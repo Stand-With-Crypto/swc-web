@@ -44,7 +44,10 @@ export default async function PoliticianDetails(props: Props) {
 
   const [person, questionnaire] = await Promise.all([
     getPoliticianDetailsData(params.dtsiSlug),
-    getQuestionnaire(params.dtsiSlug),
+    getQuestionnaire({
+      dtsiSlug: params.dtsiSlug,
+      countryCode,
+    }),
   ])
 
   if (!person) {

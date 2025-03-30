@@ -11,14 +11,11 @@ import {
 } from '@/components/ui/accordion'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useUrlHash } from '@/hooks/useUrlHash'
-import {
-  QUESTION_ANSWER_OPTIONS,
-  SWCQuestionnaireAnswers,
-} from '@/utils/shared/zod/getSWCQuestionnaire'
-import { twNoop } from '@/utils/web/cn'
+import { type NormalizedQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
+import { QUESTION_ANSWER_OPTIONS } from '@/utils/shared/zod/getSWCQuestionnaire'
 
 interface QuestionnaireAccordionProps {
-  questionnaire: SWCQuestionnaireAnswers
+  questionnaire: NormalizedQuestionnaire
 }
 
 export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordionProps) {
@@ -27,18 +24,20 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
   const questionnaireRef = useRef<HTMLDivElement>(null)
 
   const answersAmount = useMemo(() => {
-    const totalAnsweredFields = Object.entries(questionnaire?.data ?? {}).reduce(
-      (acc, [key, value]) => {
-        if (key === 'q8ShareAnyOtherOpinionsOnCrypto' && value.length > 0) return (acc += 1)
+    return questionnaire?.questions.reduce((acc, question) => {
+      if (
+        question.answer === QUESTION_ANSWER_OPTIONS.OTHER &&
+        question.otherAnswer &&
+        question.otherAnswer.length > 0
+      ) {
+        return acc + 1
+      }
 
-        return value !== QUESTION_ANSWER_OPTIONS['Not answered'] ? (acc += 1) : acc
-      },
-      0,
-    )
-
-    // subtracting one because dtsiSlug is returned inside data and it doesn't represent an answer
-    return totalAnsweredFields - 1
-  }, [questionnaire.data])
+      return [QUESTION_ANSWER_OPTIONS.YES, QUESTION_ANSWER_OPTIONS.NO].includes(question.answer)
+        ? acc + 1
+        : acc
+    }, 0)
+  }, [questionnaire])
 
   useEffect(() => {
     if (!questionnaireRef.current || !urlHash) return
@@ -49,7 +48,7 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
     setAccordionValue(urlHash === QUESTIONNAIRE_HASH_KEY ? QUESTIONNAIRE_HASH_KEY : '')
   }, [urlHash])
 
-  if (answersAmount === -1) return null
+  if (answersAmount === 0) return null
 
   return (
     <div className="mb-10 flex scroll-mt-20 flex-col" ref={questionnaireRef}>
@@ -65,46 +64,19 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
 
           <AccordionContent className="pb-0">
             <div className="px-6 last:*:border-none">
-              <QuestionnaireItem
-                answer={questionnaire.data?.q1ExperienceUsingBlockchainTechnology}
-                question="Do you have experience buying, selling, or using blockchain technology assets or investment tools?"
-              />
-
-              <QuestionnaireItem
-                answer={questionnaire.data?.q2BlockchainWillPlayMajorRoleNextInnoWave}
-                question="Do you believe blockchain technology and digital assets, including cryptocurrency like Bitcoin, will play a major role in the next wave of technological innovation globally?"
-              />
-
-              <QuestionnaireItem
-                answer={questionnaire.data?.q3AmerCryptoIsDrivingEconomicGrowth}
-                question="Do you believe the American cryptocurrency and digital asset industry is driving economic growth and supporting millions of jobs across the country?"
-              />
-
-              <QuestionnaireItem
-                answer={questionnaire.data?.q4UsCompAtRiskIfDigitalAssetsPushedOverse}
-                question="Do you believe US competitiveness and American national security are at risk if the digital asset industry is pushed overseas?"
-              />
-
-              <QuestionnaireItem
-                answer={questionnaire.data?.q5UsModernizeRegulatoryEnvironmentForCrypto}
-                question="Do you believe it is important for the United States to modernize the regulatory environment for crypto and digital assets to ensure proper consumer protection while also fostering responsible innovation?"
-              />
-
-              <QuestionnaireItem
-                answer={questionnaire.data?.q6WouldYouVoteInFavorOfLegislation}
-                question="If you are currently a Member of Congress or are elected to Congress, would you vote in favor of legislation that creates a comprehensive regulatory framework for digital assets like HR 4763, the “Financial Innovation and Technology for the 21st Century Act”, a bipartisan bill?"
-              />
-
-              <QuestionnaireItem
-                answer={questionnaire.data?.q7VoteInFavorOfLegisToPaymentStablecoins}
-                question="If you are currently a Member of Congress or are elected to Congress, would you vote in favor of legislation to create clear rules for payment stablecoins (i.e., digital assets that are redeemable for U.S. dollars 1:1) like HR 4766, “Clarity for Payment Stablecoins Act of 2023”, a bipartisan bill?"
-              />
-
-              <QuestionnaireItem
-                answer={questionnaire.data?.q8ShareAnyOtherOpinionsOnCrypto ?? ''}
-                isBooleanQuestion={false}
-                question="Please share any other positions or opinions that you have on how crypto and digital assets should be regulated?"
-              />
+              {questionnaire.questions.map(({ answer, question, otherAnswer }, index) => {
+                return (
+                  <QuestionnaireItem
+                    answer={
+                      answer === QUESTION_ANSWER_OPTIONS.OTHER
+                        ? (otherAnswer ?? QUESTION_ANSWER_OPTIONS.NOT_ANSWERED)
+                        : answer
+                    }
+                    key={`${question}-${index}`}
+                    question={question}
+                  />
+                )
+              })}
             </div>
           </AccordionContent>
         </AccordionItem>
@@ -113,31 +85,17 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
   )
 }
 
-interface QuestionnaireItemProps {
-  question: string
-  answer: QUESTION_ANSWER_OPTIONS | string
-  isBooleanQuestion?: boolean
-}
-
-function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: QuestionnaireItemProps) {
+function QuestionnaireItem({ answer, question }: { answer: string; question: string }) {
   function getAnswerStyles() {
-    if (!isBooleanQuestion || answer === QUESTION_ANSWER_OPTIONS['Not answered']) {
-      return ''
+    if (answer === QUESTION_ANSWER_OPTIONS.YES) {
+      return 'text-green-600'
     }
 
-    return answer === QUESTION_ANSWER_OPTIONS['Yes']
-      ? twNoop('text-green-600')
-      : twNoop('text-red-600')
-  }
-
-  function getAnswer() {
-    if (!isBooleanQuestion) return !answer?.length ? 'Not answered' : answer
-
-    if (isBooleanQuestion && answer === QUESTION_ANSWER_OPTIONS['Not answered']) {
-      return 'Not answered'
+    if (answer === QUESTION_ANSWER_OPTIONS.NO) {
+      return 'text-red-600'
     }
 
-    return answer === QUESTION_ANSWER_OPTIONS['Yes'] ? 'Yes' : 'No'
+    return ''
   }
 
   return (
@@ -146,7 +104,7 @@ function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: Quest
         <strong className="text-foreground">Q: </strong>
         {question}
       </p>
-      <strong className={getAnswerStyles()}>A: {getAnswer()}</strong>
+      <strong className={getAnswerStyles()}>A: {answer}</strong>
     </div>
   )
 }

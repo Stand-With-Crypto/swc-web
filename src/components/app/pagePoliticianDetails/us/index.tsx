@@ -4,8 +4,8 @@ import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/common/sc
 import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/us/questionnaireAccordion'
 import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import type { NormalizedQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCQuestionnaireAnswers } from '@/utils/shared/zod/getSWCQuestionnaire'
 
 export function UsPagePoliticianDetails({
   person,
@@ -14,7 +14,7 @@ export function UsPagePoliticianDetails({
 }: {
   person: DTSIPersonDetails
   countryCode: SupportedCountryCodes
-  questionnaire: SWCQuestionnaireAnswers | null
+  questionnaire: NormalizedQuestionnaire | null
 }) {
   return (
     <PagePoliticianDetails>
