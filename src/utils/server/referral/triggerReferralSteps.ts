@@ -52,8 +52,7 @@ export function triggerReferralSteps({
   after(async () => {
     const result = await actionCreateUserActionReferral({
       referralId,
-      userId: newUser.id,
-      localUser,
+      newUserId: newUser.id,
     })
 
     if (result.errors) return
