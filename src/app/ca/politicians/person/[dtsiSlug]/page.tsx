@@ -7,6 +7,7 @@ import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliti
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { getQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -40,15 +41,17 @@ export async function generateStaticParams() {
 
 export default async function CaPoliticianDetails(props: Props) {
   const { dtsiSlug } = await props.params
-  const [person] = await Promise.all([
+  const [person, questionnaire] = await Promise.all([
     getPoliticianDetailsData(dtsiSlug),
-    // TODO: uncomment this once we have questionnaire data for AU
-    // getQuestionnaire(dtsiSlug),
+    getQuestionnaire({
+      countryCode,
+      dtsiSlug,
+    }),
   ])
 
   if (!person) {
     notFound()
   }
 
-  return <CaPagePoliticianDetails person={person} />
+  return <CaPagePoliticianDetails person={person} questionnaire={questionnaire} />
 }
