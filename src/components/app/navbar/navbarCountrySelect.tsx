@@ -42,24 +42,13 @@ const options: Option[] = [
     label: 'Canada',
     value: SupportedCountryCodes.CA,
   },
-]
+].sort((a, b) => a.label.localeCompare(b.label))
 
 export function NavbarCountrySelect() {
   const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
 
   const currentOption = options.find(option => option.value === countryCode)
-  const sortedOptions = React.useMemo(() => {
-    if (!currentOption) {
-      return options
-    }
-
-    const currentOptionIndex = options.findIndex(option => option.value === currentOption.value)
-    const newOptions = [...options]
-    newOptions.splice(currentOptionIndex, 1)
-    newOptions.unshift(currentOption)
-    return newOptions
-  }, [currentOption])
 
   if (!currentOption) {
     return null
@@ -84,7 +73,7 @@ export function NavbarCountrySelect() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[calc(100vw-48px)] rounded-3xl min-[1096px]:w-auto">
-        {sortedOptions.map(option => {
+        {options.map(option => {
           return (
             <DropdownMenuItem
               asChild
