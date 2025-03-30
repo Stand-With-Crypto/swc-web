@@ -1,21 +1,20 @@
 import { UserActionType } from '@prisma/client'
 
-import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
+import { CAHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/ca'
 import { UserActionFormReferDeeplinkWrapper } from '@/components/app/userActionFormRefer/homepageDialogDeeplinkWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
-import { PageProps } from '@/types'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 
-export default async function UserActionReferDeepLink(props: PageProps) {
-  const params = await props.params
-  const countryCode = params.countryCode
+const countryCode = SupportedCountryCodes.CA
 
+export default async function UserActionReferDeepLink() {
   return (
-    <USHomepageDialogDeeplinkLayout className="max-w-xl" pageParams={params}>
+    <CAHomepageDialogDeeplinkLayout className="max-w-xl">
       <div className={cn(dialogContentPaddingStyles, 'h-full')}>
         <ErrorBoundary
           extras={{
@@ -32,6 +31,6 @@ export default async function UserActionReferDeepLink(props: PageProps) {
           <UserActionFormReferDeeplinkWrapper countryCode={countryCode} />
         </ErrorBoundary>
       </div>
-    </USHomepageDialogDeeplinkLayout>
+    </CAHomepageDialogDeeplinkLayout>
   )
 }
