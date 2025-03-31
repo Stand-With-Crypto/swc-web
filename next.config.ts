@@ -45,6 +45,7 @@ const contentSecurityPolicy = {
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
     'https://*.builder.io/',
+    'https://*.newmode.net/',
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
@@ -85,6 +86,7 @@ const contentSecurityPolicy = {
     'https://*.thirdweb.com/',
     'https://api.thirdweb.com/',
     'https://embedded-wallet.thirdweb.com/',
+    'https://*.newmode.net/',
   ],
   'frame-src': [
     '*.google.com',
@@ -94,6 +96,7 @@ const contentSecurityPolicy = {
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
+    'https://*.newmode.net/',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
