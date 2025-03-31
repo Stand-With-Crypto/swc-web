@@ -32,11 +32,7 @@ export function ReferralsCounter(props: ReferralsCounterProps) {
   return <div className={cn('flex w-full gap-4', className)}>{children}</div>
 }
 
-ReferralsCounter.UserReferralsCount = function UserReferralsCount({
-  className,
-}: {
-  className?: string
-}) {
+export function UserReferralsCount({ className }: { className?: string }) {
   const userResponse = useApiResponseForUserFullProfileInfo({
     refreshInterval: 1000 * 60 * 1, // 1 minute
   })
@@ -66,12 +62,9 @@ ReferralsCounter.UserReferralsCount = function UserReferralsCount({
     </div>
   )
 }
+ReferralsCounter.UserReferralsCount = UserReferralsCount
 
-ReferralsCounter.UserDistrictRanking = function UserDistrictRank({
-  className,
-}: {
-  className?: string
-}) {
+export function UserDistrictRank({ className }: { className?: string }) {
   const { address } = useMutableCurrentUserAddress()
   const districtResponse = useGetDistrictFromAddress(
     address === 'loading' ? null : address?.description,
@@ -128,3 +121,4 @@ ReferralsCounter.UserDistrictRanking = function UserDistrictRank({
     </div>
   )
 }
+ReferralsCounter.UserDistrictRank = UserDistrictRank

@@ -2,7 +2,11 @@ import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
 import { PageReferralsHeading } from '@/components/app/pageReferrals/heading'
-import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
+import {
+  ReferralsCounter,
+  UserDistrictRank,
+  UserReferralsCount,
+} from '@/components/app/pageReferrals/referralsCounter'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
@@ -27,8 +31,8 @@ export function PageReferrals(props: PageReferralsProps) {
       <PageReferralsHeading />
       <UserReferralUrlWithApi />
       <ReferralsCounter>
-        <ReferralsCounter.UserReferralsCount />
-        <ReferralsCounter.UserDistrictRanking />
+        <UserReferralsCount />
+        <UserDistrictRank />
       </ReferralsCounter>
       <YourDistrictRank />
       <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
