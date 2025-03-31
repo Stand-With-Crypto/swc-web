@@ -36,7 +36,7 @@ export async function getQuestionnaire({
       { retries: 3, minTimeout: 5000 },
     )
 
-    const isValidResponse = zodQuestionnaireSchemaValidation.safeParse(entry.data)
+    const isValidResponse = zodQuestionnaireSchemaValidation.safeParse(entry?.data)
 
     // Using safeParse to prevent logging errors when a politician hasn't answered the questionnaire yet.
     if (!isValidResponse.success) return null
