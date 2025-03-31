@@ -48,7 +48,9 @@ export function UserActionFormVoterAttestationDeeplinkWrapper() {
   return (
     <GeoGate
       countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      unavailableContent={<UserActionFormActionUnavailable />}
+      unavailableContent={
+        <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+      }
     >
       <Suspense fallback={<UserActionFormVoterAttestationSkeleton />}>
         <UserActionFormVoterAttestationDeeplinkWrapperContent />
