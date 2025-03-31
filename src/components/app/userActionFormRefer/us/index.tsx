@@ -26,7 +26,7 @@ export function USUserActionFormRefer({ onClose }: UserActionFormReferProps) {
 
           <Refer.Counter className="flex-col md:flex-row">
             <Refer.Counter.UserReferralsCount />
-            <Refer.Counter.UserDistrictRanking />
+            <Refer.Counter.UserDistrictRank />
           </Refer.Counter>
         </Refer>
       )
