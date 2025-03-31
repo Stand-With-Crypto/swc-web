@@ -9,6 +9,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { sendReferralCompletedEmail } from './sendReferralCompletedEmail'
 
@@ -62,41 +63,44 @@ export function triggerReferralSteps({
 
     if (result.errors) return
 
-    if (result.wasActionCreated) {
+    const countryCode = newUser.countryCode
+    if (result.wasActionCreated && countryCode === SupportedCountryCodes.US) {
       await sendReferralCompletedEmail(referralId)
     }
 
-    after(async () => {
-      if (result.errors || !result) return
+    if (countryCode === SupportedCountryCodes.US) {
+      after(async () => {
+        if (result.errors || !result) return
 
-      const [incrementDistrictAdvocatesRanking, incrementDistrictReferralsRanking] =
-        await Promise.all([
-          createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING),
-          createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_REFERRALS_RANKING),
-        ])
+        const [incrementDistrictAdvocatesRanking, incrementDistrictReferralsRanking] =
+          await Promise.all([
+            createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING),
+            createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_REFERRALS_RANKING),
+          ])
 
-      if (newUser.address) {
-        await incrementDistrictAdvocatesRanking({
-          state: newUser.address.administrativeAreaLevel1 as USStateCode,
-          district: newUser.address.usCongressionalDistrict || '1',
-          count: 1,
+        if (newUser.address) {
+          await incrementDistrictAdvocatesRanking({
+            state: newUser.address.administrativeAreaLevel1 as USStateCode,
+            district: newUser.address.usCongressionalDistrict || '1',
+            count: 1,
+          })
+        }
+
+        const referrer = await prismaClient.user.findFirst({
+          where: { referralId },
+          include: {
+            address: true,
+          },
         })
-      }
 
-      const referrer = await prismaClient.user.findFirst({
-        where: { referralId },
-        include: {
-          address: true,
-        },
+        if (referrer?.address) {
+          await incrementDistrictReferralsRanking({
+            state: referrer.address.administrativeAreaLevel1 as USStateCode,
+            district: referrer.address.usCongressionalDistrict || '1',
+            count: 1,
+          })
+        }
       })
-
-      if (referrer?.address) {
-        await incrementDistrictReferralsRanking({
-          state: referrer.address.administrativeAreaLevel1 as USStateCode,
-          district: referrer.address.usCongressionalDistrict || '1',
-          count: 1,
-        })
-      }
-    })
+    }
   })
 }
