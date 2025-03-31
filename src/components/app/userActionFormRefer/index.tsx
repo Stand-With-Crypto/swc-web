@@ -4,7 +4,10 @@ import { UserActionFormActionUnavailable } from '@/components/app/userActionForm
 import { UserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/common/skeleton'
 import { UserActionFormReferProps } from '@/components/app/userActionFormRefer/common/types'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 const AUUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/au').then(mod => mod.AUUserActionFormRefer),
@@ -49,7 +52,7 @@ export function UserActionFormRefer(props: UserActionFormReferProps) {
     default:
       return gracefullyError({
         msg: `Country implementation not found for UserActionFormRefer`,
-        fallback: <UserActionFormActionUnavailable />,
+        fallback: <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />,
         hint: {
           level: 'error',
           tags: {

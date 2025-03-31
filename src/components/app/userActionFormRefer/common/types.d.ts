@@ -1,4 +1,6 @@
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
 export interface UserActionFormReferProps {
-  countryCode: string
+  countryCode: SupportedCountryCodes
   onClose?: () => void
 }

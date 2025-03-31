@@ -27,7 +27,10 @@ export function UserActionFormReferDeeplinkWrapper({
   }, [])
 
   return (
-    <GeoGate countryCode={countryCode} unavailableContent={<UserActionFormActionUnavailable />}>
+    <GeoGate
+      countryCode={countryCode}
+      unavailableContent={<UserActionFormActionUnavailable countryCode={countryCode} />}
+    >
       <UserActionFormRefer countryCode={countryCode} onClose={() => router.replace(urls.home())} />
     </GeoGate>
   )
