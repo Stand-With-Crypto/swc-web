@@ -1,7 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export type VoterGuideStep = {
   title: string
@@ -11,7 +10,7 @@ export type VoterGuideStep = {
     countryCode?: SupportedCountryCodes
   }) => React.ReactNode
   action: UserActionType
-  campaignName: UserActionCampaignName
+  campaignName: string
   image: string
   mobileImage?: string
   wideDesktopImage?: boolean

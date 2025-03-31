@@ -43,7 +43,7 @@ export function GBLocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      campaignName: GBUserActionViewKeyRacesCampaignName['2025_GB_ELECTIONS'],
+      campaignName: GBUserActionViewKeyRacesCampaignName['H1_2025'],
       stateCode,
     })
   }, [stateCode])

@@ -93,7 +93,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTING_DAY,
-        campaignName: USUserActionVotingDayCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVotingDayCampaignName['H1_2025'],
         isCampaignActive: false,
         title: 'I voted!',
         description: 'Claimed your "proof-of-vote" NFT.',
@@ -256,7 +256,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTER_ATTESTATION,
-        campaignName: USUserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVoterAttestationCampaignName['H1_2025'],
         isCampaignActive: false,
         title: 'Get informed',
         description: 'See where your politicians stand on crypto.',
@@ -274,7 +274,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTER_REGISTRATION,
-        campaignName: USUserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVoterRegistrationCampaignName['H1_2025'],
         isCampaignActive: false,
         title: 'Check your voter registration',
         description: 'Make sure you’re registered to vote in this year’s election.',
@@ -292,7 +292,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
-        campaignName: USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVotingInformationResearchedCampaignName['H1_2025'],
         isCampaignActive: false,
         canBeTriggeredMultipleTimes: false,
         title: 'Prepare to vote',
