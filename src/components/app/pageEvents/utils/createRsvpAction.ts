@@ -4,7 +4,7 @@ import {
   actionCreateUserActionRsvpEvent,
   CreateActionRsvpEventInput,
 } from '@/actions/actionCreateUserActionRsvpEvent'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -13,14 +13,17 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 export async function handleCreateRsvpAction({
   event,
   shouldReceiveNotifications,
+  campaignName,
 }: {
   event: SWCEvent
   shouldReceiveNotifications: boolean
+  campaignName: string
 }) {
   const data: CreateActionRsvpEventInput = {
     eventSlug: event.slug,
     eventState: event.state,
     shouldReceiveNotifications,
+    campaignName,
   }
 
   const result = await triggerServerActionForForm(
@@ -28,7 +31,7 @@ export async function handleCreateRsvpAction({
       formName: 'RSVP Event',
       onError: () => toastGenericError(),
       analyticsProps: {
-        'Campaign Name': USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+        'Campaign Name': US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
         'User Action Type': UserActionType.RSVP_EVENT,
         eventSlug: event.slug,
         eventState: event.state,

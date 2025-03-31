@@ -9,7 +9,7 @@ import {
 } from '@/utils/shared/supportedCountries'
 import {
   US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const activeActionTypesByCountry: Record<SupportedCountryCodes, readonly UserActionType[]> = {
@@ -40,7 +40,7 @@ export function mockCreateUserActionInput({
   return {
     actionType,
     countryCode,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
+    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
   } satisfies Omit<
     Prisma.UserActionCreateInput,
     'userId' | 'nftMintId' | 'userCryptoAddressId' | 'userSessionId' | 'userEmailAddressId' | 'user'

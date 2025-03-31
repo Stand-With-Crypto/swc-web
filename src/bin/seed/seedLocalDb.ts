@@ -36,7 +36,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import {
   US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   USUserActionPollCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
@@ -328,7 +328,7 @@ async function seed() {
         campaignName:
           actionType === UserActionType.POLL
             ? faker.helpers.arrayElement(Object.values(USUserActionPollCampaignName))
-            : USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
+            : US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
       }
     }),
     data =>

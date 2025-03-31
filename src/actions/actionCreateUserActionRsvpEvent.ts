@@ -31,6 +31,7 @@ const createActionRsvpEventInputValidationSchema = object({
   eventState: string(),
   eventSlug: string(),
   shouldReceiveNotifications: boolean(),
+  campaignName: string(),
 })
 
 export type CreateActionRsvpEventInput = z.infer<typeof createActionRsvpEventInputValidationSchema>
@@ -40,6 +41,7 @@ interface SharedDependencies {
   sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
+  campaignName: CreateActionRsvpEventInput['campaignName']
 }
 
 export const actionCreateUserActionRsvpEvent = withServerActionMiddleware(
@@ -101,7 +103,12 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
   if (shouldUpdateRsvpEventNotificationStatus && rsvpEventuserAction.id) {
     await changeReceiveNotificationStatus({
       userActionRsvpEventId: rsvpEventuserAction.id,
-      sharedDependencies: { sessionId, analytics, peopleAnalytics },
+      sharedDependencies: {
+        sessionId,
+        analytics,
+        peopleAnalytics,
+        campaignName: validatedInput.data.campaignName,
+      },
     })
 
     waitUntil(beforeFinish())
@@ -160,7 +167,10 @@ async function changeReceiveNotificationStatus({
   sharedDependencies,
 }: {
   userActionRsvpEventId: string
-  sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+  sharedDependencies: Pick<
+    SharedDependencies,
+    'sessionId' | 'analytics' | 'peopleAnalytics' | 'campaignName'
+  >
 }) {
   await prismaClient.userActionRsvpEvent.update({
     where: {
@@ -174,7 +184,7 @@ async function changeReceiveNotificationStatus({
 
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.RSVP_EVENT,
-    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    campaignName: sharedDependencies,
     userState: 'Existing',
     shouldReceiveNotifications: true,
   })

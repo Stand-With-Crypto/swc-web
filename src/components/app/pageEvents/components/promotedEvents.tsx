@@ -9,17 +9,20 @@ import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEv
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface PromotedEventsProps {
   events: SWCEvents
+  countryCode: SupportedCountryCodes
 }
 
-export function PromotedEvents({ events }: PromotedEventsProps) {
+export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
   const handleRSVPButtonClick = (event: SWCEvent) => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
       event,
+      countryCode,
     })
 
     window.open(event.rsvpUrl, '_blank')
