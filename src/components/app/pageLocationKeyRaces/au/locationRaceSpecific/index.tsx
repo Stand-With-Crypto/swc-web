@@ -20,6 +20,7 @@ import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidat
 import { AUStateCode, getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { AUUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 
 interface AULocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: AUStateCode
@@ -65,6 +66,7 @@ export function AULocationRaceSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: AUUserActionViewKeyRacesCampaignName['2025_AU_ELECTIONS'],
       stateCode,
     })
   }, [stateCode])

@@ -23,6 +23,7 @@ import {
 } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { GBUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 
 interface GBLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: GBCountryCode
@@ -68,6 +69,7 @@ export function GBLocationRaceSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: GBUserActionViewKeyRacesCampaignName['2025_GB_ELECTIONS'],
       stateCode,
     })
   }, [stateCode])

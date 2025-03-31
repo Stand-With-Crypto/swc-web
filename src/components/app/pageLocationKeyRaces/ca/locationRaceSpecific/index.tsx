@@ -23,6 +23,7 @@ import {
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { CAUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
 interface CALocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: CAProvinceOrTerritoryCode
@@ -68,6 +69,7 @@ export function CALocationRaceSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: CAUserActionViewKeyRacesCampaignName['2025_CA_ELECTIONS'],
       stateCode,
     })
   }, [stateCode])

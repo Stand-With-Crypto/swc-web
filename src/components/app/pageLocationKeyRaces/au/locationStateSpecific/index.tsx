@@ -16,6 +16,7 @@ import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/dat
 import { AUStateCode, getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { AUUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
@@ -39,6 +40,7 @@ export function AULocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: AUUserActionViewKeyRacesCampaignName['2025_AU_ELECTIONS'],
       stateCode,
     })
   }, [stateCode])

@@ -19,6 +19,7 @@ import {
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { CAUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
@@ -42,6 +43,7 @@ export function CALocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: CAUserActionViewKeyRacesCampaignName['2025_CA_ELECTIONS'],
       stateCode,
     })
   }, [stateCode])
