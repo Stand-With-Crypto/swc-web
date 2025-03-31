@@ -111,7 +111,7 @@ export function TopLevelMetrics({
     <div className="flex flex-col gap-3 text-center md:flex-row md:gap-0">
       {[
         {
-          label: 'Global donations',
+          label: 'Donated by crypto advocates',
           value: disableTooltips ? (
             globalDonationsRender
           ) : (
@@ -139,11 +139,11 @@ export function TopLevelMetrics({
           ),
         },
         {
-          label: 'Global advocates',
+          label: 'Crypto advocates',
           value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
         },
         {
-          label: 'Global policymaker contacts',
+          label: 'Policymaker contacts',
           value: (
             <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),
