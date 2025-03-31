@@ -7,7 +7,7 @@ import {
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { withOrdinalSuffix } from '@/utils/web/withOrdinalSuffix'
 
 export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null | undefined }) => {

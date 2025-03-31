@@ -1,11 +1,20 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBCountryCode } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+
+export type LocationStateCode =
+  | USStateCode
+  | GBCountryCode
+  | AUStateCode
+  | CAProvinceOrTerritoryCode
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -90,17 +99,24 @@ export const getIntlUrls = (
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
-    locationStateSpecific: (stateCode: USStateCode) =>
+    locationStateSpecific: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
-    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
+    locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
-    locationUnitedStatesPresidential: () => `${countryPrefix}/races/presidential`,
-    locationUnitedStates: () => `${countryPrefix}/races/`,
+    locationStateSpecificHouseOfLordsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-lords`,
+    locationStateSpecificHouseOfCommonsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-commons`,
+    locationStateSpecificHouseOfRepsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-representatives`,
+    locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/governor`,
+    locationKeyRaces: () => `${countryPrefix}/races/`,
     locationDistrictSpecific: ({
       stateCode,
       district,
     }: {
-      stateCode: USStateCode
+      stateCode: LocationStateCode
       district: NormalizedDTSIDistrictId
     }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
   }

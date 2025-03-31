@@ -24,8 +24,8 @@ import {
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)

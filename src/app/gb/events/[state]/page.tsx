@@ -6,7 +6,10 @@ import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/even
 import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getGBCountryNameFromCode, isValidGBCountryCode } from '@/utils/shared/gbCountryUtils'
+import {
+  getGBCountryNameFromCode,
+  isValidGBCountryCode,
+} from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type Props = PageProps<{ state: string }>
