@@ -57,6 +57,7 @@ export function getLocalUserFromUser(user: User): ServerLocalUser {
 
 export function mapLocalUserToUserDatabaseFields(
   localUser: ServerLocalUser | null,
+  searchParams?: Record<string, string>,
 ): Pick<
   User,
   | 'acquisitionReferer'
@@ -69,14 +70,17 @@ export function mapLocalUserToUserDatabaseFields(
     // We are trimming the char input in case it is greater than the DB limit (191 characters)
     acquisitionReferer: localUser?.persisted?.initialReferer?.slice(0, 191) || '',
     acquisitionSource:
+      searchParams?.utm_source?.slice(0, 191) ||
       localUser?.persisted?.initialSearchParams.utm_source?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_source?.slice(0, 191) ||
       '',
     acquisitionMedium:
+      searchParams?.utm_medium?.slice(0, 191) ||
       localUser?.persisted?.initialSearchParams.utm_medium?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_medium?.slice(0, 191) ||
       '',
     acquisitionCampaign:
+      searchParams?.utm_campaign?.slice(0, 191) ||
       localUser?.persisted?.initialSearchParams.utm_campaign?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_campaign?.slice(0, 191) ||
       '',
