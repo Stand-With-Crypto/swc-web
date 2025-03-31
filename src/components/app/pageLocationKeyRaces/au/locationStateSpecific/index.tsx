@@ -39,7 +39,7 @@ export function AULocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
+      stateCode,
     })
   }, [stateCode])
 

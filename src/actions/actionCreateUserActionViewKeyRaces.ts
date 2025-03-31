@@ -21,10 +21,15 @@ import {
   GetCongressionalDistrictFromAddressSuccess,
   maybeGetCongressionalDistrictFromAddress,
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
@@ -35,6 +40,8 @@ const createActionViewKeyRacesInputValidationSchema = object({
   usCongressionalDistrict: string().optional(),
   usaState: string().optional(),
   shouldBypassAuth: z.boolean().optional(),
+  stateCode: string().optional(),
+  constituency: string().optional(),
 }).optional()
 
 export type CreateActionViewKeyRacesInput = z.infer<
@@ -66,7 +73,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const countryCode = await getCountryCodeCookie()
 
   const actionType = UserActionType.VIEW_KEY_RACES
-  const campaignName = UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS']
+  const campaignName = getCampaignName(countryCode as SupportedCountryCodes)
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -123,6 +130,9 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const currentUsaState =
     userAddress?.address?.administrativeAreaLevel1 ?? validatedInput.data?.usaState ?? null
 
+  const currentStateCode = validatedInput.data?.stateCode ?? null
+  const currentConstituency = validatedInput.data?.constituency ?? null
+
   const maybeCongressionalDistrict = (await maybeGetCongressionalDistrictFromAddress(
     { countryCode: 'US', formattedDescription: userAddress?.address?.formattedDescription ?? '' },
     { stateCode: currentUsaState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP },
@@ -145,18 +155,29 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   if (existingViewKeyRacesAction) {
     logger.info(`User ${userId} has already viewed key races`)
 
-    const shouldUpdateActionWithAddressInfo =
+    const shouldUpdateUSActionWithAddressInfo =
       existingViewKeyRacesAction.userActionViewKeyRaces?.usaState !== currentUsaState ||
       existingViewKeyRacesAction.userActionViewKeyRaces?.usCongressionalDistrict !==
         currentCongressionalDistrict
 
-    const areNewValuesPresent = currentUsaState !== null || currentCongressionalDistrict !== null
+    const shouldUpdateActionWithAddressInfo =
+      existingViewKeyRacesAction.userActionViewKeyRaces?.stateCode !== currentStateCode ||
+      existingViewKeyRacesAction.userActionViewKeyRaces?.constituency !== currentConstituency
 
-    if (shouldUpdateActionWithAddressInfo && areNewValuesPresent) {
+    const areNewUSValuesPresent = currentUsaState !== null || currentCongressionalDistrict !== null
+
+    const areNewStateValuesPresent = currentStateCode !== null || currentConstituency !== null
+
+    if (
+      (shouldUpdateUSActionWithAddressInfo && areNewUSValuesPresent) ||
+      (shouldUpdateActionWithAddressInfo && areNewStateValuesPresent)
+    ) {
       await updateUserActionViewKeyRaces(
         existingViewKeyRacesAction,
         currentUsaState,
         currentCongressionalDistrict,
+        currentStateCode,
+        currentConstituency,
         validatedInput.data,
       )
 
@@ -192,8 +213,11 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   await createUserActionViewKeyRaces(
     userId,
     countryCode,
+    campaignName,
     currentUsaState,
     currentCongressionalDistrict,
+    validatedInput.data?.stateCode ?? null,
+    validatedInput.data?.constituency ?? null,
   )
 
   analytics.trackUserActionCreated({
@@ -262,20 +286,34 @@ async function updateUserActionViewKeyRaces(
   existingViewKeyRacesAction: Awaited<ReturnType<typeof getUserAlreadyViewedKeyRaces>>,
   usaState: string | null,
   usCongressionalDistrict: string | null,
+  stateCode: string | null,
+  constituency: string | null,
   validatedInput: CreateActionViewKeyRacesInput,
 ) {
-  const shouldSetDistrictAsNull =
+  const shouldSetUSDistrictAsNull =
     usaState !== existingViewKeyRacesAction?.userActionViewKeyRaces?.usaState &&
     usCongressionalDistrict === null
+
+  const shouldSetConstituencyAsNull =
+    stateCode !== existingViewKeyRacesAction?.userActionViewKeyRaces?.stateCode &&
+    constituency === null
 
   const updateData: Record<string, string | undefined> = {
     ...(usaState !== null && { usaState }),
     ...(usCongressionalDistrict !== null && { usCongressionalDistrict }),
+    ...(stateCode !== null && { stateCode }),
+    ...(constituency !== null && { constituency }),
   }
 
-  if (shouldSetDistrictAsNull) {
+  if (shouldSetUSDistrictAsNull) {
     Object.assign(updateData, {
       usCongressionalDistrict: null,
+    })
+  }
+
+  if (shouldSetConstituencyAsNull) {
+    Object.assign(updateData, {
+      constituency: null,
     })
   }
 
@@ -316,8 +354,11 @@ async function updateUserActionViewKeyRaces(
 async function createUserActionViewKeyRaces(
   userId: string,
   countryCode: string,
+  campaignName: UserActionViewKeyRacesCampaignName,
   usaState: string | null,
   usCongressionalDistrict: string | null,
+  stateCode: string | null,
+  constituency: string | null,
 ) {
   return prismaClient.userAction.create({
     include: {
@@ -330,11 +371,13 @@ async function createUserActionViewKeyRaces(
     data: {
       countryCode,
       actionType: UserActionType.VIEW_KEY_RACES,
-      campaignName: UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
+      campaignName,
       userActionViewKeyRaces: {
         create: {
           usCongressionalDistrict,
           usaState,
+          stateCode,
+          constituency,
         },
       },
       user: {
@@ -393,6 +436,33 @@ async function getUserAddress(userId: string) {
           formattedDescription: true,
           countryCode: true,
         },
+      },
+    },
+  })
+}
+
+const getCampaignName = (countryCode: SupportedCountryCodes) => {
+  const COUNTRY_CAMPAIGN_NAME_MAP: Record<
+    SupportedCountryCodes,
+    UserActionViewKeyRacesCampaignName
+  > = {
+    [SupportedCountryCodes.US]: UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
+    [SupportedCountryCodes.CA]: UserActionViewKeyRacesCampaignName['2025_CA_ELECTIONS'],
+    [SupportedCountryCodes.GB]: UserActionViewKeyRacesCampaignName['2025_GB_ELECTIONS'],
+    [SupportedCountryCodes.AU]: UserActionViewKeyRacesCampaignName['2025_AU_ELECTIONS'],
+  }
+
+  if (countryCode in COUNTRY_CAMPAIGN_NAME_MAP) {
+    return COUNTRY_CAMPAIGN_NAME_MAP[countryCode]
+  }
+
+  return gracefullyError({
+    msg: `No campaign name found for country code: ${countryCode}`,
+    fallback: COUNTRY_CAMPAIGN_NAME_MAP[DEFAULT_SUPPORTED_COUNTRY_CODE],
+    hint: {
+      level: 'error',
+      tags: {
+        domain: 'getKeyRacesActionCampaignName',
       },
     },
   })

@@ -66,10 +66,9 @@ export function GBLocationRaceSpecific({
   const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
 
-  // TODO: add actionCreateUserActionViewKeyRaces new interface @olavoparno
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
+      stateCode,
     })
   }, [stateCode])
 

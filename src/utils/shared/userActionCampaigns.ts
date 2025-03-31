@@ -83,6 +83,9 @@ export enum UserActionRsvpEventCampaignName {
 export enum UserActionViewKeyRacesCampaignName {
   '2024_ELECTION' = '2024_ELECTION',
   '2025_US_ELECTIONS' = '2025_US_ELECTIONS',
+  '2025_AU_ELECTIONS' = '2025_AU_ELECTIONS',
+  '2025_GB_ELECTIONS' = '2025_GB_ELECTIONS',
+  '2025_CA_ELECTIONS' = '2025_CA_ELECTIONS',
 }
 export enum UserActionVotingInformationResearchedCampaignName {
   '2024_ELECTION' = '2024_ELECTION',

@@ -42,7 +42,7 @@ export function GBLocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
+      stateCode,
     })
   }, [stateCode])
 

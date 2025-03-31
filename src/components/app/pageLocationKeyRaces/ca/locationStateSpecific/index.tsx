@@ -42,7 +42,7 @@ export function CALocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
+      stateCode,
     })
   }, [stateCode])
 
