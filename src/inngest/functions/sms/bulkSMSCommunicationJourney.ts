@@ -15,7 +15,7 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { BULK_WELCOME_MESSAGE } from '@/utils/server/sms/messages'
-import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
+import { isPhoneNumberCountrySupported } from '@/utils/server/sms/utils'
 import { prettyStringify } from '@/utils/shared/prettyLog'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -180,7 +180,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           skip += phoneNumberList.length
           index += 1
 
-          allPhoneNumbers.push(...phoneNumberList.filter(isPhoneNumberSupported))
+          allPhoneNumbers.push(...phoneNumberList.filter(isPhoneNumberCountrySupported))
 
           logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
 

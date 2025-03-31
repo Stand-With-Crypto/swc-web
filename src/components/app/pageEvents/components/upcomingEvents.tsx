@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { isAfter } from 'date-fns'
 
 import { EventCard } from '@/components/app/pageEvents/components/eventCard'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -12,21 +13,45 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { getGBCountryNameFromCode } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface UpcomingEventsProps {
   events: SWCEvents
 }
 
+const GET_STATE_NAME_FROM_CODE_MAP: Record<SupportedCountryCodes, (code: string) => string> = {
+  [SupportedCountryCodes.AU]: getAUStateNameFromStateCode,
+  [SupportedCountryCodes.CA]: getCAProvinceOrTerritoryNameFromCode,
+  [SupportedCountryCodes.GB]: getGBCountryNameFromCode,
+  [SupportedCountryCodes.US]: getUSStateNameFromStateCode,
+}
+
+const FILTER_NAME_BY_COUNTRY_MAP: Record<SupportedCountryCodes, string> = {
+  [SupportedCountryCodes.AU]: 'State',
+  [SupportedCountryCodes.CA]: 'Province',
+  [SupportedCountryCodes.GB]: 'Country',
+  [SupportedCountryCodes.US]: 'State',
+}
+
+const getStateNameFromCode = (code: string, countryCode: SupportedCountryCodes) => {
+  return GET_STATE_NAME_FROM_CODE_MAP[countryCode](code)
+}
+
 export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
+  const countryCode = useCountryCode()
 
   const filteredEvents = useMemo(() => {
     const result =
       selectedStateFilter === 'All'
-        ? events
+        ? [...events]
         : events.filter(event => event.data.state === selectedStateFilter)
 
     const orderedResult = result.sort((a, b) => {
@@ -53,13 +78,13 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
     const options = stateArr.map(state => ({
       key: state,
-      name: `${US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP]} (${stateWithEvents[state]})`,
+      name: `${getStateNameFromCode(state, countryCode)} (${stateWithEvents[state]})`,
     }))
 
     options.unshift({ key: 'All', name: 'All' })
 
     return options
-  }, [events])
+  }, [countryCode, events])
 
   return (
     <>
@@ -71,7 +96,9 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
         value={selectedStateFilter}
       >
         <SelectTrigger className="max-w-[345px]">
-          <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
+          <span className="mr-2 inline-block flex-shrink-0 font-bold">
+            {FILTER_NAME_BY_COUNTRY_MAP[countryCode]}
+          </span>
           <span className="mr-auto">
             <SelectValue placeholder="All" />
           </span>
@@ -87,7 +114,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
       <div className="my-2 flex w-full flex-col items-center gap-4">
         {filteredEvents.slice(0, eventsToShow).map(event => (
-          <EventCard event={event.data} key={event.data.slug} />
+          <EventCard event={event.data} key={getUniqueEventKey(event.data)} />
         ))}
       </div>
 

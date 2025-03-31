@@ -13,6 +13,7 @@ import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/co
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { auExternalUrls } from '@/utils/shared/urls'
 import { AUUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -52,7 +53,7 @@ export function AUUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
       }
     })
 
-    openWindow('https://x.com/standwithcrypto', target, `noopener`)
+    openWindow(auExternalUrls.twitter(), target, `noopener`)
   }
 
   switch (sectionProps.currentSection) {
@@ -61,12 +62,12 @@ export function AUUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         <ShareOnX>
           <ShareOnX.Heading
             subtitle="Stay up to date on crypto policy changes in Australia"
-            title="Follow @StandWithCrypto on Twitter"
+            title="Follow @StandWCrypto_AU on Twitter"
           />
 
           <ShareOnX.Benefits benefits={auBenefits} />
 
-          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWithCrypto" />
+          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWCrypto_AU" />
         </ShareOnX>
       )
     case SectionNames.SUCCESS:

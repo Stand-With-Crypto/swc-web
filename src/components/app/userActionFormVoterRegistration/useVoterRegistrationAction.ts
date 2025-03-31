@@ -6,8 +6,8 @@ import {
   CreateActionVoterRegistrationInput,
 } from '@/actions/actionCreateUserActionVoterRegistration'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'

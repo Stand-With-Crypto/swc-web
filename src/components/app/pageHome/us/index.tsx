@@ -1,10 +1,8 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
-import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
-import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
@@ -45,8 +43,6 @@ export function UsPageHome({
   }) {
   const { countryCode } = params
   const urls = getIntlUrls(countryCode)
-  const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
-  const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
 
   return (
     <>
@@ -179,49 +175,11 @@ export function UsPageHome({
         <UserActionGridCTAs />
       </HomePageSection>
 
-      <HomePageSection className="space-y-6" container={false}>
-        <div className="container">
-          <HomePageSection.Title>Where politicians stand on crypto</HomePageSection.Title>
-          <HomePageSection.Subtitle>
-            Ask your policymakers to be pro-crypto. Here's where they stand now.
-          </HomePageSection.Subtitle>
-        </div>
-        <div>
-          <h5 className="container text-center">
-            <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={100} text="Pro-crypto" />
-          </h5>
-          <DTSIPersonHeroCardRow>
-            {highestScores.map(person => (
-              <DTSIPersonHeroCard
-                countryCode={countryCode}
-                key={person.id}
-                person={person}
-                subheader="role-w-state"
-              />
-            ))}
-          </DTSIPersonHeroCardRow>
-        </div>
-        <div>
-          <h5 className="container text-center">
-            <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={0} text="Anti-crypto" />
-          </h5>
-          <DTSIPersonHeroCardRow>
-            {lowestScores.map(person => (
-              <DTSIPersonHeroCard
-                countryCode={countryCode}
-                key={person.id}
-                person={person}
-                subheader="role-w-state"
-              />
-            ))}
-          </DTSIPersonHeroCardRow>
-        </div>
-        <div className="container space-x-4 text-center">
-          <Button asChild variant="secondary">
-            <InternalLink href={urls.politiciansHomepage()}>View all</InternalLink>
-          </Button>
-        </div>
-      </HomePageSection>
+      <HomepagePoliticiansSection
+        countryCode={countryCode}
+        cryptoStanceGrade={DTSIFormattedLetterGrade}
+        dtsiHomepagePoliticians={dtsiHomepagePeople}
+      />
     </>
   )
 }

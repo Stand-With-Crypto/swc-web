@@ -8,7 +8,7 @@ import { createDistrictRankingIncrementer } from '@/utils/server/districtRanking
 import { prismaClient } from '@/utils/server/prismaClient'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 import { sendReferralCompletedEmail } from './sendReferralCompletedEmail'
 
@@ -52,8 +52,7 @@ export function triggerReferralSteps({
   after(async () => {
     const result = await actionCreateUserActionReferral({
       referralId,
-      userId: newUser.id,
-      localUser,
+      newUserId: newUser.id,
     })
 
     if (result.errors) return

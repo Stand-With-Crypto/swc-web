@@ -1,11 +1,20 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBCountryCode } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+
+export type LocationStateCode =
+  | USStateCode
+  | GBCountryCode
+  | AUStateCode
+  | CAProvinceOrTerritoryCode
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -70,15 +79,16 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
-    founders: () => `${countryPrefix}/founders`,
     politiciansHomepage: () => `${countryPrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
-    internalHomepage: () => `${countryPrefix}/internal`,
+    internalHomepage: () => '/internal',
     becomeMember: () => `${countryPrefix}/action/become-member`,
     community: () => `${countryPrefix}/community`,
     events: () => `${countryPrefix}/events`,
+    eventDeepLink: (state: string, eventSlug: string) =>
+      `${countryPrefix}/events/${state}/${eventSlug}`,
     advocacyToolkit: () => `${countryPrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,
@@ -89,17 +99,24 @@ export const getIntlUrls = (
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
-    locationStateSpecific: (stateCode: USStateCode) =>
+    locationStateSpecific: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
-    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
+    locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
-    locationUnitedStatesPresidential: () => `${countryPrefix}/races/presidential`,
-    locationUnitedStates: () => `${countryPrefix}/races/`,
+    locationStateSpecificHouseOfLordsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-lords`,
+    locationStateSpecificHouseOfCommonsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-commons`,
+    locationStateSpecificHouseOfRepsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-representatives`,
+    locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/governor`,
+    locationKeyRaces: () => `${countryPrefix}/races/`,
     locationDistrictSpecific: ({
       stateCode,
       district,
     }: {
-      stateCode: USStateCode
+      stateCode: LocationStateCode
       district: NormalizedDTSIDistrictId
     }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
   }
@@ -117,7 +134,8 @@ export const apiUrls = {
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
-  dtsiAllPeople: () => `/api/public/dtsi/all-people`,
+  dtsiAllPeople: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/public/dtsi/all-people/${countryCode}`,
   recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
     `/api/public/recent-activity/${limit}/${countryCode}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,

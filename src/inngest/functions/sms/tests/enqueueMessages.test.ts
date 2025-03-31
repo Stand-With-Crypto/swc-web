@@ -27,6 +27,7 @@ jest.mock('@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers', () => (
 
 jest.mock('@/utils/server/sms/utils', () => ({
   ...jest.requireActual('@/utils/server/sms/utils/countSegments'),
+  ...jest.requireActual('@/utils/server/sms/utils/isPhoneNumberCountrySupported'),
   getUserByPhoneNumber: jest.fn(),
 }))
 

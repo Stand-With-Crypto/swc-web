@@ -1,5 +1,5 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
-import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+import { fragmentDTSIPersonCardWithRoles } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import {
   DTSI_LocationSpecificRacesInformationQuery,
   DTSI_LocationSpecificRacesInformationQueryVariables,
@@ -19,20 +19,7 @@ const query = /* GraphQL */ `
       personRolePrimaryState: $stateCode
       personRolePrimaryDistrict: $district
     ) {
-      ...PersonCard
-      roles {
-        id
-        primaryDistrict
-        primaryState
-        roleCategory
-        status
-        dateStart
-        group {
-          id
-          category
-          groupInstance
-        }
-      }
+      ...PersonCardWithRoles
     }
     senate: people(
       limit: 999
@@ -40,40 +27,14 @@ const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: $stateCode
     ) {
-      ...PersonCard
-      roles {
-        id
-        primaryDistrict
-        primaryState
-        roleCategory
-        status
-        dateStart
-        group {
-          id
-          category
-          groupInstance
-        }
-      }
+      ...PersonCardWithRoles
     }
     presidential: people(limit: 999, offset: 0, personRoleGroupingOr: [RUNNING_FOR_PRESIDENT]) {
-      ...PersonCard
-      roles {
-        id
-        primaryDistrict
-        primaryState
-        roleCategory
-        status
-        dateStart
-        group {
-          id
-          category
-          groupInstance
-        }
-      }
+      ...PersonCardWithRoles
     }
   }
 
-  ${fragmentDTSIPersonCard}
+  ${fragmentDTSIPersonCardWithRoles}
 `
 export const queryDTSILocationSpecificRacesInformation = async ({
   stateCode,

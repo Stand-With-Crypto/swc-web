@@ -1,6 +1,8 @@
+import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -15,13 +17,19 @@ import { CaHero } from './hero'
 const countryCode = SupportedCountryCodes.CA
 const urls = getIntlUrls(countryCode)
 
-export function CaPageHome({ topLevelMetrics, recentActivity, partners, founders }: HomePageProps) {
+export function CaPageHome({
+  topLevelMetrics,
+  recentActivity,
+  partners,
+  founders,
+  dtsiHomepagePoliticians,
+}: HomePageProps) {
   return (
     <>
       <CaHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} />
+        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
       </section>
 
       <HomePageSection>
@@ -75,14 +83,16 @@ export function CaPageHome({ topLevelMetrics, recentActivity, partners, founders
           <HomePageSection.Subtitle>
             Members from our community that have founded crypto-related businesses in the UK.
           </HomePageSection.Subtitle>
-          <div className="flex flex-col items-center gap-6">
-            <FoundersCarousel founders={founders} />
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.founders()}>View all</InternalLink>
-            </Button>
-          </div>
+
+          <FoundersCarousel founders={founders} />
         </HomePageSection>
       )}
+
+      <HomepagePoliticiansSection
+        countryCode={countryCode}
+        cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
+        dtsiHomepagePoliticians={dtsiHomepagePoliticians}
+      />
     </>
   )
 }

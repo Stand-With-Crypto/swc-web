@@ -4,7 +4,7 @@ import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLe
 import { PageReferralsHeading } from '@/components/app/pageReferrals/heading'
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
-import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/userReferralUrl'
+import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

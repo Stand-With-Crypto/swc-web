@@ -4,6 +4,7 @@ import { UserActionType } from '@prisma/client'
 
 import { UserActionCard } from '@/components/app/userActionGridCTAs/components/userActionCard'
 import { useGridCTAs } from '@/components/app/userActionGridCTAs/hooks/useGridCTAs'
+import { cn } from '@/utils/web/cn'
 
 interface UserActionGridCTAsSkeletonProps {
   excludeUserActionTypes?: UserActionType[]
@@ -15,7 +16,14 @@ export function UserActionGridCTAsSkeleton({
   const { ctas } = useGridCTAs({ excludeUserActionTypes, performedUserActionTypes: [] })
 
   return (
-    <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-4">
+    <div
+      className={cn(
+        ctas.length < 3
+          ? 'flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'
+          : 'grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:justify-items-center',
+        'gap-[18px]',
+      )}
+    >
       {ctas.map(cta => {
         const filteredCampaigns = cta.campaigns.filter(campaign => campaign.isCampaignActive)
 

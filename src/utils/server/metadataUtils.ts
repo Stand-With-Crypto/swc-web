@@ -33,20 +33,27 @@ interface MetadataDetails {
     height?: string | number
   }
 }
+const generateIconsConfig = (countryCode: SupportedCountryCodes) => {
+  const countryCodePrefix = countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `/${countryCode}`
 
-export const TOP_LEVEL_METADATA_DETAILS: Partial<Metadata> = {
-  metadataBase: new URL('https://www.standwithcrypto.org'),
-  applicationName: 'Stand With Crypto',
-  icons: [
-    { url: '/logo/favicon-16x16.png', sizes: '16x16' },
-    { url: '/logo/favicon-32x32.png', sizes: '32x32' },
-  ],
-  // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
-  appleWebApp: {
-    title: 'Stand With Crypto',
-    statusBarStyle: 'black-translucent',
-    startupImage: ['/logo/apple-touch-icon.png'],
-  },
+  return [
+    { url: `${countryCodePrefix}/logo/favicon-16x16.png`, sizes: '16x16' },
+    { url: `${countryCodePrefix}/logo/favicon-32x32.png`, sizes: '32x32' },
+  ]
+}
+
+export const generateTopLevelMetadataDetails = (countryCode: SupportedCountryCodes) => {
+  return {
+    metadataBase: new URL('https://www.standwithcrypto.org'),
+    applicationName: 'Stand With Crypto',
+    icons: generateIconsConfig(countryCode),
+    manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
+    appleWebApp: {
+      title: 'Stand With Crypto',
+      statusBarStyle: 'black-translucent',
+      startupImage: ['/logo/apple-touch-icon.png'],
+    },
+  } satisfies Partial<Metadata>
 }
 
 export const generateMetadataDetails = ({
@@ -99,6 +106,6 @@ export function generateCountryCodeLayoutMetadata(countryCode: SupportedCountryC
       default: title,
       template: `%s | ${countryCodePrefix}Stand With Crypto`,
     },
-    ...TOP_LEVEL_METADATA_DETAILS,
+    ...generateTopLevelMetadataDetails(countryCode),
   } satisfies Metadata
 }

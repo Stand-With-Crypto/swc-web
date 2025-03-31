@@ -7,7 +7,7 @@ import {
 } from '@/data/dtsi/generated'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 
 export const dtsiPersonRoleMockResolver =
   (overrides: Partial<DTSI_PersonRole> = {}) =>

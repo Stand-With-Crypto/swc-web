@@ -3,9 +3,9 @@ import { Address, Prisma } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 
 const getDistrict = (stateCode: USStateCode) => {
   const stateDistrictCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]

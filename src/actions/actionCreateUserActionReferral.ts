@@ -9,7 +9,7 @@ import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { ServerLocalUser, zodServerLocalUser } from '@/utils/server/serverLocalUser'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
@@ -19,19 +19,11 @@ const logger = getLogger(`actionCreateUserActionReferral`)
 
 const zodUserActionReferralInput = z.object({
   referralId: zodReferralId,
-  userId: z.string().uuid('Invalid user ID format'),
-  /**
-   * Calling the server action from Nextjs `after` may not have the client cookies.
-   * This is why we accept the localUser as an optional parameter.
-   */
-  localUser: zodServerLocalUser.nullable(),
+  newUserId: z.string().uuid('Invalid user ID format'),
 })
 
 type Input = z.infer<typeof zodUserActionReferralInput>
 
-/**
- * Creates a referral record with optional address attribution
- */
 async function createReferralRecord({
   referrerId,
   addressId,
@@ -259,32 +251,27 @@ export async function actionCreateUserActionReferral(input: Input) {
       errorsMetadata: validatedFields.errorsMetadata,
     }
   }
-  const { referralId, userId, localUser } = validatedFields.data
+  const { referralId, newUserId } = validatedFields.data
 
-  const user = await prismaClient.user.findFirstOrThrow({
-    where: { id: userId },
+  const referredUser = await prismaClient.user.findFirstOrThrow({
+    where: { id: newUserId },
     include: {
       primaryUserCryptoAddress: true,
       address: true,
     },
   })
-  if (!user) {
-    logger.error('user not found', { userId })
+  if (!referredUser) {
+    logger.error('Referred user not found', { newUserId })
     return {
-      errors: { userId: ['User not found'] },
+      errors: { newUserId: ['Referred user not found'] },
     }
   }
-
-  const analytics = getServerAnalytics({
-    userId: user.id,
-    localUser,
-  })
-  const beforeFinish = () => Promise.all([analytics.flush()])
 
   const referrer = await prismaClient.user.findFirst({
     where: { referralId },
     include: {
       address: true,
+      primaryUserCryptoAddress: true,
       userActions: {
         where: {
           actionType: UserActionType.REFER,
@@ -308,22 +295,27 @@ export async function actionCreateUserActionReferral(input: Input) {
       },
       extra: {
         referralId,
-        userId,
+        newUserId,
       },
       level: 'error',
     })
-    waitUntil(beforeFinish())
     return { errors: { referralId: ['Referrer not found'] } }
   }
 
   logger.info(`found referrer ${referrer.id}`)
 
-  const countryCode = getCountryCode(referrer, localUser)
+  const analytics = getServerAnalytics({
+    userId: referrer.id,
+    localUser: getLocalUserFromUser(referrer),
+  })
+  const beforeFinish = () => Promise.all([analytics.flush()])
+
+  const countryCode = referrer.countryCode
   if (!countryCode) {
     logger.error('no country code found')
     Sentry.captureMessage('no country code found', {
       tags: { domain: 'referrals' },
-      extra: { userId },
+      extra: { newUserId, referrer },
     })
     return {
       errors: { countryCode: ['No country code found'] },
@@ -341,14 +333,8 @@ export async function actionCreateUserActionReferral(input: Input) {
   waitUntil(beforeFinish())
 
   return {
-    user: getClientUser(user),
+    user: getClientUser(referrer),
     wasActionCreated: !hasExistingReferActions,
     action: userAction,
   }
-}
-
-function getCountryCode(user: User | null, localUser: ServerLocalUser | null) {
-  return (
-    user?.countryCode || localUser?.persisted?.countryCode || localUser?.currentSession?.countryCode
-  )
 }

@@ -26,9 +26,10 @@ import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type FormFields = {
-  countryCode: string
+  countryCode: SupportedCountryCodes
 }
 
 export function UserConfig() {
@@ -46,13 +47,15 @@ export function UserConfig() {
 
   const form = useForm<FormFields>({
     defaultValues: {
-      countryCode: parsedExistingCountryCode?.countryCode,
+      countryCode: parsedExistingCountryCode?.countryCode as SupportedCountryCodes,
     },
   })
 
   const handleCountryCodeSubmit = async (values: FormFields) => {
     if (isLoggedIn) {
-      const result = await actionUpdateUserCountryCode(values.countryCode.toLowerCase())
+      const result = await actionUpdateUserCountryCode(
+        values.countryCode.toLowerCase() as SupportedCountryCodes,
+      )
 
       if (result?.errors) {
         const [errorMessage] = result.errors.countryCode ?? ['Unknown error']

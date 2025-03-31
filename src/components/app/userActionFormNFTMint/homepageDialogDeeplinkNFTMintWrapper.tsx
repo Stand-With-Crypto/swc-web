@@ -18,7 +18,9 @@ export function HomepageDialogDeeplinkNFTMintWrapper() {
   return (
     <GeoGate
       countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      unavailableContent={<UserActionFormActionUnavailable />}
+      unavailableContent={
+        <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+      }
     >
       <UserActionFormNFTMint onFinished={() => router.replace(urls.home())} trackMount />
     </GeoGate>

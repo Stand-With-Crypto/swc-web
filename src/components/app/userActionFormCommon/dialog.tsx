@@ -2,7 +2,10 @@
 
 import { GeoGate } from '@/components/app/geoGate'
 import { Dialog, DialogContent, DialogProps, DialogTrigger } from '@/components/ui/dialog'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 import { UserActionFormActionUnavailable } from './actionUnavailable'
@@ -10,7 +13,7 @@ import { UserActionFormActionUnavailable } from './actionUnavailable'
 interface UserActionFormDialogProps extends DialogProps {
   children: React.ReactNode
   trigger: React.ReactNode
-  countryCode?: string
+  countryCode?: SupportedCountryCodes
   bypassCountryCheck?: boolean
   padding?: boolean
   className?: string
@@ -42,7 +45,10 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
           bypassCountryCheck={bypassCountryCheck}
           countryCode={countryCode}
           unavailableContent={
-            <UserActionFormActionUnavailable onConfirm={() => dialogProps?.onOpenChange?.(false)} />
+            <UserActionFormActionUnavailable
+              countryCode={countryCode}
+              onConfirm={() => dialogProps?.onOpenChange?.(false)}
+            />
           }
         >
           {children}
