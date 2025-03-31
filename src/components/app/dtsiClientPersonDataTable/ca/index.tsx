@@ -29,7 +29,7 @@ import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrad
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   getCAProvinceOrTerritoryNameFromCode,
-} from '@/utils/shared/caProvinceUtils'
+} from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or province'

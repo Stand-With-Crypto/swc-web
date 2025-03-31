@@ -20,8 +20,8 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { getUSStateCodeFromStateName } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 interface RenderMapProps {

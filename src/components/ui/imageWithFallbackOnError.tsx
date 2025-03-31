@@ -1,25 +1,33 @@
 'use client'
 
-import React from 'react'
+import { DetailedHTMLProps, ImgHTMLAttributes, useState } from 'react'
+
+import { MaybeNextImg } from '@/components/ui/image'
 
 export function ImageWithFallbackOnError({
   src,
   alt,
   fallbackSrc,
+  width,
+  height,
   ...props
-}: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
+}: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> & {
   alt: string
   src: string
   fallbackSrc: string
+  width?: number
+  height?: number
 }) {
-  const [hasErrored, setHasErrored] = React.useState(false)
+  const [hasErrored, setHasErrored] = useState(false)
+
   return (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img
+    <MaybeNextImg
       {...props}
       alt={alt}
+      height={height}
       onError={() => setHasErrored(true)}
       src={hasErrored ? fallbackSrc : src}
+      width={width}
     />
   )
 }

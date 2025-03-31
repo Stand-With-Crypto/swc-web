@@ -1,5 +1,8 @@
 import { possessive } from '@/utils/shared/possessive'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { withOrdinalSuffix } from '@/utils/web/withOrdinalSuffix'
 
 interface GetTextProps {

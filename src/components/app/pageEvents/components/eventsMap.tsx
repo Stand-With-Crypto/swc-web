@@ -14,7 +14,7 @@ import { pluralize } from '@/utils/shared/pluralize'
 import {
   getUSStateCodeFromStateName,
   getUSStateNameFromStateCode,
-} from '@/utils/shared/usStateUtils'
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 

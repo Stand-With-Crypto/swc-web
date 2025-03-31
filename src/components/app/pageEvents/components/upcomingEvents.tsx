@@ -14,11 +14,11 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { getAUStateNameFromStateCode } from '@/utils/shared/auStateUtils'
-import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/caProvinceUtils'
-import { getGBCountryNameFromCode } from '@/utils/shared/gbCountryUtils'
+import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { getGBCountryNameFromCode } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface UpcomingEventsProps {
