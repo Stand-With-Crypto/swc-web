@@ -6,7 +6,9 @@ import { sumBy, uniq } from 'lodash-es'
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
+import { UserReferralUrl } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
+import { Refer } from '@/components/app/userActionFormRefer/common/sections/refer'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
@@ -193,6 +195,19 @@ export function PageUserProfile({
         <div>
           <NFTDisplay userActions={userActions} />
         </div>
+      </section>
+
+      <section>
+        <Refer>
+          <div>
+            <PageTitle size="md">Invite a friend to join</PageTitle>
+            <PageTitle size="md">Stand With Crypto</PageTitle>
+          </div>
+          <PageSubTitle>
+            Send friends your unique referral code to encourage them to sign up and take action.
+          </PageSubTitle>
+          <Refer.ReferralCode />
+        </Refer>
       </section>
     </div>
   )
