@@ -73,6 +73,9 @@ export enum UserActionTweetAtPersonCampaignName {
 export enum UserActionVoterAttestationCampaignName {
   DEFAULT = 'DEFAULT',
   '2025_US_ELECTIONS' = '2025_US_ELECTIONS',
+  '2025_AU_ELECTIONS' = '2025_AU_ELECTIONS',
+  '2025_GB_ELECTIONS' = '2025_GB_ELECTIONS',
+  '2025_CA_ELECTIONS' = '2025_CA_ELECTIONS',
 }
 export enum UserActionRsvpEventCampaignName {
   DEFAULT = 'DEFAULT',

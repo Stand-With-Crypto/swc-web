@@ -11,7 +11,7 @@ import {
   actionCreateUserActionViewKeyRaces,
   CreateActionViewKeyRacesInput,
 } from '@/actions/actionCreateUserActionViewKeyRaces'
-import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
+import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants/us/usCtas'
 import {
   voterGuideFormValidationSchema,
   VoterGuideFormValues,
