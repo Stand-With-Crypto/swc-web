@@ -4,7 +4,7 @@ import {
   actionCreateUserActionRsvpEvent,
   CreateActionRsvpEventInput,
 } from '@/actions/actionCreateUserActionRsvpEvent'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'

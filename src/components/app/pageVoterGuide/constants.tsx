@@ -5,18 +5,18 @@ import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 import {
-  UserActionCampaignName,
-  UserActionVoterAttestationCampaignName,
-  UserActionVoterRegistrationCampaignName,
-  UserActionVotingInformationResearchedCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+  USUserActionCampaignName,
+  USUserActionVoterAttestationCampaignName,
+  USUserActionVoterRegistrationCampaignName,
+  USUserActionVotingInformationResearchedCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export type VoterGuideStep = {
   title: string
   description: string
   WrapperComponent: (args: { children: React.ReactNode }) => React.ReactNode
   action: UserActionType
-  campaignName: UserActionCampaignName
+  campaignName: USUserActionCampaignName
   image: string
   mobileImage?: string
   wideDesktopImage?: boolean
@@ -31,7 +31,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     description: 'See where politicians on your ballot stand on crypto.',
     WrapperComponent: KeyRacesDialog,
     action: UserActionType.VOTER_ATTESTATION,
-    campaignName: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
+    campaignName: USUserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/getInformedAction.png',
     wideDesktopImage: true,
     onlyShowInTheUS: false,
@@ -41,7 +41,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     description: 'Make sure you’re registered to vote in this year’s election.',
     WrapperComponent: UserActionFormVoterRegistrationDialog,
     action: UserActionType.VOTER_REGISTRATION,
-    campaignName: UserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
+    campaignName: USUserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/voterAttestation.png',
     onlyShowInTheUS: true,
   },
@@ -53,7 +53,8 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
         <Suspense fallback={children}>
           <UserActionFormVotingInformationResearchedDialog
             initialValues={{
-              campaignName: UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+              campaignName:
+                USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
               address: undefined,
               shouldReceiveNotifications: false,
             }}
@@ -64,7 +65,7 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
       )
     },
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
-    campaignName: UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+    campaignName: USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
     image: '/actionTypeIcons/votingResearched.png',
     onlyShowInTheUS: true,
   },

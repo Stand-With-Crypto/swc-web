@@ -8,12 +8,12 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import {
-  ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-} from '@/utils/shared/userActionCampaigns'
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const activeActionTypesByCountry: Record<SupportedCountryCodes, readonly UserActionType[]> = {
-  [SupportedCountryCodes.US]: ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.US]: US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   [SupportedCountryCodes.CA]: [UserActionType.OPT_IN, UserActionType.TWEET],
   [SupportedCountryCodes.GB]: [UserActionType.OPT_IN, UserActionType.TWEET],
   [SupportedCountryCodes.AU]: [UserActionType.OPT_IN, UserActionType.TWEET],

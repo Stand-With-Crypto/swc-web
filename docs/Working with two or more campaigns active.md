@@ -17,7 +17,7 @@
 ```javascript
 /// userActionCampaigns.ts
 
-export enum UserActionTweetAtPersonCampaignName {
+export enum USUserActionTweetAtPersonCampaignName {
   'DEFAULT' = 'DEFAULT',
   '2024_05_22_PIZZA_DAY' = '2024_05_22_PIZZA_DAY', // new campaign for tweet at person action
 }
@@ -37,7 +37,7 @@ When creating campaigns that should behave differently based on country:
        campaigns: [
          {
            actionType: UserActionType.TWEET,
-           campaignName: UserActionTweetCampaignName['2024_05_22_PIZZA_DAY'],
+           campaignName: USUserActionTweetCampaignName['2024_05_22_PIZZA_DAY'],
            isCampaignActive: true,
            title: 'US Bitcoin Pizza Day',
            description: 'Tweet about Bitcoin Pizza Day in the US',
@@ -59,7 +59,7 @@ When creating campaigns that should behave differently based on country:
        campaigns: [
          {
            actionType: UserActionType.TWEET,
-           campaignName: UserActionTweetCampaignName['2024_05_22_PIZZA_DAY'],
+           campaignName: USUserActionTweetCampaignName['2024_05_22_PIZZA_DAY'],
            isCampaignActive: true,
            title: 'GB Bitcoin Pizza Day',
            description: 'Tweet about Bitcoin Pizza Day in the GB',

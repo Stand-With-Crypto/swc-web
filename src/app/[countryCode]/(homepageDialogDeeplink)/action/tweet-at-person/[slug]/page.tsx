@@ -8,7 +8,7 @@ import { UserActionFormTweetToPersonDeeplinkWrapper } from '@/components/app/use
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
@@ -16,14 +16,14 @@ export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 export const dynamicParams = true
 
-const TWEET_AT_PERSON_CAMPAIGN_SLUGS = Object.values(UserActionTweetAtPersonCampaignName)
+const TWEET_AT_PERSON_CAMPAIGN_SLUGS = Object.values(USUserActionTweetAtPersonCampaignName)
 
 type Props = PageProps<{ slug: string }>
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
   const { slug } = params
-  const content = CAMPAIGN_METADATA[slug as UserActionTweetAtPersonCampaignName]
+  const content = CAMPAIGN_METADATA[slug as USUserActionTweetAtPersonCampaignName]
 
   if (content) {
     return generateMetadataDetails({
@@ -44,7 +44,7 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
   if (
     !slug ||
     (!TWEET_AT_PERSON_CAMPAIGN_SLUGS.includes(slug) &&
-      slug !== UserActionTweetAtPersonCampaignName.DEFAULT)
+      slug !== USUserActionTweetAtPersonCampaignName.DEFAULT)
   ) {
     notFound()
   }
@@ -66,7 +66,7 @@ export default async function UserActionTweetAtPersonDeepLink(props: Props) {
           }}
         >
           <UserActionFormTweetToPersonDeeplinkWrapper
-            slug={slug as UserActionTweetAtPersonCampaignName}
+            slug={slug as USUserActionTweetAtPersonCampaignName}
           />
         </ErrorBoundary>
       </div>

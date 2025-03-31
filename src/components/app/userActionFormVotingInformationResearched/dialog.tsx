@@ -20,7 +20,7 @@ import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -81,7 +81,7 @@ export function UserActionFormVotingInformationResearchedDialog({
     shouldReceiveNotifications: formProps.initialValues?.shouldReceiveNotifications || false,
     campaignName:
       formProps.initialValues?.campaignName ||
-      UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+      USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
   }
 
   const { mutate } = useApiResponseForUserFullProfileInfo()

@@ -20,7 +20,7 @@ import { useSession } from '@/hooks/useSession'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
@@ -81,7 +81,7 @@ export function KeyRacesDialog({ children, defaultOpen }: KeyRacesDialogProps) {
       }
 
       const data: CreateActionVoterAttestationInput = {
-        campaignName: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
         address: addressSchema,
         stateCode: addressSchema.administrativeAreaLevel1 as USStateCode,
         shouldBypassAuth: true,

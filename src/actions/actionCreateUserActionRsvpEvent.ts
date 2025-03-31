@@ -23,7 +23,7 @@ import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withSe
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionRsvpEvent`)
 
@@ -174,7 +174,7 @@ async function changeReceiveNotificationStatus({
 
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.RSVP_EVENT,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
     userState: 'Existing',
     shouldReceiveNotifications: true,
   })
@@ -206,7 +206,7 @@ function logSpamActionSubmissions({
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.RSVP_EVENT,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
     reason: 'Too Many Recent',
     userState: 'Existing',
   })
@@ -231,7 +231,7 @@ async function createAction<U extends User>({
     data: {
       user: { connect: { id: user.id } },
       actionType: UserActionType.RSVP_EVENT,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+      campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
       countryCode,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
@@ -255,7 +255,7 @@ async function createAction<U extends User>({
 
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.RSVP_EVENT,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
     userState: isNewUser ? 'New' : 'Existing',
     shouldReceiveNotifications: validatedInput.shouldReceiveNotifications,
   })

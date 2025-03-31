@@ -33,14 +33,14 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionCallCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
 const createActionCallCongresspersonInputValidationSchema = object({
   phoneNumber: zodPhoneNumber,
-  campaignName: nativeEnum(UserActionCallCampaignName),
+  campaignName: nativeEnum(USUserActionCallCampaignName),
   dtsiSlug: zodDTSISlug,
   address: zodAddress,
 })

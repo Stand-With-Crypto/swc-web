@@ -61,7 +61,7 @@ import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
 type UpsertedUser = User & {
   address: Address | null

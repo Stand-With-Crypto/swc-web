@@ -25,7 +25,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
-import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
@@ -66,7 +66,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const countryCode = await getCountryCodeCookie()
 
   const actionType = UserActionType.VIEW_KEY_RACES
-  const campaignName = UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS']
+  const campaignName = USUserActionViewKeyRacesCampaignName['2025_US_ELECTIONS']
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -330,7 +330,7 @@ async function createUserActionViewKeyRaces(
     data: {
       countryCode,
       actionType: UserActionType.VIEW_KEY_RACES,
-      campaignName: UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
+      campaignName: USUserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
       userActionViewKeyRaces: {
         create: {
           usCongressionalDistrict,
@@ -348,7 +348,7 @@ async function createUserActionViewKeyRaces(
 
 async function getUserAlreadyViewedKeyRaces(
   userId: string,
-  campaignName: UserActionViewKeyRacesCampaignName,
+  campaignName: USUserActionViewKeyRacesCampaignName,
 ) {
   return prismaClient.userAction.findFirst({
     where: {

@@ -1,5 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
+
 export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.OPT_IN,
   UserActionType.VOTER_REGISTRATION,
@@ -49,9 +51,6 @@ export enum USUserActionCallCampaignName {
 export enum USUserActionDonationCampaignName {
   DEFAULT = 'DEFAULT',
 }
-export enum USUserActionOptInCampaignName {
-  DEFAULT = 'DEFAULT',
-}
 export enum USUserActionTweetCampaignName {
   DEFAULT = 'DEFAULT',
   'FOLLOW_SWC_ON_X_2024' = 'FOLLOW_SWC_ON_X_2024',
@@ -98,7 +97,7 @@ export type USUserActionCampaignName =
   | USUserActionEmailCampaignName
   | USUserActionCallCampaignName
   | USUserActionDonationCampaignName
-  | USUserActionOptInCampaignName
+  | UserActionOptInCampaignName
   | USUserActionTweetCampaignName
   | USUserActionNftMintCampaignName
   | USUserActionVoterRegistrationCampaignName
@@ -115,7 +114,7 @@ export type USUserActionCampaigns = {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName
   [UserActionType.CALL]: USUserActionCallCampaignName
   [UserActionType.DONATION]: USUserActionDonationCampaignName
-  [UserActionType.OPT_IN]: USUserActionOptInCampaignName
+  [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: USUserActionTweetCampaignName
   [UserActionType.NFT_MINT]: USUserActionNftMintCampaignName
   [UserActionType.VOTER_REGISTRATION]: USUserActionVoterRegistrationCampaignName
@@ -134,7 +133,7 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
   [UserActionType.CALL]: USUserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: USUserActionDonationCampaignName.DEFAULT,
-  [UserActionType.OPT_IN]: USUserActionOptInCampaignName.DEFAULT,
+  [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
   [UserActionType.NFT_MINT]: USUserActionNftMintCampaignName.DEFAULT,
   [UserActionType.VOTER_REGISTRATION]:
