@@ -19,7 +19,9 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
 
   const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
   const fullUrl = externalUrls.swcReferralUrl({ referralId })
-  const presentationUrl = fullUrl.replace(/https?:\/\/(www\.)?/, '').replace('/join/', '/join/\n')
+  const presentationUrl = fullUrl
+    .replace(/https?:\/\/(www\.)?/, '')
+    .replace('/join/', '/join/\u200B')
 
   const handleCopy = () => handleCopyToClipboard(fullUrl)
 
@@ -35,9 +37,7 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
         size="lg"
         variant="outline"
       >
-        <span className="whitespace-pre-wrap text-start sm:whitespace-normal">
-          {presentationUrl}
-        </span>
+        <span className="whitespace-pre-wrap text-start">{presentationUrl}</span>
 
         <TooltipProvider>
           <Tooltip open={hasCopied}>
