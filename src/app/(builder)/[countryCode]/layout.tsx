@@ -1,7 +1,6 @@
 import { capitalize } from 'lodash-es'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Script from 'next/script'
 
 import { TopLevelBuilderClientLogic } from '@/components/app/builder/topLevelBuilderClientLogic'
 import { PageLayout } from '@/components/app/layout/layout'
@@ -54,11 +53,8 @@ export default async function Layout({
   }
 
   return (
-    <>
-      <Script src="https://win.newmode.net/assets/main.js" type="module" />
-      <PageLayout countryCode={countryCode} footer={null} navbar={null}>
-        <TopLevelBuilderClientLogic>{children}</TopLevelBuilderClientLogic>
-      </PageLayout>
-    </>
+    <PageLayout countryCode={countryCode} footer={null} navbar={null}>
+      <TopLevelBuilderClientLogic>{children}</TopLevelBuilderClientLogic>
+    </PageLayout>
   )
 }
