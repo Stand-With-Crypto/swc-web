@@ -66,3 +66,9 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
       return 'Socialist'
   }
 }
+
+const hideStanceSlugs = new Set<string>([])
+
+export function isPoliticianStanceHidden(dtsiSlug: string) {
+  return hideStanceSlugs.has(dtsiSlug.toLowerCase())
+}

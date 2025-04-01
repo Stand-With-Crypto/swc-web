@@ -9,7 +9,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { dtsiPersonFullName, isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
@@ -24,20 +24,26 @@ export function ScoreExplainer({
 }) {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
   const countryCode = useCountryCode()
+  const isStanceHidden = isPoliticianStanceHidden(person.slug)
+
   return (
     <Popover analytics="Person Score Explainer">
       <PopoverTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-secondary p-3 text-left md:my-12">
+        {!isStanceHidden ? (
+          <div>
+            {useLetterGrade ? (
+              <DTSIFormattedLetterGrade className="h-14 w-14" person={person} />
+            ) : (
+              <DTSIThumbsUpOrDownGrade className="h-14 w-14" person={person} />
+            )}
+          </div>
+        ) : null}
         <div>
-          {useLetterGrade ? (
-            <DTSIFormattedLetterGrade className="h-14 w-14" person={person} />
-          ) : (
-            <DTSIThumbsUpOrDownGrade className="h-14 w-14" person={person} />
+          {!isStanceHidden && (
+            <h3 className="mb-1 font-bold md:text-xl">
+              {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
+            </h3>
           )}
-        </div>
-        <div>
-          <h3 className="mb-1 font-bold md:text-xl">
-            {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
-          </h3>
           <h4 className="text-sm text-fontcolor-muted md:text-base">
             {dtsiPersonFullName(person)} has made{' '}
             <FormattedNumber

@@ -11,6 +11,7 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
+import { isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 
 /**
  * Custom filter logic for each Column.
@@ -26,6 +27,11 @@ export const getPersonDataTableFilterFns = (): Record<
   [PERSON_TABLE_COLUMNS_IDS.STANCE]: (row, _columnId, filterValue, _addMeta) => {
     const scoreToUse =
       row.original.manuallyOverriddenStanceScore ?? row.original.computedStanceScore
+    const isStanceHidden = isPoliticianStanceHidden(row.original.slug)
+
+    if (isStanceHidden) {
+      return filterValue === StanceOnCryptoOptions.ALL
+    }
 
     if (filterValue === StanceOnCryptoOptions.ALL) {
       return true

@@ -47,6 +47,7 @@ const query = /* GraphQL */ `
         nameSuffix
         profilePictureUrl
         id
+        slug
       }
     }
   }
