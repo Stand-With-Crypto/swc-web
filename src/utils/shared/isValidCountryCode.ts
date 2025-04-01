@@ -18,7 +18,7 @@ export function isValidCountryCode({
   if (
     countryCode === SupportedCountryCodes.US &&
     userAccessLocation &&
-    ['MX', 'CA'].includes(userAccessLocation)
+    ['mx', 'ca'].includes(userAccessLocation)
   ) {
     return true
   }

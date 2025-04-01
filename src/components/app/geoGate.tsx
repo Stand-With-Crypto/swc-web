@@ -27,7 +27,7 @@ export const GeoGate = (props: GeoGateProps) => {
 
   if (!hasHydrated) return children
 
-  const userAccessLocation = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)
+  const userAccessLocation = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.toLowerCase()
 
   const isLocallyBypassed =
     process.env.NEXT_PUBLIC_BYPASS_GEO_GATE === 'true' && process.env.NODE_ENV === 'development'
