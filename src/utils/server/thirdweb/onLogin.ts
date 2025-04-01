@@ -28,10 +28,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
 import { getCountryCodeFromURL } from '@/utils/server/getCountryCodeFromURL'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
@@ -61,6 +57,7 @@ import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
+import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 type UpsertedUser = User & {
@@ -119,27 +116,27 @@ export async function login(
         .flush(),
     ])
 
-    const currentUserCountryCode = existingVerifiedUser.countryCode
+    const currentUserCountryCode = existingVerifiedUser.countryCode?.toLowerCase()
 
-    const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-    const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
+    const userAccessLocationCookie = currentCookies
+      .get(USER_ACCESS_LOCATION_COOKIE_NAME)
+      ?.value?.toLowerCase()
 
     const hasValidCurrentCountryCode = !isEmpty(currentUserCountryCode)
-    const hasParsedCookie = !!parsedUserCountryCodeCookie
-    const cookieCountryCodeDiffersFromUser =
-      parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
-      currentUserCountryCode.toLowerCase()
+    const hasUserAccessLocationCookie = !!userAccessLocationCookie
+    const cookieCountryCodeDiffersFromUser = userAccessLocationCookie !== currentUserCountryCode
 
-    if (hasValidCurrentCountryCode && hasParsedCookie && cookieCountryCodeDiffersFromUser) {
+    if (
+      hasValidCurrentCountryCode &&
+      hasUserAccessLocationCookie &&
+      cookieCountryCodeDiffersFromUser
+    ) {
       log(
-        `setting user country code cookie from ${parsedUserCountryCodeCookie.countryCode.toLowerCase()} to ${currentUserCountryCode.toLowerCase()}`,
+        `setting user access location cookie from ${userAccessLocationCookie} to ${currentUserCountryCode}`,
       )
       currentCookies.set({
-        name: USER_COUNTRY_CODE_COOKIE_NAME,
-        value: JSON.stringify({
-          countryCode: currentUserCountryCode.toLowerCase(),
-          bypassed: true,
-        }),
+        name: USER_ACCESS_LOCATION_COOKIE_NAME,
+        value: currentUserCountryCode,
         httpOnly: false,
         sameSite: 'lax',
         secure: true,
