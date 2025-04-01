@@ -6,7 +6,7 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCFounders, zodFoundersSchemaValidation } from '@/utils/shared/zod/getSWCFounders'
+import { SWCFounder, zodFoundersSchemaValidation } from '@/utils/shared/zod/getSWCFounders'
 
 const logger = getLogger(`builderIOFounders`)
 
@@ -51,7 +51,7 @@ export async function getFounders({ countryCode }: { countryCode: SupportedCount
 
         return validEntry.data
       })
-      .filter(Boolean) as SWCFounders
+      .filter(Boolean) as SWCFounder[]
 
     if (filteredIncompleteFounders.length === 0) return null
 
