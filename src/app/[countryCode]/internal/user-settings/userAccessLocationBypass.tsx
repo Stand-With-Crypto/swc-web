@@ -2,18 +2,6 @@ import Cookies from 'js-cookie'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
-import { COOKIE_CONSENT_COOKIE_NAME } from '@/utils/shared/cookieConsent'
-import { LOCAL_USER_CURRENT_SESSION_KEY, LOCAL_USER_PERSISTED_KEY } from '@/utils/shared/localUser'
-import {
-  ORDERED_SUPPORTED_COUNTRIES,
-  SupportedCountryCodes,
-  USER_SELECTED_COUNTRY_COOKIE_NAME,
-} from '@/utils/shared/supportedCountries'
-import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
-import {
-  OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME,
-  USER_ACCESS_LOCATION_COOKIE_NAME,
-} from '@/utils/shared/userAccessLocation'
 import {
   Select,
   SelectContent,
@@ -21,11 +9,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { COOKIE_CONSENT_COOKIE_NAME } from '@/utils/shared/cookieConsent'
+import { LOCAL_USER_CURRENT_SESSION_KEY, LOCAL_USER_PERSISTED_KEY } from '@/utils/shared/localUser'
+import {
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+  USER_SELECTED_COUNTRY_COOKIE_NAME,
+} from '@/utils/shared/supportedCountries'
+import {
+  OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME,
+  USER_ACCESS_LOCATION_COOKIE_NAME,
+} from '@/utils/shared/userAccessLocation'
+import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 export function UserAccessLocationBypass() {
   const userAccessLocation = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.toLowerCase()
 
-  const handleLocationCountryCodeSubmit = async (countryCode: SupportedCountryCodes) => {
+  const handleLocationCountryCodeSubmit = (countryCode: SupportedCountryCodes) => {
     Cookies.set(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, countryCode)
 
     Cookies.remove(USER_ACCESS_LOCATION_COOKIE_NAME)
@@ -43,7 +43,7 @@ export function UserAccessLocationBypass() {
     )
   }
 
-  const handleLocationCountryCodeReset = async () => {
+  const handleLocationCountryCodeReset = () => {
     Cookies.remove(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME)
     Cookies.remove(USER_ACCESS_LOCATION_COOKIE_NAME)
 
