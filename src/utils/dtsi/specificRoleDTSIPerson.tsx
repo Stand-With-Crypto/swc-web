@@ -11,7 +11,10 @@ import {
   NEXT_SESSION_OF_CONGRESS,
 } from '@/utils/dtsi/dtsiPersonRoleUtils'
 
-type PersonFields = Pick<DTSI_StateSpecificInformationQuery['people'][0], 'roles' | 'slug'>
+type PersonFields = Pick<
+  DTSI_StateSpecificInformationQuery['people'][0],
+  'roles' | 'slug' | 'politicalAffiliationCategory'
+>
 
 export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
   person: P,
@@ -36,6 +39,7 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
       isIncumbent: currentSpecificRole?.roleCategory === DTSI_PersonRoleCategory.PRESIDENT,
       currentSpecificRole,
       runningForSpecificRole,
+      politicalAffiliationCategory: person.politicalAffiliationCategory,
     }
   }
 
@@ -62,6 +66,7 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
       isIncumbent,
       currentSpecificRole,
       runningForSpecificRole,
+      politicalAffiliationCategory: person.politicalAffiliationCategory,
     }
   }
 
@@ -88,6 +93,7 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
       currentSpecificRole.roleCategory === runningForSpecificRole.roleCategory,
     currentSpecificRole,
     runningForSpecificRole,
+    politicalAffiliationCategory: person.politicalAffiliationCategory,
   }
 }
 

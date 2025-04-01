@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { cn } from '@/utils/web/cn'
 
 type TabOption = {
   value: string
@@ -21,15 +22,24 @@ type TabOption = {
 type Props = TabsProps & {
   options: TabOption[]
   analytics: string
+  forceDesktop?: boolean
+  containerClassName?: string
 }
 
-export function ResponsiveTabsOrSelect({ defaultValue, options, analytics, ...props }: Props) {
+export function ResponsiveTabsOrSelect({
+  defaultValue,
+  options,
+  analytics,
+  forceDesktop,
+  containerClassName,
+  ...props
+}: Props) {
   const [currentTab, setCurrentTab] = useState(defaultValue)
 
   return (
     <Tabs analytics={analytics} onValueChange={setCurrentTab} value={currentTab} {...props}>
       {/* Mobile: Select */}
-      <div className="sm:hidden">
+      <div className={cn('sm:hidden', forceDesktop && 'hidden', containerClassName)}>
         <Select onValueChange={setCurrentTab} value={currentTab}>
           <SelectTrigger
             className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary text-base font-semibold"
@@ -51,7 +61,13 @@ export function ResponsiveTabsOrSelect({ defaultValue, options, analytics, ...pr
       </div>
 
       {/* Desktop: TabsList */}
-      <div className="mb-8 hidden text-center sm:mb-4 sm:block">
+      <div
+        className={cn(
+          'mb-8 hidden text-center sm:mb-4 sm:block',
+          forceDesktop && 'block',
+          containerClassName,
+        )}
+      >
         <TabsList className="mx-auto" data-testid="responsive-tabs-or-select-tabs-list">
           {options.map(option => (
             <TabsTrigger key={option.value} value={option.value}>

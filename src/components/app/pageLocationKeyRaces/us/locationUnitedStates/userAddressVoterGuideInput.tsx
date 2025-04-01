@@ -126,12 +126,8 @@ function ContentContainer({
   return (
     <ContentSection
       className="container"
-      subtitle={
-        shouldShowSubtitle
-          ? 'Enter your address to find the key races in your area that will impact the future of crypto in the United States.'
-          : null
-      }
-      title={'Your races'}
+      subtitle={shouldShowSubtitle ? 'Enter your address to find key races near you.' : null}
+      title="Races in your area"
     >
       {children}
     </ContentSection>

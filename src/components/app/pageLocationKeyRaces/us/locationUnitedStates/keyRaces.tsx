@@ -1,10 +1,11 @@
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/organizePeople'
+import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { StateShield } from '@/components/ui/stateShield'
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
+import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
@@ -25,7 +26,7 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
 
   if (keyRaces.length === 0) {
     return (
-      <div className="container flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <PageTitle as="h2" size="sm">
           No key races found
         </PageTitle>
@@ -33,65 +34,80 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
     )
   }
 
-  return keyRaces.map(([stateCode, races]) => {
-    const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
-    return (
-      <div className="container flex flex-col items-center" key={stateCode}>
-        <StateShield countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} size={150} state={stateCode} />
+  return (
+    <div className="flex flex-col items-center gap-20">
+      {keyRaces.map(([stateCode, races]) => {
+        const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
+        return (
+          <div className="flex flex-col items-center gap-10" key={stateCode}>
+            <div className="flex flex-col items-center gap-4">
+              <PageTitle as="h2" size="md">
+                {stateName} Gubernatorial Election
+              </PageTitle>
+              <PageSubTitle>November 4, 2025</PageSubTitle>
+            </div>
 
-        <PageTitle as="h2" size="sm">
-          {stateName}
-        </PageTitle>
+            {races.map(people => {
+              const republicanPeople = people.filter(
+                person =>
+                  person.politicalAffiliationCategory ===
+                  DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+              )
+              const democraticPeople = people.filter(
+                person =>
+                  person.politicalAffiliationCategory ===
+                  DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+              )
 
-        {races.map((people, idx) => {
-          const raceCategory = people[0].runningForSpecificRole?.roleCategory
-          const primaryDistrict =
-            people[0].runningForSpecificRole?.primaryDistrict &&
-            normalizeDTSIDistrictId(people[0].runningForSpecificRole)
-
-          const subtitleNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR ? 'Governor Race' : 'Senate Race'
-
-          const linkNoDistrict =
-            raceCategory === DTSI_PersonRoleCategory.GOVERNOR
-              ? urls.locationStateSpecificGovernorRace(stateCode as USStateCode)
-              : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
-
-          return (
-            <DTSIPersonHeroCardSection
-              countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-              cta={
-                <InternalLink
-                  href={
-                    primaryDistrict
-                      ? urls.locationDistrictSpecific({
-                          stateCode: stateCode as USStateCode,
-                          district: primaryDistrict,
-                        })
-                      : linkNoDistrict
-                  }
-                >
-                  View Race
-                </InternalLink>
-              }
-              key={`${stateCode}-${primaryDistrict ?? idx}`}
-              people={people}
-              subtitle={
-                primaryDistrict ? (
-                  <>
-                    {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District Race
-                  </>
-                ) : (
-                  <>
-                    {stateName} {subtitleNoDistrict}
-                  </>
-                )
-              }
-              title=""
-            />
-          )
-        })}
-      </div>
-    )
-  })
+              return (
+                <div className="flex flex-col items-center gap-6" key={stateCode}>
+                  <div className="flex flex-col items-center">
+                    <PageTitle as="h3" size="xxs">
+                      Primary election
+                    </PageTitle>
+                  </div>
+                  <ResponsiveTabsOrSelect
+                    analytics={'Primary Races Tabs'}
+                    containerClassName="mb-6 md:mb-10"
+                    data-testid="primary-races-tabs"
+                    defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
+                    forceDesktop
+                    options={[
+                      {
+                        value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                        label: 'Republican',
+                        content: (
+                          <DTSIPersonHeroCardSection
+                            countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+                            people={republicanPeople}
+                          />
+                        ),
+                      },
+                      {
+                        value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+                        label: 'Democratic',
+                        content: (
+                          <DTSIPersonHeroCardSection
+                            countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+                            people={democraticPeople}
+                          />
+                        ),
+                      },
+                    ]}
+                  />
+                  <Button asChild variant="secondary">
+                    <InternalLink
+                      href={urls.locationStateSpecificGovernorRace(stateCode as USStateCode)}
+                    >
+                      View all
+                    </InternalLink>
+                  </Button>
+                </div>
+              )
+            })}
+          </div>
+        )
+      })}
+    </div>
+  )
 }

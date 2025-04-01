@@ -35,6 +35,7 @@ export function MaybeOverflowedStances({ person, stances, countryCode }: Props) 
         stance={stance}
       />
     ))
+
   if (orderedStances.length < 4) {
     return <div className="space-y-6">{stancesContent}</div>
   }
