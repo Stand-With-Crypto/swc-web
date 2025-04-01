@@ -67,7 +67,35 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
   }
 }
 
-const hideStanceSlugs = new Set<string>([])
+const hideStanceSlugs = new Set<string>([
+  'josh---gottheimer',
+  'mikie---sherrill',
+  'edward---durr',
+  'bill---spadea',
+  'hans---herberg',
+  'jack---ciattarelli',
+  'sean---spiller',
+  'roger--bacon',
+  'stephen---sweeney',
+  'ras---baraka',
+  'robert---canfield',
+  'justin---barbera',
+  'jon---bramnick',
+  'steven---fulop',
+  'james---fazzone',
+  'stephen---zielinski',
+  'joanne---kuniansky',
+  'karen---zaletel',
+  'monica---brinson',
+  'mario---kranjac',
+  'gerardo---cedrone',
+  'abigail---spanberger',
+  'dave---larock',
+  'merle---rutledge',
+  'winsome---earle-sears',
+  'amanda---chase',
+  'andrew---white',
+])
 
 export function isPoliticianStanceHidden(dtsiSlug: string) {
   return hideStanceSlugs.has(dtsiSlug.toLowerCase())
