@@ -1,82 +1,20 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
-
-import { actionUpdateUserCountryCode } from '@/actions/actionUpdateUserCountryCode'
-import { IpLocationBypass } from '@/app/[countryCode]/internal/user-settings/ipLocationBypass'
 import { useCookieConsent } from '@/components/app/cookieConsent/useCookieConsent'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import {
-  Form,
-  FormControl,
-  FormErrorMessage,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useCookieState } from '@/hooks/useCookieState'
-import { useSession } from '@/hooks/useSession'
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-type FormFields = {
-  countryCode: SupportedCountryCodes
-}
+import { UserAccessLocationBypass } from '@/app/[countryCode]/internal/user-settings/userAccessLocationBypass'
+import { UpdateUserAccountCountryCode } from '@/app/[countryCode]/internal/user-settings/updateUserAccountCountryCode'
 
 export function UserConfig() {
-  const router = useRouter()
-  const { isLoggedIn } = useSession()
   const { resetCookieConsent } = useCookieConsent()
   const [decreaseCommunicationTimers, setDecreaseCommunicationTimers] = useCookieState(
     'SWC_DECREASE_COMMUNICATION_TIMERS',
   )
   const [bypassSingleActions, setBypassSingleActions] = useCookieState('SWC_BYPASS_SINGLE_ACTIONS')
   const [disableTokenRefresh, setDisableTokenRefresh] = useCookieState('SWC_DISABLE_TOKEN_REFRESH')
-
-  const existingCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
-  const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
-
-  const form = useForm<FormFields>({
-    defaultValues: {
-      countryCode: parsedExistingCountryCode?.countryCode as SupportedCountryCodes,
-    },
-  })
-
-  const handleCountryCodeSubmit = async (values: FormFields) => {
-    if (isLoggedIn) {
-      const result = await actionUpdateUserCountryCode(
-        values.countryCode.toLowerCase() as SupportedCountryCodes,
-      )
-
-      if (result?.errors) {
-        const [errorMessage] = result.errors.countryCode ?? ['Unknown error']
-
-        toast.warning(`Cookie was updated successfully. ${errorMessage}`, {
-          duration: 2000,
-        })
-      }
-    }
-
-    Cookies.set(
-      USER_COUNTRY_CODE_COOKIE_NAME,
-      JSON.stringify({ countryCode: values.countryCode.toLowerCase(), bypassed: true }),
-      {
-        sameSite: 'lax',
-        secure: true,
-      },
-    )
-
-    router.refresh()
-  }
 
   return (
     <div className="flex flex-col gap-12">
@@ -141,31 +79,9 @@ export function UserConfig() {
         Expire Thirdweb Auth Token
       </Button>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleCountryCodeSubmit)}>
-          <div className="flex items-end gap-4">
-            <FormField
-              control={form.control}
-              name="countryCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Country Code</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormErrorMessage />
-                </FormItem>
-              )}
-            />
+      <UpdateUserAccountCountryCode />
 
-            <Button disabled={form.formState.isSubmitting} type="submit">
-              Update
-            </Button>
-          </div>
-        </form>
-      </Form>
-
-      <IpLocationBypass />
+      <UserAccessLocationBypass />
     </div>
   )
 }
