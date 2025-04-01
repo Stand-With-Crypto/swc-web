@@ -145,16 +145,7 @@ document.cookie = "USER_SELECTED_COUNTRY=au"
 
 ## Technical Details
 
-### Cookie Data Structure
-
-```typescript
-type CountryCookieData = {
-  countryCode: string // Lowercase country code
-  bypassed: boolean // Flag for bypass status
-}
-```
-
-### Bypass Mode
+### Bypass Mode - Env
 
 - Set `BYPASS_INTERNATIONAL_REDIRECT=true` env to disable redirects
 - Useful for testing and development
