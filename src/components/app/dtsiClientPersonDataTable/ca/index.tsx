@@ -30,6 +30,7 @@ import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   getCAProvinceOrTerritoryNameFromCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or province'
@@ -37,13 +38,14 @@ const GLOBAL_SUBTITLE =
   'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
 
+const countryCode = SupportedCountryCodes.CA
+
 export function CaDTSIClientPersonDataTable({
   initialData,
 }: {
   initialData: DTSIPersonDataTablePeople
 }) {
   const [globalFilter, setGlobalFilter] = useSearchFilter('')
-  const countryCode = SupportedCountryCodes.CA
 
   const { data } = useGetAllPeople(countryCode, {
     fallbackData: { people: sortDTSIPersonDataTable(initialData) },
@@ -62,7 +64,7 @@ export function CaDTSIClientPersonDataTable({
         countryCode,
         dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
       }),
-    [countryCode],
+    [],
   )
 
   const tableBodyProps = useMemo(() => {
@@ -76,7 +78,7 @@ export function CaDTSIClientPersonDataTable({
       globalFilter,
       setGlobalFilter,
     }
-  }, [tableColumns, parsedData, countryCode, globalFilter, setGlobalFilter])
+  }, [tableColumns, parsedData, globalFilter, setGlobalFilter])
 
   return (
     <Suspense
@@ -157,11 +159,13 @@ function CaGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         partyOptions={PARTY_OPTIONS}
       />
       <GlobalFilters.StateSelect
+        locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
         namedColumns={namedColumns}
         stateOptions={[
           'All',
           ...Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP).sort(),
         ]}
+        triggerClassName="w-[145px]"
       />
     </GlobalFilters>
   )

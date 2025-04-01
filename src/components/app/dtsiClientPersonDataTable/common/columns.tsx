@@ -14,7 +14,7 @@ import {
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -61,103 +61,105 @@ export const getDTSIClientPersonDataTableColumns = ({
 }: {
   countryCode: SupportedCountryCodes
   dtsiGradeComponent: React.ComponentType<{ person: Person; className: string }>
-}) => [
-  personColumnHelper.accessor(dtsiPersonFullName, {
-    id: PERSON_TABLE_COLUMNS_IDS.FULL_NAME,
-    filterFn: PERSON_TABLE_COLUMNS_IDS.FULL_NAME,
-    cell: ({ row }) => (
-      <LinkBox className="flex items-center gap-3">
-        <DTSIAvatar person={row.original} size={40} />
-        <InternalLink
-          className={cn(linkBoxLinkClassName, 'cursor-pointer')}
-          href={getIntlUrls(countryCode).politicianDetails(row.original.slug)}
-        >
-          {dtsiPersonFullName(row.original)}
-        </InternalLink>
-      </LinkBox>
-    ),
-    header: ({ column }) => {
-      return <SortableHeader column={column}>Name</SortableHeader>
-    },
-  }),
-  personColumnHelper.accessor(
-    row => {
-      const score = row.manuallyOverriddenStanceScore || row.computedStanceScore
-      if (isNil(score)) {
-        return -1
-      }
-      return score
-    },
-    {
-      id: PERSON_TABLE_COLUMNS_IDS.STANCE,
-      filterFn: PERSON_TABLE_COLUMNS_IDS.STANCE,
-      header: ({ column }) => {
-        return (
-          <SortableHeader column={column}>
-            <span>Stance</span> <span className="ml-1 hidden md:inline-block">on crypto</span>
-          </SortableHeader>
-        )
-      },
+}) => {
+  const stateNameResolver = getStateNameResolver(countryCode)
+
+  return [
+    personColumnHelper.accessor(dtsiPersonFullName, {
+      id: PERSON_TABLE_COLUMNS_IDS.FULL_NAME,
+      filterFn: PERSON_TABLE_COLUMNS_IDS.FULL_NAME,
       cell: ({ row }) => (
-        <div className="flex items-center gap-2">
-          <DtsiGradeComponent className="h-7 w-7" person={row.original} />
-          <span className="hidden md:inline">
-            {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
-          </span>
-        </div>
+        <LinkBox className="flex items-center gap-3">
+          <DTSIAvatar person={row.original} size={40} />
+          <InternalLink
+            className={cn(linkBoxLinkClassName, 'cursor-pointer')}
+            href={getIntlUrls(countryCode).politicianDetails(row.original.slug)}
+          >
+            {dtsiPersonFullName(row.original)}
+          </InternalLink>
+        </LinkBox>
       ),
-    },
-  ),
-  personColumnHelper.accessor(
-    row => (row.primaryRole ? getDTSIPersonRoleCategoryDisplayName(row.primaryRole) : '-'),
-    {
-      id: PERSON_TABLE_COLUMNS_IDS.ROLE,
-      filterFn: PERSON_TABLE_COLUMNS_IDS.ROLE,
       header: ({ column }) => {
-        return <SortableHeader column={column}>Role</SortableHeader>
+        return <SortableHeader column={column}>Name</SortableHeader>
+      },
+    }),
+    personColumnHelper.accessor(
+      row => {
+        const score = row.manuallyOverriddenStanceScore || row.computedStanceScore
+        if (isNil(score)) {
+          return -1
+        }
+        return score
+      },
+      {
+        id: PERSON_TABLE_COLUMNS_IDS.STANCE,
+        filterFn: PERSON_TABLE_COLUMNS_IDS.STANCE,
+        header: ({ column }) => {
+          return (
+            <SortableHeader column={column}>
+              <span>Stance</span> <span className="ml-1 hidden md:inline-block">on crypto</span>
+            </SortableHeader>
+          )
+        },
+        cell: ({ row }) => (
+          <div className="flex items-center gap-2">
+            <DtsiGradeComponent className="h-7 w-7" person={row.original} />
+            <span className="hidden md:inline">
+              {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
+            </span>
+          </div>
+        ),
+      },
+    ),
+    personColumnHelper.accessor(
+      row => (row.primaryRole ? getDTSIPersonRoleCategoryDisplayName(row.primaryRole) : '-'),
+      {
+        id: PERSON_TABLE_COLUMNS_IDS.ROLE,
+        filterFn: PERSON_TABLE_COLUMNS_IDS.ROLE,
+        header: ({ column }) => {
+          return <SortableHeader column={column}>Role</SortableHeader>
+        },
+        cell: ({ row }) => (
+          <>
+            {row.original.primaryRole
+              ? getDTSIPersonRoleCategoryDisplayName(row.original.primaryRole)
+              : '-'}
+          </>
+        ),
+      },
+    ),
+    personColumnHelper.accessor(
+      row =>
+        row.primaryRole?.primaryState
+          ? `${stateNameResolver(row.primaryRole.primaryState)} ${row.primaryRole.primaryState}`
+          : '-',
+      {
+        id: PERSON_TABLE_COLUMNS_IDS.STATE,
+        filterFn: PERSON_TABLE_COLUMNS_IDS.STATE,
+        header: ({ column }) => {
+          return <SortableHeader column={column}>Location</SortableHeader>
+        },
+        cell: ({ row }) =>
+          row.original.primaryRole?.primaryState
+            ? stateNameResolver(row.original.primaryRole.primaryState)
+            : '-',
+      },
+    ),
+    personColumnHelper.accessor('politicalAffiliationCategory', {
+      id: PERSON_TABLE_COLUMNS_IDS.PARTY,
+      filterFn: PERSON_TABLE_COLUMNS_IDS.PARTY,
+      header: ({ column }) => {
+        return <SortableHeader column={column}>Party</SortableHeader>
       },
       cell: ({ row }) => (
         <>
-          {row.original.primaryRole
-            ? getDTSIPersonRoleCategoryDisplayName(row.original.primaryRole)
+          {row.original.politicalAffiliationCategory
+            ? dtsiPersonPoliticalAffiliationCategoryDisplayName(
+                row.original.politicalAffiliationCategory,
+              )
             : '-'}
         </>
       ),
-    },
-  ),
-  personColumnHelper.accessor(
-    row =>
-      row.primaryRole?.primaryState
-        ? `${getUSStateNameFromStateCode(row.primaryRole.primaryState)} ${
-            row.primaryRole.primaryState
-          }`
-        : '-',
-    {
-      id: PERSON_TABLE_COLUMNS_IDS.STATE,
-      filterFn: PERSON_TABLE_COLUMNS_IDS.STATE,
-      header: ({ column }) => {
-        return <SortableHeader column={column}>Location</SortableHeader>
-      },
-      cell: ({ row }) =>
-        row.original.primaryRole?.primaryState
-          ? getUSStateNameFromStateCode(row.original.primaryRole.primaryState)
-          : '-',
-    },
-  ),
-  personColumnHelper.accessor('politicalAffiliationCategory', {
-    id: PERSON_TABLE_COLUMNS_IDS.PARTY,
-    filterFn: PERSON_TABLE_COLUMNS_IDS.PARTY,
-    header: ({ column }) => {
-      return <SortableHeader column={column}>Party</SortableHeader>
-    },
-    cell: ({ row }) => (
-      <>
-        {row.original.politicalAffiliationCategory
-          ? dtsiPersonPoliticalAffiliationCategoryDisplayName(
-              row.original.politicalAffiliationCategory,
-            )
-          : '-'}
-      </>
-    ),
-  }),
-]
+    }),
+  ]
+}

@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { cn } from '@/utils/web/cn'
 
 export enum StanceOnCryptoOptions {
   ALL = 'All',
@@ -156,9 +157,13 @@ GlobalFilters.PartySelect = GlobalFiltersPartySelect
 function GlobalFiltersStateSelect({
   namedColumns,
   stateOptions,
+  locationLabel,
+  triggerClassName,
 }: {
   namedColumns: Record<string, Column<Person>>
   stateOptions: string[]
+  locationLabel: string
+  triggerClassName?: string
 }) {
   return (
     <Select
@@ -167,8 +172,11 @@ function GlobalFiltersStateSelect({
       }
       value={namedColumns?.[PERSON_TABLE_COLUMNS_IDS.STATE]?.getFilterValue() as string}
     >
-      <SelectTrigger className="w-[110px] flex-shrink-0" data-testid="state-filter-trigger">
-        <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
+      <SelectTrigger
+        className={cn('w-[110px] flex-shrink-0', triggerClassName)}
+        data-testid="state-filter-trigger"
+      >
+        <span className="mr-2 inline-block flex-shrink-0 font-bold">{locationLabel}</span>
         <SelectValue />
       </SelectTrigger>
       <SelectContent

@@ -30,6 +30,7 @@ import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/stateMappings/usStateUtils'
+import { getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
@@ -157,6 +158,7 @@ function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         partyOptions={PARTY_OPTIONS}
       />
       <GlobalFilters.StateSelect
+        locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
         namedColumns={namedColumns}
         stateOptions={['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]}
       />
