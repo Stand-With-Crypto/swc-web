@@ -5,15 +5,16 @@ import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
-import { COUNTRY_CODE_REGEX_PATTERN } from '@/utils/shared/supportedCountries'
+import {
+  COUNTRY_CODE_REGEX_PATTERN,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
-interface GetCountryCodeCookieProps {
-  bypassValidCountryCodeCheck?: boolean
-}
-
-export async function getCountryCodeCookie({
+export async function getCountryCodeCookie<TBypassCountryCodeCheck extends boolean = false>({
   bypassValidCountryCodeCheck,
-}: GetCountryCodeCookieProps = {}) {
+}: { bypassValidCountryCodeCheck?: TBypassCountryCodeCheck } = {}): Promise<
+  TBypassCountryCodeCheck extends true ? string : SupportedCountryCodes
+> {
   const currentCookies = await cookies()
 
   const maybeCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
@@ -35,7 +36,7 @@ export async function getCountryCodeCookie({
       throw error
     }
 
-    return countryCode
+    return countryCode as TBypassCountryCodeCheck extends true ? string : SupportedCountryCodes
   }
 
   if (!COUNTRY_CODE_REGEX_PATTERN.test(countryCode)) {
@@ -44,5 +45,5 @@ export async function getCountryCodeCookie({
     throw error
   }
 
-  return countryCode
+  return countryCode as SupportedCountryCodes
 }
