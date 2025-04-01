@@ -5,6 +5,7 @@ import { isNil } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/common/sortableHeader'
+import { StanceHiddenCard } from '@/components/app/dtsiClientPersonDataTable/stanceHidden'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
@@ -12,6 +13,7 @@ import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRol
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
+  isPoliticianStanceHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
@@ -103,10 +105,16 @@ export const getDTSIClientPersonDataTableColumns = ({
         },
         cell: ({ row }) => (
           <div className="flex items-center gap-2">
-            <DtsiGradeComponent className="h-7 w-7" person={row.original} />
-            <span className="hidden md:inline">
-              {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
-            </span>
+            {!isPoliticianStanceHidden(row.original.slug) ? (
+              <>
+                <DtsiGradeComponent className="h-7 w-7" person={row.original} />
+                <span className="hidden md:inline">
+                  {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
+                </span>
+              </>
+            ) : (
+              <StanceHiddenCard />
+            )}
           </div>
         ),
       },
