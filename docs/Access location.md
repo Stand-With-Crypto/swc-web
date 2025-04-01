@@ -36,35 +36,39 @@ The system relies on two primary cookies:
 
 ## Redirection Logic
 
-### First Visit Redirection
-
-The system implements smart redirection for first-time visitors based on the following criteria:
+The system implements smart redirection based on the following criteria:
 
 ```typescript
-// Redirection occurs when ALL conditions are met:
-1. User is accessing a country-specific homepage
-2. USER_SELECTED_COUNTRY cookie is not set
-3. USER_ACCESS_LOCATION is a supported country
-4. Current homepage != USER_ACCESS_LOCATION country
+// Redirection occurs in two cases:
 
-// Example:
-// User from Canada accessing https://standwithcrypto.com/au
-// Will be redirected to https://standwithcrypto.com/ca
+1. User has previously selected a country (USER_SELECTED_COUNTRY cookie exists):
+   - User is accessing US homepage (standwithcrypto.com/)
+   - USER_SELECTED_COUNTRY is a supported country code
+   - USER_SELECTED_COUNTRY is not the default country code (US)
+
+2. First-time visitor:
+   - User is accessing US homepage (standwithcrypto.com/)
+   - USER_ACCESS_LOCATION is a supported country code
+   - USER_ACCESS_LOCATION is not the default country code (US)
+   - USER_ACCESS_LOCATION cookie is not set
+
+// Examples:
+// Case 1: Returning user
+// User previously selected AU
+// Accessing: standwithcrypto.com/
+// Redirected to: standwithcrypto.com/au
+
+// Case 2: First-time visitor
+// User from Canada accessing: standwithcrypto.com/
+// Redirected to: standwithcrypto.com/ca
 ```
 
-### Search Engine Redirection
+### Development Override
 
-For returning users accessing through search engines:
+For development and testing purposes, the redirection can be bypassed by setting the environment variable:
 
-```typescript
-// Redirection occurs when:
-1. User accesses US homepage (standwithcrypto.com/)
-2. USER_SELECTED_COUNTRY exists and is not 'us'
-
-// Example:
-// User previously selected AU
-// Accessing from Google: standwithcrypto.com/
-// Redirected to: standwithcrypto.com/au
+```bash
+BYPASS_INTERNATIONAL_REDIRECT=true
 ```
 
 ## Cookie Usage Scenarios
@@ -83,10 +87,10 @@ For returning users accessing through search engines:
 ```typescript
 // On login:
 if (user.countryCode !== USER_SELECTED_COUNTRY) {
-  USER_SELECTED_COUNTRY = user.countryCode
+  USER_ACCESS_LOCATION = user.countryCode
 }
 
-// Then, the page is refreshed after the login is completed to match the new selected country
+// This will allow users outside of their respective country to continue completing actions
 ```
 
 ### Geogate
