@@ -81,7 +81,7 @@ export function KeyRacesDialog({ children, defaultOpen }: KeyRacesDialogProps) {
       }
 
       const data: CreateActionVoterAttestationInput = {
-        campaignName: USUserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVoterAttestationCampaignName['H1_2025'],
         address: addressSchema,
         stateCode: addressSchema.administrativeAreaLevel1 as USStateCode,
         shouldBypassAuth: true,

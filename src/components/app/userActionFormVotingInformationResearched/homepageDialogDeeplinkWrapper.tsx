@@ -60,7 +60,7 @@ function UserActionFormVotingInformationDeeplinkWrapperContent() {
               place_id: user.address.googlePlaceId,
             }
           : initialValues?.address,
-        campaignName: USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVotingInformationResearchedCampaignName['H1_2025'],
         shouldReceiveNotifications: false,
       }}
       onClose={() => router.push(urls.home())}

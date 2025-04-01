@@ -69,7 +69,7 @@ export function CALocationRaceSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      campaignName: CAUserActionViewKeyRacesCampaignName['2025_CA_ELECTIONS'],
+      campaignName: CAUserActionViewKeyRacesCampaignName['H1_2025'],
       stateCode,
     })
   }, [stateCode])

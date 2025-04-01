@@ -106,7 +106,7 @@ export function USLocationRaceSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      campaignName: USUserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
+      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
       usaState: stateCode,
       usCongressionalDistrict: district?.toString(),
     })

@@ -81,7 +81,7 @@ export function UserActionFormVotingInformationResearchedDialog({
     shouldReceiveNotifications: formProps.initialValues?.shouldReceiveNotifications || false,
     campaignName:
       formProps.initialValues?.campaignName ||
-      USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+      USUserActionVotingInformationResearchedCampaignName['H1_2025'],
   }
 
   const { mutate } = useApiResponseForUserFullProfileInfo()

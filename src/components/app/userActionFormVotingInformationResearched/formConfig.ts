@@ -29,7 +29,7 @@ export function getDefaultValues({
           place_id: user?.address.googlePlaceId,
         }
       : ({} as GooglePlaceAutocompletePrediction),
-    campaignName: USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+    campaignName: USUserActionVotingInformationResearchedCampaignName['H1_2025'],
     shouldReceiveNotifications: false,
   }
 }

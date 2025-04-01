@@ -18,7 +18,7 @@ export function useVoterRegistrationAction() {
   const [createAction, isCreatingAction] = useLoadingCallback(
     async ({ stateCode, onSuccess }: { stateCode: USStateCode; onSuccess: () => void }) => {
       const data: CreateActionVoterRegistrationInput = {
-        campaignName: USUserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVoterRegistrationCampaignName['H1_2025'],
         usaState: stateCode,
       }
 

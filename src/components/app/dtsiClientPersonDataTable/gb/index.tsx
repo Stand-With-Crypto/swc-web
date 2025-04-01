@@ -30,6 +30,7 @@ import {
   GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
   getGBCountryNameFromCode,
 } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or country'
@@ -37,13 +38,14 @@ const GLOBAL_SUBTITLE =
   'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
 
+const countryCode = SupportedCountryCodes.GB
+
 export function GbDTSIClientPersonDataTable({
   initialData,
 }: {
   initialData: DTSIPersonDataTablePeople
 }) {
   const [globalFilter, setGlobalFilter] = useSearchFilter('')
-  const countryCode = SupportedCountryCodes.GB
 
   const { data } = useGetAllPeople(countryCode, {
     fallbackData: { people: sortDTSIPersonDataTable(initialData) },
@@ -62,7 +64,7 @@ export function GbDTSIClientPersonDataTable({
         countryCode,
         dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
       }),
-    [countryCode],
+    [],
   )
 
   const tableBodyProps = useMemo(() => {
@@ -76,7 +78,7 @@ export function GbDTSIClientPersonDataTable({
       globalFilter,
       setGlobalFilter,
     }
-  }, [tableColumns, parsedData, countryCode, globalFilter, setGlobalFilter])
+  }, [tableColumns, parsedData, globalFilter, setGlobalFilter])
 
   return (
     <Suspense
@@ -157,8 +159,10 @@ function GbGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         partyOptions={PARTY_OPTIONS}
       />
       <GlobalFilters.StateSelect
+        locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
         namedColumns={namedColumns}
         stateOptions={['All', ...Object.keys(GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP).sort()]}
+        triggerClassName="w-[150px]"
       />
     </GlobalFilters>
   )

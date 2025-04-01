@@ -7,6 +7,7 @@ export const GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.TWEET,
   UserActionType.RSVP_EVENT,
   UserActionType.VIEW_KEY_RACES,
+  UserActionType.VOTER_ATTESTATION,
 ] as const
 export type GBActiveClientUserActionWithCampaignType =
   (typeof GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -20,7 +21,10 @@ export enum GBUserActionRsvpEventCampaignName {
 }
 
 export enum GBUserActionViewKeyRacesCampaignName {
-  '2025_GB_ELECTIONS' = '2025_GB_ELECTIONS',
+  'H1_2025' = 'H1_2025',
+}
+export enum GBUserActionVoterAttestationCampaignName {
+  'H1_2025' = 'H1_2025',
 }
 
 export type GBUserActionCampaignName =
@@ -28,17 +32,19 @@ export type GBUserActionCampaignName =
   | GBUserActionTweetCampaignName
   | GBUserActionRsvpEventCampaignName
   | GBUserActionViewKeyRacesCampaignName
-
+  | GBUserActionVoterAttestationCampaignName
 export type GBUserActionCampaigns = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: GBUserActionTweetCampaignName
   [UserActionType.RSVP_EVENT]: GBUserActionRsvpEventCampaignName
   [UserActionType.VIEW_KEY_RACES]: GBUserActionViewKeyRacesCampaignName
+  [UserActionType.VOTER_ATTESTATION]: GBUserActionVoterAttestationCampaignName
 }
 
 export const GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: GBUserActionTweetCampaignName.DEFAULT,
   [UserActionType.RSVP_EVENT]: GBUserActionRsvpEventCampaignName.DEFAULT,
-  [UserActionType.VIEW_KEY_RACES]: GBUserActionViewKeyRacesCampaignName['2025_GB_ELECTIONS'],
+  [UserActionType.VIEW_KEY_RACES]: GBUserActionViewKeyRacesCampaignName['H1_2025'],
+  [UserActionType.VOTER_ATTESTATION]: GBUserActionVoterAttestationCampaignName['H1_2025'],
 } satisfies Record<GBActiveClientUserActionWithCampaignType, string>

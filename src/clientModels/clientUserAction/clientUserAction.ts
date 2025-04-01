@@ -141,7 +141,7 @@ type ClientUserActionPoll = {
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
 export type ClientUserAction = ClientModel<
-  Pick<UserAction, 'id' | 'actionType' | 'campaignName'> & {
+  Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'countryCode'> & {
     datetimeCreated: string
     nftMint: ClientNFTMint | null
   } & (

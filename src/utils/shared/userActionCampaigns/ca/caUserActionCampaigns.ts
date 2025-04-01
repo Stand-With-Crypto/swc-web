@@ -7,6 +7,7 @@ export const CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.TWEET,
   UserActionType.RSVP_EVENT,
   UserActionType.VIEW_KEY_RACES,
+  UserActionType.VOTER_ATTESTATION,
 ] as const
 export type CAActiveClientUserActionWithCampaignType =
   (typeof CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -16,7 +17,10 @@ export enum CAUserActionTweetCampaignName {
 }
 
 export enum CAUserActionViewKeyRacesCampaignName {
-  '2025_CA_ELECTIONS' = '2025_CA_ELECTIONS',
+  'H1_2025' = 'H1_2025',
+}
+export enum CAUserActionVoterAttestationCampaignName {
+  'H1_2025' = 'H1_2025',
 }
 
 export enum CAUserActionRsvpEventCampaignName {
@@ -28,17 +32,20 @@ export type CAUserActionCampaignName =
   | CAUserActionTweetCampaignName
   | CAUserActionRsvpEventCampaignName
   | CAUserActionViewKeyRacesCampaignName
+  | CAUserActionVoterAttestationCampaignName
 
 export type CAUserActionCampaigns = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: CAUserActionTweetCampaignName
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName
+  [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName
 }
 
 export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: CAUserActionTweetCampaignName.DEFAULT,
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName.DEFAULT,
-  [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName['2025_CA_ELECTIONS'],
+  [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName['H1_2025'],
+  [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName['H1_2025'],
 } satisfies Record<CAActiveClientUserActionWithCampaignType, string>

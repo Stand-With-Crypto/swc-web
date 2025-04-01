@@ -40,7 +40,7 @@ export function AULocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      campaignName: AUUserActionViewKeyRacesCampaignName['2025_AU_ELECTIONS'],
+      campaignName: AUUserActionViewKeyRacesCampaignName['H1_2025'],
       stateCode,
     })
   }, [stateCode])
