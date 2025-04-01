@@ -99,7 +99,7 @@
     "mixpanel-browser": "^2.48.1",
     "motion": "^12.0.0-alpha.2",
     "nanoid": "^5.0.5",
-    "next": "^15.1.6",
+    "next": "^15.2.3",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
     "nextjs-toploader": "^1.6.12",
