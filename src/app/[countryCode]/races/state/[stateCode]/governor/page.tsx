@@ -57,5 +57,5 @@ export default async function LocationStateGovernorSpecificPage({
     throw new Error(`Invalid params for LocationGovernorSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return <USLocationRaceGovernorSpecific {...data} isGovernor stateCode={validatedStateCode} />
+  return <USLocationRaceGovernorSpecific {...data} stateCode={validatedStateCode} />
 }

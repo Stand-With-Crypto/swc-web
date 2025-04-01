@@ -79,3 +79,17 @@ export function isActionSupportedForCountry<
     action in COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[country]
   )
 }
+
+export const getActionDefaultCampaignName = (
+  action: UserActionType,
+  countryCode: SupportedCountryCodes,
+) => {
+  const campaignNameEnum =
+    COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode as SupportedCountryCodes]
+
+  if (!campaignNameEnum) {
+    return US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action]
+  }
+
+  return campaignNameEnum[action as keyof typeof campaignNameEnum]
+}

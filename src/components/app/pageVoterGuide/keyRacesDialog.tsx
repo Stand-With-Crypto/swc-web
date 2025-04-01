@@ -9,7 +9,7 @@ import {
   actionCreateUserActionVoterAttestation,
   CreateActionVoterAttestationInput,
 } from '@/actions/actionCreateUserActionVoterAttestation'
-import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
+import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants/us/usCtas'
 import { getDefaultValues } from '@/components/app/pageVoterGuide/formConfig'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
