@@ -1,19 +1,19 @@
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+
+import { actionUpdateUserCountryCode } from '@/actions/actionUpdateUserCountryCode'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { useSession } from '@/hooks/useSession'
 import {
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { toast } from 'sonner'
-
-import { actionUpdateUserCountryCode } from '@/actions/actionUpdateUserCountryCode'
-import { useSession } from '@/hooks/useSession'
-import { useRouter } from 'next/navigation'
-import {
-  Select,
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select'
 
 export function UpdateUserAccountCountryCode() {
   const router = useRouter()
@@ -41,8 +41,8 @@ export function UpdateUserAccountCountryCode() {
 
       {isLoggedIn ? (
         <Select
-          onValueChange={value => {
-            handleCountryCodeSubmit(value as SupportedCountryCodes)
+          onValueChange={async value => {
+            await handleCountryCodeSubmit(value as SupportedCountryCodes)
           }}
           value={user?.countryCode}
         >

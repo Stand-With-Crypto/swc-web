@@ -6,8 +6,8 @@ import { waitUntil } from '@vercel/functions'
 import { object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -63,7 +63,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
 
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const actionType = UserActionType.VIEW_KEY_RACES
   const campaignName = UserActionViewKeyRacesCampaignName['2025_US_ELECTIONS']
