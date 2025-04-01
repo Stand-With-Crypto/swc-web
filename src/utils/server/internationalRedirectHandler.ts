@@ -1,152 +1,98 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getCountryCode, USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import { getUserAccessLocation } from '@/utils/server/getUserAccessLocation'
 import {
   COUNTRY_CODE_REGEX_PATTERN,
-  SupportedCountryCodes,
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
   USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
+import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
-type CountryCookieData = {
-  countryCode: string
-  bypassed: boolean
-}
+const US_HOMEPAGE_REGEX = new RegExp('^/$|^/\\?.*$')
 
 export function internationalRedirectHandler(request: NextRequest): {
   response?: NextResponse
-  countryCookie?: CountryCookieData | null
+  userAccessLocationCookie: string | null
 } {
-  const geoLocationCountryCode = getCountryCode(request)?.toLowerCase()
-  const countryCodeCookieData = getCountryCookieData(request)
-  const userSelectedCountryCookie = request.cookies.get(USER_SELECTED_COUNTRY_COOKIE_NAME)?.value
+  const userAccessLocation = getUserAccessLocation(request)?.toLowerCase()
+  const maybeExistingUserAccessLocationCookie = request.cookies
+    .get(USER_ACCESS_LOCATION_COOKIE_NAME)
+    ?.value?.toLowerCase()
+  const maybeUserSelectedCountryCookie = request.cookies
+    .get(USER_SELECTED_COUNTRY_COOKIE_NAME)
+    ?.value?.toLowerCase()
 
-  const maybeResponseCountryCodeCookie = shouldUpdateCountryCookie(
-    countryCodeCookieData,
-    geoLocationCountryCode,
-  )
-    ? { countryCode: geoLocationCountryCode, bypassed: false }
-    : null
+  const { redirect, redirectCountryCode } = shouldRedirectToCountrySpecificHomepage({
+    request,
+    userAccessLocation,
+    maybeExistingUserAccessLocationCookie,
+    maybeUserSelectedCountryCookie,
+  })
 
-  if (process.env.BYPASS_INTERNATIONAL_REDIRECT === 'true') {
-    return {
-      countryCookie: maybeResponseCountryCodeCookie,
-    }
-  }
+  const shouldUpdateUserAccessLocationCookie =
+    userAccessLocation !== maybeExistingUserAccessLocationCookie
 
-  if (
-    shouldRedirectToCountrySpecificHomepageOnFirstVisit(
-      request,
-      geoLocationCountryCode,
-      countryCodeCookieData,
-    )
-  ) {
-    const response = createRedirectResponse(request, geoLocationCountryCode)
+  if (redirect) {
+    const response = createRedirectResponse(request, redirectCountryCode!)
     return {
       response,
-      countryCookie: maybeResponseCountryCodeCookie,
-    }
-  }
-
-  if (shouldRedirectBasedOnUserSelectedCountry(request, userSelectedCountryCookie)) {
-    const response = createRedirectResponse(request, userSelectedCountryCookie!)
-    return {
-      response,
-      countryCookie: maybeResponseCountryCodeCookie,
+      userAccessLocationCookie: shouldUpdateUserAccessLocationCookie ? userAccessLocation : null,
     }
   }
 
   return {
-    countryCookie: maybeResponseCountryCodeCookie,
+    userAccessLocationCookie: shouldUpdateUserAccessLocationCookie ? userAccessLocation : null,
   }
 }
 
-function getCountryCookieData(request: NextRequest): CountryCookieData | null {
-  const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-
-  if (!existingCountryCode) {
-    return null
+function shouldRedirectToCountrySpecificHomepage({
+  request,
+  userAccessLocation,
+  maybeExistingUserAccessLocationCookie,
+  maybeUserSelectedCountryCookie,
+}: {
+  request: NextRequest
+  userAccessLocation: string
+  maybeExistingUserAccessLocationCookie?: string
+  maybeUserSelectedCountryCookie?: string
+}) {
+  // On local development, we want to bypass the international redirect if the BYPASS_INTERNATIONAL_REDIRECT environment variable is set to true
+  if (process.env.BYPASS_INTERNATIONAL_REDIRECT === 'true') {
+    return { redirect: false, redirectCountryCode: null }
   }
 
-  let parsedCookieValue: CountryCookieData | null = null
+  const isUSHomepageRequested = US_HOMEPAGE_REGEX.test(request.nextUrl.pathname)
+  if (!isUSHomepageRequested) return { redirect: false, redirectCountryCode: null }
 
-  if (existingCountryCode.includes('{')) {
-    try {
-      parsedCookieValue = JSON.parse(existingCountryCode) as CountryCookieData
-    } catch {
-      return null
-    }
+  // If the user has selected a country other than US in a previous visit, we want to redirect them
+  const isSelectedCountryCodeSupported = maybeUserSelectedCountryCookie
+    ? COUNTRY_CODE_REGEX_PATTERN.test(maybeUserSelectedCountryCookie) &&
+      maybeUserSelectedCountryCookie !== DEFAULT_SUPPORTED_COUNTRY_CODE
+    : false
+
+  if (isSelectedCountryCodeSupported) {
+    return { redirect: true, redirectCountryCode: maybeUserSelectedCountryCookie }
   }
 
-  const countryCode = (parsedCookieValue?.countryCode || existingCountryCode)?.toLowerCase()
+  // If the user has not visited the site before, we want to redirect them if the access location is supported and different than the default country code
+  if (maybeExistingUserAccessLocationCookie) {
+    return { redirect: false, redirectCountryCode: null }
+  }
 
-  return parsedCookieValue
-    ? {
-        ...parsedCookieValue,
-        countryCode,
-      }
-    : { countryCode, bypassed: false }
+  if (
+    COUNTRY_CODE_REGEX_PATTERN.test(userAccessLocation) &&
+    userAccessLocation !== DEFAULT_SUPPORTED_COUNTRY_CODE
+  ) {
+    return { redirect: true, redirectCountryCode: userAccessLocation }
+  }
+
+  return { redirect: false, redirectCountryCode: null }
 }
 
-function shouldRedirectToCountrySpecificHomepageOnFirstVisit(
-  request: NextRequest,
-  geoLocationCountryCode: string,
-  countryCodeCookieData: CountryCookieData | null,
-): boolean {
-  const isHomepageRequested = new RegExp(
-    `^/(|(${Object.values(SupportedCountryCodes).join('|')}))$`,
-  ).test(request.nextUrl.pathname)
-  if (!isHomepageRequested) return false
-
-  const isCountryCodeCookieDefined = !!countryCodeCookieData
-  if (isCountryCodeCookieDefined) return false
-
-  const isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode =
-    request.nextUrl.pathname.startsWith(`/${geoLocationCountryCode}`) ||
-    (request.nextUrl.pathname === '/' && geoLocationCountryCode === SupportedCountryCodes.US)
-  if (isRequestingTheSameCountryCodeAsTheGeoLocationCountryCode) return false
-
-  const isCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(
-    geoLocationCountryCode?.toLowerCase(),
-  )
-  if (!isCountryCodeSupported) return false
-
-  return true
-}
-
-function shouldRedirectBasedOnUserSelectedCountry(
-  request: NextRequest,
-  userSelectedCountryCookie?: string,
-): boolean {
-  if (!userSelectedCountryCookie) return false
-
-  const isUShomepageRequested = new RegExp(`^/$`).test(request.nextUrl.pathname)
-  if (!isUShomepageRequested) return false
-
-  if (userSelectedCountryCookie === SupportedCountryCodes.US) return false
-
-  const isCountryCodeSupported = COUNTRY_CODE_REGEX_PATTERN.test(userSelectedCountryCookie)
-  if (!isCountryCodeSupported) return false
-
-  return true
-}
-
-function shouldUpdateCountryCookie(
-  countryCodeCookieData: CountryCookieData | null,
-  geoLocationCountryCode: string,
-): boolean {
-  return (
-    countryCodeCookieData?.countryCode !== geoLocationCountryCode &&
-    !countryCodeCookieData?.bypassed
-  )
-}
-
-function createRedirectResponse(
-  request: NextRequest,
-  geoLocationCountryCode: string,
-): NextResponse {
+function createRedirectResponse(request: NextRequest, redirectCountryCode: string): NextResponse {
   const currentUrl = new URL(request.url)
 
-  const redirectUrl = new URL(`/${geoLocationCountryCode}`, request.url)
+  const redirectUrl = new URL(`/${redirectCountryCode}`, request.url)
 
   redirectUrl.search = currentUrl.search
 
