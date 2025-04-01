@@ -1,12 +1,12 @@
 'use client'
 
+import { UpdateUserAccountCountryCode } from '@/app/[countryCode]/internal/user-settings/updateUserAccountCountryCode'
+import { UserAccessLocationBypass } from '@/app/[countryCode]/internal/user-settings/userAccessLocationBypass'
 import { useCookieConsent } from '@/components/app/cookieConsent/useCookieConsent'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { useCookieState } from '@/hooks/useCookieState'
-import { UserAccessLocationBypass } from '@/app/[countryCode]/internal/user-settings/userAccessLocationBypass'
-import { UpdateUserAccountCountryCode } from '@/app/[countryCode]/internal/user-settings/updateUserAccountCountryCode'
 
 export function UserConfig() {
   const { resetCookieConsent } = useCookieConsent()
