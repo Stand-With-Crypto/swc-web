@@ -1,24 +1,18 @@
 'use client'
 
 import { CookieConsentBanner } from '@/components/app/cookieConsent/common/banner'
+import { CookieConsentBannerProps } from '@/components/app/cookieConsent/common/types'
 import { USManageCookiesModal } from '@/components/app/cookieConsent/us/manageCookiesModal'
 import { InternalLink } from '@/components/ui/link'
-import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-export interface USCookieConsentBannerProps {
-  onAcceptSpecificCookies: (accepted: CookieConsentPermissions) => void
-  onRejectAll: () => void
-  onAcceptAll: () => void
-}
-
 export function USCookieConsentBanner({
   onAcceptSpecificCookies,
-  onAcceptAll,
   onRejectAll,
-}: USCookieConsentBannerProps) {
+  onAcceptAll,
+}: CookieConsentBannerProps) {
   const urls = getIntlUrls(SupportedCountryCodes.US)
 
   return (

@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react'
 import { useIsPreviewing } from '@builder.io/react'
 
+import { CookieConsentAction } from '@/components/app/cookieConsent/common/types'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
@@ -19,19 +20,17 @@ interface CookieConsentProps {
   debug?: boolean
 }
 
-type CookieConsentAction = ((permissions: CookieConsentPermissions) => void) | (() => void)
-
 export function CookieConsent({
   countryCode,
   debug = process.env.NEXT_PUBLIC_DEBUG_COOKIE_CONSENT === 'true',
 }: CookieConsentProps) {
   const isPreviewing = useIsPreviewing()
   const {
+    acceptedCookies,
+    hasGlobalPrivacyControl,
     acceptAllCookies,
     rejectAllOptionalCookies,
     acceptSpecificCookies,
-    acceptedCookies,
-    hasGlobalPrivacyControl,
   } = useCookieConsent()
   const [shouldShowBanner, setShouldShowBanner] = useState(() => debug || !acceptedCookies)
 
@@ -41,7 +40,7 @@ export function CookieConsent({
         action(param as CookieConsentPermissions)
         setShouldShowBanner(false)
       },
-    [setShouldShowBanner],
+    [],
   )
 
   if (hasGlobalPrivacyControl || !shouldShowBanner || isPreviewing || isCypress) {
