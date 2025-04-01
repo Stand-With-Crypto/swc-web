@@ -99,6 +99,7 @@ const contentSecurityPolicy = {
     'https://vercel.live/',
     'https://www.figma.com',
     'https://*.newmode.net/',
+    'https://js.stripe.com/',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
