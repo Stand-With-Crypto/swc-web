@@ -15,6 +15,7 @@ const contentSecurityPolicy = {
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
+    'https://fonts.googleapis.com',
   ],
   'script-src': [
     "'self'",
@@ -46,6 +47,7 @@ const contentSecurityPolicy = {
     'https://*.google-analytics.com/',
     'https://*.builder.io/',
     'https://*.newmode.net/',
+    'https://js.stripe.com/',
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
