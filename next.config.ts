@@ -15,7 +15,7 @@ const contentSecurityPolicy = {
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
-    'https://fonts.googleapis.com',
+    'https://fonts.googleapis.com', // Required for newmode
   ],
   'script-src': [
     "'self'",
@@ -47,7 +47,7 @@ const contentSecurityPolicy = {
     'https://*.google-analytics.com/',
     'https://*.builder.io/',
     'https://*.newmode.net/',
-    'https://js.stripe.com/',
+    'https://js.stripe.com/', // Required for newmode
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
@@ -89,6 +89,7 @@ const contentSecurityPolicy = {
     'https://api.thirdweb.com/',
     'https://embedded-wallet.thirdweb.com/',
     'https://*.newmode.net/',
+    'https://api.mapbox.com/', // Required for newmode
   ],
   'frame-src': [
     '*.google.com',
@@ -99,7 +100,7 @@ const contentSecurityPolicy = {
     'https://vercel.live/',
     'https://www.figma.com',
     'https://*.newmode.net/',
-    'https://js.stripe.com/',
+    'https://js.stripe.com/', // Required for newmode
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
