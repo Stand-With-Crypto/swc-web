@@ -30,3 +30,5 @@ export function getFollowOnXReminderEmail(countryCode: SupportedCountryCodes) {
       })
   }
 }
+
+export default getFollowOnXReminderEmail
