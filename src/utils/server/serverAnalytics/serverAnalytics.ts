@@ -5,10 +5,6 @@ import { cookies } from 'next/headers'
 import { promisify } from 'util'
 
 import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
-import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
   mapPersistedLocalUserToExperimentAnalyticsProperties,
@@ -16,6 +12,7 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
 
@@ -92,15 +89,14 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
       let countryCode: string | null = null
 
       try {
-        // We already have a function that gets the country code from the cookies (getCountryCodeCookie.ts)
+        // We already have a function that gets the country code from the cookies (getUserAccessLocationCookie.ts)
         // The problem is that it throws an error if the country code cookie is not found
         // This serverAnalytics function is also called in edge context (inngest). Because of this,
         // we are duplicating the logic to get the cookie here but ignoring if it fails or if the cookie doesn't exist
         const currentCookies = await cookies()
 
-        const maybeCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-
-        countryCode = parseUserCountryCodeCookie(maybeCountryCodeCookie)?.countryCode ?? null
+        countryCode =
+          currentCookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.value?.toLowerCase() ?? null
       } catch {
         // We don't want to throw errors because in edge context, we won't have access to cookies
       }

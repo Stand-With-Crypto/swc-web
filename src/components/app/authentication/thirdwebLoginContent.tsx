@@ -27,6 +27,7 @@ import { isLoggedIn } from '@/utils/server/thirdweb/isLoggedIn'
 import { login } from '@/utils/server/thirdweb/onLogin'
 import { onLogout } from '@/utils/server/thirdweb/onLogout'
 import { isCypress } from '@/utils/shared/executionEnvironment'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { apiUrls } from '@/utils/shared/urls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
@@ -149,6 +150,7 @@ function ThirdwebLoginEmbedded(
   const hasTracked = useRef(false)
   const { connect } = useConnect()
   const searchParams = useSearchParams()
+  const countryCode = useCountryCode()
 
   const searchParamsObject = searchParams ? Object.fromEntries(searchParams.entries()) : {}
 
@@ -166,7 +168,11 @@ function ThirdwebLoginEmbedded(
       </div>
     )
   }
-  const embeddedAuthOptions: AuthOption[] = ['google', 'phone', 'email']
+  const embeddedAuthOptions: AuthOption[] = [
+    'google',
+    ...(countryCode === SupportedCountryCodes.US ? ['phone' as AuthOption] : []),
+    'email',
+  ]
 
   const supportedWallets = [
     createWallet('com.coinbase.wallet', { appMetadata }),

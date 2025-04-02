@@ -6,14 +6,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useSession } from '@/hooks/useSession'
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
+import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 export default function UserSettingsPage() {
-  const [countryCode] = useCookie(USER_COUNTRY_CODE_COOKIE_NAME)
-  const parsedCountryCode = parseUserCountryCodeCookie(countryCode)
+  const [countryCode] = useCookie(USER_ACCESS_LOCATION_COOKIE_NAME)
+  const parsedCountryCode = countryCode?.toLowerCase()
   const session = useSession()
 
   return (
@@ -26,7 +23,7 @@ export default function UserSettingsPage() {
       </div>
       <div>
         <Label>Country Code</Label>
-        <Input readOnly value={parsedCountryCode?.countryCode ?? ''} />
+        <Input readOnly value={parsedCountryCode ?? ''} />
       </div>
     </div>
   )

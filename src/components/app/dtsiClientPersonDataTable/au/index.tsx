@@ -161,6 +161,7 @@ function AuGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
         namedColumns={namedColumns}
         stateOptions={['All', ...Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]}
+        triggerClassName="w-[120px]"
       />
     </GlobalFilters>
   )

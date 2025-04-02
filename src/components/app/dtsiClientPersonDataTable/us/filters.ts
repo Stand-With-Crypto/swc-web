@@ -82,7 +82,9 @@ export const getPersonDataTableFilterFns = (): Record<
   },
 
   [PERSON_TABLE_COLUMNS_IDS.STATE]: (row, _columnId, filterValue, _addMeta) => {
-    return filterValue === 'All' || row.original.primaryRole?.primaryState === filterValue
+    return (
+      filterValue === 'All' || row.original.primaryRole?.primaryState?.toUpperCase() === filterValue
+    )
   },
 })
 

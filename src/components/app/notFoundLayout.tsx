@@ -18,7 +18,7 @@ import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { FullHeight } from '@/components/ui/fullHeight'
-import { extractCountryCode } from '@/utils/server/obfuscateURLCountryCode'
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
@@ -38,7 +38,7 @@ export function NotFoundLayout({ children }: { children: React.ReactNode }) {
   // * It's not possible to force a `/[countryCode]/not-found` route without needing an intermediate page and having two routes render
   const pathname = usePathname()
   const countryCode = useMemo(() => {
-    const extractedCountryCode = extractCountryCode(pathname!) ?? ''
+    const extractedCountryCode = extractCountryCodeFromPathname(pathname!) ?? ''
     return Object.values(SupportedCountryCodes).includes(extractedCountryCode)
       ? (extractedCountryCode as SupportedCountryCodes)
       : DEFAULT_SUPPORTED_COUNTRY_CODE
