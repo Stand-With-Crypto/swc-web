@@ -3,9 +3,6 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { fullUrl } from './fullUrl'
 
 export const externalUrls = {
-  dtsi: () => 'https://www.dotheysupportit.com',
-  dtsiCreateStance: (slug: string) =>
-    `https://www.dotheysupportit.com/people/${slug}/create-stance`,
   swcReferralUrl: ({ referralId }: { referralId: string }) => fullUrl(`/join/${referralId}`),
 }
 
