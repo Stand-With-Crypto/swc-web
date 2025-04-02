@@ -6,18 +6,14 @@ import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiS
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
 import {
   DTSIStanceDetailsStanceProp,
-  IStanceDetailsProps,
+  StanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
 
-function StanceTypeContent({
-  stance: passedStance,
-  isStanceHidden,
-  ...props
-}: IStanceDetailsProps) {
+function StanceTypeContent({ stance: passedStance, isStanceHidden, ...props }: StanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
 
   if (stance.stanceType === DTSI_PersonStanceType.TWEET) {
@@ -45,7 +41,7 @@ function StanceTypeContent({
   throw new Error(`invalid StanceDetails passed ${JSON.stringify(stance)}`)
 }
 
-export function DTSIStanceDetails({ className, isStanceHidden, ...props }: IStanceDetailsProps) {
+export function DTSIStanceDetails({ className, isStanceHidden, ...props }: StanceDetailsProps) {
   const stance = props.stance
   const stanceScore = stance.computedStanceScore
 

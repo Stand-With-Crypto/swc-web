@@ -96,6 +96,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
   const group = groups.congresspeople[districtNumber]
   const { recommended, others } = findRecommendedCandidate(group.people)
   const urls = getIntlUrls(countryCode)
+
   return (
     <ContentContainer shouldShowSubtitle={shouldShowSubtitle} stateName={stateName}>
       <div>

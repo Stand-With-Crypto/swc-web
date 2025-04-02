@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo } from 'react'
-import { compact, isEmpty, times } from 'lodash-es'
+import { isEmpty } from 'lodash-es'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
@@ -22,12 +22,10 @@ import {
   DTSI_StateSpecificInformationQuery,
 } from '@/data/dtsi/generated'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 import { UserLocationRaceInfo } from './userLocationRaceInfo'
@@ -51,15 +49,6 @@ export function USLocationStateSpecific({
   const groups = organizeStateSpecificPeople(congress, governor)
   const urls = getIntlUrls(countryCode)
   const stateName = getUSStateNameFromStateCode(stateCode)
-  const otherDistricts = compact(
-    times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]).map(districtIndex => {
-      const district = districtIndex + 1
-      if (US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.includes(district)) {
-        return null
-      }
-      return district
-    }),
-  )
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
@@ -207,7 +196,9 @@ export function USLocationStateSpecific({
               />
             </div>
           ) : (
-            <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
+            !isEmpty(groups.congresspeople) && (
+              <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
+            )
           )}
           {!!stances.length && (
             <ContentSection
@@ -259,30 +250,6 @@ export function USLocationStateSpecific({
               />
             )
           })}
-
-          {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
-            <ContentSection
-              className="container"
-              subtitle={'Dive deeper and discover races in other districts.'}
-              title={`Other races in ${stateName}`}
-            >
-              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-                {otherDistricts.map(district => (
-                  <InternalLink
-                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                    href={urls.locationDistrictSpecific({
-                      stateCode,
-                      district,
-                    })}
-                    key={district}
-                  >
-                    District {district}
-                  </InternalLink>
-                ))}
-              </div>
-            </ContentSection>
-          )}
-
           <PACFooter className="container" />
         </div>
       )}

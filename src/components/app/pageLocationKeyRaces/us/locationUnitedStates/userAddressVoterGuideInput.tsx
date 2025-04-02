@@ -113,7 +113,7 @@ function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressV
             </div>
             <div className="max-sm:w-full">
               <Button asChild className="w-full">
-                <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                <InternalLink href={urls.locationStateSpecific(stateCode)}>
                   {stateCode} voter guide
                 </InternalLink>
               </Button>
