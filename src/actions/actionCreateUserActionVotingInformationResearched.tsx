@@ -24,11 +24,11 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 const createActionVotingInformationResearchedInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionVotingInformationResearchedCampaignName),
+  campaignName: nativeEnum(USUserActionVotingInformationResearchedCampaignName),
   shouldReceiveNotifications: z.boolean(),
   address: zodAddress,
 })

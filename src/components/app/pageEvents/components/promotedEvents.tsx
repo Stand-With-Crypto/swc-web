@@ -1,5 +1,6 @@
 'use client'
 
+import { UserActionType } from '@prisma/client'
 import { isBefore, startOfDay } from 'date-fns'
 import sanitizeHtml from 'sanitize-html'
 
@@ -9,17 +10,21 @@ import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEv
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface PromotedEventsProps {
   events: SWCEvents
+  countryCode: SupportedCountryCodes
 }
 
-export function PromotedEvents({ events }: PromotedEventsProps) {
+export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
   const handleRSVPButtonClick = (event: SWCEvent) => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
       event,
+      campaignName: getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode),
     })
 
     window.open(event.rsvpUrl, '_blank')

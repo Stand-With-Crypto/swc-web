@@ -14,7 +14,7 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import { generateUserSessionId } from '@/utils/shared/userSessionId'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 

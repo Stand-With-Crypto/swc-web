@@ -27,12 +27,12 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionTweetedAtPerson`)
 
 const createActionTweetAtPersonInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionTweetAtPersonCampaignName),
+  campaignName: nativeEnum(USUserActionTweetAtPersonCampaignName),
   dtsiSlug: string().nullable(),
 })
 
@@ -57,12 +57,12 @@ type CampaignDuration = {
   END_TIME: Date | null
 }
 
-const CAMPAIGN_DURATION: Record<UserActionTweetAtPersonCampaignName, CampaignDuration> = {
-  [UserActionTweetAtPersonCampaignName['DEFAULT']]: {
+const CAMPAIGN_DURATION: Record<USUserActionTweetAtPersonCampaignName, CampaignDuration> = {
+  [USUserActionTweetAtPersonCampaignName['DEFAULT']]: {
     START_TIME: null,
     END_TIME: null,
   },
-  [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
+  [USUserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
     START_TIME: new Date('2024-05-19'),
     END_TIME: new Date('2024-05-24'),
   },

@@ -106,7 +106,7 @@ export function AddressField({ user, resolvedAddress, setResolvedAddress }: Addr
       />
       <Collapsible open={shouldShowCountryCodeDisclaimer}>
         <CollapsibleContent className="AnimateCollapsibleContent">
-          <FormDescription className="text-center lg:text-left">
+          <FormDescription className="text-center md:text-left">
             {getCountryCodeDisclaimer(resolvedAddress?.countryCode)}
           </FormDescription>
         </CollapsibleContent>

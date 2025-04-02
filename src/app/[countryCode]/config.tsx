@@ -63,6 +63,11 @@ export const navbarConfig: NavbarProps = {
           text: 'Press',
           icon: <Icons.PressIcon />,
         },
+        {
+          href: urls.polls(),
+          text: 'Polls',
+          icon: <Icons.PollsIcon />,
+        },
       ],
     },
     {

@@ -26,7 +26,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns/index'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)

@@ -1,16 +1,19 @@
 import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 
-import { COUNTRY_CODE_REGEX_PATTERN } from '@/utils/shared/supportedCountries'
+import {
+  COUNTRY_CODE_REGEX_PATTERN,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
-interface GetUserAccessLocationCookieProps {
-  bypassValidCountryCodeCheck?: boolean
-}
-
-export async function getUserAccessLocationCookie({
+// The weird typing on this function is to have the return typed as `SupportedCountryCodes` if the `bypassValidCountryCodeCheck` is `false`
+// and `string` if the `bypassValidCountryCodeCheck` is `true`
+export async function getUserAccessLocationCookie<TBypassCountryCodeCheck extends boolean = false>({
   bypassValidCountryCodeCheck,
-}: GetUserAccessLocationCookieProps = {}) {
+}: { bypassValidCountryCodeCheck?: TBypassCountryCodeCheck } = {}): Promise<
+  TBypassCountryCodeCheck extends true ? string : SupportedCountryCodes
+> {
   const currentCookies = await cookies()
 
   const maybeUserAccessLocationCookie = currentCookies
@@ -32,7 +35,9 @@ export async function getUserAccessLocationCookie({
       throw error
     }
 
-    return maybeUserAccessLocationCookie
+    return maybeUserAccessLocationCookie as TBypassCountryCodeCheck extends true
+      ? string
+      : SupportedCountryCodes
   }
 
   if (!COUNTRY_CODE_REGEX_PATTERN.test(maybeUserAccessLocationCookie)) {
@@ -41,5 +46,5 @@ export async function getUserAccessLocationCookie({
     throw error
   }
 
-  return maybeUserAccessLocationCookie
+  return maybeUserAccessLocationCookie as SupportedCountryCodes
 }
