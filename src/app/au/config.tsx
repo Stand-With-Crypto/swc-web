@@ -53,6 +53,7 @@ export const footerConfig: FooterProps = {
       text: 'Privacy',
     },
     { href: urls.termsOfService(), text: 'Terms of service' },
+    { href: urls.contribute(), text: 'Contribute' },
   ],
   socialLinks: [
     {
