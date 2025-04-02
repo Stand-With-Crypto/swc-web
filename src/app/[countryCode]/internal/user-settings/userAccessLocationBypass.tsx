@@ -73,7 +73,7 @@ export function UserAccessLocationBypass() {
             {/* Adding 'br' to the list to allow for easy non supported country code testing. */}
             {[...ORDERED_SUPPORTED_COUNTRIES, 'br'].map(country => (
               <SelectItem key={country} value={country}>
-                {country}
+                {country} {country === 'br' && '(Not Supported Country)'}
               </SelectItem>
             ))}
           </SelectContent>
