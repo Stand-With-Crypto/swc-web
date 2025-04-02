@@ -1,10 +1,11 @@
+import Cookies from 'js-cookie'
+
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
   SupportedCountryCodes,
   USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import Cookies from 'js-cookie'
 
 const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: Record<
   SupportedCountryCodes,
