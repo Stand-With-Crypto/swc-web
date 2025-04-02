@@ -99,10 +99,10 @@ function NewsListItem({
     >
       <article className="flex flex-col items-center gap-4 group-hover:cursor-pointer">
         {previewImage && (
-          <div className="relative h-64 w-6/12">
+          <div className="relative h-64 w-64 sm:w-5/12">
             <NextImage
               alt={`Preview image for ${title}`}
-              className="h-48 w-full object-cover"
+              className="h-48 w-full rounded-lg object-cover"
               layout="fill"
               src={previewImage}
             />
