@@ -84,14 +84,11 @@ BYPASS_INTERNATIONAL_REDIRECT=true
 
 ### Login Behavior
 
-```typescript
-// On login:
-if (user.countryCode !== USER_SELECTED_COUNTRY) {
-  USER_ACCESS_LOCATION = user.countryCode
-}
+Initially, we were updating `USER_ACCESS_LOCATION` on login to allow users to continue performing actions on their respective SWC website, even if they were not in their home country at that moment. The problem with this approach is that it completely bypassed the geogate logic. Since accounts are created based on the country code of the page, whenever users logged in, the current IP access location would be overridden by the one associated with their account, resulting in a poor UX.
 
-// This will allow users outside of their respective country to continue completing actions
-```
+Another possibility would be to update `USER_SELECTED_COUNTRY` on login. However, since this wouldn’t allow users to complete any actions until they update their access location and address on the profile page, adding this logic at the current state would unnecessarily increase code and application complexity without significant impact.
+
+With that in mind, we’ve decided not to implement anything new on login to reduce the number of edge cases we need to handle and remain conscious of.
 
 ### Geogate
 
