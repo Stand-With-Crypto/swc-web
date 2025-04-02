@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useToggle } from 'react-use'
 import Cookies from 'js-cookie'
 import { ChevronDownIcon } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -15,13 +15,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdownMenu'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { useEffectOnce } from '@/hooks/useEffectOnce'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
   USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { useRouter } from 'next/navigation'
 
 interface Option {
   label: string
@@ -54,11 +54,9 @@ export function NavbarCountrySelect() {
 
   const currentOption = options.find(option => option.value === countryCode)
 
-  // useEffect(() => {
-  //   if (currentOption) {
-  //     Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, currentOption.value)
-  //   }
-  // }, [])
+  useEffectOnce(() => {
+    Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, countryCode)
+  })
 
   if (!currentOption) {
     return null
@@ -93,19 +91,12 @@ export function NavbarCountrySelect() {
               onClick={() => {
                 Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, option.value)
                 router.push(getIntlUrls(option.value).home())
-
-                // // This is necessary to bypass the redirect in the middleware, as if we don't remove the selected country cookie, the middleware will redirect the user to the current selected country, preventing users from switching to US.
-                // if (option.value === DEFAULT_SUPPORTED_COUNTRY_CODE) {
-                //   Cookies.remove(USER_SELECTED_COUNTRY_COOKIE_NAME)
-                // }
               }}
             >
-              {/* <Link href={getIntlUrls(option.value).home()}> */}
               <div className="flex items-center gap-2">
                 <FlagIcon countryCode={option.value} />
                 <span>{option.label}</span>
               </div>
-              {/* </Link> */}
             </DropdownMenuItem>
           )
         })}
