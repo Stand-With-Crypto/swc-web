@@ -42,7 +42,13 @@ interface UserAddressVoterGuideInput {
 
 export function UserAddressVoterGuideInputSection(props: UserAddressVoterGuideInput) {
   return (
-    <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
+    <Suspense
+      fallback={
+        <ContentContainer shouldShowSubtitle={true}>
+          <DefaultPlacesSelect onChange={noop} value={null} />
+        </ContentContainer>
+      }
+    >
       <SuspenseUserAddressVoterGuideInputSection {...props} />
     </Suspense>
   )
