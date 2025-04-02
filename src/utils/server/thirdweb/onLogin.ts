@@ -16,7 +16,7 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
-import { compact, groupBy, isEmpty } from 'lodash-es'
+import { compact, groupBy } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
@@ -57,7 +57,6 @@ import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
-import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 type UpsertedUser = User & {
@@ -115,34 +114,6 @@ export async function login(
         .set({ 'Datetime of Last Login': new Date() })
         .flush(),
     ])
-
-    const currentUserCountryCode = existingVerifiedUser.countryCode?.toLowerCase()
-
-    const userAccessLocationCookie = currentCookies
-      .get(USER_ACCESS_LOCATION_COOKIE_NAME)
-      ?.value?.toLowerCase()
-
-    const hasValidCurrentCountryCode = !isEmpty(currentUserCountryCode)
-    const hasUserAccessLocationCookie = !!userAccessLocationCookie
-    const cookieCountryCodeDiffersFromUser = userAccessLocationCookie !== currentUserCountryCode
-
-    if (
-      hasValidCurrentCountryCode &&
-      hasUserAccessLocationCookie &&
-      cookieCountryCodeDiffersFromUser
-    ) {
-      log(
-        `setting user access location cookie from ${userAccessLocationCookie} to ${currentUserCountryCode}`,
-      )
-      currentCookies.set({
-        name: USER_ACCESS_LOCATION_COOKIE_NAME,
-        value: currentUserCountryCode,
-        httpOnly: false,
-        sameSite: 'lax',
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
-      })
-    }
 
     const jwt = await thirdwebAuth.generateJWT({
       payload: verifiedPayload.payload,
