@@ -72,7 +72,6 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
                     data-testid="primary-races-tabs"
                     defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
                     forceDesktop
-                    persistCurrentTab
                     options={[
                       {
                         value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
@@ -95,6 +94,7 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
                         ),
                       },
                     ]}
+                    persistCurrentTab
                   />
                   <Button asChild variant="secondary">
                     <InternalLink

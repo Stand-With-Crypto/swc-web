@@ -57,7 +57,7 @@ export function ResponsiveTabsOrSelect({
     <Tabs analytics={analytics} onValueChange={handleValueChange} value={currentTab} {...props}>
       {/* Mobile: Select */}
       <div className={cn('sm:hidden', forceDesktop && 'hidden', containerClassName)}>
-        <Select onValueChange={handleValueChange} value={currentTab} defaultValue={defaultValue}>
+        <Select defaultValue={defaultValue} onValueChange={handleValueChange} value={currentTab}>
           <SelectTrigger
             className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary text-base font-semibold"
             data-testid="responsive-tabs-or-select-trigger"
