@@ -221,7 +221,7 @@ export function DTSIPersonHeroCard(props: Props) {
               Recommended{' '}
               <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
             </>
-          ) : isStanceHidden ? (
+          ) : !isStanceHidden ? (
             convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
           ) : null}
         </DTSIPersonHeroCardFooter>
