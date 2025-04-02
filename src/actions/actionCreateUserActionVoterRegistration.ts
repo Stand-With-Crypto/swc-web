@@ -30,7 +30,10 @@ import { withValidations } from '@/utils/server/userActionValidation/withValidat
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
@@ -121,7 +124,11 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction,
+      userCryptoAddress: user.primaryUserCryptoAddress,
+      countryCode: countryCode as SupportedCountryCodes,
+    })
   }
 
   waitUntil(beforeFinish())

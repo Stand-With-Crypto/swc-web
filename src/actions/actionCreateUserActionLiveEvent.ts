@@ -25,6 +25,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionLiveEvent`)
@@ -139,7 +140,11 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction,
+      userCryptoAddress: user.primaryUserCryptoAddress,
+      countryCode: countryCode as SupportedCountryCodes,
+    })
   }
 
   waitUntil(beforeFinish())

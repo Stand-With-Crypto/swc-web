@@ -16,6 +16,8 @@ import { sendMail } from '@/utils/server/email'
 import {
   EmailActiveActions,
   EmailEnabledActionNFTs,
+  getEmailActiveActionsByCountry,
+  getEmailEnabledActionNFTsByCountry,
 } from '@/utils/server/email/templates/common/constants'
 import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
@@ -24,9 +26,11 @@ import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrent
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import {
-  ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import {
   ActiveClientUserActionWithCampaignType,
   UserActionCallCampaignName,
   UserActionDonationCampaignName,
@@ -45,6 +49,7 @@ import {
   UserActionVotingDayCampaignName,
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
+import { COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/index'
 
 import NFTMintStatus = $Enums.NFTMintStatus
 
@@ -119,11 +124,17 @@ type UserActionToClaim = Pick<
   'id' | 'actionType' | 'campaignName' | 'nftMintId' | 'userId'
 >
 
-export async function claimNFT(
-  userAction: UserActionToClaim,
-  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
-  config: Config = {},
-) {
+export async function claimNFT({
+  userAction,
+  userCryptoAddress,
+  countryCode,
+  config = {},
+}: {
+  userAction: UserActionToClaim
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>
+  countryCode: SupportedCountryCodes
+  config?: Config
+}) {
   const hydratedConfig = {
     skipTransactionFeeCheck: false,
     ...config,
@@ -141,9 +152,9 @@ export async function claimNFT(
   logger.info('Function triggered')
 
   const { actionType, campaignName } = userAction
-  const activeClientUserActionTypeWithCampaign = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(
-    key => key === userAction.actionType,
-  )
+  const activeClientUserActionTypeWithCampaign = COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN[
+    countryCode
+  ].find(key => key === userAction.actionType)
 
   if (!activeClientUserActionTypeWithCampaign) {
     throw Error(`Action ${userAction.actionType} doesn't have an active campaign.`)
@@ -190,11 +201,17 @@ export async function claimNFT(
   })
 }
 
-export async function claimNFTAndSendEmailNotification(
-  userAction: UserActionToClaim,
-  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
-  config: Config = {},
-) {
+export async function claimNFTAndSendEmailNotification({
+  userAction,
+  userCryptoAddress,
+  countryCode,
+  config = {},
+}: {
+  userAction: UserActionToClaim
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>
+  countryCode: SupportedCountryCodes
+  config?: Config
+}) {
   const hydratedConfig = {
     skipTransactionFeeCheck: false,
     ...config,
@@ -208,9 +225,14 @@ export async function claimNFTAndSendEmailNotification(
     }
   }
 
-  return claimNFT(userAction, userCryptoAddress, {
-    ...hydratedConfig,
-    skipTransactionFeeCheck: true,
+  return claimNFT({
+    userAction,
+    userCryptoAddress,
+    countryCode,
+    config: {
+      ...hydratedConfig,
+      skipTransactionFeeCheck: true,
+    },
   })
 }
 
@@ -224,21 +246,17 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
     },
   })
 
+  // Using the default country code if user's country is not set
+  const countryCode = (user.countryCode as SupportedCountryCodes) || DEFAULT_SUPPORTED_COUNTRY_CODE
+
   if (
     !user.primaryUserEmailAddress?.emailAddress ||
-    !Object.values(EmailEnabledActionNFTs).includes(userAction.actionType)
+    !Object.values(getEmailEnabledActionNFTsByCountry(countryCode)).includes(userAction.actionType)
   ) {
     return null
   }
 
   const userSession = user.userSessions?.[0]
-  // TODO: remove this once we have templates for all countries
-  if (user.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
-    return null
-  }
-
-  // Using the default country code if user's country is not set
-  const countryCode = user.countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE
 
   const messageId = await sendMail({
     countryCode,
@@ -249,7 +267,11 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
         <NFTOnTheWayEmail
           actionNFT={userAction.actionType as EmailEnabledActionNFTs}
           completedActionTypes={user.userActions
-            .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+            .filter(action =>
+              Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
+                action.actionType,
+              ),
+            )
             .map(action => action.actionType as EmailActiveActions)}
           hiddenActions={[userAction.actionType]}
           session={

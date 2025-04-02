@@ -3,25 +3,28 @@ import { Column, Img, Row, Section, Text } from '@react-email/components'
 import { ChevronRight } from 'lucide-react'
 
 import {
-  ACTIONS_METADATA_BY_TYPE,
   EmailActiveActions,
+  getEmailActionsMetadataByCountry,
 } from '@/utils/server/email/templates/common/constants'
 import { Button } from '@/utils/server/email/templates/ui/button'
 import { Heading } from '@/utils/server/email/templates/ui/heading'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface KeepUpTheFightSectionProps {
   completedActionTypes?: EmailActiveActions[]
   hrefSearchParams?: Record<string, unknown>
   hiddenActions?: string[]
+  countryCode: SupportedCountryCodes
 }
 
 export function KeepUpTheFightSection({
   completedActionTypes = [],
   hrefSearchParams = {},
   hiddenActions = [],
+  countryCode,
 }: KeepUpTheFightSectionProps) {
-  const actionsMetadata = Object.entries(ACTIONS_METADATA_BY_TYPE)
+  const actionsMetadata = Object.entries(getEmailActionsMetadataByCountry(countryCode))
     .filter(([type]) => !hiddenActions.includes(type))
     .map(([type, metadata]) => ({
       ...metadata,

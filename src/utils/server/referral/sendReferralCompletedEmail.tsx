@@ -3,7 +3,10 @@ import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 
 import { sendMail, SendMailPayload } from '@/utils/server/email'
-import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
+import {
+  EmailActiveActions,
+  getEmailActiveActionsByCountry,
+} from '@/utils/server/email/templates/common/constants'
 import ReferralCompletedEmail from '@/utils/server/email/templates/referralCompleted'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
@@ -26,6 +29,7 @@ export async function sendReferralCompletedEmail(referralId: string) {
     return null
   }
 
+  const countryCode = referrer.countryCode as SupportedCountryCodes
   const userSession = referrer.userSessions?.[0]
   const emailPayload: SendMailPayload = {
     to: referrer.primaryUserEmailAddress.emailAddress,
@@ -33,8 +37,11 @@ export async function sendReferralCompletedEmail(referralId: string) {
     html: await render(
       <ReferralCompletedEmail
         completedActionTypes={referrer.userActions
-          .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+          .filter(action =>
+            Object.values(getEmailActiveActionsByCountry(countryCode)).includes(action.actionType),
+          )
           .map(action => action.actionType as EmailActiveActions)}
+        countryCode={countryCode}
         name={referrer.firstName}
         session={
           userSession

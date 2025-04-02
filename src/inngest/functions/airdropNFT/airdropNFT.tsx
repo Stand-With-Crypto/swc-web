@@ -6,10 +6,11 @@ import { NonRetriableError } from 'inngest'
 
 import { onFailureAirdropNFT } from '@/inngest/functions/airdropNFT/onFailureAirdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { sendMail } from '@/utils/server/email'
+import { sendMail, SendMailPayload } from '@/utils/server/email'
 import {
   EmailActiveActions,
-  NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
+  getEmailActiveActionFromNFTSlug,
+  getEmailActiveActionsByCountry,
 } from '@/utils/server/email/templates/common/constants'
 import NFTArrivedEmail from '@/utils/server/email/templates/nftArrived'
 import {
@@ -27,7 +28,7 @@ import {
 } from '@/utils/server/thirdweb/engineGetMintStatus'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import { NFTSlug } from '@/utils/shared/nft'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
 
@@ -141,55 +142,58 @@ export const airdropNFTWithInngest = inngest.createFunction(
           'Gas Price': gasPrice,
         })
 
-        const actionType = NFT_SLUG_TO_EMAIL_ACTIVE_ACTION[payload.nftSlug]
+        const countryCode = user.countryCode as SupportedCountryCodes
+        const actionType = getEmailActiveActionFromNFTSlug(payload.nftSlug, countryCode)
 
         if (!user.primaryUserEmailAddress?.emailAddress || !actionType) {
           return null
         }
         const userSession = user.userSessions?.[0]
+        const emailPayload: SendMailPayload = {
+          to: user.primaryUserEmailAddress.emailAddress,
+          subject: NFTArrivedEmail.subjectLine,
+          html: await render(
+            <NFTArrivedEmail
+              actionNFT={actionType}
+              completedActionTypes={user.userActions
+                .filter(action =>
+                  Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
+                    action.actionType,
+                  ),
+                )
+                .map(action => action.actionType as EmailActiveActions)}
+              hiddenActions={[actionType]}
+              session={
+                userSession
+                  ? {
+                      userId: userSession.userId,
+                      sessionId: userSession.id,
+                    }
+                  : null
+              }
+            />,
+          ),
+          customArgs: {
+            userId: user.id,
+            actionType,
+            campaign: NFTArrivedEmail.campaign,
+          },
+        }
 
         let messageId: string | null = null
-        // TODO: change this once we have templates for all countries
-        if (user.countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE) {
-          messageId = await sendMail({
-            countryCode: user.countryCode,
-            payload: {
-              to: user.primaryUserEmailAddress.emailAddress,
-              subject: NFTArrivedEmail.subjectLine,
-              html: await render(
-                <NFTArrivedEmail
-                  actionNFT={actionType}
-                  completedActionTypes={user.userActions
-                    .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-                    .map(action => action.actionType as EmailActiveActions)}
-                  hiddenActions={[actionType]}
-                  session={
-                    userSession
-                      ? {
-                          userId: userSession.userId,
-                          sessionId: userSession.id,
-                        }
-                      : null
-                  }
-                />,
-              ),
-              customArgs: {
-                userId: user.id,
-                actionType,
-                campaign: NFTArrivedEmail.campaign,
-              },
+        messageId = await sendMail({
+          countryCode,
+          payload: emailPayload,
+        }).catch(err => {
+          Sentry.captureException(err, {
+            extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+            tags: {
+              domain: 'airdropNFT',
             },
-          }).catch(err => {
-            Sentry.captureException(err, {
-              extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
-              tags: {
-                domain: 'airdropNFT',
-              },
-              fingerprint: ['airdropNFT', 'sendMail'],
-            })
-            return null
+            fingerprint: ['airdropNFT', 'sendMail'],
           })
-        }
+          return null
+        })
 
         await analytics.flush()
 
