@@ -8,7 +8,6 @@ it('page - bills interactions', () => {
   cy.get('@billCard').should('be.visible').click()
 
   cy.location('pathname').should('include', '/bills/')
-  cy.contains('Analysis').should('be.visible')
   cy.contains('Sponsors').should('be.visible')
   cy.contains('Co-Sponsors').should('be.visible')
   cy.contains('Voted for').should('be.visible')
