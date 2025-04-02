@@ -1,12 +1,18 @@
 /// <reference types="cypress" />
 
+import {
+  OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME,
+  USER_ACCESS_LOCATION_COOKIE_NAME,
+} from '@/utils/shared/userAccessLocation'
+
 describe('NavBarGlobalBanner', () => {
   beforeEach(() => {
-    cy.clearCookie('USER_ACCESS_LOCATION_COOKIE_NAME')
+    cy.clearCookie(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME)
   })
 
   it('should show UK banner when countryCode is "UK"', () => {
-    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'uk')
+    cy.setCookie(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, 'gb')
+    cy.setCookie(USER_ACCESS_LOCATION_COOKIE_NAME, 'gb')
 
     cy.visit('/')
 
@@ -14,7 +20,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show UK banner when countryCode is "uk"', () => {
-    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'uk')
+    cy.setCookie(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, 'gb')
+    cy.setCookie(USER_ACCESS_LOCATION_COOKIE_NAME, 'gb')
 
     cy.visit('/')
 
@@ -22,7 +29,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "CA"', () => {
-    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'ca')
+    cy.setCookie(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, 'ca')
+    cy.setCookie(USER_ACCESS_LOCATION_COOKIE_NAME, 'ca')
 
     cy.visit('/')
 
@@ -30,7 +38,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "ca"', () => {
-    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'ca')
+    cy.setCookie(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, 'ca')
+    cy.setCookie(USER_ACCESS_LOCATION_COOKIE_NAME, 'ca')
 
     cy.visit('/')
 
@@ -38,7 +47,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show US restriction banner when countryCode is not supported', () => {
-    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'br')
+    cy.setCookie(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, 'br')
+    cy.setCookie(USER_ACCESS_LOCATION_COOKIE_NAME, 'br')
 
     cy.visit('/')
 
@@ -48,7 +58,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show current US campaign for US users', () => {
-    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'us')
+    cy.setCookie(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, 'us')
+    cy.setCookie(USER_ACCESS_LOCATION_COOKIE_NAME, 'us')
 
     cy.visit('/')
 
