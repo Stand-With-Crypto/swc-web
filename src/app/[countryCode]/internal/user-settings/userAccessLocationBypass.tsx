@@ -26,7 +26,9 @@ export function UserAccessLocationBypass() {
   const userAccessLocation = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.toLowerCase()
 
   const handleLocationCountryCodeSubmit = (countryCode: SupportedCountryCodes) => {
-    Cookies.set(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, countryCode)
+    Cookies.set(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, countryCode, {
+      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+    })
 
     Cookies.remove(USER_ACCESS_LOCATION_COOKIE_NAME)
     Cookies.remove(COOKIE_CONSENT_COOKIE_NAME)
