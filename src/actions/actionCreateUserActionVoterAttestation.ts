@@ -6,8 +6,8 @@ import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -78,7 +78,7 @@ async function _actionCreateUserActionVoterAttestation(input: CreateActionVoterA
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {

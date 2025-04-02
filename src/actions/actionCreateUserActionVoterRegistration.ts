@@ -6,11 +6,11 @@ import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -51,7 +51,7 @@ export type CreateActionVoterRegistrationInput = z.infer<
 interface SharedDependencies {
   localUser: Awaited<ReturnType<typeof parseLocalUserFromCookies>>
   sessionId: Awaited<ReturnType<typeof getUserSessionId>>
-  countryCode: Awaited<ReturnType<typeof getCountryCodeCookie>>
+  countryCode: Awaited<ReturnType<typeof getUserAccessLocationCookie>>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
 }
@@ -79,7 +79,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
