@@ -9,13 +9,9 @@ import { cn } from '@/utils/web/cn'
 
 interface UserActionGridCTAProps {
   excludeUserActionTypes?: UserActionType[]
-  className?: string
 }
 
-export function UserActionGridCTAs({
-  excludeUserActionTypes,
-  className = '',
-}: UserActionGridCTAProps) {
+export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTAProps) {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const performedUserActionTypes = data?.performedUserActionTypes ?? []
 
@@ -31,7 +27,6 @@ export function UserActionGridCTAs({
           ? 'flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'
           : 'grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:justify-items-center',
         'gap-[18px]',
-        className,
       )}
     >
       {ctas.map(cta => {
