@@ -1,8 +1,10 @@
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
 
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  SupportedCountryCodes,
+  USER_SELECTED_COUNTRY_COOKIE_NAME,
+} from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: Record<
@@ -11,32 +13,36 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: Record<
     label: string
     url: string
     emoji?: string
+    countryCode: SupportedCountryCodes
   }
 > = {
   [SupportedCountryCodes.GB]: {
     label: 'United Kingdom',
     url: getIntlUrls(SupportedCountryCodes.GB).home(),
     emoji: '🇬🇧',
+    countryCode: SupportedCountryCodes.GB,
   },
   [SupportedCountryCodes.CA]: {
     label: 'Canada',
     url: getIntlUrls(SupportedCountryCodes.CA).home(),
     emoji: '🇨🇦',
+    countryCode: SupportedCountryCodes.CA,
   },
   [SupportedCountryCodes.AU]: {
     label: 'Australia',
     url: getIntlUrls(SupportedCountryCodes.AU).home(),
     emoji: '🇦🇺',
+    countryCode: SupportedCountryCodes.AU,
   },
   [SupportedCountryCodes.US]: {
     label: 'United States',
     url: getIntlUrls(SupportedCountryCodes.US).home(),
     emoji: '🇺🇸',
+    countryCode: SupportedCountryCodes.US,
   },
 }
 
 export function RedirectBannerContent({ countryCode }: { countryCode: SupportedCountryCodes }) {
-  const router = useRouter()
   const isMobile = useIsMobile()
 
   const WrapperContainer = isMobile ? 'button' : 'div'
@@ -45,7 +51,8 @@ export function RedirectBannerContent({ countryCode }: { countryCode: SupportedC
 
   const handleWrapperClick = () => {
     if (!userAccessLocationCountry?.url) return
-    router.push(userAccessLocationCountry?.url)
+    Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, userAccessLocationCountry.countryCode)
+    window.location.href = userAccessLocationCountry?.url
   }
 
   return (
@@ -59,9 +66,9 @@ export function RedirectBannerContent({ countryCode }: { countryCode: SupportedC
             <p>
               {userAccessLocationCountry?.emoji ? `${userAccessLocationCountry?.emoji} ` : ''}
               Looking for Stand With Crypto {userAccessLocationCountry.label}? Click{' '}
-              <strong>
-                <Link href={userAccessLocationCountry.url}>here</Link>
-              </strong>
+              <button className="font-bold" onClick={handleWrapperClick}>
+                here
+              </button>
             </p>
           </div>
         </div>
