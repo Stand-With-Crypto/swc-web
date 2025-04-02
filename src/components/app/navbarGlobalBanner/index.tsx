@@ -42,8 +42,8 @@ export function NavBarGlobalBanner({
     return <CountryCampaignBannerContent countryCode={currentPageCountryCode} />
   }
 
-  if (!isUserAccessLocationEqualCurrentPageCountryCode && isUserAccessLocationSupported) {
-    return <RedirectBannerContent countryCode={currentPageCountryCode} />
+  if (userAccessLocation && isUserAccessLocationSupported) {
+    return <RedirectBannerContent countryCode={userAccessLocation as SupportedCountryCodes} />
   }
 
   return (
