@@ -8,11 +8,11 @@ import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUser
 import { getSensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUserSSR } from '@/utils/server/authentication/getAuthUserSSR'
 import { prismaClient } from '@/utils/server/prismaClient'
 
 export async function getAuthenticatedData() {
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUserSSR()
   if (!authUser) {
     return null
   }
