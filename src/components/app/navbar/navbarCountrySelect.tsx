@@ -90,7 +90,7 @@ export function NavbarCountrySelect() {
               key={option.value}
               onClick={() => {
                 Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, option.value)
-                router.replace(getIntlUrls(option.value).home())
+                window.location.href = getIntlUrls(option.value).home()
               }}
             >
               <div className="flex items-center gap-2">
