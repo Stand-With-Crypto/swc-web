@@ -14,9 +14,9 @@ import {
   Text,
 } from '@react-email/components'
 
-import { SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/common/constants'
 import { tailwindConfig } from '@/utils/server/email/templates/common/tailwind-config'
-import { Button } from '@/utils/server/email/templates/ui/button'
+import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { US_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
 interface WrapperProps {
@@ -69,7 +69,7 @@ function HeaderSection({ hrefSearchParams }: Pick<WrapperProps, 'hrefSearchParam
         </Column>
 
         <Column align="right" style={{ display: 'table-cell' }}>
-          <Link href={SOCIAL_MEDIA_URL.twitter}>
+          <Link href={US_SOCIAL_MEDIA_URL.twitter}>
             <Row align="right" className="float-end w-[120px]">
               <Column className="pr-2">
                 <Text className="text-end font-semibold text-fontcolor">Follow us on</Text>
@@ -120,7 +120,7 @@ function FooterSection({ hrefSearchParams }: Pick<WrapperProps, 'hrefSearchParam
             <Text className="text-fontcolor-secondary mb-1 text-base">Follow us on socials</Text>
             <Row align="right" className="float-end w-[72px]">
               <Column className="pr-4">
-                <Link href={SOCIAL_MEDIA_URL.facebook}>
+                <Link href={US_SOCIAL_MEDIA_URL.facebook}>
                   <Img
                     alt="Facebook logo"
                     height="24"
@@ -130,7 +130,7 @@ function FooterSection({ hrefSearchParams }: Pick<WrapperProps, 'hrefSearchParam
                 </Link>
               </Column>
               <Column className="pr-4">
-                <Link href={SOCIAL_MEDIA_URL.twitter}>
+                <Link href={US_SOCIAL_MEDIA_URL.twitter}>
                   <Img
                     alt="X/Twitter logo"
                     height="24"
@@ -143,7 +143,7 @@ function FooterSection({ hrefSearchParams }: Pick<WrapperProps, 'hrefSearchParam
                 </Link>
               </Column>
               <Column>
-                <Link href={SOCIAL_MEDIA_URL.instagram}>
+                <Link href={US_SOCIAL_MEDIA_URL.instagram}>
                   <Img
                     alt="Instagram logo"
                     height="24"

@@ -162,6 +162,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
                   ),
                 )
                 .map(action => action.actionType as EmailActiveActions)}
+              countryCode={countryCode}
               hiddenActions={[actionType]}
               session={
                 userSession

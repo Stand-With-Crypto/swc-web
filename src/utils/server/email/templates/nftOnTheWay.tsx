@@ -1,22 +1,22 @@
 import * as React from 'react'
 import { Hr, Img, Section, Text } from '@react-email/components'
 
-import {
-  EmailEnabledActionNFTsNames,
-  EmailTemplateProps,
-  NFT_IMAGES_BY_ACTION,
-} from '@/utils/server/email/templates/common/constants'
-import { Heading } from '@/utils/server/email/templates/ui/heading'
+import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/ui/wrapper'
+} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
+import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
+import {
+  US_NFT_IMAGES_BY_ACTION,
+  USEmailEnabledActionNFTsNames,
+  USEmailTemplateProps,
+} from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
 type NFTOnTheWayEmailProps = KeepUpTheFightSectionProps &
-  EmailTemplateProps & {
-    actionNFT: EmailEnabledActionNFTsNames
+  USEmailTemplateProps & {
+    actionNFT: USEmailEnabledActionNFTsNames
   }
 
 NFTOnTheWayEmail.subjectLine = 'Your NFT is on the way!'
@@ -37,7 +37,7 @@ export default function NFTOnTheWayEmail({
     ...session,
   }
 
-  const nftImage = NFT_IMAGES_BY_ACTION[actionNFT]
+  const nftImage = US_NFT_IMAGES_BY_ACTION[actionNFT]
 
   return (
     <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>

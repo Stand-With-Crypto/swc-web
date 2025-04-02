@@ -273,6 +273,7 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
               ),
             )
             .map(action => action.actionType as EmailActiveActions)}
+          countryCode={countryCode}
           hiddenActions={[userAction.actionType]}
           session={
             userSession

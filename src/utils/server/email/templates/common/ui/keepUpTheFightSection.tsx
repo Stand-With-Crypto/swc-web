@@ -6,10 +6,10 @@ import {
   EmailActiveActions,
   getEmailActionsMetadataByCountry,
 } from '@/utils/server/email/templates/common/constants'
-import { Button } from '@/utils/server/email/templates/ui/button'
-import { Heading } from '@/utils/server/email/templates/ui/heading'
+import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface KeepUpTheFightSectionProps {
   completedActionTypes?: EmailActiveActions[]

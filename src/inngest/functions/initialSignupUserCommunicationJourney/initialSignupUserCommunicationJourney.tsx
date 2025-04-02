@@ -285,6 +285,7 @@ async function sendInitialSignUpEmail({
           completedActionTypes={user.userActions
             .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
             .map(action => `${action.actionType}` as EmailActiveActions)}
+          countryCode={user.countryCode}
           session={
             sessionId
               ? {

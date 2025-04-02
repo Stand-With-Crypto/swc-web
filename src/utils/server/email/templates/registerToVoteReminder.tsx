@@ -1,20 +1,20 @@
 import * as React from 'react'
 import { Hr, Img, Link, Section, Text } from '@react-email/components'
 
-import {
-  EmailTemplateProps,
-  SOCIAL_MEDIA_URL,
-} from '@/utils/server/email/templates/common/constants'
-import { Button } from '@/utils/server/email/templates/ui/button'
-import { Heading } from '@/utils/server/email/templates/ui/heading'
+import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/ui/wrapper'
+} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
+import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
+import {
+  US_SOCIAL_MEDIA_URL,
+  USEmailTemplateProps,
+} from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
-type RegisterToVoteReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
+type RegisterToVoteReminderEmailProps = KeepUpTheFightSectionProps & USEmailTemplateProps
 
 RegisterToVoteReminderEmail.subjectLine = 'Register to vote and get a free NFT'
 RegisterToVoteReminderEmail.campaign = 'register_to_vote_reminder'
@@ -61,7 +61,7 @@ export default function RegisterToVoteReminderEmail({
           Luckily, SWC makes it easy to register to vote. You can check your voter registration
           right here on SWC's website. After you do, make sure to encourage other members of the
           crypto community to do the same by posting on X and tagging us{' '}
-          <Link className="text-inherit underline" href={SOCIAL_MEDIA_URL.twitter}>
+          <Link className="text-inherit underline" href={US_SOCIAL_MEDIA_URL.twitter}>
             @StandWithCrypto
           </Link>
           .

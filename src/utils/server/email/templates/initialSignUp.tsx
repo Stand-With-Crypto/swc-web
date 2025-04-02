@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { Hr, Img, Section, Text } from '@react-email/components'
 
-import { EmailTemplateProps } from '@/utils/server/email/templates/common/constants'
-import { Heading } from '@/utils/server/email/templates/ui/heading'
+import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/ui/wrapper'
+} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
+import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
+import { USEmailTemplateProps } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
-type InitialSignUpEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
+type InitialSignUpEmailProps = KeepUpTheFightSectionProps & USEmailTemplateProps
 
 InitialSignUpEmail.subjectLine = 'Thanks for joining SWC!'
 InitialSignUpEmail.campaign = 'initial_signup'

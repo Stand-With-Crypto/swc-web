@@ -1,7 +1,5 @@
 import { CommunicationMessageStatus } from '@prisma/client'
 
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
 export enum EmailEventName {
   PROCESSED = 'processed',
   DEFERRED = 'deferred',

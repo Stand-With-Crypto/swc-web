@@ -1,20 +1,20 @@
 import * as React from 'react'
 import { Hr, Img, Link, Section, Text } from '@react-email/components'
 
-import {
-  EmailTemplateProps,
-  SOCIAL_MEDIA_URL,
-} from '@/utils/server/email/templates/common/constants'
-import { Button } from '@/utils/server/email/templates/ui/button'
-import { Heading } from '@/utils/server/email/templates/ui/heading'
+import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/ui/wrapper'
+} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
+import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
+import {
+  US_SOCIAL_MEDIA_URL,
+  USEmailTemplateProps,
+} from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
-type FollowOnXReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
+type FollowOnXReminderEmailProps = KeepUpTheFightSectionProps & USEmailTemplateProps
 
 FollowOnXReminderEmail.subjectLine = 'Stay up to date on crypto policy'
 FollowOnXReminderEmail.campaign = 'follow_on_x_reminder'
@@ -45,7 +45,7 @@ export default function FollowOnXReminderEmail({
           We're so grateful for our Stand With Crypto community members, and we want to make sure
           you stay connected to everything we're doing. While we strive to keep you up to date here
           in your inbox, another great way to get the latest news is to{' '}
-          <Link className="text-inherit underline" href={SOCIAL_MEDIA_URL.twitter}>
+          <Link className="text-inherit underline" href={US_SOCIAL_MEDIA_URL.twitter}>
             follow us on X
           </Link>
           .
@@ -55,7 +55,7 @@ export default function FollowOnXReminderEmail({
           awesome discussion Spaces that we host with advocates and founders across the country.
           <br />
           <br />
-          <Link className="text-inherit underline" href={SOCIAL_MEDIA_URL.twitter}>
+          <Link className="text-inherit underline" href={US_SOCIAL_MEDIA_URL.twitter}>
             Follow us on X
           </Link>
           . and you'll get it all into your feed as it comes. We can't wait to see you there!
@@ -63,7 +63,7 @@ export default function FollowOnXReminderEmail({
       </Section>
 
       <Section className="mt-4 text-center">
-        <Button fullWidth="mobile" href={SOCIAL_MEDIA_URL.twitter}>
+        <Button fullWidth="mobile" href={US_SOCIAL_MEDIA_URL.twitter}>
           Follow us on X
         </Button>
       </Section>
