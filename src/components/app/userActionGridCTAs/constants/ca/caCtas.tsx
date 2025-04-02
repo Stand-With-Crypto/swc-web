@@ -65,7 +65,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription:
       'Get your friend to signup for Stand With Crypto and verify their account.',
     campaignsModalDescription: 'Share your referral link with friends to help grow our movement.',
-    image: '/actionTypeIcons/refer.png',
+    image: '/ca/actionTypeIcons/refer.png',
     campaigns: [
       {
         actionType: UserActionType.REFER,
