@@ -17,12 +17,12 @@ export function LocationUnitedStates({
 }) {
   return (
     <LocationRaces countAdvocates={countAdvocates} countryCode={countryCode}>
-      <LocationRaces.VoterGuideInput countryCode={countryCode} />
       <LocationRaces.KeyRaces>
         <USKeyRaces groups={groups} />
       </LocationRaces.KeyRaces>
-      <LocationRaces.KeyRacesStates countryCode={countryCode}>
-        <USKeyRacesStates isGovernorRace />
+      <LocationRaces.VoterGuideInput countryCode={countryCode} />
+      <LocationRaces.KeyRacesStates>
+        <USKeyRacesStates />
       </LocationRaces.KeyRacesStates>
       <LocationRaces.PacFooter />
     </LocationRaces>

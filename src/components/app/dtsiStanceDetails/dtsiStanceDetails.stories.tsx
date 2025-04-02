@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { IStanceDetailsProps } from '@/components/app/dtsiStanceDetails/types'
+import { StanceDetailsProps } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonDetailsQuery, DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonDetailsQueryString } from '@/data/dtsi/queries/queryDTSIPersonDetails/dtsiPersonDetailsQueryString'
 import { queryDTSIMockSchema } from '@/mocks/dtsi/queryDTSIMockSchema'
@@ -23,7 +23,7 @@ const meta = {
 export default meta
 
 const getProps =
-  (transform = (props: IStanceDetailsProps) => props) =>
+  (transform = (props: StanceDetailsProps) => props) =>
   () =>
     queryDTSIMockSchema<DTSI_PersonDetailsQuery>(dtsiPersonDetailsQueryString).then(data => {
       const person = data.people[0]

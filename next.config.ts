@@ -11,7 +11,12 @@ const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
-  'media-src': ["'self'", 'blob:', 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com'],
+  'media-src': [
+    "'self'",
+    'blob:',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
+    'https://www.youtube-nocookie.com/embed/',
+  ],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
@@ -97,6 +102,7 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.com/',
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
+    'https://www.youtube-nocookie.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
     'https://*.newmode.net/',
@@ -666,6 +672,16 @@ const nextConfig: NextConfig = {
       {
         source: '/cb-vote-adv-push',
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
+        permanent: true,
+      },
+      {
+        source: '/canada',
+        destination: '/ca?utm_source=billboard',
+        permanent: true,
+      },
+      {
+        source: '/uk',
+        destination: '/gb',
         permanent: true,
       },
     ]

@@ -26,10 +26,10 @@ import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConvers
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const createActionMintNFTInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionNftMintCampaignName),
+  campaignName: nativeEnum(USUserActionNftMintCampaignName),
   transactionHash: z.string().transform(hash => hash as `0x${string}`),
 })
 

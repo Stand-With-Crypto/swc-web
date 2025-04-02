@@ -11,7 +11,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
 import { zodReferralId } from '@/validation/fields/zodReferrald'
 
@@ -53,7 +53,7 @@ async function createReferralRecord({
     data: {
       userId: referrerId,
       actionType: UserActionType.REFER,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+      campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
       countryCode,
       userActionRefer: {
         create: userActionReferData,
@@ -63,7 +63,7 @@ async function createReferralRecord({
 
   analytics.trackUserActionCreated({
     actionType: UserActionType.REFER,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
     creationMethod: 'On Site',
     userState: 'Existing',
   })
@@ -106,7 +106,7 @@ async function incrementExistingReferral({
 
   analytics.trackUserActionUpdated({
     actionType: UserActionType.REFER,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
     userState: 'Existing',
     actionId: existingActionId,
   })

@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { AddressField } from '@/components/app/updateUserProfileForm/step1/addressField'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
@@ -27,8 +28,14 @@ import {
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import {
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
@@ -55,6 +62,7 @@ export function UpdateUserProfileForm({
     address: GooglePlaceAutocompletePrediction | null
   }) => void
 }) {
+  const countryCode = useCountryCode()
   const router = useRouter()
   const defaultValues = useRef({
     isEmbeddedWalletUser: user.hasEmbeddedWallet,
@@ -93,9 +101,20 @@ export function UpdateUserProfileForm({
         },
         payload: { ...values, address: resolvedAddress, optedInToSms: !!values.phoneNumber },
       },
-      payload => actionUpdateUserProfile(payload),
+      actionUpdateUserProfile,
     )
     if (result.status === 'success') {
+      const { countryCode: newCountryCode } = (
+        result.response as {
+          user: ClientUserWithENSData
+        }
+      ).user
+
+      if (ORDERED_SUPPORTED_COUNTRIES.includes(newCountryCode) && newCountryCode !== countryCode) {
+        router.push(getIntlUrls(newCountryCode as SupportedCountryCodes).profile())
+        return
+      }
+
       router.refresh()
       toast.success('Profile updated', { duration: 5000 })
       const { firstName, lastName } = values

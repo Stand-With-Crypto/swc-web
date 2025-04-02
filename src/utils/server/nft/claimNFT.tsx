@@ -30,86 +30,86 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
-  ActiveClientUserActionWithCampaignType,
-  UserActionCallCampaignName,
-  UserActionDonationCampaignName,
-  UserActionEmailCampaignName,
-  UserActionLiveEventCampaignName,
-  UserActionNftMintCampaignName,
-  UserActionOptInCampaignName,
-  UserActionPollCampaignName,
-  UserActionReferCampaignName,
-  UserActionRsvpEventCampaignName,
-  UserActionTweetAtPersonCampaignName,
-  UserActionTweetCampaignName,
-  UserActionViewKeyRacesCampaignName,
-  UserActionVoterAttestationCampaignName,
-  UserActionVoterRegistrationCampaignName,
-  UserActionVotingDayCampaignName,
-  UserActionVotingInformationResearchedCampaignName,
-} from '@/utils/shared/userActionCampaigns'
-import { COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/index'
+  USActiveClientUserActionWithCampaignType,
+  USUserActionCallCampaignName,
+  USUserActionDonationCampaignName,
+  USUserActionEmailCampaignName,
+  USUserActionLiveEventCampaignName,
+  USUserActionNftMintCampaignName,
+  USUserActionPollCampaignName,
+  USUserActionReferCampaignName,
+  USUserActionRsvpEventCampaignName,
+  USUserActionTweetAtPersonCampaignName,
+  USUserActionTweetCampaignName,
+  USUserActionViewKeyRacesCampaignName,
+  USUserActionVoterAttestationCampaignName,
+  USUserActionVoterRegistrationCampaignName,
+  USUserActionVotingDayCampaignName,
+  USUserActionVotingInformationResearchedCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 import NFTMintStatus = $Enums.NFTMintStatus
 
 export const ACTION_NFT_SLUG: Record<
-  ActiveClientUserActionWithCampaignType,
+  USActiveClientUserActionWithCampaignType,
   Record<string, NFTSlug | null>
 > = {
   [UserActionType.OPT_IN]: {
     [UserActionOptInCampaignName.DEFAULT]: NFTSlug.SWC_SHIELD,
   },
   [UserActionType.CALL]: {
-    [UserActionCallCampaignName.DEFAULT]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
-    [UserActionCallCampaignName.FIT21_2024_04]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
+    [USUserActionCallCampaignName.DEFAULT]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
+    [USUserActionCallCampaignName.FIT21_2024_04]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
   },
   [UserActionType.EMAIL]: {
-    [UserActionEmailCampaignName.DEFAULT]: null,
-    [UserActionEmailCampaignName.FIT21_2024_04]: null,
+    [USUserActionEmailCampaignName.DEFAULT]: null,
+    [USUserActionEmailCampaignName.FIT21_2024_04]: null,
   },
   [UserActionType.DONATION]: {
-    [UserActionDonationCampaignName.DEFAULT]: null,
+    [USUserActionDonationCampaignName.DEFAULT]: null,
   },
   [UserActionType.NFT_MINT]: {
-    [UserActionNftMintCampaignName.DEFAULT]: null,
+    [USUserActionNftMintCampaignName.DEFAULT]: null,
   },
   [UserActionType.TWEET]: {
-    [UserActionTweetCampaignName.DEFAULT]: null,
+    [USUserActionTweetCampaignName.DEFAULT]: null,
   },
   [UserActionType.VOTER_REGISTRATION]: {
-    [UserActionVoterRegistrationCampaignName.DEFAULT]: NFTSlug.I_AM_A_VOTER,
+    [USUserActionVoterRegistrationCampaignName.DEFAULT]: NFTSlug.I_AM_A_VOTER,
   },
   [UserActionType.LIVE_EVENT]: {
-    [UserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
+    [USUserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
   },
   [UserActionType.TWEET_AT_PERSON]: {
-    [UserActionTweetAtPersonCampaignName.DEFAULT]: null,
-    [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
+    [USUserActionTweetAtPersonCampaignName.DEFAULT]: null,
+    [USUserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
   },
   [UserActionType.VOTER_ATTESTATION]: {
-    [UserActionVoterAttestationCampaignName.DEFAULT]: NFTSlug.VOTER_ATTESTATION,
+    [USUserActionVoterAttestationCampaignName.DEFAULT]: NFTSlug.VOTER_ATTESTATION,
   },
   [UserActionType.RSVP_EVENT]: {
-    [UserActionRsvpEventCampaignName.DEFAULT]: null,
+    [USUserActionRsvpEventCampaignName.DEFAULT]: null,
   },
   [UserActionType.VIEW_KEY_RACES]: {
-    [UserActionViewKeyRacesCampaignName['2024_ELECTION']]: null,
+    [USUserActionViewKeyRacesCampaignName['2024_ELECTION']]: null,
   },
   [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
-    [UserActionVotingInformationResearchedCampaignName['2024_ELECTION']]: null,
+    [USUserActionVotingInformationResearchedCampaignName['2024_ELECTION']]: null,
   },
   [UserActionType.VOTING_DAY]: {
-    [UserActionVotingDayCampaignName['2024_ELECTION']]: NFTSlug.I_VOTED,
+    [USUserActionVotingDayCampaignName['2024_ELECTION']]: NFTSlug.I_VOTED,
   },
   [UserActionType.REFER]: {
-    [UserActionReferCampaignName.DEFAULT]: null,
+    [USUserActionReferCampaignName.DEFAULT]: null,
   },
   [UserActionType.POLL]: {
-    [UserActionPollCampaignName.CRYPTO_NEWS]: null,
-    [UserActionPollCampaignName.DIGITAL_ASSETS]: null,
-    [UserActionPollCampaignName.ENCOURAGE]: null,
-    [UserActionPollCampaignName.OVAL_OFFICE]: null,
+    [USUserActionPollCampaignName.CRYPTO_NEWS]: null,
+    [USUserActionPollCampaignName.DIGITAL_ASSETS]: null,
+    [USUserActionPollCampaignName.ENCOURAGE]: null,
+    [USUserActionPollCampaignName.OVAL_OFFICE]: null,
   },
 }
 

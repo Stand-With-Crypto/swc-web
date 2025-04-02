@@ -12,7 +12,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface DTSIPersonHeroCardSectionProps {
   countryCode: SupportedCountryCodes
-  title: React.ReactNode
+  title?: React.ReactNode
   titleProps?: PageTitleProps
   subtitle?: React.ReactNode
   cta?: ReactNode

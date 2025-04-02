@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useMemo } from 'react'
+import { useMemo } from 'react'
 import { Column, filterFns } from '@tanstack/react-table'
 
 import {
@@ -9,7 +9,6 @@ import {
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/common/table'
-import { DataTableSkeleton } from '@/components/app/dtsiClientPersonDataTable/common/tableSkeleton'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -81,51 +80,38 @@ export function GbDTSIClientPersonDataTable({
   }, [tableColumns, parsedData, globalFilter, setGlobalFilter])
 
   return (
-    <Suspense
-      fallback={
-        <DataTableSkeleton>
-          <DataTableSkeleton.GlobalFilter
-            searchPlaceholder={GLOBAL_SEARCH_PLACEHOLDER}
-            subtitle={GLOBAL_SUBTITLE}
-            title={GLOBAL_TITLE}
-          />
-          <DataTableSkeleton.Body {...tableBodyProps} loadState={'static'} />
-        </DataTableSkeleton>
-      }
-    >
-      <DataTable>
-        <DataTable.GlobalFilter
-          globalFilter={globalFilter}
-          searchPlaceholder={GLOBAL_SEARCH_PLACEHOLDER}
-          setGlobalFilter={setGlobalFilter}
-          subtitle={GLOBAL_SUBTITLE}
-          title={GLOBAL_TITLE}
-        />
-        <DataTable.Body
-          {...tableBodyProps}
-          globalFilterFn={(row, _, filterValue, addMeta) => {
-            const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
-            if (matchesFullName) {
-              return true
-            }
+    <DataTable>
+      <DataTable.GlobalFilter
+        globalFilter={globalFilter}
+        searchPlaceholder={GLOBAL_SEARCH_PLACEHOLDER}
+        setGlobalFilter={setGlobalFilter}
+        subtitle={GLOBAL_SUBTITLE}
+        title={GLOBAL_TITLE}
+      />
+      <DataTable.Body
+        {...tableBodyProps}
+        globalFilterFn={(row, _, filterValue, addMeta) => {
+          const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
+          if (matchesFullName) {
+            return true
+          }
 
-            const state = row.original.primaryRole?.primaryState ?? ''
-            if (!state) {
-              return false
-            }
+          const state = row.original.primaryRole?.primaryState ?? ''
+          if (!state) {
+            return false
+          }
 
-            const parsedState = parseStringPoliticiansTable(state)
-            const parsedFilterValue = parseStringPoliticiansTable(filterValue)
-            return (
-              parsedState.includes(parsedFilterValue) ||
-              getGBCountryNameFromCode(state)?.toLowerCase().includes(parsedFilterValue)
-            )
-          }}
-          key={data?.people ? 'loaded' : 'static'}
-          loadState={data?.people ? 'loaded' : 'static'}
-        />
-      </DataTable>
-    </Suspense>
+          const parsedState = parseStringPoliticiansTable(state)
+          const parsedFilterValue = parseStringPoliticiansTable(filterValue)
+          return (
+            parsedState.includes(parsedFilterValue) ||
+            getGBCountryNameFromCode(state)?.toLowerCase().includes(parsedFilterValue)
+          )
+        }}
+        key={data?.people ? 'loaded' : 'static'}
+        loadState={data?.people ? 'loaded' : 'static'}
+      />
+    </DataTable>
   )
 }
 

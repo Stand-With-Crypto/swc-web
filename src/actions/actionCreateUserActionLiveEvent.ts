@@ -26,12 +26,12 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionLiveEvent`)
 
 const createActionLiveEventInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionLiveEventCampaignName),
+  campaignName: nativeEnum(USUserActionLiveEventCampaignName),
 })
 
 export type CreateActionLiveEventInput = z.infer<typeof createActionLiveEventInputValidationSchema>
@@ -53,8 +53,8 @@ type EventDuration = {
   END_TIME: Date
 }
 
-const EVENT_DURATION: Record<UserActionLiveEventCampaignName, EventDuration> = {
-  [UserActionLiveEventCampaignName['2024_03_04_LA']]: {
+const EVENT_DURATION: Record<USUserActionLiveEventCampaignName, EventDuration> = {
+  [USUserActionLiveEventCampaignName['2024_03_04_LA']]: {
     START_TIME: new Date('2024-03-04'),
     END_TIME: new Date('2024-03-06'),
   },

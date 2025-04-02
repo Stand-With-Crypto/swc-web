@@ -1,5 +1,5 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
-import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+import { fragmentDTSIPersonCardWithRoles } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { fragmentDTSIPersonStanceDetails } from '@/data/dtsi/fragments/fragmentDTSIPersonStanceDetails'
 import {
   DTSI_StateSpecificInformationQuery,
@@ -11,6 +11,47 @@ import { LocationStateCode } from '@/utils/shared/urls'
 
 const query = /* GraphQL */ `
   query StateSpecificInformation($stateCode: String!, $personRoleGroupingOr: [PersonGrouping!]) {
+    governor: people(
+      limit: 999
+      offset: 0
+      specificPersonRole: { primaryState: $stateCode, roleCategory: GOVERNOR, status: RUNNING_FOR }
+    ) {
+      ...PersonCardWithRoles
+    }
+    congress: people(
+      limit: 999
+      offset: 0
+      personRoleGroupingOr: $personRoleGroupingOr
+      personRolePrimaryState: $stateCode
+    ) {
+      ...PersonCard
+      roles {
+        id
+        primaryDistrict
+        primaryState
+        roleCategory
+        status
+        dateStart
+        group {
+          id
+          category
+          groupInstance
+        }
+      }
+      stances(verificationStatusIn: APPROVED) {
+        ...PersonStanceDetails
+        person {
+          profilePictureUrlDimensions
+          firstName
+          firstNickname
+          lastName
+          nameSuffix
+          profilePictureUrl
+          id
+          slug
+        }
+      }
+    }
     people(
       limit: 999
       offset: 0
@@ -53,7 +94,7 @@ const query = /* GraphQL */ `
   }
 
   ${fragmentDTSIPersonStanceDetails}
-  ${fragmentDTSIPersonCard}
+  ${fragmentDTSIPersonCardWithRoles}
 `
 export const queryDTSILocationStateSpecificInformation = async ({
   stateCode,

@@ -34,13 +34,13 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 const logger = getLogger(`actionCreateUserActionVoterRegistration`)
 
 const createActionVoterRegistrationInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionVoterRegistrationCampaignName),
+  campaignName: nativeEnum(USUserActionVoterRegistrationCampaignName),
   usaState: zodUsaState.optional(),
 })
 

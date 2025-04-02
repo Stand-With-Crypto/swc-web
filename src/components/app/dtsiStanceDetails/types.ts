@@ -62,11 +62,12 @@ export type DTSIStanceDetailsPersonProp = Pick<
   | 'slug'
 >
 
-export type IStanceDetailsProps = {
+export type StanceDetailsProps = {
   countryCode: SupportedCountryCodes
   person: DTSIStanceDetailsPersonProp
   stance: DTSIStanceDetailsStancePassedProp
   className?: string
   bodyClassName?: string
   hideImages?: boolean
+  isStanceHidden?: boolean
 }

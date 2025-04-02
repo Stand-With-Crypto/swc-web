@@ -89,17 +89,12 @@ export function LocationKeyRaces({ children }: { children: ReactNode }) {
 }
 LocationRaces.KeyRaces = LocationKeyRaces
 
-export function LocationKeyRacesStates({
-  children,
-  countryCode,
-}: {
-  children: ReactNode
-  countryCode: SupportedCountryCodes
-}) {
+export function LocationKeyRacesStates({ children }: { children: ReactNode }) {
   return (
     <ContentSection
       className="container"
-      title={`Other races across ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}`}
+      subtitle="Dive deeper and discover races in other states."
+      title="Other states"
     >
       <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
         {children}

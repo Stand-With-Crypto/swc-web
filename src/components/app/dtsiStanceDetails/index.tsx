@@ -6,24 +6,23 @@ import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiS
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
 import {
   DTSIStanceDetailsStanceProp,
-  IStanceDetailsProps,
+  StanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
-import { isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
 
-function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsProps) {
+function StanceTypeContent({ stance: passedStance, isStanceHidden, ...props }: StanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
+
   if (stance.stanceType === DTSI_PersonStanceType.TWEET) {
-    return <DTSIStanceDetailsTweet {...props} stance={stance} />
+    return <DTSIStanceDetailsTweet isStanceHidden={isStanceHidden} {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.QUOTE) {
-    return <DTSIStanceDetailsQuote {...props} stance={stance} />
+    return <DTSIStanceDetailsQuote isStanceHidden={isStanceHidden} {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
-    const isStanceHidden = isPoliticianStanceHidden(props.person.slug)
     return (
       <DTSIBillCard
         bill={stance.billRelationship?.bill}
@@ -42,17 +41,16 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
   throw new Error(`invalid StanceDetails passed ${JSON.stringify(stance)}`)
 }
 
-export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) {
+export function DTSIStanceDetails({ className, isStanceHidden, ...props }: StanceDetailsProps) {
   const stance = props.stance
   const stanceScore = stance.computedStanceScore
 
   return (
     <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
-      <StanceTypeContent {...props} />
-      {!isPoliticianStanceHidden(props.person.slug) &&
-        stance.stanceType !== DTSI_PersonStanceType.BILL_RELATIONSHIP && (
-          <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
-        )}
+      <StanceTypeContent isStanceHidden={isStanceHidden} {...props} />
+      {!isStanceHidden && stance.stanceType !== DTSI_PersonStanceType.BILL_RELATIONSHIP && (
+        <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
+      )}
     </article>
   )
 }
