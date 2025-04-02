@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getUserAccessLocation } from '@/utils/server/middleware/getUserAccessLocation'
+import { getUserAccessLocation } from '@/utils/edge/getUserAccessLocation'
 import {
   COUNTRY_CODE_REGEX_PATTERN,
   DEFAULT_SUPPORTED_COUNTRY_CODE,

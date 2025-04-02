@@ -1,6 +1,6 @@
 import { headers } from 'next/headers'
 
-import { extractCountryCodeFromPathname } from '@/utils/server/middleware/extractCountryCodeFromPathname'
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const getCountryCodeFromURL = async () => {

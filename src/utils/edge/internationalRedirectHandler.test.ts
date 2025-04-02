@@ -5,14 +5,14 @@
 import { describe, expect, it } from '@jest/globals'
 import { NextRequest } from 'next/server'
 
-import { getUserAccessLocation } from '@/utils/server/middleware/getUserAccessLocation'
+import { getUserAccessLocation } from '@/utils/edge/getUserAccessLocation'
 import * as supportedCountries from '@/utils/shared/supportedCountries'
 import { USER_SELECTED_COUNTRY_COOKIE_NAME } from '@/utils/shared/supportedCountries'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 import { internationalRedirectHandler } from './internationalRedirectHandler'
 
-jest.mock('@/utils/server/middleware/getUserAccessLocation')
+jest.mock('@/utils/edge/getUserAccessLocation')
 jest.mock('@/utils/shared/supportedCountries', () => ({
   ...jest.requireActual('@/utils/shared/supportedCountries'),
   COUNTRY_CODE_REGEX_PATTERN: {

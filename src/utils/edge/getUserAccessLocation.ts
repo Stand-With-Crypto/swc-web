@@ -1,7 +1,7 @@
 import { geolocation } from '@vercel/functions'
 import { NextRequest } from 'next/server'
 
-import { extractCountryCodeFromPathname } from '@/utils/server/middleware/extractCountryCodeFromPathname'
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'

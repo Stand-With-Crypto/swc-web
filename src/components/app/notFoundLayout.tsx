@@ -18,7 +18,7 @@ import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { FullHeight } from '@/components/ui/fullHeight'
-import { extractCountryCodeFromPathname } from '@/utils/server/middleware/extractCountryCodeFromPathname'
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,

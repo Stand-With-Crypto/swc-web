@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
 
-import { internationalRedirectHandler } from '@/utils/server/internationalRedirectHandler'
-import { obfuscateURLCountryCode } from '@/utils/server/middleware/obfuscateURLCountryCode'
-import { setResponseCookie } from '@/utils/server/middleware/setResponseCookie'
-import { setSessionCookiesFromRequest } from '@/utils/server/middleware/setSessionCookies'
+import { internationalRedirectHandler } from '@/utils/edge/internationalRedirectHandler'
+import { obfuscateURLCountryCode } from '@/utils/edge/obfuscateURLCountryCode'
+import { setResponseCookie } from '@/utils/edge/setResponseCookie'
+import { setSessionCookiesFromRequest } from '@/utils/edge/setSessionCookies'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 

@@ -20,9 +20,7 @@ export function UpdateUserAccountCountryCode() {
   const { isLoggedIn, user } = useSession()
 
   const handleCountryCodeSubmit = async (countryCode: SupportedCountryCodes) => {
-    const result = await actionUpdateUserCountryCode(
-      countryCode.toLowerCase() as SupportedCountryCodes,
-    )
+    const result = await actionUpdateUserCountryCode(countryCode as SupportedCountryCodes)
 
     if (result?.errors) {
       const [errorMessage] = result.errors.countryCode ?? ['Unknown error']

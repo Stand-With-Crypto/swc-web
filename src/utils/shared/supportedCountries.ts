@@ -27,11 +27,4 @@ export const COUNTRY_CODE_REGEX_PATTERN = new RegExp(
   `^(${Object.values(SupportedCountryCodes).join('|')})$`,
 )
 
-export const COUNTRY_CODE_TO_DISPLAY_NAME: Record<SupportedCountryCodes, string> = {
-  [SupportedCountryCodes.US]: 'the United States',
-  [SupportedCountryCodes.GB]: 'the United Kingdom',
-  [SupportedCountryCodes.CA]: 'Canada',
-  [SupportedCountryCodes.AU]: 'Australia',
-}
-
 export const USER_SELECTED_COUNTRY_COOKIE_NAME = 'USER_SELECTED_COUNTRY'

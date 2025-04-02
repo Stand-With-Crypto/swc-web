@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { setResponseCookie } from '@/utils/server/middleware/setResponseCookie'
+import { setResponseCookie } from '@/utils/edge/setResponseCookie'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_ID_COOKIE_NAME } from '@/utils/shared/userId'

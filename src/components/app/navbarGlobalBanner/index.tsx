@@ -1,9 +1,13 @@
 'use client'
 
+import { ReactNode, useMemo } from 'react'
 import Cookies from 'js-cookie'
 
-import { CountryCampaignBannerContent } from '@/components/app/navbarGlobalBanner/currentCountryCampaignBannerContent'
+import { AuCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/au/currentCampaign'
+import { CaCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/ca/currentCampaign'
+import { GbCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/gb/currentCampaign'
 import { RedirectBannerContent } from '@/components/app/navbarGlobalBanner/redirectbannerContent'
+import { UsCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/us/currentCampaign'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
@@ -16,6 +20,13 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
+
+const COUNTRY_CAMPAIGN_COMPONENTS: Record<SupportedCountryCodes, () => ReactNode> = {
+  [SupportedCountryCodes.US]: UsCurrentNavbarGlobalBannerCampaign,
+  [SupportedCountryCodes.AU]: AuCurrentNavbarGlobalBannerCampaign,
+  [SupportedCountryCodes.CA]: CaCurrentNavbarGlobalBannerCampaign,
+  [SupportedCountryCodes.GB]: GbCurrentNavbarGlobalBannerCampaign,
+}
 
 export function NavBarGlobalBanner({
   countryCode: currentPageCountryCode,
@@ -34,12 +45,19 @@ export function NavBarGlobalBanner({
   const isUserAccessLocationEqualCurrentPageCountryCode =
     userAccessLocation === currentPageCountryCode
 
+  const currentCampaignComponent = useMemo(() => {
+    const CampaignComponent = COUNTRY_CAMPAIGN_COMPONENTS[currentPageCountryCode]
+    if (!CampaignComponent) return null
+
+    return <CampaignComponent />
+  }, [currentPageCountryCode])
+
   if (!hasHydrated) {
-    return <CountryCampaignBannerContent countryCode={currentPageCountryCode} />
+    return currentCampaignComponent
   }
 
   if (isUserAccessLocationEqualCurrentPageCountryCode) {
-    return <CountryCampaignBannerContent countryCode={currentPageCountryCode} />
+    return currentCampaignComponent
   }
 
   if (userAccessLocation && isUserAccessLocationSupported) {

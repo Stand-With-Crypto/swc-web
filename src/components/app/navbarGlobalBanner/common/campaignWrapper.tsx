@@ -1,30 +1,7 @@
-import React, { ReactNode, useMemo } from 'react'
+import { ReactNode } from 'react'
 import Link from 'next/link'
 
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const COUNTRY_CAMPAIGN_COMPONENTS: Record<SupportedCountryCodes, () => ReactNode> = {
-  [SupportedCountryCodes.US]: USCampaign,
-  [SupportedCountryCodes.AU]: AUCampaign,
-  [SupportedCountryCodes.CA]: CACampaign,
-  [SupportedCountryCodes.GB]: UKCampaign,
-}
-
-export function CountryCampaignBannerContent({
-  countryCode,
-}: {
-  countryCode: SupportedCountryCodes
-}) {
-  const Content = useMemo(() => {
-    const CampaignComponent = COUNTRY_CAMPAIGN_COMPONENTS[countryCode]
-    if (!CampaignComponent) return null
-
-    return <CampaignComponent />
-  }, [countryCode])
-
-  return Content
-}
 
 /**
  * Example usage of the campaign component:
@@ -54,23 +31,7 @@ export function CountryCampaignBannerContent({
  * }
  */
 
-function USCampaign() {
-  return null
-}
-
-function UKCampaign() {
-  return null
-}
-
-function CACampaign() {
-  return null
-}
-function AUCampaign() {
-  return null
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function CampaignWrapper({ children, url }: { children: ReactNode; url: string }) {
+export function CampaignWrapper({ children, url }: { children: ReactNode; url: string }) {
   return (
     <div className="flex w-full items-center justify-center bg-primary-cta px-1 py-3">
       <MobileLinkWrapper url={url}>

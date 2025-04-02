@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { extractCountryCodeFromPathname } from '@/utils/server/middleware/extractCountryCodeFromPathname'
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 /**
