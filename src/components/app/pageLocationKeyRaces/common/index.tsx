@@ -13,11 +13,8 @@ import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActi
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import {
-  COUNTRY_CODE_TO_DISPLAY_NAME,
-  COUNTRY_CODE_TO_LOCALE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns/index'
 
 interface LocationRacesProps {

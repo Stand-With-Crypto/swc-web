@@ -7,7 +7,7 @@ import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -38,7 +38,7 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
 
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
