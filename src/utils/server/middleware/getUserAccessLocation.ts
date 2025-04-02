@@ -7,7 +7,7 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 import { OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 const defaultDevAccessLocation = ['local', 'testing'].includes(NEXT_PUBLIC_ENVIRONMENT)
-  ? process.env.USER_COUNTRY_CODE
+  ? process.env.USER_ACCESS_LOCATION
   : ''
 
 export function getUserAccessLocation(request: NextRequest) {

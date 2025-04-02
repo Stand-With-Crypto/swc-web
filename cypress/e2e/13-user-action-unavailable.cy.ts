@@ -4,13 +4,13 @@ describe('disabled user actions for non-US users', () =>
   ['/action/email', '/action/call', '/action/share', '/action/nft-mint'].forEach(action => {
     it(`should show user action unavailable message for ${action}`, () => {
       cy.visit(action)
-      cy.setCookie('USER_COUNTRY_CODE', 'BR')
+      cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'br')
       cy.contains('Action unavailable').should('be.visible')
     })
   }))
 
 it.skip('should not create user action for non-US users', () => {
-  cy.setCookie('USER_COUNTRY_CODE', 'US')
+  cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'us')
   cy.visit('/')
   cy.contains('Email your congressperson').click()
   cy.get('[role="dialog"]')
@@ -26,7 +26,7 @@ it.skip('should not create user action for non-US users', () => {
   cy.get('[data-test-id="dtsi-person-associated-with-address"]')
   cy.get('textarea').type('test message')
 
-  cy.setCookie('USER_COUNTRY_CODE', 'BR')
+  cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', 'br')
   cy.wait(100)
 
   cy.get('button[type="submit"]').click()

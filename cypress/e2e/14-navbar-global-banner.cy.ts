@@ -6,11 +6,11 @@ function getCountryCodeCookieValue(countryCode: string) {
 
 describe('NavBarGlobalBanner', () => {
   beforeEach(() => {
-    cy.clearCookie('USER_COUNTRY_CODE')
+    cy.clearCookie('USER_ACCESS_LOCATION_COOKIE_NAME')
   })
 
   it('should show UK banner when countryCode is "UK"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('UK'))
+    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', getCountryCodeCookieValue('UK'))
 
     cy.visit('/')
 
@@ -18,7 +18,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show UK banner when countryCode is "uk"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('uk'))
+    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', getCountryCodeCookieValue('uk'))
 
     cy.visit('/')
 
@@ -26,7 +26,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "CA"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('CA'))
+    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', getCountryCodeCookieValue('CA'))
 
     cy.visit('/')
 
@@ -34,7 +34,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "ca"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('ca'))
+    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', getCountryCodeCookieValue('ca'))
 
     cy.visit('/')
 
@@ -42,7 +42,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show US restriction banner when countryCode is not supported', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('br'))
+    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', getCountryCodeCookieValue('br'))
 
     cy.visit('/')
 
@@ -52,7 +52,7 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show current US campaign for US users', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('US'))
+    cy.setCookie('USER_ACCESS_LOCATION_COOKIE_NAME', getCountryCodeCookieValue('us'))
 
     cy.visit('/')
 
