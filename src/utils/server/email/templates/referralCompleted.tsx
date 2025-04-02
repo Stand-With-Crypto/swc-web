@@ -30,3 +30,5 @@ export function getReferralCompletedEmail(countryCode: SupportedCountryCodes) {
       })
   }
 }
+
+export default getReferralCompletedEmail

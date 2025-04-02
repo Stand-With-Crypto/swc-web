@@ -19,7 +19,7 @@ import {
   getEmailActiveActionsByCountry,
   getEmailEnabledActionNFTsByCountry,
 } from '@/utils/server/email/templates/common/constants'
-import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
+import { getNFTOnTheWayEmail } from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -258,6 +258,7 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
 
   const userSession = user.userSessions?.[0]
 
+  const NFTOnTheWayEmail = getNFTOnTheWayEmail(countryCode)
   const messageId = await sendMail({
     countryCode,
     payload: {

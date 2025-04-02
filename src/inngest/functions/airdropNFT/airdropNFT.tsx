@@ -12,7 +12,7 @@ import {
   getEmailActiveActionFromNFTSlug,
   getEmailActiveActionsByCountry,
 } from '@/utils/server/email/templates/common/constants'
-import NFTArrivedEmail from '@/utils/server/email/templates/nftArrived'
+import { getNFTArrivedEmail } from '@/utils/server/email/templates/nftArrived'
 import {
   THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,
   updateMintNFTStatus,
@@ -149,6 +149,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
           return null
         }
         const userSession = user.userSessions?.[0]
+        const NFTArrivedEmail = getNFTArrivedEmail(countryCode)
         const emailPayload: SendMailPayload = {
           to: user.primaryUserEmailAddress.emailAddress,
           subject: NFTArrivedEmail.subjectLine,
