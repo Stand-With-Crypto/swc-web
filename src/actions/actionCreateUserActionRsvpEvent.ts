@@ -6,11 +6,11 @@ import { waitUntil } from '@vercel/functions'
 import { boolean, object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -67,7 +67,7 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   if (
     !isActionSupportedForCountry(countryCode, UserActionType.RSVP_EVENT) ||
