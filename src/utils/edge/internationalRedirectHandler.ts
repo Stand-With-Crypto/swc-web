@@ -29,8 +29,8 @@ export function internationalRedirectHandler(request: NextRequest): {
     maybeUserSelectedCountryCookie,
   })
 
-  const shouldUpdateUserAccessLocationCookie =
-    userAccessLocation !== maybeExistingUserAccessLocationCookie
+  // if the USER_ACCESS_LOCATION cookie is not set, we want to set it
+  const shouldUpdateUserAccessLocationCookie = !maybeExistingUserAccessLocationCookie
 
   if (redirect) {
     const response = createRedirectResponse(request, redirectCountryCode!)
