@@ -12,9 +12,13 @@ import {
 } from '@/utils/dtsi/dtsiPersonRoleUtils'
 
 type PersonFields = Pick<
-  DTSI_StateSpecificInformationQuery['people'][0],
+  DTSI_StateSpecificInformationQuery['congress'][0],
   'roles' | 'slug' | 'politicalAffiliationCategory'
->
+> &
+  Pick<
+    DTSI_StateSpecificInformationQuery['governor'][0],
+    'roles' | 'slug' | 'politicalAffiliationCategory'
+  >
 
 export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
   person: P,
@@ -45,10 +49,7 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
 
   if (specificRole === DTSI_PersonRoleCategory.GOVERNOR) {
     const currentSpecificRole = roles.find(role => {
-      return (
-        role.roleCategory === DTSI_PersonRoleCategory.GOVERNOR &&
-        role.status === DTSI_PersonRoleStatus.HELD
-      )
+      return role.status === DTSI_PersonRoleStatus.HELD
     })
 
     const runningForSpecificRole = roles.find(role => {
@@ -90,7 +91,7 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
     roles,
     isIncumbent:
       currentSpecificRole &&
-      currentSpecificRole.roleCategory === runningForSpecificRole.roleCategory,
+      currentSpecificRole?.roleCategory === runningForSpecificRole?.roleCategory,
     currentSpecificRole,
     runningForSpecificRole,
     politicalAffiliationCategory: person.politicalAffiliationCategory,

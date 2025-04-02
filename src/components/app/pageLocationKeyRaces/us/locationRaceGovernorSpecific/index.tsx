@@ -135,6 +135,10 @@ export function USLocationRaceGovernorSpecific({
             United States
           </InternalLink>
           {' / '}
+          <InternalLink className="text-gray-400" href={urls.locationStateSpecific(stateCode)}>
+            {stateDisplayName}
+          </InternalLink>
+          {' / '}
           <LocationRaceLinkTitle stateCode={stateCode} stateDisplayName={stateDisplayName} />
         </h2>
         <div className="mb-5 flex flex-col items-center gap-4">

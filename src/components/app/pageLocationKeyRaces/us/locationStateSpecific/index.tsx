@@ -36,12 +36,14 @@ const countryCode = SupportedCountryCodes.US
 
 export function USLocationStateSpecific({
   stateCode,
-  people,
+  congress,
+  governor,
   countAdvocates,
-  personStances,
 }: LocationStateSpecificProps) {
-  const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
-  const groups = organizeStateSpecificPeople(people)
+  const stances = congress
+    .flatMap(x => x.stances)
+    .filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
+  const groups = organizeStateSpecificPeople(congress, governor)
   const urls = getIntlUrls(countryCode)
   const stateName = getUSStateNameFromStateCode(stateCode)
   const otherDistricts = compact(
@@ -99,12 +101,26 @@ export function USLocationStateSpecific({
         </div>
       </DarkHeroSection>
 
-      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
+      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) && isEmpty(groups.governors) ? (
         <PageTitle as="h3" className="mt-20" size="sm">
           There's no key races currently in {stateName}
         </PageTitle>
       ) : (
         <div className="space-y-20">
+          {!!groups.governors && (
+            <div className="mt-20">
+              <DTSIPersonHeroCardSection
+                countryCode={countryCode}
+                cta={
+                  <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                    View Race
+                  </InternalLink>
+                }
+                people={groups.governors}
+                title={<>{stateName} Gubernatorial Election</>}
+              />
+            </div>
+          )}
           {!!groups.senators.length && (
             <div className="mt-20">
               <DTSIPersonHeroCardSection

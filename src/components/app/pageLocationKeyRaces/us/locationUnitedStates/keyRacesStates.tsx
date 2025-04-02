@@ -18,7 +18,7 @@ export function USKeyRacesStates() {
     return (
       <InternalLink
         className={cn('mb-4 block flex-shrink-0 font-semibold')}
-        href={urls.locationStateSpecificGovernorRace(stateCode)}
+        href={urls.locationStateSpecific(stateCode)}
         key={stateCode}
       >
         {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}

@@ -69,4 +69,5 @@ export type IStanceDetailsProps = {
   className?: string
   bodyClassName?: string
   hideImages?: boolean
+  isStanceHidden?: boolean
 }
