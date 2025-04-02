@@ -1,9 +1,9 @@
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import Link from 'next/link'
 
 const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: Record<
   SupportedCountryCodes,
