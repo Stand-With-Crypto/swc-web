@@ -181,7 +181,7 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
         <div className="align-center mb-6 flex w-full justify-center">
           <DTSIPersonHeroCard
             countryCode={SupportedCountryCodes.US}
-            cryptoStanceGradeElement={<DTSIFormattedLetterGrade person={representative} />}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             isClickable={false}
             isRecommended={false}
             person={representative}

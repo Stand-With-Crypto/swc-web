@@ -14,39 +14,19 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { getAUStateNameFromStateCode } from '@/utils/shared/auStateUtils'
-import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/caProvinceUtils'
-import { getGBCountryNameFromCode } from '@/utils/shared/gbCountryUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { getStateNameResolver, getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface UpcomingEventsProps {
   events: SWCEvents
 }
 
-const GET_STATE_NAME_FROM_CODE_MAP: Record<SupportedCountryCodes, (code: string) => string> = {
-  [SupportedCountryCodes.AU]: getAUStateNameFromStateCode,
-  [SupportedCountryCodes.CA]: getCAProvinceOrTerritoryNameFromCode,
-  [SupportedCountryCodes.GB]: getGBCountryNameFromCode,
-  [SupportedCountryCodes.US]: getUSStateNameFromStateCode,
-}
-
-const FILTER_NAME_BY_COUNTRY_MAP: Record<SupportedCountryCodes, string> = {
-  [SupportedCountryCodes.AU]: 'State',
-  [SupportedCountryCodes.CA]: 'Province',
-  [SupportedCountryCodes.GB]: 'Country',
-  [SupportedCountryCodes.US]: 'State',
-}
-
-const getStateNameFromCode = (code: string, countryCode: SupportedCountryCodes) => {
-  return GET_STATE_NAME_FROM_CODE_MAP[countryCode](code)
-}
-
 export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
   const countryCode = useCountryCode()
+
+  const stateNameResolver = getStateNameResolver(countryCode)
 
   const filteredEvents = useMemo(() => {
     const result =
@@ -78,13 +58,13 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
     const options = stateArr.map(state => ({
       key: state,
-      name: `${getStateNameFromCode(state, countryCode)} (${stateWithEvents[state]})`,
+      name: `${stateNameResolver(state)} (${stateWithEvents[state]})`,
     }))
 
     options.unshift({ key: 'All', name: 'All' })
 
     return options
-  }, [countryCode, events])
+  }, [events, stateNameResolver])
 
   return (
     <>
@@ -97,7 +77,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
       >
         <SelectTrigger className="max-w-[345px]">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">
-            {FILTER_NAME_BY_COUNTRY_MAP[countryCode]}
+            {getTerritoryDivisionByCountryCode(countryCode)}
           </span>
           <span className="mr-auto">
             <SelectValue placeholder="All" />

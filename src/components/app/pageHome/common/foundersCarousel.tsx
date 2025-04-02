@@ -22,7 +22,7 @@ export function FoundersCarousel({ founders }: { founders: SWCFounders | null })
             })}
             key={founder.data.name}
           >
-            <ExternalLink className="mb-5 block shadow-lg" href={founder.data.founderLink}>
+            <ExternalLink className="mb-5 block shadow-lg" href={founder.data.companyUrl}>
               <div className="flex flex-col">
                 <div className="relative h-72">
                   <NextImage
@@ -36,7 +36,7 @@ export function FoundersCarousel({ founders }: { founders: SWCFounders | null })
                 <div className="p-2 text-left sm:p-4">
                   <p className="text-md text-primary sm:text-lg">{founder.data.name}</p>
                   <p className="mt-2 text-xs text-gray-600 text-secondary-foreground sm:text-sm">
-                    {founder.data.at}
+                    {founder.data.companyName}
                   </p>
                 </div>
               </div>

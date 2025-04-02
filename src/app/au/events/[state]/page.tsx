@@ -6,7 +6,10 @@ import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/even
 import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getAUStateNameFromStateCode, isValidAUStateCode } from '@/utils/shared/auStateUtils'
+import {
+  getAUStateNameFromStateCode,
+  isValidAUStateCode,
+} from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type Props = PageProps<{ state: string }>

@@ -3,7 +3,7 @@ import 'server-only'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 
 const zodParams = z.object({

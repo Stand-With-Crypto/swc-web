@@ -42,5 +42,33 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
       return 'Republican'
     case DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT:
       return 'Independent'
+    case DTSI_PersonPoliticalAffiliationCategory.CONSERVATIVE:
+      return 'Conservative'
+    case DTSI_PersonPoliticalAffiliationCategory.DEMOCRATIC_SOCIALIST:
+      return 'Democratic Socialist'
+    case DTSI_PersonPoliticalAffiliationCategory.GREEN:
+      return 'Green'
+    case DTSI_PersonPoliticalAffiliationCategory.LABOR:
+      return 'Labor'
+    case DTSI_PersonPoliticalAffiliationCategory.LIBERAL:
+      return 'Liberal'
+    case DTSI_PersonPoliticalAffiliationCategory.LIBERAL_DEMOCRAT:
+      return 'Liberal Democrat'
+    case DTSI_PersonPoliticalAffiliationCategory.LIBERTARIAN:
+      return 'Libertarian'
+    case DTSI_PersonPoliticalAffiliationCategory.NATIONAL_LIBERAL:
+      return 'National Liberal'
+    case DTSI_PersonPoliticalAffiliationCategory.NDP:
+      return 'NDP'
+    case DTSI_PersonPoliticalAffiliationCategory.REFORM:
+      return 'Reform'
+    case DTSI_PersonPoliticalAffiliationCategory.SOCIALIST:
+      return 'Socialist'
   }
+}
+
+const hideStanceSlugs = new Set<string>([])
+
+export function isPoliticianStanceHidden(dtsiSlug: string) {
+  return hideStanceSlugs.has(dtsiSlug.toLowerCase())
 }

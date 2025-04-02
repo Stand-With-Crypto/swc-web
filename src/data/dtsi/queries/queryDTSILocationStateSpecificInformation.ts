@@ -5,14 +5,16 @@ import {
   DTSI_StateSpecificInformationQuery,
   DTSI_StateSpecificInformationQueryVariables,
 } from '@/data/dtsi/generated'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { PERSON_ROLE_GROUPINGS_FOR_STATE_SPECIFIC_QUERY } from '@/data/dtsi/queries/constants'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { LocationStateCode } from '@/utils/shared/urls'
 
 const query = /* GraphQL */ `
-  query StateSpecificInformation($stateCode: String!) {
+  query StateSpecificInformation($stateCode: String!, $personRoleGroupingOr: [PersonGrouping!]) {
     people(
       limit: 999
       offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS, RUNNING_FOR_US_SENATE]
+      personRoleGroupingOr: $personRoleGroupingOr
       personRolePrimaryState: $stateCode
     ) {
       ...PersonCard
@@ -33,7 +35,7 @@ const query = /* GraphQL */ `
     personStances(
       limit: 15
       offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS, RUNNING_FOR_US_SENATE]
+      personRoleGroupingOr: $personRoleGroupingOr
       personRolePrimaryState: $stateCode
     ) {
       ...PersonStanceDetails
@@ -45,6 +47,7 @@ const query = /* GraphQL */ `
         nameSuffix
         profilePictureUrl
         id
+        slug
       }
     }
   }
@@ -54,14 +57,19 @@ const query = /* GraphQL */ `
 `
 export const queryDTSILocationStateSpecificInformation = async ({
   stateCode,
+  countryCode,
 }: {
-  stateCode: USStateCode
+  stateCode: LocationStateCode
+  countryCode: SupportedCountryCodes
 }) => {
+  const personRoleGroupingOr = PERSON_ROLE_GROUPINGS_FOR_STATE_SPECIFIC_QUERY[countryCode]
+
   const results = await fetchDTSI<
     DTSI_StateSpecificInformationQuery,
     DTSI_StateSpecificInformationQueryVariables
   >(query, {
     stateCode,
+    personRoleGroupingOr,
   })
 
   return results

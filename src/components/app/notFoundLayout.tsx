@@ -16,6 +16,7 @@ import * as gbConfig from '@/app/gb/config'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
+import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { extractCountryCode } from '@/utils/server/obfuscateURLCountryCode'
 import {
@@ -55,6 +56,7 @@ export function NotFoundLayout({ children }: { children: React.ReactNode }) {
         />
         <TopLevelClientLogic countryCode={countryCode}>
           <FullHeight.Container>
+            <NavBarGlobalBanner countryCode={countryCode} />
             <Navbar {...pageLayoutConfig.navbarConfig} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer {...pageLayoutConfig.footerConfig} />

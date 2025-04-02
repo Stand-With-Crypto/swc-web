@@ -61,7 +61,7 @@ export enum USUserActionNftMintCampaignName {
 }
 export enum USUserActionVoterRegistrationCampaignName {
   DEFAULT = 'DEFAULT',
-  '2025_US_ELECTIONS' = '2025_US_ELECTIONS',
+  'H1_2025' = 'H1_2025',
 }
 export enum USUserActionLiveEventCampaignName {
   '2024_03_04_LA' = '2024_03_04_LA',
@@ -72,22 +72,22 @@ export enum USUserActionTweetAtPersonCampaignName {
 }
 export enum USUserActionVoterAttestationCampaignName {
   DEFAULT = 'DEFAULT',
-  '2025_US_ELECTIONS' = '2025_US_ELECTIONS',
+  'H1_2025' = 'H1_2025',
 }
 export enum USUserActionRsvpEventCampaignName {
   DEFAULT = 'DEFAULT',
 }
 export enum USUserActionViewKeyRacesCampaignName {
   '2024_ELECTION' = '2024_ELECTION',
-  '2025_US_ELECTIONS' = '2025_US_ELECTIONS',
+  'H1_2025' = 'H1_2025',
 }
 export enum USUserActionVotingInformationResearchedCampaignName {
   '2024_ELECTION' = '2024_ELECTION',
-  '2025_US_ELECTIONS' = '2025_US_ELECTIONS',
+  'H1_2025' = 'H1_2025',
 }
 export enum USUserActionVotingDayCampaignName {
   '2024_ELECTION' = '2024_ELECTION',
-  '2025_US_ELECTIONS' = '2025_US_ELECTIONS',
+  'H1_2025' = 'H1_2025',
 }
 
 export enum USUserActionReferCampaignName {
@@ -137,16 +137,15 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.OPT_IN]: USUserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
   [UserActionType.NFT_MINT]: USUserActionNftMintCampaignName.DEFAULT,
-  [UserActionType.VOTER_REGISTRATION]:
-    USUserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
+  [UserActionType.VOTER_REGISTRATION]: USUserActionVoterRegistrationCampaignName['H1_2025'],
   [UserActionType.LIVE_EVENT]: USUserActionLiveEventCampaignName['2024_03_04_LA'],
   [UserActionType.TWEET_AT_PERSON]: USUserActionTweetAtPersonCampaignName.DEFAULT,
-  [UserActionType.VOTER_ATTESTATION]: USUserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
-  [UserActionType.VIEW_KEY_RACES]: USUserActionViewKeyRacesCampaignName['2025_US_ELECTIONS'],
+  [UserActionType.VOTER_ATTESTATION]: USUserActionVoterAttestationCampaignName['H1_2025'],
+  [UserActionType.VIEW_KEY_RACES]: USUserActionViewKeyRacesCampaignName['H1_2025'],
   [UserActionType.RSVP_EVENT]: USUserActionRsvpEventCampaignName.DEFAULT,
   [UserActionType.VOTING_INFORMATION_RESEARCHED]:
-    USUserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
-  [UserActionType.VOTING_DAY]: USUserActionVotingDayCampaignName['2025_US_ELECTIONS'],
+    USUserActionVotingInformationResearchedCampaignName['H1_2025'],
+  [UserActionType.VOTING_DAY]: USUserActionVotingDayCampaignName['H1_2025'],
   [UserActionType.REFER]: USUserActionReferCampaignName.DEFAULT,
   [UserActionType.POLL]: USUserActionPollCampaignName.CRYPTO_NEWS,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>

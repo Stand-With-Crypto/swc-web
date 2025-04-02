@@ -17,10 +17,11 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
+import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
+import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
@@ -28,14 +29,14 @@ import { UserLocationRaceInfo } from './userLocationRaceInfo'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
-  countryCode: SupportedCountryCodes
   countAdvocates: number
 }
 
-export function LocationStateSpecific({
+const countryCode = SupportedCountryCodes.US
+
+export function USLocationStateSpecific({
   stateCode,
   people,
-  countryCode,
   countAdvocates,
   personStances,
 }: LocationStateSpecificProps) {
@@ -55,6 +56,7 @@ export function LocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
       usaState: stateCode,
     })
   }, [stateCode])
@@ -64,7 +66,7 @@ export function LocationStateSpecific({
       <DarkHeroSection>
         <div className="text-center">
           <h2 className={'mb-4'}>
-            <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
+            <InternalLink className="text-gray-400" href={urls.locationKeyRaces()}>
               United States
             </InternalLink>{' '}
             / <span>{stateName}</span>
@@ -133,12 +135,7 @@ export function LocationStateSpecific({
               />
             </div>
           ) : (
-            <UserLocationRaceInfo
-              countryCode={countryCode}
-              groups={groups}
-              stateCode={stateCode}
-              stateName={stateName}
-            />
+            <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
           )}
           {!!stances.length && (
             <ContentSection

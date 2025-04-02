@@ -20,7 +20,7 @@ import {
 
 function personRoleGroupingToPersonRoleMapping(
   grouping: DTSI_PersonGrouping,
-): Partial<Omit<DTSI_PersonRole, 'group'> & { group: Partial<DTSI_PersonRoleGroup> }> {
+): Partial<Omit<DTSI_PersonRole, 'group'> & { group: Partial<DTSI_PersonRoleGroup> }> | undefined {
   switch (grouping) {
     case DTSI_PersonGrouping.CURRENT_US_HOUSE_OF_REPS:
       return {
@@ -120,9 +120,150 @@ function personRoleGroupingToPersonRoleMapping(
         primaryCountryCode: 'US',
         status: DTSI_PersonRoleStatus.HELD,
       }
-    // TODO (@twistershark): Add more mappings
-    default:
-      return {}
+    case DTSI_PersonGrouping.CURRENT_AU_HOUSE_OF_REPS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.CONGRESS,
+        primaryDistrict: '',
+        primaryState: 'NSW',
+        primaryCountryCode: 'AU',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.CURRENT_AU_SENATE:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.SENATE,
+        primaryDistrict: '',
+        primaryState: 'NSW',
+        primaryCountryCode: 'AU',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.RUNNING_FOR_AU_HOUSE_OF_REPS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.CONGRESS,
+        primaryDistrict: '',
+        primaryState: 'NSW',
+        primaryCountryCode: 'AU',
+        status: DTSI_PersonRoleStatus.RUNNING_FOR,
+      }
+    case DTSI_PersonGrouping.RUNNING_FOR_AU_SENATE:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.SENATE,
+        primaryDistrict: '',
+        primaryState: 'NSW',
+        primaryCountryCode: 'AU',
+        status: DTSI_PersonRoleStatus.RUNNING_FOR,
+      }
+    case DTSI_PersonGrouping.NEXT_AU_HOUSE_OF_REPS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.CONGRESS,
+        primaryDistrict: '',
+        primaryState: 'NSW',
+        primaryCountryCode: 'AU',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.NEXT_AU_SENATE:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.SENATE,
+        primaryDistrict: '',
+        primaryState: 'NSW',
+        primaryCountryCode: 'AU',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.CURRENT_CA_HOUSE_OF_COMMONS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+        primaryDistrict: '',
+        primaryState: 'ON',
+        primaryCountryCode: 'CA',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.CURRENT_CA_SENATE:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.SENATE,
+        primaryDistrict: '',
+        primaryState: 'ON',
+        primaryCountryCode: 'CA',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+        primaryDistrict: '',
+        primaryState: 'ON',
+        primaryCountryCode: 'CA',
+        status: DTSI_PersonRoleStatus.RUNNING_FOR,
+      }
+    case DTSI_PersonGrouping.RUNNING_FOR_CA_SENATE:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.SENATE,
+        primaryDistrict: '',
+        primaryState: 'ON',
+        primaryCountryCode: 'CA',
+        status: DTSI_PersonRoleStatus.RUNNING_FOR,
+      }
+    case DTSI_PersonGrouping.NEXT_CA_HOUSE_OF_COMMONS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+        primaryDistrict: '',
+        primaryState: 'ON',
+        primaryCountryCode: 'CA',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.NEXT_CA_SENATE:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.SENATE,
+        primaryDistrict: '',
+        primaryState: 'ON',
+        primaryCountryCode: 'CA',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.CURRENT_UK_HOUSE_OF_COMMONS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+        primaryDistrict: '',
+        primaryState: 'England',
+        primaryCountryCode: 'GB',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.CURRENT_UK_HOUSE_OF_LORDS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_LORDS,
+        primaryDistrict: '',
+        primaryState: 'England',
+        primaryCountryCode: 'GB',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_COMMONS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+        primaryDistrict: '',
+        primaryState: 'England',
+        primaryCountryCode: 'GB',
+        status: DTSI_PersonRoleStatus.RUNNING_FOR,
+      }
+    case DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_LORDS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_LORDS,
+        primaryDistrict: '',
+        primaryState: 'England',
+        primaryCountryCode: 'GB',
+        status: DTSI_PersonRoleStatus.RUNNING_FOR,
+      }
+    case DTSI_PersonGrouping.NEXT_UK_HOUSE_OF_COMMONS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+        primaryDistrict: '',
+        primaryState: 'England',
+        primaryCountryCode: 'GB',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
+    case DTSI_PersonGrouping.NEXT_UK_HOUSE_OF_LORDS:
+      return {
+        roleCategory: DTSI_PersonRoleCategory.HOUSE_OF_LORDS,
+        primaryDistrict: '',
+        primaryState: 'England',
+        primaryCountryCode: 'GB',
+        status: DTSI_PersonRoleStatus.HELD,
+      }
   }
 }
 

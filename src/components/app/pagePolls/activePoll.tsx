@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { EyeIcon } from 'lucide-react'
 
-import { actionCreateUserActionPoll } from '@/actions/actionCreateUserActionPoll'
 import { PollItem } from '@/components/app/pagePolls/pollItem'
 import { PollLegend } from '@/components/app/pagePolls/pollLegend'
 import { ProtectedSubmitButton } from '@/components/app/pagePolls/protectedSubmitButton'
@@ -16,9 +15,18 @@ import { useSession } from '@/hooks/useSession'
 import { pluralize } from '@/utils/shared/pluralize'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
+export interface PollSubmitData {
+  campaignName: string
+  answers: {
+    answer: string
+    isOtherAnswer: boolean
+  }[]
+}
+
 interface ActivePollProps {
   activePoll: SWCPoll
   handleShowResults: () => void
+  handleSubmitVote: (pollData: PollSubmitData) => Promise<void>
   pollsResults: Record<string, PollResultsDataResponse>
   userPolls: PollsVotesFromUserResponse | undefined
   isLoading: boolean
@@ -28,6 +36,7 @@ interface ActivePollProps {
 export function ActivePoll({
   activePoll,
   handleShowResults,
+  handleSubmitVote,
   pollsResults,
   userPolls,
   isLoading,
@@ -118,18 +127,11 @@ export function ActivePoll({
 
       setIsInternalLoading(true)
 
-      await actionCreateUserActionPoll(pollData).catch(error => {
-        console.error('Error creating poll vote', error)
-        setIsInternalLoading(false)
-
-        return
-      })
+      await handleSubmitVote(pollData)
 
       setIsInternalLoading(false)
-
-      return handleShowResults()
     },
-    [pollId, handleShowResults],
+    [pollId, handleSubmitVote],
   )
 
   useEffect(() => {

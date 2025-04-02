@@ -1,4 +1,4 @@
-import React, { cloneElement, ReactNode } from 'react'
+import React, { ComponentType, ReactNode } from 'react'
 import { User } from 'lucide-react'
 
 import { NextImage } from '@/components/ui/image'
@@ -11,6 +11,7 @@ import {
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
+  isPoliticianStanceHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguage,
@@ -25,8 +26,9 @@ interface Props {
   person: DTSI_PersonCardFragment
   countryCode: SupportedCountryCodes
   subheader: 'role' | 'role-w-state' | string
-  cryptoStanceGradeElement: React.ReactElement<{
+  cryptoStanceGrade: ComponentType<{
     className?: string
+    person: DTSI_PersonCardFragment
   }>
   isRecommended?: boolean
   footer?: React.ReactNode
@@ -86,7 +88,7 @@ export function DTSIPersonHeroCard(props: Props) {
     footer,
     isClickable = true,
     forceMobile = false,
-    cryptoStanceGradeElement,
+    cryptoStanceGrade: CryptoStanceGrade,
     target,
   } = props
   const politicalAffiliationCategoryAbbreviation =
@@ -97,6 +99,7 @@ export function DTSIPersonHeroCard(props: Props) {
     ? ` (${politicalAffiliationCategoryAbbreviation})`
     : ''
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
+  const isStanceHidden = isPoliticianStanceHidden(person.slug)
 
   return (
     <DtsiPersonHeroCardWrapper
@@ -169,9 +172,11 @@ export function DTSIPersonHeroCard(props: Props) {
                 </div>
               )}
             </div>
-            <div className="ml-auto h-12 w-10 flex-shrink-0">
-              {cloneElement(cryptoStanceGradeElement, { className: 'h-full w-full' })}
-            </div>
+            {!isStanceHidden && (
+              <div className="ml-auto h-12 w-10 flex-shrink-0">
+                <CryptoStanceGrade className="h-full w-full" person={person} />
+              </div>
+            )}
           </div>
         </div>
 
@@ -194,12 +199,14 @@ export function DTSIPersonHeroCard(props: Props) {
                 {person.stanceCount}{' '}
                 {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
-                <div className="shrink-0">
-                  {cloneElement(cryptoStanceGradeElement, { className: 'h-5 w-5' })}
+              {!isStanceHidden && (
+                <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
+                  <div className="shrink-0">
+                    <CryptoStanceGrade className="h-5 w-5" person={person} />
+                  </div>
+                  <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
                 </div>
-                <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
-              </div>
+              )}
             </div>
           )}
         </div>
@@ -214,9 +221,9 @@ export function DTSIPersonHeroCard(props: Props) {
               Recommended{' '}
               <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
             </>
-          ) : (
+          ) : isStanceHidden ? (
             convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
-          )}
+          ) : null}
         </DTSIPersonHeroCardFooter>
       )}
     </DtsiPersonHeroCardWrapper>

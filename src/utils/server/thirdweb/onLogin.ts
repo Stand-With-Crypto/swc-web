@@ -380,6 +380,7 @@ export async function onNewLogin(props: NewLoginParams) {
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
       countryCode,
+      searchParams,
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -610,11 +611,13 @@ async function createUser({
   hasSignedInWithEmail,
   sessionId,
   countryCode,
+  searchParams,
 }: {
   localUser: ServerLocalUser | null
   hasSignedInWithEmail: boolean
   sessionId: string | null
   countryCode: string
+  searchParams: Record<string, string>
 }) {
   return prismaClient.user.create({
     include: {
@@ -630,7 +633,7 @@ async function createUser({
       smsStatus: SMSStatus.NOT_OPTED_IN,
       referralId: generateReferralId(),
       userSessions: { create: { id: sessionId ?? undefined } },
-      ...mapLocalUserToUserDatabaseFields(localUser),
+      ...mapLocalUserToUserDatabaseFields(localUser, searchParams),
       countryCode,
     },
   })

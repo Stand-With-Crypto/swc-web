@@ -62,12 +62,12 @@ export function AUUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         <ShareOnX>
           <ShareOnX.Heading
             subtitle="Stay up to date on crypto policy changes in Australia"
-            title="Follow @StandWithCrypto on Twitter"
+            title="Follow @StandWCrypto_AU on Twitter"
           />
 
           <ShareOnX.Benefits benefits={auBenefits} />
 
-          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWithCrypto" />
+          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWCrypto_AU" />
         </ShareOnX>
       )
     case SectionNames.SUCCESS:
