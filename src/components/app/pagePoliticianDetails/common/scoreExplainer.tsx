@@ -9,7 +9,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { dtsiPersonFullName, isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
+import { dtsiPersonFullName, isPoliticianDetailsStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
@@ -24,7 +24,7 @@ export function ScoreExplainer({
 }) {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
   const countryCode = useCountryCode()
-  const isStanceHidden = isPoliticianStanceHidden(person.slug)
+  const isStanceHidden = isPoliticianDetailsStanceHidden(person.slug)
 
   return (
     <Popover analytics="Person Score Explainer">
