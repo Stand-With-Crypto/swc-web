@@ -6,22 +6,30 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface UserReferralUrlProps {
   referralId: string
   className?: string
+  countryCode?: SupportedCountryCodes
 }
 
 export function UserReferralUrl(props: UserReferralUrlProps) {
-  const { referralId, className } = props
+  const { referralId, className, countryCode } = props
 
   const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
-  const fullUrl = externalUrls.swcReferralUrl({ referralId })
+  const fullUrl = externalUrls.swcReferralUrl({ referralId, countryCode })
   const presentationUrl = fullUrl
     .replace(/https?:\/\/(www\.)?/, '')
     .replace('/join/', '/join/\u200B')
+
+  console.log('CODE', {
+    countryCode,
+    fullUrl,
+    presentationUrl,
+  })
 
   const handleCopy = () => handleCopyToClipboard(fullUrl)
 
@@ -64,5 +72,7 @@ export function UserReferralUrlWithApi() {
     return null
   }
 
-  return <UserReferralUrl referralId={data.user.referralId} />
+  const countryCode = data.user.countryCode as SupportedCountryCodes
+
+  return <UserReferralUrl countryCode={countryCode} referralId={data.user.referralId} />
 }

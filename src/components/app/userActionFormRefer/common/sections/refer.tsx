@@ -3,10 +3,9 @@
 import { ReactNode } from 'react'
 
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
-import { UserReferralUrl } from '@/components/app/pageUserProfile/common/userReferralUrl'
+import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 
 export function Refer({ children }: { children: ReactNode }) {
   return (
@@ -31,11 +30,7 @@ Refer.Heading = function ReferHeading({ description }: { description: string }) 
 }
 
 Refer.ReferralCode = function ReferralCode() {
-  const { data } = useApiResponseForUserFullProfileInfo()
-  const user = data?.user ?? null
-  const referralId = user?.referralId ?? ''
-
-  return <UserReferralUrl referralId={referralId} />
+  return <UserReferralUrlWithApi />
 }
 
 Refer.Counter = ReferralsCounter
