@@ -5,7 +5,6 @@ import { useToggle } from 'react-use'
 import Cookies from 'js-cookie'
 import { ChevronDownIcon } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -48,7 +47,6 @@ const options: Option[] = [
 ].sort((a, b) => a.label.localeCompare(b.label))
 
 export function NavbarCountrySelect() {
-  const router = useRouter()
   const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
 
