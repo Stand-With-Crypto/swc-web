@@ -9,7 +9,7 @@ import {
   actionCreateUserActionVoterAttestation,
   CreateActionVoterAttestationInput,
 } from '@/actions/actionCreateUserActionVoterAttestation'
-import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
+import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants/us/usCtas'
 import { getDefaultValues } from '@/components/app/pageVoterGuide/formConfig'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
@@ -81,7 +81,7 @@ export function KeyRacesDialog({ children, defaultOpen }: KeyRacesDialogProps) {
       }
 
       const data: CreateActionVoterAttestationInput = {
-        campaignName: UserActionVoterAttestationCampaignName['2025_US_ELECTIONS'],
+        campaignName: UserActionVoterAttestationCampaignName['H1_2025'],
         address: addressSchema,
         stateCode: addressSchema.administrativeAreaLevel1 as USStateCode,
         shouldBypassAuth: true,

@@ -23,6 +23,7 @@ import {
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { CAUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
 interface CALocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: CAProvinceOrTerritoryCode
@@ -66,10 +67,10 @@ export function CALocationRaceSpecific({
   const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
 
-  // TODO: add actionCreateUserActionViewKeyRaces new interface @olavoparno
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
+      campaignName: CAUserActionViewKeyRacesCampaignName['H1_2025'],
+      stateCode,
     })
   }, [stateCode])
 

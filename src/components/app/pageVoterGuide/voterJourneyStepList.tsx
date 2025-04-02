@@ -4,12 +4,11 @@ import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 import { ClassValue } from 'clsx'
 
-import { VOTER_GUIDE_STEPS } from '@/components/app/pageVoterGuide/constants'
+import { getVoterGuideCTAsByCountry } from '@/components/app/pageVoterGuide/constants/ctas'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { NextImage } from '@/components/ui/image'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 interface VoterJourneyStepListProps {
@@ -39,9 +38,7 @@ export function VoterJourneyStepList({ className }: VoterJourneyStepListProps) {
 
   const hydratedSteps = useMemo(
     () =>
-      VOTER_GUIDE_STEPS.filter(step =>
-        step.onlyShowInTheUS ? userCountryCode === DEFAULT_SUPPORTED_COUNTRY_CODE : true,
-      ).map(step => ({
+      getVoterGuideCTAsByCountry(userCountryCode).map(step => ({
         ...step,
         status: getStepStatus(step.action, step.campaignName, performedActions),
       })),
@@ -55,7 +52,7 @@ export function VoterJourneyStepList({ className }: VoterJourneyStepListProps) {
   return (
     <div className={cn(`grid grid-cols-1 gap-[18px] ${gridColumnsClassName}`, className)}>
       {hydratedSteps.map(({ WrapperComponent, status, ...stepProps }, index) => (
-        <WrapperComponent key={index}>
+        <WrapperComponent countryCode={userCountryCode} key={index}>
           <button
             className={cn(
               'flex h-full w-full cursor-pointer flex-row-reverse justify-self-center rounded-3xl transition-shadow hover:shadow-lg lg:max-w-96 lg:flex-col',

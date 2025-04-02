@@ -28,6 +28,7 @@ import {
 } from '@/utils/shared/stateMappings/usStateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 interface USLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: USStateCode
@@ -105,6 +106,7 @@ export function USLocationRaceSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
       usaState: stateCode,
       usCongressionalDistrict: district?.toString(),
     })

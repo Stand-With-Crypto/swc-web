@@ -19,6 +19,7 @@ import {
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { CAUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
@@ -42,7 +43,8 @@ export function CALocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
+      campaignName: CAUserActionViewKeyRacesCampaignName['H1_2025'],
+      stateCode,
     })
   }, [stateCode])
 

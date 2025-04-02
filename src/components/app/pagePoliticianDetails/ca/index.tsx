@@ -1,13 +1,21 @@
 import { QUESTIONNAIRE_HASH_KEY } from '@/components/app/pagePoliticianDetails/common/constants'
 import { PagePoliticianDetails } from '@/components/app/pagePoliticianDetails/common/politiciansDetails'
+import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/common/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/common/scoreExplainer'
 import { ScrollToTopOnRender } from '@/components/app/scrollToTopOnRender'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import { NormalizedQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.CA
 
-export function CaPagePoliticianDetails({ person }: { person: DTSIPersonDetails }) {
+export function CaPagePoliticianDetails({
+  person,
+  questionnaire,
+}: {
+  person: DTSIPersonDetails
+  questionnaire: NormalizedQuestionnaire | null
+}) {
   return (
     <PagePoliticianDetails>
       <section>
@@ -16,7 +24,7 @@ export function CaPagePoliticianDetails({ person }: { person: DTSIPersonDetails 
         <ScoreExplainer person={person} useLetterGrade={false} />
       </section>
 
-      {/* {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />} */}
+      {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />}
 
       <section>
         <PagePoliticianDetails.Stances countryCode={countryCode} person={person} />

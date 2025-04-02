@@ -30,7 +30,7 @@ export function HomepagePoliticiansSection({
   const urls = getIntlUrls(countryCode)
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePoliticians.lowestScores)
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePoliticians.highestScores)
-  const shouldShowPoliticiansSection = lowestScores.length > 3 || highestScores.length > 3
+  const shouldShowPoliticiansSection = lowestScores.length >= 3 || highestScores.length >= 3
 
   if (!shouldShowPoliticiansSection) {
     return null
@@ -42,7 +42,7 @@ export function HomepagePoliticiansSection({
         <HomePageSection.Title>{title}</HomePageSection.Title>
         <HomePageSection.Subtitle>{subtitle}</HomePageSection.Subtitle>
       </div>
-      {highestScores.length > 3 && (
+      {highestScores.length >= 3 && (
         <div>
           <h5 className="container text-center">
             <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={100} text="Pro-crypto" />
@@ -60,7 +60,7 @@ export function HomepagePoliticiansSection({
           </DTSIPersonHeroCardRow>
         </div>
       )}
-      {lowestScores.length > 3 && (
+      {lowestScores.length >= 3 && (
         <div>
           <h5 className="container text-center">
             <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={0} text="Anti-crypto" />
