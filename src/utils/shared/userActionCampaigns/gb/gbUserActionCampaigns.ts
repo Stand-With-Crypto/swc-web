@@ -26,13 +26,12 @@ export enum GBUserActionVoterAttestationCampaignName {
   'H1_2025' = 'H1_2025',
 }
 export type GBUserActionCampaignName =
-  |
   | GBUserActionOptInCampaignName
-
   | GBUserActionTweetCampaignName
   | GBUserActionReferCampaignName
   | GBUserActionViewKeyRacesCampaignName
   | GBUserActionVoterAttestationCampaignName
+
 export type GBUserActionCampaigns = {
   [UserActionType.OPT_IN]: GBUserActionOptInCampaignName
   [UserActionType.TWEET]: GBUserActionTweetCampaignName

@@ -27,9 +27,7 @@ export enum CAUserActionVoterAttestationCampaignName {
 }
 
 export type CAUserActionCampaignName =
-  |
   | CAUserActionOptInCampaignName
-
   | CAUserActionTweetCampaignName
   | CAUserActionReferCampaignName
   | CAUserActionViewKeyRacesCampaignName
