@@ -15,7 +15,10 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
-import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
+import {
+  USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
+  USER_ACCESS_LOCATION_COOKIE_NAME,
+} from '@/utils/shared/userAccessLocation'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const actionUpdateUserCountryCode = withServerActionMiddleware(
@@ -109,7 +112,7 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
   currentCookies.set(USER_ACCESS_LOCATION_COOKIE_NAME, validatedFields.data, {
     sameSite: 'lax',
     secure: true,
-    maxAge: 60 * 60 * 24,
+    maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
   })
 
   waitUntil(
