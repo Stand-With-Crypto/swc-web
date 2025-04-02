@@ -21,6 +21,7 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
   getDTSIPersonProfilePictureUrlDimensions,
+  isPoliticianDetailsStanceHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -161,6 +162,7 @@ function PoliticianStances({
         {stances.map(stance => (
           <DTSIStanceDetails
             countryCode={countryCode}
+            isStanceHidden={isPoliticianDetailsStanceHidden(person.slug)}
             key={stance.id}
             person={person}
             stance={stance}

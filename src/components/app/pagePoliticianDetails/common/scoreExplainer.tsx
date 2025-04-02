@@ -5,7 +5,7 @@ import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrad
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { dtsiPersonFullName, isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
+import { dtsiPersonFullName, isPoliticianDetailsStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
@@ -17,7 +17,7 @@ interface ScoreExplainerProps {
 
 export function ScoreExplainer({ person, useLetterGrade }: ScoreExplainerProps) {
   const countryCode = useCountryCode()
-  const isStanceHidden = isPoliticianStanceHidden(person.slug)
+  const isStanceHidden = isPoliticianDetailsStanceHidden(person.slug)
 
   return (
     <div className="my-8 flex w-full items-center gap-4 rounded-3xl bg-secondary p-3 text-left md:my-12">

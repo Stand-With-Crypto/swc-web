@@ -20,7 +20,7 @@ export function LocationAustralia({
       <LocationRaces.KeyRaces>
         <AUKeyRaces groups={groups} />
       </LocationRaces.KeyRaces>
-      <LocationRaces.KeyRacesStates countryCode={countryCode}>
+      <LocationRaces.KeyRacesStates>
         <AUKeyRacesStates />
       </LocationRaces.KeyRacesStates>
     </LocationRaces>

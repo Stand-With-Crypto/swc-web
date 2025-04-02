@@ -155,10 +155,12 @@ export function DTSIPersonHeroCard(props: Props) {
               >
                 {displayName}
               </div>
-              <div className="text-xs text-white">
-                {person.stanceCount}{' '}
-                {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
-              </div>
+              {!isStanceHidden && (
+                <div className="text-xs text-white">
+                  {person.stanceCount}{' '}
+                  {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
+                </div>
+              )}
               {subheaderString && (
                 <div className="mt-2">
                   <div
@@ -215,16 +217,12 @@ export function DTSIPersonHeroCard(props: Props) {
       {footer !== undefined ? (
         <div className={cn('hidden', !forceMobile && 'sm:block')}>{footer}</div>
       ) : (
-        <DTSIPersonHeroCardFooter forceMobile={forceMobile} isRecommended={isRecommended}>
-          {isRecommended ? (
-            <>
-              Recommended{' '}
-              <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
-            </>
-          ) : !isStanceHidden ? (
-            convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
-          ) : null}
-        </DTSIPersonHeroCardFooter>
+        <DTSIPersonHeroCardFooterStanceHidden
+          forceMobile={forceMobile}
+          isRecommended={isRecommended}
+          isStanceHidden={isStanceHidden}
+          person={person}
+        />
       )}
     </DtsiPersonHeroCardWrapper>
   )
@@ -265,5 +263,44 @@ export function DtsiPersonHeroCardWrapper({
     >
       {children}
     </InternalLink>
+  )
+}
+
+function DTSIPersonHeroCardFooterStanceHidden({
+  person,
+  isRecommended,
+  forceMobile,
+  isStanceHidden,
+}: {
+  person: DTSI_PersonCardFragment
+  forceMobile: boolean
+  isStanceHidden: boolean
+  isRecommended?: boolean
+}) {
+  if (isStanceHidden) {
+    return (
+      <DTSIPersonHeroCardFooter
+        forceMobile={forceMobile}
+        isRecommended={isRecommended && !isStanceHidden}
+      >
+        {person.stanceCount} {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
+      </DTSIPersonHeroCardFooter>
+    )
+  }
+
+  return (
+    <DTSIPersonHeroCardFooter
+      forceMobile={forceMobile}
+      isRecommended={isRecommended && !isStanceHidden}
+    >
+      {isRecommended ? (
+        <>
+          Recommended{' '}
+          <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
+        </>
+      ) : (
+        convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
+      )}
+    </DTSIPersonHeroCardFooter>
   )
 }

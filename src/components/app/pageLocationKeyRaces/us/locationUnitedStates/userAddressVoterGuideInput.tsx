@@ -42,7 +42,13 @@ interface UserAddressVoterGuideInput {
 
 export function UserAddressVoterGuideInputSection(props: UserAddressVoterGuideInput) {
   return (
-    <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
+    <Suspense
+      fallback={
+        <ContentContainer shouldShowSubtitle={true}>
+          <DefaultPlacesSelect onChange={noop} value={null} />
+        </ContentContainer>
+      }
+    >
       <SuspenseUserAddressVoterGuideInputSection {...props} />
     </Suspense>
   )
@@ -107,7 +113,7 @@ function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressV
             </div>
             <div className="max-sm:w-full">
               <Button asChild className="w-full">
-                <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                <InternalLink href={urls.locationStateSpecific(stateCode)}>
                   {stateCode} voter guide
                 </InternalLink>
               </Button>
@@ -126,12 +132,8 @@ function ContentContainer({
   return (
     <ContentSection
       className="container"
-      subtitle={
-        shouldShowSubtitle
-          ? 'Enter your address to find the key races in your area that will impact the future of crypto in the United States.'
-          : null
-      }
-      title={'Your races'}
+      subtitle={shouldShowSubtitle ? 'Enter your address to find key races near you.' : null}
+      title="Races in your area"
     >
       {children}
     </ContentSection>
