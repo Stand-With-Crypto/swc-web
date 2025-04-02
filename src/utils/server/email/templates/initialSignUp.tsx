@@ -1,67 +1,34 @@
-import * as React from 'react'
-import { Hr, Img, Section, Text } from '@react-email/components'
+import AUInitialSignUpEmail from '@/utils/server/email/templates/au/initialSignUp'
+import CAInitialSignUpEmail from '@/utils/server/email/templates/ca/initialSignUp'
+import GBInitialSignUpEmail from '@/utils/server/email/templates/gb/initialSignUp'
+import USInitialSignUpEmail from '@/utils/server/email/templates/us/initialSignUp'
+import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { Heading } from '@/utils/server/email/templates/common/ui/heading'
-import {
-  KeepUpTheFightSection,
-  KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
-import { USEmailTemplateProps } from '@/utils/server/email/templates/us/constants'
-import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-
-type InitialSignUpEmailProps = KeepUpTheFightSectionProps & USEmailTemplateProps
-
-InitialSignUpEmail.subjectLine = 'Thanks for joining SWC!'
-InitialSignUpEmail.campaign = 'initial_signup'
-
-export default function InitialSignUpEmail({
-  previewText,
-  session = {},
-  hrefSearchParams = {},
-  ...keepUpTheFightSectionProps
-}: InitialSignUpEmailProps) {
-  const hydratedHrefSearchParams = {
-    utm_campaign: InitialSignUpEmail.campaign,
-    ...hrefSearchParams,
-    ...session,
+export function getInitialSignUpEmail(countryCode: SupportedCountryCodes) {
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return USInitialSignUpEmail
+    case SupportedCountryCodes.CA:
+      return CAInitialSignUpEmail
+    case SupportedCountryCodes.AU:
+      return AUInitialSignUpEmail
+    case SupportedCountryCodes.GB:
+      return GBInitialSignUpEmail
+    default:
+      return gracefullyError({
+        msg: `No InitialSignUpEmail template found for countryCode: ${countryCode as string}`,
+        fallback: null,
+        hint: {
+          tags: {
+            domain: 'email',
+          },
+          extra: {
+            countryCode,
+          },
+        },
+      })
   }
-
-  return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
-      <Section>
-        <Img
-          className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
-        />
-
-        <Heading gutterBottom="md">Thanks for joining!</Heading>
-
-        <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto advocate. Crypto advocates like you are
-          making a huge difference in America, from your local community to Capitol Hill.
-          <br />
-          <br />
-          Stand With Crypto advocates have moved votes in Congress, brought crypto to the forefront
-          of political campaigns, and helped highlight the real-world uses of crypto that make a
-          difference in Americans' everyday lives.
-          <br />
-          <br />
-          Keep an eye out for more communications from us: you'll see updates on key news stories
-          we're tracking, events in your local area, and opportunities for you to raise your voice
-          to your elected officials.
-          <br />
-          <br />
-          Together, we're making a difference for crypto. Thank you for standing with us.
-        </Text>
-      </Section>
-
-      <Hr className="my-8" />
-
-      <KeepUpTheFightSection
-        {...keepUpTheFightSectionProps}
-        hrefSearchParams={hydratedHrefSearchParams}
-      />
-    </Wrapper>
-  )
 }
+
+export default getInitialSignUpEmail
