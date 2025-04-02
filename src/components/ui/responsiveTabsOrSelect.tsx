@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TabsProps } from '@radix-ui/react-tabs'
+import Cookies from 'js-cookie'
 
 import {
   Select,
@@ -19,11 +20,12 @@ type TabOption = {
   content: React.ReactNode
 }
 
-type Props = TabsProps & {
+type ResponsiveTabsOrSelectProps = TabsProps & {
   options: TabOption[]
   analytics: string
   forceDesktop?: boolean
   containerClassName?: string
+  persistCurrentTab?: boolean
 }
 
 export function ResponsiveTabsOrSelect({
@@ -32,15 +34,30 @@ export function ResponsiveTabsOrSelect({
   analytics,
   forceDesktop,
   containerClassName,
+  persistCurrentTab = false,
   ...props
-}: Props) {
+}: ResponsiveTabsOrSelectProps) {
   const [currentTab, setCurrentTab] = useState(defaultValue)
 
+  const handleValueChange = (value: string) => {
+    setCurrentTab(value)
+
+    if (persistCurrentTab) {
+      persistCurrentTabInCookies(value)
+    }
+  }
+
+  useEffect(() => {
+    if (persistCurrentTab) {
+      setCurrentTab(getCurrentTabFromCookies(defaultValue))
+    }
+  }, [defaultValue, persistCurrentTab])
+
   return (
-    <Tabs analytics={analytics} onValueChange={setCurrentTab} value={currentTab} {...props}>
+    <Tabs analytics={analytics} onValueChange={handleValueChange} value={currentTab} {...props}>
       {/* Mobile: Select */}
       <div className={cn('sm:hidden', forceDesktop && 'hidden', containerClassName)}>
-        <Select onValueChange={setCurrentTab} value={currentTab}>
+        <Select onValueChange={handleValueChange} value={currentTab} defaultValue={defaultValue}>
           <SelectTrigger
             className="mx-auto mb-10 min-h-14 w-full rounded-full bg-secondary text-base font-semibold"
             data-testid="responsive-tabs-or-select-trigger"
@@ -87,4 +104,20 @@ export function ResponsiveTabsOrSelect({
       </div>
     </Tabs>
   )
+}
+
+const CURRENT_RACES_TAB = 'CURRENT_RACES_TAB'
+
+function persistCurrentTabInCookies(currentTab: string) {
+  if (typeof window !== 'undefined') {
+    return Cookies.set(CURRENT_RACES_TAB, currentTab)
+  }
+}
+
+function getCurrentTabFromCookies(fallback?: string) {
+  if (typeof window !== 'undefined') {
+    return Cookies.get(CURRENT_RACES_TAB) ?? fallback
+  }
+
+  return fallback
 }

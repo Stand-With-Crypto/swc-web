@@ -167,6 +167,7 @@ export function USLocationRaceGovernorSpecific({
               data-testid="primary-races-tabs"
               defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
               forceDesktop
+              persistCurrentTab
               options={[
                 {
                   value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
