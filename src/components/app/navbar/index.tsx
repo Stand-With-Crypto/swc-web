@@ -96,10 +96,10 @@ export function Navbar({
 
       <nav
         className={cn(
-          'sticky top-0 z-20 flex h-[72px] w-full items-center bg-white py-3 min-[1096px]:h-[84px] min-[1096px]:py-5',
+          'sticky top-0 z-20 flex h-[72px] w-full items-center bg-white py-3 pl-3 min-[1096px]:h-[84px] min-[1096px]:px-8 min-[1096px]:py-5',
         )}
       >
-        <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
+        <div className="flex w-full max-w-[1800px] items-center justify-between">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
             <NextImage alt="Stand With Crypto Logo" priority {...logo} />
           </InternalLink>
@@ -121,7 +121,11 @@ export function Navbar({
                     }
                   }}
                 >
-                  <Button asChild className="hidden min-[1096px]:block" variant="secondary">
+                  <Button
+                    asChild
+                    className="hidden min-[1096px]:block"
+                    variant={href === urls.donate() ? 'default' : 'secondary'}
+                  >
                     {children ? (
                       <span className="select-none">
                         <div className="flex cursor-default items-center gap-2">
@@ -194,12 +198,6 @@ export function Navbar({
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
               <NavbarCountrySelect />
-              {showDonateButton && (
-                <DonateButton
-                  href={urls.donate()}
-                  maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-                />
-              )}
               <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
             </div>
           </div>
@@ -288,11 +286,9 @@ export function Navbar({
                   </Button>
                 )
               })}
+
               <div className="mt-4 px-6">
                 <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
-              </div>
-              <div className="mt-4 px-6">
-                <NavbarCountrySelect />
               </div>
               {showDonateButton && (
                 <div className="mt-4 px-6">
@@ -302,6 +298,9 @@ export function Navbar({
                   />
                 </div>
               )}
+              <div className="mt-4 px-6">
+                <NavbarCountrySelect />
+              </div>
             </div>
           </DrawerContent>
         </Drawer>
