@@ -30,7 +30,7 @@ const CAInitialSignUpEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/ca/email/swc-join-still.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto Canada!</Heading>

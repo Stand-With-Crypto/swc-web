@@ -31,7 +31,7 @@ const CAPhoneNumberReminderEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/phone-banner.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/ca/email/phone-banner.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">
@@ -51,7 +51,7 @@ const CAPhoneNumberReminderEmail = ({
           SWC will never use your phone number for commercial purposes, and we have a robust{' '}
           <Button
             color="primary-cta"
-            href={buildTemplateInternalUrl('/privacy', hydratedHrefSearchParams)}
+            href={buildTemplateInternalUrl('/ca/privacy', hydratedHrefSearchParams)}
             noPadding
             variant="link"
           >
@@ -64,7 +64,7 @@ const CAPhoneNumberReminderEmail = ({
       <Section className="mt-4 text-center">
         <Button
           fullWidth="mobile"
-          href={buildTemplateInternalUrl('/profile', {
+          href={buildTemplateInternalUrl('/ca/profile', {
             hasOpenUpdateUserProfileForm: true,
             ...hydratedHrefSearchParams,
           })}

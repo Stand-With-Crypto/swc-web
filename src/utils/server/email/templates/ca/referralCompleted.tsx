@@ -33,14 +33,14 @@ export default function CAReferralCompletedEmail({
     ...session,
   }
 
-  const referActionHref = buildTemplateInternalUrl('/action/refer', hydratedHrefSearchParams)
+  const referActionHref = buildTemplateInternalUrl('/ca/action/refer', hydratedHrefSearchParams)
 
   return (
     <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/ca/email/swc-join-still.png', hydratedHrefSearchParams)}
         />
         <Heading gutterBottom="md">Your voice matters—now amplify it!</Heading>
 

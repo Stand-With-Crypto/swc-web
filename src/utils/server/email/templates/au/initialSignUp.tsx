@@ -30,7 +30,7 @@ const AUInitialSignUpEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/au/email/swc-join-still.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto Australia!</Heading>

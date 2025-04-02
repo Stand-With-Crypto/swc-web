@@ -30,7 +30,7 @@ const GBReactivationReminderEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/gb/email/swc-join-still.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto UK!</Heading>
@@ -55,7 +55,7 @@ const GBReactivationReminderEmail = ({
           Stay tuned for more updates and information from SWC. You can always visit{' '}
           <Link
             className="text-[#5B616E]"
-            href={buildTemplateInternalUrl('/', hydratedHrefSearchParams)}
+            href={buildTemplateInternalUrl('/gb', hydratedHrefSearchParams)}
           >
             our website
           </Link>{' '}

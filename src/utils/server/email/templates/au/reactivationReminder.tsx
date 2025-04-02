@@ -30,7 +30,7 @@ const AUReactivationReminderEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/au/email/swc-join-still.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto Australia!</Heading>
@@ -55,7 +55,7 @@ const AUReactivationReminderEmail = ({
           Stay tuned for more updates and information from SWC. You can always visit{' '}
           <Link
             className="text-[#5B616E]"
-            href={buildTemplateInternalUrl('/', hydratedHrefSearchParams)}
+            href={buildTemplateInternalUrl('/au', hydratedHrefSearchParams)}
           >
             our website
           </Link>{' '}

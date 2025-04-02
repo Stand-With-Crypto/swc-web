@@ -34,7 +34,7 @@ const AUFollowOnXReminderEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/x-banner.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/au/email/x-banner.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Stay up to date on crypto policy in Australia</Heading>

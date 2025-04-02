@@ -35,7 +35,7 @@ const CARegisterToVoteReminderEmail = ({
         <Img
           className="mb-6 w-full max-w-full"
           src={buildTemplateInternalUrl(
-            '/email/voter-registration-banner.png',
+            '/ca/email/voter-registration-banner.png',
             hydratedHrefSearchParams,
           )}
         />
@@ -69,7 +69,7 @@ const CARegisterToVoteReminderEmail = ({
       <Section className="mt-4 text-center">
         <Button
           fullWidth="mobile"
-          href={buildTemplateInternalUrl('/action/voter-registration', hydratedHrefSearchParams)}
+          href={buildTemplateInternalUrl('/ca/action/voter-registration', hydratedHrefSearchParams)}
         >
           Make sure you're registered to vote
         </Button>

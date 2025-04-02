@@ -34,7 +34,7 @@ const GBFollowOnXReminderEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/x-banner.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/gb/email/x-banner.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Stay up to date on crypto policy in the UK</Heading>
