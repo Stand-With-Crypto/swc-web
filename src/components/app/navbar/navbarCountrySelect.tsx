@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { useToggle } from 'react-use'
 import Cookies from 'js-cookie'
 import { ChevronDownIcon } from 'lucide-react'
@@ -52,9 +52,11 @@ export function NavbarCountrySelect() {
 
   const currentOption = options.find(option => option.value === countryCode)
 
-  const handleCountrySelection = useCallback((value: SupportedCountryCodes) => {
-    Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, value)
-  }, [])
+  useEffect(() => {
+    if (currentOption) {
+      Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, currentOption.value)
+    }
+  }, [currentOption])
 
   if (!currentOption) {
     return null
@@ -86,7 +88,12 @@ export function NavbarCountrySelect() {
               className="cursor-pointer data-[disabled]:font-bold data-[disabled]:text-primary-cta data-[disabled]:opacity-100"
               disabled={option.value === currentOption.value}
               key={option.value}
-              onClick={() => handleCountrySelection(option.value)}
+              onClick={() => {
+                // This is necessary to bypass the redirect in the middleware, as if we don't remove the selected country cookie, the middleware will redirect the user to the current selected country, preventing users from switching to US.
+                if (option.value === DEFAULT_SUPPORTED_COUNTRY_CODE) {
+                  Cookies.remove(USER_SELECTED_COUNTRY_COOKIE_NAME)
+                }
+              }}
             >
               <Link href={getIntlUrls(option.value).home()}>
                 <div className="flex items-center gap-2">
