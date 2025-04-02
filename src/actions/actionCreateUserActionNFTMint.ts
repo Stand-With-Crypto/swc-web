@@ -9,7 +9,7 @@ import { BigNumber } from 'ethers'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -157,7 +157,7 @@ async function createAction<U extends User>({
       return new Decimal(0)
     })
 
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
   const decimalEthTransactionValue = new Decimal(ethTransactionValue)
   await prismaClient.userAction.create({
     data: {

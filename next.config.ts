@@ -668,6 +668,16 @@ const nextConfig: NextConfig = {
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
         permanent: true,
       },
+      {
+        source: '/canada',
+        destination: '/ca?utm_source=billboard',
+        permanent: true,
+      },
+      {
+        source: '/uk',
+        destination: '/gb',
+        permanent: true,
+      },
     ]
   },
   async rewrites() {

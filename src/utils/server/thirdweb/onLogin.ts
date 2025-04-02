@@ -16,7 +16,7 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
-import { compact, groupBy, isEmpty } from 'lodash-es'
+import { compact, groupBy } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
@@ -28,10 +28,6 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
 import { getCountryCodeFromHeaders } from '@/utils/server/getCountryCodeFromURL'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
@@ -118,34 +114,6 @@ export async function login(
         .set({ 'Datetime of Last Login': new Date() })
         .flush(),
     ])
-
-    const currentUserCountryCode = existingVerifiedUser.countryCode
-
-    const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-    const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
-
-    const hasValidCurrentCountryCode = !isEmpty(currentUserCountryCode)
-    const hasParsedCookie = !!parsedUserCountryCodeCookie
-    const cookieCountryCodeDiffersFromUser =
-      parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
-      currentUserCountryCode.toLowerCase()
-
-    if (hasValidCurrentCountryCode && hasParsedCookie && cookieCountryCodeDiffersFromUser) {
-      log(
-        `setting user country code cookie from ${parsedUserCountryCodeCookie.countryCode.toLowerCase()} to ${currentUserCountryCode.toLowerCase()}`,
-      )
-      currentCookies.set({
-        name: USER_COUNTRY_CODE_COOKIE_NAME,
-        value: JSON.stringify({
-          countryCode: currentUserCountryCode.toLowerCase(),
-          bypassed: true,
-        }),
-        httpOnly: false,
-        sameSite: 'lax',
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
-      })
-    }
 
     const jwt = await thirdwebAuth.generateJWT({
       payload: verifiedPayload.payload,

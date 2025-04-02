@@ -7,7 +7,6 @@ import { waitUntil } from 'node_modules/@vercel/functions/wait-until'
 import { z } from 'zod'
 
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics/serverAnalytics'
@@ -16,6 +15,7 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
+import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const actionUpdateUserCountryCode = withServerActionMiddleware(
@@ -106,14 +106,11 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
 
   const currentCookies = await cookies()
 
-  currentCookies.set(
-    USER_COUNTRY_CODE_COOKIE_NAME,
-    JSON.stringify({ countryCode: validatedFields.data, bypassed: true }),
-    {
-      sameSite: 'lax',
-      secure: true,
-    },
-  )
+  currentCookies.set(USER_ACCESS_LOCATION_COOKIE_NAME, validatedFields.data, {
+    sameSite: 'lax',
+    secure: true,
+    maxAge: 60 * 60 * 24,
+  })
 
   waitUntil(
     Promise.all([

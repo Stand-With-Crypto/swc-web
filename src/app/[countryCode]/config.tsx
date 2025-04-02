@@ -70,6 +70,10 @@ export const navbarConfig: NavbarProps = {
         },
       ],
     },
+    {
+      href: urls.donate(),
+      text: 'Donate',
+    },
   ],
 }
 

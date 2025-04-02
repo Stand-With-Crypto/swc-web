@@ -2,9 +2,9 @@
 
 import React from 'react'
 import { useToggle } from 'react-use'
+import Cookies from 'js-cookie'
 import { ChevronDownIcon } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -14,9 +14,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdownMenu'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { useEffectOnce } from '@/hooks/useEffectOnce'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
+  USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -50,6 +52,10 @@ export function NavbarCountrySelect() {
 
   const currentOption = options.find(option => option.value === countryCode)
 
+  useEffectOnce(() => {
+    Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, countryCode)
+  })
+
   if (!currentOption) {
     return null
   }
@@ -80,13 +86,15 @@ export function NavbarCountrySelect() {
               className="cursor-pointer data-[disabled]:font-bold data-[disabled]:text-primary-cta data-[disabled]:opacity-100"
               disabled={option.value === currentOption.value}
               key={option.value}
+              onClick={() => {
+                Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, option.value)
+                window.location.href = getIntlUrls(option.value).home()
+              }}
             >
-              <Link href={getIntlUrls(option.value).home()}>
-                <div className="flex items-center gap-2">
-                  <FlagIcon countryCode={option.value} />
-                  <span>{option.label}</span>
-                </div>
-              </Link>
+              <div className="flex items-center gap-2">
+                <FlagIcon countryCode={option.value} />
+                <span>{option.label}</span>
+              </div>
             </DropdownMenuItem>
           )
         })}

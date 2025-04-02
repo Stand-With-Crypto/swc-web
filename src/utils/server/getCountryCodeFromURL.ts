@@ -1,6 +1,6 @@
 import { headers } from 'next/headers'
 
-import { extractCountryCode } from '@/utils/server/obfuscateURLCountryCode'
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export async function getCountryCodeFromHeaders() {
@@ -10,9 +10,10 @@ export async function getCountryCodeFromHeaders() {
   const xMatchedPath = headersList.get('x-matched-path')
 
   const countryCode =
-    extractCountryCode(xMatchedPath || '') || extractCountryCode(getPathnameFromReferer(referer))
+    extractCountryCodeFromPathname(xMatchedPath || '') ||
+    extractCountryCodeFromPathname(getPathnameFromReferer(referer))
 
-  return countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE
+  return countryCode ?? DEFAULT_SUPPORTED_COUNTRY_CODE
 }
 
 function getPathnameFromReferer(referer: string | null) {

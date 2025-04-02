@@ -78,7 +78,7 @@ export function GbPageHome({
 
       {founders && (
         <HomePageSection container={false}>
-          <HomePageSection.Title>Founders</HomePageSection.Title>
+          <HomePageSection.Title>Featured founders</HomePageSection.Title>
           <HomePageSection.Subtitle>
             Members from our community that have founded crypto-related businesses in the UK.
           </HomePageSection.Subtitle>
