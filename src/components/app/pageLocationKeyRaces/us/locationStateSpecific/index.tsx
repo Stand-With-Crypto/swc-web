@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
@@ -14,8 +14,13 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import {
+  DTSI_PersonPoliticalAffiliationCategory,
+  DTSI_PersonStanceType,
+  DTSI_StateSpecificInformationQuery,
+} from '@/data/dtsi/generated'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
@@ -63,6 +68,21 @@ export function USLocationStateSpecific({
     })
   }, [stateCode])
 
+  const republicanGovernors = useMemo(
+    () =>
+      groups.governors.filter(
+        x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+      ),
+    [groups.governors],
+  )
+  const democraticGovernors = useMemo(
+    () =>
+      groups.governors.filter(
+        x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+      ),
+    [groups.governors],
+  )
+
   return (
     <div>
       <DarkHeroSection>
@@ -109,15 +129,51 @@ export function USLocationStateSpecific({
         <div className="space-y-20">
           {!!groups.governors && (
             <div className="mt-20">
-              <DTSIPersonHeroCardSection
-                countryCode={countryCode}
-                cta={
-                  <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
-                    View Race
-                  </InternalLink>
-                }
-                people={groups.governors}
-                title={<>{stateName} Gubernatorial Election</>}
+              <ResponsiveTabsOrSelect
+                analytics={'Primary Races Tabs'}
+                containerClassName="mb-6 md:mb-10 w-full"
+                data-testid="primary-races-tabs"
+                defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
+                forceDesktop
+                options={[
+                  {
+                    value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                    label: 'Republican',
+                    content: (
+                      <div className="sticky top-24 text-center">
+                        <DTSIPersonHeroCardSection
+                          countryCode={countryCode}
+                          cta={
+                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                              View Race
+                            </InternalLink>
+                          }
+                          people={republicanGovernors}
+                          title={<>{stateName} Gubernatorial Election</>}
+                        />
+                      </div>
+                    ),
+                  },
+                  {
+                    value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+                    label: 'Democratic',
+                    content: (
+                      <div className="sticky top-24 text-center">
+                        <DTSIPersonHeroCardSection
+                          countryCode={countryCode}
+                          cta={
+                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                              View Race
+                            </InternalLink>
+                          }
+                          people={democraticGovernors}
+                          title={<>{stateName} Gubernatorial Election</>}
+                        />
+                      </div>
+                    ),
+                  },
+                ]}
+                persistCurrentTab
               />
             </div>
           )}
