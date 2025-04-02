@@ -21,6 +21,7 @@ import {
   USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { useRouter } from 'next/navigation'
 
 interface Option {
   label: string
@@ -47,16 +48,17 @@ const options: Option[] = [
 ].sort((a, b) => a.label.localeCompare(b.label))
 
 export function NavbarCountrySelect() {
+  const router = useRouter()
   const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
 
   const currentOption = options.find(option => option.value === countryCode)
 
-  useEffect(() => {
-    if (currentOption) {
-      Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, currentOption.value)
-    }
-  }, [currentOption])
+  // useEffect(() => {
+  //   if (currentOption) {
+  //     Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, currentOption.value)
+  //   }
+  // }, [])
 
   if (!currentOption) {
     return null
@@ -89,18 +91,21 @@ export function NavbarCountrySelect() {
               disabled={option.value === currentOption.value}
               key={option.value}
               onClick={() => {
-                // This is necessary to bypass the redirect in the middleware, as if we don't remove the selected country cookie, the middleware will redirect the user to the current selected country, preventing users from switching to US.
-                if (option.value === DEFAULT_SUPPORTED_COUNTRY_CODE) {
-                  Cookies.remove(USER_SELECTED_COUNTRY_COOKIE_NAME)
-                }
+                Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, option.value)
+                router.push(getIntlUrls(option.value).home())
+
+                // // This is necessary to bypass the redirect in the middleware, as if we don't remove the selected country cookie, the middleware will redirect the user to the current selected country, preventing users from switching to US.
+                // if (option.value === DEFAULT_SUPPORTED_COUNTRY_CODE) {
+                //   Cookies.remove(USER_SELECTED_COUNTRY_COOKIE_NAME)
+                // }
               }}
             >
-              <Link href={getIntlUrls(option.value).home()}>
-                <div className="flex items-center gap-2">
-                  <FlagIcon countryCode={option.value} />
-                  <span>{option.label}</span>
-                </div>
-              </Link>
+              {/* <Link href={getIntlUrls(option.value).home()}> */}
+              <div className="flex items-center gap-2">
+                <FlagIcon countryCode={option.value} />
+                <span>{option.label}</span>
+              </div>
+              {/* </Link> */}
             </DropdownMenuItem>
           )
         })}

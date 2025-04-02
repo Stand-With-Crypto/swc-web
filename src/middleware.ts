@@ -4,7 +4,6 @@ import { internationalRedirectHandler } from '@/utils/server/internationalRedire
 import { obfuscateURLCountryCode } from '@/utils/server/middleware/obfuscateURLCountryCode'
 import { setResponseCookie } from '@/utils/server/middleware/setResponseCookie'
 import { setSessionCookiesFromRequest } from '@/utils/server/middleware/setSessionCookies'
-import { setUserSelectedCountryCookie } from '@/utils/server/middleware/setUserSelectedCountryCookie'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
@@ -27,8 +26,6 @@ export function middleware(request: NextRequest) {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours,
     })
   }
-
-  setUserSelectedCountryCookie(request, response)
 
   return response
 }
