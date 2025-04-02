@@ -276,26 +276,29 @@ async function sendInitialSignUpEmail({
 
   const Template = TEMPLATE_BY_STEP[step]
   const messageId = await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: Template.subjectLine,
-    html: await render(
-      <Template
-        completedActionTypes={user.userActions
-          .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
-          .map(action => `${action.actionType}` as EmailActiveActions)}
-        session={
-          sessionId
-            ? {
-                userId: user.id,
-                sessionId,
-              }
-            : null
-        }
-      />,
-    ),
-    customArgs: {
-      userId: user.id,
-      campaign: Template.campaign,
+    countryCode: user.countryCode,
+    payload: {
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: Template.subjectLine,
+      html: await render(
+        <Template
+          completedActionTypes={user.userActions
+            .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
+            .map(action => `${action.actionType}` as EmailActiveActions)}
+          session={
+            sessionId
+              ? {
+                  userId: user.id,
+                  sessionId,
+                }
+              : null
+          }
+        />,
+      ),
+      customArgs: {
+        userId: user.id,
+        campaign: Template.campaign,
+      },
     },
   }).catch(err => {
     Sentry.captureException(err, {

@@ -152,29 +152,32 @@ export const airdropNFTWithInngest = inngest.createFunction(
         // TODO: change this once we have templates for all countries
         if (user.countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE) {
           messageId = await sendMail({
-            to: user.primaryUserEmailAddress.emailAddress,
-            subject: NFTArrivedEmail.subjectLine,
-            html: await render(
-              <NFTArrivedEmail
-                actionNFT={actionType}
-                completedActionTypes={user.userActions
-                  .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-                  .map(action => action.actionType as EmailActiveActions)}
-                hiddenActions={[actionType]}
-                session={
-                  userSession
-                    ? {
-                        userId: userSession.userId,
-                        sessionId: userSession.id,
-                      }
-                    : null
-                }
-              />,
-            ),
-            customArgs: {
-              userId: user.id,
-              actionType,
-              campaign: NFTArrivedEmail.campaign,
+            countryCode: user.countryCode,
+            payload: {
+              to: user.primaryUserEmailAddress.emailAddress,
+              subject: NFTArrivedEmail.subjectLine,
+              html: await render(
+                <NFTArrivedEmail
+                  actionNFT={actionType}
+                  completedActionTypes={user.userActions
+                    .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+                    .map(action => action.actionType as EmailActiveActions)}
+                  hiddenActions={[actionType]}
+                  session={
+                    userSession
+                      ? {
+                          userId: userSession.userId,
+                          sessionId: userSession.id,
+                        }
+                      : null
+                  }
+                />,
+              ),
+              customArgs: {
+                userId: user.id,
+                actionType,
+                campaign: NFTArrivedEmail.campaign,
+              },
             },
           }).catch(err => {
             Sentry.captureException(err, {

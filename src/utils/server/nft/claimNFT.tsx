@@ -236,31 +236,38 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
   if (user.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
     return null
   }
+
+  // Using the default country code if user's country is not set
+  const countryCode = user.countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE
+
   const messageId = await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: NFTOnTheWayEmail.subjectLine,
-    html: await render(
-      <NFTOnTheWayEmail
-        actionNFT={userAction.actionType as EmailEnabledActionNFTs}
-        completedActionTypes={user.userActions
-          .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-          .map(action => action.actionType as EmailActiveActions)}
-        hiddenActions={[userAction.actionType]}
-        session={
-          userSession
-            ? {
-                userId: userSession.userId,
-                sessionId: userSession.id,
-              }
-            : null
-        }
-      />,
-    ),
-    customArgs: {
-      userId: user.id,
-      userActionId: userAction.id,
-      actionType: userAction.actionType,
-      campaign: NFTOnTheWayEmail.campaign,
+    countryCode,
+    payload: {
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: NFTOnTheWayEmail.subjectLine,
+      html: await render(
+        <NFTOnTheWayEmail
+          actionNFT={userAction.actionType as EmailEnabledActionNFTs}
+          completedActionTypes={user.userActions
+            .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+            .map(action => action.actionType as EmailActiveActions)}
+          hiddenActions={[userAction.actionType]}
+          session={
+            userSession
+              ? {
+                  userId: userSession.userId,
+                  sessionId: userSession.id,
+                }
+              : null
+          }
+        />,
+      ),
+      customArgs: {
+        userId: user.id,
+        userActionId: userAction.id,
+        actionType: userAction.actionType,
+        campaign: NFTOnTheWayEmail.campaign,
+      },
     },
   }).catch(err => {
     Sentry.captureException(err, {
@@ -273,5 +280,5 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
     throw err
   })
 
-  logger.info(`Sent nft on the way email with messageId: ${messageId}`)
+  logger.info(`Sent nft on the way email with messageId: ${String(messageId)}`)
 }

@@ -7,6 +7,7 @@ import { EmailActiveActions } from '@/utils/server/email/templates/common/consta
 import ReferralCompletedEmail from '@/utils/server/email/templates/referralCompleted'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('sendReferralCompletedEmail')
 
@@ -52,7 +53,10 @@ export async function sendReferralCompletedEmail(referralId: string) {
   }
 
   try {
-    await sendMail(emailPayload)
+    await sendMail({
+      countryCode: referrer.countryCode as SupportedCountryCodes,
+      payload: emailPayload,
+    })
     logger.info(`Sent referral completed email to ${referrer.primaryUserEmailAddress.emailAddress}`)
   } catch (err) {
     Sentry.captureException(err, {
