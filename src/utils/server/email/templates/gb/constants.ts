@@ -23,7 +23,7 @@ export const GB_ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: `/gb/action/share`,
   },
   [GBEmailActiveActions.REFER]: {
-    image: `/actionTypeIcons/refer.png`,
+    image: `/gb/actionTypeIcons/refer.png`,
     text: 'Refer a friend',
     subtext: 'Refer a friend to Stand With Crypto.',
     buttonLabel: 'Refer a friend',
@@ -37,6 +37,7 @@ export const GB_ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: `/gb/races`,
   },
 }
+
 export const GB_SOCIAL_MEDIA_URL = {
   twitter: 'https://x.com/StandWCrypto_UK',
   linkedin: 'https://www.linkedin.com/company/standwithcryptouk',

@@ -23,7 +23,7 @@ export const CA_ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: `/ca/action/share`,
   },
   [CAEmailActiveActions.REFER]: {
-    image: `/actionTypeIcons/refer.png`,
+    image: `/ca/actionTypeIcons/refer.png`,
     text: 'Refer a friend',
     subtext: 'Refer a friend to Stand With Crypto.',
     buttonLabel: 'Refer a friend',
