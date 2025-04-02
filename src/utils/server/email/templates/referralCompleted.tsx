@@ -1,76 +1,32 @@
-import * as React from 'react'
-import { Hr, Img, Section, Text } from '@react-email/components'
+import AUReferralCompletedEmail from '@/utils/server/email/templates/au/referralCompleted'
+import CAReferralCompletedEmail from '@/utils/server/email/templates/ca/referralCompleted'
+import GBReferralCompletedEmail from '@/utils/server/email/templates/gb/referralCompleted'
+import USReferralCompletedEmail from '@/utils/server/email/templates/us/referralCompleted'
+import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { Button } from '@/utils/server/email/templates/common/ui/button'
-import { Heading } from '@/utils/server/email/templates/common/ui/heading'
-import {
-  KeepUpTheFightSection,
-  KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
-import { USEmailTemplateProps } from '@/utils/server/email/templates/us/constants'
-import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-
-type ReferralCompletedEmailProps = KeepUpTheFightSectionProps &
-  USEmailTemplateProps & {
-    name: string | null
+export function getReferralCompletedEmail(countryCode: SupportedCountryCodes) {
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return USReferralCompletedEmail
+    case SupportedCountryCodes.CA:
+      return CAReferralCompletedEmail
+    case SupportedCountryCodes.AU:
+      return AUReferralCompletedEmail
+    case SupportedCountryCodes.GB:
+      return GBReferralCompletedEmail
+    default:
+      return gracefullyError({
+        msg: `No ReferralCompletedEmail template found for countryCode: ${countryCode as string}`,
+        fallback: null,
+        hint: {
+          tags: {
+            domain: 'email',
+          },
+          extra: {
+            countryCode,
+          },
+        },
+      })
   }
-
-ReferralCompletedEmail.subjectLine = "You Did It! Now Let's Get More People Involved"
-ReferralCompletedEmail.campaign = 'referral_completed'
-
-export default function ReferralCompletedEmail({
-  previewText = "One small step for you, one giant leap for crypto advocacy. Let's keep the momentum going!",
-  session = {},
-  hrefSearchParams = {},
-  name,
-  ...keepUpTheFightSectionProps
-}: ReferralCompletedEmailProps) {
-  const hydratedHrefSearchParams = {
-    utm_campaign: ReferralCompletedEmail.campaign,
-    ...hrefSearchParams,
-    ...session,
-  }
-
-  const referActionHref = buildTemplateInternalUrl('/action/refer', hydratedHrefSearchParams)
-
-  return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
-      <Section>
-        <Img
-          className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
-        />
-        <Heading gutterBottom="md">Your voice matters—now amplify it!</Heading>
-
-        <Text className="text-foreground-muted text-center text-base">
-          Hey {name || 'Advocate'},
-          <br />
-          <br />
-          You just completed your referral—nice work! 🚀 Now, let’s keep the momentum going. Every
-          voice matters, and by bringing more people into the conversation, we can help shape the
-          future of crypto, innovation, and beyond.
-          <br />
-          <br />
-          Share your referral link and invite your friends to get involved. The more people
-          participate, the stronger our impact!
-          <br />
-          <br />
-          <Button fullWidth="mobile" href={referActionHref}>
-            Share Your Link
-          </Button>
-          <br />
-          <br />
-          Let's stand together and make a difference
-        </Text>
-      </Section>
-
-      <Hr className="my-8" />
-
-      <KeepUpTheFightSection
-        {...keepUpTheFightSectionProps}
-        hrefSearchParams={hydratedHrefSearchParams}
-      />
-    </Wrapper>
-  )
 }

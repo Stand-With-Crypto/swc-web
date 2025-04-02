@@ -7,7 +7,7 @@ import {
   EmailActiveActions,
   getEmailActiveActionsByCountry,
 } from '@/utils/server/email/templates/common/constants'
-import ReferralCompletedEmail from '@/utils/server/email/templates/referralCompleted'
+import { getReferralCompletedEmail } from '@/utils/server/email/templates/referralCompleted'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -31,6 +31,8 @@ export async function sendReferralCompletedEmail(referralId: string) {
 
   const countryCode = referrer.countryCode as SupportedCountryCodes
   const userSession = referrer.userSessions?.[0]
+  const ReferralCompletedEmail = getReferralCompletedEmail(countryCode)
+
   const emailPayload: SendMailPayload = {
     to: referrer.primaryUserEmailAddress.emailAddress,
     subject: ReferralCompletedEmail.subjectLine,
