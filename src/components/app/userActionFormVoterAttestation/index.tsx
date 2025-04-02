@@ -25,7 +25,7 @@ import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
-import { UserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
@@ -132,7 +132,7 @@ export function UserActionFormVoterAttestation({
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
 
     const data: CreateActionVoterAttestationInput = {
-      campaignName: UserActionVoterAttestationCampaignName['H1_2025'],
+      campaignName: USUserActionVoterAttestationCampaignName['H1_2025'],
       address: addressSchema,
       stateCode: racesByAddressRequest.data.stateCode as USStateCode,
     }

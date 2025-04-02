@@ -39,7 +39,7 @@ import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
@@ -67,7 +67,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+      campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -87,7 +87,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+    campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
     firstName: '',
     lastName: '',
     emailAddress: '',

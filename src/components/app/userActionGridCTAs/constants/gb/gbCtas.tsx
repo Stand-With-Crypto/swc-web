@@ -7,8 +7,8 @@ import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
-  GBUserActionOptInCampaignName,
   GBUserActionReferCampaignName,
   GBUserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
@@ -25,7 +25,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
-        campaignName: GBUserActionOptInCampaignName.DEFAULT,
+        campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
         description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,

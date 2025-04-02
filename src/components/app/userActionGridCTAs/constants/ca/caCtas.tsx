@@ -8,10 +8,10 @@ import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constan
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
-  CAUserActionOptInCampaignName,
   CAUserActionReferCampaignName,
   CAUserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
 const countryCode = SupportedCountryCodes.CA
 
@@ -25,7 +25,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
-        campaignName: CAUserActionOptInCampaignName.DEFAULT,
+        campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
         description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,

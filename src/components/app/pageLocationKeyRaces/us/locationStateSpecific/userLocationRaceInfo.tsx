@@ -49,7 +49,11 @@ function DefaultPlacesSelect({
 export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
   return (
     <Suspense
-      fallback={<DefaultPlacesSelect onChange={noop} stateCode={props.stateCode} value={null} />}
+      fallback={
+        <ContentContainer shouldShowSubtitle={true} stateName={props.stateName}>
+          <DefaultPlacesSelect onChange={noop} stateCode={props.stateCode} value={null} />
+        </ContentContainer>
+      }
     >
       <SuspenseUserLocationRaceInfo {...props} />
     </Suspense>
@@ -92,6 +96,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
   const group = groups.congresspeople[districtNumber]
   const { recommended, others } = findRecommendedCandidate(group.people)
   const urls = getIntlUrls(countryCode)
+
   return (
     <ContentContainer shouldShowSubtitle={shouldShowSubtitle} stateName={stateName}>
       <div>

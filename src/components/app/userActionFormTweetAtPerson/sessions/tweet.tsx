@@ -30,7 +30,7 @@ import {
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -42,7 +42,7 @@ type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
 }
 
 interface TweetAtPersonSectionProps {
-  slug: UserActionTweetAtPersonCampaignName
+  slug: USUserActionTweetAtPersonCampaignName
   sectionProps: UseSectionsReturn<TweetAtPersonSectionNames>
 }
 

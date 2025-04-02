@@ -6,8 +6,8 @@ import { waitUntil } from '@vercel/functions'
 import { object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -26,7 +26,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns/index'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
@@ -67,7 +67,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
 
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const actionType = UserActionType.VIEW_KEY_RACES
 

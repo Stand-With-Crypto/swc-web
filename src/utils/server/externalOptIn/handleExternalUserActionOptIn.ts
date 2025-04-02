@@ -45,7 +45,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
@@ -219,6 +219,9 @@ export async function handleExternalUserActionOptIn(
       userId: existingAction.user.id,
     }
   }
+
+  const userActionCampaignName =
+    COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode].OPT_IN
   const userAction = await prismaClient.userAction.create({
     include: {
       user: {
@@ -229,7 +232,7 @@ export async function handleExternalUserActionOptIn(
     },
     data: {
       actionType,
-      campaignName: UserActionOptInCampaignName.DEFAULT,
+      campaignName: userActionCampaignName,
       userActionOptIn: {
         create: {
           optInType,

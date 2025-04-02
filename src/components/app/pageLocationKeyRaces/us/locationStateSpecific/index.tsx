@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
-import { compact, isEmpty, times } from 'lodash-es'
+import { useEffect, useMemo } from 'react'
+import { isEmpty } from 'lodash-es'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
@@ -14,15 +14,18 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import {
+  DTSI_PersonPoliticalAffiliationCategory,
+  DTSI_PersonStanceType,
+  DTSI_StateSpecificInformationQuery,
+} from '@/data/dtsi/generated'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 import { UserLocationRaceInfo } from './userLocationRaceInfo'
@@ -36,23 +39,16 @@ const countryCode = SupportedCountryCodes.US
 
 export function USLocationStateSpecific({
   stateCode,
-  people,
+  congress,
+  governor,
   countAdvocates,
-  personStances,
 }: LocationStateSpecificProps) {
-  const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
-  const groups = organizeStateSpecificPeople(people)
+  const stances = congress
+    .flatMap(x => x.stances)
+    .filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
+  const groups = organizeStateSpecificPeople(congress, governor)
   const urls = getIntlUrls(countryCode)
   const stateName = getUSStateNameFromStateCode(stateCode)
-  const otherDistricts = compact(
-    times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]).map(districtIndex => {
-      const district = districtIndex + 1
-      if (US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.includes(district)) {
-        return null
-      }
-      return district
-    }),
-  )
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
@@ -60,6 +56,21 @@ export function USLocationStateSpecific({
       usaState: stateCode,
     })
   }, [stateCode])
+
+  const republicanGovernors = useMemo(
+    () =>
+      groups.governors.filter(
+        x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+      ),
+    [groups.governors],
+  )
+  const democraticGovernors = useMemo(
+    () =>
+      groups.governors.filter(
+        x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+      ),
+    [groups.governors],
+  )
 
   return (
     <div>
@@ -99,12 +110,62 @@ export function USLocationStateSpecific({
         </div>
       </DarkHeroSection>
 
-      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
+      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) && isEmpty(groups.governors) ? (
         <PageTitle as="h3" className="mt-20" size="sm">
           There's no key races currently in {stateName}
         </PageTitle>
       ) : (
         <div className="space-y-20">
+          {!!groups.governors && (
+            <div className="mt-20">
+              <ResponsiveTabsOrSelect
+                analytics={'Primary Races Tabs'}
+                containerClassName="mb-6 md:mb-10 w-full"
+                data-testid="primary-races-tabs"
+                defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
+                forceDesktop
+                options={[
+                  {
+                    value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                    label: 'Republican',
+                    content: (
+                      <div className="sticky top-24 text-center">
+                        <DTSIPersonHeroCardSection
+                          countryCode={countryCode}
+                          cta={
+                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                              View Race
+                            </InternalLink>
+                          }
+                          people={republicanGovernors}
+                          title={<>{stateName} Gubernatorial Election</>}
+                        />
+                      </div>
+                    ),
+                  },
+                  {
+                    value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+                    label: 'Democratic',
+                    content: (
+                      <div className="sticky top-24 text-center">
+                        <DTSIPersonHeroCardSection
+                          countryCode={countryCode}
+                          cta={
+                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                              View Race
+                            </InternalLink>
+                          }
+                          people={democraticGovernors}
+                          title={<>{stateName} Gubernatorial Election</>}
+                        />
+                      </div>
+                    ),
+                  },
+                ]}
+                persistCurrentTab
+              />
+            </div>
+          )}
           {!!groups.senators.length && (
             <div className="mt-20">
               <DTSIPersonHeroCardSection
@@ -135,7 +196,9 @@ export function USLocationStateSpecific({
               />
             </div>
           ) : (
-            <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
+            !isEmpty(groups.congresspeople) && (
+              <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
+            )
           )}
           {!!stances.length && (
             <ContentSection
@@ -187,30 +250,6 @@ export function USLocationStateSpecific({
               />
             )
           })}
-
-          {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
-            <ContentSection
-              className="container"
-              subtitle={'Dive deeper and discover races in other districts.'}
-              title={`Other races in ${stateName}`}
-            >
-              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-                {otherDistricts.map(district => (
-                  <InternalLink
-                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                    href={urls.locationDistrictSpecific({
-                      stateCode,
-                      district,
-                    })}
-                    key={district}
-                  >
-                    District {district}
-                  </InternalLink>
-                ))}
-              </div>
-            </ContentSection>
-          )}
-
           <PACFooter className="container" />
         </div>
       )}

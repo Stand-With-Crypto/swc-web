@@ -2,20 +2,47 @@ import { DTSI_PersonRoleCategory, DTSI_StateSpecificInformationQuery } from '@/d
 import { NormalizedDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 
-import { FormattedPerson } from './types'
+export function organizeStateSpecificPeople(
+  congress: DTSI_StateSpecificInformationQuery['congress'],
+  governor: DTSI_StateSpecificInformationQuery['governor'],
+) {
+  const preFormattedGovernors = governor.map(x =>
+    formatSpecificRoleDTSIPerson(x, { specificRole: DTSI_PersonRoleCategory.GOVERNOR }),
+  )
+  const preFormattedCongress = congress.map(x => formatSpecificRoleDTSIPerson(x))
 
-export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformationQuery['people']) {
-  const formatted = people.map(x => formatSpecificRoleDTSIPerson(x))
+  const formatted = [...preFormattedCongress, ...preFormattedGovernors]
   const grouped = {
-    senators: [] as FormattedPerson[],
+    senators: [] as (typeof formatted)[number][],
     congresspeople: {} as Record<
       NormalizedDTSIDistrictId,
       {
         district: NormalizedDTSIDistrictId
-        people: FormattedPerson[]
+        people: (typeof formatted)[number][]
       }
     >,
+    governors: [] as (typeof formatted)[number][],
   }
+
+  const sortPeople = (a: (typeof formatted)[number], b: (typeof formatted)[number]) => {
+    if (a.isIncumbent !== b.isIncumbent) {
+      return a.isIncumbent ? -1 : 1
+    }
+
+    const scoreA = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
+    const scoreB = b.computedStanceScore || b.manuallyOverriddenStanceScore || 0
+
+    if (scoreA !== scoreB) {
+      return scoreB - scoreA
+    }
+
+    if (a.profilePictureUrl !== b.profilePictureUrl) {
+      return a.profilePictureUrl ? -1 : 1
+    }
+
+    return 0
+  }
+
   formatted.forEach(person => {
     if (person.runningForSpecificRole?.roleCategory === DTSI_PersonRoleCategory.SENATE) {
       grouped.senators.push(person)
@@ -30,11 +57,17 @@ export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformatio
         }
         grouped.congresspeople[district].people.push(person)
       }
+    } else if (person.runningForSpecificRole?.roleCategory === DTSI_PersonRoleCategory.GOVERNOR) {
+      grouped.governors.push(person)
     }
   })
-  grouped.senators.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+
+  grouped.senators.sort(sortPeople)
+  grouped.governors.sort(sortPeople)
+
   Object.values(grouped.congresspeople).forEach(group => {
-    group.people.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+    group.people.sort(sortPeople)
   })
+
   return grouped
 }

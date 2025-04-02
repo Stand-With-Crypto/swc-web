@@ -20,7 +20,7 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 function UserActionFormVotingInformationDeeplinkWrapperContent() {
   usePreventOverscroll()
@@ -60,7 +60,7 @@ function UserActionFormVotingInformationDeeplinkWrapperContent() {
               place_id: user.address.googlePlaceId,
             }
           : initialValues?.address,
-        campaignName: UserActionVotingInformationResearchedCampaignName['H1_2025'],
+        campaignName: USUserActionVotingInformationResearchedCampaignName['H1_2025'],
         shouldReceiveNotifications: false,
       }}
       onClose={() => router.push(urls.home())}

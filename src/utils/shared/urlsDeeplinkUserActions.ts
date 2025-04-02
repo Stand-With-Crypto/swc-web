@@ -3,13 +3,13 @@ import { UserActionType } from '@prisma/client'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
-import { ActiveClientUserActionWithCampaignType } from '@/utils/shared/userActionCampaigns'
 import {
   COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   isActionSupportedForCountry,
   UserActionCampaignNames,
 } from '@/utils/shared/userActionCampaigns/index'
 import {
+  USActiveClientUserActionWithCampaignType,
   USUserActionEmailCampaignName,
   USUserActionPollCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
@@ -96,7 +96,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
 const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
-  [actionType in ActiveClientUserActionWithCampaignType]?: {
+  [actionType in USActiveClientUserActionWithCampaignType]?: {
     [campaign in UserActionCampaignNames]?: DeeplinkFunction
   }
 } = {
