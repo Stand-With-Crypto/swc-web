@@ -30,12 +30,14 @@ import {
   AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
   getAUStateNameFromStateCode,
 } from '@/utils/shared/stateMappings/auStateUtils'
+import { getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const GLOBAL_SEARCH_PLACEHOLDER = 'Search by name or state'
 const GLOBAL_SUBTITLE =
   'We have a rich database of politicians. Search any politician to see where they stand on crypto.'
 const GLOBAL_TITLE = 'Search for a politician'
+const countryCode = SupportedCountryCodes.AU
 
 export function AuDTSIClientPersonDataTable({
   initialData,
@@ -43,7 +45,6 @@ export function AuDTSIClientPersonDataTable({
   initialData: DTSIPersonDataTablePeople
 }) {
   const [globalFilter, setGlobalFilter] = useSearchFilter('')
-  const countryCode = SupportedCountryCodes.AU
 
   const { data } = useGetAllPeople(countryCode, {
     fallbackData: { people: sortDTSIPersonDataTable(initialData) },
@@ -62,7 +63,7 @@ export function AuDTSIClientPersonDataTable({
         countryCode,
         dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
       }),
-    [countryCode],
+    [],
   )
 
   const tableBodyProps = useMemo(() => {
@@ -76,7 +77,7 @@ export function AuDTSIClientPersonDataTable({
       globalFilter,
       setGlobalFilter,
     }
-  }, [tableColumns, parsedData, countryCode, globalFilter, setGlobalFilter])
+  }, [tableColumns, parsedData, globalFilter, setGlobalFilter])
 
   return (
     <Suspense
@@ -157,6 +158,7 @@ function AuGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         partyOptions={PARTY_OPTIONS}
       />
       <GlobalFilters.StateSelect
+        locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
         namedColumns={namedColumns}
         stateOptions={['All', ...Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]}
       />

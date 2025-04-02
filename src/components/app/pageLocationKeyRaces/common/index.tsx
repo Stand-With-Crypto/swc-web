@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect } from 'react'
 import Balancer from 'react-wrap-balancer'
+import { UserActionType } from '@prisma/client'
 
 import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
@@ -17,6 +18,7 @@ import {
   COUNTRY_CODE_TO_LOCALE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns/index'
 
 interface LocationRacesProps {
   children: ReactNode
@@ -32,8 +34,10 @@ export function LocationRaces({
   shouldShowVoterRegistrationButton,
 }: LocationRacesProps) {
   useEffect(() => {
-    void actionCreateUserActionViewKeyRaces()
-  }, [])
+    void actionCreateUserActionViewKeyRaces({
+      campaignName: getActionDefaultCampaignName(UserActionType.VIEW_KEY_RACES, countryCode),
+    })
+  }, [countryCode])
 
   return (
     <div className="space-y-20">

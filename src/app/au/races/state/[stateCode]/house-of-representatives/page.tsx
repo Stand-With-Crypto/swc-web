@@ -4,8 +4,12 @@ import { AULocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/au
 import { queryDTSILocationHouseSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationHouseSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import {
+  AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  getAUStateNameFromStateCode,
+} from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { toBool } from '@/utils/shared/toBool'
 import { zodState } from '@/validation/fields/zodState'
 
 export const revalidate = 600 // 10 minutes
@@ -30,6 +34,14 @@ export async function generateMetadata({
     title,
     description,
   })
+}
+
+export async function generateStaticParams() {
+  return Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP)
+    .slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 99999)
+    .map(stateCode => ({
+      stateCode: stateCode.toLowerCase(),
+    }))
 }
 
 export default async function LocationHouseOfRepsSpecificPage({

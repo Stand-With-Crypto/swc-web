@@ -21,6 +21,7 @@ import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMapping
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
@@ -55,6 +56,7 @@ export function USLocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
       usaState: stateCode,
     })
   }, [stateCode])

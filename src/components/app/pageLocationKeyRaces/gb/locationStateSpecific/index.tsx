@@ -19,6 +19,7 @@ import {
 } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { GBUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
@@ -42,7 +43,8 @@ export function GBLocationStateSpecific({
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
+      campaignName: GBUserActionViewKeyRacesCampaignName['H1_2025'],
+      stateCode,
     })
   }, [stateCode])
 

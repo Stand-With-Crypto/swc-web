@@ -9,4 +9,4 @@ export const zodFoundersSchemaValidation = object({
   }),
 })
 
-export type SWCFounders = z.infer<typeof zodFoundersSchemaValidation>[]
+export type SWCFounder = z.infer<typeof zodFoundersSchemaValidation>

@@ -5,6 +5,7 @@ import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEv
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { cn } from '@/utils/web/cn'
 
 interface FeaturedPastEventsProps {
   events: SWCEvents
@@ -17,14 +18,24 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
         Featured past events
       </PageTitle>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div
+        className={cn('grid gap-4', {
+          'md:grid-cols-2 lg:grid-cols-3': events.length > 2,
+          'md:grid-flow-col md:justify-center': events.length < 3,
+        })}
+      >
         {events.map(event => (
           <EventDialog
             event={event.data}
             key={getUniqueEventKey(event.data)}
             trigger={
-              <div className="group relative" key={getUniqueEventKey(event.data)}>
-                <div className="relative h-[222px] min-w-[345px] lg:h-[271px] lg:min-w-[271px]">
+              <div
+                className={cn('group relative w-full', {
+                  'md:w-[345px]': events.length < 3,
+                })}
+                key={getUniqueEventKey(event.data)}
+              >
+                <div className="relative h-[222px] min-w-[345px] lg:h-[300px] lg:min-w-[300px]">
                   <NextImage
                     alt={event.data.name}
                     className="object-cover object-center"
@@ -35,7 +46,6 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
                 <EventOverlay eventName={event.data.name} />
               </div>
             }
-            triggerClassName="w-full"
           />
         ))}
       </div>

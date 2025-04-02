@@ -18,7 +18,6 @@ import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
-import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
@@ -28,32 +27,16 @@ import {
 } from '@/utils/shared/stateMappings/usStateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 interface LocationRaceGovernorSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: USStateCode
-  district?: NormalizedDTSIDistrictId
-  isGovernor?: boolean
 }
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
-function organizeRaceSpecificPeople(
-  people: DTSI_DistrictSpecificInformationQuery['people'],
-  {
-    district,
-    stateCode,
-    isGovernor,
-  }: Pick<LocationRaceGovernorSpecificProps, 'district' | 'stateCode' | 'isGovernor'>,
-) {
-  let targetedRoleCategory = DTSI_PersonRoleCategory.PRESIDENT
-
-  if (district) {
-    targetedRoleCategory = DTSI_PersonRoleCategory.CONGRESS
-  } else if (stateCode) {
-    targetedRoleCategory = isGovernor
-      ? DTSI_PersonRoleCategory.GOVERNOR
-      : DTSI_PersonRoleCategory.SENATE
-  }
+function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuery['people']) {
+  const targetedRoleCategory = DTSI_PersonRoleCategory.GOVERNOR
 
   const formatted = people.map(x =>
     formatSpecificRoleDTSIPerson(x, {
@@ -101,21 +84,19 @@ function organizeRaceSpecificPeople(
 
 export function USLocationRaceGovernorSpecific({
   stateCode,
-  district,
   people,
-  isGovernor,
 }: LocationRaceGovernorSpecificProps) {
-  const groups = organizeRaceSpecificPeople(people, { district, stateCode, isGovernor })
+  const groups = organizeRaceSpecificPeople(people)
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
 
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
+      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
       usaState: stateCode,
-      usCongressionalDistrict: district?.toString(),
     })
-  }, [district, stateCode])
+  }, [stateCode])
 
   const racesData = useMemo(
     () =>
@@ -134,21 +115,10 @@ export function USLocationRaceGovernorSpecific({
             United States
           </InternalLink>
           {' / '}
-          <LocationRaceLinkTitle
-            district={district}
-            isGovernor={isGovernor}
-            stateCode={stateCode}
-            stateDisplayName={stateDisplayName}
-          />
+          <LocationRaceLinkTitle stateCode={stateCode} stateDisplayName={stateDisplayName} />
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
-          {!stateCode
-            ? 'U.S. Presidential Race'
-            : district
-              ? `${stateCode} Congressional District ${district}`
-              : isGovernor
-                ? `Governors (${stateCode})`
-                : `U.S. Senate (${stateCode})`}
+          {`Governors (${stateCode})`}
         </PageTitle>
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
@@ -207,27 +177,15 @@ export function USLocationRaceGovernorSpecific({
 }
 
 function LocationRaceLinkTitle({
-  district,
-  isGovernor,
   stateCode,
   stateDisplayName,
 }: {
   stateCode: USStateCode
   stateDisplayName: string
-  district?: NormalizedDTSIDistrictId
-  isGovernor?: boolean
 }) {
   if (!stateDisplayName) {
     return <span>Presidential</span>
   }
 
-  return (
-    <span>
-      {district
-        ? `${stateCode} Congressional District ${district}`
-        : isGovernor
-          ? `Governors (${stateCode})`
-          : `U.S. Senate (${stateCode})`}
-    </span>
-  )
+  return <span>{`Governors (${stateCode})`}</span>
 }

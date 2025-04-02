@@ -4,8 +4,12 @@ import { USLocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/us
 import { queryDTSILocationSenateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationSenateSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import {
+  getUSStateNameFromStateCode,
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { toBool } from '@/utils/shared/toBool'
 import { zodState } from '@/validation/fields/zodState'
 
 export const revalidate = 600 // 10 minutes
@@ -30,6 +34,14 @@ export async function generateMetadata({
     title,
     description,
   })
+}
+
+export async function generateStaticParams() {
+  return Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
+    .slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 99999)
+    .map(stateCode => ({
+      stateCode: stateCode.toLowerCase(),
+    }))
 }
 
 export default async function LocationSenateSpecificPage({
