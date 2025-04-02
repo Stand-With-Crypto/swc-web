@@ -57,7 +57,7 @@ export function UserAccessLocationBypass() {
 
   return (
     <div>
-      <div className="flex items-end gap-4">
+      <div className="flex flex-col items-start gap-4">
         <strong>User Access Location</strong>
 
         <Select
