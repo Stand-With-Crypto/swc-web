@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { externalUrls } from '@/utils/shared/urls'
@@ -24,12 +25,6 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
   const presentationUrl = fullUrl
     .replace(/https?:\/\/(www\.)?/, '')
     .replace('/join/', '/join/\u200B')
-
-  console.log('CODE', {
-    countryCode,
-    fullUrl,
-    presentationUrl,
-  })
 
   const handleCopy = () => handleCopyToClipboard(fullUrl)
 
@@ -66,13 +61,12 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
 
 export function UserReferralUrlWithApi() {
   const { data, isLoading } = useApiResponseForUserFullProfileInfo()
+  const countryCode = useCountryCode()
   const hasHydrated = useHasHydrated()
 
   if (!data?.user || isLoading || !hasHydrated) {
     return null
   }
-
-  const countryCode = data.user.countryCode as SupportedCountryCodes
 
   return <UserReferralUrl countryCode={countryCode} referralId={data.user.referralId} />
 }
