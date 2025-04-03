@@ -7,6 +7,7 @@ import { UserActionFormSuccessScreenNextActionSkeleton } from '@/components/app/
 import { Dialog, DialogContent, DialogProps } from '@/components/ui/dialog'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useSession } from '@/hooks/useSession'
+import { SWCSuccessDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 
 const UserActionFormJoinSWCSuccess = dynamic(
   () =>
@@ -39,23 +40,27 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
   const performedUserActionTypes = performedUserActionTypesResponse.data?.performedUserActionTypes
 
   return (
-    <Dialog {...dialogProps}>
-      <DialogContent a11yTitle="Joined Stand With Crypto" className="max-w-3xl">
-        <div className="space-y-6">
-          <UserActionFormJoinSWCSuccess />
+    <SWCSuccessDialogContext.Provider
+      value={{ onCtaClick: () => dialogProps?.onOpenChange?.(false) }}
+    >
+      <Dialog {...dialogProps}>
+        <DialogContent a11yTitle="Joined Stand With Crypto" className="max-w-3xl">
+          <div className="space-y-6">
+            <UserActionFormJoinSWCSuccess />
 
-          {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
-            <UserActionFormSuccessScreenNextActionSkeleton />
-          ) : (
-            <UserActionFormSuccessScreenNextAction
-              data={{
-                userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
-                performedUserActionTypes: performedUserActionTypes || [],
-              }}
-            />
-          )}
-        </div>
-      </DialogContent>
-    </Dialog>
+            {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
+              <UserActionFormSuccessScreenNextActionSkeleton />
+            ) : (
+              <UserActionFormSuccessScreenNextAction
+                data={{
+                  userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
+                  performedUserActionTypes: performedUserActionTypes || [],
+                }}
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </SWCSuccessDialogContext.Provider>
   )
 }
