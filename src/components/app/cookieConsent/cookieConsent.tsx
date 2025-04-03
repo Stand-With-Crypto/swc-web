@@ -95,10 +95,16 @@ export function CookieConsent({
       )
     default:
       return gracefullyError({
-        msg: `Country implementation not found for CookieConsent`,
-        fallback: null,
+        msg: `CookieConsent implementation not found for country code ${countryCode as string}`,
+        fallback: (
+          <USCookieConsentBanner
+            onAcceptAll={handleActionThenClose(acceptAllCookies)}
+            onAcceptSpecificCookies={handleActionThenClose(acceptSpecificCookies)}
+            onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
+          />
+        ),
         hint: {
-          level: 'error',
+          level: 'info',
           tags: {
             domain: 'CookieConsent',
           },

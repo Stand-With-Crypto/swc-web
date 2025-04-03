@@ -10,7 +10,6 @@ import {
   DEFAULT_COOKIE_CONSENT,
   deserializeCookieConsent,
 } from '@/utils/shared/cookieConsent'
-import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 function getCountryDefaultCookieConsent(
@@ -26,19 +25,7 @@ function getCountryDefaultCookieConsent(
     case SupportedCountryCodes.AU:
       return AU_DEFAULT_VALUES
     default:
-      return gracefullyError({
-        msg: `Country implementation not found for CookieConsent`,
-        fallback: DEFAULT_COOKIE_CONSENT,
-        hint: {
-          level: 'error',
-          tags: {
-            domain: 'CookieConsent',
-          },
-          extra: {
-            countryCode,
-          },
-        },
-      })
+      return DEFAULT_COOKIE_CONSENT
   }
 }
 
