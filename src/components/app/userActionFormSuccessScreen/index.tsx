@@ -14,6 +14,7 @@ import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiRes
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { useSession } from '@/hooks/useSession'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -47,7 +48,10 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     return <JoinSWC onClose={onClose} />
   }
 
-  if (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) {
+  if (
+    (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) &&
+    isSmsSupportedInCountry(countryCode)
+  ) {
     if (isLoading) {
       return <SMSOptInContent.Skeleton />
     }
