@@ -69,4 +69,5 @@ export interface UserActionCardProps {
   campaigns: Array<UserActionGridCTACampaign>
   link?: (args: { children: React.ReactNode }) => React.ReactNode
   performedUserActions: Record<string, any>
+  onClick?: () => void
 }
