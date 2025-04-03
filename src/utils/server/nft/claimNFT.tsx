@@ -16,8 +16,10 @@ import { sendMail } from '@/utils/server/email'
 import {
   EmailActiveActions,
   EmailEnabledActionNFTs,
+  getEmailActiveActionsByCountry,
+  getEmailEnabledActionNFTsByCountry,
 } from '@/utils/server/email/templates/common/constants'
-import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
+import { getNFTOnTheWayEmail } from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -245,13 +247,14 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
 
   if (
     !user.primaryUserEmailAddress?.emailAddress ||
-    !Object.values(EmailEnabledActionNFTs).includes(userAction.actionType)
+    !Object.values(getEmailEnabledActionNFTsByCountry(countryCode)).includes(userAction.actionType)
   ) {
     return null
   }
 
   const userSession = user.userSessions?.[0]
 
+  const NFTOnTheWayEmail = getNFTOnTheWayEmail(countryCode)
   const messageId = await sendMail({
     countryCode,
     payload: {
@@ -261,8 +264,13 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
         <NFTOnTheWayEmail
           actionNFT={userAction.actionType as EmailEnabledActionNFTs}
           completedActionTypes={user.userActions
-            .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+            .filter(action =>
+              Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
+                action.actionType,
+              ),
+            )
             .map(action => action.actionType as EmailActiveActions)}
+          countryCode={countryCode}
           hiddenActions={[userAction.actionType]}
           session={
             userSession
@@ -292,5 +300,5 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
     throw err
   })
 
-  logger.info(`Sent nft on the way email with messageId: ${messageId}`)
+  logger.info(`Sent nft on the way email with messageId: ${String(messageId)}`)
 }

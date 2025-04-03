@@ -272,15 +272,14 @@ async function sendInitialSignUpEmail({
 } & Pick<InitialSignupUserCommunicationDataSchema, 'userId' | 'sessionId'>) {
   const user = await getUser(userId)
 
-  // TODO: remove this once we have templates for all countries
-  if (!user.primaryUserEmailAddress || user.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
+  if (!user.primaryUserEmailAddress) {
     return null
   }
 
   const countryCode = user.countryCode as SupportedCountryCodes
-  const Template = TEMPLATE_BY_STEP[step]
+  const Template = TEMPLATE_BY_STEP[step](countryCode)
   const messageId = await sendMail({
-    countryCode,
+    countryCode: user.countryCode as SupportedCountryCodes,
     payload: {
       to: user.primaryUserEmailAddress.emailAddress,
       subject: Template.subjectLine,
@@ -289,6 +288,7 @@ async function sendInitialSignUpEmail({
           completedActionTypes={user.userActions
             .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
             .map(action => `${action.actionType}` as EmailActiveActions)}
+          countryCode={countryCode}
           session={
             sessionId
               ? {
