@@ -5,7 +5,10 @@ import { obfuscateURLCountryCode } from '@/utils/edge/obfuscateURLCountryCode'
 import { setResponseCookie } from '@/utils/edge/setResponseCookie'
 import { setSessionCookiesFromRequest } from '@/utils/edge/setSessionCookies'
 import { isCypress } from '@/utils/shared/executionEnvironment'
-import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
+import {
+  USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
+  USER_ACCESS_LOCATION_COOKIE_NAME,
+} from '@/utils/shared/userAccessLocation'
 
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
 export function middleware(request: NextRequest) {
@@ -23,7 +26,7 @@ export function middleware(request: NextRequest) {
       response,
       cookieName: USER_ACCESS_LOCATION_COOKIE_NAME,
       cookieValue: userAccessLocationCookie,
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours,
+      maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
     })
   }
 
