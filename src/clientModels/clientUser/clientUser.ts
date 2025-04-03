@@ -28,6 +28,7 @@ export type ClientUser = ClientModel<
       displayName: string
       profilePictureUrl: string
     }
+    countryCode: string
   }
 >
 
@@ -37,8 +38,15 @@ type GetClientProps = User & {
 }
 
 export const getClientUser = (record: GetClientProps): ClientUser => {
-  const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility, address } =
-    record
+  const {
+    firstName,
+    lastName,
+    primaryUserCryptoAddress,
+    id,
+    informationVisibility,
+    address,
+    countryCode,
+  } = record
 
   const userLocationDetails =
     address && address.countryCode === 'US'
@@ -58,6 +66,7 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
     id,
     informationVisibility,
     userLocationDetails,
+    countryCode,
   })
 }
 

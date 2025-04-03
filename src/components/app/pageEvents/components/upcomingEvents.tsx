@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { isAfter } from 'date-fns'
 
 import { EventCard } from '@/components/app/pageEvents/components/eventCard'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -12,7 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { getStateNameResolver, getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface UpcomingEventsProps {
@@ -22,11 +24,14 @@ interface UpcomingEventsProps {
 export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
+  const countryCode = useCountryCode()
+
+  const stateNameResolver = getStateNameResolver(countryCode)
 
   const filteredEvents = useMemo(() => {
     const result =
       selectedStateFilter === 'All'
-        ? events
+        ? [...events]
         : events.filter(event => event.data.state === selectedStateFilter)
 
     const orderedResult = result.sort((a, b) => {
@@ -53,13 +58,13 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
     const options = stateArr.map(state => ({
       key: state,
-      name: `${US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP]} (${stateWithEvents[state]})`,
+      name: `${stateNameResolver(state)} (${stateWithEvents[state]})`,
     }))
 
     options.unshift({ key: 'All', name: 'All' })
 
     return options
-  }, [events])
+  }, [events, stateNameResolver])
 
   return (
     <>
@@ -71,7 +76,9 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
         value={selectedStateFilter}
       >
         <SelectTrigger className="max-w-[345px]">
-          <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
+          <span className="mr-2 inline-block flex-shrink-0 font-bold">
+            {getTerritoryDivisionByCountryCode(countryCode)}
+          </span>
           <span className="mr-auto">
             <SelectValue placeholder="All" />
           </span>
@@ -87,7 +94,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
       <div className="my-2 flex w-full flex-col items-center gap-4">
         {filteredEvents.slice(0, eventsToShow).map(event => (
-          <EventCard event={event.data} key={event.data.slug} />
+          <EventCard event={event.data} key={getUniqueEventKey(event.data)} />
         ))}
       </div>
 

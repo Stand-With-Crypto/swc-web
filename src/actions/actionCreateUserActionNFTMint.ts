@@ -9,7 +9,7 @@ import { BigNumber } from 'ethers'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -26,10 +26,10 @@ import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConvers
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const createActionMintNFTInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionNftMintCampaignName),
+  campaignName: nativeEnum(USUserActionNftMintCampaignName),
   transactionHash: z.string().transform(hash => hash as `0x${string}`),
 })
 
@@ -157,7 +157,7 @@ async function createAction<U extends User>({
       return new Decimal(0)
     })
 
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
   const decimalEthTransactionValue = new Decimal(ethTransactionValue)
   await prismaClient.userAction.create({
     data: {

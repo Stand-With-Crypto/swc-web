@@ -1,61 +1,36 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { PagePoliticianDetails } from '@/components/app/pagePoliticianDetails'
+import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
+import { getPoliticianDetailsPageDescription } from '@/components/app/pagePoliticianDetails/common/getPoliticianDetailsPageDescription'
+import { UsPagePoliticianDetails } from '@/components/app/pagePoliticianDetails/us'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
-import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import {
-  convertDTSIPersonStanceScoreToLetterGrade,
-  DTSILetterGrade,
-} from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
-
-import { getData } from './getData'
 
 export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
 export const dynamicParams = true
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 type Props = PageProps<{ dtsiSlug: string }>
 
-const getDescription = (person: DTSIPersonDetails) => {
-  const fullName = dtsiPersonFullName(person)
-  if (!person.stances.length) {
-    return `${fullName} has not made any recent comments about Bitcoin, Ethereum, and cryptocurrency innovation.`
-  }
-  const indication = (() => {
-    switch (convertDTSIPersonStanceScoreToLetterGrade(person)) {
-      case DTSILetterGrade.A:
-        return 'indicated they are very pro-cryptocurrencies'
-      case DTSILetterGrade.B:
-        return 'indicated thy are somewhat pro-cryptocurrencies'
-      case DTSILetterGrade.C:
-      case null:
-        return 'not indicated whether they are for or against cryptocurrencies.'
-      case DTSILetterGrade.D:
-        return 'indicated they are somewhat anti-cryptocurrencies'
-      case DTSILetterGrade.F:
-        return 'indicated they are very anti-cryptocurrencies'
-    }
-  })()
-  return `Based on previous comments, ${fullName} has ${indication}. On this page you can view the tweets, quotes, and other commentary ${fullName} has made about Bitcoin, Ethereum, and cryptocurrency innovation.`
-}
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const person = await getData((await props.params).dtsiSlug)
+  const person = await getPoliticianDetailsData((await props.params).dtsiSlug)
   if (!person) {
     return {}
   }
   const title = `${dtsiPersonFullName(person)} Crypto Policy Stance`
   return {
     title,
-    description: getDescription(person),
+    description: getPoliticianDetailsPageDescription(person),
   }
 }
 export async function generateStaticParams() {
-  const slugs = await queryDTSIAllPeopleSlugs().then(x =>
+  const slugs = await queryDTSIAllPeopleSlugs({ countryCode }).then(x =>
     x.people.map(({ slug: dtsiSlug }) => ({ dtsiSlug })),
   )
   if (toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)) {
@@ -66,16 +41,18 @@ export async function generateStaticParams() {
 
 export default async function PoliticianDetails(props: Props) {
   const params = await props.params
-  const { countryCode } = params
 
   const [person, questionnaire] = await Promise.all([
-    getData(params.dtsiSlug),
-    getQuestionnaire(params.dtsiSlug),
+    getPoliticianDetailsData(params.dtsiSlug),
+    getQuestionnaire({
+      dtsiSlug: params.dtsiSlug,
+      countryCode,
+    }),
   ])
 
   if (!person) {
     notFound()
   }
 
-  return <PagePoliticianDetails {...{ person, countryCode, questionnaire }} />
+  return <UsPagePoliticianDetails {...{ person, countryCode, questionnaire }} />
 }

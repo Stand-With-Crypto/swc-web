@@ -2,7 +2,7 @@ import { UserActionType } from '@prisma/client'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
 type Result = {

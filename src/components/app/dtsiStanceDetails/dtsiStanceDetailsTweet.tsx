@@ -6,7 +6,7 @@ import { parse as twemojiParser } from 'twemoji-parser'
 import {
   DTSIStanceDetailsStanceProp,
   DTSIStanceDetailsTweetProp,
-  IStanceDetailsProps,
+  StanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
@@ -186,7 +186,7 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
 }
 
 export const DTSIStanceDetailsTweet: React.FC<
-  Omit<IStanceDetailsProps, 'stance'> & {
+  Omit<StanceDetailsProps, 'stance'> & {
     stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
   }
 > = ({ stance, person, countryCode, bodyClassName, hideImages }) => {

@@ -5,6 +5,7 @@ import { useFormContext, useWatch } from 'react-hook-form'
 
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import { FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -101,25 +102,28 @@ export function PollItem({
           </div>
         )}
       </div>
-      {shouldShowOtherField && isOtherSelected && (
-        <FormField
-          control={control}
-          name="otherValue"
-          render={({ field }) => (
-            <FormItem>
-              <Input
-                className="w-full rounded-lg border px-4 py-2 focus:border-gray-400 focus:outline-none"
-                disabled={isOtherFieldDisabled}
-                placeholder="Please specify"
-                type="text"
-                {...field}
-              />
-              <FormErrorMessage />
-            </FormItem>
-          )}
-          rules={{ required: 'Text input required.' }}
-        />
-      )}
+
+      <Collapsible open={shouldShowOtherField && isOtherSelected}>
+        <CollapsibleContent className="AnimateCollapsibleContent">
+          <FormField
+            control={control}
+            name="otherValue"
+            render={({ field }) => (
+              <FormItem>
+                <Input
+                  className="w-full rounded-lg border px-4 py-2 focus:border-gray-400 focus:outline-none"
+                  disabled={isOtherFieldDisabled}
+                  placeholder="Please specify"
+                  type="text"
+                  {...field}
+                />
+                <FormErrorMessage />
+              </FormItem>
+            )}
+            rules={{ required: 'Text input required.' }}
+          />
+        </CollapsibleContent>
+      </Collapsible>
     </Label>
   )
 }

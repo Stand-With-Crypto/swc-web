@@ -23,8 +23,8 @@ import {
   CapitolCanaryCampaignId,
   SandboxCapitolCanaryCampaignId,
 } from '@/utils/server/capitolCanary/campaigns'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -90,7 +90,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     zodUserActionFormEmailCongresspersonAction,
     input,
   )
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   if (!validatedFields.success) {
     return {

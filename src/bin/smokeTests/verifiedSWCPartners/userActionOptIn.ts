@@ -7,6 +7,7 @@ import { createBasicAuthHeader } from '@/utils/server/basicAuth'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 /*
 Run this script only after you have the app running on localhost:3000
@@ -43,7 +44,7 @@ async function smokeTestUserActionOptIn() {
       isVerifiedEmailAddress: true,
       campaignName: 'foobar',
       hasOptedInToEmails: true,
-      countryCode: 'us',
+      countryCode: SupportedCountryCodes.US,
     } satisfies Omit<Parameters<typeof verifiedSWCPartnersUserActionOptIn>[0], 'partner'>),
   }).catch(e => {
     console.error(e)

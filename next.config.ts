@@ -20,6 +20,7 @@ const contentSecurityPolicy = {
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
+    'https://fonts.googleapis.com', // Required for newmode
   ],
   'script-src': [
     "'self'",
@@ -50,6 +51,8 @@ const contentSecurityPolicy = {
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
     'https://*.builder.io/',
+    'https://*.newmode.net/',
+    'https://js.stripe.com/', // Required for newmode
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
@@ -90,6 +93,8 @@ const contentSecurityPolicy = {
     'https://*.thirdweb.com/',
     'https://api.thirdweb.com/',
     'https://embedded-wallet.thirdweb.com/',
+    'https://*.newmode.net/',
+    'https://api.mapbox.com/', // Required for newmode
   ],
   'frame-src': [
     '*.google.com',
@@ -100,6 +105,8 @@ const contentSecurityPolicy = {
     'https://www.youtube-nocookie.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
+    'https://*.newmode.net/',
+    'https://js.stripe.com/', // Required for newmode
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
@@ -308,6 +315,32 @@ const nextConfig: NextConfig = {
       {
         source: '/join/:referralId',
         destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
+        missing: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+          },
+        ],
+      },
+      // Country-specific referral redirects
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utmMedium',
+        permanent: false,
+        has: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+            value: '(?<utmMedium>.+)',
+          },
+        ],
+      },
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
         permanent: false,
         missing: [
           {
@@ -668,16 +701,36 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/races',
-        destination: '/politicians',
+        source: '/canada',
+        destination: '/ca?utm_source=billboard',
         permanent: true,
       },
       {
-        source: '/vote',
-        destination: '/politicians',
+        source: '/uk',
+        destination: '/gb',
+        permanent: true,
+      },
+      {
+        source: '/australia',
+        destination: '/au?utm_source=billboard',
         permanent: true,
       },
     ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // These rewrites are checked after headers/redirects
+        // and before all files including _next/public files which
+        // allows overriding page files
+        {
+          source: '/:locale/(mission|manifesto)',
+          destination: '/:locale/about',
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    }
   },
 }
 

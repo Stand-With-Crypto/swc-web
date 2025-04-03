@@ -78,7 +78,8 @@
     "UPSTASH",
     "vaul",
     "viem",
-    "Warpcast"
+    "Warpcast",
+    "newmode"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[prisma]": {

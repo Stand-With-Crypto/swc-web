@@ -1,6 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
-import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import { getAuthenticatedData } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { RedirectToSignUpComponent } from '@/components/app/redirectToSignUp'
 import { PageProps } from '@/types'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'

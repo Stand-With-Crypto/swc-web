@@ -4,7 +4,7 @@ import { flatten } from 'lodash-es'
 import { ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { useCountryCode } from '@/hooks/useCountryCode'
@@ -13,32 +13,32 @@ import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
-import { UserActionCampaigns } from '@/utils/shared/userActionCampaigns'
+import { UserActionCampaignNames } from '@/utils/shared/userActionCampaigns/index'
 
 export const dynamic = 'error'
 
 export default function UserActionDeepLinks() {
   const countryCode = useCountryCode()
   const router = useRouter()
+  const userActionCTAs = getUserActionCTAsByCountry(countryCode)
   const CTAS = useMemo(() => {
-    const allCampaigns = flatten(
-      Object.values(USER_ACTION_CTAS_FOR_GRID_DISPLAY).map(cta => cta.campaigns),
-    )
+    const allCampaigns = flatten(Object.values(userActionCTAs).map(cta => cta.campaigns))
 
     return allCampaigns.filter(campaign => campaign.isCampaignActive)
-  }, [])
+  }, [userActionCTAs])
+
   return (
     <div className="container mx-auto mt-10">
       <div className="space-y-7">
         {CTAS.map(cta => {
           const url = getUserActionDeeplink({
             actionType: cta.actionType as UserActionTypesWithDeeplink,
-            campaign: cta.campaignName as UserActionCampaigns[UserActionTypesWithDeeplink],
+            campaign: cta.campaignName as UserActionCampaignNames,
             config: {
               countryCode,
             },
           })
-          const imageSrc = USER_ACTION_CTAS_FOR_GRID_DISPLAY[cta.actionType]?.image ?? ''
+          const imageSrc = userActionCTAs[cta.actionType]?.image ?? ''
 
           return (
             <div key={`${cta.actionType}-${cta.campaignName}`}>

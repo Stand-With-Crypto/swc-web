@@ -7,6 +7,7 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -23,6 +24,7 @@ interface Props {
 }
 
 export function MaybeOverflowedStances({ person, stances, countryCode }: Props) {
+  const isStanceHidden = isPoliticianStanceHidden(person.slug)
   const orderedStances = orderBy(stances, x => -1 * new Date(x.dateStanceMade).getTime())
 
   const stancesContent = orderedStances
@@ -30,11 +32,13 @@ export function MaybeOverflowedStances({ person, stances, countryCode }: Props) 
     .map(stance => (
       <DTSIStanceDetails
         countryCode={countryCode}
+        isStanceHidden={isStanceHidden}
         key={stance.id}
         person={person}
         stance={stance}
       />
     ))
+
   if (orderedStances.length < 4) {
     return <div className="space-y-6">{stancesContent}</div>
   }

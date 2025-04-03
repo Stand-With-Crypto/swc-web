@@ -7,11 +7,11 @@ import { isAfter, isBefore } from 'date-fns'
 import { nativeEnum, object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -27,12 +27,12 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionTweetedAtPerson`)
 
 const createActionTweetAtPersonInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionTweetAtPersonCampaignName),
+  campaignName: nativeEnum(USUserActionTweetAtPersonCampaignName),
   dtsiSlug: string().nullable(),
 })
 
@@ -57,12 +57,12 @@ type CampaignDuration = {
   END_TIME: Date | null
 }
 
-const CAMPAIGN_DURATION: Record<UserActionTweetAtPersonCampaignName, CampaignDuration> = {
-  [UserActionTweetAtPersonCampaignName['DEFAULT']]: {
+const CAMPAIGN_DURATION: Record<USUserActionTweetAtPersonCampaignName, CampaignDuration> = {
+  [USUserActionTweetAtPersonCampaignName['DEFAULT']]: {
     START_TIME: null,
     END_TIME: null,
   },
-  [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
+  [USUserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
     START_TIME: new Date('2024-05-19'),
     END_TIME: new Date('2024-05-24'),
   },
@@ -109,7 +109,7 @@ async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAt
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },

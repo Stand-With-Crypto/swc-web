@@ -38,6 +38,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
   // This is used to disable the login button while logging out
   useEvent(LOGOUT_ACTION_EVENT, handleLogoutEvent, window, { capture: true })
 
+  const buttonWidthClassName = 'w-full min-[1096px]:w-auto'
   return (
     <Popover
       {...dialogProps}
@@ -51,13 +52,17 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
     >
       <PopoverTrigger asChild disabled={isLoggingOut}>
         {isLoggingOut ? (
-          <Button disabled>Logging out...</Button>
+          <Button className={buttonWidthClassName} disabled>
+            Logging out...
+          </Button>
         ) : displayName ? (
-          <Button data-testid="login-button">
+          <Button className={buttonWidthClassName} data-testid="login-button">
             <div className="max-w-[150px] truncate">{displayName}</div>
           </Button>
         ) : (
-          <Button data-testid="login-button">Sign In</Button>
+          <Button className={buttonWidthClassName} data-testid="login-button">
+            Sign In
+          </Button>
         )}
       </PopoverTrigger>
       <PopoverContent a11yTitle="User Profile" align="end" className="p-0">

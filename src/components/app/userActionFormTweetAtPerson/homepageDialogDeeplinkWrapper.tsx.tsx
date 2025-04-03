@@ -8,10 +8,10 @@ import { UserActionFormTweetAtPersonSkeleton } from '@/components/app/userAction
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSession } from '@/hooks/useSession'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 interface UserActionFormTweetToPersonDeeplinkWrapperProps {
-  slug: UserActionTweetAtPersonCampaignName
+  slug: USUserActionTweetAtPersonCampaignName
 }
 
 export function UserActionFormTweetToPersonDeeplinkWrapper({

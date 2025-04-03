@@ -1,6 +1,6 @@
 import { nativeEnum, object, string } from 'zod'
 
-import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstAndLastNames } from '@/validation/fields/zodName'
@@ -11,7 +11,7 @@ const base = object({
     .min(1, 'Please enter a message')
     .max(2000, 'Your message should not exceed 2000 characters'),
   subject: string().trim(),
-  campaignName: nativeEnum(UserActionEmailCampaignName),
+  campaignName: nativeEnum(USUserActionEmailCampaignName),
 }).merge(zodFirstAndLastNames)
 
 export const zodUserActionFormEmailDebateFields = base.extend({

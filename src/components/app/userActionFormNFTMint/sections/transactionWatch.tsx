@@ -27,7 +27,7 @@ import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
-import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -66,7 +66,7 @@ export function UserActionFormNFTMintTransactionWatch({
 
   const createAction = useCallback(() => {
     const input: CreateActionMintNFTInput = {
-      campaignName: UserActionNftMintCampaignName.DEFAULT,
+      campaignName: USUserActionNftMintCampaignName.DEFAULT,
       transactionHash: transactionHash as `0x${string}`,
     }
 

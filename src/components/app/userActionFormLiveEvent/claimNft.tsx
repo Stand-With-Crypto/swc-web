@@ -16,7 +16,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
@@ -24,7 +24,7 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 
 interface Props extends UseSectionsReturn<SectionNames> {
   isLoggedIn: boolean
-  slug: UserActionLiveEventCampaignName
+  slug: USUserActionLiveEventCampaignName
 }
 
 export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {

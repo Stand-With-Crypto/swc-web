@@ -7,7 +7,7 @@ import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -18,7 +18,6 @@ import { createCountryCodeValidation } from '@/utils/server/userActionValidation
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`actionCreateUserActionPoll`)
 
@@ -29,10 +28,7 @@ export type CreatePollVoteInput = {
 
 export const actionCreateUserActionPoll = withServerActionMiddleware(
   'actionCreateUserActionPoll',
-  withValidations(
-    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
-    actionCreateUserActionPollWithoutMiddleware,
-  ),
+  withValidations([createCountryCodeValidation()], actionCreateUserActionPollWithoutMiddleware),
 )
 
 async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVoteInput) {
@@ -42,7 +38,7 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
 
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {

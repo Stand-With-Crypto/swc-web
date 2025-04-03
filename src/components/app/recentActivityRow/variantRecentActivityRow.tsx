@@ -22,13 +22,13 @@ import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRol
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
-  UserActionEmailCampaignName,
-  UserActionTweetCampaignName,
-} from '@/utils/shared/userActionCampaigns'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+  USUserActionEmailCampaignName,
+  USUserActionTweetCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
@@ -58,6 +58,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   countryCode,
 }: RecentActivityRowProps) {
   const urls = useIntlUrls()
+
+  const stateNameResolver = getStateNameResolver(countryCode)
 
   const { userLocationDetails } = action.user
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
@@ -136,12 +138,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         const dtsiRecipients = action.userActionEmailRecipients.filter(x => x.person)
 
         switch (action.campaignName) {
-          case UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024:
+          case USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024:
             return {
               children: <MainText>Email sent to CNN</MainText>,
             }
 
-          case UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024:
+          case USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024:
             return {
               children: <MainText>Email sent to ABC</MainText>,
             }
@@ -198,7 +200,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
           children:
-            action.campaignName === UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
+            action.campaignName === USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
               <MainText>
                 New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
               </MainText>
@@ -255,12 +257,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: undefined,
           children: (
             <MainText>
-              New sign up for an SWC event in{' '}
-              {
-                US_STATE_CODE_TO_DISPLAY_NAME_MAP[
-                  action.eventState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
-                ]
-              }
+              New sign up for an SWC event{' '}
+              {action.eventState ? `in ${stateNameResolver(action.eventState)}` : ''}
             </MainText>
           ),
         }

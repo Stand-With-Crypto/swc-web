@@ -1,8 +1,11 @@
+'use client'
 import { Facebook, Link, Mail } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { fullUrl, getIntlUrls } from '@/utils/shared/urls'
 
 export function EventDialogSocialLinks({
   eventState,
@@ -11,8 +14,12 @@ export function EventDialogSocialLinks({
   eventState: string
   eventSlug: string
 }) {
+  const countryCode = useCountryCode()
+
+  const urls = getIntlUrls(countryCode)
+
   const [_, handleCopyToClipboard] = useCopyTextToClipboard()
-  const eventDeeplink = `https://standwithcrypto.org/events/${eventState.toLowerCase()}/${eventSlug}`
+  const eventDeeplink = fullUrl(urls.eventDeepLink(eventState.toLowerCase(), eventSlug))
 
   return (
     <div className="mt-6 flex flex-col gap-2">

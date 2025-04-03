@@ -14,7 +14,7 @@ interface DTSIBillCardProps {
   bill: DTSIBill
   description?: string
   countryCode: SupportedCountryCodes
-  children: ReactElement<typeof CryptoSupportHighlight>
+  children?: ReactElement<typeof CryptoSupportHighlight>
   className?: string
 }
 

@@ -2,11 +2,14 @@ import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 
 import { PagePolls } from '@/components/app/pagePolls'
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { getPollsResultsData } from '@/data/polls/getPollsData'
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
@@ -25,12 +28,14 @@ export default async function PollsPage() {
   const builderIoPolls = await getPolls()
   const pollsResultsData = await getPollsResultsData()
 
-  const activePolls = USER_ACTION_CTAS_FOR_GRID_DISPLAY[UserActionType.POLL].campaigns
+  const ctas = getUserActionCTAsByCountry(countryCode)
+
+  const activePolls = ctas[UserActionType.POLL].campaigns
     .filter(campaign => campaign.isCampaignActive)
     .map(campaign => builderIoPolls?.find(poll => poll.id === campaign.campaignName))
     .filter(Boolean) as SWCPoll[] | null
 
-  const inactivePolls = USER_ACTION_CTAS_FOR_GRID_DISPLAY[UserActionType.POLL].campaigns
+  const inactivePolls = ctas[UserActionType.POLL].campaigns
     .filter(campaign => !campaign.isCampaignActive)
     .map(campaign => builderIoPolls?.find(poll => poll.id === campaign.campaignName))
     .filter(Boolean) as SWCPoll[] | null

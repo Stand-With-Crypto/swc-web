@@ -53,6 +53,8 @@ interface DialogContentProps
   closeClassName?: string
   forceAutoFocus?: boolean
   a11yTitle: string
+  preventCloseOnEscapeKeyDown?: boolean
+  preventCloseOnInteractOutside?: boolean
 }
 const DialogContent = React.forwardRef<
   React.ComponentRef<typeof DialogPrimitive.Content>,
@@ -67,6 +69,8 @@ const DialogContent = React.forwardRef<
       onOpenAutoFocus,
       closeClassName = '',
       a11yTitle,
+      preventCloseOnEscapeKeyDown = false,
+      preventCloseOnInteractOutside = false,
       ...props
     },
     ref,
@@ -77,6 +81,8 @@ const DialogContent = React.forwardRef<
         <DialogOverlay />
         <DialogPrimitive.Content
           className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
+          onEscapeKeyDown={preventCloseOnEscapeKeyDown ? e => e.preventDefault() : undefined}
+          onInteractOutside={preventCloseOnInteractOutside ? e => e.preventDefault() : undefined}
           onOpenAutoFocus={isMobile && !forceAutoFocus ? e => e.preventDefault() : onOpenAutoFocus}
           ref={ref}
           {...props}
@@ -85,7 +91,7 @@ const DialogContent = React.forwardRef<
             <DialogPrimitive.Description>{props['aria-describedby']}</DialogPrimitive.Description>
             <DialogTitle>{a11yTitle}</DialogTitle>
           </VisuallyHidden>
-          <ScrollArea className="overflow-auto md:max-h-[90vh]">{children}</ScrollArea>
+          <ScrollArea className="-mr-4 overflow-auto pr-4 md:max-h-[90vh]">{children}</ScrollArea>
           <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
             <X size={20} />
             <span className="sr-only">Close</span>

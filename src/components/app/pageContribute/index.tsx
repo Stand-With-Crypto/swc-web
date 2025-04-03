@@ -88,9 +88,8 @@ export function PageContribute() {
                             <p>All,</p>
 
                             <p>
-                              2024 is a critical year for crypto in America. I’m reaching out to ask
-                              for help in securing crypto’s future and America’s leadership in
-                              financial innovation.
+                              I’m reaching out to ask for help in securing crypto’s future and
+                              America’s leadership in financial innovation.
                             </p>
                             <p>
                               The elections, new Congressional legislation, and court proceedings
@@ -240,27 +239,6 @@ export function PageContribute() {
             <Button asChild size="lg">
               <ExternalLink href={'https://github.com/Stand-With-Crypto/swc-web/'}>
                 View Github
-              </ExternalLink>
-            </Button>
-          ),
-        },
-        {
-          imageSrc: '/pagesContent/contribute/stances.svg',
-          title: 'Contribute to our politician scoring system',
-          subtitle: (
-            <>
-              Help us build a transparent politician scoring system by submitting public statements
-              or tweets that a politician has made about crypto to{' '}
-              <ExternalLink href={'https://www.dotheysupportit.com/faq'}>
-                DoTheySupportIt.com
-              </ExternalLink>
-              .
-            </>
-          ),
-          content: (
-            <Button asChild size="lg">
-              <ExternalLink href={'https://www.dotheysupportit.com/faq'}>
-                Add a position
               </ExternalLink>
             </Button>
           ),

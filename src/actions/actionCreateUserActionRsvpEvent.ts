@@ -6,11 +6,11 @@ import { waitUntil } from '@vercel/functions'
 import { boolean, object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeFromURL } from '@/utils/server/getCountryCodeFromURL'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -23,7 +23,10 @@ import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withSe
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import {
+  getActionDefaultCampaignName,
+  isActionSupportedForCountry,
+} from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionRsvpEvent`)
 
@@ -31,6 +34,7 @@ const createActionRsvpEventInputValidationSchema = object({
   eventState: string(),
   eventSlug: string(),
   shouldReceiveNotifications: boolean(),
+  campaignName: string(),
 })
 
 export type CreateActionRsvpEventInput = z.infer<typeof createActionRsvpEventInputValidationSchema>
@@ -40,6 +44,7 @@ interface SharedDependencies {
   sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
+  campaignName: CreateActionRsvpEventInput['campaignName']
 }
 
 export const actionCreateUserActionRsvpEvent = withServerActionMiddleware(
@@ -62,7 +67,15 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeFromURL()
+  const countryCode = await getUserAccessLocationCookie()
+
+  if (
+    !isActionSupportedForCountry(countryCode, UserActionType.RSVP_EVENT) ||
+    getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode) !==
+      validatedInput.data.campaignName
+  ) {
+    return { errors: { campaignName: ['Invalid campaign name'] } }
+  }
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
@@ -85,23 +98,28 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
   const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentRsvpEventUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
-  const rsvpEventuserAction = recentRsvpEventUserAction?.userActionRsvpEvent
+  const rsvpEventUserAction = recentRsvpEventUserAction?.userActionRsvpEvent
   const shouldUpdateRsvpEventNotificationStatus =
-    rsvpEventuserAction?.shouldReceiveNotifications === false &&
+    rsvpEventUserAction?.shouldReceiveNotifications === false &&
     validatedInput.data.shouldReceiveNotifications === true
 
   if (recentRsvpEventUserAction && !shouldUpdateRsvpEventNotificationStatus) {
     logSpamActionSubmissions({
-      sharedDependencies: { analytics },
+      sharedDependencies: { analytics, campaignName: validatedInput.data.campaignName },
     })
     waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
-  if (shouldUpdateRsvpEventNotificationStatus && rsvpEventuserAction.id) {
+  if (shouldUpdateRsvpEventNotificationStatus && rsvpEventUserAction.id) {
     await changeReceiveNotificationStatus({
-      userActionRsvpEventId: rsvpEventuserAction.id,
-      sharedDependencies: { sessionId, analytics, peopleAnalytics },
+      userActionRsvpEventId: rsvpEventUserAction.id,
+      sharedDependencies: {
+        sessionId,
+        analytics,
+        peopleAnalytics,
+        campaignName: validatedInput.data.campaignName,
+      },
     })
 
     waitUntil(beforeFinish())
@@ -160,7 +178,10 @@ async function changeReceiveNotificationStatus({
   sharedDependencies,
 }: {
   userActionRsvpEventId: string
-  sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+  sharedDependencies: Pick<
+    SharedDependencies,
+    'sessionId' | 'analytics' | 'peopleAnalytics' | 'campaignName'
+  >
 }) {
   await prismaClient.userActionRsvpEvent.update({
     where: {
@@ -174,7 +195,7 @@ async function changeReceiveNotificationStatus({
 
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.RSVP_EVENT,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    campaignName: sharedDependencies.campaignName,
     userState: 'Existing',
     shouldReceiveNotifications: true,
   })
@@ -202,11 +223,11 @@ async function getRecentUserActionByUserId(
 function logSpamActionSubmissions({
   sharedDependencies,
 }: {
-  sharedDependencies: Pick<SharedDependencies, 'analytics'>
+  sharedDependencies: Pick<SharedDependencies, 'analytics' | 'campaignName'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.RSVP_EVENT,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    campaignName: sharedDependencies.campaignName,
     reason: 'Too Many Recent',
     userState: 'Existing',
   })
@@ -231,7 +252,7 @@ async function createAction<U extends User>({
     data: {
       user: { connect: { id: user.id } },
       actionType: UserActionType.RSVP_EVENT,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+      campaignName: validatedInput.campaignName,
       countryCode,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
@@ -255,7 +276,7 @@ async function createAction<U extends User>({
 
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.RSVP_EVENT,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    campaignName: validatedInput.campaignName,
     userState: isNewUser ? 'New' : 'Existing',
     shouldReceiveNotifications: validatedInput.shouldReceiveNotifications,
   })

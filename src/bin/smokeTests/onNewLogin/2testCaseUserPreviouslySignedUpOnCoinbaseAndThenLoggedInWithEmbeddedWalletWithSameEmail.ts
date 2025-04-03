@@ -4,7 +4,7 @@ import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
 import { getDefaultParameters, mockEmbeddedWalletMetadata, TestCase, verify } from './utils'
 import { UserEmailAddressSource } from '.prisma/client'

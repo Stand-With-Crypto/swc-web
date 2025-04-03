@@ -1,6 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { PageProps } from '@/types'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
@@ -11,7 +11,7 @@ export const dynamic = 'error'
 export default async function UserActionEmailCongresspersonDeepLink(props: PageProps) {
   const params = await props.params
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
+    <USHomepageDialogDeeplinkLayout pageParams={params}>
       <ErrorBoundary
         extras={{
           action: {
@@ -26,6 +26,6 @@ export default async function UserActionEmailCongresspersonDeepLink(props: PageP
       >
         <UserActionFormEmailCongresspersonDeeplinkWrapper />
       </ErrorBoundary>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }

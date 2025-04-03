@@ -222,7 +222,9 @@ function UnauthenticatedSection({
         <GeoGate
           bypassCountryCheck={bypassCountryCheck}
           countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-          unavailableContent={<UserActionFormActionUnavailable />}
+          unavailableContent={
+            <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
+          }
         >
           {currentSection === LoginSections.LOGIN ? (
             <div className="px-4 md:px-6">

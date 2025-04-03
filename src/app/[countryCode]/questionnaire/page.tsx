@@ -7,7 +7,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { externalUrls } from '@/utils/shared/urls'
+import { usExternalUrls } from '@/utils/shared/urls'
 
 export const dynamic = 'error'
 
@@ -47,7 +47,7 @@ export default async function QuestionnairePage() {
 
       <div className="space-y-6">
         <Button asChild size="lg">
-          <ExternalLink href={externalUrls.swcQuestionnaire()}>
+          <ExternalLink href={usExternalUrls.swcQuestionnaire()}>
             Proceed to questionnaire
           </ExternalLink>
         </Button>

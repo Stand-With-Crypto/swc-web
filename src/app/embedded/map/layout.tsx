@@ -8,10 +8,11 @@ import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import {
   generateMetadataDetails,
-  TOP_LEVEL_METADATA_DETAILS,
+  generateTopLevelMetadataDetails,
   viewport as defaultViewport,
 } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 import { fontClassName } from '@/utils/web/fonts'
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     default: title,
     template: '%s | Stand With Crypto',
   },
-  ...TOP_LEVEL_METADATA_DETAILS,
+  ...generateTopLevelMetadataDetails(DEFAULT_SUPPORTED_COUNTRY_CODE),
 }
 
 export const viewport: Viewport = {

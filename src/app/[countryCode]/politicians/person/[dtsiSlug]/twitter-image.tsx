@@ -1,4 +1,4 @@
-import { generateOgImage } from '@/components/app/pagePoliticianDetails/generateOgImage'
+import { generateOgImage } from '@/components/app/pagePoliticianDetails/common/generateOgImage'
 
 export const dynamic = 'error'
 export const runtime = 'edge'

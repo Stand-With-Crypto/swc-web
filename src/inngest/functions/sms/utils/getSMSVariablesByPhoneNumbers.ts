@@ -8,7 +8,7 @@ import {
 } from '@/utils/server/districtRankings/upsertRankings'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
 export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {

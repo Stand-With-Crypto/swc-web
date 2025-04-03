@@ -1,36 +1,84 @@
 'use client'
+import dynamic from 'next/dynamic'
 
-import { ShareOnX } from '@/components/app/userActionFormShareOnTwitter/sections/share'
-import { UserActionFormShareOnTwitterSuccess } from '@/components/app/userActionFormShareOnTwitter/sections/success'
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { useSections } from '@/hooks/useSections'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
+import { UserActionFormShareOnTwitterSkeleton } from '@/components/app/userActionFormShareOnTwitter/common/skeleton'
+import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
+import { gracefullyError } from '@/utils/shared/gracefullyError'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
-import { ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER, SECTIONS_NAMES } from './constants'
+const AUUserActionFormShareOnTwitter = dynamic(
+  () =>
+    import('@/components/app/userActionFormShareOnTwitter/au').then(
+      mod => mod.AUUserActionFormShareOnTwitter,
+    ),
+  {
+    loading: () => <UserActionFormShareOnTwitterSkeleton />,
+  },
+)
 
-interface UserActionFormShareOnTwitterProps {
-  onClose: () => void
-}
+const CAUserActionFormShareOnTwitter = dynamic(
+  () =>
+    import('@/components/app/userActionFormShareOnTwitter/ca').then(
+      mod => mod.CAUserActionFormShareOnTwitter,
+    ),
+  {
+    loading: () => <UserActionFormShareOnTwitterSkeleton />,
+  },
+)
+
+const GBUserActionFormShareOnTwitter = dynamic(
+  () =>
+    import('@/components/app/userActionFormShareOnTwitter/gb').then(
+      mod => mod.GBUserActionFormShareOnTwitter,
+    ),
+  {
+    loading: () => <UserActionFormShareOnTwitterSkeleton />,
+  },
+)
+
+const USUserActionFormShareOnTwitter = dynamic(
+  () =>
+    import('@/components/app/userActionFormShareOnTwitter/us').then(
+      mod => mod.USUserActionFormShareOnTwitter,
+    ),
+  {
+    loading: () => <UserActionFormShareOnTwitterSkeleton />,
+  },
+)
 
 export function UserActionFormShareOnTwitter(props: UserActionFormShareOnTwitterProps) {
-  const { onClose } = props
+  const { countryCode } = props
 
-  const sectionProps = useSections({
-    sections: Object.values(SECTIONS_NAMES),
-    initialSectionId: SECTIONS_NAMES.SHARE,
-    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER,
-  })
-
-  switch (sectionProps.currentSection) {
-    case SECTIONS_NAMES.SHARE:
-      return <ShareOnX {...sectionProps} />
-    case SECTIONS_NAMES.SUCCESS:
-      return (
-        <UserActionFormSuccessScreen onClose={onClose}>
-          <UserActionFormShareOnTwitterSuccess />
-        </UserActionFormSuccessScreen>
-      )
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return <USUserActionFormShareOnTwitter {...props} />
+    case SupportedCountryCodes.GB:
+      return <GBUserActionFormShareOnTwitter {...props} />
+    case SupportedCountryCodes.CA:
+      return <CAUserActionFormShareOnTwitter {...props} />
+    case SupportedCountryCodes.AU:
+      return <AUUserActionFormShareOnTwitter {...props} />
     default:
-      sectionProps.onSectionNotFound()
-      return null
+      return gracefullyError({
+        msg: `Country implementation not found for UserActionFormShareOnTwitter`,
+        fallback: (
+          <UserActionFormActionUnavailable
+            countryCode={countryCode || DEFAULT_SUPPORTED_COUNTRY_CODE}
+          />
+        ),
+        hint: {
+          level: 'error',
+          tags: {
+            domain: 'UserActionFormShareOnTwitter',
+          },
+          extra: {
+            countryCode,
+          },
+        },
+      })
   }
 }

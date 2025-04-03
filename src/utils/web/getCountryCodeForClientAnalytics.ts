@@ -1,21 +1,16 @@
 import Cookies from 'js-cookie'
 
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
 import { isBrowser } from '@/utils/shared/executionEnvironment'
+import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 export function getCountryCodeForClientAnalytics() {
   if (!isBrowser) return ''
 
-  const maybeCountryCodeCookie = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
+  const maybeUserAccessLocationCookie = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.toLowerCase()
 
-  const countryCode = parseUserCountryCodeCookie(maybeCountryCodeCookie)?.countryCode ?? null
-
-  if (!countryCode) {
+  if (!maybeUserAccessLocationCookie) {
     return 'not-set'
   }
 
-  return countryCode
+  return maybeUserAccessLocationCookie
 }

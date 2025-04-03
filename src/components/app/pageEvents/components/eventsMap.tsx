@@ -5,13 +5,16 @@ import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps
 import { AnimatePresence, motion } from 'motion/react'
 
 import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
+import {
+  StateEventsDialog,
+  StateEventsDialogProps,
+} from '@/components/app/pageEvents/components/stateEventsDialog'
 import { EVENT_MAP_STATE_COORDS } from '@/components/app/pageEvents/utils/mapCoordinates'
 import { pluralize } from '@/utils/shared/pluralize'
 import {
   getUSStateCodeFromStateName,
-  US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
-} from '@/utils/shared/usStateUtils'
+  getUSStateNameFromStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
@@ -26,9 +29,12 @@ interface MapMarker {
 export function EventsMap({ events }: { events: SWCEvents }) {
   const [tooltipMessage, setTooltipMessage] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
-  const [stateDialogProps, setStateDialogProps] = useState<{ open: boolean; state: string | null }>(
-    { open: false, state: null },
-  )
+  const [stateDialogProps, setStateDialogProps] = useState<
+    Omit<StateEventsDialogProps, 'setIsOpen'>
+  >({
+    isOpen: false,
+    state: null,
+  })
 
   const currentFill = '#F4EEFF'
   const currentStroke = '#DAC5FF'
@@ -115,9 +121,16 @@ export function EventsMap({ events }: { events: SWCEvents }) {
                     onClick={() => {
                       if (!stateHasEvents) return
 
+                      const stateCode = getUSStateCodeFromStateName(geo.properties.name)
+
                       setStateDialogProps({
-                        open: true,
-                        state: getUSStateCodeFromStateName(geo.properties.name) ?? null,
+                        isOpen: true,
+                        state: stateCode
+                          ? {
+                              code: stateCode,
+                              name: geo.properties.name,
+                            }
+                          : null,
                       })
                     }}
                     onMouseMove={event => handleActionMouseHover(geo, event)}
@@ -158,8 +171,8 @@ export function EventsMap({ events }: { events: SWCEvents }) {
                     key={id}
                     onClick={() =>
                       setStateDialogProps({
-                        open: true,
-                        state: eventState,
+                        isOpen: true,
+                        state: { code: eventState, name: getUSStateNameFromStateCode(eventState) },
                       })
                     }
                     transition={{ duration: 0.5 }}
@@ -204,9 +217,9 @@ export function EventsMap({ events }: { events: SWCEvents }) {
 
       <StateEventsDialog
         events={events}
-        isOpen={stateDialogProps.open}
-        setIsOpen={(open: boolean) => setStateDialogProps({ open, state: null })}
-        state={stateDialogProps.state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
+        isOpen={stateDialogProps.isOpen}
+        setIsOpen={(open: boolean) => setStateDialogProps({ isOpen: open, state: null })}
+        state={stateDialogProps.state}
       />
     </>
   )

@@ -9,11 +9,11 @@ import { UserActionFormLiveEventSuccess } from '@/components/app/userActionFormL
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useSections } from '@/hooks/useSections'
 import { NFTSlug } from '@/utils/shared/nft'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 export type UserActionFormLiveEventProps = {
-  slug: UserActionLiveEventCampaignName
+  slug: USUserActionLiveEventCampaignName
   onClose: () => void
   isLoggedIn: boolean
 }

@@ -4,7 +4,6 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFormatter'
 import { RichTextEditorValue } from '@/components/app/dtsiRichText/types'
 import { VotesSection } from '@/components/app/pageBillDetails/votesSection'
-import { Button } from '@/components/ui/button'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -50,27 +49,19 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
       </section>
 
-      <section className="space-y-8 text-center">
-        <p className="text-lg font-semibold">Analysis</p>
+      {!!analyses.length && (
+        <section className="space-y-8 text-center">
+          <p className="text-lg font-semibold">Analysis</p>
 
-        <div className="space-y-6 text-center text-fontcolor-muted">
-          {analyses.length ? (
-            analyses.map(analysis => (
+          <div className="space-y-6 text-center text-fontcolor-muted">
+            {analyses.map(analysis => (
               <div className="space-y-2" key={analysis.id}>
                 <RichTextFormatter richText={analysis.richTextCommentary} />
               </div>
-            ))
-          ) : (
-            <p className="text-fontcolor-muted">No analysis for this Bill yet.</p>
-          )}
-        </div>
-
-        <Button asChild variant="secondary">
-          <ExternalLink href={`https://www.dotheysupportit.com/bills/${bill.id}/create-analysis`}>
-            Add Analysis
-          </ExternalLink>
-        </Button>
-      </section>
+            ))}
+          </div>
+        </section>
+      )}
 
       <VotesSection countryCode={countryCode} votes={relationships} />
     </div>

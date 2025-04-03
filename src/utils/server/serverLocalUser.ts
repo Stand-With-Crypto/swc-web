@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 import { any, object, record, string } from 'zod'
 
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { COOKIE_CONSENT_COOKIE_NAME, deserializeCookieConsent } from '@/utils/shared/cookieConsent'
 import {
   CurrentSessionLocalUser,
@@ -139,7 +139,7 @@ function parseFromCookieStrings({
 
 export async function parseLocalUserFromCookies() {
   const cookieObj = await cookies()
-  const countryCode = await getCountryCodeCookie({ bypassValidCountryCodeCheck: true })
+  const countryCode = await getUserAccessLocationCookie({ bypassValidCountryCodeCheck: true })
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value

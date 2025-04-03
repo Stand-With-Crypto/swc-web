@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Script from 'next/script'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
 import { PageProps } from '@/types'
@@ -24,9 +25,12 @@ export default async function Page(props: DynamicPageProps) {
   const content = await getPageContent(PAGE_MODEL, pathname, countryCode)
 
   return (
-    <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={pathname}>
-      <RenderBuilderContent content={content} model={PAGE_MODEL} />
-    </BuilderPageLayout>
+    <>
+      <Script src="https://win.newmode.net/assets/main.js" type="module" />
+      <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={pathname}>
+        <RenderBuilderContent content={content} model={PAGE_MODEL} />
+      </BuilderPageLayout>
+    </>
   )
 }
 

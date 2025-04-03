@@ -3,16 +3,19 @@ import { UserActionType } from '@prisma/client'
 import { useParams } from 'next/navigation'
 
 import { UserActionGridCampaignsDialogContent } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { useGridCTAs } from '@/components/app/userActionGridCTAs/hooks/useGridCTAs'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export default function UserActionCampaigns() {
   const params = useParams<{ action: UserActionType }>()
   const action = params?.action?.toUpperCase() ?? ''
-  const cta = USER_ACTION_CTAS_FOR_GRID_DISPLAY[action]
+  const cta = getUserActionCTAsByCountry(countryCode)[action]
 
   const { data, isLoading } = useApiResponseForUserPerformedUserActionTypes()
   const performedUserActionTypes = data?.performedUserActionTypes ?? []

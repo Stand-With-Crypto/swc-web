@@ -26,7 +26,7 @@ import { BILLS_IDS } from '@/utils/shared/constants'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionCallCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -163,7 +163,7 @@ export function SuggestedScript({
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
       const data: CreateActionCallCongresspersonInput = {
-        campaignName: UserActionCallCampaignName.FIT21_2024_04,
+        campaignName: USUserActionCallCampaignName.FIT21_2024_04,
         dtsiSlug: dtsiPerson.slug,
         phoneNumber: phoneNumberToCall,
         address: addressSchema,

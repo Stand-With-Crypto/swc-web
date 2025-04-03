@@ -4,10 +4,15 @@ import { notFound } from 'next/navigation'
 import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
+import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import {
+  getUSStateNameFromStateCode,
+  isValidUSStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-type Props = PageProps<{ state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP }>
+type Props = PageProps<{ state: string }>
 
 export const dynamic = 'error'
 
@@ -19,24 +24,34 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { state } = params
 
   return generateMetadataDetails({
-    title: `Events in ${US_STATE_CODE_TO_DISPLAY_NAME_MAP[state.toUpperCase() as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP]}`,
+    title: `Events in ${getUSStateNameFromStateCode(state)}`,
     description,
   })
 }
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export default async function StateEventsPageRoot(props: Props) {
   const params = await props.params
   const { state } = params
 
-  const isStateValid = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(state.toUpperCase())
-
-  if (!isStateValid) {
+  if (!isValidUSStateCode(state)) {
     notFound()
   }
 
+  const stateCode = state.toUpperCase()
+
+  const events = await getEvents({ countryCode })
+
   return (
-    <EventsPageDialogDeeplinkLayout pageParams={params}>
-      <StateEventsDialogContent state={state} />
+    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
+      <StateEventsDialogContent
+        countryCode={countryCode}
+        state={{
+          code: stateCode,
+          name: getUSStateNameFromStateCode(stateCode),
+        }}
+      />
     </EventsPageDialogDeeplinkLayout>
   )
 }

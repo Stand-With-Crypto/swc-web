@@ -8,7 +8,11 @@ import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/get
 import { inngest } from '@/inngest/inngest'
 import { sendSMS, SendSMSError, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
-import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
+import {
+  countSegments,
+  getUserByPhoneNumber,
+  isPhoneNumberCountrySupported,
+} from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getLogger } from '@/utils/shared/logger'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
@@ -148,68 +152,74 @@ export async function enqueueMessages(
   let segmentsSent = 0
   let queuedMessages = 0
 
-  const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
-    for (const message of messages) {
-      const { body, journeyType, campaignName, media, hasWelcomeMessageInBody } = message
+  const enqueueMessagesPromise = payload
+    .map(async ({ messages, phoneNumber }) => {
+      if (!isPhoneNumberCountrySupported(phoneNumber)) {
+        return
+      }
 
-      const phoneNumberVariables = variables[phoneNumber] ?? {}
+      for (const message of messages) {
+        const { body, journeyType, campaignName, media, hasWelcomeMessageInBody } = message
 
-      try {
-        const queuedMessage = await sendSMS({
-          body: applySMSVariables(body, phoneNumberVariables),
-          to: phoneNumber,
-          media,
-          statusCallbackUrl: fullUrl(
-            apiUrls.smsStatusCallback({
-              journeyType,
-              campaignName,
-              hasWelcomeMessageInBody,
-            }),
-          ),
-        })
+        const phoneNumberVariables = variables[phoneNumber] ?? {}
 
-        if (queuedMessage) {
-          segmentsSent += countSegments(queuedMessage.body)
-          queuedMessages += 1
-        }
-      } catch (error) {
-        if (error instanceof NonRetriableError) {
-          throw error
-        }
+        try {
+          const queuedMessage = await sendSMS({
+            body: applySMSVariables(body, phoneNumberVariables),
+            to: phoneNumber,
+            media,
+            statusCallbackUrl: fullUrl(
+              apiUrls.smsStatusCallback({
+                journeyType,
+                campaignName,
+                hasWelcomeMessageInBody,
+              }),
+            ),
+          })
 
-        if (error instanceof SendSMSError) {
-          if (error.isTooManyRequests) {
-            return update(failedPhoneNumbers, [error.phoneNumber], (current = []) => [
-              ...current,
-              message,
-            ])
+          if (queuedMessage) {
+            segmentsSent += countSegments(queuedMessage.body)
+            queuedMessages += 1
           }
-          if (error.isInvalidPhoneNumber) {
-            return invalidPhoneNumbers.push(error.phoneNumber)
-          }
-          if (error.isUnsubscribedUser) {
-            return unsubscribedUsers.push(error.phoneNumber)
+        } catch (error) {
+          if (error instanceof NonRetriableError) {
+            throw error
           }
 
-          return Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
-            extra: { reason: error },
+          if (error instanceof SendSMSError) {
+            if (error.isTooManyRequests) {
+              return update(failedPhoneNumbers, [error.phoneNumber], (current = []) => [
+                ...current,
+                message,
+              ])
+            }
+            if (error.isInvalidPhoneNumber) {
+              return invalidPhoneNumbers.push(error.phoneNumber)
+            }
+            if (error.isUnsubscribedUser) {
+              return unsubscribedUsers.push(error.phoneNumber)
+            }
+
+            return Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
+              extra: { reason: error },
+              tags: {
+                domain: 'enqueueMessages',
+              },
+            })
+          }
+
+          Sentry.captureException(`sendSMS unexpected Error: ${(error as any)?.message}`, {
+            extra: {
+              reason: error,
+            },
             tags: {
               domain: 'enqueueMessages',
             },
           })
         }
-
-        Sentry.captureException(`sendSMS unexpected Error: ${(error as any)?.message}`, {
-          extra: {
-            reason: error,
-          },
-          tags: {
-            domain: 'enqueueMessages',
-          },
-        })
       }
-    }
-  })
+    })
+    .filter(Boolean)
 
   await Promise.all(enqueueMessagesPromise)
 

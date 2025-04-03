@@ -9,7 +9,7 @@ import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
   requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),

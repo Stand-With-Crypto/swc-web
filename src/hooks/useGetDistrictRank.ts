@@ -2,8 +2,8 @@ import useSWR, { SWRConfiguration } from 'swr'
 
 import { GetDistrictRankResponse } from '@/app/api/public/referrals/[stateCode]/[districtNumber]/route'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { apiUrls } from '@/utils/shared/urls'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 
 interface UseGetDistrictRankProps {
   stateCode: USStateCode

@@ -1,7 +1,6 @@
-import React, { ReactNode } from 'react'
+import React, { ComponentType, ReactNode } from 'react'
 import { User } from 'lucide-react'
 
-import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
@@ -12,6 +11,7 @@ import {
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
+  isPoliticianStanceHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguage,
@@ -26,6 +26,10 @@ interface Props {
   person: DTSI_PersonCardFragment
   countryCode: SupportedCountryCodes
   subheader: 'role' | 'role-w-state' | string
+  cryptoStanceGrade: ComponentType<{
+    className?: string
+    person: DTSI_PersonCardFragment
+  }>
   isRecommended?: boolean
   footer?: React.ReactNode
   isClickable?: boolean
@@ -84,6 +88,7 @@ export function DTSIPersonHeroCard(props: Props) {
     footer,
     isClickable = true,
     forceMobile = false,
+    cryptoStanceGrade: CryptoStanceGrade,
     target,
   } = props
   const politicalAffiliationCategoryAbbreviation =
@@ -94,6 +99,7 @@ export function DTSIPersonHeroCard(props: Props) {
     ? ` (${politicalAffiliationCategoryAbbreviation})`
     : ''
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
+  const isStanceHidden = isPoliticianStanceHidden(person.slug)
 
   return (
     <DtsiPersonHeroCardWrapper
@@ -149,10 +155,12 @@ export function DTSIPersonHeroCard(props: Props) {
               >
                 {displayName}
               </div>
-              <div className="text-xs text-white">
-                {person.stanceCount}{' '}
-                {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
-              </div>
+              {!isStanceHidden && (
+                <div className="text-xs text-white">
+                  {person.stanceCount}{' '}
+                  {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
+                </div>
+              )}
               {subheaderString && (
                 <div className="mt-2">
                   <div
@@ -166,9 +174,11 @@ export function DTSIPersonHeroCard(props: Props) {
                 </div>
               )}
             </div>
-            <div className="ml-auto h-12 w-10 flex-shrink-0">
-              <DTSIFormattedLetterGrade className="h-full w-full" person={person} />
-            </div>
+            {!isStanceHidden && (
+              <div className="ml-auto h-12 w-10 flex-shrink-0">
+                <CryptoStanceGrade className="h-full w-full" person={person} />
+              </div>
+            )}
           </div>
         </div>
 
@@ -191,12 +201,14 @@ export function DTSIPersonHeroCard(props: Props) {
                 {person.stanceCount}{' '}
                 {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
-                <div className="shrink-0">
-                  <DTSIFormattedLetterGrade className="h-5 w-5" person={person} />
+              {!isStanceHidden && (
+                <div className="inline-flex items-center gap-2 rounded-full bg-muted p-1 text-xs">
+                  <div className="shrink-0">
+                    <CryptoStanceGrade className="h-5 w-5" person={person} />
+                  </div>
+                  <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
                 </div>
-                <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
-              </div>
+              )}
             </div>
           )}
         </div>
@@ -205,16 +217,12 @@ export function DTSIPersonHeroCard(props: Props) {
       {footer !== undefined ? (
         <div className={cn('hidden', !forceMobile && 'sm:block')}>{footer}</div>
       ) : (
-        <DTSIPersonHeroCardFooter forceMobile={forceMobile} isRecommended={isRecommended}>
-          {isRecommended ? (
-            <>
-              Recommended{' '}
-              <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
-            </>
-          ) : (
-            convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
-          )}
-        </DTSIPersonHeroCardFooter>
+        <DTSIPersonHeroCardFooterStanceHidden
+          forceMobile={forceMobile}
+          isRecommended={isRecommended}
+          isStanceHidden={isStanceHidden}
+          person={person}
+        />
       )}
     </DtsiPersonHeroCardWrapper>
   )
@@ -255,5 +263,44 @@ export function DtsiPersonHeroCardWrapper({
     >
       {children}
     </InternalLink>
+  )
+}
+
+function DTSIPersonHeroCardFooterStanceHidden({
+  person,
+  isRecommended,
+  forceMobile,
+  isStanceHidden,
+}: {
+  person: DTSI_PersonCardFragment
+  forceMobile: boolean
+  isStanceHidden: boolean
+  isRecommended?: boolean
+}) {
+  if (isStanceHidden) {
+    return (
+      <DTSIPersonHeroCardFooter
+        forceMobile={forceMobile}
+        isRecommended={isRecommended && !isStanceHidden}
+      >
+        {person.stanceCount} {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
+      </DTSIPersonHeroCardFooter>
+    )
+  }
+
+  return (
+    <DTSIPersonHeroCardFooter
+      forceMobile={forceMobile}
+      isRecommended={isRecommended && !isStanceHidden}
+    >
+      {isRecommended ? (
+        <>
+          Recommended{' '}
+          <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
+        </>
+      ) : (
+        convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
+      )}
+    </DTSIPersonHeroCardFooter>
   )
 }

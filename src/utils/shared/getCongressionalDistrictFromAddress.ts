@@ -7,7 +7,7 @@ import {
   GoogleCivicInfoResponse,
 } from '@/utils/shared/googleCivicInfo'
 import { logger } from '@/utils/shared/logger'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 const SINGLE_MEMBER_STATES = ['AK', 'DE', 'ND', 'SD', 'VT', 'WY', 'DC']
 

@@ -6,12 +6,12 @@ import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFor
 import {
   DTSIStanceDetailsQuoteProp,
   DTSIStanceDetailsStanceProp,
-  IStanceDetailsProps,
+  StanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { ExternalLink } from '@/components/ui/link'
 import { cn } from '@/utils/web/cn'
 
-type IDTSIStanceDetailsQuoteProps = Omit<IStanceDetailsProps, 'stance'> & {
+type IDTSIStanceDetailsQuoteProps = Omit<StanceDetailsProps, 'stance'> & {
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsQuoteProp>
 }
 

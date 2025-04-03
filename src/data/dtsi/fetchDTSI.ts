@@ -23,7 +23,7 @@ export const fetchDTSI = async <R, V = object>(
   variables?: V,
   nextConfig?: { nextTags?: string[]; nextRevalidate?: number },
 ) => {
-  if (IS_MOCKING_DTSI_DATA) {
+  if (toBool(IS_MOCKING_DTSI_DATA)) {
     // because this file will import faker, we want to avoid loading it in our serverless environments
     return import('@/mocks/dtsi/queryDTSIMockSchema').then(x =>
       x.queryDTSIMockSchema<R>(query, variables),

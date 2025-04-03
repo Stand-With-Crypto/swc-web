@@ -1,6 +1,6 @@
 import { array, nativeEnum, object, string } from 'zod'
 
-import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { withEnhancedDescription } from '@/utils/shared/zod'
 import { GENERIC_ERROR_DESCRIPTION } from '@/utils/web/errorUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -19,7 +19,7 @@ const base = object({
     triggerException: true,
     message: GENERIC_ERROR_DESCRIPTION,
   }),
-  campaignName: nativeEnum(UserActionEmailCampaignName),
+  campaignName: nativeEnum(USUserActionEmailCampaignName),
   politicianCategory: zodYourPoliticianCategory,
 }).merge(zodFirstAndLastNames)
 

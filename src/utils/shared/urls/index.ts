@@ -1,10 +1,20 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBCountryCode } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+
+export type LocationStateCode =
+  | USStateCode
+  | GBCountryCode
+  | AUStateCode
+  | CAProvinceOrTerritoryCode
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -39,6 +49,8 @@ export const getIntlUrls = (
     termsOfService: () => `${countryPrefix}/terms-of-service`,
     privacyPolicy: () => `${countryPrefix}/privacy`,
     about: () => `${countryPrefix}/about`,
+    // Uses Next.js rewrite function to render the same page as /about
+    manifesto: () => `${countryPrefix}/manifesto`,
     resources: () => `${countryPrefix}/resources`,
     bills: () => `${countryPrefix}/bills`,
     billDetails: (billSlug: string) => `${countryPrefix}/bills/${billSlug}`,
@@ -71,60 +83,43 @@ export const getIntlUrls = (
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
-    internalHomepage: () => `${countryPrefix}/internal`,
+    internalHomepage: () => '/internal',
     becomeMember: () => `${countryPrefix}/action/become-member`,
     community: () => `${countryPrefix}/community`,
     events: () => `${countryPrefix}/events`,
+    eventDeepLink: (state: string, eventSlug: string) =>
+      `${countryPrefix}/events/${state}/${eventSlug}`,
     advocacyToolkit: () => `${countryPrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
     referrals: (pageNum?: number) => {
-      const shouldSuppressPageNum = pageNum === 1
+      const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
+    locationStateSpecific: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
+    locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
+    locationStateSpecificHouseOfLordsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-lords`,
+    locationStateSpecificHouseOfCommonsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-commons`,
+    locationStateSpecificHouseOfRepsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-representatives`,
+    locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/governor`,
+    locationKeyRaces: () => `${countryPrefix}/races/`,
+    locationDistrictSpecific: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: NormalizedDTSIDistrictId
+    }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
   }
-}
-
-const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
-  process.env.NEXT_PUBLIC_VERCEL_URL,
-  'NEXT_PUBLIC_VERCEL_URL',
-  null,
-)
-
-export const fullUrl = (path: string) => {
-  switch (NEXT_PUBLIC_ENVIRONMENT) {
-    case 'local':
-      return `http://localhost:3000${path}`
-    case 'testing':
-      return `https://testing.standwithcrypto.org${path}`
-    case 'preview':
-      return `https://${NEXT_PUBLIC_VERCEL_URL!}${path}`
-    case 'production':
-      return `https://www.standwithcrypto.org${path}`
-  }
-}
-
-export const externalUrls = {
-  discord: () => 'https://discord.com/invite/standwithcrypto',
-  donate: () =>
-    NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad'
-      : 'https://commerce.coinbase.com/checkout/582a836d-733c-4a66-84d9-4e3c40c90281',
-  dtsi: () => 'https://www.dotheysupportit.com',
-  dtsiCreateStance: (slug: string) =>
-    `https://www.dotheysupportit.com/people/${slug}/create-stance`,
-  emailFeedback: () => 'mailto:info@standwithcrypto.org',
-  facebook: () => 'https://www.facebook.com/standwithcrypto',
-  instagram: () => 'https://www.instagram.com/standwithcrypto/',
-  linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
-  twitter: () => 'https://twitter.com/standwithcrypto',
-  youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
-  swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
-  swcReferralUrl: ({ referralId }: { referralId: string }) => fullUrl(`/join/${referralId}`),
-  swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
 }
 
 export const apiUrls = {
@@ -139,7 +134,8 @@ export const apiUrls = {
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
-  dtsiAllPeople: () => `/api/public/dtsi/all-people`,
+  dtsiAllPeople: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/public/dtsi/all-people/${countryCode}`,
   recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
     `/api/public/recent-activity/${limit}/${countryCode}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
@@ -162,4 +158,14 @@ export const apiUrls = {
   pollsResultsData: () => `/api/public/polls`,
   districtRanking: ({ stateCode, districtNumber }: { stateCode: string; districtNumber: string }) =>
     `/api/public/referrals/${stateCode}/${districtNumber}`,
+  dtsiRacesByCongressionalDistrict: ({
+    stateCode,
+    district,
+  }: {
+    stateCode: string
+    district: number
+  }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
 }
+
+export * from './externalUrls'
+export * from './fullUrl'

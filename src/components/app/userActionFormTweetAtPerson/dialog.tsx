@@ -8,7 +8,7 @@ import { UserActionFormTweetAtPerson } from '@/components/app/userActionFormTwee
 import { LazyUserActionFormTweetAtPerson } from '@/components/app/userActionFormTweetAtPerson/lazyLoad'
 import { UserActionFormTweetAtPersonSkeleton } from '@/components/app/userActionFormTweetAtPerson/skeletons/dialogSkeleton'
 import { useDialog } from '@/hooks/useDialog'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export function UserActionFormTweetAtPersonDialog({
   children,
@@ -28,7 +28,7 @@ export function UserActionFormTweetAtPersonDialog({
       <Suspense fallback={<UserActionFormTweetAtPersonSkeleton />}>
         <LazyUserActionFormTweetAtPerson
           {...formProps}
-          slug={UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']}
+          slug={USUserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']}
         />
       </Suspense>
     </UserActionFormDialog>

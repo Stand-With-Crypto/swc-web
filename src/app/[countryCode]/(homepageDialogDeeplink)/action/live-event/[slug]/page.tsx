@@ -2,27 +2,27 @@ import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { MESSAGES } from '@/components/app/userActionFormLiveEvent/constants'
 import { UserActionFormLiveEventDeeplinkWrapper } from '@/components/app/userActionFormLiveEvent/homepageDialogDeeplinkWrapper.tsx'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 export const dynamicParams = true
 
-const LIVE_EVENT_CAMPAIGN_SLUGS = Object.values(UserActionLiveEventCampaignName)
+const LIVE_EVENT_CAMPAIGN_SLUGS = Object.values(USUserActionLiveEventCampaignName)
 
 type Props = PageProps<{ slug: string }>
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
   const { slug } = params
-  const content = MESSAGES[slug as UserActionLiveEventCampaignName]
+  const content = MESSAGES[slug as USUserActionLiveEventCampaignName]
   if (content) {
     return generateMetadataDetails({
       title: `Live Event - ${content.title}`,
@@ -43,7 +43,7 @@ export default async function UserActionLiveEventDeepLink(props: Props) {
   }
 
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
+    <USHomepageDialogDeeplinkLayout pageParams={params}>
       <div className={dialogContentPaddingStyles}>
         <ErrorBoundary
           extras={{
@@ -58,9 +58,11 @@ export default async function UserActionLiveEventDeepLink(props: Props) {
             domain: 'UserActionLiveEventDeepLink',
           }}
         >
-          <UserActionFormLiveEventDeeplinkWrapper slug={slug as UserActionLiveEventCampaignName} />
+          <UserActionFormLiveEventDeeplinkWrapper
+            slug={slug as USUserActionLiveEventCampaignName}
+          />
         </ErrorBoundary>
       </div>
-    </HomepageDialogDeeplinkLayout>
+    </USHomepageDialogDeeplinkLayout>
   )
 }

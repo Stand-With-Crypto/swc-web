@@ -9,13 +9,9 @@ import { cn } from '@/utils/web/cn'
 
 interface UserActionGridCTAProps {
   excludeUserActionTypes?: UserActionType[]
-  className?: string
 }
 
-export function UserActionGridCTAs({
-  excludeUserActionTypes,
-  className = '',
-}: UserActionGridCTAProps) {
+export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTAProps) {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const performedUserActionTypes = data?.performedUserActionTypes ?? []
 
@@ -25,8 +21,14 @@ export function UserActionGridCTAs({
   })
 
   return (
-    // TODO: figure out a better way to control grid-cols based on the number of active actions
-    <div className={cn('grid grid-cols-1 gap-[18px] lg:grid-cols-4', className)}>
+    <div
+      className={cn(
+        ctas.length < 3
+          ? 'flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'
+          : 'grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:justify-items-center',
+        'gap-[18px]',
+      )}
+    >
       {ctas.map(cta => {
         const completedCampaigns = cta.campaigns.reduce((acc, campaign) => {
           const key = `${campaign.actionType}-${campaign.campaignName}`

@@ -1,14 +1,16 @@
 'use client'
-import { useRef } from 'react'
-import { useForm } from 'react-hook-form'
+
+import { useRef, useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { AddressField } from '@/components/app/updateUserProfileForm/step1/addressField'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -23,19 +25,24 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
-import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import {
   zodUpdateUserProfileFormFields,
   zodUpdateUserProfileWithRequiredFormFields,
@@ -56,6 +63,7 @@ export function UpdateUserProfileForm({
     address: GooglePlaceAutocompletePrediction | null
   }) => void
 }) {
+  const countryCode = useCountryCode()
   const router = useRouter()
   const defaultValues = useRef({
     isEmbeddedWalletUser: user.hasEmbeddedWallet,
@@ -78,37 +86,51 @@ export function UpdateUserProfileForm({
     ),
     defaultValues: defaultValues.current,
   })
-  const phoneNumberValue = form.watch('phoneNumber')
+
+  const phoneNumberValue = useWatch({ control: form.control, name: 'phoneNumber' })
+  const [resolvedAddress, setResolvedAddress] = useState<Awaited<
+    ReturnType<typeof convertGooglePlaceAutoPredictionToAddressSchema>
+  > | null>(null)
+
+  const onSubmit = async (values: typeof defaultValues.current) => {
+    const result = await triggerServerActionForForm(
+      {
+        form,
+        formName: FORM_NAME,
+        analyticsProps: {
+          ...(resolvedAddress ? convertAddressToAnalyticsProperties(resolvedAddress) : {}),
+        },
+        payload: { ...values, address: resolvedAddress, optedInToSms: !!values.phoneNumber },
+      },
+      actionUpdateUserProfile,
+    )
+    if (result.status === 'success') {
+      const { countryCode: newCountryCode } = (
+        result.response as {
+          user: ClientUserWithENSData
+        }
+      ).user
+
+      if (ORDERED_SUPPORTED_COUNTRIES.includes(newCountryCode) && newCountryCode !== countryCode) {
+        router.push(getIntlUrls(newCountryCode as SupportedCountryCodes).profile())
+        return
+      }
+
+      router.refresh()
+      toast.success('Profile updated', { duration: 5000 })
+      const { firstName, lastName } = values
+      onSuccess({ firstName, lastName, address: values.address })
+    }
+  }
+
+  const shouldShowAllianceCheckbox =
+    countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !defaultValues.current.hasOptedInToMembership
 
   return (
     <Form {...form}>
       <form
-        className="flex min-h-full flex-col gap-6 px-4 md:px-6"
-        onSubmit={form.handleSubmit(async values => {
-          const address = values.address
-            ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
-                Sentry.captureException(e)
-                catchUnexpectedServerErrorAndTriggerToast(e)
-                return null
-              })
-            : null
-
-          const result = await triggerServerActionForForm(
-            {
-              form,
-              formName: FORM_NAME,
-              analyticsProps: { ...(address ? convertAddressToAnalyticsProperties(address) : {}) },
-              payload: { ...values, address, optedInToSms: !!values.phoneNumber },
-            },
-            payload => actionUpdateUserProfile(payload),
-          )
-          if (result.status === 'success') {
-            router.refresh()
-            toast.success('Profile updated', { duration: 5000 })
-            const { firstName, lastName } = values
-            onSuccess({ firstName, lastName, address: values.address })
-          }
-        }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        className="flex min-h-full flex-col gap-6"
+        onSubmit={form.handleSubmit(onSubmit, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
         <div>
           <PageTitle className="mb-1" size="md">
@@ -165,24 +187,12 @@ export function UpdateUserProfileForm({
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Address</FormLabel>
-                <FormControl>
-                  <GooglePlacesSelect
-                    {...field}
-                    onChange={field.onChange}
-                    placeholder="Street address"
-                    value={field.value}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
+          <AddressField
+            resolvedAddress={resolvedAddress}
+            setResolvedAddress={setResolvedAddress}
+            user={user}
           />
+
           {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' &&
             !validatePhoneNumber(user?.phoneNumber || '') && (
               <FormField
@@ -209,7 +219,7 @@ export function UpdateUserProfileForm({
                 )}
               />
             )}
-          {!defaultValues.current.hasOptedInToMembership && (
+          {shouldShowAllianceCheckbox && (
             <FormField
               control={form.control}
               name="hasOptedInToMembership"

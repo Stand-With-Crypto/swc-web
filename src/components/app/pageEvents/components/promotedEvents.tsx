@@ -1,30 +1,30 @@
 'use client'
 
+import { UserActionType } from '@prisma/client'
 import { isBefore, startOfDay } from 'date-fns'
 import sanitizeHtml from 'sanitize-html'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { handleCreateRsvpAction } from '@/components/app/pageEvents/utils/createRsvpAction'
+import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface PromotedEventsProps {
   events: SWCEvents
+  countryCode: SupportedCountryCodes
 }
 
-export function PromotedEvents({ events }: PromotedEventsProps) {
-  const filteredPromotionalEvents = events.filter(event => !!event.data.promotedPositioning)
-
-  const orderedPromotionalEvents = filteredPromotionalEvents.sort(
-    (a, b) => a.data.promotedPositioning! - b.data.promotedPositioning!,
-  )
-
+export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
   const handleRSVPButtonClick = (event: SWCEvent) => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
       event,
+      campaignName: getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode),
     })
 
     window.open(event.rsvpUrl, '_blank')
@@ -32,7 +32,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
 
   return (
     <section className="flex flex-col items-center gap-8">
-      {orderedPromotionalEvents.map(event => {
+      {events.map(event => {
         const eventDate = event.data?.time
           ? new Date(`${event.data.date}T${event.data.time}`)
           : new Date(event.data.date)
@@ -42,7 +42,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
         return (
           <div
             className="flex flex-col items-center gap-4 lg:flex-row lg:gap-6"
-            key={event.data.slug}
+            key={getUniqueEventKey(event.data)}
           >
             <div className="relative h-[182px] min-w-[271px]">
               <NextImage
