@@ -290,6 +290,20 @@ const nextConfig: NextConfig = {
         destination: '/action/nft-mint',
         permanent: true,
       },
+      // international redirect handler
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'query',
+            key: 'ccRedirect',
+            // Only match SupportedCountryCode values, excluding US
+            value: '^(ca|gb|au)$',
+          },
+        ],
+        destination: '/:ccRedirect/:path*:query',
+        permanent: false,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
