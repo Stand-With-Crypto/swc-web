@@ -5,8 +5,8 @@ import { cn } from '@/utils/web/cn'
 
 export const UserActionFormReferSkeleton = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <UserActionFormLayout>
-      <UserActionFormLayout.Container className="flex h-[400px] items-center justify-center">
+    <UserActionFormLayout className="items-center">
+      <UserActionFormLayout.Container className="m-auto flex h-[400px] items-center justify-center">
         <div className="relative flex flex-col items-center">
           <div className="relative flex min-h-32 min-w-32 items-center justify-center rounded-full bg-primary-cta/5">
             <div className="absolute inset-0 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] rounded-full border border-primary-cta/20"></div>
