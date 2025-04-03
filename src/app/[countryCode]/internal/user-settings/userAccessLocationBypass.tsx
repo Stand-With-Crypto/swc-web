@@ -21,13 +21,17 @@ import {
   USER_ACCESS_LOCATION_COOKIE_NAME,
 } from '@/utils/shared/userAccessLocation'
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
+import { useState, useEffect } from 'react'
+
+// Adding 'br' to the list to allow for easy non supported country code testing.
+const USER_ACCESS_LOCATION_OPTIONS = [...ORDERED_SUPPORTED_COUNTRIES, 'br']
 
 export function UserAccessLocationBypass() {
-  const userAccessLocation = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.toLowerCase()
+  const [userAccessLocation, setUserAccessLocation] = useState('')
 
   const handleLocationCountryCodeSubmit = (countryCode: SupportedCountryCodes) => {
     Cookies.set(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, countryCode, {
-      maxAge: 1000 * 60 * 60 * 24, // 24 hours
+      expires: 1,
     })
 
     Cookies.remove(USER_ACCESS_LOCATION_COOKIE_NAME)
@@ -43,6 +47,7 @@ export function UserAccessLocationBypass() {
         duration: 10000,
       },
     )
+    setUserAccessLocation(countryCode)
   }
 
   const handleLocationCountryCodeReset = () => {
@@ -57,23 +62,22 @@ export function UserAccessLocationBypass() {
     )
   }
 
+  useEffect(() => {
+    const cookieValue = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)
+    setUserAccessLocation(cookieValue?.toLowerCase() ?? '')
+  }, [])
+
   return (
     <div>
       <div className="flex flex-col items-start gap-4">
         <strong>User Access Location</strong>
 
-        <Select
-          onValueChange={value => {
-            handleLocationCountryCodeSubmit(value as SupportedCountryCodes)
-          }}
-          value={userAccessLocation}
-        >
-          <SelectTrigger className="w-[195px]">
-            <SelectValue />
+        <Select onValueChange={handleLocationCountryCodeSubmit} value={userAccessLocation}>
+          <SelectTrigger className="w-[250px]">
+            <SelectValue placeholder="not-set" />
           </SelectTrigger>
           <SelectContent>
-            {/* Adding 'br' to the list to allow for easy non supported country code testing. */}
-            {[...ORDERED_SUPPORTED_COUNTRIES, 'br'].map(country => (
+            {USER_ACCESS_LOCATION_OPTIONS.map(country => (
               <SelectItem key={country} value={country}>
                 {country} {country === 'br' && '(Not Supported Country)'}
               </SelectItem>
