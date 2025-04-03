@@ -67,7 +67,7 @@ describe('internationalRedirectHandler - Country Cookie', () => {
     expect(userAccessLocationCookie).toEqual('gb')
   })
 
-  it("should update the country cookie when geo location country code is different that cookie's country code", () => {
+  it('should not update the country cookie when cookie already exists', () => {
     const request = createMockRequest('/', {
       userAccessLocationCookie: 'us',
     })
@@ -75,7 +75,7 @@ describe('internationalRedirectHandler - Country Cookie', () => {
     const { response, userAccessLocationCookie } = internationalRedirectHandler(request)
 
     expect(response).toBeUndefined()
-    expect(userAccessLocationCookie).toEqual('gb')
+    expect(userAccessLocationCookie).toBeNull()
   })
 })
 
