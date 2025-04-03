@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -7,9 +8,11 @@ import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 import {
   CAUserActionReferCampaignName,
   CAUserActionTweetCampaignName,
+  CAUserActionViewKeyPageCampaignName,
 } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
@@ -55,6 +58,28 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
+        ),
+      },
+    ],
+  },
+  [UserActionType.VIEW_KEY_PAGE]: {
+    title: 'Contact your representative',
+    description:
+      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+    campaignsModalDescription:
+      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+    image: '/ca/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        campaignName: CAUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
+        isCampaignActive: true,
+        title: `Email your representative`,
+        description:
+          'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <Link href={getIntlUrls(countryCode).newmodeEmailAction()}>{children}</Link>
         ),
       },
     ],

@@ -13,6 +13,7 @@ import {
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
+  UserActionViewKeyPage,
   UserActionViewKeyRaces,
   UserActionVoterAttestation,
   UserActionVoterRegistration,
@@ -62,6 +63,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
         userActionPollAnswers: UserActionPollAnswer[]
       })
     | null
+  userActionViewKeyPage: UserActionViewKeyPage | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -136,6 +138,10 @@ type ClientUserActionPoll = {
   actionType: typeof UserActionType.POLL
   userActionPollAnswers: ClientUserActionPollAnswer[]
 }
+type ClientUserActionViewKeyPage = {
+  actionType: typeof UserActionType.VIEW_KEY_PAGE
+  path: string
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -161,6 +167,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionVotingDay
       | ClientUserActionRefer
       | ClientUserActionPoll
+      | ClientUserActionViewKeyPage
     )
 >
 
@@ -345,6 +352,14 @@ export const getClientUserAction = ({
         })),
       }
       return getClientModel({ ...sharedProps, ...pollFields })
+    },
+    [UserActionType.VIEW_KEY_PAGE]: () => {
+      const { path } = getRelatedModel(record, 'userActionViewKeyPage')
+      const viewKeyPageFields: ClientUserActionViewKeyPage = {
+        path,
+        actionType: UserActionType.VIEW_KEY_PAGE,
+      }
+      return getClientModel({ ...sharedProps, ...viewKeyPageFields })
     },
   }
 

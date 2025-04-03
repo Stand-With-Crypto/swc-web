@@ -1,6 +1,7 @@
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { NextImage } from '@/components/ui/image'
+import { useSuccessScreenDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 import { cn } from '@/utils/web/cn'
 
 export function SuccessScreenActionCard({
@@ -14,8 +15,11 @@ export function SuccessScreenActionCard({
   mobileCTADescription,
   link: _link,
   campaignsModalDescription: _campaignsModalDescription,
+  onClick: _onClick,
   ...rest
 }: Omit<UserActionCardProps, 'WrapperComponent'>) {
+  const { onCtaClick } = useSuccessScreenDialogContext()
+
   const isReadOnly = campaigns.every(
     campaign =>
       !campaign.canBeTriggeredMultipleTimes &&
@@ -37,6 +41,10 @@ export function SuccessScreenActionCard({
         'flex w-full cursor-pointer flex-row-reverse items-stretch rounded-3xl transition-shadow hover:shadow-lg',
         isReadOnly && 'pointer-events-none cursor-default',
       )}
+      onClick={() => {
+        _onClick?.()
+        onCtaClick?.()
+      }}
     >
       <div className="flex h-auto min-h-36 min-w-32 max-w-32 items-center justify-center rounded-br-3xl rounded-tr-3xl bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9">
         <NextImage alt={title} height={80} objectFit="contain" src={image} width={80} />
