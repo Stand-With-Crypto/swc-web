@@ -1,12 +1,17 @@
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
-import { GBUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import {
+  GBUserActionTweetCampaignName,
+  GBUserActionViewKeyPageCampaignName,
+} from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 
 export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
@@ -48,6 +53,28 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.GB}>
             {children}
           </UserActionFormShareOnTwitterDialog>
+        ),
+      },
+    ],
+  },
+  [UserActionType.VIEW_KEY_PAGE]: {
+    title: 'Contact your representative',
+    description:
+      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+    campaignsModalDescription:
+      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+    image: '/gb/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        campaignName: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
+        isCampaignActive: true,
+        title: `Email your representative`,
+        description:
+          'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <Link href={getIntlUrls(SupportedCountryCodes.GB).newmodeEmailAction()}>{children}</Link>
         ),
       },
     ],

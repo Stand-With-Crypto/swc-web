@@ -2,7 +2,8 @@
 import useSWR from 'swr'
 import { FullConfiguration } from 'swr/_internal'
 
-import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
+import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/[countryCode]/performed-user-action-types/route'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
@@ -10,8 +11,10 @@ import { apiUrls } from '@/utils/shared/urls'
 export function useApiResponseForUserPerformedUserActionTypes(
   config?: Pick<FullConfiguration, 'revalidateOnMount'>,
 ) {
+  const countryCode = useCountryCode()
+
   return useSWR(
-    apiUrls.userPerformedUserActionTypes(),
+    apiUrls.userPerformedUserActionTypes({ countryCode }),
     url =>
       fetchReq(url)
         .then(res => res.json())
