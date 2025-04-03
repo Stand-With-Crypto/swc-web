@@ -6,7 +6,10 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
-import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
+import {
+  OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME,
+  USER_ACCESS_LOCATION_COOKIE_NAME,
+} from '@/utils/shared/userAccessLocation'
 
 const US_HOMEPAGE_REGEX = new RegExp('^/$|^/\\?.*$')
 
@@ -15,6 +18,9 @@ export function internationalRedirectHandler(request: NextRequest): {
   userAccessLocationCookie: string | null
 } {
   const userAccessLocation = getUserAccessLocation(request)?.toLowerCase()
+  const userAccessLocationOverride = request.cookies
+    .get(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME)
+    ?.value?.toLowerCase()
   const maybeExistingUserAccessLocationCookie = request.cookies
     .get(USER_ACCESS_LOCATION_COOKIE_NAME)
     ?.value?.toLowerCase()
@@ -29,8 +35,9 @@ export function internationalRedirectHandler(request: NextRequest): {
     maybeUserSelectedCountryCookie,
   })
 
+  // if the USER_ACCESS_LOCATION cookie is not set, we want to set it
   const shouldUpdateUserAccessLocationCookie =
-    userAccessLocation !== maybeExistingUserAccessLocationCookie
+    !maybeExistingUserAccessLocationCookie || !!userAccessLocationOverride
 
   if (redirect) {
     const response = createRedirectResponse(request, redirectCountryCode!)
