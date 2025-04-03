@@ -12,28 +12,28 @@ import {
 const AUUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/au').then(mod => mod.AUUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton />,
+    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.AU} />,
   },
 )
 
 const CAUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/ca').then(mod => mod.CAUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton />,
+    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.CA} />,
   },
 )
 
 const GBUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/gb').then(mod => mod.GBUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton />,
+    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.GB} />,
   },
 )
 
 const USUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/us').then(mod => mod.USUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton />,
+    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.US} />,
   },
 )
 

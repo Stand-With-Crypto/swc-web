@@ -2,9 +2,25 @@
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { NextImage } from '@/components/ui/image'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
-export const UserActionFormReferSkeleton = () => {
+const getSkeletonSrc = (countryCode: SupportedCountryCodes) => {
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return '/actionTypeIcons/refer.png'
+    default:
+      return `/${countryCode}/actionTypeIcons/refer.png`
+  }
+}
+
+export const UserActionFormReferSkeleton = ({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) => {
+  const src = getSkeletonSrc(countryCode)
+
   return (
     <UserActionFormLayout>
       <UserActionFormLayout.Container className="flex h-[400px] items-center justify-center">
@@ -19,7 +35,7 @@ export const UserActionFormReferSkeleton = () => {
                 alt="Refer a friend"
                 className="object-contain drop-shadow-md"
                 height={100}
-                src="/actionTypeIcons/refer.png"
+                src={src}
                 width={100}
               />
             </div>
