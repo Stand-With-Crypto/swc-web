@@ -10,7 +10,7 @@ import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/ser
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import * as messages from '@/utils/server/sms/messages'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
+import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
 
 export async function optInUser(phoneNumber: string, user: User): Promise<SMSStatus> {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
