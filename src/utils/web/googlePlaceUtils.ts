@@ -79,7 +79,7 @@ async function handleExpiredPlaceId(prediction: GooglePlaceAutocompletePredictio
   }
 }
 
-async function getAddressWithRetry(prediction: GooglePlaceAutocompletePrediction, retryCount = 0) {
+async function getAddressWithRetry(prediction: GooglePlaceAutocompletePrediction) {
   try {
     const addressComponents = await fetchAddressComponents(prediction.place_id)
     return formatGooglePlacesResultToAddress({
@@ -90,15 +90,6 @@ async function getAddressWithRetry(prediction: GooglePlaceAutocompletePrediction
   } catch (error) {
     if (error === 'NOT_FOUND' || error === 'INVALID_REQUEST') {
       return await handleExpiredPlaceId(prediction)
-    }
-    // this is a workaround for the library not being initialized yet. If we ever
-    // use the hook usePlacesAutocomplete we get to know whether the lib is ready or not
-    if (error instanceof TypeError && error.message.includes('PlacesService')) {
-      if (retryCount <= 3) {
-        await new Promise(resolve => setTimeout(resolve, 100))
-
-        return await getAddressWithRetry(prediction, retryCount + 1)
-      }
     }
     throw error
   }
