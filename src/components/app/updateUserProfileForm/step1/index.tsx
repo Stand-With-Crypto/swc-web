@@ -32,6 +32,7 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
@@ -121,6 +122,9 @@ export function UpdateUserProfileForm({
       onSuccess({ firstName, lastName, address: values.address })
     }
   }
+
+  const shouldShowAllianceCheckbox =
+    countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !defaultValues.current.hasOptedInToMembership
 
   return (
     <Form {...form}>
@@ -215,7 +219,7 @@ export function UpdateUserProfileForm({
                 )}
               />
             )}
-          {!defaultValues.current.hasOptedInToMembership && (
+          {shouldShowAllianceCheckbox && (
             <FormField
               control={form.control}
               name="hasOptedInToMembership"
