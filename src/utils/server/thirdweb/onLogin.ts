@@ -56,6 +56,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
@@ -845,7 +846,11 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
 
-    await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction: optInUserAction,
+      userCryptoAddress,
+      countryCode: countryCode as SupportedCountryCodes,
+    })
 
     if (embeddedWalletUserDetails?.phone) {
       await smsActions.optInUser(embeddedWalletUserDetails.phone, user)
