@@ -20,6 +20,7 @@ import {
   FormLabel,
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -39,12 +40,13 @@ interface AddressFieldProps {
 export function AddressField({ user, resolvedAddress, setResolvedAddress }: AddressFieldProps) {
   const form = useFormContext()
   const addressValue = useWatch({ control: form.control, name: 'address' })
+  const { isLoaded } = useGoogleMapsScript()
 
   const [shouldShowCountryCodeDisclaimer, setShouldShowCountryCodeDisclaimer] = useState(false)
 
   useEffect(() => {
     async function resolveAddress() {
-      if (addressValue) {
+      if (addressValue && isLoaded) {
         const newAddress = await convertGooglePlaceAutoPredictionToAddressSchema(
           addressValue,
         ).catch(e => {
@@ -59,7 +61,7 @@ export function AddressField({ user, resolvedAddress, setResolvedAddress }: Addr
     }
 
     void resolveAddress()
-  }, [addressValue, setResolvedAddress])
+  }, [addressValue, isLoaded, setResolvedAddress])
 
   useEffect(() => {
     if (resolvedAddress) {
