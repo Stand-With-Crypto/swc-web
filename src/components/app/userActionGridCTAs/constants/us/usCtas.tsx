@@ -12,11 +12,11 @@ import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionF
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
-  USUserActionOptInCampaignName,
   USUserActionPollCampaignName,
   USUserActionReferCampaignName,
   USUserActionTweetCampaignName,
@@ -37,7 +37,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
-        campaignName: USUserActionOptInCampaignName.DEFAULT,
+        campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
         description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
@@ -364,7 +364,11 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper
-            authenticatedContent={<UserActionFormReferDialog>{children}</UserActionFormReferDialog>}
+            authenticatedContent={
+              <UserActionFormReferDialog countryCode={SupportedCountryCodes.US}>
+                {children}
+              </UserActionFormReferDialog>
+            }
           >
             {children}
           </LoginDialogWrapper>

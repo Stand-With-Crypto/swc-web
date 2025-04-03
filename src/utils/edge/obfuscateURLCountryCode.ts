@@ -1,15 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import {
-  COUNTRY_CODE_REGEX_PATTERN,
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-} from '@/utils/shared/supportedCountries'
-
-export function extractCountryCode(pathname: string) {
-  const segments = pathname.split('/').filter(Boolean)
-  const firstSegment = segments[0]
-  return COUNTRY_CODE_REGEX_PATTERN.test(firstSegment) ? firstSegment : null
-}
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 /**
  * Routes requests based on country code in the URL path:
@@ -26,7 +18,7 @@ export function obfuscateURLCountryCode(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl
   const searchParams = request.nextUrl.search
 
-  const maybeCountryCode = extractCountryCode(pathname)
+  const maybeCountryCode = extractCountryCodeFromPathname(pathname)
 
   const createUrl = (path: string): URL => new URL(`${path}${searchParams}`, request.url)
 

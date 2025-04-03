@@ -1,6 +1,7 @@
 'use client'
 
 import Balancer from 'react-wrap-balancer'
+import { UserActionType } from '@prisma/client'
 import { format, isBefore, startOfDay } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
 import sanitizeHtml from 'sanitize-html'
@@ -22,6 +23,8 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 
 enum SectionNames {
@@ -32,9 +35,10 @@ enum SectionNames {
 
 interface EventDialogContentProps {
   event: SWCEvent
+  countryCode: SupportedCountryCodes
 }
 
-export function EventDialogContent({ event }: EventDialogContentProps) {
+export function EventDialogContent({ event, countryCode }: EventDialogContentProps) {
   usePreventOverscroll()
   const { data: userFullProfileInfoResponse } = useApiResponseForUserFullProfileInfo()
   const { user } = userFullProfileInfoResponse ?? { user: null }
@@ -53,6 +57,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     await handleCreateRsvpAction({
       shouldReceiveNotifications: true,
       event,
+      campaignName: getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode),
     })
 
     toast.success('Thank you for your interest! We will send you a reminder closer to the event.')
@@ -63,6 +68,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
       event,
+      campaignName: getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode),
     })
 
     window.open(event.rsvpUrl, '_blank')

@@ -4,9 +4,9 @@ import React from 'react'
 import Cookies from 'js-cookie'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 interface GeoGateProps {
   children: React.ReactNode
@@ -27,13 +27,13 @@ export const GeoGate = (props: GeoGateProps) => {
 
   if (!hasHydrated) return children
 
-  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
+  const userAccessLocation = Cookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.toLowerCase()
 
   const isLocallyBypassed =
     process.env.NEXT_PUBLIC_BYPASS_GEO_GATE === 'true' && process.env.NODE_ENV === 'development'
 
   if (
-    !isValidCountryCode({ countryCode, userCountryCode, bypassCountryCheck }) &&
+    !isValidCountryCode({ countryCode, userAccessLocation, bypassCountryCheck }) &&
     !isLocallyBypassed
   ) {
     if (!unavailableContent) return null

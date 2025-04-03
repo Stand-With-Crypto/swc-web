@@ -243,27 +243,6 @@ export function PageContribute() {
             </Button>
           ),
         },
-        {
-          imageSrc: '/pagesContent/contribute/stances.svg',
-          title: 'Contribute to our politician scoring system',
-          subtitle: (
-            <>
-              Help us build a transparent politician scoring system by submitting public statements
-              or tweets that a politician has made about crypto to{' '}
-              <ExternalLink href={'https://www.dotheysupportit.com/faq'}>
-                DoTheySupportIt.com
-              </ExternalLink>
-              .
-            </>
-          ),
-          content: (
-            <Button asChild size="lg">
-              <ExternalLink href={'https://www.dotheysupportit.com/faq'}>
-                Add a position
-              </ExternalLink>
-            </Button>
-          ),
-        },
       ].map(({ title, subtitle, imageSrc, content }, index) => (
         <section className="text-center" key={index}>
           <div className="mx-auto mb-6 inline-block">

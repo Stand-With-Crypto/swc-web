@@ -1,29 +1,34 @@
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
-  GBUserActionOptInCampaignName,
+  GBUserActionReferCampaignName,
   GBUserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+
+const countryCode = SupportedCountryCodes.GB
 
 export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
-    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in United Kingdom.`,
-    mobileCTADescription: 'Join the fight to keep crypto in United Kingdom.',
-    campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in United Kingdom.`,
+    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
+    mobileCTADescription: `Join the fight to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
+    campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
     image: '/gb/actionTypeIcons/opt-in.png',
     campaigns: [
       {
         actionType: UserActionType.OPT_IN,
-        campaignName: GBUserActionOptInCampaignName.DEFAULT,
+        campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
-        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in United Kingdom.`,
+        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -47,9 +52,38 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Stay up to date on crypto policy by following @StandWCrypto_UK on X.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.GB}>
+          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
+        ),
+      },
+    ],
+  },
+  [UserActionType.REFER]: {
+    title: 'Refer a Friend',
+    description: 'Get your friend to signup for Stand With Crypto and verify their account.',
+    mobileCTADescription:
+      'Get your friend to signup for Stand With Crypto and verify their account.',
+    campaignsModalDescription: 'Share your referral link with friends to help grow our movement.',
+    image: '/gb/actionTypeIcons/refer.png',
+    campaigns: [
+      {
+        actionType: UserActionType.REFER,
+        campaignName: GBUserActionReferCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Refer a Friend',
+        description: 'You have referred friends to join Stand With Crypto.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <LoginDialogWrapper
+            authenticatedContent={
+              <UserActionFormReferDialog countryCode={countryCode}>
+                {children}
+              </UserActionFormReferDialog>
+            }
+          >
+            {children}
+          </LoginDialogWrapper>
         ),
       },
     ],

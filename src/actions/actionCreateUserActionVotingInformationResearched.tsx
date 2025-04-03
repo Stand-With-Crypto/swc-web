@@ -6,8 +6,8 @@ import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -24,11 +24,11 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 const createActionVotingInformationResearchedInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionVotingInformationResearchedCampaignName),
+  campaignName: nativeEnum(USUserActionVotingInformationResearchedCampaignName),
   shouldReceiveNotifications: z.boolean(),
   address: zodAddress,
 })
@@ -65,7 +65,7 @@ async function _actionCreateUserActionVotingInformationResearched(
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   const actionType = UserActionType.VOTING_INFORMATION_RESEARCHED
   const campaignName = validatedInput.data.campaignName

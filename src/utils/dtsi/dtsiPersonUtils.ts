@@ -67,8 +67,121 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
   }
 }
 
-const hideStanceSlugs = new Set<string>([])
+const hideStanceSlugs = [
+  {
+    isCongressperson: true,
+    slug: 'josh---gottheimer',
+  },
+  {
+    isCongressperson: true,
+    slug: 'mikie---sherrill',
+  },
+  {
+    isCongressperson: false,
+    slug: 'edward---durr',
+  },
+  {
+    isCongressperson: false,
+    slug: 'bill---spadea',
+  },
+  {
+    isCongressperson: false,
+    slug: 'hans---herberg',
+  },
+  {
+    isCongressperson: false,
+    slug: 'jack---ciattarelli',
+  },
+  {
+    isCongressperson: false,
+    slug: 'sean---spiller',
+  },
+  {
+    isCongressperson: false,
+    slug: 'roger--bacon',
+  },
+  {
+    isCongressperson: false,
+    slug: 'stephen---sweeney',
+  },
+  {
+    isCongressperson: false,
+    slug: 'ras---baraka',
+  },
+  {
+    isCongressperson: false,
+    slug: 'robert---canfield',
+  },
+  {
+    isCongressperson: false,
+    slug: 'justin---barbera',
+  },
+  {
+    isCongressperson: false,
+    slug: 'jon---bramnick',
+  },
+  {
+    isCongressperson: false,
+    slug: 'steven---fulop',
+  },
+  {
+    isCongressperson: false,
+    slug: 'james---fazzone',
+  },
+  {
+    isCongressperson: false,
+    slug: 'stephen---zielinski',
+  },
+  {
+    isCongressperson: false,
+    slug: 'joanne---kuniansky',
+  },
+  {
+    isCongressperson: false,
+    slug: 'karen---zaletel',
+  },
+  {
+    isCongressperson: false,
+    slug: 'monica---brinson',
+  },
+  {
+    isCongressperson: false,
+    slug: 'mario---kranjac',
+  },
+  {
+    isCongressperson: false,
+    slug: 'gerardo---cedrone',
+  },
+  {
+    isCongressperson: false,
+    slug: 'abigail---spanberger',
+  },
+  {
+    isCongressperson: false,
+    slug: 'dave---larock',
+  },
+  {
+    isCongressperson: false,
+    slug: 'merle---rutledge',
+  },
+  {
+    isCongressperson: false,
+    slug: 'winsome---earle-sears',
+  },
+  {
+    isCongressperson: false,
+    slug: 'amanda---chase',
+  },
+  {
+    isCongressperson: false,
+    slug: 'andrew---white',
+  },
+]
 
 export function isPoliticianStanceHidden(dtsiSlug: string) {
-  return hideStanceSlugs.has(dtsiSlug.toLowerCase())
+  return hideStanceSlugs.some(x => x.slug === dtsiSlug.toLowerCase())
+}
+
+export function isPoliticianDetailsStanceHidden(dtsiSlug: string) {
+  return hideStanceSlugs.some(x => x.slug === dtsiSlug.toLowerCase() && !x.isCongressperson)
 }

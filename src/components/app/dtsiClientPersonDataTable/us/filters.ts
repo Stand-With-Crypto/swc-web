@@ -11,7 +11,7 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
-import { isPoliticianStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
+import { isPoliticianDetailsStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
 
 /**
  * Custom filter logic for each Column.
@@ -27,7 +27,7 @@ export const getPersonDataTableFilterFns = (): Record<
   [PERSON_TABLE_COLUMNS_IDS.STANCE]: (row, _columnId, filterValue, _addMeta) => {
     const scoreToUse =
       row.original.manuallyOverriddenStanceScore ?? row.original.computedStanceScore
-    const isStanceHidden = isPoliticianStanceHidden(row.original.slug)
+    const isStanceHidden = isPoliticianDetailsStanceHidden(row.original.slug)
 
     if (isStanceHidden) {
       return filterValue === StanceOnCryptoOptions.ALL
@@ -82,7 +82,9 @@ export const getPersonDataTableFilterFns = (): Record<
   },
 
   [PERSON_TABLE_COLUMNS_IDS.STATE]: (row, _columnId, filterValue, _addMeta) => {
-    return filterValue === 'All' || row.original.primaryRole?.primaryState === filterValue
+    return (
+      filterValue === 'All' || row.original.primaryRole?.primaryState?.toUpperCase() === filterValue
+    )
   },
 })
 

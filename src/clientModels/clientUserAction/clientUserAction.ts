@@ -26,9 +26,9 @@ import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
-  UserActionLiveEventCampaignName,
-  UserActionTweetAtPersonCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+  USUserActionLiveEventCampaignName,
+  USUserActionTweetAtPersonCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
@@ -94,11 +94,11 @@ type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaS
 }
 type ClientUserActionLiveEvent = {
   actionType: typeof UserActionType.LIVE_EVENT
-  campaignName: UserActionLiveEventCampaignName
+  campaignName: USUserActionLiveEventCampaignName
 }
 type ClientUserActionTweetAtPerson = {
   actionType: typeof UserActionType.TWEET_AT_PERSON
-  campaignName: UserActionTweetAtPersonCampaignName
+  campaignName: USUserActionTweetAtPersonCampaignName
   person: DTSIPersonForUserActions | null
 }
 type ClientUserActionVoterAttestation = Pick<UserActionVoterAttestation, 'usaState'> & {
@@ -260,7 +260,7 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
     },
     [UserActionType.LIVE_EVENT]: () => {
-      const _campaignName = sharedProps.campaignName as UserActionLiveEventCampaignName
+      const _campaignName = sharedProps.campaignName as USUserActionLiveEventCampaignName
       return getClientModel({
         ...sharedProps,
         actionType: UserActionType.LIVE_EVENT,
@@ -271,7 +271,7 @@ export const getClientUserAction = ({
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')
       const tweetAtPersonFields: ClientUserActionTweetAtPerson = {
         person: recipientDtsiSlug ? peopleBySlug[recipientDtsiSlug] : null,
-        campaignName: record.campaignName as UserActionTweetAtPersonCampaignName,
+        campaignName: record.campaignName as USUserActionTweetAtPersonCampaignName,
         actionType: UserActionType.TWEET_AT_PERSON,
       }
       return getClientModel({ ...sharedProps, ...tweetAtPersonFields })

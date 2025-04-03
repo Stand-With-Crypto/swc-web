@@ -95,7 +95,7 @@ export const getIntlUrls = (
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
     referrals: (pageNum?: number) => {
-      const shouldSuppressPageNum = pageNum === 1
+      const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },

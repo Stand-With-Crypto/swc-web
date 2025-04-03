@@ -5,6 +5,7 @@ import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featuredPastEvents'
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
@@ -13,9 +14,10 @@ export interface EventsPageProps {
   isDeepLink?: boolean
   /** Default to true */
   showMap?: boolean
+  countryCode: SupportedCountryCodes
 }
 
-export function EventsPage({ events, isDeepLink, showMap = true }: EventsPageProps) {
+export function EventsPage({ events, isDeepLink, showMap = true, countryCode }: EventsPageProps) {
   const futureEvents = events?.filter(event =>
     isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
   )
@@ -41,7 +43,9 @@ export function EventsPage({ events, isDeepLink, showMap = true }: EventsPagePro
     >
       <EventsIntro />
 
-      {promotedEvents && promotedEvents.length > 0 && <PromotedEvents events={promotedEvents} />}
+      {promotedEvents && promotedEvents.length > 0 && (
+        <PromotedEvents countryCode={countryCode} events={promotedEvents} />
+      )}
 
       <EventsNearYou events={futureEvents ?? []} />
 

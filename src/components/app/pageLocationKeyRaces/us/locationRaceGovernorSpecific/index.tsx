@@ -12,7 +12,9 @@ import { PACFooter } from '@/components/app/pacFooter'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonPoliticalAffiliationCategory,
@@ -98,77 +100,159 @@ export function USLocationRaceGovernorSpecific({
     })
   }, [stateCode])
 
-  const racesData = useMemo(
+  const compactedRaces = useMemo(() => {
+    return compact([
+      recommended && { person: recommended, isRecommended: true },
+      ...others.map(person => ({ person, isRecommended: false })),
+    ])
+  }, [others, recommended])
+
+  const democraticRacesData = useMemo(
     () =>
-      compact([
-        recommended && { person: recommended, isRecommended: true },
-        ...others.map(person => ({ person, isRecommended: false })),
-      ]),
-    [others, recommended],
+      compactedRaces.filter(
+        x =>
+          x.person.politicalAffiliationCategory ===
+          DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+      ),
+    [compactedRaces],
+  )
+
+  const republicanRacesData = useMemo(
+    () =>
+      compactedRaces.filter(
+        x =>
+          x.person.politicalAffiliationCategory ===
+          DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+      ),
+    [compactedRaces],
   )
 
   return (
     <div>
-      <DarkHeroSection className="text-center">
+      <DarkHeroSection className="mb-10 text-center md:mb-20">
         <h2 className={'mb-4'}>
           <InternalLink className="text-gray-400" href={urls.locationKeyRaces()}>
             United States
           </InternalLink>
           {' / '}
+          <InternalLink className="text-gray-400" href={urls.locationStateSpecific(stateCode)}>
+            {stateDisplayName}
+          </InternalLink>
+          {' / '}
           <LocationRaceLinkTitle stateCode={stateCode} stateDisplayName={stateDisplayName} />
         </h2>
-        <PageTitle as="h1" className="mb-4" size="md">
-          {`Governors (${stateCode})`}
-        </PageTitle>
+        <div className="mb-5 flex flex-col items-center gap-4">
+          <PageTitle as="h1" className="mb-4" size="md">
+            {`Gubernatorial Race (${stateCode})`}
+          </PageTitle>
+          <PageSubTitle>November 4, 2025</PageSubTitle>
+        </div>
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
             Make sure you're registered to vote
           </Button>
         </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
-      <div className="divide-y-2">
-        {isEmpty(racesData) ? (
+      <div className="w-full divide-y-2">
+        {isEmpty(democraticRacesData) && isEmpty(republicanRacesData) ? (
           <PageTitle as="h3" className="mt-20" size="sm">
-            There's no key races currently in {stateDisplayName}
+            There's no races currently in {stateDisplayName}
           </PageTitle>
         ) : (
-          racesData.map(({ person, isRecommended }) => (
-            <div key={person.id}>
-              <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
-                <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
-                  <div className="sticky top-24 text-center">
-                    <DTSIPersonHeroCard
-                      countryCode={countryCode}
-                      cryptoStanceGrade={DTSIFormattedLetterGrade}
-                      isRecommended={isRecommended}
-                      person={person}
-                      subheader="role"
-                    />
-                  </div>
-                </div>
-                <div className="w-full py-10 md:py-20">
-                  {person.stances.length ? (
-                    <>
-                      <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
-                        {dtsiPersonFullName(person)} statements on crypto
-                      </PageTitle>
-                      <MaybeOverflowedStances
-                        countryCode={countryCode}
-                        person={person}
-                        stances={person.stances}
-                      />
-                    </>
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center text-center">
-                      <h3 className="text-xl md:text-2xl">
-                        {dtsiPersonFullName(person)} has no statements on crypto.
-                      </h3>
-                    </div>
-                  )}
-                </div>
-              </section>
+          <div className="flex flex-col items-center gap-6" key={stateCode}>
+            <div className="flex flex-col items-center">
+              <PageTitle as="h3" size="xxs">
+                Primary election
+              </PageTitle>
             </div>
-          ))
+            <ResponsiveTabsOrSelect
+              analytics={'Primary Races Tabs'}
+              containerClassName="mb-6 md:mb-10 w-full"
+              data-testid="primary-races-tabs"
+              defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
+              forceDesktop
+              options={[
+                {
+                  value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                  label: 'Republican',
+                  content: republicanRacesData.map(({ person, isRecommended }) => (
+                    <section
+                      className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row"
+                      key={person.id}
+                    >
+                      <div className="shrink-0 py-5 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
+                        <div className="sticky top-24 text-center">
+                          <DTSIPersonHeroCard
+                            countryCode={countryCode}
+                            cryptoStanceGrade={DTSIFormattedLetterGrade}
+                            isRecommended={isRecommended}
+                            person={person}
+                            subheader="role"
+                          />
+                        </div>
+                      </div>
+                      <div className="w-full md:py-20">
+                        {person.stances.length ? (
+                          <>
+                            <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                              {dtsiPersonFullName(person)} statements on crypto
+                            </PageTitle>
+                            <MaybeOverflowedStances
+                              countryCode={countryCode}
+                              person={person}
+                              stances={person.stances}
+                            />
+                          </>
+                        ) : (
+                          <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                            {dtsiPersonFullName(person)} has no statements on crypto.
+                          </PageTitle>
+                        )}
+                      </div>
+                    </section>
+                  )),
+                },
+                {
+                  value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+                  label: 'Democratic',
+                  content: democraticRacesData.map(({ person, isRecommended }) => (
+                    <section className="flex max-w-7xl flex-col px-6 md:flex-row" key={person.id}>
+                      <div className="shrink-0 py-5 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
+                        <div className="sticky top-24 text-center">
+                          <DTSIPersonHeroCard
+                            countryCode={countryCode}
+                            cryptoStanceGrade={DTSIFormattedLetterGrade}
+                            isRecommended={isRecommended}
+                            person={person}
+                            subheader="role"
+                          />
+                        </div>
+                      </div>
+                      <div className="w-full md:py-20">
+                        {person.stances.length ? (
+                          <>
+                            <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                              {dtsiPersonFullName(person)} statements on crypto
+                            </PageTitle>
+                            <MaybeOverflowedStances
+                              countryCode={countryCode}
+                              person={person}
+                              stances={person.stances}
+                            />
+                          </>
+                        ) : (
+                          <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                            {dtsiPersonFullName(person)} has no statements on crypto.
+                          </PageTitle>
+                        )}
+                      </div>
+                    </section>
+                  )),
+                },
+              ]}
+              persistCurrentTab
+            />
+          </div>
         )}
       </div>
       <PACFooter className="container" />

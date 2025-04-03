@@ -59,7 +59,7 @@ export default async function EventDetailsPageRoot(props: Props) {
 
   return (
     <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
-      <EventDialogContent event={event.data} />
+      <EventDialogContent countryCode={countryCode} event={event.data} />
     </EventsPageDialogDeeplinkLayout>
   )
 }

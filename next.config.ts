@@ -11,7 +11,12 @@ const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
-  'media-src': ["'self'", 'blob:', 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com'],
+  'media-src': [
+    "'self'",
+    'blob:',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
+    'https://www.youtube-nocookie.com/embed/',
+  ],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
@@ -97,6 +102,7 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.com/',
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
+    'https://www.youtube-nocookie.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
     'https://*.newmode.net/',
@@ -309,6 +315,32 @@ const nextConfig: NextConfig = {
       {
         source: '/join/:referralId',
         destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
+        missing: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+          },
+        ],
+      },
+      // Country-specific referral redirects
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utmMedium',
+        permanent: false,
+        has: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+            value: '(?<utmMedium>.+)',
+          },
+        ],
+      },
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
         permanent: false,
         missing: [
           {
@@ -666,6 +698,21 @@ const nextConfig: NextConfig = {
       {
         source: '/cb-vote-adv-push',
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
+        permanent: true,
+      },
+      {
+        source: '/canada',
+        destination: '/ca?utm_source=billboard',
+        permanent: true,
+      },
+      {
+        source: '/uk',
+        destination: '/gb',
+        permanent: true,
+      },
+      {
+        source: '/australia',
+        destination: '/au?utm_source=billboard',
         permanent: true,
       },
     ]
