@@ -7,13 +7,14 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import {
   US_SOCIAL_MEDIA_URL,
   USEmailTemplateProps,
 } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+import { USWrapper } from "./wrapper"
 
 type FollowOnXReminderEmailProps = KeepUpTheFightSectionProps & USEmailTemplateProps
 
@@ -30,7 +31,7 @@ const USFollowOnXReminderEmail = ({
   }
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -73,7 +74,7 @@ const USFollowOnXReminderEmail = ({
         countryCode={SupportedCountryCodes.US}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </USWrapper>
   )
 }
 

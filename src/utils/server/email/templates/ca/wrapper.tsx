@@ -28,7 +28,7 @@ export function CAWrapper({
             <Img
               alt="Stand With Crypto"
               height="40"
-              src={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
+              src={buildTemplateInternalUrl('/email/misc/shield.svg', hrefSearchParams)}
               width="40"
             />
           </HeaderSection.Logo>
@@ -48,7 +48,7 @@ export function CAWrapper({
       {children}
 
       <FooterSection
-        shieldSrc={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
+        shieldSrc={buildTemplateInternalUrl('/email/misc/shield.svg', hrefSearchParams)}
         swchHref={buildTemplateInternalUrl('/', hrefSearchParams)}
       >
         <FooterSection.SocialMedia

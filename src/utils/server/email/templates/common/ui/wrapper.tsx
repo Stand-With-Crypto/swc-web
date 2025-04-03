@@ -126,7 +126,7 @@ FooterSection.SocialMedia = function FooterSectionSocialMedia({
   src: string
 }) {
   return (
-    <Column className="pr-4">
+    <Column className="pl-4">
       <Link href={href}>
         <Img alt={alt} height="24" src={src} width="24" />
       </Link>

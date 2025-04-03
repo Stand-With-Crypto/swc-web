@@ -30,7 +30,7 @@ export const GB_ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: `/gb/action/refer`,
   },
   [GBEmailActiveActions.VIEW_KEY_RACES]: {
-    image: `/gb/actionTypeIcons/view-key-races.png`,
+    image: `/gb/actionTypeIcons/votingResearched.png`,
     text: 'View key races',
     subtext: 'See the key races for the upcoming election.',
     buttonLabel: 'View key races',

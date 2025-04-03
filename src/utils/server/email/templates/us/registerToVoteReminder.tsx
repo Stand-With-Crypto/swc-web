@@ -7,13 +7,14 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import {
   US_SOCIAL_MEDIA_URL,
   USEmailTemplateProps,
 } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+import { USWrapper } from "./wrapper"
 
 type RegisterToVoteReminderEmailProps = KeepUpTheFightSectionProps & USEmailTemplateProps
 
@@ -30,7 +31,7 @@ const USRegisterToVoteReminderEmail = ({
   }
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -83,7 +84,7 @@ const USRegisterToVoteReminderEmail = ({
         hiddenActions={['VOTER_REGISTRATION']}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </USWrapper>
   )
 }
 

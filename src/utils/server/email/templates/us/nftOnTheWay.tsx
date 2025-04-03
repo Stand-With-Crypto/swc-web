@@ -6,13 +6,14 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import {
   US_NFT_IMAGES_BY_ACTION,
   USEmailTemplateProps,
 } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+import { USWrapper } from "./wrapper"
 
 type USNFTOnTheWayEmailProps = KeepUpTheFightSectionProps &
   USEmailTemplateProps & {
@@ -37,7 +38,7 @@ const USNFTOnTheWayEmail = ({
   const nftImage = US_NFT_IMAGES_BY_ACTION[actionNFT]
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           alt={nftImage.alt}
@@ -69,7 +70,7 @@ const USNFTOnTheWayEmail = ({
         countryCode={SupportedCountryCodes.US}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </USWrapper>
   )
 }
 

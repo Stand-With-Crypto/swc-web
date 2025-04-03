@@ -30,7 +30,7 @@ export const CA_ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: `/ca/action/refer`,
   },
   [CAEmailActiveActions.VIEW_KEY_RACES]: {
-    image: `/ca/actionTypeIcons/view-key-races.png`,
+    image: `/ca/actionTypeIcons/votingResearched.png`,
     text: 'View key races',
     subtext: 'See the key races for the upcoming election.',
     buttonLabel: 'View key races',

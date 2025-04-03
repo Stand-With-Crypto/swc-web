@@ -30,7 +30,7 @@ export const AU_ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: `/au/action/refer`,
   },
   [AUEmailActiveActions.VIEW_KEY_RACES]: {
-    image: `/au/actionTypeIcons/view-key-races.png`,
+    image: `/au/actionTypeIcons/votingResearched.png`,
     text: 'View key races',
     subtext: 'See the key races for the upcoming election.',
     buttonLabel: 'View key races',
