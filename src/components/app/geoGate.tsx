@@ -9,7 +9,6 @@ import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocat
 
 interface GeoGateProps {
   children: React.ReactNode
-  useSessionHook: any
   countryCode?: string
   unavailableContent?: React.ReactNode
   bypassCountryCheck?: boolean
