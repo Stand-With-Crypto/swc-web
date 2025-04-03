@@ -7,10 +7,11 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import { GBEmailTemplateProps } from '@/utils/server/email/templates/gb/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+import { GBWrapper } from "./wrapper"
 
 type GBReferralCompletedEmailProps = KeepUpTheFightSectionProps &
   GBEmailTemplateProps & {
@@ -36,7 +37,7 @@ export default function GBReferralCompletedEmail({
   const referActionHref = buildTemplateInternalUrl('/gb/action/refer', hydratedHrefSearchParams)
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <GBWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -73,6 +74,6 @@ export default function GBReferralCompletedEmail({
         countryCode={SupportedCountryCodes.GB}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </GBWrapper>
   )
 }

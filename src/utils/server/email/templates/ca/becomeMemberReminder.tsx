@@ -8,9 +8,10 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+import { CAWrapper } from "./wrapper"
 
 type BecomeMemberReminderEmailProps = KeepUpTheFightSectionProps & CAEmailTemplateProps
 
@@ -27,7 +28,7 @@ const CABecomeMemberReminderEmail = ({
   }
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <CAWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -79,7 +80,7 @@ const CABecomeMemberReminderEmail = ({
         countryCode={SupportedCountryCodes.CA}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </CAWrapper>
   )
 }
 
