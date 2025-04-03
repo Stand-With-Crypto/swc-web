@@ -16,10 +16,7 @@ import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXRemi
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
-import {
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'
@@ -63,12 +60,6 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     const userCommunicationJourney = await step.run('create-communication-journey', () =>
       createCommunicationJourney(payload.userId),
     )
-
-    const userForCountryCodeCheck = await getUser(payload.userId)
-    // TODO: remove this once we have templates for all countries
-    if (userForCountryCodeCheck.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
-      return
-    }
 
     let done = false
     do {
