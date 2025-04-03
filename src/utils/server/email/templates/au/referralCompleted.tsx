@@ -8,9 +8,10 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+import { AUWrapper } from './wrapper'
 
 type AUReferralCompletedEmailProps = KeepUpTheFightSectionProps &
   AUEmailTemplateProps & {
@@ -36,7 +37,7 @@ export default function AUReferralCompletedEmail({
   const referActionHref = buildTemplateInternalUrl('/au/action/refer', hydratedHrefSearchParams)
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -73,6 +74,6 @@ export default function AUReferralCompletedEmail({
         countryCode={SupportedCountryCodes.AU}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </AUWrapper>
   )
 }

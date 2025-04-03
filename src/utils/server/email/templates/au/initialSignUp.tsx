@@ -7,9 +7,10 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+import { AUWrapper } from "./wrapper";
 
 type InitialSignUpEmailProps = KeepUpTheFightSectionProps & AUEmailTemplateProps
 
@@ -26,7 +27,7 @@ const AUInitialSignUpEmail = ({
   }
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -62,7 +63,7 @@ const AUInitialSignUpEmail = ({
         countryCode={SupportedCountryCodes.AU}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </AUWrapper>
   )
 }
 

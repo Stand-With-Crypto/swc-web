@@ -7,8 +7,8 @@ import {
   KeepUpTheFightSection,
   KeepUpTheFightSectionProps,
 } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
-import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 import { USEmailTemplateProps } from '@/utils/server/email/templates/us/constants'
+import { USWrapper } from '@/utils/server/email/templates/us/wrapper'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -27,7 +27,7 @@ const USBecomeMemberReminderEmail = ({
   }
 
   return (
-    <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -82,7 +82,7 @@ const USBecomeMemberReminderEmail = ({
         countryCode={SupportedCountryCodes.US}
         hrefSearchParams={hydratedHrefSearchParams}
       />
-    </Wrapper>
+    </USWrapper>
   )
 }
 
