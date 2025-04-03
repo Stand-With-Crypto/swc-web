@@ -70,6 +70,7 @@ export function GBLocationRaceSpecific({
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
       campaignName: GBUserActionViewKeyRacesCampaignName['H1_2025'],
+      countryCode,
       stateCode,
     })
   }, [stateCode])

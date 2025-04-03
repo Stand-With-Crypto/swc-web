@@ -9,6 +9,7 @@ export const CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.RSVP_EVENT,
   UserActionType.VIEW_KEY_RACES,
   UserActionType.VOTER_ATTESTATION,
+  UserActionType.VIEW_KEY_PAGE,
 ] as const
 export type CAActiveClientUserActionWithCampaignType =
   (typeof CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -21,14 +22,18 @@ export enum CAUserActionReferCampaignName {
 }
 
 export enum CAUserActionViewKeyRacesCampaignName {
-  'H1_2025' = 'H1_2025',
+  H1_2025 = 'H1_2025',
 }
 export enum CAUserActionVoterAttestationCampaignName {
-  'H1_2025' = 'H1_2025',
+  H1_2025 = 'H1_2025',
 }
 
 export enum CAUserActionRsvpEventCampaignName {
   DEFAULT = 'DEFAULT',
+}
+
+export enum CAUserActionViewKeyPageCampaignName {
+  NEWMODE_EMAIL_ACTION = 'NEWMODE_EMAIL_ACTION',
 }
 
 export type CAUserActionCampaignName =
@@ -38,6 +43,7 @@ export type CAUserActionCampaignName =
   | CAUserActionRsvpEventCampaignName
   | CAUserActionViewKeyRacesCampaignName
   | CAUserActionVoterAttestationCampaignName
+  | CAUserActionViewKeyPageCampaignName
 
 export type CAUserActionCampaigns = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
@@ -46,6 +52,7 @@ export type CAUserActionCampaigns = {
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName
   [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName
+  [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName
 }
 
 export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -53,6 +60,7 @@ export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.TWEET]: CAUserActionTweetCampaignName.DEFAULT,
   [UserActionType.REFER]: CAUserActionReferCampaignName.DEFAULT,
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName.DEFAULT,
-  [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName['H1_2025'],
-  [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName['H1_2025'],
+  [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName.H1_2025,
+  [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName.H1_2025,
+  [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
 } satisfies Record<CAActiveClientUserActionWithCampaignType, string>

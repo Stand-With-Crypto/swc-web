@@ -96,6 +96,7 @@ export function USLocationRaceGovernorSpecific({
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
       campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
+      countryCode,
       usaState: stateCode,
     })
   }, [stateCode])
