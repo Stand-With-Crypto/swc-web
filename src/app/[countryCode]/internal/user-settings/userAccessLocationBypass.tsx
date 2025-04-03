@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { toast } from 'sonner'
 
@@ -43,9 +43,7 @@ export function UserAccessLocationBypass() {
 
     toast.success(
       'IP location country code bypassed. Please, open a new tab to see the changes or refresh the page.',
-      {
-        duration: 10000,
-      },
+      { duration: 10000 },
     )
     setUserAccessLocation(countryCode)
   }
