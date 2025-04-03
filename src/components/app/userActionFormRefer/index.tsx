@@ -1,58 +1,57 @@
 import dynamic from 'next/dynamic'
 
-import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
-import { UserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/common/skeleton'
+import { AUUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/au/skeleton'
+import { CAUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/ca/skeleton'
 import { UserActionFormReferProps } from '@/components/app/userActionFormRefer/common/types'
+import { GBUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/gb/skeleton'
+import { USUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/us/skeleton'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
-import {
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const AUUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/au').then(mod => mod.AUUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.AU} />,
+    loading: () => <AUUserActionFormReferSkeleton />,
   },
 )
 
 const CAUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/ca').then(mod => mod.CAUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.CA} />,
+    loading: () => <CAUserActionFormReferSkeleton />,
   },
 )
 
 const GBUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/gb').then(mod => mod.GBUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.GB} />,
+    loading: () => <GBUserActionFormReferSkeleton />,
   },
 )
 
 const USUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/us').then(mod => mod.USUserActionFormRefer),
   {
-    loading: () => <UserActionFormReferSkeleton countryCode={SupportedCountryCodes.US} />,
+    loading: () => <USUserActionFormReferSkeleton />,
   },
 )
 
-export function UserActionFormRefer(props: UserActionFormReferProps) {
+export function getUserActionFormRefer(props: UserActionFormReferProps) {
   const { countryCode } = props
 
   switch (countryCode) {
     case SupportedCountryCodes.US:
-      return <USUserActionFormRefer {...props} />
+      return USUserActionFormRefer
     case SupportedCountryCodes.GB:
-      return <GBUserActionFormRefer {...props} />
+      return GBUserActionFormRefer
     case SupportedCountryCodes.CA:
-      return <CAUserActionFormRefer {...props} />
+      return CAUserActionFormRefer
     case SupportedCountryCodes.AU:
-      return <AUUserActionFormRefer {...props} />
+      return AUUserActionFormRefer
     default:
       return gracefullyError({
         msg: `Country implementation not found for UserActionFormRefer`,
-        fallback: <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />,
+        fallback: null,
         hint: {
           level: 'error',
           tags: {

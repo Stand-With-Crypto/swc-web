@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { GeoGate } from '@/components/app/geoGate'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
-import { UserActionFormRefer } from '@/components/app/userActionFormRefer'
+import { getUserActionFormRefer } from '@/components/app/userActionFormRefer'
 import { ANALYTICS_NAME_USER_ACTION_FORM_REFER } from '@/components/app/userActionFormRefer/common/constants'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
@@ -25,6 +25,8 @@ export function UserActionFormReferDeeplinkWrapper({
   useEffect(() => {
     trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_REFER })
   }, [])
+
+  const UserActionFormRefer = useMemo(() => getUserActionFormRefer({ countryCode }), [countryCode])
 
   return (
     <GeoGate

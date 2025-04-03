@@ -1,10 +1,10 @@
 'use client'
 
-import dynamic from 'next/dynamic'
+import { useMemo } from 'react'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
+import { getUserActionFormRefer } from '@/components/app/userActionFormRefer'
 import { ANALYTICS_NAME_USER_ACTION_FORM_REFER } from '@/components/app/userActionFormRefer/common/constants'
-import { UserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/common/skeleton'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -22,12 +22,7 @@ export function UserActionFormReferDialog(props: UserActionFormReferDialogProps)
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_REFER,
   })
 
-  const UserActionFormRefer = dynamic(
-    () => import('@/components/app/userActionFormRefer').then(mod => mod.UserActionFormRefer),
-    {
-      loading: () => <UserActionFormReferSkeleton countryCode={countryCode} />,
-    },
-  )
+  const UserActionFormRefer = useMemo(() => getUserActionFormRefer(props), [props])
 
   return (
     <UserActionFormDialog

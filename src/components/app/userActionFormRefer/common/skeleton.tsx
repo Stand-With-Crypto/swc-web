@@ -1,26 +1,9 @@
 'use client'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { NextImage } from '@/components/ui/image'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
-const getSkeletonSrc = (countryCode: SupportedCountryCodes) => {
-  switch (countryCode) {
-    case SupportedCountryCodes.US:
-      return '/actionTypeIcons/refer.png'
-    default:
-      return `/${countryCode}/actionTypeIcons/refer.png`
-  }
-}
-
-export const UserActionFormReferSkeleton = ({
-  countryCode,
-}: {
-  countryCode: SupportedCountryCodes
-}) => {
-  const src = getSkeletonSrc(countryCode)
-
+export const UserActionFormReferSkeleton = ({ children }: { children?: React.ReactNode }) => {
   return (
     <UserActionFormLayout>
       <UserActionFormLayout.Container className="flex h-[400px] items-center justify-center">
@@ -31,13 +14,7 @@ export const UserActionFormReferSkeleton = ({
             <div className="absolute inset-2 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite_400ms] rounded-full border border-primary-cta/40"></div>
 
             <div className={cn('relative z-10', 'animate-[pulse_3s_ease-in-out_infinite]')}>
-              <NextImage
-                alt="Refer a friend"
-                className="object-contain drop-shadow-md"
-                height={100}
-                src={src}
-                width={100}
-              />
+              {children}
             </div>
           </div>
           <p className="mt-6 font-medium text-primary/60">Please wait...</p>
