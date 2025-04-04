@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { GbDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/gb'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -18,7 +17,7 @@ export function GbPagePoliticians({ politicians }: { politicians: DTSIPersonData
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <Suspense fallback={<LoadingOverlay />}>
+        <Suspense>
           <GbDTSIClientPersonDataTable initialData={politicians} />
         </Suspense>
       </PagePoliticiansLayout.PoliticiansTableSection>
