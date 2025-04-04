@@ -11,7 +11,7 @@ import { USEmailTemplateProps } from '@/utils/server/email/templates/us/constant
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { USWrapper } from "./wrapper"
+import { USWrapper } from './wrapper'
 
 type ContactYourRepresentativeReminderEmailProps = KeepUpTheFightSectionProps & USEmailTemplateProps
 

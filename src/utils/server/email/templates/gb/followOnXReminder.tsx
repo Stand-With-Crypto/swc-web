@@ -14,7 +14,7 @@ import {
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { GBWrapper } from "./wrapper"
+import { GBWrapper } from './wrapper'
 
 type FollowOnXReminderEmailProps = KeepUpTheFightSectionProps & GBEmailTemplateProps
 

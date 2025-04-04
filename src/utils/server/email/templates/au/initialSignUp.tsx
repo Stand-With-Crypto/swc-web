@@ -10,7 +10,7 @@ import {
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { AUWrapper } from "./wrapper";
+import { AUWrapper } from './wrapper'
 
 type InitialSignUpEmailProps = KeepUpTheFightSectionProps & AUEmailTemplateProps
 

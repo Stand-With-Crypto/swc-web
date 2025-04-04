@@ -10,7 +10,7 @@ import { GBEmailTemplateProps } from '@/utils/server/email/templates/gb/constant
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { GBWrapper } from "./wrapper"
+import { GBWrapper } from './wrapper'
 
 type ReactivationReminderProps = KeepUpTheFightSectionProps & GBEmailTemplateProps
 
