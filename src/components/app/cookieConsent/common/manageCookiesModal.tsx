@@ -2,6 +2,10 @@ import React, { useMemo } from 'react'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 import {
+  CookiePreferencesFieldConfig,
+  CookiePreferencesForm,
+} from '@/components/app/cookieConsent/common/cookiePreferencesForm'
+import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -23,18 +27,20 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-import { CookiePreferencesForm } from './cookiePreferencesForm'
-
 interface ManageCookiesModalProps {
   children: React.ReactNode
   onSubmit: (accepted: CookieConsentPermissions) => void
   countryCode: SupportedCountryCodes
+  defaultValues: CookieConsentPermissions
+  fieldsConfig: CookiePreferencesFieldConfig[]
 }
 
-export default function ManageCookiesModal({
+export function ManageCookiesModal({
   children,
   onSubmit,
   countryCode,
+  defaultValues,
+  fieldsConfig,
 }: ManageCookiesModalProps) {
   const urls = useMemo(() => getIntlUrls(countryCode), [countryCode])
   const dialogProps = useDialog({ analytics: 'Cookie Consent Management' })
@@ -103,7 +109,12 @@ export default function ManageCookiesModal({
             </InternalLink>
             .
           </p>
-          <CookiePreferencesForm onSubmit={handleManageCookiesSubmit} />
+
+          <CookiePreferencesForm
+            defaultValues={defaultValues}
+            fieldsConfig={fieldsConfig}
+            onSubmit={handleManageCookiesSubmit}
+          />
         </div>
       </ContainerContent>
     </Container>
