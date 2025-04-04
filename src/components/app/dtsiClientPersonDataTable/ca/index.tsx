@@ -139,12 +139,8 @@ function CaGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         roleOptions={ROLE_OPTIONS}
       />
-      <GlobalFilters.PartySelect
-        getPartyOptionDisplayName={getPartyOptionDisplayName}
-        namedColumns={namedColumns}
-        partyOptions={PARTY_OPTIONS}
-      />
       <GlobalFilters.StateSelect
+        getStateOptionDisplayName={getCAProvinceOrTerritoryNameFromCode}
         locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
         namedColumns={namedColumns}
         stateOptions={[
@@ -152,6 +148,11 @@ function CaGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
           ...Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP).sort(),
         ]}
         triggerClassName="w-[145px]"
+      />
+      <GlobalFilters.PartySelect
+        getPartyOptionDisplayName={getPartyOptionDisplayName}
+        namedColumns={namedColumns}
+        partyOptions={PARTY_OPTIONS}
       />
     </GlobalFilters>
   )

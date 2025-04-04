@@ -16,7 +16,7 @@ import {
   isPoliticianDetailsStanceHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { getStateNameResolver } from '@/utils/shared/stateUtils'
+import { getStateNameResolver, getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -145,7 +145,11 @@ export const getDTSIClientPersonDataTableColumns = ({
         id: PERSON_TABLE_COLUMNS_IDS.STATE,
         filterFn: PERSON_TABLE_COLUMNS_IDS.STATE,
         header: ({ column }) => {
-          return <SortableHeader column={column}>Location</SortableHeader>
+          return (
+            <SortableHeader column={column}>
+              {getTerritoryDivisionByCountryCode(countryCode)}
+            </SortableHeader>
+          )
         },
         cell: ({ row }) =>
           row.original.primaryRole?.primaryState
