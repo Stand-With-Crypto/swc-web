@@ -2,6 +2,7 @@ import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/d
 import { organizePeople } from '@/components/app/pageLocationKeyRaces/us/locationUnitedStates/organizePeople'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'

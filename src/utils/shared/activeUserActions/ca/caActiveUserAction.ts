@@ -1,4 +1,8 @@
 import { UserActionType } from '@prisma/client'
 
-const _CA_ACTIVE_CLIENT_USER_ACTION_TYPES = [UserActionType.OPT_IN, UserActionType.TWEET] as const
+const _CA_ACTIVE_CLIENT_USER_ACTION_TYPES = [
+  UserActionType.OPT_IN,
+  UserActionType.TWEET,
+  UserActionType.VIEW_KEY_PAGE,
+] as const
 export type CAActiveClientUserActionType = (typeof _CA_ACTIVE_CLIENT_USER_ACTION_TYPES)[number]
