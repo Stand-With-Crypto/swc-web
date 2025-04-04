@@ -5,21 +5,26 @@ import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface UserReferralUrlProps {
   referralId: string
   className?: string
+  countryCode?: SupportedCountryCodes
 }
 
 export function UserReferralUrl(props: UserReferralUrlProps) {
-  const { referralId, className } = props
+  const { referralId, className, countryCode } = props
 
   const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
-  const fullUrl = externalUrls.swcReferralUrl({ referralId })
-  const presentationUrl = fullUrl.replace(/https?:\/\/(www\.)?/, '').replace('/join/', '/join/\n')
+  const fullUrl = externalUrls.swcReferralUrl({ referralId, countryCode })
+  const presentationUrl = fullUrl
+    .replace(/https?:\/\/(www\.)?/, '')
+    .replace('/join/', '/join/\u200B')
 
   const handleCopy = () => handleCopyToClipboard(fullUrl)
 
@@ -35,9 +40,7 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
         size="lg"
         variant="outline"
       >
-        <span className="whitespace-pre-wrap text-start sm:whitespace-normal">
-          {presentationUrl}
-        </span>
+        <span className="whitespace-pre-wrap text-start">{presentationUrl}</span>
 
         <TooltipProvider>
           <Tooltip open={hasCopied}>
@@ -58,11 +61,12 @@ export function UserReferralUrl(props: UserReferralUrlProps) {
 
 export function UserReferralUrlWithApi() {
   const { data, isLoading } = useApiResponseForUserFullProfileInfo()
+  const countryCode = useCountryCode()
   const hasHydrated = useHasHydrated()
 
   if (!data?.user || isLoading || !hasHydrated) {
     return null
   }
 
-  return <UserReferralUrl referralId={data.user.referralId} />
+  return <UserReferralUrl countryCode={countryCode} referralId={data.user.referralId} />
 }

@@ -185,6 +185,7 @@ enum PersonGrouping {
 }
 
 enum PersonPoliticalAffiliationCategory {
+  BLOC_QUEBECOIS
   CONSERVATIVE
   DEMOCRAT
   DEMOCRATIC_SOCIALIST
@@ -197,6 +198,7 @@ enum PersonPoliticalAffiliationCategory {
   NATIONAL_LIBERAL
   NDP
   OTHER
+  PPC
   REFORM
   REPUBLICAN
   SOCIALIST

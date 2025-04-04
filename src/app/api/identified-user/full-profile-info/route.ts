@@ -46,6 +46,7 @@ async function apiResponseForUserFullProfileInfo() {
                 userActionPollAnswers: true,
               },
             },
+            userActionViewKeyPage: true,
           },
         },
       },

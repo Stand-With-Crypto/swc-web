@@ -41,7 +41,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     // This revalidation is used to revalidate the user's completed actions list
     // after they complete any action
     void mutate(apiUrls.userFullProfileInfo())
-    void mutate(apiUrls.userPerformedUserActionTypes())
+    void mutate(apiUrls.userPerformedUserActionTypes({ countryCode }))
   })
 
   if (!isLoggedIn || !user) {

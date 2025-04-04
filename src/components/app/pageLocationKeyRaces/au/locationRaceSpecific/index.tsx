@@ -67,6 +67,7 @@ export function AULocationRaceSpecific({
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
       campaignName: AUUserActionViewKeyRacesCampaignName['H1_2025'],
+      countryCode,
       stateCode,
     })
   }, [stateCode])

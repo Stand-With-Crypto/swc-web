@@ -109,6 +109,7 @@ export function USLocationRaceSpecific({
       campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
       usaState: stateCode,
       usCongressionalDistrict: district?.toString(),
+      countryCode,
     })
   }, [district, stateCode])
 

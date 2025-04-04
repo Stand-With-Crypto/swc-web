@@ -20,6 +20,7 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VOTING_DAY,
   UserActionType.REFER,
   UserActionType.POLL,
+  UserActionType.VIEW_KEY_PAGE,
 ] as const
 export type USActiveClientUserActionWithCampaignType =
   (typeof US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -88,8 +89,10 @@ export enum USUserActionVotingDayCampaignName {
   '2024_ELECTION' = '2024_ELECTION',
   'H1_2025' = 'H1_2025',
 }
-
 export enum USUserActionReferCampaignName {
+  DEFAULT = 'DEFAULT',
+}
+export enum USUserActionViewKeyPageCampaignName {
   DEFAULT = 'DEFAULT',
 }
 
@@ -127,6 +130,7 @@ export type USUserActionCampaigns = {
   [UserActionType.VOTING_DAY]: USUserActionVotingDayCampaignName
   [UserActionType.REFER]: USUserActionReferCampaignName
   [UserActionType.POLL]: USUserActionPollCampaignName
+  [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName
 }
 
 export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -147,4 +151,5 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTING_DAY]: USUserActionVotingDayCampaignName['H1_2025'],
   [UserActionType.REFER]: USUserActionReferCampaignName.DEFAULT,
   [UserActionType.POLL]: USUserActionPollCampaignName.CRYPTO_NEWS,
+  [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName.DEFAULT,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>

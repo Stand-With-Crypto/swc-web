@@ -95,7 +95,7 @@ export const getIntlUrls = (
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
     referrals: (pageNum?: number) => {
-      const shouldSuppressPageNum = pageNum === 1
+      const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
@@ -119,6 +119,7 @@ export const getIntlUrls = (
       stateCode: LocationStateCode
       district: NormalizedDTSIDistrictId
     }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
+    newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
   }
 }
 
@@ -131,7 +132,8 @@ export const apiUrls = {
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
   totalDonations: () => '/api/public/total-donations',
-  userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
+  userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/${countryCode}/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>

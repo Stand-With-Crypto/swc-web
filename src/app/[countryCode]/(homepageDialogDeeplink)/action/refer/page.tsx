@@ -12,6 +12,7 @@ export const dynamic = 'error'
 
 export default async function UserActionReferDeepLink(props: PageProps) {
   const params = await props.params
+  const countryCode = params.countryCode
 
   return (
     <USHomepageDialogDeeplinkLayout className="max-w-xl" pageParams={params}>
@@ -28,7 +29,7 @@ export default async function UserActionReferDeepLink(props: PageProps) {
             domain: 'UserActionReferDeepLink',
           }}
         >
-          <UserActionFormReferDeeplinkWrapper />
+          <UserActionFormReferDeeplinkWrapper countryCode={countryCode} />
         </ErrorBoundary>
       </div>
     </USHomepageDialogDeeplinkLayout>
