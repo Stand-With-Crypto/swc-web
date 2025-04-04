@@ -5,6 +5,7 @@ import { SMSStatus, UserActionType, UserInformationVisibility } from '@prisma/cl
 import { waitUntil } from '@vercel/functions'
 import { object, string, z } from 'zod'
 
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -63,6 +64,7 @@ async function _actionCreateUserActionViewKeyPage(input: CreateActionViewKeyPage
   }
 
   const campaignName = validatedInput.data.campaignName
+  const path = validatedInput.data.path
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -74,7 +76,7 @@ async function _actionCreateUserActionViewKeyPage(input: CreateActionViewKeyPage
 
   if (user.countryCode !== countryCode) {
     logger.info('User country code does not match page country code, aborting')
-    return
+    return { user: getClientUser(user) }
   }
 
   const userId = user.id
@@ -106,14 +108,19 @@ async function _actionCreateUserActionViewKeyPage(input: CreateActionViewKeyPage
     })
 
     waitUntil(beforeFinish())
-    return
+    return { user: getClientUser(user) }
   }
 
   logger.info(`Creating new action for user ${userId}`)
 
   await triggerRateLimiterAtMostOnce()
 
-  await createUserActionViewKeyPage({ userId, countryCode, campaignName, path: '/foobar' })
+  await createUserActionViewKeyPage({
+    userId,
+    countryCode,
+    campaignName,
+    path,
+  })
 
   analytics.trackUserActionCreated({
     actionType,
@@ -124,7 +131,7 @@ async function _actionCreateUserActionViewKeyPage(input: CreateActionViewKeyPage
 
   waitUntil(beforeFinish())
 
-  return
+  return { user: getClientUser(user) }
 }
 
 async function createUser({
