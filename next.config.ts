@@ -290,6 +290,16 @@ const nextConfig: NextConfig = {
         destination: '/action/nft-mint',
         permanent: true,
       },
+      {
+        source: '/australia',
+        destination: 'https://au.standwithcrypto.org',
+        permanent: false,
+      },
+      {
+        source: '/canada',
+        destination: 'https://ca.standwithcrypto.org',
+        permanent: false,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
