@@ -92,11 +92,6 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
   },
-  [UserActionType.VIEW_KEY_PAGE]: {
-    getDeeplinkUrl: ({ countryCode }) => {
-      return `${getIntlPrefix(countryCode)}/content/debanking`
-    },
-  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
