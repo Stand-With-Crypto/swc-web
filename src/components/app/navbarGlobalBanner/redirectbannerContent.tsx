@@ -55,6 +55,14 @@ export function RedirectBannerContent({ countryCode }: { countryCode: SupportedC
     window.location.href = userAccessLocationCountry?.url
   }
 
+  const hereTextSection = isMobile ? (
+    <span className="font-bold">here</span>
+  ) : (
+    <button className="font-bold" onClick={handleWrapperClick}>
+      here
+    </button>
+  )
+
   return (
     <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
       <WrapperContainer
@@ -66,9 +74,7 @@ export function RedirectBannerContent({ countryCode }: { countryCode: SupportedC
             <p>
               {userAccessLocationCountry?.emoji ? `${userAccessLocationCountry?.emoji} ` : ''}
               Looking for Stand With Crypto {userAccessLocationCountry.label}? Click{' '}
-              <button className="font-bold" onClick={handleWrapperClick}>
-                here
-              </button>
+              {hereTextSection}
             </p>
           </div>
         </div>

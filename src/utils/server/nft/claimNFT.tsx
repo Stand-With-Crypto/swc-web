@@ -41,6 +41,7 @@ import {
   USUserActionRsvpEventCampaignName,
   USUserActionTweetAtPersonCampaignName,
   USUserActionTweetCampaignName,
+  USUserActionViewKeyPageCampaignName,
   USUserActionViewKeyRacesCampaignName,
   USUserActionVoterAttestationCampaignName,
   USUserActionVoterRegistrationCampaignName,
@@ -107,6 +108,9 @@ export const ACTION_NFT_SLUG: Record<
     [USUserActionPollCampaignName.DIGITAL_ASSETS]: null,
     [USUserActionPollCampaignName.ENCOURAGE]: null,
     [USUserActionPollCampaignName.OVAL_OFFICE]: null,
+  },
+  [UserActionType.VIEW_KEY_PAGE]: {
+    [USUserActionViewKeyPageCampaignName.DEFAULT]: null,
   },
 }
 

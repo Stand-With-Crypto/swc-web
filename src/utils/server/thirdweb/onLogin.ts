@@ -59,6 +59,7 @@ import { generateReferralId } from '@/utils/shared/referralId'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
+import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/index'
 
 type UpsertedUser = User & {
   address: Address | null
@@ -461,7 +462,18 @@ export async function onNewLogin(props: NewLoginParams) {
     isValidReferral(localUser?.currentSession?.searchParamsOnLoad)
 
   if (isReferral) {
-    triggerReferralSteps({ localUser, searchParams, newUser: user })
+    const campaignName =
+      searchParams.campaignName ||
+      COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode as SupportedCountryCodes][
+        UserActionType.REFER
+      ]
+
+    triggerReferralSteps({
+      localUser,
+      searchParams,
+      newUser: user,
+      campaignName,
+    })
   }
 
   waitUntil(beforeFinish())

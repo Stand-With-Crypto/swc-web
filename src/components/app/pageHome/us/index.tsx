@@ -133,7 +133,7 @@ export function UsPageHome({
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper
                         authenticatedContent={
-                          <UserActionFormReferDialog>
+                          <UserActionFormReferDialog countryCode={countryCode}>
                             <Button className="w-full">Refer</Button>
                           </UserActionFormReferDialog>
                         }

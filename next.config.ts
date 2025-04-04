@@ -323,6 +323,32 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Country-specific referral redirects
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utmMedium',
+        permanent: false,
+        has: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+            value: '(?<utmMedium>.+)',
+          },
+        ],
+      },
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
+        missing: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+          },
+        ],
+      },
       {
         source: '/politicians/person/:slug/questionnaire',
         destination: '/politicians/person/:slug#questionnaire',

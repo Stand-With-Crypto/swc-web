@@ -33,6 +33,8 @@ export function LocationRaces({
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
       campaignName: getActionDefaultCampaignName(UserActionType.VIEW_KEY_RACES, countryCode),
+      countryCode,
+      shouldBypassAuth: true,
     })
   }, [countryCode])
 
