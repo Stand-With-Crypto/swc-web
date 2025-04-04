@@ -118,7 +118,7 @@ export function getRoleOptionDisplayName(role: string) {
     case ROLE_OPTIONS.ALL_OTHER:
       return 'Other Political Figure'
     case ROLE_OPTIONS.HOUSE_OF_COMMONS:
-      return 'House of Representatives (Parliament)'
+      return 'House of Reps'
     default:
       return 'All'
   }
