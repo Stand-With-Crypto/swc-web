@@ -63,6 +63,7 @@ async function _actionCreateUserActionViewKeyPage(input: CreateActionViewKeyPage
   }
 
   const campaignName = validatedInput.data.campaignName
+  const path = validatedInput.data.path
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -113,7 +114,12 @@ async function _actionCreateUserActionViewKeyPage(input: CreateActionViewKeyPage
 
   await triggerRateLimiterAtMostOnce()
 
-  await createUserActionViewKeyPage({ userId, countryCode, campaignName, path: '/foobar' })
+  await createUserActionViewKeyPage({
+    userId,
+    countryCode,
+    campaignName,
+    path,
+  })
 
   analytics.trackUserActionCreated({
     actionType,

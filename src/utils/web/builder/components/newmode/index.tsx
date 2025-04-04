@@ -1,0 +1,102 @@
+'use client'
+
+import { useEffect } from 'react'
+import { UserActionType } from '@prisma/client'
+import { usePathname } from 'next/navigation'
+
+import {
+  actionCreateUserActionViewKeyPage,
+  CreateActionViewKeyPageInput,
+} from '@/actions/actionCreateUserActionViewKeyPage'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
+import { BuilderComponentAttributes } from '@/utils/web/builder/types'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { toastGenericError } from '@/utils/web/toastUtils'
+
+declare global {
+  namespace React {
+    namespace JSX {
+      interface IntrinsicElements {
+        'newmode-embed': React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement> & {
+            action: string
+            base: string
+          },
+          HTMLElement
+        >
+      }
+    }
+  }
+}
+
+export interface NewModeProps {
+  campaignId: string
+}
+
+export function NewMode({ campaignId, ...props }: NewModeProps & BuilderComponentAttributes) {
+  const { data: userActionData, isLoading: isLoadingPerformedUserAction } =
+    useApiResponseForUserPerformedUserActionTypes()
+  const countryCode = useCountryCode()
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (isLoadingPerformedUserAction) {
+      return
+    }
+
+    const hasPerformedUserAction = userActionData?.performedUserActionTypes.some(
+      action => action.actionType === UserActionType.VIEW_KEY_PAGE,
+    )
+
+    if (hasPerformedUserAction) {
+      return
+    }
+
+    if (pathname) {
+      void handleViewKeyPageAction({
+        countryCode,
+        path: pathname,
+      })
+    }
+  }, [pathname, countryCode, isLoadingPerformedUserAction, userActionData])
+
+  return (
+    <newmode-embed {...props} action={campaignId} base="https://base.newmode.net"></newmode-embed>
+  )
+}
+
+async function handleViewKeyPageAction({
+  countryCode,
+  path,
+}: {
+  countryCode: SupportedCountryCodes
+  path: string
+}) {
+  const data: CreateActionViewKeyPageInput = {
+    countryCode,
+    path: path.replace(`/${countryCode}/`, '/'),
+    campaignName: getActionDefaultCampaignName(UserActionType.VIEW_KEY_PAGE, countryCode),
+  }
+
+  const result = await triggerServerActionForForm(
+    {
+      formName: 'View Key Page',
+      onError: () => toastGenericError(),
+      analyticsProps: {
+        'Campaign Name': data.campaignName,
+        'User Action Type': UserActionType.VIEW_KEY_PAGE,
+        countryCode: data.countryCode,
+        path: data.path,
+      },
+      payload: data,
+    },
+    payload => actionCreateUserActionViewKeyPage(payload),
+  )
+
+  if (result.status !== 'success') {
+    toastGenericError()
+  }
+}
