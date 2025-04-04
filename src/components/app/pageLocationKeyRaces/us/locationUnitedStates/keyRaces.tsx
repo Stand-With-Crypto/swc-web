@@ -44,7 +44,6 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
               <PageTitle as="h2" size="md">
                 {stateName} Gubernatorial Election
               </PageTitle>
-              <PageSubTitle>November 4, 2025</PageSubTitle>
             </div>
 
             {races.map(people => {
