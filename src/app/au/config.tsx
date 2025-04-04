@@ -52,6 +52,7 @@ export const footerConfig: FooterProps = {
       href: urls.privacyPolicy(),
       text: 'Privacy',
     },
+    { href: urls.termsOfService(), text: 'Terms of service' },
   ],
   socialLinks: [
     {
