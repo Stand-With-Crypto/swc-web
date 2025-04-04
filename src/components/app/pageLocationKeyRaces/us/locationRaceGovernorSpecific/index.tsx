@@ -12,7 +12,6 @@ import { PACFooter } from '@/components/app/pacFooter'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import {

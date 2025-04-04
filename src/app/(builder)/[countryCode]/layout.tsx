@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { TopLevelBuilderClientLogic } from '@/components/app/builder/topLevelBuilderClientLogic'
 import { PageLayout } from '@/components/app/layout/layout'
+import { GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE } from '@/components/app/navbarGlobalBanner/common/constants'
 import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import {
@@ -53,7 +54,12 @@ export default async function Layout({
   }
 
   return (
-    <PageLayout countryCode={countryCode} footer={null} navbar={null}>
+    <PageLayout
+      countryCode={countryCode}
+      footer={null}
+      globalBanner={GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE[countryCode]}
+      navbar={null}
+    >
       <TopLevelBuilderClientLogic>{children}</TopLevelBuilderClientLogic>
     </PageLayout>
   )

@@ -5,6 +5,7 @@ import { mapPersistedLocalUserToExperimentAnalyticsProperties } from '@/utils/sh
 import { customLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 import { getLocalUser } from '@/utils/web/clientLocalUser'
 import { getCountryCodeForClientAnalytics } from '@/utils/web/getCountryCodeForClientAnalytics'
@@ -17,8 +18,6 @@ const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
 const environmentHasAnalyticsEnabled =
   !isStorybook && !isCypress && !!NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN
 
-const hasTargetingEnabled = getClientCookieConsent().targeting
-
 let init = false
 export function maybeInitClientAnalytics() {
   if (!init) {
@@ -30,6 +29,9 @@ export function maybeInitClientAnalytics() {
   }
 }
 export function identifyClientAnalyticsUser(userId: string) {
+  const hasTargetingEnabled = getClientCookieConsent(
+    getCountryCodeForClientAnalytics() as SupportedCountryCodes,
+  ).targeting
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
     maybeInitClientAnalytics()
     mixpanel.identify(userId)
@@ -65,6 +67,8 @@ export function trackClientAnalytic(
   )
 
   maybeInitClientAnalytics()
+
+  const hasTargetingEnabled = getClientCookieConsent(countryCode as SupportedCountryCodes).targeting
 
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
     mixpanel.track(eventName, eventProperties, optionsOrCallback)

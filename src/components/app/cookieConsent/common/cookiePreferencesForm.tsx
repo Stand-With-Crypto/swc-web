@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckboxProps } from '@radix-ui/react-checkbox'
 import { z } from 'zod'
 
-import { zodManageCookieConsent } from '@/components/app/cookieConsent/cookieConsentSchema'
+import { zodManageCookieConsent } from '@/components/app/cookieConsent/common/cookieConsentSchema'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
@@ -12,41 +12,28 @@ import { InfoBadge } from '@/components/ui/infoBadge'
 import { CookieConsentPermissions, OptionalCookieConsentTypes } from '@/utils/shared/cookieConsent'
 import { GenericErrorFormValues } from '@/utils/web/formUtils'
 
+export interface CookiePreferencesFieldConfig {
+  key: OptionalCookieConsentTypes
+  label: string
+  helpText: string
+}
+
 interface CookiePreferencesFormProps {
   onSubmit: (accepted: CookieConsentPermissions) => void
+  defaultValues: CookieConsentPermissions
+  fieldsConfig: CookiePreferencesFieldConfig[]
 }
 
 type FormValues = z.infer<typeof zodManageCookieConsent> & GenericErrorFormValues
 
-const FIELDS_CONFIG = [
-  {
-    key: OptionalCookieConsentTypes.PERFORMANCE,
-    label: 'Performance',
-    helpText:
-      'These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous. If you do not allow these cookies we will not know when you have visited our site, and will not be able to monitor its performance.',
-  },
-  {
-    key: OptionalCookieConsentTypes.FUNCTIONAL,
-    label: 'Functional',
-    helpText:
-      'These cookies enable us to remember choices you have made in the past in order to provide enhanced functionality and personalization (e.g., what language you prefer). If you do not allow these cookies then some or all of these services may not function properly.',
-  },
-  {
-    key: OptionalCookieConsentTypes.TARGETING,
-    label: 'Targeting & Analytical',
-    helpText:
-      'Targeting cookies help us better tailor online advertising to you. Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics such as the number of visitors, bounce rate, traffic source, etc. Personal information obtained from both types of cookies may be shared with third party marketing and/or analytics partners.',
-  },
-]
-
-export function CookiePreferencesForm({ onSubmit }: CookiePreferencesFormProps) {
+export function CookiePreferencesForm({
+  onSubmit,
+  defaultValues,
+  fieldsConfig,
+}: CookiePreferencesFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(zodManageCookieConsent),
-    defaultValues: {
-      [OptionalCookieConsentTypes.PERFORMANCE]: true,
-      [OptionalCookieConsentTypes.FUNCTIONAL]: true,
-      [OptionalCookieConsentTypes.TARGETING]: true,
-    },
+    defaultValues,
   })
 
   return (
@@ -62,7 +49,7 @@ export function CookiePreferencesForm({ onSubmit }: CookiePreferencesFormProps) 
             label="Strictly necessary Cookies"
           />
 
-          {FIELDS_CONFIG.map(({ key, label, helpText }) => (
+          {fieldsConfig.map(({ key, label, helpText }) => (
             <FormField
               control={form.control}
               key={key}
