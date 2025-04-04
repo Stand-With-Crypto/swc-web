@@ -14,6 +14,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { BuilderComponentAttributes } from '@/utils/web/builder/types'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
 declare global {
@@ -93,7 +94,15 @@ async function handleViewKeyPageAction({
       },
       payload: data,
     },
-    payload => actionCreateUserActionViewKeyPage(payload),
+    payload =>
+      actionCreateUserActionViewKeyPage(payload).then(async actionResultPromise => {
+        const actionResult = await actionResultPromise
+
+        if (actionResult?.user) {
+          identifyUserOnClient(actionResult.user)
+        }
+        return actionResult
+      }),
   )
 
   if (result.status !== 'success') {
