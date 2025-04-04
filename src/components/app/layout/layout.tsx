@@ -26,7 +26,7 @@ export function PageLayout({
   footer,
 }: React.PropsWithChildren<PageLayoutProps>) {
   return (
-    <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
+    <html className="scroll-smooth" lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
       {COUNTRIES_WITH_GTM.includes(countryCode) && <GoogleTagManager />}
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
