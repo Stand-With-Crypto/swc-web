@@ -73,7 +73,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: AUUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: `Sign the petition`,
         description:
           'Make your voice heard. Sign our petition to support crypto-friendly policies in Australia.',
