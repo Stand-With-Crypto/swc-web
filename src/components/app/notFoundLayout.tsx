@@ -2,7 +2,7 @@
 
 import '@/globals.css'
 
-import { ReactNode, useMemo } from 'react'
+import { useMemo } from 'react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { usePathname } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
@@ -16,10 +16,7 @@ import * as gbConfig from '@/app/gb/config'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
-import { AuNavbarGlobalBanner } from '@/components/app/navbarGlobalBanner/au'
-import { CaNavbarGlobalBanner } from '@/components/app/navbarGlobalBanner/ca'
-import { GbNavbarGlobalBanner } from '@/components/app/navbarGlobalBanner/gb'
-import { UsNavbarGlobalBanner } from '@/components/app/navbarGlobalBanner/us'
+import { GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE } from '@/components/app/navbarGlobalBanner/common/constants'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import {
@@ -33,13 +30,6 @@ const PAGE_LAYOUT_CONFIG_BY_COUNTRY_CODE: Record<SupportedCountryCodes, typeof u
   [SupportedCountryCodes.AU]: auConfig,
   [SupportedCountryCodes.GB]: gbConfig,
   [SupportedCountryCodes.CA]: caConfig,
-}
-
-const GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE: Record<SupportedCountryCodes, ReactNode> = {
-  [SupportedCountryCodes.US]: <UsNavbarGlobalBanner />,
-  [SupportedCountryCodes.AU]: <AuNavbarGlobalBanner />,
-  [SupportedCountryCodes.GB]: <GbNavbarGlobalBanner />,
-  [SupportedCountryCodes.CA]: <CaNavbarGlobalBanner />,
 }
 
 export function NotFoundLayout({ children }: { children: React.ReactNode }) {
