@@ -110,7 +110,7 @@ export function getPartyOptionDisplayName(party: string) {
 
 export const ROLE_OPTIONS = {
   ALL: 'All',
-  HOUSE_OF_COMMONS: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+  HOUSE_OF_COMMONS: DTSI_PersonRoleCategory.CONGRESS,
   ALL_OTHER: 'ALL_OTHER',
 }
 export function getRoleOptionDisplayName(role: string) {
