@@ -8,13 +8,13 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
+const urls = getIntlUrls(SupportedCountryCodes.US)
+
 export function USCookieConsentBanner({
   onAcceptSpecificCookies,
   onRejectAll,
   onAcceptAll,
 }: CookieConsentBannerProps) {
-  const urls = getIntlUrls(SupportedCountryCodes.US)
-
   return (
     <CookieConsentBanner>
       <CookieConsentBanner.Content onRejectAll={onRejectAll}>
