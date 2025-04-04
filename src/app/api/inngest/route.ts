@@ -2,6 +2,7 @@ import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
+import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
@@ -52,6 +53,7 @@ export const { GET, POST, PUT } = serve({
     backfillSMSOptInReplyWithInngest,
     backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
     airdropNFTWithInngest,
+    backfillCountryCodesInngest,
     cleanupPostalCodesWithInngest,
     monitorBaseETHBalances,
     setPrimaryCryptoAddressOfUserWithInngest,
