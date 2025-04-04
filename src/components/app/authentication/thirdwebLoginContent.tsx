@@ -126,12 +126,8 @@ export function ThirdwebLoginContent({
             <span className="text-[10px]">
               {footerContent} To learn more, visit the{' '}
               <InternalLink href={urls.privacyPolicy()} target="_blank">
-                Stand With Crypto Alliance Privacy Policy
-              </InternalLink>{' '}
-              and{' '}
-              <ExternalLink href="https://www.quorum.us/privacy-policy/">
-                Quorum Privacy Policy
-              </ExternalLink>
+                Stand With Crypto Privacy Policy
+              </InternalLink>
               .
             </span>
           </p>
