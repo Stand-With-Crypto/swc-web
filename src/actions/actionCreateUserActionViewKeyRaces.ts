@@ -7,7 +7,6 @@ import { object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -28,6 +27,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
 
@@ -39,7 +39,8 @@ const createActionViewKeyRacesInputValidationSchema = object({
   shouldBypassAuth: z.boolean().optional(),
   stateCode: string().optional(),
   constituency: string().optional(),
-}).optional()
+  countryCode: zodSupportedCountryCode,
+})
 
 export type CreateActionViewKeyRacesInput = z.infer<
   typeof createActionViewKeyRacesInputValidationSchema
@@ -50,7 +51,7 @@ export const actionCreateUserActionViewKeyRaces = withServerActionMiddleware(
   _actionCreateUserActionViewKeyRaces,
 )
 
-async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRacesInput = {}) {
+async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRacesInput) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
@@ -67,8 +68,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
 
-  const countryCode = await getUserAccessLocationCookie()
-
+  const countryCode = validatedInput.data.countryCode
   const actionType = UserActionType.VIEW_KEY_RACES
 
   if (
@@ -98,6 +98,11 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const user =
     userMatch.user ||
     (await createUser({ localUser, sessionId, countryCode, address: validatedInput.data?.address }))
+
+  if (user.countryCode !== countryCode) {
+    logger.info('User country code does not match page country code, aborting')
+    return
+  }
 
   const userId = user.id
 

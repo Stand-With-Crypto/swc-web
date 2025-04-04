@@ -14,13 +14,25 @@ import { useSession } from '@/hooks/useSession'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-interface ReferralsCounterContentProps {
+interface ReferralsCounterProps {
+  children: React.ReactNode
   className?: string
 }
 
-function ReferralsCounterContent(props: ReferralsCounterContentProps) {
-  const { className } = props
+export function ReferralsCounter(props: ReferralsCounterProps) {
+  const { children, className } = props
 
+  const { isLoggedIn, isLoading } = useSession()
+  const hasHydrated = useHasHydrated()
+
+  if (!isLoggedIn || isLoading || !hasHydrated) {
+    return null
+  }
+
+  return <div className={cn('flex w-full gap-4', className)}>{children}</div>
+}
+
+export function UserReferralsCount({ className }: { className?: string }) {
   const userResponse = useApiResponseForUserFullProfileInfo({
     refreshInterval: 1000 * 60 * 1, // 1 minute
   })
@@ -34,6 +46,25 @@ function ReferralsCounterContent(props: ReferralsCounterContentProps) {
       .reduce((total, action) => total + (action.referralsCount || 0), 0)
   }, [user])
 
+  return (
+    <div
+      className={cn(
+        'flex w-full flex-col items-start justify-between gap-10 rounded-2xl bg-primary-cta p-4 text-white',
+        className,
+      )}
+    >
+      <p className="font-medium">Your referrals</p>
+      {userResponse.isLoading ? (
+        <Skeleton className="h-12 w-14" />
+      ) : (
+        <AnimatedNumericOdometer size={48} value={referralsCount.toString()} />
+      )}
+    </div>
+  )
+}
+ReferralsCounter.UserReferralsCount = UserReferralsCount
+
+export function UserDistrictRank({ className }: { className?: string }) {
   const { address } = useMutableCurrentUserAddress()
   const districtResponse = useGetDistrictFromAddress(
     address === 'loading' ? null : address?.description,
@@ -79,31 +110,15 @@ function ReferralsCounterContent(props: ReferralsCounterContentProps) {
   ])
 
   return (
-    <div className={cn('flex w-full gap-4', className)}>
-      <div className="flex w-full flex-col items-start justify-between gap-10 rounded-2xl bg-primary-cta p-4 text-white">
-        <p className="font-medium">Your referrals</p>
-        {userResponse.isLoading ? (
-          <Skeleton className="h-12 w-14" />
-        ) : (
-          <AnimatedNumericOdometer size={48} value={referralsCount.toString()} />
-        )}
-      </div>
-
-      <div className="flex w-full flex-col items-start justify-between gap-10 rounded-2xl bg-secondary p-4">
-        <p className="font-medium">District ranking</p>
-        {districtRanking}
-      </div>
+    <div
+      className={cn(
+        'flex w-full flex-col items-start justify-between gap-10 rounded-2xl bg-secondary p-4',
+        className,
+      )}
+    >
+      <p className="font-medium">District ranking</p>
+      {districtRanking}
     </div>
   )
 }
-
-export function ReferralsCounter(props: ReferralsCounterContentProps) {
-  const { isLoggedIn, isLoading } = useSession()
-  const hasHydrated = useHasHydrated()
-
-  if (!isLoggedIn || isLoading || !hasHydrated) {
-    return null
-  }
-
-  return <ReferralsCounterContent {...props} />
-}
+ReferralsCounter.UserDistrictRank = UserDistrictRank

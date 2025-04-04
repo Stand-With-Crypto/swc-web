@@ -53,6 +53,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
             userActionPollAnswers: true,
           },
         },
+        userActionViewKeyPage: true,
       },
       where: {
         countryCode: config.countryCode,

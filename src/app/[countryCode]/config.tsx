@@ -28,6 +28,11 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.DonateIcon />,
         },
         {
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: <Icons.ReferralsIcon />,
+        },
+        {
           href: urls.about(),
           text: 'Our mission',
           icon: <Icons.MissionIcon />,

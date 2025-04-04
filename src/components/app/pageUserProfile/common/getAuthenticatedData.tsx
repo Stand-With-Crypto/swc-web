@@ -69,6 +69,7 @@ export async function getAuthenticatedData() {
           userActionPollAnswers: true,
         },
       },
+      userActionViewKeyPage: true,
     },
   })
 
