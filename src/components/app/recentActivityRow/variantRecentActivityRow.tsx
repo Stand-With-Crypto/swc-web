@@ -4,10 +4,12 @@ import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
+import { RecentActivityRowMainText as MainText } from '@/components/app/recentActivityRow/mainText'
 import {
   RecentActivityRowBase,
   RecentActivityRowProps,
 } from '@/components/app/recentActivityRow/recentActivityRow'
+import { viewKeyPageRecentActivityRow } from '@/components/app/recentActivityRow/viewKeyPageRecentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -31,10 +33,6 @@ import {
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
-const MainText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
-)
-
 const DTSIPersonName = ({ person, href }: { person: DTSIPersonForUserActions; href: string }) => {
   const link = <InternalLink href={href}>{dtsiPersonFullName(person)}</InternalLink>
   if (person.primaryRole) {
@@ -53,6 +51,7 @@ const getSWCDisplayText = () => (
     <span className="sm:hidden"> SWC </span>
   </>
 )
+
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   countryCode,
@@ -74,7 +73,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
     ? `in ${userLocationDetails.administrativeAreaLevel1}`
     : ''
 
-  const getActionSpecificProps = () => {
+  const getActionSpecificProps = (): {
+    onFocusContent?: React.ComponentType
+    children: React.ReactNode
+  } => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
         return {
@@ -292,6 +294,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: () => null,
           children: <MainText>Someone voted in a poll</MainText>,
         }
+      }
+      case UserActionType.VIEW_KEY_PAGE: {
+        const { campaignName } = action
+        return viewKeyPageRecentActivityRow({
+          campaignName,
+          countryCode,
+        })
       }
     }
     return gracefullyError({

@@ -18,8 +18,8 @@ export function RecentActivityRowBase({
   countryCode,
   action,
   children,
-  onFocusContent,
-}: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
+  onFocusContent: OnFocusContent,
+}: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: React.ComponentType }) {
   const [hasFocus, setHasFocus] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: true })
   return (
@@ -36,13 +36,13 @@ export function RecentActivityRowBase({
         <div>{children}</div>
       </div>
       <div className="shrink-0 text-xs text-gray-500 lg:text-base">
-        {hasFocus && onFocusContent ? (
+        {hasFocus && OnFocusContent ? (
           <motion.div
             animate={{ opacity: 1, transform: 'translateX(0)' }}
             initial={{ opacity: 0, transform: 'translateX(10px)' }}
             transition={{ duration: 0.5 }}
           >
-            {onFocusContent()}
+            <OnFocusContent />
           </motion.div>
         ) : (
           <>

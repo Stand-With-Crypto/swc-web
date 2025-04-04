@@ -96,6 +96,7 @@ export function USLocationRaceGovernorSpecific({
   useEffect(() => {
     void actionCreateUserActionViewKeyRaces({
       campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
+      countryCode,
       usaState: stateCode,
     })
   }, [stateCode])
@@ -145,7 +146,6 @@ export function USLocationRaceGovernorSpecific({
           <PageTitle as="h1" className="mb-4" size="md">
             {`Gubernatorial Race (${stateCode})`}
           </PageTitle>
-          <PageSubTitle>November 4, 2025</PageSubTitle>
         </div>
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">

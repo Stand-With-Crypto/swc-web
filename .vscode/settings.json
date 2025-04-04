@@ -79,7 +79,8 @@
     "vaul",
     "viem",
     "Warpcast",
-    "newmode"
+    "newmode",
+    "debanking"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[prisma]": {

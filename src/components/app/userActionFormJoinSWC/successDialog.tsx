@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogProps } from '@/components/ui/dialog'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useSession } from '@/hooks/useSession'
+import { SWCSuccessDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 import { cn } from '@/utils/web/cn'
 
 const UserActionFormJoinSWCSuccess = dynamic(
@@ -42,24 +43,28 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
   const performedUserActionTypes = performedUserActionTypesResponse.data?.performedUserActionTypes
 
   return (
-    <Dialog {...dialogProps}>
-      <DialogContent a11yTitle="Joined Stand With Crypto" className="max-w-3xl">
-        <div className={cn('flex h-full flex-col gap-8 md:pb-16')}>
-          <UserActionFormJoinSWCSuccess />
+    <SWCSuccessDialogContext.Provider
+      value={{ onCtaClick: () => dialogProps?.onOpenChange?.(false) }}
+    >
+      <Dialog {...dialogProps}>
+        <DialogContent a11yTitle="Joined Stand With Crypto" className="max-w-3xl">
+          <div className={cn('flex h-full flex-col gap-8 md:pb-16')}>
+            <UserActionFormJoinSWCSuccess />
 
-          {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
-            <UserActionFormSuccessScreenNextActionSkeleton />
-          ) : (
-            <UserActionFormSuccessScreenNextAction
-              data={{
-                countryCode,
-                userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
-                performedUserActionTypes: performedUserActionTypes || [],
-              }}
-            />
-          )}
-        </div>
-      </DialogContent>
-    </Dialog>
+            {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
+              <UserActionFormSuccessScreenNextActionSkeleton />
+            ) : (
+              <UserActionFormSuccessScreenNextAction
+                data={{
+                  countryCode,
+                  userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
+                  performedUserActionTypes: performedUserActionTypes || [],
+                }}
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </SWCSuccessDialogContext.Provider>
   )
 }

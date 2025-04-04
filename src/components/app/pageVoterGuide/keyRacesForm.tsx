@@ -114,6 +114,7 @@ export function KeyRacesForm({
       usaState: addressSchema?.administrativeAreaLevel1,
       campaignName: getActionDefaultCampaignName(UserActionType.VIEW_KEY_RACES, countryCode),
       shouldBypassAuth: true,
+      countryCode,
     }
     const result = await triggerServerActionForForm(
       {

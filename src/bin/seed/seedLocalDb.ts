@@ -435,8 +435,22 @@ async function seed() {
         data,
       }),
   )
-  const userActionTweetAtPerson = await prismaClient.userActionTweetAtPerson.findMany()
-  logEntity({ userActionTweetAtPerson })
+
+  /*
+  userActionViewKeyPage
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.VIEW_KEY_PAGE].map(action => ({
+      path: faker.internet.url(),
+      id: action.id,
+    })),
+    data =>
+      prismaClient.userActionViewKeyPage.createMany({
+        data,
+      }),
+  )
+  const userActionViewKeyPage = await prismaClient.userActionViewKeyPage.findMany()
+  logEntity({ userActionViewKeyPage })
 
   /*
   userActionDonation
