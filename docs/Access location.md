@@ -166,3 +166,17 @@ const COUNTRY_CODE_REGEX_PATTERN = new RegExp(
   `^(${Object.values(SupportedCountryCodes).join('|')})$`,
 )
 ```
+
+---
+
+## Edge cases
+
+| Case                                                                                     | Access Location Cookie                                      | Behavior                                                                         |
+| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| User from a supported country accessing their website while in another supported country | Cookie is set                                               | User can complete actions normally.                                              |
+| User from a supported country accessing their website while in another supported country | Cookie not set                                              | The user should see a banner: "Actions only for users in [Supported Country]".   |
+| User from a supported country accessing their website while in a non-supported country   | Cookie is set                                               | User can complete actions normally.                                              |
+| User from a supported country accessing their website while in a non-supported country   | Cookie not set                                              | The user should see a banner: "Actions only for users in [Supported Country]".   |
+| User from a non-supported country traveling to a supported country                       | Cookie is set                                               | The user should see the banner: "Actions only for users in [Supported Country]". |
+| User from a non-supported country traveling to a supported country                       | Cookie not set and the visiting country matches the website | The user is allowed to complete actions.                                         |
+| User from a non-supported country traveling to another non-supported country             | Cookie is set or not                                        | The user will see the banner: "Actions only for users in [Supported Country]"    |
