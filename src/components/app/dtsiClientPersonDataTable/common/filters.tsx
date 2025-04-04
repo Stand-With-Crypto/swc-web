@@ -158,11 +158,13 @@ function GlobalFiltersStateSelect({
   namedColumns,
   stateOptions,
   locationLabel,
+  getStateOptionDisplayName,
   triggerClassName,
 }: {
   namedColumns: Record<string, Column<Person>>
   stateOptions: string[]
   locationLabel: string
+  getStateOptionDisplayName: (state: string) => string
   triggerClassName?: string
 }) {
   return (
@@ -191,7 +193,7 @@ function GlobalFiltersStateSelect({
       >
         {stateOptions.map(state => (
           <SelectItem key={state} value={state}>
-            {state}
+            {getStateOptionDisplayName(state)}
           </SelectItem>
         ))}
       </SelectContent>
