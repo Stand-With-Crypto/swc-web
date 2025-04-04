@@ -25,3 +25,8 @@ export function buildTemplateInternalUrl(path: string, params: Record<string, un
   })
   return url.toString()
 }
+
+export function buildTemplateInternalUrlWithCountry({ countryCode }: { countryCode: string }) {
+  return (...args: Parameters<typeof buildTemplateInternalUrl>) =>
+    buildTemplateInternalUrl(`/${countryCode}${args[0]}`, args[1])
+}

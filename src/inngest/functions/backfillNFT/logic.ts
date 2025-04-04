@@ -5,6 +5,7 @@ import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const defaultLogger = getLogger('backfillNFT')
 
@@ -55,7 +56,12 @@ export async function backfillNFT(
   await batchAsyncAndLog(userActions, actions =>
     Promise.all(
       actions.map(action =>
-        claimNFT(action, action.user.primaryUserCryptoAddress!, { skipTransactionFeeCheck: true }),
+        claimNFT({
+          userAction: action,
+          userCryptoAddress: action.user.primaryUserCryptoAddress!,
+          countryCode: action.user.countryCode as SupportedCountryCodes,
+          config: { skipTransactionFeeCheck: true },
+        }),
       ),
     ),
   )
