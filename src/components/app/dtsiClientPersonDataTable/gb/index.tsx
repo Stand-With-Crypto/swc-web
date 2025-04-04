@@ -139,16 +139,17 @@ function GbGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         roleOptions={ROLE_OPTIONS}
       />
-      <GlobalFilters.PartySelect
-        getPartyOptionDisplayName={getPartyOptionDisplayName}
-        namedColumns={namedColumns}
-        partyOptions={PARTY_OPTIONS}
-      />
       <GlobalFilters.StateSelect
+        getStateOptionDisplayName={getGBCountryNameFromCode}
         locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
         namedColumns={namedColumns}
         stateOptions={['All', ...Object.keys(GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP).sort()]}
         triggerClassName="w-[150px]"
+      />
+      <GlobalFilters.PartySelect
+        getPartyOptionDisplayName={getPartyOptionDisplayName}
+        namedColumns={namedColumns}
+        partyOptions={PARTY_OPTIONS}
       />
     </GlobalFilters>
   )

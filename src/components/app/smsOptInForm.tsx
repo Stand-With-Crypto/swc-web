@@ -14,6 +14,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -32,10 +33,11 @@ export interface SMSOptInFormProps extends Omit<ComponentProps<'form'>, 'childre
 export function SMSOptInForm(props: SMSOptInFormProps) {
   const { initialValues, onSuccess, children, ...rest } = props
 
+  const countryCode = useCountryCode()
   const router = useRouter()
 
   const form = useForm<UpdateUserHasOptedInToSMSPayload>({
-    resolver: zodResolver(zodUpdateUserHasOptedInToSMS),
+    resolver: zodResolver(zodUpdateUserHasOptedInToSMS(countryCode)),
     defaultValues: initialValues,
   })
 

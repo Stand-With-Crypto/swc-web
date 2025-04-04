@@ -138,15 +138,16 @@ function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         roleOptions={ROLE_OPTIONS}
       />
+      <GlobalFilters.StateSelect
+        getStateOptionDisplayName={getUSStateNameFromStateCode}
+        locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
+        namedColumns={namedColumns}
+        stateOptions={['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]}
+      />
       <GlobalFilters.PartySelect
         getPartyOptionDisplayName={getPartyOptionDisplayName}
         namedColumns={namedColumns}
         partyOptions={PARTY_OPTIONS}
-      />
-      <GlobalFilters.StateSelect
-        locationLabel={getTerritoryDivisionByCountryCode(countryCode)}
-        namedColumns={namedColumns}
-        stateOptions={['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]}
       />
     </GlobalFilters>
   )

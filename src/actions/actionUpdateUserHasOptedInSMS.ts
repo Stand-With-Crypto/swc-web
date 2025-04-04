@@ -12,28 +12,40 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
+import { getLogger } from '@/utils/shared/logger'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
+
+const logger = getLogger('actionUpdateUserHasOptedInToSMS')
 
 export const actionUpdateUserHasOptedInToSMS = withServerActionMiddleware(
   'actionUpdateUserHasOptedInToSMS',
   _actionUpdateUserHasOptedInToSMS,
 )
 
-export type UpdateUserHasOptedInToSMSPayload = z.infer<typeof zodUpdateUserHasOptedInToSMS>
+export type UpdateUserHasOptedInToSMSPayload = z.infer<
+  ReturnType<typeof zodUpdateUserHasOptedInToSMS>
+>
 
 async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSPayload) {
+  logger.info('triggered')
+
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')
   }
-  const validatedFields = zodUpdateUserHasOptedInToSMS.safeParse(data)
+
+  const countryCode = await getUserAccessLocationCookie()
+  const validatedFields = zodUpdateUserHasOptedInToSMS(countryCode).safeParse(data)
   if (!validatedFields.success) {
+    const errors = validatedFields.error.flatten().fieldErrors
+    logger.error('invalid payload', { errors })
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors,
     }
   }
 
@@ -58,8 +70,11 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
     },
   })
 
+  logger.info(`updated user ${updatedUser.id}`)
+
   if (phoneNumber) {
     updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
+    logger.info(`opted in user ${updatedUser.id} to SMS`)
   }
 
   await handleCapitolCanarySMSUpdate(updatedUser)
