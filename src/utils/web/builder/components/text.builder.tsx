@@ -25,7 +25,11 @@ function transformOlAndUl(tagName: string, attribs: Record<string, string>) {
 }
 
 function transformLink(tagName: string, attribs: Record<string, string>) {
-  if (attribs.href?.startsWith(INTERNAL_BASE_URL) || attribs.href?.startsWith('/')) {
+  if (
+    attribs.href?.startsWith(INTERNAL_BASE_URL) ||
+    attribs.href?.startsWith('/') ||
+    attribs.href?.startsWith('#')
+  ) {
     attribs.target = '_self'
   } else {
     attribs.target = '_blank'
