@@ -77,10 +77,15 @@ export function ManageCookiesModal({
           <p className="text-xs sm:text-sm">
             We may engage in remarketing campaigns. This is a type of online advertising that
             directs advertising to individuals that have previously interacted with us. To opt-out
-            of the use of your personal data for our remarketing campaigns, please email us at:{' '}
-            <a className="underline" href="mailto:info@standwithcrypto.org">
+            of the use of your personal data for our remarketing campaigns, please email{' '}
+            <a className="text-primary-cta underline" href="mailto:info@standwithcrypto.org">
               info@standwithcrypto.org
-            </a>
+            </a>{' '}
+            if you live in the USA, or{' '}
+            <a className="text-primary-cta underline" href="mailto:info@swcinternational.org">
+              info@swcinternational.org
+            </a>{' '}
+            if you live outside the USA.
           </p>
         </div>
         <ContainerHeader
