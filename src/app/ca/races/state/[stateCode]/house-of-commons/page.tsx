@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import { CALocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/ca/locationRaceSpecific'
-import { queryDTSILocationHouseSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationHouseSpecificInformation'
+// import { queryDTSILocationHouseSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationHouseSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import {
@@ -51,10 +51,13 @@ export default async function LocationHouseOfCommonsSpecificPage({
   const { stateCode } = await params
   const validatedStateCode = zodState.parse(stateCode.toUpperCase(), countryCode)
 
-  const data = await queryDTSILocationHouseSpecificInformation({
-    stateCode: validatedStateCode,
-    countryCode,
-  })
+  // const data = await queryDTSILocationHouseSpecificInformation({
+  //   stateCode: validatedStateCode,
+  //   countryCode,
+  // })
+  const data = {
+    people: [],
+  }
 
   if (!data) {
     throw new Error(
