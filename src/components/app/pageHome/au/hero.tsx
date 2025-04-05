@@ -14,8 +14,8 @@ export function AuHero() {
           It’s time to fight for crypto in <span className="text-primary-cta">Australia</span>
         </Hero.Title>
         <Hero.Subtitle>
-          52 million Americans own crypto. And yet, crypto’s future in America remains uncertain.
-          Congress is writing the rules as we speak – but they won’t vote YES until they’ve heard
+          Australians own crypto. And yet, crypto’s future in Australia remains uncertain.
+          Parliament is writing the rules as we speak – but they won’t vote YES until they’ve heard
           from you.
         </Hero.Subtitle>
         <Hero.HeadingCTA />
