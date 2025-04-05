@@ -4,7 +4,9 @@ import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/her
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-const urls = getIntlUrls(SupportedCountryCodes.CA)
+const countryCode = SupportedCountryCodes.CA
+
+const urls = getIntlUrls(countryCode)
 
 export function CaHero() {
   return (
@@ -17,7 +19,7 @@ export function CaHero() {
           Canadians own crypto. And yet, crypto’s future in Canada remains uncertain. Congress is
           writing the rules as we speak – but they won’t vote YES until they’ve heard from you.
         </Hero.Subtitle>
-        <Hero.HeadingCTA />
+        <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
       <HeroAnnouncementCard
         authenticatedContent={

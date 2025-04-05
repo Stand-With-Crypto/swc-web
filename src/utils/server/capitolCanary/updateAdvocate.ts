@@ -1,7 +1,7 @@
 import { BaseUpsertAdvocateRequest } from '@/utils/server/capitolCanary/baseUpsertRequest'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
-import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
+import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
 
 const CAPITOL_CANARY_UPDATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
 

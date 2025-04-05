@@ -24,7 +24,14 @@ export interface FooterProps {
   footerBanner?: React.ReactNode
 }
 
-export function Footer({ title, subtitle, links, socialLinks, footerBanner }: FooterProps) {
+export function Footer({
+  title,
+  subtitle,
+  links,
+  socialLinks,
+  footerBanner,
+  countryCode,
+}: FooterProps) {
   return (
     <div className="mt-36">
       {footerBanner}
@@ -36,7 +43,7 @@ export function Footer({ title, subtitle, links, socialLinks, footerBanner }: Fo
                 {title}
               </PageTitle>
               <p className="text-xl">{subtitle}</p>
-              <HeroCTA />
+              <HeroCTA countryCode={countryCode} />
             </div>
             <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-3 sm:space-y-6">

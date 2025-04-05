@@ -15,7 +15,7 @@ import {
 } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -126,12 +126,8 @@ export function ThirdwebLoginContent({
             <span className="text-[10px]">
               {footerContent} To learn more, visit the{' '}
               <InternalLink href={urls.privacyPolicy()} target="_blank">
-                Stand With Crypto Alliance Privacy Policy
-              </InternalLink>{' '}
-              and{' '}
-              <ExternalLink href="https://www.quorum.us/privacy-policy/">
-                Quorum Privacy Policy
-              </ExternalLink>
+                Stand With Crypto Privacy Policy
+              </InternalLink>
               .
             </span>
           </p>

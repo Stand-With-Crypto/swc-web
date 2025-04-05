@@ -1,9 +1,7 @@
 import { parsePhoneNumberWithError } from 'libphonenumber-js/core'
 import phoneNumberMetadata from 'libphonenumber-js/mobile/metadata'
 
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const supportedCountries: SupportedCountryCodes[] = [SupportedCountryCodes.US]
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 
 export const isPhoneNumberCountrySupported = (phoneNumber: string) => {
   try {
@@ -14,7 +12,7 @@ export const isPhoneNumberCountrySupported = (phoneNumber: string) => {
     }
 
     // libphonenumber-js returns the country code in uppercase
-    return supportedCountries.includes(parsedPhoneNumber.country?.toLowerCase())
+    return isSmsSupportedInCountry(parsedPhoneNumber.country?.toLowerCase())
   } catch {
     return false
   }

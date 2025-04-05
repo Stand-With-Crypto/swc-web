@@ -14,7 +14,7 @@ import {
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import { smsProvider } from '@/utils/shared/smsProvider'
+import { smsProvider } from '@/utils/shared/sms/smsProvider'
 
 const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_RETRY_LIMIT = 10
 

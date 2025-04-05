@@ -31,6 +31,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   ORDERED_SUPPORTED_COUNTRIES,
@@ -256,7 +257,8 @@ export function UpdateUserProfileForm({
             open={
               !!phoneNumberValue &&
               user.smsStatus === 'NOT_OPTED_IN' &&
-              !validatePhoneNumber(user?.phoneNumber || '')
+              !validatePhoneNumber(user?.phoneNumber || '') &&
+              isSmsSupportedInCountry(countryCode)
             }
           >
             <CollapsibleContent className="AnimateCollapsibleContent">

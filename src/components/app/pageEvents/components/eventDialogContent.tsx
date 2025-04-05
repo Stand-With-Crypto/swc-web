@@ -23,6 +23,7 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
@@ -174,22 +175,24 @@ function EventInformation({
           className="z-10 mt-auto flex flex-col items-center justify-end gap-3 border border-t px-4 py-6 lg:flex-row"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
-          <LoginDialogWrapper
-            authenticatedContent={
-              <Button
-                className="w-full lg:w-auto"
-                disabled={isCreatingRsvpEventAction}
-                onClick={handleGetUpdatesButtonClick}
-                variant="secondary"
-              >
-                Get updates
+          {isSmsSupportedInCountry(countryCode) && (
+            <LoginDialogWrapper
+              authenticatedContent={
+                <Button
+                  className="w-full lg:w-auto"
+                  disabled={isCreatingRsvpEventAction}
+                  onClick={handleGetUpdatesButtonClick}
+                  variant="secondary"
+                >
+                  Get updates
+                </Button>
+              }
+            >
+              <Button className="w-full md:w-1/2" variant="secondary">
+                Log in to get updates
               </Button>
-            }
-          >
-            <Button className="w-full md:w-1/2" variant="secondary">
-              Log in to get updates
-            </Button>
-          </LoginDialogWrapper>
+            </LoginDialogWrapper>
+          )}
 
           <Button
             className="w-full lg:w-auto"

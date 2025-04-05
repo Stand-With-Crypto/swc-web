@@ -2,6 +2,8 @@ import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/her
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
+const countryCode = SupportedCountryCodes.US
+
 export function UsHero() {
   return (
     <Hero>
@@ -12,7 +14,7 @@ export function UsHero() {
           Congress is writing the rules as we speak - but they won't vote YES until they've heard
           from you.
         </Hero.Subtitle>
-        <Hero.HeadingCTA />
+        <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
       <HeroAnnouncementCard
         authenticatedContent={

@@ -8,9 +8,11 @@ import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
-export function HeroCTA() {
+export function HeroCTA({ countryCode }: { countryCode: SupportedCountryCodes }) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
 
@@ -28,8 +30,11 @@ export function HeroCTA() {
     }
 
     if (
-      !user.phoneNumber ||
-      [SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(user.smsStatus)
+      (!user.phoneNumber ||
+        [SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(
+          user.smsStatus,
+        )) &&
+      isSmsSupportedInCountry(countryCode)
     ) {
       return (
         <SMSOptInCTA

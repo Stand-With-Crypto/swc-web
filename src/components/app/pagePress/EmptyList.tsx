@@ -7,6 +7,8 @@ import { SMSOptInForm } from '@/components/app/smsOptInForm'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 
 export function EmptyList() {
   return (
@@ -21,13 +23,27 @@ export function EmptyList() {
 
 function EmptyListCTA() {
   const profileReq = useApiResponseForUserFullProfileInfo()
+  const countryCode = useCountryCode()
   const user = profileReq.data?.user
 
   if (profileReq.isLoading) {
     return null
   }
 
-  if (user) {
+  if (!user) {
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <p className="text-center text-muted-foreground">
+          Join Stand With Crypto and we’ll send you updates when relevant articles are posted
+        </p>
+        <LoginDialogWrapper>
+          <Button variant="secondary">Sign in</Button>
+        </LoginDialogWrapper>
+      </div>
+    )
+  }
+
+  if (isSmsSupportedInCountry(countryCode)) {
     return (
       <div className="flex flex-col items-center gap-4">
         <p className="text-center text-muted-foreground">
@@ -69,16 +85,7 @@ function EmptyListCTA() {
     )
   }
 
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <p className="text-center text-muted-foreground">
-        Join Stand With Crypto and we’ll send you updates when relevant articles are posted
-      </p>
-      <LoginDialogWrapper>
-        <Button variant="secondary">Sign in</Button>
-      </LoginDialogWrapper>
-    </div>
-  )
+  return null
 }
 
 const CHECKMARK_SIZE = 24
