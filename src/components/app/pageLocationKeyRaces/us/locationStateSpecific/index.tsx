@@ -107,7 +107,7 @@ export function USLocationStateSpecific({
         </LocationRaces.EmptyMessage>
       ) : (
         <div className="space-y-20">
-          {!!groups.governors && (
+          {!isEmpty(groups.governors) && (
             <div className="mt-20">
               <ResponsiveTabsOrSelect
                 analytics={'Primary Races Tabs'}
@@ -157,7 +157,7 @@ export function USLocationStateSpecific({
               />
             </div>
           )}
-          {!!groups.senators.length && (
+          {!isEmpty(groups.senators) && (
             <div className="mt-20">
               <DTSIPersonHeroCardSection
                 countryCode={countryCode}
@@ -171,7 +171,7 @@ export function USLocationStateSpecific({
               />
             </div>
           )}
-          {!!groups.congresspeople['at-large']?.people.length ? (
+          {!isEmpty(groups.congresspeople['at-large']?.people) ? (
             <div className="mt-20">
               <DTSIPersonHeroCardSection
                 countryCode={countryCode}
@@ -191,7 +191,7 @@ export function USLocationStateSpecific({
               <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
             )
           )}
-          {!!stances.length && (
+          {!isEmpty(stances) && (
             <ContentSection
               subtitle={
                 <>Keep up with recent tweets about crypto from politicians in {stateName}.</>

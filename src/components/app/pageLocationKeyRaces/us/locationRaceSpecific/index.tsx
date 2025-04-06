@@ -1,13 +1,12 @@
 import { compact, isEmpty } from 'lodash-es'
 
-import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
-import { PACFooter } from '@/components/app/pacFooter'
+import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   DTSI_DistrictSpecificInformationQuery,
@@ -25,7 +24,6 @@ import {
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 
 interface USLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: USStateCode
@@ -221,34 +219,4 @@ function getBreadcrumbSections({
   }
 
   return sections
-}
-
-function LocationRaceLinkTitle({
-  href,
-  stateDisplayName,
-  district,
-  stateCode,
-}: {
-  href: string
-  stateCode: USStateCode
-  stateDisplayName?: string
-  district?: NormalizedDTSIDistrictId
-}) {
-  if (!stateDisplayName) {
-    return <span>Presidential</span>
-  }
-
-  return (
-    <>
-      <InternalLink className="text-gray-400" href={href}>
-        {stateDisplayName}
-      </InternalLink>{' '}
-      /{' '}
-      <span>
-        {district
-          ? `${stateCode} Congressional District ${district}`
-          : `U.S. Senate (${stateCode})`}
-      </span>
-    </>
-  )
 }
