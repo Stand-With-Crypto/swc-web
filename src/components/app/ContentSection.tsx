@@ -4,7 +4,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle, PageTitleProps } from '@/components/ui/pageTitleText'
 import { cn } from '@/utils/web/cn'
 
-interface ContentSectionProps {
+export interface ContentSectionProps {
   title?: React.ReactNode
   subtitle?: React.ReactNode
   children?: React.ReactNode

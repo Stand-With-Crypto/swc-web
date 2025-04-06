@@ -706,11 +706,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/uk',
-        destination: '/gb',
-        permanent: true,
-      },
-      {
         source: '/australia',
         destination: '/au?utm_source=billboard',
         permanent: true,

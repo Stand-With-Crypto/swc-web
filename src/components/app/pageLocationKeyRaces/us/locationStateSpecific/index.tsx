@@ -1,19 +1,14 @@
-'use client'
-
-import { useEffect, useMemo } from 'react'
 import { isEmpty } from 'lodash-es'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
-import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { PACFooter } from '@/components/app/pacFooter'
+import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import {
@@ -50,60 +45,55 @@ export function USLocationStateSpecific({
   const urls = getIntlUrls(countryCode)
   const stateName = getUSStateNameFromStateCode(stateCode)
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
-      countryCode,
-      usaState: stateCode,
-    })
-  }, [stateCode])
-
-  const republicanGovernors = useMemo(
-    () =>
-      groups.governors.filter(
-        x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-      ),
-    [groups.governors],
+  const republicanGovernors = groups.governors.filter(
+    x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
   )
-  const democraticGovernors = useMemo(
-    () =>
-      groups.governors.filter(
-        x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-      ),
-    [groups.governors],
+  const democraticGovernors = groups.governors.filter(
+    x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
   )
 
   return (
-    <div>
+    <LocationRaces disableVerticalSpacing>
+      <LocationRaces.ActionRegisterer
+        input={{
+          campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
+          countryCode,
+          usaState: stateCode,
+        }}
+      />
+
       <DarkHeroSection>
-        <div className="text-center">
-          <h2 className={'mb-4'}>
-            <InternalLink className="text-gray-400" href={urls.locationKeyRaces()}>
-              United States
-            </InternalLink>{' '}
-            / <span>{stateName}</span>
-          </h2>
-          <PageTitle as="h1" className="mb-4" size="md">
-            Key Races in {stateName}
-          </PageTitle>
-          {countAdvocates > 1000 && (
-            <h3 className="mt-4 font-mono text-xl font-light">
-              <FormattedNumber
-                amount={countAdvocates}
-                locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-              />{' '}
-              crypto advocates
-            </h3>
-          )}
+        <DarkHeroSection.Breadcrumbs
+          sections={[
+            {
+              name: 'United States',
+              url: urls.locationKeyRaces(),
+            },
+            {
+              name: stateName,
+            },
+          ]}
+        />
+
+        <DarkHeroSection.Title>Key Races in {stateName}</DarkHeroSection.Title>
+
+        {countAdvocates > 1000 && (
+          <DarkHeroSection.HighlightedText>
+            <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
+            crypto advocates
+          </DarkHeroSection.HighlightedText>
+        )}
+
+        <div className="mt-6">
           {stateCode === 'MI' ? (
-            <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
+            <Button asChild className="w-full max-w-xs" variant="secondary">
               <ExternalLink href="https://mvic.sos.state.mi.us/Voter/Index">
                 Find your poll location
               </ExternalLink>
             </Button>
           ) : (
             <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
-              <Button className="mt-6 w-full max-w-xs" variant="secondary">
+              <Button className="w-full max-w-xs" variant="secondary">
                 Make sure you're registered to vote
               </Button>
             </UserActionFormVoterRegistrationDialog>
@@ -112,9 +102,9 @@ export function USLocationStateSpecific({
       </DarkHeroSection>
 
       {isEmpty(groups.senators) && isEmpty(groups.congresspeople) && isEmpty(groups.governors) ? (
-        <PageTitle as="h3" className="mt-20" size="sm">
+        <LocationRaces.EmptyMessage gutterTop>
           There's no key races currently in {stateName}
-        </PageTitle>
+        </LocationRaces.EmptyMessage>
       ) : (
         <div className="space-y-20">
           {!!groups.governors && (
@@ -181,7 +171,7 @@ export function USLocationStateSpecific({
               />
             </div>
           )}
-          {groups.congresspeople['at-large']?.people.length ? (
+          {!!groups.congresspeople['at-large']?.people.length ? (
             <div className="mt-20">
               <DTSIPersonHeroCardSection
                 countryCode={countryCode}
@@ -251,9 +241,9 @@ export function USLocationStateSpecific({
               />
             )
           })}
-          <PACFooter className="container" />
+          <LocationRaces.PacFooter />
         </div>
       )}
-    </div>
+    </LocationRaces>
   )
 }

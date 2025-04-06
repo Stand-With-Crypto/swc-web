@@ -3,7 +3,7 @@
 import { AUKeyRaces } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/keyRaces'
 import { AUKeyRacesStates } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/keyRacesStates'
 import { auOrganizePeople } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/organizePeople'
-import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.AU

@@ -1,9 +1,14 @@
-import { auFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/specificRoleDTSIPerson'
+import {
+  auFormatSpecificRoleDTSIPerson,
+  AUSpecificRoleDTSIPerson,
+} from '@/components/app/pageLocationKeyRaces/au/locationAustralia/specificRoleDTSIPerson'
 import { DTSI_PersonRoleCategory, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 
-import { FormattedPerson } from './types'
+type FormattedPerson = AUSpecificRoleDTSIPerson<DTSI_StateSpecificInformationQuery['people'][0]>
 
-export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformationQuery['people']) {
+export function organizeAUDistrictSpecificPeople(
+  people: DTSI_StateSpecificInformationQuery['people'],
+) {
   const formatted = people.map(x => auFormatSpecificRoleDTSIPerson(x))
   const grouped = {
     houseOfReps: [] as FormattedPerson[],

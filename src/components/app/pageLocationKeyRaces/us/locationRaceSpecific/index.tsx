@@ -1,10 +1,6 @@
-'use client'
-
-import { useEffect, useMemo } from 'react'
 import { compact, isEmpty } from 'lodash-es'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
-import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
@@ -29,6 +25,7 @@ import {
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 
 interface USLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: USStateCode
@@ -37,6 +34,7 @@ interface USLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQu
 }
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+const urls = getIntlUrls(countryCode)
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
@@ -101,60 +99,54 @@ export function USLocationRaceSpecific({
 }: USLocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people, { district, stateCode })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
-  const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
-      usaState: stateCode,
-      usCongressionalDistrict: district?.toString(),
-      countryCode,
-    })
-  }, [district, stateCode])
-
-  const racesData = useMemo(
-    () =>
-      compact([
-        recommended && { person: recommended, isRecommended: true },
-        ...others.map(person => ({ person, isRecommended: false })),
-      ]),
-    [others, recommended],
-  )
+  const racesData = compact([
+    recommended && { person: recommended, isRecommended: true },
+    ...others.map(person => ({ person, isRecommended: false })),
+  ])
 
   return (
-    <div>
+    <LocationRaces disableVerticalSpacing>
+      <LocationRaces.ActionRegisterer
+        input={{
+          campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
+          usaState: stateCode,
+          usCongressionalDistrict: district?.toString(),
+          countryCode,
+        }}
+      />
+
       <DarkHeroSection className="text-center">
-        <h2 className={'mb-4'}>
-          <InternalLink className="text-gray-400" href={urls.locationKeyRaces()}>
-            United States
-          </InternalLink>
-          {' / '}
-          <LocationRaceLinkTitle
-            district={district}
-            href={urls.locationStateSpecific(stateCode)}
-            stateCode={stateCode}
-            stateDisplayName={stateDisplayName}
-          />
-        </h2>
-        <PageTitle as="h1" className="mb-4" size="md">
+        <DarkHeroSection.Breadcrumbs
+          sections={getBreadcrumbSections({
+            href: urls.locationKeyRaces(),
+            stateCode,
+            stateDisplayName,
+            district,
+          })}
+        />
+
+        <DarkHeroSection.Title>
           {!stateCode
             ? 'U.S. Presidential Race'
             : district
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
-        </PageTitle>
+        </DarkHeroSection.Title>
+
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
             Make sure you're registered to vote
           </Button>
         </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
+
       <div className="divide-y-2">
         {isEmpty(racesData) ? (
-          <PageTitle as="h3" className="mt-20" size="sm">
+          <LocationRaces.EmptyMessage gutterTop>
             There's no key races currently in {stateDisplayName}
-          </PageTitle>
+          </LocationRaces.EmptyMessage>
         ) : (
           racesData.map(({ person, isRecommended }) => (
             <div key={person.id}>
@@ -195,9 +187,40 @@ export function USLocationRaceSpecific({
           ))
         )}
       </div>
-      <PACFooter className="container" />
-    </div>
+      <LocationRaces.PacFooter />
+    </LocationRaces>
   )
+}
+
+function getBreadcrumbSections({
+  href,
+  stateCode,
+  stateDisplayName,
+  district,
+}: {
+  href: string
+  stateCode: USStateCode
+  stateDisplayName?: string
+  district?: NormalizedDTSIDistrictId
+}) {
+  const sections: { name: string; url?: string }[] = [
+    { name: 'United States', url: getIntlUrls(countryCode).locationKeyRaces() },
+  ]
+
+  if (!stateDisplayName) {
+    sections.push({ name: 'Presidential' })
+    return sections
+  }
+
+  sections.push({ name: stateDisplayName, url: href })
+
+  if (district) {
+    sections.push({ name: `${stateCode} Congressional District ${district}` })
+  } else {
+    sections.push({ name: `U.S. Senate (${stateCode})` })
+  }
+
+  return sections
 }
 
 function LocationRaceLinkTitle({
