@@ -1,15 +1,13 @@
 import { compact, isEmpty } from 'lodash-es'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
 import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import {
@@ -27,7 +25,6 @@ import {
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 
 interface LocationRaceGovernorSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode: USStateCode
@@ -133,8 +130,7 @@ export function USLocationRaceGovernorSpecific({
         />
 
         <div className="mb-5 flex flex-col items-center gap-4">
-          <DarkHeroSection.Title>{`Gubernatorial Race (${stateCode})`}</DarkHeroSection.Title>
-          <DarkHeroSection.Subtitle>November 4, 2025</DarkHeroSection.Subtitle>
+          <DarkHeroSection.Title>Gubernatorial Race ({stateCode})</DarkHeroSection.Title>
         </div>
 
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>

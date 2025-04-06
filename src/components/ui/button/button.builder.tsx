@@ -82,8 +82,8 @@ Builder.registerComponent(
             type: 'string',
             helperText: 'The URL to navigate to',
             regex: {
-              pattern: '^(/|https://)',
-              message: 'The URL must start with / or https://',
+              pattern: '^(/|https://|#)',
+              message: 'The URL must start with /, https:// or #',
             },
           },
           {

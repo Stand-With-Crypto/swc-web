@@ -2,6 +2,10 @@ import React, { useMemo } from 'react'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 import {
+  CookiePreferencesFieldConfig,
+  CookiePreferencesForm,
+} from '@/components/app/cookieConsent/common/cookiePreferencesForm'
+import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -23,18 +27,20 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-import { CookiePreferencesForm } from './cookiePreferencesForm'
-
 interface ManageCookiesModalProps {
   children: React.ReactNode
   onSubmit: (accepted: CookieConsentPermissions) => void
   countryCode: SupportedCountryCodes
+  defaultValues: CookieConsentPermissions
+  fieldsConfig: CookiePreferencesFieldConfig[]
 }
 
-export default function ManageCookiesModal({
+export function ManageCookiesModal({
   children,
   onSubmit,
   countryCode,
+  defaultValues,
+  fieldsConfig,
 }: ManageCookiesModalProps) {
   const urls = useMemo(() => getIntlUrls(countryCode), [countryCode])
   const dialogProps = useDialog({ analytics: 'Cookie Consent Management' })
@@ -71,10 +77,15 @@ export default function ManageCookiesModal({
           <p className="text-xs sm:text-sm">
             We may engage in remarketing campaigns. This is a type of online advertising that
             directs advertising to individuals that have previously interacted with us. To opt-out
-            of the use of your personal data for our remarketing campaigns, please email us at:{' '}
-            <a className="underline" href="mailto:info@standwithcrypto.org">
+            of the use of your personal data for our remarketing campaigns, please email{' '}
+            <a className="text-primary-cta underline" href="mailto:info@standwithcrypto.org">
               info@standwithcrypto.org
-            </a>
+            </a>{' '}
+            if you live in the USA, or{' '}
+            <a className="text-primary-cta underline" href="mailto:info@swcinternational.org">
+              info@swcinternational.org
+            </a>{' '}
+            if you live outside the USA.
           </p>
         </div>
         <ContainerHeader
@@ -103,7 +114,12 @@ export default function ManageCookiesModal({
             </InternalLink>
             .
           </p>
-          <CookiePreferencesForm onSubmit={handleManageCookiesSubmit} />
+
+          <CookiePreferencesForm
+            defaultValues={defaultValues}
+            fieldsConfig={fieldsConfig}
+            onSubmit={handleManageCookiesSubmit}
+          />
         </div>
       </ContainerContent>
     </Container>

@@ -1,13 +1,9 @@
 'use client'
 
-import { ReactNode, useMemo } from 'react'
+import { ReactNode } from 'react'
 import Cookies from 'js-cookie'
 
-import { AuCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/au/currentCampaign'
-import { CaCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/ca/currentCampaign'
-import { GbCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/gb/currentCampaign'
-import { RedirectBannerContent } from '@/components/app/navbarGlobalBanner/redirectbannerContent'
-import { UsCurrentNavbarGlobalBannerCampaign } from '@/components/app/navbarGlobalBanner/us/currentCampaign'
+import { RedirectBannerContent } from '@/components/app/navbarGlobalBanner/common/redirectbannerContent'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
@@ -21,17 +17,12 @@ import {
 } from '@/utils/shared/supportedCountries'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
-const COUNTRY_CAMPAIGN_COMPONENTS: Record<SupportedCountryCodes, () => ReactNode> = {
-  [SupportedCountryCodes.US]: UsCurrentNavbarGlobalBannerCampaign,
-  [SupportedCountryCodes.AU]: AuCurrentNavbarGlobalBannerCampaign,
-  [SupportedCountryCodes.CA]: CaCurrentNavbarGlobalBannerCampaign,
-  [SupportedCountryCodes.GB]: GbCurrentNavbarGlobalBannerCampaign,
-}
-
 export function NavBarGlobalBanner({
   countryCode: currentPageCountryCode,
+  currentCampaignComponent,
 }: {
   countryCode: SupportedCountryCodes
+  currentCampaignComponent: ReactNode
 }) {
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
@@ -44,13 +35,6 @@ export function NavBarGlobalBanner({
     : false
   const isUserAccessLocationEqualCurrentPageCountryCode =
     userAccessLocation === currentPageCountryCode
-
-  const currentCampaignComponent = useMemo(() => {
-    const CampaignComponent = COUNTRY_CAMPAIGN_COMPONENTS[currentPageCountryCode]
-    if (!CampaignComponent) return null
-
-    return <CampaignComponent />
-  }, [currentPageCountryCode])
 
   if (!hasHydrated) {
     return currentCampaignComponent
@@ -68,7 +52,7 @@ export function NavBarGlobalBanner({
     <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
       <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
         <div className="container flex justify-between">
-          <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center max-[330px]:text-xs sm:text-base">
+          <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center max-[400px]:text-xs sm:text-base">
             <p>
               Actions on Stand With Crypto
               {currentPageCountryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE

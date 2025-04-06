@@ -65,18 +65,18 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Contact your representative',
     description:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+      'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
     campaignsModalDescription:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+      'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
     image: '/gb/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: true,
-        title: `Email your representative`,
+        isCampaignActive: false,
+        title: `Sign the petition`,
         description:
-          'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+          'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <Link href={getIntlUrls(countryCode).newmodeEmailAction()}>{children}</Link>

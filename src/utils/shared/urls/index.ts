@@ -119,8 +119,7 @@ export const getIntlUrls = (
       district: string | number
     }) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${encodeURIComponent(district)}`,
-    // TODO: change once we have the actual page
-    newmodeEmailAction: () => `${countryPrefix}/action/newmode-email`,
+    newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
   }
 }
 

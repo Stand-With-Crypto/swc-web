@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import { AuDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/au'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -18,7 +17,7 @@ export function AuPagePoliticians({ politicians }: { politicians: DTSIPersonData
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <Suspense fallback={<LoadingOverlay />}>
+        <Suspense>
           <AuDTSIClientPersonDataTable initialData={politicians} />
         </Suspense>
       </PagePoliticiansLayout.PoliticiansTableSection>
