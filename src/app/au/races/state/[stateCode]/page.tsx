@@ -105,7 +105,7 @@ export default async function LocationStateSpecificPage({
           <NestedPageLink
             href={urls.locationDistrictSpecificHouseOfReps({
               stateCode,
-              district,
+              district: district.toLowerCase(),
             })}
             key={district}
           >
