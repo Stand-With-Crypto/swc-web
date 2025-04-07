@@ -8,6 +8,8 @@ import { SMSOptInForm } from '@/components/app/smsOptInForm'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { cn } from '@/utils/web/cn'
 
 export function NoEventsCTA({
@@ -18,6 +20,7 @@ export function NoEventsCTA({
   className?: string
 }) {
   const { data, isLoading, mutate } = useApiResponseForUserFullProfileInfo()
+  const countryCode = useCountryCode()
   const user = data?.user
 
   return (
@@ -38,36 +41,37 @@ export function NoEventsCTA({
           </p>
           {user ? (
             <>
-              {user.smsStatus === SMSStatus.NOT_OPTED_IN && (
-                <SMSOptInForm
-                  initialValues={{
-                    phoneNumber: user?.phoneNumber ?? '',
-                  }}
-                  onSuccess={({ phoneNumber }) =>
-                    void mutate({
-                      user: {
-                        ...data!.user!,
-                        phoneNumber,
-                      },
-                    })
-                  }
-                >
-                  {({ form }) => (
-                    <div className="mt-4">
-                      <div className="flex flex-col items-center gap-4">
-                        <SMSOptInForm.PhoneNumberField className="w-full max-w-[400px]" />
-                        <SMSOptInForm.SubmitButton
-                          disabled={form.formState.isSubmitting}
-                          variant="secondary"
-                        >
-                          Get updates
-                        </SMSOptInForm.SubmitButton>
-                        <SMSOptInForm.Footnote className="mt-4 w-full max-w-xl text-center text-xs" />
+              {user.smsStatus === SMSStatus.NOT_OPTED_IN &&
+                isSmsSupportedInCountry(countryCode) && (
+                  <SMSOptInForm
+                    initialValues={{
+                      phoneNumber: user?.phoneNumber ?? '',
+                    }}
+                    onSuccess={({ phoneNumber }) =>
+                      void mutate({
+                        user: {
+                          ...data!.user!,
+                          phoneNumber,
+                        },
+                      })
+                    }
+                  >
+                    {({ form }) => (
+                      <div className="mt-4">
+                        <div className="flex flex-col items-center gap-4">
+                          <SMSOptInForm.PhoneNumberField className="w-full max-w-[400px]" />
+                          <SMSOptInForm.SubmitButton
+                            disabled={form.formState.isSubmitting}
+                            variant="secondary"
+                          >
+                            Get updates
+                          </SMSOptInForm.SubmitButton>
+                          <SMSOptInForm.Footnote className="mt-4 w-full max-w-xl text-center text-xs" />
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </SMSOptInForm>
-              )}
+                    )}
+                  </SMSOptInForm>
+                )}
             </>
           ) : (
             <LoginDialogWrapper>
@@ -81,18 +85,22 @@ export function NoEventsCTA({
 }
 
 function CTATextBySMSStatus({ smsStatus }: { smsStatus: SMSStatus }) {
-  if (smsStatus === SMSStatus.NOT_OPTED_IN) {
-    return `Enter your number and we’ll keep you updated on any events in your area.`
-  }
+  const countryCode = useCountryCode()
 
-  if (
-    [
-      SMSStatus.OPTED_IN,
-      SMSStatus.OPTED_IN_HAS_REPLIED,
-      SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
-    ].includes(smsStatus)
-  ) {
-    return `We’ll keep you updated on any events in your area.`
+  if (isSmsSupportedInCountry(countryCode)) {
+    if (smsStatus === SMSStatus.NOT_OPTED_IN) {
+      return `Enter your number and we’ll keep you updated on any events in your area.`
+    }
+
+    if (
+      [
+        SMSStatus.OPTED_IN,
+        SMSStatus.OPTED_IN_HAS_REPLIED,
+        SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
+      ].includes(smsStatus)
+    ) {
+      return `We’ll keep you updated on any events in your area.`
+    }
   }
 
   return 'Please check back later for updates, as new events may be added soon.'

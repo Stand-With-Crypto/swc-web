@@ -15,6 +15,7 @@ import { optOutUser } from '@/utils/server/sms/actions'
 import * as smsErrorCodes from '@/utils/server/sms/errorCodes'
 import type { SendSMSPayload } from '@/utils/server/sms/sendSMS'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 jest.mock('@/inngest/functions/sms/utils/flagInvalidPhoneNumbers', () => ({
@@ -77,7 +78,7 @@ describe('enqueueMessages', () => {
   )
 
   it('should call sendSMS with each phone number', async () => {
-    await enqueueMessages(mockedPayload, mockedPayloadVariables)
+    await enqueueMessages(mockedPayload, mockedPayloadVariables, DEFAULT_SUPPORTED_COUNTRY_CODE)
 
     const totalMessages = mockedPayload.reduce((acc, curr) => acc + curr.messages.length, 0)
 
@@ -105,6 +106,7 @@ describe('enqueueMessages', () => {
     const { queuedMessages, segmentsSent } = await enqueueMessages(
       mockedPayload,
       mockedPayloadVariables,
+      DEFAULT_SUPPORTED_COUNTRY_CODE,
     )
 
     expect(queuedMessages).toBe(messages)
@@ -135,6 +137,7 @@ describe('enqueueMessages', () => {
     const { invalidPhoneNumbers, failedPhoneNumbers, unsubscribedUsers } = await enqueueMessages(
       mockedPayload,
       mockedPayloadVariables,
+      DEFAULT_SUPPORTED_COUNTRY_CODE,
     )
 
     expect(invalidPhoneNumbers).toContain(invalidPhoneNumber)
@@ -170,6 +173,7 @@ describe('enqueueMessages', () => {
       {
         [phoneNumber]: mockedVariables,
       },
+      DEFAULT_SUPPORTED_COUNTRY_CODE,
     )
 
     expect(sendSMS).toBeCalledWith({
