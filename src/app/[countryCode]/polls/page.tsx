@@ -25,8 +25,7 @@ export const metadata: Metadata = {
 }
 
 export default async function PollsPage() {
-  const builderIoPolls = await getPolls()
-  const pollsResultsData = await getPollsResultsData()
+  const [builderIoPolls, pollsResultsData] = await Promise.all([getPolls(), getPollsResultsData()])
 
   const ctas = getUserActionCTAsByCountry(countryCode)
 

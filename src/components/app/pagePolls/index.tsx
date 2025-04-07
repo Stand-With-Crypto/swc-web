@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { isEmpty } from 'lodash-es'
 
 import { GeoGatedPollsContent } from '@/components/app/pagePolls/geoGatedPollsContent'
@@ -8,9 +8,8 @@ import { InactivePolls } from '@/components/app/pagePolls/inactivePolls'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { PollResultsDataResponse } from '@/data/polls/getPollsData'
+import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
 import { usePollsResultsData } from '@/hooks/usePollsResultsData'
-import { usePollsVotesFromUser } from '@/hooks/usePollsVotesFromUser'
 import { useSession } from '@/hooks/useSession'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
@@ -29,26 +28,46 @@ export function PagePolls({
 }) {
   const { user, isUserProfileLoading } = useSession()
   const {
-    data: userPolls,
-    isLoading: isPollsVotesLoading,
-    mutate: refreshPollsVotesFromUser,
-  } = usePollsVotesFromUser(user?.id)
-  const {
     data: pollsResults,
     mutate: refreshPollsResults,
     isLoading: isPollsResultsLoading,
   } = usePollsResultsData(pollsResultsData)
 
-  const isLoading = isUserProfileLoading || isPollsVotesLoading || isPollsResultsLoading
+  const userPolls: PollsVotesFromUserResponse = useMemo(
+    () =>
+      Object.values(pollsResults).reduce(
+        (acc, pollResult) => {
+          const { campaignName, answers } = pollResult
+
+          const userAnswer = answers.find(currentAnswer => {
+            return currentAnswer.userId === user?.id
+          })
+
+          return {
+            ...acc,
+            pollVote: {
+              [campaignName]: {
+                answers: userAnswer || [],
+              },
+            },
+          }
+        },
+        {
+          pollVote: {},
+        },
+      ),
+    [pollsResults, user],
+  )
+
+  const isLoading = isUserProfileLoading || isPollsResultsLoading
 
   const hasActivePoll = activePolls && !isEmpty(activePolls)
   const hasInactivePolls = inactivePolls && !isEmpty(inactivePolls)
   const hasNoPolls = !hasActivePoll && !hasInactivePolls
 
   const handleRefreshVotes = useCallback(async () => {
-    await refreshPollsVotesFromUser()
     await refreshPollsResults()
-  }, [refreshPollsResults, refreshPollsVotesFromUser])
+  }, [refreshPollsResults])
 
   return (
     <div className="standard-spacing-from-navbar container px-2">

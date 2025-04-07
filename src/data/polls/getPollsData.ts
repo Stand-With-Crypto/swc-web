@@ -1,5 +1,3 @@
-import { UserActionType } from '@prisma/client'
-
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
@@ -9,16 +7,19 @@ export interface PollResultsDataResponse {
   answers: {
     answer: string
     isOtherAnswer: boolean
+    userId: string
   }[]
   computedAnswers: {
     answer: string
     totalVotes: number
     isOtherAnswer: boolean
+    userId: string
   }[]
   computedAnswersWithOther: {
     answer: string
     totalVotes: number
     isOtherAnswer: boolean
+    userId: string
   }[]
 }
 
@@ -43,27 +44,27 @@ export interface PollsVotesFromUserResponse {
 }
 
 export async function getPollsResultsData(): Promise<Record<string, PollResultsDataResponse>> {
-  const pollsAnswers = await prismaClient.userActionPoll.findMany({
-    where: {
-      userAction: {
-        actionType: UserActionType.POLL,
-      },
-    },
+  const pollsAnswers = await prismaClient.userActionPollAnswer.findMany({
     include: {
-      userAction: true,
-      userActionPollAnswers: true,
+      userActionPoll: {
+        include: {
+          userAction: {
+            include: {
+              user: {
+                select: {
+                  id: true,
+                },
+              },
+            },
+          },
+        },
+      },
     },
   })
 
-  const groupedAnswers = pollsAnswers.reduce<Record<string, PollResultsDataResponse>>(
-    (acc, poll) => {
-      const { campaignName } = poll.userAction
-
-      const processAnswers = (answers: typeof poll.userActionPollAnswers) =>
-        answers.map(({ answer, isOtherAnswer }) => ({
-          answer,
-          isOtherAnswer,
-        }))
+  const groupedAnswersByCampaignName = pollsAnswers.reduce<Record<string, PollResultsDataResponse>>(
+    (acc, pollAnswer) => {
+      const campaignName = pollAnswer.userActionCampaignName
 
       if (!acc[campaignName]) {
         acc[campaignName] = {
@@ -74,26 +75,29 @@ export async function getPollsResultsData(): Promise<Record<string, PollResultsD
         }
       }
 
-      acc[campaignName].answers = [
-        ...acc[campaignName].answers,
-        ...processAnswers(poll.userActionPollAnswers),
-      ]
+      acc[campaignName].answers.push({
+        answer: pollAnswer.answer,
+        isOtherAnswer: pollAnswer.isOtherAnswer,
+        userId: pollAnswer.userActionPoll.userAction.user.id,
+      })
 
       const computedAnswers = acc[campaignName].answers.reduce<
-        Array<{ answer: string; totalVotes: number; isOtherAnswer: boolean }>
-      >((computed, { answer, isOtherAnswer }) => {
+        Array<{ answer: string; totalVotes: number; isOtherAnswer: boolean; userId: string }>
+      >((computed, { answer, isOtherAnswer, userId }) => {
         const existingAnswer = computed.find(a => a.answer === answer)
         if (existingAnswer) {
           return computed.map(a =>
             a.answer === answer ? { ...a, totalVotes: a.totalVotes + 1, isOtherAnswer } : a,
           )
         }
-        return [...computed, { answer, totalVotes: 1, isOtherAnswer }]
+        return [...computed, { answer, totalVotes: 1, isOtherAnswer, userId }]
       }, [])
 
+      acc[campaignName].computedAnswers = computedAnswers
+
       const computedAnswersWithOther = acc[campaignName].answers.reduce<
-        Array<{ answer: string; totalVotes: number; isOtherAnswer: boolean }>
-      >((computed, { answer, isOtherAnswer }) => {
+        Array<{ answer: string; totalVotes: number; isOtherAnswer: boolean; userId: string }>
+      >((computed, { answer, isOtherAnswer, userId }) => {
         const answerKey = isOtherAnswer ? 'other' : answer
         const existingAnswer = computed.find(a => a.answer === answerKey)
         if (existingAnswer) {
@@ -101,21 +105,17 @@ export async function getPollsResultsData(): Promise<Record<string, PollResultsD
             a.answer === answerKey ? { ...a, totalVotes: a.totalVotes + 1, isOtherAnswer } : a,
           )
         }
-        return [...computed, { answer: answerKey, totalVotes: 1, isOtherAnswer }]
+        return [...computed, { answer: answerKey, totalVotes: 1, isOtherAnswer, userId }]
       }, [])
 
-      acc[campaignName] = {
-        ...acc[campaignName],
-        computedAnswers,
-        computedAnswersWithOther,
-      }
+      acc[campaignName].computedAnswersWithOther = computedAnswersWithOther
 
-      return acc as Record<string, PollResultsDataResponse>
+      return acc
     },
     {},
   )
 
-  return groupedAnswers
+  return groupedAnswersByCampaignName
 }
 
 export async function getPollsVotesFromUser(userId: string): Promise<PollsVotesFromUserResponse> {
@@ -175,11 +175,18 @@ export async function getPollsWithAbsoluteResults(): Promise<PollsWithResults[]>
       displayName: answer.displayName,
       isOtherAnswer: false,
       totalVotes: 0,
+      userId: '',
     }))
 
     const computedAnswersMap = new Map<
       string,
-      { answer: string; displayName: string; isOtherAnswer: boolean; totalVotes: number }
+      {
+        answer: string
+        displayName: string
+        isOtherAnswer: boolean
+        totalVotes: number
+        userId: string
+      }
     >()
 
     allAnswers.forEach(answer => {
@@ -193,7 +200,13 @@ export async function getPollsWithAbsoluteResults(): Promise<PollsWithResults[]>
           totalVotes,
         })
       } else {
-        computedAnswersMap.set(answer, { answer, displayName: answer, isOtherAnswer, totalVotes })
+        computedAnswersMap.set(answer, {
+          answer,
+          displayName: answer,
+          isOtherAnswer,
+          totalVotes,
+          userId: '',
+        })
       }
     })
 
