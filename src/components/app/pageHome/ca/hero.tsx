@@ -19,7 +19,7 @@ export function CaHero() {
           Canadians own crypto. And yet, crypto’s future in Canada remains uncertain. Congress is
           writing the rules as we speak – but they won’t vote YES until they’ve heard from you.
         </Hero.Subtitle>
-        <Hero.HeadingCTA countryCode={countryCode} />
+        <Hero.HeadingCTA countryCode={countryCode} ctaText="Join the Movement" />
       </Hero.Heading>
       <HeroAnnouncementCard
         authenticatedContent={
@@ -31,7 +31,7 @@ export function CaHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Get started">
-                Fight for crypto in Canada.
+                Advocate for crypto in Canada.
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </Link>
@@ -44,7 +44,7 @@ export function CaHero() {
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">
-              Fight for crypto in Canada.
+              Advocate for crypto in Canada.
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
         }

@@ -31,7 +31,7 @@ export function GbHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Get started">
-                Fight for crypto in Britain.
+                Advocate for crypto in Britain.
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </Link>
@@ -44,7 +44,7 @@ export function GbHero() {
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">
-              Fight for crypto in Britain.
+              Advocate for crypto in Britain.
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
         }

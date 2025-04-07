@@ -20,7 +20,7 @@ export function AuHero() {
           The Government is writing the rules as we speak – but they won’t vote YES until they’ve
           heard from you.
         </Hero.Subtitle>
-        <Hero.HeadingCTA countryCode={countryCode} />
+        <Hero.HeadingCTA countryCode={countryCode} ctaText="Join the Movement" />
       </Hero.Heading>
       <HeroAnnouncementCard
         authenticatedContent={
@@ -32,7 +32,7 @@ export function AuHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Get started">
-                Fight for crypto in Australia.
+                Advocate for crypto in Australia.
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </Link>
@@ -45,7 +45,7 @@ export function AuHero() {
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">
-              Fight for crypto in Australia.
+              Advocate for crypto in Australia.
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
         }
