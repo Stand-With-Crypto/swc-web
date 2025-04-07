@@ -29,7 +29,12 @@ export function GbPageHome({
       <GbHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
+        <TopLevelMetrics
+          countryCode={countryCode}
+          {...topLevelMetrics}
+          disableTooltips
+          useGlobalLabels
+        />
       </section>
 
       <HomePageSection>

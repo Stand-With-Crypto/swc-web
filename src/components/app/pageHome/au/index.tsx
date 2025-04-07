@@ -30,7 +30,12 @@ export function AuPageHome({
       <AuHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
+        <TopLevelMetrics
+          countryCode={countryCode}
+          {...topLevelMetrics}
+          disableTooltips
+          useGlobalLabels
+        />
       </section>
 
       <HomePageSection>
