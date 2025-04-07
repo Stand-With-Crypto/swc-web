@@ -22,6 +22,10 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
+      href: urls.locationKeyRaces(),
+      text: 'Races',
+    },
+    {
       href: urls.manifesto(),
       text: 'Manifesto',
     },
