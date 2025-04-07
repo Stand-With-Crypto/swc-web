@@ -1,5 +1,4 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
@@ -117,8 +116,25 @@ export const getIntlUrls = (
       district,
     }: {
       stateCode: LocationStateCode
-      district: NormalizedDTSIDistrictId
+      district: string | number
     }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
+    locationDistrictSpecificHouseOfReps: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-representatives`,
+    locationDistrictSpecificHouseOfCommons: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-commons`,
+
     newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
   }
 }

@@ -1,13 +1,13 @@
-import { caFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/ca/locationCanada/specificRoleDTSIPerson'
+import { auFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/au/locationAustralia/specificRoleDTSIPerson'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 
-export function organizeCARaceSpecificPeople(
+export function organizeAURaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
 ) {
-  const formatted = people.map(x => caFormatSpecificRoleDTSIPerson(x))
+  const formatted = people.map(x => auFormatSpecificRoleDTSIPerson(x))
 
   formatted.sort((a, b) => {
     const aPersonScore = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
