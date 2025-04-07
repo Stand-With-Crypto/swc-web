@@ -49,7 +49,7 @@ export default async function LocationCanadaPage() {
       </DarkHeroSection>
 
       <LocationRaces.KeyRacesStates
-        subtitle="Dive deeper and discover races in other provinces and territories"
+        subtitle="Dive deeper and discover races in each province and territory"
         title={`${COUNTRY_CODE_TO_DEMONYM[countryCode]} Provinces and Territories`}
       >
         <CAKeyRacesStates />

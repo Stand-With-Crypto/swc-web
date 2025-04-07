@@ -63,8 +63,9 @@ LocationRaces.KeyRaces = LocationKeyRaces
 
 function LocationKeyRacesStates({
   children,
+  useFlexBox = false,
   ...props
-}: React.PropsWithChildren<ContentSectionProps>) {
+}: React.PropsWithChildren<ContentSectionProps & { useFlexBox?: boolean }>) {
   return (
     <ContentSection
       className="container"
@@ -72,7 +73,14 @@ function LocationKeyRacesStates({
       title="Other states"
       {...props}
     >
-      <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
+      <div
+        className={cn(
+          'gap-3 text-center',
+          useFlexBox
+            ? 'flex flex-wrap justify-around'
+            : 'grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4',
+        )}
+      >
         {children}
       </div>
     </ContentSection>

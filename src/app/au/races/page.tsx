@@ -51,6 +51,7 @@ export default async function LocationAustraliaPage() {
       </DarkHeroSection>
 
       <LocationRaces.KeyRacesStates
+        subtitle="Dive deeper and discover races in each state and territory"
         title={`${COUNTRY_CODE_TO_DEMONYM[countryCode]} States and Territories`}
       >
         <AUKeyRacesStates />
