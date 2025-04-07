@@ -41,6 +41,7 @@ export const footerConfig: FooterProps = {
   title: 'Fight for the future',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
+  legalText: 'Authorized by Coinbase Canada Inc, 745 Thurlow Street, Suite 2400, 613-866-4125.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img
