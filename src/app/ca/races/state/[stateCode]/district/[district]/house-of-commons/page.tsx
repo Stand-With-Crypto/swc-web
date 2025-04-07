@@ -4,7 +4,8 @@ import { Metadata } from 'next'
 import { organizeCARaceSpecificPeople } from '@/components/app/pageLocationKeyRaces/ca/locationRaceSpecific'
 import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
 import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
-import { queryDTSILocationHouseSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationHouseSpecificInformation'
+import { queryDTSIRacesPeopleByRolePrimaryDistrict } from '@/data/dtsi/queries/queryDTSIRacesPeopleByRolePrimaryDistrict'
+import { queryDTSIStatePrimaryDistricts } from '@/data/dtsi/queries/queryDTSIStatePrimaryDistricts'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
@@ -14,6 +15,7 @@ import {
 } from '@/utils/shared/intl/displayNames'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+  CAProvinceOrTerritoryCode,
   getCAProvinceOrTerritoryNameFromCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -29,19 +31,17 @@ export const dynamicParams = false
 const countryCode = SupportedCountryCodes.CA
 const urls = getIntlUrls(countryCode)
 
-type LocationHouseOfCommonsRaceSpecificPageProps = PageProps<{
+type CALocationDistrictPageProps = PageProps<{
   stateCode: string
+  district: string
 }>
 
-export async function generateMetadata({
-  params,
-}: LocationHouseOfCommonsRaceSpecificPageProps): Promise<Metadata> {
-  const { stateCode } = await params
-  const validatedStateCode = zodState.parse(stateCode.toUpperCase(), countryCode)
-  const stateName = getCAProvinceOrTerritoryNameFromCode(validatedStateCode)
-  const title = `${stateName} Canadian House of Commons Race`
-  const description = `See where politicians running for the Canadian House of Commons in ${stateName} stand on crypto.`
+export async function generateMetadata({ params }: CALocationDistrictPageProps): Promise<Metadata> {
+  const { district } = await params
+  const decodedDistrict = decodeURIComponent(district)
 
+  const title = `Key Races in ${decodedDistrict}`
+  const description = `View the races critical to keeping crypto in ${decodedDistrict}.`
   return generateMetadataDetails({
     title,
     description,
@@ -49,22 +49,42 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP)
-    .slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 99999)
-    .map(stateCode => ({
-      stateCode: stateCode.toLowerCase(),
-    }))
+  const pageParams = []
+
+  const statesToGenerate = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
+    ? Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP)[0]
+    : Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP)
+
+  // This might be a bit slow, if it becomes a problem we can batch the states
+  for (const stateCode of statesToGenerate) {
+    const result = await queryDTSIStatePrimaryDistricts({
+      stateCode: stateCode as CAProvinceOrTerritoryCode,
+      countryCode,
+    })
+    const districts = result?.primaryDistricts ?? []
+
+    for (const district of districts) {
+      pageParams.push({
+        stateCode: stateCode.toLowerCase(),
+        district,
+      })
+    }
+  }
+
+  return pageParams
 }
 
 export default async function LocationHouseOfCommonsSpecificPage({
   params,
-}: LocationHouseOfCommonsRaceSpecificPageProps) {
-  const { stateCode: rawStateCode } = await params
-  const stateCode = zodState.parse(rawStateCode.toUpperCase(), countryCode)
+}: CALocationDistrictPageProps) {
+  const pageParams = await params
+  const stateCode = zodState.parse(pageParams.stateCode.toUpperCase(), countryCode)
   const stateDisplayName = getCAProvinceOrTerritoryNameFromCode(stateCode)
 
-  const data = await queryDTSILocationHouseSpecificInformation({
-    stateCode,
+  const district = decodeURIComponent(pageParams.district)
+
+  const data = await queryDTSIRacesPeopleByRolePrimaryDistrict({
+    district,
     countryCode,
   })
 
@@ -103,19 +123,23 @@ export default async function LocationHouseOfCommonsSpecificPage({
               url: urls.locationStateSpecific(stateCode),
             },
             {
-              name: 'Canadian House of Commons',
+              name: district,
+              url: '#',
+            },
+            {
+              name: 'House of Commons',
             },
           ]}
         />
         <DarkHeroSection.Title>
-          {COUNTRY_CODE_TO_DEMONYM[countryCode]} House of Commons ({stateCode})
+          {COUNTRY_CODE_TO_DEMONYM[countryCode]} House of Commons ({district})
         </DarkHeroSection.Title>
       </DarkHeroSection>
 
       <LocationRaces.DetailedCandidateListContainer>
         {isEmpty(racesData) ? (
           <LocationRaces.EmptyMessage gutterTop>
-            There's no key races currently in {stateDisplayName}
+            There's no key races currently in {district}
           </LocationRaces.EmptyMessage>
         ) : (
           racesData.map(race => (

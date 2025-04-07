@@ -117,8 +117,7 @@ export const getIntlUrls = (
     }: {
       stateCode: LocationStateCode
       district: string | number
-    }) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${encodeURIComponent(district)}`,
+    }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
     locationDistrictSpecificHouseOfReps: ({
       stateCode,
       district,
@@ -127,6 +126,14 @@ export const getIntlUrls = (
       district: string | number
     }) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-representatives`,
+    locationDistrictSpecificHouseOfCommons: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-commons`,
 
     newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
   }
