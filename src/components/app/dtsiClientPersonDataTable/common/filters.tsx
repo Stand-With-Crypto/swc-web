@@ -128,7 +128,7 @@ function GlobalFiltersPartySelect({
       }
       value={namedColumns?.[PERSON_TABLE_COLUMNS_IDS.PARTY]?.getFilterValue() as string}
     >
-      <SelectTrigger className="w-[120px] flex-shrink-0" data-testid="party-filter-trigger">
+      <SelectTrigger className="w-[144px] flex-shrink-0" data-testid="party-filter-trigger">
         <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
         <SelectValue />
       </SelectTrigger>
