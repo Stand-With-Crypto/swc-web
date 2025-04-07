@@ -1,10 +1,14 @@
-import { gbFormatSpecificRoleDTSIPerson } from '@/components/app/pageLocationKeyRaces/gb/locationUnitedKingdom/specificRoleDTSIPerson'
+import {
+  caFormatSpecificRoleDTSIPerson,
+  CASpecificRoleDTSIPerson,
+} from '@/components/app/pageLocationKeyRaces/ca/locationCanada/specificRoleDTSIPerson'
 import { DTSI_PersonRoleCategory, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 
-import { FormattedPerson } from './types'
-
-export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformationQuery['people']) {
-  const formatted = people.map(x => gbFormatSpecificRoleDTSIPerson(x))
+type FormattedPerson = CASpecificRoleDTSIPerson<DTSI_StateSpecificInformationQuery['people'][0]>
+export function organizeCADistrictSpecificPeople(
+  people: DTSI_StateSpecificInformationQuery['people'],
+) {
+  const formatted = people.map(x => caFormatSpecificRoleDTSIPerson(x))
   const grouped = {
     houseOfCommons: [] as FormattedPerson[],
     senate: [] as FormattedPerson[],

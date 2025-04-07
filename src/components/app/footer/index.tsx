@@ -21,6 +21,7 @@ export interface FooterProps {
     text: string
     href: string
   }[]
+  legalText?: string
   footerBanner?: React.ReactNode
 }
 
@@ -31,6 +32,7 @@ export function Footer({
   socialLinks,
   footerBanner,
   countryCode,
+  legalText,
 }: FooterProps) {
   return (
     <div className="mt-36">
@@ -66,6 +68,8 @@ export function Footer({
               </div>
             </div>
           </div>
+
+          {legalText && <div className="mt-4 text-sm text-muted">{legalText}</div>}
 
           <div className="mt-4 text-sm text-muted">
             Stand With Crypto ©️ All rights reserved {getYear(new Date())}

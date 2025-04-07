@@ -297,6 +297,16 @@ const nextConfig: NextConfig = {
         destination: '/action/nft-mint',
         permanent: true,
       },
+      {
+        source: '/australia',
+        destination: 'https://au.standwithcrypto.org',
+        permanent: false,
+      },
+      {
+        source: '/canada',
+        destination: 'https://ca.standwithcrypto.org',
+        permanent: false,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
@@ -703,11 +713,6 @@ const nextConfig: NextConfig = {
       {
         source: '/canada',
         destination: '/ca?utm_source=billboard',
-        permanent: true,
-      },
-      {
-        source: '/uk',
-        destination: '/gb',
         permanent: true,
       },
       {

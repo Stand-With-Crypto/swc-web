@@ -22,7 +22,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-interface Props {
+export interface DTSIPersonHeroCardProps {
   person: DTSI_PersonCardFragment
   countryCode: SupportedCountryCodes
   subheader: 'role' | 'role-w-state' | string
@@ -37,7 +37,7 @@ interface Props {
   target?: React.HTMLAttributeAnchorTarget
 }
 
-function getSubHeaderString(props: Props) {
+function getSubHeaderString(props: DTSIPersonHeroCardProps) {
   switch (props.subheader) {
     case 'role':
       return props.person.primaryRole
@@ -80,7 +80,7 @@ function DTSIPersonHeroCardFooter({
   )
 }
 
-export function DTSIPersonHeroCard(props: Props) {
+export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
   const {
     person,
     countryCode,

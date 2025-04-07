@@ -22,6 +22,10 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
+      href: urls.manifesto(),
+      text: 'Manifesto',
+    },
+    {
       href: urls.events(),
       text: 'Events',
     },
@@ -37,6 +41,7 @@ export const footerConfig: FooterProps = {
   title: 'Join the Movement',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
+  legalText: 'Authorised by J. O’Loghlen, Coinbase Australia Pty Ltd., Sydney.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img
