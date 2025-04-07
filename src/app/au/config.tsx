@@ -42,7 +42,7 @@ export const navbarConfig: NavbarProps = {
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Fight for the future',
+  title: 'Join the Movement',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
   legalText: 'Authorised by J. O’Loghlen, Coinbase Australia Pty Ltd., Sydney.',

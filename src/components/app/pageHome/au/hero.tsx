@@ -16,9 +16,9 @@ export function AuHero() {
           It’s time to fight for crypto in <span className="text-primary-cta">Australia</span>
         </Hero.Title>
         <Hero.Subtitle>
-          Australians own crypto. And yet, crypto’s future in Australia remains uncertain.
-          Parliament is writing the rules as we speak – but they won’t vote YES until they’ve heard
-          from you.
+          1 in 5 Australians own crypto. And yet, crypto’s future in Australia remains uncertain.
+          The Government is writing the rules as we speak – but they won’t vote YES until they’ve
+          heard from you.
         </Hero.Subtitle>
         <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
@@ -32,7 +32,7 @@ export function AuHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Get started">
-                Fight for crypto in Australia.
+                Advocate for crypto in Australia.
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </Link>
@@ -45,7 +45,7 @@ export function AuHero() {
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">
-              Fight for crypto in Australia.
+              Advocate for crypto in Australia.
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
         }
