@@ -6,6 +6,7 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
     lastName
     firstNickname
     nameSuffix
+    politicalAffiliation
     politicalAffiliationCategory
     computedStanceScore
     computedSumStanceScoreWeight
