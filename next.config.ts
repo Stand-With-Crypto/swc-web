@@ -21,6 +21,7 @@ const contentSecurityPolicy = {
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
     'https://fonts.googleapis.com', // Required for newmode
+    'https://*.newmode.net/',
   ],
   'script-src': [
     "'self'",
