@@ -34,7 +34,7 @@ export function GbPageHome({
 
       <HomePageSection>
         <HomePageSection.Title>
-          People in <span className="text-primary-cta">Britain</span> are fighting for crypto
+          <span className="text-primary-cta">Britons</span> believe in crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
           See how the community is taking a stand to safeguard the future of crypto in Britain.

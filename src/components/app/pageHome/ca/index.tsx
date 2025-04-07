@@ -34,7 +34,7 @@ export function CaPageHome({
 
       <HomePageSection>
         <HomePageSection.Title>
-          People in <span className="text-primary-cta">Canada</span> are fighting for crypto
+          People in <span className="text-primary-cta">Canada</span> believe in crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
           See how the community is taking a stand to safeguard the future of crypto in Canada.
