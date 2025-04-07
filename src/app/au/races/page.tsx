@@ -42,10 +42,12 @@ export default async function LocationAustraliaPage() {
           that will impact the future of crypto. Learn where politicians stand on crypto to make an
           informed decision at the ballot box.
         </DarkHeroSection.Subtitle>
-        <DarkHeroSection.HighlightedText>
-          <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
-          advocates in {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}
-        </DarkHeroSection.HighlightedText>
+        {countAdvocates > 1000 && (
+          <DarkHeroSection.HighlightedText>
+            <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
+            advocates in {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}
+          </DarkHeroSection.HighlightedText>
+        )}
       </DarkHeroSection>
 
       <LocationRaces.KeyRacesStates
