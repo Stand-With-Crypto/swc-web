@@ -34,7 +34,8 @@ export function CaPageHome({
 
       <HomePageSection>
         <HomePageSection.Title>
-          People in <span className="text-primary-cta">Canada</span> believe in crypto
+          People in <span className="text-primary-cta">Canada</span> are joining the movement for
+          crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
           See how the community is taking a stand to safeguard the future of crypto in Canada.
@@ -56,8 +57,8 @@ export function CaPageHome({
           <HomePageSection.Subtitle>
             Join Stand With Crypto and shape the future of finance and tech in Canada. Whether
             you're a developer, advocate, or curious about blockchain, engage with our community
-            through exclusive events, resources, and networking. Collaborate on projects, influence
-            policy, and help build an inclusive web3 ecosystem. Your participation is crucial.
+            through exclusive events, resources, and networking. Collaborate on projects and help
+            build an inclusive web3 ecosystem. Your participation is crucial.
           </HomePageSection.Subtitle>
           <div className="flex flex-col items-center gap-6">
             <PartnerGrid partners={partners} />

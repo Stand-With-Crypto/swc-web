@@ -13,11 +13,13 @@ export function CaHero() {
     <Hero>
       <Hero.Heading>
         <Hero.Title>
-          It’s time to fight for crypto in <span className="text-primary-cta">Canada</span>
+          It’s time to join the movement for crypto in{' '}
+          <span className="text-primary-cta">Canada</span>
         </Hero.Title>
         <Hero.Subtitle>
-          Canadians own crypto. And yet, crypto’s future in Canada remains uncertain. Congress is
-          writing the rules as we speak – but they won’t vote YES until they’ve heard from you.
+          4 million Canadians own crypto. And yet, crypto’s future in Canada remains uncertain. This
+          is our chance to shape the future of crypto policy and ensure Canada remains a global
+          leader.
         </Hero.Subtitle>
         <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
@@ -31,7 +33,7 @@ export function CaHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Get started">
-                Advocate for crypto in Canada.
+                Join the movement for crypto in Canada
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </Link>
@@ -44,7 +46,7 @@ export function CaHero() {
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">
-              Advocate for crypto in Canada.
+              Join the movement for crypto in Canada
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
         }

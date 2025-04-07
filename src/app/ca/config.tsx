@@ -38,9 +38,8 @@ export const navbarConfig: NavbarProps = {
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Join the Movement',
-  subtitle:
-    'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
+  title: 'Join the movement for the future of crypto',
+  subtitle: 'Protect the future of crypto in Canada. #standwithcrypto',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img
