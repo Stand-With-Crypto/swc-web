@@ -12,7 +12,28 @@ import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountrie
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
-export function HeroCTA({ countryCode }: { countryCode: SupportedCountryCodes }) {
+function getCountryCTA(countryCode: SupportedCountryCodes) {
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return 'Join the fight'
+    case SupportedCountryCodes.AU:
+      return 'Join the Movement'
+    case SupportedCountryCodes.CA:
+      return 'Join the Movement'
+    case SupportedCountryCodes.GB:
+      return 'Join the Movement'
+    default:
+      return 'Join the fight'
+  }
+}
+
+export function HeroCTA({
+  countryCode,
+  ctaText = getCountryCTA(countryCode),
+}: {
+  countryCode: SupportedCountryCodes
+  ctaText?: string
+}) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
 
@@ -20,7 +41,7 @@ export function HeroCTA({ countryCode }: { countryCode: SupportedCountryCodes })
 
   const unauthenticatedContent = (
     <Button size="lg" variant="primary-cta">
-      Join the fight
+      {ctaText}
     </Button>
   )
 

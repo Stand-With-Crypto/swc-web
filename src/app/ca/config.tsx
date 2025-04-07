@@ -38,9 +38,8 @@ export const navbarConfig: NavbarProps = {
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Fight for the future',
-  subtitle:
-    'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
+  title: 'Join the movement for the future of crypto',
+  subtitle: 'Protect the future of crypto in Canada. #standwithcrypto',
   legalText: 'Authorized by Coinbase Canada Inc, 745 Thurlow Street, Suite 2400, 613-866-4125.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">

@@ -7,6 +7,7 @@ import { actionCreateUserActionTweet } from '@/actions/actionCreateUserActionTwe
 import { Button } from '@/components/ui/button'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
 import { openWindow } from '@/utils/shared/openWindow'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -20,8 +21,14 @@ const getCountrySpecificMessage = (countryCode: SupportedCountryCodes) => {
   switch (countryCode) {
     case SupportedCountryCodes.US:
       return `I #StandWithCrypto. More than ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.`
+    case SupportedCountryCodes.AU:
+      return `I #StandWithCrypto. People in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]} are already advocating for better crypto policy. Join the Movement to receive email updates on crypto policy, invites to local events, and more.`
+    case SupportedCountryCodes.CA:
+      return `I #StandWithCrypto. People in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]} are already advocating for better crypto policy. Join the Movement to receive email updates on crypto policy, invites to local events, and more.`
+    case SupportedCountryCodes.GB:
+      return `I #StandWithCrypto. People in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]} are already advocating for better crypto policy. Join the Movement to receive email updates on crypto policy, invites to local events, and more.`
     default:
-      return `I #StandWithCrypto. Join the fight to receive email updates on crypto policy, invites to local events, and more.`
+      return `I #StandWithCrypto. More than ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} people are already advocating for better crypto policy. Join the fight to receive email updates on crypto policy, invites to local events, and more.`
   }
 }
 
