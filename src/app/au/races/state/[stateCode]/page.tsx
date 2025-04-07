@@ -96,12 +96,16 @@ export default async function LocationStateSpecificPage({
         )}
       </DarkHeroSection>
 
-      <LocationRaces.KeyRacesStates title={`${stateDisplayName} Constituencies`}>
+      <LocationRaces.KeyRacesStates
+        subtitle="Dive deeper and discover who’s running for office in each constituency"
+        title={`${stateDisplayName} Constituencies`}
+        useFlexBox={dtsiResults.primaryDistricts.length < 4}
+      >
         {dtsiResults.primaryDistricts.map(district => (
           <NestedPageLink
             href={urls.locationDistrictSpecificHouseOfReps({
               stateCode,
-              district,
+              district: district.toLowerCase(),
             })}
             key={district}
           >

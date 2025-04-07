@@ -40,14 +40,16 @@ export default async function LocationCanadaPage() {
           future of crypto. Learn where politicians stand on crypto to make an informed decision at
           the ballot box.
         </DarkHeroSection.Subtitle>
-        <DarkHeroSection.HighlightedText>
-          <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
-          advocates in {countryDisplayNameWithPrefix}
-        </DarkHeroSection.HighlightedText>
+        {countAdvocates > 1000 && (
+          <DarkHeroSection.HighlightedText>
+            <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
+            advocates in {countryDisplayNameWithPrefix}
+          </DarkHeroSection.HighlightedText>
+        )}
       </DarkHeroSection>
 
       <LocationRaces.KeyRacesStates
-        subtitle="Dive deeper and discover races in other provinces and territories"
+        subtitle="Dive deeper and discover races in each province and territory"
         title={`${COUNTRY_CODE_TO_DEMONYM[countryCode]} Provinces and Territories`}
       >
         <CAKeyRacesStates />

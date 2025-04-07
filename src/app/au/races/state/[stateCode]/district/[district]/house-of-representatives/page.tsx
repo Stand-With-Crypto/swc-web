@@ -69,7 +69,7 @@ export async function generateStaticParams() {
     for (const district of districts) {
       pageParams.push({
         stateCode: stateCode.toLowerCase(),
-        district,
+        district: district.toLowerCase(),
       })
     }
   }
@@ -123,11 +123,7 @@ export default async function AUDistrictHouseOfRepsRacePage({
               url: urls.locationStateSpecific(stateCode),
             },
             {
-              name: district,
-              url: '#',
-            },
-            {
-              name: 'House of Representatives',
+              name: `House of Representatives (${district})`,
             },
           ]}
         />

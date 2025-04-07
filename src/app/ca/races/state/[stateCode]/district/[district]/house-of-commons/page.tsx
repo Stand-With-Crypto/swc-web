@@ -66,7 +66,7 @@ export async function generateStaticParams() {
     for (const district of districts) {
       pageParams.push({
         stateCode: stateCode.toLowerCase(),
-        district,
+        district: district.toLowerCase(),
       })
     }
   }
@@ -123,11 +123,7 @@ export default async function LocationHouseOfCommonsSpecificPage({
               url: urls.locationStateSpecific(stateCode),
             },
             {
-              name: district,
-              url: '#',
-            },
-            {
-              name: 'House of Commons',
+              name: `House of Commons (${district})`,
             },
           ]}
         />
