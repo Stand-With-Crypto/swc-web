@@ -10,10 +10,8 @@ import {
   ANALYTICS_NAME_LOGIN,
   ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
 } from '@/components/app/authentication/constants'
-import { GeoGate } from '@/components/app/geoGate'
 import { UserProfileFormSections } from '@/components/app/updateUserProfileForm'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
-import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -23,7 +21,6 @@ import { useENS } from '@/hooks/useENS'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
@@ -53,10 +50,6 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren<ThirdwebLoginC
    * instead of our internal authentication
    */
   useThirdwebSession?: boolean
-  /**
-   * If this is true than the component will bypass the country check
-   */
-  bypassCountryCheck?: boolean
 }
 
 enum LoginSections {
@@ -72,7 +65,6 @@ export function LoginDialogWrapper({
   loadingFallback,
   forceUnauthenticated,
   useThirdwebSession = false,
-  bypassCountryCheck = true, // For Onchain Summer
   ...props
 }: LoginDialogWrapperProps) {
   const session = useSession()
@@ -135,7 +127,6 @@ export function LoginDialogWrapper({
 
   return (
     <UnauthenticatedSection
-      bypassCountryCheck={bypassCountryCheck}
       currentSection={currentSection}
       dialogProps={dialogProps}
       goToSection={goToSection}
@@ -157,10 +148,6 @@ interface UnauthenticatedSectionProps extends React.PropsWithChildren<ThirdwebLo
    * Callback that is called after the user logs in and closes the dialog.
    */
   onLoginSuccess?: () => void
-  /**
-   * If this is true than the component will bypass the country check
-   */
-  bypassCountryCheck?: boolean
 }
 
 function UnauthenticatedSection({
@@ -170,7 +157,6 @@ function UnauthenticatedSection({
   dialogProps,
   isLoggedIn,
   onLoginSuccess,
-  bypassCountryCheck,
   ...props
 }: UnauthenticatedSectionProps) {
   const { mutate } = useApiResponseForUserFullProfileInfo()
@@ -219,28 +205,20 @@ function UnauthenticatedSection({
         a11yTitle={currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
         className="max-w-l w-full px-0 md:px-0"
       >
-        <GeoGate
-          bypassCountryCheck={bypassCountryCheck}
-          countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-          unavailableContent={
-            <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
-          }
-        >
-          {currentSection === LoginSections.LOGIN ? (
-            <div className="px-4 md:px-6">
-              <DialogBody>
-                <LoginSection onLogin={handleLoginSuccess} {...props} />
-              </DialogBody>
-            </div>
-          ) : (
-            <FinishProfileSection
-              onSuccess={() => {
-                setDialogOpen(false)
-                void mutate()
-              }}
-            />
-          )}
-        </GeoGate>
+        {currentSection === LoginSections.LOGIN ? (
+          <div className="px-4 md:px-6">
+            <DialogBody>
+              <LoginSection onLogin={handleLoginSuccess} {...props} />
+            </DialogBody>
+          </div>
+        ) : (
+          <FinishProfileSection
+            onSuccess={() => {
+              setDialogOpen(false)
+              void mutate()
+            }}
+          />
+        )}
       </DialogContent>
     </Dialog>
   )
