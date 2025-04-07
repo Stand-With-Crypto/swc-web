@@ -126,7 +126,7 @@ export const getIntlUrls = (
       stateCode: LocationStateCode
       district: string | number
     }) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${encodeURIComponent(district)}/house-of-representatives`,
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-representatives`,
 
     newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
   }

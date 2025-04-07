@@ -65,7 +65,7 @@ export async function generateStaticParams() {
     for (const district of districts) {
       pageParams.push({
         stateCode: stateCode.toLowerCase(),
-        district: encodeURIComponent(district),
+        district,
       })
     }
   }
@@ -76,10 +76,10 @@ export async function generateStaticParams() {
 export default async function AUDistrictHouseOfRepsRacePage({
   params,
 }: AUDistrictHouseOfRepsRacePageProps) {
-  const { stateCode: rawStateCode, district: rawDistrict } = await params
-  const stateCode = zodState.parse(rawStateCode.toUpperCase(), countryCode)
+  const pageParams = await params
+  const stateCode = zodState.parse(pageParams.stateCode.toUpperCase(), countryCode)
+  const district = decodeURIComponent(pageParams.district)
   const stateDisplayName = getAUStateNameFromStateCode(stateCode)
-  const district = decodeURIComponent(rawDistrict)
 
   const data = await queryDTSIRacesPeopleByRolePrimaryDistrict({
     district,
@@ -133,7 +133,7 @@ export default async function AUDistrictHouseOfRepsRacePage({
       <LocationRaces.DetailedCandidateListContainer>
         {isEmpty(racesData) ? (
           <LocationRaces.EmptyMessage gutterTop>
-            There's no key races currently in {stateDisplayName}
+            There's no key races currently in {district}
           </LocationRaces.EmptyMessage>
         ) : (
           racesData.map(race => (

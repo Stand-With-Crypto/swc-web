@@ -64,7 +64,7 @@ export async function generateStaticParams() {
     for (const district of districts) {
       pageParams.push({
         stateCode: stateCode.toLowerCase(),
-        district: encodeURIComponent(district),
+        district,
       })
     }
   }
@@ -75,16 +75,16 @@ export async function generateStaticParams() {
 export default async function CALocationDistrictSpecificPage({
   params,
 }: CALocationDistrictSpecificPageProps) {
-  const { stateCode: rawStateCode, district } = await params
-  const decodedDistrict = decodeURIComponent(district)
-  const stateCode = zodState.parse(rawStateCode.toUpperCase(), countryCode)
+  const pageParams = await params
+  const stateCode = zodState.parse(pageParams.stateCode.toUpperCase(), countryCode)
+  const district = decodeURIComponent(pageParams.district)
 
   if (!stateCode) {
-    throw new Error(`Invalid state code for LocationDistrictSpecificPage: ${rawStateCode}`)
+    throw new Error(`Invalid state code for LocationDistrictSpecificPage: ${pageParams.stateCode}`)
   }
 
   const data = await queryDTSIRacesPeopleByRolePrimaryDistrict({
-    district: decodedDistrict,
+    district,
     countryCode,
   })
 
@@ -100,7 +100,7 @@ export default async function CALocationDistrictSpecificPage({
         input={{
           countryCode,
           stateCode: stateCode,
-          constituency: decodedDistrict,
+          constituency: district,
         }}
       />
       <DarkHeroSection>
@@ -115,17 +115,17 @@ export default async function CALocationDistrictSpecificPage({
               url: urls.locationStateSpecific(stateCode),
             },
             {
-              name: decodedDistrict,
+              name: district,
             },
           ]}
         />
-        <DarkHeroSection.Title>Key Races in {decodedDistrict}</DarkHeroSection.Title>
+        <DarkHeroSection.Title>Key Races in {district}</DarkHeroSection.Title>
       </DarkHeroSection>
 
       <LocationRaces.Content>
         {isEmpty(houseOfCommons) ? (
           <LocationRaces.EmptyMessage>
-            There's no key races currently in {decodedDistrict}
+            There's no key races currently in {district}
           </LocationRaces.EmptyMessage>
         ) : (
           <DTSIPersonHeroCardSection
@@ -136,7 +136,7 @@ export default async function CALocationDistrictSpecificPage({
               />
             }
             people={houseOfCommons}
-            title={`House of Commons Race (${decodedDistrict})`}
+            title={`House of Commons Race (${district})`}
           />
         )}
       </LocationRaces.Content>
