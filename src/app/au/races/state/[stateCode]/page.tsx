@@ -99,7 +99,7 @@ export default async function LocationStateSpecificPage({
       <LocationRaces.KeyRacesStates title={`${stateDisplayName} Constituencies`}>
         {dtsiResults.primaryDistricts.map(district => (
           <NestedPageLink
-            href={urls.locationDistrictSpecific({
+            href={urls.locationDistrictSpecificHouseOfReps({
               stateCode,
               district,
             })}

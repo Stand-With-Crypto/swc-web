@@ -119,6 +119,15 @@ export const getIntlUrls = (
       district: string | number
     }) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${encodeURIComponent(district)}`,
+    locationDistrictSpecificHouseOfReps: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${encodeURIComponent(district)}/house-of-representatives`,
+
     newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
   }
 }

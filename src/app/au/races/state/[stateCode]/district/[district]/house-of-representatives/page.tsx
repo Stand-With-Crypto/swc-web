@@ -1,14 +1,14 @@
-import { isEmpty } from 'lodash-es'
+import { compact, isEmpty } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
-import { organizeAUDistrictSpecificPeople } from '@/components/app/pageLocationKeyRaces/au/district/organizeDistrictSpecificPeople'
+import { organizeAURaceSpecificPeople } from '@/components/app/pageLocationKeyRaces/au/locationRaceSpecific/organizeRaceSpecificPeople'
 import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
 import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { queryDTSIRacesPeopleByRolePrimaryDistrict } from '@/data/dtsi/queries/queryDTSIRacesPeopleByRolePrimaryDistrict'
 import { queryDTSIStatePrimaryDistricts } from '@/data/dtsi/queries/queryDTSIStatePrimaryDistricts'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import {
   AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
@@ -18,6 +18,7 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { AUUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { zodState } from '@/validation/fields/zodState'
 
 export const revalidate = 600 // 10 minutes
@@ -27,14 +28,14 @@ export const dynamicParams = false
 const countryCode = SupportedCountryCodes.AU
 const urls = getIntlUrls(countryCode)
 
-type AULocationDistrictSpecificPageProps = PageProps<{
+type AUDistrictHouseOfRepsRacePageProps = PageProps<{
   stateCode: string
   district: string
 }>
 
 export async function generateMetadata({
   params,
-}: AULocationDistrictSpecificPageProps): Promise<Metadata> {
+}: AUDistrictHouseOfRepsRacePageProps): Promise<Metadata> {
   const { district } = await params
   const decodedDistrict = decodeURIComponent(district)
 
@@ -72,37 +73,40 @@ export async function generateStaticParams() {
   return pageParams
 }
 
-export default async function AULocationDistrictSpecificPage({
+export default async function AUDistrictHouseOfRepsRacePage({
   params,
-}: AULocationDistrictSpecificPageProps) {
-  const { stateCode: rawStateCode, district } = await params
-  const decodedDistrict = decodeURIComponent(district)
+}: AUDistrictHouseOfRepsRacePageProps) {
+  const { stateCode: rawStateCode, district: rawDistrict } = await params
   const stateCode = zodState.parse(rawStateCode.toUpperCase(), countryCode)
-
-  if (!stateCode) {
-    throw new Error(`Invalid state code for LocationDistrictSpecificPage: ${rawStateCode}`)
-  }
+  const stateDisplayName = getAUStateNameFromStateCode(stateCode)
+  const district = decodeURIComponent(rawDistrict)
 
   const data = await queryDTSIRacesPeopleByRolePrimaryDistrict({
-    district: decodedDistrict,
+    district,
     countryCode,
   })
 
   if (!data) {
-    throw new Error(`Invalid params for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
+    throw new Error(`Invalid params for LocationHouseOfRepsSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  const { houseOfReps } = organizeAUDistrictSpecificPeople(data.people)
+  const groups = organizeAURaceSpecificPeople(data.people)
+  const { recommended, others } = findRecommendedCandidate(groups)
+  const racesData = compact([
+    recommended && { person: recommended, isRecommended: true },
+    ...others.map(person => ({ person, isRecommended: false })),
+  ])
 
   return (
-    <LocationRaces>
+    <LocationRaces disableVerticalSpacing>
       <LocationRaces.ActionRegisterer
         input={{
+          campaignName: AUUserActionViewKeyRacesCampaignName['H1_2025'],
           countryCode,
-          stateCode: stateCode,
-          constituency: decodedDistrict,
+          stateCode,
         }}
       />
+
       <DarkHeroSection>
         <DarkHeroSection.Breadcrumbs
           sections={[
@@ -111,35 +115,38 @@ export default async function AULocationDistrictSpecificPage({
               url: urls.locationKeyRaces(),
             },
             {
-              name: getAUStateNameFromStateCode(stateCode),
+              name: stateDisplayName,
               url: urls.locationStateSpecific(stateCode),
             },
             {
-              name: decodedDistrict,
+              name: district,
+              url: '#',
+            },
+            {
+              name: 'House of Representatives',
             },
           ]}
         />
-        <DarkHeroSection.Title>Key Races in {decodedDistrict}</DarkHeroSection.Title>
+        <DarkHeroSection.Title>House of Representatives ({district})</DarkHeroSection.Title>
       </DarkHeroSection>
 
-      <LocationRaces.Content>
-        {isEmpty(houseOfReps) ? (
-          <LocationRaces.EmptyMessage>
-            There's no key races currently in {decodedDistrict}
+      <LocationRaces.DetailedCandidateListContainer>
+        {isEmpty(racesData) ? (
+          <LocationRaces.EmptyMessage gutterTop>
+            There's no key races currently in {stateDisplayName}
           </LocationRaces.EmptyMessage>
         ) : (
-          <DTSIPersonHeroCardSection
-            countryCode={countryCode}
-            cta={
-              <LocationRaces.ViewRaceCTA
-                href={urls.locationStateSpecificHouseOfRepsRace(stateCode)}
-              />
-            }
-            people={houseOfReps}
-            title={`House of Representatives Race (${decodedDistrict})`}
-          />
+          racesData.map(race => (
+            <LocationRaces.DetailedCandidateListItem
+              countryCode={countryCode}
+              isRecommended={race.isRecommended}
+              key={race.person.id}
+              person={race.person}
+              useThumbsUpOrDownGrade
+            />
+          ))
         )}
-      </LocationRaces.Content>
+      </LocationRaces.DetailedCandidateListContainer>
     </LocationRaces>
   )
 }
