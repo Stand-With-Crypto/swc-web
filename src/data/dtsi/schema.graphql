@@ -195,8 +195,10 @@ enum PersonPoliticalAffiliationCategory {
   LIBERAL
   LIBERAL_DEMOCRAT
   LIBERTARIAN
+  NATIONALS
   NATIONAL_LIBERAL
   NDP
+  ONE_NATION
   OTHER
   PPC
   REFORM
@@ -367,6 +369,7 @@ type PublicUser {
 }
 
 type Query {
+  INTERNAL__testSentry: Boolean
   bill(id: String!): Bill!
   bills: [Bill!]!
   congressPeople(chamber: CongressionalChamber!, session: CongressionalSession!): [Person!]! @deprecated(reason: "Use people instead")

@@ -64,6 +64,10 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
       return 'Reform'
     case DTSI_PersonPoliticalAffiliationCategory.SOCIALIST:
       return 'Socialist'
+    case DTSI_PersonPoliticalAffiliationCategory.NATIONALS:
+      return 'National Party'
+    case DTSI_PersonPoliticalAffiliationCategory.ONE_NATION:
+      return 'One Nation'
   }
 }
 
