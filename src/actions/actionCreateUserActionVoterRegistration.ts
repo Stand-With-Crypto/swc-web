@@ -127,7 +127,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     await claimNFTAndSendEmailNotification({
       userAction,
       userCryptoAddress: user.primaryUserCryptoAddress,
-      countryCode: countryCode as SupportedCountryCodes,
+      countryCode,
     })
   }
 
