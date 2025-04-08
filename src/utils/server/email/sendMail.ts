@@ -14,6 +14,11 @@ const SENDGRID_SANDBOX_MODE = requiredOutsideLocalEnv(
   'SENDGRID_SANDBOX_MODE',
   'Sendgrid Email Sends',
 )
+const SENDGRID_SENDER = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER,
+  'SENDGRID_SENDER',
+  'Sendgrid Email Sends',
+)
 const SENDGRID_SENDER_US = requiredOutsideLocalEnv(
   process.env.SENDGRID_SENDER_US,
   'SENDGRID_SENDER_US',
@@ -113,7 +118,7 @@ export async function sendMail({
   payload: SendMailPayload | SendMailPayload[]
   countryCode: SupportedCountryCodes
 }): Promise<string | string[]> {
-  const senderEmail = COUNTRY_CODE_TO_SENDGRID_SENDER[countryCode]
+  const senderEmail = COUNTRY_CODE_TO_SENDGRID_SENDER[countryCode] || SENDGRID_SENDER
 
   if (!SENDGRID_API_KEY || !senderEmail) {
     logger.debug(
