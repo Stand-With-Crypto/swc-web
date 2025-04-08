@@ -1,9 +1,9 @@
 import { UserActionType } from '@prisma/client'
-import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
+import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
@@ -63,23 +63,28 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Contact your representative',
+    title: 'Email your Member of Parliament',
     description:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in Australia.',
+      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
     campaignsModalDescription:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in Australia.',
+      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
     image: '/au/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
-        campaignName: AUUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: false,
-        title: `Sign the petition`,
+        campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
+        isCampaignActive: true,
+        title: `Email your Member of Parliament`,
         description:
-          'Make your voice heard. Sign our petition to support crypto-friendly policies in Australia.',
+          'You’ve emailed your Member of Parliament and called for responsible crypto policy.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).newmodeEmailAction()}>{children}</Link>
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={getIntlUrls(countryCode).newmodeElectionAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
         ),
       },
     ],
