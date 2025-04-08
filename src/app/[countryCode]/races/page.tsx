@@ -49,9 +49,9 @@ export default async function LocationUnitedStatesPage() {
         </DarkHeroSection.Title>
         <DarkHeroSection.Subtitle>
           View the key races occurring across{' '}
-          {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}
-          that will impact the future of crypto. Learn where politicians stand on crypto to make an
-          informed decision at the ballot box.
+          {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]} that will impact the future of
+          crypto. Learn where politicians stand on crypto to make an informed decision at the ballot
+          box.
         </DarkHeroSection.Subtitle>
         <DarkHeroSection.HighlightedText>
           <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
