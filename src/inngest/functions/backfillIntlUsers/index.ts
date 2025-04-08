@@ -20,53 +20,51 @@ export const BACKFILL_INTL_USERS_FUNCTION_ID = 'script.backfill-intl-users'
 
 const BATCH_SIZE = 1000
 
+const zodUserDataSchema = (countryCode: SupportedCountryCodes) =>
+  z.object({
+    email: zodEmailAddress,
+    firstName: z.union([zodFirstName.optional(), z.literal('')]),
+    lastName: z.union([zodLastName.optional(), z.literal('')]),
+    referralId: zodReferralId.optional(),
+    phoneNumber: zodOptionalEmptyPhoneNumber(countryCode).optional(),
+  })
+
+export type UserData = z.infer<ReturnType<typeof zodUserDataSchema>>
+
 const createUserDataSchema = (countryCode: SupportedCountryCodes) => {
   // Map  CSV columns to our expected field names
-  return z.preprocess(
-    data => {
-      if (typeof data !== 'object' || data === null) return data
+  return z.preprocess(data => {
+    if (!data || typeof data !== 'object') return data
 
-      const csvFieldNames: Record<string, string> = { ...data }
+    const typedData = data as Record<string, string>
+    const userData: UserData = {} as UserData
 
-      if ('What is your name?' in csvFieldNames && Boolean(csvFieldNames['What is your name?'])) {
-        csvFieldNames.firstName = csvFieldNames['What is your name?']
-        csvFieldNames.lastName = ''
-      }
+    if ('What is your name?' in typedData && Boolean(typedData['What is your name?'])) {
+      userData.firstName = typedData['What is your name?']
+      userData.lastName = ''
+    }
 
-      if ('What is your email?' in csvFieldNames && Boolean(csvFieldNames['What is your email?'])) {
-        csvFieldNames.email = csvFieldNames['What is your email?']
-      }
+    if ('What is your email?' in typedData && Boolean(typedData['What is your email?'])) {
+      userData.email = typedData['What is your email?']
+    }
 
-      if (
-        'Waitlist Referral URL' in csvFieldNames &&
-        Boolean(csvFieldNames['Waitlist Referral URL'])
-      ) {
-        try {
-          const url = new URL(csvFieldNames['Waitlist Referral URL'])
-          const referralParam = url.searchParams.get('referral')
-          if (referralParam) {
-            csvFieldNames.referralId = referralParam
-          }
-        } catch (error) {
-          logger.error(`Error parsing referral URL: ${csvFieldNames['Waitlist Referral URL']}`, {
-            error,
-          })
+    if ('Waitlist Referral URL' in typedData && Boolean(typedData['Waitlist Referral URL'])) {
+      try {
+        const url = new URL(typedData['Waitlist Referral URL'])
+        const referralParam = url.searchParams.get('referral')
+        if (referralParam) {
+          userData.referralId = referralParam
         }
+      } catch (error) {
+        logger.error(`Error parsing referral URL: ${typedData['Waitlist Referral URL']}`, {
+          error,
+        })
       }
+    }
 
-      return csvFieldNames
-    },
-    z.object({
-      email: zodEmailAddress,
-      firstName: z.union([zodFirstName.optional(), z.literal('')]),
-      lastName: z.union([zodLastName.optional(), z.literal('')]),
-      referralId: zodReferralId.optional(),
-      phoneNumber: zodOptionalEmptyPhoneNumber(countryCode).optional(),
-    }),
-  )
+    return userData
+  }, zodUserDataSchema(countryCode))
 }
-
-export type UserData = z.infer<ReturnType<typeof createUserDataSchema>>
 
 const eventPayloadSchema = z.object({
   countryCode: zodSupportedCountryCode,
@@ -100,7 +98,23 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
         const workbook = read(buffer, { type: 'buffer' })
         const firstSheetName = workbook.SheetNames[0]
         const worksheet = workbook.Sheets[firstSheetName]
-        const rawUsers = utils.sheet_to_json<Record<string, unknown>>(worksheet)
+
+        const columns = ['What is your name?', 'What is your email?', 'Waitlist Referral URL']
+
+        const headerRow =
+          utils.sheet_to_json<string[]>(worksheet, {
+            header: 1,
+            range: 0,
+          })[0] || []
+
+        const customHeader = headerRow.map(header => (columns.includes(header) ? header : ''))
+
+        const rawUsers = utils.sheet_to_json<Record<string, unknown>>(worksheet, {
+          header: customHeader,
+          range: 1,
+          blankrows: false,
+          defval: '',
+        })
 
         const userDataSchema = createUserDataSchema(countryCode)
         const errorsByType = new Map<
@@ -154,7 +168,7 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
         }
 
         logger.info(
-          `Found ${validUsers.length} valid users to process for country code ${countryCode}`,
+          `Found ${validUsers.length} valid users to process out of ${rawUsers.length} data rows read for country code ${countryCode}`,
         )
 
         const batches = chunk(validUsers, BATCH_SIZE)

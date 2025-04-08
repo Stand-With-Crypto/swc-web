@@ -35,6 +35,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
@@ -113,6 +114,7 @@ export function UserActionFormEmailCongressperson({
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
+  const countryCode = useCountryCode()
   const hasModifiedMessage = useRef(false)
   const userDefaultValues = getDefaultValues({ user, dtsiSlugs: [] })
   const form = useForm<FormValues>({
@@ -309,6 +311,7 @@ export function UserActionFormEmailCongressperson({
                   <div className="w-full">
                     <DTSICongresspersonAssociatedWithFormAddress
                       address={addressProps.field.value}
+                      countryCode={countryCode}
                       dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
                       onChangeAddress={noop}
                       politicianCategory={politicianCategory}

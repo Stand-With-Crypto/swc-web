@@ -20,12 +20,12 @@ import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
-import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
   USUserActionEmailCampaignName,
@@ -33,12 +33,21 @@ import {
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
-const DTSIPersonName = ({ person, href }: { person: DTSIPersonForUserActions; href: string }) => {
+const DTSIPersonName = ({
+  person,
+  href,
+  countryCode,
+}: {
+  person: DTSIPersonForUserActions
+  href: string
+  countryCode: SupportedCountryCodes
+}) => {
+  const roleNameResolver = getRoleNameResolver(countryCode)
   const link = <InternalLink href={href}>{dtsiPersonFullName(person)}</InternalLink>
   if (person.primaryRole) {
     return (
       <>
-        {getDTSIPersonRoleCategoryDisplayName(person.primaryRole)} {link}
+        {roleNameResolver(person.primaryRole)} {link}
       </>
     )
   }
@@ -106,6 +115,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               Call to{' '}
               {action.person ? (
                 <DTSIPersonName
+                  countryCode={countryCode}
                   href={urls.politicianDetails(action.person.slug)}
                   person={action.person}
                 />
@@ -165,6 +175,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                         dtsiRecipients.map(actionEmailRecipient => (
                           <React.Fragment key={actionEmailRecipient.id}>
                             <DTSIPersonName
+                              countryCode={countryCode}
                               href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
                               person={actionEmailRecipient.person!}
                             />
@@ -239,6 +250,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                 <>
                   {'to '}
                   <DTSIPersonName
+                    countryCode={countryCode}
                     href={urls.politicianDetails(action.person.slug)}
                     person={action.person}
                   />

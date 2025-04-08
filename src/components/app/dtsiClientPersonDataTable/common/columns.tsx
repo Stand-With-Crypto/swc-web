@@ -10,7 +10,7 @@ import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
-import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
@@ -66,6 +66,7 @@ export const getDTSIClientPersonDataTableColumns = ({
   dtsiGradeComponent: React.ComponentType<{ person: Person; className: string }>
 }) => {
   const stateNameResolver = getStateNameResolver(countryCode)
+  const roleNameResolver = getRoleNameResolver(countryCode)
 
   return [
     personColumnHelper.accessor(dtsiPersonFullName, {
@@ -121,7 +122,7 @@ export const getDTSIClientPersonDataTableColumns = ({
       },
     ),
     personColumnHelper.accessor(
-      row => (row.primaryRole ? getDTSIPersonRoleCategoryDisplayName(row.primaryRole) : '-'),
+      row => (row.primaryRole ? roleNameResolver(row.primaryRole) : '-'),
       {
         id: PERSON_TABLE_COLUMNS_IDS.ROLE,
         filterFn: PERSON_TABLE_COLUMNS_IDS.ROLE,
@@ -129,11 +130,7 @@ export const getDTSIClientPersonDataTableColumns = ({
           return <SortableHeader column={column}>Role</SortableHeader>
         },
         cell: ({ row }) => (
-          <>
-            {row.original.primaryRole
-              ? getDTSIPersonRoleCategoryDisplayName(row.original.primaryRole)
-              : '-'}
-          </>
+          <>{row.original.primaryRole ? roleNameResolver(row.original.primaryRole) : '-'}</>
         ),
       },
     ),
