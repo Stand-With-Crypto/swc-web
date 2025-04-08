@@ -1,10 +1,15 @@
 import { Builder } from '@builder.io/react'
 
+import { GeoGate } from '@/components/app/geoGate'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { NewMode, NewModeProps } from '@/utils/web/builder/components/newmode'
 import { BuilderComponentBaseProps } from '@/utils/web/builder/types'
 
 Builder.registerComponent(
   (props: BuilderComponentBaseProps & NewModeProps) => {
+    const countryCode = useCountryCode()
+
     if (Builder.isEditing) {
       return (
         <div {...props}>
@@ -23,7 +28,18 @@ Builder.registerComponent(
     }
 
     return (
-      <NewMode {...props.attributes} campaignId={props.campaignId} key={props.attributes?.key} />
+      <GeoGate
+        countryCode={countryCode}
+        unavailableContent={
+          <UserActionFormActionUnavailable
+            className="mt-16 min-h-min"
+            countryCode={countryCode}
+            hideTitle
+          />
+        }
+      >
+        <NewMode {...props.attributes} campaignId={props.campaignId} key={props.attributes?.key} />
+      </GeoGate>
     )
   },
   {

@@ -1,9 +1,11 @@
 import { UserActionType } from '@prisma/client'
-import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
-import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
+import {
+  UserActionFormShareOnTwitterDialog,
+  UserActionViewKeyPageDialog,
+} from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -79,7 +81,12 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           'You’ve emailed your Member of Parliament and taken action to help stop unfair debanking.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).newmodeElectionAction()}>{children}</Link>
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={getIntlUrls(countryCode).newmodeElectionAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
         ),
       },
     ],

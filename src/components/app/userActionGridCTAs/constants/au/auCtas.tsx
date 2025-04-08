@@ -1,9 +1,11 @@
 import { UserActionType } from '@prisma/client'
-import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
-import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
+import {
+  UserActionFormShareOnTwitterDialog,
+  UserActionViewKeyPageDialog,
+} from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
@@ -76,10 +78,15 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         isCampaignActive: true,
         title: `Email your Member of Parliament`,
         description:
-          'You’ve emailed your Member of Parliament and taken action to help stop unfair debanking.',
+          'You’ve emailed your Member of Parliament and called for responsible crypto policy.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).newmodeElectionAction()}>{children}</Link>
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={getIntlUrls(countryCode).newmodeElectionAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
         ),
       },
     ],
