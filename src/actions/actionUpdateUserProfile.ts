@@ -189,7 +189,11 @@ async function actionUpdateUserProfileWithoutMiddleware(
   })
 
   if (optedInToSms && phoneNumber) {
-    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
+    updatedUser.smsStatus = await smsActions.optInUser({
+      phoneNumber,
+      user,
+      countryCode: addressCountryCode,
+    })
   }
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)

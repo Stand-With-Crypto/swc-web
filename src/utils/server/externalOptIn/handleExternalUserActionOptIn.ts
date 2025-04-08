@@ -191,7 +191,7 @@ export async function handleExternalUserActionOptIn(
   }
 
   if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber) {
-    await smsActions.optInUser(input.phoneNumber, user)
+    await smsActions.optInUser({ phoneNumber: input.phoneNumber, user, countryCode })
   }
 
   if (existingAction) {

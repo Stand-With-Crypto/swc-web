@@ -60,6 +60,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/index'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 type UpsertedUser = User & {
   address: Address | null
@@ -860,8 +861,14 @@ async function triggerPostLoginUserActionSteps({
 
     await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
 
+    const { data: normalizedCountryCode } = zodSupportedCountryCode.safeParse(countryCode)
+
     if (embeddedWalletUserDetails?.phone) {
-      await smsActions.optInUser(embeddedWalletUserDetails.phone, user)
+      await smsActions.optInUser({
+        phoneNumber: embeddedWalletUserDetails.phone,
+        user,
+        countryCode: normalizedCountryCode,
+      })
     }
 
     analytics.trackUserActionCreated({
