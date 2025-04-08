@@ -43,9 +43,11 @@ const GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP = {
 }
 
 export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
-  return GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP[
-    countryCode as keyof typeof GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP
-  ]
+  return (
+    GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP[
+      countryCode as keyof typeof GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP
+    ] || usGetDTSIPersonRoleCategoryDisplayName
+  )
 }
 
 export type DTSIPersonRoleCategoryDisplayNameProps = Pick<

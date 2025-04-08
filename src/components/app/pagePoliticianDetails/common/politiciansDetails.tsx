@@ -42,6 +42,7 @@ function PoliticianHeader({
   showRoleLocation?: boolean
 }) {
   const roleNameResolver = getRoleNameResolver(countryCode)
+
   return (
     <>
       {person.profilePictureUrl ? (
