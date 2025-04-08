@@ -72,9 +72,7 @@ function ActionAdditionalInfo({ action, countryCode }: ActionAdditionalInfoProps
     const { administrativeAreaLevel1, countryCode: userLocationCountryCode } =
       action.user.userLocationDetails ?? {}
     const hasUserChangedLocationSinceActionCompleted =
-      countryCode === SupportedCountryCodes.GB
-        ? userLocationCountryCode !== 'UK'
-        : userLocationCountryCode?.toLowerCase() !== countryCode
+      userLocationCountryCode?.toLowerCase() !== countryCode
 
     if (!administrativeAreaLevel1 || hasUserChangedLocationSinceActionCompleted) {
       return <span>From {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}</span>
