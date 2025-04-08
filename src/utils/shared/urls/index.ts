@@ -28,6 +28,31 @@ function getBaseUrl() {
 
 export const INTERNAL_BASE_URL = getBaseUrl()
 
+const COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS: Record<
+  SupportedCountryCodes,
+  {
+    state: string
+    district: string
+  }
+> = {
+  [SupportedCountryCodes.US]: {
+    state: 'state',
+    district: 'district',
+  },
+  [SupportedCountryCodes.GB]: {
+    state: 'province',
+    district: 'constituency',
+  },
+  [SupportedCountryCodes.AU]: {
+    state: 'state',
+    district: 'constituency',
+  },
+  [SupportedCountryCodes.CA]: {
+    state: 'province',
+    district: 'constituency',
+  },
+}
+
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `/${countryCode}`
@@ -43,6 +68,44 @@ export const getIntlUrls = (
 ) => {
   const countryPrefix =
     countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !actualPaths ? '' : `/${countryCode}`
+
+  const racesRoutesSegments = COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS[countryCode]
+  const RACES_ROUTES = {
+    locationStateSpecific: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}`,
+    locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/senate`,
+    locationStateSpecificHouseOfRepsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/house-of-representatives`,
+    locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/governor`,
+    locationKeyRaces: () => `${countryPrefix}/races/`,
+    locationDistrictSpecific: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/${racesRoutesSegments.district}/${district}`,
+    locationDistrictSpecificHouseOfReps: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/${racesRoutesSegments.district}/${district}/house-of-representatives`,
+    locationDistrictSpecificHouseOfCommons: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/${racesRoutesSegments.district}/${district}/house-of-commons`,
+  }
+
   return {
     home: () => `${countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '/' : countryPrefix}`,
     termsOfService: () => `${countryPrefix}/terms-of-service`,
@@ -98,6 +161,7 @@ export const getIntlUrls = (
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
+<<<<<<< Updated upstream
     locationStateSpecific: (stateCode: LocationStateCode) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
     locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
@@ -137,6 +201,10 @@ export const getIntlUrls = (
 
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
+=======
+    newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
+    ...RACES_ROUTES,
+>>>>>>> Stashed changes
   }
 }
 
