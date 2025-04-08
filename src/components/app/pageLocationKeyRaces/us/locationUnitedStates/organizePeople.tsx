@@ -27,8 +27,11 @@ export function organizePeople({ keyRaces }: QueryDTSILocationUnitedStatesInform
         const racesInDistrict = groupedByDistrict[district]
 
         racesInDistrict.sort((a, b) => {
-          if (a.isIncumbent !== b.isIncumbent) {
-            return a.isIncumbent ? -1 : 1
+          const lastNameA = a.lastName
+          const lastNameB = b.lastName
+
+          if (lastNameA !== lastNameB) {
+            return lastNameA.localeCompare(lastNameB)
           }
 
           const scoreA = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
