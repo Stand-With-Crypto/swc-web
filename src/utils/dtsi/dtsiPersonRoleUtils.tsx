@@ -6,8 +6,8 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
-import { auGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/auDtsiPersonRoleUtils'
-import { usGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/usDtsiPersonRoleUtils'
+import { auGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/au/dtsiPersonRoleUtils'
+import { usGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/us/dtsiPersonRoleUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
