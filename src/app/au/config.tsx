@@ -30,10 +30,6 @@ export const navbarConfig: NavbarProps = {
       text: 'Manifesto',
     },
     {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
       href: urls.community(),
       text: 'Community',
     },
