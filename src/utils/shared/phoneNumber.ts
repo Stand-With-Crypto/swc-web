@@ -27,10 +27,10 @@ export const SUPPORTED_PHONE_NUMBER_COUNTRY_CODES: Record<SupportedCountryCodes,
 
 // https://stackoverflow.com/a/43687969
 export function normalizePhoneNumber(passed: string, countryCode?: SupportedCountryCodes) {
-  const countryCodePrefix =
-    countryCode && SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[countryCode]
-      ? SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[countryCode]
-      : ''
+  const countryCodePrefix = countryCode && SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[countryCode]
+  const defaultCountryCodePrefix =
+    SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[DEFAULT_SUPPORTED_COUNTRY_CODE]
+
   // Split number and extension
   let [number, extension] = passed.split('x')
 
@@ -40,12 +40,29 @@ export function normalizePhoneNumber(passed: string, countryCode?: SupportedCoun
   // Handle country code
   number = number.replace(/^00/, '+')
 
-  if (new RegExp(`^${countryCodePrefix.replace('+', '')}`).test(number)) {
-    number = number.startsWith('+') ? number : '+' + number
+  if (
+    number.startsWith(
+      (countryCodePrefix ? countryCodePrefix : defaultCountryCodePrefix).replace('+', ''),
+    )
+  ) {
+    number = '+' + number
   }
 
-  if (!new RegExp(/^\+/).test(number)) {
-    number = countryCodePrefix + number
+  if (!number.startsWith('+')) {
+    if (countryCodePrefix) {
+      number = countryCodePrefix + number
+    } else {
+      number = defaultCountryCodePrefix + number
+      Sentry.captureMessage('Tried to normalize phone number without country code, using default', {
+        tags: {
+          domain: 'normalizePhoneNumber',
+        },
+        extra: {
+          payload: passed,
+          countryCode,
+        },
+      })
+    }
   }
 
   // Add extension back if present

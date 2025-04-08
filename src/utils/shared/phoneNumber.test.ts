@@ -2,99 +2,89 @@ import { describe, expect, it } from '@jest/globals'
 import { uniq } from 'lodash-es'
 
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
-const US_PHONE_NUMBERS = [
-  '222 888 3333',
-  '(222) 888-3333',
-  '12228883333',
-  '1 222 888 3333',
-  '1 (222) 888 3333',
-  '2228883333',
-  '+1 222 888-3333',
-]
+const TEST_PHONE_NUMBERS: Record<SupportedCountryCodes, string[]> = {
+  [SupportedCountryCodes.US]: [
+    '222 888 3333',
+    '(222) 888 3333',
+    '12228883333',
+    '1 222 888 3333',
+    '1 (222) 888 3333',
+    '2228883333',
+    '+1 222 888 3333',
+  ],
+  [SupportedCountryCodes.CA]: [
+    '222 888 3333',
+    '(222) 888-3333',
+    '12228883333',
+    '1 222 888 3333',
+    '1 (222) 888 3333',
+    '2228883333',
+    '+1 222 888-3333',
+  ],
+  [SupportedCountryCodes.GB]: [
+    '+44 117 2345678',
+    '+44 117 234 5678',
+    '(117) 234 5678',
+    '44 117 234-5678',
+    '44 (117) 234 5678',
+    '+44117 2345678',
+    '1172345678',
+    '441172345678',
+  ],
+  [SupportedCountryCodes.AU]: [
+    '+61 421 345678',
+    '+61 421 345-678',
+    '(421) 345 678',
+    '61 421 345 678',
+    '61 (421) 345 678',
+    '+61421 345678',
+    '421345678',
+    '61421345678',
+  ],
+}
 
-const CA_PHONE_NUMBERS = [...US_PHONE_NUMBERS]
+const EXPECTED_PHONE_NUMBERS: Record<SupportedCountryCodes, string[]> = {
+  [SupportedCountryCodes.US]: ['+12228883333'],
+  [SupportedCountryCodes.CA]: ['+12228883333'],
+  [SupportedCountryCodes.GB]: ['+441172345678'],
+  [SupportedCountryCodes.AU]: ['+61421345678'],
+}
 
-const UK_PHONE_NUMBERS = [
-  '+44 117 2345678',
-  '+44 117 234 5678',
-  '(117) 234 5678',
-  '44 117 234-5678',
-  '44 (117) 234 5678',
-  '+44117 2345678',
-  '1172345678',
-  '441172345678',
-]
-
-const AU_PHONE_NUMBERS = [
-  '+61 421 345678',
-  '+61 421 345-678',
-  '(421) 345 678',
-  '61 421 345 678',
-  '61 (421) 345 678',
-  '+61421 345678',
-  '421345678',
-  '61421345678',
-]
-
-const NOT_SUPPORTED_PHONE_NUMBERS = [
-  '+55 11 99999-9999',
-  '55 (11) 99999 9999',
-  '+5511999999999',
-  '55 11 99999-9999',
-  '5511999999999',
-  '+55(11)999999999',
-]
+const NOT_SUPPORTED_PHONE_NUMBERS = ['+55 11 99999-9999', '+5511999999999', '+55(11)999999999']
 
 describe('utils/normalizePhoneNumber', () => {
-  it('Correctly parses phone number strings for the US', () => {
-    expect(
-      uniq(
-        US_PHONE_NUMBERS.map(phoneNumber =>
-          normalizePhoneNumber(phoneNumber, SupportedCountryCodes.US),
+  it.each(ORDERED_SUPPORTED_COUNTRIES)(
+    'Correctly parses phone number strings for %s',
+    countryCode => {
+      expect(
+        uniq(
+          TEST_PHONE_NUMBERS[countryCode].map(phoneNumber =>
+            normalizePhoneNumber(phoneNumber, countryCode),
+          ),
         ),
-      ),
-    ).toEqual(['+12228883333'])
-  })
+      ).toEqual(EXPECTED_PHONE_NUMBERS[countryCode])
+    },
+  )
 
-  it('Correctly parses phone number strings for the CA', () => {
+  it('Correctly parses phone number strings without country code', () => {
     expect(
       uniq(
-        CA_PHONE_NUMBERS.map(phoneNumber =>
-          normalizePhoneNumber(phoneNumber, SupportedCountryCodes.CA),
+        TEST_PHONE_NUMBERS[DEFAULT_SUPPORTED_COUNTRY_CODE].map(phoneNumber =>
+          normalizePhoneNumber(phoneNumber),
         ),
       ),
-    ).toEqual(['+12228883333'])
-  })
-
-  it('Correctly parses phone number strings for the UK', () => {
-    expect(
-      uniq(
-        UK_PHONE_NUMBERS.map(phoneNumber =>
-          normalizePhoneNumber(phoneNumber, SupportedCountryCodes.GB),
-        ),
-      ),
-    ).toEqual(['+441172345678'])
-  })
-
-  it('Correctly parses phone number strings for the AU', () => {
-    expect(
-      uniq(
-        AU_PHONE_NUMBERS.map(phoneNumber =>
-          normalizePhoneNumber(phoneNumber, SupportedCountryCodes.AU),
-        ),
-      ),
-    ).toEqual(['+61421345678'])
+    ).toEqual(EXPECTED_PHONE_NUMBERS[DEFAULT_SUPPORTED_COUNTRY_CODE])
   })
 
   it('Returns the original phone number for unsupported countries', () => {
     expect(
-      uniq(
-        NOT_SUPPORTED_PHONE_NUMBERS.map(phoneNumber =>
-          normalizePhoneNumber(phoneNumber, 'BR' as SupportedCountryCodes),
-        ),
-      ),
+      uniq(NOT_SUPPORTED_PHONE_NUMBERS.map(phoneNumber => normalizePhoneNumber(phoneNumber))),
     ).toEqual(['+5511999999999'])
   })
 })
