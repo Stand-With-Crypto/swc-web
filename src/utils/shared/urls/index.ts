@@ -161,50 +161,9 @@ export const getIntlUrls = (
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
-<<<<<<< Updated upstream
-    locationStateSpecific: (stateCode: LocationStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
-    locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
-    locationStateSpecificHouseOfLordsRace: (stateCode: LocationStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-lords`,
-    locationStateSpecificHouseOfCommonsRace: (stateCode: LocationStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-commons`,
-    locationStateSpecificHouseOfRepsRace: (stateCode: LocationStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/house-of-representatives`,
-    locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/governor`,
-    locationKeyRaces: () => `${countryPrefix}/races/`,
-    locationDistrictSpecific: ({
-      stateCode,
-      district,
-    }: {
-      stateCode: LocationStateCode
-      district: string | number
-    }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
-    locationDistrictSpecificHouseOfReps: ({
-      stateCode,
-      district,
-    }: {
-      stateCode: LocationStateCode
-      district: string | number
-    }) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-representatives`,
-    locationDistrictSpecificHouseOfCommons: ({
-      stateCode,
-      district,
-    }: {
-      stateCode: LocationStateCode
-      district: string | number
-    }) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-commons`,
-
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
-=======
-    newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
     ...RACES_ROUTES,
->>>>>>> Stashed changes
   }
 }
 
