@@ -88,7 +88,13 @@ export default async function LocationHouseOfCommonsSpecificPage({
     countryCode,
   })
 
-  if (!data) {
+  const districtDisplayName = await queryDTSIStatePrimaryDistricts({
+    stateCode,
+    countryCode,
+    district,
+  }).then(result => result?.primaryDistricts?.[0])
+
+  if (!data || !districtDisplayName) {
     throw new Error(
       `Invalid params for LocationHouseOfCommonsSpecificPage: ${JSON.stringify(params)}`,
     )
@@ -123,19 +129,19 @@ export default async function LocationHouseOfCommonsSpecificPage({
               url: urls.locationStateSpecific(stateCode),
             },
             {
-              name: `House of Commons (${district})`,
+              name: `House of Commons (${districtDisplayName})`,
             },
           ]}
         />
         <DarkHeroSection.Title>
-          {COUNTRY_CODE_TO_DEMONYM[countryCode]} House of Commons ({district})
+          {COUNTRY_CODE_TO_DEMONYM[countryCode]} House of Commons ({districtDisplayName})
         </DarkHeroSection.Title>
       </DarkHeroSection>
 
       <LocationRaces.DetailedCandidateListContainer>
         {isEmpty(racesData) ? (
           <LocationRaces.EmptyMessage gutterTop>
-            There's no key races currently in {district}
+            There's no key races currently in {districtDisplayName}
           </LocationRaces.EmptyMessage>
         ) : (
           racesData.map(race => (

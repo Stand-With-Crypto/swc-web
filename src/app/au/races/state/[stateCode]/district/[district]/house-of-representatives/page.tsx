@@ -90,7 +90,13 @@ export default async function AUDistrictHouseOfRepsRacePage({
     countryCode,
   })
 
-  if (!data) {
+  const districtDisplayName = await queryDTSIStatePrimaryDistricts({
+    stateCode,
+    countryCode,
+    district,
+  }).then(result => result?.primaryDistricts?.[0])
+
+  if (!data || !districtDisplayName) {
     throw new Error(`Invalid params for LocationHouseOfRepsSpecificPage: ${JSON.stringify(params)}`)
   }
 
@@ -123,17 +129,19 @@ export default async function AUDistrictHouseOfRepsRacePage({
               url: urls.locationStateSpecific(stateCode),
             },
             {
-              name: `House of Representatives (${district})`,
+              name: `House of Representatives (${districtDisplayName})`,
             },
           ]}
         />
-        <DarkHeroSection.Title>House of Representatives ({district})</DarkHeroSection.Title>
+        <DarkHeroSection.Title>
+          House of Representatives ({districtDisplayName})
+        </DarkHeroSection.Title>
       </DarkHeroSection>
 
       <LocationRaces.DetailedCandidateListContainer>
         {isEmpty(racesData) ? (
           <LocationRaces.EmptyMessage gutterTop>
-            There's no key races currently in {district}
+            There's no key races currently in {districtDisplayName}
           </LocationRaces.EmptyMessage>
         ) : (
           racesData.map(race => (
