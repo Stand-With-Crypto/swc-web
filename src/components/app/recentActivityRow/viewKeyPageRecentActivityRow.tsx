@@ -34,9 +34,7 @@ export function viewKeyPageRecentActivityRow({
       children: <RecentActivityRowMainText>Someone viewed a key page</RecentActivityRowMainText>,
     },
     [CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION]: {
-      children: (
-        <RecentActivityRowMainText>Someone emailed their representative</RecentActivityRowMainText>
-      ),
+      children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
       onFocusContent: () => (
         <InternalLink className="block" href={urls.newmodeElectionAction()}>
           <Button>Email yours</Button>
@@ -44,9 +42,7 @@ export function viewKeyPageRecentActivityRow({
       ),
     },
     [AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION]: {
-      children: (
-        <RecentActivityRowMainText>Someone emailed their representative</RecentActivityRowMainText>
-      ),
+      children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
       onFocusContent: () => (
         <InternalLink className="block" href={urls.newmodeElectionAction()}>
           <Button>Email yours</Button>
