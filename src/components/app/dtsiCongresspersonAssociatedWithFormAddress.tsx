@@ -10,9 +10,10 @@ import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { usGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/usDtsiPersonRoleUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   getYourPoliticianCategoryDisplayName,
   YourPoliticianCategory,
@@ -24,7 +25,9 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   onChangeAddress,
   politicianCategory,
   dtsiPeopleFromAddressResponse,
+  countryCode,
 }: {
+  countryCode: SupportedCountryCodes
   politicianCategory: YourPoliticianCategory
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
   onChangeAddress: (args: {
@@ -35,6 +38,8 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   }) => void
   dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
 }) {
+  const roleNameResolver = getRoleNameResolver(countryCode)
+
   useEffect(() => {
     if (dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data) {
       const { districtNumber, stateCode } = dtsiPeopleFromAddressResponse.data
@@ -90,7 +95,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
               <div className="text-fontcolor-muted">
                 Your{' '}
                 {person.primaryRole
-                  ? usGetDTSIPersonRoleCategoryDisplayName(person.primaryRole).toLowerCase()
+                  ? roleNameResolver(person.primaryRole).toLowerCase()
                   : gracefullyError({
                       msg: 'No primary role found',
                       fallback: 'representative',
