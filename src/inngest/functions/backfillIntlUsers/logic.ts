@@ -185,6 +185,7 @@ async function createUserWithCountryCode(
                 optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
               },
             },
+            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
           },
         })
 
