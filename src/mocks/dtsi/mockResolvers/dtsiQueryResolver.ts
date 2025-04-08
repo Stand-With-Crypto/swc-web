@@ -16,7 +16,7 @@ import { REAL_CONGRESSPERSON_DATA } from '@/mocks/misc/congresspersonData'
 import {
   CURRENT_SESSION_OF_CONGRESS,
   NEXT_SESSION_OF_CONGRESS,
-} from '@/utils/dtsi/dtsiPersonRoleUtils'
+} from '@/utils/dtsi/us/usGetIsRoleInFuture'
 
 function personRoleGroupingToPersonRoleMapping(
   grouping: DTSI_PersonGrouping,
