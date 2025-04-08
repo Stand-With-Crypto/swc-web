@@ -13,7 +13,7 @@ export function AuHero() {
     <Hero>
       <Hero.Heading>
         <Hero.Title>
-          It’s time to fight for crypto in <span className="text-primary-cta">Australia</span>
+          It’s time to support crypto in <span className="text-primary-cta">Australia</span>
         </Hero.Title>
         <Hero.Subtitle>
           1 in 5 Australians own crypto. And yet, crypto’s future in Australia remains uncertain.

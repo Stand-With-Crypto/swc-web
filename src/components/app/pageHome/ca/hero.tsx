@@ -13,8 +13,7 @@ export function CaHero() {
     <Hero>
       <Hero.Heading>
         <Hero.Title>
-          It’s time to join the movement for crypto in{' '}
-          <span className="text-primary-cta">Canada</span>
+          It’s time to support crypto in <span className="text-primary-cta">Canada</span>
         </Hero.Title>
         <Hero.Subtitle>
           4 million Canadians own crypto. And yet, crypto’s future in Canada remains uncertain. This
