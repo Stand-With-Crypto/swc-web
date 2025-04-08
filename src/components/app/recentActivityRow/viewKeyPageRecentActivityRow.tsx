@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { AUUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { CAUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { USUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
@@ -14,6 +15,7 @@ interface ViewKeyPageRecentActivityRowProps {
 type ViewKeyPageCampaignName =
   | USUserActionViewKeyPageCampaignName
   | CAUserActionViewKeyPageCampaignName
+  | AUUserActionViewKeyPageCampaignName
 
 export function viewKeyPageRecentActivityRow({
   campaignName,
@@ -32,6 +34,16 @@ export function viewKeyPageRecentActivityRow({
       children: <RecentActivityRowMainText>Someone viewed a key page</RecentActivityRowMainText>,
     },
     [CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION]: {
+      children: (
+        <RecentActivityRowMainText>Someone emailed their representative</RecentActivityRowMainText>
+      ),
+      onFocusContent: () => (
+        <InternalLink className="block" href={urls.newmodeElectionAction()}>
+          <Button>Email yours</Button>
+        </InternalLink>
+      ),
+    },
+    [AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION]: {
       children: (
         <RecentActivityRowMainText>Someone emailed their representative</RecentActivityRowMainText>
       ),
