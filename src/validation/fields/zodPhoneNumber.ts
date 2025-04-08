@@ -5,7 +5,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const zodPhoneNumber = string()
   .refine(validatePhoneNumber, 'Please enter a valid phone number')
-  .transform(normalizePhoneNumber)
+  .transform(phoneNumber => normalizePhoneNumber(phoneNumber))
 
 export const zodOptionalEmptyPhoneNumber = union([zodPhoneNumber, literal('')])
 
@@ -15,5 +15,5 @@ export function zodPhoneNumberWithCountryCode(countryCode: SupportedCountryCodes
       phoneNumber => validatePhoneNumber(phoneNumber, countryCode),
       'Please enter a valid phone number',
     )
-    .transform(normalizePhoneNumber)
+    .transform(phoneNumber => normalizePhoneNumber(phoneNumber, countryCode))
 }

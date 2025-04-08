@@ -15,11 +15,10 @@ import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export async function optInUser(phoneNumber: string, user: User): Promise<SMSStatus> {
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+  const coutryCode = user.countryCode as SupportedCountryCodes
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, coutryCode)
 
-  if (
-    !isPhoneNumberCountrySupported(normalizedPhoneNumber, user.countryCode as SupportedCountryCodes)
-  ) {
+  if (!isPhoneNumberCountrySupported(normalizedPhoneNumber, coutryCode)) {
     return SMSStatus.NOT_OPTED_IN
   }
 
@@ -94,7 +93,8 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
 }
 
 export async function optOutUser(phoneNumber: string, user?: User | null) {
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+  const coutryCode = user?.countryCode as SupportedCountryCodes
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, coutryCode)
 
   if (user?.smsStatus === SMSStatus.OPTED_OUT) return user.smsStatus
 
@@ -155,7 +155,8 @@ export async function optOutUser(phoneNumber: string, user?: User | null) {
 }
 
 export async function optUserBackIn(phoneNumber: string, user?: User | null) {
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+  const coutryCode = user?.countryCode as SupportedCountryCodes
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, coutryCode)
 
   if (user?.smsStatus !== SMSStatus.OPTED_OUT) return user?.smsStatus
 

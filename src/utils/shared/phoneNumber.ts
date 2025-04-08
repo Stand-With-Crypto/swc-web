@@ -18,8 +18,19 @@ export const SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE: Record<
   [SupportedCountryCodes.AU]: 'AU',
 }
 
+export const SUPPORTED_PHONE_NUMBER_COUNTRY_CODES: Record<SupportedCountryCodes, string> = {
+  [SupportedCountryCodes.US]: '+1',
+  [SupportedCountryCodes.CA]: '+1',
+  [SupportedCountryCodes.GB]: '+44',
+  [SupportedCountryCodes.AU]: '+61',
+}
+
 // https://stackoverflow.com/a/43687969
-export function normalizePhoneNumber(passed: string) {
+export function normalizePhoneNumber(passed: string, countryCode?: SupportedCountryCodes) {
+  const countryCodePrefix =
+    countryCode && SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[countryCode]
+      ? SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[countryCode]
+      : ''
   // Split number and extension
   let [number, extension] = passed.split('x')
 
@@ -28,8 +39,14 @@ export function normalizePhoneNumber(passed: string) {
 
   // Handle country code
   number = number.replace(/^00/, '+')
-  if (number.match(/^1/)) number = '+' + number
-  if (!number.match(/^\+/)) number = '+1' + number
+
+  if (new RegExp(`^${countryCodePrefix.replace('+', '')}`).test(number)) {
+    number = number.startsWith('+') ? number : '+' + number
+  }
+
+  if (!new RegExp(/^\+/).test(number)) {
+    number = countryCodePrefix + number
+  }
 
   // Add extension back if present
   return number + (extension ? `x${extension}` : '')
