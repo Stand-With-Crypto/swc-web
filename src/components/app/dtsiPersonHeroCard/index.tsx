@@ -5,8 +5,8 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
 import {
-  getDTSIPersonRoleCategoryDisplayName,
   getDTSIPersonRoleCategoryWithStateDisplayName,
+  getRoleNameResolver,
 } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
@@ -38,11 +38,11 @@ export interface DTSIPersonHeroCardProps {
 }
 
 function getSubHeaderString(props: DTSIPersonHeroCardProps) {
+  const roleNameResolver = getRoleNameResolver(props.countryCode)
+
   switch (props.subheader) {
     case 'role':
-      return props.person.primaryRole
-        ? getDTSIPersonRoleCategoryDisplayName(props.person.primaryRole)
-        : ''
+      return props.person.primaryRole ? roleNameResolver(props.person.primaryRole) : ''
     case 'role-w-state':
       return props.person.primaryRole
         ? getDTSIPersonRoleCategoryWithStateDisplayName(props.person.primaryRole)
@@ -94,6 +94,7 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
   const politicalAffiliationCategoryAbbreviation =
     person.politicalAffiliationCategory &&
     dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
+
   const subheaderString = getSubHeaderString(props)
   const politicalAbbrDisplayName = politicalAffiliationCategoryAbbreviation
     ? ` (${politicalAffiliationCategoryAbbreviation})`

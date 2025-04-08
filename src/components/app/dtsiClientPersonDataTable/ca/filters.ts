@@ -121,8 +121,7 @@ export const ROLE_OPTIONS = {
 export function getRoleOptionDisplayName(role: string) {
   switch (role) {
     case ROLE_OPTIONS.ALL_OTHER:
-      return 'Other Political Figure'
-
+      return 'Candidate'
     case ROLE_OPTIONS.HOUSE_OF_COMMONS:
       return 'House of Commons'
     default:

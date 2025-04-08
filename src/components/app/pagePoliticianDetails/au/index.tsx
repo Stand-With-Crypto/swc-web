@@ -19,7 +19,11 @@ export function AuPagePoliticianDetails({
   return (
     <PagePoliticianDetails>
       <section>
-        <PagePoliticianDetails.Header person={person} showRoleLocation={false} />
+        <PagePoliticianDetails.Header
+          countryCode={countryCode}
+          person={person}
+          showRoleLocation={false}
+        />
         <PagePoliticianDetails.Links person={person} showDonateButton={false} />
         <ScoreExplainer person={person} useLetterGrade={false} />
       </section>
