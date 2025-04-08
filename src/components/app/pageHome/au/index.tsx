@@ -30,12 +30,17 @@ export function AuPageHome({
       <AuHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
+        <TopLevelMetrics
+          countryCode={countryCode}
+          {...topLevelMetrics}
+          disableTooltips
+          useGlobalLabels
+        />
       </section>
 
       <HomePageSection>
         <HomePageSection.Title>
-          People in <span className="text-primary-cta">Australia</span> are fighting for crypto
+          People in <span className="text-primary-cta">Australia</span> believe in crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
           See how the community is taking a stand to safeguard the future of crypto in Australia.

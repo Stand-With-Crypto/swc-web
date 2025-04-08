@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import Balancer from 'react-wrap-balancer'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { getCountryCallingCode } from 'libphonenumber-js'
 
 import {
   actionUpdateUserHasOptedInToSMS,
@@ -9,6 +10,8 @@ import {
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE } from '@/utils/shared/phoneNumber'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
@@ -17,8 +20,13 @@ interface EventDialogPhoneNumberProps {
 }
 
 export function EventDialogPhoneNumber({ onSuccess }: EventDialogPhoneNumberProps) {
+  const countryCode = useCountryCode()
+
   const form = useForm<UpdateUserHasOptedInToSMSPayload>({
-    resolver: zodResolver(zodUpdateUserHasOptedInToSMS),
+    resolver: zodResolver(zodUpdateUserHasOptedInToSMS(countryCode)),
+    defaultValues: {
+      phoneNumber: '',
+    },
   })
 
   return (
@@ -46,8 +54,11 @@ export function EventDialogPhoneNumber({ onSuccess }: EventDialogPhoneNumberProp
           }, trackFormSubmissionSyncErrors('EventDialogPhoneNumber'))}
         >
           <div className="flex w-full items-start gap-4">
-            <div className="flex w-20 items-center justify-center rounded-md border border-input bg-background px-2 py-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ">
-              <span>US +1</span>
+            <div className="flex min-w-fit cursor-default items-center justify-center rounded-md border border-input bg-background px-2 py-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ">
+              <span>
+                {countryCode.toLocaleUpperCase()} +
+                {getCountryCallingCode(SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE[countryCode])}
+              </span>
             </div>
 
             <FormField

@@ -5,7 +5,6 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
-import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -17,13 +16,14 @@ import {
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
 const countryCode = SupportedCountryCodes.CA
+const countryDisplayName = COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]
 
 export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
-    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
-    mobileCTADescription: `Join the fight to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
-    campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+    description: `Join the movement to make ${countryDisplayName} the best crypto ecosystem in the world.`,
+    mobileCTADescription: `Join the Movement for crypto in ${countryDisplayName}.`,
+    campaignsModalDescription: `Join the movement to make ${countryDisplayName} the best crypto ecosystem in the world.`,
     image: '/ca/actionTypeIcons/opt-in.png',
     campaigns: [
       {
@@ -31,7 +31,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
-        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+        description: `Join the movement to make ${countryDisplayName} the best crypto ecosystem in the world.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -65,18 +65,18 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Contact your representative',
     description:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+      'Make your voice heard. Sign our petition to support crypto-friendly policies in Canada.',
     campaignsModalDescription:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+      'Make your voice heard. Sign our petition to support crypto-friendly policies in Canada.',
     image: '/ca/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: true,
-        title: `Email your representative`,
+        isCampaignActive: false,
+        title: `Sign the petition`,
         description:
-          'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+          'Make your voice heard. Sign our petition to support crypto-friendly policies in Canada.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <Link href={getIntlUrls(countryCode).newmodeEmailAction()}>{children}</Link>

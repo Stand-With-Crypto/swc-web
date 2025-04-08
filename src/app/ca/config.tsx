@@ -22,6 +22,10 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
+      href: urls.locationKeyRaces(),
+      text: 'Races',
+    },
+    {
       href: urls.manifesto(),
       text: 'Manifesto',
     },
@@ -38,9 +42,9 @@ export const navbarConfig: NavbarProps = {
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Fight for the future',
-  subtitle:
-    'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
+  title: 'Join the movement for the future of crypto',
+  subtitle: 'Protect the future of crypto in Canada. #standwithcrypto',
+  legalText: 'Authorized by Coinbase Canada Inc, 745 Thurlow Street, Suite 2400, 613-866-4125.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img
@@ -56,7 +60,6 @@ export const footerConfig: FooterProps = {
       href: urls.privacyPolicy(),
       text: 'Privacy',
     },
-    { href: urls.termsOfService(), text: 'Terms of service' },
   ],
   socialLinks: [
     {

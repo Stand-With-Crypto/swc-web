@@ -8,7 +8,10 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 
-const PHONE_NUMBER_COUNTRY_CODE_MAP: Record<SupportedCountryCodes, CountryCode> = {
+export const SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE: Record<
+  SupportedCountryCodes,
+  CountryCode
+> = {
   [SupportedCountryCodes.US]: 'US',
   [SupportedCountryCodes.CA]: 'CA',
   [SupportedCountryCodes.GB]: 'GB',
@@ -36,7 +39,8 @@ function parsePhoneNumber(
   phoneNumber: string,
   countryCode: SupportedCountryCodes = DEFAULT_SUPPORTED_COUNTRY_CODE,
 ) {
-  const phoneLibCountryCode: CountryCode = PHONE_NUMBER_COUNTRY_CODE_MAP[countryCode]
+  const phoneLibCountryCode: CountryCode =
+    SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE[countryCode]
   try {
     // https://github.com/catamphetamine/libphonenumber-js/issues/468#issue-2504182999
     // We have to add phoneNumberMetadata from the 'libphonenumber-js/mobile/metadata'

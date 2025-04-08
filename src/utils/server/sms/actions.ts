@@ -9,11 +9,19 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import * as messages from '@/utils/server/sms/messages'
+import { isPhoneNumberCountrySupported } from '@/utils/server/sms/utils'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
+import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export async function optInUser(phoneNumber: string, user: User): Promise<SMSStatus> {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+
+  if (
+    !isPhoneNumberCountrySupported(normalizedPhoneNumber, user.countryCode as SupportedCountryCodes)
+  ) {
+    return SMSStatus.NOT_OPTED_IN
+  }
 
   if (
     user.smsStatus === SMSStatus.OPTED_OUT ||

@@ -195,8 +195,10 @@ enum PersonPoliticalAffiliationCategory {
   LIBERAL
   LIBERAL_DEMOCRAT
   LIBERTARIAN
+  NATIONALS
   NATIONAL_LIBERAL
   NDP
+  ONE_NATION
   OTHER
   PPC
   REFORM
@@ -367,6 +369,7 @@ type PublicUser {
 }
 
 type Query {
+  INTERNAL__testSentry: Boolean
   bill(id: String!): Bill!
   bills: [Bill!]!
   congressPeople(chamber: CongressionalChamber!, session: CongressionalSession!): [Person!]! @deprecated(reason: "Use people instead")
@@ -374,6 +377,8 @@ type Query {
   people(grouping: PersonGrouping, hasPromotedPositioning: Boolean, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, slugIn: [String!], specificPersonRole: SpecificPersonRole, stanceScoreGte: Int, stanceScoreLte: Int): [Person!]!
   peopleByUSCongressionalDistrict(congressionalDistrict: Int, stateCode: String!): [Person!]!
   personStances(grouping: PersonGrouping, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, personSlugIn: [String!], specificPersonRole: SpecificPersonRole): [PersonStance!]!
+  primaryDistricts(onlyWithCurrentRaces: Boolean, primaryCountryCode: String!, primaryDistrict: String, primaryState: String): [String!]!
+  primaryStates(onlyWithCurrentRaces: Boolean, primaryCountryCode: String!): [String!]!
 }
 
 input SpecificPersonRole {

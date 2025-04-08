@@ -38,7 +38,7 @@ export const navbarConfig: NavbarProps = {
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Fight for the future',
+  title: 'Join the Movement',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
   footerBanner: (
@@ -56,7 +56,6 @@ export const footerConfig: FooterProps = {
       href: urls.privacyPolicy(),
       text: 'Privacy',
     },
-    { href: urls.termsOfService(), text: 'Terms of service' },
   ],
   socialLinks: [
     {

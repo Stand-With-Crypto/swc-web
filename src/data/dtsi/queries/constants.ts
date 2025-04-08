@@ -83,3 +83,13 @@ export const PERSON_ROLE_GROUPINGS_FOR_HOUSE_SPECIFIC_QUERY: Record<
   [SupportedCountryCodes.GB]: [DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_COMMONS],
   [SupportedCountryCodes.CA]: [DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS],
 }
+
+export const PERSON_ROLE_GROUPINGS_FOR_DISTRICT_SPECIFIC_QUERY: Record<
+  SupportedCountryCodes,
+  DTSI_PersonGrouping[]
+> = {
+  [SupportedCountryCodes.US]: [DTSI_PersonGrouping.RUNNING_FOR_US_HOUSE_OF_REPS],
+  [SupportedCountryCodes.AU]: [DTSI_PersonGrouping.RUNNING_FOR_AU_HOUSE_OF_REPS],
+  [SupportedCountryCodes.GB]: [DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_COMMONS],
+  [SupportedCountryCodes.CA]: [DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS],
+}

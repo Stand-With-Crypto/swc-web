@@ -21,6 +21,7 @@ const contentSecurityPolicy = {
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
     'https://fonts.googleapis.com', // Required for newmode
+    'https://*.newmode.net/',
   ],
   'script-src': [
     "'self'",
@@ -296,6 +297,16 @@ const nextConfig: NextConfig = {
         source: '/action/mint-nft',
         destination: '/action/nft-mint',
         permanent: true,
+      },
+      {
+        source: '/australia',
+        destination: 'https://au.standwithcrypto.org',
+        permanent: false,
+      },
+      {
+        source: '/canada',
+        destination: 'https://ca.standwithcrypto.org',
+        permanent: false,
       },
       // vanity urls
       {
@@ -703,11 +714,6 @@ const nextConfig: NextConfig = {
       {
         source: '/canada',
         destination: '/ca?utm_source=billboard',
-        permanent: true,
-      },
-      {
-        source: '/uk',
-        destination: '/gb',
         permanent: true,
       },
       {

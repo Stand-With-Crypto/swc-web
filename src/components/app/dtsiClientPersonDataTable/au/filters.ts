@@ -55,7 +55,7 @@ export const getPersonDataTableFilterFns = (): Record<
       return true
     }
 
-    const rolesArray = [ROLE_OPTIONS.HOUSE_OF_COMMONS]
+    const rolesArray = [ROLE_OPTIONS.CONGRESS]
 
     if (rolesArray.includes(filterValue)) {
       return (
@@ -89,6 +89,8 @@ export const PARTY_OPTIONS = {
   LIBERAL: DTSI_PersonPoliticalAffiliationCategory.LIBERAL,
   GREEN: DTSI_PersonPoliticalAffiliationCategory.GREEN,
   INDEPENDENT: DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
+  NATIONALS: DTSI_PersonPoliticalAffiliationCategory.NATIONALS,
+  ONE_NATION: DTSI_PersonPoliticalAffiliationCategory.ONE_NATION,
   OTHER: DTSI_PersonPoliticalAffiliationCategory.OTHER,
 }
 export function getPartyOptionDisplayName(party: string) {
@@ -101,6 +103,10 @@ export function getPartyOptionDisplayName(party: string) {
       return 'Australian Greens'
     case PARTY_OPTIONS.INDEPENDENT:
       return 'Independent members of Parliament'
+    case PARTY_OPTIONS.NATIONALS:
+      return 'National Party'
+    case PARTY_OPTIONS.ONE_NATION:
+      return 'One Nation'
     case PARTY_OPTIONS.OTHER:
       return 'Other Parties'
     default:
@@ -110,15 +116,15 @@ export function getPartyOptionDisplayName(party: string) {
 
 export const ROLE_OPTIONS = {
   ALL: 'All',
-  HOUSE_OF_COMMONS: DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
+  CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
   ALL_OTHER: 'ALL_OTHER',
 }
 export function getRoleOptionDisplayName(role: string) {
   switch (role) {
     case ROLE_OPTIONS.ALL_OTHER:
       return 'Other Political Figure'
-    case ROLE_OPTIONS.HOUSE_OF_COMMONS:
-      return 'House of Representatives (Parliament)'
+    case ROLE_OPTIONS.CONGRESS:
+      return 'House of Reps'
     default:
       return 'All'
   }

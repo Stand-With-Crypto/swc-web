@@ -35,7 +35,7 @@ Hero.Title = HeroTitle
 
 function HeroSubtitle({ children }: React.PropsWithChildren) {
   return (
-    <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
+    <PageSubTitle className="lg:max-w-xl lg:text-left lg:text-justify" withoutBalancer>
       {children}
     </PageSubTitle>
   )
