@@ -158,7 +158,9 @@ function PoliticianStances({
         Notable statements
       </PageTitle>
       <div className="space-y-14 md:space-y-16">
-        {!stances.length && <div>No recent statements.</div>}
+        {!stances.length && (
+          <div className="flex items-center justify-center">No recent statements.</div>
+        )}
         {stances.map(stance => (
           <DTSIStanceDetails
             countryCode={countryCode}
