@@ -6,7 +6,7 @@ import {
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
 import { fakerFields } from '@/mocks/fakerUtils'
-import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { usGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/usDtsiPersonRoleUtils'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 
 export const dtsiPersonRoleMockResolver =
@@ -31,7 +31,7 @@ export const dtsiPersonRoleMockResolver =
       primaryCountryCode: 'US',
       primaryState,
       primaryCity: '',
-      title: getDTSIPersonRoleCategoryDisplayName({
+      title: usGetDTSIPersonRoleCategoryDisplayName({
         roleCategory,
         title: '',
         primaryState,

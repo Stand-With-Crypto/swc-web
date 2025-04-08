@@ -12,10 +12,10 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import {
-  getDTSIPersonRoleCategoryDisplayName,
   getDTSIPersonRoleLocation,
   getFormattedDTSIPersonRoleDateRange,
   getHasDTSIPersonRoleEnded,
+  getRoleNameResolver,
 } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
@@ -34,11 +34,14 @@ export function PagePoliticianDetails({ children }: { children: ReactNode }) {
 
 function PoliticianHeader({
   person,
+  countryCode,
   showRoleLocation = true,
 }: {
   person: DTSIPersonDetails
+  countryCode: SupportedCountryCodes
   showRoleLocation?: boolean
 }) {
+  const roleNameResolver = getRoleNameResolver(countryCode)
   return (
     <>
       {person.profilePictureUrl ? (
@@ -77,7 +80,7 @@ function PoliticianHeader({
                   )}{' '}
                 </>
               )}
-              {getDTSIPersonRoleCategoryDisplayName(person.primaryRole)}
+              {roleNameResolver(person.primaryRole)}
               {showRoleLocation && getDTSIPersonRoleLocation(person.primaryRole) && (
                 <span className="font-normal text-gray-500">
                   {' '}

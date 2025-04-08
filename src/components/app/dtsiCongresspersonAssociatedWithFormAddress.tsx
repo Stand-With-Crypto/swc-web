@@ -10,8 +10,8 @@ import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { usGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/usDtsiPersonRoleUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import {
   getYourPoliticianCategoryDisplayName,
@@ -73,7 +73,6 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   }
 
   const people = dtsiPeopleFromAddressResponse?.data?.dtsiPeople
-
   return (
     <div className="space-y-6">
       {people.map(person => (
@@ -91,7 +90,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
               <div className="text-fontcolor-muted">
                 Your{' '}
                 {person.primaryRole
-                  ? getDTSIPersonRoleCategoryDisplayName(person.primaryRole).toLowerCase()
+                  ? usGetDTSIPersonRoleCategoryDisplayName(person.primaryRole).toLowerCase()
                   : gracefullyError({
                       msg: 'No primary role found',
                       fallback: 'representative',

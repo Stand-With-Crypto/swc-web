@@ -6,8 +6,11 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
+import { auGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/auDtsiPersonRoleUtils'
+import { usGetDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/roleMappings/usDtsiPersonRoleUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { withOrdinalSuffix } from '@/utils/web/withOrdinalSuffix'
 
 export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null | undefined }) => {
@@ -34,24 +37,15 @@ export const getFormattedDTSIPersonRoleDateRange = ({
     .join(' - ')
 }
 
-type FuturePrefixRole = Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'dateStart'> & {
-  group: null | undefined | { groupInstance: string }
+const GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP = {
+  [SupportedCountryCodes.US]: usGetDTSIPersonRoleCategoryDisplayName,
+  [SupportedCountryCodes.AU]: auGetDTSIPersonRoleCategoryDisplayName,
 }
 
-const getIsRoleInFuture = (role: FuturePrefixRole) => {
-  if (role.dateStart && isBefore(parseISO(role.dateStart), new Date())) {
-    return false
-  }
-  switch (role.roleCategory) {
-    case DTSI_PersonRoleCategory.SENATE:
-    case DTSI_PersonRoleCategory.CONGRESS: {
-      const groupInstanceNum = role.group?.groupInstance
-        ? parseInt(role.group.groupInstance, 10)
-        : null
-      return groupInstanceNum ? groupInstanceNum > CURRENT_SESSION_OF_CONGRESS : null
-    }
-  }
-  return null
+export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
+  return GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP[
+    countryCode as keyof typeof GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP
+  ]
 }
 
 export type DTSIPersonRoleCategoryDisplayNameProps = Pick<
@@ -59,41 +53,6 @@ export type DTSIPersonRoleCategoryDisplayNameProps = Pick<
   'roleCategory' | 'title' | 'status' | 'primaryState' | 'dateStart'
 > & {
   group: null | undefined | { groupInstance: string }
-}
-
-export const getDTSIPersonRoleCategoryDisplayName = (
-  role: DTSIPersonRoleCategoryDisplayNameProps,
-) => {
-  if (role.status !== DTSI_PersonRoleStatus.HELD || getIsRoleInFuture(role)) {
-    return 'Political Figure'
-  }
-  switch (role.roleCategory) {
-    case DTSI_PersonRoleCategory.CONGRESS:
-      return 'Congressperson'
-    case DTSI_PersonRoleCategory.PRESIDENT:
-      return 'President'
-    case DTSI_PersonRoleCategory.SENATE:
-      return 'Senator'
-    case DTSI_PersonRoleCategory.VICE_PRESIDENT:
-      return 'Vice President'
-    case DTSI_PersonRoleCategory.GOVERNOR:
-      return 'Governor'
-    case DTSI_PersonRoleCategory.HOUSE_OF_COMMONS:
-      return 'House of Commons Member'
-    case DTSI_PersonRoleCategory.HOUSE_OF_LORDS:
-      return 'House of Lords Member'
-    case DTSI_PersonRoleCategory.STATE_CONGRESS:
-      return 'State Congressperson'
-    case DTSI_PersonRoleCategory.STATE_SENATE:
-      return 'State Senator'
-    case DTSI_PersonRoleCategory.MAYOR:
-      return 'Mayor'
-    case DTSI_PersonRoleCategory.COMMITTEE_CHAIR:
-      return 'Committee Chair'
-    case DTSI_PersonRoleCategory.COMMITTEE_MEMBER:
-      return 'Committee Member'
-  }
-  return 'Political Figure'
 }
 
 export const getDTSIPersonRoleCategoryWithStateDisplayName = (
