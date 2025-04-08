@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { usePathname } from 'next/navigation'
 
@@ -38,34 +38,48 @@ export interface NewModeProps {
 }
 
 export function NewMode({ campaignId, ...props }: NewModeProps & BuilderComponentAttributes) {
+  const [shouldCaptureAction, setShouldCaptureAction] = useState(true)
+
   const { data: userActionData, isLoading: isLoadingPerformedUserAction } =
     useApiResponseForUserPerformedUserActionTypes()
   const countryCode = useCountryCode()
   const pathname = usePathname()
 
-  useEffect(() => {
+  const hasPerformedUserAction = useMemo(
+    () =>
+      userActionData?.performedUserActionTypes.some(
+        action => action.actionType === UserActionType.VIEW_KEY_PAGE,
+      ),
+    [userActionData],
+  )
+
+  const handleIframeClick = () => {
+    if (hasPerformedUserAction) {
+      setShouldCaptureAction(false)
+      return
+    }
+
     if (isLoadingPerformedUserAction) {
       return
     }
 
-    const hasPerformedUserAction = userActionData?.performedUserActionTypes.some(
-      action => action.actionType === UserActionType.VIEW_KEY_PAGE,
-    )
-
-    if (hasPerformedUserAction) {
-      return
-    }
-
-    if (pathname) {
+    if (pathname && shouldCaptureAction) {
       void handleViewKeyPageAction({
         countryCode,
         path: pathname,
+      }).then(() => {
+        setShouldCaptureAction(false)
       })
     }
-  }, [pathname, countryCode, isLoadingPerformedUserAction, userActionData])
+  }
 
   return (
-    <newmode-embed {...props} action={campaignId} base="https://base.newmode.net"></newmode-embed>
+    <newmode-embed
+      {...props}
+      action={campaignId}
+      base="https://base.newmode.net"
+      onClick={handleIframeClick}
+    ></newmode-embed>
   )
 }
 
