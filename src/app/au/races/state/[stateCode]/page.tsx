@@ -98,7 +98,7 @@ export default async function LocationStateSpecificPage({
 
       <LocationRaces.KeyRacesStates
         subtitle="Dive deeper and discover who’s running for office in each constituency"
-        title={`${stateDisplayName} Constituencies`}
+        title={`${stateDisplayName} Electorates`}
         useFlexBox={dtsiResults.primaryDistricts.length < 4}
       >
         {dtsiResults.primaryDistricts.map(district => (
