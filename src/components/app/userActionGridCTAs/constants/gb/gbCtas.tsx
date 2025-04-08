@@ -79,7 +79,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).newmodeEmailAction()}>{children}</Link>
+          <Link href={getIntlUrls(countryCode).newmodeElectionAction()}>{children}</Link>
         ),
       },
     ],
