@@ -36,7 +36,7 @@ export function viewKeyPageRecentActivityRow({
         <RecentActivityRowMainText>Someone emailed their representative</RecentActivityRowMainText>
       ),
       onFocusContent: () => (
-        <InternalLink className="block" href={urls.newmodeEmailAction()}>
+        <InternalLink className="block" href={urls.newmodeElectionAction()}>
           <Button>Email yours</Button>
         </InternalLink>
       ),

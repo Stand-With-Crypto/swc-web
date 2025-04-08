@@ -135,7 +135,7 @@ export const getIntlUrls = (
     }) =>
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-commons`,
 
-    newmodeEmailAction: () => `${countryPrefix}/content/debanking`,
+    newmodeElectionAction: () => `${countryPrefix}/content/election`,
   }
 }
 

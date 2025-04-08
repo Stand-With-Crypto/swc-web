@@ -63,23 +63,23 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Contact your representative',
+    title: 'Email your Member of Parliament',
     description:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in Canada.',
+      'Email your Member of Parliament today and call for action to stop unfair debanking.',
     campaignsModalDescription:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in Canada.',
+      'Email your Member of Parliament today and call for action to stop unfair debanking.',
     image: '/ca/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
-        campaignName: CAUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: false,
-        title: `Sign the petition`,
+        campaignName: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
+        isCampaignActive: true,
+        title: `Email your Member of Parliament`,
         description:
-          'Make your voice heard. Sign our petition to support crypto-friendly policies in Canada.',
+          'You’ve emailed your Member of Parliament and taken action to help stop unfair debanking.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).newmodeEmailAction()}>{children}</Link>
+          <Link href={getIntlUrls(countryCode).newmodeElectionAction()}>{children}</Link>
         ),
       },
     ],
