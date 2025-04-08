@@ -1,15 +1,9 @@
 import { literal, string, union } from 'zod'
 
 import { normalizePhoneNumber, validatePhoneNumber } from '@/utils/shared/phoneNumber'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-export const zodPhoneNumber = string()
-  .refine(validatePhoneNumber, 'Please enter a valid phone number')
-  .transform(phoneNumber => normalizePhoneNumber(phoneNumber))
-
-export const zodOptionalEmptyPhoneNumber = union([zodPhoneNumber, literal('')])
-
-export function zodPhoneNumberWithCountryCode(countryCode: SupportedCountryCodes) {
+export function zodPhoneNumber(countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE) {
   return string()
     .refine(
       phoneNumber => validatePhoneNumber(phoneNumber, countryCode),
@@ -17,3 +11,6 @@ export function zodPhoneNumberWithCountryCode(countryCode: SupportedCountryCodes
     )
     .transform(phoneNumber => normalizePhoneNumber(phoneNumber, countryCode))
 }
+
+export const zodOptionalEmptyPhoneNumber = (countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE) =>
+  union([zodPhoneNumber(countryCode), literal('')])

@@ -1,11 +1,11 @@
 import { object } from 'zod'
 
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { zodPhoneNumberWithCountryCode } from '@/validation/fields/zodPhoneNumber'
+import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
 export const zodUpdateUserHasOptedInToSMS = (countryCode: SupportedCountryCodes) =>
   object({
-    phoneNumber: zodPhoneNumberWithCountryCode(countryCode).superRefine((phoneNumber, ctx) => {
+    phoneNumber: zodPhoneNumber(countryCode).superRefine((phoneNumber, ctx) => {
       if (!phoneNumber) {
         ctx.addIssue({
           code: 'custom',
