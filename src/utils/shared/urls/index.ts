@@ -136,6 +136,7 @@ export const getIntlUrls = (
       `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}/house-of-commons`,
 
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
+    newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
   }
 }
 
