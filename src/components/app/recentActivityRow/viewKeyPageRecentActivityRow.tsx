@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { GBUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { CAUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { USUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 interface ViewKeyPageRecentActivityRowProps {
@@ -13,7 +13,7 @@ interface ViewKeyPageRecentActivityRowProps {
 
 type ViewKeyPageCampaignName =
   | USUserActionViewKeyPageCampaignName
-  | GBUserActionViewKeyPageCampaignName
+  | CAUserActionViewKeyPageCampaignName
 
 export function viewKeyPageRecentActivityRow({
   campaignName,
@@ -31,7 +31,7 @@ export function viewKeyPageRecentActivityRow({
     [USUserActionViewKeyPageCampaignName.DEFAULT]: {
       children: <RecentActivityRowMainText>Someone viewed a key page</RecentActivityRowMainText>,
     },
-    [GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION]: {
+    [CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION]: {
       children: (
         <RecentActivityRowMainText>Someone emailed their representative</RecentActivityRowMainText>
       ),
