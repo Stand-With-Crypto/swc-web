@@ -15,6 +15,10 @@ import {
 } from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getLogger } from '@/utils/shared/logger'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 export const ENQUEUE_SMS_INNGEST_EVENT_NAME = 'app/enqueue.sms'
@@ -38,6 +42,7 @@ export interface EnqueueSMSInngestEventSchema {
   data: {
     payload: EnqueueMessagePayload[]
     variables?: EnqueueMessagesVariables
+    countryCode?: SupportedCountryCodes
     attempt?: number
   }
 }
@@ -51,7 +56,12 @@ export const enqueueSMS = inngest.createFunction(
     event: ENQUEUE_SMS_INNGEST_EVENT_NAME,
   },
   async ({ event, step, logger }) => {
-    const { payload, variables, attempt = 0 } = event.data
+    const {
+      payload,
+      variables,
+      attempt = 0,
+      countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+    } = event.data
 
     if (payload.length > TWILIO_RATE_LIMIT) {
       throw new NonRetriableError('Payload exceeds the limit allowed')
@@ -81,7 +91,7 @@ export const enqueueSMS = inngest.createFunction(
     logger.info(`Attempt ${attempt + 1} queuing messages`)
 
     const enqueueMessagesResults = await step.run('enqueue-messages', () =>
-      enqueueMessages(payload, userSMSVariables),
+      enqueueMessages(payload, userSMSVariables, countryCode),
     )
 
     const {
@@ -122,6 +132,7 @@ export const enqueueSMS = inngest.createFunction(
       const queuedFailedMessages = await step.invoke('enqueue-failed-messages', {
         function: enqueueSMS,
         data: {
+          countryCode,
           payload: failedEnqueueMessagePayload,
           attempt: attempt + 1,
           variables: userSMSVariables,
@@ -144,6 +155,7 @@ type EnqueueMessagesVariables = Record<string, UserSMSVariables>
 export async function enqueueMessages(
   payload: EnqueueMessagePayload[],
   variables: EnqueueMessagesVariables,
+  countryCode: SupportedCountryCodes,
 ) {
   const invalidPhoneNumbers: string[] = []
   const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
@@ -154,7 +166,7 @@ export async function enqueueMessages(
 
   const enqueueMessagesPromise = payload
     .map(async ({ messages, phoneNumber }) => {
-      if (!isPhoneNumberCountrySupported(phoneNumber)) {
+      if (!isPhoneNumberCountrySupported(phoneNumber, countryCode)) {
         return
       }
 

@@ -22,8 +22,12 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
-      href: urls.events(),
-      text: 'Events',
+      href: urls.locationKeyRaces(),
+      text: 'Races',
+    },
+    {
+      href: urls.manifesto(),
+      text: 'Manifesto',
     },
     {
       href: urls.community(),
@@ -34,9 +38,10 @@ export const navbarConfig: NavbarProps = {
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Fight for the future',
+  title: 'Join the Movement',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
+  legalText: 'Authorised by J. O’Loghlen, Coinbase Australia Pty Ltd., Sydney.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img
@@ -52,7 +57,6 @@ export const footerConfig: FooterProps = {
       href: urls.privacyPolicy(),
       text: 'Privacy',
     },
-    { href: urls.termsOfService(), text: 'Terms of service' },
   ],
   socialLinks: [
     {

@@ -8,6 +8,7 @@ import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/commo
 import { StanceHiddenCard } from '@/components/app/dtsiClientPersonDataTable/stanceHidden'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
@@ -16,7 +17,7 @@ import {
   isPoliticianDetailsStanceHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { getStateNameResolver } from '@/utils/shared/stateUtils'
+import { getStateNameResolver, getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -145,7 +146,11 @@ export const getDTSIClientPersonDataTableColumns = ({
         id: PERSON_TABLE_COLUMNS_IDS.STATE,
         filterFn: PERSON_TABLE_COLUMNS_IDS.STATE,
         header: ({ column }) => {
-          return <SortableHeader column={column}>Location</SortableHeader>
+          return (
+            <SortableHeader column={column}>
+              {getTerritoryDivisionByCountryCode(countryCode)}
+            </SortableHeader>
+          )
         },
         cell: ({ row }) =>
           row.original.primaryRole?.primaryState
@@ -159,15 +164,25 @@ export const getDTSIClientPersonDataTableColumns = ({
       header: ({ column }) => {
         return <SortableHeader column={column}>Party</SortableHeader>
       },
-      cell: ({ row }) => (
-        <>
-          {row.original.politicalAffiliationCategory
-            ? dtsiPersonPoliticalAffiliationCategoryDisplayName(
-                row.original.politicalAffiliationCategory,
-              )
-            : '-'}
-        </>
-      ),
+      cell: ({ row }) => {
+        const shouldShowPartyName =
+          row.original.politicalAffiliationCategory ===
+          DTSI_PersonPoliticalAffiliationCategory.OTHER
+
+        if (shouldShowPartyName) {
+          return row.original.politicalAffiliation
+        }
+
+        return (
+          <>
+            {row.original.politicalAffiliationCategory
+              ? dtsiPersonPoliticalAffiliationCategoryDisplayName(
+                  row.original.politicalAffiliationCategory,
+                )
+              : '-'}
+          </>
+        )
+      },
     }),
   ]
 }

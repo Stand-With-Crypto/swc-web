@@ -21,6 +21,7 @@ const getDefaultProps = () => {
     lastName: 'Biden',
     firstNickname: 'Joe',
     nameSuffix: '',
+    politicalAffiliation: 'Democrat',
     politicalAffiliationCategory: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
     computedStanceScore: 0,
     computedSumStanceScoreWeight: 5,

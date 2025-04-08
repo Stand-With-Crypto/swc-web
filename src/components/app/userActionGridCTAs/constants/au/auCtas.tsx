@@ -21,9 +21,9 @@ const countryCode = SupportedCountryCodes.AU
 export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto Australia',
-    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
-    mobileCTADescription: 'Join the fight to keep crypto in Australia.',
-    campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+    description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+    mobileCTADescription: 'Join the Movement to keep crypto in Australia.',
+    campaignsModalDescription: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
     image: '/au/actionTypeIcons/opt-in.png',
     campaigns: [
       {
@@ -31,7 +31,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto Australia',
-        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+        description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -65,18 +65,18 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Contact your representative',
     description:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+      'Make your voice heard. Sign our petition to support crypto-friendly policies in Australia.',
     campaignsModalDescription:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+      'Make your voice heard. Sign our petition to support crypto-friendly policies in Australia.',
     image: '/au/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: AUUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: true,
-        title: `Email your representative`,
+        isCampaignActive: false,
+        title: `Sign the petition`,
         description:
-          'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+          'Make your voice heard. Sign our petition to support crypto-friendly policies in Australia.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <Link href={getIntlUrls(countryCode).newmodeEmailAction()}>{children}</Link>

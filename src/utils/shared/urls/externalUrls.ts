@@ -40,17 +40,17 @@ export const usExternalUrls = {
 export const auExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_AU',
   linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-australia',
-  emailFeedback: usExternalUrls.emailFeedback,
+  emailFeedback: () => 'mailto:info@swcinternational.org',
 }
 
 export const gbExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_UK',
   linkedin: () => 'https://www.linkedin.com/company/standwithcryptouk',
-  emailFeedback: usExternalUrls.emailFeedback,
+  emailFeedback: () => 'mailto:info@swcinternational.org',
 }
 
 export const caExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_CA',
   linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-canada',
-  emailFeedback: usExternalUrls.emailFeedback,
+  emailFeedback: () => 'mailto:info@swcinternational.org',
 }

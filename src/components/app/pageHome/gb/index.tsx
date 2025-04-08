@@ -29,12 +29,17 @@ export function GbPageHome({
       <GbHero />
 
       <section className="container">
-        <TopLevelMetrics countryCode={countryCode} {...topLevelMetrics} disableTooltips />
+        <TopLevelMetrics
+          countryCode={countryCode}
+          {...topLevelMetrics}
+          disableTooltips
+          useGlobalLabels
+        />
       </section>
 
       <HomePageSection>
         <HomePageSection.Title>
-          People in <span className="text-primary-cta">Britain</span> are fighting for crypto
+          <span className="text-primary-cta">Britons</span> believe in crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
           See how the community is taking a stand to safeguard the future of crypto in Britain.
@@ -54,9 +59,8 @@ export function GbPageHome({
         <HomePageSection>
           <HomePageSection.Title>Our partners</HomePageSection.Title>
           <HomePageSection.Subtitle>
-            Stand with Crypto in the UK has joined forces with numerous companies to support our
-            case, and we couldn't be more grateful. If you also want to become an official partner,
-            fill out the form via the button below.
+            Leading crypto asset and blockchain firms are supporting Stand with Crypto in the UK. If
+            you also want to become an official partner, fill out the form via the button below.
           </HomePageSection.Subtitle>
           <div className="flex flex-col items-center gap-6">
             <PartnerGrid partners={partners} />

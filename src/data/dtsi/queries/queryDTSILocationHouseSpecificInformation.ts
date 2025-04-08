@@ -25,13 +25,13 @@ const query = /* GraphQL */ `
   ${fragmentDTSIPersonStanceDetails}
   ${fragmentRaceSpecificPersonInfo}
 `
-export const queryDTSILocationHouseSpecificInformation = async ({
+export async function queryDTSILocationHouseSpecificInformation({
   stateCode,
   countryCode,
 }: {
   stateCode: string
   countryCode: SupportedCountryCodes
-}) => {
+}) {
   const personRoleGroupingOr = PERSON_ROLE_GROUPINGS_FOR_HOUSE_SPECIFIC_QUERY[countryCode]
 
   const results = await fetchDTSI<

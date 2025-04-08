@@ -1,18 +1,13 @@
-'use client'
-
-import { useEffect, useMemo } from 'react'
 import { compact, isEmpty } from 'lodash-es'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
-import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
+import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import {
@@ -93,61 +88,51 @@ export function USLocationRaceGovernorSpecific({
   const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
-      countryCode,
-      usaState: stateCode,
-    })
-  }, [stateCode])
+  const compactedRaces = compact([
+    recommended && { person: recommended, isRecommended: true },
+    ...others.map(person => ({ person, isRecommended: false })),
+  ])
 
-  const compactedRaces = useMemo(() => {
-    return compact([
-      recommended && { person: recommended, isRecommended: true },
-      ...others.map(person => ({ person, isRecommended: false })),
-    ])
-  }, [others, recommended])
-
-  const democraticRacesData = useMemo(
-    () =>
-      compactedRaces.filter(
-        x =>
-          x.person.politicalAffiliationCategory ===
-          DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-      ),
-    [compactedRaces],
+  const democraticRacesData = compactedRaces.filter(
+    x => x.person.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
   )
 
-  const republicanRacesData = useMemo(
-    () =>
-      compactedRaces.filter(
-        x =>
-          x.person.politicalAffiliationCategory ===
-          DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-      ),
-    [compactedRaces],
+  const republicanRacesData = compactedRaces.filter(
+    x =>
+      x.person.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
   )
 
   return (
-    <div>
+    <LocationRaces disableVerticalSpacing>
+      <LocationRaces.ActionRegisterer
+        input={{
+          campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
+          countryCode,
+          usaState: stateCode,
+        }}
+      />
+
       <DarkHeroSection className="mb-10 text-center md:mb-20">
-        <h2 className={'mb-4'}>
-          <InternalLink className="text-gray-400" href={urls.locationKeyRaces()}>
-            United States
-          </InternalLink>
-          {' / '}
-          <InternalLink className="text-gray-400" href={urls.locationStateSpecific(stateCode)}>
-            {stateDisplayName}
-          </InternalLink>
-          {' / '}
-          <LocationRaceLinkTitle stateCode={stateCode} stateDisplayName={stateDisplayName} />
-        </h2>
+        <DarkHeroSection.Breadcrumbs
+          sections={[
+            {
+              name: 'United States',
+              url: urls.locationKeyRaces(),
+            },
+            {
+              name: stateDisplayName,
+              url: urls.locationStateSpecific(stateCode),
+            },
+            {
+              name: stateDisplayName ? `Governors (${stateCode})` : 'Presidential',
+            },
+          ]}
+        />
+
         <div className="mb-5 flex flex-col items-center gap-4">
-          <PageTitle as="h1" className="mb-4" size="md">
-            {`Gubernatorial Race (${stateCode})`}
-          </PageTitle>
-          <PageSubTitle>November 4, 2025</PageSubTitle>
+          <DarkHeroSection.Title>Gubernatorial Race ({stateCode})</DarkHeroSection.Title>
         </div>
+
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
             Make sure you're registered to vote
@@ -156,9 +141,9 @@ export function USLocationRaceGovernorSpecific({
       </DarkHeroSection>
       <div className="w-full divide-y-2">
         {isEmpty(democraticRacesData) && isEmpty(republicanRacesData) ? (
-          <PageTitle as="h3" className="mt-20" size="sm">
+          <LocationRaces.EmptyMessage gutterTop>
             There's no races currently in {stateDisplayName}
-          </PageTitle>
+          </LocationRaces.EmptyMessage>
         ) : (
           <div className="flex flex-col items-center gap-6" key={stateCode}>
             <div className="flex flex-col items-center">
@@ -257,20 +242,6 @@ export function USLocationRaceGovernorSpecific({
         )}
       </div>
       <PACFooter className="container" />
-    </div>
+    </LocationRaces>
   )
-}
-
-function LocationRaceLinkTitle({
-  stateCode,
-  stateDisplayName,
-}: {
-  stateCode: USStateCode
-  stateDisplayName: string
-}) {
-  if (!stateDisplayName) {
-    return <span>Presidential</span>
-  }
-
-  return <span>{`Governors (${stateCode})`}</span>
 }

@@ -57,13 +57,17 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
     case DTSI_PersonPoliticalAffiliationCategory.LIBERTARIAN:
       return 'Libertarian'
     case DTSI_PersonPoliticalAffiliationCategory.NATIONAL_LIBERAL:
-      return 'National Liberal'
+      return 'Liberal Nationals'
     case DTSI_PersonPoliticalAffiliationCategory.NDP:
       return 'NDP'
     case DTSI_PersonPoliticalAffiliationCategory.REFORM:
       return 'Reform'
     case DTSI_PersonPoliticalAffiliationCategory.SOCIALIST:
       return 'Socialist'
+    case DTSI_PersonPoliticalAffiliationCategory.NATIONALS:
+      return 'National Party'
+    case DTSI_PersonPoliticalAffiliationCategory.ONE_NATION:
+      return 'One Nation'
   }
 }
 
