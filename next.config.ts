@@ -386,6 +386,11 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/sb-1797',
+        destination: 'https://speak4.app/lp/jk01insm/?ts=1744055112',
+        permanent: true,
+      },
+      {
         source: '/new-congress-2/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=new-member-activation-2&sessionId=:sessionId*',
