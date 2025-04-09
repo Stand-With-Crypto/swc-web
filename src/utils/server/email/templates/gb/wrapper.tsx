@@ -7,13 +7,7 @@ import {
   WrapperProps,
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { GB_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/gb/constants'
-import { buildTemplateInternalUrlWithCountry } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const countryCode = SupportedCountryCodes.GB
-const buildTemplateInternalUrl = buildTemplateInternalUrlWithCountry({
-  countryCode,
-})
+import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
 export function GBWrapper({
   children,
@@ -24,11 +18,11 @@ export function GBWrapper({
     <Wrapper {...props}>
       <HeaderSection>
         <Column>
-          <HeaderSection.Logo href={buildTemplateInternalUrl('/', hrefSearchParams)}>
+          <HeaderSection.Logo href={buildTemplateInternalUrl('/gb', hrefSearchParams)}>
             <Img
               alt="Stand With Crypto"
               height="40"
-              src={buildTemplateInternalUrl('/email/misc/shield.svg', hrefSearchParams)}
+              src={buildTemplateInternalUrl('/gb/email/misc/shield.svg', hrefSearchParams)}
               width="40"
             />
           </HeaderSection.Logo>
@@ -48,8 +42,8 @@ export function GBWrapper({
       {children}
 
       <FooterSection
-        shieldSrc={buildTemplateInternalUrl('/email/misc/shield.svg', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/', hrefSearchParams)}
+        shieldSrc={buildTemplateInternalUrl('/gb/email/misc/shield.svg', hrefSearchParams)}
+        swchHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="X/Twitter logo"

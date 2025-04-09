@@ -7,13 +7,7 @@ import {
   Wrapper,
   WrapperProps,
 } from '@/utils/server/email/templates/common/ui/wrapper'
-import { buildTemplateInternalUrlWithCountry } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const countryCode = SupportedCountryCodes.AU
-const buildTemplateInternalUrl = buildTemplateInternalUrlWithCountry({
-  countryCode,
-})
+import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
 export function AUWrapper({
   children,
@@ -24,11 +18,11 @@ export function AUWrapper({
     <Wrapper {...props}>
       <HeaderSection>
         <Column>
-          <HeaderSection.Logo href={buildTemplateInternalUrl('/', hrefSearchParams)}>
+          <HeaderSection.Logo href={buildTemplateInternalUrl('/au', hrefSearchParams)}>
             <Img
               alt="Stand With Crypto"
               height="40"
-              src={buildTemplateInternalUrl('/email/misc/shield.svg', hrefSearchParams)}
+              src={buildTemplateInternalUrl('/au/email/misc/shield.svg', hrefSearchParams)}
               width="40"
             />
           </HeaderSection.Logo>
@@ -48,8 +42,8 @@ export function AUWrapper({
       {children}
 
       <FooterSection
-        shieldSrc={buildTemplateInternalUrl('/email/misc/shield.svg', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/', hrefSearchParams)}
+        shieldSrc={buildTemplateInternalUrl('/au/email/misc/shield.svg', hrefSearchParams)}
+        swchHref={buildTemplateInternalUrl('/au', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="X/Twitter logo"

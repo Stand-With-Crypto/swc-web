@@ -31,7 +31,7 @@ const CAInitialSignUpEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/ca/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/ca/email/join-banner.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Thanks for joining!</Heading>

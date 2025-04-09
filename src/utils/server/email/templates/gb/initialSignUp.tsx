@@ -31,7 +31,7 @@ const GBInitialSignUpEmail = ({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/gb/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/gb/email/join-banner.png', hydratedHrefSearchParams)}
         />
 
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto UK!</Heading>
