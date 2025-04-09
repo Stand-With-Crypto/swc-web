@@ -95,6 +95,7 @@ async function handleSMSErrors(errorCode: string, messageId: string) {
 
     const user = userCommunication.userCommunicationJourney.user
 
-    await optOutUser(user.phoneNumber, user)
+    // Phone number is already normalized so we don't need to send the country code
+    await optOutUser({ phoneNumber: user.phoneNumber, user })
   }
 }

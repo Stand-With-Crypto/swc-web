@@ -41,15 +41,18 @@ import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
-const createActionCallCongresspersonInputValidationSchema = object({
-  phoneNumber: zodPhoneNumber,
-  campaignName: nativeEnum(USUserActionCallCampaignName),
-  dtsiSlug: zodDTSISlug,
-  address: zodAddress,
-})
+const getCreateActionCallCongresspersonInputValidationSchema = (
+  countryCode: SupportedCountryCodes,
+) =>
+  object({
+    phoneNumber: zodPhoneNumber(countryCode),
+    campaignName: nativeEnum(USUserActionCallCampaignName),
+    dtsiSlug: zodDTSISlug,
+    address: zodAddress,
+  })
 
 export type CreateActionCallCongresspersonInput = z.infer<
-  typeof createActionCallCongresspersonInputValidationSchema
+  ReturnType<typeof getCreateActionCallCongresspersonInputValidationSchema>
 >
 
 interface SharedDependencies {
@@ -79,7 +82,10 @@ async function _actionCreateUserActionCallCongressperson(
     context: 'unauthenticated',
   })
 
-  const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
+  const countryCode = await getUserAccessLocationCookie()
+
+  const validatedInput =
+    getCreateActionCallCongresspersonInputValidationSchema(countryCode).safeParse(input)
   if (!validatedInput.success) {
     return {
       errors: validatedInput.error.flatten().fieldErrors,
@@ -88,7 +94,6 @@ async function _actionCreateUserActionCallCongressperson(
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getUserAccessLocationCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {

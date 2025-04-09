@@ -14,6 +14,7 @@ import {
 } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export type ClientUser = ClientModel<
   Pick<User, 'id' | 'informationVisibility'> & {
@@ -48,13 +49,7 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
     countryCode,
   } = record
 
-  const userLocationDetails =
-    address && address.countryCode === 'US'
-      ? {
-          administrativeAreaLevel1: address.administrativeAreaLevel1,
-          countryCode: address.countryCode,
-        }
-      : null
+  const userLocationDetails = getClientUserAddressInfo(address)
 
   return getClientModel({
     firstName: informationVisibility === UserInformationVisibility.ALL_INFO ? firstName : null,
@@ -68,6 +63,25 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
     userLocationDetails,
     countryCode,
   })
+}
+
+const getClientUserAddressInfo = (address: Address | null) => {
+  if (!address) {
+    return null
+  }
+
+  const { success: isCountryCodeSupported } = zodSupportedCountryCode.safeParse(
+    address.countryCode.toLowerCase(),
+  )
+
+  if (!isCountryCodeSupported) {
+    return null
+  }
+
+  return {
+    administrativeAreaLevel1: address.administrativeAreaLevel1,
+    countryCode: address.countryCode,
+  }
 }
 
 export type ClientUnidentifiedUser = ClientModel<{

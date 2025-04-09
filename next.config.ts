@@ -733,6 +733,14 @@ const nextConfig: NextConfig = {
           source: '/:locale/(mission|manifesto)',
           destination: '/:locale/about',
         },
+        {
+          source: '/:locale/races/province/:stateCode',
+          destination: '/:locale/races/state/:stateCode',
+        },
+        {
+          source: '/:locale/races/(province|state)/:stateCode/constituency/:path*',
+          destination: '/:locale/races/state/:stateCode/district/:path*',
+        },
       ],
       afterFiles: [],
       fallback: [],

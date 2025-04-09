@@ -56,10 +56,18 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  COUNTRY_CODE_REGEX_PATTERN,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
+import {
+  OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME,
+  USER_ACCESS_LOCATION_COOKIE_NAME,
+} from '@/utils/shared/userAccessLocation'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/index'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 type UpsertedUser = User & {
   address: Address | null
@@ -88,7 +96,10 @@ export async function login(
   const log = getLog(cryptoAddress)
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
-    include: { userActions: { select: { actionType: true } } },
+    include: {
+      userActions: { select: { actionType: true } },
+      address: { select: { countryCode: true } },
+    },
     where: { userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } } },
   })
 
@@ -123,6 +134,8 @@ export async function login(
     })
 
     currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
+
+    await overrideAccessLocation({ user: existingVerifiedUser })
 
     return
   }
@@ -208,6 +221,25 @@ async function onExistingUserLogin({
     }
     log(`onExistingUserLogin: merging user ${userToDelete.user.id} into user ${userToKeepId}`)
     await mergeUsers({ persist: true, userToKeepId, userToDeleteId: userToDelete.user.id })
+  }
+}
+
+async function overrideAccessLocation({
+  user,
+}: {
+  user: User & { address: { countryCode: string | null } | null }
+}) {
+  const currentCookies = await cookies()
+  const accessLocationCookie = currentCookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.value
+
+  const userAddressCountryCode = user?.address?.countryCode?.toLowerCase()
+  const shouldOverrideAccessLocation =
+    userAddressCountryCode &&
+    userAddressCountryCode !== accessLocationCookie &&
+    COUNTRY_CODE_REGEX_PATTERN.test(userAddressCountryCode)
+
+  if (shouldOverrideAccessLocation) {
+    currentCookies.set(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, userAddressCountryCode)
   }
 }
 
@@ -864,8 +896,14 @@ async function triggerPostLoginUserActionSteps({
       countryCode: countryCode as SupportedCountryCodes,
     })
 
+    const { data: normalizedCountryCode } = zodSupportedCountryCode.safeParse(countryCode)
+
     if (embeddedWalletUserDetails?.phone) {
-      await smsActions.optInUser(embeddedWalletUserDetails.phone, user)
+      await smsActions.optInUser({
+        phoneNumber: embeddedWalletUserDetails.phone,
+        user,
+        countryCode: normalizedCountryCode,
+      })
     }
 
     analytics.trackUserActionCreated({

@@ -106,7 +106,7 @@ export const enqueueSMS = inngest.createFunction(
     )
 
     await step.run('persist-results-to-db', () =>
-      persistEnqueueMessagesResults(enqueueMessagesResults, logger),
+      persistEnqueueMessagesResults(enqueueMessagesResults, logger, countryCode),
     )
 
     totalQueuedMessages += queuedMessages
@@ -249,6 +249,7 @@ const defaultLogger = getLogger('persistEnqueueMessagesResults')
 export async function persistEnqueueMessagesResults(
   { invalidPhoneNumbers, unsubscribedUsers }: Awaited<ReturnType<typeof enqueueMessages>>,
   logger = defaultLogger,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
 ) {
   if (invalidPhoneNumbers.length > 0) {
     logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
@@ -262,7 +263,7 @@ export async function persistEnqueueMessagesResults(
     const optOutUserPromises = unsubscribedUsers.map(async phoneNumber => {
       const user = await getUserByPhoneNumber(phoneNumber)
 
-      await optOutUser(phoneNumber, user)
+      await optOutUser({ phoneNumber, user, countryCode })
     })
 
     await Promise.all(optOutUserPromises)
