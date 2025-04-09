@@ -37,13 +37,13 @@ const AUInitialSignUpEmail = ({
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto Australia!</Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto advocate. Crypto advocates like you are
-          making a huge difference in Australia, from your local community to Parliament.
+          Thank you for signing up to be a Stand With Crypto advocate. Advocates like you are making
+          a huge difference to promote forward looking crypto policy in Australia.
           <br />
           <br />
-          Stand With Crypto advocates have brought crypto to the forefront of political discussions,
-          and helped highlight the real-world uses of crypto that make a difference in Australians'
-          everyday lives.
+          Stand with Crypto advocates have helped educate politicians in Canberra, bought crypto to
+          the forefront of political campaigns, and helped highlight the real-world uses of crypto
+          that make a difference in the Australian economy.
           <br />
           <br />
           Keep an eye out for more communications from us: you'll see updates on key news stories
@@ -51,8 +51,7 @@ const AUInitialSignUpEmail = ({
           to your elected officials.
           <br />
           <br />
-          Together, we're making a difference for crypto in Australia. Thank you for standing with
-          us.
+          Together, we're making a difference for crypto. Thank you for standing with us.
         </Text>
       </Section>
 
