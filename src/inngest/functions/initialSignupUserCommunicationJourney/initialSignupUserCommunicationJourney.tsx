@@ -269,6 +269,11 @@ async function sendInitialSignUpEmail({
 
   const countryCode = user.countryCode as SupportedCountryCodes
   const Template = TEMPLATE_BY_STEP[step](countryCode)
+
+  if (!Template) {
+    return null
+  }
+
   const messageId = await sendMail({
     countryCode: user.countryCode as SupportedCountryCodes,
     payload: {

@@ -6,6 +6,12 @@ export function getNFTOnTheWayEmail(countryCode: SupportedCountryCodes) {
   switch (countryCode) {
     case SupportedCountryCodes.US:
       return USNFTOnTheWayEmail
+    case SupportedCountryCodes.CA:
+      return null
+    case SupportedCountryCodes.AU:
+      return null
+    case SupportedCountryCodes.GB:
+      return null
     default:
       return gracefullyError({
         msg: `No NFTOnTheWayEmail template found for countryCode: ${countryCode as string}`,

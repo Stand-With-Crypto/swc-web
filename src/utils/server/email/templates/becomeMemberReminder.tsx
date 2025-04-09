@@ -1,6 +1,3 @@
-import AUBecomeMemberReminderEmail from '@/utils/server/email/templates/au/becomeMemberReminder'
-import CABecomeMemberReminderEmail from '@/utils/server/email/templates/ca/becomeMemberReminder'
-import GBBecomeMemberReminderEmail from '@/utils/server/email/templates/gb/becomeMemberReminder'
 import USBecomeMemberReminderEmail from '@/utils/server/email/templates/us/becomeMemberReminder'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -10,11 +7,11 @@ export function getBecomeMemberReminderEmail(countryCode: SupportedCountryCodes)
     case SupportedCountryCodes.US:
       return USBecomeMemberReminderEmail
     case SupportedCountryCodes.CA:
-      return CABecomeMemberReminderEmail
+      return null
     case SupportedCountryCodes.AU:
-      return AUBecomeMemberReminderEmail
+      return null
     case SupportedCountryCodes.GB:
-      return GBBecomeMemberReminderEmail
+      return null
     default:
       return gracefullyError({
         msg: `No BecomeMemberReminderEmail template found for countryCode: ${countryCode as string}`,

@@ -6,6 +6,12 @@ export function getNFTArrivedEmail(countryCode: SupportedCountryCodes) {
   switch (countryCode) {
     case SupportedCountryCodes.US:
       return USNFTArrivedEmail
+    case SupportedCountryCodes.CA:
+      return null
+    case SupportedCountryCodes.AU:
+      return null
+    case SupportedCountryCodes.GB:
+      return null
     default:
       return gracefullyError({
         msg: `No NFTArrivedEmail template found for countryCode: ${countryCode as string}`,
