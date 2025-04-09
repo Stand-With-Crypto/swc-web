@@ -9,8 +9,8 @@ import { logger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
-import { zodPhoneNumberWithCountryCode } from '@/validation/fields/zodPhoneNumber'
-import { zodReferralId } from '@/validation/fields/zodReferrald'
+import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodReferralId } from '@/validation/fields/zodReferralId'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 import { processIntlUsersBatch } from './logic'
@@ -26,7 +26,7 @@ const zodUserDataSchema = (countryCode: SupportedCountryCodes) =>
     firstName: z.union([zodFirstName.optional(), z.literal('')]),
     lastName: z.union([zodLastName.optional(), z.literal('')]),
     referralId: zodReferralId.optional(),
-    phoneNumber: z.union([zodPhoneNumberWithCountryCode(countryCode), z.literal('')]).optional(),
+    phoneNumber: zodOptionalEmptyPhoneNumber(countryCode).optional(),
     countryCode: zodSupportedCountryCode,
   })
 

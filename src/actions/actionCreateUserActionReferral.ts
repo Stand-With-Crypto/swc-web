@@ -13,7 +13,7 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
-import { zodReferralId } from '@/validation/fields/zodReferrald'
+import { zodReferralId } from '@/validation/fields/zodReferralId'
 
 const logger = getLogger(`actionCreateUserActionReferral`)
 

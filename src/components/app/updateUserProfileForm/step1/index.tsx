@@ -45,8 +45,8 @@ import {
 } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import {
-  zodUpdateUserProfileFormFields,
-  zodUpdateUserProfileWithRequiredFormFields,
+  getZodUpdateUserProfileFormFields,
+  getZodUpdateUserProfileWithRequiredFormFieldsSchema,
 } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 
 const FORM_NAME = 'User Profile'
@@ -82,8 +82,8 @@ export function UpdateUserProfileForm({
   const form = useForm({
     resolver: zodResolver(
       shouldFieldsBeRequired
-        ? zodUpdateUserProfileWithRequiredFormFields
-        : zodUpdateUserProfileFormFields,
+        ? getZodUpdateUserProfileWithRequiredFormFieldsSchema(countryCode)
+        : getZodUpdateUserProfileFormFields(countryCode),
     ),
     defaultValues: defaultValues.current,
   })
