@@ -44,9 +44,9 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Email your Member of Parliament',
     description:
-      'Email your Member of Parliament today and call for action to stop unfair debanking.',
+      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
     campaignsModalDescription:
-      'Email your Member of Parliament today and call for action to stop unfair debanking.',
+      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
     image: '/ca/actionTypeIcons/email.png',
     campaigns: [
       {

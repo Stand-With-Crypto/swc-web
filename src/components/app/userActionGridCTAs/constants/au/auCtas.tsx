@@ -42,9 +42,9 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Email your Member of Parliament',
     description:
-      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
+      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
     campaignsModalDescription:
-      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
+      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
     image: '/au/actionTypeIcons/email.png',
     campaigns: [
       {
