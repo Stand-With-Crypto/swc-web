@@ -14,32 +14,37 @@ const SENDGRID_SANDBOX_MODE = requiredOutsideLocalEnv(
   'SENDGRID_SANDBOX_MODE',
   'Sendgrid Email Sends',
 )
-const US_SENDGRID_SENDER = requiredOutsideLocalEnv(
+const SENDGRID_SENDER = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER,
+  'SENDGRID_SENDER',
+  'Sendgrid Email Sends',
+)
+const SENDGRID_SENDER_US = requiredOutsideLocalEnv(
   process.env.SENDGRID_SENDER_US,
   'SENDGRID_SENDER_US',
   'Sendgrid Email Sends',
 )
-const AU_SENDGRID_SENDER = requiredOutsideLocalEnv(
+const SENDGRID_SENDER_AU = requiredOutsideLocalEnv(
   process.env.SENDGRID_SENDER_AU,
   'SENDGRID_SENDER_AU',
   'Sendgrid Email Sends',
 )
-const CA_SENDGRID_SENDER = requiredOutsideLocalEnv(
+const SENDGRID_SENDER_CA = requiredOutsideLocalEnv(
   process.env.SENDGRID_SENDER_CA,
   'SENDGRID_SENDER_CA',
   'Sendgrid Email Sends',
 )
-const GB_SENDGRID_SENDER = requiredOutsideLocalEnv(
+const SENDGRID_SENDER_GB = requiredOutsideLocalEnv(
   process.env.SENDGRID_SENDER_GB,
   'SENDGRID_SENDER_GB',
   'Sendgrid Email Sends',
 )
 
 const COUNTRY_CODE_TO_SENDGRID_SENDER: Record<SupportedCountryCodes, string | undefined> = {
-  [SupportedCountryCodes.US]: US_SENDGRID_SENDER,
-  [SupportedCountryCodes.GB]: GB_SENDGRID_SENDER,
-  [SupportedCountryCodes.CA]: CA_SENDGRID_SENDER,
-  [SupportedCountryCodes.AU]: AU_SENDGRID_SENDER,
+  [SupportedCountryCodes.US]: SENDGRID_SENDER_US,
+  [SupportedCountryCodes.GB]: SENDGRID_SENDER_GB,
+  [SupportedCountryCodes.CA]: SENDGRID_SENDER_CA,
+  [SupportedCountryCodes.AU]: SENDGRID_SENDER_AU,
 }
 
 if (SENDGRID_API_KEY) {
@@ -113,7 +118,7 @@ export async function sendMail({
   payload: SendMailPayload | SendMailPayload[]
   countryCode: SupportedCountryCodes
 }): Promise<string | string[]> {
-  const senderEmail = COUNTRY_CODE_TO_SENDGRID_SENDER[countryCode]
+  const senderEmail = COUNTRY_CODE_TO_SENDGRID_SENDER[countryCode] || SENDGRID_SENDER
 
   if (!SENDGRID_API_KEY || !senderEmail) {
     logger.debug(
