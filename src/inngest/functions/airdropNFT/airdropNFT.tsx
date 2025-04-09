@@ -150,6 +150,10 @@ export const airdropNFTWithInngest = inngest.createFunction(
         }
         const userSession = user.userSessions?.[0]
         const NFTArrivedEmail = getNFTArrivedEmail(countryCode)
+        if (!NFTArrivedEmail) {
+          return null
+        }
+
         const emailPayload: SendMailPayload = {
           to: user.primaryUserEmailAddress.emailAddress,
           subject: NFTArrivedEmail.subjectLine,

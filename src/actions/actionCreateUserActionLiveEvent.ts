@@ -143,7 +143,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     await claimNFTAndSendEmailNotification({
       userAction,
       userCryptoAddress: user.primaryUserCryptoAddress,
-      countryCode: countryCode as SupportedCountryCodes,
+      countryCode,
     })
   }
 

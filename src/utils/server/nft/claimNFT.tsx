@@ -259,6 +259,10 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
   const userSession = user.userSessions?.[0]
 
   const NFTOnTheWayEmail = getNFTOnTheWayEmail(countryCode)
+  if (!NFTOnTheWayEmail) {
+    return null
+  }
+
   const messageId = await sendMail({
     countryCode,
     payload: {
