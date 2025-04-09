@@ -14,6 +14,7 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics/serverP
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import { COOKIE_CONSENT_COOKIE_NAME } from '@/utils/shared/cookieConsent'
 import { getLogger } from '@/utils/shared/logger'
 import {
   USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
@@ -114,6 +115,7 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
     secure: true,
     maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
   })
+  currentCookies.delete(COOKIE_CONSENT_COOKIE_NAME)
 
   waitUntil(
     Promise.all([
