@@ -41,7 +41,7 @@ export default function AUReferralCompletedEmail({
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
-          src={buildTemplateInternalUrl('/au/email/swc-join-still.png', hydratedHrefSearchParams)}
+          src={buildTemplateInternalUrl('/au/email/join-banner.png', hydratedHrefSearchParams)}
         />
         <Heading gutterBottom="md">Your voice matters—now amplify it!</Heading>
 
