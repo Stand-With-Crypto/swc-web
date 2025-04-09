@@ -129,9 +129,6 @@ export const footerConfig: FooterProps = {
       href: usExternalUrls.discord(),
       text: 'Discord',
     },
-    {
-      href: usExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: usExternalUrls.emailFeedback(),
 }

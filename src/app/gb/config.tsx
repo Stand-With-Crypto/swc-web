@@ -66,9 +66,6 @@ export const footerConfig: FooterProps = {
       href: gbExternalUrls.linkedin(),
       text: 'LinkedIn',
     },
-    {
-      href: gbExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: gbExternalUrls.emailFeedback(),
 }

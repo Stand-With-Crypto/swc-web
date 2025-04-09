@@ -1,18 +1,18 @@
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
-import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
-import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
   AUUserActionReferCampaignName,
   AUUserActionTweetCampaignName,
   AUUserActionViewKeyPageCampaignName,
+  AUUserActionViewKeyRacesCampaignName,
 } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
@@ -21,9 +21,9 @@ const countryCode = SupportedCountryCodes.AU
 export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto Australia',
-    description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
-    mobileCTADescription: 'Join the Movement to keep crypto in Australia.',
-    campaignsModalDescription: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+    description: `Join the movement to make your voice heard.`,
+    mobileCTADescription: 'Join the movement to make your voice heard.',
+    campaignsModalDescription: `Join the movement to make your voice heard.`,
     image: '/au/actionTypeIcons/opt-in.png',
     campaigns: [
       {
@@ -31,10 +31,59 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto Australia',
-        description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+        description: `Join the movement to make your voice heard.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
+        ),
+      },
+    ],
+  },
+  [UserActionType.VIEW_KEY_PAGE]: {
+    title: 'Email your Member of Parliament',
+    description:
+      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
+    campaignsModalDescription:
+      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
+    image: '/au/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
+        isCampaignActive: true,
+        title: `Email your Member of Parliament`,
+        description:
+          'You’ve emailed your Member of Parliament and called for responsible crypto policy.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={getIntlUrls(countryCode).newmodeElectionAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
+        ),
+      },
+    ],
+  },
+  [UserActionType.VIEW_KEY_RACES]: {
+    title: 'View Key Races in Australia',
+    description:
+      'View the key races occurring across Australia that will impact the future of crypto.',
+    campaignsModalDescription:
+      'View the key races occurring across Australia that will impact the future of crypto.',
+    image: '/au/actionTypeIcons/view-key-races.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VIEW_KEY_RACES,
+        campaignName: AUUserActionViewKeyRacesCampaignName.H1_2025,
+        isCampaignActive: true,
+        title: 'View Key Races in Australia',
+        description:
+          'View the key races occurring across Australia that will impact the future of crypto.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <Link href={getIntlUrls(countryCode).locationKeyRaces()}>{children}</Link>
         ),
       },
     ],
@@ -58,33 +107,6 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
-        ),
-      },
-    ],
-  },
-  [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Email your Member of Parliament',
-    description:
-      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
-    campaignsModalDescription:
-      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
-    image: '/au/actionTypeIcons/email.png',
-    campaigns: [
-      {
-        actionType: UserActionType.VIEW_KEY_PAGE,
-        campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
-        isCampaignActive: true,
-        title: `Email your Member of Parliament`,
-        description:
-          'You’ve emailed your Member of Parliament and called for responsible crypto policy.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeElectionAction()}
-          >
-            {children}
-          </UserActionViewKeyPageDialog>
         ),
       },
     ],

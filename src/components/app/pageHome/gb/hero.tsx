@@ -13,13 +13,12 @@ export function GbHero() {
     <Hero>
       <Hero.Heading>
         <Hero.Title>
-          It’s time to support crypto in <span className="text-primary-cta">Britain</span>
+          It’s time to support crypto in the <span className="text-primary-cta">UK</span>
         </Hero.Title>
         <Hero.Subtitle>
-          The British public owns crypto. And yet, crypto’s future in Britain remains uncertain. If
-          you believe in the power of the blockchain and want the Government to foster a positive
-          business and policy environment for crypto assets and blockchain technology in the UK,
-          make your voice heard.
+          Crypto’s future in the UK remains uncertain. If you believe in the power of the blockchain
+          and want the Government to foster a positive business and policy environment for crypto
+          assets and blockchain technology in the UK, make your voice heard.
         </Hero.Subtitle>
         <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
@@ -33,7 +32,7 @@ export function GbHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Get started">
-                Advocate for crypto in Britain.
+                Advocate for crypto in the UK.
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </Link>
@@ -46,7 +45,7 @@ export function GbHero() {
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">
-              Advocate for crypto in Britain.
+              Advocate for crypto in the UK.
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
         }

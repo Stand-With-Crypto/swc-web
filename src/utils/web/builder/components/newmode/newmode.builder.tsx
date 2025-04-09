@@ -27,17 +27,20 @@ Builder.registerComponent(
       )
     }
 
+    // Creating a separate component because unavailableContent is cloning the element
+    // and adding a countryCode prop to the div which causes a React error
+    const UnavailableContent = () => (
+      <div {...props.attributes} key={props.attributes?.key}>
+        <UserActionFormActionUnavailable
+          className="mt-16 min-h-min"
+          countryCode={countryCode}
+          hideTitle
+        />
+      </div>
+    )
+
     return (
-      <GeoGate
-        countryCode={countryCode}
-        unavailableContent={
-          <UserActionFormActionUnavailable
-            className="mt-16 min-h-min"
-            countryCode={countryCode}
-            hideTitle
-          />
-        }
-      >
+      <GeoGate countryCode={countryCode} unavailableContent={<UnavailableContent />}>
         <NewMode {...props.attributes} campaignId={props.campaignId} key={props.attributes?.key} />
       </GeoGate>
     )
