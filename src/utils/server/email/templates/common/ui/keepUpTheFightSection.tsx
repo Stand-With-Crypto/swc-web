@@ -10,6 +10,7 @@ import { Button } from '@/utils/server/email/templates/common/ui/button'
 import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
 
 function getCountryCTA(countryCode: SupportedCountryCodes) {
   switch (countryCode) {
@@ -56,8 +57,8 @@ export function KeepUpTheFightSection({
         {ctaText}
       </Heading>
       <Text className="text-center text-base text-[#5B616E]">
-        Don't wait - take action now. See below for actions you can take to help keep crypto in
-        America.
+        Don't wait - take action now. See below for actions you can take to help keep crypto in{' '}
+        {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.
       </Text>
 
       <Row>
