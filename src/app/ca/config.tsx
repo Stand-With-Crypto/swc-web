@@ -70,9 +70,6 @@ export const footerConfig: FooterProps = {
       href: caExternalUrls.linkedin(),
       text: 'LinkedIn',
     },
-    {
-      href: caExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: caExternalUrls.emailFeedback(),
 }
