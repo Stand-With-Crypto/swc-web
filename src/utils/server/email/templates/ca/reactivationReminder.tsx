@@ -34,24 +34,10 @@ const CAReactivationReminderEmail = ({
           src={buildTemplateInternalUrl('/ca/email/swc-join-still.png', hydratedHrefSearchParams)}
         />
 
-        <Heading gutterBottom="md">Thanks for joining Stand With Crypto Canada!</Heading>
-
+        <Heading gutterBottom="md">Thanks for joining Stand With Crypto!</Heading>
         <Text className="mb-0 text-center text-[15px] text-[#5B616E]">
-          We're excited that you've signed up to be a part of Stand With Crypto. SWC was created to
-          give the Canadian crypto community a voice in the public debates around crypto and to
-          educate lawmakers and the public about the benefits of keeping crypto in Canada,
-          including:
-          <br />
-          <br />
+          We're excited that you've signed up to be a part of Stand With Crypto.
         </Text>
-        <ul className="pl-4 text-[15px] text-[#5B616E]">
-          <li>Job creation</li>
-          <li>Technology and innovation</li>
-          <li>Modernizing the financial system</li>
-          <li>Protecting and empowering consumers</li>
-          <li>Maintaining Canada's competitive edge</li>
-        </ul>
-        <br />
         <Text className="my-0 text-center text-[15px] text-[#5B616E]">
           Stay tuned for more updates and information from SWC. You can always visit{' '}
           <Link

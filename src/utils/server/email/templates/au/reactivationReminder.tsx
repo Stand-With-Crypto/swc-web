@@ -34,12 +34,12 @@ const AUReactivationReminderEmail = ({
           src={buildTemplateInternalUrl('/au/email/swc-join-still.png', hydratedHrefSearchParams)}
         />
 
-        <Heading gutterBottom="md">Thanks for joining Stand With Crypto Australia!</Heading>
+        <Heading gutterBottom="md">Thanks for joining Stand With Crypto!</Heading>
 
         <Text className="mb-0 text-center text-[15px] text-[#5B616E]">
           We're excited that you've signed up to be a part of Stand With Crypto. SWC was created to
           give the Australian crypto community a voice in the public debates around crypto and to
-          educate lawmakers and the public about the benefits of keeping crypto in Australia,
+          educate policymakers and the public about the benefits of keeping crypto in Australia,
           including:
           <br />
           <br />
@@ -49,7 +49,7 @@ const AUReactivationReminderEmail = ({
           <li>Technology and innovation</li>
           <li>Modernizing the financial system</li>
           <li>Protecting and empowering consumers</li>
-          <li>Maintaining Australia's competitive edge</li>
+          <li>Maintaining our edge over other nations</li>
         </ul>
         <br />
         <Text className="my-0 text-center text-[15px] text-[#5B616E]">
