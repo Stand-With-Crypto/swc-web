@@ -46,28 +46,9 @@ const CAContactYourRepresentativeReminderEmail = ({
           hear from you!
           <br />
           <br />
-          Luckily, SWC makes it easy to get active. We have simple and easy tools that allow you to
-          email your Member of Parliament or call their office and let them know that you care about
-          crypto. All you need to do is enter your address and we'll make sure your email or call is
-          routed correctly.
+          Email your representative or call their office and let them know that you care about
+          crypto.
         </Text>
-      </Section>
-
-      <Section className="mt-4 space-x-4 space-y-4 text-center">
-        <Button
-          fullWidth="mobile"
-          href={buildTemplateInternalUrl('/ca/action/call', hydratedHrefSearchParams)}
-          variant="secondary"
-        >
-          Make a call
-        </Button>
-        <Button
-          className="ml-0 mt-4 md:ml-4 md:mt-0"
-          fullWidth="mobile"
-          href={buildTemplateInternalUrl('/ca/action/email', hydratedHrefSearchParams)}
-        >
-          Send an email
-        </Button>
       </Section>
 
       <Hr className="my-8" />
