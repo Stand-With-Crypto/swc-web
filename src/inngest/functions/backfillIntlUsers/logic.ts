@@ -8,7 +8,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
-import { chunk } from 'lodash-es'
+import { chunk as lodashChunk } from 'lodash-es'
 import pRetry from 'p-retry'
 
 import { inngest } from '@/inngest/inngest'
@@ -81,7 +81,7 @@ export const processIntlUsersBatch = inngest.createFunction(
         errors: 0,
       }
 
-      const userChunks = chunk(users, TRANSACTION_CONNECTION_LIMIT)
+      const userChunks = lodashChunk(users, TRANSACTION_CONNECTION_LIMIT)
       for (const chunk of userChunks) {
         const chunkPromises = chunk.map(user =>
           createUserWithCountryCode(user, validCountryCode, persist),
