@@ -8,6 +8,8 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
+import { chunk } from 'lodash-es'
+import pRetry from 'p-retry'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -20,8 +22,6 @@ import { generateUserSessionId } from '@/utils/shared/userSessionId'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 import type { UserData } from './index'
-import pRetry from 'p-retry'
-import { chunk } from 'lodash-es'
 
 export const PROCESS_BATCH_EVENT_NAME = 'script/backfill-intl-users.process-batch'
 export const PROCESS_BATCH_FUNCTION_ID = 'script.backfill-intl-users.process-batch'
