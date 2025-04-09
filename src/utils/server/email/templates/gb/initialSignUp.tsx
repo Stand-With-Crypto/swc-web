@@ -37,13 +37,9 @@ const GBInitialSignUpEmail = ({
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto UK!</Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto advocate. Crypto advocates like you are
-          making a huge difference in the UK, from your local community to Westminster.
-          <br />
-          <br />
-          Stand With Crypto advocates have brought crypto to the forefront of political discussions,
-          and helped highlight the real-world uses of crypto that make a difference in UK citizens'
-          everyday lives.
+          Thank you for signing up to be a Stand With Crypto advocate. Advocates like you are making
+          a huge difference to promote a positive business and policy environment for crypto assets
+          in the UK.
           <br />
           <br />
           Keep an eye out for more communications from us: you'll see updates on key news stories
@@ -51,8 +47,7 @@ const GBInitialSignUpEmail = ({
           to your elected officials.
           <br />
           <br />
-          Together, we're making a difference for crypto in the United Kingdom. Thank you for
-          standing with us.
+          Together, we're making a difference for crypto. Thank you for standing with us.
         </Text>
       </Section>
 
