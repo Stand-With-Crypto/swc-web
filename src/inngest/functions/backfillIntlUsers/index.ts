@@ -18,7 +18,7 @@ import { processIntlUsersBatch } from './logic'
 export const BACKFILL_INTL_USERS_INNGEST_EVENT_NAME = 'script/backfill-intl-users'
 export const BACKFILL_INTL_USERS_FUNCTION_ID = 'script.backfill-intl-users'
 
-const BATCH_SIZE = 1000
+const BATCH_SIZE = 500
 
 const zodUserDataSchema = (countryCode: SupportedCountryCodes) =>
   z.object({
@@ -27,6 +27,7 @@ const zodUserDataSchema = (countryCode: SupportedCountryCodes) =>
     lastName: z.union([zodLastName.optional(), z.literal('')]),
     referralId: zodReferralId.optional(),
     phoneNumber: zodOptionalEmptyPhoneNumber(countryCode).optional(),
+    countryCode: zodSupportedCountryCode,
   })
 
 export type UserData = z.infer<ReturnType<typeof zodUserDataSchema>>
@@ -60,6 +61,28 @@ const createUserDataSchema = (countryCode: SupportedCountryCodes) => {
           error,
         })
       }
+    }
+
+    if ('Purchaser country' in typedData && Boolean(typedData['Purchaser country'])) {
+      userData.countryCode = typedData['Purchaser country'] as SupportedCountryCodes
+    } else {
+      userData.countryCode = countryCode
+    }
+
+    if ('Buyer email' in typedData && Boolean(typedData['Buyer email'])) {
+      userData.email = typedData['Buyer email']
+    }
+
+    if ('Buyer first name' in typedData && Boolean(typedData['Buyer first name'])) {
+      userData.firstName = typedData['Buyer first name']
+    }
+
+    if ('Buyer last name' in typedData && Boolean(typedData['Buyer last name'])) {
+      userData.lastName = typedData['Buyer last name']
+    }
+
+    if ('Phone number' in typedData && Boolean(typedData['Phone number'])) {
+      userData.phoneNumber = typedData['Phone number']
     }
 
     return userData
@@ -99,7 +122,18 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
         const firstSheetName = workbook.SheetNames[0]
         const worksheet = workbook.Sheets[firstSheetName]
 
-        const columns = ['What is your name?', 'What is your email?', 'Waitlist Referral URL']
+        const columns = [
+          // AU, CA, GB csv columns
+          'What is your name?',
+          'What is your email?',
+          'Waitlist Referral URL',
+          // ZEBU live event csv columns
+          'Buyer first name',
+          'Buyer last name',
+          'Buyer email',
+          'Phone number',
+          'Purchaser country',
+        ]
 
         const headerRow =
           utils.sheet_to_json<string[]>(worksheet, {
@@ -119,7 +153,10 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
         const userDataSchema = createUserDataSchema(countryCode)
         const errorsByType = new Map<
           string,
-          { count: number; examples: Array<{ rawUserData: unknown; message: string }> }
+          {
+            count: number
+            examples: Array<{ message: string; rawUser: unknown }>
+          }
         >()
 
         const processedResults = rawUsers.reduce<{
@@ -136,7 +173,7 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
                 const errorKey = `${err.path.join('.')}: ${err.code}`
                 const current = errorsByType.get(errorKey) || { count: 0, examples: [] }
                 current.examples.push({
-                  rawUserData: err.path.length ? rawUser[err.path[0]] : rawUser,
+                  rawUser,
                   message: err.message,
                 })
                 errorsByType.set(errorKey, {
@@ -161,7 +198,7 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
             logger.warn(`Error type: ${errorType} - found ${data.count} occurrences`)
             data.examples.forEach((example, i) => {
               logger.warn(
-                `Example ${i + 1}: ${JSON.stringify(example.rawUserData)} - ${example.message}`,
+                `Example ${i + 1}: ${JSON.stringify(example.rawUser)} - ${example.message}`,
               )
             })
           })
@@ -209,7 +246,7 @@ export const backfillIntlUsersWithInngest = inngest.createFunction(
     }
 
     return {
-      message: `Processed ${totalUsers} valid users for country code ${countryCode} in ${batches.length} batches`,
+      message: `Processed ${validUsers}/${totalUsers} users for country code "${countryCode}" in ${batches.length} batches`,
       countryCode,
       totalUsers,
       validUsers,

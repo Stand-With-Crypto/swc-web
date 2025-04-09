@@ -68,19 +68,9 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
                     analytics={'Primary Races Tabs'}
                     containerClassName="mb-6 md:mb-10"
                     data-testid="primary-races-tabs"
-                    defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
+                    defaultValue={DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT}
                     forceDesktop
                     options={[
-                      {
-                        value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-                        label: 'Republican',
-                        content: (
-                          <DTSIPersonHeroCardSection
-                            countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-                            people={republicanPeople}
-                          />
-                        ),
-                      },
                       {
                         value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
                         label: 'Democratic',
@@ -88,6 +78,16 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
                           <DTSIPersonHeroCardSection
                             countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
                             people={democraticPeople}
+                          />
+                        ),
+                      },
+                      {
+                        value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                        label: 'Republican',
+                        content: (
+                          <DTSIPersonHeroCardSection
+                            countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+                            people={republicanPeople}
                           />
                         ),
                       },
