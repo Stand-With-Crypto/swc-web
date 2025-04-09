@@ -113,27 +113,9 @@ export function USLocationStateSpecific({
                 analytics={'Primary Races Tabs'}
                 containerClassName="mb-6 md:mb-10 w-full"
                 data-testid="primary-races-tabs"
-                defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
+                defaultValue={DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT}
                 forceDesktop
                 options={[
-                  {
-                    value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-                    label: 'Republican',
-                    content: (
-                      <div className="sticky top-24 text-center">
-                        <DTSIPersonHeroCardSection
-                          countryCode={countryCode}
-                          cta={
-                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
-                              View Race
-                            </InternalLink>
-                          }
-                          people={republicanGovernors}
-                          title={<>{stateName} Gubernatorial Election</>}
-                        />
-                      </div>
-                    ),
-                  },
                   {
                     value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
                     label: 'Democratic',
@@ -147,6 +129,24 @@ export function USLocationStateSpecific({
                             </InternalLink>
                           }
                           people={democraticGovernors}
+                          title={<>{stateName} Gubernatorial Election</>}
+                        />
+                      </div>
+                    ),
+                  },
+                  {
+                    value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                    label: 'Republican',
+                    content: (
+                      <div className="sticky top-24 text-center">
+                        <DTSIPersonHeroCardSection
+                          countryCode={countryCode}
+                          cta={
+                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                              View Race
+                            </InternalLink>
+                          }
+                          people={republicanGovernors}
                           title={<>{stateName} Gubernatorial Election</>}
                         />
                       </div>

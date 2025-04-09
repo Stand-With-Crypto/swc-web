@@ -42,12 +42,19 @@ function organizeRaceSpecificPeople(people: DTSI_DistrictSpecificInformationQuer
   )
 
   const partyOrder = [
-    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
     DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
     DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
   ]
 
   formatted.sort((a, b) => {
+    const lastNameA = a.lastName
+    const lastNameB = b.lastName
+
+    if (lastNameA !== lastNameB) {
+      return lastNameA.localeCompare(lastNameB)
+    }
+
     const aPartyIndex = a.politicalAffiliationCategory
       ? partyOrder.indexOf(a.politicalAffiliationCategory)
       : -1
@@ -155,17 +162,14 @@ export function USLocationRaceGovernorSpecific({
               analytics={'Primary Races Tabs'}
               containerClassName="mb-6 md:mb-10 w-full"
               data-testid="primary-races-tabs"
-              defaultValue={DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN}
+              defaultValue={DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT}
               forceDesktop
               options={[
                 {
-                  value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-                  label: 'Republican',
-                  content: republicanRacesData.map(({ person, isRecommended }) => (
-                    <section
-                      className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row"
-                      key={person.id}
-                    >
+                  value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+                  label: 'Democratic',
+                  content: democraticRacesData.map(({ person, isRecommended }) => (
+                    <section className="flex max-w-7xl flex-col px-6 md:flex-row" key={person.id}>
                       <div className="shrink-0 py-5 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
                         <div className="sticky top-24 text-center">
                           <DTSIPersonHeroCard
@@ -199,10 +203,13 @@ export function USLocationRaceGovernorSpecific({
                   )),
                 },
                 {
-                  value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-                  label: 'Democratic',
-                  content: democraticRacesData.map(({ person, isRecommended }) => (
-                    <section className="flex max-w-7xl flex-col px-6 md:flex-row" key={person.id}>
+                  value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                  label: 'Republican',
+                  content: republicanRacesData.map(({ person, isRecommended }) => (
+                    <section
+                      className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row"
+                      key={person.id}
+                    >
                       <div className="shrink-0 py-5 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
                         <div className="sticky top-24 text-center">
                           <DTSIPersonHeroCard

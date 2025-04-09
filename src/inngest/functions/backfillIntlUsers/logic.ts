@@ -8,6 +8,8 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
+import { chunk as lodashChunk } from 'lodash-es'
+import pRetry from 'p-retry'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -20,8 +22,6 @@ import { generateUserSessionId } from '@/utils/shared/userSessionId'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 import type { UserData } from './index'
-import pRetry from 'p-retry'
-import { chunk } from 'lodash-es'
 
 export const PROCESS_BATCH_EVENT_NAME = 'script/backfill-intl-users.process-batch'
 export const PROCESS_BATCH_FUNCTION_ID = 'script.backfill-intl-users.process-batch'
@@ -81,7 +81,7 @@ export const processIntlUsersBatch = inngest.createFunction(
         errors: 0,
       }
 
-      const userChunks = chunk(users, TRANSACTION_CONNECTION_LIMIT)
+      const userChunks = lodashChunk(users, TRANSACTION_CONNECTION_LIMIT)
       for (const chunk of userChunks) {
         const chunkPromises = chunk.map(user =>
           createUserWithCountryCode(user, validCountryCode, persist),
