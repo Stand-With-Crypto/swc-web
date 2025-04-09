@@ -73,6 +73,7 @@ export default function GBReferralCompletedEmail({
         {...keepUpTheFightSectionProps}
         countryCode={SupportedCountryCodes.GB}
         hrefSearchParams={hydratedHrefSearchParams}
+        hiddenActions={['REFER']}
       />
     </GBWrapper>
   )

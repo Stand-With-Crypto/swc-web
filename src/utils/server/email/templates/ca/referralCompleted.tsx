@@ -73,6 +73,7 @@ export default function CAReferralCompletedEmail({
         {...keepUpTheFightSectionProps}
         countryCode={SupportedCountryCodes.CA}
         hrefSearchParams={hydratedHrefSearchParams}
+        hiddenActions={['REFER']}
       />
     </CAWrapper>
   )
