@@ -16,6 +16,7 @@ const contentSecurityPolicy = {
     'blob:',
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
     'https://www.youtube-nocookie.com/embed/',
+    'https://cdn.builder.io/',
   ],
   'style-src': [
     "'self'",
