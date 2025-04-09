@@ -6,6 +6,13 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
+import { lazy } from 'react'
+
+const SendFeedbackButton = lazy(() =>
+  import('@/components/app/footer/sendFeedback').then(m => ({
+    default: m.SendFeedbackButton,
+  })),
+)
 
 const footerLinkStyles = cn('block text-gray-400')
 
@@ -21,6 +28,7 @@ export interface FooterProps {
     text: string
     href: string
   }[]
+  sendFeedbackLink?: string
   legalText?: string
   footerBanner?: React.ReactNode
 }
@@ -30,6 +38,7 @@ export function Footer({
   subtitle,
   links,
   socialLinks,
+  sendFeedbackLink,
   footerBanner,
   countryCode,
   legalText,
@@ -54,6 +63,7 @@ export function Footer({
                     {text}
                   </ExternalLink>
                 ))}
+                {sendFeedbackLink && <SendFeedbackButton href={sendFeedbackLink} />}
               </div>
               <div className="space-y-3 sm:space-y-6">
                 {links.map(({ text, href }) => (
