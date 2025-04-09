@@ -1,3 +1,4 @@
+import { lazy } from 'react'
 import { getYear } from 'date-fns'
 
 import { CookieConsentFooterButton } from '@/components/app/cookieConsent/common/cookieConsentFooterButton'
@@ -6,7 +7,6 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
-import { lazy } from 'react'
 
 const SendFeedbackButton = lazy(() =>
   import('@/components/app/footer/sendFeedback').then(m => ({

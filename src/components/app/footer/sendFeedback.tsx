@@ -1,5 +1,7 @@
 'use client'
 
+import Balancer from 'react-wrap-balancer'
+
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -8,11 +10,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { ExternalLink } from '@/components/ui/link'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
-import { ExternalLink } from '@/components/ui/link'
-import Balancer from 'react-wrap-balancer'
 
 export function SendFeedbackButton({ href }: { href: string }) {
   const isDesktop = useIsDesktop()
@@ -44,9 +45,9 @@ export function SendFeedbackButton({ href }: { href: string }) {
 
           <Button
             className="mt-4"
+            onClick={() => handleCopyToClipboard(href)}
             size="lg"
             variant="primary-cta"
-            onClick={() => handleCopyToClipboard(href)}
           >
             {copiedValue ? 'Copied!' : 'Copy email to clipboard'}
           </Button>
