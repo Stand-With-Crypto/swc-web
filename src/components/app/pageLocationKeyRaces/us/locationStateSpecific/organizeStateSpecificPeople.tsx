@@ -25,8 +25,11 @@ export function organizeStateSpecificPeople(
   }
 
   const sortPeople = (a: (typeof formatted)[number], b: (typeof formatted)[number]) => {
-    if (a.isIncumbent !== b.isIncumbent) {
-      return a.isIncumbent ? -1 : 1
+    const lastNameA = a.lastName
+    const lastNameB = b.lastName
+
+    if (lastNameA !== lastNameB) {
+      return lastNameA.localeCompare(lastNameB)
     }
 
     const scoreA = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0

@@ -9,7 +9,7 @@ import {
 import {
   CURRENT_SESSION_OF_CONGRESS,
   NEXT_SESSION_OF_CONGRESS,
-} from '@/utils/dtsi/dtsiPersonRoleUtils'
+} from '@/utils/dtsi/us/usGetIsRoleInFuture'
 
 type PersonFields = Pick<
   DTSI_StateSpecificInformationQuery['congress'][0],

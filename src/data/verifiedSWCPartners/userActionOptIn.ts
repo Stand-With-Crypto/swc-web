@@ -9,6 +9,7 @@ import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -26,22 +27,25 @@ export const zodVerifiedSWCPartnersUserAddress = object({
   countryCode: string().length(2),
 })
 
-export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
-  emailAddress: zodEmailAddress,
-  optInType: z.nativeEnum(UserActionOptInType),
-  campaignName: z.string(),
-  isVerifiedEmailAddress: z.boolean(),
-  firstName: zodFirstName.optional(),
-  lastName: zodLastName.optional(),
-  address: zodVerifiedSWCPartnersUserAddress.optional(),
-  phoneNumber: zodOptionalEmptyPhoneNumber,
-  hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
-  hasOptedInToEmails: z.boolean().optional(),
-  hasOptedInToMembership: z.boolean().optional(),
-  countryCode: zodSupportedCountryCode,
-})
+export const getZodVerifiedSWCPartnersUserActionOptInSchema = (
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+) =>
+  z.object({
+    emailAddress: zodEmailAddress,
+    optInType: z.nativeEnum(UserActionOptInType),
+    campaignName: z.string(),
+    isVerifiedEmailAddress: z.boolean(),
+    firstName: zodFirstName.optional(),
+    lastName: zodLastName.optional(),
+    address: zodVerifiedSWCPartnersUserAddress.optional(),
+    phoneNumber: zodOptionalEmptyPhoneNumber(countryCode),
+    hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
+    hasOptedInToEmails: z.boolean().optional(),
+    hasOptedInToMembership: z.boolean().optional(),
+    countryCode: zodSupportedCountryCode,
+  })
 
-type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
+type Input = z.infer<ReturnType<typeof getZodVerifiedSWCPartnersUserActionOptInSchema>> & {
   partner: VerifiedSWCPartner
 }
 

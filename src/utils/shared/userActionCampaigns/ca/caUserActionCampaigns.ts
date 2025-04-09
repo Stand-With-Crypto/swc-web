@@ -33,7 +33,7 @@ export enum CAUserActionRsvpEventCampaignName {
 }
 
 export enum CAUserActionViewKeyPageCampaignName {
-  NEWMODE_EMAIL_ACTION = 'NEWMODE_EMAIL_ACTION',
+  CA_Q2_2025_ELECTION = 'CA_Q2_2025_ELECTION',
 }
 
 export type CAUserActionCampaignName =
@@ -62,5 +62,5 @@ export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName.DEFAULT,
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName.H1_2025,
   [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName.H1_2025,
-  [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
+  [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
 } satisfies Record<CAActiveClientUserActionWithCampaignType, string>

@@ -53,12 +53,19 @@ function organizeRaceSpecificPeople(
   )
 
   const partyOrder = [
-    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
     DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
     DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
   ]
 
   formatted.sort((a, b) => {
+    const lastNameA = a.lastName
+    const lastNameB = b.lastName
+
+    if (lastNameA !== lastNameB) {
+      return lastNameA.localeCompare(lastNameB)
+    }
+
     const aPartyIndex = a.politicalAffiliationCategory
       ? partyOrder.indexOf(a.politicalAffiliationCategory)
       : -1

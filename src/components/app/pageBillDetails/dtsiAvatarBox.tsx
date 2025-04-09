@@ -4,7 +4,7 @@ import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { DTSI_Person, Maybe } from '@/data/dtsi/generated'
 import {
   DTSIPersonRoleCategoryDisplayNameProps,
-  getDTSIPersonRoleCategoryDisplayName,
+  getRoleNameResolver,
 } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
@@ -28,6 +28,7 @@ export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
   const politicalAffiliationCategoryAbbr =
     person.politicalAffiliationCategory &&
     dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
+  const roleNameResolver = getRoleNameResolver(countryCode)
   return (
     <LinkBox className="flex w-fit flex-col items-center gap-2 text-center">
       <DTSIAvatar className="rounded-full" person={person} {...avatarProps} />
@@ -42,7 +43,7 @@ export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
           {!!politicalAffiliationCategoryAbbr && ` (${politicalAffiliationCategoryAbbr})`}
         </InternalLink>
         <p className="text-sm text-fontcolor-muted">
-          {person.primaryRole ? getDTSIPersonRoleCategoryDisplayName(person.primaryRole) : '-'}
+          {person.primaryRole ? roleNameResolver(person.primaryRole) : '-'}
         </p>
       </div>
     </LinkBox>

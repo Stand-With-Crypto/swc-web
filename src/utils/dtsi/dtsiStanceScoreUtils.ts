@@ -33,7 +33,7 @@ export const convertDTSIPersonStanceScoreToLetterGrade = (entity: PersonWithStan
   if (score >= 50) {
     return DTSILetterGrade.C
   }
-  if (score >= 30) {
+  if (score >= 25) {
     return DTSILetterGrade.D
   }
   return DTSILetterGrade.F
@@ -58,7 +58,7 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguage = (
   if (score >= 50) {
     return 'Neutral'
   }
-  if (score >= 30) {
+  if (score >= 25) {
     return 'Somewhat Against'
   }
   return 'Strongly against'
@@ -83,7 +83,7 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence = (
   if (score >= 50) {
     return 'Neutral on crypto'
   }
-  if (score >= 30) {
+  if (score >= 25) {
     return 'Somewhat against crypto'
   }
   return 'Strongly against crypto'

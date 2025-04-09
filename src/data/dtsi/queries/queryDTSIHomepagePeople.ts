@@ -9,7 +9,7 @@ const query = /* GraphQL */ `
     lowestScores: people(
       limit: 4
       offset: 0
-      stanceScoreLte: 50
+      stanceScoreLte: 49
       personRoleGroupingOr: $personRoleGroupingOr
     ) {
       ...PersonCard

@@ -5,8 +5,12 @@ import { motion } from 'motion/react'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { ActivityAvatar } from '@/components/app/recentActivityRow/activityAvatar'
-import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
+import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface RecentActivityRowProps {
@@ -45,23 +49,56 @@ export function RecentActivityRowBase({
             <OnFocusContent />
           </motion.div>
         ) : (
-          <>
-            <span className="hidden md:inline">
-              <FormattedRelativeDatetimeWithClientHydration
-                countryCode={countryCode}
-                date={new Date(action.datetimeCreated)}
-              />
-            </span>
-            <span className="inline md:hidden">
-              <FormattedRelativeDatetimeWithClientHydration
-                countryCode={countryCode}
-                date={new Date(action.datetimeCreated)}
-                timeFormatStyle="narrow"
-              />
-            </span>
-          </>
+          <ActionAdditionalInfo action={action} countryCode={countryCode} />
         )}
       </div>
     </div>
+  )
+}
+
+interface ActionAdditionalInfoProps {
+  action: RecentActivityRowProps['action']
+  countryCode: SupportedCountryCodes
+}
+
+function ActionAdditionalInfo({ action, countryCode }: ActionAdditionalInfoProps) {
+  const hasHydrated = useHasHydrated()
+  if (!hasHydrated) {
+    return <Skeleton>a while ago</Skeleton>
+  }
+
+  // TODO: Change this to a prop instead of hardcoded based on the countryCode
+  if (countryCode !== SupportedCountryCodes.US) {
+    const { administrativeAreaLevel1, countryCode: userLocationCountryCode } =
+      action.user.userLocationDetails ?? {}
+    const hasUserChangedLocationSinceActionCompleted =
+      userLocationCountryCode?.toLowerCase() !== countryCode
+
+    if (!administrativeAreaLevel1 || hasUserChangedLocationSinceActionCompleted) {
+      return <span>From {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}</span>
+    }
+
+    const stateNameResolver = getStateNameResolver(countryCode)
+    const stateName = stateNameResolver(administrativeAreaLevel1)
+
+    return <span>From {stateName ?? administrativeAreaLevel1}</span>
+  }
+
+  return (
+    <>
+      <span className="hidden md:inline">
+        <FormattedRelativeDatetime
+          countryCode={countryCode}
+          date={new Date(action.datetimeCreated)}
+        />
+      </span>
+      <span className="inline md:hidden">
+        <FormattedRelativeDatetime
+          countryCode={countryCode}
+          date={new Date(action.datetimeCreated)}
+          timeFormatStyle="narrow"
+        />
+      </span>
+    </>
   )
 }

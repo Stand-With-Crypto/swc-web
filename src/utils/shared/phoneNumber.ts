@@ -18,8 +18,19 @@ export const SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE: Record<
   [SupportedCountryCodes.AU]: 'AU',
 }
 
+export const SUPPORTED_PHONE_NUMBER_COUNTRY_CODES: Record<SupportedCountryCodes, string> = {
+  [SupportedCountryCodes.US]: '+1',
+  [SupportedCountryCodes.CA]: '+1',
+  [SupportedCountryCodes.GB]: '+44',
+  [SupportedCountryCodes.AU]: '+61',
+}
+
 // https://stackoverflow.com/a/43687969
-export function normalizePhoneNumber(passed: string) {
+export function normalizePhoneNumber(passed: string, countryCode?: SupportedCountryCodes) {
+  const countryCodePrefix = countryCode && SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[countryCode]
+  const defaultCountryCodePrefix =
+    SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[DEFAULT_SUPPORTED_COUNTRY_CODE]
+
   // Split number and extension
   let [number, extension] = passed.split('x')
 
@@ -28,17 +39,37 @@ export function normalizePhoneNumber(passed: string) {
 
   // Handle country code
   number = number.replace(/^00/, '+')
-  if (number.match(/^1/)) number = '+' + number
-  if (!number.match(/^\+/)) number = '+1' + number
+
+  if (
+    number.startsWith(
+      (countryCodePrefix ? countryCodePrefix : defaultCountryCodePrefix).replace('+', ''),
+    )
+  ) {
+    number = '+' + number
+  }
+
+  if (!number.startsWith('+')) {
+    if (countryCodePrefix) {
+      number = countryCodePrefix + number
+    } else {
+      number = defaultCountryCodePrefix + number
+      Sentry.captureMessage('Tried to normalize phone number without country code, using default', {
+        tags: {
+          domain: 'normalizePhoneNumber',
+        },
+        extra: {
+          payload: passed,
+          countryCode,
+        },
+      })
+    }
+  }
 
   // Add extension back if present
   return number + (extension ? `x${extension}` : '')
 }
 
-function parsePhoneNumber(
-  phoneNumber: string,
-  countryCode: SupportedCountryCodes = DEFAULT_SUPPORTED_COUNTRY_CODE,
-) {
+function parsePhoneNumber(phoneNumber: string, countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE) {
   const phoneLibCountryCode: CountryCode =
     SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE[countryCode]
   try {
@@ -63,7 +94,7 @@ function parsePhoneNumber(
 
 export function formatPhoneNumber(
   phoneNumber: string,
-  countryCode: SupportedCountryCodes = DEFAULT_SUPPORTED_COUNTRY_CODE,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
 ) {
   if (!phoneNumber) return ''
 
@@ -76,7 +107,7 @@ export function formatPhoneNumber(
 
 export function validatePhoneNumber(
   phoneNumber: string,
-  countryCode: SupportedCountryCodes = DEFAULT_SUPPORTED_COUNTRY_CODE,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
 ) {
   if (!phoneNumber) return false
 

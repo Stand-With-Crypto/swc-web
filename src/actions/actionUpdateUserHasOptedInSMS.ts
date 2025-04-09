@@ -73,7 +73,7 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
   logger.info(`updated user ${updatedUser.id}`)
 
   if (phoneNumber) {
-    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
+    updatedUser.smsStatus = await smsActions.optInUser({ phoneNumber, user, countryCode })
     logger.info(`opted in user ${updatedUser.id} to SMS`)
   }
 
