@@ -38,13 +38,13 @@ const GBFinishSettingUpProfileReminderEmail = ({
         <Heading gutterBottom="md">Finish setting up your profile</Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto UK advocate. As a reminder, please take
+          Thank you for signing up to be a Stand With Crypto advocate. As a reminder, please take
           just a few moments to finish setting up your full profile with SWC.
           <br />
           <br />
           Adding additional information will unlock special benefits with SWC, like exclusive
           communications, NFTs, and even more opportunities to engage with the pro-crypto movement
-          we're building in the United Kingdom.
+          we're building.
           <br />
           <br />
           Setting up your profile takes just a few minutes, and is easy to do on our site. Thank you
