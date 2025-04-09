@@ -16,6 +16,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { COOKIE_CONSENT_COOKIE_NAME } from '@/utils/shared/cookieConsent'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
   USER_ACCESS_LOCATION_COOKIE_NAME,
@@ -115,7 +116,13 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
     secure: true,
     maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
   })
-  currentCookies.delete(COOKIE_CONSENT_COOKIE_NAME)
+
+  const isChangingToOrFromUS =
+    validatedFields.data === SupportedCountryCodes.US ||
+    user.countryCode === SupportedCountryCodes.US
+  if (isChangingToOrFromUS) {
+    currentCookies.delete(COOKIE_CONSENT_COOKIE_NAME)
+  }
 
   waitUntil(
     Promise.all([
