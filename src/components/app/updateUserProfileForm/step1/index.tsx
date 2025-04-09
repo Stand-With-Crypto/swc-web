@@ -152,7 +152,7 @@ export function UpdateUserProfileForm({
               control={form.control}
               name="emailAddress"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="mb-4">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="Your email" {...field} />
