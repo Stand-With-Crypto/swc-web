@@ -27,7 +27,7 @@ export const usExternalUrls = {
     NEXT_PUBLIC_ENVIRONMENT === 'production'
       ? 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad'
       : 'https://commerce.coinbase.com/checkout/582a836d-733c-4a66-84d9-4e3c40c90281',
-  emailFeedback: () => 'mailto:info@standwithcrypto.org',
+  emailFeedback: () => 'info@standwithcrypto.org',
   facebook: () => 'https://www.facebook.com/standwithcrypto',
   instagram: () => 'https://www.instagram.com/standwithcrypto/',
   linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
@@ -40,17 +40,17 @@ export const usExternalUrls = {
 export const auExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_AU',
   linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-australia',
-  emailFeedback: () => 'mailto:info@swcinternational.org',
+  emailFeedback: () => 'info@swcinternational.org',
 }
 
 export const gbExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_UK',
   linkedin: () => 'https://www.linkedin.com/company/standwithcryptouk',
-  emailFeedback: () => 'mailto:info@swcinternational.org',
+  emailFeedback: () => 'info@swcinternational.org',
 }
 
 export const caExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_CA',
   linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-canada',
-  emailFeedback: () => 'mailto:info@swcinternational.org',
+  emailFeedback: () => 'info@swcinternational.org',
 }
