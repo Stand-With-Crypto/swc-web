@@ -42,7 +42,7 @@ export function GbPageHome({
           <span className="text-primary-cta">Britons</span> believe in crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
-          See how the community is taking a stand to safeguard the future of crypto in Britain.
+          See how the community is taking a stand to safeguard the future of crypto in the UK.
         </HomePageSection.Subtitle>
 
         <RecentActivity>
