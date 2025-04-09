@@ -45,7 +45,7 @@ const CAContactYourRepresentativeReminderEmail = ({
           hear from you!
           <br />
           <br />
-          Email your representative or call their office and let them know that you care about
+          Email your member of Parliament or call their office and let them know that you care about
           crypto.
         </Text>
       </Section>
