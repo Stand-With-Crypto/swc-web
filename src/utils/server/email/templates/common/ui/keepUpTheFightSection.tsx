@@ -9,8 +9,8 @@ import {
 import { Button } from '@/utils/server/email/templates/common/ui/button'
 import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 function getCountryCTA(countryCode: SupportedCountryCodes) {
   switch (countryCode) {

@@ -72,8 +72,8 @@ export default function AUReferralCompletedEmail({
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
         countryCode={SupportedCountryCodes.AU}
-        hrefSearchParams={hydratedHrefSearchParams}
         hiddenActions={['REFER']}
+        hrefSearchParams={hydratedHrefSearchParams}
       />
     </AUWrapper>
   )

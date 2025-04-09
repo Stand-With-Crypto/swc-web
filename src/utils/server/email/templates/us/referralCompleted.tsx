@@ -71,8 +71,8 @@ export default function USReferralCompletedEmail({
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
         countryCode={SupportedCountryCodes.US}
-        hrefSearchParams={hydratedHrefSearchParams}
         hiddenActions={['REFER']}
+        hrefSearchParams={hydratedHrefSearchParams}
       />
     </USWrapper>
   )

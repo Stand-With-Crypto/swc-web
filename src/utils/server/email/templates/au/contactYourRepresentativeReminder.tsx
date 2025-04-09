@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Hr, Img, Section, Text } from '@react-email/components'
 
 import { AUEmailTemplateProps } from '@/utils/server/email/templates/au/constants'
-import { Button } from '@/utils/server/email/templates/common/ui/button'
 import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import {
   KeepUpTheFightSection,
