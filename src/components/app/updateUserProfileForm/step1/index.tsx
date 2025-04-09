@@ -11,6 +11,7 @@ import { ClientAddress } from '@/clientModels/clientAddress'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { AddressField } from '@/components/app/updateUserProfileForm/step1/addressField'
+import { PrivacyConsentDisclaimer } from '@/components/app/updateUserProfileForm/step1/privacyConsentDisclaimer'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -38,6 +39,7 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
@@ -127,6 +129,8 @@ export function UpdateUserProfileForm({
   const shouldShowAllianceCheckbox =
     countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !defaultValues.current.hasOptedInToMembership
 
+  const shouldShowConsentDisclaimer = countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
+
   return (
     <Form {...form}>
       <form
@@ -143,7 +147,7 @@ export function UpdateUserProfileForm({
           </PageSubTitle>
         </div>
 
-        <div className="flex h-full flex-col space-y-4">
+        <div className="flex h-full flex-col">
           {user.hasEmbeddedWallet || (
             <FormField
               control={form.control}
@@ -159,7 +163,7 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <div className="grid grid-cols-1 space-y-4 md:grid-cols-2 md:gap-8 md:space-y-0">
+          <div className="mb-4 grid grid-cols-1 space-y-4 md:grid-cols-2 md:gap-8 md:space-y-0">
             <FormField
               control={form.control}
               name="firstName"
@@ -189,6 +193,7 @@ export function UpdateUserProfileForm({
           </div>
 
           <AddressField
+            className="mb-4"
             resolvedAddress={resolvedAddress}
             setResolvedAddress={setResolvedAddress}
             user={user}
@@ -200,7 +205,7 @@ export function UpdateUserProfileForm({
                 control={form.control}
                 name="phoneNumber"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="mb-4">
                     <FormLabel>Phone number</FormLabel>
                     <FormControl>
                       <Input
@@ -220,13 +225,14 @@ export function UpdateUserProfileForm({
                 )}
               />
             )}
+          <PrivacyConsentDisclaimer shouldShowConsentDisclaimer={shouldShowConsentDisclaimer} />
           {shouldShowAllianceCheckbox && (
             <FormField
               control={form.control}
               name="hasOptedInToMembership"
               render={({ field }) => (
                 <label className="block">
-                  <FormItem>
+                  <FormItem className="mb-4">
                     <div className="flex flex-row items-center space-x-3 space-y-0">
                       <FormControl>
                         <Checkbox
