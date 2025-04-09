@@ -13,7 +13,7 @@ export function GbHero() {
     <Hero>
       <Hero.Heading>
         <Hero.Title>
-          It’s time to support crypto in <span className="text-primary-cta">Britain</span>
+          It’s time to support crypto in the <span className="text-primary-cta">UK</span>
         </Hero.Title>
         <Hero.Subtitle>
           The British public owns crypto. And yet, crypto’s future in Britain remains uncertain. If
