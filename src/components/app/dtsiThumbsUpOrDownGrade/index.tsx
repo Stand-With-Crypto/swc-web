@@ -3,6 +3,7 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
   isAntiCrypto,
+  isNeutralOnCrypto,
   isProCrypto,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
@@ -30,6 +31,9 @@ export const DTSIThumbsUpOrDownGrade: React.FC<
     }
     if (isAntiCrypto(letterGrade)) {
       return '/dtsiLetterGrade/thumbs-down.svg'
+    }
+    if (isNeutralOnCrypto(letterGrade)) {
+      return '/dtsiLetterGrade/neutral.svg'
     }
     return '/dtsiLetterGrade/no-stance.svg'
   }
