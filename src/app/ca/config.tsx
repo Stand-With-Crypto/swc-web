@@ -44,8 +44,7 @@ export const footerConfig: FooterProps = {
   countryCode,
   title: 'Join the movement for the future of crypto',
   subtitle: 'Protect the future of crypto in Canada. #standwithcrypto',
-  // TODO: uncomment when CBCA is approved
-  // legalText: 'Authorized by Coinbase Canada Inc, 745 Thurlow Street, Suite 2400, 613-866-4125.',
+  legalText: 'Authorized by Coinbase Canada Inc, 745 Thurlow Street, Suite 2400, 613-866-4125.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img

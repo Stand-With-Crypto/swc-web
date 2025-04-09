@@ -73,7 +73,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
-        isCampaignActive: false,
+        isCampaignActive: true,
         title: `Email your Member of Parliament`,
         description:
           'You’ve emailed your Member of Parliament and taken action to help stop unfair debanking.',
