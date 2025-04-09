@@ -36,17 +36,17 @@ const GBPhoneNumberReminderEmail = ({
         />
 
         <Heading gutterBottom="md">
-          Get text updates on crypto policy and invites to UK events
+          Get text updates on crypto policy and invites to local events
         </Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto advocate in the UK. We're reaching out
-          to encourage you to take your advocacy to the next level by adding a phone number to
-          receive text messages from SWC.
+          Thank you for signing up to be a Stand With Crypto advocate. We're reaching out to
+          encourage you to take your advocacy to the next level by adding a phone number to receive
+          text messages from SWC.
           <br />
           <br />
-          You'll receive updates on key crypto bills, exclusive events in the United Kingdom, and
-          opportunities for advocacy. We promise to only reach out when it's important.
+          You'll receive updates on key crypto bills, exclusive events, and opportunities for
+          advocacy. We promise to only reach out when it's important.
           <br />
           <br />
           SWC will never use your phone number for commercial purposes, and we have a robust{' '}
