@@ -56,8 +56,8 @@ const USFollowOnXReminderEmail = ({
           <br />
           <Link className="text-inherit underline" href={US_SOCIAL_MEDIA_URL.twitter}>
             Follow us on X
-          </Link>
-          . and you'll get it all into your feed as it comes. We can't wait to see you there!
+          </Link>{' '}
+          and you'll get it all into your feed as it comes. We can't wait to see you there!
         </Text>
       </Section>
 
