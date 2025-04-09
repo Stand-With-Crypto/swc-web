@@ -11,6 +11,7 @@ import {
   COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX,
 } from '@/utils/shared/intl/displayNames'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { CAUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
@@ -33,6 +34,13 @@ export default async function LocationCanadaPage() {
 
   return (
     <LocationRaces>
+      <LocationRaces.ActionRegisterer
+        input={{
+          campaignName: CAUserActionViewKeyRacesCampaignName.H1_2025,
+          countryCode,
+        }}
+      />
+
       <DarkHeroSection>
         <DarkHeroSection.Title>Key Races in {countryDisplayNameWithPrefix}</DarkHeroSection.Title>
         <DarkHeroSection.Subtitle>

@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -13,6 +14,7 @@ import {
   AUUserActionReferCampaignName,
   AUUserActionTweetCampaignName,
   AUUserActionViewKeyPageCampaignName,
+  AUUserActionViewKeyRacesCampaignName,
 } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
@@ -35,29 +37,6 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
-        ),
-      },
-    ],
-  },
-  [UserActionType.TWEET]: {
-    title: 'Follow us on X',
-    description: 'Stay up to date on crypto policy by following @StandWCrypto_AU on X.',
-    mobileCTADescription: 'Stay up to date on crypto policy.',
-    campaignsModalDescription:
-      'Stay up to date on crypto policy by following @StandWCrypto_AU on X.',
-    image: '/au/actionTypeIcons/tweet.png',
-    campaigns: [
-      {
-        actionType: UserActionType.TWEET,
-        campaignName: AUUserActionTweetCampaignName.DEFAULT,
-        isCampaignActive: true,
-        title: 'Follow us on X',
-        description: 'Stay up to date on crypto policy by following @StandWCrypto_AU on X.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
-            {children}
-          </UserActionFormShareOnTwitterDialog>
         ),
       },
     ],
@@ -85,6 +64,51 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           >
             {children}
           </UserActionViewKeyPageDialog>
+        ),
+      },
+    ],
+  },
+  [UserActionType.VIEW_KEY_RACES]: {
+    title: 'View Key Races in Australia',
+    description:
+      'View the key races occurring across Australia that will impact the future of crypto.',
+    campaignsModalDescription:
+      'View the key races occurring across Australia that will impact the future of crypto.',
+    image: '/au/actionTypeIcons/view-key-races.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VIEW_KEY_RACES,
+        campaignName: AUUserActionViewKeyRacesCampaignName.H1_2025,
+        isCampaignActive: true,
+        title: 'View Key Races in Australia',
+        description:
+          'View the key races occurring across Australia that will impact the future of crypto.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <Link href={getIntlUrls(countryCode).locationKeyRaces()}>{children}</Link>
+        ),
+      },
+    ],
+  },
+  [UserActionType.TWEET]: {
+    title: 'Follow us on X',
+    description: 'Stay up to date on crypto policy by following @StandWCrypto_AU on X.',
+    mobileCTADescription: 'Stay up to date on crypto policy.',
+    campaignsModalDescription:
+      'Stay up to date on crypto policy by following @StandWCrypto_AU on X.',
+    image: '/au/actionTypeIcons/tweet.png',
+    campaigns: [
+      {
+        actionType: UserActionType.TWEET,
+        campaignName: AUUserActionTweetCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Follow us on X',
+        description: 'Stay up to date on crypto policy by following @StandWCrypto_AU on X.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
+            {children}
+          </UserActionFormShareOnTwitterDialog>
         ),
       },
     ],

@@ -11,6 +11,7 @@ import {
   COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX,
 } from '@/utils/shared/intl/displayNames'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { AUUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'
@@ -32,6 +33,13 @@ export default async function LocationAustraliaPage() {
 
   return (
     <LocationRaces>
+      <LocationRaces.ActionRegisterer
+        input={{
+          campaignName: AUUserActionViewKeyRacesCampaignName.H1_2025,
+          countryCode,
+        }}
+      />
+
       <DarkHeroSection>
         <DarkHeroSection.Title>
           Key Races in {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}
