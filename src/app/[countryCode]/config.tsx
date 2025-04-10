@@ -27,11 +27,6 @@ export const navbarConfig: NavbarProps = {
       text: 'Resources',
       children: [
         {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: <Icons.DonateIcon />,
-        },
-        {
           href: urls.referrals(),
           text: 'Referrals',
           icon: <Icons.ReferralsIcon />,

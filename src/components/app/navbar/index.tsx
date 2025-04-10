@@ -61,7 +61,6 @@ export function Navbar({
     width: 41,
     height: 40,
   },
-  showDonateButton = false,
 }: NavbarProps) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
@@ -286,14 +285,7 @@ export function Navbar({
               <div className="mt-4 px-6">
                 <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
               </div>
-              {showDonateButton && (
-                <div className="mt-4 px-6">
-                  <DonateButton
-                    href={urls.donate()}
-                    maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-                  />
-                </div>
-              )}
+
               <div className="mt-4 px-6">
                 <NavbarCountrySelect />
               </div>
@@ -318,22 +310,4 @@ const LoginButton = ({ maybeCloseAfterNavigating }: { maybeCloseAfterNavigating:
       Sign In
     </Button>
   </LoginDialogWrapper>
-)
-
-const DonateButton = ({
-  href,
-  maybeCloseAfterNavigating,
-}: {
-  maybeCloseAfterNavigating: () => void
-  href: string
-}) => (
-  <Button
-    asChild
-    className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
-    key={href}
-    onClick={maybeCloseAfterNavigating}
-    variant="default"
-  >
-    <InternalLink href={href}>Donate</InternalLink>
-  </Button>
 )
