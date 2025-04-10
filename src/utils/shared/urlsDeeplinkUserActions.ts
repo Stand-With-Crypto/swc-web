@@ -1,14 +1,18 @@
 import { UserActionType } from '@prisma/client'
 
-import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionCampaigns,
-  UserActionEmailCampaignName,
-  UserActionPollCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+  COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  isActionSupportedForCountry,
+  UserActionCampaignNames,
+} from '@/utils/shared/userActionCampaigns/index'
+import {
+  USActiveClientUserActionWithCampaignType,
+  USUserActionEmailCampaignName,
+  USUserActionPollCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const parseQueryString = (queryString?: string) => {
   if (!queryString) return ''
@@ -88,33 +92,40 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
   },
+  [UserActionType.VIEW_KEY_PAGE]: {
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/election`
+    },
+  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
 const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
-  [key in ActiveClientUserActionType]?: {
-    [campaign in UserActionCampaigns[key]]?: DeeplinkFunction
+  [actionType in USActiveClientUserActionWithCampaignType]?: {
+    [campaign in UserActionCampaignNames]?: DeeplinkFunction
   }
 } = {
   [UserActionType.EMAIL]: {
-    [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
+    [USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email-debate`
     },
-    [UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]: ({ countryCode }) => {
+    [USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]: ({
+      countryCode,
+    }) => {
       return `${getIntlPrefix(countryCode)}/action/email`
     },
   },
   [UserActionType.POLL]: {
-    [UserActionPollCampaignName.CRYPTO_NEWS]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.CRYPTO_NEWS]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
-    [UserActionPollCampaignName.DIGITAL_ASSETS]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.DIGITAL_ASSETS]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
-    [UserActionPollCampaignName.ENCOURAGE]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.ENCOURAGE]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
-    [UserActionPollCampaignName.OVAL_OFFICE]: ({ countryCode }) => {
+    [USUserActionPollCampaignName.OVAL_OFFICE]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/poll`
     },
   },
@@ -123,7 +134,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
 type GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> = {
   actionType: ActionType
   config: DeeplinkConfig
-  campaign?: UserActionCampaigns[ActionType]
+  campaign?: UserActionCampaignNames
 }
 
 export const getUserActionDeeplink = <
@@ -133,7 +144,11 @@ export const getUserActionDeeplink = <
   config,
   campaign,
 }: GetUserActionDeeplinkArgs<ActionType>) => {
-  if (!campaign || campaign === USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType]) {
+  const isDefaultCampaign =
+    isActionSupportedForCountry(config.countryCode, actionType) &&
+    campaign === COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[config.countryCode][actionType]
+
+  if (!campaign || isDefaultCampaign) {
     return USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl(config)
   }
 

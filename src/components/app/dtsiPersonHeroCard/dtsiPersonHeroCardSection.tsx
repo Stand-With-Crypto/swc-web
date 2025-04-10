@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import { ContentSection } from '@/components/app/ContentSection'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { Button } from '@/components/ui/button'
@@ -11,7 +12,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface DTSIPersonHeroCardSectionProps {
   countryCode: SupportedCountryCodes
-  title: React.ReactNode
+  title?: React.ReactNode
   titleProps?: PageTitleProps
   subtitle?: React.ReactNode
   cta?: ReactNode
@@ -41,6 +42,7 @@ export function DTSIPersonHeroCardSection({
         {recommended && (
           <DTSIPersonHeroCard
             countryCode={countryCode}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             forceMobile={forceMobile}
             isRecommended
             person={recommended}
@@ -51,6 +53,7 @@ export function DTSIPersonHeroCardSection({
         {others.map(person => (
           <DTSIPersonHeroCard
             countryCode={countryCode}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             forceMobile={forceMobile}
             key={person.id}
             person={person}

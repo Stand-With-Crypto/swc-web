@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { zodReferralId } from '@/validation/fields/zodReferrald'
+import { zodReferralId } from '@/validation/fields/zodReferralId'
 
 const referralSchema = z.object({
   utm_source: z.literal('swc'),

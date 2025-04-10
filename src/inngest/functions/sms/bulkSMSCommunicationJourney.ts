@@ -15,10 +15,15 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { BULK_WELCOME_MESSAGE } from '@/utils/server/sms/messages'
-import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
+import { isPhoneNumberCountrySupported } from '@/utils/server/sms/utils'
 import { prettyStringify } from '@/utils/shared/prettyLog'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
@@ -42,6 +47,7 @@ export interface BulkSMSPayload {
   send?: boolean
   // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
   sleepTime?: string | number
+  countryCode?: SupportedCountryCodes
 }
 
 const MAX_RETRY_COUNT = 1
@@ -63,7 +69,21 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { send, sleepTime, messages, timezone = -5 } = event.data
+    const {
+      send,
+      sleepTime,
+      messages,
+      timezone = -5,
+      countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+    } = event.data
+
+    if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode as SupportedCountryCodes)) {
+      throw new NonRetriableError(
+        `Country code ${countryCode} is not supported. Supported country codes are: ${ORDERED_SUPPORTED_COUNTRIES.join(
+          ', ',
+        )}`,
+      )
+    }
 
     if (!messages) {
       throw new NonRetriableError('Missing messages to send')
@@ -180,7 +200,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           skip += phoneNumberList.length
           index += 1
 
-          allPhoneNumbers.push(...phoneNumberList.filter(isPhoneNumberSupported))
+          allPhoneNumbers.push(
+            ...phoneNumberList.filter(phoneNumber =>
+              isPhoneNumberCountrySupported(phoneNumber, countryCode),
+            ),
+          )
 
           logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
 
@@ -311,6 +335,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           function: enqueueSMS,
           data: {
             payload: payloadChunk,
+            countryCode,
           },
         },
       )

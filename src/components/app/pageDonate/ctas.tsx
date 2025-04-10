@@ -4,7 +4,10 @@ import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
-const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT', 'DONATION']
+const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = [
+  UserActionType.NFT_MINT,
+  UserActionType.DONATION,
+]
 
 export function CTAs() {
   return (
@@ -16,10 +19,7 @@ export function CTAs() {
         Do your part to help protect crypto without opening your wallet.
       </PageSubTitle>
 
-      <UserActionGridCTAs
-        className="lg:grid-cols-3 lg:place-items-center"
-        excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES}
-      />
+      <UserActionGridCTAs excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES} />
     </section>
   )
 }

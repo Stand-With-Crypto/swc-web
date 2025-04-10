@@ -1,109 +1,91 @@
+import { lazy } from 'react'
 import { getYear } from 'date-fns'
 
-import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
-import { HeroCTA } from '@/components/app/pageHome/heroCTA'
+import { CookieConsentFooterButton } from '@/components/app/cookieConsent/common/cookieConsentFooterButton'
+import { HeroCTA } from '@/components/app/pageHome/common/hero/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { externalUrls, getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+
+const SendFeedbackButton = lazy(() =>
+  import('@/components/app/footer/sendFeedback').then(m => ({
+    default: m.SendFeedbackButton,
+  })),
+)
 
 const footerLinkStyles = cn('block text-gray-400')
 
-export function Footer({ countryCode }: { countryCode: SupportedCountryCodes }) {
-  const urls = getIntlUrls(countryCode)
+export interface FooterProps {
+  countryCode: SupportedCountryCodes
+  title: string
+  subtitle: string
+  links: {
+    text: string
+    href: string
+  }[]
+  socialLinks: {
+    text: string
+    href: string
+  }[]
+  sendFeedbackLink?: string
+  legalText?: string
+  footerBanner?: React.ReactNode
+}
 
+export function Footer({
+  title,
+  subtitle,
+  links,
+  socialLinks,
+  sendFeedbackLink,
+  footerBanner,
+  countryCode,
+  legalText,
+}: FooterProps) {
   return (
-    <footer className="mt-36 border-t bg-black py-24 text-muted antialiased">
-      <div className="container">
-        <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
-          <div className="max-w-2xl space-y-8">
-            <PageTitle as="h6" className="text-left" size={DEFAULT_PAGE_TITLE_SIZE}>
-              Fight for Crypto Rights
-            </PageTitle>
-            <p className="text-xl">
-              Join to show your support, collect advocacy NFTs, and protect the future of crypto.
-              #StandWithCrypto
-            </p>
-            <HeroCTA />
-          </div>
-          <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
-            <div className="space-y-3 sm:space-y-6">
-              <ExternalLink className={footerLinkStyles} href={externalUrls.twitter()}>
-                Twitter / X
-              </ExternalLink>
-              <ExternalLink className={footerLinkStyles} href={externalUrls.youtube()}>
-                Youtube
-              </ExternalLink>
-              <ExternalLink className={footerLinkStyles} href={externalUrls.instagram()}>
-                Instagram
-              </ExternalLink>
-              <ExternalLink className={footerLinkStyles} href={externalUrls.facebook()}>
-                Facebook
-              </ExternalLink>
-              <ExternalLink className={footerLinkStyles} href={externalUrls.linkedin()}>
-                LinkedIn
-              </ExternalLink>
-              <ExternalLink className={footerLinkStyles} href={externalUrls.discord()}>
-                Discord
-              </ExternalLink>
-              <ExternalLink className={footerLinkStyles} href={externalUrls.emailFeedback()}>
-                Send feedback
-              </ExternalLink>
+    <div className="mt-36">
+      {footerBanner}
+      <footer className="bg-black py-24 text-muted antialiased">
+        <div className="container">
+          <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
+            <div className="max-w-2xl space-y-8">
+              <PageTitle as="h6" className="text-left" size={DEFAULT_PAGE_TITLE_SIZE}>
+                {title}
+              </PageTitle>
+              <p className="text-xl">{subtitle}</p>
+              <HeroCTA countryCode={countryCode} />
             </div>
-            <div className="space-y-3 sm:space-y-6">
-              <InternalLink className={footerLinkStyles} href={urls.termsOfService()}>
-                Terms of service
-              </InternalLink>
-              <InternalLink className={footerLinkStyles} href={urls.privacyPolicy()}>
-                Privacy Policy
-              </InternalLink>
-              <CookieConsentFooterButton
-                className={cn(footerLinkStyles, 'h-auto text-wrap p-0 text-left text-base')}
-                variant={'link'}
-              />
-              <InternalLink className={footerLinkStyles} href={urls.contribute()}>
-                Contribute
-              </InternalLink>
-              <InternalLink className={footerLinkStyles} href={urls.questionnaire()}>
-                Questionnaire
-              </InternalLink>
-              <InternalLink className={footerLinkStyles} href={urls.leaderboard()}>
-                Community
-              </InternalLink>
-              <InternalLink className={footerLinkStyles} href={urls.resources()}>
-                FIT21 resources
-              </InternalLink>
+            <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
+              <div className="space-y-3 sm:space-y-6">
+                {socialLinks.map(({ text, href }) => (
+                  <ExternalLink className={footerLinkStyles} href={href} key={href}>
+                    {text}
+                  </ExternalLink>
+                ))}
+                {sendFeedbackLink && <SendFeedbackButton href={sendFeedbackLink} />}
+              </div>
+              <div className="space-y-3 sm:space-y-6">
+                {links.map(({ text, href }) => (
+                  <InternalLink className={footerLinkStyles} href={href} key={href}>
+                    {text}
+                  </InternalLink>
+                ))}
+                <CookieConsentFooterButton
+                  className={cn(footerLinkStyles, 'h-auto text-wrap p-0 text-left text-base')}
+                  variant={'link'}
+                />
+              </div>
             </div>
           </div>
+
+          {legalText && <div className="mt-4 text-sm text-muted">{legalText}</div>}
+
+          <div className="mt-4 text-sm text-muted">
+            Stand With Crypto ©️ All rights reserved {getYear(new Date())}
+          </div>
         </div>
-        <div className="mb-2 text-xs text-muted">
-          Information about people’s stances on crypto sourced from{' '}
-          <a className={'hover:underline'} href="https://www.dotheysupportit.com/" target="_blank">
-            DoTheySupportIt.com
-          </a>{' '}
-          For more information, visit DoTheySupportIt’s{' '}
-          <a
-            className={'hover:underline'}
-            href="https://www.dotheysupportit.com/privacy-policy"
-            target="_blank"
-          >
-            privacy policy
-          </a>{' '}
-          and{' '}
-          <a
-            className={'hover:underline'}
-            href="https://www.dotheysupportit.com/terms-and-conditions"
-            target="_blank"
-          >
-            terms and conditions
-          </a>
-          .
-        </div>
-        <div className="text-sm text-muted">
-          Stand With Crypto ©️ All rights reserved {getYear(new Date())}
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   )
 }

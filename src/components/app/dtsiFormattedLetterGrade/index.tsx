@@ -14,7 +14,7 @@ export const DTSIFormattedLetterGrade: React.FC<
       }
     | { letterGrade: DTSILetterGrade | null }
   ) & {
-    className: string
+    className?: string
   }
 > = ({ className, ...other }) => {
   const letterGrade =

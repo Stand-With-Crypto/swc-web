@@ -1,24 +1,12 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { JSX, useCallback, useState } from 'react'
 import { useIsPreviewing } from '@builder.io/react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
 import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import {
-  AdvocacyToolkitIcon,
-  BillsIcon,
-  CommunityIcon,
-  CreatorDefenseIcon,
-  DonateIcon,
-  MissionIcon,
-  PartnersIcon,
-  PollIcon,
-  PressIcon,
-  ReferralsIcon,
-} from '@/components/app/navbar/navbarDrawerIcons'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import {
   Accordion,
@@ -36,78 +24,50 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) {
+import { NavbarCountrySelect } from './navbarCountrySelect'
+
+export type NavbarItem =
+  | {
+      href: string
+      text: string
+      children?: undefined
+    }
+  | {
+      text: string
+      children: {
+        href: string
+        text: string
+        icon: JSX.Element
+      }[]
+      href?: undefined
+    }
+
+export interface NavbarProps {
+  countryCode: SupportedCountryCodes
+  items: NavbarItem[]
+  showDonateButton?: boolean
+  logo?: {
+    src: string
+    width: number
+    height: number
+  }
+}
+
+export function Navbar({
+  countryCode,
+  items,
+  logo = {
+    src: '/logo/shield.svg',
+    width: 41,
+    height: 40,
+  },
+  showDonateButton = false,
+}: NavbarProps) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
   const urls = getIntlUrls(countryCode)
   const [hoveredMenuIndex, setHoveredMenuIndex] = useState<number | null>(null)
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
-
-  const leftLinks = [
-    {
-      href: urls.politiciansHomepage(),
-      text: 'Politician scores',
-    },
-    {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
-      text: 'Resources',
-      children: [
-        {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: DonateIcon,
-        },
-        {
-          href: urls.polls(),
-          text: 'Polls',
-          icon: PollIcon,
-        },
-        {
-          href: urls.referrals(),
-          text: 'Referrals',
-          icon: ReferralsIcon,
-        },
-        {
-          href: urls.about(),
-          text: 'Our mission',
-          icon: MissionIcon,
-        },
-        {
-          href: urls.community(),
-          text: 'Community',
-          icon: CommunityIcon,
-        },
-        {
-          href: urls.partners(),
-          text: 'Partners',
-          icon: PartnersIcon,
-        },
-        {
-          href: urls.bills(),
-          text: 'Bills',
-          icon: BillsIcon,
-        },
-        {
-          href: urls.creatorDefenseFund(),
-          text: 'Creator Defense Fund',
-          icon: CreatorDefenseIcon,
-        },
-        {
-          href: urls.advocacyToolkit(),
-          text: 'Advocacy toolkit',
-          icon: AdvocacyToolkitIcon,
-        },
-        {
-          href: urls.press(),
-          text: 'Press',
-          icon: PressIcon,
-        },
-      ],
-    },
-  ]
 
   const maybeCloseAfterNavigating = useCallback(() => {
     if (dialogProps.open) {
@@ -136,22 +96,16 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
 
       <nav
         className={cn(
-          'sticky top-0 z-20 flex h-[72px] w-full items-center bg-white py-3 min-[1096px]:h-[84px] min-[1096px]:py-5',
+          'sticky top-0 z-20 flex h-[72px] w-full items-center justify-center bg-white py-3 pl-3 min-[1096px]:h-[84px] min-[1096px]:px-8 min-[1096px]:py-5',
         )}
       >
-        <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
+        <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
-            <NextImage
-              alt="Stand With Crypto Logo"
-              height={40}
-              priority
-              src="/logo/shield.svg"
-              width={41}
-            />
+            <NextImage alt="Stand With Crypto Logo" priority {...logo} />
           </InternalLink>
           <div className="flex gap-4">
             <div className="flex h-fit gap-4 rounded-full bg-secondary">
-              {leftLinks.map(({ href, text, children }, index) => (
+              {items.map(({ href, text, children }, index) => (
                 <div
                   className="nav-item group relative"
                   key={text}
@@ -167,7 +121,11 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                     }
                   }}
                 >
-                  <Button asChild className="hidden min-[1096px]:block" variant="secondary">
+                  <Button
+                    asChild
+                    className="hidden min-[1096px]:block"
+                    variant={href === urls.donate() ? 'default' : 'secondary'}
+                  >
                     {children ? (
                       <span className="select-none">
                         <div className="flex cursor-default items-center gap-2">
@@ -206,45 +164,40 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                         }
                       }}
                     >
-                      {children.map(
-                        ({ href: childHref, text: childText, icon: Icon }, childIndex) => (
-                          <Button
-                            asChild
+                      {children.map(({ href: childHref, text: childText, icon }, childIndex) => (
+                        <Button
+                          asChild
+                          className={cn(
+                            'block w-full rounded-b-none rounded-t-none font-sans text-base font-bold',
+                            childIndex === 0 && 'rounded-t-[24px]',
+                            childIndex === children.length - 1 && 'rounded-b-[24px]',
+                          )}
+                          key={childHref}
+                          variant="ghost"
+                        >
+                          <InternalLink
                             className={cn(
-                              'block w-full rounded-b-none rounded-t-none font-sans text-base font-bold',
+                              'flex px-0 py-0',
+                              !!icon &&
+                                'items-center justify-start gap-2 rounded-b-none rounded-t-none p-6',
                               childIndex === 0 && 'rounded-t-[24px]',
                               childIndex === children.length - 1 && 'rounded-b-[24px]',
                             )}
-                            key={childHref}
-                            variant="ghost"
+                            href={childHref}
+                            onClick={() => setHoveredMenuIndex(null)}
                           >
-                            <InternalLink
-                              className={cn(
-                                'flex px-0 py-0',
-                                !!Icon &&
-                                  'items-center justify-start gap-2 rounded-b-none rounded-t-none p-6',
-                                childIndex === 0 && 'rounded-t-[24px]',
-                                childIndex === children.length - 1 && 'rounded-b-[24px]',
-                              )}
-                              href={childHref}
-                              onClick={() => setHoveredMenuIndex(null)}
-                            >
-                              {Icon && <Icon />}
-                              {childText}
-                            </InternalLink>
-                          </Button>
-                        ),
-                      )}
+                            {icon}
+                            {childText}
+                          </InternalLink>
+                        </Button>
+                      ))}
                     </div>
                   )}
                 </div>
               ))}
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
-              <DonateButton
-                href={urls.donate()}
-                maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-              />
+              <NavbarCountrySelect />
               <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
             </div>
           </div>
@@ -260,13 +213,7 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
             <div className="h-screen overflow-y-auto pb-6 text-left">
               <div className="flex justify-between p-6">
                 <InternalLink className="flex-shrink-0" href={urls.home()}>
-                  <NextImage
-                    alt="Stand With Crypto Logo"
-                    height={40}
-                    priority
-                    src="/logo/shield.svg"
-                    width={41}
-                  />
+                  <NextImage alt="Stand With Crypto Logo" priority {...logo} />
                 </InternalLink>
                 <DrawerClose asChild>
                   <Button className="px-0" variant="ghost">
@@ -275,7 +222,7 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                 </DrawerClose>
               </div>
 
-              {leftLinks.map(({ href, text, children }) => {
+              {items.map(({ href, text, children }) => {
                 if (children) {
                   const accordionTitle = text
                   return (
@@ -300,7 +247,7 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                           {accordionTitle}
                         </AccordionTrigger>
                         <AccordionContent>
-                          {children.map(({ href: childHref, text: childText, icon: Icon }) => (
+                          {children.map(({ href: childHref, text: childText, icon }) => (
                             <Button
                               asChild
                               className="block w-full font-sans text-xl font-bold"
@@ -310,12 +257,12 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                               <InternalLink
                                 className={cn(
                                   'flex p-6 first:pt-3',
-                                  !!Icon && 'items-center justify-start gap-3',
+                                  !!icon && 'items-center justify-start gap-3',
                                 )}
                                 href={childHref}
                                 onClick={maybeCloseAfterNavigating}
                               >
-                                {Icon && <Icon />}
+                                {icon}
                                 {childText}
                               </InternalLink>
                             </Button>
@@ -339,14 +286,20 @@ export function Navbar({ countryCode }: { countryCode: SupportedCountryCodes }) 
                   </Button>
                 )
               })}
+
               <div className="mt-4 px-6">
                 <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
               </div>
+              {showDonateButton && (
+                <div className="mt-4 px-6">
+                  <DonateButton
+                    href={urls.donate()}
+                    maybeCloseAfterNavigating={maybeCloseAfterNavigating}
+                  />
+                </div>
+              )}
               <div className="mt-4 px-6">
-                <DonateButton
-                  href={urls.donate()}
-                  maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-                />
+                <NavbarCountrySelect />
               </div>
             </div>
           </DrawerContent>

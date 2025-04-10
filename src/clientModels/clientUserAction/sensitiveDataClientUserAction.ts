@@ -13,6 +13,7 @@ import {
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
+  UserActionViewKeyPage,
   UserActionViewKeyRaces,
   UserActionVoterAttestation,
   UserActionVoterRegistration,
@@ -23,6 +24,7 @@ import {
 import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
@@ -57,6 +59,7 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
         userActionPollAnswers: UserActionPollAnswer[]
       })
     | null
+  userActionViewKeyPage: UserActionViewKeyPage | null
 }
 
 type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'>
@@ -136,6 +139,11 @@ type SensitiveDataClientUserActionPoll = {
   userActionPollAnswers: SensitiveDataClientUserActionPollAnswer[]
 }
 
+type SensitiveDataClientUserActionViewKeyPage = {
+  actionType: typeof UserActionType.VIEW_KEY_PAGE
+  path: string
+}
+
 type SensitiveDataClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
   actionType: typeof UserActionType.REFER
 }
@@ -147,6 +155,7 @@ export type SensitiveDataClientUserAction = ClientModel<
   Pick<UserAction, 'id' | 'actionType' | 'campaignName'> & {
     nftMint: ClientNFTMint | null
     datetimeCreated: string
+    countryCode: SupportedCountryCodes
   } & (
       | SensitiveDataClientUserActionTweet
       | SensitiveDataClientUserActionOptIn
@@ -164,6 +173,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionVotingDay
       | SensitiveDataClientUserActionRefer
       | SensitiveDataClientUserActionPoll
+      | SensitiveDataClientUserActionViewKeyPage
     )
 >
 
@@ -185,7 +195,7 @@ export const getSensitiveDataClientUserAction = ({
 }: {
   record: SensitiveDataClientUserActionDatabaseQuery
 }): SensitiveDataClientUserAction => {
-  const { id, datetimeCreated, actionType, nftMint, campaignName } = record
+  const { id, datetimeCreated, actionType, nftMint, campaignName, countryCode } = record
   const sharedProps = {
     id,
     datetimeCreated: datetimeCreated.toISOString(),
@@ -196,6 +206,7 @@ export const getSensitiveDataClientUserAction = ({
           ...getClientNFTMint(nftMint),
         }
       : null,
+    countryCode: countryCode as SupportedCountryCodes,
   }
 
   const actionTypes: {
@@ -345,6 +356,14 @@ export const getSensitiveDataClientUserAction = ({
         })),
       }
       return getClientModel({ ...sharedProps, ...pollFields })
+    },
+    [UserActionType.VIEW_KEY_PAGE]: () => {
+      const { path } = getRelatedModel(record, 'userActionViewKeyPage')
+      const viewKeyPageFields: SensitiveDataClientUserActionViewKeyPage = {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        path,
+      }
+      return getClientModel({ ...sharedProps, ...viewKeyPageFields })
     },
   }
 

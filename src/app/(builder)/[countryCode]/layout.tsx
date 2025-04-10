@@ -1,26 +1,21 @@
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import NextTopLoader from 'nextjs-toploader'
 
-import { TopLevelBuilderClientLogic } from '@/app/(builder)/[countryCode]/topLevelBuilderClientLogic'
-import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
-import { CookieConsent } from '@/components/app/cookieConsent'
-import { GoogleTagManager } from '@/components/app/googleTagManager'
-import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
-import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
-import { FullHeight } from '@/components/ui/fullHeight'
-import { Toaster } from '@/components/ui/sonner'
+import { TopLevelBuilderClientLogic } from '@/components/app/builder/topLevelBuilderClientLogic'
+import { PageLayout } from '@/components/app/layout/layout'
+import { GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE } from '@/components/app/navbarGlobalBanner/common/constants'
 import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
-import { generateMetadataDetails, TOP_LEVEL_METADATA_DETAILS } from '@/utils/server/metadataUtils'
+import {
+  generateMetadataDetails,
+  generateTopLevelMetadataDetails,
+} from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
-  COUNTRY_CODE_TO_LOCALE,
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
   ORDERED_SUPPORTED_COUNTRIES,
 } from '@/utils/shared/supportedCountries'
-import { fontClassName } from '@/utils/web/fonts'
 
 export { viewport } from '@/utils/server/metadataUtils'
 
@@ -45,7 +40,7 @@ export const metadata: Metadata = {
     default: title,
     template: '%s | Stand With Crypto',
   },
-  ...TOP_LEVEL_METADATA_DETAILS,
+  ...generateTopLevelMetadataDetails(DEFAULT_SUPPORTED_COUNTRY_CODE),
 }
 
 export default async function Layout({
@@ -59,27 +54,13 @@ export default async function Layout({
   }
 
   return (
-    <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
-      <GoogleTagManager />
-      <body className={fontClassName}>
-        <OverrideGlobalLocalStorage />
-        <NextTopLoader
-          color="hsl(var(--primary-cta))"
-          shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
-          showSpinner={false}
-        />
-        <TopLevelClientLogic countryCode={countryCode}>
-          <TopLevelBuilderClientLogic>
-            <FullHeight.Container>
-              <NavBarGlobalBanner />
-              <FullHeight.Content>{children}</FullHeight.Content>
-            </FullHeight.Container>
-          </TopLevelBuilderClientLogic>
-        </TopLevelClientLogic>
-        <Toaster />
-        <CookieConsent countryCode={countryCode} />
-        <SpeedInsights debug={false} sampleRate={0.04} />
-      </body>
-    </html>
+    <PageLayout
+      countryCode={countryCode}
+      footer={null}
+      globalBanner={GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE[countryCode]}
+      navbar={null}
+    >
+      <TopLevelBuilderClientLogic>{children}</TopLevelBuilderClientLogic>
+    </PageLayout>
   )
 }

@@ -9,20 +9,25 @@ import { base } from 'thirdweb/chains'
 import { ConnectEmbed, ConnectEmbedProps, useConnect } from 'thirdweb/react'
 import { createWallet, createWalletAdapter, generateAccount } from 'thirdweb/wallets'
 
-import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
+import {
+  ANALYTICS_NAME_LOGIN,
+  COUNTRY_SPECIFIC_LOGIN_CONTENT,
+} from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { generateThirdwebLoginPayload } from '@/utils/server/thirdweb/getThirdwebLoginPayload'
 import { isLoggedIn } from '@/utils/server/thirdweb/isLoggedIn'
 import { login } from '@/utils/server/thirdweb/onLogin'
 import { onLogout } from '@/utils/server/thirdweb/onLogout'
 import { isCypress } from '@/utils/shared/executionEnvironment'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { apiUrls } from '@/utils/shared/urls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
@@ -31,14 +36,8 @@ import { theme } from '@/utils/web/thirdweb/theme'
 
 export interface ThirdwebLoginContentProps extends Omit<ConnectEmbedProps, 'client'> {
   initialEmailAddress?: string | null
-  title?: React.ReactNode
-  subtitle?: React.ReactNode
   onLoginCallback?: () => Promise<void> | void
 }
-
-const DEFAULT_TITLE = 'Join Stand With Crypto'
-const DEFAULT_SUBTITLE =
-  'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
 
 const appMetadata = {
   name: 'Stand With Crypto',
@@ -50,8 +49,6 @@ const appMetadata = {
 
 export function ThirdwebLoginContent({
   initialEmailAddress,
-  title = DEFAULT_TITLE,
-  subtitle = DEFAULT_SUBTITLE,
   onLoginCallback,
   ...props
 }: ThirdwebLoginContentProps) {
@@ -59,6 +56,9 @@ export function ThirdwebLoginContent({
   const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const swrConfig = useSWRConfig()
+  const countryCode = useCountryCode()
+
+  const { title, subtitle, footerContent, iconSrc } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
 
   const handleLogin = useCallback(async () => {
     if (onLoginCallback) {
@@ -102,13 +102,7 @@ export function ThirdwebLoginContent({
       <DialogBody>
         <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
           <div className="flex flex-col items-center space-y-6">
-            <NextImage
-              alt="Stand With Crypto Logo"
-              height={80}
-              priority
-              src="/logo/shield.svg"
-              width={80}
-            />
+            <NextImage alt="Stand With Crypto Logo" height={80} priority src={iconSrc} width={80} />
 
             <div className="space-y-4">
               <PageTitle size="sm">{title}</PageTitle>
@@ -130,17 +124,10 @@ export function ThirdwebLoginContent({
         <DialogFooterCTA className="mt-auto px-6 pb-2">
           <p className="text-center text-xs text-muted-foreground">
             <span className="text-[10px]">
-              By signing up with your phone number, you consent to receive recurring texts from
-              Stand With Crypto. You can reply STOP to stop receiving texts. Message and data rates
-              may apply. You understand that Stand With Crypto and its vendors may collect and use
-              your Personal Information. To learn more, visit the{' '}
+              {footerContent} To learn more, visit the{' '}
               <InternalLink href={urls.privacyPolicy()} target="_blank">
-                Stand With Crypto Alliance Privacy Policy
-              </InternalLink>{' '}
-              and{' '}
-              <ExternalLink href="https://www.quorum.us/privacy-policy/">
-                Quorum Privacy Policy
-              </ExternalLink>
+                Stand With Crypto Privacy Policy
+              </InternalLink>
               .
             </span>
           </p>
@@ -159,6 +146,7 @@ function ThirdwebLoginEmbedded(
   const hasTracked = useRef(false)
   const { connect } = useConnect()
   const searchParams = useSearchParams()
+  const countryCode = useCountryCode()
 
   const searchParamsObject = searchParams ? Object.fromEntries(searchParams.entries()) : {}
 
@@ -176,7 +164,11 @@ function ThirdwebLoginEmbedded(
       </div>
     )
   }
-  const embeddedAuthOptions: AuthOption[] = ['google', 'phone', 'email']
+  const embeddedAuthOptions: AuthOption[] = [
+    'google',
+    ...(countryCode === SupportedCountryCodes.US ? ['phone' as AuthOption] : []),
+    'email',
+  ]
 
   const supportedWallets = [
     createWallet('com.coinbase.wallet', { appMetadata }),

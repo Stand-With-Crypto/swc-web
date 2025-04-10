@@ -1,8 +1,9 @@
 import { UserActionType } from '@prisma/client'
 import { flatMap } from 'lodash-es'
 
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
@@ -17,11 +18,13 @@ export interface GetUserActionsProgressArgs {
     actionType: UserActionType
     campaignName: string
   }[]
+  countryCode: SupportedCountryCodes
 }
 
 export function getUserActionsProgress({
   userHasEmbeddedWallet,
   performedUserActionTypes,
+  countryCode,
 }: GetUserActionsProgressArgs) {
   const excludeUserActionTypes = new Set<UserActionType>(
     userHasEmbeddedWallet
@@ -38,12 +41,10 @@ export function getUserActionsProgress({
     {} as Record<string, any>,
   )
 
-  const allCampaignsCombined: Array<UserActionGridCTACampaign> = flatMap(
-    USER_ACTION_CTAS_FOR_GRID_DISPLAY,
-    cta => {
-      return cta.campaigns.filter(campaign => !excludeUserActionTypes.has(campaign.actionType))
-    },
-  )
+  const ctas = getUserActionCTAsByCountry(countryCode)
+  const allCampaignsCombined: Array<UserActionGridCTACampaign> = flatMap(ctas, cta => {
+    return cta.campaigns.filter(campaign => !excludeUserActionTypes.has(campaign.actionType))
+  })
 
   const filteredActiveAndCompletedCampaigns = allCampaignsCombined.filter(
     campaign =>

@@ -45,7 +45,8 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
@@ -66,31 +67,32 @@ const zodExternalUserActionOptInUserAddress = object({
 })
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const zodExternalUserActionOptIn = z.object({
-  emailAddress: zodEmailAddress,
-  cryptoAddress: string()
-    .optional()
-    .refine(str => !str || isAddress(str), { message: 'Invalid Ethereum address' })
-    .transform(str => str && str.toLowerCase()),
-  optInType: z.nativeEnum(UserActionOptInType),
-  campaignName: z.string(),
-  isVerifiedEmailAddress: z.boolean(),
-  firstName: zodFirstName.optional(),
-  lastName: zodLastName.optional(),
-  address: zodExternalUserActionOptInUserAddress.optional(),
-  phoneNumber: zodOptionalEmptyPhoneNumber.optional(),
-  hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
-  hasOptedInToEmails: z.boolean().optional(),
-  hasOptedInToMembership: z.boolean().optional(),
-  acquisitionOverride: z
-    .object({
-      source: z.string(),
-      medium: z.string(),
-    })
-    .optional(),
-  additionalAnalyticsProperties: z.record(z.string()).optional(),
-  countryCode: zodSupportedCountryCode,
-})
+const getZodExternalUserActionOptInSchema = (countryCode: SupportedCountryCodes) =>
+  z.object({
+    emailAddress: zodEmailAddress,
+    cryptoAddress: string()
+      .optional()
+      .refine(str => !str || isAddress(str), { message: 'Invalid Ethereum address' })
+      .transform(str => str && str.toLowerCase()),
+    optInType: z.nativeEnum(UserActionOptInType),
+    campaignName: z.string(),
+    isVerifiedEmailAddress: z.boolean(),
+    firstName: zodFirstName.optional(),
+    lastName: zodLastName.optional(),
+    address: zodExternalUserActionOptInUserAddress.optional(),
+    phoneNumber: zodOptionalEmptyPhoneNumber(countryCode).optional(),
+    hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
+    hasOptedInToEmails: z.boolean().optional(),
+    hasOptedInToMembership: z.boolean().optional(),
+    acquisitionOverride: z
+      .object({
+        source: z.string(),
+        medium: z.string(),
+      })
+      .optional(),
+    additionalAnalyticsProperties: z.record(z.string()).optional(),
+    countryCode: zodSupportedCountryCode,
+  })
 
 const logger = getLogger('handleExternalUserActionOptIn')
 
@@ -106,7 +108,7 @@ type UserWithRelations = User & {
   address?: Address | null
 }
 
-type Input = z.infer<typeof zodExternalUserActionOptIn> & {
+type Input = z.infer<ReturnType<typeof getZodExternalUserActionOptInSchema>> & {
   partner?: VerifiedSWCPartner
 }
 
@@ -189,7 +191,7 @@ export async function handleExternalUserActionOptIn(
   }
 
   if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber) {
-    await smsActions.optInUser(input.phoneNumber, user)
+    await smsActions.optInUser({ phoneNumber: input.phoneNumber, user, countryCode })
   }
 
   if (existingAction) {
@@ -219,6 +221,9 @@ export async function handleExternalUserActionOptIn(
       userId: existingAction.user.id,
     }
   }
+
+  const userActionCampaignName =
+    COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode].OPT_IN
   const userAction = await prismaClient.userAction.create({
     include: {
       user: {
@@ -229,7 +234,7 @@ export async function handleExternalUserActionOptIn(
     },
     data: {
       actionType,
-      campaignName: UserActionOptInCampaignName.DEFAULT,
+      campaignName: userActionCampaignName,
       userActionOptIn: {
         create: {
           optInType,

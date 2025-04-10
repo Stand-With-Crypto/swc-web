@@ -25,6 +25,7 @@ export type SensitiveDataClientUser = ClientModel<
     | 'hasOptedInToMembership'
     | 'smsStatus'
     | 'referralId'
+    | 'countryCode'
   > & {
     hasEmbeddedWallet: boolean
     datetimeCreated: string
@@ -59,6 +60,7 @@ export const getSensitiveDataClientUser = (
     referralId,
     address,
     smsStatus,
+    countryCode,
   } = record
   const userLocationDetails = address
     ? {
@@ -86,6 +88,7 @@ export const getSensitiveDataClientUser = (
     hasOptedInToMembership,
     userLocationDetails,
     smsStatus,
+    countryCode,
   })
 }
 

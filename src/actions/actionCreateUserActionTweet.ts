@@ -12,8 +12,8 @@ import {
 import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -33,8 +33,7 @@ import { withValidations } from '@/utils/server/userActionValidation/withValidat
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`actionCreateUserActionTweet`)
 
@@ -46,12 +45,12 @@ type UserWithRelations = User & {
 export const actionCreateUserActionTweet = withServerActionMiddleware(
   'actionCreateUserActionTweet',
   withValidations(
-    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
+    [createCountryCodeValidation(Object.values(SupportedCountryCodes))],
     _actionCreateUserActionTweet,
   ),
 )
 
-async function _actionCreateUserActionTweet() {
+async function _actionCreateUserActionTweet({ campaignName }: { campaignName: string }) {
   logger.info('triggered')
 
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
@@ -66,7 +65,7 @@ async function _actionCreateUserActionTweet() {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
-  const countryCode = await getCountryCodeCookie()
+  const countryCode = await getUserAccessLocationCookie()
 
   if (!userMatch.user) {
     await triggerRateLimiterAtMostOnce()
@@ -85,13 +84,14 @@ async function _actionCreateUserActionTweet() {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
   logger.info('fetched/created user')
-  const campaignName = USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.TWEET]
+
   const actionType = UserActionType.TWEET
   let userAction = await prismaClient.userAction.findFirst({
     where: {
       actionType,
       campaignName,
       userId: user.id,
+      countryCode,
     },
   })
 

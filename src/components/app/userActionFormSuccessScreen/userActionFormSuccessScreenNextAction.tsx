@@ -10,7 +10,7 @@ import {
 
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (
-    <div className="space-y-6 text-center">
+    <div className="space-y-6 pb-8 text-center">
       <Skeleton>
         <Progress />
       </Skeleton>
@@ -29,11 +29,12 @@ interface UserActionFormSuccessScreenNextActionProps {
 export function UserActionFormSuccessScreenNextAction({
   data,
 }: UserActionFormSuccessScreenNextActionProps) {
-  const { performedUserActionTypes, userHasEmbeddedWallet } = data
+  const { performedUserActionTypes, userHasEmbeddedWallet, countryCode } = data
 
   const { excludeUserActionTypes } = getUserActionsProgress({
     userHasEmbeddedWallet,
     performedUserActionTypes,
+    countryCode,
   })
 
   return (

@@ -10,6 +10,7 @@ import {
   actionCreateUserActionTweetedAtPerson,
   CreateActionTweetAtPersonInput,
 } from '@/actions/actionCreateUserActionTweetAtPerson'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import {
@@ -29,7 +30,7 @@ import {
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -41,7 +42,7 @@ type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
 }
 
 interface TweetAtPersonSectionProps {
-  slug: UserActionTweetAtPersonCampaignName
+  slug: USUserActionTweetAtPersonCampaignName
   sectionProps: UseSectionsReturn<TweetAtPersonSectionNames>
 }
 
@@ -180,6 +181,7 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
         <div className="align-center mb-6 flex w-full justify-center">
           <DTSIPersonHeroCard
             countryCode={SupportedCountryCodes.US}
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             isClickable={false}
             isRecommended={false}
             person={representative}

@@ -11,8 +11,10 @@ import {
   UserActionFormSuccessScreenNextActionSkeleton,
 } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { useSession } from '@/hooks/useSession'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -24,6 +26,8 @@ interface UserActionFormSuccessScreenProps {
 
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
   const { children, onClose } = props
+
+  const countryCode = useCountryCode()
 
   const { user, isLoggedIn, isLoading } = useSession()
   const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
@@ -37,14 +41,17 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     // This revalidation is used to revalidate the user's completed actions list
     // after they complete any action
     void mutate(apiUrls.userFullProfileInfo())
-    void mutate(apiUrls.userPerformedUserActionTypes())
+    void mutate(apiUrls.userPerformedUserActionTypes({ countryCode }))
   })
 
   if (!isLoggedIn || !user) {
     return <JoinSWC onClose={onClose} />
   }
 
-  if (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) {
+  if (
+    (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) &&
+    isSmsSupportedInCountry(countryCode)
+  ) {
     if (isLoading) {
       return <SMSOptInContent.Skeleton />
     }
@@ -64,7 +71,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   return (
-    <div className={cn('flex h-full flex-col gap-8 p-0 md:p-8')}>
+    <div className={cn('flex h-full flex-col gap-8 md:pb-12')}>
       {children}
 
       {isLoading || performedActionsResponse.isLoading ? (
@@ -72,6 +79,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
       ) : (
         <UserActionFormSuccessScreenNextAction
           data={{
+            countryCode,
             userHasEmbeddedWallet: user.hasEmbeddedWallet,
             performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes || [],
           }}
