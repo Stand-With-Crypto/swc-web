@@ -3,13 +3,13 @@ import { UserActionFormSuccessScreenFeedback } from '@/components/app/userAction
 import { NextImage } from '@/components/ui/image'
 import { Video } from '@/components/ui/video'
 
-export const UserActionFormJoinSWCSuccess = () => {
+export const AUUserActionFormJoinSWCSuccess = () => {
   const imageFallback = (
     <NextImage
-      alt="A animated SWC Shield."
+      alt="A SWC Shield."
       height={245}
       sizes="(max-width: 640px) 300px, 345px"
-      src="/actionTypeVideos/swca_join_still.png"
+      src="/actionTypeVideos/join-intl-still.png"
       width={300}
     />
   )
@@ -20,7 +20,7 @@ export const UserActionFormJoinSWCSuccess = () => {
         <Video
           className={'h-[300px] w-[300px] overflow-hidden rounded-xl object-cover sm:w-[345px]'}
           fallback={imageFallback}
-          src="/actionTypeVideos/swca_join.mp4"
+          src="/actionTypeVideos/join_intl.mp4"
         />
       }
       {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.OPT_IN}
