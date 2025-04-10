@@ -24,7 +24,10 @@ import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { getStateNameResolver } from '@/utils/shared/stateUtils'
+import {
+  getElectoralZoneDescriptorByCountryCode,
+  getStateNameResolver,
+} from '@/utils/shared/stateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
@@ -280,7 +283,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VIEW_KEY_RACES: {
         return {
           onFocusContent: undefined,
-          children: <MainText>Someone investigated the key races in their district</MainText>,
+          children: (
+            <MainText>
+              Someone investigated the key races in their{' '}
+              {getElectoralZoneDescriptorByCountryCode(countryCode)}
+            </MainText>
+          ),
         }
       }
       case UserActionType.VOTING_INFORMATION_RESEARCHED: {
