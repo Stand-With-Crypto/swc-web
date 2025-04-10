@@ -9,6 +9,7 @@ import {
   PersistedLocalUser,
 } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 import { getAllExperiments } from '@/utils/web/clientExperiments'
 import { getCountryCodeForClientAnalytics } from '@/utils/web/getCountryCodeForClientAnalytics'
@@ -62,10 +63,9 @@ export const getLocalUser = (): LocalUser => {
       persisted: undefined,
     }
   }
+  const countryCode = getCountryCodeForClientAnalytics() as SupportedCountryCodes
   const canUsePersistedData =
-    getClientCookieConsent().targeting && getClientCookieConsent().functional
-
-  const countryCode = getCountryCodeForClientAnalytics()
+    getClientCookieConsent(countryCode).targeting && getClientCookieConsent(countryCode).functional
 
   if (localUser) {
     if (!canUsePersistedData) {
@@ -116,8 +116,9 @@ export const getLocalUser = (): LocalUser => {
 }
 
 export function setLocalUserPersistedValues(values: Partial<PersistedLocalUser>) {
+  const countryCode = getCountryCodeForClientAnalytics() as SupportedCountryCodes
   const canUsePersistedData =
-    getClientCookieConsent().targeting && getClientCookieConsent().functional
+    getClientCookieConsent(countryCode).targeting && getClientCookieConsent(countryCode).functional
   if (!canUsePersistedData) {
     return
   }

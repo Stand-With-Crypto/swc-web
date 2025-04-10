@@ -1,10 +1,9 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 import { EventsPage } from '@/components/app/pageEvents'
-import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 
@@ -19,14 +18,10 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function EventsPageRoot(props: PageProps) {
-  const { countryCode } = await props.params
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
+export default async function EventsPageRoot() {
   const events = await getEvents({ countryCode })
 
-  if (!events || !events?.length) {
-    notFound()
-  }
-
-  return <EventsPage events={events} />
+  return <EventsPage countryCode={countryCode} events={events} />
 }

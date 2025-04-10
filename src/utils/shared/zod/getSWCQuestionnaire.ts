@@ -1,24 +1,30 @@
-import { nativeEnum, object, string } from 'zod'
+import { z } from 'zod'
 
 export enum QUESTION_ANSWER_OPTIONS {
-  'Yes' = 'Yes',
-  'No' = 'No',
-  'Not answered' = 'Not answered',
+  YES = 'Yes',
+  NO = 'No',
+  NOT_ANSWERED = 'Not answered',
+  OTHER = 'Other',
 }
 
-export const zodQuestionnaireSchemaValidation = object({
-  data: object({
-    dtsiSlug: string(),
-    q1ExperienceUsingBlockchainTechnology: nativeEnum(QUESTION_ANSWER_OPTIONS),
-    q2BlockchainWillPlayMajorRoleNextInnoWave: nativeEnum(QUESTION_ANSWER_OPTIONS),
-    q3AmerCryptoIsDrivingEconomicGrowth: nativeEnum(QUESTION_ANSWER_OPTIONS),
-    q4UsCompAtRiskIfDigitalAssetsPushedOverse: nativeEnum(QUESTION_ANSWER_OPTIONS),
-    q5UsModernizeRegulatoryEnvironmentForCrypto: nativeEnum(QUESTION_ANSWER_OPTIONS),
-    q6WouldYouVoteInFavorOfLegislation: nativeEnum(QUESTION_ANSWER_OPTIONS),
-    q7VoteInFavorOfLegisToPaymentStablecoins: nativeEnum(QUESTION_ANSWER_OPTIONS),
-    q8ShareAnyOtherOpinionsOnCrypto: string().optional(),
-  }),
-  published: string().regex(/^published$/),
+const zodQuestionnaireAnswerSchema = z.object({
+  question: z.string(),
+  answer: z.enum([
+    QUESTION_ANSWER_OPTIONS.YES,
+    QUESTION_ANSWER_OPTIONS.NO,
+    QUESTION_ANSWER_OPTIONS.NOT_ANSWERED,
+    QUESTION_ANSWER_OPTIONS.OTHER,
+  ]),
+  otherAnswer: z.string().optional(),
 })
 
-export type SWCQuestionnaireAnswers = Zod.infer<typeof zodQuestionnaireSchemaValidation>
+export const zodQuestionnaireSchemaValidation = z.object({
+  dtsiSlug: z.string(),
+  questionnaireUs: z.array(zodQuestionnaireAnswerSchema),
+  questionnaireAu: z.array(zodQuestionnaireAnswerSchema),
+  questionnaireCa: z.array(zodQuestionnaireAnswerSchema),
+  questionnaireGb: z.array(zodQuestionnaireAnswerSchema),
+})
+
+export type SWCQuestionnaireEntry = Zod.infer<typeof zodQuestionnaireSchemaValidation>
+export type SWCQuestionnaireAnswers = Zod.infer<typeof zodQuestionnaireAnswerSchema>

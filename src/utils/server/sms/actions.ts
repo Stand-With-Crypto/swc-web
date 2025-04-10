@@ -9,11 +9,28 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import * as messages from '@/utils/server/sms/messages'
+import { isPhoneNumberCountrySupported } from '@/utils/server/sms/utils'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
+import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
-export async function optInUser(phoneNumber: string, user: User): Promise<SMSStatus> {
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+export async function optInUser({
+  phoneNumber,
+  user,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+}: {
+  phoneNumber: string
+  user: User
+  countryCode?: SupportedCountryCodes
+}): Promise<SMSStatus> {
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode)
+
+  if (!isPhoneNumberCountrySupported(normalizedPhoneNumber, countryCode)) {
+    return SMSStatus.NOT_OPTED_IN
+  }
 
   if (
     user.smsStatus === SMSStatus.OPTED_OUT ||
@@ -85,8 +102,16 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
   return newSMSStatus
 }
 
-export async function optOutUser(phoneNumber: string, user?: User | null) {
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+export async function optOutUser({
+  phoneNumber,
+  user,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+}: {
+  phoneNumber: string
+  user?: User | null
+  countryCode?: SupportedCountryCodes
+}) {
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode)
 
   if (user?.smsStatus === SMSStatus.OPTED_OUT) return user.smsStatus
 
@@ -146,8 +171,16 @@ export async function optOutUser(phoneNumber: string, user?: User | null) {
   return newSMSStatus
 }
 
-export async function optUserBackIn(phoneNumber: string, user?: User | null) {
-  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+export async function optUserBackIn({
+  phoneNumber,
+  user,
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+}: {
+  phoneNumber: string
+  user?: User | null
+  countryCode?: SupportedCountryCodes
+}) {
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode)
 
   if (user?.smsStatus !== SMSStatus.OPTED_OUT) return user?.smsStatus
 

@@ -16,7 +16,7 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export function extractPricingValues(payment: CoinbaseCommercePayment) {
   if (payment.event.data.payments && payment.event.data.payments.length > 0) {
@@ -308,7 +308,7 @@ async function createUserActionDonation(
           },
         },
       }),
-      campaignName: UserActionDonationCampaignName.DEFAULT,
+      campaignName: USUserActionDonationCampaignName.DEFAULT,
       actionType: UserActionType.DONATION,
       countryCode: user.countryCode,
       userActionDonation: {
@@ -340,7 +340,7 @@ async function createUserActionDonation(
     analytics
       .trackUserActionCreated({
         actionType: UserActionType.DONATION,
-        campaignName: UserActionDonationCampaignName.DEFAULT,
+        campaignName: USUserActionDonationCampaignName.DEFAULT,
         creationMethod: 'On Site',
         userState: isNewUser ? 'New' : 'Existing',
       })

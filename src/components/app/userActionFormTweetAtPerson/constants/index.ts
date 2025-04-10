@@ -1,4 +1,4 @@
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const ANALYTICS_NAME_USER_ACTION_FORM_TWEET_AT_PERSON = 'User Action Form Tweet At Person'
 
@@ -14,14 +14,14 @@ export enum TweetAtPersonSectionNames {
 type Message = 'title' | 'analyticsName'
 
 export const CAMPAIGN_METADATA: Record<
-  UserActionTweetAtPersonCampaignName,
+  USUserActionTweetAtPersonCampaignName,
   Record<Message, string>
 > = {
-  [UserActionTweetAtPersonCampaignName.DEFAULT]: {
+  [USUserActionTweetAtPersonCampaignName.DEFAULT]: {
     title: 'Tweet at your Congress Person',
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_TWEET_AT_PERSON,
   },
-  [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
+  [USUserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
     title: 'Pizza Day - Tweet at your Congress Person',
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_TWEET_AT_PERSON_CAMPAIGN,
   },

@@ -10,12 +10,15 @@ import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface AllUpcomingEventsProps {
   events: SWCEvents
+  showMap?: boolean
 }
 
-export function AllUpcomingEvents({ events }: AllUpcomingEventsProps) {
+export function AllUpcomingEvents({ events, showMap = true }: AllUpcomingEventsProps) {
   const isMobile = useIsMobile()
 
-  const [displayOption, setDisplayOption] = useState<'map' | 'list'>(isMobile ? 'list' : 'map')
+  const [displayOption, setDisplayOption] = useState<'map' | 'list'>(
+    isMobile || !showMap ? 'list' : 'map',
+  )
 
   useEffect(() => {
     if (isMobile) {
@@ -26,7 +29,7 @@ export function AllUpcomingEvents({ events }: AllUpcomingEventsProps) {
   return (
     <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
       <PageTitle as="h3">All upcoming events</PageTitle>
-      {!isMobile && (
+      {!isMobile && showMap && (
         <div className="flex items-center justify-center gap-4 rounded-lg bg-backgroundAlternate px-4 py-3">
           <button onClick={() => setDisplayOption('map')}>
             <MapOptionSVG isActive={displayOption === 'map'} />

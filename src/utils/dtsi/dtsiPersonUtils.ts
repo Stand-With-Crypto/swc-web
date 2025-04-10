@@ -42,5 +42,150 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
       return 'Republican'
     case DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT:
       return 'Independent'
+    case DTSI_PersonPoliticalAffiliationCategory.CONSERVATIVE:
+      return 'Conservative'
+    case DTSI_PersonPoliticalAffiliationCategory.DEMOCRATIC_SOCIALIST:
+      return 'Democratic Socialist'
+    case DTSI_PersonPoliticalAffiliationCategory.GREEN:
+      return 'Green'
+    case DTSI_PersonPoliticalAffiliationCategory.LABOR:
+      return 'Labor'
+    case DTSI_PersonPoliticalAffiliationCategory.LIBERAL:
+      return 'Liberal'
+    case DTSI_PersonPoliticalAffiliationCategory.LIBERAL_DEMOCRAT:
+      return 'Liberal Democrat'
+    case DTSI_PersonPoliticalAffiliationCategory.LIBERTARIAN:
+      return 'Libertarian'
+    case DTSI_PersonPoliticalAffiliationCategory.NATIONAL_LIBERAL:
+      return 'Liberal Nationals'
+    case DTSI_PersonPoliticalAffiliationCategory.NDP:
+      return 'NDP'
+    case DTSI_PersonPoliticalAffiliationCategory.REFORM:
+      return 'Reform'
+    case DTSI_PersonPoliticalAffiliationCategory.SOCIALIST:
+      return 'Socialist'
+    case DTSI_PersonPoliticalAffiliationCategory.NATIONALS:
+      return 'National Party'
+    case DTSI_PersonPoliticalAffiliationCategory.ONE_NATION:
+      return 'One Nation'
   }
+}
+
+const hideStanceSlugs = [
+  {
+    isCongressperson: true,
+    slug: 'josh---gottheimer',
+  },
+  {
+    isCongressperson: true,
+    slug: 'mikie---sherrill',
+  },
+  {
+    isCongressperson: false,
+    slug: 'edward---durr',
+  },
+  {
+    isCongressperson: false,
+    slug: 'bill---spadea',
+  },
+  {
+    isCongressperson: false,
+    slug: 'hans---herberg',
+  },
+  {
+    isCongressperson: false,
+    slug: 'jack---ciattarelli',
+  },
+  {
+    isCongressperson: false,
+    slug: 'sean---spiller',
+  },
+  {
+    isCongressperson: false,
+    slug: 'roger--bacon',
+  },
+  {
+    isCongressperson: false,
+    slug: 'stephen---sweeney',
+  },
+  {
+    isCongressperson: false,
+    slug: 'ras---baraka',
+  },
+  {
+    isCongressperson: false,
+    slug: 'robert---canfield',
+  },
+  {
+    isCongressperson: false,
+    slug: 'justin---barbera',
+  },
+  {
+    isCongressperson: false,
+    slug: 'jon---bramnick',
+  },
+  {
+    isCongressperson: false,
+    slug: 'steven---fulop',
+  },
+  {
+    isCongressperson: false,
+    slug: 'james---fazzone',
+  },
+  {
+    isCongressperson: false,
+    slug: 'stephen---zielinski',
+  },
+  {
+    isCongressperson: false,
+    slug: 'joanne---kuniansky',
+  },
+  {
+    isCongressperson: false,
+    slug: 'karen---zaletel',
+  },
+  {
+    isCongressperson: false,
+    slug: 'monica---brinson',
+  },
+  {
+    isCongressperson: false,
+    slug: 'mario---kranjac',
+  },
+  {
+    isCongressperson: false,
+    slug: 'gerardo---cedrone',
+  },
+  {
+    isCongressperson: false,
+    slug: 'abigail---spanberger',
+  },
+  {
+    isCongressperson: false,
+    slug: 'dave---larock',
+  },
+  {
+    isCongressperson: false,
+    slug: 'merle---rutledge',
+  },
+  {
+    isCongressperson: false,
+    slug: 'winsome---earle-sears',
+  },
+  {
+    isCongressperson: false,
+    slug: 'amanda---chase',
+  },
+  {
+    isCongressperson: false,
+    slug: 'andrew---white',
+  },
+]
+
+export function isPoliticianStanceHidden(dtsiSlug: string) {
+  return hideStanceSlugs.some(x => x.slug === dtsiSlug.toLowerCase())
+}
+
+export function isPoliticianDetailsStanceHidden(dtsiSlug: string) {
+  return hideStanceSlugs.some(x => x.slug === dtsiSlug.toLowerCase() && !x.isCongressperson)
 }

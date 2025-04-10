@@ -3,19 +3,19 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import {
+  getZodVerifiedSWCPartnersUserActionOptInSchema,
   verifiedSWCPartnersUserActionOptIn,
-  zodVerifiedSWCPartnersUserActionOptIn,
 } from '@/data/verifiedSWCPartners/userActionOptIn'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
 
-type RequestBody = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn>
+type RequestBody = z.infer<ReturnType<typeof getZodVerifiedSWCPartnersUserActionOptInSchema>>
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const partner = await authenticateAndGetVerifiedSWCPartnerFromHeader()
   const requestBody = await request.json()
 
-  const baseValidationResult = zodVerifiedSWCPartnersUserActionOptIn
+  const baseValidationResult = getZodVerifiedSWCPartnersUserActionOptInSchema()
     .omit({ phoneNumber: true })
     .safeParse(requestBody)
 
@@ -29,10 +29,11 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     return NextResponse.json({ error: baseValidationResult.error }, { status: 400 })
   }
 
-  const phoneNumberValidationResult =
-    zodVerifiedSWCPartnersUserActionOptIn.shape.phoneNumber.safeParse(
-      (requestBody as RequestBody)?.phoneNumber,
-    )
+  const { countryCode } = baseValidationResult.data
+
+  const phoneNumberValidationResult = getZodVerifiedSWCPartnersUserActionOptInSchema(
+    countryCode,
+  ).shape.phoneNumber.safeParse((requestBody as RequestBody)?.phoneNumber)
 
   let validatedFields: RequestBody = baseValidationResult.data as RequestBody
 

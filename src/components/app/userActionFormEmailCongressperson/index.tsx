@@ -35,11 +35,12 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
@@ -67,7 +68,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+      campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -87,7 +88,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+    campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
     firstName: '',
     lastName: '',
     emailAddress: '',
@@ -113,6 +114,7 @@ export function UserActionFormEmailCongressperson({
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
+  const countryCode = useCountryCode()
   const hasModifiedMessage = useRef(false)
   const userDefaultValues = getDefaultValues({ user, dtsiSlugs: [] })
   const form = useForm<FormValues>({
@@ -309,6 +311,7 @@ export function UserActionFormEmailCongressperson({
                   <div className="w-full">
                     <DTSICongresspersonAssociatedWithFormAddress
                       address={addressProps.field.value}
+                      countryCode={countryCode}
                       dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
                       onChangeAddress={noop}
                       politicianCategory={politicianCategory}

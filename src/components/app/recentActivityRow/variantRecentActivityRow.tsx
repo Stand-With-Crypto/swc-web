@@ -4,10 +4,12 @@ import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
+import { RecentActivityRowMainText as MainText } from '@/components/app/recentActivityRow/mainText'
 import {
   RecentActivityRowBase,
   RecentActivityRowProps,
 } from '@/components/app/recentActivityRow/recentActivityRow'
+import { viewKeyPageRecentActivityRow } from '@/components/app/recentActivityRow/viewKeyPageRecentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -18,29 +20,37 @@ import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
+import {
+  getElectoralZoneDescriptorByCountryCode,
+  getStateNameResolver,
+} from '@/utils/shared/stateUtils'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
-  UserActionEmailCampaignName,
-  UserActionTweetCampaignName,
-} from '@/utils/shared/userActionCampaigns'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+  USUserActionEmailCampaignName,
+  USUserActionTweetCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
-const MainText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
-)
-
-const DTSIPersonName = ({ person, href }: { person: DTSIPersonForUserActions; href: string }) => {
+const DTSIPersonName = ({
+  person,
+  href,
+  countryCode,
+}: {
+  person: DTSIPersonForUserActions
+  href: string
+  countryCode: SupportedCountryCodes
+}) => {
+  const roleNameResolver = getRoleNameResolver(countryCode)
   const link = <InternalLink href={href}>{dtsiPersonFullName(person)}</InternalLink>
   if (person.primaryRole) {
     return (
       <>
-        {getDTSIPersonRoleCategoryDisplayName(person.primaryRole)} {link}
+        {roleNameResolver(person.primaryRole)} {link}
       </>
     )
   }
@@ -53,11 +63,14 @@ const getSWCDisplayText = () => (
     <span className="sm:hidden"> SWC </span>
   </>
 )
+
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   countryCode,
 }: RecentActivityRowProps) {
   const urls = useIntlUrls()
+
+  const stateNameResolver = getStateNameResolver(countryCode)
 
   const { userLocationDetails } = action.user
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
@@ -72,7 +85,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
     ? `in ${userLocationDetails.administrativeAreaLevel1}`
     : ''
 
-  const getActionSpecificProps = () => {
+  const getActionSpecificProps = (): {
+    onFocusContent?: React.ComponentType
+    children: React.ReactNode
+  } => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
         return {
@@ -102,6 +118,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               Call to{' '}
               {action.person ? (
                 <DTSIPersonName
+                  countryCode={countryCode}
                   href={urls.politicianDetails(action.person.slug)}
                   person={action.person}
                 />
@@ -136,12 +153,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         const dtsiRecipients = action.userActionEmailRecipients.filter(x => x.person)
 
         switch (action.campaignName) {
-          case UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024:
+          case USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024:
             return {
               children: <MainText>Email sent to CNN</MainText>,
             }
 
-          case UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024:
+          case USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024:
             return {
               children: <MainText>Email sent to ABC</MainText>,
             }
@@ -161,6 +178,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                         dtsiRecipients.map(actionEmailRecipient => (
                           <React.Fragment key={actionEmailRecipient.id}>
                             <DTSIPersonName
+                              countryCode={countryCode}
                               href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
                               person={actionEmailRecipient.person!}
                             />
@@ -198,7 +216,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
           children:
-            action.campaignName === UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
+            action.campaignName === USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
               <MainText>
                 New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
               </MainText>
@@ -235,6 +253,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                 <>
                   {'to '}
                   <DTSIPersonName
+                    countryCode={countryCode}
                     href={urls.politicianDetails(action.person.slug)}
                     person={action.person}
                   />
@@ -255,12 +274,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: undefined,
           children: (
             <MainText>
-              New sign up for an SWC event in{' '}
-              {
-                US_STATE_CODE_TO_DISPLAY_NAME_MAP[
-                  action.eventState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
-                ]
-              }
+              New sign up for an SWC event{' '}
+              {action.eventState ? `in ${stateNameResolver(action.eventState)}` : ''}
             </MainText>
           ),
         }
@@ -268,7 +283,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VIEW_KEY_RACES: {
         return {
           onFocusContent: undefined,
-          children: <MainText>Someone investigated the key races in their district</MainText>,
+          children: (
+            <MainText>
+              Someone investigated the key races in their{' '}
+              {getElectoralZoneDescriptorByCountryCode(countryCode)}
+            </MainText>
+          ),
         }
       }
       case UserActionType.VOTING_INFORMATION_RESEARCHED: {
@@ -294,6 +314,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: () => null,
           children: <MainText>Someone voted in a poll</MainText>,
         }
+      }
+      case UserActionType.VIEW_KEY_PAGE: {
+        const { campaignName } = action
+        return viewKeyPageRecentActivityRow({
+          campaignName,
+          countryCode,
+        })
       }
     }
     return gracefullyError({

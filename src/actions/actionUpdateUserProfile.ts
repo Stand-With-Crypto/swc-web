@@ -14,6 +14,7 @@ import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
+import { actionUpdateUserCountryCodeWithoutMiddleware } from '@/actions/actionUpdateUserCountryCode'
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
@@ -36,23 +37,30 @@ import {
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
-import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
+import { getZodUpdateUserProfileFormActionSchema } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
 
 export const actionUpdateUserProfile = withServerActionMiddleware(
   'actionUpdateUserProfile',
-  _actionUpdateUserProfile,
+  actionUpdateUserProfileWithoutMiddleware,
 )
 
 const logger = getLogger(`actionUpdateUserProfile`)
 
-async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfileFormAction>) {
+async function actionUpdateUserProfileWithoutMiddleware(
+  data: z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>,
+) {
   const authUser = await appRouterGetAuthUser()
 
   if (!authUser) {
     throw new Error('Unauthenticated')
   }
-  const validatedFields = zodUpdateUserProfileFormAction.safeParse(data)
+  // Assuming the country code is valid. If not, the default country code will be used.
+  const validatedFields = getZodUpdateUserProfileFormActionSchema(
+    data.address?.countryCode as SupportedCountryCodes,
+  ).safeParse(data)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -108,6 +116,13 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         update: {},
       })
     : null
+
+  const { success: isSupportedCountryCode, data: addressCountryCode } =
+    zodSupportedCountryCode.safeParse(address?.countryCode)
+  if (address && isSupportedCountryCode && user.countryCode.toLowerCase() !== addressCountryCode) {
+    await actionUpdateUserCountryCodeWithoutMiddleware(addressCountryCode)
+  }
+
   const existingUserEmailAddress = emailAddress
     ? user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)
     : null
@@ -174,7 +189,11 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
   })
 
   if (optedInToSms && phoneNumber) {
-    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
+    updatedUser.smsStatus = await smsActions.optInUser({
+      phoneNumber,
+      user,
+      countryCode: addressCountryCode,
+    })
   }
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)

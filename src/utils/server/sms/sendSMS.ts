@@ -1,6 +1,5 @@
 import { z } from 'zod'
 
-import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -29,10 +28,6 @@ export const sendSMS = async (payload: SendSMSPayload) => {
   }
 
   const { body, to, media, statusCallbackUrl } = validatedInput.data
-
-  if (!isPhoneNumberSupported(to)) {
-    return
-  }
 
   if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
     return

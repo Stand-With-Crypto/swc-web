@@ -1,16 +1,13 @@
 /// <reference types="cypress" />
 
-function getCountryCodeCookieValue(countryCode: string) {
-  return `{%22countryCode%22:%22${countryCode}%22%2C%22bypassed%22:true}`
-}
-
 describe('NavBarGlobalBanner', () => {
   beforeEach(() => {
-    cy.clearCookie('USER_COUNTRY_CODE')
+    cy.clearCookie('OVERRIDE_USER_ACCESS_LOCATION')
   })
 
   it('should show UK banner when countryCode is "UK"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('UK'))
+    cy.setCookie('OVERRIDE_USER_ACCESS_LOCATION', 'gb')
+    cy.setCookie('USER_ACCESS_LOCATION', 'gb')
 
     cy.visit('/')
 
@@ -18,7 +15,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show UK banner when countryCode is "uk"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('uk'))
+    cy.setCookie('OVERRIDE_USER_ACCESS_LOCATION', 'gb')
+    cy.setCookie('USER_ACCESS_LOCATION', 'gb')
 
     cy.visit('/')
 
@@ -26,7 +24,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "CA"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('CA'))
+    cy.setCookie('OVERRIDE_USER_ACCESS_LOCATION', 'ca')
+    cy.setCookie('USER_ACCESS_LOCATION', 'ca')
 
     cy.visit('/')
 
@@ -34,7 +33,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show CA banner when countryCode is "ca"', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('ca'))
+    cy.setCookie('OVERRIDE_USER_ACCESS_LOCATION', 'ca')
+    cy.setCookie('USER_ACCESS_LOCATION', 'ca')
 
     cy.visit('/')
 
@@ -42,7 +42,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show US restriction banner when countryCode is not supported', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('br'))
+    cy.setCookie('OVERRIDE_USER_ACCESS_LOCATION', 'br')
+    cy.setCookie('USER_ACCESS_LOCATION', 'br')
 
     cy.visit('/')
 
@@ -52,7 +53,8 @@ describe('NavBarGlobalBanner', () => {
   })
 
   it('should show current US campaign for US users', () => {
-    cy.setCookie('USER_COUNTRY_CODE', getCountryCodeCookieValue('US'))
+    cy.setCookie('OVERRIDE_USER_ACCESS_LOCATION', 'us')
+    cy.setCookie('USER_ACCESS_LOCATION', 'us')
 
     cy.visit('/')
 

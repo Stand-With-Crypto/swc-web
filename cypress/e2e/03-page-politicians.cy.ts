@@ -20,11 +20,11 @@ it('page - politicians interactions', () => {
   cy.get('[data-testid="state-filter-trigger"]').as('stateFilterTrigger').scrollIntoView()
   cy.get('@stateFilterTrigger').should('be.visible')
   cy.get('@stateFilterTrigger').click()
-  cy.get('[role="option"]').contains('div', 'AK').as('stateOption')
+  cy.get('[role="option"]').contains('div', 'Alaska').as('stateOption')
   cy.get('@stateOption').should('be.visible').click({
     // force: true // Bypass visibility checks, not ideal
   })
-  cy.get('@stateFilterTrigger').children().should('contain', 'AK')
+  cy.get('@stateFilterTrigger').children().should('contain', 'Alaska')
   // cy.get('tbody').find('tr').should('have.length', 4)
   cy.get('tbody')
     .find('td:nth-child(4)')

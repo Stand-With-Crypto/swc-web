@@ -35,10 +35,10 @@ import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import {
-  ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionPollCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+  US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  USUserActionPollCampaignName,
+} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
   requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),
@@ -257,7 +257,7 @@ async function seed() {
   /*
   userAction
   */
-  const userActionTypes = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN
+  const userActionTypes = US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN
   const userActionTypesToPersist = times(seedSizes([400, 4000, 40000])).map(index => {
     return userActionTypes[index % userActionTypes.length]
   })
@@ -302,8 +302,9 @@ async function seed() {
       const relatedItem = getRelatedItem()
 
       return {
-        ...mockCreateUserActionInput(),
-        actionType,
+        ...mockCreateUserActionInput({
+          actionType,
+        }),
         userCryptoAddressId:
           actionType === UserActionType.OPT_IN
             ? null
@@ -326,8 +327,8 @@ async function seed() {
             : null,
         campaignName:
           actionType === UserActionType.POLL
-            ? faker.helpers.arrayElement(Object.values(UserActionPollCampaignName))
-            : USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
+            ? faker.helpers.arrayElement(Object.values(USUserActionPollCampaignName))
+            : US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
       }
     }),
     data =>
@@ -434,8 +435,22 @@ async function seed() {
         data,
       }),
   )
-  const userActionTweetAtPerson = await prismaClient.userActionTweetAtPerson.findMany()
-  logEntity({ userActionTweetAtPerson })
+
+  /*
+  userActionViewKeyPage
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.VIEW_KEY_PAGE].map(action => ({
+      path: faker.internet.url(),
+      id: action.id,
+    })),
+    data =>
+      prismaClient.userActionViewKeyPage.createMany({
+        data,
+      }),
+  )
+  const userActionViewKeyPage = await prismaClient.userActionViewKeyPage.findMany()
+  logEntity({ userActionViewKeyPage })
 
   /*
   userActionDonation
@@ -649,7 +664,7 @@ async function seed() {
   await batchAsyncAndLog(
     userActionsByType[UserActionType.POLL].map(action => {
       return {
-        ...mockCreateUserActionPollAnswerInput(action.campaignName as UserActionPollCampaignName),
+        ...mockCreateUserActionPollAnswerInput(action.campaignName as USUserActionPollCampaignName),
         id: action.id,
         userActionPollId: faker.helpers.arrayElement(userActionPoll).id,
       }
