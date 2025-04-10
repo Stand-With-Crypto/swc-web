@@ -48,11 +48,6 @@ export function AuPageHome({
 
         <RecentActivity>
           <RecentActivity.List actions={recentActivity} />
-          <RecentActivity.Footer>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </RecentActivity.Footer>
         </RecentActivity>
       </HomePageSection>
 
