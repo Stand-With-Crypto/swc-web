@@ -31,7 +31,7 @@ export function viewKeyPageRecentActivityRow({
     }
   > = {
     [USUserActionViewKeyPageCampaignName.DEFAULT]: {
-      children: <RecentActivityRowMainText>Someone viewed a key page</RecentActivityRowMainText>,
+      children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
     },
     [CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION]: {
       children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
