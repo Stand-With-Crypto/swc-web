@@ -121,11 +121,7 @@ export function Navbar({
                     }
                   }}
                 >
-                  <Button
-                    asChild
-                    className="hidden min-[1096px]:block"
-                    variant={href === urls.donate() ? 'default' : 'secondary'}
-                  >
+                  <Button asChild className="hidden min-[1096px]:block" variant="secondary">
                     {children ? (
                       <span className="select-none">
                         <div className="flex cursor-default items-center gap-2">
