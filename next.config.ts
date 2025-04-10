@@ -421,6 +421,11 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/paul-atkins',
+        destination: 'https://speak4.app/lp/b901vnot/?ts=1744310543',
+        permanent: true,
+      },
+      {
         source: '/s/sb-1797',
         destination: 'https://speak4.app/lp/jk01insm/?ts=1744055112',
         permanent: true,
