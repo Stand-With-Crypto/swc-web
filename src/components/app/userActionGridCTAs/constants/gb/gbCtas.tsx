@@ -61,21 +61,17 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Contact your representative',
-    description:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
-    campaignsModalDescription:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
+    title: 'Email your Member of Parliament',
+    description: 'Make your voice heard – and write to your MP',
+    campaignsModalDescription: 'Make your voice heard – and write to your MP',
     image: '/gb/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
-        // TODO: Update this to the correct campaign name when available
         campaignName: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
         isCampaignActive: false,
-        title: `Sign the petition`,
-        description:
-          'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
+        title: 'Email your Member of Parliament',
+        description: 'Email your MP today and call for urgent action to stop unfair debanking.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <Link href={getIntlUrls(countryCode).newmodeDebankingAction()}>{children}</Link>
