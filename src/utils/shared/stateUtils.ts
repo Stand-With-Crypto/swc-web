@@ -26,3 +26,14 @@ const TERRITORY_DIVISION_BY_COUNTRY_CODE: Record<SupportedCountryCodes, string> 
 export function getTerritoryDivisionByCountryCode(countryCode: SupportedCountryCodes) {
   return TERRITORY_DIVISION_BY_COUNTRY_CODE[countryCode]
 }
+
+const ELECTORAL_ZONE_DESCRIPTOR_BY_COUNTRY_CODE: Record<SupportedCountryCodes, string> = {
+  [SupportedCountryCodes.US]: 'district',
+  [SupportedCountryCodes.GB]: 'constituency',
+  [SupportedCountryCodes.CA]: 'constituency',
+  [SupportedCountryCodes.AU]: 'constituency',
+}
+
+export function getElectoralZoneDescriptorByCountryCode(countryCode: SupportedCountryCodes) {
+  return ELECTORAL_ZONE_DESCRIPTOR_BY_COUNTRY_CODE[countryCode]
+}
