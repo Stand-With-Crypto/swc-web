@@ -45,7 +45,7 @@ function getSubHeaderString(props: DTSIPersonHeroCardProps) {
       return props.person.primaryRole ? roleNameResolver(props.person.primaryRole) : ''
     case 'role-w-state':
       return props.person.primaryRole
-        ? getDTSIPersonRoleCategoryWithStateDisplayName(props.person.primaryRole)
+        ? getDTSIPersonRoleCategoryWithStateDisplayName(props.person.primaryRole, props.countryCode)
         : ''
     default:
       return props.subheader
