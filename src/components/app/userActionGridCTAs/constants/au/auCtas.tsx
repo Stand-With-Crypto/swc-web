@@ -42,9 +42,9 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Email your Member of Parliament',
     description:
-      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
+      'Make your voice heard on important crypto policy issues by emailing your representatives',
     campaignsModalDescription:
-      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
+      'Make your voice heard on important crypto policy issues by emailing your representatives',
     image: '/au/actionTypeIcons/email.png',
     campaigns: [
       {
@@ -52,13 +52,28 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
         isCampaignActive: true,
         title: `Email your Member of Parliament`,
-        description:
-          'You’ve emailed your Member of Parliament and called for responsible crypto policy.',
+        description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <UserActionViewKeyPageDialog
             countryCode={countryCode}
             url={getIntlUrls(countryCode).newmodeElectionAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
+        ),
+      },
+      {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        campaignName: AUUserActionViewKeyPageCampaignName.AU_NEWMODE_DEBANKING,
+        isCampaignActive: true,
+        title: 'Email your MP to stop unfair debanking',
+        description: 'Email your MP today and call for action to stop unfair debanking.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={getIntlUrls(countryCode).newmodeDebankingAction()}
           >
             {children}
           </UserActionViewKeyPageDialog>
