@@ -24,7 +24,7 @@ import {
   PARTY_OPTIONS,
   ROLE_OPTIONS,
 } from '@/components/app/dtsiClientPersonDataTable/gb/filters'
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import {
   GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
   getGBCountryNameFromCode,
@@ -61,7 +61,7 @@ export function GbDTSIClientPersonDataTable({
     () =>
       getDTSIClientPersonDataTableColumns({
         countryCode,
-        dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
+        dtsiGradeComponent: DTSIFormattedLetterGrade,
       }),
     [],
   )

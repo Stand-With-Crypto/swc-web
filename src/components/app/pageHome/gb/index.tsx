@@ -1,4 +1,4 @@
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -93,7 +93,7 @@ export function GbPageHome({
 
       <HomepagePoliticiansSection
         countryCode={countryCode}
-        cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
+        cryptoStanceGrade={DTSIFormattedLetterGrade}
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
       />
     </>
