@@ -12,14 +12,19 @@ import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/su
 import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
-type Props = Pick<
-  Awaited<ReturnType<typeof getHomepageData>>,
-  'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
-> & { countryCode: SupportedCountryCodes }
+interface TopLevelMetricsProps
+  extends Pick<
+    Awaited<ReturnType<typeof getHomepageData>>,
+    'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
+  > {
+  countryCode: SupportedCountryCodes
+  disableTooltips?: boolean
+  useGlobalLabels?: boolean
+}
 
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
-  initial: Omit<Props, 'countryCode'>,
-): Omit<Props, 'countryCode'> => ({
+  initial: Omit<TopLevelMetricsProps, 'countryCode'>,
+): Omit<TopLevelMetricsProps, 'countryCode'> => ({
   sumDonations: {
     amountUsd: roundDownNumberToAnimateIn(initial.sumDonations.amountUsd, 10000),
     fairshakeAmountUsd: roundDownNumberToAnimateIn(initial.sumDonations.fairshakeAmountUsd, 10000),
@@ -45,8 +50,10 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
 
 export function TopLevelMetrics({
   countryCode,
+  disableTooltips = false,
+  useGlobalLabels = false,
   ...data
-}: Props & { countryCode: SupportedCountryCodes }) {
+}: TopLevelMetricsProps) {
   const [isDonatedTooltipOpen, setIsDonatedTooltipOpen] = useState(false)
   const decreasedInitialValues = useMemo(
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
@@ -102,12 +109,18 @@ export function TopLevelMetrics({
     }
   }, [formatCurrency, values, countryCode])
 
+  const globalDonationsRender = (
+    <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
+  )
+
   return (
     <div className="flex flex-col gap-3 text-center md:flex-row md:gap-0">
       {[
         {
-          label: 'Global donations',
-          value: (
+          label: useGlobalLabels ? 'Global donations' : 'Donated by crypto advocates',
+          value: disableTooltips ? (
+            globalDonationsRender
+          ) : (
             <TooltipProvider delayDuration={0}>
               <Tooltip onOpenChange={setIsDonatedTooltipOpen} open={isDonatedTooltipOpen}>
                 <TooltipTrigger
@@ -115,7 +128,7 @@ export function TopLevelMetrics({
                   onClick={() => setIsDonatedTooltipOpen(true)}
                   style={{ height: 35 }}
                 >
-                  <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
+                  {globalDonationsRender}
                   <sup>
                     <Info className="h-4 w-4" />
                   </sup>
@@ -132,11 +145,11 @@ export function TopLevelMetrics({
           ),
         },
         {
-          label: 'Global advocates',
+          label: useGlobalLabels ? 'Global advocates' : 'Crypto advocates',
           value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
         },
         {
-          label: 'Global policymaker contacts',
+          label: useGlobalLabels ? 'Global policymaker contacts' : 'Policymaker contacts',
           value: (
             <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { Button } from '@/components/ui/button'
 import {
@@ -12,48 +13,52 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const getDefaultProps = () => {
+  const person = {
+    id: 'fakeId',
+    slug: 'joseph---biden',
+    firstName: 'Joseph',
+    lastName: 'Biden',
+    firstNickname: 'Joe',
+    nameSuffix: '',
+    politicalAffiliation: 'Democrat',
+    politicalAffiliationCategory: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+    computedStanceScore: 0,
+    computedSumStanceScoreWeight: 5,
+    manuallyOverriddenStanceScore: undefined,
+    profilePictureUrl:
+      'https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Joe_Biden_presidential_portrait.jpg',
+    profilePictureUrlDimensions: { width: 220, height: 275 },
+    promotedPositioning: undefined,
+    stanceCount: 2,
+    primaryRole: {
+      dateEnd: undefined,
+      dateStart: '2021-01-20',
+      id: 'fakeId',
+      primaryCity: '',
+      primaryCountryCode: 'US',
+      primaryDistrict: '',
+      primaryState: '',
+      roleCategory: DTSI_PersonRoleCategory.PRESIDENT,
+      status: DTSI_PersonRoleStatus.HELD,
+      title: 'President',
+      group: null,
+    },
+    twitterAccounts: [
+      {
+        accountType: DTSI_TwitterAccountType.PROFESSIONAL,
+        id: '',
+        personId: '',
+        state: DTSI_TwitterAccountState.VISIBLE,
+        username: 'xHandle',
+      },
+    ],
+  }
+
   const props: React.ComponentProps<typeof DTSIPersonHeroCard> = {
     subheader: 'role',
     countryCode: SupportedCountryCodes.US,
-    person: {
-      id: 'fakeId',
-      slug: 'joseph---biden',
-      firstName: 'Joseph',
-      lastName: 'Biden',
-      firstNickname: 'Joe',
-      nameSuffix: '',
-      politicalAffiliationCategory: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-      computedStanceScore: 0,
-      computedSumStanceScoreWeight: 5,
-      manuallyOverriddenStanceScore: undefined,
-      profilePictureUrl:
-        'https://db0prh5pvbqwd.cloudfront.net/admin-uploads/production/person_profile_picture_urls/Joe_Biden_presidential_portrait.jpg',
-      profilePictureUrlDimensions: { width: 220, height: 275 },
-      promotedPositioning: undefined,
-      stanceCount: 2,
-      primaryRole: {
-        dateEnd: undefined,
-        dateStart: '2021-01-20',
-        id: 'fakeId',
-        primaryCity: '',
-        primaryCountryCode: 'US',
-        primaryDistrict: '',
-        primaryState: '',
-        roleCategory: DTSI_PersonRoleCategory.PRESIDENT,
-        status: DTSI_PersonRoleStatus.HELD,
-        title: 'President',
-        group: null,
-      },
-      twitterAccounts: [
-        {
-          accountType: DTSI_TwitterAccountType.PROFESSIONAL,
-          id: '',
-          personId: '',
-          state: DTSI_TwitterAccountState.VISIBLE,
-          username: 'xHandle',
-        },
-      ],
-    },
+    person,
+    cryptoStanceGrade: DTSIFormattedLetterGrade,
   }
   return props
 }

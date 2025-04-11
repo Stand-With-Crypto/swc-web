@@ -6,8 +6,8 @@ import {
   CreateActionVoterRegistrationInput,
 } from '@/actions/actionCreateUserActionVoterRegistration'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
-import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { USUserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -18,7 +18,7 @@ export function useVoterRegistrationAction() {
   const [createAction, isCreatingAction] = useLoadingCallback(
     async ({ stateCode, onSuccess }: { stateCode: USStateCode; onSuccess: () => void }) => {
       const data: CreateActionVoterRegistrationInput = {
-        campaignName: UserActionVoterRegistrationCampaignName['2025_US_ELECTIONS'],
+        campaignName: USUserActionVoterRegistrationCampaignName['H1_2025'],
         usaState: stateCode,
       }
 

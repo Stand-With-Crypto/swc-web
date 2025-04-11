@@ -1,95 +1,99 @@
-'use client'
+import { isEmpty } from 'lodash-es'
 
-import { useEffect } from 'react'
-import { compact, isEmpty, times } from 'lodash-es'
-
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
-import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { PACFooter } from '@/components/app/pacFooter'
+import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import {
+  DTSI_PersonPoliticalAffiliationCategory,
+  DTSI_PersonStanceType,
+  DTSI_StateSpecificInformationQuery,
+} from '@/data/dtsi/generated'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
+import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
-import { cn } from '@/utils/web/cn'
+import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 import { UserLocationRaceInfo } from './userLocationRaceInfo'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
-  countryCode: SupportedCountryCodes
   countAdvocates: number
 }
 
-export function LocationStateSpecific({
+const countryCode = SupportedCountryCodes.US
+
+export function USLocationStateSpecific({
   stateCode,
-  people,
-  countryCode,
+  congress,
+  governor,
   countAdvocates,
-  personStances,
 }: LocationStateSpecificProps) {
-  const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
-  const groups = organizeStateSpecificPeople(people)
+  const stances = congress
+    .flatMap(x => x.stances)
+    .filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
+  const groups = organizeStateSpecificPeople(congress, governor)
   const urls = getIntlUrls(countryCode)
   const stateName = getUSStateNameFromStateCode(stateCode)
-  const otherDistricts = compact(
-    times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]).map(districtIndex => {
-      const district = districtIndex + 1
-      if (US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.includes(district)) {
-        return null
-      }
-      return district
-    }),
+
+  const republicanGovernors = groups.governors.filter(
+    x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+  )
+  const democraticGovernors = groups.governors.filter(
+    x => x.politicalAffiliationCategory === DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
   )
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
-    })
-  }, [stateCode])
-
   return (
-    <div>
+    <LocationRaces disableVerticalSpacing>
+      <LocationRaces.ActionRegisterer
+        input={{
+          campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
+          countryCode,
+          usaState: stateCode,
+        }}
+      />
+
       <DarkHeroSection>
-        <div className="text-center">
-          <h2 className={'mb-4'}>
-            <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
-              United States
-            </InternalLink>{' '}
-            / <span>{stateName}</span>
-          </h2>
-          <PageTitle as="h1" className="mb-4" size="md">
-            Key Races in {stateName}
-          </PageTitle>
-          {countAdvocates > 1000 && (
-            <h3 className="mt-4 font-mono text-xl font-light">
-              <FormattedNumber
-                amount={countAdvocates}
-                locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-              />{' '}
-              crypto advocates
-            </h3>
-          )}
+        <DarkHeroSection.Breadcrumbs
+          sections={[
+            {
+              name: 'United States',
+              url: urls.locationKeyRaces(),
+            },
+            {
+              name: stateName,
+            },
+          ]}
+        />
+
+        <DarkHeroSection.Title>Key Races in {stateName}</DarkHeroSection.Title>
+
+        {countAdvocates > 1000 && (
+          <DarkHeroSection.HighlightedText>
+            <FormattedNumber amount={countAdvocates} locale={COUNTRY_CODE_TO_LOCALE[countryCode]} />{' '}
+            crypto advocates
+          </DarkHeroSection.HighlightedText>
+        )}
+
+        <div className="mt-6">
           {stateCode === 'MI' ? (
-            <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
+            <Button asChild className="w-full max-w-xs" variant="secondary">
               <ExternalLink href="https://mvic.sos.state.mi.us/Voter/Index">
                 Find your poll location
               </ExternalLink>
             </Button>
           ) : (
             <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
-              <Button className="mt-6 w-full max-w-xs" variant="secondary">
+              <Button className="w-full max-w-xs" variant="secondary">
                 Make sure you're registered to vote
               </Button>
             </UserActionFormVoterRegistrationDialog>
@@ -97,13 +101,63 @@ export function LocationStateSpecific({
         </div>
       </DarkHeroSection>
 
-      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
-        <PageTitle as="h3" className="mt-20" size="sm">
+      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) && isEmpty(groups.governors) ? (
+        <LocationRaces.EmptyMessage gutterTop>
           There's no key races currently in {stateName}
-        </PageTitle>
+        </LocationRaces.EmptyMessage>
       ) : (
         <div className="space-y-20">
-          {!!groups.senators.length && (
+          {!isEmpty(groups.governors) && (
+            <div className="mt-20">
+              <ResponsiveTabsOrSelect
+                analytics={'Primary Races Tabs'}
+                containerClassName="mb-6 md:mb-10 w-full"
+                data-testid="primary-races-tabs"
+                defaultValue={DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT}
+                forceDesktop
+                options={[
+                  {
+                    value: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+                    label: 'Democratic',
+                    content: (
+                      <div className="sticky top-24 text-center">
+                        <DTSIPersonHeroCardSection
+                          countryCode={countryCode}
+                          cta={
+                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                              View Race
+                            </InternalLink>
+                          }
+                          people={democraticGovernors}
+                          title={<>{stateName} Gubernatorial Election</>}
+                        />
+                      </div>
+                    ),
+                  },
+                  {
+                    value: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+                    label: 'Republican',
+                    content: (
+                      <div className="sticky top-24 text-center">
+                        <DTSIPersonHeroCardSection
+                          countryCode={countryCode}
+                          cta={
+                            <InternalLink href={urls.locationStateSpecificGovernorRace(stateCode)}>
+                              View Race
+                            </InternalLink>
+                          }
+                          people={republicanGovernors}
+                          title={<>{stateName} Gubernatorial Election</>}
+                        />
+                      </div>
+                    ),
+                  },
+                ]}
+                persistCurrentTab
+              />
+            </div>
+          )}
+          {!isEmpty(groups.senators) && (
             <div className="mt-20">
               <DTSIPersonHeroCardSection
                 countryCode={countryCode}
@@ -117,7 +171,7 @@ export function LocationStateSpecific({
               />
             </div>
           )}
-          {groups.congresspeople['at-large']?.people.length ? (
+          {!isEmpty(groups.congresspeople['at-large']?.people) ? (
             <div className="mt-20">
               <DTSIPersonHeroCardSection
                 countryCode={countryCode}
@@ -133,14 +187,11 @@ export function LocationStateSpecific({
               />
             </div>
           ) : (
-            <UserLocationRaceInfo
-              countryCode={countryCode}
-              groups={groups}
-              stateCode={stateCode}
-              stateName={stateName}
-            />
+            !isEmpty(groups.congresspeople) && (
+              <UserLocationRaceInfo groups={groups} stateCode={stateCode} stateName={stateName} />
+            )
           )}
-          {!!stances.length && (
+          {!isEmpty(stances) && (
             <ContentSection
               subtitle={
                 <>Keep up with recent tweets about crypto from politicians in {stateName}.</>
@@ -190,33 +241,9 @@ export function LocationStateSpecific({
               />
             )
           })}
-
-          {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
-            <ContentSection
-              className="container"
-              subtitle={'Dive deeper and discover races in other districts.'}
-              title={`Other races in ${stateName}`}
-            >
-              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-                {otherDistricts.map(district => (
-                  <InternalLink
-                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                    href={urls.locationDistrictSpecific({
-                      stateCode,
-                      district,
-                    })}
-                    key={district}
-                  >
-                    District {district}
-                  </InternalLink>
-                ))}
-              </div>
-            </ContentSection>
-          )}
-
-          <PACFooter className="container" />
+          <LocationRaces.PacFooter />
         </div>
       )}
-    </div>
+    </LocationRaces>
   )
 }

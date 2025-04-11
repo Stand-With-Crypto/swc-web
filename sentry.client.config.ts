@@ -106,6 +106,7 @@ Sentry.init({
     // `Can't find variable: bytecode`,
     'ResizeObserver loop limit exceeded',
     'ResizeObserver loop completed with undelivered notifications',
+    'As of March 1st, 2025, google.maps.places.AutocompleteService is not available to new customers. Please use google.maps.places.AutocompleteSuggestion instead. At this time, google.maps.places.AutocompleteService is not scheduled to be discontinued',
   ],
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry

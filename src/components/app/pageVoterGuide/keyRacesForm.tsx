@@ -11,7 +11,7 @@ import {
   actionCreateUserActionViewKeyRaces,
   CreateActionViewKeyRacesInput,
 } from '@/actions/actionCreateUserActionViewKeyRaces'
-import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
+import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants/us/usCtas'
 import {
   voterGuideFormValidationSchema,
   VoterGuideFormValues,
@@ -25,9 +25,11 @@ import { ErrorMessage } from '@/components/ui/errorMessage'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns/index'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -61,6 +63,7 @@ export function KeyRacesForm({
   const inputRef = useRef<HTMLInputElement | null>(null)
   const addressError = form.formState.errors?.address
   const errorRef = useRef(addressError)
+  const countryCode = useCountryCode()
 
   useEffect(() => {
     if (!isMobile && !errorRef.current && !initialValues?.address) {
@@ -109,7 +112,9 @@ export function KeyRacesForm({
       address: addressSchema,
       usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
       usaState: addressSchema?.administrativeAreaLevel1,
+      campaignName: getActionDefaultCampaignName(UserActionType.VIEW_KEY_RACES, countryCode),
       shouldBypassAuth: true,
+      countryCode,
     }
     const result = await triggerServerActionForForm(
       {

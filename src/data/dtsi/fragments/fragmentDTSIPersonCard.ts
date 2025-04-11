@@ -6,6 +6,7 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
     lastName
     firstNickname
     nameSuffix
+    politicalAffiliation
     politicalAffiliationCategory
     computedStanceScore
     computedSumStanceScoreWeight
@@ -39,4 +40,25 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
       username
     }
   }
+`
+
+export const fragmentDTSIPersonCardWithRoles = /* GraphQL */ `
+  fragment PersonCardWithRoles on Person {
+    ...PersonCard
+    roles {
+      id
+      primaryDistrict
+      primaryState
+      roleCategory
+      status
+      dateStart
+      group {
+        id
+        category
+        groupInstance
+      }
+    }
+  }
+
+  ${fragmentDTSIPersonCard}
 `

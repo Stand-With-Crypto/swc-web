@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Footer } from '@/components/app/footer'
 import { PageLayout } from '@/components/app/layout/layout'
 import { Navbar } from '@/components/app/navbar'
+import { UsNavbarGlobalBanner } from '@/components/app/navbarGlobalBanner/us'
 import { PageProps } from '@/types'
 import { generateCountryCodeLayoutMetadata } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
@@ -35,6 +36,7 @@ export default async function Layout({
     <PageLayout
       countryCode={countryCode}
       footer={<Footer {...footerConfig} />}
+      globalBanner={<UsNavbarGlobalBanner />}
       navbar={<Navbar {...navbarConfig} />}
     >
       {children}

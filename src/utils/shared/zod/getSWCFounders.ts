@@ -3,10 +3,10 @@ import { object, string, z } from 'zod'
 export const zodFoundersSchemaValidation = object({
   data: object({
     name: string(),
-    at: string(),
-    founderLink: string().url(),
+    companyName: string(),
+    companyUrl: string().url(),
     image: string().url(),
   }),
 })
 
-export type SWCFounders = z.infer<typeof zodFoundersSchemaValidation>[]
+export type SWCFounder = z.infer<typeof zodFoundersSchemaValidation>

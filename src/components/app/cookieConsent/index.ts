@@ -2,6 +2,9 @@
 
 import dynamic from 'next/dynamic'
 
-export const CookieConsent = dynamic(() => import('./cookieConsent'), {
-  ssr: false,
-})
+export const CookieConsent = dynamic(
+  () => import('./cookieConsent').then(mod => mod.CookieConsent),
+  {
+    ssr: false,
+  },
+)

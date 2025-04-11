@@ -1,11 +1,19 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBCountryCode } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+
+export type LocationStateCode =
+  | USStateCode
+  | GBCountryCode
+  | AUStateCode
+  | CAProvinceOrTerritoryCode
 
 function getBaseUrl() {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
@@ -19,6 +27,31 @@ function getBaseUrl() {
 }
 
 export const INTERNAL_BASE_URL = getBaseUrl()
+
+const COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS: Record<
+  SupportedCountryCodes,
+  {
+    state: string
+    district: string
+  }
+> = {
+  [SupportedCountryCodes.US]: {
+    state: 'state',
+    district: 'district',
+  },
+  [SupportedCountryCodes.GB]: {
+    state: 'province',
+    district: 'constituency',
+  },
+  [SupportedCountryCodes.AU]: {
+    state: 'state',
+    district: 'constituency',
+  },
+  [SupportedCountryCodes.CA]: {
+    state: 'province',
+    district: 'constituency',
+  },
+}
 
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -35,6 +68,44 @@ export const getIntlUrls = (
 ) => {
   const countryPrefix =
     countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !actualPaths ? '' : `/${countryCode}`
+
+  const racesRoutesSegments = COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS[countryCode]
+  const RACES_ROUTES = {
+    locationStateSpecific: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}`,
+    locationStateSpecificSenateRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/senate`,
+    locationStateSpecificHouseOfRepsRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/house-of-representatives`,
+    locationStateSpecificGovernorRace: (stateCode: LocationStateCode) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/governor`,
+    locationKeyRaces: () => `${countryPrefix}/races/`,
+    locationDistrictSpecific: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/${racesRoutesSegments.district}/${district}`,
+    locationDistrictSpecificHouseOfReps: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/${racesRoutesSegments.district}/${district}/house-of-representatives`,
+    locationDistrictSpecificHouseOfCommons: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: LocationStateCode
+      district: string | number
+    }) =>
+      `${countryPrefix}/races/${racesRoutesSegments.state}/${stateCode.toLowerCase()}/${racesRoutesSegments.district}/${district}/house-of-commons`,
+  }
+
   return {
     home: () => `${countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '/' : countryPrefix}`,
     termsOfService: () => `${countryPrefix}/terms-of-service`,
@@ -70,38 +141,29 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
-    founders: () => `${countryPrefix}/founders`,
     politiciansHomepage: () => `${countryPrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
-    internalHomepage: () => `${countryPrefix}/internal`,
+    internalHomepage: () => '/internal',
     becomeMember: () => `${countryPrefix}/action/become-member`,
     community: () => `${countryPrefix}/community`,
     events: () => `${countryPrefix}/events`,
+    eventDeepLink: (state: string, eventSlug: string) =>
+      `${countryPrefix}/events/${state}/${eventSlug}`,
     advocacyToolkit: () => `${countryPrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${countryPrefix}/creator-defense-fund`,
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
     referrals: (pageNum?: number) => {
-      const shouldSuppressPageNum = pageNum === 1
+      const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       return `${countryPrefix}/referrals${pageSuffix}`
     },
-    locationStateSpecific: (stateCode: USStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}`,
-    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
-      `${countryPrefix}/races/state/${stateCode.toLowerCase()}/senate`,
-    locationUnitedStatesPresidential: () => `${countryPrefix}/races/presidential`,
-    locationUnitedStates: () => `${countryPrefix}/races/`,
-    locationDistrictSpecific: ({
-      stateCode,
-      district,
-    }: {
-      stateCode: USStateCode
-      district: NormalizedDTSIDistrictId
-    }) => `${countryPrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
+    newmodeElectionAction: () => `${countryPrefix}/content/election`,
+    newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
+    ...RACES_ROUTES,
   }
 }
 
@@ -114,10 +176,12 @@ export const apiUrls = {
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
   totalDonations: () => '/api/public/total-donations',
-  userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
+  userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/${countryCode}/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
-  dtsiAllPeople: () => `/api/public/dtsi/all-people`,
+  dtsiAllPeople: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/public/dtsi/all-people/${countryCode}`,
   recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
     `/api/public/recent-activity/${limit}/${countryCode}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,

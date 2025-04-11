@@ -26,7 +26,11 @@ function validatePhoneNumber(phoneNumber: string) {
     const parsedPhoneNumber = parsePhoneNumber(phoneNumber, 'US', phoneNumberMetadata)
     if (!parsedPhoneNumber) return false
 
-    return parsedPhoneNumber.isPossible() && parsedPhoneNumber.isValid()
+    return (
+      parsedPhoneNumber.isPossible() &&
+      parsedPhoneNumber.isValid() &&
+      parsedPhoneNumber.country === 'US'
+    )
   } catch {
     return false
   }

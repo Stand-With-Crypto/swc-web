@@ -14,9 +14,12 @@ import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
 function DefaultPlacesSelect(
@@ -39,7 +42,13 @@ interface UserAddressVoterGuideInput {
 
 export function UserAddressVoterGuideInputSection(props: UserAddressVoterGuideInput) {
   return (
-    <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
+    <Suspense
+      fallback={
+        <ContentContainer shouldShowSubtitle={true}>
+          <DefaultPlacesSelect onChange={noop} value={null} />
+        </ContentContainer>
+      }
+    >
       <SuspenseUserAddressVoterGuideInputSection {...props} />
     </Suspense>
   )
@@ -123,12 +132,8 @@ function ContentContainer({
   return (
     <ContentSection
       className="container"
-      subtitle={
-        shouldShowSubtitle
-          ? 'Enter your address to find the key races in your area that will impact the future of crypto in the United States.'
-          : null
-      }
-      title={'Your races'}
+      subtitle={shouldShowSubtitle ? 'Enter your address to find key races near you.' : null}
+      title="Races in your area"
     >
       {children}
     </ContentSection>

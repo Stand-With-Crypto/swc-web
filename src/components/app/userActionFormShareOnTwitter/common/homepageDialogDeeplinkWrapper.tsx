@@ -10,9 +10,13 @@ import { ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER } from '@/components/a
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export function UserActionFormShareOnTwitterDeeplinkWrapper() {
+export function UserActionFormShareOnTwitterDeeplinkWrapper({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) {
   usePreventOverscroll()
 
   const urls = useIntlUrls()
@@ -23,11 +27,11 @@ export function UserActionFormShareOnTwitterDeeplinkWrapper() {
 
   return (
     <GeoGate
-      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      unavailableContent={<UserActionFormActionUnavailable />}
+      countryCode={countryCode}
+      unavailableContent={<UserActionFormActionUnavailable countryCode={countryCode} />}
     >
       <UserActionFormShareOnTwitter
-        countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+        countryCode={countryCode}
         onClose={() => router.replace(urls.home())}
       />
     </GeoGate>

@@ -20,12 +20,16 @@ export const navbarConfig: NavbarProps = {
       text: 'Events',
     },
     {
+      href: urls.donate(),
+      text: 'Donate',
+    },
+    {
       text: 'Resources',
       children: [
         {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: <Icons.DonateIcon />,
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: <Icons.ReferralsIcon />,
         },
         {
           href: urls.about(),
@@ -62,6 +66,11 @@ export const navbarConfig: NavbarProps = {
           href: urls.press(),
           text: 'Press',
           icon: <Icons.PressIcon />,
+        },
+        {
+          href: urls.polls(),
+          text: 'Polls',
+          icon: <Icons.PollsIcon />,
         },
       ],
     },
@@ -115,9 +124,6 @@ export const footerConfig: FooterProps = {
       href: usExternalUrls.discord(),
       text: 'Discord',
     },
-    {
-      href: usExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: usExternalUrls.emailFeedback(),
 }

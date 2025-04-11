@@ -18,20 +18,12 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
-      href: urls.politiciansHomepage(),
-      text: 'Politician scores',
-    },
-    {
       href: urls.manifesto(),
       text: 'Manifesto',
     },
     {
       href: urls.partners(),
       text: 'Partners',
-    },
-    {
-      href: urls.events(),
-      text: 'Events',
     },
     {
       href: urls.community(),
@@ -46,7 +38,7 @@ export const navbarConfig: NavbarProps = {
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Fight for the future',
+  title: 'Join the Movement',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
   footerBanner: (
@@ -69,32 +61,13 @@ export const footerConfig: FooterProps = {
   ],
   socialLinks: [
     {
-      href: gbExternalUrls.discord(),
-      text: 'Discord',
-    },
-    {
       href: gbExternalUrls.twitter(),
       text: 'Twitter / X',
-    },
-    {
-      href: gbExternalUrls.instagram(),
-      text: 'Instagram',
-    },
-    {
-      href: gbExternalUrls.youtube(),
-      text: 'Youtube',
-    },
-    {
-      href: gbExternalUrls.facebook(),
-      text: 'Facebook',
     },
     {
       href: gbExternalUrls.linkedin(),
       text: 'LinkedIn',
     },
-    {
-      href: gbExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: gbExternalUrls.emailFeedback(),
 }

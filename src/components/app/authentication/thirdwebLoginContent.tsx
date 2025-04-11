@@ -15,7 +15,7 @@ import {
 } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -27,6 +27,7 @@ import { isLoggedIn } from '@/utils/server/thirdweb/isLoggedIn'
 import { login } from '@/utils/server/thirdweb/onLogin'
 import { onLogout } from '@/utils/server/thirdweb/onLogout'
 import { isCypress } from '@/utils/shared/executionEnvironment'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { apiUrls } from '@/utils/shared/urls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
@@ -57,7 +58,7 @@ export function ThirdwebLoginContent({
   const swrConfig = useSWRConfig()
   const countryCode = useCountryCode()
 
-  const { title, subtitle, footerContent } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
+  const { title, subtitle, footerContent, iconSrc } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
 
   const handleLogin = useCallback(async () => {
     if (onLoginCallback) {
@@ -101,13 +102,7 @@ export function ThirdwebLoginContent({
       <DialogBody>
         <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
           <div className="flex flex-col items-center space-y-6">
-            <NextImage
-              alt="Stand With Crypto Logo"
-              height={80}
-              priority
-              src="/logo/shield.svg"
-              width={80}
-            />
+            <NextImage alt="Stand With Crypto Logo" height={80} priority src={iconSrc} width={80} />
 
             <div className="space-y-4">
               <PageTitle size="sm">{title}</PageTitle>
@@ -131,12 +126,8 @@ export function ThirdwebLoginContent({
             <span className="text-[10px]">
               {footerContent} To learn more, visit the{' '}
               <InternalLink href={urls.privacyPolicy()} target="_blank">
-                Stand With Crypto Alliance Privacy Policy
-              </InternalLink>{' '}
-              and{' '}
-              <ExternalLink href="https://www.quorum.us/privacy-policy/">
-                Quorum Privacy Policy
-              </ExternalLink>
+                Stand With Crypto Privacy Policy
+              </InternalLink>
               .
             </span>
           </p>
@@ -155,6 +146,7 @@ function ThirdwebLoginEmbedded(
   const hasTracked = useRef(false)
   const { connect } = useConnect()
   const searchParams = useSearchParams()
+  const countryCode = useCountryCode()
 
   const searchParamsObject = searchParams ? Object.fromEntries(searchParams.entries()) : {}
 
@@ -172,7 +164,11 @@ function ThirdwebLoginEmbedded(
       </div>
     )
   }
-  const embeddedAuthOptions: AuthOption[] = ['google', 'phone', 'email']
+  const embeddedAuthOptions: AuthOption[] = [
+    'google',
+    ...(countryCode === SupportedCountryCodes.US ? ['phone' as AuthOption] : []),
+    'email',
+  ]
 
   const supportedWallets = [
     createWallet('com.coinbase.wallet', { appMetadata }),

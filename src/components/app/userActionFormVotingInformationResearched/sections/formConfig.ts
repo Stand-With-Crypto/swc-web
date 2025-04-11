@@ -1,7 +1,7 @@
 import { boolean, nativeEnum, object, type z } from 'zod'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 
@@ -9,7 +9,7 @@ export const FORM_NAME = 'Voting Information Researched'
 
 export const votingInformationResearchedFormValidationSchema = object({
   address: zodGooglePlacesAutocompletePrediction,
-  campaignName: nativeEnum(UserActionVotingInformationResearchedCampaignName),
+  campaignName: nativeEnum(USUserActionVotingInformationResearchedCampaignName),
   shouldReceiveNotifications: boolean(),
 })
 
@@ -29,7 +29,7 @@ export function getDefaultValues({
           place_id: user?.address.googlePlaceId,
         }
       : ({} as GooglePlaceAutocompletePrediction),
-    campaignName: UserActionVotingInformationResearchedCampaignName['2025_US_ELECTIONS'],
+    campaignName: USUserActionVotingInformationResearchedCampaignName['H1_2025'],
     shouldReceiveNotifications: false,
   }
 }

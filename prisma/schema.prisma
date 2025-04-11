@@ -155,6 +155,7 @@ model User {
   @@index([datetimeCreated])
   @@index([phoneNumber])
   @@index([smsStatus])
+  @@index([referralId])
   @@map("user")
 }
 
@@ -276,6 +277,7 @@ enum UserActionType {
   VOTING_DAY
   REFER
   POLL
+  VIEW_KEY_PAGE
 }
 
 model UserAction {
@@ -314,6 +316,7 @@ model UserAction {
   userActionVotingDay                   UserActionVotingDay?
   userActionRefer                       UserActionRefer?
   userActionPoll                        UserActionPoll?
+  userActionViewKeyPage                 UserActionViewKeyPage?
 
   @@index([datetimeCreated])
   @@index([userId, nftMintId])
@@ -467,8 +470,22 @@ model UserActionViewKeyRaces {
   userAction              UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usCongressionalDistrict String?    @map("us_congressional_district")
   usaState                String?    @map("usa_state")
+  stateCode               String?    @map("state_code")
+  constituency            String?    @map("constituency")
+
+  // We're making it flexible to store the state code and constituency for non-US countries
+  // TODO: backfill existing data with the correct state code and constituency
 
   @@map("user_action_view_key_races")
+}
+
+model UserActionViewKeyPage {
+  id         String     @id @default(uuid())
+  userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  path String @map("path")
+
+  @@map("user_action_view_key_page")
 }
 
 model UserActionVoterRegistration {

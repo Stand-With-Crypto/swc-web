@@ -1,11 +1,18 @@
+import { lazy } from 'react'
 import { getYear } from 'date-fns'
 
-import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
+import { CookieConsentFooterButton } from '@/components/app/cookieConsent/common/cookieConsentFooterButton'
 import { HeroCTA } from '@/components/app/pageHome/common/hero/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
+
+const SendFeedbackButton = lazy(() =>
+  import('@/components/app/footer/sendFeedback').then(m => ({
+    default: m.SendFeedbackButton,
+  })),
+)
 
 const footerLinkStyles = cn('block text-gray-400')
 
@@ -21,10 +28,21 @@ export interface FooterProps {
     text: string
     href: string
   }[]
+  sendFeedbackLink?: string
+  legalText?: string
   footerBanner?: React.ReactNode
 }
 
-export function Footer({ title, subtitle, links, socialLinks, footerBanner }: FooterProps) {
+export function Footer({
+  title,
+  subtitle,
+  links,
+  socialLinks,
+  sendFeedbackLink,
+  footerBanner,
+  countryCode,
+  legalText,
+}: FooterProps) {
   return (
     <div className="mt-36">
       {footerBanner}
@@ -36,7 +54,7 @@ export function Footer({ title, subtitle, links, socialLinks, footerBanner }: Fo
                 {title}
               </PageTitle>
               <p className="text-xl">{subtitle}</p>
-              <HeroCTA />
+              <HeroCTA countryCode={countryCode} />
             </div>
             <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-3 sm:space-y-6">
@@ -45,6 +63,7 @@ export function Footer({ title, subtitle, links, socialLinks, footerBanner }: Fo
                     {text}
                   </ExternalLink>
                 ))}
+                {sendFeedbackLink && <SendFeedbackButton href={sendFeedbackLink} />}
               </div>
               <div className="space-y-3 sm:space-y-6">
                 {links.map(({ text, href }) => (
@@ -59,34 +78,10 @@ export function Footer({ title, subtitle, links, socialLinks, footerBanner }: Fo
               </div>
             </div>
           </div>
-          <div className="mb-2 text-xs text-muted">
-            Information about people's stances on crypto sourced from{' '}
-            <a
-              className={'hover:underline'}
-              href="https://www.dotheysupportit.com/"
-              target="_blank"
-            >
-              DoTheySupportIt.com
-            </a>{' '}
-            For more information, visit DoTheySupportIt's{' '}
-            <a
-              className={'hover:underline'}
-              href="https://www.dotheysupportit.com/privacy-policy"
-              target="_blank"
-            >
-              privacy policy
-            </a>{' '}
-            and{' '}
-            <a
-              className={'hover:underline'}
-              href="https://www.dotheysupportit.com/terms-and-conditions"
-              target="_blank"
-            >
-              terms and conditions
-            </a>
-            .
-          </div>
-          <div className="text-sm text-muted">
+
+          {legalText && <div className="mt-4 text-sm text-muted">{legalText}</div>}
+
+          <div className="mt-4 text-sm text-muted">
             Stand With Crypto ©️ All rights reserved {getYear(new Date())}
           </div>
         </div>

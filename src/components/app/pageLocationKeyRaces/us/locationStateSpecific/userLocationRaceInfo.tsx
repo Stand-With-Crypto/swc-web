@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
 import { ContentSection } from '@/components/app/ContentSection'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationKeyRaces/us/locationStateSpecific/organizeStateSpecificPeople'
@@ -15,16 +16,20 @@ import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils/shared/getCongressionalDistrictFromAddress'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>
   stateCode: USStateCode
   stateName: string
-  countryCode: SupportedCountryCodes
 }
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 function DefaultPlacesSelect({
   stateCode,
@@ -44,19 +49,18 @@ function DefaultPlacesSelect({
 export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
   return (
     <Suspense
-      fallback={<DefaultPlacesSelect onChange={noop} stateCode={props.stateCode} value={null} />}
+      fallback={
+        <ContentContainer shouldShowSubtitle={true} stateName={props.stateName}>
+          <DefaultPlacesSelect onChange={noop} stateCode={props.stateCode} value={null} />
+        </ContentContainer>
+      }
     >
       <SuspenseUserLocationRaceInfo {...props} />
     </Suspense>
   )
 }
 
-function SuspenseUserLocationRaceInfo({
-  groups,
-  stateCode,
-  stateName,
-  countryCode,
-}: UserLocationRaceInfoProps) {
+function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDistrictFromAddress(address === 'loading' ? null : address?.description, {
     stateCode,
@@ -92,6 +96,7 @@ function SuspenseUserLocationRaceInfo({
   const group = groups.congresspeople[districtNumber]
   const { recommended, others } = findRecommendedCandidate(group.people)
   const urls = getIntlUrls(countryCode)
+
   return (
     <ContentContainer shouldShowSubtitle={shouldShowSubtitle} stateName={stateName}>
       <div>
@@ -105,6 +110,7 @@ function SuspenseUserLocationRaceInfo({
           {recommended && (
             <DTSIPersonHeroCard
               countryCode={countryCode}
+              cryptoStanceGrade={DTSIFormattedLetterGrade}
               isRecommended
               person={recommended}
               subheader="role"
@@ -113,6 +119,7 @@ function SuspenseUserLocationRaceInfo({
           {others.map(person => (
             <DTSIPersonHeroCard
               countryCode={countryCode}
+              cryptoStanceGrade={DTSIFormattedLetterGrade}
               key={person.id}
               person={person}
               subheader={person.isIncumbent ? 'Incumbent' : 'role'}

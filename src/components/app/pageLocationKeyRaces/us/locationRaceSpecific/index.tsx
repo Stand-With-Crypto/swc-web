@@ -1,16 +1,12 @@
-'use client'
+import { compact, isEmpty } from 'lodash-es'
 
-import { useEffect } from 'react'
-import { compact } from 'lodash-es'
-
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
-import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
-import { PACFooter } from '@/components/app/pacFooter'
+import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
+import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   DTSI_DistrictSpecificInformationQuery,
@@ -21,25 +17,34 @@ import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import { USUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
-  stateCode?: USStateCode
+interface USLocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
+  stateCode: USStateCode
   district?: NormalizedDTSIDistrictId
-  countryCode: SupportedCountryCodes
+  isGovernor?: boolean
 }
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+const urls = getIntlUrls(countryCode)
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
+  { district, stateCode }: Pick<USLocationRaceSpecificProps, 'district' | 'stateCode'>,
 ) {
-  const targetedRoleCategory = district
-    ? DTSI_PersonRoleCategory.CONGRESS
-    : stateCode
-      ? DTSI_PersonRoleCategory.SENATE
-      : DTSI_PersonRoleCategory.PRESIDENT
+  let targetedRoleCategory = DTSI_PersonRoleCategory.PRESIDENT
+
+  if (district) {
+    targetedRoleCategory = DTSI_PersonRoleCategory.CONGRESS
+  } else if (stateCode) {
+    targetedRoleCategory = DTSI_PersonRoleCategory.SENATE
+  }
 
   const formatted = people.map(x =>
     formatSpecificRoleDTSIPerson(x, {
@@ -48,18 +53,36 @@ function organizeRaceSpecificPeople(
   )
 
   const partyOrder = [
-    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
     DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
     DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
   ]
 
   formatted.sort((a, b) => {
+    const lastNameA = a.lastName
+    const lastNameB = b.lastName
+
+    if (lastNameA !== lastNameB) {
+      return lastNameA.localeCompare(lastNameB)
+    }
+
     const aPartyIndex = a.politicalAffiliationCategory
       ? partyOrder.indexOf(a.politicalAffiliationCategory)
       : -1
     const bPartyIndex = b.politicalAffiliationCategory
       ? partyOrder.indexOf(b.politicalAffiliationCategory)
       : -1
+    const aPersonScore = a.computedStanceScore || a.manuallyOverriddenStanceScore || 0
+    const bPersonScore = b.computedStanceScore || b.manuallyOverriddenStanceScore || 0
+
+    if (aPersonScore !== bPersonScore) {
+      return bPersonScore - aPersonScore
+    }
+
+    if (a.profilePictureUrl !== b.profilePictureUrl) {
+      return a.profilePictureUrl ? -1 : 1
+    }
+
     if (aPartyIndex !== bPartyIndex) {
       return aPartyIndex - bPartyIndex
     }
@@ -74,109 +97,133 @@ function organizeRaceSpecificPeople(
   return formatted
 }
 
-export function LocationRaceSpecific({
+export function USLocationRaceSpecific({
   stateCode,
   district,
   people,
-  countryCode,
-}: LocationRaceSpecificProps) {
+}: USLocationRaceSpecificProps) {
   const groups = organizeRaceSpecificPeople(people, { district, stateCode })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
-  const urls = getIntlUrls(countryCode)
   const { recommended, others } = findRecommendedCandidate(groups)
 
-  useEffect(() => {
-    void actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
-      usCongressionalDistrict: district?.toString(),
-    })
-  }, [district, stateCode])
+  const racesData = compact([
+    recommended && { person: recommended, isRecommended: true },
+    ...others.map(person => ({ person, isRecommended: false })),
+  ])
 
   return (
-    <div>
+    <LocationRaces disableVerticalSpacing>
+      <LocationRaces.ActionRegisterer
+        input={{
+          campaignName: USUserActionViewKeyRacesCampaignName['H1_2025'],
+          usaState: stateCode,
+          usCongressionalDistrict: district?.toString(),
+          countryCode,
+        }}
+      />
+
       <DarkHeroSection className="text-center">
-        <h2 className={'mb-4'}>
-          <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
-            United States
-          </InternalLink>
-          {' / '}
-          {(() => {
-            if (!stateDisplayName) {
-              return <span>Presidential</span>
-            }
-            return (
-              <>
-                <InternalLink
-                  className="text-gray-400"
-                  href={urls.locationStateSpecific(stateCode)}
-                >
-                  {stateDisplayName}
-                </InternalLink>{' '}
-                /{' '}
-                <span>
-                  {district
-                    ? `${stateCode} Congressional District ${district}`
-                    : `U.S. Senate (${stateCode})`}
-                </span>
-              </>
-            )
-          })()}
-        </h2>
-        <PageTitle as="h1" className="mb-4" size="md">
+        <DarkHeroSection.Breadcrumbs
+          sections={getBreadcrumbSections({
+            href: urls.locationKeyRaces(),
+            stateCode,
+            stateDisplayName,
+            district,
+          })}
+        />
+
+        <DarkHeroSection.Title>
           {!stateCode
             ? 'U.S. Presidential Race'
             : district
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
-        </PageTitle>
+        </DarkHeroSection.Title>
+
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
             Make sure you're registered to vote
           </Button>
         </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
+
       <div className="divide-y-2">
-        {compact([
-          recommended && { person: recommended, isRecommended: true },
-          ...others.map(person => ({ person, isRecommended: false })),
-        ]).map(({ person, isRecommended }) => (
-          <div key={person.id}>
-            <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
-              <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
-                <div className="sticky top-24 text-center">
-                  <DTSIPersonHeroCard
-                    countryCode={countryCode}
-                    isRecommended={isRecommended}
-                    person={person}
-                    subheader="role"
-                  />
-                </div>
-              </div>
-              <div className="w-full py-10 md:py-20">
-                {person.stances.length ? (
-                  <>
-                    <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
-                      {dtsiPersonFullName(person)} statements on crypto
-                    </PageTitle>
-                    <MaybeOverflowedStances
+        {isEmpty(racesData) ? (
+          <LocationRaces.EmptyMessage gutterTop>
+            There's no key races currently in {stateDisplayName}
+          </LocationRaces.EmptyMessage>
+        ) : (
+          racesData.map(({ person, isRecommended }) => (
+            <div key={person.id}>
+              <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
+                <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
+                  <div className="sticky top-24 text-center">
+                    <DTSIPersonHeroCard
                       countryCode={countryCode}
+                      cryptoStanceGrade={DTSIFormattedLetterGrade}
+                      isRecommended={isRecommended}
                       person={person}
-                      stances={person.stances}
+                      subheader="role"
                     />
-                  </>
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-center">
-                    <h3 className="text-xl md:text-2xl">
-                      {dtsiPersonFullName(person)} has no statements on crypto.
-                    </h3>
                   </div>
-                )}
-              </div>
-            </section>
-          </div>
-        ))}
+                </div>
+                <div className="w-full py-10 md:py-20">
+                  {person.stances.length ? (
+                    <>
+                      <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                        {dtsiPersonFullName(person)} statements on crypto
+                      </PageTitle>
+                      <MaybeOverflowedStances
+                        countryCode={countryCode}
+                        person={person}
+                        stances={person.stances}
+                      />
+                    </>
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-center">
+                      <h3 className="text-xl md:text-2xl">
+                        {dtsiPersonFullName(person)} has no statements on crypto.
+                      </h3>
+                    </div>
+                  )}
+                </div>
+              </section>
+            </div>
+          ))
+        )}
       </div>
-      <PACFooter className="container" />
-    </div>
+      <LocationRaces.PacFooter />
+    </LocationRaces>
   )
+}
+
+function getBreadcrumbSections({
+  href,
+  stateCode,
+  stateDisplayName,
+  district,
+}: {
+  href: string
+  stateCode: USStateCode
+  stateDisplayName?: string
+  district?: NormalizedDTSIDistrictId
+}) {
+  const sections: { name: string; url?: string }[] = [
+    { name: 'United States', url: getIntlUrls(countryCode).locationKeyRaces() },
+  ]
+
+  if (!stateDisplayName) {
+    sections.push({ name: 'Presidential' })
+    return sections
+  }
+
+  sections.push({ name: stateDisplayName, url: href })
+
+  if (district) {
+    sections.push({ name: `${stateCode} Congressional District ${district}` })
+  } else {
+    sections.push({ name: `U.S. Senate (${stateCode})` })
+  }
+
+  return sections
 }

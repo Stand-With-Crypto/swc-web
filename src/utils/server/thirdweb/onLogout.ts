@@ -8,6 +8,7 @@ import { cookies } from 'next/headers'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
+import { OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 export async function onLogout() {
   const currentCookies = await cookies()
@@ -31,5 +32,6 @@ export async function onLogout() {
     })
   } finally {
     currentCookies.delete(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+    currentCookies.delete(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME)
   }
 }

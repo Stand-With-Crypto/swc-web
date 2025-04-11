@@ -11,10 +11,18 @@ const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
-  'media-src': ["'self'", 'blob:', 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com'],
+  'media-src': [
+    "'self'",
+    'blob:',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
+    'https://www.youtube-nocookie.com/embed/',
+    'https://cdn.builder.io/',
+  ],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
+    'https://fonts.googleapis.com', // Required for newmode
+    'https://*.newmode.net/',
   ],
   'script-src': [
     "'self'",
@@ -45,6 +53,8 @@ const contentSecurityPolicy = {
     'https://*.ads-twitter.com/',
     'https://*.google-analytics.com/',
     'https://*.builder.io/',
+    'https://*.newmode.net/',
+    'https://js.stripe.com/', // Required for newmode
   ],
   'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
   'connect-src': [
@@ -85,6 +95,8 @@ const contentSecurityPolicy = {
     'https://*.thirdweb.com/',
     'https://api.thirdweb.com/',
     'https://embedded-wallet.thirdweb.com/',
+    'https://*.newmode.net/',
+    'https://api.mapbox.com/', // Required for newmode
   ],
   'frame-src': [
     '*.google.com',
@@ -92,8 +104,11 @@ const contentSecurityPolicy = {
     'https://verify.walletconnect.com/',
     'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
+    'https://www.youtube-nocookie.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com',
+    'https://*.newmode.net/',
+    'https://js.stripe.com/', // Required for newmode
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
@@ -284,6 +299,16 @@ const nextConfig: NextConfig = {
         destination: '/action/nft-mint',
         permanent: true,
       },
+      {
+        source: '/uk',
+        destination: '/gb',
+        permanent: false,
+      },
+      {
+        source: '/uk/:path*',
+        destination: '/gb/:path*',
+        permanent: false,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
@@ -302,6 +327,32 @@ const nextConfig: NextConfig = {
       {
         source: '/join/:referralId',
         destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
+        missing: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+          },
+        ],
+      },
+      // Country-specific referral redirects
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=:utmMedium',
+        permanent: false,
+        has: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+            value: '(?<utmMedium>.+)',
+          },
+        ],
+      },
+      {
+        source: '/:countryCode/join/:referralId',
+        destination:
+          '/:countryCode/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
         permanent: false,
         missing: [
           {
@@ -369,6 +420,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // SMS shortlinks
+      {
+        source: '/s/paul-atkins',
+        destination: 'https://speak4.app/lp/b901vnot/?ts=1744310543',
+        permanent: true,
+      },
+      {
+        source: '/s/sb-1797',
+        destination: 'https://speak4.app/lp/jk01insm/?ts=1744055112',
+        permanent: true,
+      },
       {
         source: '/new-congress-2/:sessionId*',
         destination:
@@ -596,6 +657,11 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: '/tweet/case-dismissed/:state',
+        destination: '/api/public/x-redirect/:state',
+        permanent: false,
+      },
+      {
         source: '/oh/1',
         destination:
           'https://americalovescryptooh.splashthat.com?utm_source=swc&utm_medium=sms&utm_campaign=oh_1&utm_id=ss',
@@ -656,6 +722,16 @@ const nextConfig: NextConfig = {
         destination: '/vote?utm_source=cb&utm_medium=push&utm_campaign=vote-adv',
         permanent: true,
       },
+      {
+        source: '/canada',
+        destination: '/ca/action/sign-up?utm_source=billboard',
+        permanent: true,
+      },
+      {
+        source: '/australia',
+        destination: '/au/action/sign-up?utm_source=billboard',
+        permanent: true,
+      },
     ]
   },
   async rewrites() {
@@ -667,6 +743,14 @@ const nextConfig: NextConfig = {
         {
           source: '/:locale/(mission|manifesto)',
           destination: '/:locale/about',
+        },
+        {
+          source: '/:locale/races/province/:stateCode',
+          destination: '/:locale/races/state/:stateCode',
+        },
+        {
+          source: '/:locale/races/(province|state)/:stateCode/constituency/:path*',
+          destination: '/:locale/races/state/:stateCode/district/:path*',
         },
       ],
       afterFiles: [],

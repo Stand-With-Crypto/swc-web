@@ -37,8 +37,10 @@ import {
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
-import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
+import { getZodUpdateUserProfileFormActionSchema } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
 
 export const actionUpdateUserProfile = withServerActionMiddleware(
   'actionUpdateUserProfile',
@@ -48,14 +50,17 @@ export const actionUpdateUserProfile = withServerActionMiddleware(
 const logger = getLogger(`actionUpdateUserProfile`)
 
 async function actionUpdateUserProfileWithoutMiddleware(
-  data: z.infer<typeof zodUpdateUserProfileFormAction>,
+  data: z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>,
 ) {
   const authUser = await appRouterGetAuthUser()
 
   if (!authUser) {
     throw new Error('Unauthenticated')
   }
-  const validatedFields = zodUpdateUserProfileFormAction.safeParse(data)
+  // Assuming the country code is valid. If not, the default country code will be used.
+  const validatedFields = getZodUpdateUserProfileFormActionSchema(
+    data.address?.countryCode as SupportedCountryCodes,
+  ).safeParse(data)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -112,8 +117,10 @@ async function actionUpdateUserProfileWithoutMiddleware(
       })
     : null
 
-  if (address && user.countryCode.toLowerCase() !== address.countryCode.toLowerCase()) {
-    await actionUpdateUserCountryCodeWithoutMiddleware(address.countryCode)
+  const { success: isSupportedCountryCode, data: addressCountryCode } =
+    zodSupportedCountryCode.safeParse(address?.countryCode)
+  if (address && isSupportedCountryCode && user.countryCode.toLowerCase() !== addressCountryCode) {
+    await actionUpdateUserCountryCodeWithoutMiddleware(addressCountryCode)
   }
 
   const existingUserEmailAddress = emailAddress
@@ -182,7 +189,11 @@ async function actionUpdateUserProfileWithoutMiddleware(
   })
 
   if (optedInToSms && phoneNumber) {
-    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
+    updatedUser.smsStatus = await smsActions.optInUser({
+      phoneNumber,
+      user,
+      countryCode: addressCountryCode,
+    })
   }
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)

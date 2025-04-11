@@ -7,11 +7,11 @@ import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
 import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -32,21 +32,27 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import { USUserActionCallCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
-const createActionCallCongresspersonInputValidationSchema = object({
-  phoneNumber: zodPhoneNumber,
-  campaignName: nativeEnum(UserActionCallCampaignName),
-  dtsiSlug: zodDTSISlug,
-  address: zodAddress,
-})
+const getCreateActionCallCongresspersonInputValidationSchema = (
+  countryCode: SupportedCountryCodes,
+) =>
+  object({
+    phoneNumber: zodPhoneNumber(countryCode),
+    campaignName: nativeEnum(USUserActionCallCampaignName),
+    dtsiSlug: zodDTSISlug,
+    address: zodAddress,
+  })
 
 export type CreateActionCallCongresspersonInput = z.infer<
-  typeof createActionCallCongresspersonInputValidationSchema
+  ReturnType<typeof getCreateActionCallCongresspersonInputValidationSchema>
 >
 
 interface SharedDependencies {
@@ -76,7 +82,10 @@ async function _actionCreateUserActionCallCongressperson(
     context: 'unauthenticated',
   })
 
-  const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
+  const countryCode = await getUserAccessLocationCookie()
+
+  const validatedInput =
+    getCreateActionCallCongresspersonInputValidationSchema(countryCode).safeParse(input)
   if (!validatedInput.success) {
     return {
       errors: validatedInput.error.flatten().fieldErrors,
@@ -85,7 +94,6 @@ async function _actionCreateUserActionCallCongressperson(
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getCountryCodeCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {

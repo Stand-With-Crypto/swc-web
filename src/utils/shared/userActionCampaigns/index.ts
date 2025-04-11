@@ -59,7 +59,7 @@ export type UserActionCampaignNames =
   | CAUserActionCampaigns[keyof CAUserActionCampaigns]
   | AUUserActionCampaigns[keyof AUUserActionCampaigns]
 
-export type UserActionCampaigns = CountryUserActionCampaigns[SupportedCountryCodes]
+export type UserActionCampaign = CountryUserActionCampaigns[SupportedCountryCodes]
 
 export const COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP: {
   [key in SupportedCountryCodes]: CountryUserActionCampaigns[key]
@@ -80,18 +80,16 @@ export function isActionSupportedForCountry<
   )
 }
 
-// For backwards compatibility
-export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
-  ...US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  ...GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  ...CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  ...AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-]
+export const getActionDefaultCampaignName = (
+  action: UserActionType,
+  countryCode: SupportedCountryCodes,
+) => {
+  const campaignNameEnum =
+    COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode as SupportedCountryCodes]
 
-// For backwards compatibility
-export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
-  ...US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  ...GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  ...CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  ...AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-} satisfies Record<ActiveClientUserActionWithCampaignType, string>
+  if (!campaignNameEnum) {
+    return US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action]
+  }
+
+  return campaignNameEnum[action as keyof typeof campaignNameEnum]
+}

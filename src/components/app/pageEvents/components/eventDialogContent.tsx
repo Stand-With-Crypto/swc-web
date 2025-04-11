@@ -1,6 +1,7 @@
 'use client'
 
 import Balancer from 'react-wrap-balancer'
+import { UserActionType } from '@prisma/client'
 import { format, isBefore, startOfDay } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
 import sanitizeHtml from 'sanitize-html'
@@ -16,10 +17,15 @@ import { handleCreateRsvpAction as _handleCreateRsvpAction } from '@/components/
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { StateShield } from '@/components/ui/stateShield'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 
 enum SectionNames {
@@ -30,9 +36,10 @@ enum SectionNames {
 
 interface EventDialogContentProps {
   event: SWCEvent
+  countryCode: SupportedCountryCodes
 }
 
-export function EventDialogContent({ event }: EventDialogContentProps) {
+export function EventDialogContent({ event, countryCode }: EventDialogContentProps) {
   usePreventOverscroll()
   const { data: userFullProfileInfoResponse } = useApiResponseForUserFullProfileInfo()
   const { user } = userFullProfileInfoResponse ?? { user: null }
@@ -51,6 +58,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     await handleCreateRsvpAction({
       shouldReceiveNotifications: true,
       event,
+      campaignName: getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode),
     })
 
     toast.success('Thank you for your interest! We will send you a reminder closer to the event.')
@@ -61,6 +69,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
       event,
+      campaignName: getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode),
     })
 
     window.open(event.rsvpUrl, '_blank')
@@ -104,6 +113,8 @@ function EventInformation({
   handleGetUpdatesButtonClick: () => Promise<void>
   handleRSVPButtonClick: () => void
 }) {
+  const countryCode = useCountryCode()
+
   const eventDate = event?.time
     ? new Date(`${event.date}T${event.time}`)
     : new Date(`${event.date}T00:00`)
@@ -114,12 +125,11 @@ function EventInformation({
     <div className="flex h-full flex-col">
       <ScrollArea className="overflow-auto px-4 py-6 md:max-h-[70vh]">
         <div className="flex h-full flex-col items-center gap-2">
-          <NextImage
-            alt={`${event.state} shield`}
+          <StateShield
             className="mb-2 lg:mb-0"
-            height={100}
-            src={`/stateShields/${event.state}.png`}
-            width={100}
+            countryCode={countryCode}
+            size={100}
+            state={event.state}
           />
           <h3 className="text-center font-sans text-xl font-bold">
             <Balancer>{event.name}</Balancer>
@@ -165,22 +175,24 @@ function EventInformation({
           className="z-10 mt-auto flex flex-col items-center justify-end gap-3 border border-t px-4 py-6 lg:flex-row"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
-          <LoginDialogWrapper
-            authenticatedContent={
-              <Button
-                className="w-full lg:w-auto"
-                disabled={isCreatingRsvpEventAction}
-                onClick={handleGetUpdatesButtonClick}
-                variant="secondary"
-              >
-                Get updates
+          {isSmsSupportedInCountry(countryCode) && (
+            <LoginDialogWrapper
+              authenticatedContent={
+                <Button
+                  className="w-full lg:w-auto"
+                  disabled={isCreatingRsvpEventAction}
+                  onClick={handleGetUpdatesButtonClick}
+                  variant="secondary"
+                >
+                  Get updates
+                </Button>
+              }
+            >
+              <Button className="w-full md:w-1/2" variant="secondary">
+                Log in to get updates
               </Button>
-            }
-          >
-            <Button className="w-full md:w-1/2" variant="secondary">
-              Log in to get updates
-            </Button>
-          </LoginDialogWrapper>
+            </LoginDialogWrapper>
+          )}
 
           <Button
             className="w-full lg:w-auto"

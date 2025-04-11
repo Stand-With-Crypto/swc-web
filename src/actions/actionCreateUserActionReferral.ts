@@ -9,44 +9,39 @@ import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { ServerLocalUser, zodServerLocalUser } from '@/utils/server/serverLocalUser'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
-import { zodReferralId } from '@/validation/fields/zodReferrald'
+import { zodReferralId } from '@/validation/fields/zodReferralId'
 
 const logger = getLogger(`actionCreateUserActionReferral`)
 
 const zodUserActionReferralInput = z.object({
   referralId: zodReferralId,
-  userId: z.string().uuid('Invalid user ID format'),
-  /**
-   * Calling the server action from Nextjs `after` may not have the client cookies.
-   * This is why we accept the localUser as an optional parameter.
-   */
-  localUser: zodServerLocalUser.nullable(),
+  newUserId: z.string().uuid('Invalid user ID format'),
+  campaignName: z.string(),
 })
 
 type Input = z.infer<typeof zodUserActionReferralInput>
 
-/**
- * Creates a referral record with optional address attribution
- */
 async function createReferralRecord({
   referrerId,
   addressId,
   countryCode,
   analytics,
   districtInfo,
+  campaignName,
 }: {
   referrerId: string
   addressId: string | null
-  countryCode: string
+  countryCode: SupportedCountryCodes
   analytics: ReturnType<typeof getServerAnalytics>
   districtInfo?: {
     state: string
     district: string
   }
+  campaignName: string
 }) {
   const userActionReferData = addressId
     ? {
@@ -61,7 +56,7 @@ async function createReferralRecord({
     data: {
       userId: referrerId,
       actionType: UserActionType.REFER,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+      campaignName,
       countryCode,
       userActionRefer: {
         create: userActionReferData,
@@ -71,7 +66,7 @@ async function createReferralRecord({
 
   analytics.trackUserActionCreated({
     actionType: UserActionType.REFER,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+    campaignName,
     creationMethod: 'On Site',
     userState: 'Existing',
   })
@@ -94,12 +89,14 @@ async function incrementExistingReferral({
   addressId,
   analytics,
   districtInfo,
+  campaignName,
 }: {
   existingActionId: string
   referrerId: string
   addressId: string | null
   analytics: ReturnType<typeof getServerAnalytics>
   districtInfo?: { state: string; district: string }
+  campaignName: string
 }) {
   const userAction = await prismaClient.userAction.update({
     where: { id: existingActionId },
@@ -114,7 +111,7 @@ async function incrementExistingReferral({
 
   analytics.trackUserActionUpdated({
     actionType: UserActionType.REFER,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.REFER],
+    campaignName,
     userState: 'Existing',
     actionId: existingActionId,
   })
@@ -133,6 +130,7 @@ async function findOrCreateUserActionRefer({
   referrer,
   analytics,
   countryCode,
+  campaignName,
 }: {
   referrer: User & {
     address: Address | null
@@ -145,7 +143,8 @@ async function findOrCreateUserActionRefer({
     })[]
   }
   analytics: ReturnType<typeof getServerAnalytics>
-  countryCode: string
+  countryCode: SupportedCountryCodes
+  campaignName: string
 }) {
   /**
    * For users without an address,
@@ -156,7 +155,9 @@ async function findOrCreateUserActionRefer({
 
     const existingReferWithoutAddress = referrer.userActions.find(
       action =>
-        action.actionType === UserActionType.REFER && action.userActionRefer?.address === null,
+        action.actionType === UserActionType.REFER &&
+        action.userActionRefer?.address === null &&
+        action.campaignName === campaignName,
     )
 
     if (existingReferWithoutAddress) {
@@ -165,6 +166,7 @@ async function findOrCreateUserActionRefer({
         referrerId: referrer.id,
         addressId: referrer.addressId,
         analytics,
+        campaignName,
       })
     } else {
       return await createReferralRecord({
@@ -172,6 +174,7 @@ async function findOrCreateUserActionRefer({
         addressId: referrer.addressId,
         analytics,
         countryCode,
+        campaignName,
       })
     }
   }
@@ -194,7 +197,8 @@ async function findOrCreateUserActionRefer({
     const existingReferWithAddressButNoDistrict = referrer.userActions.find(
       action =>
         action.actionType === UserActionType.REFER &&
-        action.userActionRefer?.address?.id === addressId,
+        action.userActionRefer?.address?.id === addressId &&
+        action.campaignName === campaignName,
     )
 
     if (existingReferWithAddressButNoDistrict) {
@@ -203,6 +207,7 @@ async function findOrCreateUserActionRefer({
         referrerId: referrer.id,
         addressId,
         analytics,
+        campaignName,
       })
     } else {
       return await createReferralRecord({
@@ -210,6 +215,7 @@ async function findOrCreateUserActionRefer({
         analytics,
         addressId,
         countryCode,
+        campaignName,
       })
     }
   }
@@ -222,7 +228,8 @@ async function findOrCreateUserActionRefer({
     action =>
       action.actionType === UserActionType.REFER &&
       action.userActionRefer?.address?.administrativeAreaLevel1 === state &&
-      action.userActionRefer?.address?.usCongressionalDistrict === district,
+      action.userActionRefer?.address?.usCongressionalDistrict === district &&
+      action.campaignName === campaignName,
   )
 
   const districtInfo = {
@@ -237,6 +244,7 @@ async function findOrCreateUserActionRefer({
       addressId,
       analytics,
       districtInfo,
+      campaignName,
     })
   } else {
     return await createReferralRecord({
@@ -245,6 +253,7 @@ async function findOrCreateUserActionRefer({
       addressId,
       districtInfo,
       countryCode,
+      campaignName,
     })
   }
 }
@@ -259,35 +268,31 @@ export async function actionCreateUserActionReferral(input: Input) {
       errorsMetadata: validatedFields.errorsMetadata,
     }
   }
-  const { referralId, userId, localUser } = validatedFields.data
+  const { referralId, newUserId, campaignName } = validatedFields.data
 
-  const user = await prismaClient.user.findFirstOrThrow({
-    where: { id: userId },
+  const referredUser = await prismaClient.user.findFirstOrThrow({
+    where: { id: newUserId },
     include: {
       primaryUserCryptoAddress: true,
       address: true,
     },
   })
-  if (!user) {
-    logger.error('user not found', { userId })
+  if (!referredUser) {
+    logger.error('Referred user not found', { newUserId })
     return {
-      errors: { userId: ['User not found'] },
+      errors: { newUserId: ['Referred user not found'] },
     }
   }
-
-  const analytics = getServerAnalytics({
-    userId: user.id,
-    localUser,
-  })
-  const beforeFinish = () => Promise.all([analytics.flush()])
 
   const referrer = await prismaClient.user.findFirst({
     where: { referralId },
     include: {
       address: true,
+      primaryUserCryptoAddress: true,
       userActions: {
         where: {
           actionType: UserActionType.REFER,
+          campaignName,
         },
         include: {
           userActionRefer: {
@@ -308,22 +313,28 @@ export async function actionCreateUserActionReferral(input: Input) {
       },
       extra: {
         referralId,
-        userId,
+        newUserId,
+        campaignName,
       },
       level: 'error',
     })
-    waitUntil(beforeFinish())
     return { errors: { referralId: ['Referrer not found'] } }
   }
 
   logger.info(`found referrer ${referrer.id}`)
 
-  const countryCode = getCountryCode(referrer, localUser)
+  const analytics = getServerAnalytics({
+    userId: referrer.id,
+    localUser: getLocalUserFromUser(referrer),
+  })
+  const beforeFinish = () => Promise.all([analytics.flush()])
+
+  const countryCode = referrer.countryCode as SupportedCountryCodes
   if (!countryCode) {
     logger.error('no country code found')
     Sentry.captureMessage('no country code found', {
       tags: { domain: 'referrals' },
-      extra: { userId },
+      extra: { newUserId, referrer, campaignName },
     })
     return {
       errors: { countryCode: ['No country code found'] },
@@ -334,6 +345,7 @@ export async function actionCreateUserActionReferral(input: Input) {
     referrer,
     analytics,
     countryCode,
+    campaignName,
   })
 
   const hasExistingReferActions = referrer.userActions.length > 0
@@ -341,14 +353,8 @@ export async function actionCreateUserActionReferral(input: Input) {
   waitUntil(beforeFinish())
 
   return {
-    user: getClientUser(user),
+    user: getClientUser(referrer),
     wasActionCreated: !hasExistingReferActions,
     action: userAction,
   }
-}
-
-function getCountryCode(user: User | null, localUser: ServerLocalUser | null) {
-  return (
-    user?.countryCode || localUser?.persisted?.countryCode || localUser?.currentSession?.countryCode
-  )
 }

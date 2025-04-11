@@ -8,9 +8,32 @@ import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
-export function HeroCTA() {
+function getCountryCTA(countryCode: SupportedCountryCodes) {
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return 'Join the fight'
+    case SupportedCountryCodes.AU:
+      return 'Join the Movement'
+    case SupportedCountryCodes.CA:
+      return 'Join the Movement'
+    case SupportedCountryCodes.GB:
+      return 'Join the Movement'
+    default:
+      return 'Join the fight'
+  }
+}
+
+export function HeroCTA({
+  countryCode,
+  ctaText = getCountryCTA(countryCode),
+}: {
+  countryCode: SupportedCountryCodes
+  ctaText?: string
+}) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
 
@@ -18,7 +41,7 @@ export function HeroCTA() {
 
   const unauthenticatedContent = (
     <Button size="lg" variant="primary-cta">
-      Join the fight
+      {ctaText}
     </Button>
   )
 
@@ -28,8 +51,11 @@ export function HeroCTA() {
     }
 
     if (
-      !user.phoneNumber ||
-      [SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(user.smsStatus)
+      (!user.phoneNumber ||
+        [SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(
+          user.smsStatus,
+        )) &&
+      isSmsSupportedInCountry(countryCode)
     ) {
       return (
         <SMSOptInCTA

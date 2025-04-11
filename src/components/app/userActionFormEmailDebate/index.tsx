@@ -32,7 +32,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
@@ -76,7 +76,7 @@ export function UserActionFormEmailDebate({
       emailAddress: initialValues?.email || user?.primaryUserEmailAddress?.emailAddress || '',
       firstName: initialValues?.firstName || user?.firstName,
       lastName: initialValues?.lastName || user?.lastName,
-      campaignName: UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
+      campaignName: USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
       subject: 'Include Crypto In The Debate',
       message: getEmailMessage({
         firstName: initialValues?.firstName || user?.firstName,

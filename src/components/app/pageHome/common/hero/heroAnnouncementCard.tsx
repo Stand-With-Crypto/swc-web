@@ -45,7 +45,7 @@ export function HeroAnnouncementCard({
 
 function HeroAnnouncementCardImage({ children, media }: HeroImageProps) {
   return (
-    <LinkBox className="relative h-[320px] overflow-hidden md:rounded-3xl lg:h-[400px]">
+    <LinkBox className="relative h-[320px] overflow-hidden rounded-none md:rounded-3xl lg:h-[400px]">
       {'videoSrc' in media ? (
         <Video
           className={cn('absolute left-0 top-0 h-full w-full object-cover')}
@@ -96,9 +96,9 @@ function HeroAnnouncementCardCTA({
 }: React.PropsWithChildren<{ buttonText: string }>) {
   return (
     <>
-      <p>{children}</p>
+      <p className="max-sm:flex-[2]">{children}</p>
       <Button
-        className={cn('max-sm:w-full', linkBoxLinkClassName)}
+        className={cn('max-sm:flex-1', linkBoxLinkClassName)}
         data-link-box-subject
         size="sm"
         variant="secondary"

@@ -15,12 +15,12 @@ import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { NextImage } from '@/components/ui/image'
 import { useSections } from '@/hooks/useSections'
 import { NFTSlug } from '@/utils/shared/nft'
-import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USUserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 interface UserActionFormTweetAtPersonProps {
-  slug: UserActionTweetAtPersonCampaignName
+  slug: USUserActionTweetAtPersonCampaignName
 }
 
 export function UserActionFormTweetAtPerson({ slug }: UserActionFormTweetAtPersonProps) {

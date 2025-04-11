@@ -13,6 +13,8 @@ import { SuccessSection } from '@/components/app/userActionFormShareOnTwitter/co
 import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFormShareOnTwitter/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { caExternalUrls } from '@/utils/shared/urls'
+import { CAUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
@@ -41,17 +43,17 @@ export function CAUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         analyticsProps: {
           'User Action Type': UserActionType.TWEET,
         },
-        payload: undefined,
+        payload: { campaignName: CAUserActionTweetCampaignName.DEFAULT },
         onError: toastGenericError,
       },
-      () => actionCreateUserActionTweet(),
+      actionCreateUserActionTweet,
     ).then(result => {
       if (result.status === 'success') {
         sectionProps.goToSection(SectionNames.SUCCESS)
       }
     })
 
-    openWindow('https://x.com/standwithcrypto', target, `noopener`)
+    openWindow(caExternalUrls.twitter(), target, `noopener`)
   }
 
   switch (sectionProps.currentSection) {
@@ -60,12 +62,12 @@ export function CAUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         <ShareOnX>
           <ShareOnX.Heading
             subtitle="Stay up to date on crypto policy changes in Canada"
-            title="Follow @StandWithCrypto on Twitter"
+            title="Follow @StandWCrypto_CA on Twitter"
           />
 
           <ShareOnX.Benefits benefits={caBenefits} />
 
-          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWithCrypto" />
+          <ShareOnX.SubmitButton onClick={handleSubmit} text="Follow @StandWCrypto_CA" />
         </ShareOnX>
       )
     case SectionNames.SUCCESS:

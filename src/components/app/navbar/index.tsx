@@ -61,7 +61,6 @@ export function Navbar({
     width: 41,
     height: 40,
   },
-  showDonateButton = false,
 }: NavbarProps) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
@@ -96,10 +95,10 @@ export function Navbar({
 
       <nav
         className={cn(
-          'sticky top-0 z-20 flex h-[72px] w-full items-center bg-white py-3 min-[1096px]:h-[84px] min-[1096px]:py-5',
+          'sticky top-0 z-20 flex h-[72px] w-full items-center justify-center bg-white py-3 pl-3 min-[1096px]:h-[84px] min-[1096px]:px-8 min-[1096px]:py-5',
         )}
       >
-        <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
+        <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
             <NextImage alt="Stand With Crypto Logo" priority {...logo} />
           </InternalLink>
@@ -194,12 +193,6 @@ export function Navbar({
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
               <NavbarCountrySelect />
-              {showDonateButton && (
-                <DonateButton
-                  href={urls.donate()}
-                  maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-                />
-              )}
               <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
             </div>
           </div>
@@ -288,20 +281,14 @@ export function Navbar({
                   </Button>
                 )
               })}
+
               <div className="mt-4 px-6">
                 <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
               </div>
+
               <div className="mt-4 px-6">
                 <NavbarCountrySelect />
               </div>
-              {showDonateButton && (
-                <div className="mt-4 px-6">
-                  <DonateButton
-                    href={urls.donate()}
-                    maybeCloseAfterNavigating={maybeCloseAfterNavigating}
-                  />
-                </div>
-              )}
             </div>
           </DrawerContent>
         </Drawer>
@@ -323,22 +310,4 @@ const LoginButton = ({ maybeCloseAfterNavigating }: { maybeCloseAfterNavigating:
       Sign In
     </Button>
   </LoginDialogWrapper>
-)
-
-const DonateButton = ({
-  href,
-  maybeCloseAfterNavigating,
-}: {
-  maybeCloseAfterNavigating: () => void
-  href: string
-}) => (
-  <Button
-    asChild
-    className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
-    key={href}
-    onClick={maybeCloseAfterNavigating}
-    variant="default"
-  >
-    <InternalLink href={href}>Donate</InternalLink>
-  </Button>
 )

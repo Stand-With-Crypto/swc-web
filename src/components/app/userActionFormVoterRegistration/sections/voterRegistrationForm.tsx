@@ -20,7 +20,7 @@ import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
-} from '@/utils/shared/usStateUtils'
+} from '@/utils/shared/stateMappings/usStateUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
 const STATE_CODES = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)

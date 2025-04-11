@@ -22,33 +22,22 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
+      href: urls.locationKeyRaces(),
+      text: 'Races',
+    },
+    {
       href: urls.manifesto(),
       text: 'Manifesto',
-    },
-    {
-      href: urls.partners(),
-      text: 'Partners',
-    },
-    {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
-      href: urls.community(),
-      text: 'Community',
-    },
-    {
-      href: urls.press(),
-      text: 'Press',
     },
   ],
 }
 
 export const footerConfig: FooterProps = {
   countryCode,
-  title: 'Fight for the future',
+  title: 'Join the Movement',
   subtitle:
     'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
+  legalText: 'Authorised by J. O’Loghlen, Coinbase Australia Pty Ltd., Sydney.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img
@@ -69,32 +58,13 @@ export const footerConfig: FooterProps = {
   ],
   socialLinks: [
     {
-      href: auExternalUrls.discord(),
-      text: 'Discord',
-    },
-    {
       href: auExternalUrls.twitter(),
       text: 'Twitter / X',
-    },
-    {
-      href: auExternalUrls.instagram(),
-      text: 'Instagram',
-    },
-    {
-      href: auExternalUrls.youtube(),
-      text: 'Youtube',
-    },
-    {
-      href: auExternalUrls.facebook(),
-      text: 'Facebook',
     },
     {
       href: auExternalUrls.linkedin(),
       text: 'LinkedIn',
     },
-    {
-      href: auExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: auExternalUrls.emailFeedback(),
 }

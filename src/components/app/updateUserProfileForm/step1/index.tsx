@@ -8,8 +8,10 @@ import { toast } from 'sonner'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { AddressField } from '@/components/app/updateUserProfileForm/step1/addressField'
+import { PrivacyConsentDisclaimer } from '@/components/app/updateUserProfileForm/step1/privacyConsentDisclaimer'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -27,8 +29,16 @@ import {
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
@@ -36,8 +46,8 @@ import {
 } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import {
-  zodUpdateUserProfileFormFields,
-  zodUpdateUserProfileWithRequiredFormFields,
+  getZodUpdateUserProfileFormFields,
+  getZodUpdateUserProfileWithRequiredFormFieldsSchema,
 } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 
 const FORM_NAME = 'User Profile'
@@ -55,6 +65,7 @@ export function UpdateUserProfileForm({
     address: GooglePlaceAutocompletePrediction | null
   }) => void
 }) {
+  const countryCode = useCountryCode()
   const router = useRouter()
   const defaultValues = useRef({
     isEmbeddedWalletUser: user.hasEmbeddedWallet,
@@ -72,8 +83,8 @@ export function UpdateUserProfileForm({
   const form = useForm({
     resolver: zodResolver(
       shouldFieldsBeRequired
-        ? zodUpdateUserProfileWithRequiredFormFields
-        : zodUpdateUserProfileFormFields,
+        ? getZodUpdateUserProfileWithRequiredFormFieldsSchema(countryCode)
+        : getZodUpdateUserProfileFormFields(countryCode),
     ),
     defaultValues: defaultValues.current,
   })
@@ -93,15 +104,31 @@ export function UpdateUserProfileForm({
         },
         payload: { ...values, address: resolvedAddress, optedInToSms: !!values.phoneNumber },
       },
-      payload => actionUpdateUserProfile(payload),
+      actionUpdateUserProfile,
     )
     if (result.status === 'success') {
+      const { countryCode: newCountryCode } = (
+        result.response as {
+          user: ClientUserWithENSData
+        }
+      ).user
+
+      if (ORDERED_SUPPORTED_COUNTRIES.includes(newCountryCode) && newCountryCode !== countryCode) {
+        router.push(getIntlUrls(newCountryCode as SupportedCountryCodes).profile())
+        return
+      }
+
       router.refresh()
       toast.success('Profile updated', { duration: 5000 })
       const { firstName, lastName } = values
       onSuccess({ firstName, lastName, address: values.address })
     }
   }
+
+  const shouldShowAllianceCheckbox =
+    countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !defaultValues.current.hasOptedInToMembership
+
+  const shouldShowConsentDisclaimer = countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
 
   return (
     <Form {...form}>
@@ -119,13 +146,13 @@ export function UpdateUserProfileForm({
           </PageSubTitle>
         </div>
 
-        <div className="flex h-full flex-col space-y-4">
+        <div className="flex h-full flex-col">
           {user.hasEmbeddedWallet || (
             <FormField
               control={form.control}
               name="emailAddress"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="mb-4">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="Your email" {...field} />
@@ -135,7 +162,7 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <div className="grid grid-cols-1 space-y-4 md:grid-cols-2 md:gap-8 md:space-y-0">
+          <div className="mb-4 grid grid-cols-1 space-y-4 md:grid-cols-2 md:gap-8 md:space-y-0">
             <FormField
               control={form.control}
               name="firstName"
@@ -165,6 +192,7 @@ export function UpdateUserProfileForm({
           </div>
 
           <AddressField
+            className="mb-4"
             resolvedAddress={resolvedAddress}
             setResolvedAddress={setResolvedAddress}
             user={user}
@@ -176,7 +204,7 @@ export function UpdateUserProfileForm({
                 control={form.control}
                 name="phoneNumber"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="mb-4">
                     <FormLabel>Phone number</FormLabel>
                     <FormControl>
                       <Input
@@ -196,13 +224,14 @@ export function UpdateUserProfileForm({
                 )}
               />
             )}
-          {!defaultValues.current.hasOptedInToMembership && (
+          <PrivacyConsentDisclaimer shouldShowConsentDisclaimer={shouldShowConsentDisclaimer} />
+          {shouldShowAllianceCheckbox && (
             <FormField
               control={form.control}
               name="hasOptedInToMembership"
               render={({ field }) => (
                 <label className="block">
-                  <FormItem>
+                  <FormItem className="mb-4">
                     <div className="flex flex-row items-center space-x-3 space-y-0">
                       <FormControl>
                         <Checkbox
@@ -233,7 +262,8 @@ export function UpdateUserProfileForm({
             open={
               !!phoneNumberValue &&
               user.smsStatus === 'NOT_OPTED_IN' &&
-              !validatePhoneNumber(user?.phoneNumber || '')
+              !validatePhoneNumber(user?.phoneNumber || '') &&
+              isSmsSupportedInCountry(countryCode)
             }
           >
             <CollapsibleContent className="AnimateCollapsibleContent">

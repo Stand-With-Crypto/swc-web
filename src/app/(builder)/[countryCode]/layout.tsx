@@ -4,11 +4,18 @@ import { notFound } from 'next/navigation'
 
 import { TopLevelBuilderClientLogic } from '@/components/app/builder/topLevelBuilderClientLogic'
 import { PageLayout } from '@/components/app/layout/layout'
+import { GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE } from '@/components/app/navbarGlobalBanner/common/constants'
 import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
-import { generateMetadataDetails, TOP_LEVEL_METADATA_DETAILS } from '@/utils/server/metadataUtils'
+import {
+  generateMetadataDetails,
+  generateTopLevelMetadataDetails,
+} from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  ORDERED_SUPPORTED_COUNTRIES,
+} from '@/utils/shared/supportedCountries'
 
 export { viewport } from '@/utils/server/metadataUtils'
 
@@ -33,7 +40,7 @@ export const metadata: Metadata = {
     default: title,
     template: '%s | Stand With Crypto',
   },
-  ...TOP_LEVEL_METADATA_DETAILS,
+  ...generateTopLevelMetadataDetails(DEFAULT_SUPPORTED_COUNTRY_CODE),
 }
 
 export default async function Layout({
@@ -47,7 +54,12 @@ export default async function Layout({
   }
 
   return (
-    <PageLayout countryCode={countryCode} footer={null} navbar={null}>
+    <PageLayout
+      countryCode={countryCode}
+      footer={null}
+      globalBanner={GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE[countryCode]}
+      navbar={null}
+    >
       <TopLevelBuilderClientLogic>{children}</TopLevelBuilderClientLogic>
     </PageLayout>
   )

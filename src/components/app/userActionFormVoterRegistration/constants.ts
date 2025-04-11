@@ -1,4 +1,4 @@
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 export enum SectionNames {
   SURVEY = 'Survey',

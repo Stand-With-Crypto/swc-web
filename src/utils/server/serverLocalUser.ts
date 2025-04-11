@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { cookies } from 'next/headers'
 import { any, object, record, string } from 'zod'
 
-import { getCountryCodeCookie } from '@/utils/server/getCountryCodeCookie'
+import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { COOKIE_CONSENT_COOKIE_NAME, deserializeCookieConsent } from '@/utils/shared/cookieConsent'
 import {
   CurrentSessionLocalUser,
@@ -57,6 +57,7 @@ export function getLocalUserFromUser(user: User): ServerLocalUser {
 
 export function mapLocalUserToUserDatabaseFields(
   localUser: ServerLocalUser | null,
+  searchParams?: Record<string, string>,
 ): Pick<
   User,
   | 'acquisitionReferer'
@@ -69,14 +70,17 @@ export function mapLocalUserToUserDatabaseFields(
     // We are trimming the char input in case it is greater than the DB limit (191 characters)
     acquisitionReferer: localUser?.persisted?.initialReferer?.slice(0, 191) || '',
     acquisitionSource:
+      searchParams?.utm_source?.slice(0, 191) ||
       localUser?.persisted?.initialSearchParams.utm_source?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_source?.slice(0, 191) ||
       '',
     acquisitionMedium:
+      searchParams?.utm_medium?.slice(0, 191) ||
       localUser?.persisted?.initialSearchParams.utm_medium?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_medium?.slice(0, 191) ||
       '',
     acquisitionCampaign:
+      searchParams?.utm_campaign?.slice(0, 191) ||
       localUser?.persisted?.initialSearchParams.utm_campaign?.slice(0, 191) ||
       localUser?.currentSession.searchParamsOnLoad.utm_campaign?.slice(0, 191) ||
       '',
@@ -135,7 +139,7 @@ function parseFromCookieStrings({
 
 export async function parseLocalUserFromCookies() {
   const cookieObj = await cookies()
-  const countryCode = await getCountryCodeCookie({ bypassValidCountryCodeCheck: true })
+  const countryCode = await getUserAccessLocationCookie({ bypassValidCountryCodeCheck: true })
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value

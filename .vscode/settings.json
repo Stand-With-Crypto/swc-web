@@ -44,6 +44,7 @@
     "datetime",
     "datetimes",
     "Deeplink",
+    "DEMONYM",
     "dotheysupportit",
     "DTSI",
     "FAIRSHAKE",
@@ -54,6 +55,7 @@
     "Leaderboard",
     "libphonenumber",
     "Lucide",
+    "newmode",
     "nextjs",
     "pageview",
     "precheck",
@@ -78,7 +80,9 @@
     "UPSTASH",
     "vaul",
     "viem",
-    "Warpcast"
+    "Warpcast",
+    "newmode",
+    "debanking"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[prisma]": {

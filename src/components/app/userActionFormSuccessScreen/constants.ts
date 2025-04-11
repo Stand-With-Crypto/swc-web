@@ -61,4 +61,8 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Omit<
     description:
       "Thanks for doing your part to save crypto this year. We'll send a free NFT to your profile soon. Spread the word and urge others to vote by sharing on X.",
   },
+  [UserActionType.VIEW_KEY_PAGE]: {
+    title: 'You emailed your representatives!',
+    description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
+  },
 }

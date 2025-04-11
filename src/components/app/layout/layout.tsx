@@ -4,7 +4,6 @@ import NextTopLoader from 'nextjs-toploader'
 import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
-import { NavBarGlobalBanner } from '@/components/app/navbarGlobalBanner'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
@@ -15,6 +14,7 @@ export interface PageLayoutProps {
   countryCode: SupportedCountryCodes
   navbar: React.ReactNode
   footer: React.ReactNode
+  globalBanner: React.ReactNode
 }
 
 const COUNTRIES_WITH_GTM = [SupportedCountryCodes.US]
@@ -24,6 +24,7 @@ export function PageLayout({
   countryCode,
   navbar,
   footer,
+  globalBanner,
 }: React.PropsWithChildren<PageLayoutProps>) {
   return (
     <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
@@ -37,7 +38,7 @@ export function PageLayout({
         />
         <TopLevelClientLogic countryCode={countryCode}>
           <FullHeight.Container>
-            <NavBarGlobalBanner />
+            {globalBanner}
             {navbar}
             <FullHeight.Content>{children}</FullHeight.Content>
             {footer}

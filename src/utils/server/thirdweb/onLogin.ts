@@ -16,7 +16,7 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
-import { compact, groupBy, isEmpty } from 'lodash-es'
+import { compact, groupBy } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
@@ -28,11 +28,7 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import {
-  parseUserCountryCodeCookie,
-  USER_COUNTRY_CODE_COOKIE_NAME,
-} from '@/utils/server/getCountryCode'
-import { getCountryCodeFromURL } from '@/utils/server/getCountryCodeFromURL'
+import { getCountryCodeFromHeaders } from '@/utils/server/getCountryCodeFromURL'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
@@ -60,8 +56,18 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
+import {
+  COUNTRY_CODE_REGEX_PATTERN,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME,
+  USER_ACCESS_LOCATION_COOKIE_NAME,
+} from '@/utils/shared/userAccessLocation'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
+import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns/index'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 type UpsertedUser = User & {
   address: Address | null
@@ -90,7 +96,10 @@ export async function login(
   const log = getLog(cryptoAddress)
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
-    include: { userActions: { select: { actionType: true } } },
+    include: {
+      userActions: { select: { actionType: true } },
+      address: { select: { countryCode: true } },
+    },
     where: { userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } } },
   })
 
@@ -115,37 +124,12 @@ export async function login(
         .track('User Logged In')
         .flush(),
       getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser })
-        .set({ 'Datetime of Last Login': new Date() })
+        .set({
+          'Datetime of Last Login': new Date(),
+          countryCode: existingVerifiedUser.countryCode,
+        })
         .flush(),
     ])
-
-    const currentUserCountryCode = existingVerifiedUser.countryCode
-
-    const userCountryCodeCookie = currentCookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-    const parsedUserCountryCodeCookie = parseUserCountryCodeCookie(userCountryCodeCookie)
-
-    const hasValidCurrentCountryCode = !isEmpty(currentUserCountryCode)
-    const hasParsedCookie = !!parsedUserCountryCodeCookie
-    const cookieCountryCodeDiffersFromUser =
-      parsedUserCountryCodeCookie?.countryCode.toLowerCase() !==
-      currentUserCountryCode.toLowerCase()
-
-    if (hasValidCurrentCountryCode && hasParsedCookie && cookieCountryCodeDiffersFromUser) {
-      log(
-        `setting user country code cookie from ${parsedUserCountryCodeCookie.countryCode.toLowerCase()} to ${currentUserCountryCode.toLowerCase()}`,
-      )
-      currentCookies.set({
-        name: USER_COUNTRY_CODE_COOKIE_NAME,
-        value: JSON.stringify({
-          countryCode: currentUserCountryCode.toLowerCase(),
-          bypassed: true,
-        }),
-        httpOnly: false,
-        sameSite: 'lax',
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
-      })
-    }
 
     const jwt = await thirdwebAuth.generateJWT({
       payload: verifiedPayload.payload,
@@ -153,6 +137,8 @@ export async function login(
     })
 
     currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
+
+    await overrideAccessLocation({ user: existingVerifiedUser })
 
     return
   }
@@ -241,6 +227,25 @@ async function onExistingUserLogin({
   }
 }
 
+async function overrideAccessLocation({
+  user,
+}: {
+  user: User & { address: { countryCode: string | null } | null }
+}) {
+  const currentCookies = await cookies()
+  const accessLocationCookie = currentCookies.get(USER_ACCESS_LOCATION_COOKIE_NAME)?.value
+
+  const userAddressCountryCode = user?.address?.countryCode?.toLowerCase()
+  const shouldOverrideAccessLocation =
+    userAddressCountryCode &&
+    userAddressCountryCode !== accessLocationCookie &&
+    COUNTRY_CODE_REGEX_PATTERN.test(userAddressCountryCode)
+
+  if (shouldOverrideAccessLocation) {
+    currentCookies.set(OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME, userAddressCountryCode)
+  }
+}
+
 interface NewLoginParams {
   cryptoAddress: string
   localUser: ServerLocalUser | null
@@ -319,7 +324,7 @@ export async function onNewLogin(props: NewLoginParams) {
   const { cryptoAddress: _cryptoAddress, localUser, searchParams } = props
   const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
-  const countryCode = await getCountryCodeFromURL()
+  const countryCode = await getCountryCodeFromHeaders()
 
   // queryMatchingUsers logic
   const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
@@ -380,6 +385,7 @@ export async function onNewLogin(props: NewLoginParams) {
       hasSignedInWithEmail,
       sessionId: await props.getUserSessionId(),
       countryCode,
+      searchParams,
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -491,7 +497,18 @@ export async function onNewLogin(props: NewLoginParams) {
     isValidReferral(localUser?.currentSession?.searchParamsOnLoad)
 
   if (isReferral) {
-    triggerReferralSteps({ localUser, searchParams, newUser: user })
+    const campaignName =
+      searchParams.campaignName ||
+      COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode as SupportedCountryCodes][
+        UserActionType.REFER
+      ]
+
+    triggerReferralSteps({
+      localUser,
+      searchParams,
+      newUser: user,
+      campaignName,
+    })
   }
 
   waitUntil(beforeFinish())
@@ -610,11 +627,13 @@ async function createUser({
   hasSignedInWithEmail,
   sessionId,
   countryCode,
+  searchParams,
 }: {
   localUser: ServerLocalUser | null
   hasSignedInWithEmail: boolean
   sessionId: string | null
   countryCode: string
+  searchParams: Record<string, string>
 }) {
   return prismaClient.user.create({
     include: {
@@ -630,7 +649,7 @@ async function createUser({
       smsStatus: SMSStatus.NOT_OPTED_IN,
       referralId: generateReferralId(),
       userSessions: { create: { id: sessionId ?? undefined } },
-      ...mapLocalUserToUserDatabaseFields(localUser),
+      ...mapLocalUserToUserDatabaseFields(localUser, searchParams),
       countryCode,
     },
   })
@@ -876,8 +895,14 @@ async function triggerPostLoginUserActionSteps({
 
     await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
 
+    const { data: normalizedCountryCode } = zodSupportedCountryCode.safeParse(countryCode)
+
     if (embeddedWalletUserDetails?.phone) {
-      await smsActions.optInUser(embeddedWalletUserDetails.phone, user)
+      await smsActions.optInUser({
+        phoneNumber: embeddedWalletUserDetails.phone,
+        user,
+        countryCode: normalizedCountryCode,
+      })
     }
 
     analytics.trackUserActionCreated({
