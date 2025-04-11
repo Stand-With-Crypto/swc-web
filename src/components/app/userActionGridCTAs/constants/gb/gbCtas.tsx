@@ -73,7 +73,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
         isCampaignActive: true,
         title: 'Email your MP to stop unfair debanking',
-        description: 'Email your MP today and call for action to stop unfair debanking.',
+        description: 'Urge them to stand up for financial access and innovation.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <UserActionViewKeyPageDialog
