@@ -61,11 +61,9 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Email your Member of Parliament',
-    description:
-      'Make your voice heard on important crypto policy issues by emailing your representatives.',
-    campaignsModalDescription:
-      'Make your voice heard on important crypto policy issues by emailing your representatives.',
+    title: 'Email your MP to stop unfair debanking',
+    description: 'Urge them to stand up for financial access and innovation.',
+    campaignsModalDescription: 'Urge them to stand up for financial access and innovation.',
     image: '/gb/actionTypeIcons/email.png',
     campaigns: [
       {
