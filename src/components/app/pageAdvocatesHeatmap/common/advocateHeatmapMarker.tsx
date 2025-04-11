@@ -4,7 +4,7 @@ import React from 'react'
 import { Marker } from 'react-simple-maps'
 import { motion } from 'motion/react'
 
-import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+import { IconProps } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapIcons'
 
 export function AdvocateHeatmapMarker({
   coordinates,

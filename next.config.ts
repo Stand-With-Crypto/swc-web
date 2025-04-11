@@ -61,6 +61,8 @@ const contentSecurityPolicy = {
     "'self'",
     'ws: wss:',
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
+    // Canada topojson meanwhile not in a Vercel's blob storage
+    'https://gist.githubusercontent.com/Saw-mon-and-Natalie/a11f058fc0dcce9343b02498a46b3d44/raw/e8afc74f791169a64d6e8df033d7e88ff85ba673/canada.json',
     'https://cloudflare-eth.com',
     'https://c.thirdweb.com/',
     'https://c.amazon-adsystem.com/',

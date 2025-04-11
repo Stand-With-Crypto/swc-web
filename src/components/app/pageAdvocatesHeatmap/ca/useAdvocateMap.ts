@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { ADVOCATES_ACTIONS, STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  CA_ADVOCATES_ACTIONS,
+  CA_STATE_COORDS,
+} from '@/components/app/pageAdvocatesHeatmap/ca/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
 export interface MapMarker {
@@ -10,7 +13,7 @@ export interface MapMarker {
   coordinates: [number, number]
   actionType: UserActionType
   datetimeCreated: string
-  iconType: (typeof ADVOCATES_ACTIONS)[keyof typeof ADVOCATES_ACTIONS]
+  iconType: (typeof CA_ADVOCATES_ACTIONS)[keyof typeof CA_ADVOCATES_ACTIONS]
   amountUsd?: number
 }
 
@@ -24,7 +27,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
     if (userLocation && userLocation.administrativeAreaLevel1) {
       const state = userLocation.administrativeAreaLevel1
 
-      const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
+      const coordinates = CA_STATE_COORDS[state as keyof typeof CA_STATE_COORDS]
 
       if (coordinates) {
         let offsetX = 0
@@ -40,7 +43,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
         }
 
         const currentIconActionType =
-          ADVOCATES_ACTIONS[item.actionType as keyof typeof ADVOCATES_ACTIONS]
+          CA_ADVOCATES_ACTIONS[item.actionType as keyof typeof CA_ADVOCATES_ACTIONS]
 
         if (!currentIconActionType) {
           return

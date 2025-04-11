@@ -1,4 +1,7 @@
 import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
+import { CARecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/common/delayedRecentActivity'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -9,6 +12,9 @@ import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -23,7 +29,11 @@ export function CaPageHome({
   partners,
   founders,
   dtsiHomepagePoliticians,
-}: HomePageProps) {
+  advocatePerStateDataProps,
+  countUsers,
+}: HomePageProps & {
+  advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
+} & Awaited<ReturnType<typeof getHomepageData>>) {
   return (
     <>
       <CaHero />
@@ -47,12 +57,31 @@ export function CaPageHome({
         </HomePageSection.Subtitle>
 
         <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
-          <RecentActivity.Footer>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </RecentActivity.Footer>
+          <ResponsiveTabsOrSelect
+            analytics={'Homepage Our Community Tabs'}
+            data-testid="community-leaderboard-tabs"
+            defaultValue={CARecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_MAP}
+            options={[
+              {
+                value: CARecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_MAP,
+                label: 'Recent activity map',
+                content: (
+                  <AdvocatesHeatmap
+                    actions={recentActivity}
+                    advocatesMapPageData={advocatePerStateDataProps}
+                    countUsers={countUsers.count}
+                    countryCode={countryCode}
+                    isEmbedded={false}
+                  />
+                ),
+              },
+              {
+                value: CARecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_LIST,
+                label: 'Recent activity list',
+                content: <RecentActivity.List actions={recentActivity} />,
+              },
+            ]}
+          />
         </RecentActivity>
       </HomePageSection>
 

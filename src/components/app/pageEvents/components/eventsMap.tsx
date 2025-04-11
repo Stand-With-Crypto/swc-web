@@ -4,7 +4,7 @@ import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { AnimatePresence, motion } from 'motion/react'
 
-import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { US_ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/us/constants'
 import {
   StateEventsDialog,
   StateEventsDialogProps,
@@ -107,7 +107,7 @@ export function EventsMap({ events }: { events: SWCEvents }) {
   return (
     <>
       <ComposableMap projection="geoAlbersUsa" viewBox="-20 40 850 550">
-        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+        <Geographies geography={US_ADVOCATES_HEATMAP_GEO_URL}>
           {({ geographies }) => (
             <>
               {geographies.map(geo => {

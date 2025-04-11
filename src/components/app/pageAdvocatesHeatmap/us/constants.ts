@@ -1,15 +1,16 @@
-import type { ReactNode } from 'react'
-import { UserActionType } from '@prisma/client'
-
+import { ActionListItem } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapActionList'
 import {
   DonateIcon,
   EmailIcon,
   FollowOnXIcon,
-  IconProps,
   JoinIcon,
-} from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+} from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapIcons'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 
-export const STATE_COORDS: Record<string, [number, number]> = {
+export const US_STATE_COORDS: Record<
+  keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  [number, number]
+> = {
   AL: [-86.9023, 32.3182],
   AK: [-152.4044, 61.3707],
   AZ: [-111.4312, 34.0489],
@@ -61,22 +62,16 @@ export const STATE_COORDS: Record<string, [number, number]> = {
   WI: [-89.6165, 44.2685],
   WY: [-107.3025, 42.756],
   DC: [-77.026, 38.8964],
+  GU: [-159.3742, 13.4443],
+  PR: [-66.5901, 18.2208],
+  VI: [-64.7503, 18.3358],
+  AS: [-155.5681, 14.2746],
 }
 
-export const ADVOCATES_HEATMAP_GEO_URL =
+export const US_ADVOCATES_HEATMAP_GEO_URL =
   'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json'
 
-export const ADVOCATES_ACTIONS: Partial<
-  Record<
-    UserActionType,
-    {
-      icon: (args: IconProps) => ReactNode
-      label: string
-      labelMobile: string
-      labelActionTooltip: (extraText?: string) => string
-    }
-  >
-> = {
+export const US_ADVOCATES_ACTIONS: ActionListItem = {
   // removed call and email for the voting day
   // CALL: {
   //   icon: CallIcon,
