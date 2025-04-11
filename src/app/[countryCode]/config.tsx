@@ -20,13 +20,12 @@ export const navbarConfig: NavbarProps = {
       text: 'Events',
     },
     {
+      href: urls.donate(),
+      text: 'Donate',
+    },
+    {
       text: 'Resources',
       children: [
-        {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: <Icons.DonateIcon />,
-        },
         {
           href: urls.referrals(),
           text: 'Referrals',
@@ -74,10 +73,6 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.PollsIcon />,
         },
       ],
-    },
-    {
-      href: urls.donate(),
-      text: 'Donate',
     },
   ],
 }
