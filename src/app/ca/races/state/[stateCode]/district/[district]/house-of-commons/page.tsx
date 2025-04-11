@@ -150,7 +150,6 @@ export default async function LocationHouseOfCommonsSpecificPage({
               isRecommended={race.isRecommended}
               key={race.person.id}
               person={race.person}
-              useThumbsUpOrDownGrade
             />
           ))
         )}
