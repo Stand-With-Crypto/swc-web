@@ -1,4 +1,4 @@
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -39,7 +39,7 @@ export function GbPageHome({
 
       <HomePageSection>
         <HomePageSection.Title>
-          <span className="text-primary-cta">Britons</span> believe in crypto
+          <span className="text-primary-cta">Brits</span> believe in crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
           See how the community is taking a stand to safeguard the future of crypto in the UK.
@@ -93,7 +93,7 @@ export function GbPageHome({
 
       <HomepagePoliticiansSection
         countryCode={countryCode}
-        cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
+        cryptoStanceGrade={DTSIFormattedLetterGrade}
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
       />
     </>

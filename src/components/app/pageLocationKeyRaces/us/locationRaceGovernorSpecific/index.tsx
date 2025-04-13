@@ -3,7 +3,6 @@ import { compact, isEmpty } from 'lodash-es'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
-import { PACFooter } from '@/components/app/pacFooter'
 import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
 import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
@@ -248,7 +247,6 @@ export function USLocationRaceGovernorSpecific({
           </div>
         )}
       </div>
-      <PACFooter className="container" />
     </LocationRaces>
   )
 }

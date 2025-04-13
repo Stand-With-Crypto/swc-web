@@ -12,6 +12,7 @@ import { gbGetIsRoleInFuture } from '@/utils/dtsi/gb/gbGetIsRoleInFuture'
 import { usGetIsRoleInFuture } from '@/utils/dtsi/us/usGetIsRoleInFuture'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
@@ -120,14 +121,20 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
     DTSI_PersonRole,
     'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory' | 'primaryDistrict'
   >,
+  countryCode: SupportedCountryCodes,
 ) => {
   let stateStr = <></>
-  if (role.primaryState && role.primaryCountryCode === 'US') {
+
+  const stateNameResolver = getStateNameResolver(countryCode)
+
+  if (role.primaryState) {
     stateStr = (
       <>
         , <span className="max-sm:hidden">{role.primaryState}</span>
-        <span className="sm:hidden">{getUSStateNameFromStateCode(role.primaryState)}</span>{' '}
-        {role.primaryDistrict ? `${role.primaryDistrict} ` : ''}
+        <span className="sm:hidden">{stateNameResolver(role.primaryState)}</span>{' '}
+        {role.primaryDistrict && countryCode === SupportedCountryCodes.US
+          ? `${role.primaryDistrict} `
+          : ''}
       </>
     )
   }
@@ -136,6 +143,9 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
+      if (countryCode === SupportedCountryCodes.AU) {
+        return <>MP{stateStr}</>
+      }
       return <>Rep{stateStr}</>
     case DTSI_PersonRoleCategory.PRESIDENT:
       return 'President'
@@ -143,6 +153,10 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
       return <>Senator{stateStr}</>
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
       return 'Vice President'
+    case DTSI_PersonRoleCategory.HOUSE_OF_COMMONS:
+      return <>MP{stateStr}</>
+    case DTSI_PersonRoleCategory.HOUSE_OF_LORDS:
+      return <>MP{stateStr}</>
   }
   return 'Political Figure'
 }

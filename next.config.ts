@@ -302,13 +302,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/australia',
-        destination: 'https://au.standwithcrypto.org',
+        source: '/uk',
+        destination: '/gb',
         permanent: false,
       },
       {
-        source: '/canada',
-        destination: 'https://ca.standwithcrypto.org',
+        source: '/uk/:path*',
+        destination: '/gb/:path*',
         permanent: false,
       },
       // vanity urls
@@ -422,6 +422,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // SMS shortlinks
+      {
+        source: '/s/paul-atkins',
+        destination: 'https://speak4.app/lp/b901vnot/?ts=1744310543',
+        permanent: true,
+      },
       {
         source: '/s/sb-1797',
         destination: 'https://speak4.app/lp/jk01insm/?ts=1744055112',
@@ -721,12 +726,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/canada',
-        destination: '/ca?utm_source=billboard',
+        destination: '/ca/action/sign-up?utm_source=billboard',
         permanent: true,
       },
       {
         source: '/australia',
-        destination: '/au?utm_source=billboard',
+        destination: '/au/action/sign-up?utm_source=billboard',
         permanent: true,
       },
     ]

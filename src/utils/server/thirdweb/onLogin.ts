@@ -124,7 +124,10 @@ export async function login(
         .track('User Logged In')
         .flush(),
       getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser })
-        .set({ 'Datetime of Last Login': new Date() })
+        .set({
+          'Datetime of Last Login': new Date(),
+          countryCode: existingVerifiedUser.countryCode,
+        })
         .flush(),
     ])
 

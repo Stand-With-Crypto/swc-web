@@ -43,6 +43,7 @@ export function mapPersistedLocalUserToAnalyticsProperties(
   return {
     'Initial Referer': persisted.initialReferer,
     'Datetime First Seen': persisted.datetimeFirstSeen,
+    countryCode: persisted.countryCode,
     ...Object.entries(persisted.initialSearchParams).reduce(
       (accum, [key, val]) => {
         accum[`Initial Search Param ${key}`] = val
