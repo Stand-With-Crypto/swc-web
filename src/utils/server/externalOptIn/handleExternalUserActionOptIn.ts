@@ -322,27 +322,30 @@ async function maybeUpsertUser({
       logger.error('error getting `googlePlaceId`:' + e)
     }
 
-    try {
-      const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(dbAddress)
+    const isUSAddress = dbAddress.countryCode?.toUpperCase() === 'US'
+    if (isUSAddress) {
+      try {
+        const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(dbAddress)
 
-      if ('notFoundReason' in usCongressionalDistrict) {
-        logCongressionalDistrictNotFound({
-          address: dbAddress.formattedDescription,
-          notFoundReason: usCongressionalDistrict.notFoundReason,
-          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+        if ('notFoundReason' in usCongressionalDistrict) {
+          logCongressionalDistrictNotFound({
+            address: dbAddress.formattedDescription,
+            notFoundReason: usCongressionalDistrict.notFoundReason,
+            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+          })
+        }
+        if ('districtNumber' in usCongressionalDistrict) {
+          dbAddress.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+        }
+      } catch (error) {
+        logger.error('error getting `usCongressionalDistrict`:' + error)
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+            message: 'error getting usCongressionalDistrict',
+          },
         })
       }
-      if ('districtNumber' in usCongressionalDistrict) {
-        dbAddress.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
-      }
-    } catch (error) {
-      logger.error('error getting `usCongressionalDistrict`:' + error)
-      Sentry.captureException(error, {
-        tags: {
-          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-          message: 'error getting usCongressionalDistrict',
-        },
-      })
     }
   }
 
