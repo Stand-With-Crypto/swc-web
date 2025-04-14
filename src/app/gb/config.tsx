@@ -18,6 +18,14 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
+      href: urls.politiciansHomepage(),
+      text: 'Politician scores',
+    },
+    {
+      href: urls.locationKeyRaces(),
+      text: 'Races',
+    },
+    {
       href: urls.manifesto(),
       text: 'Manifesto',
     },
