@@ -12,12 +12,14 @@ import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimit
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import {
+  ServerActionConfig,
+  withServerActionMiddleware,
+} from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`actionCreateUserActionPoll`)
 
@@ -33,7 +35,7 @@ export const actionCreateUserActionPoll = withServerActionMiddleware(
 
 async function actionCreateUserActionPollWithoutMiddleware(
   input: CreatePollVoteInput,
-  { countryCode }: { countryCode: SupportedCountryCodes },
+  { countryCode }: ServerActionConfig,
 ) {
   logger.info('triggered')
 
