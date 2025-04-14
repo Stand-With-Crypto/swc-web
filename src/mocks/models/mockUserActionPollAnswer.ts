@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { Prisma, UserActionPollAnswer } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { USUserActionPollCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
