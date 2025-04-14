@@ -35,9 +35,14 @@ declare global {
 
 export interface NewModeProps {
   campaignId: string
+  actionName: string
 }
 
-export function NewMode({ campaignId, ...props }: NewModeProps & BuilderComponentAttributes) {
+export function NewMode({
+  campaignId,
+  actionName,
+  ...props
+}: NewModeProps & BuilderComponentAttributes) {
   const [shouldCaptureAction, setShouldCaptureAction] = useState(true)
 
   const { data: userActionData, isLoading: isLoadingPerformedUserAction } =
@@ -45,12 +50,22 @@ export function NewMode({ campaignId, ...props }: NewModeProps & BuilderComponen
   const countryCode = useCountryCode()
   const pathname = usePathname()
 
+  const campaignName = useMemo(() => {
+    const normalizedActionName = actionName.toUpperCase().trim()
+
+    return normalizedActionName === 'DEFAULT'
+      ? getActionDefaultCampaignName(UserActionType.VIEW_KEY_PAGE, countryCode)
+      : normalizedActionName
+  }, [actionName, countryCode])
+
   const hasPerformedUserAction = useMemo(
     () =>
       userActionData?.performedUserActionTypes.some(
-        action => action.actionType === UserActionType.VIEW_KEY_PAGE,
+        action =>
+          action.actionType === UserActionType.VIEW_KEY_PAGE &&
+          action.campaignName === campaignName,
       ),
-    [userActionData],
+    [userActionData, campaignName],
   )
 
   const handleIframeClick = () => {
@@ -66,6 +81,7 @@ export function NewMode({ campaignId, ...props }: NewModeProps & BuilderComponen
     if (pathname && shouldCaptureAction) {
       void handleViewKeyPageAction({
         countryCode,
+        campaignName,
         path: pathname,
       }).then(() => {
         setShouldCaptureAction(false)
@@ -85,15 +101,17 @@ export function NewMode({ campaignId, ...props }: NewModeProps & BuilderComponen
 
 async function handleViewKeyPageAction({
   countryCode,
+  campaignName,
   path,
 }: {
   countryCode: SupportedCountryCodes
+  campaignName: string
   path: string
 }) {
   const data: CreateActionViewKeyPageInput = {
     countryCode,
     path: path.replace(`/${countryCode}/`, '/'),
-    campaignName: getActionDefaultCampaignName(UserActionType.VIEW_KEY_PAGE, countryCode),
+    campaignName,
   }
 
   const result = await triggerServerActionForForm(

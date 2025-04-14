@@ -36,6 +36,7 @@ export enum AUUserActionRsvpEventCampaignName {
 
 export enum AUUserActionViewKeyPageCampaignName {
   AU_Q2_2025_ELECTION = 'AU_Q2_2025_ELECTION',
+  AU_NEWMODE_DEBANKING = 'AU_NEWMODE_DEBANKING',
 }
 
 export type AUUserActionCampaignName =
