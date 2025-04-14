@@ -41,7 +41,12 @@ Builder.registerComponent(
 
     return (
       <GeoGate countryCode={countryCode} unavailableContent={<UnavailableContent />}>
-        <NewMode {...props.attributes} campaignId={props.campaignId} key={props.attributes?.key} />
+        <NewMode
+          {...props.attributes}
+          actionName={props.actionName}
+          campaignId={props.campaignId}
+          key={props.attributes?.key}
+        />
       </GeoGate>
     )
   },
@@ -54,6 +59,14 @@ Builder.registerComponent(
         type: 'string',
         required: true,
         helperText: 'The ID of the NewMode campaign to embed.',
+      },
+      {
+        name: 'actionName',
+        type: 'string',
+        advanced: true,
+        required: true,
+        helperText: 'The name of the user action to perform.',
+        defaultValue: 'DEFAULT',
       },
     ],
   },

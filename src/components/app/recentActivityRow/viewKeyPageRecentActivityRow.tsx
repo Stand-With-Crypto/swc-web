@@ -43,6 +43,16 @@ export function viewKeyPageRecentActivityRow({
         </InternalLink>
       ),
     },
+    [CAUserActionViewKeyPageCampaignName.CA_NEWMODE_DEBANKING]: {
+      children: (
+        <RecentActivityRowMainText>Someone took action to stop debanking</RecentActivityRowMainText>
+      ),
+      onFocusContent: () => (
+        <InternalLink className="block" href={urls.newmodeDebankingAction()}>
+          <Button>Take action</Button>
+        </InternalLink>
+      ),
+    },
     [AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION]: {
       children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
       onFocusContent: () => (
@@ -51,14 +61,25 @@ export function viewKeyPageRecentActivityRow({
         </InternalLink>
       ),
     },
+    [AUUserActionViewKeyPageCampaignName.AU_NEWMODE_DEBANKING]: {
+      children: (
+        <RecentActivityRowMainText>Someone took action to stop debanking</RecentActivityRowMainText>
+      ),
+      onFocusContent: () => (
+        <InternalLink className="block" href={urls.newmodeDebankingAction()}>
+          <Button>Take action</Button>
+        </InternalLink>
+      ),
+    },
     [GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION]: {
-      children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
-      // TODO: uncomment when the debanking action is live
-      // onFocusContent: () => (
-      //   <InternalLink className="block" href={urls.newmodeDebankingAction()}>
-      //     <Button>Email yours</Button>
-      //   </InternalLink>
-      // ),
+      children: (
+        <RecentActivityRowMainText>Someone took action to stop debanking</RecentActivityRowMainText>
+      ),
+      onFocusContent: () => (
+        <InternalLink className="block" href={urls.newmodeDebankingAction()}>
+          <Button>Take action</Button>
+        </InternalLink>
+      ),
     },
   }
 

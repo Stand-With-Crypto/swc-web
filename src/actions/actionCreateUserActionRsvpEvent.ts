@@ -10,7 +10,6 @@ import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -19,7 +18,10 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import {
+  ServerActionConfig,
+  withServerActionMiddleware,
+} from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -52,7 +54,10 @@ export const actionCreateUserActionRsvpEvent = withServerActionMiddleware(
   _actionCreateUserActionRsvpEvent,
 )
 
-async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInput) {
+async function _actionCreateUserActionRsvpEvent(
+  input: CreateActionRsvpEventInput,
+  { countryCode }: ServerActionConfig,
+) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
@@ -67,7 +72,6 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getUserAccessLocationCookie()
 
   if (
     !isActionSupportedForCountry(countryCode, UserActionType.RSVP_EVENT) ||
