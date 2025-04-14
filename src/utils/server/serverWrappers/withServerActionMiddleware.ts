@@ -46,7 +46,7 @@ export function withServerActionMiddleware<TAction extends ServerAction<any, any
         headers: currentHeaders,
         formData: convertArgsToFormData(args),
       },
-      () => action(args, { countryCode }),
+      () => action(args[0], { countryCode }),
     )
   }
 }
