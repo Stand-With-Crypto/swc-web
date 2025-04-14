@@ -38,8 +38,6 @@ export default async function CaHomePage() {
     getAdvocatesMapData(countryCode),
   ])
 
-  console.log('recentActivity', recentActivity)
-
   return (
     <CaPageHome
       advocatePerStateDataProps={advocatePerStateDataProps}

@@ -1,11 +1,23 @@
-import { useEffect, useMemo, useState } from 'react'
+import { ReactNode, useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
+import {
+  AU_ADVOCATES_ACTIONS,
+  AU_STATE_COORDS,
+} from '@/components/app/pageAdvocatesHeatmap/au/constants'
 import {
   CA_ADVOCATES_ACTIONS,
   CA_STATE_COORDS,
 } from '@/components/app/pageAdvocatesHeatmap/ca/constants'
+import { ActionListItem } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapActionList'
+import { IconProps } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapIcons'
+import {
+  US_ADVOCATES_ACTIONS,
+  US_STATE_COORDS,
+} from '@/components/app/pageAdvocatesHeatmap/us/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface MapMarker {
   id: string
@@ -13,11 +25,20 @@ export interface MapMarker {
   coordinates: [number, number]
   actionType: UserActionType
   datetimeCreated: string
-  iconType: (typeof CA_ADVOCATES_ACTIONS)[keyof typeof CA_ADVOCATES_ACTIONS]
+  iconType: {
+    icon: (args: IconProps) => ReactNode
+    label: string
+    labelMobile: string
+    labelActionTooltip: (extraText?: string) => string
+  }
   amountUsd?: number
 }
 
-const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMarker[] => {
+const createMarkersFromActions = (
+  recentActivity: PublicRecentActivity,
+  coordinates: Record<string, [number, number]>,
+  mapActions: ActionListItem,
+): MapMarker[] => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
 
@@ -27,9 +48,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
     if (userLocation && userLocation.administrativeAreaLevel1) {
       const state = userLocation.administrativeAreaLevel1
 
-      const coordinates = CA_STATE_COORDS[state as keyof typeof CA_STATE_COORDS]
-
-      if (coordinates) {
+      if (coordinates[state]) {
         let offsetX = 0
         let offsetY = 0
 
@@ -42,8 +61,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
           stateCount[state] = 1
         }
 
-        const currentIconActionType =
-          CA_ADVOCATES_ACTIONS[item.actionType as keyof typeof CA_ADVOCATES_ACTIONS]
+        const currentIconActionType = mapActions[item.actionType as keyof typeof mapActions]
 
         if (!currentIconActionType) {
           return
@@ -52,7 +70,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
         markers.push({
           id: item.id,
           name: state,
-          coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
+          coordinates: [coordinates[state][0] + offsetX, coordinates[state][1] + offsetY],
           actionType: item.actionType,
           datetimeCreated: item.datetimeCreated,
           iconType: currentIconActionType,
@@ -76,11 +94,43 @@ const INITIAL_MARKERS = 5
 const MAX_MARKERS = 20
 const ADVOCATE_MAP_INTERVAL = 2000
 
+const getCoordinates = (countryCode: string) => {
+  const COORDINATES_BY_COUNTRY_CODE: Record<
+    SupportedCountryCodes,
+    Record<string, [number, number]>
+  > = {
+    au: AU_STATE_COORDS,
+    us: US_STATE_COORDS,
+    ca: CA_STATE_COORDS,
+    gb: US_STATE_COORDS,
+  }
+
+  return COORDINATES_BY_COUNTRY_CODE[countryCode as keyof typeof COORDINATES_BY_COUNTRY_CODE]
+}
+
+const getMapActions = (countryCode: string) => {
+  const ACTIONS_BY_COUNTRY_CODE: Record<SupportedCountryCodes, ActionListItem> = {
+    au: AU_ADVOCATES_ACTIONS,
+    us: US_ADVOCATES_ACTIONS,
+    ca: CA_ADVOCATES_ACTIONS,
+    gb: US_ADVOCATES_ACTIONS,
+  }
+
+  return ACTIONS_BY_COUNTRY_CODE[countryCode as keyof typeof ACTIONS_BY_COUNTRY_CODE]
+}
+
 export function useAdvocateMap(actions: PublicRecentActivity) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
   const [totalMarkers, setTotalMarkers] = useState<number>(INITIAL_MARKERS - 1)
+  const countryCode = useCountryCode()
 
-  const markers = useMemo(() => createMarkersFromActions(actions), [actions])
+  const coordinates = useMemo(() => getCoordinates(countryCode), [countryCode])
+  const mapActions = useMemo(() => getMapActions(countryCode), [countryCode])
+
+  const markers = useMemo(
+    () => createMarkersFromActions(actions, coordinates, mapActions),
+    [actions, coordinates, mapActions],
+  )
 
   useEffect(() => {
     const intervalId = setInterval(() => {

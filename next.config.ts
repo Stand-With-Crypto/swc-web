@@ -63,6 +63,8 @@ const contentSecurityPolicy = {
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
     // Canada topojson meanwhile not in a Vercel's blob storage
     'https://gist.githubusercontent.com/Saw-mon-and-Natalie/a11f058fc0dcce9343b02498a46b3d44/raw/e8afc74f791169a64d6e8df033d7e88ff85ba673/canada.json',
+    // Australia topojson meanwhile not in a Vercel's blob storage
+    'https://raw.githubusercontent.com/cartdeco/Australia-json-data/refs/heads/master/aus25fgd_r.topojson',
     'https://cloudflare-eth.com',
     'https://c.thirdweb.com/',
     'https://c.amazon-adsystem.com/',

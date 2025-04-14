@@ -2,7 +2,7 @@ import { FC, MouseEvent, useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 import { AnimatePresence } from 'motion/react'
 
-import { CA_ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/ca/constants'
+import { AU_ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/au/constants'
 import { ActionInfoTooltip } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapActionTooltip'
 import { IconProps } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapIcons'
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapMarker'
@@ -12,9 +12,9 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const countryCode = SupportedCountryCodes.CA
+const countryCode = SupportedCountryCodes.AU
 
-export const CAMapComponent = ({
+export const AUMapComponent = ({
   actions,
   handleStateMouseHover,
   handleStateMouseOut,
@@ -58,11 +58,14 @@ export const CAMapComponent = ({
   return (
     <>
       <ComposableMap
-        projection="geoAlbers"
+        projection="geoMercator"
+        projectionConfig={{
+          center: [134, -27],
+          scale: 830,
+        }}
         style={{ width: '100%', height: '100%' }}
-        viewBox="-45 -420 990 665"
       >
-        <Geographies geography={CA_ADVOCATES_HEATMAP_GEO_URL}>
+        <Geographies geography={AU_ADVOCATES_HEATMAP_GEO_URL}>
           {({ geographies }) => (
             <>
               {geographies.map(geo => (

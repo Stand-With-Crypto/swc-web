@@ -1,4 +1,6 @@
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
+import { AURecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -9,6 +11,9 @@ import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -24,7 +29,11 @@ export function AuPageHome({
   partners,
   founders,
   dtsiHomepagePoliticians,
-}: HomePageProps) {
+  countUsers,
+  advocatePerStateDataProps,
+}: HomePageProps & {
+  advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
+} & Awaited<ReturnType<typeof getHomepageData>>) {
   return (
     <>
       <AuHero />
@@ -47,7 +56,31 @@ export function AuPageHome({
         </HomePageSection.Subtitle>
 
         <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
+          <ResponsiveTabsOrSelect
+            analytics={'Homepage Our Community Tabs'}
+            data-testid="community-leaderboard-tabs"
+            defaultValue={AURecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_MAP}
+            options={[
+              {
+                value: AURecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_MAP,
+                label: 'Recent activity map',
+                content: (
+                  <AdvocatesHeatmap
+                    actions={recentActivity}
+                    advocatesMapPageData={advocatePerStateDataProps}
+                    countUsers={countUsers.count}
+                    countryCode={countryCode}
+                    isEmbedded={false}
+                  />
+                ),
+              },
+              {
+                value: AURecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_LIST,
+                label: 'Recent activity list',
+                content: <RecentActivity.List actions={recentActivity} />,
+              },
+            ]}
+          />
         </RecentActivity>
       </HomePageSection>
 

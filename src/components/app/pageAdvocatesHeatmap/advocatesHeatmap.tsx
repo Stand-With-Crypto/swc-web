@@ -3,6 +3,7 @@
 import { FC, MouseEvent, useCallback, useMemo, useState } from 'react'
 import { useMedia, useOrientation } from 'react-use'
 
+import { AUMapComponent } from '@/components/app/pageAdvocatesHeatmap/au/mapComponent'
 import { CA_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/ca/constants'
 import { CAMapComponent } from '@/components/app/pageAdvocatesHeatmap/ca/mapComponent'
 import {
@@ -111,7 +112,7 @@ export function AdvocatesHeatmap({
           'flex w-full flex-col items-start gap-4',
           isEmbedded
             ? 'md:flex-row'
-            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
+            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-12'}`,
         )}
       >
         {isEmbedded && (
@@ -186,7 +187,7 @@ function GetMapComponent({
     [DEFAULT_SUPPORTED_COUNTRY_CODE]: USMapComponent,
     [SupportedCountryCodes.CA]: CAMapComponent,
     [SupportedCountryCodes.GB]: USMapComponent,
-    [SupportedCountryCodes.AU]: USMapComponent,
+    [SupportedCountryCodes.AU]: AUMapComponent,
   }
 
   const CurrentMapComponent = MAP_COMPONENT_PER_COUNTRY_CODE[countryCode]
