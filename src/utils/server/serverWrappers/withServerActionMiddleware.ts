@@ -14,12 +14,14 @@ export type ServerAction<TPayload, TReturn = any> = (
   config: ServerActionConfig,
 ) => TReturn
 
+type FirstParameter<T extends (...args: any[]) => any> = Parameters<T>[0]
+
 export function withServerActionMiddleware<TAction extends ServerAction<any, any>>(
   name: string,
   action: TAction,
 ) {
   return async function orchestratedLogic(
-    args: Parameters<TAction>[0],
+    ...args: FirstParameter<TAction> extends undefined ? [] : [FirstParameter<TAction>]
   ): Promise<ReturnType<TAction>> {
     const currentCookies = await cookies()
     const currentHeaders = await headers()
