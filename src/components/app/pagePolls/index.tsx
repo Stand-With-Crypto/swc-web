@@ -46,8 +46,7 @@ export function PagePolls({
   const hasNoPolls = !hasActivePoll && !hasInactivePolls
 
   const handleRefreshVotes = useCallback(async () => {
-    await refreshPollsVotesFromUser()
-    await refreshPollsResults()
+    await Promise.all([refreshPollsVotesFromUser(), refreshPollsResults()])
   }, [refreshPollsResults, refreshPollsVotesFromUser])
 
   return (
