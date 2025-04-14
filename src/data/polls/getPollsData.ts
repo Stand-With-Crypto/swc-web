@@ -1,5 +1,3 @@
-import { UserActionType } from '@prisma/client'
-
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
@@ -43,27 +41,17 @@ export interface PollsVotesFromUserResponse {
 }
 
 export async function getPollsResultsData(): Promise<Record<string, PollResultsDataResponse>> {
-  const pollsAnswers = await prismaClient.userActionPoll.findMany({
-    where: {
-      userAction: {
-        actionType: UserActionType.POLL,
-      },
-    },
-    include: {
-      userAction: true,
-      userActionPollAnswers: true,
+  const pollsAnswers = await prismaClient.userActionPollAnswer.findMany({
+    select: {
+      userActionCampaignName: true,
+      answer: true,
+      isOtherAnswer: true,
     },
   })
 
   const groupedAnswers = pollsAnswers.reduce<Record<string, PollResultsDataResponse>>(
     (acc, poll) => {
-      const { campaignName } = poll.userAction
-
-      const processAnswers = (answers: typeof poll.userActionPollAnswers) =>
-        answers.map(({ answer, isOtherAnswer }) => ({
-          answer,
-          isOtherAnswer,
-        }))
+      const campaignName = poll.userActionCampaignName
 
       if (!acc[campaignName]) {
         acc[campaignName] = {
@@ -76,7 +64,7 @@ export async function getPollsResultsData(): Promise<Record<string, PollResultsD
 
       acc[campaignName].answers = [
         ...acc[campaignName].answers,
-        ...processAnswers(poll.userActionPollAnswers),
+        { answer: poll.answer, isOtherAnswer: poll.isOtherAnswer },
       ]
 
       const computedAnswers = acc[campaignName].answers.reduce<
