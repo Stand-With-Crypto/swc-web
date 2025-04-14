@@ -1,6 +1,8 @@
 import * as Sentry from '@sentry/nextjs'
 import { cookies, headers } from 'next/headers'
 
+import { getCountryCodeFromHeaders } from '@/utils/server/getCountryCodeFromURL'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 // sentry only allows form data to be passed but we want to support json objects as well so we need to make it form data
@@ -20,19 +22,27 @@ const convertArgsToFormData = <T extends any[]>(args: T) => {
   }
 }
 
-export function withServerActionMiddleware<T extends (...args: any) => any>(
-  name: string,
-  action: T,
-) {
-  return async function orchestratedLogic(...args: Parameters<T>) {
+interface ServerActionConfig {
+  countryCode: SupportedCountryCodes
+}
+
+export function withServerActionMiddleware<
+  T extends (input: any, config: ServerActionConfig) => any,
+>(name: string, action: T) {
+  return async function orchestratedLogic(args: Parameters<T>) {
     const currentCookies = await cookies()
     const currentHeaders = await headers()
     const userSession = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
+
+    const countryCode = await getCountryCodeFromHeaders(currentHeaders)
 
     if (userSession) {
       Sentry.setUser({
         id: userSession,
         idType: 'session',
+        geo: {
+          country_code: countryCode,
+        },
       })
     }
 
@@ -43,7 +53,7 @@ export function withServerActionMiddleware<T extends (...args: any) => any>(
         headers: currentHeaders,
         formData: convertArgsToFormData(args),
       },
-      () => action(...args),
+      () => action(args, { countryCode }),
     )
   }
 }
