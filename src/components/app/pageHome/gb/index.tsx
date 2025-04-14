@@ -1,14 +1,19 @@
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
+import { GBRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -23,7 +28,12 @@ export function GbPageHome({
   partners,
   founders,
   dtsiHomepagePoliticians,
-}: HomePageProps) {
+  advocatePerStateDataProps,
+  countUsers,
+  actions,
+}: HomePageProps & {
+  advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
+} & Awaited<ReturnType<typeof getHomepageData>>) {
   return (
     <>
       <GbHero />
@@ -46,12 +56,35 @@ export function GbPageHome({
         </HomePageSection.Subtitle>
 
         <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
-          <RecentActivity.Footer>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </RecentActivity.Footer>
+          <ResponsiveTabsOrSelect
+            analytics={'Homepage Our Community Tabs'}
+            data-testid="community-leaderboard-tabs"
+            defaultValue={GBRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_MAP}
+            options={[
+              {
+                value: GBRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_MAP,
+                label: 'Recent activity map',
+                content: (
+                  <AdvocatesHeatmap
+                    actions={actions}
+                    advocatesMapPageData={advocatePerStateDataProps}
+                    countUsers={countUsers.count}
+                    countryCode={countryCode}
+                    isEmbedded={false}
+                  />
+                ),
+              },
+              {
+                value: GBRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_LIST,
+                label: 'Recent activity list',
+                content: (
+                  <div className="py-6">
+                    <RecentActivity.List actions={recentActivity} />
+                  </div>
+                ),
+              },
+            ]}
+          />
         </RecentActivity>
       </HomePageSection>
 

@@ -12,6 +12,7 @@ import {
 } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapActionList'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/common/advocatesHeatmapTooltip'
+import { GBMapComponent } from '@/components/app/pageAdvocatesHeatmap/gb/mapComponent'
 import { US_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/us/constants'
 import { USMapComponent } from '@/components/app/pageAdvocatesHeatmap/us/mapComponent'
 import { NextImage } from '@/components/ui/image'
@@ -25,6 +26,9 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
+import { GB_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/gb/constants'
+import { AU_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/au/constants'
+import { getMapActions } from '@/components/app/pageAdvocatesHeatmap/common/constants'
 
 interface RenderMapProps {
   countryCode: SupportedCountryCodes
@@ -75,7 +79,7 @@ export function AdvocatesHeatmap({
     setHoveredStateName(null)
   }
 
-  const actionsList = useMemo(() => getActionList(countryCode), [countryCode])
+  const actionsList = useMemo(() => getMapActions(countryCode), [countryCode])
 
   if (advocatesPerState.isLoading || !actions) {
     return (
@@ -151,17 +155,6 @@ export function AdvocatesHeatmap({
   )
 }
 
-function getActionList(countryCode: SupportedCountryCodes) {
-  const ACTIONS_BY_COUNTRY_CODE: Record<SupportedCountryCodes, ActionListItem> = {
-    [DEFAULT_SUPPORTED_COUNTRY_CODE]: US_ADVOCATES_ACTIONS,
-    [SupportedCountryCodes.CA]: CA_ADVOCATES_ACTIONS,
-    [SupportedCountryCodes.GB]: US_ADVOCATES_ACTIONS,
-    [SupportedCountryCodes.AU]: US_ADVOCATES_ACTIONS,
-  }
-
-  return ACTIONS_BY_COUNTRY_CODE[countryCode]
-}
-
 function GetMapComponent({
   actions,
   countryCode,
@@ -186,7 +179,7 @@ function GetMapComponent({
   > = {
     [DEFAULT_SUPPORTED_COUNTRY_CODE]: USMapComponent,
     [SupportedCountryCodes.CA]: CAMapComponent,
-    [SupportedCountryCodes.GB]: USMapComponent,
+    [SupportedCountryCodes.GB]: GBMapComponent,
     [SupportedCountryCodes.AU]: AUMapComponent,
   }
 

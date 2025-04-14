@@ -31,6 +31,7 @@ export function AuPageHome({
   dtsiHomepagePoliticians,
   countUsers,
   advocatePerStateDataProps,
+  actions,
 }: HomePageProps & {
   advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
 } & Awaited<ReturnType<typeof getHomepageData>>) {
@@ -66,7 +67,7 @@ export function AuPageHome({
                 label: 'Recent activity map',
                 content: (
                   <AdvocatesHeatmap
-                    actions={recentActivity}
+                    actions={actions}
                     advocatesMapPageData={advocatePerStateDataProps}
                     countUsers={countUsers.count}
                     countryCode={countryCode}
@@ -77,7 +78,11 @@ export function AuPageHome({
               {
                 value: AURecentActivityAndLeaderboardTabs.RECENT_ACTIVITY_LIST,
                 label: 'Recent activity list',
-                content: <RecentActivity.List actions={recentActivity} />,
+                content: (
+                  <div className="py-6">
+                    <RecentActivity.List actions={recentActivity} />
+                  </div>
+                ),
               },
             ]}
           />

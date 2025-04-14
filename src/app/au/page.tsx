@@ -23,7 +23,7 @@ export default async function AuHomePage() {
     advocatePerStateDataProps,
   ] = await Promise.all([
     getHomepageData({
-      restrictToUS: true,
+      recentActivityLimit: 30,
       countryCode,
     }),
     getHomepageTopLevelMetrics(),

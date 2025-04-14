@@ -1,23 +1,14 @@
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import {
-  AU_ADVOCATES_ACTIONS,
-  AU_STATE_COORDS,
-} from '@/components/app/pageAdvocatesHeatmap/au/constants'
-import {
-  CA_ADVOCATES_ACTIONS,
-  CA_STATE_COORDS,
-} from '@/components/app/pageAdvocatesHeatmap/ca/constants'
 import { ActionListItem } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapActionList'
 import { IconProps } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapIcons'
 import {
-  US_ADVOCATES_ACTIONS,
-  US_STATE_COORDS,
-} from '@/components/app/pageAdvocatesHeatmap/us/constants'
+  getCoordinates,
+  getMapActions,
+} from '@/components/app/pageAdvocatesHeatmap/common/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface MapMarker {
   id: string
@@ -93,31 +84,6 @@ const markersAreSame = (arr1: MapMarker[], arr2: MapMarker[]): boolean => {
 const INITIAL_MARKERS = 5
 const MAX_MARKERS = 20
 const ADVOCATE_MAP_INTERVAL = 2000
-
-const getCoordinates = (countryCode: string) => {
-  const COORDINATES_BY_COUNTRY_CODE: Record<
-    SupportedCountryCodes,
-    Record<string, [number, number]>
-  > = {
-    au: AU_STATE_COORDS,
-    us: US_STATE_COORDS,
-    ca: CA_STATE_COORDS,
-    gb: US_STATE_COORDS,
-  }
-
-  return COORDINATES_BY_COUNTRY_CODE[countryCode as keyof typeof COORDINATES_BY_COUNTRY_CODE]
-}
-
-const getMapActions = (countryCode: string) => {
-  const ACTIONS_BY_COUNTRY_CODE: Record<SupportedCountryCodes, ActionListItem> = {
-    au: AU_ADVOCATES_ACTIONS,
-    us: US_ADVOCATES_ACTIONS,
-    ca: CA_ADVOCATES_ACTIONS,
-    gb: US_ADVOCATES_ACTIONS,
-  }
-
-  return ACTIONS_BY_COUNTRY_CODE[countryCode as keyof typeof ACTIONS_BY_COUNTRY_CODE]
-}
 
 export function useAdvocateMap(actions: PublicRecentActivity) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
