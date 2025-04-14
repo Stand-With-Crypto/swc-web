@@ -32,7 +32,7 @@ export async function USHomepageDialogDeeplinkLayout({
     leaderboardData,
   ] = await Promise.all([
     getHomepageTopLevelMetrics(),
-    getAdvocatesMapData(),
+    getAdvocatesMapData(countryCode),
     getPartners({ countryCode }),
     getDistrictsLeaderboardData({ limit: 10 }),
   ])

@@ -4,16 +4,12 @@ import { FC, MouseEvent, useCallback, useMemo, useState } from 'react'
 import { useMedia, useOrientation } from 'react-use'
 
 import { AUMapComponent } from '@/components/app/pageAdvocatesHeatmap/au/mapComponent'
-import { CA_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/ca/constants'
 import { CAMapComponent } from '@/components/app/pageAdvocatesHeatmap/ca/mapComponent'
-import {
-  ActionListItem,
-  AdvocateHeatmapActionList,
-} from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapActionList'
+import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapActionList'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/common/advocatesHeatmapTooltip'
+import { getMapActions } from '@/components/app/pageAdvocatesHeatmap/common/constants'
 import { GBMapComponent } from '@/components/app/pageAdvocatesHeatmap/gb/mapComponent'
-import { US_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/us/constants'
 import { USMapComponent } from '@/components/app/pageAdvocatesHeatmap/us/mapComponent'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -26,9 +22,6 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
-import { GB_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/gb/constants'
-import { AU_ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/au/constants'
-import { getMapActions } from '@/components/app/pageAdvocatesHeatmap/common/constants'
 
 interface RenderMapProps {
   countryCode: SupportedCountryCodes
@@ -47,7 +40,7 @@ export function AdvocatesHeatmap({
 }: RenderMapProps) {
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
-  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
+  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData, { countryCode })
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
 

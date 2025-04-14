@@ -10,8 +10,8 @@ import { GB_ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeat
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getGBCountryCodeFromName } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.GB
 
@@ -41,7 +41,7 @@ export const GBMapComponent = ({
         },
       }
     })
-  }, [actions, countryCode]) as PublicRecentActivity
+  }, [actions]) as PublicRecentActivity
 
   const markers = useAdvocateMap(parsedCountryStateNameActions)
   const [actionInfo, setActionInfo] = useState<string | null>(null)
@@ -72,8 +72,6 @@ export const GBMapComponent = ({
     setMousePosition(null)
     setActionInfo(null)
   }, [])
-
-  console.log('markers', markers)
 
   return (
     <>

@@ -6,7 +6,8 @@ import { PseudoDialog } from '@/components/app/homepageDialogDeeplinkLayout/comm
 import { HomepageDialogDeeplinkLayoutProps } from '@/components/app/homepageDialogDeeplinkLayout/common/types'
 import { CaPageHome } from '@/components/app/pageHome/ca'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
-import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getHomepageData, getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { getFounders } from '@/utils/server/builder/models/data/founders'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
@@ -19,17 +20,29 @@ export async function CAHomepageDialogDeeplinkLayout({
   size = 'md',
   className,
 }: HomepageDialogDeeplinkLayoutProps) {
-  const [topLevelMetrics, recentActivity, partners, founders, dtsiHomepagePoliticians] =
-    await Promise.all([
-      getHomepageTopLevelMetrics(),
-      getPublicRecentActivity({
-        limit: 10,
-        countryCode,
-      }),
-      getPartners({ countryCode }),
-      getFounders({ countryCode }),
-      queryDTSIHomepagePeople({ countryCode }),
-    ])
+  const [
+    asyncProps,
+    topLevelMetrics,
+    recentActivity,
+    partners,
+    founders,
+    dtsiHomepagePoliticians,
+    advocatePerStateDataProps,
+  ] = await Promise.all([
+    getHomepageData({
+      recentActivityLimit: 10,
+      countryCode,
+    }),
+    getHomepageTopLevelMetrics(),
+    getPublicRecentActivity({
+      limit: 10,
+      countryCode,
+    }),
+    getPartners({ countryCode }),
+    getFounders({ countryCode }),
+    queryDTSIHomepagePeople({ countryCode }),
+    getAdvocatesMapData(countryCode),
+  ])
 
   return (
     <>
@@ -38,11 +51,13 @@ export async function CAHomepageDialogDeeplinkLayout({
       </PseudoDialog>
 
       <CaPageHome
+        advocatePerStateDataProps={advocatePerStateDataProps}
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
         founders={founders}
         partners={partners}
         recentActivity={recentActivity}
         topLevelMetrics={topLevelMetrics}
+        {...asyncProps}
       />
     </>
   )
