@@ -31,14 +31,8 @@ export const navbarConfig: NavbarProps = {
       text: 'Polls',
     },
     {
-      text: 'Resources',
-      children: [
-        {
-          href: urls.manifesto(),
-          text: 'Manifesto',
-          icon: <Icons.MissionIcon />,
-        },
-      ],
+      href: urls.manifesto(),
+      text: 'Manifesto',
     },
   ],
 }
