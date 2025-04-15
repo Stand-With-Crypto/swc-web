@@ -5,18 +5,26 @@ import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPoll, zodPollSchemaValidation } from '@/utils/shared/zod/getSWCPolls'
 
 const logger = getLogger(`builderIOPolls`)
 
 const LIMIT = 100
 
-async function getAllPollsWithOffset(offset: number) {
+async function getAllPollsWithOffset({
+  offset,
+  countryCode,
+}: {
+  offset: number
+  countryCode: SupportedCountryCodes
+}) {
   return await pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.POLLS, {
         query: {
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
+          countryCode: countryCode.toUpperCase(),
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
@@ -31,15 +39,15 @@ async function getAllPollsWithOffset(offset: number) {
   )
 }
 
-export async function getPolls() {
+export async function getPolls({ countryCode }: { countryCode: SupportedCountryCodes }) {
   try {
     let offset = 0
 
-    const entries = await getAllPollsWithOffset(offset)
+    const entries = await getAllPollsWithOffset({ offset, countryCode })
 
     while (entries.length === LIMIT + offset) {
       offset += entries.length
-      entries.push(...(await getAllPollsWithOffset(offset)))
+      entries.push(...(await getAllPollsWithOffset({ offset, countryCode })))
     }
 
     const filteredIncompletePolls = entries

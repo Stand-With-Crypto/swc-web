@@ -3,9 +3,12 @@ import xlsx from 'xlsx'
 
 import { runBin } from '@/bin/runBin'
 import { getPollsWithAbsoluteResults } from '@/data/polls/getPollsData'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 async function generatePollsAnswers() {
-  const pollsWithResults = await getPollsWithAbsoluteResults()
+  const pollsWithResults = await getPollsWithAbsoluteResults({
+    countryCode: SupportedCountryCodes.US,
+  })
 
   const pollsAnswers = pollsWithResults.map(poll => {
     return {

@@ -1,5 +1,6 @@
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 export interface PollResultsDataResponse {
@@ -167,8 +168,12 @@ export async function getPollsVotesFromUser(userId: string): Promise<PollsVotesF
   return { pollVote: groupedAnswersByCampaignName }
 }
 
-export async function getPollsWithAbsoluteResults(): Promise<PollsWithResults[]> {
-  const builderIoPolls = await getPolls()
+export async function getPollsWithAbsoluteResults({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}): Promise<PollsWithResults[]> {
+  const builderIoPolls = await getPolls({ countryCode })
   const pollsResultsData = await getPollsResultsData()
 
   if (!builderIoPolls) {
