@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { getPollsResultsData } from '@/data/polls/getPollsData'
 
-export const revalidate = 30 // 30 seconds
+export const revalidate = 60 // 60 seconds
 export const dynamic = 'error'
 
 export async function GET() {
