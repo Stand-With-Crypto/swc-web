@@ -2,7 +2,6 @@
 
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
-import * as Icons from '@/components/app/navbar/navbarDrawerIcons'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { auExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
