@@ -166,7 +166,25 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.POLL,
-        campaignName: AUUserActionPollCampaignName.TEST_POLL_AU,
+        campaignName: AUUserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.DIGITAL_ASSETS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.ENCOURAGE,
         isCampaignActive: true,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',

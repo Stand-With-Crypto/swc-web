@@ -40,7 +40,9 @@ export enum CAUserActionViewKeyPageCampaignName {
 }
 
 export enum CAUserActionPollCampaignName {
-  TEST_POLL_CA = 'ad3b0b2d3b704f4599b150816e95bc4d',
+  CRYPTO_NEWS = '1457fc9c45ca474bb92487ad29878d05',
+  DIGITAL_ASSETS = '9158179a1f4741e3b41c66263f5d2790',
+  ENCOURAGE = '2df3e725d2b94b7c8c5740f85cdbcb3c',
 }
 
 export type CAUserActionCampaignName =
@@ -72,5 +74,5 @@ export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName.H1_2025,
   [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName.H1_2025,
   [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
-  [UserActionType.POLL]: CAUserActionPollCampaignName.TEST_POLL_CA,
+  [UserActionType.POLL]: CAUserActionPollCampaignName.CRYPTO_NEWS,
 } satisfies Record<CAActiveClientUserActionWithCampaignType, string>

@@ -41,7 +41,9 @@ export enum GBUserActionViewKeyPageCampaignName {
 }
 
 export enum GBUserActionPollCampaignName {
-  TEST_POLL_GB = '2f0cdf469b734e74812aadb7d88ef209',
+  CRYPTO_NEWS = '62781aa7423a40e4a013340e0732d454',
+  DIGITAL_ASSETS = '7cbd05a756084a908b447e75de194aa2',
+  ENCOURAGE = '71c9f42180414e87b6bc362e630e710c',
 }
 
 export type GBUserActionCampaignName =
@@ -73,5 +75,5 @@ export const GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VIEW_KEY_RACES]: GBUserActionViewKeyRacesCampaignName.H1_2025,
   [UserActionType.VOTER_ATTESTATION]: GBUserActionVoterAttestationCampaignName.H1_2025,
   [UserActionType.VIEW_KEY_PAGE]: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-  [UserActionType.POLL]: GBUserActionPollCampaignName.TEST_POLL_GB,
+  [UserActionType.POLL]: GBUserActionPollCampaignName.CRYPTO_NEWS,
 } satisfies Record<GBActiveClientUserActionWithCampaignType, string>

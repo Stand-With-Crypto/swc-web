@@ -42,7 +42,9 @@ export enum AUUserActionViewKeyPageCampaignName {
 }
 
 export enum AUUserActionPollCampaignName {
-  TEST_POLL_AU = '325223e2a70e472f9b5007f5a0680750',
+  CRYPTO_NEWS = '0703f9442c8c4bedb12375d213aaef21',
+  DIGITAL_ASSETS = 'd77dded618334e18b77b526587dd7532',
+  ENCOURAGE = 'f6d5d046ba4240598912b7d8be539bd3',
 }
 
 export type AUUserActionCampaignName =
@@ -74,5 +76,5 @@ export const AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VIEW_KEY_RACES]: AUUserActionViewKeyRacesCampaignName.H1_2025,
   [UserActionType.VOTER_ATTESTATION]: AUUserActionVoterAttestationCampaignName.H1_2025,
   [UserActionType.VIEW_KEY_PAGE]: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
-  [UserActionType.POLL]: AUUserActionPollCampaignName.TEST_POLL_AU,
+  [UserActionType.POLL]: AUUserActionPollCampaignName.CRYPTO_NEWS,
 } satisfies Record<AUActiveClientUserActionWithCampaignType, string>
