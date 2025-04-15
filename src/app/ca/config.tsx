@@ -2,6 +2,7 @@
 
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
+import * as Icons from '@/components/app/navbar/navbarDrawerIcons'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { caExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
@@ -26,16 +27,28 @@ export const navbarConfig: NavbarProps = {
       text: 'Races',
     },
     {
-      href: urls.manifesto(),
-      text: 'Manifesto',
+      href: urls.polls(),
+      text: 'Polls',
     },
     {
-      href: urls.partners(),
-      text: 'Partners',
-    },
-    {
-      href: urls.community(),
-      text: 'Community',
+      text: 'Resources',
+      children: [
+        {
+          href: urls.partners(),
+          text: 'Partners',
+          icon: <Icons.PartnersIcon />,
+        },
+        {
+          href: urls.community(),
+          text: 'Community',
+          icon: <Icons.CommunityIcon />,
+        },
+        {
+          href: urls.manifesto(),
+          text: 'Manifesto',
+          icon: <Icons.MissionIcon />,
+        },
+      ],
     },
   ],
 }
