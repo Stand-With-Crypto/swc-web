@@ -34,11 +34,6 @@ export const navbarConfig: NavbarProps = {
       text: 'Resources',
       children: [
         {
-          href: urls.community(),
-          text: 'Community',
-          icon: <Icons.CommunityIcon />,
-        },
-        {
           href: urls.manifesto(),
           text: 'Manifesto',
           icon: <Icons.MissionIcon />,

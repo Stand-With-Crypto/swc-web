@@ -19,16 +19,16 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
-      href: urls.partners(),
-      text: 'Partners',
-    },
-    {
       href: urls.press(),
       text: 'Press',
     },
     {
       href: urls.polls(),
       text: 'Polls',
+    },
+    {
+      href: urls.manifesto(),
+      text: 'Manifesto',
     },
     {
       text: 'Resources',
@@ -39,9 +39,9 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.CommunityIcon />,
         },
         {
-          href: urls.manifesto(),
-          text: 'Manifesto',
-          icon: <Icons.MissionIcon />,
+          href: urls.partners(),
+          text: 'Partners',
+          icon: <Icons.PartnersIcon />,
         },
       ],
     },

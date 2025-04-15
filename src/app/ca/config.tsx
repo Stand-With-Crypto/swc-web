@@ -34,9 +34,9 @@ export const navbarConfig: NavbarProps = {
       text: 'Resources',
       children: [
         {
-          href: urls.partners(),
-          text: 'Partners',
-          icon: <Icons.PartnersIcon />,
+          href: urls.manifesto(),
+          text: 'Manifesto',
+          icon: <Icons.MissionIcon />,
         },
         {
           href: urls.community(),
@@ -44,9 +44,9 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.CommunityIcon />,
         },
         {
-          href: urls.manifesto(),
-          text: 'Manifesto',
-          icon: <Icons.MissionIcon />,
+          href: urls.partners(),
+          text: 'Partners',
+          icon: <Icons.PartnersIcon />,
         },
       ],
     },
