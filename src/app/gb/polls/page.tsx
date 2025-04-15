@@ -6,10 +6,10 @@ import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/
 import { getPollsResultsData } from '@/data/polls/getPollsData'
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+const countryCode = SupportedCountryCodes.GB
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'

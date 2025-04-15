@@ -199,9 +199,16 @@ export const apiUrls = {
     hasWelcomeMessageInBody?: boolean
   }) =>
     `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
-  pollsVotesFromUser: ({ userId }: { userId?: string }) =>
-    `/api/identified-user/polls-votes-from-user?userId=${userId ?? ''}`,
-  pollsResultsData: () => `/api/public/polls`,
+  pollsVotesFromUser: ({
+    userId,
+    countryCode,
+  }: {
+    userId?: string
+    countryCode: SupportedCountryCodes
+  }) =>
+    `/api/identified-user/polls-votes-from-user?userId=${userId ?? ''}&countryCode=${countryCode}`,
+  pollsResultsData: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/public/polls?countryCode=${countryCode}`,
   districtRanking: ({ stateCode, districtNumber }: { stateCode: string; districtNumber: string }) =>
     `/api/public/referrals/${stateCode}/${districtNumber}`,
   dtsiRacesByCongressionalDistrict: ({

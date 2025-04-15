@@ -44,8 +44,20 @@ export interface PollsVotesFromUserResponse {
   pollVote: PollVote
 }
 
-export async function getPollsResultsData(): Promise<Record<string, PollResultsDataResponse>> {
-  const pollsAnswers = await prismaClient.userActionPollAnswer.findMany()
+export async function getPollsResultsData({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}): Promise<Record<string, PollResultsDataResponse>> {
+  const pollsAnswers = await prismaClient.userActionPollAnswer.findMany({
+    where: {
+      userActionPoll: {
+        userAction: {
+          countryCode,
+        },
+      },
+    },
+  })
 
   const groupedAnswers: Record<string, PollResultsDataResponse> = {}
 
@@ -125,12 +137,19 @@ export async function getPollsResultsData(): Promise<Record<string, PollResultsD
   return groupedAnswers
 }
 
-export async function getPollsVotesFromUser(userId: string): Promise<PollsVotesFromUserResponse> {
+export async function getPollsVotesFromUser({
+  userId,
+  countryCode,
+}: {
+  userId: string
+  countryCode: SupportedCountryCodes
+}): Promise<PollsVotesFromUserResponse> {
   const pollVotes = await prismaClient.userActionPollAnswer.findMany({
     where: {
       userActionPoll: {
         userAction: {
           userId,
+          countryCode,
         },
       },
     },
@@ -174,7 +193,7 @@ export async function getPollsWithAbsoluteResults({
   countryCode: SupportedCountryCodes
 }): Promise<PollsWithResults[]> {
   const builderIoPolls = await getPolls({ countryCode })
-  const pollsResultsData = await getPollsResultsData()
+  const pollsResultsData = await getPollsResultsData({ countryCode })
 
   if (!builderIoPolls) {
     return []

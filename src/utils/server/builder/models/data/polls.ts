@@ -23,8 +23,10 @@ async function getAllPollsWithOffset({
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.POLLS, {
         query: {
+          data: {
+            countryCode: countryCode.toUpperCase(),
+          },
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
-          countryCode: countryCode.toUpperCase(),
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,

@@ -20,6 +20,7 @@ import { createCountryCodeValidation } from '@/utils/server/userActionValidation
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`actionCreateUserActionPoll`)
 
@@ -30,7 +31,10 @@ export type CreatePollVoteInput = {
 
 export const actionCreateUserActionPoll = withServerActionMiddleware(
   'actionCreateUserActionPoll',
-  withValidations([createCountryCodeValidation()], actionCreateUserActionPollWithoutMiddleware),
+  withValidations(
+    [createCountryCodeValidation(Object.values(ORDERED_SUPPORTED_COUNTRIES))],
+    actionCreateUserActionPollWithoutMiddleware,
+  ),
 )
 
 async function actionCreateUserActionPollWithoutMiddleware(
