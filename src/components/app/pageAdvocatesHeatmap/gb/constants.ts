@@ -3,7 +3,6 @@ import {
   EmailIcon,
   FollowOnXIcon,
   JoinIcon,
-  PrepareToVoteIcon,
 } from '@/components/app/pageAdvocatesHeatmap/common/advocateHeatmapIcons'
 import { GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/gbCountryUtils'
 
@@ -32,12 +31,6 @@ export const GB_ADVOCATES_ACTIONS: ActionListItem = {
     label: 'Email sent to their MP',
     labelMobile: 'emailed',
     labelActionTooltip: () => 'emailed their MP',
-  },
-  VIEW_KEY_PAGE: {
-    icon: PrepareToVoteIcon,
-    label: 'Viewed key page',
-    labelMobile: 'viewed',
-    labelActionTooltip: () => 'viewed key page',
   },
   TWEET: {
     icon: FollowOnXIcon,

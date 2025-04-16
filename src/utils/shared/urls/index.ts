@@ -189,7 +189,7 @@ export const apiUrls = {
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,
   totalAdvocatesPerState: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
-    `/api/public/advocates-map/total-advocates-per-state/${countryCode}`,
+    `/api/${countryCode}/public/advocates-map/total-advocates-per-state`,
   smsStatusCallback: ({
     campaignName,
     journeyType,
