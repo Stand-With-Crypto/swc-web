@@ -27,12 +27,12 @@ export function PagePolls({
   inactivePolls: SWCPoll[] | null
   pollsResultsData: Record<string, PollResultsDataResponse>
 }) {
-  const { user, isUserProfileLoading } = useSession()
+  const { isUserProfileLoading } = useSession()
   const {
     data: userPolls,
     isLoading: isPollsVotesLoading,
     mutate: refreshPollsVotesFromUser,
-  } = usePollsVotesFromUser(user?.id)
+  } = usePollsVotesFromUser()
   const {
     data: pollsResults,
     mutate: refreshPollsResults,

@@ -1,14 +1,23 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 import { getPollsResultsData } from '@/data/polls/getPollsData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const revalidate = 60 // 60 seconds
 
-export async function GET(request: NextRequest) {
-  const countryCode = request.nextUrl.searchParams.get('countryCode')
+interface RequestContext {
+  params: Promise<{
+    countryCode: SupportedCountryCodes
+  }>
+}
 
-  if (!countryCode) {
+export async function GET(_: Request, { params }: RequestContext) {
+  const { countryCode } = await params
+
+  const validatedFields = zodSupportedCountryCode.safeParse(countryCode)
+
+  if (!validatedFields.success) {
     return NextResponse.json(
       {
         error: 'Country code is required',
@@ -18,7 +27,7 @@ export async function GET(request: NextRequest) {
   }
 
   const pollsVotesData = await getPollsResultsData({
-    countryCode: countryCode as SupportedCountryCodes,
+    countryCode: validatedFields.data,
   })
 
   if (!pollsVotesData) {
