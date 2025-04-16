@@ -41,167 +41,162 @@ export const backfillMissingCommunications = inngest.createFunction(
     while (hasMoreUsers) {
       logger.info('Starting new batch iteration', { iteration, skip })
 
-      const results = await step.run(`backfill-missing-communications-${iteration}`, async () => {
-        // 1. Identify userCommunicationJourneys missing a userCommunication
-        const usersWithMissingUserCommunications = await prismaClient.user.findMany({
-          where: {
-            UserCommunicationJourney: {
-              some: {
-                journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                campaignName: 'bulk-welcome',
-                userCommunications: {
-                  none: {},
+      const createUserCommunicationsPayload = await step.run(
+        `get-create-user-communications-payload-${iteration}`,
+        async () => {
+          // 1. Identify userCommunicationJourneys missing a userCommunication
+          const usersWithMissingUserCommunications = await prismaClient.user.findMany({
+            where: {
+              UserCommunicationJourney: {
+                some: {
+                  journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                  campaignName: 'bulk-welcome',
+                  userCommunications: {
+                    none: {},
+                  },
                 },
               },
             },
-          },
-          include: {
-            UserCommunicationJourney: {
-              include: {
-                userCommunications: true,
+            include: {
+              UserCommunicationJourney: {
+                include: {
+                  userCommunications: true,
+                },
               },
             },
-          },
-          take: DATABASE_QUERY_LIMIT,
-          skip,
-        })
-
-        logger.info('Found users with missing communications', {
-          batchSize: usersWithMissingUserCommunications.length,
-          iteration,
-        })
-
-        // 2. Find a matching userCommunication reference
-        let matchedCount = 0
-        let unmatchedCount = 0
-
-        const userCommunicationJourneysWithMissingUserCommunications =
-          usersWithMissingUserCommunications.map(user => {
-            const userCommunicationJourneyMissingUserCommunication =
-              user.UserCommunicationJourney.find(
-                journey =>
-                  journey.userCommunications.length === 0 &&
-                  journey.campaignName === 'bulk-welcome',
-              )
-
-            if (!userCommunicationJourneyMissingUserCommunication) {
-              logger.error('No userCommunicationJourneyMissingUserCommunication found', {
-                userId: user.id,
-              })
-              throw new Error('No userCommunicationJourneyMissingUserCommunication found')
-            }
-
-            // Search for another userCommunicationJourney with the same campaign name (bulk-welcome)
-            const matchingUserCommunicationJourney = user.UserCommunicationJourney.find(
-              journey =>
-                journey.campaignName === 'bulk-welcome' && journey.userCommunications.length > 0,
-            )
-
-            if (matchingUserCommunicationJourney) {
-              matchedCount += 1
-              return [
-                userCommunicationJourneyMissingUserCommunication,
-                matchingUserCommunicationJourney,
-              ]
-            }
-
-            // If no direct match is found, locate the first BULK_SMS sent before and after the userCommunicationJourney creation date
-            const missingJourneyDate =
-              userCommunicationJourneyMissingUserCommunication.datetimeCreated
-
-            const userCommunicationJourneyWithUserCommunications =
-              user.UserCommunicationJourney.filter(
-                journey => journey.userCommunications.length > 0,
-              ).map(journey => ({
-                ...journey,
-                userCommunications: journey.userCommunications.filter(
-                  communication => communication.communicationType === CommunicationType.SMS,
-                ),
-              }))
-
-            // Find the journey with the closest creation date
-            let closestJourney = userCommunicationJourneyWithUserCommunications[0]
-            let smallestTimeDiff = Math.abs(
-              closestJourney.datetimeCreated.getTime() - missingJourneyDate.getTime(),
-            )
-
-            for (const journey of userCommunicationJourneyWithUserCommunications) {
-              const timeDiff = Math.abs(
-                journey.datetimeCreated.getTime() - missingJourneyDate.getTime(),
-              )
-              if (timeDiff < smallestTimeDiff) {
-                smallestTimeDiff = timeDiff
-                closestJourney = journey
-              }
-            }
-
-            unmatchedCount += 1
-            return [userCommunicationJourneyMissingUserCommunication, closestJourney]
+            take: DATABASE_QUERY_LIMIT,
+            skip,
           })
 
-        logger.info('Matching results', {
-          totalProcessed: userCommunicationJourneysWithMissingUserCommunications.length,
-          directMatches: matchedCount,
-          dateBasedMatches: unmatchedCount,
-        })
+          logger.info('Found users with missing communications', {
+            batchSize: usersWithMissingUserCommunications.length,
+            iteration,
+          })
 
+          // 2. Find a matching userCommunication reference
+          let matchedCount = 0
+          let unmatchedCount = 0
+
+          const userCommunicationJourneysWithMissingUserCommunications =
+            usersWithMissingUserCommunications.map(user => {
+              const userCommunicationJourneyMissingUserCommunication =
+                user.UserCommunicationJourney.find(
+                  journey =>
+                    journey.userCommunications.length === 0 &&
+                    journey.campaignName === 'bulk-welcome',
+                )
+
+              if (!userCommunicationJourneyMissingUserCommunication) {
+                logger.error('No userCommunicationJourneyMissingUserCommunication found', {
+                  userId: user.id,
+                })
+                throw new Error('No userCommunicationJourneyMissingUserCommunication found')
+              }
+
+              // Search for another userCommunicationJourney with the same campaign name (bulk-welcome)
+              const matchingUserCommunicationJourney = user.UserCommunicationJourney.find(
+                journey =>
+                  journey.campaignName === 'bulk-welcome' && journey.userCommunications.length > 0,
+              )
+
+              if (matchingUserCommunicationJourney) {
+                matchedCount += 1
+                return [
+                  userCommunicationJourneyMissingUserCommunication,
+                  matchingUserCommunicationJourney,
+                ]
+              }
+
+              // If no direct match is found, locate the first BULK_SMS sent before and after the userCommunicationJourney creation date
+              const missingJourneyDate =
+                userCommunicationJourneyMissingUserCommunication.datetimeCreated
+
+              const userCommunicationJourneyWithUserCommunications =
+                user.UserCommunicationJourney.filter(
+                  journey => journey.userCommunications.length > 0,
+                ).map(journey => ({
+                  ...journey,
+                  userCommunications: journey.userCommunications.filter(
+                    communication => communication.communicationType === CommunicationType.SMS,
+                  ),
+                }))
+
+              // Find the journey with the closest creation date
+              let closestJourney = userCommunicationJourneyWithUserCommunications[0]
+              let smallestTimeDiff = Math.abs(
+                closestJourney.datetimeCreated.getTime() - missingJourneyDate.getTime(),
+              )
+
+              for (const journey of userCommunicationJourneyWithUserCommunications) {
+                const timeDiff = Math.abs(
+                  journey.datetimeCreated.getTime() - missingJourneyDate.getTime(),
+                )
+                if (timeDiff < smallestTimeDiff) {
+                  smallestTimeDiff = timeDiff
+                  closestJourney = journey
+                }
+              }
+
+              unmatchedCount += 1
+              return [userCommunicationJourneyMissingUserCommunication, closestJourney]
+            })
+
+          logger.info('Matching results', {
+            totalProcessed: userCommunicationJourneysWithMissingUserCommunications.length,
+            directMatches: matchedCount,
+            dateBasedMatches: unmatchedCount,
+          })
+
+          return userCommunicationJourneysWithMissingUserCommunications.map<Prisma.UserCommunicationCreateManyInput>(
+            ([missingJourney, matchingJourney]) => ({
+              userCommunicationJourneyId: missingJourney.id,
+              communicationType: matchingJourney.userCommunications[0].communicationType,
+              messageId: matchingJourney.userCommunications[0].messageId,
+              status: matchingJourney.userCommunications[0].status,
+            }),
+          )
+        },
+      )
+
+      if (persist) {
         // 3. Reference the useCommunication with the matching userCommunicationJourney
-        if (persist) {
-          try {
+        const createdUserCommunicationsCount = await step.run(
+          `create-user-communications-${iteration}`,
+          async () => {
             const { count } = await prismaClient.userCommunication.createMany({
-              data: userCommunicationJourneysWithMissingUserCommunications.map<Prisma.UserCommunicationCreateManyInput>(
-                ([missingJourney, matchingJourney]) => ({
-                  userCommunicationJourneyId: missingJourney.id,
-                  communicationType: matchingJourney.userCommunications[0].communicationType,
-                  messageId: matchingJourney.userCommunications[0].messageId,
-                  status: matchingJourney.userCommunications[0].status,
-                }),
-              ),
+              data: createUserCommunicationsPayload,
             })
 
             logger.info('Created new user communications', {
               count,
               iteration,
             })
-          } catch (error) {
-            logger.error('Failed to create user communications', {
-              error: error instanceof Error ? error.message : 'Unknown error',
-              iteration,
-            })
-          }
-        } else {
-          logger.info('Dry run - skipping creation of user communications', {
-            wouldCreateCount: userCommunicationJourneysWithMissingUserCommunications.length,
-            iteration,
-          })
-        }
 
-        return {
-          hasMoreUsers: usersWithMissingUserCommunications.length === DATABASE_QUERY_LIMIT,
-          skip: skip + DATABASE_QUERY_LIMIT,
-          iteration: iteration + 1,
-          totalProcessed: totalProcessed + usersWithMissingUserCommunications.length,
-        }
-      })
+            return count
+          },
+        )
+
+        totalProcessed += createdUserCommunicationsCount
+      } else {
+        logger.info('Dry run - skipping creation of user communications', {
+          wouldCreateCount: createUserCommunicationsPayload.length,
+          iteration,
+        })
+      }
+
+      hasMoreUsers = createUserCommunicationsPayload.length === DATABASE_QUERY_LIMIT
+      skip += DATABASE_QUERY_LIMIT
+      iteration += 1
 
       logger.info('Batch results', {
-        hasMoreUsers: results.hasMoreUsers,
-        skip: results.skip,
-        iteration: results.iteration,
-        totalProcessed: results.totalProcessed,
+        hasMoreUsers,
+        skip,
+        iteration,
+        totalProcessed,
       })
-
-      hasMoreUsers = results.hasMoreUsers
-      skip = results.skip
-      iteration = results.iteration
-      totalProcessed = results.totalProcessed
 
       if (hasMoreUsers) {
         await step.sleep('wait-between-batches', SECONDS_DURATION['30_SECONDS'])
-      }
-
-      if (iteration === 2) {
-        break
       }
     }
 
