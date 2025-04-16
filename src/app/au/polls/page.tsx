@@ -1,13 +1,9 @@
-import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 
 import { PagePolls } from '@/components/app/pagePolls'
-import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
-import { getPollsResultsData } from '@/data/polls/getPollsData'
-import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getCurrentPollsData } from '@/utils/server/polls/getCurrentPollsData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 const countryCode = SupportedCountryCodes.AU
 
@@ -25,20 +21,9 @@ export const metadata: Metadata = {
 }
 
 export default async function PollsPage() {
-  const builderIoPolls = await getPolls({ countryCode })
-  const pollsResultsData = await getPollsResultsData({ countryCode })
-
-  const ctas = getUserActionCTAsByCountry(countryCode)
-
-  const activePolls = ctas[UserActionType.POLL].campaigns
-    .filter(campaign => campaign.isCampaignActive)
-    .map(campaign => builderIoPolls?.find(poll => poll.id === campaign.campaignName))
-    .filter(Boolean) as SWCPoll[] | null
-
-  const inactivePolls = ctas[UserActionType.POLL].campaigns
-    .filter(campaign => !campaign.isCampaignActive)
-    .map(campaign => builderIoPolls?.find(poll => poll.id === campaign.campaignName))
-    .filter(Boolean) as SWCPoll[] | null
+  const { activePolls, inactivePolls, pollsResultsData } = await getCurrentPollsData({
+    countryCode,
+  })
 
   return (
     <PagePolls
