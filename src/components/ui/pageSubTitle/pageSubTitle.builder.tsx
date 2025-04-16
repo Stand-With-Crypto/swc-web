@@ -1,3 +1,4 @@
+import { Children, cloneElement, ReactElement } from 'react'
 import { Builder, withChildren } from '@builder.io/react'
 
 import {
@@ -6,6 +7,7 @@ import {
   subTitleVariantsConfig,
 } from '@/components/ui/pageSubTitle'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
+import { merge } from 'lodash-es'
 
 interface BuilderPageSubtitleProps extends BuilderComponentBaseProps {
   as: (typeof AsVariantsConfig)[number]
@@ -14,17 +16,42 @@ interface BuilderPageSubtitleProps extends BuilderComponentBaseProps {
 }
 
 Builder.registerComponent(
-  withChildren((props: BuilderPageSubtitleProps) => (
-    <PageSubTitle
-      {...props.attributes}
-      as={props.as}
-      key={props.attributes?.key}
-      size={props.size}
-      withoutBalancer={props.withoutBalancer}
-    >
-      {props.children}
-    </PageSubTitle>
-  )),
+  withChildren((props: BuilderPageSubtitleProps) => {
+    const childrenWithProps = Children.map(props.children, child => {
+      const element = child as ReactElement<any>
+
+      return cloneElement(
+        element,
+        merge({}, element.props, {
+          block: {
+            component: {
+              options: {
+                // 1. This is necessary because the text component uses tailwind prose classes
+                // and overrides the font size and line height so the size prop is not respected
+                // 2. Using style because tailwind doesn't have a way to inherit the font size and line height
+                style: {
+                  fontSize: 'inherit',
+                  lineHeight: 'inherit',
+                },
+              },
+            },
+          },
+        }),
+      )
+    })
+
+    return (
+      <PageSubTitle
+        {...props.attributes}
+        as={props.as}
+        key={props.attributes?.key}
+        size={props.size}
+        withoutBalancer={props.withoutBalancer}
+      >
+        {childrenWithProps}
+      </PageSubTitle>
+    )
+  }),
   {
     name: 'PageSubTitle',
     canHaveChildren: true,

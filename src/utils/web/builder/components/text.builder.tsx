@@ -40,12 +40,17 @@ function transformLink(tagName: string, attribs: Record<string, string>) {
 
 interface BuilderTextProps extends BuilderComponentBaseProps {
   text: string
+  style?: React.CSSProperties
 }
 
 Builder.registerComponent(
-  ({ text, attributes }: BuilderTextProps) => (
+  ({ text, attributes, style }: BuilderTextProps) => (
     <div
       {...attributes}
+      style={{
+        ...attributes?.style,
+        ...style,
+      }}
       className={cn('prose max-w-full break-words', attributes?.className)}
       dangerouslySetInnerHTML={{
         __html: sanitizeHtml(text, {
