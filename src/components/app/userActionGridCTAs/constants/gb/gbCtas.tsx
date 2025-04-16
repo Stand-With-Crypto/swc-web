@@ -1,9 +1,9 @@
 import { UserActionType } from '@prisma/client'
-import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
+import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -61,20 +61,25 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Email your Member of Parliament',
-    description: 'Make your voice heard – and write to your MP',
-    campaignsModalDescription: 'Make your voice heard – and write to your MP',
+    title: 'Email your MP to stop unfair debanking',
+    description: 'Urge them to stand up for financial access and innovation.',
+    campaignsModalDescription: 'Urge them to stand up for financial access and innovation.',
     image: '/gb/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: false,
-        title: 'Email your Member of Parliament',
-        description: 'Email your MP today and call for urgent action to stop unfair debanking.',
+        isCampaignActive: true,
+        title: 'Email your MP to stop unfair debanking',
+        description: 'Urge them to stand up for financial access and innovation.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).newmodeDebankingAction()}>{children}</Link>
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={getIntlUrls(countryCode).newmodeDebankingAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
         ),
       },
     ],

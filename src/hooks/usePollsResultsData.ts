@@ -15,7 +15,6 @@ export function usePollsResultsData(
       fetchReq(url)
         .then(res => res.json())
         .then(data => data as Record<string, PollResultsDataResponse>),
-
-    { fallbackData, config },
+    { fallbackData, ...config, refreshInterval: 1000 * 30 }, // 30 seconds
   )
 }

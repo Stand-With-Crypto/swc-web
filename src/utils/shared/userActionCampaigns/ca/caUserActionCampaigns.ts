@@ -34,6 +34,7 @@ export enum CAUserActionRsvpEventCampaignName {
 
 export enum CAUserActionViewKeyPageCampaignName {
   CA_Q2_2025_ELECTION = 'CA_Q2_2025_ELECTION',
+  CA_NEWMODE_DEBANKING = 'CA_NEWMODE_DEBANKING',
 }
 
 export type CAUserActionCampaignName =

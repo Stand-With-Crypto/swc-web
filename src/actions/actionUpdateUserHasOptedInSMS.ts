@@ -12,10 +12,12 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
-import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import {
+  ServerActionConfig,
+  withServerActionMiddleware,
+} from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
 import { getLogger } from '@/utils/shared/logger'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
@@ -31,7 +33,10 @@ export type UpdateUserHasOptedInToSMSPayload = z.infer<
   ReturnType<typeof zodUpdateUserHasOptedInToSMS>
 >
 
-async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSPayload) {
+async function _actionUpdateUserHasOptedInToSMS(
+  data: UpdateUserHasOptedInToSMSPayload,
+  { countryCode }: ServerActionConfig,
+) {
   logger.info('triggered')
 
   const authUser = await appRouterGetAuthUser()
@@ -39,7 +44,6 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
     throw new Error('Unauthenticated')
   }
 
-  const countryCode = await getUserAccessLocationCookie()
   const validatedFields = zodUpdateUserHasOptedInToSMS(countryCode).safeParse(data)
   if (!validatedFields.success) {
     const errors = validatedFields.error.flatten().fieldErrors
