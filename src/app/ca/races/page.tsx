@@ -45,8 +45,7 @@ export default async function LocationCanadaPage() {
         <DarkHeroSection.Title>Key Races in {countryDisplayNameWithPrefix}</DarkHeroSection.Title>
         <DarkHeroSection.Subtitle>
           View the key races occurring across {countryDisplayNameWithPrefix} that will impact the
-          future of crypto. Learn where politicians stand on crypto to make an informed decision at
-          the ballot box.
+          future of crypto.
         </DarkHeroSection.Subtitle>
         {countAdvocates > 1000 && (
           <DarkHeroSection.HighlightedText>

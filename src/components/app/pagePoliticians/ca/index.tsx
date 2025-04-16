@@ -7,7 +7,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
 export const PAGE_POLITICIANS_TITLE = 'Find out where politicians stand on crypto'
-export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives Canada innovation. Discover the politicians fighting to keep crypto in Canada.`
+export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives Canada innovation. Find out how political leaders have addressed crypto issues.`
 
 export function CaPagePoliticians({ politicians }: { politicians: DTSIPersonDataTablePeople }) {
   return (
