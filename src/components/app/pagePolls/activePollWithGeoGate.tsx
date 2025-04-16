@@ -12,7 +12,7 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { useSession } from '@/hooks/useSession'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
-interface GeoGatedPollsContentProps {
+export interface ActivePollWithGeoGateProps {
   activePoll: SWCPoll
   isLoading: boolean
   pollsResults: Record<string, PollResultsDataResponse>
@@ -20,13 +20,13 @@ interface GeoGatedPollsContentProps {
   handleRefreshVotes: () => Promise<void>
 }
 
-export function GeoGatedPollsContent({
+export function ActivePollWithGeoGate({
   activePoll,
   isLoading,
   pollsResults,
   userPolls,
   handleRefreshVotes,
-}: GeoGatedPollsContentProps) {
+}: ActivePollWithGeoGateProps) {
   const countryCode = useCountryCode()
   const [showResults, setShowResults] = useState(false)
   const [isPendingVoteSubmissionTransaction, startVoteSubmissionTransaction] = useTransition()

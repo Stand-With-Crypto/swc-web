@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { PagePolls } from '@/components/app/pagePolls'
@@ -25,13 +26,13 @@ export default async function PollsPage() {
     countryCode,
   })
 
+  const hasPolls = !isEmpty(activePolls) || !isEmpty(inactivePolls)
+
   return (
-    <PagePolls
-      activePolls={activePolls}
-      description={description}
-      inactivePolls={inactivePolls}
-      pollsResultsData={pollsResultsData}
-      title={title}
-    />
+    <PagePolls description={description} pollsResultsData={pollsResultsData} title={title}>
+      <PagePolls.Header description={description} hasPolls={hasPolls} title={title} />
+      <PagePolls.ActivePollsAndResults activePolls={activePolls} />
+      <PagePolls.InactivePollsResults inactivePolls={inactivePolls} />
+    </PagePolls>
   )
 }
