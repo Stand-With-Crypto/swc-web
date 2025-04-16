@@ -204,7 +204,7 @@ export async function claimNFT(
       tags: {
         domain: 'claimNFT',
       },
-      level: 'fatal',
+      level: 'error',
     })
     logger.error(`Failed to claim NFT: ${error instanceof Error ? error.message : String(error)}`)
     throw error
