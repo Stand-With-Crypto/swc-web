@@ -3,25 +3,46 @@ import { Column, Img, Row, Section, Text } from '@react-email/components'
 import { ChevronRight } from 'lucide-react'
 
 import {
-  ACTIONS_METADATA_BY_TYPE,
   EmailActiveActions,
+  getEmailActionsMetadataByCountry,
 } from '@/utils/server/email/templates/common/constants'
-import { Button } from '@/utils/server/email/templates/ui/button'
-import { Heading } from '@/utils/server/email/templates/ui/heading'
+import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+function getCountryCTA(countryCode: SupportedCountryCodes) {
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return 'Keep up the fight'
+    case SupportedCountryCodes.AU:
+      return 'Join the Movement'
+    case SupportedCountryCodes.CA:
+      return 'Join the Movement'
+    case SupportedCountryCodes.GB:
+      return 'Join the Movement'
+    default:
+      return 'Keep up the fight'
+  }
+}
 
 export interface KeepUpTheFightSectionProps {
   completedActionTypes?: EmailActiveActions[]
   hrefSearchParams?: Record<string, unknown>
   hiddenActions?: string[]
+  countryCode: SupportedCountryCodes
+  ctaText?: string
 }
 
 export function KeepUpTheFightSection({
   completedActionTypes = [],
   hrefSearchParams = {},
   hiddenActions = [],
+  countryCode,
+  ctaText = getCountryCTA(countryCode),
 }: KeepUpTheFightSectionProps) {
-  const actionsMetadata = Object.entries(ACTIONS_METADATA_BY_TYPE)
+  const actionsMetadata = Object.entries(getEmailActionsMetadataByCountry(countryCode))
     .filter(([type]) => !hiddenActions.includes(type))
     .map(([type, metadata]) => ({
       ...metadata,
@@ -33,11 +54,11 @@ export function KeepUpTheFightSection({
   return (
     <Section>
       <Heading as="h2" className="text-[#101828]" gutterBottom="md" size="md">
-        Keep up the fight
+        {ctaText}
       </Heading>
       <Text className="text-center text-base text-[#5B616E]">
-        Don't wait - take action now. See below for actions you can take to help keep crypto in
-        America.
+        Don't wait - take action now. See below for actions you can take to help keep crypto in{' '}
+        {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.
       </Text>
 
       <Row>
