@@ -8,13 +8,11 @@ import { PollResultsDataResponse } from '@/data/polls/getPollsData'
 
 interface PagePollsProps {
   children: ReactNode
-  title: string
-  description: string
-  pollsResultsData: Record<string, PollResultsDataResponse>
+  initialPollsResultsData: Record<string, PollResultsDataResponse>
 }
 
-export function PagePolls({ children, pollsResultsData }: PagePollsProps) {
-  return <PollContainer pollsResultsData={pollsResultsData}>{children}</PollContainer>
+export function PagePolls({ children, initialPollsResultsData }: PagePollsProps) {
+  return <PollContainer initialPollsResultsData={initialPollsResultsData}>{children}</PollContainer>
 }
 
 PagePolls.Header = PagePollsHeader

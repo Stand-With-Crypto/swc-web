@@ -1,8 +1,6 @@
 'use client'
 
-import { useContext } from 'react'
-
-import { PollContainerContext } from '@/components/app/pagePolls/pollContainer'
+import { usePollPageContext } from '@/components/app/pagePolls/pollPageContext'
 import { PollResults } from '@/components/app/pagePolls/pollResults'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
@@ -12,7 +10,7 @@ interface InactivePollsResultsProps {
 }
 
 export function InactivePollsResults({ inactivePolls }: InactivePollsResultsProps) {
-  const { isLoading, userPolls, pollsResults } = useContext(PollContainerContext)
+  const { isLoading, userPolls, pollsResults } = usePollPageContext()
 
   return (
     inactivePolls &&

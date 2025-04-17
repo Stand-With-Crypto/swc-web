@@ -1,30 +1,19 @@
 'use client'
 
-import { createContext, ReactNode, useCallback } from 'react'
+import { ReactNode, useCallback } from 'react'
 
-import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
+import { PollPageContextProvider } from '@/components/app/pagePolls/pollPageContext'
+import { PollResultsDataResponse } from '@/data/polls/getPollsData'
 import { usePollsResultsData } from '@/hooks/usePollsResultsData'
 import { usePollsVotesFromUser } from '@/hooks/usePollsVotesFromUser'
 import { useSession } from '@/hooks/useSession'
 
 interface PollContainerProps {
   children: ReactNode
-  pollsResultsData: Record<string, PollResultsDataResponse>
+  initialPollsResultsData: Record<string, PollResultsDataResponse>
 }
 
-export const PollContainerContext = createContext<{
-  isLoading: boolean
-  userPolls: PollsVotesFromUserResponse | undefined
-  pollsResults: Record<string, PollResultsDataResponse>
-  handleRefreshVotes: () => Promise<void>
-}>({
-  isLoading: false,
-  userPolls: undefined,
-  pollsResults: {},
-  handleRefreshVotes: async () => {},
-})
-
-export function PollContainer({ children, pollsResultsData }: PollContainerProps) {
+export function PollContainer({ children, initialPollsResultsData }: PollContainerProps) {
   const { isUserProfileLoading } = useSession()
   const {
     data: userPolls,
@@ -35,7 +24,7 @@ export function PollContainer({ children, pollsResultsData }: PollContainerProps
     data: pollsResults,
     mutate: refreshPollsResults,
     isLoading: isPollsResultsLoading,
-  } = usePollsResultsData(pollsResultsData)
+  } = usePollsResultsData(initialPollsResultsData)
 
   const isLoading = isUserProfileLoading || isPollsVotesLoading || isPollsResultsLoading
 
@@ -45,11 +34,11 @@ export function PollContainer({ children, pollsResultsData }: PollContainerProps
 
   return (
     <div className="standard-spacing-from-navbar container px-2">
-      <PollContainerContext.Provider
-        value={{ isLoading, userPolls, pollsResults, handleRefreshVotes }}
+      <PollPageContextProvider
+        contextValue={{ isLoading, userPolls, pollsResults, handleRefreshVotes }}
       >
         {children}
-      </PollContainerContext.Provider>
+      </PollPageContextProvider>
     </div>
   )
 }

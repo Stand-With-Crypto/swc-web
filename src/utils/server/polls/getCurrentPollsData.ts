@@ -15,13 +15,13 @@ interface GetCurrentPollsArgs {
 interface PollsResponse {
   activePolls: SWCPoll[] | null
   inactivePolls: SWCPoll[] | null
-  pollsResultsData: Record<string, PollResultsDataResponse>
+  initialPollsResultsData: Record<string, PollResultsDataResponse>
 }
 
 export async function getCurrentPollsData({
   countryCode,
 }: GetCurrentPollsArgs): Promise<PollsResponse> {
-  const [builderIoPolls, pollsResultsData] = await Promise.all([
+  const [builderIoPolls, initialPollsResultsData] = await Promise.all([
     getPolls({ countryCode }),
     getPollsResultsData({ countryCode }),
   ])
@@ -47,6 +47,6 @@ export async function getCurrentPollsData({
   return {
     activePolls: activePolls.length ? activePolls : null,
     inactivePolls: inactivePolls.length ? inactivePolls : null,
-    pollsResultsData,
+    initialPollsResultsData,
   }
 }

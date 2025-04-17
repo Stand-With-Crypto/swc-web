@@ -22,14 +22,14 @@ export const metadata: Metadata = {
 }
 
 export default async function PollsPage() {
-  const { activePolls, inactivePolls, pollsResultsData } = await getCurrentPollsData({
+  const { activePolls, inactivePolls, initialPollsResultsData } = await getCurrentPollsData({
     countryCode,
   })
 
   const hasPolls = !isEmpty(activePolls) || !isEmpty(inactivePolls)
 
   return (
-    <PagePolls description={description} pollsResultsData={pollsResultsData} title={title}>
+    <PagePolls initialPollsResultsData={initialPollsResultsData}>
       <PagePolls.Header description={description} hasPolls={hasPolls} title={title} />
       <PagePolls.ActivePollsAndResults activePolls={activePolls} />
       <PagePolls.InactivePollsResults inactivePolls={inactivePolls} />

@@ -1,14 +1,11 @@
 'use client'
 
-import { useContext } from 'react'
-
 import { ActivePollWithGeoGate } from '@/components/app/pagePolls/activePollWithGeoGate'
-import { PollContainerContext } from '@/components/app/pagePolls/pollContainer'
+import { usePollPageContext } from '@/components/app/pagePolls/pollPageContext'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 export function ActivePollsAndResults({ activePolls }: { activePolls: SWCPoll[] | null }) {
-  const { isLoading, userPolls, pollsResults, handleRefreshVotes } =
-    useContext(PollContainerContext)
+  const { isLoading, userPolls, pollsResults, handleRefreshVotes } = usePollPageContext()
 
   return (
     activePolls &&
