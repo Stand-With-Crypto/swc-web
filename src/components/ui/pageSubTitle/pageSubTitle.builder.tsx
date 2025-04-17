@@ -1,5 +1,6 @@
 import { Children, cloneElement, ReactElement } from 'react'
 import { Builder, withChildren } from '@builder.io/react'
+import { merge } from 'lodash-es'
 
 import {
   AsVariantsConfig,
@@ -7,7 +8,6 @@ import {
   subTitleVariantsConfig,
 } from '@/components/ui/pageSubTitle'
 import type { BuilderComponentBaseProps } from '@/utils/web/builder'
-import { merge } from 'lodash-es'
 
 interface BuilderPageSubtitleProps extends BuilderComponentBaseProps {
   as: (typeof AsVariantsConfig)[number]

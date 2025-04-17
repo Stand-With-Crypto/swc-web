@@ -47,10 +47,6 @@ Builder.registerComponent(
   ({ text, attributes, style }: BuilderTextProps) => (
     <div
       {...attributes}
-      style={{
-        ...attributes?.style,
-        ...style,
-      }}
       className={cn('prose max-w-full break-words', attributes?.className)}
       dangerouslySetInnerHTML={{
         __html: sanitizeHtml(text, {
@@ -67,6 +63,10 @@ Builder.registerComponent(
         }),
       }}
       key={attributes?.key}
+      style={{
+        ...attributes?.style,
+        ...style,
+      }}
     />
   ),
   {
