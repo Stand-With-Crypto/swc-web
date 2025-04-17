@@ -8,7 +8,6 @@ import { queryDTSIRacesPeopleByRolePrimaryDistrict } from '@/data/dtsi/queries/q
 import { queryDTSIStatePrimaryDistricts } from '@/data/dtsi/queries/queryDTSIStatePrimaryDistricts'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { isCypress } from '@/utils/shared/executionEnvironment'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import {
   COUNTRY_CODE_TO_DEMONYM,
@@ -51,12 +50,9 @@ export async function generateMetadata({ params }: CALocationDistrictPageProps):
 
 export async function generateStaticParams() {
   const pageParams = []
-  if (isCypress) {
-    return []
-  }
 
   const statesToGenerate = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-    ? Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP)[0]
+    ? [Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP)[0]]
     : Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP)
 
   // This might be a bit slow, if it becomes a problem we can batch the states
