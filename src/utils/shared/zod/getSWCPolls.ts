@@ -1,5 +1,7 @@
 import { array, boolean, number, object, string, z } from 'zod'
 
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
+
 export const zodPollSchemaValidation = object({
   id: string(),
   name: string(),
@@ -15,6 +17,7 @@ export const zodPollSchemaValidation = object({
       }),
     ),
     maxNumberOptionsSelected: number().optional().nullable(),
+    countryCode: zodSupportedCountryCode.optional().nullable(),
   }),
 })
 

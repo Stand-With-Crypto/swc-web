@@ -8,10 +8,11 @@ import { GeoGate } from '@/components/app/geoGate'
 import { ActivePoll, PollSubmitData } from '@/components/app/pagePolls/activePoll'
 import { PollResults } from '@/components/app/pagePolls/pollResults'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useSession } from '@/hooks/useSession'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
-interface GeoGatedPollsContentProps {
+export interface ActivePollWithGeoGateProps {
   activePoll: SWCPoll
   isLoading: boolean
   pollsResults: Record<string, PollResultsDataResponse>
@@ -19,13 +20,14 @@ interface GeoGatedPollsContentProps {
   handleRefreshVotes: () => Promise<void>
 }
 
-export function GeoGatedPollsContent({
+export function ActivePollWithGeoGate({
   activePoll,
   isLoading,
   pollsResults,
   userPolls,
   handleRefreshVotes,
-}: GeoGatedPollsContentProps) {
+}: ActivePollWithGeoGateProps) {
+  const countryCode = useCountryCode()
   const [showResults, setShowResults] = useState(false)
   const [isPendingVoteSubmissionTransaction, startVoteSubmissionTransaction] = useTransition()
   const { isLoggedIn, user } = useSession()
@@ -71,6 +73,7 @@ export function GeoGatedPollsContent({
 
   return (
     <GeoGate
+      countryCode={countryCode}
       unavailableContent={
         <ActivePoll
           activePoll={activePoll}

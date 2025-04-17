@@ -22,6 +22,7 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.POLL,
   UserActionType.VIEW_KEY_PAGE,
 ] as const
+
 export type USActiveClientUserActionWithCampaignType =
   (typeof US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
 

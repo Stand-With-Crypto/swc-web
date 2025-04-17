@@ -10,7 +10,9 @@ export const CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VIEW_KEY_RACES,
   UserActionType.VOTER_ATTESTATION,
   UserActionType.VIEW_KEY_PAGE,
+  UserActionType.POLL,
 ] as const
+
 export type CAActiveClientUserActionWithCampaignType =
   (typeof CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
 
@@ -37,6 +39,12 @@ export enum CAUserActionViewKeyPageCampaignName {
   CA_NEWMODE_DEBANKING = 'CA_NEWMODE_DEBANKING',
 }
 
+export enum CAUserActionPollCampaignName {
+  CRYPTO_NEWS = '1457fc9c45ca474bb92487ad29878d05',
+  DIGITAL_ASSETS = '9158179a1f4741e3b41c66263f5d2790',
+  ENCOURAGE = '2df3e725d2b94b7c8c5740f85cdbcb3c',
+}
+
 export type CAUserActionCampaignName =
   | UserActionOptInCampaignName
   | CAUserActionTweetCampaignName
@@ -45,6 +53,7 @@ export type CAUserActionCampaignName =
   | CAUserActionViewKeyRacesCampaignName
   | CAUserActionVoterAttestationCampaignName
   | CAUserActionViewKeyPageCampaignName
+  | CAUserActionPollCampaignName
 
 export type CAUserActionCampaigns = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
@@ -54,6 +63,7 @@ export type CAUserActionCampaigns = {
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName
   [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName
   [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName
+  [UserActionType.POLL]: CAUserActionPollCampaignName
 }
 
 export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -64,4 +74,5 @@ export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName.H1_2025,
   [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName.H1_2025,
   [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
+  [UserActionType.POLL]: CAUserActionPollCampaignName.CRYPTO_NEWS,
 } satisfies Record<CAActiveClientUserActionWithCampaignType, string>

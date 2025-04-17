@@ -4,9 +4,9 @@ import { Metadata } from 'next'
 import { PagePolls } from '@/components/app/pagePolls'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { getCurrentPollsData } from '@/utils/server/polls/getCurrentPollsData'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+const countryCode = SupportedCountryCodes.GB
 
 export const revalidate = 600 // 10 minutes
 export const dynamic = 'error'

@@ -9,6 +9,7 @@ import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
+  AUUserActionPollCampaignName,
   AUUserActionReferCampaignName,
   AUUserActionTweetCampaignName,
   AUUserActionViewKeyPageCampaignName,
@@ -152,6 +153,43 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
             {children}
           </LoginDialogWrapper>
         ),
+      },
+    ],
+  },
+  [UserActionType.POLL]: {
+    title: 'Take the poll',
+    description: 'Take the poll and see the results.',
+    mobileCTADescription: 'Take the poll and see the results.',
+    campaignsModalDescription: 'Take the poll and see the results.',
+    image: '/actionTypeIcons/voterAttestation.png',
+    link: ({ children }) => <Link href="/polls">{children}</Link>,
+    campaigns: [
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.DIGITAL_ASSETS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.ENCOURAGE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
       },
     ],
   },

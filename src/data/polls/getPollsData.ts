@@ -1,5 +1,6 @@
 import { getPolls } from '@/utils/server/builder/models/data/polls'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
 
 export interface PollResultsDataResponse {
@@ -43,8 +44,20 @@ export interface PollsVotesFromUserResponse {
   pollVote: PollVote
 }
 
-export async function getPollsResultsData(): Promise<Record<string, PollResultsDataResponse>> {
-  const pollsAnswers = await prismaClient.userActionPollAnswer.findMany()
+export async function getPollsResultsData({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}): Promise<Record<string, PollResultsDataResponse>> {
+  const pollsAnswers = await prismaClient.userActionPollAnswer.findMany({
+    where: {
+      userActionPoll: {
+        userAction: {
+          countryCode,
+        },
+      },
+    },
+  })
 
   const groupedAnswers: Record<string, PollResultsDataResponse> = {}
 
@@ -124,12 +137,19 @@ export async function getPollsResultsData(): Promise<Record<string, PollResultsD
   return groupedAnswers
 }
 
-export async function getPollsVotesFromUser(userId: string): Promise<PollsVotesFromUserResponse> {
+export async function getPollsVotesFromUser({
+  userId,
+  countryCode,
+}: {
+  userId: string
+  countryCode: SupportedCountryCodes
+}): Promise<PollsVotesFromUserResponse> {
   const pollVotes = await prismaClient.userActionPollAnswer.findMany({
     where: {
       userActionPoll: {
         userAction: {
           userId,
+          countryCode,
         },
       },
     },
@@ -167,9 +187,13 @@ export async function getPollsVotesFromUser(userId: string): Promise<PollsVotesF
   return { pollVote: groupedAnswersByCampaignName }
 }
 
-export async function getPollsWithAbsoluteResults(): Promise<PollsWithResults[]> {
-  const builderIoPolls = await getPolls()
-  const pollsResultsData = await getPollsResultsData()
+export async function getPollsWithAbsoluteResults({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}): Promise<PollsWithResults[]> {
+  const builderIoPolls = await getPolls({ countryCode })
+  const pollsResultsData = await getPollsResultsData({ countryCode })
 
   if (!builderIoPolls) {
     return []
