@@ -16,7 +16,10 @@ import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXRemi
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'
@@ -274,28 +277,32 @@ async function sendInitialSignUpEmail({
     return null
   }
 
+  const countryCode = user.countryCode as SupportedCountryCodes
   const Template = TEMPLATE_BY_STEP[step]
   const messageId = await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: Template.subjectLine,
-    html: await render(
-      <Template
-        completedActionTypes={user.userActions
-          .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
-          .map(action => `${action.actionType}` as EmailActiveActions)}
-        session={
-          sessionId
-            ? {
-                userId: user.id,
-                sessionId,
-              }
-            : null
-        }
-      />,
-    ),
-    customArgs: {
-      userId: user.id,
-      campaign: Template.campaign,
+    countryCode,
+    payload: {
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: Template.subjectLine,
+      html: await render(
+        <Template
+          completedActionTypes={user.userActions
+            .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
+            .map(action => `${action.actionType}` as EmailActiveActions)}
+          session={
+            sessionId
+              ? {
+                  userId: user.id,
+                  sessionId,
+                }
+              : null
+          }
+        />,
+      ),
+      customArgs: {
+        userId: user.id,
+        campaign: Template.campaign,
+      },
     },
   }).catch(err => {
     Sentry.captureException(err, {

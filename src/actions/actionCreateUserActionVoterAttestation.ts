@@ -143,7 +143,11 @@ async function _actionCreateUserActionVoterAttestation(input: CreateActionVoterA
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction,
+      userCryptoAddress: user.primaryUserCryptoAddress,
+      countryCode,
+    })
   }
 
   waitUntil(beforeFinish())
