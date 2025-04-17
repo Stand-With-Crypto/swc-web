@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -9,6 +10,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
+  GBUserActionPollCampaignName,
   GBUserActionReferCampaignName,
   GBUserActionTweetCampaignName,
   GBUserActionViewKeyPageCampaignName,
@@ -110,6 +112,43 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
             {children}
           </LoginDialogWrapper>
         ),
+      },
+    ],
+  },
+  [UserActionType.POLL]: {
+    title: 'Take the poll',
+    description: 'Take the poll and see the results.',
+    mobileCTADescription: 'Take the poll and see the results.',
+    campaignsModalDescription: 'Take the poll and see the results.',
+    image: '/actionTypeIcons/voterAttestation.png',
+    link: ({ children }) => <Link href="/polls">{children}</Link>,
+    campaigns: [
+      {
+        actionType: UserActionType.POLL,
+        campaignName: GBUserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: GBUserActionPollCampaignName.DIGITAL_ASSETS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: GBUserActionPollCampaignName.ENCOURAGE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
       },
     ],
   },

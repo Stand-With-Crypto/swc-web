@@ -26,6 +26,10 @@ export const navbarConfig: NavbarProps = {
       text: 'Races',
     },
     {
+      href: urls.polls(),
+      text: 'Polls',
+    },
+    {
       href: urls.manifesto(),
       text: 'Manifesto',
     },

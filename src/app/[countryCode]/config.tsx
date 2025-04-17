@@ -61,7 +61,6 @@ export const navbarConfig: NavbarProps = {
           text: 'Advocacy toolkit',
           icon: <Icons.AdvocacyToolkitIcon />,
         },
-
         {
           href: urls.press(),
           text: 'Press',

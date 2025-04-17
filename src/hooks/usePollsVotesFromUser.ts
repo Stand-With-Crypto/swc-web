@@ -1,16 +1,18 @@
+'use client'
+
 import useSWR from 'swr'
 import { FullConfiguration } from 'swr/_internal'
 
 import { PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
-export function usePollsVotesFromUser(
-  userId?: string,
-  config?: Pick<FullConfiguration, 'revalidateOnMount'>,
-) {
+export function usePollsVotesFromUser(config?: Pick<FullConfiguration, 'revalidateOnMount'>) {
+  const countryCode = useCountryCode()
+
   return useSWR(
-    userId ? apiUrls.pollsVotesFromUser({ userId }) : null,
+    apiUrls.pollsVotesFromUser({ countryCode }),
     url =>
       fetchReq(url)
         .then(res => res.json())
