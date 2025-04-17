@@ -1,3 +1,4 @@
+export { backfillMissingCommunications } from './backfillMissingCommunications'
 export { backfillOptedOutUsers } from './backfillOptedOutUsers'
 export { backfillPhoneNumberValidation } from './backfillPhoneNumberValidation'
 export { bulkSMSCommunicationJourney } from './bulkSMSCommunicationJourney'
