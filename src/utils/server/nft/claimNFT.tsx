@@ -85,6 +85,7 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VOTER_ATTESTATION]: {
     [USUserActionVoterAttestationCampaignName.DEFAULT]: NFTSlug.VOTER_ATTESTATION,
+    [USUserActionVoterAttestationCampaignName.H1_2025]: NFTSlug.VOTER_ATTESTATION,
   },
   [UserActionType.RSVP_EVENT]: {
     [USUserActionRsvpEventCampaignName.DEFAULT]: null,
@@ -161,6 +162,12 @@ export async function claimNFT(
 
   if (userAction.nftMintId !== null) {
     throw Error(`Action ${userAction.id} for campaign ${campaignName} already has an NFT mint.`)
+  }
+
+  if (!nftSlug || !NFT_SLUG_BACKEND_METADATA[nftSlug]) {
+    throw new Error(
+      `Invalid or missing NFT metadata for action ${actionType} with campaign ${campaignName}`,
+    )
   }
 
   try {
