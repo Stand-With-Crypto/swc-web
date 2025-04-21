@@ -75,6 +75,7 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VOTER_REGISTRATION]: {
     [USUserActionVoterRegistrationCampaignName.DEFAULT]: NFTSlug.I_AM_A_VOTER,
+    [USUserActionVoterRegistrationCampaignName.H1_2025]: null,
   },
   [UserActionType.LIVE_EVENT]: {
     [USUserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
