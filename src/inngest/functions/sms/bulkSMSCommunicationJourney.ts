@@ -127,47 +127,55 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
-            UserCommunicationJourney: userHasWelcomeMessage
+            ...(userHasWelcomeMessage
               ? {
-                  some: {
-                    journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                    userCommunications: {
-                      some: {
-                        status: CommunicationMessageStatus.DELIVERED,
+                  UserCommunicationJourney: {
+                    some: {
+                      journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                      userCommunications: {
+                        some: {
+                          status: CommunicationMessageStatus.DELIVERED,
+                        },
                       },
-                    },
-                    datetimeCreated: {
-                      gt: SHORT_CODE_GO_LIVE_DATE,
+                      datetimeCreated: {
+                        gt: SHORT_CODE_GO_LIVE_DATE,
+                      },
                     },
                   },
                 }
               : {
-                  every: {
-                    OR: [
-                      {
-                        journeyType: {
-                          not: UserCommunicationJourneyType.WELCOME_SMS,
+                  OR: [
+                    {
+                      UserCommunicationJourney: {
+                        none: {
+                          journeyType: UserCommunicationJourneyType.WELCOME_SMS,
                         },
                       },
-                      {
-                        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                        datetimeCreated: {
-                          lt: SHORT_CODE_GO_LIVE_DATE,
+                    },
+                    {
+                      UserCommunicationJourney: {
+                        every: {
+                          journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                          datetimeCreated: {
+                            lt: SHORT_CODE_GO_LIVE_DATE,
+                          },
                         },
                       },
-                      {
-                        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                        userCommunications: {
-                          every: {
-                            status: {
-                              not: CommunicationMessageStatus.DELIVERED,
+                    },
+                    {
+                      UserCommunicationJourney: {
+                        every: {
+                          journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                          userCommunications: {
+                            none: {
+                              status: CommunicationMessageStatus.DELIVERED,
                             },
                           },
                         },
                       },
-                    ],
-                  },
-                },
+                    },
+                  ],
+                }),
           },
         )
 
