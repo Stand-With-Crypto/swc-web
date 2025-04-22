@@ -32,6 +32,7 @@ import {
   USUserActionCallCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
+  USUserActionLinkedinCampaignName,
   USUserActionLiveEventCampaignName,
   USUserActionNftMintCampaignName,
   USUserActionPollCampaignName,
@@ -111,6 +112,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VIEW_KEY_PAGE]: {
     [USUserActionViewKeyPageCampaignName.DEFAULT]: null,
+  },
+  [UserActionType.LINKEDIN]: {
+    [USUserActionLinkedinCampaignName.DEFAULT]: null,
   },
 }
 

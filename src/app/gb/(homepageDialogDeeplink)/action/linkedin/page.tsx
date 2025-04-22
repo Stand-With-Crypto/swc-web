@@ -1,6 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
-import { UserActionFormShareOnLinkedInDeeplinkWrapper } from '@/components/app/userActionFormFollowOnLinkedIn/common/homepageDialogDeeplinkWrapper'
+import { UserActionFormFollowLinkedInDeeplinkWrapper } from '@/components/app/userActionFormFollowOnLinkedIn/common/homepageDialogDeeplinkWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
@@ -23,7 +23,7 @@ export default function GBUserActionShareOnLinkedInDeepLink() {
           domain: 'UserActionShareOnLinkedInDeepLink',
         }}
       >
-        <UserActionFormShareOnLinkedInDeeplinkWrapper countryCode={countryCode} />
+        <UserActionFormFollowLinkedInDeeplinkWrapper countryCode={countryCode} />
       </ErrorBoundary>
     </div>
   )
