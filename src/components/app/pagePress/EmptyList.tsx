@@ -3,7 +3,7 @@
 import { SMSStatus } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { SMSOptInForm } from '@/components/app/smsOptInForm'
+import { SMSOptInForm } from '@/components/app/sms/smsOptInForm'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'

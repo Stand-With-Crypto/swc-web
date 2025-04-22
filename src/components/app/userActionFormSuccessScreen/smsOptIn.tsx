@@ -1,4 +1,4 @@
-import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/smsOptInForm'
+import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/sms/smsOptInForm'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { Skeleton } from '@/components/ui/skeleton'
 

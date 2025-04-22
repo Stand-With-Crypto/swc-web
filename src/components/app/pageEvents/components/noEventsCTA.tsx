@@ -4,7 +4,7 @@ import Balancer from 'react-wrap-balancer'
 import { SMSStatus } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { SMSOptInForm } from '@/components/app/smsOptInForm'
+import { SMSOptInForm } from '@/components/app/sms/smsOptInForm'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'

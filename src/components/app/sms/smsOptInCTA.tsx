@@ -1,6 +1,6 @@
 'use client'
 
-import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/smsOptInForm'
+import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/sms/smsOptInForm'
 
 type SMSOptInProps = Omit<SMSOptInFormProps, 'children'>
 
