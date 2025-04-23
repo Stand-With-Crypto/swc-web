@@ -9,7 +9,7 @@ export const dynamic = 'error'
 
 export default async function UserActionEmailCongresspersonDeepLink() {
   return (
-    <AUHomepageDialogDeeplinkLayout>
+    <AUHomepageDialogDeeplinkLayout className="max-w-xl">
       <ErrorBoundary
         extras={{
           action: {
