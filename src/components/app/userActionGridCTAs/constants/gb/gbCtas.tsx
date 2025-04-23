@@ -67,6 +67,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: 'Urge them to stand up for financial access and innovation.',
     campaignsModalDescription: 'Urge them to stand up for financial access and innovation.',
     image: '/gb/actionTypeIcons/email.png',
+    link: ({ children }) => <Link href={getIntlUrls(countryCode).emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
