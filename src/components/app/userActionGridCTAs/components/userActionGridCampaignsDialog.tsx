@@ -177,7 +177,7 @@ function CampaignCard({
     <button
       {...rest}
       className={cn(
-        'flex w-full items-center justify-between rounded-2xl bg-backgroundAlternate p-6',
+        'flex items-center justify-between rounded-2xl bg-backgroundAlternate p-6',
         isReadOnly && 'pointer-events-none cursor-default',
       )}
     >
