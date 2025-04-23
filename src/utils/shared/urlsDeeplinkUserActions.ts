@@ -94,7 +94,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
   },
   [UserActionType.VIEW_KEY_PAGE]: {
     getDeeplinkUrl: ({ countryCode }) => {
-      return `${getIntlPrefix(countryCode)}/content/election`
+      return `${getIntlPrefix(countryCode)}/content/debanking`
     },
   },
 }
