@@ -4,7 +4,6 @@ import {
   SMSStatus,
   SupportedUserCryptoNetwork,
   User,
-  UserActionOptInType,
   UserActionType,
   UserCryptoAddress,
   UserEmailAddress,
@@ -13,9 +12,8 @@ import {
   UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { waitUntil } from '@vercel/functions'
-import { isAddress } from 'viem'
-import { object, string, z } from 'zod'
+import { after } from 'next/server'
+import { z } from 'zod'
 
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
@@ -45,54 +43,10 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
-import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
-import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
-import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
-
-const zodExternalUserActionOptInUserAddress = object({
-  streetNumber: string(),
-  route: string(),
-  subpremise: string(),
-  locality: string(),
-  administrativeAreaLevel1: string(),
-  administrativeAreaLevel2: string(),
-  postalCode: string(),
-  postalCodeSuffix: string(),
-  countryCode: string().length(2),
-})
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getZodExternalUserActionOptInSchema = (countryCode: SupportedCountryCodes) =>
-  z.object({
-    emailAddress: zodEmailAddress,
-    cryptoAddress: string()
-      .optional()
-      .refine(str => !str || isAddress(str), { message: 'Invalid Ethereum address' })
-      .transform(str => str && str.toLowerCase()),
-    optInType: z.nativeEnum(UserActionOptInType),
-    campaignName: z.string(),
-    isVerifiedEmailAddress: z.boolean(),
-    firstName: zodFirstName.optional(),
-    lastName: zodLastName.optional(),
-    address: zodExternalUserActionOptInUserAddress.optional(),
-    phoneNumber: zodOptionalEmptyPhoneNumber(countryCode).optional(),
-    hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
-    hasOptedInToEmails: z.boolean().optional(),
-    hasOptedInToMembership: z.boolean().optional(),
-    acquisitionOverride: z
-      .object({
-        source: z.string(),
-        medium: z.string(),
-      })
-      .optional(),
-    additionalAnalyticsProperties: z.record(z.string()).optional(),
-    countryCode: zodSupportedCountryCode,
-  })
+import { getZodExternalUserActionOptInSchema } from '@/validation/userActionOptIn/zodExternalUserActionOptIn'
 
 const logger = getLogger('handleExternalUserActionOptIn')
 
@@ -119,11 +73,14 @@ export type ExternalUserActionOptInResponse<ResultOptions extends string> = {
   userId: string
 }
 
+const actionType = UserActionType.OPT_IN
+const campaignId = getCapitolCanaryCampaignID(CapitolCanaryCampaignName.ONE_CLICK_NATIVE_SUBSCRIBER)
+
 export async function handleExternalUserActionOptIn(
   input: Input,
 ): Promise<ExternalUserActionOptInResponse<ExternalUserActionOptInResult>> {
   const { emailAddress, cryptoAddress, optInType, campaignName, countryCode } = input
-  const actionType = UserActionType.OPT_IN
+
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
       user: {
@@ -162,8 +119,8 @@ export async function handleExternalUserActionOptIn(
   })
 
   const { user, userState } = await maybeUpsertUser({
-    existingUser: existingAction?.user,
     input,
+    existingUser: existingAction?.user,
     countryCode: countryCode?.toLowerCase(),
   })
   const localUser = getLocalUserFromUser(user)
@@ -176,7 +133,7 @@ export async function handleExternalUserActionOptIn(
   }
 
   const capitolCanaryPayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.ONE_CLICK_NATIVE_SUBSCRIBER),
+    campaignId,
     user: {
       ...user,
       address: user.address || null,
@@ -191,7 +148,11 @@ export async function handleExternalUserActionOptIn(
   }
 
   if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber) {
-    await smsActions.optInUser({ phoneNumber: input.phoneNumber, user, countryCode })
+    const optInUserPayload = { phoneNumber: input.phoneNumber, user, countryCode }
+
+    after(async () => {
+      await smsActions.optInUser(optInUserPayload)
+    })
   }
 
   if (existingAction) {
@@ -199,11 +160,14 @@ export async function handleExternalUserActionOptIn(
       existingAction.user.smsStatus === SMSStatus.NOT_OPTED_IN &&
       input.hasOptedInToReceiveSMSFromSWC
     ) {
-      await inngest.send({
-        name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-        data: capitolCanaryPayload,
+      after(async () => {
+        await inngest.send({
+          name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+          data: capitolCanaryPayload,
+        })
       })
     }
+
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
@@ -213,7 +177,9 @@ export async function handleExternalUserActionOptIn(
       ...input.additionalAnalyticsProperties,
       countryCode,
     })
-    waitUntil(flushAnalytics())
+
+    after(async () => await flushAnalytics())
+
     return {
       result: ExternalUserActionOptInResult.EXISTING_ACTION,
       resultOptions: Object.values(ExternalUserActionOptInResult),
@@ -224,6 +190,7 @@ export async function handleExternalUserActionOptIn(
 
   const userActionCampaignName =
     COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode].OPT_IN
+
   const userAction = await prismaClient.userAction.create({
     include: {
       user: {
@@ -270,12 +237,14 @@ export async function handleExternalUserActionOptIn(
     capitolCanaryPayload.opts = {}
   }
   capitolCanaryPayload.opts.isEmailOptin = true
-  await inngest.send({
-    name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-    data: capitolCanaryPayload,
+  after(async () => {
+    await inngest.send({
+      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+      data: capitolCanaryPayload,
+    })
   })
 
-  waitUntil(flushAnalytics())
+  after(async () => await flushAnalytics())
   return {
     result: ExternalUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(ExternalUserActionOptInResult),
@@ -420,13 +389,18 @@ async function maybeUpsertUser({
       })
     }
 
+    let possiblePrimaryEmailAndCryptoPayload: Prisma.UserUpdateInput = {}
+
     if (!user.primaryUserEmailAddressId && emailAddress) {
       const newEmail = user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)!
       logger.info(`updating primary email`)
-      await prismaClient.user.update({
-        where: { id: user.id },
-        data: { primaryUserEmailAddressId: newEmail.id },
-      })
+
+      possiblePrimaryEmailAndCryptoPayload = {
+        primaryUserEmailAddress: {
+          connect: { id: newEmail.id },
+        },
+      }
+
       user.primaryUserEmailAddressId = newEmail.id
     }
 
@@ -435,17 +409,25 @@ async function maybeUpsertUser({
         addr => addr.cryptoAddress === cryptoAddress,
       )!
       logger.info(`updating primary crypto address`)
-      await prismaClient.user.update({
-        where: { id: user.id },
-        data: { primaryUserCryptoAddressId: newCryptoAddress.id },
-      })
+
+      possiblePrimaryEmailAndCryptoPayload = {
+        primaryUserCryptoAddress: {
+          connect: { id: newCryptoAddress.id },
+        },
+      }
+
       user.primaryUserCryptoAddressId = newCryptoAddress.id
     }
+
+    await prismaClient.user.update({
+      where: { id: user.id },
+      data: possiblePrimaryEmailAndCryptoPayload,
+    })
 
     return { user, userState: 'Existing With Updates' }
   }
 
-  let user = await prismaClient.user.create({
+  const user = await prismaClient.user.create({
     include: {
       userEmailAddresses: true,
       userCryptoAddresses: true,
@@ -501,19 +483,18 @@ async function maybeUpsertUser({
       }),
     },
   })
-  user = await prismaClient.user.update({
+
+  const updatedUser = await prismaClient.user.update({
     include: {
       userEmailAddresses: true,
-      userCryptoAddresses: true,
-      userSessions: true,
-      address: true,
     },
     where: { id: user.id },
     data: {
       primaryUserEmailAddressId: user.userEmailAddresses[0].id,
     },
   })
-  return { user, userState: 'New' }
+
+  return { user: { ...user, ...updatedUser }, userState: 'New' }
 }
 
 function getUserAcquisitionFields({
