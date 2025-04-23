@@ -1,8 +1,8 @@
 import { UserActionType } from '@prisma/client'
 
-import { ErrorBoundary } from '@/utils/web/errorBoundary'
 import { AUHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/au'
 import { UserActionViewKeyPageDeeplinkWrapper } from '@/components/app/userActionFormViewKeyPage/homepageDialogDeeplinkWrapper'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'

@@ -1,5 +1,7 @@
 'use client'
 
+import type { UserActionType } from '@prisma/client'
+
 import { UserActionGridCampaignsDialogContent } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
 import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { useGridCTAs } from '@/components/app/userActionGridCTAs/hooks/useGridCTAs'
@@ -7,7 +9,6 @@ import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import type { UserActionType } from '@prisma/client'
 
 const actionName: UserActionType = 'VIEW_KEY_PAGE'
 
