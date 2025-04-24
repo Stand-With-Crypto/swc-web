@@ -897,7 +897,7 @@ async function triggerPostLoginUserActionSteps({
 
     const { data: normalizedCountryCode } = zodSupportedCountryCode.safeParse(countryCode)
 
-    if (embeddedWalletUserDetails?.phone) {
+    if (embeddedWalletUserDetails?.phone && normalizedCountryCode) {
       await smsActions.optInUser({
         phoneNumber: embeddedWalletUserDetails.phone,
         user,

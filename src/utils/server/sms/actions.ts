@@ -12,20 +12,17 @@ import { getSMSMessages } from '@/utils/server/sms/messages'
 import { getCountryCodeFromPhoneNumber } from '@/utils/server/sms/utils'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
-import {
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export async function optInUser({
   phoneNumber,
   user,
-  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+  countryCode,
 }: {
   phoneNumber: string
   user: User
-  countryCode?: SupportedCountryCodes
+  countryCode: SupportedCountryCodes
 }): Promise<SMSStatus> {
   const smsMessages = getSMSMessages(countryCode)
 
@@ -110,11 +107,11 @@ export async function optInUser({
 export async function optOutUser({
   phoneNumber,
   user,
-  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+  countryCode,
 }: {
   phoneNumber: string
   user?: User | null
-  countryCode?: SupportedCountryCodes
+  countryCode: SupportedCountryCodes
 }) {
   const smsMessages = getSMSMessages(countryCode)
 
@@ -181,11 +178,11 @@ export async function optOutUser({
 export async function optUserBackIn({
   phoneNumber,
   user,
-  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+  countryCode,
 }: {
   phoneNumber: string
   user?: User | null
-  countryCode?: SupportedCountryCodes
+  countryCode: SupportedCountryCodes
 }) {
   const smsMessages = getSMSMessages(countryCode)
 

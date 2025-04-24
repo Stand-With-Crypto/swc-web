@@ -185,9 +185,9 @@ SMSOptInForm.Footnote = function SMSOptInFormFootnote({
                 <FormControl>
                   <Checkbox
                     checked={field.value}
+                    className="mt-1"
                     onCheckedChange={field.onChange}
                     variant={variant}
-                    className="mt-1"
                   />
                 </FormControl>
               )}

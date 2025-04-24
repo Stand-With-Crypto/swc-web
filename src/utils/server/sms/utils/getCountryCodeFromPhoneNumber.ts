@@ -1,13 +1,13 @@
 import { parsePhoneNumberWithError } from 'libphonenumber-js/core'
 import phoneNumberMetadata from 'libphonenumber-js/max/metadata'
 
+import { getLogger } from '@/utils/shared/logger'
 import { SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE } from '@/utils/shared/phoneNumber'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('isPhoneNumberCountrySupported')
 

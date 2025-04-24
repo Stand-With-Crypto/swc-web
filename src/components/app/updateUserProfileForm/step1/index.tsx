@@ -296,9 +296,9 @@ export function UpdateUserProfileForm({
                           <FormControl>
                             <Checkbox
                               checked={field.value}
+                              className="mt-1"
                               data-testid="sms-opt-in-checkbox"
                               onCheckedChange={field.onChange}
-                              className="mt-1"
                             />
                           </FormControl>
                         )}

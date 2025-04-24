@@ -64,13 +64,16 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  const phoneNumberCountryCode = (user?.countryCode ??
-    getCountryCodeFromPhoneNumber(phoneNumber) ??
-    DEFAULT_SUPPORTED_COUNTRY_CODE) as SupportedCountryCodes
+  const userCountryCode = user?.countryCode as SupportedCountryCodes | undefined
+
+  const countryCode =
+    userCountryCode ??
+    getCountryCodeFromPhoneNumber(phoneNumber, userCountryCode) ??
+    DEFAULT_SUPPORTED_COUNTRY_CODE
 
   const keyword = identifyIncomingKeyword(body.Body)
 
-  const smsMessages = getSMSMessages(phoneNumberCountryCode)
+  const smsMessages = getSMSMessages(countryCode)
 
   let message = ''
 
@@ -78,9 +81,9 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   // This is because we can't get the messageId when replying with Twilio
   // And for both cases the phone number is already normalized so we don't need to send the country code
   if (keyword?.isOptOutKeyword) {
-    await smsActions.optOutUser({ phoneNumber, user })
+    await smsActions.optOutUser({ phoneNumber, user, countryCode })
   } else if (keyword?.isUnstopKeyword) {
-    await smsActions.optUserBackIn({ phoneNumber, user })
+    await smsActions.optUserBackIn({ phoneNumber, user, countryCode })
   } else if (keyword?.isHelpKeyword) {
     // We don't want to track this message, so we can just reply with twilio
     message = smsMessages.helpMessage

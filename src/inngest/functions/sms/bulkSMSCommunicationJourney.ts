@@ -19,12 +19,12 @@ import { getCountryCodeFromPhoneNumber } from '@/utils/server/sms/utils'
 import { prettyStringify } from '@/utils/shared/prettyLog'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
