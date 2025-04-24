@@ -31,7 +31,7 @@ export function GbHero() {
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Take action">
-              Email your MP to stop unfair banking
+              Email your MP to stop unfair debanking
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
         </Link>
