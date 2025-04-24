@@ -8,14 +8,15 @@ import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import * as messages from '@/utils/server/sms/messages'
-import { isPhoneNumberCountrySupported } from '@/utils/server/sms/utils'
+import { getSMSMessages } from '@/utils/server/sms/messages'
+import { getCountryCodeFromPhoneNumber } from '@/utils/server/sms/utils'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 
 export async function optInUser({
   phoneNumber,
@@ -26,9 +27,13 @@ export async function optInUser({
   user: User
   countryCode?: SupportedCountryCodes
 }): Promise<SMSStatus> {
+  const smsMessages = getSMSMessages(countryCode)
+
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode)
 
-  if (!isPhoneNumberCountrySupported(normalizedPhoneNumber, countryCode)) {
+  const phoneNumberCountryCode = getCountryCodeFromPhoneNumber(normalizedPhoneNumber, countryCode)
+
+  if (!phoneNumberCountryCode || !isSmsSupportedInCountry(phoneNumberCountryCode)) {
     return SMSStatus.NOT_OPTED_IN
   }
 
@@ -68,7 +73,7 @@ export async function optInUser({
               {
                 campaignName: 'default',
                 journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                body: messages.WELCOME_MESSAGE,
+                body: smsMessages.welcomeMessage,
               },
             ],
           },
@@ -111,6 +116,8 @@ export async function optOutUser({
   user?: User | null
   countryCode?: SupportedCountryCodes
 }) {
+  const smsMessages = getSMSMessages(countryCode)
+
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode)
 
   if (user?.smsStatus === SMSStatus.OPTED_OUT) return user.smsStatus
@@ -136,7 +143,7 @@ export async function optOutUser({
             messages: [
               {
                 journeyType: UserCommunicationJourneyType.GOODBYE_SMS,
-                body: messages.GOODBYE_MESSAGE,
+                body: smsMessages.goodbyeMessage,
                 campaignName: 'default',
               },
             ],
@@ -180,6 +187,8 @@ export async function optUserBackIn({
   user?: User | null
   countryCode?: SupportedCountryCodes
 }) {
+  const smsMessages = getSMSMessages(countryCode)
+
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber, countryCode)
 
   if (user?.smsStatus !== SMSStatus.OPTED_OUT) return user?.smsStatus
@@ -205,7 +214,7 @@ export async function optUserBackIn({
             messages: [
               {
                 journeyType: UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
-                body: messages.UNSTOP_CONFIRMATION_MESSAGE,
+                body: smsMessages.unstopConfirmationMessage,
                 campaignName: 'default',
               },
             ],

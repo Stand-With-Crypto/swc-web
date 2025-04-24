@@ -7,8 +7,16 @@ import twilio from 'twilio'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
 import { identifyIncomingKeyword } from '@/utils/server/sms/identifyIncomingKeyword'
-import * as messages from '@/utils/server/sms/messages'
-import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
+import { getSMSMessages } from '@/utils/server/sms/messages'
+import {
+  getCountryCodeFromPhoneNumber,
+  getUserByPhoneNumber,
+  verifySignature,
+} from '@/utils/server/sms/utils'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 interface SMSMessageEvent {
   ToCountry: string
@@ -56,7 +64,13 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
+  const phoneNumberCountryCode = (user?.countryCode ??
+    getCountryCodeFromPhoneNumber(phoneNumber) ??
+    DEFAULT_SUPPORTED_COUNTRY_CODE) as SupportedCountryCodes
+
   const keyword = identifyIncomingKeyword(body.Body)
+
+  const smsMessages = getSMSMessages(phoneNumberCountryCode)
 
   let message = ''
 
@@ -69,7 +83,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     await smsActions.optUserBackIn({ phoneNumber, user })
   } else if (keyword?.isHelpKeyword) {
     // We don't want to track this message, so we can just reply with twilio
-    message = messages.HELP_MESSAGE
+    message = smsMessages.helpMessage
   } else if (keyword?.isUnidentifiedKeyword) {
     Sentry.captureMessage(`Unable to identify keyword`, {
       extra: {

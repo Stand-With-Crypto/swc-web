@@ -11,7 +11,7 @@ import { optOutUser } from '@/utils/server/sms/actions'
 import {
   countSegments,
   getUserByPhoneNumber,
-  isPhoneNumberCountrySupported,
+  getCountryCodeFromPhoneNumber,
 } from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getLogger } from '@/utils/shared/logger'
@@ -20,6 +20,7 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 
 export const ENQUEUE_SMS_INNGEST_EVENT_NAME = 'app/enqueue.sms'
 const ENQUEUE_SMS_INNGEST_FUNCTION_ID = 'app.enqueue-sms'
@@ -166,7 +167,9 @@ export async function enqueueMessages(
 
   const enqueueMessagesPromise = payload
     .map(async ({ messages, phoneNumber }) => {
-      if (!isPhoneNumberCountrySupported(phoneNumber, countryCode)) {
+      const phoneNumberCountryCode = getCountryCodeFromPhoneNumber(phoneNumber)
+
+      if (!phoneNumberCountryCode || !isSmsSupportedInCountry(phoneNumberCountryCode)) {
         return
       }
 
