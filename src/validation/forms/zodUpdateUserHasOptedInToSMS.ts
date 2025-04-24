@@ -14,5 +14,5 @@ export const zodUpdateUserHasOptedInToSMS = (countryCode: SupportedCountryCodes)
         })
       }
     }),
-    optedInToSms: boolean().refine(value => value === true, 'You must opt in to get updates'),
+    optedInToSms: boolean().refine(value => value === true, 'Please check the box to get updates'),
   })
