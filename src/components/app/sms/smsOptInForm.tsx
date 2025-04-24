@@ -180,13 +180,14 @@ SMSOptInForm.Footnote = function SMSOptInFormFootnote({
       render={({ field }) => (
         <label className="block">
           <FormItem>
-            <div className={cn('flex flex-row items-center space-x-3 space-y-0', className)}>
+            <div className={cn('flex flex-row items-start space-x-3 space-y-0', className)}>
               {shouldShowSMSOptInCheckbox && (
                 <FormControl>
                   <Checkbox
                     checked={field.value}
                     onCheckedChange={field.onChange}
                     variant={variant}
+                    className="mt-1"
                   />
                 </FormControl>
               )}

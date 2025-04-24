@@ -291,13 +291,14 @@ export function UpdateUserProfileForm({
                 render={({ field }) => (
                   <label className="block">
                     <FormItem className="mb-4">
-                      <div className="flex flex-row items-center space-x-3 space-y-0">
+                      <div className="flex flex-row items-start space-x-3 space-y-0">
                         {shouldShowSMSOptInCheckbox && (
                           <FormControl>
                             <Checkbox
                               checked={field.value}
                               data-testid="sms-opt-in-checkbox"
                               onCheckedChange={field.onChange}
+                              className="mt-1"
                             />
                           </FormControl>
                         )}

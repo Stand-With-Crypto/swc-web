@@ -2,9 +2,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const SMS_SUPPORTED_COUNTRIES: Record<SupportedCountryCodes, boolean> = {
   [SupportedCountryCodes.US]: true,
-  [SupportedCountryCodes.GB]: false,
+  [SupportedCountryCodes.GB]: true,
   [SupportedCountryCodes.CA]: true,
-  [SupportedCountryCodes.AU]: false,
+  [SupportedCountryCodes.AU]: true,
 }
 
 export const isSmsSupportedInCountry = (countryCode: SupportedCountryCodes | string) => {
