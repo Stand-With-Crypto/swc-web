@@ -1,15 +1,14 @@
+'use server'
+import 'server-only'
+
 import {
-  Address,
   Prisma,
   SMSStatus,
   SupportedUserCryptoNetwork,
   User,
   UserActionType,
-  UserCryptoAddress,
-  UserEmailAddress,
   UserEmailAddressSource,
   UserInformationVisibility,
-  UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { after } from 'next/server'
@@ -23,6 +22,12 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { getOrCreateSessionIdForUser } from '@/utils/server/externalOptIn/getOrCreateSessionIdForUser'
+import {
+  ExternalUserActionOptInResponse,
+  ExternalUserActionOptInResult,
+  Input,
+  UserWithRelations,
+} from '@/utils/server/externalOptIn/types'
 import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
@@ -46,32 +51,8 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
-import { getZodExternalUserActionOptInSchema } from '@/validation/userActionOptIn/zodExternalUserActionOptIn'
 
 const logger = getLogger('handleExternalUserActionOptIn')
-
-export enum ExternalUserActionOptInResult {
-  NEW_ACTION = 'new-action',
-  EXISTING_ACTION = 'existing-action',
-}
-
-type UserWithRelations = User & {
-  userEmailAddresses: UserEmailAddress[]
-  userCryptoAddresses: UserCryptoAddress[]
-  userSessions: Array<UserSession>
-  address?: Address | null
-}
-
-type Input = z.infer<ReturnType<typeof getZodExternalUserActionOptInSchema>> & {
-  partner?: VerifiedSWCPartner
-}
-
-export type ExternalUserActionOptInResponse<ResultOptions extends string> = {
-  result: ResultOptions
-  resultOptions: ResultOptions[]
-  sessionId: string
-  userId: string
-}
 
 const actionType = UserActionType.OPT_IN
 const campaignId = getCapitolCanaryCampaignID(CapitolCanaryCampaignName.ONE_CLICK_NATIVE_SUBSCRIBER)
