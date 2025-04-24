@@ -1,5 +1,5 @@
 import { parsePhoneNumberWithError } from 'libphonenumber-js/core'
-import phoneNumberMetadata from 'libphonenumber-js/max/metadata'
+import phoneNumberMetadata from 'libphonenumber-js/mobile/metadata'
 
 import { getLogger } from '@/utils/shared/logger'
 import { SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE } from '@/utils/shared/phoneNumber'
