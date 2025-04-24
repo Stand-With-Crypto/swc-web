@@ -61,6 +61,7 @@ export function HeroCTA({
     ) {
       return (
         <SMSOptInCTA
+          darkMode={darkMode}
           onSuccess={({ phoneNumber }) =>
             void profileReq.mutate({
               user: {
@@ -70,7 +71,6 @@ export function HeroCTA({
             })
           }
           user={user}
-          darkMode={darkMode}
         />
       )
     }

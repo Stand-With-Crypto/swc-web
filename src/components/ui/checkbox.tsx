@@ -2,10 +2,10 @@
 
 import * as React from 'react'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
+import { cva, VariantProps } from 'class-variance-authority'
 import { Check } from 'lucide-react'
 
 import { cn } from '@/utils/web/cn'
-import { cva, VariantProps } from 'class-variance-authority'
 
 const checkboxVariantsConfig = {
   variant: {
