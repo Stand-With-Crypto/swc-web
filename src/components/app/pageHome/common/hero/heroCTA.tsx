@@ -30,9 +30,11 @@ function getCountryCTA(countryCode: SupportedCountryCodes) {
 export function HeroCTA({
   countryCode,
   ctaText = getCountryCTA(countryCode),
+  darkMode = false,
 }: {
   countryCode: SupportedCountryCodes
   ctaText?: string
+  darkMode?: boolean
 }) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
@@ -59,9 +61,6 @@ export function HeroCTA({
     ) {
       return (
         <SMSOptInCTA
-          initialValues={{
-            phoneNumber: user.phoneNumber,
-          }}
           onSuccess={({ phoneNumber }) =>
             void profileReq.mutate({
               user: {
@@ -70,6 +69,8 @@ export function HeroCTA({
               },
             })
           }
+          user={user}
+          darkMode={darkMode}
         />
       )
     }

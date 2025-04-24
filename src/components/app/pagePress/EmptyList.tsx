@@ -51,9 +51,6 @@ function EmptyListCTA() {
         </p>
 
         <SMSOptInForm
-          initialValues={{
-            phoneNumber: user?.phoneNumber ?? '',
-          }}
           onSuccess={({ phoneNumber }) =>
             void profileReq.mutate({
               user: {
@@ -62,12 +59,13 @@ function EmptyListCTA() {
               },
             })
           }
+          user={user}
         >
           {({ form }) => (
             <div className="space-y-2">
-              <div className="flex flex-col items-center gap-4">
+              <div className="flex max-w-[400px] flex-col items-center gap-4">
                 <SMSOptInForm.PhoneNumberField
-                  className="w-full max-w-[400px]"
+                  className="w-full"
                   disabled={user.smsStatus !== SMSStatus.NOT_OPTED_IN}
                 />
 
@@ -127,10 +125,8 @@ function SMSStatusFooter({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <SMSOptInForm.SubmitButton disabled={isSubmitting} variant="secondary">
-        Get updates
-      </SMSOptInForm.SubmitButton>
-      <SMSOptInForm.Footnote className="w-full max-w-xl text-center text-xs" />
+      <SMSOptInForm.Footnote className="w-full max-w-xl" size="xs" />
+      <SMSOptInForm.SubmitButton disabled={isSubmitting} variant="secondary" />
     </div>
   )
 }

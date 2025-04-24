@@ -1,8 +1,9 @@
 'use client'
 
-import { ComponentProps, useEffect } from 'react'
-import { useForm, useFormContext } from 'react-hook-form'
+import { ComponentProps, useEffect, useMemo } from 'react'
+import { useForm, useFormContext, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { cva } from 'class-variance-authority'
 import type { ClassValue } from 'clsx'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
@@ -11,11 +12,23 @@ import {
   actionUpdateUserHasOptedInToSMS,
   UpdateUserHasOptedInToSMSPayload,
 } from '@/actions/actionUpdateUserHasOptedInSMS'
+import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { SMSOptInConsentText } from '@/components/app/sms/smsOptInConsentText'
 import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormErrorMessage,
+  FormField,
+  FormItem,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
+import { requiresOptInConfirmation } from '@/utils/shared/sms/smsSupportedCountries'
+import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
@@ -23,7 +36,7 @@ import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHa
 const FORM_NAME = 'SMS opt in form'
 
 export interface SMSOptInFormProps extends Omit<ComponentProps<'form'>, 'children'> {
-  initialValues?: UpdateUserHasOptedInToSMSPayload
+  user: GetUserFullProfileInfoResponse['user']
   onSuccess?: (formValues: UpdateUserHasOptedInToSMSPayload) => void
   children: (props: {
     form: ReturnType<typeof useForm<UpdateUserHasOptedInToSMSPayload>>
@@ -31,14 +44,17 @@ export interface SMSOptInFormProps extends Omit<ComponentProps<'form'>, 'childre
 }
 
 export function SMSOptInForm(props: SMSOptInFormProps) {
-  const { initialValues, onSuccess, children, ...rest } = props
+  const { user, onSuccess, children, ...rest } = props
 
   const countryCode = useCountryCode()
   const router = useRouter()
 
   const form = useForm<UpdateUserHasOptedInToSMSPayload>({
     resolver: zodResolver(zodUpdateUserHasOptedInToSMS(countryCode)),
-    defaultValues: initialValues,
+    defaultValues: {
+      phoneNumber: user?.phoneNumber || '',
+      optedInToSms: userHasOptedInToSMS(user),
+    },
   })
 
   return (
@@ -124,11 +140,80 @@ SMSOptInForm.SubmitButton = function SMSOptInFormSubmitButton({
   )
 }
 
-SMSOptInForm.Footnote = function SMSOptInFormFootnote({ className }: { className?: ClassValue }) {
+SMSOptInForm.Footnote = function SMSOptInFormFootnote({
+  className,
+  consentButtonText = 'Get updates',
+  size = 'sm',
+  textAlign = 'auto',
+  variant = 'default',
+}: {
+  className?: ClassValue
+  consentButtonText?: string
+  size?: 'xs' | 'sm' | 'md' | 'lg'
+  /**
+   * @default 'auto'
+   * @description If 'auto', the text will be aligned to the left if the country requires opt-in confirmation, otherwise it will be centered.
+   */
+  textAlign?: 'left' | 'center' | 'auto'
+  variant?: 'default' | 'muted'
+}) {
+  const { control, setValue } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
+
+  const countryCode = useCountryCode()
+
+  const phoneNumber = useWatch({ control, name: 'phoneNumber' })
+
+  const shouldShowSMSOptInCheckbox = useMemo(
+    () => requiresOptInConfirmation(countryCode),
+    [countryCode],
+  )
+
+  useEffect(() => {
+    if (!shouldShowSMSOptInCheckbox) {
+      setValue('optedInToSms', !!phoneNumber)
+    }
+  }, [shouldShowSMSOptInCheckbox, phoneNumber, setValue])
+
   return (
-    <p className={cn('text-sm text-fontcolor-muted', className)}>
-      By clicking Get updates, I consent to receive recurring texts from Stand with Crypto. You can
-      reply STOP to stop receiving texts. Message and data rates may apply.
-    </p>
+    <FormField
+      control={control}
+      name="optedInToSms"
+      render={({ field }) => (
+        <label className="block">
+          <FormItem>
+            <div className={cn('flex flex-row items-center space-x-3 space-y-0', className)}>
+              {shouldShowSMSOptInCheckbox && (
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    variant={variant}
+                  />
+                </FormControl>
+              )}
+              <FormDescription
+                className={cn({
+                  'text-xs': size === 'xs',
+                  'text-sm': size === 'sm',
+                  'text-base': size === 'md',
+                  'text-lg': size === 'lg',
+                  'text-left':
+                    textAlign === 'left' || (shouldShowSMSOptInCheckbox && textAlign === 'auto'),
+                  'text-center':
+                    textAlign === 'center' || (!shouldShowSMSOptInCheckbox && textAlign === 'auto'),
+                  'text-muted': variant === 'muted',
+                })}
+              >
+                <SMSOptInConsentText
+                  consentButtonText={consentButtonText}
+                  countryCode={countryCode}
+                />
+              </FormDescription>
+            </div>
+            <FormErrorMessage />
+          </FormItem>
+        </label>
+      )}
+    />
   )
 }
