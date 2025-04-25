@@ -54,6 +54,7 @@ export function HomepagePoliticiansSection({
                 cryptoStanceGrade={CryptoStanceGrade}
                 key={person.id}
                 person={person}
+                shouldHideStanceScores={false}
                 subheader="role-w-state"
               />
             ))}
@@ -72,6 +73,7 @@ export function HomepagePoliticiansSection({
                 cryptoStanceGrade={CryptoStanceGrade}
                 key={person.id}
                 person={person}
+                shouldHideStanceScores={false}
                 subheader="role-w-state"
               />
             ))}
