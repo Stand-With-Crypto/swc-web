@@ -89,6 +89,7 @@ export function PledgeSection({
                 <PledgeSectionWrapper>
                   <DTSIPersonHeroCardSection
                     countryCode={countryCode}
+                    shouldHideStanceScores={false}
                     {...dtsiPersonHeroCardSectionProps}
                     people={presidential}
                     title="Presidential Election"
@@ -102,6 +103,7 @@ export function PledgeSection({
                   <PledgeSectionWrapper>
                     <DTSIPersonHeroCardSection
                       countryCode={countryCode}
+                      shouldHideStanceScores={false}
                       {...dtsiPersonHeroCardSectionProps}
                       people={senate}
                       title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
@@ -116,6 +118,7 @@ export function PledgeSection({
                   <PledgeSectionWrapper>
                     <DTSIPersonHeroCardSection
                       countryCode={countryCode}
+                      shouldHideStanceScores={false}
                       {...dtsiPersonHeroCardSectionProps}
                       people={congressional}
                       title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}

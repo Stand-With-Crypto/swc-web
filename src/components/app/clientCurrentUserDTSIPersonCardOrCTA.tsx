@@ -97,6 +97,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
             cryptoStanceGrade={DTSIFormattedLetterGrade}
             key={person.id}
             person={person}
+            shouldHideStanceScores={false}
             subheader="role"
           />
         ))}

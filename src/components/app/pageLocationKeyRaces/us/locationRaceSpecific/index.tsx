@@ -163,6 +163,7 @@ export function USLocationRaceSpecific({
                       cryptoStanceGrade={DTSIFormattedLetterGrade}
                       isRecommended={isRecommended}
                       person={person}
+                      shouldHideStanceScores={false}
                       subheader="role"
                     />
                   </div>

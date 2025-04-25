@@ -44,6 +44,7 @@ const COMMON_ROLE_DISPLAY_NAME_MAP = {
   [DTSI_PersonRoleCategory.PRESIDENT]: 'President',
   [DTSI_PersonRoleCategory.SENATE]: 'Senator',
   [DTSI_PersonRoleCategory.VICE_PRESIDENT]: 'Vice President',
+  [DTSI_PersonRoleCategory.ATTORNEY_GENERAL]: 'Attorney General',
   [DTSI_PersonRoleCategory.GOVERNOR]: 'Governor',
   [DTSI_PersonRoleCategory.MAYOR]: 'Mayor',
 }
@@ -149,6 +150,10 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
       return <>Rep{stateStr}</>
     case DTSI_PersonRoleCategory.PRESIDENT:
       return 'President'
+    case DTSI_PersonRoleCategory.GOVERNOR:
+      return <>Governor{stateStr}</>
+    case DTSI_PersonRoleCategory.ATTORNEY_GENERAL:
+      return <>Attorney General{stateStr}</>
     case DTSI_PersonRoleCategory.SENATE:
       return <>Senator{stateStr}</>
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
@@ -167,9 +172,10 @@ export const getDTSIPersonRoleLocation = (
     'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState' | 'roleCategory'
   >,
 ) => {
-  // TODO: Understand how to handle intl cases here
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
+    case DTSI_PersonRoleCategory.ATTORNEY_GENERAL:
+    case DTSI_PersonRoleCategory.GOVERNOR:
     case DTSI_PersonRoleCategory.PRESIDENT:
     case DTSI_PersonRoleCategory.SENATE:
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
