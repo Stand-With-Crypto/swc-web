@@ -19,6 +19,10 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
+      href: urls.politiciansHomepage(),
+      text: 'Politician scores',
+    },
+    {
       href: urls.press(),
       text: 'Press',
     },
@@ -27,12 +31,13 @@ export const navbarConfig: NavbarProps = {
       text: 'Polls',
     },
     {
-      href: urls.manifesto(),
-      text: 'Manifesto',
-    },
-    {
       text: 'Resources',
       children: [
+        {
+          href: urls.manifesto(),
+          text: 'Manifesto',
+          icon: <Icons.MissionIcon />,
+        },
         {
           href: urls.community(),
           text: 'Community',
