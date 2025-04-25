@@ -19,10 +19,6 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
-      href: urls.locationKeyRaces(),
-      text: 'Races',
-    },
-    {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
     },
@@ -35,12 +31,13 @@ export const navbarConfig: NavbarProps = {
       text: 'Polls',
     },
     {
-      href: urls.manifesto(),
-      text: 'Manifesto',
-    },
-    {
       text: 'Resources',
       children: [
+        {
+          href: urls.manifesto(),
+          text: 'Manifesto',
+          icon: <Icons.MissionIcon />,
+        },
         {
           href: urls.community(),
           text: 'Community',
