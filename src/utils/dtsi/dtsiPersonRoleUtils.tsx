@@ -69,15 +69,33 @@ export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
       )
     },
     [SupportedCountryCodes.AU]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
-      if (role.status !== DTSI_PersonRoleStatus.HELD || auGetIsRoleInFuture(role)) {
-        return 'Candidate'
-      }
-      const roleDisplayNames = {
+      const currentRoleDisplayName = {
+        ...COMMON_ROLE_DISPLAY_NAME_MAP,
         [DTSI_PersonRoleCategory.CONGRESS]: 'Member of Parliament',
         [DTSI_PersonRoleCategory.HOUSE_OF_COMMONS]: 'House of Representatives Member',
-        ...COMMON_ROLE_DISPLAY_NAME_MAP,
       }
-      return roleDisplayNames[role.roleCategory as keyof typeof roleDisplayNames] || 'Candidate'
+
+      const runningForRoleDisplayName = {
+        ...COMMON_ROLE_DISPLAY_NAME_MAP,
+        [DTSI_PersonRoleCategory.CONGRESS]: 'Candidate',
+        [DTSI_PersonRoleCategory.SENATE]: 'Senate Candidate',
+      }
+
+      if (role.status === DTSI_PersonRoleStatus.HELD) {
+        return (
+          currentRoleDisplayName[role.roleCategory as keyof typeof currentRoleDisplayName] ||
+          'Candidate'
+        )
+      }
+
+      if (role.status === DTSI_PersonRoleStatus.RUNNING_FOR || auGetIsRoleInFuture(role)) {
+        return (
+          runningForRoleDisplayName[role.roleCategory as keyof typeof runningForRoleDisplayName] ||
+          'Candidate'
+        )
+      }
+
+      return 'Candidate'
     },
     [SupportedCountryCodes.CA]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
       if (role.status !== DTSI_PersonRoleStatus.HELD || caGetIsRoleInFuture(role)) {
