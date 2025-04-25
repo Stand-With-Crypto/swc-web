@@ -57,6 +57,8 @@ export const getPersonDataTableFilterFns = (): Record<
   },
 
   [PERSON_TABLE_COLUMNS_IDS.ROLE]: (row, _columnId, filterValue, _addMeta) => {
+    const personRoleCategory = row.original.primaryRole?.roleCategory
+    const personRoleStatus = row.original.primaryRole?.status
     switch (filterValue as (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]) {
       case ROLE_OPTIONS.ALL:
         return true
@@ -65,20 +67,19 @@ export const getPersonDataTableFilterFns = (): Record<
       case ROLE_OPTIONS.GOVERNOR:
       case ROLE_OPTIONS.ATTORNEY_GENERAL:
         return !!(
-          filterValue === row.original.primaryRole?.roleCategory &&
-          row.original.primaryRole?.status === DTSI_PersonRoleStatus.HELD
+          filterValue === personRoleCategory && personRoleStatus === DTSI_PersonRoleStatus.HELD
         )
       case ROLE_OPTIONS.EXECUTIVE:
         return !!(
-          row.original.primaryRole?.roleCategory &&
+          personRoleCategory &&
           [DTSI_PersonRoleCategory.PRESIDENT, DTSI_PersonRoleCategory.VICE_PRESIDENT].includes(
-            row.original.primaryRole?.roleCategory,
+            personRoleCategory,
           ) &&
-          row.original.primaryRole?.status === DTSI_PersonRoleStatus.HELD
+          personRoleStatus === DTSI_PersonRoleStatus.HELD
         )
       case ROLE_OPTIONS.ALL_OTHER:
         return !(
-          row.original.primaryRole?.roleCategory &&
+          personRoleCategory &&
           [
             DTSI_PersonRoleCategory.PRESIDENT,
             DTSI_PersonRoleCategory.VICE_PRESIDENT,
@@ -86,8 +87,8 @@ export const getPersonDataTableFilterFns = (): Record<
             DTSI_PersonRoleCategory.CONGRESS,
             DTSI_PersonRoleCategory.GOVERNOR,
             DTSI_PersonRoleCategory.ATTORNEY_GENERAL,
-          ].includes(row.original.primaryRole?.roleCategory) &&
-          row.original.primaryRole?.status === DTSI_PersonRoleStatus.HELD
+          ].includes(personRoleCategory) &&
+          personRoleStatus === DTSI_PersonRoleStatus.HELD
         )
     }
   },
