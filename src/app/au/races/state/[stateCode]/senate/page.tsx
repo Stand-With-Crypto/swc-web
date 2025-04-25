@@ -1,10 +1,13 @@
+import { compact, isEmpty } from 'lodash-es'
 import { Metadata } from 'next'
 
+import { organizeAURaceSpecificPeople } from '@/components/app/pageLocationKeyRaces/au/locationRaceSpecific/organizeRaceSpecificPeople'
 import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
 import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { queryDTSILocationSenateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationSenateSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import {
   AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
@@ -64,14 +67,14 @@ export default async function LocationSenateSpecificPage({
     throw new Error(`Invalid params for LocationSenateSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  // const groups = organizeAURaceSpecificPeople(data.people)
+  const groups = organizeAURaceSpecificPeople(data.people)
   const stateDisplayName = stateCode && AU_STATE_CODE_TO_DISPLAY_NAME_MAP[validatedStateCode]
-  // const { recommended, others } = findRecommendedCandidate(groups)
+  const { recommended, others } = findRecommendedCandidate(groups)
 
-  // const racesData = compact([
-  //   recommended && { person: recommended, isRecommended: true },
-  //   ...others.map(person => ({ person, isRecommended: false })),
-  // ])
+  const racesData = compact([
+    recommended && { person: recommended, isRecommended: true },
+    ...others.map(person => ({ person, isRecommended: false })),
+  ])
 
   return (
     <LocationRaces disableVerticalSpacing>
@@ -103,7 +106,7 @@ export default async function LocationSenateSpecificPage({
         <DarkHeroSection.Title>{stateDisplayName} Australian Senate Race</DarkHeroSection.Title>
       </DarkHeroSection>
 
-      {/* <LocationRaces.DetailedCandidateListContainer>
+      <LocationRaces.DetailedCandidateListContainer>
         {isEmpty(racesData) ? (
           <LocationRaces.EmptyMessage gutterTop>
             There's no key races currently in {stateDisplayName}
@@ -115,10 +118,11 @@ export default async function LocationSenateSpecificPage({
               isRecommended={race.isRecommended}
               key={race.person.id}
               person={race.person}
+              shouldHideStanceScores={false}
             />
           ))
         )}
-      </LocationRaces.DetailedCandidateListContainer> */}
+      </LocationRaces.DetailedCandidateListContainer>
     </LocationRaces>
   )
 }
