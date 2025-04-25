@@ -1,21 +1,18 @@
 import { isEmpty } from 'lodash-es'
 
-import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
-import { InternalLink } from '@/components/ui/link'
 import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { AUStateCode, getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 
+// import { getIntlUrls } from '@/utils/shared/urls'
 import { organizeAUStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: AUStateCode
 }
 
-const countryCode = SupportedCountryCodes.AU
-const urls = getIntlUrls(countryCode)
+// const countryCode = SupportedCountryCodes.AU
+// const urls = getIntlUrls(countryCode)
 
 export function AULocationStateSpecific({ stateCode, congress }: LocationStateSpecificProps) {
   const groups = organizeAUStateSpecificPeople(congress)
@@ -32,7 +29,7 @@ export function AULocationStateSpecific({ stateCode, congress }: LocationStateSp
   return (
     <div className="space-y-20">
       <div className="mt-20">
-        <DTSIPersonHeroCardSection
+        {/* <DTSIPersonHeroCardSection
           countryCode={countryCode}
           cta={
             <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
@@ -41,7 +38,7 @@ export function AULocationStateSpecific({ stateCode, congress }: LocationStateSp
           }
           people={groups.senators}
           title={<>Australian Senate Race ({stateCode})</>}
-        />
+        /> */}
       </div>
     </div>
   )
