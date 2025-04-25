@@ -7,7 +7,6 @@ import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { AUStateCode, getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { AUUserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 
 import { organizeAUStateSpecificPeople } from './organizeStateSpecificPeople'
 
@@ -22,36 +21,28 @@ export function AULocationStateSpecific({ stateCode, congress }: LocationStateSp
   const groups = organizeAUStateSpecificPeople(congress)
   const stateName = getAUStateNameFromStateCode(stateCode)
 
-  return (
-    <>
-      <LocationRaces.ActionRegisterer
-        input={{
-          campaignName: AUUserActionViewKeyRacesCampaignName['H1_2025'],
-          countryCode,
-          stateCode,
-        }}
-      />
+  if (isEmpty(groups.senators)) {
+    return (
+      <LocationRaces.EmptyMessage gutterTop>
+        There's no key races currently in {stateName}
+      </LocationRaces.EmptyMessage>
+    )
+  }
 
-      {isEmpty(groups.senators) ? (
-        <LocationRaces.EmptyMessage gutterTop>
-          There's no key races currently in {stateName}
-        </LocationRaces.EmptyMessage>
-      ) : (
-        <div className="space-y-20">
-          <div className="mt-20">
-            <DTSIPersonHeroCardSection
-              countryCode={countryCode}
-              cta={
-                <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
-                  View Race
-                </InternalLink>
-              }
-              people={groups.senators}
-              title={<>Australian Senate Race ({stateCode})</>}
-            />
-          </div>
-        </div>
-      )}
-    </>
+  return (
+    <div className="space-y-20">
+      <div className="mt-20">
+        <DTSIPersonHeroCardSection
+          countryCode={countryCode}
+          cta={
+            <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+              View Race
+            </InternalLink>
+          }
+          people={groups.senators}
+          title={<>Australian Senate Race ({stateCode})</>}
+        />
+      </div>
+    </div>
   )
 }

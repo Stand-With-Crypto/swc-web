@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function LocationAustraliaPage() {
-  const [countAdvocates] = await Promise.all([prismaClient.user.count({ where: { countryCode } })])
+  const countAdvocates = await prismaClient.user.count({ where: { countryCode } })
 
   return (
     <LocationRaces>

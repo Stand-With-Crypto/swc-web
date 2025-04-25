@@ -14,7 +14,7 @@ export function organizeAUStateSpecificPeople(
 
   const sortPeople = (a: (typeof formatted)[number], b: (typeof formatted)[number]) => {
     /**
-     * Sorting by profoile picture first because most candidates do not have a profile picture
+     * Sorting by profile picture first because most candidates do not have a profile picture
      */
     if (a.profilePictureUrl !== b.profilePictureUrl) {
       return a.profilePictureUrl ? -1 : 1
