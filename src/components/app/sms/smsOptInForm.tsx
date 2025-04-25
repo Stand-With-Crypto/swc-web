@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentProps, useEffect, useMemo } from 'react'
+import { ComponentProps, createContext, useContext, useEffect, useMemo } from 'react'
 import { useForm, useFormContext, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { ClassValue } from 'clsx'
@@ -28,6 +28,10 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { requiresOptInConfirmation } from '@/utils/shared/sms/smsSupportedCountries'
 import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
@@ -42,14 +46,22 @@ export interface SMSOptInFormProps extends Omit<ComponentProps<'form'>, 'childre
   }) => React.ReactNode
 }
 
+const SMSOptInFormCountryCodeContext = createContext<SupportedCountryCodes>(
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+)
+
 export function SMSOptInForm(props: SMSOptInFormProps) {
   const { user, onSuccess, children, ...rest } = props
 
   const countryCode = useCountryCode()
+  const userCountryCode = user?.countryCode as SupportedCountryCodes | undefined
+
+  const formCountryCode = userCountryCode || countryCode
+
   const router = useRouter()
 
   const form = useForm<UpdateUserHasOptedInToSMSPayload>({
-    resolver: zodResolver(zodUpdateUserHasOptedInToSMS(countryCode)),
+    resolver: zodResolver(zodUpdateUserHasOptedInToSMS(formCountryCode)),
     defaultValues: {
       phoneNumber: user?.phoneNumber || '',
       optedInToSms: userHasOptedInToSMS(user),
@@ -76,9 +88,11 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
         {...rest}
       >
-        {children({
-          form,
-        })}
+        <SMSOptInFormCountryCodeContext.Provider value={formCountryCode}>
+          {children({
+            form,
+          })}
+        </SMSOptInFormCountryCodeContext.Provider>
       </form>
     </Form>
   )
@@ -158,7 +172,7 @@ SMSOptInForm.Footnote = function SMSOptInFormFootnote({
 }) {
   const { control, setValue } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
 
-  const countryCode = useCountryCode()
+  const countryCode = useContext(SMSOptInFormCountryCodeContext)
 
   const phoneNumber = useWatch({ control, name: 'phoneNumber' })
 

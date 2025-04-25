@@ -305,7 +305,7 @@ export function UpdateUserProfileForm({
                         <FormDescription className="text-left">
                           <SMSOptInConsentText
                             consentButtonText={'Next'}
-                            countryCode={countryCode}
+                            countryCode={user.countryCode as SupportedCountryCodes}
                           />
                         </FormDescription>
                       </div>
