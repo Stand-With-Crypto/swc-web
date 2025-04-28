@@ -35,6 +35,8 @@ export interface DTSIPersonHeroCardProps {
   forceMobile?: boolean
   target?: React.HTMLAttributeAnchorTarget
   shouldHideStanceScores: boolean
+  className?: string
+  wrapperClassName?: string
 }
 
 function getSubHeaderString(props: DTSIPersonHeroCardProps) {
@@ -91,6 +93,8 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
     cryptoStanceGrade: CryptoStanceGrade,
     target,
     shouldHideStanceScores,
+    className,
+    wrapperClassName,
   } = props
   const politicalAffiliationCategoryAbbreviation =
     person.politicalAffiliationCategory &&
@@ -100,10 +104,11 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
   const politicalAbbrDisplayName = politicalAffiliationCategoryAbbreviation
     ? ` (${politicalAffiliationCategoryAbbreviation})`
     : ''
-  const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
+  const displayName = `${dtsiPersonFullName(person)}`
 
   return (
     <DtsiPersonHeroCardWrapper
+      className={wrapperClassName}
       countryCode={countryCode}
       forceMobile={forceMobile}
       isClickable={isClickable}
@@ -116,6 +121,7 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
             'relative h-36 w-36 shrink-0',
             person.profilePictureUrl || 'bg-black',
             !forceMobile && 'sm:h-52 sm:w-52 xl:h-72 xl:w-72',
+            className,
           )}
         >
           {person.profilePictureUrl ? (
@@ -139,7 +145,7 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
           {/* Hidden on mobile */}
           <div
             className={cn(
-              'absolute bottom-0 left-0 right-0 flex items-end justify-between gap-2 px-3 pb-3 pt-16',
+              'absolute bottom-0 left-0 right-0 flex flex-col px-3 pb-3 pt-16',
               forceMobile ? 'hidden' : 'max-sm:hidden',
             )}
             style={{
@@ -147,14 +153,13 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
             }}
           >
             <div className="flex flex-grow flex-col justify-end overflow-hidden">
-              {' '}
               <div
-                className={cn(
-                  'block truncate text-sm font-bold text-white',
-                  !forceMobile && 'lg:text-base',
-                )}
+                className={cn('flex flex-row gap-1 text-sm font-bold text-white', {
+                  'lg:text-base': !forceMobile,
+                })}
               >
-                {displayName}
+                <span className={cn('truncate')}>{displayName}</span>
+                <span>{politicalAbbrDisplayName}</span>
               </div>
               {!shouldHideStanceScores && (
                 <div className="text-xs text-white">
@@ -162,6 +167,9 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
                   {pluralize({ count: person.stanceCount || 0, singular: 'statement' })}
                 </div>
               )}
+            </div>
+
+            <div className="flex items-center gap-0.5">
               {subheaderString && (
                 <div className="mt-2">
                   <div
@@ -174,12 +182,13 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
                   </div>
                 </div>
               )}
+
+              {!shouldHideStanceScores && (
+                <div className="ml-auto h-12 w-10 flex-shrink-0">
+                  <CryptoStanceGrade className="h-full w-full" person={person} />
+                </div>
+              )}
             </div>
-            {!shouldHideStanceScores && (
-              <div className="ml-auto h-12 w-10 flex-shrink-0">
-                <CryptoStanceGrade className="h-full w-full" person={person} />
-              </div>
-            )}
           </div>
         </div>
 
@@ -236,6 +245,7 @@ export function DtsiPersonHeroCardWrapper({
   children,
   forceMobile = false,
   target = '_self',
+  className,
 }: {
   isClickable: boolean
   children: ReactNode
@@ -243,8 +253,9 @@ export function DtsiPersonHeroCardWrapper({
   countryCode: SupportedCountryCodes
   forceMobile?: boolean
   target?: React.HTMLAttributeAnchorTarget
+  className?: string
 }) {
-  const className = cn(
+  const wrapperClassName = cn(
     'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline ',
     !isClickable && 'hover:cursor-default',
     forceMobile
@@ -253,12 +264,12 @@ export function DtsiPersonHeroCardWrapper({
   )
 
   if (!isClickable) {
-    return <div className={className}>{children}</div>
+    return <div className={cn(wrapperClassName, className)}>{children}</div>
   }
 
   return (
     <InternalLink
-      className={className}
+      className={cn(wrapperClassName, className)}
       href={getIntlUrls(countryCode).politicianDetails(person.slug)}
       target={target}
     >

@@ -24,7 +24,12 @@ const HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH = [
   'chris---vanhollen',
 ]
 
-const ROLE_PRIORITY = [DTSI_PersonRoleCategory.CONGRESS, DTSI_PersonRoleCategory.SENATE]
+const ROLE_PRIORITY = [
+  DTSI_PersonRoleCategory.GOVERNOR,
+  DTSI_PersonRoleCategory.ATTORNEY_GENERAL,
+  DTSI_PersonRoleCategory.CONGRESS,
+  DTSI_PersonRoleCategory.SENATE,
+]
 
 /*
 
