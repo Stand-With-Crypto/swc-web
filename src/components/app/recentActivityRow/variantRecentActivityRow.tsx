@@ -1,7 +1,9 @@
 'use client'
 import React from 'react'
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
+import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/[countryCode]/performed-user-action-types/route'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
 import { RecentActivityRowMainText as MainText } from '@/components/app/recentActivityRow/mainText'
@@ -12,6 +14,7 @@ import {
 import { viewKeyPageRecentActivityRow } from '@/components/app/recentActivityRow/viewKeyPageRecentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -64,6 +67,11 @@ const getSWCDisplayText = () => (
   </>
 )
 
+const hasTakenAction = (
+  actionType: UserActionType,
+  performedUserActionTypes?: GetUserPerformedUserActionTypesResponse['performedUserActionTypes'],
+) => performedUserActionTypes?.some(performedAction => performedAction.actionType === actionType)
+
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   countryCode,
@@ -75,9 +83,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const { userLocationDetails } = action.user
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
   const { data } = useApiResponseForUserPerformedUserActionTypes()
-  const hasSignedUp = data?.performedUserActionTypes.some(
-    performedAction => performedAction.actionType === UserActionType.OPT_IN,
-  )
+
+  const hasSignedUp = hasTakenAction(UserActionType.OPT_IN, data?.performedUserActionTypes)
+  const hasJoinedLinkedIn = hasTakenAction(UserActionType.LINKEDIN, data?.performedUserActionTypes)
+  const hasVotedInPoll = hasTakenAction(UserActionType.POLL, data?.performedUserActionTypes)
+
   const fromStateOrEmpty = isStateAvailable
     ? `from ${userLocationDetails.administrativeAreaLevel1}`
     : ''
@@ -311,7 +321,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.POLL: {
         return {
-          onFocusContent: () => null,
+          onFocusContent: hasVotedInPoll
+            ? undefined
+            : () => (
+                <Button asChild>
+                  <Link href={urls.polls()}>Vote</Link>
+                </Button>
+              ),
           children: <MainText>Someone voted in a poll</MainText>,
         }
       }
@@ -321,6 +337,18 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           campaignName,
           countryCode,
         })
+      }
+      case UserActionType.LINKEDIN: {
+        return {
+          onFocusContent: hasJoinedLinkedIn
+            ? undefined
+            : () => (
+                <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
+                  <Button>Follow</Button>
+                </UserActionFormFollowLinkedInDialog>
+              ),
+          children: <MainText>Someone followed SWC on LinkedIn</MainText>,
+        }
       }
     }
     return gracefullyError({

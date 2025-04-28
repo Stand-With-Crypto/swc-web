@@ -5,6 +5,7 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/
 export const CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.OPT_IN,
   UserActionType.TWEET,
+  UserActionType.LINKEDIN,
   UserActionType.REFER,
   UserActionType.RSVP_EVENT,
   UserActionType.VIEW_KEY_RACES,
@@ -19,6 +20,11 @@ export type CAActiveClientUserActionWithCampaignType =
 export enum CAUserActionTweetCampaignName {
   DEFAULT = 'DEFAULT',
 }
+
+export enum CAUserActionLinkedInCampaignName {
+  DEFAULT = 'DEFAULT',
+}
+
 export enum CAUserActionReferCampaignName {
   DEFAULT = 'DEFAULT',
 }
@@ -26,6 +32,7 @@ export enum CAUserActionReferCampaignName {
 export enum CAUserActionViewKeyRacesCampaignName {
   H1_2025 = 'H1_2025',
 }
+
 export enum CAUserActionVoterAttestationCampaignName {
   H1_2025 = 'H1_2025',
 }
@@ -48,6 +55,7 @@ export enum CAUserActionPollCampaignName {
 export type CAUserActionCampaignName =
   | UserActionOptInCampaignName
   | CAUserActionTweetCampaignName
+  | CAUserActionLinkedInCampaignName
   | CAUserActionReferCampaignName
   | CAUserActionRsvpEventCampaignName
   | CAUserActionViewKeyRacesCampaignName
@@ -58,6 +66,7 @@ export type CAUserActionCampaignName =
 export type CAUserActionCampaigns = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: CAUserActionTweetCampaignName
+  [UserActionType.LINKEDIN]: CAUserActionLinkedInCampaignName
   [UserActionType.REFER]: CAUserActionReferCampaignName
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName
@@ -69,6 +78,7 @@ export type CAUserActionCampaigns = {
 export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: CAUserActionTweetCampaignName.DEFAULT,
+  [UserActionType.LINKEDIN]: CAUserActionLinkedInCampaignName.DEFAULT,
   [UserActionType.REFER]: CAUserActionReferCampaignName.DEFAULT,
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName.DEFAULT,
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName.H1_2025,

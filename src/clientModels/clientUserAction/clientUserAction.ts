@@ -91,6 +91,8 @@ type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
+// Added here as a placeholder for type inference until we have some linkedin-specific fields
+type ClientUserActionLinkedIn = { actionType: typeof UserActionType.LINKEDIN }
 type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
@@ -152,6 +154,7 @@ export type ClientUserAction = ClientModel<
     nftMint: ClientNFTMint | null
   } & (
       | ClientUserActionTweet
+      | ClientUserActionLinkedIn
       | ClientUserActionOptIn
       | ClientUserActionEmail
       | ClientUserActionCall
@@ -360,6 +363,9 @@ export const getClientUserAction = ({
         actionType: UserActionType.VIEW_KEY_PAGE,
       }
       return getClientModel({ ...sharedProps, ...viewKeyPageFields })
+    },
+    [UserActionType.LINKEDIN]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.LINKEDIN })
     },
   }
 

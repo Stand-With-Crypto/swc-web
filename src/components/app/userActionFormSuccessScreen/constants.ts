@@ -65,4 +65,8 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Omit<
     title: 'You emailed your representatives!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
+  [UserActionType.LINKEDIN]: {
+    title: 'You followed us on LinkedIn!',
+    description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
+  },
 }
