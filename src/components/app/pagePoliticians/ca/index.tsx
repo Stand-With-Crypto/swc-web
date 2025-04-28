@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import { CaDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/ca'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
@@ -17,9 +15,7 @@ export function CaPagePoliticians({ politicians }: { politicians: DTSIPersonData
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <Suspense>
-          <CaDTSIClientPersonDataTable initialData={politicians} />
-        </Suspense>
+        <CaDTSIClientPersonDataTable initialData={politicians} />
       </PagePoliticiansLayout.PoliticiansTableSection>
     </PagePoliticiansLayout>
   )
