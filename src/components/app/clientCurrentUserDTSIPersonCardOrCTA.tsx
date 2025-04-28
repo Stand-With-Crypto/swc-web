@@ -9,6 +9,7 @@ import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -43,7 +44,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA(props: {
   )
 }
 
-const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
+const POLITICIAN_CATEGORY: YourPoliticianCategory = 'legislative-and-executive'
 
 function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
   countryCode,
@@ -76,6 +77,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
   }
   const people = res.data.dtsiPeople
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
+
   return (
     <div>
       <p className="mb-3 text-center text-sm text-fontcolor-muted">
@@ -90,15 +92,20 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
       >
         Your {categoryDisplayName}
       </p>
-      <DTSIPersonHeroCardRow>
+      <DTSIPersonHeroCardRow className="lg:grid lg:grid-cols-[repeat(auto-fit,minmax(0px,1fr))] lg:gap-2 lg:px-0">
         {people.map(person => (
           <DTSIPersonHeroCard
+            className="lg:w-auto xl:w-auto"
             countryCode={countryCode}
             cryptoStanceGrade={DTSIFormattedLetterGrade}
             key={person.id}
             person={person}
-            shouldHideStanceScores={false}
+            shouldHideStanceScores={
+              person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.GOVERNOR ||
+              person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.ATTORNEY_GENERAL
+            }
             subheader="role"
+            wrapperClassName="lg:h-auto lg:w-auto xl:h-auto xl:w-auto"
           />
         ))}
       </DTSIPersonHeroCardRow>
