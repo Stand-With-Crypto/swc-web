@@ -255,6 +255,8 @@ function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) 
         return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
       case 'senate-and-house':
         return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+      case 'legislative-and-executive':
+        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
     }
   }
 
@@ -264,6 +266,8 @@ function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) 
     case 'house':
       return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
     case 'senate-and-house':
+      return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+    case 'legislative-and-executive':
       return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
   }
 }
