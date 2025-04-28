@@ -92,6 +92,8 @@ type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
+// Added here as a placeholder for type inference until we have some linkedin-specific fields
+type SensitiveDataClientUserActionLinkedIn = { actionType: typeof UserActionType.LINKEDIN }
 type SensitiveDataClientUserActionVoterRegistration = Pick<
   UserActionVoterRegistration,
   'usaState'
@@ -158,6 +160,7 @@ export type SensitiveDataClientUserAction = ClientModel<
     countryCode: SupportedCountryCodes
   } & (
       | SensitiveDataClientUserActionTweet
+      | SensitiveDataClientUserActionLinkedIn
       | SensitiveDataClientUserActionOptIn
       | SensitiveDataClientUserActionEmail
       | SensitiveDataClientUserActionCall
@@ -364,6 +367,9 @@ export const getSensitiveDataClientUserAction = ({
         path,
       }
       return getClientModel({ ...sharedProps, ...viewKeyPageFields })
+    },
+    [UserActionType.LINKEDIN]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.LINKEDIN })
     },
   }
 

@@ -21,6 +21,7 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.REFER,
   UserActionType.POLL,
   UserActionType.VIEW_KEY_PAGE,
+  UserActionType.LINKEDIN,
 ] as const
 
 export type USActiveClientUserActionWithCampaignType =
@@ -96,6 +97,9 @@ export enum USUserActionReferCampaignName {
 export enum USUserActionViewKeyPageCampaignName {
   DEFAULT = 'DEFAULT',
 }
+export enum USUserActionLinkedinCampaignName {
+  DEFAULT = 'DEFAULT',
+}
 
 export type USUserActionCampaignName =
   | USUserActionEmailCampaignName
@@ -113,7 +117,7 @@ export type USUserActionCampaignName =
   | USUserActionVotingDayCampaignName
   | USUserActionReferCampaignName
   | USUserActionPollCampaignName
-
+  | USUserActionLinkedinCampaignName
 export type USUserActionCampaigns = {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName
   [UserActionType.CALL]: USUserActionCallCampaignName
@@ -132,6 +136,7 @@ export type USUserActionCampaigns = {
   [UserActionType.REFER]: USUserActionReferCampaignName
   [UserActionType.POLL]: USUserActionPollCampaignName
   [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName
+  [UserActionType.LINKEDIN]: USUserActionLinkedinCampaignName
 }
 
 export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -153,4 +158,5 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.REFER]: USUserActionReferCampaignName.DEFAULT,
   [UserActionType.POLL]: USUserActionPollCampaignName.CRYPTO_NEWS,
   [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName.DEFAULT,
+  [UserActionType.LINKEDIN]: USUserActionLinkedinCampaignName.DEFAULT,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>
