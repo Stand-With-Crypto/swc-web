@@ -19,10 +19,6 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
-      href: urls.politiciansHomepage(),
-      text: 'Politician scores',
-    },
-    {
       href: urls.press(),
       text: 'Press',
     },
