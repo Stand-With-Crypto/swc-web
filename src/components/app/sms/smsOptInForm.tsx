@@ -156,13 +156,11 @@ SMSOptInForm.SubmitButton = function SMSOptInFormSubmitButton({
 SMSOptInForm.Footnote = function SMSOptInFormFootnote({
   className,
   consentButtonText = 'Get updates',
-  size = 'sm',
   textAlign = 'auto',
   variant = 'default',
 }: {
   className?: ClassValue
   consentButtonText?: string
-  size?: 'xs' | 'sm' | 'md' | 'lg'
   /**
    * @default 'auto'
    * @description If 'auto', the text will be aligned to the left if the country requires opt-in confirmation, otherwise it will be centered.
@@ -206,11 +204,7 @@ SMSOptInForm.Footnote = function SMSOptInFormFootnote({
                 </FormControl>
               )}
               <FormDescription
-                className={cn({
-                  'text-xs': size === 'xs',
-                  'text-sm': size === 'sm',
-                  'text-base': size === 'md',
-                  'text-lg': size === 'lg',
+                className={cn('text-xs', {
                   'text-left':
                     textAlign === 'left' || (shouldShowSMSOptInCheckbox && textAlign === 'auto'),
                   'text-center':
@@ -224,7 +218,7 @@ SMSOptInForm.Footnote = function SMSOptInFormFootnote({
                 />
               </FormDescription>
             </div>
-            <FormErrorMessage />
+            {shouldShowSMSOptInCheckbox && <FormErrorMessage />}
           </FormItem>
         </label>
       )}
