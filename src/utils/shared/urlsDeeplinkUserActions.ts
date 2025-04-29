@@ -94,7 +94,12 @@ export const USER_ACTION_DEEPLINK_MAP: {
   },
   [UserActionType.VIEW_KEY_PAGE]: {
     getDeeplinkUrl: ({ countryCode }) => {
-      return `${getIntlPrefix(countryCode)}/content/election`
+      return `${getIntlPrefix(countryCode)}/action/email`
+    },
+  },
+  [UserActionType.LINKEDIN]: {
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/linkedin`
     },
   },
 }

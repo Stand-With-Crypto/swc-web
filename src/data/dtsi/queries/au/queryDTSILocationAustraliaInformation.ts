@@ -33,6 +33,7 @@ export const queryDTSILocationAustraliaInformation = async () => {
   const keyRaces = flatten(Object.values(results))
   return {
     keyRaces,
+    auSenate: results.auSenate,
   }
 }
 

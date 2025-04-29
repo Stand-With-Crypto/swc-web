@@ -1,4 +1,9 @@
-import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import {
+  DTSI_Person,
+  DTSI_PersonPoliticalAffiliationCategory,
+  DTSI_PersonRole,
+  DTSI_PersonRoleCategory,
+} from '@/data/dtsi/generated'
 
 export const dtsiPersonFullName = (
   person: Pick<DTSI_Person, 'firstName' | 'lastName' | 'firstNickname' | 'nameSuffix'>,
@@ -71,121 +76,21 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
   }
 }
 
-const hideStanceSlugs = [
-  {
-    isCongressperson: true,
-    slug: 'josh---gottheimer',
-  },
-  {
-    isCongressperson: true,
-    slug: 'mikie---sherrill',
-  },
-  {
-    isCongressperson: false,
-    slug: 'edward---durr',
-  },
-  {
-    isCongressperson: false,
-    slug: 'bill---spadea',
-  },
-  {
-    isCongressperson: false,
-    slug: 'hans---herberg',
-  },
-  {
-    isCongressperson: false,
-    slug: 'jack---ciattarelli',
-  },
-  {
-    isCongressperson: false,
-    slug: 'sean---spiller',
-  },
-  {
-    isCongressperson: false,
-    slug: 'roger--bacon',
-  },
-  {
-    isCongressperson: false,
-    slug: 'stephen---sweeney',
-  },
-  {
-    isCongressperson: false,
-    slug: 'ras---baraka',
-  },
-  {
-    isCongressperson: false,
-    slug: 'robert---canfield',
-  },
-  {
-    isCongressperson: false,
-    slug: 'justin---barbera',
-  },
-  {
-    isCongressperson: false,
-    slug: 'jon---bramnick',
-  },
-  {
-    isCongressperson: false,
-    slug: 'steven---fulop',
-  },
-  {
-    isCongressperson: false,
-    slug: 'james---fazzone',
-  },
-  {
-    isCongressperson: false,
-    slug: 'stephen---zielinski',
-  },
-  {
-    isCongressperson: false,
-    slug: 'joanne---kuniansky',
-  },
-  {
-    isCongressperson: false,
-    slug: 'karen---zaletel',
-  },
-  {
-    isCongressperson: false,
-    slug: 'monica---brinson',
-  },
-  {
-    isCongressperson: false,
-    slug: 'mario---kranjac',
-  },
-  {
-    isCongressperson: false,
-    slug: 'gerardo---cedrone',
-  },
-  {
-    isCongressperson: false,
-    slug: 'abigail---spanberger',
-  },
-  {
-    isCongressperson: false,
-    slug: 'dave---larock',
-  },
-  {
-    isCongressperson: false,
-    slug: 'merle---rutledge',
-  },
-  {
-    isCongressperson: false,
-    slug: 'winsome---earle-sears',
-  },
-  {
-    isCongressperson: false,
-    slug: 'amanda---chase',
-  },
-  {
-    isCongressperson: false,
-    slug: 'andrew---white',
-  },
+const STATE_SPECIFIC_PRIMARY_ROLES = [
+  DTSI_PersonRoleCategory.GOVERNOR,
+  DTSI_PersonRoleCategory.ATTORNEY_GENERAL,
 ]
 
-export function isPoliticianStanceHidden(dtsiSlug: string) {
-  return hideStanceSlugs.some(x => x.slug === dtsiSlug.toLowerCase())
-}
-
-export function isPoliticianDetailsStanceHidden(dtsiSlug: string) {
-  return hideStanceSlugs.some(x => x.slug === dtsiSlug.toLowerCase() && !x.isCongressperson)
+export function shouldPersonHaveStanceScoresHidden(person: {
+  slug: string
+  primaryRole: Pick<DTSI_PersonRole, 'roleCategory' | 'primaryCountryCode'> | null | undefined
+}) {
+  // We don't want any person on the US site, who's primary role is a state level role, to have their stance scores visible. Examples include Governors (and people running for governor), Attorney Generals, etc.
+  // if someone is running for one of these roles, but has an existing federal role, we will show their stance scores.
+  const primaryRoleIsUSStateLevelRole = Boolean(
+    person.primaryRole?.roleCategory &&
+      STATE_SPECIFIC_PRIMARY_ROLES.includes(person.primaryRole?.roleCategory) &&
+      person.primaryRole.primaryCountryCode === 'US',
+  )
+  return primaryRoleIsUSStateLevelRole
 }

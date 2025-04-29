@@ -113,6 +113,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
               cryptoStanceGrade={DTSIFormattedLetterGrade}
               isRecommended
               person={recommended}
+              shouldHideStanceScores={false}
               subheader="role"
             />
           )}
@@ -122,6 +123,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
               cryptoStanceGrade={DTSIFormattedLetterGrade}
               key={person.id}
               person={person}
+              shouldHideStanceScores={false}
               subheader={person.isIncumbent ? 'Incumbent' : 'role'}
             />
           ))}

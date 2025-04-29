@@ -1,10 +1,8 @@
 import { UserActionOptInType } from '@prisma/client'
 import { object, string, z } from 'zod'
 
-import {
-  ExternalUserActionOptInResult,
-  handleExternalUserActionOptIn,
-} from '@/utils/server/externalOptIn/handleExternalUserActionOptIn'
+import { handleExternalUserActionOptIn } from '@/utils/server/externalOptIn/handleExternalUserActionOptIn'
+import { ExternalUserActionOptInResult } from '@/utils/server/externalOptIn/types'
 import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
@@ -52,7 +50,7 @@ type Input = z.infer<ReturnType<typeof getZodVerifiedSWCPartnersUserActionOptInS
 export async function verifiedSWCPartnersUserActionOptIn(
   input: Input,
 ): Promise<VerifiedSWCPartnerApiResponse<ExternalUserActionOptInResult>> {
-  return await handleExternalUserActionOptIn({
+  return handleExternalUserActionOptIn({
     emailAddress: input.emailAddress,
     optInType: input.optInType,
     campaignName: input.campaignName,

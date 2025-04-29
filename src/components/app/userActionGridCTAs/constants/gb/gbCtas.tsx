@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
@@ -10,6 +11,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
+  GBUserActionLinkedInCampaignName,
   GBUserActionPollCampaignName,
   GBUserActionReferCampaignName,
   GBUserActionTweetCampaignName,
@@ -67,6 +69,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: 'Urge them to stand up for financial access and innovation.',
     campaignsModalDescription: 'Urge them to stand up for financial access and innovation.',
     image: '/gb/actionTypeIcons/email.png',
+    link: ({ children }) => <Link href={getIntlUrls(countryCode).emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
@@ -149,6 +152,31 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.LINKEDIN]: {
+    title: 'Follow us on LinkedIn',
+    description: 'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+    mobileCTADescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+    campaignsModalDescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+    image: '/gb/actionTypeIcons/follow-linkedin.png',
+    campaigns: [
+      {
+        actionType: UserActionType.LINKEDIN,
+        campaignName: GBUserActionLinkedInCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Follow us on LinkedIn',
+        description:
+          'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
+            {children}
+          </UserActionFormFollowLinkedInDialog>
+        ),
       },
     ],
   },

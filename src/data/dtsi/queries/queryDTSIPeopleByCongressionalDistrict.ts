@@ -14,6 +14,14 @@ const query = /* GraphQL */ `
     ) {
       ...PersonCard
     }
+    stateReps: people(
+      limit: 999
+      offset: 0
+      personRolePrimaryState: $stateCode
+      personRoleGroupingOr: [CURRENT_US_STATE_ATTORNEY_GENERAL, CURRENT_US_STATE_GOVERNOR]
+    ) {
+      ...PersonCard
+    }
   }
   ${fragmentDTSIPersonCard}
 `
@@ -32,7 +40,12 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
     stateCode,
     congressionalDistrict: districtNumber,
   })
-  return orderDTSICongressionalDistrictResults(data.peopleByUSCongressionalDistrict)
+  const people = [
+    ...orderDTSICongressionalDistrictResults(data.peopleByUSCongressionalDistrict),
+    ...orderDTSICongressionalDistrictResults(data.stateReps),
+  ]
+
+  return orderDTSICongressionalDistrictResults(people)
 }
 
 export type DTSIPeopleByCongressionalDistrictQueryResult = NonNullable<

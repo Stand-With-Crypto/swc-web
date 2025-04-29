@@ -9,7 +9,10 @@ import {
   GetCongressionalDistrictFromAddressSuccess,
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import {
+  LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 export interface DTSIPeopleFromCongressionalDistrict
@@ -38,19 +41,39 @@ async function getDTSIPeopleFromCongressionalDistrict(
     })
   const dtsiPeople = data as DTSIPeopleByCongressionalDistrictQueryResult
 
-  const filteredData =
-    category === 'senate-and-house'
-      ? dtsiPeople
-      : dtsiPeople.filter(
-          person =>
-            person.primaryRole?.roleCategory ===
-            (category === 'senate'
-              ? DTSI_PersonRoleCategory.SENATE
-              : DTSI_PersonRoleCategory.CONGRESS),
-        )
-
   if ('notFoundReason' in data) {
     return data
+  }
+
+  let filteredData: DTSIPeopleByCongressionalDistrictQueryResult = []
+
+  switch (category) {
+    case 'senate':
+      filteredData = dtsiPeople.filter(
+        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE,
+      )
+      break
+    case 'house':
+      filteredData = dtsiPeople.filter(
+        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
+      )
+      break
+    case 'senate-and-house':
+      filteredData = dtsiPeople.filter(
+        person =>
+          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE ||
+          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
+      )
+      break
+    case 'legislative-and-executive':
+      filteredData = dtsiPeople.filter(
+        person =>
+          person.primaryRole?.roleCategory &&
+          LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES.includes(person.primaryRole.roleCategory),
+      )
+      break
+    default:
+      filteredData = dtsiPeople
   }
 
   if (!filteredData.length) {

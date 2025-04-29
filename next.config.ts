@@ -300,6 +300,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/gb/action/email',
+        destination: '/gb/content/debanking',
+        permanent: true,
+      },
+      {
         source: '/uk',
         destination: '/gb',
         permanent: false,

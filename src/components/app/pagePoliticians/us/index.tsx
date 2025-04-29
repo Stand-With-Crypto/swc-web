@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import { ClientCurrentUserDTSIPersonCardOrCTA } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { UsDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/us'
@@ -26,9 +24,7 @@ export function UsPagePoliticians({
         <ClientCurrentUserDTSIPersonCardOrCTA countryCode={countryCode} />
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <Suspense>
-          <UsDTSIClientPersonDataTable initialData={politicians} />
-        </Suspense>
+        <UsDTSIClientPersonDataTable initialData={politicians} />
       </PagePoliticiansLayout.PoliticiansTableSection>
     </PagePoliticiansLayout>
   )

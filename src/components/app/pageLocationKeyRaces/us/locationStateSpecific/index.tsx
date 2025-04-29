@@ -129,6 +129,7 @@ export function USLocationStateSpecific({
                             </InternalLink>
                           }
                           people={democraticGovernors}
+                          shouldHideStanceScores
                           title={<>{stateName} Gubernatorial Election</>}
                         />
                       </div>
@@ -147,6 +148,7 @@ export function USLocationStateSpecific({
                             </InternalLink>
                           }
                           people={republicanGovernors}
+                          shouldHideStanceScores
                           title={<>{stateName} Gubernatorial Election</>}
                         />
                       </div>
@@ -167,6 +169,7 @@ export function USLocationStateSpecific({
                   </InternalLink>
                 }
                 people={groups.senators}
+                shouldHideStanceScores={false}
                 title={<>U.S. Senate Race ({stateCode})</>}
               />
             </div>
@@ -183,6 +186,7 @@ export function USLocationStateSpecific({
                   </InternalLink>
                 }
                 people={groups.congresspeople['at-large'].people}
+                shouldHideStanceScores={false}
                 title={<>At-Large Congressional District</>}
               />
             </div>
@@ -237,6 +241,7 @@ export function USLocationStateSpecific({
                 }
                 key={district}
                 people={districtPeople}
+                shouldHideStanceScores={false}
                 title={<>Congressional District {district}</>}
               />
             )

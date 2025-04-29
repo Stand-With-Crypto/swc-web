@@ -185,6 +185,7 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
             isClickable={false}
             isRecommended={false}
             person={representative}
+            shouldHideStanceScores={false}
             subheader="role-w-state"
           />
         </div>
