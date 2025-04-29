@@ -26,7 +26,7 @@ export function SMSOptInCTA({ className, darkMode, ...props }: SMSOptInProps) {
                 })}
               />
 
-              <SMSOptInForm.Footnote size="xs" variant={variant} />
+              <SMSOptInForm.Footnote variant={variant} />
 
               <SMSOptInForm.SubmitButton
                 className="flex-0 self-start"

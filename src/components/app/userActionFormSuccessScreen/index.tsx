@@ -87,7 +87,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
               <SMSOptInForm.PhoneNumberField shouldAutoFocus />
 
               <div className="mt-auto">
-                <SMSOptInForm.Footnote className="mb-8" size="xs" />
+                <SMSOptInForm.Footnote className="mb-8" />
                 <SMSOptInForm.SubmitButton
                   className="w-full md:max-w-[300px]"
                   disabled={form.formState.isSubmitting}

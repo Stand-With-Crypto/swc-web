@@ -30,7 +30,7 @@ export function EventDialogPhoneNumber(props: Omit<SMSOptInFormProps, 'children'
               <SMSOptInForm.PhoneNumberField className="w-full" shouldAutoFocus />
             </div>
 
-            <SMSOptInForm.Footnote className="w-full max-w-xl" size="xs" />
+            <SMSOptInForm.Footnote className="w-full max-w-xl" />
             <SMSOptInForm.SubmitButton className="mt-4" disabled={form.formState.isSubmitting} />
           </>
         )}

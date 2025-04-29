@@ -125,7 +125,7 @@ function SMSStatusFooter({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <SMSOptInForm.Footnote className="w-full max-w-xl" size="xs" />
+      <SMSOptInForm.Footnote className="w-full max-w-xl" />
       <SMSOptInForm.SubmitButton disabled={isSubmitting} variant="secondary" />
     </div>
   )

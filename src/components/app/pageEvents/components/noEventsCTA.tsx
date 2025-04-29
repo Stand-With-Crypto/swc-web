@@ -58,7 +58,7 @@ export function NoEventsCTA({
                       <div className="mt-4">
                         <div className="flex max-w-[400px] flex-col items-center gap-4">
                           <SMSOptInForm.PhoneNumberField className="w-full" />
-                          <SMSOptInForm.Footnote className="w-full" size="xs" />
+                          <SMSOptInForm.Footnote className="w-full" />
                           <SMSOptInForm.SubmitButton
                             className="mt-4"
                             disabled={form.formState.isSubmitting}
