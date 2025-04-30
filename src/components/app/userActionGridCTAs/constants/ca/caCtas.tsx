@@ -23,6 +23,8 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/
 const countryCode = SupportedCountryCodes.CA
 const countryDisplayName = COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]
 
+const urls = getIntlUrls(countryCode)
+
 export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
@@ -51,7 +53,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaignsModalDescription:
       'Make your voice heard on important crypto policy issues by emailing your representatives.',
     image: '/ca/actionTypeIcons/email.png',
-    link: ({ children }) => <Link href={getIntlUrls(countryCode).emailDeeplink()}>{children}</Link>,
+    link: ({ children }) => <Link href={urls.emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
@@ -61,10 +63,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeElectionAction()}
-          >
+          <UserActionViewKeyPageDialog countryCode={countryCode} url={urls.newmodeElectionAction()}>
             {children}
           </UserActionViewKeyPageDialog>
         ),
@@ -79,7 +78,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <UserActionViewKeyPageDialog
             countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeDebankingAction()}
+            url={urls.newmodeDebankingAction()}
           >
             {children}
           </UserActionViewKeyPageDialog>
@@ -103,9 +102,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description:
           'View the key races occurring across Canada that will impact the future of crypto.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).locationKeyRaces()}>{children}</Link>
-        ),
+        WrapperComponent: ({ children }) => <Link href={urls.locationKeyRaces()}>{children}</Link>,
       },
     ],
   },
@@ -167,7 +164,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href="/polls">{children}</Link>,
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.POLL,

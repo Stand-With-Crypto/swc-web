@@ -20,6 +20,8 @@ import {
 
 const countryCode = SupportedCountryCodes.GB
 
+const urls = getIntlUrls(countryCode)
+
 export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
@@ -69,7 +71,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: 'Urge them to stand up for financial access and innovation.',
     campaignsModalDescription: 'Urge them to stand up for financial access and innovation.',
     image: '/gb/actionTypeIcons/email.png',
-    link: ({ children }) => <Link href={getIntlUrls(countryCode).emailDeeplink()}>{children}</Link>,
+    link: ({ children }) => <Link href={urls.emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
@@ -81,7 +83,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <UserActionViewKeyPageDialog
             countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeDebankingAction()}
+            url={urls.newmodeDebankingAction()}
           >
             {children}
           </UserActionViewKeyPageDialog>
@@ -124,7 +126,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href="/polls">{children}</Link>,
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.POLL,
