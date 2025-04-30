@@ -24,6 +24,8 @@ import type { CleanupPostalCodesInngestEventSchema } from '@/inngest/functions/c
 import { UpdateDistrictsRankingsCronJobSchema } from '@/inngest/functions/districtsRankings/updateRankings'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
+import { SyncSendgridContactsCronJobSchema } from '@/inngest/functions/sendgridContactsCronJob'
+import { SyncCountryContactsSchema } from '@/inngest/functions/sendgridContactsCronJob/logic'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import type { BackfillMissingCommunicationsInngestEventSchema } from '@/inngest/functions/sms/backfillMissingCommunications'
 import type { BackfillOptedOutUsersSchema } from '@/inngest/functions/sms/backfillOptedOutUsers'
@@ -72,4 +74,6 @@ type EventTypes =
   | ProcessBatchSchema
   | BackfillMissingCommunicationsInngestEventSchema
   | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
+  | SyncSendgridContactsCronJobSchema
+  | SyncCountryContactsSchema
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
