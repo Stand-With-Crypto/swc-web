@@ -61,3 +61,5 @@ certificates
 cypress/downloads
 
 yarn.lock
+
+/data
