@@ -319,6 +319,11 @@ const nextConfig: NextConfig = {
         destination: '/gb',
         permanent: false,
       },
+      {
+        source: '/gb/politicians/person/:slug',
+        destination: '/gb',
+        permanent: false,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
