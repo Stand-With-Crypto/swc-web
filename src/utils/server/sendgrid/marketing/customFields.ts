@@ -25,16 +25,18 @@ export type SendgridCustomField = (typeof SendgridCustomFields)[number]
 
 export type SendgridField = SendgridReservedField | SendgridCustomField
 
+export type FieldType = 'Text' | 'Number' | 'Date'
+
 interface FieldDefinitionsResponse {
   custom_fields: Array<{
     id: string
     name: string
-    field_type: 'Text' | 'Number' | 'Date'
+    field_type: FieldType
   }>
   reserved_fields: Array<{
     id: string
     name: string
-    field_type: 'Text' | 'Number' | 'Date'
+    field_type: FieldType
     read_only?: boolean
   }>
 }
@@ -50,6 +52,37 @@ export const getSendgridCustomFields = async () => {
     Sentry.captureException(error, {
       tags: {
         domain: 'SendgridMarketing',
+      },
+    })
+    throw error
+  }
+}
+
+interface CreateCustomFieldResponse {
+  id: string
+  name: string
+  field_type: FieldType
+}
+
+export const createSendgridCustomField = async (name: string, fieldType: FieldType) => {
+  try {
+    const [response] = await SendgridClient.request({
+      url: '/v3/marketing/field_definitions',
+      method: 'POST',
+      body: {
+        name,
+        field_type: fieldType,
+      },
+    })
+    return response.body as CreateCustomFieldResponse
+  } catch (error) {
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'SendgridMarketing',
+      },
+      extra: {
+        name,
+        fieldType,
       },
     })
     throw error

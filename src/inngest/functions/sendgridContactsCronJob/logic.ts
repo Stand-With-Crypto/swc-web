@@ -1,5 +1,4 @@
 import { inngest } from '@/inngest/inngest'
-import { prismaClient } from '@/utils/server/prismaClient'
 import {
   uploadSendgridContactsCSV,
   upsertSendgridContactsArray,
@@ -10,8 +9,8 @@ import {
 } from '@/utils/server/sendgrid/marketing/lists'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const SYNC_COUNTRY_CONTACTS_EVENT_NAME = 'script/sync-country-contacts'
-const SYNC_COUNTRY_CONTACTS_FUNCTION_ID = 'script.sync-country-contacts'
+const SYNC_COUNTRY_CONTACTS_EVENT_NAME = 'script/sync-country-contact-list'
+const SYNC_COUNTRY_CONTACTS_FUNCTION_ID = 'script.sync-country-contact-list'
 
 const SENDGRID_CONTACTS_API_LIMIT = 30000
 
@@ -59,7 +58,7 @@ export const syncCountryContacts = inngest.createFunction(
       return list.id
     })
 
-    return await step.run(`sync-${countryCode}-contacts-impl`, async () => {
+    return await step.run(`sync-${countryCode}-contacts`, async () => {
       try {
         // Format users for SendGrid - map DB fields to SendGrid fields
         const contacts = users.map(user => {
