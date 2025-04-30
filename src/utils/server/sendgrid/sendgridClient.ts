@@ -1,4 +1,5 @@
 import SendgridClient from '@sendgrid/client'
+
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
 const SENDGRID_API_KEY = requiredOutsideLocalEnv(

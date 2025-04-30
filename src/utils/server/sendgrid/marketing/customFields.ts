@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 
 export const SendgridReservedFields = [

@@ -26,6 +26,8 @@ import { updateDistrictsRankings } from '@/inngest/functions/districtsRankings/u
 import { globalSendEventNotifications } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
+import { syncSendgridContacts } from '@/inngest/functions/sendgridContactsCronJob'
+import { syncCountryContacts } from '@/inngest/functions/sendgridContactsCronJob/logic'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
   backfillMissingCommunications,
@@ -45,8 +47,6 @@ import {
   backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/usersTotalDonationAmountUsd/backfill'
 import { inngest } from '@/inngest/inngest'
-import { syncSendgridContacts } from '@/inngest/functions/sendgridContactsCronJob'
-import { syncCountryContacts } from '@/inngest/functions/sendgridContactsCronJob/logic'
 
 export const maxDuration = 180 // 3 minutes
 

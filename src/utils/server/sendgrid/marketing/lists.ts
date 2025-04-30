@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/nextjs'
+
 import {
   SendgridCustomField,
   SendgridReservedField,
@@ -5,7 +7,6 @@ import {
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import * as Sentry from '@sentry/nextjs'
 
 type CountryDisplayNames =
   (typeof COUNTRY_CODE_TO_DISPLAY_NAME)[keyof typeof COUNTRY_CODE_TO_DISPLAY_NAME]

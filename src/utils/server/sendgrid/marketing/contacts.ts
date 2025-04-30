@@ -1,11 +1,12 @@
+import * as Sentry from '@sentry/nextjs'
+import * as XLSX from 'xlsx'
+
 import {
   getContactFieldIds,
   getSendgridCustomFields,
 } from '@/utils/server/sendgrid/marketing/customFields'
 import { SendgridContact } from '@/utils/server/sendgrid/marketing/lists'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
-import * as Sentry from '@sentry/nextjs'
-import * as XLSX from 'xlsx'
 
 interface ContactOptions {
   listIds: string[]
