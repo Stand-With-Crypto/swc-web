@@ -90,12 +90,6 @@ export function GbPageHome({
           <FoundersCarousel founders={founders} />
         </HomePageSection>
       )}
-
-      <HomepagePoliticiansSection
-        countryCode={countryCode}
-        cryptoStanceGrade={DTSIFormattedLetterGrade}
-        dtsiHomepagePoliticians={dtsiHomepagePoliticians}
-      />
     </>
   )
 }
