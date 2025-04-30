@@ -33,7 +33,7 @@ type User = {
   firstName: string | null
   lastName: string | null
   countryCode: string
-  datetimeCreated: Date | string
+  datetimeCreated: string
 }
 
 export type SyncCountryContactsParams = {
@@ -80,10 +80,7 @@ export const syncCountryContacts = inngest.createFunction(
             phone_number: user.phoneNumber || '',
             // Custom fields
             custom_fields: {
-              signup_date:
-                typeof user.datetimeCreated === 'string'
-                  ? user.datetimeCreated
-                  : user.datetimeCreated.toISOString(),
+              signup_date: user.datetimeCreated,
               completed_user_actions: userActions,
               user_actions_count: userActions.length.toString(),
             },
