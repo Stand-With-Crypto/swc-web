@@ -90,7 +90,6 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaignsModalDescription:
       'View the key races occurring across Australia that will impact the future of crypto.',
     image: '/au/actionTypeIcons/view-key-races.png',
-    link: ({ children }) => <Link href={urls.emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_RACES,
