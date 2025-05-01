@@ -1,8 +1,4 @@
-import * as Sentry from '@sentry/nextjs'
-
-import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { logger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { fullUrl } from '@/utils/shared/urls'
 
@@ -104,9 +100,7 @@ export interface GoogleCivicInfoOfficial {
 
 export interface GoogleCivicInfoResponse {
   normalizedInput: GoogleCivicInfoAddress
-  kind: 'civicinfo#representativeInfoResponse'
   divisions: Record<string, { name: string }>
-  officials: GoogleCivicInfoOfficial[]
 }
 
 interface GoogleCivicErrorResponse {
