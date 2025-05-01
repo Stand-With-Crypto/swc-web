@@ -5,7 +5,10 @@ import Link from 'next/link'
 
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/[countryCode]/performed-user-action-types/route'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
+import {
+  FOLLOW_ON_X_CAMPAIGNS_BY_COUNTRY,
+  USER_ACTION_LIVE_EVENT_LOCATION,
+} from '@/components/app/recentActivityRow/constants'
 import { RecentActivityRowMainText as MainText } from '@/components/app/recentActivityRow/mainText'
 import {
   RecentActivityRowBase,
@@ -226,7 +229,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
           children:
-            action.campaignName === USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
+            action.campaignName === FOLLOW_ON_X_CAMPAIGNS_BY_COUNTRY[countryCode] ? (
               <MainText>
                 New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
               </MainText>
