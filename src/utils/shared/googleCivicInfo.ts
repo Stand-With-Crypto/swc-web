@@ -126,7 +126,7 @@ const NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY = requiredEnv(
   process.env.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY,
   'NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY',
 )
-const CIVIC_BY_ADDRESS_ENDPOINT = 'https://www.googleapis.com/civicinfo/v2/representatives'
+const CIVIC_BY_ADDRESS_ENDPOINT = 'https://www.googleapis.com/civicinfo/v2/divisionsByAddress'
 export function getGoogleCivicDataFromAddress(address: string) {
   const apiUrl = new URL(CIVIC_BY_ADDRESS_ENDPOINT)
   apiUrl.searchParams.set('key', NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY)
@@ -162,54 +162,4 @@ export function getGoogleCivicDataFromAddress(address: string) {
       civicDataByAddressCache.set(apiUrl.toString(), response)
       return response
     })
-}
-
-export function getGoogleCivicOfficialByDTSIName(
-  dtsiPersonName: { firstName: string; lastName: string; firstNickname: string },
-  googleCivicInfoResponse: GoogleCivicInfoResponse,
-) {
-  const normalizeName = (name: string) => {
-    return convertToOnlyEnglishCharacters(name.toLowerCase().trim()).replace(/[.-\s]/g, '')
-  }
-  const normalizedDTSIFirstNickname = normalizeName(dtsiPersonName.firstNickname)
-  const normalizedDTSIFirstName = normalizeName(dtsiPersonName.firstName)
-  const normalizedDTSILastName = normalizeName(dtsiPersonName.lastName)
-  const { officials } = googleCivicInfoResponse
-
-  // This is necessary since the Google Civic API return the middle initial (e.g. "John F. Kennedy")
-  // While the DTSI data does not (e.g. "John Kennedy")
-  let matchOfficial = officials.find(official => {
-    const normalizedOfficialName = normalizeName(official.name)
-    return (
-      (normalizedOfficialName.startsWith(normalizedDTSIFirstName) ||
-        normalizedOfficialName.startsWith(normalizedDTSIFirstNickname)) &&
-      normalizedOfficialName.includes(normalizedDTSILastName)
-    )
-  })
-
-  if (!matchOfficial) {
-    matchOfficial = officials.find(official => {
-      const normalizedOfficialName = normalizeName(official.name)
-      return normalizedOfficialName.includes(normalizedDTSILastName)
-    })
-  }
-
-  if (!matchOfficial) {
-    const extra = {
-      dtsiPersonName,
-      normalizedDTSIFirstName,
-      normalizedDTSILastName,
-      officials,
-    }
-    logger.info('returned people', extra)
-    const vacantResult = officials.find(official => official.name.toLocaleLowerCase() === 'vacant')
-    if (!vacantResult) {
-      Sentry.captureMessage('getGoogleCivicOfficialByDTSIName - Official not found', {
-        extra,
-      })
-    }
-    return null
-  }
-
-  return matchOfficial
 }
