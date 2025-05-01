@@ -5,10 +5,7 @@ import Link from 'next/link'
 
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/[countryCode]/performed-user-action-types/route'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import {
-  FOLLOW_ON_X_CAMPAIGNS_BY_COUNTRY,
-  USER_ACTION_LIVE_EVENT_LOCATION,
-} from '@/components/app/recentActivityRow/constants'
+import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
 import { RecentActivityRowMainText as MainText } from '@/components/app/recentActivityRow/mainText'
 import {
   RecentActivityRowBase,
@@ -36,10 +33,7 @@ import {
 } from '@/utils/shared/stateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import {
-  USUserActionEmailCampaignName,
-  USUserActionTweetCampaignName,
-} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const DTSIPersonName = ({
@@ -228,14 +222,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
-          children:
-            action.campaignName === FOLLOW_ON_X_CAMPAIGNS_BY_COUNTRY[countryCode] ? (
-              <MainText>
-                New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
-              </MainText>
-            ) : (
-              <MainText>Tweet sent in support of {getSWCDisplayText()}</MainText>
-            ),
+          children: (
+            <MainText>
+              New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
+            </MainText>
+          ),
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
