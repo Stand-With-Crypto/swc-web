@@ -5,8 +5,12 @@ import { z } from 'zod'
 import { CAPITOL_CANARY_SUPPORTED_COUNTRY_CODES } from '@/inngest/functions/capitolCanary/constants'
 import { inngest } from '@/inngest/inngest'
 import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
+import {
+  formatCapitolCanaryAdvocateUpdateRequest,
   updateAdvocateInCapitolCanary,
-  UpdateAdvocateInCapitolCanaryRequest,
 } from '@/utils/server/capitolCanary/updateAdvocate'
 import { prismaClient } from '@/utils/server/prismaClient'
 
@@ -78,11 +82,19 @@ export const deleteNotSupportedCountryCodeAdvocates = inngest.createFunction(
     for (let i = 0; i < usersChunks.length; i++) {
       await step.run(`add-delete-tag-on-capitol-canary-${i + 1}`, async () => {
         const promises = usersChunks[i].map(user => {
-          const formattedUpdateRequest: UpdateAdvocateInCapitolCanaryRequest = {
-            advocateid: user.capitolCanaryAdvocateId!,
-            tags: [`countryCode:${user.countryCode}`, 'toDelete'],
-          }
-          return updateAdvocateInCapitolCanary(formattedUpdateRequest)
+          const formattedUpdateRequest = formatCapitolCanaryAdvocateUpdateRequest({
+            user,
+            campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+            metadata: {
+              tags: [`countryCode:${user.countryCode}`, 'toDelete'],
+            },
+          })
+
+          return formattedUpdateRequest instanceof Error
+            ? new Promise((_, reject) => {
+                reject(formattedUpdateRequest)
+              })
+            : updateAdvocateInCapitolCanary(formattedUpdateRequest)
         })
 
         return Promise.allSettled(promises)
