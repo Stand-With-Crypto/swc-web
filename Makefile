@@ -21,3 +21,9 @@ import_gb_geojson:
 
 import_au_shp:
 	ogr2ogr -f "PostgreSQL" $(POSTGRES_CONNECTION_STRING) "./data/au/AUS_ELB_region.shp" -nln au_federal_electoral_district -nlt MULTIPOLYGON -overwrite
+
+import_all_data:
+	make import_us_geojson
+	make import_ca_kmz
+	make import_gb_geojson
+	make import_au_shp
