@@ -16,6 +16,7 @@ import {
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import { checkSMSOptInReplyWithInngest } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { deleteNotSupportedCountryCodeAdvocates } from '@/inngest/functions/capitolCanary/deleteNotSupportedCountryCodeAdvocates'
 import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
@@ -85,5 +86,6 @@ export const { GET, POST, PUT } = serve({
     backfillIntlUsersWithInngest,
     processIntlUsersBatch,
     backfillMissingCommunications,
+    deleteNotSupportedCountryCodeAdvocates,
   ],
 })

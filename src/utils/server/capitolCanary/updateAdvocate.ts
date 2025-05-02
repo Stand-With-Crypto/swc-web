@@ -7,7 +7,7 @@ const CAPITOL_CANARY_UPDATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0
 
 // Interface based on: https://docs.phone2action.com/#:~:text=%3A19302020%0A%7D-,Update%20an%20advocate,-In%20order%20to
 // Interface should not be accessed directly - use the requirements interface (see `payloadRequirements.ts`).
-interface UpdateAdvocateInCapitolCanaryRequest extends BaseUpsertAdvocateRequest {
+export interface UpdateAdvocateInCapitolCanaryRequest extends BaseUpsertAdvocateRequest {
   // Required information.
   advocateid: number
 }
