@@ -23,21 +23,16 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
-      href: urls.locationKeyRaces(),
-      text: 'Races',
-    },
-    {
       href: urls.polls(),
       text: 'Polls',
     },
     {
+      href: urls.manifesto(),
+      text: 'Manifesto',
+    },
+    {
       text: 'Resources',
       children: [
-        {
-          href: urls.manifesto(),
-          text: 'Manifesto',
-          icon: <Icons.MissionIcon />,
-        },
         {
           href: urls.community(),
           text: 'Community',
