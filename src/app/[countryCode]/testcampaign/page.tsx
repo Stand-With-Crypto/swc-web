@@ -7,7 +7,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 
 export default function TestCampaignPage() {
   return (
-    <div className="standard-spacing-from-navbar container mx-auto">
+    <div className="standard-spacing-from-navbar container">
       <div className="prose max-w-[80ch]">
         <PageTitle className="text-left" size="lg">
           Bring back staking in your state
