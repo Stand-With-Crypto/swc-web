@@ -34,6 +34,9 @@ type User = {
   lastName: string | null
   countryCode: string
   datetimeCreated: string
+  userSessions: {
+    id: string
+  }[]
 }
 
 export type SyncCountryContactsParams = {
@@ -63,7 +66,7 @@ export const syncCountryContacts = inngest.createFunction(
         // Format users for SendGrid - map DB fields to SendGrid fields
         const contacts = users.map(user => {
           const email = user.primaryUserEmailAddress?.emailAddress || ''
-          const userActions = user.userActions
+          const completedUserActions = user.userActions
             .map(action => `${action.actionType}-${action.campaignName}`)
             .join(';')
 
@@ -74,6 +77,7 @@ export const syncCountryContacts = inngest.createFunction(
             last_name: user.lastName || '',
             country: user.countryCode,
             address_line_1: user.address?.formattedDescription || '',
+            address_line_2: '',
             city: user.address?.locality || '',
             state_province_region: user.address?.administrativeAreaLevel1 || '',
             postal_code: user.address?.postalCode || '',
@@ -81,13 +85,15 @@ export const syncCountryContacts = inngest.createFunction(
             // Custom fields
             custom_fields: {
               signup_date: user.datetimeCreated,
-              completed_user_actions: userActions,
-              user_actions_count: userActions.length.toString(),
+              completed_user_actions: completedUserActions,
+              user_actions_count: user.userActions.length.toString(),
+              session_id: user.userSessions?.[0]?.id || '',
             },
           }
         })
 
-        const validContacts = contacts.filter(contact => !!contact.email)
+        // const validContacts = contacts.filter(contact => !!contact.email)
+        const validContacts = contacts
 
         if (validContacts.length === 0) {
           return {

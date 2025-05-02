@@ -42,10 +42,11 @@ export const syncSendgridContacts = inngest.createFunction(
         signup_date: 'Date',
         completed_user_actions: 'Text',
         user_actions_count: 'Number',
+        // session_id: 'Text',
       }
 
       const fieldDefinitions = await getSendgridCustomFields()
-      const existingCustomFields = fieldDefinitions.custom_fields.map(field => field.name)
+      const existingCustomFields = fieldDefinitions?.custom_fields?.map(field => field.name) || []
 
       logger.info(`Found ${existingCustomFields.length} existing custom fields`, {
         existingFields: existingCustomFields,
@@ -150,6 +151,11 @@ export const syncSendgridContacts = inngest.createFunction(
             lastName: true,
             countryCode: true,
             datetimeCreated: true,
+            userSessions: {
+              select: {
+                id: true,
+              },
+            },
           },
         })
       })

@@ -8,10 +8,11 @@ export const SendgridReservedFields = [
   'first_name',
   'last_name',
   'address_line_1',
+  'address_line_2',
   'city',
   'state_province_region',
-  'postal_code',
   'country',
+  'postal_code',
   'phone_number',
 ] as const
 export type SendgridReservedField = (typeof SendgridReservedFields)[number]
@@ -20,6 +21,7 @@ export const SendgridCustomFields = [
   'signup_date',
   'completed_user_actions',
   'user_actions_count',
+  // 'session_id',
 ] as const
 export type SendgridCustomField = (typeof SendgridCustomFields)[number]
 
@@ -28,7 +30,7 @@ export type SendgridField = SendgridReservedField | SendgridCustomField
 export type FieldType = 'Text' | 'Number' | 'Date'
 
 interface FieldDefinitionsResponse {
-  custom_fields: Array<{
+  custom_fields?: Array<{
     id: string
     name: string
     field_type: FieldType
@@ -95,7 +97,7 @@ export function getContactFieldIds(fieldDefinitions: FieldDefinitionsResponse) {
     (acc, fieldName) => {
       const isReserved = SendgridReservedFields.includes(fieldName)
       const fields = isReserved ? fieldDefinitions.reserved_fields : fieldDefinitions.custom_fields
-      const field = fields.find(f => f.name === fieldName)
+      const field = fields?.find(f => f.name === fieldName)
       acc[fieldName] = field?.id || null
       return acc
     },

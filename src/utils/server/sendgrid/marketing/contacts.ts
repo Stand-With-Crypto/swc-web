@@ -4,22 +4,29 @@ import * as XLSX from 'xlsx'
 import {
   getContactFieldIds,
   getSendgridCustomFields,
+  SendgridCustomField,
+  SendgridReservedField,
 } from '@/utils/server/sendgrid/marketing/customFields'
-import { SendgridContact } from '@/utils/server/sendgrid/marketing/lists'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 
-interface ContactOptions {
+export type SendgridContact = Record<SendgridReservedField, string> & {
+  custom_fields: Record<SendgridCustomField, string>
+}
+
+interface Options {
   listIds: string[]
 }
 
 export const upsertSendgridContactsArray = async (
   contacts: SendgridContact[],
-  options: ContactOptions,
+  options: Options,
 ) => {
   try {
     const sendgridFieldDefinitions = await getSendgridCustomFields()
     const fieldIds = getContactFieldIds(sendgridFieldDefinitions)
 
+    // TODO: improve type safety.
+    // An if case for each field wont allow for dynamic fields scalability (every new field will require an update here)
     const formattedContacts = contacts.map(contact => {
       const { custom_fields: contactCustomFields, ...standardFields } = contact
       const custom_fields: Record<string, string> = {}
@@ -32,6 +39,9 @@ export const upsertSendgridContactsArray = async (
       if (fieldIds.completed_user_actions) {
         custom_fields[fieldIds.completed_user_actions] = contactCustomFields.completed_user_actions
       }
+      // if (fieldIds.session_id) {
+      //   custom_fields[fieldIds.session_id] = contactCustomFields.session_id
+      // }
       return {
         ...standardFields,
         custom_fields,
@@ -49,6 +59,7 @@ export const upsertSendgridContactsArray = async (
       body: data,
     }
     const [response] = await SendgridClient.request(request)
+    console.log('UPSERT RESPONSE:', response.body)
     return response.body
   } catch (error) {
     Sentry.captureException(error, {
@@ -71,8 +82,12 @@ interface SendgridImportResponse {
 }
 
 export async function uploadSendgridContactsCSV(
+  /**
+   * TODO: This typing should not have a `custom_fields` property.
+   * Even though it works, it ends up adding an extra column to the CSV file.
+   */
   contacts: SendgridContact[],
-  options?: ContactOptions,
+  options?: Options,
 ) {
   try {
     const sendgridFieldDefinitions = await getSendgridCustomFields()

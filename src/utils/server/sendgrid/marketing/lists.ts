@@ -1,25 +1,17 @@
 import * as Sentry from '@sentry/nextjs'
 
-import {
-  SendgridCustomField,
-  SendgridReservedField,
-} from '@/utils/server/sendgrid/marketing/customFields'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type CountryDisplayNames =
   (typeof COUNTRY_CODE_TO_DISPLAY_NAME)[keyof typeof COUNTRY_CODE_TO_DISPLAY_NAME]
-export type SendgridContactListName = `${CountryDisplayNames} Contacts`
+export type SendgridContactListName = `${CountryDisplayNames} Advocates`
 
 export const getSendgridContactListName = (
   countryCode: SupportedCountryCodes,
 ): SendgridContactListName => {
-  return `${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode as SupportedCountryCodes]} Contacts`
-}
-
-export type SendgridContact = Record<SendgridReservedField, string> & {
-  custom_fields: Record<SendgridCustomField, string>
+  return `${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode as SupportedCountryCodes]} Advocates`
 }
 
 interface GetListsResponse {
