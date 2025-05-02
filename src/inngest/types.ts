@@ -16,6 +16,7 @@ import type {
   CapitolCanaryBackfillSmsOptInReplyUpdateBatchOfUsersSchema,
 } from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import type { CapitolCanaryCheckSmsOptInReplySchema } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema } from '@/inngest/functions/capitolCanary/deleteNotSupportedCountryCodeAdvocates'
 import type { CapitolCanaryEmailInngestEventSchema } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import type { CapitolCanaryUpsertAdvocateInngestSchema } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import type { CleanupNftMintsEventSchema } from '@/inngest/functions/cleanupNFTMints'
@@ -70,4 +71,5 @@ type EventTypes =
   | BackfillIntlUsersSchema
   | ProcessBatchSchema
   | BackfillMissingCommunicationsInngestEventSchema
+  | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
