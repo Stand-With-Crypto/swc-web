@@ -110,16 +110,18 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
                   height: '300px',
                 }}
               />
-              <img
-                alt="politician stance on crypto"
-                src={letterImage as any}
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  right: 0,
-                  width: '90px',
-                }}
-              />
+              {!shouldHideStanceScores && (
+                <img
+                  alt="politician stance on crypto"
+                  src={letterImage as any}
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    width: '90px',
+                  }}
+                />
+              )}
             </div>
           ) : (
             <div tw="flex">
