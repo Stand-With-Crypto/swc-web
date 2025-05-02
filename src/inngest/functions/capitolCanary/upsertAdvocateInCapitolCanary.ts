@@ -2,6 +2,7 @@ import { CapitolCanaryInstance, SMSStatus, User } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { CAPITOL_CANARY_SUPPORTED_COUNTRY_CODES } from '@/inngest/functions/capitolCanary/constants'
 import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
@@ -37,6 +38,13 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   { event: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
     const data = event.data
+
+    if (!CAPITOL_CANARY_SUPPORTED_COUNTRY_CODES.includes(data.user.countryCode)) {
+      return {
+        success: 1,
+        advocateid: null,
+      }
+    }
 
     // If the user does not have an SwC advocate ID, then we need to create one for them.
     if (
