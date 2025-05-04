@@ -2,12 +2,15 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
 import {
+  AdvocatesCountResult,
   getAdvocatesCountByDistrict,
   getReferralsCountByDistrict,
 } from '@/utils/server/districtRankings/getRankingData'
 import { syncReferralsWithoutAddress } from '@/utils/server/districtRankings/syncReferralsWithoutAddress'
 import { createDistrictRankingUpserter } from '@/utils/server/districtRankings/upsertRankings'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_FUNCTION_ID = 'script.update-districts-rankings'
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_SCHEDULE = '0 */1 * * *' // every 1 hour
@@ -33,16 +36,50 @@ export const updateDistrictsRankings = inngest.createFunction(
       return await syncReferralsWithoutAddress()
     })
 
-    const [districtAdvocatesCounts, districtsReferralsCount] = await Promise.all([
-      step.run('Get Advocates Count by District', async () => {
-        logger.info('Getting Advocates Count by District')
-        return await getAdvocatesCountByDistrict()
-      }),
-      step.run('Get Referrals Count by District', async () => {
-        logger.info('Getting Referrals Count by District')
-        return await getReferralsCountByDistrict()
-      }),
-    ])
+    const districtAdvocatesCounts = await step.run('Get Advocates Count by District', async () => {
+      logger.info('Getting Advocates Count for all states')
+      const stateCodes = Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[]
+      const promises = stateCodes.map(stateCode =>
+        getAdvocatesCountByDistrict(stateCode).catch(error => {
+          logger.error(`Failed querying advocates for state ${stateCode}`, { error })
+          return { stateCode, error: true }
+        }),
+      )
+
+      const results = await Promise.allSettled(promises)
+
+      const allCounts: AdvocatesCountResult[] = []
+      const failedStates: USStateCode[] = []
+
+      results.forEach((result, index) => {
+        const stateCode = stateCodes[index]
+        if (result.status === 'fulfilled') {
+          if ('error' in result.value) {
+            failedStates.push(stateCode)
+          } else {
+            allCounts.push(...result.value)
+          }
+        } else {
+          logger.error(`Promise rejected unexpectedly for state ${stateCode}`, {
+            reason: result.reason,
+          })
+          failedStates.push(stateCode)
+        }
+      })
+
+      logger.info(
+        `Fetched advocate counts. Success: ${stateCodes.length - failedStates.length}, Failed: ${failedStates.length}`,
+      )
+      if (failedStates.length > 0) {
+        logger.warn(`Failures encountered during parallel advocate count fetch.`)
+      }
+      return allCounts
+    })
+
+    const districtsReferralsCount = await step.run('Get Referrals Count by District', async () => {
+      logger.info('Getting Referrals Count by District')
+      return await getReferralsCountByDistrict()
+    })
 
     const [districtAdvocatesRankingResults, districtReferralsRankingResults] = await Promise.all([
       step.run('Update Districts Advocates Rankings', async () => {
