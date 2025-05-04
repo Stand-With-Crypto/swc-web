@@ -1,4 +1,5 @@
 import { Logger } from 'inngest/middleware/logger'
+import pRetry from 'p-retry'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -41,15 +42,15 @@ export const updateDistrictsRankings = inngest.createFunction(
     const [districtAdvocatesCounts, districtsReferralsCount] = await Promise.all([
       step.run('Get Advocates Count by District', async () => {
         logger.info('Getting Advocates Count by District')
-        return await queryUSStates({
-          getRankingDataFn: getAdvocatesCountByDistrict,
+        return await fetchStatesCount({
+          queryFn: getAdvocatesCountByDistrict,
           logger,
         })
       }),
       step.run('Get Referrals Count by District', async () => {
         logger.info('Getting Referrals Count by District')
-        return await queryUSStates({
-          getRankingDataFn: getReferralsCountByDistrict,
+        return await fetchStatesCount({
+          queryFn: getReferralsCountByDistrict,
           logger,
         })
       }),
@@ -104,15 +105,20 @@ export const updateDistrictsRankings = inngest.createFunction(
   },
 )
 
-async function queryUSStates({
-  getRankingDataFn,
+async function fetchStatesCount({
+  queryFn,
   logger,
 }: {
-  getRankingDataFn: (stateCode: USStateCode) => Promise<AdvocatesCountResult[]>
+  queryFn: (stateCode: USStateCode) => Promise<AdvocatesCountResult[]>
   logger: Logger
 }) {
   const states = Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[]
-  const promises = states.map(stateCode => getRankingDataFn(stateCode))
+  const promises = states.map(stateCode =>
+    pRetry(() => queryFn(stateCode), {
+      retries: 3,
+    }),
+  )
+
   const results = await Promise.allSettled(promises)
   const allCounts: AdvocatesCountResult[] = []
   const failedStates: USStateCode[] = []
@@ -122,7 +128,7 @@ async function queryUSStates({
     if (result.status === 'fulfilled') {
       allCounts.push(...result.value)
     } else {
-      logger.error(`Promise rejected for state ${stateCode}`, {
+      logger.error(`Promise failed for state ${stateCode} in ${queryFn.name}`, {
         reason: result.reason,
       })
       failedStates.push(stateCode)
@@ -130,7 +136,7 @@ async function queryUSStates({
   })
 
   logger.info(
-    `Fetched ${getRankingDataFn.name} counts. Success: ${states.length - failedStates.length}, Failed: ${failedStates.length}`,
+    `Fetched ${queryFn.name} counts. Success: ${states.length - failedStates.length}, Failed: ${failedStates.length}`,
   )
   return allCounts
 }

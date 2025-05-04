@@ -66,34 +66,9 @@ export async function getAdvocatesCountByDistrict(
     .filter(result => isValidDistrict(result.state, result.district))
     .map(({ state, district, count }) => ({
       state: state as USStateCode,
-      district: district!, // District is non-null here due to filter
+      district: district!,
       count: Number(count),
     }))
-}
-
-export async function getAdvocatesCountByDistrictExplain(sampleStateCode: USStateCode = 'CA') {
-  const results = await prismaClient.$queryRaw`
-    EXPLAIN
-    SELECT
-      a.administrative_area_level_1 as state,
-      CASE
-        WHEN a.administrative_area_level_1 = 'DC' THEN '1'
-        ELSE a.us_congressional_district
-      END as district,
-      COUNT(DISTINCT u.id) as count
-    FROM user_action ua
-    INNER JOIN user u ON ua.user_id = u.id
-    INNER JOIN address a ON u.address_id = a.id
-    WHERE ua.action_type = ${UserActionType.OPT_IN}
-      AND a.country_code = 'US'
-      AND a.administrative_area_level_1 = ${sampleStateCode}
-    GROUP BY
-      state,
-      district
-    HAVING COUNT(DISTINCT u.id) > 0
-  `
-
-  return results
 }
 
 export async function getReferralsCountByDistrict(
