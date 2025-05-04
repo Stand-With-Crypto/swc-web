@@ -27,7 +27,7 @@ type ReferralsCountByDistrictQueryResult = {
 function isValidDistrict(state: string, district: string | null): boolean {
   const zodResult = zodStateDistrict.safeParse({ state, district })
   if (!zodResult.success) {
-    logger.warn('[District Rankings] Invalid district:', {
+    logger.warn('[District Rankings] Invalid district', {
       state,
       district,
       errors: zodResult.error.errors,
@@ -66,15 +66,12 @@ export async function getAdvocatesCountByDistrict(
     .filter(result => isValidDistrict(result.state, result.district))
     .map(({ state, district, count }) => ({
       state: state as USStateCode,
-      district: district!,
+      district: district!, // District is non-null here due to filter
       count: Number(count),
     }))
 }
 
-// Explain needs a sample state
-export async function getAdvocatesCountByDistrictExplain(
-  sampleStateCode: USStateCode = 'CA', // Default to CA for example
-) {
+export async function getAdvocatesCountByDistrictExplain(sampleStateCode: USStateCode = 'CA') {
   const results = await prismaClient.$queryRaw`
     EXPLAIN
     SELECT
@@ -99,19 +96,18 @@ export async function getAdvocatesCountByDistrictExplain(
   return results
 }
 
-/*
- * Looks at the address stored in UserActionRefer records to determine which district
- * a referral should be attributed to. Users can have multiple UserActionRefer records if they've
- * made referrals while living in different districts.
- */
-export async function getReferralsCountByDistrict(): Promise<AdvocatesCountResult[]> {
-  // NOTE: This function still needs refactoring to the per-state approach
-  // and needs the CASE statement for district if NULLs are possible.
+export async function getReferralsCountByDistrict(
+  stateCode: USStateCode,
+): Promise<AdvocatesCountResult[]> {
   const results = await prismaClient.$queryRaw<ReferralsCountByDistrictQueryResult[]>`
     SELECT
       a.administrative_area_level_1 as state,
-      a.us_congressional_district as district,
-      COUNT(DISTINCT ua.id) as refer_actions_count,
+      -- Handle NULL district for DC, map it to '1' for consistency
+      CASE
+        WHEN a.administrative_area_level_1 = 'DC' THEN '1'
+        ELSE a.us_congressional_district
+      END as district,
+      COUNT(DISTINCT ua.id) as refer_actions_count, -- Keep original alias if needed downstream
       SUM(uar.referrals_count) as referrals
     FROM user_action ua
     INNER JOIN user_action_refer uar ON ua.id = uar.id
@@ -119,28 +115,10 @@ export async function getReferralsCountByDistrict(): Promise<AdvocatesCountResul
     WHERE ua.action_type = ${UserActionType.REFER}
       AND uar.referrals_count > 0
       AND a.country_code = 'US'
-      AND a.administrative_area_level_1 != 'DC'
-      AND a.administrative_area_level_1 IS NOT NULL
-      AND a.us_congressional_district IS NOT NULL
+      AND a.administrative_area_level_1 = ${stateCode}
     GROUP BY
-      a.administrative_area_level_1,
-      a.us_congressional_district
-    HAVING SUM(uar.referrals_count) > 0
-
-    UNION ALL
-
-    SELECT
-      'DC' as state,
-      '1' as district,
-      COUNT(DISTINCT ua.id) as refer_actions_count,
-      SUM(uar.referrals_count) as referrals
-    FROM user_action ua
-    INNER JOIN user_action_refer uar ON ua.id = uar.id
-    INNER JOIN address a ON uar.address_id = a.id
-    WHERE ua.action_type = ${UserActionType.REFER}
-      AND uar.referrals_count > 0
-      AND a.country_code = 'US'
-      AND a.administrative_area_level_1 = 'DC'
+      state,
+      district
     HAVING SUM(uar.referrals_count) > 0
   `
 

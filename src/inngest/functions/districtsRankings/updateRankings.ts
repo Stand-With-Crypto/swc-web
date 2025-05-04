@@ -37,17 +37,16 @@ export const updateDistrictsRankings = inngest.createFunction(
     })
 
     const districtAdvocatesCounts = await step.run('Get Advocates Count by District', async () => {
-      logger.info('Getting Advocates Count for all states')
+      logger.info('Getting Advocates Count for all states in parallel')
       const stateCodes = Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[]
       const promises = stateCodes.map(stateCode =>
         getAdvocatesCountByDistrict(stateCode).catch(error => {
-          logger.error(`Failed querying advocates for state ${stateCode}`, { error })
+          logger.error(`Failed fetching advocates for state ${stateCode}`, { error })
           return { stateCode, error: true }
         }),
       )
 
       const results = await Promise.allSettled(promises)
-
       const allCounts: AdvocatesCountResult[] = []
       const failedStates: USStateCode[] = []
 
@@ -70,15 +69,43 @@ export const updateDistrictsRankings = inngest.createFunction(
       logger.info(
         `Fetched advocate counts. Success: ${stateCodes.length - failedStates.length}, Failed: ${failedStates.length}`,
       )
-      if (failedStates.length > 0) {
-        logger.warn(`Failures encountered during parallel advocate count fetch.`)
-      }
       return allCounts
     })
 
     const districtsReferralsCount = await step.run('Get Referrals Count by District', async () => {
       logger.info('Getting Referrals Count by District')
-      return await getReferralsCountByDistrict()
+      const stateCodes = Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[]
+      const promises = stateCodes.map(stateCode =>
+        getReferralsCountByDistrict(stateCode).catch(error => {
+          logger.error(`Failed fetching referrals for state ${stateCode}`, { stateCode, error })
+          return { stateCode, error: true }
+        }),
+      )
+
+      const results = await Promise.allSettled(promises)
+      const allCounts: AdvocatesCountResult[] = []
+      const failedStates: USStateCode[] = []
+
+      results.forEach((result, index) => {
+        const stateCode = stateCodes[index]
+        if (result.status === 'fulfilled') {
+          if ('error' in result.value) {
+            failedStates.push(stateCode)
+          } else {
+            allCounts.push(...result.value)
+          }
+        } else {
+          logger.error(`Promise rejected unexpectedly for state ${stateCode}`, {
+            reason: result.reason,
+          })
+          failedStates.push(stateCode)
+        }
+      })
+
+      logger.info(
+        `Fetched referral counts. Success: ${stateCodes.length - failedStates.length}, Failed: ${failedStates.length}`,
+      )
+      return allCounts
     })
 
     const [districtAdvocatesRankingResults, districtReferralsRankingResults] = await Promise.all([
