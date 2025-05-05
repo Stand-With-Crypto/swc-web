@@ -3,6 +3,7 @@ import { UserActionType } from '@prisma/client'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
 export type AdvocatesCountResult = {
@@ -54,7 +55,7 @@ export async function getAdvocatesCountByDistrict(
     INNER JOIN user u ON ua.user_id = u.id
     INNER JOIN address a ON u.address_id = a.id
     WHERE ua.action_type = ${UserActionType.OPT_IN}
-      AND a.country_code = 'US'
+      AND a.country_code = ${SupportedCountryCodes.US}
       AND a.administrative_area_level_1 = ${stateCode}
     GROUP BY
       state,
@@ -82,14 +83,14 @@ export async function getReferralsCountByDistrict(
         WHEN a.administrative_area_level_1 = 'DC' THEN '1'
         ELSE a.us_congressional_district
       END as district,
-      COUNT(DISTINCT ua.id) as refer_actions_count, -- Keep original alias if needed downstream
+      COUNT(DISTINCT ua.id) as refer_actions_count,
       SUM(uar.referrals_count) as referrals
     FROM user_action ua
     INNER JOIN user_action_refer uar ON ua.id = uar.id
     INNER JOIN address a ON uar.address_id = a.id
     WHERE ua.action_type = ${UserActionType.REFER}
       AND uar.referrals_count > 0
-      AND a.country_code = 'US'
+      AND a.country_code = ${SupportedCountryCodes.US}
       AND a.administrative_area_level_1 = ${stateCode}
     GROUP BY
       state,
