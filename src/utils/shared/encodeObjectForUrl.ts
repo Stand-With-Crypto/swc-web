@@ -2,7 +2,7 @@
 import stringify from 'fast-json-stable-stringify'
 import { isString } from 'lodash-es'
 
-interface EncodedObject {
+export interface EncodedObject {
   [key: string]: string | number | boolean | null | undefined
 }
 

@@ -1,7 +1,7 @@
-import { encodeObjectForUrl } from '@/utils/shared/encodeObjectForUrl'
+import { EncodedObject, encodeObjectForUrl } from '@/utils/shared/encodeObjectForUrl'
 import { fullUrl } from '@/utils/shared/urls'
 
-export interface OpenGraphImageOptions {
+export interface OpenGraphImageOptions extends EncodedObject {
   title: string
   description?: string
 }
