@@ -14,7 +14,6 @@ import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_FUNCTION_ID = 'script.update-districts-rankings'
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_SCHEDULE = '0 */1 * * *' // every 1 hour
 const UPDATE_DISTRICT_RANKINGS_INNGEST_EVENT_NAME = 'script/update-districts-rankings'
-const DB_CONNECTION_LIMIT = 50
 
 export interface UpdateDistrictsRankingsCronJobSchema {
   name: typeof UPDATE_DISTRICT_RANKINGS_INNGEST_EVENT_NAME
@@ -24,7 +23,6 @@ export const updateDistrictsRankings = inngest.createFunction(
   {
     id: UPDATE_DISTRICT_RANKINGS_CRON_JOB_FUNCTION_ID,
     onFailure: onScriptFailure,
-    concurrency: DB_CONNECTION_LIMIT,
   },
   {
     ...(NEXT_PUBLIC_ENVIRONMENT === 'production'
@@ -38,25 +36,26 @@ export const updateDistrictsRankings = inngest.createFunction(
     })
 
     const stateCodes = Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[]
-    const advocatesCountPromises = []
-    const referralsCountPromises = []
-    for (const stateCode of stateCodes) {
-      advocatesCountPromises.push(
-        step.run(`Get Advocates Count by District for ${stateCode}`, async () => {
-          logger.info(`Getting Advocates Count by District for ${stateCode}`)
-          return await getAdvocatesCountByDistrict(stateCode)
-        }),
-      )
-      referralsCountPromises.push(
-        step.run(`Get Referrals Count by District for ${stateCode}`, async () => {
-          logger.info(`Getting Referrals Count by District for ${stateCode}`)
-          return await getReferralsCountByDistrict(stateCode)
-        }),
-      )
-    }
-    const advocatesCountsByDistrictEntries = (await Promise.all(advocatesCountPromises)).flat()
-    const referralsCountByDistrictEntries = (await Promise.all(referralsCountPromises)).flat()
 
+    const advocatesCountsByDistrictEntries = await step.run(
+      'Get Advocates Count by District',
+      async () => {
+        logger.info('Getting Advocates Count by District')
+        const promises = stateCodes.map(getAdvocatesCountByDistrict)
+        const results = await Promise.all(promises)
+        return results.flat()
+      },
+    )
+
+    const referralsCountByDistrictEntries = await step.run(
+      'Get Referrals Count by District',
+      async () => {
+        logger.info('Getting Referrals Count by District')
+        const promises = stateCodes.map(getReferralsCountByDistrict)
+        const results = await Promise.all(promises)
+        return results.flat()
+      },
+    )
     const [advocatesRankingResults, referralsRankingResults] = await Promise.all([
       step.run('Update Districts Advocates Rankings', async () => {
         const upsertDistrictAdvocatesRanking = await createDistrictRankingUpserter(
