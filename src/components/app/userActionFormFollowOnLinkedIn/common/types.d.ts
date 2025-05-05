@@ -1,6 +1,6 @@
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export type UserActionFormFollowLinkedInProps = {
+export interface UserActionFormFollowLinkedInProps {
   countryCode: SupportedCountryCodes
   onClose: () => void
 }

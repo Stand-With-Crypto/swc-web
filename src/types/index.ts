@@ -1,6 +1,6 @@
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export type PageProps<Params = object> = {
+export interface PageProps<Params = object> {
   params: Promise<
     Params & {
       countryCode: SupportedCountryCodes

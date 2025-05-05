@@ -95,7 +95,7 @@ const eventPayloadSchema = z.object({
   persist: z.boolean().optional().default(false),
 })
 
-export type BackfillIntlUsersSchema = {
+export interface BackfillIntlUsersSchema {
   name: typeof BACKFILL_INTL_USERS_INNGEST_EVENT_NAME
   data: z.infer<typeof eventPayloadSchema>
 }

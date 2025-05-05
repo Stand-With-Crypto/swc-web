@@ -54,7 +54,7 @@ export const actionCreateUserActionTweetedAtPerson = withServerActionMiddleware(
   _actionCreateUserActionTweetedAtPerson,
 )
 
-type CampaignDuration = {
+interface CampaignDuration {
   START_TIME: Date | null
   END_TIME: Date | null
 }

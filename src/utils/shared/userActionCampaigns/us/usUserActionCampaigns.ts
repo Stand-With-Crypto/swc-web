@@ -118,7 +118,7 @@ export type USUserActionCampaignName =
   | USUserActionReferCampaignName
   | USUserActionPollCampaignName
   | USUserActionLinkedinCampaignName
-export type USUserActionCampaigns = {
+export interface USUserActionCampaigns {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName
   [UserActionType.CALL]: USUserActionCallCampaignName
   [UserActionType.DONATION]: USUserActionDonationCampaignName

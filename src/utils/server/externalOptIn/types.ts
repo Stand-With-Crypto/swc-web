@@ -20,7 +20,7 @@ export type Input = z.infer<ReturnType<typeof getZodExternalUserActionOptInSchem
   partner?: VerifiedSWCPartner
 }
 
-export type ExternalUserActionOptInResponse<ResultOptions extends string> = {
+export interface ExternalUserActionOptInResponse<ResultOptions extends string> {
   result: ResultOptions
   resultOptions: ResultOptions[]
   sessionId: string

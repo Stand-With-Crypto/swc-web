@@ -6,7 +6,7 @@ import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapit
 
 const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
 
-export type FetchAdvocatesFromCapitolCanaryRequest = {
+export interface FetchAdvocatesFromCapitolCanaryRequest {
   updatedSince?: number
   page?: number
   campaignid?: number
@@ -15,12 +15,12 @@ export type FetchAdvocatesFromCapitolCanaryRequest = {
   phone?: string
 }
 
-type FetchAdvocatesFromCapitolCanaryResponse = {
+interface FetchAdvocatesFromCapitolCanaryResponse {
   data: FetchAdvocatesFromCapitolCanaryData[]
   pagination: FetchAdvocatesFromCapitolCanaryPageInfo
 }
 
-type FetchAdvocatesFromCapitolCanaryData = {
+interface FetchAdvocatesFromCapitolCanaryData {
   id: number
   firstname: string
   middlename: string
@@ -35,7 +35,7 @@ type FetchAdvocatesFromCapitolCanaryData = {
   tags: string[]
 }
 
-type FetchAdvocatesFromCapitolCanaryAddress = {
+interface FetchAdvocatesFromCapitolCanaryAddress {
   street1: string
   street2: string
   city: string
@@ -49,7 +49,7 @@ type FetchAdvocatesFromCapitolCanaryAddress = {
   longitude: string
 }
 
-type FetchAdvocatesFromCapitolCanaryMembership = {
+interface FetchAdvocatesFromCapitolCanaryMembership {
   id: number
   campaignid: number
   campaigntype: string
@@ -58,14 +58,14 @@ type FetchAdvocatesFromCapitolCanaryMembership = {
   source: string
 }
 
-type FetchAdvocatesFromCapitolCanaryContact = {
+interface FetchAdvocatesFromCapitolCanaryContact {
   id: number
   address: string
   subscribed: boolean
   valid: boolean
 }
 
-type FetchAdvocatesFromCapitolCanaryPageInfo = {
+interface FetchAdvocatesFromCapitolCanaryPageInfo {
   count: number
   current_page: number
   next_url: string

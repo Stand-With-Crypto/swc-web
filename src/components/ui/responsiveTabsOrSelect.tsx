@@ -14,7 +14,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/utils/web/cn'
 
-type TabOption = {
+interface TabOption {
   value: string
   label: string
   content: React.ReactNode

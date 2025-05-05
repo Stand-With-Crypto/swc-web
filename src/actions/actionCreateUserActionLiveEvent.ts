@@ -47,7 +47,7 @@ export const actionCreateUserActionLiveEvent = withServerActionMiddleware(
   _actionCreateUserActionLiveEvent,
 )
 
-type EventDuration = {
+interface EventDuration {
   START_TIME: Date
   END_TIME: Date
 }

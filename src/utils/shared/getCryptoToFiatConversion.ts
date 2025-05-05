@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 
-type CryptoToFiatConversionResult = {
+interface CryptoToFiatConversionResult {
   data: {
     amount: Decimal
     currency: string
