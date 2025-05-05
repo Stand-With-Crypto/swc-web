@@ -94,10 +94,10 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_RACES,
         campaignName: AUUserActionViewKeyRacesCampaignName.H1_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'View Key Races in Australia',
         description:
-          'View the key races occurring across Australia that will impact the future of crypto.',
+          'Viewed the key races that occurred across Australia that could impact the future of crypto in early 2025.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => <Link href={urls.locationKeyRaces()}>{children}</Link>,
       },
