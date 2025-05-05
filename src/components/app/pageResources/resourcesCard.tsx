@@ -1,6 +1,6 @@
 import { NextImage } from '@/components/ui/image'
 
-type Props = {
+interface Props {
   imageUrl: string
   title: string
   subtitle: string

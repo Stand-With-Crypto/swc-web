@@ -83,7 +83,7 @@ type SensitiveDataClientUserActionDonation = Pick<
   amountUsd: number
   actionType: typeof UserActionType.DONATION
 }
-type SensitiveDataClientUserActionNFTMint = {
+interface SensitiveDataClientUserActionNFTMint {
   nftMint: ClientNFTMint
   actionType: typeof UserActionType.NFT_MINT
 }
@@ -91,21 +91,27 @@ type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
   actionType: typeof UserActionType.OPT_IN
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
-type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
+interface SensitiveDataClientUserActionTweet {
+  actionType: typeof UserActionType.TWEET
+}
 // Added here as a placeholder for type inference until we have some linkedin-specific fields
-type SensitiveDataClientUserActionLinkedIn = { actionType: typeof UserActionType.LINKEDIN }
+interface SensitiveDataClientUserActionLinkedIn {
+  actionType: typeof UserActionType.LINKEDIN
+}
 type SensitiveDataClientUserActionVoterRegistration = Pick<
   UserActionVoterRegistration,
   'usaState'
 > & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
-type SensitiveDataClientUserActionLiveEvent = { actionType: typeof UserActionType.LIVE_EVENT }
-type SensitiveDataClientUserActionTweetAtPerson = {
+interface SensitiveDataClientUserActionLiveEvent {
+  actionType: typeof UserActionType.LIVE_EVENT
+}
+interface SensitiveDataClientUserActionTweetAtPerson {
   actionType: typeof UserActionType.TWEET_AT_PERSON
   recipientDtsiSlug: string | null
 }
-type SensitiveDataClientUserActionRsvpEvent = {
+interface SensitiveDataClientUserActionRsvpEvent {
   actionType: typeof UserActionType.RSVP_EVENT
   eventSlug: string
   eventState: string
@@ -136,12 +142,12 @@ type SensitiveDataClientUserActionPollAnswer = Pick<
   UserActionPollAnswer,
   'answer' | 'isOtherAnswer' | 'userActionCampaignName'
 >
-type SensitiveDataClientUserActionPoll = {
+interface SensitiveDataClientUserActionPoll {
   actionType: typeof UserActionType.POLL
   userActionPollAnswers: SensitiveDataClientUserActionPollAnswer[]
 }
 
-type SensitiveDataClientUserActionViewKeyPage = {
+interface SensitiveDataClientUserActionViewKeyPage {
   actionType: typeof UserActionType.VIEW_KEY_PAGE
   path: string
 }

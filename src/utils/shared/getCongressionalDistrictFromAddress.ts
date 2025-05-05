@@ -72,7 +72,7 @@ export type CongressionalDistrictFromAddress = Awaited<
   ReturnType<typeof getCongressionalDistrictFromAddress>
 >
 
-export type GetCongressionalDistrictFromAddressParams = {
+export interface GetCongressionalDistrictFromAddressParams {
   stateCode?: USStateCode
 }
 

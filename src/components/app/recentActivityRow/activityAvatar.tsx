@@ -26,7 +26,7 @@ const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.VIEW_KEY_PAGE]: '/activityFeedIcons/email.svg',
 }
 
-type ActivityAvatarProps = {
+interface ActivityAvatarProps {
   actionType: ClientUserAction['actionType']
   size: number
 }

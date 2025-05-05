@@ -5,19 +5,19 @@ import { logger } from '@/utils/shared/logger'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
-type Result = {
+interface Result {
   state: USStateCode
   district: string
   count: number
 }
 
-type AdvocatesCountByDistrictQueryResult = {
+interface AdvocatesCountByDistrictQueryResult {
   state: string
   district: string
   count: number
 }
 
-type ReferralsCountByDistrictQueryResult = {
+interface ReferralsCountByDistrictQueryResult {
   state: string
   district: string
   refer_actions_count: number

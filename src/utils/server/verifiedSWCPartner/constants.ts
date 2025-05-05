@@ -4,7 +4,7 @@ export enum VerifiedSWCPartner {
   COINBASE = 'coinbase',
 }
 
-export type VerifiedSWCPartnerApiResponse<ResultOptions extends string> = {
+export interface VerifiedSWCPartnerApiResponse<ResultOptions extends string> {
   result: ResultOptions | null
   resultOptions: ResultOptions[] | []
   sessionId: string

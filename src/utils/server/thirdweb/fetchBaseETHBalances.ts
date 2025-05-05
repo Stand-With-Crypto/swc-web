@@ -2,7 +2,7 @@ import { formatEther } from 'viem'
 
 import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 
-type BaseETHBalance = {
+interface BaseETHBalance {
   walletAddress: string
   ethValue: number
 }

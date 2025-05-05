@@ -9,7 +9,7 @@ import { DTSI_HomepagePeopleQuery, DTSI_PersonCardFragment } from '@/data/dtsi/g
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-type HomepagePoliticiansSectionProps = {
+interface HomepagePoliticiansSectionProps {
   dtsiHomepagePoliticians: DTSI_HomepagePeopleQuery
   countryCode: SupportedCountryCodes
   cryptoStanceGrade: React.ComponentType<{

@@ -8,7 +8,7 @@ import { getClientModel } from '@/clientModels/utils'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-type SumDonationsByUserConfig = {
+interface SumDonationsByUserConfig {
   limit: number
   offset?: number
   pageNum: number

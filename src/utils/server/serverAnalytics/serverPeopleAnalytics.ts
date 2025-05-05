@@ -9,7 +9,10 @@ import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
 
 const logger = getLogger('serverPeopleAnalytics')
 
-type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
+interface ServerAnalyticsConfig {
+  localUser: LocalUser | null
+  userId: string
+}
 
 export type ServerPeopleAnalytics = ReturnType<typeof getServerPeopleAnalytics>
 

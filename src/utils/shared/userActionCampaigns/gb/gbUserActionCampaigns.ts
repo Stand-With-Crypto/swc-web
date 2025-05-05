@@ -62,7 +62,7 @@ export type GBUserActionCampaignName =
   | GBUserActionViewKeyPageCampaignName
   | GBUserActionPollCampaignName
 
-export type GBUserActionCampaigns = {
+export interface GBUserActionCampaigns {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: GBUserActionTweetCampaignName
   [UserActionType.LINKEDIN]: GBUserActionLinkedInCampaignName

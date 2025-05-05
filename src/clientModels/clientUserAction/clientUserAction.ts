@@ -69,11 +69,11 @@ type ClientUserActionDatabaseQuery = UserAction & {
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
   person: DTSIPersonForUserActions | null
 }
-type ClientUserActionEmail = {
+interface ClientUserActionEmail {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
-type ClientUserActionCall = {
+interface ClientUserActionCall {
   person: DTSIPersonForUserActions | null
   actionType: typeof UserActionType.CALL
 }
@@ -82,7 +82,7 @@ type ClientUserActionDonation = Pick<UserActionDonation, 'amountCurrencyCode' | 
   amount: number
   amountUsd: number
 }
-type ClientUserActionNFTMint = {
+interface ClientUserActionNFTMint {
   nftMint: ClientNFTMint
   actionType: typeof UserActionType.NFT_MINT
 }
@@ -90,17 +90,21 @@ type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
   actionType: typeof UserActionType.OPT_IN
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
-type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
+interface ClientUserActionTweet {
+  actionType: typeof UserActionType.TWEET
+}
 // Added here as a placeholder for type inference until we have some linkedin-specific fields
-type ClientUserActionLinkedIn = { actionType: typeof UserActionType.LINKEDIN }
+interface ClientUserActionLinkedIn {
+  actionType: typeof UserActionType.LINKEDIN
+}
 type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
-type ClientUserActionLiveEvent = {
+interface ClientUserActionLiveEvent {
   actionType: typeof UserActionType.LIVE_EVENT
   campaignName: USUserActionLiveEventCampaignName
 }
-type ClientUserActionTweetAtPerson = {
+interface ClientUserActionTweetAtPerson {
   actionType: typeof UserActionType.TWEET_AT_PERSON
   campaignName: USUserActionTweetAtPersonCampaignName
   person: DTSIPersonForUserActions | null
@@ -108,7 +112,7 @@ type ClientUserActionTweetAtPerson = {
 type ClientUserActionVoterAttestation = Pick<UserActionVoterAttestation, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_ATTESTATION
 }
-type ClientUserActionRsvpEvent = {
+interface ClientUserActionRsvpEvent {
   actionType: typeof UserActionType.RSVP_EVENT
   eventSlug: string
   eventState: string
@@ -136,11 +140,11 @@ type ClientUserActionPollAnswer = Pick<
 type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
   actionType: typeof UserActionType.REFER
 }
-type ClientUserActionPoll = {
+interface ClientUserActionPoll {
   actionType: typeof UserActionType.POLL
   userActionPollAnswers: ClientUserActionPollAnswer[]
 }
-type ClientUserActionViewKeyPage = {
+interface ClientUserActionViewKeyPage {
   actionType: typeof UserActionType.VIEW_KEY_PAGE
   path: string
 }

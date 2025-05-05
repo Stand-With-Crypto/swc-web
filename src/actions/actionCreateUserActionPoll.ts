@@ -24,7 +24,7 @@ import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`actionCreateUserActionPoll`)
 
-export type CreatePollVoteInput = {
+export interface CreatePollVoteInput {
   campaignName: string
   answers: { answer: string; isOtherAnswer: boolean }[]
 }

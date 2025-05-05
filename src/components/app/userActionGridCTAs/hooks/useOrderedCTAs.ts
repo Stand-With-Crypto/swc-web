@@ -6,7 +6,7 @@ import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { useCountryCode } from '@/hooks/useCountryCode'
 
-type CTAType = {
+interface CTAType {
   title: string
   description: string
   mobileCTADescription?: string

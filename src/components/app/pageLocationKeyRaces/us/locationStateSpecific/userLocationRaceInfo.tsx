@@ -23,7 +23,7 @@ import {
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-type UserLocationRaceInfoProps = {
+interface UserLocationRaceInfoProps {
   groups: ReturnType<typeof organizeStateSpecificPeople>
   stateCode: USStateCode
   stateName: string

@@ -4,7 +4,7 @@ import { toBool } from '@/utils/shared/toBool'
 const maybeIgnorePreGeneration = (num: number) =>
   toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : num
 
-type PaginationConfig = {
+interface PaginationConfig {
   totalPages: number
   itemsPerPage: number
   totalPregeneratedPages: number
