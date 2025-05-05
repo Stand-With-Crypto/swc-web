@@ -22,10 +22,6 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
-      href: urls.locationKeyRaces(),
-      text: 'Races',
-    },
-    {
       href: urls.polls(),
       text: 'Polls',
     },
