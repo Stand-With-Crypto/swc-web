@@ -6,19 +6,19 @@ import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
-export type AdvocatesCountResult = {
+export interface AdvocatesCountResult {
   state: USStateCode
   district: string
   count: number
 }
 
-type AdvocatesCountByDistrictQueryResult = {
+interface AdvocatesCountByDistrictQueryResult {
   state: string
   district: string | null
   count: number
 }
 
-type ReferralsCountByDistrictQueryResult = {
+interface ReferralsCountByDistrictQueryResult {
   state: string
   district: string | null
   refer_actions_count: number

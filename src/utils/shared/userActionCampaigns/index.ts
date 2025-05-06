@@ -27,7 +27,7 @@ import {
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 // Define which action types are available for each country
-export type CountryActiveClientUserActionWithCampaignType = {
+export interface CountryActiveClientUserActionWithCampaignType {
   [SupportedCountryCodes.US]: USActiveClientUserActionWithCampaignType
   [SupportedCountryCodes.GB]: GBActiveClientUserActionWithCampaignType
   [SupportedCountryCodes.CA]: CAActiveClientUserActionWithCampaignType
@@ -46,7 +46,7 @@ export const COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN: {
   [SupportedCountryCodes.AU]: AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
 }
 
-export type CountryUserActionCampaigns = {
+export interface CountryUserActionCampaigns {
   [SupportedCountryCodes.US]: USUserActionCampaigns
   [SupportedCountryCodes.GB]: GBUserActionCampaigns
   [SupportedCountryCodes.CA]: CAUserActionCampaigns

@@ -63,7 +63,7 @@ export type CAUserActionCampaignName =
   | CAUserActionViewKeyPageCampaignName
   | CAUserActionPollCampaignName
 
-export type CAUserActionCampaigns = {
+export interface CAUserActionCampaigns {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: CAUserActionTweetCampaignName
   [UserActionType.LINKEDIN]: CAUserActionLinkedInCampaignName

@@ -20,7 +20,7 @@ const parseQueryString = (queryString?: string) => {
   return `?${queryString}`
 }
 
-type DeeplinkConfig = {
+interface DeeplinkConfig {
   countryCode: SupportedCountryCodes
   queryString?: string
 }
@@ -136,7 +136,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   },
 }
 
-type GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> = {
+interface GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> {
   actionType: ActionType
   config: DeeplinkConfig
   campaign?: UserActionCampaignNames

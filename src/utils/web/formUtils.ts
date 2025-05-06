@@ -15,7 +15,7 @@ import {
 import { formatErrorStatus } from '@/utils/web/errorUtils'
 
 export const GENERIC_FORM_ERROR_KEY = 'FORM_ERROR' as const
-export type GenericErrorFormValues = {
+export interface GenericErrorFormValues {
   FORM_ERROR?: string
 }
 

@@ -63,7 +63,7 @@ export type AUUserActionCampaignName =
   | AUUserActionViewKeyPageCampaignName
   | AUUserActionPollCampaignName
 
-export type AUUserActionCampaigns = {
+export interface AUUserActionCampaigns {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: AUUserActionTweetCampaignName
   [UserActionType.LINKEDIN]: AUUserActionLinkedInCampaignName

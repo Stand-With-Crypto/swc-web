@@ -8,11 +8,11 @@ import { NextImage } from '@/components/ui/image'
 import { NFTSlug } from '@/utils/shared/nft'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
-type NFTDisplayProps = {
+interface NFTDisplayProps {
   userActions: SensitiveDataClientUserAction[]
 }
 
-type NFTImages = {
+interface NFTImages {
   name: string
   image: string
   width: number
