@@ -12,9 +12,9 @@ export function PageReferralsHeading() {
   if (!isLoggedIn || isLoading || !hasHydrated) {
     return (
       <section className="space-y-7 text-center">
-        <PageTitle>Referral Leaderboard</PageTitle>
+        <PageTitle>District Leaderboard</PageTitle>
         <PageSubTitle>
-          See which districts have referred the most number of new advocates into SWC{' '}
+          See which districts have the most number of Stand With Crypto advocates.
         </PageSubTitle>
       </section>
     )
