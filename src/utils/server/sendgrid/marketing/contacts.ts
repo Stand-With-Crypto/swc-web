@@ -2,8 +2,8 @@ import * as Sentry from '@sentry/nextjs'
 import * as XLSX from 'xlsx'
 
 import {
-  getContactFieldIds,
-  getSendgridCustomFields,
+  mapSendgridFieldToFieldIds,
+  fetchSendgridCustomFields,
   SendgridCustomField,
   SendgridReservedField,
 } from '@/utils/server/sendgrid/marketing/customFields'
@@ -22,8 +22,8 @@ export const upsertSendgridContactsArray = async (
   options: Options,
 ) => {
   try {
-    const sendgridFieldDefinitions = await getSendgridCustomFields()
-    const fieldIds = getContactFieldIds(sendgridFieldDefinitions)
+    const sendgridFieldDefinitions = await fetchSendgridCustomFields()
+    const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
 
     // TODO: improve type safety.
     // An if case for each field wont allow for dynamic fields scalability (every new field will require an update here)
@@ -36,9 +36,9 @@ export const upsertSendgridContactsArray = async (
       if (fieldIds.user_actions_count) {
         custom_fields[fieldIds.user_actions_count] = contactCustomFields.user_actions_count
       }
-      if (fieldIds.completed_user_actions) {
-        custom_fields[fieldIds.completed_user_actions] = contactCustomFields.completed_user_actions
-      }
+      // if (fieldIds.completed_user_actions) {
+      //   custom_fields[fieldIds.completed_user_actions] = contactCustomFields.completed_user_actions
+      // }
       // if (fieldIds.session_id) {
       //   custom_fields[fieldIds.session_id] = contactCustomFields.session_id
       // }
@@ -90,8 +90,8 @@ export async function uploadSendgridContactsCSV(
   options?: Options,
 ) {
   try {
-    const sendgridFieldDefinitions = await getSendgridCustomFields()
-    const fieldIds = getContactFieldIds(sendgridFieldDefinitions)
+    const sendgridFieldDefinitions = await fetchSendgridCustomFields()
+    const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
 
     if (!fieldIds.email) {
       throw new Error('Required email field not found in SendGrid')
@@ -108,7 +108,6 @@ export async function uploadSendgridContactsCSV(
       fieldIds.postal_code,
       fieldIds.phone_number,
       fieldIds.signup_date,
-      fieldIds.completed_user_actions,
       fieldIds.user_actions_count,
     ]
 

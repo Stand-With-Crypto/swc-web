@@ -1,8 +1,9 @@
 import * as Sentry from '@sentry/nextjs'
 
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
+import { UserActionType } from '@prisma/client'
 
-export const SendgridReservedFields = [
+export const SENDGRID_RESERVED_FIELDS = [
   'external_id',
   'email',
   'first_name',
@@ -15,20 +16,26 @@ export const SendgridReservedFields = [
   'postal_code',
   'phone_number',
 ] as const
-export type SendgridReservedField = (typeof SendgridReservedFields)[number]
+export type SendgridReservedField = (typeof SENDGRID_RESERVED_FIELDS)[number]
 
-export const SendgridCustomFields = [
+export type SendgridUserActionCustomField = `${UserActionType}_actions`
+export function getSendgridUserActionCustomFieldName(
+  actionType: UserActionType,
+): SendgridUserActionCustomField {
+  return `${actionType}_actions`
+}
+
+export const SENDGRID_CUSTOM_FIELDS = [
   'signup_date',
-  'completed_user_actions',
   'user_actions_count',
-  // 'session_id',
+  'session_id',
+  ...Object.values(UserActionType).map(getSendgridUserActionCustomFieldName),
 ] as const
-export type SendgridCustomField = (typeof SendgridCustomFields)[number]
+export type SendgridCustomField = (typeof SENDGRID_CUSTOM_FIELDS)[number]
 
 export type SendgridField = SendgridReservedField | SendgridCustomField
 
 export type FieldType = 'Text' | 'Number' | 'Date'
-
 interface FieldDefinitionsResponse {
   custom_fields?: Array<{
     id: string
@@ -43,7 +50,7 @@ interface FieldDefinitionsResponse {
   }>
 }
 
-export const getSendgridCustomFields = async () => {
+export const fetchSendgridCustomFields = async () => {
   try {
     const [response] = await SendgridClient.request({
       url: '/v3/marketing/field_definitions',
@@ -91,11 +98,11 @@ export const createSendgridCustomField = async (name: string, fieldType: FieldTy
   }
 }
 
-export function getContactFieldIds(fieldDefinitions: FieldDefinitionsResponse) {
-  const allFields: SendgridField[] = [...SendgridReservedFields, ...SendgridCustomFields]
+export function mapSendgridFieldToFieldIds(fieldDefinitions: FieldDefinitionsResponse) {
+  const allFields: SendgridField[] = [...SENDGRID_RESERVED_FIELDS, ...SENDGRID_CUSTOM_FIELDS]
   return allFields.reduce(
     (acc, fieldName) => {
-      const isReserved = SendgridReservedFields.includes(fieldName)
+      const isReserved = SENDGRID_RESERVED_FIELDS.includes(fieldName)
       const fields = isReserved ? fieldDefinitions.reserved_fields : fieldDefinitions.custom_fields
       const field = fields?.find(f => f.name === fieldName)
       acc[fieldName] = field?.id || null

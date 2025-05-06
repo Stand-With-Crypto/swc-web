@@ -1,16 +1,22 @@
 import { inngest } from '@/inngest/inngest'
 import {
+  SendgridContact,
   uploadSendgridContactsCSV,
   upsertSendgridContactsArray,
 } from '@/utils/server/sendgrid/marketing/contacts'
 import {
-  getSendgridContactList,
+  getSendgridUserActionCustomFieldName,
+  SendgridUserActionCustomField,
+} from '@/utils/server/sendgrid/marketing/customFields'
+import {
+  fetchSendgridContactList,
   getSendgridContactListName,
 } from '@/utils/server/sendgrid/marketing/lists'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { UserActionType } from '@prisma/client'
 
-const SYNC_COUNTRY_CONTACTS_EVENT_NAME = 'script/sync-country-contact-list'
-const SYNC_COUNTRY_CONTACTS_FUNCTION_ID = 'script.sync-country-contact-list'
+const SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME = 'script/sync-sendgrid-contacts-processor'
+const SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID = 'script.sync-sendgrid-contacts-processor'
 
 const SENDGRID_CONTACTS_API_LIMIT = 30000
 
@@ -39,25 +45,22 @@ type User = {
   }[]
 }
 
-export type SyncCountryContactsParams = {
-  countryCode: SupportedCountryCodes
-  users: User[]
+export type SyncSendgridContactsProcessorSchema = {
+  name: typeof SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME
+  data: {
+    countryCode: SupportedCountryCodes
+    users: User[]
+  }
 }
 
-export type SyncCountryContactsSchema = {
-  name: typeof SYNC_COUNTRY_CONTACTS_EVENT_NAME
-  data: SyncCountryContactsParams
-}
-
-export const syncCountryContacts = inngest.createFunction(
-  { id: SYNC_COUNTRY_CONTACTS_FUNCTION_ID },
-  { event: SYNC_COUNTRY_CONTACTS_EVENT_NAME },
+export const syncSendgridContactsProcessor = inngest.createFunction(
+  { id: SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID },
+  { event: SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME },
   async ({ event, step }) => {
     const { countryCode, users } = event.data
 
     const listId = await step.run(`get-${countryCode}-list-id`, async () => {
-      const listName = getSendgridContactListName(countryCode)
-      const list = await getSendgridContactList(listName)
+      const list = await fetchSendgridContactList(getSendgridContactListName(countryCode))
       return list.id
     })
 
@@ -66,13 +69,23 @@ export const syncCountryContacts = inngest.createFunction(
         // Format users for SendGrid - map DB fields to SendGrid fields
         const contacts = users.map(user => {
           const email = user.primaryUserEmailAddress?.emailAddress || ''
-          const completedUserActions = user.userActions
-            .map(action => `${action.actionType}-${action.campaignName}`)
-            .join(';')
+          const completedUsersActionsCustomFields: Record<SendgridUserActionCustomField, string> =
+            Object.values(UserActionType).reduce(
+              (acc, actionType) => {
+                const customFieldName = getSendgridUserActionCustomFieldName(actionType)
+                acc[customFieldName] = user.userActions
+                  .filter(action => action.actionType === actionType)
+                  .map(action => action.campaignName)
+                  .join(',')
+                return acc
+              },
+              {} as Record<SendgridUserActionCustomField, string>,
+            )
 
           return {
-            external_id: user.id,
+            // Reserved fields
             email,
+            external_id: user.id,
             first_name: user.firstName || '',
             last_name: user.lastName || '',
             country: user.countryCode,
@@ -85,11 +98,11 @@ export const syncCountryContacts = inngest.createFunction(
             // Custom fields
             custom_fields: {
               signup_date: user.datetimeCreated,
-              completed_user_actions: completedUserActions,
               user_actions_count: user.userActions.length.toString(),
               session_id: user.userSessions?.[0]?.id || '',
+              ...completedUsersActionsCustomFields,
             },
-          }
+          } satisfies SendgridContact
         })
 
         // const validContacts = contacts.filter(contact => !!contact.email)
@@ -103,6 +116,10 @@ export const syncCountryContacts = inngest.createFunction(
           }
         }
 
+        /**
+         * SendGrid has a limit of 30,000 contacts per batch or 6MB of data, whichever is smaller.
+         * The CSV upload limit is 1,000,000 contacts or 5GB of data, whichever is smaller.
+         */
         if (validContacts.length > SENDGRID_CONTACTS_API_LIMIT) {
           const uploadResult = await uploadSendgridContactsCSV(validContacts, {
             listIds: [listId],

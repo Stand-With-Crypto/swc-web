@@ -28,7 +28,7 @@ interface CreateListResponse {
   contact_count: number
 }
 
-export const getSendgridContactList = async (name: SendgridContactListName) => {
+export const fetchSendgridContactList = async (name: SendgridContactListName) => {
   try {
     const [listsResponse] = await SendgridClient.request({
       url: `/v3/marketing/lists`,
