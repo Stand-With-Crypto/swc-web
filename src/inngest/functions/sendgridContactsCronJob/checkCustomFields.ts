@@ -89,5 +89,6 @@ export async function checkCustomFields() {
   return {
     success: true,
     message: `Created ${successCount} fields, ${failureCount} failed`,
+    results: creationResults,
   }
 }

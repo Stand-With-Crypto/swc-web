@@ -64,8 +64,7 @@ export const upsertSendgridContactsArray = async (
       body: data,
     }
     const [response] = await SendgridClient.request(request)
-    console.log('UPSERT RESPONSE:', response.body)
-    return response.body
+    return response.body as { job_id: string }
   } catch (error) {
     Sentry.captureException(error, {
       tags: {

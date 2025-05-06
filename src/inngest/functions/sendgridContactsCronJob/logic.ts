@@ -107,12 +107,13 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         })
 
         // const validContacts = contacts.filter(contact => !!contact.email)
-        const validContacts = contacts
+        const validContacts = contacts.slice(0, 1)
 
         if (validContacts.length === 0) {
           return {
             success: true,
-            count: 0,
+            validContactsCount: 0,
+            jobId: null,
             method: 'no-contacts',
           }
         }
@@ -126,18 +127,19 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
             listIds: [listId],
           })
           return {
-            success: true,
-            count: validContacts.length,
-            job_id: uploadResult.job_id,
+            success: uploadResult.success,
+            validContactsCount: validContacts.length,
+            jobId: uploadResult.job_id,
             method: 'csv-upload',
           }
         } else {
-          await upsertSendgridContactsArray(validContacts, {
+          const upsertResult = await upsertSendgridContactsArray(validContacts, {
             listIds: [listId],
           })
           return {
             success: true,
-            count: validContacts.length,
+            validContactsCount: validContacts.length,
+            jobId: upsertResult.job_id,
             method: 'upsert',
           }
         }
@@ -145,7 +147,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         console.error(`Error syncing ${countryCode} contacts:`, error)
         return {
           success: false,
-          count: users.length,
+          usersCount: users.length,
           error: error instanceof Error ? error.message : String(error),
         }
       }

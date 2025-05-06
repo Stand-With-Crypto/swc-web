@@ -16,6 +16,8 @@ export const SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME =
 export const SYNC_SENDGRID_CONTACTS_COORDINATOR_FUNCTION_ID =
   'script.sync-sendgrid-contacts-coordinator'
 
+const DB_QUERY_LIMIT = 100000
+
 export type SyncSendgridContactsCoordinatorSchema = {
   name: typeof SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME
 }
@@ -38,72 +40,106 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       countryCode => countryCode !== SupportedCountryCodes.US,
     )
 
-    const results = []
+    const allResults = []
     for (const countryCode of countries) {
-      const users = await step.run(`fetch-${countryCode}-users`, async () => {
-        return prismaClient.user.findMany({
+      const userCount = await step.run(`count-${countryCode}-users`, async () => {
+        return prismaClient.user.count({
           where: {
             countryCode,
             primaryUserEmailAddressId: { not: null },
           },
-          select: {
-            id: true,
-            primaryUserEmailAddress: {
-              select: {
-                emailAddress: true,
-              },
-            },
-            userActions: {
-              select: {
-                actionType: true,
-                campaignName: true,
-              },
-            },
-            address: {
-              select: {
-                formattedDescription: true,
-                locality: true,
-                administrativeAreaLevel1: true,
-                postalCode: true,
-              },
-            },
-            phoneNumber: true,
-            firstName: true,
-            lastName: true,
-            countryCode: true,
-            datetimeCreated: true,
-            userSessions: {
-              select: {
-                id: true,
-              },
-            },
-          },
         })
       })
 
-      if (!users.length) {
+      if (userCount === 0) {
         logger.info(`No users found for country code ${countryCode}, skipping.`)
         continue
       }
 
-      logger.info(`Processing ${users.length} users for country ${countryCode}`)
-
-      const promises = []
-      promises.push(
-        step.invoke(`sync-${countryCode}-contacts`, {
-          function: syncSendgridContactsProcessor,
-          data: {
-            countryCode,
-            users,
-          },
-        }),
+      logger.info(`Found ${userCount} users for country ${countryCode}`)
+      const numDbChunks = Math.ceil(userCount / DB_QUERY_LIMIT)
+      logger.info(
+        `Processing ${countryCode} users in ${numDbChunks} DB chunks of up to ${DB_QUERY_LIMIT} users each`,
       )
 
-      const countryResults = await Promise.all(promises)
+      const countryPromises = []
+      for (let chunkIndex = 0; chunkIndex < numDbChunks; chunkIndex++) {
+        const take = DB_QUERY_LIMIT
+        const skip = chunkIndex * DB_QUERY_LIMIT
 
-      results.push({
+        logger.info(
+          `Fetching DB chunk ${chunkIndex + 1}/${numDbChunks} for ${countryCode}: skip=${skip}, take=${take}`,
+        )
+
+        const users = await step.run(
+          `fetch-${countryCode}-users-db-chunk-${chunkIndex}`,
+          async () => {
+            return prismaClient.user.findMany({
+              where: {
+                countryCode,
+                primaryUserEmailAddressId: { not: null },
+              },
+              select: {
+                id: true,
+                primaryUserEmailAddress: {
+                  select: {
+                    emailAddress: true,
+                  },
+                },
+                userActions: {
+                  select: {
+                    actionType: true,
+                    campaignName: true,
+                  },
+                },
+                address: {
+                  select: {
+                    formattedDescription: true,
+                    locality: true,
+                    administrativeAreaLevel1: true,
+                    postalCode: true,
+                  },
+                },
+                phoneNumber: true,
+                firstName: true,
+                lastName: true,
+                countryCode: true,
+                datetimeCreated: true,
+                userSessions: {
+                  select: {
+                    id: true,
+                  },
+                },
+              },
+              skip,
+              take,
+            })
+          },
+        )
+
+        if (!users.length) {
+          logger.warn(
+            `DB chunk ${chunkIndex + 1}/${numDbChunks} for ${countryCode} returned no users. Stopping for this country.`,
+          )
+          break
+        }
+
+        countryPromises.push(
+          step.invoke(`sync-${countryCode}-contacts-batch-${chunkIndex}`, {
+            function: syncSendgridContactsProcessor,
+            data: {
+              countryCode,
+              users,
+            },
+          }),
+        )
+      }
+
+      const countryResults = await Promise.all(countryPromises)
+
+      allResults.push({
         countryCode,
-        totalUsers: users.length,
+        totalUsers: userCount,
         results: countryResults,
       })
     }
@@ -111,7 +147,7 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
     return {
       message: 'Completed syncing contacts to SendGrid',
       customFields: 'verified',
-      results,
+      results: allResults,
     }
   },
 )
