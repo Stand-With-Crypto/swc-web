@@ -1,15 +1,16 @@
+import { UserActionType } from '@prisma/client'
+
 import {
   createSendgridCustomField,
   fetchSendgridCustomFields,
+  FieldType,
   getSendgridUserActionCustomFieldName,
   mapSendgridFieldToFieldIds,
   SENDGRID_CUSTOM_FIELDS,
+  SendgridCustomField,
   SendgridUserActionCustomField,
 } from '@/utils/server/sendgrid/marketing/customFields'
-
-import { FieldType, SendgridCustomField } from '@/utils/server/sendgrid/marketing/customFields'
 import { logger } from '@/utils/shared/logger'
-import { UserActionType } from '@prisma/client'
 
 export async function checkCustomFields() {
   const fieldDefinitions = await fetchSendgridCustomFields()
@@ -81,7 +82,7 @@ export async function checkCustomFields() {
   if (failureCount > 0) {
     const errors = creationResults
       .filter(r => r.status === 'error')
-      .map(r => `Field ${r.fieldName}: ${r.error}`)
+      .map(r => `Field ${r.fieldName}: ${r.error || 'Unknown error'}`)
     logger.error(`Failed to create some custom fields: ${errors.join('; ')}`)
     throw new Error(`Failed to create custom fields: ${errors.join('; ')}`)
   }

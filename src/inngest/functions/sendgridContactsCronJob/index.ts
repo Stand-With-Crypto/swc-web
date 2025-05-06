@@ -1,5 +1,6 @@
-import chunk from 'lodash-es/chunk'
+import { NonRetriableError } from 'inngest'
 
+import { checkCustomFields } from '@/inngest/functions/sendgridContactsCronJob/checkCustomFields'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -8,9 +9,7 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 
-import { NonRetriableError } from 'inngest'
 import { syncSendgridContactsProcessor } from './logic'
-import { checkCustomFields } from '@/inngest/functions/sendgridContactsCronJob/checkCustomFields'
 
 export const SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME =
   'script/sync-sendgrid-contacts-coordinator'
@@ -29,7 +28,8 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       try {
         return await checkCustomFields()
       } catch (error) {
-        throw new NonRetriableError('Custom Fields check failed')
+        logger.error('Custom Fields check failed', { error })
+        throw new NonRetriableError(`Custom Fields check failed`)
       }
     })
 

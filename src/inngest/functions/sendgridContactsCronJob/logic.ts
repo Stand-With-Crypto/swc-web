@@ -1,3 +1,5 @@
+import { UserActionType } from '@prisma/client'
+
 import { inngest } from '@/inngest/inngest'
 import {
   SendgridContact,
@@ -13,7 +15,6 @@ import {
   getSendgridContactListName,
 } from '@/utils/server/sendgrid/marketing/lists'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { UserActionType } from '@prisma/client'
 
 const SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME = 'script/sync-sendgrid-contacts-processor'
 const SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID = 'script.sync-sendgrid-contacts-processor'
@@ -59,7 +60,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
   async ({ event, step }) => {
     const { countryCode, users } = event.data
 
-    const listId = await step.run(`get-${countryCode}-list-id`, async () => {
+    const listId = await step.run(`get-${countryCode}-contact-list-id`, async () => {
       const list = await fetchSendgridContactList(getSendgridContactListName(countryCode))
       return list.id
     })

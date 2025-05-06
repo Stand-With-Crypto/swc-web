@@ -2,8 +2,8 @@ import * as Sentry from '@sentry/nextjs'
 import * as XLSX from 'xlsx'
 
 import {
-  mapSendgridFieldToFieldIds,
   fetchSendgridCustomFields,
+  mapSendgridFieldToFieldIds,
   SendgridCustomField,
   SendgridReservedField,
 } from '@/utils/server/sendgrid/marketing/customFields'
@@ -25,23 +25,28 @@ export const upsertSendgridContactsArray = async (
     const sendgridFieldDefinitions = await fetchSendgridCustomFields()
     const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
 
-    // TODO: improve type safety.
-    // An if case for each field wont allow for dynamic fields scalability (every new field will require an update here)
     const formattedContacts = contacts.map(contact => {
       const { custom_fields: contactCustomFields, ...standardFields } = contact
       const custom_fields: Record<string, string> = {}
-      if (fieldIds.signup_date) {
-        custom_fields[fieldIds.signup_date] = contactCustomFields.signup_date
-      }
-      if (fieldIds.user_actions_count) {
-        custom_fields[fieldIds.user_actions_count] = contactCustomFields.user_actions_count
-      }
-      // if (fieldIds.completed_user_actions) {
-      //   custom_fields[fieldIds.completed_user_actions] = contactCustomFields.completed_user_actions
-      // }
-      // if (fieldIds.session_id) {
-      //   custom_fields[fieldIds.session_id] = contactCustomFields.session_id
-      // }
+
+      typedObjectEntries(contactCustomFields).forEach(([fieldName, fieldValue]) => {
+        const fieldId = fieldIds[fieldName]
+        if (fieldId) {
+          custom_fields[fieldId] = fieldValue
+        } else {
+          Sentry.captureMessage(`Custom field ${fieldName} not found in SendGrid definitions`, {
+            tags: {
+              domain: 'SendgridMarketing',
+            },
+            extra: {
+              fieldName,
+              fieldValue,
+              sendgridFieldDefinitions,
+            },
+          })
+        }
+      })
+
       return {
         ...standardFields,
         custom_fields,
@@ -64,7 +69,7 @@ export const upsertSendgridContactsArray = async (
   } catch (error) {
     Sentry.captureException(error, {
       tags: {
-        domain: 'sendgridClient.contacts.upsert',
+        domain: 'SendgridMarketing',
       },
       extra: {
         contacts: contacts.slice(0, 3),
@@ -150,7 +155,7 @@ export async function uploadSendgridContactsCSV(
   } catch (error) {
     Sentry.captureException(error, {
       tags: {
-        domain: 'sendgridClient.contacts.upload',
+        domain: 'SendgridMarketing',
       },
       extra: {
         contacts: contacts.slice(0, 3),
@@ -159,4 +164,9 @@ export async function uploadSendgridContactsCSV(
     })
     throw error
   }
+}
+
+type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T]
+function typedObjectEntries<T extends object>(object: T): Entries<T>[] {
+  return Object.entries(object) as Entries<T>[]
 }

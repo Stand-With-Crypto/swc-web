@@ -28,14 +28,14 @@ interface CreateListResponse {
   contact_count: number
 }
 
-export const fetchSendgridContactList = async (name: SendgridContactListName) => {
+export const fetchSendgridContactList = async (listName: SendgridContactListName) => {
   try {
     const [listsResponse] = await SendgridClient.request({
       url: `/v3/marketing/lists`,
       method: 'GET',
     })
     const lists = (listsResponse.body as GetListsResponse).result
-    const existingList = lists.find(list => list.name === name)
+    const existingList = lists.find(list => list.name === listName)
     if (existingList) {
       return existingList
     }
@@ -44,7 +44,7 @@ export const fetchSendgridContactList = async (name: SendgridContactListName) =>
       url: '/v3/marketing/lists',
       method: 'POST',
       body: {
-        name: name,
+        name: listName,
       },
     })
     const newList = createResponse.body as CreateListResponse
@@ -52,7 +52,10 @@ export const fetchSendgridContactList = async (name: SendgridContactListName) =>
   } catch (error) {
     Sentry.captureException(error, {
       tags: {
-        domain: 'sendgridClient.lists.getOrCreateList',
+        domain: 'SendgridMarketing',
+      },
+      extra: {
+        listName,
       },
     })
     throw error

@@ -1,7 +1,7 @@
+import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
-import { UserActionType } from '@prisma/client'
 
 export const SENDGRID_RESERVED_FIELDS = [
   'external_id',

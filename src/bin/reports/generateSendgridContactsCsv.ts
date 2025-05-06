@@ -12,12 +12,13 @@ import {
 import {
   createSendgridCustomField,
   FieldType,
-  getContactFieldIds,
-  getSendgridCustomFields,
-  SendgridCustomFields,
+  mapSendgridFieldToFieldIds,
+  fetchSendgridCustomFields,
+  SendgridCustomField,
+  SENDGRID_CUSTOM_FIELDS,
 } from '@/utils/server/sendgrid/marketing/customFields'
 import {
-  getSendgridContactList,
+  fetchSendgridContactList,
   getSendgridContactListName,
 } from '@/utils/server/sendgrid/marketing/lists'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
@@ -145,13 +146,13 @@ async function ensureCustomFieldsExist() {
   }
 
   // Get existing fields
-  const fieldDefinitions = await getSendgridCustomFields()
+  const fieldDefinitions = await fetchSendgridCustomFields()
   const existingCustomFields = fieldDefinitions?.custom_fields?.map(field => field.name) || []
 
   console.log(`Found ${existingCustomFields.length} existing custom fields in SendGrid`)
 
   // Check which fields need to be created
-  const fieldsToCreate = SendgridCustomFields.filter(
+  const fieldsToCreate = SENDGRID_CUSTOM_FIELDS.filter(
     fieldName => !existingCustomFields.includes(fieldName),
   )
 
@@ -159,7 +160,7 @@ async function ensureCustomFieldsExist() {
     console.log('✅ All required custom fields already exist in SendGrid')
     return {
       success: true,
-      fieldIds: getContactFieldIds(fieldDefinitions),
+      fieldIds: mapSendgridFieldToFieldIds(fieldDefinitions),
     }
   }
 
@@ -229,7 +230,10 @@ async function ensureContactListsExist(countries: SupportedCountryCodes[]) {
       const listName = getSendgridContactListName(countryCode)
       console.log(`Checking if contact list exists for ${countryCode}: "${listName}"`)
 
-      const list = (await getSendgridContactList(listName)) as { id: string; contact_count: number }
+      const list = (await fetchSendgridContactList(listName)) as {
+        id: string
+        contact_count: number
+      }
       // Log without template literals to avoid type issues
       console.log(
         '✅ Contact list for',
@@ -297,8 +301,8 @@ async function generateSendgridContactsCsv() {
   console.log('Contact lists:', contactLists)
 
   // Get SendGrid field definitions and IDs
-  const fieldDefinitions = await getSendgridCustomFields()
-  const fieldIds = getContactFieldIds(fieldDefinitions)
+  const fieldDefinitions = await fetchSendgridCustomFields()
+  const fieldIds = mapSendgridFieldToFieldIds(fieldDefinitions)
 
   // Log field IDs for debugging
   console.log('\nSendGrid Field IDs:')
