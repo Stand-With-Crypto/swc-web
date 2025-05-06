@@ -3,6 +3,9 @@ import * as Sentry from '@sentry/nextjs'
 
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 
+/**
+ * Sendgrid reserved fields. At least one of email or external_id is required.
+ */
 export const SENDGRID_RESERVED_FIELDS = [
   'external_id',
   'email',
@@ -25,6 +28,11 @@ export function getSendgridUserActionCustomFieldName(
   return `${actionType}_actions`
 }
 
+/**
+ * Add new custom fields here.
+ *
+ * Note: SendGrid has a limit of 500 custom fields.
+ */
 export const SENDGRID_CUSTOM_FIELDS = [
   'signup_date',
   'user_actions_count',
@@ -35,6 +43,9 @@ export type SendgridCustomField = (typeof SENDGRID_CUSTOM_FIELDS)[number]
 
 export type SendgridField = SendgridReservedField | SendgridCustomField
 
+/**
+ * Sendgrid supported field types.
+ */
 export type FieldType = 'Text' | 'Number' | 'Date'
 interface FieldDefinitionsResponse {
   custom_fields?: Array<{

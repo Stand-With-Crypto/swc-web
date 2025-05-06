@@ -148,6 +148,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         return {
           success: false,
           usersCount: users.length,
+          jobId: null,
           error: error instanceof Error ? error.message : String(error),
         }
       }

@@ -1,6 +1,7 @@
 import { NonRetriableError } from 'inngest'
 
 import { checkCustomFields } from '@/inngest/functions/sendgridContactsCronJob/checkCustomFields'
+import { checkSendgridJobStatus } from '@/inngest/functions/sendgridContactsCronJob/checkJobStatus'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -40,7 +41,14 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       countryCode => countryCode !== SupportedCountryCodes.US,
     )
 
-    const allResults = []
+    const allResults: {
+      countryCode: SupportedCountryCodes
+      totalUsers: number
+      batchesResults: {
+        success: boolean
+        jobId: string | null
+      }[]
+    }[] = []
     for (const countryCode of countries) {
       const userCount = await step.run(`count-${countryCode}-users`, async () => {
         return prismaClient.user.count({
@@ -140,9 +148,22 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       allResults.push({
         countryCode,
         totalUsers: userCount,
-        results: countryResults,
+        batchesResults: countryResults,
       })
     }
+
+    // Check sendgrid's job status
+    const jobStatuses = await step.run('check-sendgrid-job-statuses', async () => {
+      const promises: Promise<void>[] = []
+      allResults.forEach(countryResult => {
+        countryResult.batchesResults.forEach(({ jobId }) => {
+          if (jobId) {
+            promises.push(checkSendgridJobStatus(jobId))
+          }
+        })
+      })
+      return await Promise.all(promises)
+    })
 
     return {
       message: 'Completed syncing contacts to SendGrid',
