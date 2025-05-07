@@ -13,10 +13,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PollResultsDataResponse, PollsVotesFromUserResponse } from '@/data/polls/getPollsData'
 import { useSession } from '@/hooks/useSession'
 import { pluralize } from '@/utils/shared/pluralize'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { SWCPoll } from '@/utils/shared/zod/getSWCPolls'
-
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export interface PollSubmitData {
   campaignName: string
@@ -188,11 +185,7 @@ export function ActivePoll({
               value="other"
             />
           )}
-          <ProtectedSubmitButton
-            countryCode={countryCode}
-            isDisabled={isSubmitDisabled}
-            isMultiple={isMultiple}
-          />
+          <ProtectedSubmitButton isDisabled={isSubmitDisabled} isMultiple={isMultiple} />
         </form>
       </Form>
       {shouldShowVoteInfo && (

@@ -24,7 +24,7 @@ import {
   parseStringPoliticiansTable,
   sortDTSIPersonDataTable,
 } from '@/components/app/dtsiClientPersonDataTable/common/utils'
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   getCAProvinceOrTerritoryNameFromCode,
@@ -61,7 +61,7 @@ export function CaDTSIClientPersonDataTable({
     () =>
       getDTSIClientPersonDataTableColumns({
         countryCode,
-        dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
+        dtsiGradeComponent: DTSIFormattedLetterGrade,
       }),
     [],
   )

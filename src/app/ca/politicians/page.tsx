@@ -11,7 +11,8 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 600 // 10 minutes
-export const dynamic = 'error'
+export const dynamic = 'force-static'
+
 const countryCode = SupportedCountryCodes.CA
 
 export const metadata: Metadata = {

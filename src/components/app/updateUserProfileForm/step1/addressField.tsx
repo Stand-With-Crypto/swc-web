@@ -10,6 +10,7 @@ import {
   DEFAULT_DISCLAIMER,
   DISCLAIMERS_BY_COUNTRY_CODE,
 } from '@/components/app/updateUserProfileForm/step1/constants'
+import { PrivacyConsentDisclaimer } from '@/components/app/updateUserProfileForm/step1/privacyConsentDisclaimer'
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import {
   FormControl,
@@ -20,9 +21,14 @@ import {
   FormLabel,
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
+import { cn } from '@/utils/web/cn'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
@@ -35,12 +41,19 @@ interface AddressFieldProps {
   setResolvedAddress: (
     address: Awaited<ReturnType<typeof convertGooglePlaceAutoPredictionToAddressSchema>> | null,
   ) => void
+  className?: string
 }
 
-export function AddressField({ user, resolvedAddress, setResolvedAddress }: AddressFieldProps) {
+export function AddressField({
+  user,
+  resolvedAddress,
+  setResolvedAddress,
+  className,
+}: AddressFieldProps) {
   const form = useFormContext()
   const addressValue = useWatch({ control: form.control, name: 'address' })
   const { isLoaded } = useGoogleMapsScript()
+  const countryCode = useCountryCode()
 
   const [shouldShowCountryCodeDisclaimer, setShouldShowCountryCodeDisclaimer] = useState(false)
 
@@ -62,6 +75,9 @@ export function AddressField({ user, resolvedAddress, setResolvedAddress }: Addr
 
     void resolveAddress()
   }, [addressValue, isLoaded, setResolvedAddress])
+
+  const shouldShowConsentDisclaimer =
+    shouldShowCountryCodeDisclaimer && countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE
 
   useEffect(() => {
     if (resolvedAddress) {
@@ -87,12 +103,12 @@ export function AddressField({ user, resolvedAddress, setResolvedAddress }: Addr
   }, [resolvedAddress, user.countryCode])
 
   return (
-    <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
+    <div className={cn('flex flex-col justify-center', className)}>
       <FormField
         control={form.control}
         name="address"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className={cn(shouldShowCountryCodeDisclaimer && 'mb-4')}>
             <FormLabel>Address</FormLabel>
             <FormControl>
               <GooglePlacesSelect
@@ -106,13 +122,17 @@ export function AddressField({ user, resolvedAddress, setResolvedAddress }: Addr
           </FormItem>
         )}
       />
-      <Collapsible open={shouldShowCountryCodeDisclaimer}>
+      <Collapsible
+        className={cn(shouldShowConsentDisclaimer && 'mb-4')}
+        open={shouldShowCountryCodeDisclaimer}
+      >
         <CollapsibleContent className="AnimateCollapsibleContent">
           <FormDescription className="text-center md:text-left">
             {getCountryCodeDisclaimer(resolvedAddress?.countryCode)}
           </FormDescription>
         </CollapsibleContent>
       </Collapsible>
+      <PrivacyConsentDisclaimer shouldShowConsentDisclaimer={shouldShowConsentDisclaimer} />
     </div>
   )
 }

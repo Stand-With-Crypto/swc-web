@@ -124,7 +124,10 @@ export async function login(
         .track('User Logged In')
         .flush(),
       getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser })
-        .set({ 'Datetime of Last Login': new Date() })
+        .set({
+          'Datetime of Last Login': new Date(),
+          countryCode: existingVerifiedUser.countryCode,
+        })
         .flush(),
     ])
 
@@ -170,7 +173,7 @@ export async function login(
   currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
 }
 
-type ExistingUserLoginParams = {
+interface ExistingUserLoginParams {
   existingVerifiedUser: User
   cryptoAddress: string
   localUser: ServerLocalUser | null
@@ -571,7 +574,9 @@ async function queryMatchingUsers({
   return { embeddedWalletUserDetails, existingUsersWithSource }
 }
 
-type FindUsersToMergeOptions = { userToKeepId?: string }
+interface FindUsersToMergeOptions {
+  userToKeepId?: string
+}
 
 function findUsersToMerge(
   existingUsersWithSource: Awaited<
@@ -927,7 +932,7 @@ async function triggerPostLoginUserActionSteps({
   return { pastActionsMinted, hadOptInUserAction, optInUserAction }
 }
 
-type GetExistingUserArgs = {
+interface GetExistingUserArgs {
   cryptoAddress: string
   userSessionId: string | null
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata | null

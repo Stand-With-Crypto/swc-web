@@ -31,7 +31,7 @@ export function GBUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
     'Staying informed about crypto policy in the GB',
     'Supporting the British crypto community',
     'Getting updates on important regulatory changes',
-    "Being part of a movement that's shaping the future of finance in Britain",
+    "Being part of a movement that's shaping the future of finance in the UK",
   ]
 
   const handleSubmit = () => {

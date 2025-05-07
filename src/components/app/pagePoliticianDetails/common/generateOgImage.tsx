@@ -3,7 +3,10 @@
 import { ImageResponse } from 'next/og'
 
 import { getPoliticianDetailsData } from '@/components/app/pagePoliticianDetails/common/getData'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import {
+  dtsiPersonFullName,
+  shouldPersonHaveStanceScoresHidden,
+} from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,
   convertDTSIPersonStanceScoreToLetterGrade,
@@ -12,6 +15,7 @@ import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphIma
 
 export async function generateOgImage({ params }: { params: { dtsiSlug: string } }) {
   const person = await getPoliticianDetailsData(params.dtsiSlug)
+
   const shieldData = await fetch(new URL('./images/shield.png', import.meta.url)).then(res =>
     res.arrayBuffer(),
   )
@@ -35,6 +39,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
       OPEN_GRAPH_IMAGE_DIMENSIONS,
     )
   }
+  const shouldHideStanceScores = shouldPersonHaveStanceScoresHidden(person)
   const letterGrade = convertDTSIPersonStanceScoreToLetterGrade(person) ?? '?'
   let letterImage
 
@@ -105,16 +110,18 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
                   height: '300px',
                 }}
               />
-              <img
-                alt="politician stance on crypto"
-                src={letterImage as any}
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  right: 0,
-                  width: '90px',
-                }}
-              />
+              {!shouldHideStanceScores && (
+                <img
+                  alt="politician stance on crypto"
+                  src={letterImage as any}
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    width: '90px',
+                  }}
+                />
+              )}
             </div>
           ) : (
             <div tw="flex">
@@ -144,22 +151,24 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
                   }}
                 />
               </div>
-              <img
-                alt="politician stance on crypto"
-                src={letterImage as any}
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  right: 0,
-                  width: '90px',
-                }}
-              />
+              {!shouldHideStanceScores && (
+                <img
+                  alt="politician stance on crypto"
+                  src={letterImage as any}
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    width: '90px',
+                  }}
+                />
+              )}
             </div>
           )}
           <div tw="flex-col text-xl mb-2 mt-8 flex justify-center items-center">
             <span tw="text-white mx-2 text-6xl pb-4">{dtsiPersonFullName(person)}</span>
             <br />
-            <span tw="text-4xl text-gray-400">{scoreLanguage}</span>
+            {!shouldHideStanceScores && <span tw="text-4xl text-gray-400">{scoreLanguage}</span>}
           </div>
         </div>
         <div tw="text-gray-400 pt-9">standwithcrypto.org</div>

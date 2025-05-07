@@ -1,6 +1,6 @@
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-type IsValidCountryCodeArgs = {
+interface IsValidCountryCodeArgs {
   countryCode: string
   userAccessLocation?: string
   bypassCountryCheck?: boolean

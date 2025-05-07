@@ -12,6 +12,7 @@ import { gbGetIsRoleInFuture } from '@/utils/dtsi/gb/gbGetIsRoleInFuture'
 import { usGetIsRoleInFuture } from '@/utils/dtsi/us/usGetIsRoleInFuture'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
@@ -43,6 +44,7 @@ const COMMON_ROLE_DISPLAY_NAME_MAP = {
   [DTSI_PersonRoleCategory.PRESIDENT]: 'President',
   [DTSI_PersonRoleCategory.SENATE]: 'Senator',
   [DTSI_PersonRoleCategory.VICE_PRESIDENT]: 'Vice President',
+  [DTSI_PersonRoleCategory.ATTORNEY_GENERAL]: 'Attorney General',
   [DTSI_PersonRoleCategory.GOVERNOR]: 'Governor',
   [DTSI_PersonRoleCategory.MAYOR]: 'Mayor',
 }
@@ -67,15 +69,33 @@ export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
       )
     },
     [SupportedCountryCodes.AU]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
-      if (role.status !== DTSI_PersonRoleStatus.HELD || auGetIsRoleInFuture(role)) {
-        return 'Candidate'
-      }
-      const roleDisplayNames = {
+      const currentRoleDisplayName = {
+        ...COMMON_ROLE_DISPLAY_NAME_MAP,
         [DTSI_PersonRoleCategory.CONGRESS]: 'Member of Parliament',
         [DTSI_PersonRoleCategory.HOUSE_OF_COMMONS]: 'House of Representatives Member',
-        ...COMMON_ROLE_DISPLAY_NAME_MAP,
       }
-      return roleDisplayNames[role.roleCategory as keyof typeof roleDisplayNames] || 'Candidate'
+
+      const runningForRoleDisplayName = {
+        ...COMMON_ROLE_DISPLAY_NAME_MAP,
+        [DTSI_PersonRoleCategory.CONGRESS]: 'Candidate',
+        [DTSI_PersonRoleCategory.SENATE]: 'Senate Candidate',
+      }
+
+      if (role.status === DTSI_PersonRoleStatus.HELD) {
+        return (
+          currentRoleDisplayName[role.roleCategory as keyof typeof currentRoleDisplayName] ||
+          'Candidate'
+        )
+      }
+
+      if (role.status === DTSI_PersonRoleStatus.RUNNING_FOR || auGetIsRoleInFuture(role)) {
+        return (
+          runningForRoleDisplayName[role.roleCategory as keyof typeof runningForRoleDisplayName] ||
+          'Candidate'
+        )
+      }
+
+      return 'Candidate'
     },
     [SupportedCountryCodes.CA]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
       if (role.status !== DTSI_PersonRoleStatus.HELD || caGetIsRoleInFuture(role)) {
@@ -120,14 +140,20 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
     DTSI_PersonRole,
     'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory' | 'primaryDistrict'
   >,
+  countryCode: SupportedCountryCodes,
 ) => {
   let stateStr = <></>
-  if (role.primaryState && role.primaryCountryCode === 'US') {
+
+  const stateNameResolver = getStateNameResolver(countryCode)
+
+  if (role.primaryState) {
     stateStr = (
       <>
         , <span className="max-sm:hidden">{role.primaryState}</span>
-        <span className="sm:hidden">{getUSStateNameFromStateCode(role.primaryState)}</span>{' '}
-        {role.primaryDistrict ? `${role.primaryDistrict} ` : ''}
+        <span className="sm:hidden">{stateNameResolver(role.primaryState)}</span>{' '}
+        {role.primaryDistrict && countryCode === SupportedCountryCodes.US
+          ? `${role.primaryDistrict} `
+          : ''}
       </>
     )
   }
@@ -136,13 +162,24 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
+      if (countryCode === SupportedCountryCodes.AU) {
+        return <>MP{stateStr}</>
+      }
       return <>Rep{stateStr}</>
     case DTSI_PersonRoleCategory.PRESIDENT:
       return 'President'
+    case DTSI_PersonRoleCategory.GOVERNOR:
+      return <>Governor{stateStr}</>
+    case DTSI_PersonRoleCategory.ATTORNEY_GENERAL:
+      return <>Attorney General{stateStr}</>
     case DTSI_PersonRoleCategory.SENATE:
       return <>Senator{stateStr}</>
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
       return 'Vice President'
+    case DTSI_PersonRoleCategory.HOUSE_OF_COMMONS:
+      return <>MP{stateStr}</>
+    case DTSI_PersonRoleCategory.HOUSE_OF_LORDS:
+      return <>MP{stateStr}</>
   }
   return 'Political Figure'
 }
@@ -153,9 +190,10 @@ export const getDTSIPersonRoleLocation = (
     'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState' | 'roleCategory'
   >,
 ) => {
-  // TODO: Understand how to handle intl cases here
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
+    case DTSI_PersonRoleCategory.ATTORNEY_GENERAL:
+    case DTSI_PersonRoleCategory.GOVERNOR:
     case DTSI_PersonRoleCategory.PRESIDENT:
     case DTSI_PersonRoleCategory.SENATE:
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:

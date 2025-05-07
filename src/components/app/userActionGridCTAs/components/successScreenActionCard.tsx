@@ -41,8 +41,8 @@ export function SuccessScreenActionCard({
         'flex w-full cursor-pointer flex-row-reverse items-stretch rounded-3xl transition-shadow hover:shadow-lg',
         isReadOnly && 'pointer-events-none cursor-default',
       )}
-      onClick={() => {
-        _onClick?.()
+      onClick={event => {
+        _onClick?.(event)
         onCtaClick?.()
       }}
     >

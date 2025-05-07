@@ -18,7 +18,10 @@ import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
 
 const logger = getLogger('serverAnalytics')
 
-type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
+interface ServerAnalyticsConfig {
+  localUser: LocalUser | null
+  userId: string
+}
 
 const promisifiedMixpanelTrack = promisify<string, PropertyDict, void>(mixpanel.track)
 

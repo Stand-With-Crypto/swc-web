@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import { CaDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/ca'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
@@ -7,7 +5,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
 export const PAGE_POLITICIANS_TITLE = 'Find out where politicians stand on crypto'
-export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives Canada innovation. Discover the politicians fighting to keep crypto in Canada.`
+export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives Canada innovation. Find out how political leaders have addressed crypto issues.`
 
 export function CaPagePoliticians({ politicians }: { politicians: DTSIPersonDataTablePeople }) {
   return (
@@ -17,9 +15,7 @@ export function CaPagePoliticians({ politicians }: { politicians: DTSIPersonData
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <Suspense>
-          <CaDTSIClientPersonDataTable initialData={politicians} />
-        </Suspense>
+        <CaDTSIClientPersonDataTable initialData={politicians} />
       </PagePoliticiansLayout.PoliticiansTableSection>
     </PagePoliticiansLayout>
   )

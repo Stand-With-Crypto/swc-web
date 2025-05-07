@@ -139,11 +139,32 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     }
   }
 
+  const existingViewKeyRacesAction = await getUserAlreadyViewedKeyRaces({
+    userId,
+    campaignName,
+    countryCode,
+  })
+  if (existingViewKeyRacesAction) {
+    logger.info(`User ${userId} has already viewed key races`)
+    analytics.trackUserActionCreatedIgnored({
+      actionType,
+      campaignName,
+      creationMethod: 'On Site',
+      reason: 'Already Exists',
+      userState: 'Existing',
+    })
+
+    waitUntil(analytics.flush())
+
+    return { user: getClientUser(user) }
+  }
+
+  logger.info(`Creating new action for user ${userId}`)
+
+  await triggerRateLimiterAtMostOnce()
+
   const currentUsaState =
     userAddress?.address?.administrativeAreaLevel1 ?? validatedInput.data?.usaState ?? null
-
-  const currentStateCode = validatedInput.data?.stateCode ?? null
-  const currentConstituency = validatedInput.data?.constituency ?? null
 
   const maybeCongressionalDistrict = (await maybeGetCongressionalDistrictFromAddress(
     { countryCode: 'US', formattedDescription: userAddress?.address?.formattedDescription ?? '' },
@@ -161,66 +182,6 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     validatedInput.data?.usCongressionalDistrict ||
     maybeCongressionalDistrict?.districtNumber?.toString() ||
     null
-
-  const existingViewKeyRacesAction = await getUserAlreadyViewedKeyRaces(userId, campaignName)
-
-  if (existingViewKeyRacesAction) {
-    logger.info(`User ${userId} has already viewed key races`)
-
-    const shouldUpdateUSActionWithAddressInfo =
-      existingViewKeyRacesAction.userActionViewKeyRaces?.usaState !== currentUsaState ||
-      existingViewKeyRacesAction.userActionViewKeyRaces?.usCongressionalDistrict !==
-        currentCongressionalDistrict
-
-    const shouldUpdateActionWithAddressInfo =
-      existingViewKeyRacesAction.userActionViewKeyRaces?.stateCode !== currentStateCode ||
-      existingViewKeyRacesAction.userActionViewKeyRaces?.constituency !== currentConstituency
-
-    const areNewUSValuesPresent = currentUsaState !== null || currentCongressionalDistrict !== null
-
-    const areNewStateValuesPresent = currentStateCode !== null || currentConstituency !== null
-
-    if (
-      (shouldUpdateUSActionWithAddressInfo && areNewUSValuesPresent) ||
-      (shouldUpdateActionWithAddressInfo && areNewStateValuesPresent)
-    ) {
-      await updateUserActionViewKeyRaces(
-        existingViewKeyRacesAction,
-        currentUsaState,
-        currentCongressionalDistrict,
-        currentStateCode,
-        currentConstituency,
-        validatedInput.data,
-      )
-
-      analytics.trackUserActionUpdated({
-        actionType,
-        campaignName,
-        creationMethod: 'On Site',
-        userState: 'Existing With Updates',
-      })
-
-      waitUntil(beforeFinish())
-
-      return { user: getClientUser(user) }
-    }
-
-    analytics.trackUserActionCreatedIgnored({
-      actionType,
-      campaignName,
-      creationMethod: 'On Site',
-      reason: 'Already Exists',
-      userState: 'Existing',
-    })
-
-    waitUntil(analytics.flush())
-
-    return { user: getClientUser(user) }
-  }
-
-  logger.info(`Creating new action for user ${userId}`)
-
-  await triggerRateLimiterAtMostOnce()
 
   await createUserActionViewKeyRaces(
     userId,
@@ -294,75 +255,6 @@ async function createUser({
   return createdUser
 }
 
-async function updateUserActionViewKeyRaces(
-  existingViewKeyRacesAction: Awaited<ReturnType<typeof getUserAlreadyViewedKeyRaces>>,
-  usaState: string | null,
-  usCongressionalDistrict: string | null,
-  stateCode: string | null,
-  constituency: string | null,
-  validatedInput: CreateActionViewKeyRacesInput,
-) {
-  const shouldSetUSDistrictAsNull =
-    usaState !== existingViewKeyRacesAction?.userActionViewKeyRaces?.usaState &&
-    usCongressionalDistrict === null
-
-  const shouldSetConstituencyAsNull =
-    stateCode !== existingViewKeyRacesAction?.userActionViewKeyRaces?.stateCode &&
-    constituency === null
-
-  const updateData: Record<string, string | undefined> = {
-    ...(usaState !== null && { usaState }),
-    ...(usCongressionalDistrict !== null && { usCongressionalDistrict }),
-    ...(stateCode !== null && { stateCode }),
-    ...(constituency !== null && { constituency }),
-  }
-
-  if (shouldSetUSDistrictAsNull) {
-    Object.assign(updateData, {
-      usCongressionalDistrict: null,
-    })
-  }
-
-  if (shouldSetConstituencyAsNull) {
-    Object.assign(updateData, {
-      constituency: null,
-    })
-  }
-
-  const userAction = await prismaClient.userAction.update({
-    where: {
-      id: existingViewKeyRacesAction?.id,
-    },
-    data: {
-      userActionViewKeyRaces: {
-        update: updateData,
-      },
-    },
-  })
-
-  logger.info('updated user action')
-
-  if (validatedInput?.address) {
-    await prismaClient.user.update({
-      where: { id: existingViewKeyRacesAction?.userId },
-      data: {
-        address: {
-          connectOrCreate: {
-            where: { googlePlaceId: validatedInput.address.googlePlaceId },
-            create: validatedInput.address,
-          },
-        },
-      },
-      include: {
-        address: true,
-      },
-    })
-    logger.info('updated user address')
-  }
-
-  return { userAction }
-}
-
 async function createUserActionViewKeyRaces(
   userId: string,
   countryCode: string,
@@ -401,7 +293,15 @@ async function createUserActionViewKeyRaces(
   })
 }
 
-async function getUserAlreadyViewedKeyRaces(userId: string, campaignName: string) {
+async function getUserAlreadyViewedKeyRaces({
+  userId,
+  campaignName,
+  countryCode,
+}: {
+  userId: string
+  campaignName: string
+  countryCode: SupportedCountryCodes
+}) {
   return prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.VIEW_KEY_RACES,
@@ -409,6 +309,7 @@ async function getUserAlreadyViewedKeyRaces(userId: string, campaignName: string
         id: userId,
       },
       campaignName,
+      countryCode,
     },
     include: {
       userActionViewKeyRaces: true,

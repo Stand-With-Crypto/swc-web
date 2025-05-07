@@ -1,4 +1,4 @@
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -48,11 +48,6 @@ export function AuPageHome({
 
         <RecentActivity>
           <RecentActivity.List actions={recentActivity} />
-          <RecentActivity.Footer>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </RecentActivity.Footer>
         </RecentActivity>
       </HomePageSection>
 
@@ -94,7 +89,7 @@ export function AuPageHome({
 
       <HomepagePoliticiansSection
         countryCode={countryCode}
-        cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
+        cryptoStanceGrade={DTSIFormattedLetterGrade}
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
       />
     </>

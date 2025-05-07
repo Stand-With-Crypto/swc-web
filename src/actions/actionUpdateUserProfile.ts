@@ -67,8 +67,9 @@ async function actionUpdateUserProfileWithoutMiddleware(
     }
   }
 
+  const isUSAddress = validatedFields.data.address?.countryCode?.toUpperCase() === 'US'
   try {
-    if (validatedFields.data.address) {
+    if (isUSAddress && validatedFields.data.address) {
       const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
         validatedFields.data.address,
       )

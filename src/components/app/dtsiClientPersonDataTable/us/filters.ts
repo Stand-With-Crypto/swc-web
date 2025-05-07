@@ -11,7 +11,7 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
-import { isPoliticianDetailsStanceHidden } from '@/utils/dtsi/dtsiPersonUtils'
+import { shouldPersonHaveStanceScoresHidden } from '@/utils/dtsi/dtsiPersonUtils'
 
 /**
  * Custom filter logic for each Column.
@@ -27,7 +27,7 @@ export const getPersonDataTableFilterFns = (): Record<
   [PERSON_TABLE_COLUMNS_IDS.STANCE]: (row, _columnId, filterValue, _addMeta) => {
     const scoreToUse =
       row.original.manuallyOverriddenStanceScore ?? row.original.computedStanceScore
-    const isStanceHidden = isPoliticianDetailsStanceHidden(row.original.slug)
+    const isStanceHidden = shouldPersonHaveStanceScoresHidden(row.original)
 
     if (isStanceHidden) {
       return filterValue === StanceOnCryptoOptions.ALL
@@ -57,22 +57,40 @@ export const getPersonDataTableFilterFns = (): Record<
   },
 
   [PERSON_TABLE_COLUMNS_IDS.ROLE]: (row, _columnId, filterValue, _addMeta) => {
-    if (filterValue === ROLE_OPTIONS.ALL) {
-      return true
+    const personRoleCategory = row.original.primaryRole?.roleCategory
+    const personRoleStatus = row.original.primaryRole?.status
+    switch (filterValue as (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]) {
+      case ROLE_OPTIONS.ALL:
+        return true
+      case ROLE_OPTIONS.SENATE:
+      case ROLE_OPTIONS.CONGRESS:
+      case ROLE_OPTIONS.GOVERNOR:
+      case ROLE_OPTIONS.ATTORNEY_GENERAL:
+        return !!(
+          filterValue === personRoleCategory && personRoleStatus === DTSI_PersonRoleStatus.HELD
+        )
+      case ROLE_OPTIONS.EXECUTIVE:
+        return !!(
+          personRoleCategory &&
+          [DTSI_PersonRoleCategory.PRESIDENT, DTSI_PersonRoleCategory.VICE_PRESIDENT].includes(
+            personRoleCategory,
+          ) &&
+          personRoleStatus === DTSI_PersonRoleStatus.HELD
+        )
+      case ROLE_OPTIONS.ALL_OTHER:
+        return !(
+          personRoleCategory &&
+          [
+            DTSI_PersonRoleCategory.PRESIDENT,
+            DTSI_PersonRoleCategory.VICE_PRESIDENT,
+            DTSI_PersonRoleCategory.SENATE,
+            DTSI_PersonRoleCategory.CONGRESS,
+            DTSI_PersonRoleCategory.GOVERNOR,
+            DTSI_PersonRoleCategory.ATTORNEY_GENERAL,
+          ].includes(personRoleCategory) &&
+          personRoleStatus === DTSI_PersonRoleStatus.HELD
+        )
     }
-    if ([ROLE_OPTIONS.SENATE, ROLE_OPTIONS.CONGRESS].includes(filterValue)) {
-      return (
-        filterValue === row.original.primaryRole?.roleCategory &&
-        row.original.primaryRole?.status === DTSI_PersonRoleStatus.HELD
-      )
-    }
-    return (
-      !row.original.primaryRole?.roleCategory ||
-      ![DTSI_PersonRoleCategory.SENATE, DTSI_PersonRoleCategory.CONGRESS].includes(
-        row.original.primaryRole?.roleCategory,
-      ) ||
-      row.original.primaryRole?.status !== DTSI_PersonRoleStatus.HELD
-    )
   },
 
   [PERSON_TABLE_COLUMNS_IDS.PARTY]: (row, _columnId, filterValue, _addMeta) => {
@@ -108,19 +126,26 @@ export const ROLE_OPTIONS = {
   ALL: 'All',
   SENATE: DTSI_PersonRoleCategory.SENATE,
   CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
+  GOVERNOR: DTSI_PersonRoleCategory.GOVERNOR,
+  ATTORNEY_GENERAL: DTSI_PersonRoleCategory.ATTORNEY_GENERAL,
+  EXECUTIVE: 'EXECUTIVE',
   ALL_OTHER: 'ALL_OTHER',
+} as const
+
+const ROLE_OPTION_DISPLAY_NAME_MAP: Record<
+  (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS],
+  string
+> = {
+  [ROLE_OPTIONS.ALL_OTHER]: 'Other Political Figure',
+  [ROLE_OPTIONS.SENATE]: 'Senator',
+  [ROLE_OPTIONS.CONGRESS]: 'Representative',
+  [ROLE_OPTIONS.GOVERNOR]: 'Governor',
+  [ROLE_OPTIONS.ATTORNEY_GENERAL]: 'Attorney General',
+  [ROLE_OPTIONS.EXECUTIVE]: 'Executive Branch',
+  [ROLE_OPTIONS.ALL]: 'All',
 }
-export function getRoleOptionDisplayName(role: string) {
-  switch (role) {
-    case ROLE_OPTIONS.ALL_OTHER:
-      return 'Other Political Figure'
-    case ROLE_OPTIONS.SENATE:
-      return 'Senator'
-    case ROLE_OPTIONS.CONGRESS:
-      return 'Representative'
-    default:
-      return 'All'
-  }
+export function getRoleOptionDisplayName(role: string): string {
+  return ROLE_OPTION_DISPLAY_NAME_MAP[role as keyof typeof ROLE_OPTION_DISPLAY_NAME_MAP]
 }
 
 export const getGlobalFilterDefaults = (): ColumnFiltersState => [

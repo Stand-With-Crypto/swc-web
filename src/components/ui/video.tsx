@@ -1,6 +1,7 @@
 import { ReactNode, VideoHTMLAttributes } from 'react'
 
 interface VideoProps extends VideoHTMLAttributes<HTMLVideoElement> {
+  src: string
   /**
    * Fallback content to display if the browser does not support the video tag.
    */

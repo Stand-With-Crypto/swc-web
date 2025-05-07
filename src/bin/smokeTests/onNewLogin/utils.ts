@@ -11,7 +11,7 @@ import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
  */
 type Params = Parameters<typeof onNewLogin>[0]
 export type Issue = string
-export type TestCase = {
+export interface TestCase {
   name: string
   parameters: () => Promise<Params>
   validateResults: (data: Awaited<ReturnType<typeof onNewLogin>>, issues: Issue[]) => void

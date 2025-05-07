@@ -22,16 +22,12 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
-      href: urls.locationKeyRaces(),
-      text: 'Races',
+      href: urls.polls(),
+      text: 'Polls',
     },
     {
       href: urls.manifesto(),
       text: 'Manifesto',
-    },
-    {
-      href: urls.community(),
-      text: 'Community',
     },
   ],
 }
@@ -67,9 +63,6 @@ export const footerConfig: FooterProps = {
       href: auExternalUrls.linkedin(),
       text: 'LinkedIn',
     },
-    {
-      href: auExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: auExternalUrls.emailFeedback(),
 }

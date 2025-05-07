@@ -13,44 +13,29 @@ export function GbHero() {
     <Hero>
       <Hero.Heading>
         <Hero.Title>
-          It’s time to support crypto in <span className="text-primary-cta">Britain</span>
+          It’s time to support crypto in the <span className="text-primary-cta">UK</span>
         </Hero.Title>
         <Hero.Subtitle>
-          The British public owns crypto. And yet, crypto’s future in Britain remains uncertain. If
-          you believe in the power of the blockchain and want the Government to foster a positive
-          business and policy environment for crypto assets and blockchain technology in the UK,
-          make your voice heard.
+          Crypto’s future in the UK remains uncertain. If you believe in the power of the blockchain
+          and want the Government to foster a positive business and policy environment for crypto
+          assets and blockchain technology in the UK, make your voice heard.
         </Hero.Subtitle>
         <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
-      <HeroAnnouncementCard
-        authenticatedContent={
-          <Link href={urls.profile()}>
-            <HeroAnnouncementCard.Image
-              media={{
-                src: '/gb/home/hero.svg',
-                alt: 'Stay up to date on crypto policy by following @StandWCrypto_UK on X.',
-              }}
-            >
-              <HeroAnnouncementCard.CTA buttonText="Get started">
-                Advocate for crypto in Britain.
-              </HeroAnnouncementCard.CTA>
-            </HeroAnnouncementCard.Image>
-          </Link>
-        }
-        unauthenticatedContent={
+      <div className="order-0 self-start md:container lg:order-1 lg:col-span-2 lg:px-0">
+        <Link href={urls.newmodeDebankingAction()}>
           <HeroAnnouncementCard.Image
             media={{
               src: '/gb/home/hero.svg',
               alt: 'Stay up to date on crypto policy by following @StandWCrypto_UK on X.',
             }}
           >
-            <HeroAnnouncementCard.CTA buttonText="Join">
-              Advocate for crypto in Britain.
+            <HeroAnnouncementCard.CTA buttonText="Take action">
+              Email your MP to stop unfair debanking
             </HeroAnnouncementCard.CTA>
           </HeroAnnouncementCard.Image>
-        }
-      />
+        </Link>
+      </div>
     </Hero>
   )
 }

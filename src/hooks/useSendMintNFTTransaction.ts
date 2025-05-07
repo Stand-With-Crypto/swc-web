@@ -10,7 +10,7 @@ import { logger } from '@/utils/shared/logger'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { safeStringify } from '@/utils/web/safeStringify'
 
-type UseSendMintNFTTransactionOptions = {
+interface UseSendMintNFTTransactionOptions {
   contractAddress: string
   quantity: number
 }

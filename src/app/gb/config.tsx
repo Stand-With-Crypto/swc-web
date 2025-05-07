@@ -2,6 +2,7 @@
 
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
+import * as Icons from '@/components/app/navbar/navbarDrawerIcons'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { gbExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
@@ -18,20 +19,32 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
-      href: urls.manifesto(),
-      text: 'Manifesto',
-    },
-    {
-      href: urls.partners(),
-      text: 'Partners',
-    },
-    {
-      href: urls.community(),
-      text: 'Community',
-    },
-    {
       href: urls.press(),
       text: 'Press',
+    },
+    {
+      href: urls.polls(),
+      text: 'Polls',
+    },
+    {
+      text: 'Resources',
+      children: [
+        {
+          href: urls.manifesto(),
+          text: 'Manifesto',
+          icon: <Icons.MissionIcon />,
+        },
+        {
+          href: urls.community(),
+          text: 'Community',
+          icon: <Icons.CommunityIcon />,
+        },
+        {
+          href: urls.partners(),
+          text: 'Partners',
+          icon: <Icons.PartnersIcon />,
+        },
+      ],
     },
   ],
 }
@@ -66,9 +79,6 @@ export const footerConfig: FooterProps = {
       href: gbExternalUrls.linkedin(),
       text: 'LinkedIn',
     },
-    {
-      href: gbExternalUrls.emailFeedback(),
-      text: 'Send feedback',
-    },
   ],
+  sendFeedbackLink: gbExternalUrls.emailFeedback(),
 }

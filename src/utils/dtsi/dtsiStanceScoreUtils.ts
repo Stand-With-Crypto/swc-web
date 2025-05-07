@@ -142,3 +142,7 @@ export const isAntiCrypto = (score: DTSILetterGrade | null) => {
   if (isNil(score)) return false
   return [DTSILetterGrade.D, DTSILetterGrade.F].includes(score)
 }
+export const isNeutralOnCrypto = (score: DTSILetterGrade | null) => {
+  if (isNil(score)) return false
+  return score === DTSILetterGrade.C
+}

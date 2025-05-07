@@ -2,15 +2,17 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
+import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
-import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
-import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
+  GBUserActionLinkedInCampaignName,
+  GBUserActionPollCampaignName,
   GBUserActionReferCampaignName,
   GBUserActionTweetCampaignName,
   GBUserActionViewKeyPageCampaignName,
@@ -18,12 +20,14 @@ import {
 
 const countryCode = SupportedCountryCodes.GB
 
+const urls = getIntlUrls(countryCode)
+
 export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
-    description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
-    mobileCTADescription: `Join the Movement to keep crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
-    campaignsModalDescription: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
+    description: `Join the movement to make your voice heard.`,
+    mobileCTADescription: `Join the movement to make your voice heard.`,
+    campaignsModalDescription: `Join the movement to make your voice heard.`,
     image: '/gb/actionTypeIcons/opt-in.png',
     campaigns: [
       {
@@ -31,7 +35,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
-        description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[countryCode]}.`,
+        description: `Join the movement to make your voice heard.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -63,24 +67,26 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Contact your representative',
-    description:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
-    campaignsModalDescription:
-      'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
+    title: 'Email your MP to stop unfair debanking',
+    description: 'Urge them to stand up for financial access and innovation.',
+    campaignsModalDescription: 'Urge them to stand up for financial access and innovation.',
     image: '/gb/actionTypeIcons/email.png',
+    link: ({ children }) => <Link href={urls.emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
-        // TODO: Update this to the correct campaign name when available
         campaignName: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: false,
-        title: `Sign the petition`,
-        description:
-          'Make your voice heard. Sign our petition to support crypto-friendly policies in the UK.',
+        isCampaignActive: true,
+        title: 'Email your MP to stop unfair debanking',
+        description: 'Urge them to stand up for financial access and innovation.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).newmodeDebankingAction()}>{children}</Link>
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={urls.newmodeDebankingAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
         ),
       },
     ],
@@ -110,6 +116,68 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           >
             {children}
           </LoginDialogWrapper>
+        ),
+      },
+    ],
+  },
+  [UserActionType.POLL]: {
+    title: 'Take the poll',
+    description: 'Take the poll and see the results.',
+    mobileCTADescription: 'Take the poll and see the results.',
+    campaignsModalDescription: 'Take the poll and see the results.',
+    image: '/actionTypeIcons/voterAttestation.png',
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
+    campaigns: [
+      {
+        actionType: UserActionType.POLL,
+        campaignName: GBUserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: GBUserActionPollCampaignName.DIGITAL_ASSETS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: GBUserActionPollCampaignName.ENCOURAGE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.LINKEDIN]: {
+    title: 'Follow us on LinkedIn',
+    description: 'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+    mobileCTADescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+    campaignsModalDescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+    image: '/gb/actionTypeIcons/follow-linkedin.png',
+    campaigns: [
+      {
+        actionType: UserActionType.LINKEDIN,
+        campaignName: GBUserActionLinkedInCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Follow us on LinkedIn',
+        description:
+          'Follow us on LinkedIn and stay up to date on crypto policy changes in the UK.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
+            {children}
+          </UserActionFormFollowLinkedInDialog>
         ),
       },
     ],

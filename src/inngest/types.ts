@@ -16,6 +16,7 @@ import type {
   CapitolCanaryBackfillSmsOptInReplyUpdateBatchOfUsersSchema,
 } from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import type { CapitolCanaryCheckSmsOptInReplySchema } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema } from '@/inngest/functions/capitolCanary/deleteNotSupportedCountryCodeAdvocates'
 import type { CapitolCanaryEmailInngestEventSchema } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import type { CapitolCanaryUpsertAdvocateInngestSchema } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import type { CleanupNftMintsEventSchema } from '@/inngest/functions/cleanupNFTMints'
@@ -24,6 +25,7 @@ import { UpdateDistrictsRankingsCronJobSchema } from '@/inngest/functions/distri
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
+import type { BackfillMissingCommunicationsInngestEventSchema } from '@/inngest/functions/sms/backfillMissingCommunications'
 import type { BackfillOptedOutUsersSchema } from '@/inngest/functions/sms/backfillOptedOutUsers'
 import type { BackfillPhoneNumberValidationInngestEventSchema } from '@/inngest/functions/sms/backfillPhoneNumberValidation'
 import type { BulkSmsCommunicationJourneyInngestEventSchema } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
@@ -68,5 +70,6 @@ type EventTypes =
   | BackfillUserCountryCodeEmptyInngestSchema
   | BackfillIntlUsersSchema
   | ProcessBatchSchema
-
+  | BackfillMissingCommunicationsInngestEventSchema
+  | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

@@ -24,7 +24,7 @@ import {
   parseStringPoliticiansTable,
   sortDTSIPersonDataTable,
 } from '@/components/app/dtsiClientPersonDataTable/common/utils'
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import {
   AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
   getAUStateNameFromStateCode,
@@ -60,7 +60,7 @@ export function AuDTSIClientPersonDataTable({
     () =>
       getDTSIClientPersonDataTableColumns({
         countryCode,
-        dtsiGradeComponent: DTSIThumbsUpOrDownGrade,
+        dtsiGradeComponent: DTSIFormattedLetterGrade,
       }),
     [],
   )

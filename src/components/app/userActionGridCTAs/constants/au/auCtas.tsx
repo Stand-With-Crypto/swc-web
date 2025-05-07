@@ -1,29 +1,34 @@
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
-import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
-import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
+  AUUserActionLinkedInCampaignName,
+  AUUserActionPollCampaignName,
   AUUserActionReferCampaignName,
   AUUserActionTweetCampaignName,
   AUUserActionViewKeyPageCampaignName,
+  AUUserActionViewKeyRacesCampaignName,
 } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
 const countryCode = SupportedCountryCodes.AU
 
+const urls = getIntlUrls(countryCode)
+
 export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto Australia',
-    description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
-    mobileCTADescription: 'Join the Movement to keep crypto in Australia.',
-    campaignsModalDescription: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+    description: `Join the movement to make your voice heard.`,
+    mobileCTADescription: 'Join the movement to make your voice heard.',
+    campaignsModalDescription: `Join the movement to make your voice heard.`,
     image: '/au/actionTypeIcons/opt-in.png',
     campaigns: [
       {
@@ -31,11 +36,70 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto Australia',
-        description: `Join the Movement with over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates supporting crypto in ${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]}.`,
+        description: `Join the movement to make your voice heard.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
         ),
+      },
+    ],
+  },
+  [UserActionType.VIEW_KEY_PAGE]: {
+    title: 'Email your Member of Parliament',
+    description:
+      'Make your voice heard on important crypto policy issues by emailing your representatives',
+    campaignsModalDescription:
+      'Make your voice heard on important crypto policy issues by emailing your representatives',
+    image: '/au/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
+        isCampaignActive: true,
+        title: `Email your Member of Parliament`,
+        description: 'Tell your MP to support responsible crypto policy — send an email now!',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionViewKeyPageDialog countryCode={countryCode} url={urls.newmodeElectionAction()}>
+            {children}
+          </UserActionViewKeyPageDialog>
+        ),
+      },
+      {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        campaignName: AUUserActionViewKeyPageCampaignName.AU_NEWMODE_DEBANKING,
+        isCampaignActive: true,
+        title: 'Email your MP to stop unfair debanking',
+        description: 'Urge them to stand up for financial access and innovation.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionViewKeyPageDialog
+            countryCode={countryCode}
+            url={urls.newmodeDebankingAction()}
+          >
+            {children}
+          </UserActionViewKeyPageDialog>
+        ),
+      },
+    ],
+  },
+  [UserActionType.VIEW_KEY_RACES]: {
+    title: 'View Key Races in Australia',
+    description:
+      'View the key races occurring across Australia that will impact the future of crypto.',
+    campaignsModalDescription:
+      'View the key races occurring across Australia that will impact the future of crypto.',
+    image: '/au/actionTypeIcons/view-key-races.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VIEW_KEY_RACES,
+        campaignName: AUUserActionViewKeyRacesCampaignName.H1_2025,
+        isCampaignActive: false,
+        title: 'View Key Races in Australia',
+        description:
+          'Viewed the key races that occurred across Australia that could impact the future of crypto in early 2025.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => <Link href={urls.locationKeyRaces()}>{children}</Link>,
       },
     ],
   },
@@ -58,33 +122,6 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
-        ),
-      },
-    ],
-  },
-  [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Email your Member of Parliament',
-    description:
-      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
-    campaignsModalDescription:
-      'Tell your Member of Parliament to support responsible crypto policy—send an email now!',
-    image: '/au/actionTypeIcons/email.png',
-    campaigns: [
-      {
-        actionType: UserActionType.VIEW_KEY_PAGE,
-        campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
-        isCampaignActive: true,
-        title: `Email your Member of Parliament`,
-        description:
-          'You’ve emailed your Member of Parliament and called for responsible crypto policy.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeElectionAction()}
-          >
-            {children}
-          </UserActionViewKeyPageDialog>
         ),
       },
     ],
@@ -114,6 +151,68 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           >
             {children}
           </LoginDialogWrapper>
+        ),
+      },
+    ],
+  },
+  [UserActionType.POLL]: {
+    title: 'Take the poll',
+    description: 'Take the poll and see the results.',
+    mobileCTADescription: 'Take the poll and see the results.',
+    campaignsModalDescription: 'Take the poll and see the results.',
+    image: '/actionTypeIcons/voterAttestation.png',
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
+    campaigns: [
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.DIGITAL_ASSETS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: AUUserActionPollCampaignName.ENCOURAGE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.LINKEDIN]: {
+    title: 'Follow us on LinkedIn',
+    description: 'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+    mobileCTADescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+    campaignsModalDescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+    image: '/au/actionTypeIcons/follow-linkedin.png',
+    campaigns: [
+      {
+        actionType: UserActionType.LINKEDIN,
+        campaignName: AUUserActionLinkedInCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Follow us on LinkedIn',
+        description:
+          'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
+            {children}
+          </UserActionFormFollowLinkedInDialog>
         ),
       },
     ],
