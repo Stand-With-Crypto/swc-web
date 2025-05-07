@@ -125,8 +125,8 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Contact your Member of Congress',
-    description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
+    title: 'Contact your Senator',
+    description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -218,6 +218,15 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         isCampaignActive: false,
         title: 'Contact your Member of Congress',
         description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
+        isCampaignActive: true,
+        title: 'Contact your Senator',
+        description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
