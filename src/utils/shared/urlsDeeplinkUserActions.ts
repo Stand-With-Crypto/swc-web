@@ -20,7 +20,7 @@ const parseQueryString = (queryString?: string) => {
   return `?${queryString}`
 }
 
-type DeeplinkConfig = {
+interface DeeplinkConfig {
   countryCode: SupportedCountryCodes
   queryString?: string
 }
@@ -94,7 +94,12 @@ export const USER_ACTION_DEEPLINK_MAP: {
   },
   [UserActionType.VIEW_KEY_PAGE]: {
     getDeeplinkUrl: ({ countryCode }) => {
-      return `${getIntlPrefix(countryCode)}/content/election`
+      return `${getIntlPrefix(countryCode)}/action/email`
+    },
+  },
+  [UserActionType.LINKEDIN]: {
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/linkedin`
     },
   },
 }
@@ -131,7 +136,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   },
 }
 
-type GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> = {
+interface GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> {
   actionType: ActionType
   config: DeeplinkConfig
   campaign?: UserActionCampaignNames

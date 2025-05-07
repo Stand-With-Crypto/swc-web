@@ -1,8 +1,6 @@
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
-import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -17,13 +15,7 @@ import { GbHero } from './hero'
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
 
-export function GbPageHome({
-  topLevelMetrics,
-  recentActivity,
-  partners,
-  founders,
-  dtsiHomepagePoliticians,
-}: HomePageProps) {
+export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders }: HomePageProps) {
   return (
     <>
       <GbHero />
@@ -39,7 +31,7 @@ export function GbPageHome({
 
       <HomePageSection>
         <HomePageSection.Title>
-          <span className="text-primary-cta">Britons</span> believe in crypto
+          <span className="text-primary-cta">Brits</span> believe in crypto
         </HomePageSection.Title>
         <HomePageSection.Subtitle>
           See how the community is taking a stand to safeguard the future of crypto in the UK.
@@ -90,12 +82,6 @@ export function GbPageHome({
           <FoundersCarousel founders={founders} />
         </HomePageSection>
       )}
-
-      <HomepagePoliticiansSection
-        countryCode={countryCode}
-        cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
-        dtsiHomepagePoliticians={dtsiHomepagePoliticians}
-      />
     </>
   )
 }

@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
@@ -10,6 +11,8 @@ import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
+  CAUserActionLinkedInCampaignName,
+  CAUserActionPollCampaignName,
   CAUserActionReferCampaignName,
   CAUserActionTweetCampaignName,
   CAUserActionViewKeyPageCampaignName,
@@ -19,6 +22,8 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/
 
 const countryCode = SupportedCountryCodes.CA
 const countryDisplayName = COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]
+
+const urls = getIntlUrls(countryCode)
 
 export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
@@ -44,23 +49,36 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Email your Member of Parliament',
     description:
-      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
+      'Make your voice heard on important crypto policy issues by emailing your representatives.',
     campaignsModalDescription:
-      'Tell your Member of Parliament to support responsible crypto policy — send an email now!',
+      'Make your voice heard on important crypto policy issues by emailing your representatives.',
     image: '/ca/actionTypeIcons/email.png',
+    link: ({ children }) => <Link href={urls.emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
         isCampaignActive: true,
         title: 'Email your Member of Parliament',
-        description:
-          'You’ve emailed your Member of Parliament and taken action to help stop unfair debanking.',
+        description: 'Tell your MP to support responsible crypto policy — send an email now!',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionViewKeyPageDialog countryCode={countryCode} url={urls.newmodeElectionAction()}>
+            {children}
+          </UserActionViewKeyPageDialog>
+        ),
+      },
+      {
+        actionType: UserActionType.VIEW_KEY_PAGE,
+        campaignName: CAUserActionViewKeyPageCampaignName.CA_NEWMODE_DEBANKING,
+        isCampaignActive: true,
+        title: 'Email your MP to stop unfair debanking',
+        description: 'Urge them to stand up for financial access and innovation.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
           <UserActionViewKeyPageDialog
             countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeElectionAction()}
+            url={urls.newmodeDebankingAction()}
           >
             {children}
           </UserActionViewKeyPageDialog>
@@ -79,14 +97,12 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_RACES,
         campaignName: CAUserActionViewKeyRacesCampaignName.H1_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'View Key Races in Canada',
         description:
-          'View the key races occurring across Canada that will impact the future of crypto.',
+          'Viewed the key races occurring across Canada that would impact the future of crypto in early 2025.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).locationKeyRaces()}>{children}</Link>
-        ),
+        WrapperComponent: ({ children }) => <Link href={urls.locationKeyRaces()}>{children}</Link>,
       },
     ],
   },
@@ -138,6 +154,68 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           >
             {children}
           </LoginDialogWrapper>
+        ),
+      },
+    ],
+  },
+  [UserActionType.POLL]: {
+    title: 'Take the poll',
+    description: 'Take the poll and see the results.',
+    mobileCTADescription: 'Take the poll and see the results.',
+    campaignsModalDescription: 'Take the poll and see the results.',
+    image: '/actionTypeIcons/voterAttestation.png',
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
+    campaigns: [
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.DIGITAL_ASSETS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.ENCOURAGE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.LINKEDIN]: {
+    title: 'Follow us on LinkedIn',
+    description: 'Follow us on LinkedIn and stay up to date on crypto policy changes in Canada.',
+    mobileCTADescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in Canada.',
+    campaignsModalDescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in Canada.',
+    image: '/ca/actionTypeIcons/follow-linkedin.png',
+    campaigns: [
+      {
+        actionType: UserActionType.LINKEDIN,
+        campaignName: CAUserActionLinkedInCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Follow us on LinkedIn',
+        description:
+          'Follow us on LinkedIn and stay up to date on crypto policy changes in Canada.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
+            {children}
+          </UserActionFormFollowLinkedInDialog>
         ),
       },
     ],

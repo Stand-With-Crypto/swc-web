@@ -25,7 +25,7 @@ export function AuPagePoliticianDetails({
           showRoleLocation={false}
         />
         <PagePoliticianDetails.Links person={person} showDonateButton={false} />
-        <ScoreExplainer person={person} useLetterGrade={false} />
+        <ScoreExplainer person={person} />
       </section>
 
       {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />}

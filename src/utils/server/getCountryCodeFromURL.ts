@@ -2,9 +2,12 @@ import { headers } from 'next/headers'
 
 import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
-export async function getCountryCodeFromHeaders() {
-  const headersList = await headers()
+export async function getCountryCodeFromHeaders(
+  headersListArg?: Awaited<ReturnType<typeof headers>>,
+) {
+  const headersList = headersListArg ?? (await headers())
 
   const referer = headersList.get('referer')
   const xMatchedPath = headersList.get('x-matched-path')
@@ -13,7 +16,8 @@ export async function getCountryCodeFromHeaders() {
     extractCountryCodeFromPathname(xMatchedPath || '') ||
     extractCountryCodeFromPathname(getPathnameFromReferer(referer))
 
-  return countryCode ?? DEFAULT_SUPPORTED_COUNTRY_CODE
+  const validatedCountryCode = zodSupportedCountryCode.safeParse(countryCode)
+  return validatedCountryCode.success ? validatedCountryCode.data : DEFAULT_SUPPORTED_COUNTRY_CODE
 }
 
 function getPathnameFromReferer(referer: string | null) {

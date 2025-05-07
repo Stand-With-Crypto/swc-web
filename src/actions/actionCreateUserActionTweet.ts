@@ -13,7 +13,6 @@ import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -27,7 +26,10 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import {
+  ServerActionConfig,
+  withServerActionMiddleware,
+} from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
@@ -50,7 +52,10 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
   ),
 )
 
-async function _actionCreateUserActionTweet({ campaignName }: { campaignName: string }) {
+async function _actionCreateUserActionTweet(
+  { campaignName }: { campaignName: string },
+  { countryCode }: ServerActionConfig,
+) {
   logger.info('triggered')
 
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
@@ -65,7 +70,6 @@ async function _actionCreateUserActionTweet({ campaignName }: { campaignName: st
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
-  const countryCode = await getUserAccessLocationCookie()
 
   if (!userMatch.user) {
     await triggerRateLimiterAtMostOnce()

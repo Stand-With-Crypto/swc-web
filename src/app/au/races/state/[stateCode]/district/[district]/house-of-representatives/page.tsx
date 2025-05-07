@@ -8,7 +8,6 @@ import { queryDTSIRacesPeopleByRolePrimaryDistrict } from '@/data/dtsi/queries/q
 import { queryDTSIStatePrimaryDistricts } from '@/data/dtsi/queries/queryDTSIStatePrimaryDistricts'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { isCypress } from '@/utils/shared/executionEnvironment'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import {
@@ -50,15 +49,11 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const pageParams = []
-  if (isCypress) {
-    return []
-  }
 
   const statesToGenerate = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-    ? Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP)[0]
+    ? [Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP)[0]]
     : Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP)
 
-  // This might be a bit slow, if it becomes a problem we can batch the states
   for (const stateCode of statesToGenerate) {
     const result = await queryDTSIStatePrimaryDistricts({
       stateCode: stateCode as AUStateCode,
@@ -150,7 +145,7 @@ export default async function AUDistrictHouseOfRepsRacePage({
               isRecommended={race.isRecommended}
               key={race.person.id}
               person={race.person}
-              useThumbsUpOrDownGrade
+              shouldHideStanceScores={false}
             />
           ))
         )}

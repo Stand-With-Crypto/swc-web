@@ -20,10 +20,10 @@ import { GENERIC_FORM_ERROR_KEY } from '@/utils/web/formUtils'
 
 const Form = FormProvider
 
-type FormFieldContextValue<
+interface FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
+> {
   name: TName
 }
 
@@ -80,7 +80,7 @@ const useFormField = () => {
   }
 }
 
-type FormItemContextValue = {
+interface FormItemContextValue {
   id: string
 }
 

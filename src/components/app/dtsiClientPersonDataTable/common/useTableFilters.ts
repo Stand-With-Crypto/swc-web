@@ -5,31 +5,35 @@ import { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 import { PERSON_TABLE_COLUMNS_IDS } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { StanceOnCryptoOptions } from '@/components/app/dtsiClientPersonDataTable/common/filters'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSearchParamState } from '@/hooks/useSearchParamState'
 
 export function useSearchFilter(
   defaultValue: string = '',
 ): [string, Dispatch<SetStateAction<string | undefined | null>>] {
+  const hasHydrated = useHasHydrated()
   const [searchValue, setSearchValue] = useSearchParamState('search', defaultValue)
 
-  return [searchValue ?? defaultValue, setSearchValue]
+  return [hasHydrated ? (searchValue ?? defaultValue) : defaultValue, setSearchValue]
+}
+
+const parseValueToString = (value?: SortingState[number]): string | null => {
+  if (!value) return null
+
+  const { id, desc } = value
+
+  return `${id}.${desc ? 'desc' : 'asc'}`
 }
 
 export function useSortingFilter(
   defaultValue: SortingState = [],
 ): [SortingState, Dispatch<SetStateAction<SortingState>>] {
-  const parseValueToString = (value?: SortingState[number]): string | null => {
-    if (!value) return null
-
-    const { id, desc } = value
-
-    return `${id}.${desc ? 'desc' : 'asc'}`
-  }
+  const hasHydrated = useHasHydrated()
 
   const parsedDefaultValue = defaultValue.length > 0 ? parseValueToString(defaultValue.at(0)) : null
   const [sortValue, setSortValue] = useSearchParamState('sorting', parsedDefaultValue)
 
-  const returnValue = useMemo(() => {
+  const sortedValue = useMemo(() => {
     if (!sortValue) return []
 
     const [id, direction] = sortValue?.split('.') ?? []
@@ -44,7 +48,7 @@ export function useSortingFilter(
 
   const handleSortingValue: Dispatch<SetStateAction<SortingState>> = useCallback(
     newValue => {
-      const valueToSet = typeof newValue === 'function' ? newValue(returnValue) : newValue
+      const valueToSet = typeof newValue === 'function' ? newValue(sortedValue) : newValue
 
       if (!valueToSet || valueToSet.length === 0) {
         return setSortValue(null)
@@ -54,16 +58,18 @@ export function useSortingFilter(
 
       return setSortValue(parseValueToString(currentSortingValue))
     },
-    [returnValue, setSortValue],
+    [sortedValue, setSortValue],
   )
 
-  return [returnValue, handleSortingValue]
+  return [hasHydrated ? sortedValue : [], handleSortingValue]
 }
 
 export function useColumnFilters(): [
   ColumnFiltersState,
   Dispatch<SetStateAction<ColumnFiltersState>>,
 ] {
+  const hasHydrated = useHasHydrated()
+
   const [stanceValue, setStanceValue] = useSearchParamState(
     PERSON_TABLE_COLUMNS_IDS.STANCE,
     StanceOnCryptoOptions.ALL,
@@ -123,5 +129,5 @@ export function useColumnFilters(): [
     [filters, setPartyValue, setRoleValue, setStanceValue, setStateValue],
   )
 
-  return [filters, setValue]
+  return [hasHydrated ? filters : [], setValue]
 }

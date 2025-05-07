@@ -139,7 +139,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
 
       // Claim the NFT for the user actions.
       await step.run(`script.claim-nfts-${batchNum}`, async () => {
-        await Promise.all(
+        const results = await Promise.allSettled(
           userActionBatch.map(userAction =>
             claimNFT({
               userAction,
@@ -149,6 +149,16 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
             }),
           ),
         )
+
+        const failedClaims = results.filter(
+          (result): result is PromiseRejectedResult => result.status === 'rejected',
+        )
+
+        if (failedClaims.length > 0) {
+          logger.warn(
+            `${failedClaims.length}/${results.length} NFT claims failed in batch ${batchNum}`,
+          )
+        }
       })
       batchNum += 1
 

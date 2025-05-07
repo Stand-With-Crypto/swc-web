@@ -7,7 +7,7 @@ type AnalyticsFnCall<A> = (params: {
   properties: { Category: string } & AnalyticProperties
 }) => void
 
-export type PrimitiveComponentAnalytics<A> = {
+export interface PrimitiveComponentAnalytics<A> {
   analytics: string | ({ Category: string } & AnalyticProperties) | ((args: A) => void)
 }
 

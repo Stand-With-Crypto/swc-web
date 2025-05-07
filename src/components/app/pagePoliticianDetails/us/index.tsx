@@ -21,7 +21,7 @@ export function UsPagePoliticianDetails({
       <section>
         <PagePoliticianDetails.Header countryCode={countryCode} person={person} />
         <PagePoliticianDetails.Links person={person} />
-        <ScoreExplainer person={person} useLetterGrade />
+        <ScoreExplainer person={person} />
       </section>
 
       {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />}

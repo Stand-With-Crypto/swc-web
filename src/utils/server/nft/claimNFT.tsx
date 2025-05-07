@@ -34,6 +34,7 @@ import {
   USUserActionCallCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
+  USUserActionLinkedinCampaignName,
   USUserActionLiveEventCampaignName,
   USUserActionNftMintCampaignName,
   USUserActionPollCampaignName,
@@ -77,6 +78,7 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VOTER_REGISTRATION]: {
     [USUserActionVoterRegistrationCampaignName.DEFAULT]: NFTSlug.I_AM_A_VOTER,
+    [USUserActionVoterRegistrationCampaignName.H1_2025]: null,
   },
   [UserActionType.LIVE_EVENT]: {
     [USUserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
@@ -87,6 +89,7 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VOTER_ATTESTATION]: {
     [USUserActionVoterAttestationCampaignName.DEFAULT]: NFTSlug.VOTER_ATTESTATION,
+    [USUserActionVoterAttestationCampaignName.H1_2025]: NFTSlug.VOTER_ATTESTATION,
   },
   [UserActionType.RSVP_EVENT]: {
     [USUserActionRsvpEventCampaignName.DEFAULT]: null,
@@ -111,6 +114,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VIEW_KEY_PAGE]: {
     [USUserActionViewKeyPageCampaignName.DEFAULT]: null,
+  },
+  [UserActionType.LINKEDIN]: {
+    [USUserActionLinkedinCampaignName.DEFAULT]: null,
   },
 }
 
@@ -171,35 +177,58 @@ export async function claimNFT({
     throw Error(`Action ${userAction.id} for campaign ${campaignName} already has an NFT mint.`)
   }
 
-  const action = await prismaClient.userAction.update({
-    where: { id: userAction.id },
-    data: {
-      nftMint: {
-        create: {
-          nftSlug: nftSlug,
-          mintType: NFTMintType.SWC_AIRDROPPED,
-          status: NFTMintStatus.REQUESTED,
-          costAtMint: 0.0,
-          contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
-          costAtMintCurrencyCode: NFTCurrency.ETH,
-          costAtMintUsd: new Decimal(0),
+  if (!nftSlug || !NFT_SLUG_BACKEND_METADATA[nftSlug]) {
+    throw new Error(
+      `Invalid or missing NFT metadata for action ${actionType} with campaign ${campaignName}`,
+    )
+  }
+
+  try {
+    const action = await prismaClient.userAction.update({
+      where: { id: userAction.id },
+      data: {
+        nftMint: {
+          create: {
+            nftSlug: nftSlug,
+            mintType: NFTMintType.SWC_AIRDROPPED,
+            status: NFTMintStatus.REQUESTED,
+            costAtMint: 0.0,
+            contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
+            costAtMintCurrencyCode: NFTCurrency.ETH,
+            costAtMintUsd: new Decimal(0),
+          },
         },
       },
-    },
-    include: {
-      nftMint: true,
-    },
-  })
+      include: {
+        nftMint: true,
+      },
+    })
 
-  return inngest.send({
-    name: AIRDROP_NFT_INNGEST_EVENT_NAME,
-    data: {
-      nftMintId: action.nftMintId!,
-      nftSlug,
-      recipientWalletAddress: userCryptoAddress.cryptoAddress,
-      userId: action.userId,
-    },
-  })
+    return inngest.send({
+      name: AIRDROP_NFT_INNGEST_EVENT_NAME,
+      data: {
+        nftMintId: action.nftMintId!,
+        nftSlug,
+        recipientWalletAddress: userCryptoAddress.cryptoAddress,
+        userId: action.userId,
+      },
+    })
+  } catch (error) {
+    Sentry.captureException(error, {
+      extra: {
+        actionType: userAction.actionType,
+        campaignName: userAction.campaignName,
+        activeClientUserActionTypeWithCampaign,
+        nftSlug,
+      },
+      tags: {
+        domain: 'claimNFT',
+      },
+      level: 'error',
+    })
+    logger.error(`Failed to claim NFT: ${error instanceof Error ? error.message : String(error)}`)
+    throw error
+  }
 }
 
 export async function claimNFTAndSendEmailNotification({

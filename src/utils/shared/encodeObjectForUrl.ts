@@ -2,7 +2,9 @@
 import stringify from 'fast-json-stable-stringify'
 import { isString } from 'lodash-es'
 
-type EncodedObject = { [key: string]: string | number | boolean | null | undefined }
+export interface EncodedObject {
+  [key: string]: string | number | boolean | null | undefined
+}
 
 /*
 base64 encoding does not accept non-standard unicode characters and seo we encode all strings on the object before serializing/de-serializing

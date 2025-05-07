@@ -62,6 +62,7 @@ export function AUKeyRaces({ groups }: AUKeyRacesProps) {
               cta={<InternalLink href={linkNoDistrict}>View Race</InternalLink>}
               key={`${stateCode}-${primaryDistrict ?? idx}`}
               people={people}
+              shouldHideStanceScores={false}
               subtitle={
                 primaryDistrict ? (
                   <>

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import { Button } from '@/components/ui/button'
 import {
   DTSI_PersonPoliticalAffiliationCategory,
@@ -60,6 +59,7 @@ const getDefaultProps = () => {
     countryCode: SupportedCountryCodes.US,
     person,
     cryptoStanceGrade: DTSIFormattedLetterGrade,
+    shouldHideStanceScores: false,
   }
   return props
 }
@@ -88,12 +88,6 @@ export const Recommended: Story = {
 
 export const NoProfilePicture: Story = {
   args: { person: { ...getDefaultProps().person, profilePictureUrl: '' } },
-}
-
-export const ThumbsUpOrDownGrade: Story = {
-  args: {
-    cryptoStanceGrade: DTSIThumbsUpOrDownGrade,
-  },
 }
 
 export const WithCustomFooter: Story = {

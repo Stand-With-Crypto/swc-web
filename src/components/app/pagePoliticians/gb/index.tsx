@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { GbDTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/gb'
 import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/layout'
@@ -17,9 +15,7 @@ export function GbPagePoliticians({ politicians }: { politicians: DTSIPersonData
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
-        <Suspense>
-          <GbDTSIClientPersonDataTable initialData={politicians} />
-        </Suspense>
+        <GbDTSIClientPersonDataTable initialData={politicians} />
       </PagePoliticiansLayout.PoliticiansTableSection>
     </PagePoliticiansLayout>
   )

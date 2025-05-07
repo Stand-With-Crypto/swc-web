@@ -16,6 +16,7 @@ import {
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import { checkSMSOptInReplyWithInngest } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { deleteNotSupportedCountryCodeAdvocates } from '@/inngest/functions/capitolCanary/deleteNotSupportedCountryCodeAdvocates'
 import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
@@ -27,6 +28,7 @@ import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initi
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
+  backfillMissingCommunications,
   backfillOptedOutUsers,
   backfillPhoneNumberValidation,
   bulkSMSCommunicationJourney,
@@ -83,5 +85,7 @@ export const { GET, POST, PUT } = serve({
     backfillUserCountryCodeEmptyWithInngest,
     backfillIntlUsersWithInngest,
     processIntlUsersBatch,
+    backfillMissingCommunications,
+    deleteNotSupportedCountryCodeAdvocates,
   ],
 })

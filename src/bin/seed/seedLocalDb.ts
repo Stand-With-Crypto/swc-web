@@ -625,23 +625,6 @@ async function seed() {
   const userActionVotingDay = await prismaClient.userActionVotingDay.findMany()
   logEntity({ userActionVotingDay })
 
-  /*
-  userActionPoll
-  */
-  await batchAsyncAndLog(
-    userActionsByType[UserActionType.POLL].map(action => {
-      return {
-        id: action.id,
-      }
-    }),
-    data =>
-      prismaClient.userActionPoll.createMany({
-        data,
-      }),
-  )
-  const userActionPoll = await prismaClient.userActionPoll.findMany()
-  logEntity({ userActionPoll })
-
   /* userActionRefer */
   await batchAsyncAndLog(
     userActionsByType[UserActionType.REFER].map(action => {
@@ -659,12 +642,29 @@ async function seed() {
   logEntity({ userActionRefer })
 
   /*
+  userActionPoll
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.POLL].map(action => {
+      return {
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionPoll.createMany({
+        data,
+      }),
+  )
+  const userActionPoll = await prismaClient.userActionPoll.findMany()
+  logEntity({ userActionPoll })
+
+  /*
   userActionPollAnswer
   */
   await batchAsyncAndLog(
     userActionsByType[UserActionType.POLL].map(action => {
       return {
-        ...mockCreateUserActionPollAnswerInput(action.campaignName as USUserActionPollCampaignName),
+        ...mockCreateUserActionPollAnswerInput(),
         id: action.id,
         userActionPollId: faker.helpers.arrayElement(userActionPoll).id,
       }

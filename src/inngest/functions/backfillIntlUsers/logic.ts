@@ -27,7 +27,7 @@ export const PROCESS_BATCH_EVENT_NAME = 'script/backfill-intl-users.process-batc
 export const PROCESS_BATCH_FUNCTION_ID = 'script.backfill-intl-users.process-batch'
 const TRANSACTION_CONNECTION_LIMIT = 50
 
-export type ProcessBatchSchema = {
+export interface ProcessBatchSchema {
   name: typeof PROCESS_BATCH_EVENT_NAME
   data: {
     countryCode: SupportedCountryCodes
@@ -38,7 +38,7 @@ export type ProcessBatchSchema = {
   }
 }
 
-type UserProcessingResult = {
+interface UserProcessingResult {
   action: 'created' | 'updated' | 'skipped' | 'error'
   email: string
   userId?: string
@@ -83,9 +83,7 @@ export const processIntlUsersBatch = inngest.createFunction(
 
       const userChunks = lodashChunk(users, TRANSACTION_CONNECTION_LIMIT)
       for (const chunk of userChunks) {
-        const chunkPromises = chunk.map(user =>
-          createUserWithCountryCode(user, validCountryCode, persist),
-        )
+        const chunkPromises = chunk.map(user => createUserWithCountryCode(user, persist))
         const chunkResults = await Promise.allSettled(chunkPromises)
         for (const result of chunkResults) {
           if (result.status === 'fulfilled') {
@@ -101,7 +99,6 @@ export const processIntlUsersBatch = inngest.createFunction(
               results.errors++
               logger.error(`Failed to process user: ${userResult.error || 'Unknown error'}`, {
                 email: userResult.email,
-                countryCode: validCountryCode,
               })
             }
           } else {
@@ -124,7 +121,6 @@ export const processIntlUsersBatch = inngest.createFunction(
 
 async function createUserWithCountryCode(
   userData: UserData,
-  countryCode: SupportedCountryCodes,
   persist: boolean,
 ): Promise<UserProcessingResult> {
   const emailAddress = userData.email
@@ -160,7 +156,7 @@ async function createUserWithCountryCode(
                   dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
                   referralId: userData.referralId || generateReferralId(),
                   userSessions: { create: { id: generateUserSessionId() } },
-                  countryCode,
+                  countryCode: userData.countryCode,
                   acquisitionReferer: '',
                   acquisitionSource: 'INTL_BACKFILL_CSV',
                   acquisitionMedium: 'INTL_BACKFILL_CSV',
@@ -188,7 +184,7 @@ async function createUserWithCountryCode(
                   user: { connect: { id: user.id } },
                   actionType: UserActionType.OPT_IN,
                   campaignName: UserActionOptInCampaignName.DEFAULT,
-                  countryCode,
+                  countryCode: userData.countryCode,
                   userActionOptIn: {
                     create: {
                       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,

@@ -48,16 +48,7 @@ function GlobalFiltersStanceOnCryptoSelect({
         <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance on crypto</span>
         <SelectValue />
       </SelectTrigger>
-      <SelectContent
-        // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
-        // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
-        ref={ref => {
-          if (!ref) return
-          ref.ontouchend = e => {
-            e.preventDefault()
-          }
-        }}
-      >
+      <SelectContent>
         {Object.values(StanceOnCryptoOptions).map(stance => (
           <SelectItem key={stance} onClick={event => event.stopPropagation()} value={stance}>
             {stance}
@@ -90,16 +81,7 @@ function GlobalFiltersRoleSelect({
         <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
         <SelectValue />
       </SelectTrigger>
-      <SelectContent
-        // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
-        // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
-        ref={ref => {
-          if (!ref) return
-          ref.ontouchend = e => {
-            e.preventDefault()
-          }
-        }}
-      >
+      <SelectContent>
         {Object.values(roleOptions).map(role => (
           <SelectItem key={role} onClick={event => event.stopPropagation()} value={role}>
             {getRoleOptionDisplayName(role)}
@@ -132,16 +114,7 @@ function GlobalFiltersPartySelect({
         <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
         <SelectValue />
       </SelectTrigger>
-      <SelectContent
-        // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
-        // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
-        ref={ref => {
-          if (!ref) return
-          ref.ontouchend = e => {
-            e.preventDefault()
-          }
-        }}
-      >
+      <SelectContent>
         {Object.values(partyOptions).map(party => (
           <SelectItem key={party} onClick={event => event.stopPropagation()} value={party}>
             {getPartyOptionDisplayName(party)}
@@ -181,16 +154,7 @@ function GlobalFiltersStateSelect({
         <span className="mr-2 inline-block flex-shrink-0 font-bold">{locationLabel}</span>
         <SelectValue />
       </SelectTrigger>
-      <SelectContent
-        // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
-        // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
-        ref={ref => {
-          if (!ref) return
-          ref.ontouchend = e => {
-            e.preventDefault()
-          }
-        }}
-      >
+      <SelectContent>
         {stateOptions.map(state => (
           <SelectItem key={state} value={state}>
             {getStateOptionDisplayName(state)}

@@ -12,7 +12,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { cn } from '@/utils/web/cn'
 
-type Props = {
+interface Props {
   hasOptedInToMembership?: boolean
 }
 

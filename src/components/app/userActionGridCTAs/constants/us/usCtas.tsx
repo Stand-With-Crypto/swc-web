@@ -12,6 +12,7 @@ import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionF
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
@@ -26,6 +27,9 @@ import {
   USUserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+
+const countryCode = SupportedCountryCodes.US
+const urls = getIntlUrls(countryCode)
 
 export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
@@ -107,7 +111,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: 'Donate fiat or crypto to help keep crypto in America.',
     campaignsModalDescription: 'Donate fiat or crypto to help keep crypto in America.',
     image: '/actionTypeIcons/donate.png',
-    link: ({ children }) => <Link href="/donate">{children}</Link>,
+    link: ({ children }) => <Link href={urls.donate()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.DONATION,
@@ -307,7 +311,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href="/polls">{children}</Link>,
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.POLL,
