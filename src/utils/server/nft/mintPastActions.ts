@@ -6,6 +6,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('mintPastActions')
 
@@ -38,7 +39,11 @@ export async function mintPastActions(
       'User Action Id': action.id,
     })
 
-    await claimNFT(action, userCryptoAddress)
+    await claimNFT({
+      userAction: action,
+      userCryptoAddress,
+      countryCode: action.countryCode as SupportedCountryCodes,
+    })
   }
 
   waitUntil(analytics.flush())

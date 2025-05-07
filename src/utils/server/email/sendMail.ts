@@ -2,15 +2,11 @@ import SendGrid, { ClientResponse } from '@sendgrid/mail'
 
 import { logger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const SENDGRID_API_KEY = requiredOutsideLocalEnv(
   process.env.SENDGRID_API_KEY,
   'SENDGRID_API_KEY',
-  'Sendgrid Email Sends',
-)
-const SENDGRID_SENDER = requiredOutsideLocalEnv(
-  process.env.SENDGRID_SENDER,
-  'SENDGRID_SENDER',
   'Sendgrid Email Sends',
 )
 const SENDGRID_SANDBOX_MODE = requiredOutsideLocalEnv(
@@ -18,6 +14,38 @@ const SENDGRID_SANDBOX_MODE = requiredOutsideLocalEnv(
   'SENDGRID_SANDBOX_MODE',
   'Sendgrid Email Sends',
 )
+const SENDGRID_SENDER = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER,
+  'SENDGRID_SENDER',
+  'Sendgrid Email Sends',
+)
+const SENDGRID_SENDER_US = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER_US,
+  'SENDGRID_SENDER_US',
+  'Sendgrid Email Sends',
+)
+const SENDGRID_SENDER_AU = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER_AU,
+  'SENDGRID_SENDER_AU',
+  'Sendgrid Email Sends',
+)
+const SENDGRID_SENDER_CA = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER_CA,
+  'SENDGRID_SENDER_CA',
+  'Sendgrid Email Sends',
+)
+const SENDGRID_SENDER_GB = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER_GB,
+  'SENDGRID_SENDER_GB',
+  'Sendgrid Email Sends',
+)
+
+const COUNTRY_CODE_TO_SENDGRID_SENDER: Record<SupportedCountryCodes, string | undefined> = {
+  [SupportedCountryCodes.US]: SENDGRID_SENDER_US,
+  [SupportedCountryCodes.GB]: SENDGRID_SENDER_GB,
+  [SupportedCountryCodes.CA]: SENDGRID_SENDER_CA,
+  [SupportedCountryCodes.AU]: SENDGRID_SENDER_AU,
+}
 
 if (SENDGRID_API_KEY) {
   SendGrid.setApiKey(SENDGRID_API_KEY)
@@ -65,22 +93,34 @@ export type SendMailPayload =
 
 /**
  * Send email using SendGrid
- * @param payload: SendMailPayload
+ * @param payload {@link SendMailPayload}
  * @returns string
  */
-export function sendMail(payload: SendMailPayload): Promise<string>
+export function sendMail(args: {
+  payload: SendMailPayload
+  countryCode: SupportedCountryCodes
+}): Promise<string>
 
 /**
  * Send emails using SendGrid
- * @param payload: SendMailPayload[]
+ * @param payload {@link SendMailPayload | SendMailPayload[]}
  * @returns string[]
  */
-export function sendMail(payload: SendMailPayload[]): Promise<string[]>
+export function sendMail(args: {
+  payload: SendMailPayload[]
+  countryCode: SupportedCountryCodes
+}): Promise<string[]>
 
-export async function sendMail(
-  payload: SendMailPayload | SendMailPayload[],
-): Promise<string | string[]> {
-  if (!SENDGRID_API_KEY || !SENDGRID_SENDER) {
+export async function sendMail({
+  payload,
+  countryCode,
+}: {
+  payload: SendMailPayload | SendMailPayload[]
+  countryCode: SupportedCountryCodes
+}): Promise<string | string[]> {
+  const senderEmail = COUNTRY_CODE_TO_SENDGRID_SENDER[countryCode] || SENDGRID_SENDER
+
+  if (!SENDGRID_API_KEY || !senderEmail) {
     logger.debug(
       'Skipping `sendMail` call due to undefined `SENDGRID_API_KEY` or `SENDGRID_SENDER`',
       payload,
@@ -92,7 +132,7 @@ export async function sendMail(
 
   const parsedPayload = isMultiple
     ? payload.map(currentMessage => ({
-        from: SENDGRID_SENDER,
+        from: senderEmail,
         mailSettings: {
           sandboxMode: {
             enable: SENDGRID_SANDBOX_MODE === 'true',
@@ -101,7 +141,7 @@ export async function sendMail(
         ...currentMessage,
       }))
     : {
-        from: SENDGRID_SENDER,
+        from: senderEmail,
         mailSettings: {
           sandboxMode: {
             enable: SENDGRID_SANDBOX_MODE === 'true',
