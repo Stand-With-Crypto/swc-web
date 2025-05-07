@@ -85,7 +85,7 @@ const AUPhoneNumberReminderEmail = ({
   )
 }
 
-AUPhoneNumberReminderEmail.subjectLine = 'Get text updates from SWC Australia'
+AUPhoneNumberReminderEmail.subjectLine = 'Get text updates from SWC'
 AUPhoneNumberReminderEmail.campaign = 'phone_number_reminder'
 
 export default AUPhoneNumberReminderEmail

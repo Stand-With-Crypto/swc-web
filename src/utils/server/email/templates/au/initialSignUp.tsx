@@ -34,20 +34,20 @@ const AUInitialSignUpEmail = ({
           src={buildTemplateInternalUrl('/au/email/join-banner.png', hydratedHrefSearchParams)}
         />
 
-        <Heading gutterBottom="md">Thanks for joining Stand With Crypto Australia!</Heading>
+        <Heading gutterBottom="md">Thanks for joining!</Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto advocate. Advocates like you are making
-          a huge difference to promote forward looking crypto policy in Australia.
+          Thank you for signing up to be a Stand With Crypto advocate. Crypto advocates like you are
+          making a huge difference in Australia, from your local community to Parliament House.
           <br />
           <br />
-          Stand with Crypto advocates have helped educate politicians in Canberra, bought crypto to
-          the forefront of political campaigns, and helped highlight the real-world uses of crypto
-          that make a difference in the Australian economy.
+          Stand With Crypto advocates have helped bring crypto to the forefront of political
+          campaigns, while highlighting the real-world uses of crypto that make a difference in
+          Australians’ everyday lives.
           <br />
           <br />
-          Keep an eye out for more communications from us: you'll see updates on key news stories
-          we're tracking, events in your local area, and opportunities for you to raise your voice
+          Keep an eye out for more communications from us: you’ll see updates on key news stories
+          we’re tracking, events in your local area, and opportunities for you to raise your voice
           to your elected officials.
           <br />
           <br />

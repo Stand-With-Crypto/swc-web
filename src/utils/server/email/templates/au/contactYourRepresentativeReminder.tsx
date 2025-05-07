@@ -45,8 +45,10 @@ const AUContactYourRepresentativeReminderEmail = ({
           to hear from you!
           <br />
           <br />
-          Email your member of House of Representatives or call their office and let them know that
-          you care about crypto.
+          Luckily, SWC makes it easy to get active. We have simple and easy tools that allow you to
+          email your member of Congress or call their office and let them know that you care about
+          crypto. All you need to do is enter your address and we’ll make sure your email or call is
+          routed correctly.
         </Text>
       </Section>
 
