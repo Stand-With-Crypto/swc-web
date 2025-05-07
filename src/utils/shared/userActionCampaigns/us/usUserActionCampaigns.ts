@@ -141,7 +141,7 @@ export interface USUserActionCampaigns {
 }
 
 export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
-  [UserActionType.EMAIL]: USUserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
+  [UserActionType.EMAIL]: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
   [UserActionType.CALL]: USUserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: USUserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
