@@ -41,12 +41,12 @@ const CAInitialSignUpEmail = ({
           making a huge difference in Canada.
           <br />
           <br />
-          Stand With Crypto advocates have helped highlight the real-world uses of crypto that make
-          a difference in Canadians lives.
+          Stand With Crypto advocates are highlighting the real-world uses of crypto that make a
+          difference in Canadians’ everyday lives.
           <br />
           <br />
-          Keep an eye out for more communications from us: you'll see updates on key news stories
-          we're tracking, events in your local area, and opportunities for you to raise your voice
+          Keep an eye out for more communications from us: you’ll see updates on key news stories
+          we’re tracking, events in your local area, and opportunities for you to raise your voice
           to your elected officials.
           <br />
           <br />

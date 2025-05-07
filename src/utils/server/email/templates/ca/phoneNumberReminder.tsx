@@ -45,8 +45,8 @@ const CAPhoneNumberReminderEmail = ({
           text messages from SWC.
           <br />
           <br />
-          You'll receive updates on key crypto bills, exclusive events, and opportunities for
-          advocacy. We promise to only reach out when it's important.
+          You'll receive updates on exclusive events and opportunities for advocacy. We promise to
+          only reach out when it's important.
           <br />
           <br />
           SWC will never use your phone number for commercial purposes, and we have a robust{' '}
@@ -85,7 +85,7 @@ const CAPhoneNumberReminderEmail = ({
   )
 }
 
-CAPhoneNumberReminderEmail.subjectLine = 'Get text updates from SWC Canada'
+CAPhoneNumberReminderEmail.subjectLine = 'Get text updates from SWC'
 CAPhoneNumberReminderEmail.campaign = 'phone_number_reminder'
 
 export default CAPhoneNumberReminderEmail

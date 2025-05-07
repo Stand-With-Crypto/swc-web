@@ -41,12 +41,14 @@ const CAContactYourRepresentativeReminderEmail = ({
 
         <Text className="text-foreground-muted text-center text-base">
           Stand With Crypto was founded to give the crypto community a voice in major policy
-          debates. As policymakers in Ottawa discuss the future of crypto in Canada, they need to
-          hear from you!
+          debates. As policymakers discuss the future of crypto in Canada, they need to hear from
+          you!
           <br />
           <br />
-          Email your member of Parliament or call their office and let them know that you care about
-          crypto.
+          Luckily, SWC makes it easy to get active. We have simple and easy tools that allow you to
+          email your member of Congress or call their office and let them know that you care about
+          crypto. All you need to do is enter your address and we’ll make sure your email or call is
+          routed correctly.
         </Text>
       </Section>
 
