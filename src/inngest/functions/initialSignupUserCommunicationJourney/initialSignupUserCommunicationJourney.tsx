@@ -275,7 +275,7 @@ async function sendInitialSignUpEmail({
   }
 
   const messageId = await sendMail({
-    countryCode: user.countryCode as SupportedCountryCodes,
+    countryCode,
     payload: {
       to: user.primaryUserEmailAddress.emailAddress,
       subject: Template.subjectLine,
