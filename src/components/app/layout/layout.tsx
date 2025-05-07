@@ -4,6 +4,7 @@ import NextTopLoader from 'nextjs-toploader'
 import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { GoogleTagManager } from '@/components/app/googleTagManager'
+import { LayoutScript } from '@/components/app/layout/layoutScripts'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
@@ -29,6 +30,7 @@ export function PageLayout({
   return (
     <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
       {COUNTRIES_WITH_GTM.includes(countryCode) && <GoogleTagManager />}
+      <LayoutScript countryCode={countryCode} />
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <NextTopLoader
