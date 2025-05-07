@@ -1,15 +1,11 @@
 import * as React from 'react'
-import { Hr, Img, Section, Text } from '@react-email/components'
+import { Img, Section, Text } from '@react-email/components'
 
 import { Button } from '@/utils/server/email/templates/common/ui/button'
 import { Heading } from '@/utils/server/email/templates/common/ui/heading'
-import {
-  KeepUpTheFightSection,
-  KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
+import { KeepUpTheFightSectionProps } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
 import { GBEmailTemplateProps } from '@/utils/server/email/templates/gb/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { GBWrapper } from './wrapper'
 
@@ -19,7 +15,6 @@ const GBFinishSettingUpProfileReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
-  ...keepUpTheFightSectionProps
 }: FinishSettingUpProfileReminderEmailProps) => {
   const hydratedHrefSearchParams = {
     utm_campaign: GBFinishSettingUpProfileReminderEmail.campaign,
@@ -42,9 +37,8 @@ const GBFinishSettingUpProfileReminderEmail = ({
           just a few moments to finish setting up your full profile with SWC.
           <br />
           <br />
-          Adding additional information will unlock special benefits with SWC, like exclusive
-          communications, NFTs, and even more opportunities to engage with the pro-crypto movement
-          we're building.
+          Adding additional information will unlock benefits with SWC, like NFTs and even more
+          opportunities to engage with the pro-crypto movement we're building.
           <br />
           <br />
           Setting up your profile takes just a few minutes, and is easy to do on our site. Thank you
@@ -63,14 +57,6 @@ const GBFinishSettingUpProfileReminderEmail = ({
           Finish your profile
         </Button>
       </Section>
-
-      <Hr className="my-8" />
-
-      <KeepUpTheFightSection
-        {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.GB}
-        hrefSearchParams={hydratedHrefSearchParams}
-      />
     </GBWrapper>
   )
 }

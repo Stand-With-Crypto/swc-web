@@ -1,6 +1,5 @@
 import AUPhoneNumberReminderEmail from '@/utils/server/email/templates/au/phoneNumberReminder'
 import CAPhoneNumberReminderEmail from '@/utils/server/email/templates/ca/phoneNumberReminder'
-import GBPhoneNumberReminderEmail from '@/utils/server/email/templates/gb/phoneNumberReminder'
 import USPhoneNumberReminderEmail from '@/utils/server/email/templates/us/phoneNumberReminder'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -14,7 +13,7 @@ export function getPhoneNumberReminderEmail(countryCode: SupportedCountryCodes) 
     case SupportedCountryCodes.AU:
       return AUPhoneNumberReminderEmail
     case SupportedCountryCodes.GB:
-      return GBPhoneNumberReminderEmail
+      return null
     default:
       return gracefullyError({
         msg: `No PhoneNumberReminderEmail template found for countryCode: ${countryCode as string}`,

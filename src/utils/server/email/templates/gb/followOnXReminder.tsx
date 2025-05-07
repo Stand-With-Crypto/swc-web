@@ -46,12 +46,17 @@ const GBFollowOnXReminderEmail = ({
           in your inbox, another great way to get the latest news is to{' '}
           <Link className="text-inherit underline" href={GB_SOCIAL_MEDIA_URL.twitter}>
             follow us on X
+          </Link>{' '}
+          and
+          <Link className="text-inherit underline" href={GB_SOCIAL_MEDIA_URL.linkedin}>
+            Linkedin
           </Link>
           .
           <br />
           <br />
-          X is where you'll get instant updates on events we're hosting, news we're reading, and
-          awesome discussion Spaces that we host with advocates and founders across the country.
+          X and Linkedin are where you'll get instant updates on events we're hosting, news we're
+          reading, and awesome discussion Spaces that we host with advocates and founders across the
+          country.
           <br />
           <br />
           <Link className="text-inherit underline" href={GB_SOCIAL_MEDIA_URL.twitter}>
@@ -64,6 +69,13 @@ const GBFollowOnXReminderEmail = ({
       <Section className="mt-4 text-center">
         <Button fullWidth="mobile" href={GB_SOCIAL_MEDIA_URL.twitter}>
           Follow us on X
+        </Button>
+        <Button
+          className="mt-4 md:ml-4 md:mt-0"
+          fullWidth="mobile"
+          href={GB_SOCIAL_MEDIA_URL.linkedin}
+        >
+          Follow us on Linkedin
         </Button>
       </Section>
 
@@ -78,7 +90,7 @@ const GBFollowOnXReminderEmail = ({
   )
 }
 
-GBFollowOnXReminderEmail.subjectLine = 'Stay up to date on crypto policy in the UK'
+GBFollowOnXReminderEmail.subjectLine = 'Stay up to date on crypto policy'
 GBFollowOnXReminderEmail.campaign = 'follow_on_x_reminder'
 
 export default GBFollowOnXReminderEmail

@@ -1,14 +1,10 @@
 import * as React from 'react'
-import { Hr, Img, Link, Section, Text } from '@react-email/components'
+import { Img, Link, Section, Text } from '@react-email/components'
 
 import { Heading } from '@/utils/server/email/templates/common/ui/heading'
-import {
-  KeepUpTheFightSection,
-  KeepUpTheFightSectionProps,
-} from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
+import { KeepUpTheFightSectionProps } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
 import { GBEmailTemplateProps } from '@/utils/server/email/templates/gb/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { GBWrapper } from './wrapper'
 
@@ -18,7 +14,6 @@ const GBReactivationReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
-  ...keepUpTheFightSectionProps
 }: ReactivationReminderProps) => {
   const hydratedHrefSearchParams = {
     utm_campaign: GBReactivationReminderEmail.campaign,
@@ -38,18 +33,19 @@ const GBReactivationReminderEmail = ({
 
         <Text className="mb-0 text-center text-[15px] text-[#5B616E]">
           We're excited that you've signed up to be a part of Stand With Crypto. SWC was created to
-          give the British crypto community a voice in the public debates around crypto and to
-          educate policymakers and the public about the benefits of keeping crypto in Britain,
-          including:
+          galvanise the grassroots community, shine a spotlight on all the innovation taking place
+          up and down the country, and to promote a positive business environment for crypto assets,
+          blockchain technology and tokenisation, through policy change. The benefits of this
+          technology for the UK economy:
           <br />
           <br />
         </Text>
         <ul className="pl-4 text-[15px] text-[#5B616E]">
           <li>Job creation</li>
-          <li>Technology and innovation</li>
+          <li>Technological innovation</li>
           <li>Modernizing the financial system</li>
           <li>Protecting and empowering consumers</li>
-          <li>Maintaining our edge over other nations</li>
+          <li>Maintaining our competitive position as leading financial centre and fintech hub</li>
         </ul>
         <br />
         <Text className="my-0 text-center text-[15px] text-[#5B616E]">
@@ -64,14 +60,6 @@ const GBReactivationReminderEmail = ({
           channels below. Thank you again for being a part of our community.
         </Text>
       </Section>
-
-      <Hr className="my-8" />
-
-      <KeepUpTheFightSection
-        {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.GB}
-        hrefSearchParams={hydratedHrefSearchParams}
-      />
     </GBWrapper>
   )
 }
