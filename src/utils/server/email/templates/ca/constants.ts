@@ -1,3 +1,5 @@
+import { NFTSlug } from '@/utils/shared/nft'
+
 export enum CAEmailActiveActions {
   TWEET = 'TWEET',
   REFER = 'REFER',
@@ -50,3 +52,16 @@ export interface CAEmailTemplateProps {
     sessionId?: string
   } | null
 }
+
+export enum CAEmailEnabledActionNFTs {}
+
+export type CAEmailEnabledActionNFTsNames = `${CAEmailEnabledActionNFTs}`
+
+export const CA_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION: Partial<
+  Record<NFTSlug, CAEmailEnabledActionNFTs>
+> = {}
+
+export const CA_NFT_IMAGES_BY_ACTION: Record<
+  CAEmailEnabledActionNFTsNames,
+  { src: string; alt: string }
+> = {}

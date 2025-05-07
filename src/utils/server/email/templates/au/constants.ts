@@ -1,3 +1,5 @@
+import { NFTSlug } from '@/utils/shared/nft'
+
 export enum AUEmailActiveActions {
   TWEET = 'TWEET',
   REFER = 'REFER',
@@ -50,3 +52,16 @@ export interface AUEmailTemplateProps {
     sessionId?: string
   } | null
 }
+
+export enum AUEmailEnabledActionNFTs {}
+
+export type AUEmailEnabledActionNFTsNames = `${AUEmailEnabledActionNFTs}`
+
+export const AU_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION: Partial<
+  Record<NFTSlug, AUEmailEnabledActionNFTs>
+> = {}
+
+export const AU_NFT_IMAGES_BY_ACTION: Record<
+  AUEmailEnabledActionNFTsNames,
+  { src: string; alt: string }
+> = {}

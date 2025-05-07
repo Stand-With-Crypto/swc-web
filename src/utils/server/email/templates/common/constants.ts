@@ -1,14 +1,20 @@
 import {
   AU_ACTIONS_METADATA_BY_TYPE,
+  AU_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
   AUEmailActiveActions,
+  AUEmailEnabledActionNFTs,
 } from '@/utils/server/email/templates/au/constants'
 import {
   CA_ACTIONS_METADATA_BY_TYPE,
+  CA_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
   CAEmailActiveActions,
+  CAEmailEnabledActionNFTs,
 } from '@/utils/server/email/templates/ca/constants'
 import {
   GB_ACTIONS_METADATA_BY_TYPE,
+  GB_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
   GBEmailActiveActions,
+  GBEmailEnabledActionNFTs,
 } from '@/utils/server/email/templates/gb/constants'
 import {
   US_ACTIONS_METADATA_BY_TYPE,
@@ -84,6 +90,12 @@ export function getEmailEnabledActionNFTsByCountry(countryCode: SupportedCountry
   switch (countryCode) {
     case SupportedCountryCodes.US:
       return USEmailEnabledActionNFTs
+    case SupportedCountryCodes.AU:
+      return AUEmailEnabledActionNFTs
+    case SupportedCountryCodes.CA:
+      return CAEmailEnabledActionNFTs
+    case SupportedCountryCodes.GB:
+      return GBEmailEnabledActionNFTs
     default:
       return gracefullyError({
         msg: `No email enabled action nfts found for country code`,
@@ -105,6 +117,12 @@ export const getEmailActiveActionFromNFTSlug = (
   switch (countryCode) {
     case SupportedCountryCodes.US:
       return US_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION[nftSlug]
+    case SupportedCountryCodes.CA:
+      return CA_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION[nftSlug]
+    case SupportedCountryCodes.GB:
+      return GB_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION[nftSlug]
+    case SupportedCountryCodes.AU:
+      return AU_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION[nftSlug]
     default:
       return gracefullyError({
         msg: `No active email action found for nft slug`,

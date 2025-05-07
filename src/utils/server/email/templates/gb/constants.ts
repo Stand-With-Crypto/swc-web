@@ -1,3 +1,5 @@
+import { NFTSlug } from '@/utils/shared/nft'
+
 export enum GBEmailActiveActions {
   TWEET = 'TWEET',
   REFER = 'REFER',
@@ -42,3 +44,16 @@ export interface GBEmailTemplateProps {
     sessionId?: string
   } | null
 }
+
+export enum GBEmailEnabledActionNFTs {}
+
+export type GBEmailEnabledActionNFTsNames = `${GBEmailEnabledActionNFTs}`
+
+export const GB_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION: Partial<
+  Record<NFTSlug, GBEmailEnabledActionNFTs>
+> = {}
+
+export const GB_NFT_IMAGES_BY_ACTION: Record<
+  GBEmailEnabledActionNFTsNames,
+  { src: string; alt: string }
+> = {}

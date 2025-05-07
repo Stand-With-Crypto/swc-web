@@ -19,7 +19,7 @@ import {
   getEmailActiveActionsByCountry,
   getEmailEnabledActionNFTsByCountry,
 } from '@/utils/server/email/templates/common/constants'
-import { getNFTOnTheWayEmail } from '@/utils/server/email/templates/nftOnTheWay'
+import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -287,7 +287,7 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
 
   const userSession = user.userSessions?.[0]
 
-  const NFTOnTheWayEmail = getNFTOnTheWayEmail(countryCode)
+  const NFTOnTheWayEmailTemplate = NFTOnTheWayEmail(countryCode)
   if (!NFTOnTheWayEmail) {
     return null
   }
@@ -296,9 +296,9 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
     countryCode,
     payload: {
       to: user.primaryUserEmailAddress.emailAddress,
-      subject: NFTOnTheWayEmail.subjectLine,
+      subject: NFTOnTheWayEmailTemplate.subjectLine,
       html: await render(
-        <NFTOnTheWayEmail
+        <NFTOnTheWayEmailTemplate
           actionNFT={userAction.actionType as EmailEnabledActionNFTs}
           completedActionTypes={user.userActions
             .filter(action =>
@@ -323,7 +323,7 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
         userId: user.id,
         userActionId: userAction.id,
         actionType: userAction.actionType,
-        campaign: NFTOnTheWayEmail.campaign,
+        campaign: NFTOnTheWayEmailTemplate.campaign,
       },
     },
   }).catch(err => {
