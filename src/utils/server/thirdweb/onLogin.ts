@@ -895,7 +895,11 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
 
-    await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction: optInUserAction,
+      userCryptoAddress,
+      countryCode: countryCode as SupportedCountryCodes,
+    })
 
     const { data: normalizedCountryCode } = zodSupportedCountryCode.safeParse(countryCode)
 
