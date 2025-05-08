@@ -68,7 +68,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+      campaignName: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -77,7 +77,7 @@ const getDefaultValues = ({
         lastName: user.lastName,
         address: user?.address?.formattedDescription,
       }),
-      subject: 'Crypto Matters To Me',
+      subject: 'Vote YES on motion to proceed on GENIUS Act.',
       address: user.address?.route
         ? {
             description: user.address.formattedDescription,
@@ -88,12 +88,12 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+    campaignName: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
     firstName: '',
     lastName: '',
     emailAddress: '',
     contactMessage: getEmailBodyText(),
-    subject: 'Crypto Matters To Me',
+    subject: 'Vote YES on motion to proceed on GENIUS Act.',
     address: undefined,
     dtsiSlugs,
   }
@@ -238,10 +238,10 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Contact your Member of Congress
+              Contact Your Senator
             </PageTitle>
             <PageSubTitle className="mb-7">
-              Tell your Member to Vote “Yes” for H.J.Res.25.
+              Tell your Senator to vote YES on opening debate on the GENIUS Act.
             </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
