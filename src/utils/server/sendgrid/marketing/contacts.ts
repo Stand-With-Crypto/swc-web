@@ -10,7 +10,7 @@ import {
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 
 export type SendgridContact = Record<SendgridReservedField, string> & {
-  custom_fields: Record<SendgridCustomField, string>
+  custom_fields: Record<SendgridCustomField, string | number>
 }
 
 interface Options {
@@ -25,14 +25,15 @@ export const upsertSendgridContactsArray = async (
     const sendgridFieldDefinitions = await fetchSendgridCustomFields()
     const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
 
+    // Map custom fields to their respective Sendgrid ID
     const formattedContacts = contacts.map(contact => {
-      const { custom_fields: contactCustomFields, ...standardFields } = contact
-      const custom_fields: Record<string, string> = {}
+      const { custom_fields, ...standardFields } = contact
+      const customFieldsMappedToIds: Record<string, string | number> = {}
 
-      typedObjectEntries(contactCustomFields).forEach(([fieldName, fieldValue]) => {
+      typedObjectEntries(custom_fields).forEach(([fieldName, fieldValue]) => {
         const fieldId = fieldIds[fieldName]
         if (fieldId) {
-          custom_fields[fieldId] = fieldValue
+          customFieldsMappedToIds[fieldId] = fieldValue
         } else {
           Sentry.captureMessage(`Custom field ${fieldName} not found in SendGrid definitions`, {
             tags: {
@@ -49,7 +50,7 @@ export const upsertSendgridContactsArray = async (
 
       return {
         ...standardFields,
-        custom_fields,
+        custom_fields: customFieldsMappedToIds,
       }
     })
 
@@ -88,7 +89,7 @@ interface SendgridImportResponse {
 export async function uploadSendgridContactsCSV(
   /**
    * TODO: This typing should not have a `custom_fields` property.
-   * Even though it works, it ends up adding an extra column to the CSV file.
+   * Even though it works (xlsx flattens the custom_fields), it ends up adding an extra column to the CSV file.
    */
   contacts: SendgridContact[],
   options?: Options,
@@ -101,6 +102,7 @@ export async function uploadSendgridContactsCSV(
       throw new Error('Required email field not found in SendGrid')
     }
 
+    // TODO: Make this dynamic/programmatic
     const fieldMappings = [
       fieldIds.email,
       fieldIds.first_name,

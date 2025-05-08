@@ -67,7 +67,6 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
 
     return await step.run(`sync-${countryCode}-contacts`, async () => {
       try {
-        // Format users for SendGrid - map DB fields to SendGrid fields
         const contacts = users.map(user => {
           const email = user.primaryUserEmailAddress?.emailAddress || ''
           const completedUsersActionsCustomFields: Record<SendgridUserActionCustomField, string> =
@@ -84,7 +83,6 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
             )
 
           return {
-            // Reserved fields
             email,
             external_id: user.id,
             first_name: user.firstName || '',
@@ -96,18 +94,16 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
             state_province_region: user.address?.administrativeAreaLevel1 || '',
             postal_code: user.address?.postalCode || '',
             phone_number: user.phoneNumber || '',
-            // Custom fields
             custom_fields: {
               signup_date: user.datetimeCreated,
-              user_actions_count: user.userActions.length.toString(),
+              user_actions_count: user.userActions.length,
               session_id: user.userSessions?.[0]?.id || '',
               ...completedUsersActionsCustomFields,
             },
           } satisfies SendgridContact
         })
 
-        // const validContacts = contacts.filter(contact => !!contact.email)
-        const validContacts = contacts.slice(0, 1)
+        const validContacts = contacts.filter(contact => !!contact.email)
 
         if (validContacts.length === 0) {
           return {

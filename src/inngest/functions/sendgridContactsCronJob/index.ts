@@ -1,7 +1,10 @@
 import { NonRetriableError } from 'inngest'
 
 import { checkCustomFields } from '@/inngest/functions/sendgridContactsCronJob/checkCustomFields'
-import { checkSendgridJobStatus } from '@/inngest/functions/sendgridContactsCronJob/checkJobStatus'
+import {
+  checkSendgridJobStatus,
+  SendgridImportJobStatusResponse,
+} from '@/inngest/functions/sendgridContactsCronJob/checkJobStatus'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -152,9 +155,8 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       })
     }
 
-    // Check sendgrid's job status
-    const jobStatuses = await step.run('check-sendgrid-job-statuses', async () => {
-      const promises: Promise<void>[] = []
+    const importStatus = await step.run('check-sendgrid-job-statuses', async () => {
+      const promises: Promise<SendgridImportJobStatusResponse>[] = []
       allResults.forEach(countryResult => {
         countryResult.batchesResults.forEach(({ jobId }) => {
           if (jobId) {
@@ -162,13 +164,18 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
           }
         })
       })
-      return await Promise.all(promises)
+      try {
+        return await Promise.all(promises)
+      } catch (error) {
+        logger.error('Sendgrid job status failed', { error })
+        throw new NonRetriableError(`Error checking sendgrid job statuses`)
+      }
     })
 
     return {
       message: 'Completed syncing contacts to SendGrid',
-      customFields: 'verified',
       results: allResults,
+      importStatus,
     }
   },
 )
