@@ -31,10 +31,10 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Contact your Member of Congress
+            Contact Your Senator
           </PageTitle>
           <PageSubTitle className="mb-7">
-            Tell your Member to Vote “Yes” for H.J.Res.25.
+            Tell your Senator to vote YES on opening debate on the GENIUS Act.
           </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
