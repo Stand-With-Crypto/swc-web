@@ -4,7 +4,10 @@ import * as XLSX from 'xlsx'
 import {
   fetchSendgridCustomFields,
   mapSendgridFieldToFieldIds,
+  SENDGRID_CUSTOM_FIELDS,
+  SENDGRID_RESERVED_FIELDS,
   SendgridCustomField,
+  SendgridField,
   SendgridReservedField,
 } from '@/utils/server/sendgrid/marketing/customFields'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
@@ -86,14 +89,7 @@ interface SendgridImportResponse {
   upload_headers: Array<{ header: string; value: string }>
 }
 
-export async function uploadSendgridContactsCSV(
-  /**
-   * TODO: This typing should not have a `custom_fields` property.
-   * Even though it works (xlsx flattens the custom_fields), it ends up adding an extra column to the CSV file.
-   */
-  contacts: SendgridContact[],
-  options?: Options,
-) {
+export async function uploadSendgridContactsCSV(contacts: SendgridContact[], options?: Options) {
   try {
     const sendgridFieldDefinitions = await fetchSendgridCustomFields()
     const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
@@ -102,35 +98,45 @@ export async function uploadSendgridContactsCSV(
       throw new Error('Required email field not found in SendGrid')
     }
 
-    // TODO: Make this dynamic/programmatic
-    const fieldMappings = [
-      fieldIds.email,
-      fieldIds.first_name,
-      fieldIds.last_name,
-      fieldIds.country,
-      fieldIds.address_line_1,
-      fieldIds.city,
-      fieldIds.state_province_region,
-      fieldIds.postal_code,
-      fieldIds.phone_number,
-      fieldIds.signup_date,
-      fieldIds.user_actions_count,
-    ]
+    // Flatten the custom_fields for the CSV
+    const flattenedContactsData = contacts.map(contact => {
+      const { custom_fields, ...standardFields } = contact
+      return {
+        ...standardFields,
+        ...custom_fields,
+      }
+    })
+
+    const allFieldNames: SendgridField[] = [...SENDGRID_RESERVED_FIELDS, ...SENDGRID_CUSTOM_FIELDS]
+
+    const csvSheetHeaders: string[] = []
+    const sendgridApiMappings: string[] = []
+    allFieldNames.forEach(fieldName => {
+      const fieldId = fieldIds[fieldName]
+      if (fieldId) {
+        csvSheetHeaders.push(fieldName)
+        sendgridApiMappings.push(fieldId)
+      }
+    })
+
+    if (csvSheetHeaders.length === 0) {
+      throw new Error('No valid field mappings found for CSV export.')
+    }
 
     const [response] = await SendgridClient.request({
       url: '/v3/marketing/contacts/imports',
       method: 'PUT',
       body: {
         file_type: 'csv',
-        field_mappings: fieldMappings,
+        field_mappings: sendgridApiMappings,
         list_ids: options?.listIds || [],
       },
     })
     const responseBody = response.body as SendgridImportResponse
     const { upload_uri, upload_headers } = responseBody
 
-    const worksheet = XLSX.utils.json_to_sheet(contacts, {
-      header: fieldMappings.map(field => field || ''),
+    const worksheet = XLSX.utils.json_to_sheet(flattenedContactsData, {
+      header: csvSheetHeaders,
     })
     const csvContent = XLSX.utils.sheet_to_csv(worksheet)
 
@@ -151,7 +157,7 @@ export async function uploadSendgridContactsCSV(
     return {
       success: true,
       job_id: responseBody.job_id,
-      count: contacts.length,
+      count: flattenedContactsData.length,
     }
   } catch (error) {
     Sentry.captureException(error, {
