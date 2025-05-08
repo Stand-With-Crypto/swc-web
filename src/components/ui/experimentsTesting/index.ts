@@ -23,7 +23,7 @@ export function useExperimentName<K extends Experiments>({
   return variant
 }
 
-type ExperimentsComponentProps<K extends Experiments> = {
+interface ExperimentsComponentProps<K extends Experiments> {
   experimentName: K
   variants: Record<IExperimentContext[K], React.ReactNode>
 }

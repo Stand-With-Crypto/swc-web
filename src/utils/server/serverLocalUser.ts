@@ -12,7 +12,7 @@ import {
   PersistedLocalUser,
 } from '@/utils/shared/localUser'
 
-export type ServerLocalUser = {
+export interface ServerLocalUser {
   persisted: PersistedLocalUser
   currentSession: CurrentSessionLocalUser
 }

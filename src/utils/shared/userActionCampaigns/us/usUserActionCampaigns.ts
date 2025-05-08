@@ -38,6 +38,7 @@ export enum USUserActionEmailCampaignName {
   BROKER_REPORTING_RULE_SJ_RES_3 = 'BROKER_REPORTING_RULE_SJ_RES_3',
   BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD',
   BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH',
+  GENIUS_ACT_8_MAY_2025 = 'GENIUS_ACT_8_MAY_2025',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
@@ -118,7 +119,7 @@ export type USUserActionCampaignName =
   | USUserActionReferCampaignName
   | USUserActionPollCampaignName
   | USUserActionLinkedinCampaignName
-export type USUserActionCampaigns = {
+export interface USUserActionCampaigns {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName
   [UserActionType.CALL]: USUserActionCallCampaignName
   [UserActionType.DONATION]: USUserActionDonationCampaignName
@@ -140,7 +141,7 @@ export type USUserActionCampaigns = {
 }
 
 export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
-  [UserActionType.EMAIL]: USUserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
+  [UserActionType.EMAIL]: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
   [UserActionType.CALL]: USUserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: USUserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,

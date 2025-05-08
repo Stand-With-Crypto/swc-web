@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import { isError } from 'lodash-es'
 import { getDetails } from 'use-places-autocomplete'
 import { z } from 'zod'
 
@@ -91,7 +92,7 @@ async function getAddressWithRetry(prediction: GooglePlaceAutocompletePrediction
     if (error === 'NOT_FOUND' || error === 'INVALID_REQUEST') {
       return await handleExpiredPlaceId(prediction)
     }
-    throw error
+    throw isError(error) ? error : new Error(String(error))
   }
 }
 

@@ -50,7 +50,7 @@ const PARTY_OPTIONS_DISPLAY_NAME: Record<PARTY_OPTION, string> = {
   [DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT]: 'Democratic',
 }
 
-export type FILTER_KEYS = {
+export interface FILTER_KEYS {
   stance: STANCE_OPTION
   role: ROLE_OPTION
   party: PARTY_OPTION

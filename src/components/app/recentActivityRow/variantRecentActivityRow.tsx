@@ -33,10 +33,7 @@ import {
 } from '@/utils/shared/stateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import {
-  USUserActionEmailCampaignName,
-  USUserActionTweetCampaignName,
-} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const DTSIPersonName = ({
@@ -225,14 +222,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
-          children:
-            action.campaignName === USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
-              <MainText>
-                New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
-              </MainText>
-            ) : (
-              <MainText>Tweet sent in support of {getSWCDisplayText()}</MainText>
-            ),
+          children: (
+            <MainText>
+              New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
+            </MainText>
+          ),
         }
       }
       case UserActionType.VOTER_REGISTRATION: {

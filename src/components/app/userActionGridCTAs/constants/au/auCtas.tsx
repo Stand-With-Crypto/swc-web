@@ -21,6 +21,8 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/
 
 const countryCode = SupportedCountryCodes.AU
 
+const urls = getIntlUrls(countryCode)
+
 export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto Australia',
@@ -58,10 +60,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeElectionAction()}
-          >
+          <UserActionViewKeyPageDialog countryCode={countryCode} url={urls.newmodeElectionAction()}>
             {children}
           </UserActionViewKeyPageDialog>
         ),
@@ -76,7 +75,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <UserActionViewKeyPageDialog
             countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeDebankingAction()}
+            url={urls.newmodeDebankingAction()}
           >
             {children}
           </UserActionViewKeyPageDialog>
@@ -91,19 +90,16 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaignsModalDescription:
       'View the key races occurring across Australia that will impact the future of crypto.',
     image: '/au/actionTypeIcons/view-key-races.png',
-    link: ({ children }) => <Link href={getIntlUrls(countryCode).emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_RACES,
         campaignName: AUUserActionViewKeyRacesCampaignName.H1_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'View Key Races in Australia',
         description:
-          'View the key races occurring across Australia that will impact the future of crypto.',
+          'Viewed the key races that occurred across Australia that could impact the future of crypto in early 2025.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).locationKeyRaces()}>{children}</Link>
-        ),
+        WrapperComponent: ({ children }) => <Link href={urls.locationKeyRaces()}>{children}</Link>,
       },
     ],
   },
@@ -165,7 +161,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href="/polls">{children}</Link>,
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.POLL,

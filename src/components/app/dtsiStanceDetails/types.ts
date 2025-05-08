@@ -12,12 +12,12 @@ import {
 import { PartialButDefined } from '@/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export type DTSIStanceDetailsQuoteProp = {
+export interface DTSIStanceDetailsQuoteProp {
   stanceType: DTSI_PersonStanceType.QUOTE
   quote: Pick<DTSI_PersonStanceQuote, 'richTextDescription' | 'sourceUrl'>
 }
 
-export type DTSIStanceDetailsTweetProp = {
+export interface DTSIStanceDetailsTweetProp {
   stanceType: DTSI_PersonStanceType.TWEET
   tweet: Pick<DTSI_Tweet, 'datetimeCreatedOnTwitter' | 'entities' | 'id' | 'text'> & {
     twitterAccount: Pick<DTSI_TwitterAccount, 'id' | 'username' | 'personId'>
@@ -25,7 +25,7 @@ export type DTSIStanceDetailsTweetProp = {
   }
 }
 
-export type DTSIStanceDetailsBillRelationshipProp = {
+export interface DTSIStanceDetailsBillRelationshipProp {
   stanceType: DTSI_PersonStanceType.BILL_RELATIONSHIP
   billRelationship: Pick<DTSI_BillPersonRelationship, 'id' | 'relationshipType'> & {
     bill: Pick<
@@ -62,7 +62,7 @@ export type DTSIStanceDetailsPersonProp = Pick<
   | 'slug'
 >
 
-export type StanceDetailsProps = {
+export interface StanceDetailsProps {
   countryCode: SupportedCountryCodes
   person: DTSIStanceDetailsPersonProp
   stance: DTSIStanceDetailsStancePassedProp

@@ -1,6 +1,6 @@
 export interface BaseUpsertAdvocateRequest {
   // Required information.
-  campaigns: number[]
+  campaigns?: number[]
 
   // Advocate information.
   email?: string

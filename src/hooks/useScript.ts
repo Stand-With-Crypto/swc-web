@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 type UseScriptStatus = 'idle' | 'loading' | 'ready' | 'error'
 
-type UseScriptOptions = {
+interface UseScriptOptions {
   shouldPreventLoad?: boolean
   removeOnUnmount?: boolean
   id?: string

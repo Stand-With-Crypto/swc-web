@@ -9,7 +9,7 @@ import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 import { CURRENT_DISTRICT_RANKING, REDIS_KEYS } from './constants'
 
-export type DistrictRankingEntry = {
+export interface DistrictRankingEntry {
   state: USStateCode
   district: string
   count: number
@@ -170,7 +170,7 @@ export async function createDistrictRankingIncrementer(
 type RedisInterlacedResult = Array<[MemberKey, number]>
 export type DistrictRankingEntryWithRank = DistrictRankingEntry & { rank: number }
 
-export type LeaderboardPaginationData = {
+export interface LeaderboardPaginationData {
   items: DistrictRankingEntryWithRank[]
   total: number
 }

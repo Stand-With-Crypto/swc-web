@@ -74,7 +74,7 @@ function ActionAdditionalInfo({ action, countryCode }: ActionAdditionalInfoProps
   }
 
   // TODO: Change this to a prop instead of hardcoded based on the countryCode
-  if (countryCode !== SupportedCountryCodes.US) {
+  if (countryCode === SupportedCountryCodes.GB) {
     const { administrativeAreaLevel1, countryCode: userLocationCountryCode } =
       action.user.userLocationDetails ?? {}
     const hasUserChangedLocationSinceActionCompleted =
