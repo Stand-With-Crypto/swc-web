@@ -7,12 +7,12 @@ const POLLING_INTERVAL_MS = 15000
 const MAX_POLLS = 240 // Max polling for 1 hour (15s * 240 = 3600s = 60 minutes)
 
 interface ImportJobResults {
-  requestedCount?: number
-  createdCount?: number
-  updatedCount?: number
-  deletedCount?: number
-  erroredCount?: number
-  errorsUrl?: string
+  requested_count?: number
+  created_count?: number
+  updated_count?: number
+  deleted_count?: number
+  errored_count?: number
+  errors_url?: string
 }
 
 export interface SendgridImportJobStatusResponse {
@@ -49,7 +49,7 @@ export async function checkSendgridJobStatus(
           extra: {
             jobId,
             pollCount,
-            responseBody: jobStatusResponse,
+            response: jobStatusResponse,
           },
           tags: { domain: 'SendgridMarketing' },
         })
@@ -83,13 +83,23 @@ export async function checkSendgridJobStatus(
 
     if (currentStatus !== 'pending') {
       if (currentStatus === 'failed' || currentStatus === 'errored') {
-        const errorMessage = `SendGrid job ${jobId} ended with status '${currentStatus}'.`
-        logger.error(errorMessage, { jobId, fullStatus: jobStatusResponse })
+        const errorDetails = jobStatusResponse?.results?.errors_url
+        const errorMessage = `SendGrid job ${jobId} ended with status '${currentStatus}'. ${errorDetails ? `Details: ${errorDetails}` : ''}`
+        logger.error(errorMessage, { jobId, response: jobStatusResponse })
         Sentry.captureMessage(errorMessage, {
-          extra: { jobId, fullStatus: jobStatusResponse },
-          tags: { domain: 'SendgridMarketing', jobStatus: currentStatus },
+          extra: {
+            jobId,
+            jobStatus: currentStatus,
+            response: jobStatusResponse,
+            errorDetailsURL: errorDetails,
+          },
+          tags: {
+            domain: 'SendgridMarketing',
+          },
         })
-        throw new Error(errorMessage)
+        throw new Error(errorMessage, {
+          cause: errorDetails,
+        })
       }
       logger.info(`SendGrid job ${jobId} is no longer pending. Final status: ${currentStatus}.`)
       return jobStatusResponse

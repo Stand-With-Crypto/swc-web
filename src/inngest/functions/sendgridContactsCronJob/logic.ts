@@ -21,7 +21,7 @@ const SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID = 'script.sync-sendgrid-conta
 
 const SENDGRID_CONTACTS_API_LIMIT = 30000
 
-type User = {
+interface User {
   id: string
   primaryUserEmailAddress?: {
     emailAddress: string
@@ -46,7 +46,7 @@ type User = {
   }[]
 }
 
-export type SyncSendgridContactsProcessorSchema = {
+export interface SyncSendgridContactsProcessorSchema {
   name: typeof SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME
   data: {
     countryCode: SupportedCountryCodes
