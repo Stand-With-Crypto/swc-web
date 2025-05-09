@@ -9,7 +9,9 @@ import { inngest } from '@/inngest/inngest'
 import { sendMail, SendMailPayload } from '@/utils/server/email'
 import {
   EmailActiveActions,
-  NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
+  EmailEnabledActionNFTs,
+  getEmailActiveActionFromNFTSlug,
+  getEmailActiveActionsByCountry,
 } from '@/utils/server/email/templates/common/constants'
 import NFTArrivedEmail from '@/utils/server/email/templates/nftArrived'
 import {
@@ -142,22 +144,35 @@ export const airdropNFTWithInngest = inngest.createFunction(
         })
 
         const countryCode = user.countryCode as SupportedCountryCodes
-        const actionType = NFT_SLUG_TO_EMAIL_ACTIVE_ACTION[payload.nftSlug]
+        const actionType = getEmailActiveActionFromNFTSlug(payload.nftSlug, countryCode)
+        if (!actionType) {
+          return null
+        }
 
         if (!user.primaryUserEmailAddress?.emailAddress || !actionType) {
           return null
         }
         const userSession = user.userSessions?.[0]
+        const NFTArrivedEmailTemplate = NFTArrivedEmail(countryCode)
+        if (!NFTArrivedEmailTemplate) {
+          return null
+        }
+
         const emailPayload: SendMailPayload = {
           to: user.primaryUserEmailAddress.emailAddress,
-          subject: NFTArrivedEmail.subjectLine,
+          subject: NFTArrivedEmailTemplate.subjectLine,
           html: await render(
-            <NFTArrivedEmail
-              actionNFT={actionType}
+            <NFTArrivedEmailTemplate
+              actionNFT={actionType as EmailEnabledActionNFTs}
               completedActionTypes={user.userActions
-                .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+                .filter(action =>
+                  Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
+                    action.actionType,
+                  ),
+                )
                 .map(action => action.actionType as EmailActiveActions)}
-              hiddenActions={[actionType]}
+              countryCode={countryCode}
+              hiddenActions={[actionType as string]}
               session={
                 userSession
                   ? {
@@ -170,8 +185,8 @@ export const airdropNFTWithInngest = inngest.createFunction(
           ),
           customArgs: {
             userId: user.id,
-            actionType,
-            campaign: NFTArrivedEmail.campaign,
+            actionType: actionType as EmailEnabledActionNFTs,
+            campaign: NFTArrivedEmailTemplate.campaign,
           },
         }
 
@@ -180,7 +195,10 @@ export const airdropNFTWithInngest = inngest.createFunction(
           payload: emailPayload,
         }).catch(err => {
           Sentry.captureException(err, {
-            extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+            extra: {
+              userId: user.id,
+              emailTo: user.primaryUserEmailAddress!.emailAddress,
+            },
             tags: {
               domain: 'airdropNFT',
             },
