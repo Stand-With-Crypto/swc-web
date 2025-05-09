@@ -1,4 +1,4 @@
-import { object } from 'zod'
+import { boolean, object } from 'zod'
 
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -14,4 +14,5 @@ export const zodUpdateUserHasOptedInToSMS = (countryCode: SupportedCountryCodes)
         })
       }
     }),
+    optedInToSms: boolean().refine(value => value === true, 'Please check the box to get updates'),
   })

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -10,6 +10,7 @@ import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { SMSOptInConsentText } from '@/components/app/sms/smsOptInConsentText'
 import { AddressField } from '@/components/app/updateUserProfileForm/step1/addressField'
 import { PrivacyConsentDisclaimer } from '@/components/app/updateUserProfileForm/step1/privacyConsentDisclaimer'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
@@ -32,7 +33,11 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
+import {
+  isSmsSupportedInCountry,
+  requiresOptInConfirmation,
+} from '@/utils/shared/sms/smsSupportedCountries'
+import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   ORDERED_SUPPORTED_COUNTRIES,
@@ -74,7 +79,7 @@ export function UpdateUserProfileForm({
     emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
     phoneNumber: user.phoneNumber || '',
     hasOptedInToMembership: user.hasOptedInToMembership,
-    optedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
+    optedInToSms: userHasOptedInToSMS(user),
     address: user.address
       ? { description: user.address.formattedDescription, place_id: user.address.googlePlaceId }
       : null,
@@ -102,7 +107,7 @@ export function UpdateUserProfileForm({
         analyticsProps: {
           ...(resolvedAddress ? convertAddressToAnalyticsProperties(resolvedAddress) : {}),
         },
-        payload: { ...values, address: resolvedAddress, optedInToSms: !!values.phoneNumber },
+        payload: { ...values, address: resolvedAddress },
       },
       actionUpdateUserProfile,
     )
@@ -129,6 +134,19 @@ export function UpdateUserProfileForm({
     countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !defaultValues.current.hasOptedInToMembership
 
   const shouldShowConsentDisclaimer = countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
+
+  const shouldShowSMSOptInCheckbox = useMemo(
+    () => requiresOptInConfirmation(countryCode),
+    [countryCode],
+  )
+
+  const phoneNumber = form.watch('phoneNumber')
+
+  useEffect(() => {
+    if (!shouldShowSMSOptInCheckbox) {
+      form.setValue('optedInToSms', !!phoneNumber)
+    }
+  }, [form, phoneNumber, shouldShowSMSOptInCheckbox])
 
   return (
     <Form {...form}>
@@ -267,10 +285,34 @@ export function UpdateUserProfileForm({
             }
           >
             <CollapsibleContent className="AnimateCollapsibleContent">
-              <FormDescription className="text-center lg:text-left">
-                By clicking Next, you consent to receive recurring texts from Stand With Crypto. You
-                can reply STOP to stop receiving texts. Message and data rates may apply.
-              </FormDescription>
+              <FormField
+                control={form.control}
+                name="optedInToSms"
+                render={({ field }) => (
+                  <label className="block">
+                    <FormItem className="mb-4">
+                      <div className="flex flex-row items-start space-x-3 space-y-0">
+                        {shouldShowSMSOptInCheckbox && (
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              className="mt-1"
+                              data-testid="sms-opt-in-checkbox"
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                        )}
+                        <FormDescription className="text-left">
+                          <SMSOptInConsentText
+                            consentButtonText={'Next'}
+                            countryCode={user.countryCode as SupportedCountryCodes}
+                          />
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  </label>
+                )}
+              />
             </CollapsibleContent>
           </Collapsible>
           <Button

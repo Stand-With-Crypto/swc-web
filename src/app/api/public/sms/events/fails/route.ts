@@ -7,7 +7,11 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { optOutUser } from '@/utils/server/sms/actions'
 import * as smsErrorCodes from '@/utils/server/sms/errorCodes'
-import { verifySignature } from '@/utils/server/sms/utils'
+import { getCountryCodeFromPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 interface SMSFailedEvent {
   ParentAccountSid: string
@@ -95,7 +99,13 @@ async function handleSMSErrors(errorCode: string, messageId: string) {
 
     const user = userCommunication.userCommunicationJourney.user
 
-    // Phone number is already normalized so we don't need to send the country code
-    await optOutUser({ phoneNumber: user.phoneNumber, user })
+    const userCountryCode = user?.countryCode as SupportedCountryCodes | undefined
+
+    const countryCode =
+      userCountryCode ??
+      getCountryCodeFromPhoneNumber(user.phoneNumber, userCountryCode) ??
+      DEFAULT_SUPPORTED_COUNTRY_CODE
+
+    await optOutUser({ phoneNumber: user.phoneNumber, user, countryCode })
   }
 }

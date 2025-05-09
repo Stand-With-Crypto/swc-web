@@ -4,12 +4,14 @@ import { SMSStatus } from '@prisma/client'
 import { noop } from 'lodash-es'
 import { useSWRConfig } from 'swr'
 
+import { SMSOptInForm } from '@/components/app/sms/smsOptInForm'
 import { JoinSWC } from '@/components/app/userActionFormSuccessScreen/joinSWC'
-import { SMSOptInContent } from '@/components/app/userActionFormSuccessScreen/smsOptIn'
+import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import {
   UserActionFormSuccessScreenNextAction,
   UserActionFormSuccessScreenNextActionSkeleton,
 } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
@@ -53,20 +55,49 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     isSmsSupportedInCountry(countryCode)
   ) {
     if (isLoading) {
-      return <SMSOptInContent.Skeleton />
+      return (
+        <div className="space-y-8">
+          <UserActionFormSuccessScreenFeedback.Skeleton />
+
+          <Skeleton className="mx-auto h-14 w-full max-w-[450px]" />
+        </div>
+      )
     }
 
     return (
-      <SMSOptInContent
-        initialValues={{ phoneNumber: user.phoneNumber }}
-        onSuccess={({ phoneNumber }) => {
-          void mutate(apiUrls.userFullProfileInfo(), {
-            ...user,
-            phoneNumber,
-          })
-          void performedActionsResponse.mutate()
-        }}
-      />
+      <div className="mx-auto flex h-full max-w-lg flex-col items-center gap-6 text-center">
+        <UserActionFormSuccessScreenFeedback
+          description="This is an important time for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area."
+          title="Nice work!"
+        />
+
+        <SMSOptInForm
+          className="h-full"
+          onSuccess={({ phoneNumber }) => {
+            void mutate(apiUrls.userFullProfileInfo(), {
+              ...user,
+              phoneNumber,
+            })
+            void performedActionsResponse.mutate()
+          }}
+          user={user}
+        >
+          {({ form }) => (
+            <div className="flex h-full flex-col gap-2">
+              <SMSOptInForm.PhoneNumberField shouldAutoFocus />
+
+              <div className="mt-auto">
+                <SMSOptInForm.Footnote className="mb-8" />
+                <SMSOptInForm.SubmitButton
+                  className="w-full md:max-w-[300px]"
+                  disabled={form.formState.isSubmitting}
+                  size="lg"
+                />
+              </div>
+            </div>
+          )}
+        </SMSOptInForm>
+      </div>
     )
   }
 

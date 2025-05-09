@@ -1,4 +1,4 @@
 export { countSegments } from './countSegments'
+export { getCountryCodeFromPhoneNumber } from './getCountryCodeFromPhoneNumber'
 export { getUserByPhoneNumber } from './getUserByPhoneNumber'
-export { isPhoneNumberCountrySupported } from './isPhoneNumberCountrySupported'
 export { parseTwilioBody, verifySignature } from './verifySignature'
