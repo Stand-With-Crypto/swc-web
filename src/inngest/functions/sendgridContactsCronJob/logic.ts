@@ -1,6 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
 import { inngest } from '@/inngest/inngest'
+import { onScriptFailure } from '@/inngest/onScriptFailure'
 import {
   SendgridContact,
   uploadSendgridContactsCSV,
@@ -55,9 +56,9 @@ export interface SyncSendgridContactsProcessorSchema {
 }
 
 export const syncSendgridContactsProcessor = inngest.createFunction(
-  { id: SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID },
+  { id: SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID, onFailure: onScriptFailure, concurrency: 10 },
   { event: SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME },
-  async ({ event, step }) => {
+  async ({ event, step, logger }) => {
     const { countryCode, users } = event.data
 
     const listId = await step.run(`get-${countryCode}-contact-list-id`, async () => {
@@ -88,7 +89,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
             first_name: user.firstName || '',
             last_name: user.lastName || '',
             country: user.countryCode,
-            address_line_1: user.address?.formattedDescription || '',
+            address_line_1: user.address?.formattedDescription?.slice(0, 100) || '',
             address_line_2: '',
             city: user.address?.locality || '',
             state_province_region: user.address?.administrativeAreaLevel1 || '',
@@ -140,12 +141,13 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
           }
         }
       } catch (error) {
-        console.error(`Error syncing ${countryCode} contacts:`, error)
+        const errorMessage = error instanceof Error ? error.message : String(error)
+        logger.error(`Error syncing ${countryCode} contacts:`, errorMessage)
         return {
           success: false,
-          usersCount: users.length,
           jobId: null,
-          error: error instanceof Error ? error.message : String(error),
+          usersCount: users.length,
+          error: errorMessage,
         }
       }
     })

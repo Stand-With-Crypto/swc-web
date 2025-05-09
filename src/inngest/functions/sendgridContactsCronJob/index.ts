@@ -20,7 +20,7 @@ export const SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME =
 export const SYNC_SENDGRID_CONTACTS_COORDINATOR_FUNCTION_ID =
   'script.sync-sendgrid-contacts-coordinator'
 
-const DB_QUERY_LIMIT = 100000
+const STEP_OUTPUT_SIZE_LIMIT = 500
 
 export interface SyncSendgridContactsCoordinatorSchema {
   name: typeof SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME
@@ -80,15 +80,15 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
         }
 
         logger.info(`Found ${userCount} users for country ${countryCode}`)
-        const numDbChunks = Math.ceil(userCount / DB_QUERY_LIMIT)
+        const numDbChunks = Math.ceil(userCount / STEP_OUTPUT_SIZE_LIMIT)
         logger.info(
-          `Processing ${countryCode} users in ${numDbChunks} DB chunks of up to ${DB_QUERY_LIMIT} users each`,
+          `Processing ${countryCode} users in ${numDbChunks} DB chunks of up to ${STEP_OUTPUT_SIZE_LIMIT} users each`,
         )
 
         const batchPromises: Promise<CountryProcessingBatchResult>[] = []
         for (let chunkIndex = 0; chunkIndex < numDbChunks; chunkIndex++) {
-          const take = DB_QUERY_LIMIT
-          const skip = chunkIndex * DB_QUERY_LIMIT
+          const take = STEP_OUTPUT_SIZE_LIMIT
+          const skip = chunkIndex * STEP_OUTPUT_SIZE_LIMIT
 
           logger.info(
             `Queueing DB fetch for chunk ${chunkIndex + 1}/${numDbChunks} for ${countryCode}: skip=${skip}, take=${take}`,
@@ -181,15 +181,15 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
     if (jobIdsToMonitor.length > 0) {
       sendgridJobResults = await step.run('check-all-sendgrid-job-statuses', async () => {
         const statusPromises = jobIdsToMonitor.map(jobId => checkSendgridJobStatus(jobId))
-        try {
-          return await Promise.all(statusPromises)
-        } catch (error) {
-          logger.error('SendGrid job status checks failed', error)
-          const errorMessage = error instanceof Error ? error.message : String(error)
-          throw new NonRetriableError(errorMessage, {
-            cause: error,
+        const results = await Promise.allSettled(statusPromises)
+        return results
+          .map(result => {
+            if (result.status === 'fulfilled') {
+              return result.value
+            }
+            return null
           })
-        }
+          .filter(Boolean) as SendgridImportJobStatusResponse[]
       })
     } else {
       logger.info('No SendGrid jobs were submitted; skipping status check phase.')

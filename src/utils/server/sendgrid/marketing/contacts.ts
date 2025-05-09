@@ -24,44 +24,44 @@ export const upsertSendgridContactsArray = async (
   contacts: SendgridContact[],
   options: Options,
 ) => {
-  try {
-    const sendgridFieldDefinitions = await fetchSendgridCustomFields()
-    const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
+  const sendgridFieldDefinitions = await fetchSendgridCustomFields()
+  const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
 
-    // Map custom fields to their respective Sendgrid ID
-    const formattedContacts = contacts.map(contact => {
-      const { custom_fields, ...standardFields } = contact
-      const customFieldsMappedToIds: Record<string, string | number> = {}
+  // Map custom fields to their respective Sendgrid ID
+  const formattedContacts = contacts.map(contact => {
+    const { custom_fields, ...standardFields } = contact
+    const customFieldsMappedToIds: Record<string, string | number> = {}
 
-      typedObjectEntries(custom_fields).forEach(([fieldName, fieldValue]) => {
-        const fieldId = fieldIds[fieldName]
-        if (fieldId) {
-          customFieldsMappedToIds[fieldId] = fieldValue
-        } else {
-          Sentry.captureMessage(`Custom field ${fieldName} not found in SendGrid definitions`, {
-            tags: {
-              domain: 'SendgridMarketing',
-            },
-            extra: {
-              fieldName,
-              fieldValue,
-              sendgridFieldDefinitions,
-            },
-          })
-        }
-      })
-
-      return {
-        ...standardFields,
-        custom_fields: customFieldsMappedToIds,
+    typedObjectEntries(custom_fields).forEach(([fieldName, fieldValue]) => {
+      const fieldId = fieldIds[fieldName]
+      if (fieldId) {
+        customFieldsMappedToIds[fieldId] = fieldValue
+      } else {
+        Sentry.captureMessage(`Custom field ${fieldName} not found in SendGrid definitions`, {
+          tags: {
+            domain: 'SendgridMarketing',
+          },
+          extra: {
+            fieldName,
+            fieldValue,
+            sendgridFieldDefinitions,
+          },
+        })
       }
     })
 
-    const data = {
-      list_ids: options.listIds,
-      contacts: formattedContacts,
+    return {
+      ...standardFields,
+      custom_fields: customFieldsMappedToIds,
     }
+  })
 
+  const data = {
+    list_ids: options.listIds,
+    contacts: formattedContacts,
+  }
+
+  try {
     const request = {
       url: '/v3/marketing/contacts',
       method: 'PUT' as const,
@@ -79,6 +79,11 @@ export const upsertSendgridContactsArray = async (
         options,
       },
     })
+
+    if (isSendgridError(error)) {
+      throw new Error(JSON.stringify(error.response.body, null, 2))
+    }
+
     throw error
   }
 }
@@ -169,6 +174,11 @@ export async function uploadSendgridContactsCSV(contacts: SendgridContact[], opt
         options,
       },
     })
+
+    if (isSendgridError(error)) {
+      throw new Error(JSON.stringify(error.response.body, null, 2))
+    }
+
     throw error
   }
 }
@@ -176,4 +186,33 @@ export async function uploadSendgridContactsCSV(contacts: SendgridContact[], opt
 type Entries<T> = { [K in keyof T]: [K, T[K]] }[keyof T]
 function typedObjectEntries<T extends object>(object: T): Entries<T>[] {
   return Object.entries(object) as Entries<T>[]
+}
+
+interface SendgridContactsError {
+  message: string
+  code: number
+  response: {
+    body: {
+      errors: {
+        field: string
+        message: string
+      }[]
+    }
+  }
+}
+function isSendgridError(error: unknown): error is SendgridContactsError {
+  if (typeof error !== 'object' || error === null) {
+    return false
+  }
+  const err = error as Record<string, any>
+
+  return (
+    typeof err.message === 'string' &&
+    typeof err.code === 'number' &&
+    typeof err.response === 'object' &&
+    err.response !== null &&
+    typeof err.response.body === 'object' &&
+    err.response.body !== null &&
+    Array.isArray(err.response.body.errors)
+  )
 }
