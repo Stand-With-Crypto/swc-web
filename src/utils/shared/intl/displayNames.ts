@@ -1,11 +1,11 @@
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export const COUNTRY_CODE_TO_DISPLAY_NAME: Record<SupportedCountryCodes, string> = {
+export const COUNTRY_CODE_TO_DISPLAY_NAME = {
   [SupportedCountryCodes.US]: 'United States',
   [SupportedCountryCodes.CA]: 'Canada',
   [SupportedCountryCodes.GB]: 'United Kingdom',
   [SupportedCountryCodes.AU]: 'Australia',
-}
+} as const
 
 export const COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX: Record<SupportedCountryCodes, string> = {
   [SupportedCountryCodes.US]: `the ${COUNTRY_CODE_TO_DISPLAY_NAME[SupportedCountryCodes.US]}`,
