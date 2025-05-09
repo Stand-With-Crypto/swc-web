@@ -1,4 +1,4 @@
-type Params = {
+interface Params {
   latitude: number
   longitude: number
 }
