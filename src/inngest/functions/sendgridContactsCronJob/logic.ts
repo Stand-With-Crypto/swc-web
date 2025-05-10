@@ -41,7 +41,7 @@ interface User {
   firstName: string | null
   lastName: string | null
   countryCode: string
-  datetimeCreated: string
+  datetimeCreated: Date | string
   userSessions: {
     id: string
   }[]
@@ -96,7 +96,10 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
             postal_code: user.address?.postalCode || '',
             phone_number: user.phoneNumber || '',
             custom_fields: {
-              signup_date: user.datetimeCreated,
+              signup_date:
+                user.datetimeCreated instanceof Date
+                  ? user.datetimeCreated.toISOString()
+                  : user.datetimeCreated,
               user_actions_count: user.userActions.length,
               session_id: user.userSessions?.[0]?.id || '',
               ...completedUsersActionsCustomFields,

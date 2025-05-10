@@ -20,7 +20,7 @@ export const SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME =
 export const SYNC_SENDGRID_CONTACTS_COORDINATOR_FUNCTION_ID =
   'script.sync-sendgrid-contacts-coordinator'
 
-const STEP_OUTPUT_SIZE_LIMIT = 500
+const DB_READ_LIMIT = 100000
 
 export interface SyncSendgridContactsCoordinatorSchema {
   name: typeof SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME
@@ -38,7 +38,7 @@ interface CountryProcessingBatchResult {
 interface CountryProcessingResult {
   countryCode: SupportedCountryCodes
   totalUsers: number
-  batchesResults: CountryProcessingBatchResult[]
+  batchesPromises: Promise<CountryProcessingBatchResult>[]
 }
 
 export const syncSendgridContactsCoordinator = inngest.createFunction(
@@ -59,9 +59,9 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       countryCode => countryCode !== SupportedCountryCodes.US,
     )
 
-    const countryProcessingPromises = countriesToProcess.map(
+    const countriesPromises = countriesToProcess.map(
       async (countryCode): Promise<CountryProcessingResult> => {
-        const userCount = await step.run(`count-${countryCode}-users`, async () => {
+        const userCount = await step.run(`[${countryCode}]-count-users`, async () => {
           return prismaClient.user.count({
             where: {
               countryCode,
@@ -75,65 +75,53 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
           return {
             countryCode,
             totalUsers: 0,
-            batchesResults: [],
+            batchesPromises: [],
           }
         }
 
-        logger.info(`Found ${userCount} users for country ${countryCode}`)
-        const numDbChunks = Math.ceil(userCount / STEP_OUTPUT_SIZE_LIMIT)
+        const numDbChunks = Math.ceil(userCount / DB_READ_LIMIT)
         logger.info(
-          `Processing ${countryCode} users in ${numDbChunks} DB chunks of up to ${STEP_OUTPUT_SIZE_LIMIT} users each`,
+          `Processing ${countryCode} users in ${numDbChunks} batches of up to ${DB_READ_LIMIT} users each`,
         )
 
-        const batchPromises: Promise<CountryProcessingBatchResult>[] = []
+        const promises: Promise<CountryProcessingBatchResult>[] = []
         for (let chunkIndex = 0; chunkIndex < numDbChunks; chunkIndex++) {
-          const take = STEP_OUTPUT_SIZE_LIMIT
-          const skip = chunkIndex * STEP_OUTPUT_SIZE_LIMIT
-
-          logger.info(
-            `Queueing DB fetch for chunk ${chunkIndex + 1}/${numDbChunks} for ${countryCode}: skip=${skip}, take=${take}`,
-          )
-
-          const batchProcessingPromise = async (): Promise<CountryProcessingBatchResult> => {
-            const users = await step.run(
-              `fetch-${countryCode}-users-db-chunk-${chunkIndex}`,
-              async () => {
-                return prismaClient.user.findMany({
-                  where: {
-                    countryCode,
-                    primaryUserEmailAddressId: { not: null },
-                  },
-                  select: {
-                    id: true,
-                    primaryUserEmailAddress: {
-                      select: { emailAddress: true },
-                    },
-                    userActions: {
-                      select: { actionType: true, campaignName: true },
-                    },
-                    address: {
-                      select: {
-                        formattedDescription: true,
-                        locality: true,
-                        administrativeAreaLevel1: true,
-                        postalCode: true,
-                      },
-                    },
-                    phoneNumber: true,
-                    firstName: true,
-                    lastName: true,
-                    countryCode: true,
-                    datetimeCreated: true,
-                    userSessions: {
-                      select: { id: true },
-                    },
-                  },
-                  skip,
-                  take,
-                })
+          const take = DB_READ_LIMIT
+          const skip = chunkIndex * DB_READ_LIMIT
+          const batchProcessingWrapperFn = async (): Promise<CountryProcessingBatchResult> => {
+            const users = await prismaClient.user.findMany({
+              where: {
+                countryCode,
+                primaryUserEmailAddressId: { not: null },
               },
-            )
-
+              select: {
+                id: true,
+                primaryUserEmailAddress: {
+                  select: { emailAddress: true },
+                },
+                userActions: {
+                  select: { actionType: true, campaignName: true },
+                },
+                address: {
+                  select: {
+                    formattedDescription: true,
+                    locality: true,
+                    administrativeAreaLevel1: true,
+                    postalCode: true,
+                  },
+                },
+                phoneNumber: true,
+                firstName: true,
+                lastName: true,
+                countryCode: true,
+                datetimeCreated: true,
+                userSessions: {
+                  select: { id: true },
+                },
+              },
+              skip,
+              take,
+            })
             if (!users.length) {
               logger.warn(
                 `DB chunk ${chunkIndex + 1}/${numDbChunks} for ${countryCode} (fetch step: fetch-${countryCode}-users-db-chunk-${chunkIndex}) returned no users. This should not happen if count > 0.`,
@@ -145,36 +133,58 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
                 validContactsCount: 0,
               }
             }
-
-            return step.invoke(`sync-${countryCode}-contacts-batch-${chunkIndex}`, {
-              function: syncSendgridContactsProcessor,
-              data: {
-                countryCode,
-                users,
+            const batchResult = await step.invoke(
+              `[${countryCode}]-sync-contacts.batch-${chunkIndex}`,
+              {
+                function: syncSendgridContactsProcessor,
+                data: {
+                  countryCode,
+                  users,
+                },
               },
-            })
+            )
+            return batchResult
           }
-          batchPromises.push(batchProcessingPromise())
+          logger.info(
+            `Queueing batch ${chunkIndex + 1}/${numDbChunks} for ${countryCode}: skip=${skip}, take=${take}`,
+          )
+          promises.push(batchProcessingWrapperFn())
         }
 
-        const batchesResults = await Promise.all(batchPromises)
         return {
           countryCode,
           totalUsers: userCount,
-          batchesResults,
+          batchesPromises: promises,
         }
       },
     )
 
-    const allCountriesResults = await Promise.all(countryProcessingPromises)
+    const countriesResults = await Promise.allSettled(countriesPromises)
+    const fulfilledCountriesResults = countriesResults.filter(
+      countryResult => countryResult.status === 'fulfilled',
+    )
+    const batchesResults = await Promise.allSettled(
+      fulfilledCountriesResults.flatMap(countryResult => countryResult.value.batchesPromises),
+    )
+    const successfulBatches: CountryProcessingBatchResult[] = []
+    const failedBatches: CountryProcessingBatchResult[] = []
+    const errors: PromiseSettledResult<CountryProcessingBatchResult>[] = []
+    batchesResults.forEach(batchResult => {
+      if (batchResult.status === 'fulfilled' && batchResult.value.success) {
+        successfulBatches.push(batchResult.value)
+      } else if (batchResult.status === 'fulfilled' && !batchResult.value.success) {
+        failedBatches.push(batchResult.value)
+      } else {
+        logger.error('Batch processing failed', { batchResult })
+        errors.push(batchResult)
+      }
+    })
 
     const jobIdsToMonitor: string[] = []
-    allCountriesResults.forEach(countryResult => {
-      countryResult.batchesResults.forEach(batchResult => {
-        if (batchResult.jobId) {
-          jobIdsToMonitor.push(batchResult.jobId)
-        }
-      })
+    successfulBatches.forEach(batchResult => {
+      if (batchResult.jobId) {
+        jobIdsToMonitor.push(batchResult.jobId)
+      }
     })
 
     let sendgridJobResults: SendgridImportJobStatusResponse[] = []
@@ -189,14 +199,14 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
             }
             return null
           })
-          .filter(Boolean) as SendgridImportJobStatusResponse[]
+          .filter(Boolean)
       })
     } else {
       logger.info('No SendGrid jobs were submitted; skipping status check phase.')
     }
 
     return {
-      results: allCountriesResults,
+      countriesResults,
       sendgridJobResults,
     }
   },
