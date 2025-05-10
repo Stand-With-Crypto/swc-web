@@ -21,6 +21,7 @@ const SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME = 'script/sync-sendgrid-contac
 const SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID = 'script.sync-sendgrid-contacts-processor'
 
 const SENDGRID_CONTACTS_API_LIMIT = 30000
+const SIX_MB_IN_BYTES = 6 * 1024 * 1024
 
 interface User {
   id: string
@@ -122,7 +123,11 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
          * SendGrid has a limit of 30,000 contacts per batch or 6MB of data, whichever is smaller.
          * The CSV upload limit is 1,000,000 contacts or 5GB of data, whichever is smaller.
          */
-        if (validContacts.length > SENDGRID_CONTACTS_API_LIMIT) {
+        const contactsDataSize = Buffer.from(JSON.stringify(validContacts), 'utf-8').length
+        if (
+          validContacts.length > SENDGRID_CONTACTS_API_LIMIT ||
+          contactsDataSize > SIX_MB_IN_BYTES
+        ) {
           const uploadResult = await uploadSendgridContactsCSV(validContacts, {
             listIds: [listId],
           })

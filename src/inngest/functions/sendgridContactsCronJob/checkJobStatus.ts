@@ -81,8 +81,11 @@ export async function checkSendgridJobStatus(
 
     const currentStatus = jobStatusResponse.status
 
-    if (currentStatus !== 'pending') {
-      if (currentStatus === 'failed' || currentStatus === 'errored') {
+    switch (currentStatus) {
+      case 'completed':
+        return jobStatusResponse
+      case 'errored':
+      case 'failed': {
         const errorDetails = jobStatusResponse?.results?.errors_url
         const errorMessage = `SendGrid job ${jobId} ended with status '${currentStatus}'. ${errorDetails ? `Details: ${errorDetails}` : ''}`
         logger.error(errorMessage, { jobId, response: jobStatusResponse })
@@ -97,16 +100,16 @@ export async function checkSendgridJobStatus(
             domain: 'SendgridMarketing',
           },
         })
-        throw new Error(errorMessage, {
-          cause: errorDetails,
-        })
+        if (currentStatus === 'failed') {
+          throw new Error(errorMessage, {
+            cause: errorDetails,
+          })
+        }
+        return jobStatusResponse
       }
-      logger.info(`SendGrid job ${jobId} is no longer pending. Final status: ${currentStatus}.`)
-      return jobStatusResponse
-    }
-
-    if (pollCount < MAX_POLLS) {
-      await new Promise(resolve => setTimeout(resolve, POLLING_INTERVAL_MS))
+      case 'pending':
+      default:
+        await new Promise(resolve => setTimeout(resolve, POLLING_INTERVAL_MS))
     }
   }
 
