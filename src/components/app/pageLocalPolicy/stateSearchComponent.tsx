@@ -1,15 +1,38 @@
 'use client'
-import { useCallback, useEffect } from 'react'
+import { Suspense, useCallback, useEffect } from 'react'
 
 import { SearchError, StateSearchProps } from '@/components/app/pageLocalPolicy/types'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
+import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
+import { noop } from 'lodash-es'
 
-export function StateSearchComponent({
+function PlacesSelect(
+  props: Required<Pick<GooglePlacesSelectProps, 'loading' | 'onChange' | 'value'>>,
+) {
+  return (
+    <div className="mx-auto w-full max-w-[562px]">
+      <GooglePlacesSelect
+        className="bg-backgroundAlternate"
+        placeholder="Enter your address"
+        {...props}
+      />
+    </div>
+  )
+}
+
+export function StateSearchComponent(props: StateSearchProps) {
+  return (
+    <Suspense fallback={<PlacesSelect onChange={noop} loading value={null} />}>
+      <SuspenseStateSearchComponent {...props} />
+    </Suspense>
+  )
+}
+
+export function SuspenseStateSearchComponent({
   countryCode,
   setSearchError,
   setSearchResult,
@@ -56,14 +79,10 @@ export function StateSearchComponent({
   }, [address, onChangeAddress])
 
   return (
-    <div className="mx-auto w-full max-w-[562px]">
-      <GooglePlacesSelect
-        className="bg-backgroundAlternate"
-        loading={address === 'loading'}
-        onChange={setAddress}
-        placeholder="Enter your address"
-        value={address !== 'loading' ? address : null}
-      />
-    </div>
+    <PlacesSelect
+      loading={address === 'loading'}
+      onChange={setAddress}
+      value={address !== 'loading' ? address : null}
+    />
   )
 }
