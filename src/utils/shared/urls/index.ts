@@ -164,6 +164,7 @@ export const getIntlUrls = (
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
     ...RACES_ROUTES,
+    localPolicy: (stateCode: string) => `${countryPrefix}/local-policy/${stateCode.toLowerCase()}`,
   }
 }
 
