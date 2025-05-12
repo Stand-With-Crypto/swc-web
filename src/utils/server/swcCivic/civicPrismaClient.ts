@@ -1,10 +1,10 @@
 import { neonConfig, Pool } from '@neondatabase/serverless'
 import { PrismaNeon } from '@prisma/adapter-neon'
-import { PrismaClient } from '@/data/prisma/generated/swc-civic'
 import { PrismaClientOptions } from '@prisma/client/runtime/library'
 import logQuery from 'prisma/extensions/logQuery'
 import { WebSocket } from 'undici'
 
+import { PrismaClient } from '@/data/prisma/generated/swc-civic'
 import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { toBool } from '@/utils/shared/toBool'
