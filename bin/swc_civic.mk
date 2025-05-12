@@ -6,12 +6,6 @@ SWC_CIVIC_DATABASE_URL ?= $(SWC_CIVIC_DATABASE_URL)
 dc_postgres:
 	docker compose $(DC_FLAGS) exec -ti postgis psql -U postgres --dbname=swc_civic
 
-dc_up:
-	docker compose $(DC_FLAGS) up -d
-
-dc_down:
-	docker compose $(DC_FLAGS) down
-
 import_us_geojson:
 	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/us_congressional_districts.geojson" -nln us_congressional_district -overwrite
 
