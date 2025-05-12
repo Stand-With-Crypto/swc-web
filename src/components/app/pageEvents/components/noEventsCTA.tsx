@@ -4,7 +4,7 @@ import Balancer from 'react-wrap-balancer'
 import { SMSStatus } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { SMSOptInForm } from '@/components/app/smsOptInForm'
+import { SMSOptInForm } from '@/components/app/sms/smsOptInForm'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -44,9 +44,6 @@ export function NoEventsCTA({
               {user.smsStatus === SMSStatus.NOT_OPTED_IN &&
                 isSmsSupportedInCountry(countryCode) && (
                   <SMSOptInForm
-                    initialValues={{
-                      phoneNumber: user?.phoneNumber ?? '',
-                    }}
                     onSuccess={({ phoneNumber }) =>
                       void mutate({
                         user: {
@@ -55,18 +52,18 @@ export function NoEventsCTA({
                         },
                       })
                     }
+                    user={user}
                   >
                     {({ form }) => (
                       <div className="mt-4">
-                        <div className="flex flex-col items-center gap-4">
-                          <SMSOptInForm.PhoneNumberField className="w-full max-w-[400px]" />
+                        <div className="flex max-w-[400px] flex-col items-center gap-4">
+                          <SMSOptInForm.PhoneNumberField className="w-full" />
+                          <SMSOptInForm.Footnote className="w-full" />
                           <SMSOptInForm.SubmitButton
+                            className="mt-4"
                             disabled={form.formState.isSubmitting}
                             variant="secondary"
-                          >
-                            Get updates
-                          </SMSOptInForm.SubmitButton>
-                          <SMSOptInForm.Footnote className="mt-4 w-full max-w-xl text-center text-xs" />
+                          />
                         </div>
                       </div>
                     )}

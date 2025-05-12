@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { Address, User, UserCryptoAddress } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -54,7 +55,20 @@ async function _actionUpdateUserHasOptedInToSMS(
   }
 
   await throwIfRateLimited({ context: 'authenticated' })
-  const { phoneNumber } = validatedFields.data
+  const { phoneNumber, optedInToSms } = validatedFields.data
+
+  if (!optedInToSms) {
+    Sentry.captureMessage('optedInToSms is required', {
+      level: 'error',
+      extra: {
+        phoneNumber,
+        optedInToSms,
+        countryCode,
+      },
+    })
+    throw new Error('optedInToSms is required')
+  }
+
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
       id: authUser.userId,
