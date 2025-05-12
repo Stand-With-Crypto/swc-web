@@ -1,13 +1,15 @@
 import { UserActionType } from '@prisma/client'
 
 import {
+  SENDGRID_CUSTOM_FIELDS,
+  SendgridCustomField,
+} from '@/utils/server/sendgrid/marketing/constants'
+import {
   createSendgridCustomField,
   fetchSendgridCustomFields,
   FieldType,
   getSendgridUserActionCustomFieldName,
   mapSendgridFieldToFieldIds,
-  SENDGRID_CUSTOM_FIELDS,
-  SendgridCustomField,
   SendgridUserActionCustomField,
 } from '@/utils/server/sendgrid/marketing/customFields'
 import { logger } from '@/utils/shared/logger'

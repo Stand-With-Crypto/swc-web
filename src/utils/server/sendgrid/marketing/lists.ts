@@ -1,17 +1,14 @@
 import * as Sentry from '@sentry/nextjs'
 
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
-import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
+import { COUNTRY_CODE_TO_DISPLAY_NAME, CountryDisplayName } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-type CountryDisplayNames =
-  (typeof COUNTRY_CODE_TO_DISPLAY_NAME)[keyof typeof COUNTRY_CODE_TO_DISPLAY_NAME]
-export type SendgridContactListName = `${CountryDisplayNames} Advocates`
-
+export type SendgridContactListName = `${CountryDisplayName} Advocates`
 export const getSendgridContactListName = (
   countryCode: SupportedCountryCodes,
 ): SendgridContactListName => {
-  return `${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode as SupportedCountryCodes]} Advocates`
+  return `${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode]} Advocates`
 }
 
 interface SendgridContactList {

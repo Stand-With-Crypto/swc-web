@@ -1,11 +1,20 @@
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export const COUNTRY_CODE_TO_DISPLAY_NAME = {
+const _countryCodeToDisplayName = {
   [SupportedCountryCodes.US]: 'United States',
   [SupportedCountryCodes.CA]: 'Canada',
   [SupportedCountryCodes.GB]: 'United Kingdom',
   [SupportedCountryCodes.AU]: 'Australia',
 } as const
+export type CountryDisplayName =
+  (typeof _countryCodeToDisplayName)[keyof typeof _countryCodeToDisplayName]
+export const COUNTRY_CODE_TO_DISPLAY_NAME = _countryCodeToDisplayName
+
+/**
+ * Compile-time check to ensure all SupportedCountryCodes keys are present
+ */
+const _displayNamesTypeCheck: Record<SupportedCountryCodes, CountryDisplayName> =
+  _countryCodeToDisplayName
 
 export const COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX: Record<SupportedCountryCodes, string> = {
   [SupportedCountryCodes.US]: `the ${COUNTRY_CODE_TO_DISPLAY_NAME[SupportedCountryCodes.US]}`,
