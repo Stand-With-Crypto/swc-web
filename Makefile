@@ -1,8 +1,8 @@
 DC_FLAGS = -f dev.docker-compose.yml
-POSTGRES_CONNECTION_STRING = "PG:host=127.0.0.1 user=postgres dbname=swc_district_geo_data password=postgres"
+POSTGRES_CONNECTION_STRING = "PG:host=127.0.0.1 user=postgres dbname=swc_civic password=postgres"
 
 dc_postgres:
-	docker compose $(DC_FLAGS) exec -ti postgis psql -U postgres --dbname=swc_district_geo_data
+	docker compose $(DC_FLAGS) exec -ti postgis psql -U postgres --dbname=swc_civic
 
 dc_up:
 	docker compose $(DC_FLAGS) up -d
@@ -22,7 +22,7 @@ import_gb_geojson:
 import_au_shp:
 	ogr2ogr -f "PostgreSQL" $(POSTGRES_CONNECTION_STRING) "./data/au/AUS_ELB_region.shp" -nln au_federal_electoral_district -nlt MULTIPOLYGON -overwrite
 
-import_all_data:
+import_swc_civic_data:
 	make import_us_geojson
 	make import_ca_kmz
 	make import_gb_geojson

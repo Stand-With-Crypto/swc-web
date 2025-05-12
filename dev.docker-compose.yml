@@ -20,7 +20,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: swc_district_geo_data
+      POSTGRES_DB: swc_civic
     ports:
       - 5432:5432
 
