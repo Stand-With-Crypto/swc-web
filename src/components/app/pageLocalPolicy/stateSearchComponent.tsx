@@ -1,5 +1,6 @@
 'use client'
 import { Suspense, useCallback, useEffect } from 'react'
+import { noop } from 'lodash-es'
 
 import { SearchError, StateSearchProps } from '@/components/app/pageLocalPolicy/types'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
@@ -8,7 +9,6 @@ import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
-import { noop } from 'lodash-es'
 
 function PlacesSelect(
   props: Required<Pick<GooglePlacesSelectProps, 'loading' | 'onChange' | 'value'>>,
@@ -26,7 +26,7 @@ function PlacesSelect(
 
 export function StateSearchComponent(props: StateSearchProps) {
   return (
-    <Suspense fallback={<PlacesSelect onChange={noop} loading value={null} />}>
+    <Suspense fallback={<PlacesSelect loading onChange={noop} value={null} />}>
       <SuspenseStateSearchComponent {...props} />
     </Suspense>
   )
