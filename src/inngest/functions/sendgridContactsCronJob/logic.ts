@@ -8,7 +8,6 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import {
   SendgridContact,
-  uploadSendgridContactsCSV,
   upsertSendgridContactsArray,
 } from '@/utils/server/sendgrid/marketing/contacts'
 import {
@@ -19,6 +18,7 @@ import {
   fetchSendgridContactList,
   getSendgridContactListName,
 } from '@/utils/server/sendgrid/marketing/lists'
+import { uploadSendgridContactsCSV } from '@/utils/server/sendgrid/marketing/uploadCSV'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME = 'script/sync-sendgrid-contacts-processor'

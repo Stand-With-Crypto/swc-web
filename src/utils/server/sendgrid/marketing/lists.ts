@@ -14,41 +14,42 @@ export const getSendgridContactListName = (
   return `${COUNTRY_CODE_TO_DISPLAY_NAME[countryCode as SupportedCountryCodes]} Advocates`
 }
 
-interface GetListsResponse {
-  result: {
-    id: string
-    name: string
-    contact_count: number
-  }[]
-}
-
-interface CreateListResponse {
+interface SendgridContactList {
   id: string
   name: string
   contact_count: number
 }
 
+interface GetListsResponse {
+  body: {
+    result: SendgridContactList[]
+  }
+}
+
+interface CreateListResponse {
+  body: SendgridContactList
+}
+
 export const fetchSendgridContactList = async (listName: SendgridContactListName) => {
   try {
-    const [listsResponse] = await SendgridClient.request({
+    const [listsResponse] = (await SendgridClient.request({
       url: `/v3/marketing/lists`,
       method: 'GET',
-    })
-    const lists = (listsResponse.body as GetListsResponse).result
+    })) as [GetListsResponse, unknown]
+    const lists = listsResponse.body.result
     const existingList = lists.find(list => list.name === listName)
     if (existingList) {
       return existingList
     }
 
-    const [createResponse] = await SendgridClient.request({
+    const [createResponse] = (await SendgridClient.request({
       url: '/v3/marketing/lists',
       method: 'POST',
       body: {
         name: listName,
       },
-    })
-    const newList = createResponse.body as CreateListResponse
-    return newList
+    })) as [CreateListResponse, unknown]
+    return createResponse.body
   } catch (error) {
     Sentry.captureException(error, {
       tags: {
