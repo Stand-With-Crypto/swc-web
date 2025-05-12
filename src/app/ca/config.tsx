@@ -52,8 +52,6 @@ export const footerConfig: FooterProps = {
   countryCode,
   title: 'Join the movement for the future of crypto',
   subtitle: 'Protect the future of crypto in Canada. #standwithcrypto',
-  legalText:
-    'Authorized by Coinbase Canada, Inc., 1 University Avenue, 14-111, Toronto ON M5J 2P1 CAN, Phone: (416) 876-9271.',
   footerBanner: (
     <div className="pointer-events-none min-w-full select-none">
       <img
