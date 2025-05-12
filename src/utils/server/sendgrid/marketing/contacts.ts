@@ -2,13 +2,15 @@ import * as Sentry from '@sentry/nextjs'
 import * as XLSX from 'xlsx'
 
 import {
-  fetchSendgridCustomFields,
-  mapSendgridFieldToFieldIds,
   SENDGRID_CUSTOM_FIELDS,
   SENDGRID_RESERVED_FIELDS,
   SendgridCustomField,
   SendgridField,
   SendgridReservedField,
+} from '@/utils/server/sendgrid/marketing/constants'
+import {
+  fetchSendgridCustomFields,
+  mapSendgridFieldToFieldIds,
 } from '@/utils/server/sendgrid/marketing/customFields'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 

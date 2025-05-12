@@ -1,5 +1,9 @@
 import { UserActionType } from '@prisma/client'
 
+import {
+  SENDGRID_CONTACTS_API_LIMIT,
+  SIX_MB_IN_BYTES,
+} from '@/inngest/functions/sendgridContactsCronJob/config'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import {
@@ -19,9 +23,6 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME = 'script/sync-sendgrid-contacts-processor'
 const SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID = 'script.sync-sendgrid-contacts-processor'
-
-const SENDGRID_CONTACTS_API_LIMIT = 30000
-const SIX_MB_IN_BYTES = 6 * 1024 * 1024
 
 interface User {
   id: string

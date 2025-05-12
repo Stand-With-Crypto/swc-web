@@ -5,13 +5,14 @@ import {
   checkSendgridJobStatus,
   SendgridImportJobStatusResponse,
 } from '@/inngest/functions/sendgridContactsCronJob/checkJobStatus'
+import {
+  COUNTRIES_TO_SYNC,
+  DB_READ_LIMIT,
+} from '@/inngest/functions/sendgridContactsCronJob/config'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import {
-  ORDERED_SUPPORTED_COUNTRIES,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { syncSendgridContactsProcessor } from './logic'
 
@@ -19,8 +20,6 @@ export const SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME =
   'script/sync-sendgrid-contacts-coordinator'
 export const SYNC_SENDGRID_CONTACTS_COORDINATOR_FUNCTION_ID =
   'script.sync-sendgrid-contacts-coordinator'
-
-const DB_READ_LIMIT = 100000
 
 export interface SyncSendgridContactsCoordinatorSchema {
   name: typeof SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME
@@ -56,12 +55,7 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       }
     })
 
-    // Skip US for now
-    const countriesToProcess = ORDERED_SUPPORTED_COUNTRIES.filter(
-      countryCode => countryCode !== SupportedCountryCodes.US,
-    )
-
-    const countriesPromises = countriesToProcess.map(
+    const countriesPromises = COUNTRIES_TO_SYNC.map(
       async (countryCode): Promise<CountryProcessingResult> => {
         const userCount = await step.run(`[${countryCode}]-count-users`, async () => {
           return prismaClient.user.count({
