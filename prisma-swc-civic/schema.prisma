@@ -1,46 +1,47 @@
 generator client {
   provider        = "prisma-client-js"
   output          = "../src/data/prisma/generated/swc-civic"
-  previewFeatures = ["driverAdapters"]
+  previewFeatures = ["driverAdapters", "postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("SWC_CIVIC_DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("SWC_CIVIC_DATABASE_URL")
+  extensions = [postgis(schema: "public")]
 }
 
 model au_federal_electoral_district {
-  ogc_fid      Int                      @id @default(autoincrement())
-  wkb_geometry Unsupported("geometry")?
-  e_div_numb   Decimal?                 @db.Decimal(11, 0)
-  elect_div    String?                  @db.VarChar(30)
-  numccds      Decimal?                 @db.Decimal(11, 0)
-  actual       Decimal?                 @db.Decimal(11, 0)
-  projected    Decimal?                 @db.Decimal(11, 0)
-  total_popu   Decimal?                 @db.Decimal(11, 0)
-  australian   Decimal?                 @db.Decimal(11, 0)
-  area_sqkm    Decimal?                 @db.Decimal(30, 15)
-  sortname     String?                  @db.VarChar(30)
+  ogc_fid      Int                                     @id @default(autoincrement())
+  wkb_geometry Unsupported("geometry(Geometry,4283)")?
+  e_div_numb   Decimal?                                @db.Decimal(11, 0)
+  elect_div    String?                                 @db.VarChar(30)
+  numccds      Decimal?                                @db.Decimal(11, 0)
+  actual       Decimal?                                @db.Decimal(11, 0)
+  projected    Decimal?                                @db.Decimal(11, 0)
+  total_popu   Decimal?                                @db.Decimal(11, 0)
+  australian   Decimal?                                @db.Decimal(11, 0)
+  area_sqkm    Decimal?                                @db.Decimal(30, 15)
+  sortname     String?                                 @db.VarChar(30)
 
   @@index([wkb_geometry], map: "au_federal_electoral_district_wkb_geometry_geom_idx", type: Gist)
 }
 
 model ca_electoral_districts {
-  ogc_fid      Int                      @id @default(autoincrement())
-  id           String?                  @db.VarChar
-  name         String?                  @db.VarChar
-  description  String?                  @db.VarChar
-  timestamp    DateTime?                @db.Timestamptz(6)
-  begin        DateTime?                @db.Timestamptz(6)
-  end          DateTime?                @db.Timestamptz(6)
-  altitudemode String?                  @db.VarChar
+  ogc_fid      Int                                     @id @default(autoincrement())
+  id           String?                                 @db.VarChar
+  name         String?                                 @db.VarChar
+  description  String?                                 @db.VarChar
+  timestamp    DateTime?                               @db.Timestamptz(6)
+  begin        DateTime?                               @db.Timestamptz(6)
+  end          DateTime?                               @db.Timestamptz(6)
+  altitudemode String?                                 @db.VarChar
   tessellate   Int?
   extrude      Int?
   visibility   Int?
   draworder    Int?
-  icon         String?                  @db.VarChar
-  snippet      String?                  @db.VarChar
-  wkb_geometry Unsupported("geometry")?
+  icon         String?                                 @db.VarChar
+  snippet      String?                                 @db.VarChar
+  wkb_geometry Unsupported("geometry(Geometry,4326)")?
 
   @@index([wkb_geometry], map: "ca_electoral_districts_wkb_geometry_geom_idx", type: Gist)
 }
@@ -55,36 +56,36 @@ model spatial_ref_sys {
 }
 
 model uk_parliamentary_constituency {
-  ogc_fid      Int                      @id @default(autoincrement())
-  wkb_geometry Unsupported("geometry")?
+  ogc_fid      Int                                     @id @default(autoincrement())
+  wkb_geometry Unsupported("geometry(Geometry,4326)")?
   fid          Int?
-  pcon24cd     String?                  @db.VarChar
-  pcon24nm     String?                  @db.VarChar
-  pcon24nmw    String?                  @db.VarChar
+  pcon24cd     String?                                 @db.VarChar
+  pcon24nm     String?                                 @db.VarChar
+  pcon24nmw    String?                                 @db.VarChar
   bng_e        Int?
   bng_n        Int?
   long         Float?
   lat          Float?
-  globalid     String?                  @db.VarChar
+  globalid     String?                                 @db.VarChar
 
   @@index([wkb_geometry], map: "uk_parliamentary_constituency_wkb_geometry_geom_idx", type: Gist)
 }
 
 model us_congressional_district {
-  ogc_fid      Int                      @id @default(autoincrement())
-  cdsessn      String?                  @db.VarChar
-  intptlon     String?                  @db.VarChar
-  awater       String?                  @db.VarChar
-  mtfcc        String?                  @db.VarChar
-  aland        String?                  @db.VarChar
-  namelsad     String?                  @db.VarChar
-  statefp      String?                  @db.VarChar
-  cd116fp      String?                  @db.VarChar
-  intptlat     String?                  @db.VarChar
-  funcstat     String?                  @db.VarChar
-  lsad         String?                  @db.VarChar
-  geoid        String?                  @db.VarChar
-  wkb_geometry Unsupported("geometry")?
+  ogc_fid      Int                                     @id @default(autoincrement())
+  cdsessn      String?                                 @db.VarChar
+  intptlon     String?                                 @db.VarChar
+  awater       String?                                 @db.VarChar
+  mtfcc        String?                                 @db.VarChar
+  aland        String?                                 @db.VarChar
+  namelsad     String?                                 @db.VarChar
+  statefp      String?                                 @db.VarChar
+  cd116fp      String?                                 @db.VarChar
+  intptlat     String?                                 @db.VarChar
+  funcstat     String?                                 @db.VarChar
+  lsad         String?                                 @db.VarChar
+  geoid        String?                                 @db.VarChar
+  wkb_geometry Unsupported("geometry(Geometry,4326)")?
 
   @@index([wkb_geometry], map: "us_congressional_district_wkb_geometry_geom_idx", type: Gist)
 }
