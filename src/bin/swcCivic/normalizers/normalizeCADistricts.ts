@@ -14,7 +14,6 @@ const manuallyNormalizedCanadaDistrictsOverrides: Record<string, string> = {
   'LaSalle-Émard-Verdun': 'LaSalle-Emard-Verdun',
   'Megantic-L’Erable-Lotbiniere': "Megantic-L'Erable-Lotbiniere",
   'Mont-Saint-Bruno-L’Acadie': "Mont-Saint-Bruno-L'Acadie",
-  "Toronto-St. Paul's": 'Saint John-St Paul', // Same as Toronto-St
   'St. Catharines': 'St Catherines',
   'South Shore-St. Margarets': "South Shore-St Margaret's",
   "St. John's East": "St John's East",
@@ -22,7 +21,7 @@ const manuallyNormalizedCanadaDistrictsOverrides: Record<string, string> = {
   'St. Albert-Sturgeon River': 'St Albert-Sturgeon River',
   'Ville-Marie-Le Sud-Ouest-Ile-des-Soeurs': 'Ville-Marie-Le-Sud-Ouest-Ile-Des-Soeurs',
   'Sault Ste. Marie-Algoma': 'Sault Ste',
-  'Northumberland-Clarke': 'Northumberland-Clarke', // Same as Northumberland—Peterborough South
+  "Toronto-St. Paul's": 'Toronto-St',
 }
 
 function normalizeCADistrictName(name: string) {
