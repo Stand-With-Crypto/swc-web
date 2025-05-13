@@ -13,6 +13,10 @@ const SUBJECT = 'Support GENIUS Act'
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
 
+export const DIALOG_TITLE = 'Email Your Senator'
+
+export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
+
 export function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
     firstName: props?.firstName,

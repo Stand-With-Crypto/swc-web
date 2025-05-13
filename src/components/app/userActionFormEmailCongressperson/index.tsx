@@ -12,6 +12,8 @@ import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreat
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import {
+  DIALOG_SUBTITLE,
+  DIALOG_TITLE,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
   getDefaultFormValuesWithCampaignMetadata,
   getEmailBodyText,
@@ -198,11 +200,9 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Contact Your Senator
+              {DIALOG_TITLE}
             </PageTitle>
-            <PageSubTitle className="mb-7">
-              Tell your Senator to vote YES on opening debate on the GENIUS Act.
-            </PageSubTitle>
+            <PageSubTitle className="mb-7">{DIALOG_SUBTITLE}</PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField
