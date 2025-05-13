@@ -1,8 +1,10 @@
 import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
-import { getEmailBodyText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import {
+  EMAIL_FLOW_POLITICIANS_CATEGORY,
+  getEmailBodyText,
+} from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
