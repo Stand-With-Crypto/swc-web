@@ -10,13 +10,13 @@ import_us_geojson:
 	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/us_congressional_districts.geojson" -nln us_congressional_district -overwrite
 
 import_ca_kmz:
-	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/FED_CA_2023_EN.kmz" -nlt PROMOTE_TO_MULTI -lco precision=NO -nln ca_electoral_districts -overwrite
+	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/FED_CA_2023_EN.kmz" -nlt PROMOTE_TO_MULTI -lco precision=NO -nln ca_electoral_districts -overwrite && npm run ts src/bin/swcCivic/normalizers/normalizeCADistricts.ts
 
 import_gb_geojson:
 	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/uk_parliamentary_constituencies.geojson" -nln uk_parliamentary_constituency -overwrite
 
 import_au_shp:
-	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/au/AUS_ELB_region.shp" -nln au_federal_electoral_district -nlt MULTIPOLYGON -overwrite
+	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/au/AUS_ELB_region.shp" -nln au_federal_electoral_district -nlt MULTIPOLYGON -overwrite && npm run ts src/bin/swcCivic/normalizers/normalizeAUDistricts.ts
 
 import_swc_civic_data:
 	make import_us_geojson -f bin/swc_civic.mk
