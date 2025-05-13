@@ -54,7 +54,7 @@ export function Footer({
                 {title}
               </PageTitle>
               <p className="text-xl">{subtitle}</p>
-              <HeroCTA countryCode={countryCode} />
+              <HeroCTA countryCode={countryCode} darkMode />
             </div>
             <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-3 sm:space-y-6">
