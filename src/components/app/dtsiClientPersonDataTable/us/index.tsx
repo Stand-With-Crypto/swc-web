@@ -107,6 +107,7 @@ export function UsDTSIClientPersonDataTable({
             getUSStateNameFromStateCode(state)?.toLowerCase().includes(parsedFilterValue)
           )
         }}
+        id="politicians-table"
         key={data?.people ? 'loaded' : 'static'}
         loadState={data?.people ? 'loaded' : 'static'}
       />

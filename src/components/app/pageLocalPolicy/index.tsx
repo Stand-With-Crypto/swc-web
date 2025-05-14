@@ -1,22 +1,17 @@
 'use client'
 import { useState } from 'react'
 
+import { localPolicyStatesMap } from '@/components/app/pageLocalPolicy/config'
 import { SearchErrorMessage } from '@/components/app/pageLocalPolicy/searchErrorMessage'
 import { SearchResultState } from '@/components/app/pageLocalPolicy/searchResultState'
 import { StateList } from '@/components/app/pageLocalPolicy/stateList'
 import { StateSearch } from '@/components/app/pageLocalPolicy/stateSearch'
 import {
-  LocalPolicyStatesMap,
   PageLocalPolicyProps,
   SearchError,
   SearchResult,
 } from '@/components/app/pageLocalPolicy/types'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
-
-const localPolicyStatesMap: LocalPolicyStatesMap = {
-  us: US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
-}
 
 export function PageLocalPolicy({ countryCode }: PageLocalPolicyProps) {
   const [searchError, setSearchError] = useState<SearchError>(null)
