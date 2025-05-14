@@ -7,13 +7,13 @@ import {
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
-const CAMPAIGN_NAME = USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025
+const CAMPAIGN_NAME = USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025
 
-const SUBJECT = 'Support GENIUS Act'
+const SUBJECT = 'Support Crypto Legislation'
 
-export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
+export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
 
-export const DIALOG_TITLE = 'Email Your Senator'
+export const DIALOG_TITLE = 'Email Your Member of Congress'
 
 export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
 
@@ -23,11 +23,11 @@ export function getEmailBodyText(props?: GetTextProps & { address?: string }) {
     lastName: props?.lastName,
   })
 
-  return `As a Stand With Crypto Advocate, I am your constituent and I am one of the tens of millions of Americans who own, build, or develop with cryptocurrencies and blockchain technology. On behalf of the entire crypto community, I am urging you to support the Guiding and Establishing National Innovation for U.S. Stablecoins (GENIUS) Act.
+  return `As a Stand With Crypto Advocate, I am your constituent and one of the tens of millions of Americans who own, build, or develop with cryptocurrencies and blockchain technology. Today, over 60 crypto founders and advocates are flying into D.C. to push for strong crypto legislation. On behalf of the entire crypto community, I urge you to support this important effort.
 
-In order for the U.S. to realize the full potential of stablecoins, we must foster a regulatory environment that encourages the growth of the crypto industry while ensuring the protection of consumers like myself. The GENIUS Act has the potential to provide clear guidelines and standards for stablecoin regulation, helping to enhance the efficiency of our financial system and maintain U.S. leadership in digital asset innovation
+In order for the U.S. to realize the full potential of crypto, we must foster a regulatory environment that encourages the growth of the crypto industry while ensuring the protection of consumers like myself. We need clear guidelines and standards for regulation, helping to enhance the efficiency of our financial system and maintain U.S. leadership in digital asset innovation.
 
-In the past, you’ve shown commitment to thoughtful and forward-looking legislation, and as one of your constituents I am grateful to you for moving America forward. By supporting the GENIUS Act, you have the opportunity to show this commitment once again.
+In the past, you’ve shown a commitment to thoughtful and forward-looking legislation, and as one of your constituents, I am grateful to you for helping move America forward. Thank you for supporting the 52 million Americans who own crypto by backing strong, sensible crypto legislation.
 
 When you stand with crypto, you stand with millions of Americans across the country. Thank you.${fullNameSignOff}`
 }

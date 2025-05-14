@@ -40,6 +40,7 @@ export enum USUserActionEmailCampaignName {
   BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH',
   GENIUS_ACT_8_MAY_2025 = 'GENIUS_ACT_8_MAY_2025',
   GENIUS_ACT_MAY_13_2025 = 'GENIUS_ACT_MAY_13_2025',
+  FOUNDERS_PUSH_MAY_14_2025 = 'FOUNDERS_PUSH_MAY_14_2025',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
