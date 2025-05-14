@@ -1,7 +1,7 @@
 import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/campaigns'
+import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/campaigns/useEmailActionCampaignMetadata'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'

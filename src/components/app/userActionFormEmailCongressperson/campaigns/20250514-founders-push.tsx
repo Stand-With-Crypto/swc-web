@@ -11,7 +11,7 @@ import {
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-import type { CampaignMetadata } from '.'
+import type { CampaignMetadata } from './types'
 
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
@@ -27,6 +27,8 @@ In the past, you’ve shown a commitment to thoughtful and forward-looking legis
 
 When you stand with crypto, you stand with millions of Americans across the country. Thank you.${fullNameSignOff}`
 }
+
+export const DEEPLINK_SLUG = 'founders-push'
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,

@@ -20,8 +20,13 @@ import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
+function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
+  campaignName,
+}: {
+  campaignName: USUserActionEmailCampaignName
+}) {
   usePreventOverscroll()
 
   const fetchUser = useApiResponseForUserFullProfileInfo()
@@ -44,9 +49,13 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   }, [])
 
   return fetchUser.isLoading || loadingParams ? (
-    <UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />
+    <UserActionFormEmailCongresspersonSkeleton
+      countryCode={countryCode}
+      campaignName={campaignName}
+    />
   ) : state === 'form' ? (
     <UserActionFormEmailCongressperson
+      campaignName={campaignName}
       initialValues={initialValues}
       onCancel={() => router.replace(urls.home())}
       onSuccess={() => setState('success')}
@@ -61,8 +70,13 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   )
 }
 
-export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
+export function UserActionFormEmailCongresspersonDeeplinkWrapper({
+  campaignName,
+}: {
+  campaignName: USUserActionEmailCampaignName
+}) {
   const countryCode = useCountryCode()
+
   return (
     <GeoGate
       countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
@@ -70,8 +84,15 @@ export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
         <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
       }
     >
-      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
-        <UserActionFormEmailCongresspersonDeeplinkWrapperContent />
+      <Suspense
+        fallback={
+          <UserActionFormEmailCongresspersonSkeleton
+            countryCode={countryCode}
+            campaignName={campaignName}
+          />
+        }
+      >
+        <UserActionFormEmailCongresspersonDeeplinkWrapperContent campaignName={campaignName} />
       </Suspense>
     </GeoGate>
   )
