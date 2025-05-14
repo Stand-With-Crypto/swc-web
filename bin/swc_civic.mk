@@ -15,8 +15,9 @@ import_ca_kmz:
 import_gb_geojson:
 	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/uk_parliamentary_constituencies.geojson" -nln uk_parliamentary_constituency -overwrite
 
+# Using an older version of the geo data because DTSI is still showing MPs for the 2022 election. Once DTSI is updated, we can use the latest data.
 import_au_shp:
-	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/au/AUS_ELB_region.shp" -nln au_federal_electoral_district -nlt MULTIPOLYGON -overwrite && npm run ts src/bin/swcCivic/normalizers/normalizeAUDistricts.ts
+	ogr2ogr -f "PostgreSQL" "PG:$(SWC_CIVIC_DATABASE_URL)" "./data/au/2021_ELB_region.shp" -nln au_federal_electoral_district -nlt MULTIPOLYGON -overwrite
 
 import_swc_civic_data:
 	make import_us_geojson -f bin/swc_civic.mk
