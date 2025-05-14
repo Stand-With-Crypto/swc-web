@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
 
-import { PageLocalPolicy } from '@/components/app/pageLocalPolicy'
+import { UsLocalPolicy } from '@/components/app/pageLocalPolicy/us'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { PageProps } from '@/types'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { notFound } from 'next/navigation'
 
 export const title = 'Local policy'
 const description =
@@ -15,8 +17,13 @@ export const metadata: Metadata = {
   }),
 }
 
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+export default async function LocalPolicyPageRoot(props: PageProps) {
+  const params = await props.params
+  const { countryCode } = params
 
-export default function LocalPolicyPageRoot() {
-  return <PageLocalPolicy countryCode={countryCode} />
+  if (countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
+    notFound()
+  }
+
+  return <UsLocalPolicy />
 }

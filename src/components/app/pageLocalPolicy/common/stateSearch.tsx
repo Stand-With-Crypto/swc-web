@@ -2,13 +2,20 @@
 import { Suspense, useCallback, useEffect } from 'react'
 import { noop } from 'lodash-es'
 
-import { SearchError, StateSearchProps } from '@/components/app/pageLocalPolicy/types'
+import { SearchErrorCode, SearchResult } from '@/components/app/pageLocalPolicy/common/types'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+interface StateSearchProps {
+  countryCode: SupportedCountryCodes
+  setSearchErrorCode: React.Dispatch<React.SetStateAction<SearchErrorCode>>
+  setSearchResult: React.Dispatch<React.SetStateAction<SearchResult>>
+}
 
 function PlacesSelect(
   props: Required<Pick<GooglePlacesSelectProps, 'loading' | 'onChange' | 'value'>>,
@@ -24,28 +31,14 @@ function PlacesSelect(
   )
 }
 
-export function StateSearchComponent(props: StateSearchProps) {
-  return (
-    <Suspense fallback={<PlacesSelect loading onChange={noop} value={null} />}>
-      <SuspenseStateSearchComponent {...props} />
-    </Suspense>
-  )
-}
-
-export function SuspenseStateSearchComponent({
+function SuspenseStateSearch({
   countryCode,
-  setSearchError,
+  setSearchErrorCode,
   setSearchResult,
 }: StateSearchProps) {
   const { address, setAddress } = useMutableCurrentUserAddress()
 
-  const triggerError = useCallback(
-    (error: SearchError) => {
-      setSearchError(error)
-      setSearchResult(null)
-    },
-    [setSearchError, setSearchResult],
-  )
+  const isAddressLoading = address === 'loading'
 
   const onChangeAddress = useCallback(
     async (prediction: GooglePlaceAutocompletePrediction | null) => {
@@ -57,21 +50,25 @@ export function SuspenseStateSearchComponent({
       const details = await convertGooglePlaceAutoPredictionToAddressSchema(prediction)
 
       if (details.countryCode.toLowerCase() !== countryCode) {
-        return triggerError('COUNTRY_NOT_SUPPORTED')
+        setSearchErrorCode('COUNTRY_NOT_SUPPORTED')
+        setSearchResult(null)
+        return
       }
 
       if (!details.administrativeAreaLevel1) {
-        return triggerError('STATE_NOT_FOUND')
+        setSearchErrorCode('STATE_NOT_FOUND')
+        setSearchResult(null)
+        return
       }
 
-      setSearchError(null)
+      setSearchErrorCode(null)
       setSearchResult(details)
     },
-    [countryCode, setAddress, setSearchError, setSearchResult, triggerError],
+    [countryCode, setAddress, setSearchErrorCode, setSearchResult],
   )
 
   useEffect(() => {
-    if (address === 'loading') {
+    if (isAddressLoading) {
       return
     }
 
@@ -80,9 +77,17 @@ export function SuspenseStateSearchComponent({
 
   return (
     <PlacesSelect
-      loading={address === 'loading'}
+      loading={isAddressLoading}
       onChange={setAddress}
-      value={address !== 'loading' ? address : null}
+      value={isAddressLoading ? null : address}
     />
+  )
+}
+
+export function StateSearch(props: StateSearchProps) {
+  return (
+    <Suspense fallback={<PlacesSelect loading onChange={noop} value={null} />}>
+      <SuspenseStateSearch {...props} />
+    </Suspense>
   )
 }
