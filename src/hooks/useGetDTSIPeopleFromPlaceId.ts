@@ -2,42 +2,50 @@ import useSWR from 'swr'
 
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import {
-  CongressionalDistrictFromAddress,
-  getCongressionalDistrictFromAddress,
-  GetCongressionalDistrictFromAddressSuccess,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { getCongressionalDistrictFromLatLong } from '@/utils/shared/getCongressionalDistrictFromLatLong'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import {
   LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory'
+import { getLatLongFromGooglePlaceId } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
-export interface DTSIPeopleFromCongressionalDistrict
-  extends GetCongressionalDistrictFromAddressSuccess {
-  dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult
-}
-
-export type UseGetDTSIPeopleFromAddressResponse = Awaited<
-  ReturnType<typeof getDTSIPeopleFromAddress>
+export type UseGetDTSIPeopleFromPlaceIdResponse = Awaited<
+  ReturnType<typeof getDTSIPeopleFromLatLong>
 >
 
-async function getDTSIPeopleFromCongressionalDistrict(
-  result: CongressionalDistrictFromAddress,
-  category: YourPoliticianCategory,
-) {
-  if ('notFoundReason' in result) {
-    return result
+export async function getDTSIPeopleFromLatLong({
+  category,
+  latitude,
+  longitude,
+  countryCode,
+}: {
+  category: YourPoliticianCategory
+  latitude: number
+  longitude: number
+  countryCode: SupportedCountryCodes
+}) {
+  const congressionalDistrict = await getCongressionalDistrictFromLatLong({
+    latitude,
+    longitude,
+    countryCode,
+  })
+
+  if (!congressionalDistrict) {
+    return {
+      notFoundReason: 'CONGRESSIONAL_DISTRICT_NOT_FOUND' as const,
+    }
   }
 
   const data = await fetchReq(
     apiUrls.dtsiPeopleByCongressionalDistrict({
-      stateCode: String(result.stateCode),
-      congressionalDistrict: String(result.districtNumber),
-      countryCode: SupportedCountryCodes.US,
+      congressionalDistrict: congressionalDistrict.name,
+      stateCode: congressionalDistrict.stateCode,
+      countryCode,
     }),
   )
     .then(res => res.json())
@@ -87,27 +95,36 @@ async function getDTSIPeopleFromCongressionalDistrict(
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
   }
 
-  return { ...result, dtsiPeople: filteredData }
+  return { ...congressionalDistrict, dtsiPeople: filteredData }
 }
 
-export async function getDTSIPeopleFromAddress(
-  category: YourPoliticianCategory,
-  address?: string | null,
-) {
-  const result = await getCongressionalDistrictFromAddress(address)
+export function useGetDTSIPeopleFromPlaceId({
+  placeId,
+  category,
+}: {
+  placeId?: string | null
+  category: YourPoliticianCategory
+}) {
+  const countryCode = useCountryCode()
 
-  return getDTSIPeopleFromCongressionalDistrict(result, category)
+  return useSWR(placeId ? `useGetDTSIPeopleFromPlaceId-${placeId}` : null, async () => {
+    if (!placeId) return
+
+    const { lat, lng } = await getLatLongFromGooglePlaceId(placeId)
+
+    if (!lat || !lng) return
+
+    return getDTSIPeopleFromLatLong({
+      countryCode,
+      category,
+      latitude: lat,
+      longitude: lng,
+    })
+  })
 }
-export function useGetDTSIPeopleFromAddress(
-  category: YourPoliticianCategory,
-  address?: string | null,
-) {
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, () =>
-    getDTSIPeopleFromAddress(category, address),
-  )
-}
-export function formatGetDTSIPeopleFromAddressNotFoundReason(
-  data: Pick<UseGetDTSIPeopleFromAddressResponse, 'notFoundReason'> | undefined | null,
+
+export function formatGetDTSIPeopleFromPlaceIdNotFoundReason(
+  data: Pick<UseGetDTSIPeopleFromPlaceIdResponse, 'notFoundReason'> | undefined | null,
 ) {
   const defaultError = "We can't find your representative right now, we're working on a fix"
   if (!data || !('notFoundReason' in data)) {
@@ -115,14 +132,7 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
   }
 
   switch (data.notFoundReason) {
-    case 'NOT_USA_ADDRESS':
-      return 'Please enter a US-based address.'
-    case 'NOT_SAME_STATE':
-      return "Looks like you entered an address that's not in this state."
-    case 'NOT_SPECIFIC_ENOUGH':
-      return 'Please enter a specific address that includes street-level information.'
-    case 'CIVIC_API_DOWN':
-      return "Looks like we're having some issues finding your representative right now. Please come back later and try again."
+    case 'CONGRESSIONAL_DISTRICT_NOT_FOUND':
     case 'MISSING_FROM_DTSI':
     case 'UNEXPECTED_ERROR':
     default:

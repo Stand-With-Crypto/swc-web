@@ -18,6 +18,7 @@ export const LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES = [
   DTSI_PersonRoleCategory.CONGRESS,
   DTSI_PersonRoleCategory.GOVERNOR,
   DTSI_PersonRoleCategory.ATTORNEY_GENERAL,
+  DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
 ]
 
 export function getYourPoliticianCategoryDisplayName(

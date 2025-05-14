@@ -170,11 +170,28 @@ export const getIntlUrls = (
 export const apiUrls = {
   dtsiPeopleByCongressionalDistrict: ({
     stateCode,
-    districtNumber,
+    congressionalDistrict,
+    countryCode,
   }: {
-    stateCode: string
-    districtNumber: number
-  }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
+    stateCode?: string
+    congressionalDistrict: string
+    countryCode: SupportedCountryCodes
+  }) => {
+    if (countryCode === SupportedCountryCodes.US && stateCode) {
+      return `/api/public/dtsi/by-geography/usa/${stateCode}/${congressionalDistrict}`
+    }
+
+    return `/api/public/dtsi/by-geography/${countryCode}/${congressionalDistrict}`
+  },
+  congressionalDistrictFromLatLong: ({
+    latitude,
+    longitude,
+    countryCode,
+  }: {
+    latitude: number
+    longitude: number
+    countryCode: SupportedCountryCodes
+  }) => `/api/${countryCode}/congressional-district?latitude=${latitude}&longitude=${longitude}`,
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,

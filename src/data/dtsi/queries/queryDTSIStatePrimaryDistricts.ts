@@ -9,7 +9,7 @@ import { LocationStateCode } from '@/utils/shared/urls'
 const query = /* GraphQL */ `
   query StatePrimaryDistricts(
     $primaryCountryCode: String!
-    $primaryState: String!
+    $primaryState: String
     $primaryDistrict: String
   ) {
     primaryDistricts(
@@ -25,7 +25,7 @@ export const queryDTSIStatePrimaryDistricts = async ({
   countryCode,
   district,
 }: {
-  stateCode: LocationStateCode
+  stateCode?: LocationStateCode
   countryCode: SupportedCountryCodes
   district?: string
 }) => {
