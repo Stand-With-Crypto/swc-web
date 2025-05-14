@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
+import { getEmailActionCTAConfigByCampaign } from '@/components/app/userActionFormEmailCongressperson/campaigns'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -131,15 +131,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
     campaigns: [
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.DEFAULT,
-        isCampaignActive: false,
-        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        description: 'You emailed your representative about FIT21.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
+      getEmailActionCTAConfigByCampaign(USUserActionEmailCampaignName.DEFAULT),
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.DEFAULT,
@@ -183,7 +175,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Email Your Senator',
         description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -192,7 +184,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contacted and welcomed the 119 congress',
         description: 'The 119th Congress needs to hear from you!',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -201,7 +193,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Member of Congress',
         description: 'Tell your senator to sign the discharge petition',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -210,7 +202,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Member of Congress',
         description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -219,7 +211,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Member of Congress',
         description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -228,7 +220,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Senator',
         description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -237,17 +229,9 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Email Your Senator',
         description: 'Support Crucial Crypto Legislation.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
-        isCampaignActive: true,
-        title: 'Email Your Member of Congress',
-        description: 'Support Crucial Crypto Legislation',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
+      getEmailActionCTAConfigByCampaign(USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025),
     ],
   },
   [UserActionType.CALL]: {

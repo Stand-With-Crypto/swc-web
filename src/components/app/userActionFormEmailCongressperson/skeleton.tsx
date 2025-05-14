@@ -1,12 +1,7 @@
 import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import {
-  DIALOG_SUBTITLE,
-  DIALOG_TITLE,
-  EMAIL_FLOW_POLITICIANS_CATEGORY,
-  getEmailBodyText,
-} from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
+import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/campaigns'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -19,25 +14,27 @@ import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export function UserActionFormEmailCongresspersonSkeleton({
   countryCode,
-  politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
+  campaignName,
 }: {
   countryCode: SupportedCountryCodes
-  politicianCategory?: YourPoliticianCategory
+  campaignName: USUserActionEmailCampaignName
 }) {
   const urls = getIntlUrls(countryCode)
+  const campaignMetadata = useEmailActionCampaignMetadata(campaignName)
+
   return (
     <form className="flex max-h-dvh flex-col">
       <LoadingOverlay />
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            {DIALOG_TITLE}
+            {campaignMetadata.dialogTitle}
           </PageTitle>
-          <PageSubTitle className="mb-7">{DIALOG_SUBTITLE}</PageSubTitle>
+          <PageSubTitle className="mb-7">{campaignMetadata.dialogSubtitle}</PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormItemSkeleton>
@@ -63,7 +60,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
                 countryCode={countryCode}
                 dtsiPeopleFromAddressResponse={{} as ReturnType<typeof useGetDTSIPeopleFromAddress>}
                 onChangeAddress={noop}
-                politicianCategory={politicianCategory}
+                politicianCategory={campaignMetadata.politicianCategory}
               />
             </div>
             <div className="relative">
@@ -76,7 +73,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
                 <Textarea
                   autoComplete="off"
                   autoCorrect="off"
-                  defaultValue={getEmailBodyText()}
+                  defaultValue={campaignMetadata.getEmailBodyText()}
                   placeholder="Your message..."
                   rows={16}
                   spellCheck={false}
