@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 
+import { Layout } from '@/components/app/pageLocalPolicy/common/layout'
 import { StateSearch } from '@/components/app/pageLocalPolicy/common/stateSearch'
 import { SearchErrorCode, SearchResult } from '@/components/app/pageLocalPolicy/common/types'
 import { UsHeader } from '@/components/app/pageLocalPolicy/us/header'
@@ -10,7 +11,6 @@ import { UsStateList } from '@/components/app/pageLocalPolicy/us/stateList'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { Layout } from '@/components/app/pageLocalPolicy/common/layout'
 
 const countryCode = SupportedCountryCodes.US
 

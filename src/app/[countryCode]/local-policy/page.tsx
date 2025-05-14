@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 import { UsLocalPolicy } from '@/components/app/pageLocalPolicy/us'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { PageProps } from '@/types'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { notFound } from 'next/navigation'
 
 export const title = 'Local policy'
 const description =

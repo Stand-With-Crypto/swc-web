@@ -5,11 +5,11 @@ import { noop } from 'lodash-es'
 import { SearchErrorCode, SearchResult } from '@/components/app/pageLocalPolicy/common/types'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
 } from '@/utils/web/googlePlaceUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface StateSearchProps {
   countryCode: SupportedCountryCodes
@@ -73,7 +73,7 @@ function SuspenseStateSearch({
     }
 
     void onChangeAddress(address)
-  }, [address, onChangeAddress])
+  }, [address, isAddressLoading, onChangeAddress])
 
   return (
     <PlacesSelect

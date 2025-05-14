@@ -1,5 +1,5 @@
 import { SearchError } from '@/components/app/pageLocalPolicy/common/searchError'
-import { SearchErrorMap, SearchErrorCode } from '@/components/app/pageLocalPolicy/common/types'
+import { SearchErrorCode, SearchErrorMap } from '@/components/app/pageLocalPolicy/common/types'
 
 const errorMap: SearchErrorMap = {
   COUNTRY_NOT_SUPPORTED: 'Sorry, we do not support this country yet.',
