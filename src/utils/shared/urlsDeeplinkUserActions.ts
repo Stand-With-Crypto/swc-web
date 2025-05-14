@@ -114,7 +114,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     [USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email-debate`
     },
-    [USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025]: ({ countryCode }) => {
+    [USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email`
     },
   },
