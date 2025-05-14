@@ -24,7 +24,7 @@ export const getUSCongressionalDistrict: GetConstituencyQuery = async ({ latitud
   const { namelsad, statefp } = res[0]
 
   return {
-    name: namelsad.match(/(\d+)/)?.[0] ?? '',
+    name: namelsad,
     stateCode: statefp,
   }
 }
