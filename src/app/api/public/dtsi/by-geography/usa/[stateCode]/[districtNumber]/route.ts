@@ -11,7 +11,7 @@ export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 
 const zodParams = z.object({
-  districtNumber: z.string().pipe(z.coerce.number().int().gte(0).lt(1000)),
+  districtNumber: z.string(),
   stateCode: zodUsaState.optional(),
 })
 
