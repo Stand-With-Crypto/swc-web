@@ -1,3 +1,5 @@
+/* cspell:disable */
+
 import path from 'path'
 import xlsx from 'xlsx'
 

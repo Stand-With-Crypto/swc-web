@@ -1,3 +1,5 @@
+/* cspell:disable */
+
 // https://github.com/prisma/prisma/issues/2789
 // Prisma doesn't support PostGIS, so we need to use raw SQL queries
 import 'server-only'
