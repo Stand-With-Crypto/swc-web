@@ -436,6 +436,12 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/founders-push/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/s/paul-atkins',
         destination: 'https://speak4.app/lp/b901vnot/?ts=1744310543',
         permanent: true,
