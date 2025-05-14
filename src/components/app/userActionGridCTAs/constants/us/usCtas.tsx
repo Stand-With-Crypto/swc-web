@@ -125,7 +125,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email Your Member of Congress',
+    title: 'Email Your Senator',
     description: 'Support Crucial Crypto Legislation.',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
@@ -233,7 +233,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
-        isCampaignActive: false,
+        isCampaignActive: true,
         title: 'Email Your Senator',
         description: 'Support Crucial Crypto Legislation.',
         canBeTriggeredMultipleTimes: true,
@@ -242,7 +242,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email Your Member of Congress',
         description: 'Support Crucial Crypto Legislation',
         canBeTriggeredMultipleTimes: true,
