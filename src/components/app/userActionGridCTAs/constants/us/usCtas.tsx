@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
+import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -125,8 +125,8 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Contact your Senator',
-    description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
+    title: 'Email Your Member of Congress',
+    description: 'Support Crucial Crypto Legislation.',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -224,9 +224,27 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Contact your Senator',
         description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        isCampaignActive: false,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        isCampaignActive: true,
+        title: 'Email Your Member of Congress',
+        description: 'Support Crucial Crypto Legislation',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
