@@ -15,6 +15,13 @@ import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
+// Countries without short code phone numbers are not allowed to send SMS messages to users
+// that replied STOP. Twilio will send a default message to the user when this happens.
+const COUNTRIES_WITH_SHORT_CODE_PHONE_NUMBERS: SupportedCountryCodes[] = [
+  SupportedCountryCodes.US,
+  SupportedCountryCodes.CA,
+]
+
 export async function optInUser({
   phoneNumber,
   user,
@@ -130,7 +137,11 @@ export async function optOutUser({
     },
   })
 
-  if (smsProvider === SMSProviders.TWILIO) {
+  if (
+    smsProvider === SMSProviders.TWILIO &&
+    COUNTRIES_WITH_SHORT_CODE_PHONE_NUMBERS.includes(countryCode) &&
+    smsMessages.goodbyeMessage
+  ) {
     await inngest.send({
       name: ENQUEUE_SMS_INNGEST_EVENT_NAME,
       data: {
@@ -201,7 +212,11 @@ export async function optUserBackIn({
     },
   })
 
-  if (smsProvider === SMSProviders.TWILIO) {
+  if (
+    smsProvider === SMSProviders.TWILIO &&
+    COUNTRIES_WITH_SHORT_CODE_PHONE_NUMBERS.includes(countryCode) &&
+    smsMessages.unstopConfirmationMessage
+  ) {
     await inngest.send({
       name: ENQUEUE_SMS_INNGEST_EVENT_NAME,
       data: {
