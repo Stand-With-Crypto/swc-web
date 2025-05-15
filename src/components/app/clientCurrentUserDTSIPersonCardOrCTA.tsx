@@ -12,14 +12,15 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  useGetDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+  formatGetDTSIPeopleFromPlaceIdNotFoundReason,
+  useGetDTSIPeopleFromPlaceId,
+} from '@/hooks/useGetDTSIPeopleFromPlaceId'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   getYourPoliticianCategoryDisplayName,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory'
+import { cn } from '@/utils/web/cn'
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -52,10 +53,11 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
   countryCode: SupportedCountryCodes
 }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromAddress(
-    POLITICIAN_CATEGORY,
-    address === 'loading' ? null : address?.description,
-  )
+  const res = useGetDTSIPeopleFromPlaceId({
+    category: POLITICIAN_CATEGORY,
+    placeId: address === 'loading' ? null : address?.place_id,
+  })
+
   if (!address || address === 'loading' || !res.data) {
     return (
       <DefaultPlacesSelect
@@ -68,7 +70,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
   if ('notFoundReason' in res.data) {
     return (
       <PageSubTitle as="h4" size="sm">
-        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
+        {formatGetDTSIPeopleFromPlaceIdNotFoundReason(res.data)}{' '}
         <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
           Try another address.
         </button>
@@ -92,10 +94,10 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
       >
         Your {categoryDisplayName}
       </p>
-      <DTSIPersonHeroCardRow className="lg:grid lg:grid-cols-[repeat(auto-fit,minmax(0px,1fr))] lg:gap-2 lg:px-0">
+      <DTSIPersonHeroCardRow className={cn('gap-2 max-sm:justify-normal lg:px-0')}>
         {people.map(person => (
           <DTSIPersonHeroCard
-            className="lg:w-auto xl:w-auto"
+            className={cn('sm:h-64 sm:w-60')}
             countryCode={countryCode}
             cryptoStanceGrade={DTSIFormattedLetterGrade}
             key={person.id}
@@ -105,7 +107,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
               person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.ATTORNEY_GENERAL
             }
             subheader="role"
-            wrapperClassName="lg:h-auto lg:w-auto xl:h-auto xl:w-auto"
+            wrapperClassName={cn('sm:w-60')}
           />
         ))}
       </DTSIPersonHeroCardRow>

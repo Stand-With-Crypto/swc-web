@@ -1,3 +1,5 @@
+/* cspell:disable */
+
 // https://github.com/prisma/prisma/issues/2789
 // Prisma doesn't support PostGIS, so we need to use raw SQL queries
 import 'server-only'
@@ -22,7 +24,7 @@ export const getUSCongressionalDistrict: GetConstituencyQuery = async ({ latitud
   const { namelsad, statefp } = res[0]
 
   return {
-    name: namelsad.match(/(\d+)/)?.[0] ?? '',
+    name: namelsad,
     stateCode: statefp,
   }
 }

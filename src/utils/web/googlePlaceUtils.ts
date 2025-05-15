@@ -115,3 +115,29 @@ export async function convertGooglePlaceAutoPredictionToAddressSchema(
     throw error
   }
 }
+
+async function fetchGeometry(placeId: string) {
+  return getDetails({
+    placeId,
+    fields: ['geometry'],
+  }).then(details => {
+    if (typeof details === 'string') {
+      return
+    }
+
+    return details.geometry
+  })
+}
+
+export async function getLatLongFromGooglePlaceId(placeId: string) {
+  const geometry = await fetchGeometry(placeId)
+
+  if (!geometry?.location) {
+    return {}
+  }
+
+  return {
+    lat: geometry.location.lat(),
+    lng: geometry.location.lng(),
+  }
+}
