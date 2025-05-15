@@ -94,15 +94,10 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
       >
         Your {categoryDisplayName}
       </p>
-      <DTSIPersonHeroCardRow
-        className={cn({
-          'lg:grid lg:grid-cols-[repeat(auto-fit,minmax(0px,1fr))] lg:gap-2 lg:px-0':
-            people.length > 1 && people.length <= 6,
-        })}
-      >
+      <DTSIPersonHeroCardRow className={cn('gap-2 max-sm:justify-normal lg:px-0')}>
         {people.map(person => (
           <DTSIPersonHeroCard
-            className="lg:w-auto xl:w-auto"
+            className={cn('sm:h-64 sm:w-60')}
             countryCode={countryCode}
             cryptoStanceGrade={DTSIFormattedLetterGrade}
             key={person.id}
@@ -112,7 +107,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
               person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.ATTORNEY_GENERAL
             }
             subheader="role"
-            wrapperClassName="lg:h-auto lg:w-auto xl:h-auto xl:w-auto max-w-60"
+            wrapperClassName={cn('sm:w-60')}
           />
         ))}
       </DTSIPersonHeroCardRow>
