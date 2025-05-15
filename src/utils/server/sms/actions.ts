@@ -15,8 +15,8 @@ import { smsProvider, SMSProviders } from '@/utils/shared/sms/smsProvider'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-// Countries without short code phone numbers are not allowed to send SMS messages to users
-// that replied STOP. Twilio will send a default message to the user when this happens.
+// Countries without short code phone numbers are not allowed to send SMS messages to users that replied STOP.
+// A default message will be sent to the user when they reply STOP and START.
 const COUNTRIES_WITH_SHORT_CODE_PHONE_NUMBERS: SupportedCountryCodes[] = [
   SupportedCountryCodes.US,
   SupportedCountryCodes.CA,
