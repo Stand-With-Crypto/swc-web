@@ -59,7 +59,7 @@ const US_STATE_NUMBER_TO_STATE_CODE: Record<number, USStateCode> = {
 }
 
 function normalizeUSDistrictName(name: string) {
-  if (name === 'Congressional District (at Large)') {
+  if (name.toLowerCase().includes('at large')) {
     return 'At-Large'
   }
 
@@ -89,7 +89,7 @@ async function normalizeUSDistricts() {
     if (!name) continue
 
     const normalizedName = normalizeUSDistrictName(name)
-    const normalizedStateCode = US_STATE_NUMBER_TO_STATE_CODE[Number(statefp)]
+    const normalizedStateCode = US_STATE_NUMBER_TO_STATE_CODE[Number(statefp)] ?? statefp
 
     if (normalizedName !== name || normalizedStateCode !== statefp) {
       console.log(
