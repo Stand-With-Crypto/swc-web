@@ -14,8 +14,6 @@ import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = SupportedCountryCodes.US
 
-const states = US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
-
 const urls = getIntlUrls(countryCode)
 
 export function UsLocalPolicy() {
@@ -36,7 +34,11 @@ export function UsLocalPolicy() {
 
       <UsSearchResult countryCode={countryCode} searchResult={searchResult} urls={urls} />
 
-      <UsStateList searchResult={searchResult} states={states} urls={urls} />
+      <UsStateList
+        searchResult={searchResult}
+        states={US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
+        urls={urls}
+      />
     </Layout>
   )
 }

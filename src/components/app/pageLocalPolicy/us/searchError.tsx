@@ -2,8 +2,8 @@ import { SearchError } from '@/components/app/pageLocalPolicy/common/searchError
 import { SearchErrorCode, SearchErrorMap } from '@/components/app/pageLocalPolicy/common/types'
 
 const errorMap: SearchErrorMap = {
-  COUNTRY_NOT_SUPPORTED: 'Sorry, we do not support this country yet.',
-  STATE_NOT_FOUND: 'Sorry, we could not find a state for this address.',
+  COUNTRY_NOT_SUPPORTED: 'This address is not in the US.',
+  STATE_NOT_FOUND: 'We could not find a state in the US for this address.',
 }
 
 interface UsSearchErrorProps {
