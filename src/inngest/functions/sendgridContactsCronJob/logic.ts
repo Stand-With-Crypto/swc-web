@@ -2,7 +2,7 @@ import { UserActionType } from '@prisma/client'
 
 import {
   SENDGRID_CONTACTS_API_LIMIT,
-  SIX_MB_IN_BYTES,
+  SENDGRID_CONTACTS_API_LIMIT_BYTES,
 } from '@/inngest/functions/sendgridContactsCronJob/config'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -123,11 +123,12 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         /**
          * SendGrid has a limit of 30,000 contacts per batch or 6MB of data, whichever is smaller.
          * The CSV upload limit is 1,000,000 contacts or 5GB of data, whichever is smaller.
+         * The direct API upsert (non-CSV) has a stricter gRPC message limit around 4MB.
          */
         const contactsDataSize = Buffer.from(JSON.stringify(validContacts), 'utf-8').length
         if (
           validContacts.length > SENDGRID_CONTACTS_API_LIMIT ||
-          contactsDataSize > SIX_MB_IN_BYTES
+          contactsDataSize > SENDGRID_CONTACTS_API_LIMIT_BYTES
         ) {
           const uploadResult = await uploadSendgridContactsCSV(validContacts, {
             listIds: [listId],
