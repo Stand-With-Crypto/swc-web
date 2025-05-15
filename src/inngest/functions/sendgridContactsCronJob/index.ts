@@ -12,6 +12,7 @@ import {
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { syncSendgridContactsProcessor } from './logic'
@@ -20,6 +21,7 @@ export const SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME =
   'script/sync-sendgrid-contacts-coordinator'
 export const SYNC_SENDGRID_CONTACTS_COORDINATOR_FUNCTION_ID =
   'script.sync-sendgrid-contacts-coordinator'
+const SYNC_SENDGRID_CONTACTS_COORDINATOR_CRON_JOB_SCHEDULE = '0 */6 * * *' // every 6 hours
 
 export interface SyncSendgridContactsCoordinatorSchema {
   name: typeof SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME
@@ -44,7 +46,11 @@ interface CountryProcessingResult {
 
 export const syncSendgridContactsCoordinator = inngest.createFunction(
   { id: SYNC_SENDGRID_CONTACTS_COORDINATOR_FUNCTION_ID, onFailure: onScriptFailure },
-  { event: SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME },
+  {
+    ...(NEXT_PUBLIC_ENVIRONMENT === 'production'
+      ? { cron: SYNC_SENDGRID_CONTACTS_COORDINATOR_CRON_JOB_SCHEDULE }
+      : { event: SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME }),
+  },
   async ({ step, logger }) => {
     await step.run('ensure-custom-fields-exist', async () => {
       try {
