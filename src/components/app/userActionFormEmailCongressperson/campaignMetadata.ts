@@ -23,7 +23,7 @@ export function getEmailBodyText(props?: GetTextProps & { address?: string }) {
     lastName: props?.lastName,
   })
 
-  return `As a Stand With Crypto Advocate, I am your constituent and I am one of the tens of millions of Americans who own, build, or develop with cryptocurrencies and blockchain technology. On behalf of the entire crypto community, I am urging you to support the Guiding and Establishing National Innovation for U.S. Stablecoins (GENIUS) Act.
+  return `As a Stand With Crypto Advocate and your constituent, I am one of the tens of millions of Americans who own, build, or develop with cryptocurrencies and blockchain technology. On behalf of the broader crypto community, I urge you to support the Guiding and Establishing National Innovation for U.S. Stablecoins (GENIUS) Act.
 
 In order for the U.S. to realize the full potential of stablecoins, we must foster a regulatory environment that encourages the growth of the crypto industry while ensuring the protection of consumers like myself. The GENIUS Act has the potential to provide clear guidelines and standards for stablecoin regulation, helping to enhance the efficiency of our financial system and maintain U.S. leadership in digital asset innovation.
 
