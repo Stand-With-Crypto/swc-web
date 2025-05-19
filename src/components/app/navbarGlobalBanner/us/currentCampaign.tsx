@@ -1,19 +1,22 @@
-import { CampaignWrapper } from '@/components/app/navbarGlobalBanner/common/campaignWrapper'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useIsMobile } from '@/hooks/useIsMobile'
+'use client'
 import Link from 'next/link'
 
+import { CampaignWrapper } from '@/components/app/navbarGlobalBanner/common/campaignWrapper'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
+
 export function UsCurrentNavbarGlobalBannerCampaign() {
-  const isMobile = useIsMobile()
-  const urls = useIntlUrls()
-  const campaignUrl = urls.emailDeeplink()
+  const campaignUrl = getIntlUrls(DEFAULT_SUPPORTED_COUNTRY_CODE).emailDeeplink()
 
   return (
     <CampaignWrapper url={campaignUrl}>
       <p>
-        KEY VOTE ALERT IN THE SENATE – VOTE "YES" ON GENIUS ACT
-        {isMobile ? <br /> : <span> – </span>}
-        Find out more <strong>{isMobile ? 'here' : <Link href={campaignUrl}>here</Link>}</strong>
+        KEY VOTE ALERT – Cloture on the GENIUS Act
+        <br className="block sm:hidden" />
+        <span className="hidden sm:inline"> – </span>
+        <strong>
+          <Link href={campaignUrl}>Email your Senators now</Link>
+        </strong>
       </p>
     </CampaignWrapper>
   )
