@@ -1,8 +1,13 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
-import { LocalPolicyStatePage } from '@/components/app/pageLocalPolicy/components'
+import { UsLocalPolicyStatePage } from '@/components/app/pageLocalPolicy/us/statePage'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 export const title = 'Local policy'
 const description =
@@ -15,14 +20,19 @@ export const metadata: Metadata = {
   }),
 }
 
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
-
 export default async function LocalPolicyStatePageRoot({
   params,
 }: {
-  params: Promise<{ stateCode: string }>
+  params: Promise<{ countryCode: SupportedCountryCodes; stateCode: string }>
 }) {
-  const { stateCode } = await params
+  const { countryCode, stateCode } = await params
 
-  return <LocalPolicyStatePage countryCode={countryCode} stateCode={stateCode} />
+  if (
+    countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE ||
+    !(stateCode.toUpperCase() in US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)
+  ) {
+    notFound()
+  }
+
+  return <UsLocalPolicyStatePage stateCode={stateCode} />
 }

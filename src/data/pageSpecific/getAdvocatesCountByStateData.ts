@@ -6,9 +6,7 @@ export async function getAdvocatesCountByStateData(stateCode: string) {
   const [advocatesCountByState] = await Promise.all([getAdvocatesCountByState(stateCode)])
 
   return {
-    advocatesCountByStateData: {
-      advocatesCountByState,
-    },
+    advocatesCountByState: advocatesCountByState.advocatesCount,
   }
 }
 

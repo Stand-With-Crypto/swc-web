@@ -4,11 +4,11 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 interface AdvocatesCountByStateQuery {
-  advocatesCount: bigint
+  advocatesCount: number
 }
 
 const fetchDataFromPrisma = async (stateCode: string) => {
-  return prismaClient.$queryRaw<AdvocatesCountByStateQuery>`
+  return prismaClient.$queryRaw<AdvocatesCountByStateQuery[]>`
     SELECT COUNT(user.id) AS advocatesCount
     FROM address
     JOIN user ON user.address_id = address.id
@@ -26,13 +26,13 @@ const parseAdvocatesCountByState = (advocatesCountByState: AdvocatesCountByState
 
   return {
     ...advocatesCountByState,
-    advocatesCount: parseInt(advocatesCountByState.toString(), 10) * multiplier,
+    advocatesCount: parseInt(advocatesCountByState.advocatesCount.toString(), 10) * multiplier,
   }
 }
 
 export const getAdvocatesCountByState = async (stateCode: string) => {
   const rawAdvocatesCountByState = await fetchDataFromPrisma(stateCode)
-  const advocatesCountByState = parseAdvocatesCountByState(rawAdvocatesCountByState)
+  const advocatesCountByState = parseAdvocatesCountByState(rawAdvocatesCountByState[0])
 
   return advocatesCountByState
 }
