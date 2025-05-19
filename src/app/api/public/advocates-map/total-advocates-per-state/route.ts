@@ -1,24 +1,14 @@
 import 'server-only'
 
-import { NextRequest, NextResponse } from 'next/server'
-import z from 'zod'
+import { NextResponse } from 'next/server'
 
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 
-const zodPayload = z.object({
-  stateCode: z.string().optional(),
-})
-
-export async function GET(request: NextRequest) {
-  const params = request.nextUrl.searchParams
-  const { stateCode } = zodPayload.parse({
-    stateCode: params.get('stateCode') || undefined,
-  })
-
-  const data = await getAdvocatesMapData(stateCode)
+export async function GET() {
+  const data = await getAdvocatesMapData()
 
   return NextResponse.json(data)
 }

@@ -141,8 +141,8 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
-    politiciansHomepage: (search?: string) =>
-      `${countryPrefix}/politicians${search ? `?search=${search}` : ''}`,
+    politiciansHomepage: (filters?: { stateCode?: string }) =>
+      `${countryPrefix}/politicians${filters?.stateCode ? `?state=${filters.stateCode.toUpperCase()}` : ''}`,
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,

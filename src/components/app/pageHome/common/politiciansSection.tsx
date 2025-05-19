@@ -18,7 +18,7 @@ interface HomepagePoliticiansSectionProps {
   }>
   title?: string
   subtitle?: string
-  stateName?: string
+  stateCode?: string
 }
 
 export function HomepagePoliticiansSection({
@@ -27,7 +27,7 @@ export function HomepagePoliticiansSection({
   cryptoStanceGrade: CryptoStanceGrade,
   title = 'Where politicians stand on crypto',
   subtitle = "Ask your policymakers to be pro-crypto. Here's where they stand now.",
-  stateName,
+  stateCode,
 }: HomepagePoliticiansSectionProps) {
   const urls = getIntlUrls(countryCode)
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePoliticians.lowestScores)
@@ -84,7 +84,7 @@ export function HomepagePoliticiansSection({
       )}
       <div className="container space-x-4 text-center">
         <Button asChild variant="secondary">
-          <InternalLink href={`${urls.politiciansHomepage(stateName)}#politicians-table`}>
+          <InternalLink href={`${urls.politiciansHomepage({ stateCode })}#table`}>
             View all
           </InternalLink>
         </Button>

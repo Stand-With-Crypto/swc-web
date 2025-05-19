@@ -15,7 +15,7 @@ export async function PoliticiansSection({
       countryCode={countryCode}
       cryptoStanceGrade={DTSIFormattedLetterGrade}
       dtsiHomepagePoliticians={data}
-      stateName={stateName}
+      stateCode={stateCode}
       subtitle={`See where ${stateName}'s politicians stand on crypto`}
       title="Elected officials"
     />
