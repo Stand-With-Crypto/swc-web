@@ -13,7 +13,7 @@ interface PageBillsProps {
   countryCode: SupportedCountryCodes
 }
 
-const KEY_BILLS = ['hr4763', 'hjres109', 'hr5403', 'SJRES3', 'HJRES25']
+const KEY_BILLS = ['S1582', 'hr4763', 'hjres109', 'SJRES3', 'HJRES25', 'hr5403']
 
 export function PageBills(props: PageBillsProps) {
   const { title, description, bills, countryCode } = props
