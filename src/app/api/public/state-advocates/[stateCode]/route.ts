@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { getAdvocatesCountByStateData } from '@/data/pageSpecific/getAdvocatesCountByStateData'
 
 const zodPayload = z.object({
-  stateCode: z.string(),
+  stateCode: z.string().length(2),
 })
 
 interface RequestContext {
@@ -17,11 +17,20 @@ interface RequestContext {
 
 export async function GET(_: NextRequest, context: RequestContext) {
   const params = await context.params
-  const { stateCode } = zodPayload.parse({
+  const payload = zodPayload.safeParse({
     stateCode: params.stateCode,
   })
 
-  const data = await getAdvocatesCountByStateData(stateCode)
+  if (payload.success === false) {
+    return NextResponse.json(
+      {
+        errors: payload.error.errors,
+      },
+      { status: 400 },
+    )
+  }
+
+  const data = await getAdvocatesCountByStateData(payload.data.stateCode)
 
   return NextResponse.json(data)
 }

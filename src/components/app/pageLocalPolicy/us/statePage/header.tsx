@@ -12,13 +12,25 @@ import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 const CTA_LABEL = 'Join SWC'
 
-const formatNumber = intlNumberFormat(SupportedLocale.EN_US).format
-
 interface UsHeaderProps {
   countryCode: SupportedCountryCodes
   initialTotalAdvocates: number
   stateCode: string
   stateName: string
+}
+
+function getHeaderDescription(advocatesCount: number) {
+  if (advocatesCount === 0) {
+    return 'No advocates'
+  }
+
+  if (advocatesCount === 1) {
+    return '1 advocate'
+  }
+
+  const formatNumber = intlNumberFormat(SupportedLocale.EN_US).format
+
+  return `${formatNumber(advocatesCount)} advocates`
 }
 
 export function UsHeader({
@@ -41,7 +53,7 @@ export function UsHeader({
   )
 
   const HEADER_TITLE = stateName
-  const HEADER_DESCRIPTION = `${formatNumber(data.advocatesCountByState)} ${data.advocatesCountByState < 2 ? 'advocate' : 'advocates'} in ${stateName}`
+  const HEADER_DESCRIPTION = `${getHeaderDescription(data.advocatesCountByState)} in ${stateName}`
 
   return (
     <Header>

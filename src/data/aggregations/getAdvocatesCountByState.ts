@@ -32,7 +32,9 @@ const parseAdvocatesCountByState = (advocatesCountByState: AdvocatesCountByState
 
 export const getAdvocatesCountByState = async (stateCode: string) => {
   const rawAdvocatesCountByState = await fetchDataFromPrisma(stateCode)
-  const advocatesCountByState = parseAdvocatesCountByState(rawAdvocatesCountByState[0])
+  const advocatesCountByState = parseAdvocatesCountByState(
+    rawAdvocatesCountByState[0] || { advocatesCount: 0 },
+  )
 
   return advocatesCountByState
 }
