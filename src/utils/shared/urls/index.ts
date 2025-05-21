@@ -141,7 +141,11 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
-    politiciansHomepage: () => `${countryPrefix}/politicians`,
+    politiciansHomepage: (filters?: Partial<{ state: string }>) => {
+      const params = new URLSearchParams(filters).toString()
+
+      return `${countryPrefix}/politicians${params ? `?${params}` : ''}`
+    },
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
@@ -164,7 +168,8 @@ export const getIntlUrls = (
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
     ...RACES_ROUTES,
-    localPolicy: (stateCode: string) => `${countryPrefix}/local-policy/${stateCode.toLowerCase()}`,
+    localPolicy: (stateCode?: string) =>
+      `${countryPrefix}/local-policy${stateCode ? `/${stateCode.toLowerCase()}` : ''}`,
   }
 }
 
@@ -190,6 +195,7 @@ export const apiUrls = {
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,
   totalAdvocatesPerState: () => '/api/public/advocates-map/total-advocates-per-state',
+  advocatesCountByState: (stateCode: string) => `/api/public/state-advocates/${stateCode}`,
   smsStatusCallback: ({
     campaignName,
     journeyType,
