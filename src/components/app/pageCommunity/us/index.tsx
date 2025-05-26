@@ -68,6 +68,8 @@ type PageLeaderboardProps = PageLeaderboardInferredProps & {
   countryCode: SupportedCountryCodes
   offset: number
   pageNum: number
+  stateCode?: string
+  totalPages?: number
 }
 
 export function UsPageCommunity({
@@ -78,9 +80,11 @@ export function UsPageCommunity({
   sumDonationsByUser,
   publicRecentActivity,
   leaderboardData,
+  stateCode,
+  totalPages: totalPagesAfterFiltering,
 }: PageLeaderboardProps) {
   const urls = getIntlUrls(countryCode)
-  const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
+  const totalPages = totalPagesAfterFiltering || COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
     <PageLayout className="space-y-7">
@@ -190,7 +194,7 @@ export function UsPageCommunity({
             getPageUrl={pageNumber =>
               pageNumber < 1 || pageNumber > totalPages
                 ? ''
-                : urls.leaderboard({ pageNum: pageNumber, tab })
+                : urls.leaderboard({ pageNum: pageNumber, tab, stateCode })
             }
             totalPages={totalPages}
           />

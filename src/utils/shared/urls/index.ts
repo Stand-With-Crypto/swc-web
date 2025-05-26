@@ -119,7 +119,11 @@ export const getIntlUrls = (
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
-    leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
+    leaderboard: (params?: {
+      pageNum?: number
+      stateCode?: string
+      tab: RecentActivityAndLeaderboardTabs
+    }) => {
       const getTabPrefix = (tab = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY) => {
         switch (tab) {
           case RecentActivityAndLeaderboardTabs.LEADERBOARD:
@@ -138,7 +142,7 @@ export const getIntlUrls = (
       const pageNum = params.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${countryPrefix}${tabPrefix}${tabSuffix}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
     },
     partners: () => `${countryPrefix}/partners`,
     politiciansHomepage: (filters?: Partial<{ state: string }>) => {
