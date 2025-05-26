@@ -37,7 +37,7 @@ const getConstituencyQueries: Record<SupportedCountryCodes, Promise<{ name: stri
         namelsad: true,
       },
     })
-    .then(res => res.map(({ namelsad }) => ({ name: namelsad?.match(/(\d+)/)?.[0] ?? null }))),
+    .then(res => res.map(({ namelsad }) => ({ name: namelsad?.match(/(\d+)/)?.[0] ?? namelsad }))),
 }
 
 async function compareDatabaseDistrictsWithDTSI() {
