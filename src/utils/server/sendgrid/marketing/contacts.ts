@@ -5,7 +5,6 @@ import {
   SendgridReservedField,
 } from '@/utils/server/sendgrid/marketing/constants'
 import { formatContactCustomFields } from '@/utils/server/sendgrid/marketing/formatContact'
-import { isSendgridError } from '@/utils/server/sendgrid/marketing/utils'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 
 export type SendgridContact = Record<SendgridReservedField, string> & {
@@ -48,10 +47,6 @@ export const upsertSendgridContactsArray = async (
         options,
       },
     })
-
-    if (isSendgridError(error)) {
-      throw new Error(JSON.stringify(error.response.body, null, 2))
-    }
 
     throw error
   }
