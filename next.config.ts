@@ -436,9 +436,15 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/founders-push/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/s/genius/:sessionId*',
         destination:
-          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=genius-floor-1&sessionId=:sessionId*',
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=genius-1&sessionId=:sessionId*',
         permanent: true,
       },
       {
