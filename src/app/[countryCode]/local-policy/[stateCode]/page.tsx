@@ -18,6 +18,9 @@ export const title = 'Local policy'
 const description =
   'View bills, local elections, and find out where politicians in your state stand on crypto'
 
+export const dynamic = 'error'
+export const dynamicParams = false
+
 export const metadata: Metadata = {
   ...generateMetadataDetails({
     title,
