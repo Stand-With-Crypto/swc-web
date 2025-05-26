@@ -13,7 +13,7 @@ import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,

@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import {

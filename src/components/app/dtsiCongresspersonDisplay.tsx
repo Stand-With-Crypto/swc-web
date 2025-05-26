@@ -5,7 +5,7 @@ import { DTSI_PersonRole, DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   UseGetDTSIPeopleFromAddressResponse,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'

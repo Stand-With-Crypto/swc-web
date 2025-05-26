@@ -9,7 +9,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'

@@ -26,7 +26,7 @@ import { InternalLink } from '@/components/ui/link'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   getDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
