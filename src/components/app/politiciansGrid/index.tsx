@@ -53,7 +53,14 @@ export function PoliticiansGrid({
       )}
 
       <Politicians.Button
-        href={urls.politiciansHomepage(stateCode ? { state: stateCode.toUpperCase() } : undefined)}
+        href={urls.politiciansHomepage(
+          stateCode
+            ? {
+                filters: { state: stateCode.toUpperCase() },
+                hash: 'table',
+              }
+            : {},
+        )}
       >
         View all
       </Politicians.Button>
