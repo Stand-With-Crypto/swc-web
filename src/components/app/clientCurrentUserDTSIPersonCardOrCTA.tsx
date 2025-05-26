@@ -12,9 +12,9 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
-  formatGetDTSIPeopleFromPlaceIdNotFoundReason,
-  useGetDTSIPeopleFromPlaceId,
-} from '@/hooks/useGetDTSIPeopleFromPlaceId'
+  useGetDTSIPeopleFromAddress,
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   getYourPoliticianCategoryDisplayName,
@@ -53,12 +53,12 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
   countryCode: SupportedCountryCodes
 }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromPlaceId({
+  const res = useGetDTSIPeopleFromAddress({
     category: POLITICIAN_CATEGORY,
-    placeId: address === 'loading' ? null : address?.place_id,
+    address: address === 'loading' ? null : address?.description,
   })
 
-  if (!address || address === 'loading' || !res.data) {
+  if (!address || address === 'loading' || !res?.data) {
     return (
       <DefaultPlacesSelect
         loading={address === 'loading'}
@@ -70,7 +70,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
   if ('notFoundReason' in res.data) {
     return (
       <PageSubTitle as="h4" size="sm">
-        {formatGetDTSIPeopleFromPlaceIdNotFoundReason(res.data)}{' '}
+        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
         <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
           Try another address.
         </button>

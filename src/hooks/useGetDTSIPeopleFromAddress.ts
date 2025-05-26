@@ -4,47 +4,38 @@ import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getCongressionalDistrictFromLatLong } from '@/utils/shared/getCongressionalDistrictFromLatLong'
+import { getConstituencyFromAddress } from '@/utils/shared/getConstituencyFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import {
   LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory'
-import { getLatLongFromGooglePlaceId } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 export type UseGetDTSIPeopleFromPlaceIdResponse = Awaited<
-  ReturnType<typeof getDTSIPeopleFromLatLong>
+  ReturnType<typeof getDTSIPeopleFromAddress>
 >
 
-export async function getDTSIPeopleFromLatLong({
+export async function getDTSIPeopleFromAddress({
+  address,
   category,
-  latitude,
-  longitude,
   countryCode,
 }: {
+  address: string
   category: YourPoliticianCategory
-  latitude: number
-  longitude: number
   countryCode: SupportedCountryCodes
 }) {
-  const congressionalDistrict = await getCongressionalDistrictFromLatLong({
-    latitude,
-    longitude,
-    countryCode,
-  })
+  const constituencyData = await getConstituencyFromAddress(address, countryCode)
 
-  if (!congressionalDistrict) {
-    return {
-      notFoundReason: 'CONGRESSIONAL_DISTRICT_NOT_FOUND' as const,
-    }
+  if ('notFoundReason' in constituencyData) {
+    return constituencyData
   }
 
   const data = await fetchReq(
     apiUrls.dtsiPeopleByCongressionalDistrict({
-      congressionalDistrict: congressionalDistrict.name,
-      stateCode: congressionalDistrict.stateCode,
+      congressionalDistrict: constituencyData.name,
+      stateCode: constituencyData.stateCode,
       countryCode,
     }),
   )
@@ -55,10 +46,6 @@ export async function getDTSIPeopleFromLatLong({
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
     })
   const dtsiPeople = data as DTSIPeopleByCongressionalDistrictQueryResult
-
-  if ('notFoundReason' in data) {
-    return data
-  }
 
   let filteredData: DTSIPeopleByCongressionalDistrictQueryResult = []
 
@@ -95,35 +82,32 @@ export async function getDTSIPeopleFromLatLong({
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
   }
 
-  return { ...congressionalDistrict, dtsiPeople: filteredData }
+  return { ...constituencyData, dtsiPeople: filteredData }
 }
 
-export function useGetDTSIPeopleFromPlaceId({
-  placeId,
+export function useGetDTSIPeopleFromAddress({
+  address,
   category,
 }: {
-  placeId?: string | null
+  address?: string | null
   category: YourPoliticianCategory
 }) {
   const countryCode = useCountryCode()
 
-  return useSWR(placeId ? `useGetDTSIPeopleFromPlaceId-${placeId}` : null, async () => {
-    if (!placeId) return
+  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, async () => {
+    if (!address) {
+      return
+    }
 
-    const { lat, lng } = await getLatLongFromGooglePlaceId(placeId)
-
-    if (!lat || !lng) return
-
-    return getDTSIPeopleFromLatLong({
+    return getDTSIPeopleFromAddress({
+      address,
       countryCode,
       category,
-      latitude: lat,
-      longitude: lng,
     })
   })
 }
 
-export function formatGetDTSIPeopleFromPlaceIdNotFoundReason(
+export function formatGetDTSIPeopleFromAddressNotFoundReason(
   data: Pick<UseGetDTSIPeopleFromPlaceIdResponse, 'notFoundReason'> | undefined | null,
 ) {
   const defaultError = "We can't find your representative right now, we're working on a fix"
@@ -132,7 +116,7 @@ export function formatGetDTSIPeopleFromPlaceIdNotFoundReason(
   }
 
   switch (data.notFoundReason) {
-    case 'CONGRESSIONAL_DISTRICT_NOT_FOUND':
+    case 'CONSTITUENCY_NOT_FOUND':
     case 'MISSING_FROM_DTSI':
     case 'UNEXPECTED_ERROR':
     default:

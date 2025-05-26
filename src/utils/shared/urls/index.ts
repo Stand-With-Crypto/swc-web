@@ -183,15 +183,13 @@ export const apiUrls = {
 
     return `/api/public/dtsi/by-geography/${countryCode}/${congressionalDistrict}`
   },
-  congressionalDistrictFromLatLong: ({
-    latitude,
-    longitude,
+  swcCivicConstituencyFromAddress: ({
+    address,
     countryCode,
   }: {
-    latitude: number
-    longitude: number
+    address: string
     countryCode: SupportedCountryCodes
-  }) => `/api/${countryCode}/congressional-district?latitude=${latitude}&longitude=${longitude}`,
+  }) => `/api/public/swc-civic/${countryCode}?address=${encodeURIComponent(address.trim())}`,
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,
