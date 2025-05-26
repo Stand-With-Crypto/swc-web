@@ -155,10 +155,11 @@ export function UsPageCommunity({
                 COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
                   .itemsPerPage
               }
+              stateCode={stateCode}
             />
           ) : (
             <>
-              {publicRecentActivity.map(action => (
+              {publicRecentActivity.data.map(action => (
                 <VariantRecentActivityRow
                   action={action}
                   countryCode={countryCode}

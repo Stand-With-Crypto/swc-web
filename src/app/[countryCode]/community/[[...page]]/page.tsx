@@ -15,7 +15,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 30 // 30 seconds
-export const dynamic = 'error'
+// export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -36,7 +36,12 @@ export async function generateStaticParams() {
 
 export default async function CommunityRecentActivityPage(props: Props) {
   const params = await props.params
-  const { publicRecentActivity, pageNum, offset } = await getPageData(params)
+  const searchParams = await props.searchParams
+
+  const { publicRecentActivity, pageNum, offset, totalPages } = await getPageData(
+    params,
+    searchParams,
+  )
 
   const dataProps: PageLeaderboardInferredProps = {
     tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
@@ -51,6 +56,8 @@ export default async function CommunityRecentActivityPage(props: Props) {
       countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
       offset={offset}
       pageNum={pageNum}
+      stateCode={searchParams?.state as string | undefined}
+      totalPages={totalPages}
     />
   )
 }
