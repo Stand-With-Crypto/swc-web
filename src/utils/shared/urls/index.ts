@@ -144,7 +144,7 @@ export const getIntlUrls = (
     politiciansHomepage: (filters?: Partial<{ state: string }>) => {
       const params = new URLSearchParams(filters).toString()
 
-      return `${countryPrefix}/politicians${params ? `?${params}` : ''}`
+      return `${countryPrefix}/politicians${params ? `?${params}#table` : ''}`
     },
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,

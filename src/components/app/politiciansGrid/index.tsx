@@ -1,5 +1,5 @@
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/utils'
-import { Politicians } from '@/components/app/politiciansGrid/components'
+import { Politicians } from '@/components/app/politiciansGrid/politiciansGrid'
 import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -53,7 +53,7 @@ export function PoliticiansGrid({
       )}
 
       <Politicians.Button
-        href={`${urls.politiciansHomepage(stateCode ? { state: stateCode.toUpperCase() } : {})}#table`}
+        href={urls.politiciansHomepage(stateCode ? { state: stateCode.toUpperCase() } : undefined)}
       >
         View all
       </Politicians.Button>

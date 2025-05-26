@@ -8,10 +8,14 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
-export async function UsLocalPolicyStatePage({ stateCode }: LocalPolicyStatePageProps) {
+const stateNameResolver = getStateNameResolver(countryCode)
+
+export async function UsLocalPolicyStatePage({
+  politiciansData,
+  stateCode,
+}: LocalPolicyStatePageProps) {
   const initialTotalAdvocates = await getAdvocatesCountByState(stateCode)
 
-  const stateNameResolver = getStateNameResolver(countryCode)
   const stateName = stateNameResolver(stateCode.toUpperCase())
 
   return (
@@ -23,7 +27,13 @@ export async function UsLocalPolicyStatePage({ stateCode }: LocalPolicyStatePage
         stateName={stateName}
       />
 
-      <UsPoliticiansSection countryCode={countryCode} stateCode={stateCode} stateName={stateName} />
+      <UsPoliticiansSection
+        countryCode={countryCode}
+        highestScores={politiciansData.highestScores}
+        lowestScores={politiciansData.lowestScores}
+        stateCode={stateCode}
+        stateName={stateName}
+      />
     </Layout>
   )
 }

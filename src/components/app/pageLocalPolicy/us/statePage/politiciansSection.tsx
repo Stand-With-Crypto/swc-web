@@ -12,17 +12,24 @@ interface UsPoliticiansSectionProps extends PoliticiansSectionProps {
 
 export function UsPoliticiansSection({
   countryCode,
+  highestScores,
+  lowestScores,
   stateCode,
   stateName,
 }: UsPoliticiansSectionProps) {
-  const SECTION_SUB_TITLE = `See where ${stateName}'s politicians stand on crypto`
+  const sectionSubTitle = `See where ${stateName}'s politicians stand on crypto`
 
   return (
     <Section container={false}>
       <Section.Title>{SECTION_TITLE}</Section.Title>
-      <Section.SubTitle>{SECTION_SUB_TITLE}</Section.SubTitle>
+      <Section.SubTitle>{sectionSubTitle}</Section.SubTitle>
 
-      <PoliticiansSection countryCode={countryCode} stateCode={stateCode} />
+      <PoliticiansSection
+        countryCode={countryCode}
+        highestScores={highestScores}
+        lowestScores={lowestScores}
+        stateCode={stateCode}
+      />
     </Section>
   )
 }
