@@ -19,7 +19,7 @@ async function compareDatabaseDistrictsWithDTSI() {
         countryCode,
       },
       select: {
-        name: true,
+        constituencyName: true,
       },
     })
     const dtsiResults = await queryDTSIDistrictsByCountryCode({
@@ -28,7 +28,7 @@ async function compareDatabaseDistrictsWithDTSI() {
 
     // Convert both lists to Sets for efficient comparison
     // For constituencies, we use the name field which is common across all types
-    const constituencySet = new Set(constituencies.map(c => c.name))
+    const constituencySet = new Set(constituencies.map(c => c.constituencyName))
     // For DTSI results, we use the primaryDistricts array
     const dtsiSet = new Set(dtsiResults.primaryDistricts.sort((a, b) => a.localeCompare(b)) || [])
 
