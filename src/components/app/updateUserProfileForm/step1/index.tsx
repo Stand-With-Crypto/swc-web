@@ -152,6 +152,7 @@ export function UpdateUserProfileForm({
     <Form {...form}>
       <form
         className="flex min-h-full flex-col gap-6"
+        data-testid="update-user-profile-form"
         onSubmit={form.handleSubmit(onSubmit, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
         <div>
