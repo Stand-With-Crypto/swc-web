@@ -30,49 +30,46 @@ interface GooglePlacesRequest {
  * @throws Error if no place ID is found or if the API request fails
  */
 export async function getGooglePlaceIdFromAddress(address: string): Promise<string> {
-  try {
-    const requestBody: GooglePlacesRequest = {
-      input: address,
-      languageCode: 'en',
-    }
-
-    const response = await fetchReq(GOOGLE_PLACES_API_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Goog-Api-Key': GOOGLE_PLACES_BACKEND_API_KEY,
-        'X-Goog-FieldMask': 'suggestions.placePrediction.placeId',
-      },
-    })
-
-    if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(
-        `Google Places autocomplete API request failed: ${response.status} ${errorText}`,
-      )
-    }
-
-    const data = (await response.json()) as GooglePlacesResponse
-
-    if (_isEmpty(data) || !data?.suggestions || data?.suggestions?.length === 0) {
-      const error = new Error('No place ID found for address')
-      Sentry.captureMessage('getGooglePlaceIdFromAddress no results for the address', {
-        extra: {
-          address,
-          data,
-          status: response.status,
-          statusText: response.statusText,
-        },
-      })
-      throw error
-    }
-
-    return data.suggestions[0].placePrediction.placeId
-  } catch (error) {
-    Sentry.captureException(error, {
-      extra: { address },
-    })
-    throw error
+  const requestBody: GooglePlacesRequest = {
+    input: address,
+    languageCode: 'en',
   }
+
+  const response = await fetchReq(GOOGLE_PLACES_API_URL, {
+    method: 'POST',
+    body: JSON.stringify(requestBody),
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Goog-Api-Key': GOOGLE_PLACES_BACKEND_API_KEY,
+      'X-Goog-FieldMask': 'suggestions.placePrediction.placeId',
+    },
+  })
+
+  if (!response.ok) {
+    const errorText = await response.text()
+
+    Sentry.captureException(
+      new Error(`Google Places autocomplete API request failed: ${response.status} ${errorText}`),
+      {
+        extra: { address },
+      },
+    )
+  }
+
+  const data = (await response.json()) as GooglePlacesResponse
+
+  if (_isEmpty(data) || !data?.suggestions || data?.suggestions?.length === 0) {
+    Sentry.captureMessage('getGooglePlaceIdFromAddress no results for the address', {
+      extra: {
+        address,
+        data,
+        status: response.status,
+        statusText: response.statusText,
+      },
+      level: 'info',
+    })
+    throw new Error('No place ID found for address')
+  }
+
+  return data.suggestions[0].placePrediction.placeId
 }
