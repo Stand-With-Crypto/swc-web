@@ -16,6 +16,7 @@ import {
   fetchSendgridContactList,
   getSendgridContactListName,
 } from '@/utils/server/sendgrid/marketing/lists'
+import { addToGlobalSuppressionGroup } from '@/utils/server/sendgrid/marketing/suppresions'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -64,6 +65,54 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       } catch (error) {
         logger.error('Custom Fields check failed', { error })
         throw new NonRetriableError(`Custom Fields check failed`)
+      }
+    })
+
+    await step.run('add-unsubscribed-users-to-suppression-group', async () => {
+      logger.info('Starting to add unsubscribed users to global suppression group')
+      const unsubscribedEmails: string[] = []
+      for (const countryCode of COUNTRIES_TO_SYNC) {
+        const unsubscribedUsers = await prismaClient.user.findMany({
+          where: {
+            countryCode,
+            hasOptedInToEmails: false,
+            userEmailAddresses: {
+              some: {
+                emailAddress: { not: '' },
+              },
+            },
+          },
+          select: {
+            userEmailAddresses: {
+              select: {
+                emailAddress: true,
+              },
+            },
+          },
+        })
+
+        const emailsToSuppress = unsubscribedUsers.flatMap(u =>
+          u.userEmailAddresses.map(e => e.emailAddress),
+        )
+
+        unsubscribedEmails.push(...emailsToSuppress)
+
+        logger.info(`Found ${emailsToSuppress.length} unsubscribed emails for ${countryCode}`)
+      }
+
+      if (!unsubscribedEmails.length) {
+        logger.info('No unsubscribed emails found to add to global suppression group')
+        return { success: true, suppressedCount: 0 }
+      }
+
+      logger.info(`Adding ${unsubscribedEmails.length} emails to global suppression group`)
+      const result = await addToGlobalSuppressionGroup(unsubscribedEmails)
+      logger.info(
+        `Successfully added ${result.recipient_emails.length} emails to global suppression group`,
+      )
+      return {
+        success: true,
+        suppressedCount: result.recipient_emails.length,
       }
     })
 
