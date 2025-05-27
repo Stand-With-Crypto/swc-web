@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { getAdvocatesCountByStateData } from '@/data/pageSpecific/getAdvocatesCountByStateData'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 const zodPayload = z.object({
   stateCode: z.string().length(2),
@@ -11,7 +12,7 @@ const zodPayload = z.object({
 
 interface RequestContext {
   params: Promise<{
-    stateCode: string
+    stateCode: USStateCode
   }>
 }
 

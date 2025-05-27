@@ -3,10 +3,13 @@ import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGr
 import { PoliticiansGrid } from '@/components/app/politiciansGrid'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
+type Scores = ReturnType<typeof sortDTSIPersonDataTable>
+
 export interface PoliticiansSectionProps {
   countryCode: SupportedCountryCodes
-  highestScores: ReturnType<typeof sortDTSIPersonDataTable>
-  lowestScores: ReturnType<typeof sortDTSIPersonDataTable>
+  highestScores: Scores
+  lowestScores: Scores
+  showGroupTitle?: boolean
   stateCode: string
 }
 
@@ -14,6 +17,7 @@ export async function PoliticiansSection({
   countryCode,
   highestScores,
   lowestScores,
+  showGroupTitle = false,
   stateCode,
 }: PoliticiansSectionProps) {
   return (
@@ -22,7 +26,7 @@ export async function PoliticiansSection({
       countryCode={countryCode}
       highestScores={highestScores}
       lowestScores={lowestScores}
-      showGroupTitle={false}
+      showGroupTitle={showGroupTitle}
       stateCode={stateCode}
     />
   )
