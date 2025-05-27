@@ -32,9 +32,15 @@ export async function getDTSIPeopleFromAddress({
     return constituencyData
   }
 
+  if (countryCode !== constituencyData.countryCode) {
+    return {
+      notFoundReason: 'INVALID_COUNTRY_CODE' as const,
+    }
+  }
+
   const data = await fetchReq(
     apiUrls.dtsiPeopleByCongressionalDistrict({
-      congressionalDistrict: constituencyData.name,
+      congressionalDistrict: constituencyData.constituencyName,
       stateCode: constituencyData.stateCode,
       countryCode,
     }),
@@ -116,6 +122,8 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
   }
 
   switch (data.notFoundReason) {
+    case 'INVALID_COUNTRY_CODE':
+      return 'Please enter an address from your selected country'
     case 'CONSTITUENCY_NOT_FOUND':
     case 'MISSING_FROM_DTSI':
     case 'UNEXPECTED_ERROR':

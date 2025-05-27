@@ -91,7 +91,7 @@ async function seedSWCCivicDB() {
         try {
           if (persist) {
             await civicPrismaClient.$executeRaw`
-            INSERT INTO constituencies (name, state_code, country_code, wkb_geometry)
+            INSERT INTO constituencies (constituency_name, state_code, country_code, geometry)
             VALUES (${normalizedConstituencyName}, ${normalizedStateCode}, ${countryCode}, ST_Force3D(ST_GeomFromGeoJSON(${geometry})))
             `
           } else {

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { getLatLongFromAddress } from '@/utils/server/getLatLongFromAddress'
-import { querySWCCivicConstituencyFromLatLong } from '@/utils/server/swcCivic/queries/getConstituencyFromLatLong'
+import { querySWCCivicConstituencyFromLatLong } from '@/utils/server/swcCivic/queries/queryConstituencyFromLatLong'
 
 export const GET = async (req: Request) => {
   const url = new URL(req.url)
@@ -19,8 +19,7 @@ export const GET = async (req: Request) => {
 
     latitude = lat
     longitude = lng
-  } catch (error) {
-    // TODO: maybe add a code to the error
+  } catch {
     return NextResponse.json({ error: 'Unable to get latitude and longitude' }, { status: 400 })
   }
 

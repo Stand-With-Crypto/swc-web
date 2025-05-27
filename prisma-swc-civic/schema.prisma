@@ -10,6 +10,7 @@ datasource db {
   extensions = [postgis(schema: "public")]
 }
 
+// This table is automatically created by the postgis extension
 model spatial_ref_sys {
   srid      Int     @id
   auth_name String? @db.VarChar(256)
@@ -19,11 +20,11 @@ model spatial_ref_sys {
 }
 
 model constituencies {
-  id          Int                                      @id @default(autoincrement())
-  name        String
-  stateCode   String?                                  @map("state_code")
-  wkbGeometry Unsupported("geometry(GeometryZ,4326)")? @map("wkb_geometry")
-  countryCode String?                                  @map("country_code")
+  id               Int                                      @id @default(autoincrement())
+  constituencyName String                                   @map("constituency_name")
+  stateCode        String?                                  @map("state_code")
+  geometry         Unsupported("geometry(GeometryZ,4326)")? @map("geometry")
+  countryCode      String?                                  @map("country_code")
 
-  @@index([wkbGeometry], map: "constituencies_wkb_geometry_geom_idx", type: Gist)
+  @@index([geometry], map: "constituencies_geometry_geom_idx", type: Gist)
 }

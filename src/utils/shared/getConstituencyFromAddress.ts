@@ -1,9 +1,13 @@
 import { Address } from '@prisma/client'
 
+import type { SWCCivicConstituency } from '@/utils/server/swcCivic/queries/queryConstituencyFromLatLong'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { getLogger } from '@/utils/shared/logger'
 import { apiUrls } from '@/utils/shared/urls'
 
 export type ConstituencyFromAddress = Awaited<ReturnType<typeof getConstituencyFromAddress>>
+
+const logger = getLogger('getConstituencyFromAddress')
 
 export async function maybeGetConstituencyFromAddress(
   address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null,
@@ -21,28 +25,30 @@ export async function getConstituencyFromAddress(address: string) {
   try {
     const response = await fetchReq(apiUrls.swcCivicConstituencyFromAddress(address))
 
-    const data = (await response.json()) as {
-      name: string
-      stateCode?: string
+    const data = (await response.json()) as SWCCivicConstituency
+
+    if (!data) {
+      return {
+        notFoundReason: 'CONSTITUENCY_NOT_FOUND' as const,
+      }
     }
 
     return data
   } catch (error) {
-    console.error('Error fetching constituency:', error)
+    logger.error('Error fetching constituency:', error)
 
     if (error instanceof Response) {
-      console.log('Response error status:', error.status)
-      // TODO: maybe add a code to the error
+      logger.info('Response error status:', error.status)
       if (error.status === 404) {
-        console.log('Constituency not found (404)')
+        logger.info('Constituency not found (404)')
         return {
           notFoundReason: 'CONSTITUENCY_NOT_FOUND' as const,
         }
       }
-      console.log('Unexpected response error:', error.status)
+      logger.info('Unexpected response error:', error.status)
     }
 
-    console.log(
+    logger.info(
       'Unexpected error occurred:',
       error instanceof Error ? error.message : 'Unknown error type',
     )
