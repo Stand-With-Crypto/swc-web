@@ -25,8 +25,8 @@ export async function getLatLongFromAddress(address: string) {
 
   const data = (await response.json()) as {
     location?: {
-      lat: number
-      lng: number
+      latitude: number
+      longitude: number
     }
   }
 

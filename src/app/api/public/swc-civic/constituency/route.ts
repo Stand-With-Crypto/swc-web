@@ -15,7 +15,7 @@ export const GET = async (req: Request) => {
   let longitude: number | null = null
 
   try {
-    const { lat, lng } = await getLatLongFromAddress(address)
+    const { latitude: lat, longitude: lng } = await getLatLongFromAddress(address)
 
     latitude = lat
     longitude = lng
