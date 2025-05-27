@@ -6,39 +6,7 @@ import xlsx from 'xlsx'
 import { runBin } from '@/bin/runBin'
 import { queryDTSIDistrictsByCountryCode } from '@/data/dtsi/queries/queryDTSIDistrictsByCountryCode'
 import { civicPrismaClient } from '@/utils/server/swcCivic/civicPrismaClient'
-import {
-  ORDERED_SUPPORTED_COUNTRIES,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
-
-const getConstituencyQueries: Record<SupportedCountryCodes, Promise<{ name: string | null }[]>> = {
-  [SupportedCountryCodes.AU]: civicPrismaClient.au_federal_electoral_district
-    .findMany({
-      select: {
-        elect_div: true,
-      },
-    })
-    .then(res => res.map(({ elect_div }) => ({ name: elect_div }))),
-  [SupportedCountryCodes.CA]: civicPrismaClient.ca_electoral_districts.findMany({
-    select: {
-      name: true,
-    },
-  }),
-  [SupportedCountryCodes.GB]: civicPrismaClient.uk_parliamentary_constituency
-    .findMany({
-      select: {
-        pcon24nm: true,
-      },
-    })
-    .then(res => res.map(({ pcon24nm }) => ({ name: pcon24nm }))),
-  [SupportedCountryCodes.US]: civicPrismaClient.us_congressional_district
-    .findMany({
-      select: {
-        namelsad: true,
-      },
-    })
-    .then(res => res.map(({ namelsad }) => ({ name: namelsad?.match(/(\d+)/)?.[0] ?? namelsad }))),
-}
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 async function compareDatabaseDistrictsWithDTSI() {
   const localCacheDir = path.join(__dirname, '..', 'localCache')
@@ -46,8 +14,14 @@ async function compareDatabaseDistrictsWithDTSI() {
 
   for (const countryCode of ORDERED_SUPPORTED_COUNTRIES) {
     console.log(`\nAnalyzing ${countryCode}...`)
-    const query = getConstituencyQueries[countryCode]
-    const constituencies = await query
+    const constituencies = await civicPrismaClient.constituencies.findMany({
+      where: {
+        countryCode,
+      },
+      select: {
+        name: true,
+      },
+    })
     const dtsiResults = await queryDTSIDistrictsByCountryCode({
       countryCode,
     })

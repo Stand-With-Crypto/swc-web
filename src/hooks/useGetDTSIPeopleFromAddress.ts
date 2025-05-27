@@ -26,7 +26,7 @@ export async function getDTSIPeopleFromAddress({
   category: YourPoliticianCategory
   countryCode: SupportedCountryCodes
 }) {
-  const constituencyData = await getConstituencyFromAddress(address, countryCode)
+  const constituencyData = await getConstituencyFromAddress(address)
 
   if ('notFoundReason' in constituencyData) {
     return constituencyData

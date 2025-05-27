@@ -12,8 +12,8 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
-  useGetDTSIPeopleFromAddress,
   formatGetDTSIPeopleFromAddressNotFoundReason,
+  useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {

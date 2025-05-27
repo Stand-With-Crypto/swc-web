@@ -1,7 +1,3 @@
-/* cspell:disable */
-
-import { runBin } from '@/bin/runBin'
-import { civicPrismaClient } from '@/utils/server/swcCivic/civicPrismaClient'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 const US_STATE_NUMBER_TO_STATE_CODE: Record<number, USStateCode> = {
@@ -58,7 +54,11 @@ const US_STATE_NUMBER_TO_STATE_CODE: Record<number, USStateCode> = {
   56: 'WY',
 }
 
-function normalizeUSDistrictName(name: string) {
+export function normalizeUSStateCode(stateCode: string) {
+  return US_STATE_NUMBER_TO_STATE_CODE[Number(stateCode)] ?? stateCode
+}
+
+export function normalizeUSDistrictName(name: string) {
   if (name.toLowerCase().includes('at large')) {
     return 'At-Large'
   }
@@ -71,49 +71,3 @@ function normalizeUSDistrictName(name: string) {
 
   return name
 }
-
-async function normalizeUSDistricts() {
-  const res = await civicPrismaClient.us_congressional_district.findMany({
-    select: {
-      namelsad: true,
-      ogc_fid: true,
-      statefp: true,
-    },
-  })
-
-  console.log(`Processing ${res.length} electoral districts...`)
-
-  const updatedDistricts: (typeof res)[number][] = []
-
-  for (const { namelsad: name, statefp, ogc_fid } of res) {
-    if (!name) continue
-
-    const normalizedName = normalizeUSDistrictName(name)
-    const normalizedStateCode = US_STATE_NUMBER_TO_STATE_CODE[Number(statefp)] ?? statefp
-
-    if (normalizedName !== name || normalizedStateCode !== statefp) {
-      console.log(
-        `Updating district ${ogc_fid}: "${name}" -> "${normalizedName}" (${normalizedStateCode})`,
-      )
-      updatedDistricts.push({
-        ogc_fid,
-        namelsad: normalizedName,
-        statefp: normalizedStateCode,
-      })
-    }
-  }
-
-  console.log(`Found ${updatedDistricts.length} districts that need updating`)
-  console.log(`Updating ${updatedDistricts.length} districts...`)
-
-  for (const district of updatedDistricts) {
-    await civicPrismaClient.us_congressional_district.update({
-      where: { ogc_fid: district.ogc_fid },
-      data: district,
-    })
-  }
-
-  console.log('Finished updating electoral districts')
-}
-
-void runBin(normalizeUSDistricts)

@@ -10,42 +10,6 @@ datasource db {
   extensions = [postgis(schema: "public")]
 }
 
-model au_federal_electoral_district {
-  ogc_fid      Int                      @id @default(autoincrement())
-  e_div_numb   Decimal?                 @db.Decimal(11, 0)
-  elect_div    String?                  @db.VarChar(30)
-  numccds      Decimal?                 @db.Decimal(11, 0)
-  actual       Decimal?                 @db.Decimal(11, 0)
-  projected    Decimal?                 @db.Decimal(11, 0)
-  total_popu   Decimal?                 @db.Decimal(11, 0)
-  australian   Decimal?                 @db.Decimal(11, 0)
-  area_sqkm    Decimal?                 @db.Decimal(30, 15)
-  sortname     String?                  @db.VarChar(30)
-  wkb_geometry Unsupported("geometry")?
-
-  @@index([wkb_geometry], map: "au_federal_electoral_district_wkb_geometry_geom_idx", type: Gist)
-}
-
-model ca_electoral_districts {
-  ogc_fid      Int                      @id @default(autoincrement())
-  id           String?                  @db.VarChar
-  name         String?                  @db.VarChar
-  description  String?                  @db.VarChar
-  timestamp    DateTime?                @db.Timestamptz(6)
-  begin        DateTime?                @db.Timestamptz(6)
-  end          DateTime?                @db.Timestamptz(6)
-  altitudemode String?                  @db.VarChar
-  tessellate   Int?
-  extrude      Int?
-  visibility   Int?
-  draworder    Int?
-  icon         String?                  @db.VarChar
-  wkb_geometry Unsupported("geometry")?
-
-  @@index([wkb_geometry], map: "ca_electoral_districts_wkb_geometry_geom_idx", type: Gist)
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model spatial_ref_sys {
   srid      Int     @id
   auth_name String? @db.VarChar(256)
@@ -54,66 +18,12 @@ model spatial_ref_sys {
   proj4text String? @db.VarChar(2048)
 }
 
-model uk_parliamentary_constituency {
-  ogc_fid      Int                      @id @default(autoincrement())
-  fid          Int?
-  pcon24cd     String?                  @db.VarChar
-  pcon24nm     String?                  @db.VarChar
-  pcon24nmw    String?                  @db.VarChar
-  bng_e        Int?
-  bng_n        Int?
-  long         Float?
-  lat          Float?
-  globalid     String?                  @db.VarChar
-  wkb_geometry Unsupported("geometry")?
+model constituencies {
+  id          Int                                      @id @default(autoincrement())
+  name        String
+  stateCode   String?                                  @map("state_code")
+  wkbGeometry Unsupported("geometry(GeometryZ,4326)")? @map("wkb_geometry")
+  countryCode String?                                  @map("country_code")
 
-  @@index([wkb_geometry], map: "uk_parliamentary_constituency_wkb_geometry_geom_idx", type: Gist)
-}
-
-model us_congressional_district {
-  ogc_fid               Int                      @id @default(autoincrement())
-  objectid              Int?
-  statefp               String?                  @db.VarChar
-  cd119fp               String?                  @db.VarChar
-  geoid                 String?                  @db.VarChar
-  geoidfq               String?                  @db.VarChar
-  namelsad              String?                  @db.VarChar
-  lsad                  String?                  @db.VarChar
-  cdsessn               String?                  @db.VarChar
-  mtfcc                 String?                  @db.VarChar
-  funcstat              String?                  @db.VarChar
-  aland                 BigInt?
-  awater                BigInt?
-  intptlat              String?                  @db.VarChar
-  intptlon              String?                  @db.VarChar
-  office_id             String?                  @db.VarChar
-  bioguide_id           String?                  @db.VarChar
-  office_audit_id       String?                  @db.VarChar
-  prefix                String?                  @db.VarChar
-  firstname             String?                  @db.VarChar
-  middlename            String?                  @db.VarChar
-  lastname              String?                  @db.VarChar
-  suffix                String?                  @db.VarChar
-  listing_name          String?                  @db.VarChar
-  phone                 String?                  @db.VarChar
-  websiteurl            String?                  @db.VarChar
-  vacant                String?                  @db.VarChar
-  contactformurl        String?                  @db.VarChar
-  photourl              String?                  @db.VarChar
-  face_book_url         String?                  @db.VarChar
-  twitter_url           String?                  @db.VarChar
-  youtube_url           String?                  @db.VarChar
-  instagram_url         String?                  @db.VarChar
-  flickr_url            String?                  @db.VarChar
-  party                 String?                  @db.VarChar
-  district              String?                  @db.VarChar
-  state                 String?                  @db.VarChar
-  vacancy               Int?
-  room_num              Int?
-  hob                   String?                  @db.VarChar
-  committee_assignments String?                  @db.VarChar
-  last_updated          String?                  @db.VarChar
-  wkb_geometry          Unsupported("geometry")?
-
-  @@index([wkb_geometry], map: "us_congressional_district_wkb_geometry_geom_idx", type: Gist)
+  @@index([wkbGeometry], map: "constituencies_wkb_geometry_geom_idx", type: Gist)
 }

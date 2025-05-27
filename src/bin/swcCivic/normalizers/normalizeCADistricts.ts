@@ -1,7 +1,5 @@
 /* cspell:disable */
 
-import { runBin } from '@/bin/runBin'
-import { civicPrismaClient } from '@/utils/server/swcCivic/civicPrismaClient'
 import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 
 const manuallyNormalizedCanadaDistrictsOverrides: Record<string, string> = {
@@ -24,7 +22,7 @@ const manuallyNormalizedCanadaDistrictsOverrides: Record<string, string> = {
   "Toronto-St. Paul's": 'Toronto-St',
 }
 
-function normalizeCADistrictName(name: string) {
+export function normalizeCADistrictName(name: string) {
   let normalized = ''
 
   normalized = name.replaceAll(/[\u2012\u2013\u2014\u2015]/g, '-')
@@ -36,44 +34,3 @@ function normalizeCADistrictName(name: string) {
 
   return normalized
 }
-
-async function normalizeCADistricts() {
-  const res = await civicPrismaClient.ca_electoral_districts.findMany({
-    select: {
-      name: true,
-      ogc_fid: true,
-    },
-  })
-
-  console.log(`Processing ${res.length} electoral districts...`)
-
-  const updatedDistricts: (typeof res)[number][] = []
-
-  for (const { name, ogc_fid } of res) {
-    if (!name) continue
-
-    const normalizedName = normalizeCADistrictName(name)
-
-    if (normalizedName !== name) {
-      console.log(`Updating district ${ogc_fid}: "${name}" -> "${normalizedName}"`)
-      updatedDistricts.push({
-        ogc_fid,
-        name: normalizedName,
-      })
-    }
-  }
-
-  console.log(`Found ${updatedDistricts.length} districts that need updating`)
-  console.log(`Updating ${updatedDistricts.length} districts...`)
-
-  for (const { ogc_fid, name } of updatedDistricts) {
-    await civicPrismaClient.ca_electoral_districts.update({
-      where: { ogc_fid },
-      data: { name },
-    })
-  }
-
-  console.log('Finished updating electoral districts')
-}
-
-void runBin(normalizeCADistricts)

@@ -1,13 +1,18 @@
-import { runBin } from '@/bin/runBin'
+import path from 'path'
+import usRandomAddresses from 'src/bin/localCache/us_random_addresses.json'
 import xlsx from 'xlsx'
 
-import usRandomAddresses from '../localCache/us_random_addresses.json'
-
-import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { runBin } from '@/bin/runBin'
 import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
-import { getUSCongressionalDistrict } from '@/utils/server/swcCivic/getConstituencyQueries'
+import { querySWCCivicConstituencyFromLatLong } from '@/utils/server/swcCivic/queries/getConstituencyFromLatLong'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import path from 'path'
+import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
+
+const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
+  process.env.GOOGLE_PLACES_BACKEND_API_KEY,
+  'GOOGLE_PLACES_BACKEND_API_KEY',
+)
 
 interface Result {
   address: string
@@ -26,7 +31,7 @@ async function getResult(address: string): Promise<Result | undefined> {
     }
 
     const details = await fetchReq(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.GOOGLE_PLACES_BACKEND_API_KEY}`,
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_PLACES_BACKEND_API_KEY}`,
     )
 
     const detailsData = (await details.json()) as any
@@ -41,10 +46,7 @@ async function getResult(address: string): Promise<Result | undefined> {
     }
 
     const [swcCivicData, googleCivicResult] = await Promise.all([
-      getUSCongressionalDistrict({
-        latitude: lat,
-        longitude: lng,
-      }),
+      querySWCCivicConstituencyFromLatLong(lat, lng),
       getCongressionalDistrictFromAddress(formatted_address),
     ])
 
@@ -58,7 +60,11 @@ async function getResult(address: string): Promise<Result | undefined> {
       return
     }
 
-    const swcCivicResultString = `${swcCivicData.stateCode}-${swcCivicData.name}`
+    console.log(swcCivicData)
+
+    const swcCivicResultString = `${swcCivicData.stateCode ?? ''}-${
+      swcCivicData.name === 'At-Large' ? '1' : swcCivicData.name
+    }`
     const googleCivicResultString = `${googleCivicResult.stateCode}-${googleCivicResult.districtNumber}`
 
     if (!googleCivicResultString) {
@@ -72,6 +78,8 @@ async function getResult(address: string): Promise<Result | undefined> {
       googleCivic: googleCivicResultString,
       different: swcCivicResultString !== googleCivicResultString ? 'yes' : 'no',
       placeId,
+      lat,
+      lng,
     }
 
     console.log(result)
