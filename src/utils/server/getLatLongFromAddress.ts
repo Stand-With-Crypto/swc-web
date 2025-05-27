@@ -13,26 +13,29 @@ export async function getLatLongFromAddress(address: string) {
   const placeId = await getGooglePlaceIdFromAddress(address)
 
   const response = await fetchReq(
-    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_PLACES_BACKEND_API_KEY}`,
+    `https://places.googleapis.com/v1/places/${placeId}?key=${GOOGLE_PLACES_BACKEND_API_KEY}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Goog-Api-Key': GOOGLE_PLACES_BACKEND_API_KEY,
+        'X-Goog-FieldMask': 'location',
+      },
+    },
   )
 
   const data = (await response.json()) as {
-    result: {
-      geometry?: {
-        location?: {
-          lat: number
-          lng: number
-        }
-      }
+    location?: {
+      lat: number
+      lng: number
     }
   }
 
-  if (!data?.result?.geometry?.location) {
+  if (!data?.location) {
     Sentry.captureMessage(`getLatLongFromAddress latitude and longitude not found`, {
       extra: { address, data },
     })
     throw new Error('No latitude and longitude found for address')
   }
 
-  return data.result.geometry.location
+  return data.location
 }
