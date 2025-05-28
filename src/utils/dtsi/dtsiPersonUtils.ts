@@ -54,7 +54,7 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
     case DTSI_PersonPoliticalAffiliationCategory.GREEN:
       return 'Green'
     case DTSI_PersonPoliticalAffiliationCategory.LABOR:
-      return 'Labor'
+      return 'Labour'
     case DTSI_PersonPoliticalAffiliationCategory.LIBERAL:
       return 'Liberal'
     case DTSI_PersonPoliticalAffiliationCategory.LIBERAL_DEMOCRAT:
