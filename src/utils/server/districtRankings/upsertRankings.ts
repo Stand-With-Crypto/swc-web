@@ -208,15 +208,14 @@ export async function getDistrictsLeaderboardData(
 
 export async function getDistrictsLeaderboardDataByState(
   options: {
-    redisKey?: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS]
     limit?: number
     offset?: number
     stateCode?: string
   } = {},
 ): Promise<LeaderboardPaginationData> {
-  const { redisKey = CURRENT_DISTRICT_RANKING, limit = 10, offset = 0, stateCode } = options
+  const { limit = 5, offset = 0, stateCode } = options
 
-  const rawResults = await redisWithCache.zrange(redisKey, 0, -1, {
+  const rawResults = await redisWithCache.zrange(CURRENT_DISTRICT_RANKING, 0, -1, {
     rev: true,
     withScores: true,
   })

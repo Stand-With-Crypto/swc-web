@@ -6,6 +6,7 @@ import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRanki
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const SECTION_TITLE = 'Referral leaderboard'
+const SECTION_BUTTON_LABEL = 'View all'
 
 interface UsReferralLeaderboardSectionProps {
   countryCode: SupportedCountryCodes
@@ -22,7 +23,7 @@ export async function UsReferralLeaderboardSection({
   stateName,
   urls,
 }: UsReferralLeaderboardSectionProps) {
-  const SECTION_SUB_TITLE = `See which districts in ${stateName} have the most advocates`
+  const sectionSubTitle = `See which districts in ${stateName} have the most advocates`
 
   const { items: leaderboardData, total } = await getDistrictsLeaderboardDataByState({
     limit: itemsPerPage,
@@ -33,7 +34,7 @@ export async function UsReferralLeaderboardSection({
   return (
     <Section>
       <Section.Title>{SECTION_TITLE}</Section.Title>
-      <Section.SubTitle>{SECTION_SUB_TITLE}</Section.SubTitle>
+      <Section.SubTitle>{sectionSubTitle}</Section.SubTitle>
 
       <ReferralLeaderboard>
         <ReferralLeaderboard.Content countryCode={countryCode} data={leaderboardData} />
@@ -45,7 +46,7 @@ export async function UsReferralLeaderboardSection({
               tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
             })}
           >
-            View all
+            {SECTION_BUTTON_LABEL}
           </ReferralLeaderboard.Button>
         )}
       </ReferralLeaderboard>
