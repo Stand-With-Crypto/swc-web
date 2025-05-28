@@ -1,13 +1,11 @@
 'use client'
-import useSWR from 'swr'
 
 import { Header } from '@/components/app/pageLocalPolicy/common/statePage/header'
-import { GetAdvocatesCountByStateDataResponse } from '@/data/pageSpecific/getAdvocatesCountByStateData'
+import { useApiAdvocatesCountByState } from '@/hooks/useApiAdvocatesCountByState'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
-import { fetchReq } from '@/utils/shared/fetchReq'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
-import { apiUrls } from '@/utils/shared/urls'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 const CTA_LABEL = 'Join SWC'
@@ -41,28 +39,26 @@ export function UsHeader({
 }: UsHeaderProps) {
   const session = useSession()
 
-  const { data } = useSWR(
-    apiUrls.advocatesCountByState(stateCode),
-    url =>
-      fetchReq(url)
-        .then(response => response.json())
-        .then(value => value as GetAdvocatesCountByStateDataResponse),
-    {
-      fallbackData: { advocatesCountByState: initialTotalAdvocates },
-    },
+  const hasHydrated = useHasHydrated()
+
+  const { data } = useApiAdvocatesCountByState(
+    { advocatesCountByState: initialTotalAdvocates },
+    stateCode,
   )
 
-  const HEADER_TITLE = stateName
-  const HEADER_DESCRIPTION = `${getHeaderDescription(data.advocatesCountByState)} in ${stateName}`
+  const headerTitle = stateName
+  const headerDescription = `${getHeaderDescription(data.advocatesCountByState)} in ${stateName}`
+
+  const isCTAVisible = hasHydrated && !session.isLoggedIn
 
   return (
     <Header>
       <Header.Shield countryCode={countryCode} stateCode={stateCode} />
 
-      <Header.Title>{HEADER_TITLE}</Header.Title>
-      <Header.SubTitle>{HEADER_DESCRIPTION}</Header.SubTitle>
+      <Header.Title>{headerTitle}</Header.Title>
+      <Header.SubTitle>{headerDescription}</Header.SubTitle>
 
-      {!session.isLoggedIn && <Header.CTA>{CTA_LABEL}</Header.CTA>}
+      {isCTAVisible && <Header.CTA>{CTA_LABEL}</Header.CTA>}
     </Header>
   )
 }
