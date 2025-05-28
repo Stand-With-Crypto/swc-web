@@ -20,7 +20,7 @@ const parseQueryString = (queryString?: string) => {
   return `?${queryString}`
 }
 
-type DeeplinkConfig = {
+interface DeeplinkConfig {
   countryCode: SupportedCountryCodes
   queryString?: string
 }
@@ -97,6 +97,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(countryCode)}/action/email`
     },
   },
+  [UserActionType.LINKEDIN]: {
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/linkedin`
+    },
+  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
@@ -109,9 +114,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     [USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email-debate`
     },
-    [USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]: ({
-      countryCode,
-    }) => {
+    [USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email`
     },
   },
@@ -131,7 +134,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   },
 }
 
-type GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> = {
+interface GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> {
   actionType: ActionType
   config: DeeplinkConfig
   campaign?: UserActionCampaignNames

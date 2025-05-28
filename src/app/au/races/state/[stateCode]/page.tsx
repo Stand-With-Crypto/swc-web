@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
 
+import { AULocationStateSpecific } from '@/components/app/pageLocationKeyRaces/au/locationStateSpecific'
 import { DarkHeroSection } from '@/components/app/pageLocationKeyRaces/common/darkHeroSection'
 import { LocationRaces } from '@/components/app/pageLocationKeyRaces/common/locationRaces'
 import { NestedPageLink } from '@/components/app/pageLocationKeyRaces/common/nestedPageLink'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { queryDTSIStatePrimaryDistricts } from '@/data/dtsi/queries/queryDTSIStatePrimaryDistricts'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -61,8 +63,9 @@ export default async function LocationStateSpecificPage({
   const stateCode = zodState.parse(rawStateCode.toUpperCase(), countryCode)
   const stateDisplayName = getAUStateNameFromStateCode(stateCode)
 
-  const [dtsiResults, countAdvocates] = await Promise.all([
+  const [dtsiResults, auResults, countAdvocates] = await Promise.all([
     queryDTSIStatePrimaryDistricts({ stateCode, countryCode }),
+    queryDTSILocationStateSpecificInformation({ stateCode, countryCode }),
     prismaClient.user.count({
       where: { address: { countryCode, administrativeAreaLevel1: stateCode } },
     }),
@@ -95,6 +98,8 @@ export default async function LocationStateSpecificPage({
           </DarkHeroSection.HighlightedText>
         )}
       </DarkHeroSection>
+
+      <AULocationStateSpecific stateCode={stateCode} {...auResults} />
 
       <LocationRaces.KeyRacesStates
         subtitle="Dive deeper and discover who’s running for office in each constituency"

@@ -8,6 +8,8 @@ import {
 import { syncReferralsWithoutAddress } from '@/utils/server/districtRankings/syncReferralsWithoutAddress'
 import { createDistrictRankingUpserter } from '@/utils/server/districtRankings/upsertRankings'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_FUNCTION_ID = 'script.update-districts-rankings'
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_SCHEDULE = '0 */1 * * *' // every 1 hour
@@ -33,34 +35,45 @@ export const updateDistrictsRankings = inngest.createFunction(
       return await syncReferralsWithoutAddress()
     })
 
-    const [districtAdvocatesCounts, districtsReferralsCount] = await Promise.all([
-      step.run('Get Advocates Count by District', async () => {
-        logger.info('Getting Advocates Count by District')
-        return await getAdvocatesCountByDistrict()
-      }),
-      step.run('Get Referrals Count by District', async () => {
-        logger.info('Getting Referrals Count by District')
-        return await getReferralsCountByDistrict()
-      }),
-    ])
+    const stateCodes = Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[]
 
-    const [districtAdvocatesRankingResults, districtReferralsRankingResults] = await Promise.all([
+    const advocatesCountsByDistrictEntries = await step.run(
+      'Get Advocates Count by District',
+      async () => {
+        logger.info('Getting Advocates Count by District')
+        const promises = stateCodes.map(getAdvocatesCountByDistrict)
+        const results = await Promise.all(promises)
+        return results.flat()
+      },
+    )
+
+    const referralsCountByDistrictEntries = await step.run(
+      'Get Referrals Count by District',
+      async () => {
+        logger.info('Getting Referrals Count by District')
+        const promises = stateCodes.map(getReferralsCountByDistrict)
+        const results = await Promise.all(promises)
+        return results.flat()
+      },
+    )
+    const [advocatesRankingResults, referralsRankingResults] = await Promise.all([
       step.run('Update Districts Advocates Rankings', async () => {
         const upsertDistrictAdvocatesRanking = await createDistrictRankingUpserter(
           REDIS_KEYS.DISTRICT_ADVOCATES_RANKING,
         )
         const results = await Promise.all(
-          districtAdvocatesCounts.map(entry => upsertDistrictAdvocatesRanking(entry)),
+          advocatesCountsByDistrictEntries.map(entry => upsertDistrictAdvocatesRanking(entry)),
         )
 
         const successfulResults = results.filter(result => result.success)
         const failedResults = results.filter(result => !result.success)
 
         return {
-          totalResults: results.length,
-          successfulResults: successfulResults.length,
-          failedResults: failedResults.length,
+          totalEntries: results.length,
+          successfulEntries: successfulResults.map(result => result.entry),
+          successful: successfulResults.length,
           failedEntries: failedResults.map(result => result.entry),
+          failed: failedResults.length,
         }
       }),
 
@@ -69,26 +82,27 @@ export const updateDistrictsRankings = inngest.createFunction(
           REDIS_KEYS.DISTRICT_REFERRALS_RANKING,
         )
         const results = await Promise.all(
-          districtsReferralsCount.map(entry => upsertDistrictReferralsRanking(entry)),
+          referralsCountByDistrictEntries.map(entry => upsertDistrictReferralsRanking(entry)),
         )
 
         const successfulResults = results.filter(result => result.success)
         const failedResults = results.filter(result => !result.success)
 
         return {
-          totalResults: results.length,
-          successfulResults: successfulResults.length,
-          failedResults: failedResults.length,
+          totalEntries: results.length,
+          successfulEntries: successfulResults.map(result => result.entry),
+          successful: successfulResults.length,
           failedEntries: failedResults.map(result => result.entry),
+          failed: failedResults.length,
         }
       }),
     ])
 
     return {
-      districtAdvocatesCountEntries: districtAdvocatesCounts.length,
-      districtAdvocatesRankingResults,
-      districtReferralsCountEntries: districtsReferralsCount.length,
-      districtReferralsRankingResults,
+      advocatesCountsByDistrictEntries: advocatesCountsByDistrictEntries.length,
+      advocatesRankingResults,
+      referralsCountByDistrictEntries: referralsCountByDistrictEntries.length,
+      referralsRankingResults,
     }
   },
 )

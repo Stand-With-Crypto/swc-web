@@ -1,8 +1,12 @@
 import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
-import { getEmailBodyText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import {
+  DIALOG_SUBTITLE,
+  DIALOG_TITLE,
+  EMAIL_FLOW_POLITICIANS_CATEGORY,
+  getEmailBodyText,
+} from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -31,11 +35,9 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Contact your Member of Congress
+            {DIALOG_TITLE}
           </PageTitle>
-          <PageSubTitle className="mb-7">
-            Tell your Member to Vote “Yes” for H.J.Res.25.
-          </PageSubTitle>
+          <PageSubTitle className="mb-7">{DIALOG_SUBTITLE}</PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormItemSkeleton>

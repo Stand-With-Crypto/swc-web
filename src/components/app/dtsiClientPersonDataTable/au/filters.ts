@@ -55,7 +55,7 @@ export const getPersonDataTableFilterFns = (): Record<
       return true
     }
 
-    const rolesArray = [ROLE_OPTIONS.CONGRESS]
+    const rolesArray = [ROLE_OPTIONS.CONGRESS, ROLE_OPTIONS.SENATE]
 
     if (rolesArray.includes(filterValue)) {
       return (
@@ -116,6 +116,7 @@ export function getPartyOptionDisplayName(party: string) {
 
 export const ROLE_OPTIONS = {
   ALL: 'All',
+  SENATE: DTSI_PersonRoleCategory.SENATE,
   CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
   ALL_OTHER: 'ALL_OTHER',
 }
@@ -123,6 +124,8 @@ export function getRoleOptionDisplayName(role: string) {
   switch (role) {
     case ROLE_OPTIONS.ALL_OTHER:
       return 'Candidate'
+    case ROLE_OPTIONS.SENATE:
+      return 'Senator'
     case ROLE_OPTIONS.CONGRESS:
       return 'Member of Parliament'
     default:

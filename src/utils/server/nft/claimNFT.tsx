@@ -16,6 +16,8 @@ import { sendMail } from '@/utils/server/email'
 import {
   EmailActiveActions,
   EmailEnabledActionNFTs,
+  getEmailActiveActionsByCountry,
+  getEmailEnabledActionNFTsByCountry,
 } from '@/utils/server/email/templates/common/constants'
 import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
@@ -24,14 +26,15 @@ import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrent
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
-  US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USActiveClientUserActionWithCampaignType,
   USUserActionCallCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
+  USUserActionLinkedinCampaignName,
   USUserActionLiveEventCampaignName,
   USUserActionNftMintCampaignName,
   USUserActionPollCampaignName,
@@ -112,6 +115,9 @@ export const ACTION_NFT_SLUG: Record<
   [UserActionType.VIEW_KEY_PAGE]: {
     [USUserActionViewKeyPageCampaignName.DEFAULT]: null,
   },
+  [UserActionType.LINKEDIN]: {
+    [USUserActionLinkedinCampaignName.DEFAULT]: null,
+  },
 }
 
 const logger = getLogger('claimNft')
@@ -125,11 +131,17 @@ type UserActionToClaim = Pick<
   'id' | 'actionType' | 'campaignName' | 'nftMintId' | 'userId'
 >
 
-export async function claimNFT(
-  userAction: UserActionToClaim,
-  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
-  config: Config = {},
-) {
+export async function claimNFT({
+  userAction,
+  userCryptoAddress,
+  countryCode,
+  config = {},
+}: {
+  userAction: UserActionToClaim
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>
+  countryCode: SupportedCountryCodes
+  config?: Config
+}) {
   const hydratedConfig = {
     skipTransactionFeeCheck: false,
     ...config,
@@ -147,9 +159,9 @@ export async function claimNFT(
   logger.info('Function triggered')
 
   const { actionType, campaignName } = userAction
-  const activeClientUserActionTypeWithCampaign = US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(
-    key => key === userAction.actionType,
-  )
+  const activeClientUserActionTypeWithCampaign = COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN[
+    countryCode
+  ].find(key => key === userAction.actionType)
 
   if (!activeClientUserActionTypeWithCampaign) {
     throw Error(`Action ${userAction.actionType} doesn't have an active campaign.`)
@@ -219,11 +231,17 @@ export async function claimNFT(
   }
 }
 
-export async function claimNFTAndSendEmailNotification(
-  userAction: UserActionToClaim,
-  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
-  config: Config = {},
-) {
+export async function claimNFTAndSendEmailNotification({
+  userAction,
+  userCryptoAddress,
+  countryCode,
+  config = {},
+}: {
+  userAction: UserActionToClaim
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>
+  countryCode: SupportedCountryCodes
+  config?: Config
+}) {
   const hydratedConfig = {
     skipTransactionFeeCheck: false,
     ...config,
@@ -237,9 +255,14 @@ export async function claimNFTAndSendEmailNotification(
     }
   }
 
-  return claimNFT(userAction, userCryptoAddress, {
-    ...hydratedConfig,
-    skipTransactionFeeCheck: true,
+  return claimNFT({
+    userAction,
+    userCryptoAddress,
+    countryCode,
+    config: {
+      ...hydratedConfig,
+      skipTransactionFeeCheck: true,
+    },
   })
 }
 
@@ -253,43 +276,55 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
     },
   })
 
+  const countryCode = user.countryCode as SupportedCountryCodes
+
   if (
     !user.primaryUserEmailAddress?.emailAddress ||
-    !Object.values(EmailEnabledActionNFTs).includes(userAction.actionType)
+    !Object.values(getEmailEnabledActionNFTsByCountry(countryCode)).includes(userAction.actionType)
   ) {
     return null
   }
 
   const userSession = user.userSessions?.[0]
-  // TODO: remove this once we have templates for all countries
-  if (user.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
+
+  const NFTOnTheWayEmailTemplate = NFTOnTheWayEmail(countryCode)
+  if (!NFTOnTheWayEmail) {
     return null
   }
+
   const messageId = await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: NFTOnTheWayEmail.subjectLine,
-    html: await render(
-      <NFTOnTheWayEmail
-        actionNFT={userAction.actionType as EmailEnabledActionNFTs}
-        completedActionTypes={user.userActions
-          .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-          .map(action => action.actionType as EmailActiveActions)}
-        hiddenActions={[userAction.actionType]}
-        session={
-          userSession
-            ? {
-                userId: userSession.userId,
-                sessionId: userSession.id,
-              }
-            : null
-        }
-      />,
-    ),
-    customArgs: {
-      userId: user.id,
-      userActionId: userAction.id,
-      actionType: userAction.actionType,
-      campaign: NFTOnTheWayEmail.campaign,
+    countryCode,
+    payload: {
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: NFTOnTheWayEmailTemplate.subjectLine,
+      html: await render(
+        <NFTOnTheWayEmailTemplate
+          actionNFT={userAction.actionType as EmailEnabledActionNFTs}
+          completedActionTypes={user.userActions
+            .filter(action =>
+              Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
+                action.actionType,
+              ),
+            )
+            .map(action => action.actionType as EmailActiveActions)}
+          countryCode={countryCode}
+          hiddenActions={[userAction.actionType]}
+          session={
+            userSession
+              ? {
+                  userId: userSession.userId,
+                  sessionId: userSession.id,
+                }
+              : null
+          }
+        />,
+      ),
+      customArgs: {
+        userId: user.id,
+        userActionId: userAction.id,
+        actionType: userAction.actionType,
+        campaign: NFTOnTheWayEmailTemplate.campaign,
+      },
     },
   }).catch(err => {
     Sentry.captureException(err, {
@@ -302,5 +337,5 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
     throw err
   })
 
-  logger.info(`Sent nft on the way email with messageId: ${messageId}`)
+  logger.info(`Sent nft on the way email with messageId: ${String(messageId)}`)
 }

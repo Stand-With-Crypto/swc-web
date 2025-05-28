@@ -162,7 +162,10 @@ enum PersonGrouping {
   CURRENT_UK_HOUSE_OF_COMMONS
   CURRENT_UK_HOUSE_OF_LORDS
   CURRENT_US_HOUSE_OF_REPS
+  CURRENT_US_PRESIDENT
   CURRENT_US_SENATE
+  CURRENT_US_STATE_ATTORNEY_GENERAL
+  CURRENT_US_STATE_GOVERNOR
   NEXT_AU_HOUSE_OF_REPS
   NEXT_AU_SENATE
   NEXT_CA_HOUSE_OF_COMMONS
@@ -181,6 +184,8 @@ enum PersonGrouping {
   RUNNING_FOR_UK_HOUSE_OF_LORDS
   RUNNING_FOR_US_HOUSE_OF_REPS
   RUNNING_FOR_US_SENATE
+  RUNNING_FOR_US_STATE_ATTORNEY_GENERAL
+  RUNNING_FOR_US_STATE_GOVERNOR
   US_PRESIDENT
 }
 
@@ -227,6 +232,7 @@ type PersonRole {
 }
 
 enum PersonRoleCategory {
+  ATTORNEY_GENERAL
   COMMITTEE_CHAIR
   COMMITTEE_MEMBER
   CONGRESS
@@ -371,7 +377,7 @@ type PublicUser {
 type Query {
   INTERNAL__testSentry: Boolean
   bill(id: String!): Bill!
-  bills: [Bill!]!
+  bills(slugIn: [String!]): [Bill!]!
   congressPeople(chamber: CongressionalChamber!, session: CongressionalSession!): [Person!]! @deprecated(reason: "Use people instead")
   nonCongressPeople: [Person!]! @deprecated(reason: "Use people instead")
   people(grouping: PersonGrouping, hasPromotedPositioning: Boolean, limit: Int, offset: Int, personRoleGroupingOr: [PersonGrouping!], personRolePrimaryCity: String, personRolePrimaryCountryCode: String, personRolePrimaryDistrict: String, personRolePrimaryState: String, slugIn: [String!], specificPersonRole: SpecificPersonRole, stanceScoreGte: Int, stanceScoreLte: Int): [Person!]!

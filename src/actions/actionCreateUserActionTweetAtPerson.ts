@@ -54,7 +54,7 @@ export const actionCreateUserActionTweetedAtPerson = withServerActionMiddleware(
   _actionCreateUserActionTweetedAtPerson,
 )
 
-type CampaignDuration = {
+interface CampaignDuration {
   START_TIME: Date | null
   END_TIME: Date | null
 }
@@ -156,7 +156,11 @@ async function _actionCreateUserActionTweetedAtPerson(
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction,
+      userCryptoAddress: user.primaryUserCryptoAddress,
+      countryCode,
+    })
   }
 
   waitUntil(beforeFinish())

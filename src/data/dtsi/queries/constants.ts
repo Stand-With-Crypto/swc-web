@@ -8,7 +8,9 @@ export const PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY: Record<
   [SupportedCountryCodes.US]: [
     DTSI_PersonGrouping.CURRENT_US_HOUSE_OF_REPS,
     DTSI_PersonGrouping.CURRENT_US_SENATE,
-    DTSI_PersonGrouping.US_PRESIDENT,
+    DTSI_PersonGrouping.CURRENT_US_PRESIDENT,
+    DTSI_PersonGrouping.CURRENT_US_STATE_ATTORNEY_GENERAL,
+    DTSI_PersonGrouping.CURRENT_US_STATE_GOVERNOR,
     DTSI_PersonGrouping.RUNNING_FOR_US_HOUSE_OF_REPS,
     DTSI_PersonGrouping.RUNNING_FOR_US_SENATE,
     DTSI_PersonGrouping.RUNNING_FOR_PRESIDENT,

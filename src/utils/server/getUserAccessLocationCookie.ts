@@ -40,7 +40,10 @@ export async function getUserAccessLocationCookie<TBypassCountryCodeCheck extend
       : SupportedCountryCodes
   }
 
-  if (!COUNTRY_CODE_REGEX_PATTERN.test(maybeUserAccessLocationCookie)) {
+  if (
+    !COUNTRY_CODE_REGEX_PATTERN.test(maybeUserAccessLocationCookie) &&
+    maybeUserAccessLocationCookie !== 'mx' // there are cases where users in the US are getting blocked if they are close to the US border so we want to be more permissive with Canada/Mexico
+  ) {
     const error = new Error('Invalid User Access Location cookie.')
     Sentry.captureException(error, { tags: { countryCode: maybeUserAccessLocationCookie } })
     throw error

@@ -16,6 +16,7 @@ import {
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import { checkSMSOptInReplyWithInngest } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { deleteNotSupportedCountryCodeAdvocates } from '@/inngest/functions/capitolCanary/deleteNotSupportedCountryCodeAdvocates'
 import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
@@ -25,6 +26,8 @@ import { updateDistrictsRankings } from '@/inngest/functions/districtsRankings/u
 import { globalSendEventNotifications } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
+import { syncSendgridContactsCoordinator } from '@/inngest/functions/sendgridContactsCronJob'
+import { syncSendgridContactsProcessor } from '@/inngest/functions/sendgridContactsCronJob/logic'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
   backfillMissingCommunications,
@@ -85,5 +88,8 @@ export const { GET, POST, PUT } = serve({
     backfillIntlUsersWithInngest,
     processIntlUsersBatch,
     backfillMissingCommunications,
+    deleteNotSupportedCountryCodeAdvocates,
+    syncSendgridContactsCoordinator,
+    syncSendgridContactsProcessor,
   ],
 })

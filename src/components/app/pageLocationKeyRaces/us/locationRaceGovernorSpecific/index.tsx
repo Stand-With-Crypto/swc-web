@@ -176,6 +176,7 @@ export function USLocationRaceGovernorSpecific({
                             cryptoStanceGrade={DTSIFormattedLetterGrade}
                             isRecommended={isRecommended}
                             person={person}
+                            shouldHideStanceScores
                             subheader="role"
                           />
                         </div>
@@ -189,6 +190,7 @@ export function USLocationRaceGovernorSpecific({
                             <MaybeOverflowedStances
                               countryCode={countryCode}
                               person={person}
+                              shouldHideStanceScores
                               stances={person.stances}
                             />
                           </>
@@ -216,6 +218,7 @@ export function USLocationRaceGovernorSpecific({
                             cryptoStanceGrade={DTSIFormattedLetterGrade}
                             isRecommended={isRecommended}
                             person={person}
+                            shouldHideStanceScores
                             subheader="role"
                           />
                         </div>
@@ -229,6 +232,7 @@ export function USLocationRaceGovernorSpecific({
                             <MaybeOverflowedStances
                               countryCode={countryCode}
                               person={person}
+                              shouldHideStanceScores
                               stances={person.stances}
                             />
                           </>

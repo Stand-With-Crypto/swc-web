@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
@@ -9,6 +10,7 @@ import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
+  AUUserActionLinkedInCampaignName,
   AUUserActionPollCampaignName,
   AUUserActionReferCampaignName,
   AUUserActionTweetCampaignName,
@@ -18,6 +20,8 @@ import {
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
 const countryCode = SupportedCountryCodes.AU
+
+const urls = getIntlUrls(countryCode)
 
 export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
@@ -56,10 +60,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeElectionAction()}
-          >
+          <UserActionViewKeyPageDialog countryCode={countryCode} url={urls.newmodeElectionAction()}>
             {children}
           </UserActionViewKeyPageDialog>
         ),
@@ -74,7 +75,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <UserActionViewKeyPageDialog
             countryCode={countryCode}
-            url={getIntlUrls(countryCode).newmodeDebankingAction()}
+            url={urls.newmodeDebankingAction()}
           >
             {children}
           </UserActionViewKeyPageDialog>
@@ -89,19 +90,16 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaignsModalDescription:
       'View the key races occurring across Australia that will impact the future of crypto.',
     image: '/au/actionTypeIcons/view-key-races.png',
-    link: ({ children }) => <Link href={getIntlUrls(countryCode).emailDeeplink()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_RACES,
         campaignName: AUUserActionViewKeyRacesCampaignName.H1_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'View Key Races in Australia',
         description:
-          'View the key races occurring across Australia that will impact the future of crypto.',
+          'Viewed the key races that occurred across Australia that could impact the future of crypto in early 2025.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <Link href={getIntlUrls(countryCode).locationKeyRaces()}>{children}</Link>
-        ),
+        WrapperComponent: ({ children }) => <Link href={urls.locationKeyRaces()}>{children}</Link>,
       },
     ],
   },
@@ -163,7 +161,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href="/polls">{children}</Link>,
+    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.POLL,
@@ -191,6 +189,31 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.LINKEDIN]: {
+    title: 'Follow us on LinkedIn',
+    description: 'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+    mobileCTADescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+    campaignsModalDescription:
+      'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+    image: '/au/actionTypeIcons/follow-linkedin.png',
+    campaigns: [
+      {
+        actionType: UserActionType.LINKEDIN,
+        campaignName: AUUserActionLinkedInCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Follow us on LinkedIn',
+        description:
+          'Follow us on LinkedIn and stay up to date on crypto policy changes in Australia.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
+            {children}
+          </UserActionFormFollowLinkedInDialog>
+        ),
       },
     ],
   },

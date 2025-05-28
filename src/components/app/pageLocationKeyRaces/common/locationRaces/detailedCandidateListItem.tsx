@@ -12,12 +12,14 @@ interface LocationRacesDetailedCandidateListItemProps {
   person: DTSI_HouseSpecificInformationQuery['people'][number]
   isRecommended: boolean
   countryCode: SupportedCountryCodes
+  shouldHideStanceScores: boolean
 }
 
 export function LocationRacesDetailedCandidateListItem({
   person,
   isRecommended,
   countryCode,
+  shouldHideStanceScores,
 }: LocationRacesDetailedCandidateListItemProps) {
   return (
     <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row md:border-b-2">
@@ -28,6 +30,7 @@ export function LocationRacesDetailedCandidateListItem({
             cryptoStanceGrade={DTSIFormattedLetterGrade}
             isRecommended={isRecommended}
             person={person}
+            shouldHideStanceScores={shouldHideStanceScores}
             subheader="role"
           />
         </div>
@@ -41,6 +44,7 @@ export function LocationRacesDetailedCandidateListItem({
             <MaybeOverflowedStances
               countryCode={countryCode}
               person={person}
+              shouldHideStanceScores={shouldHideStanceScores}
               stances={person.stances}
             />
           </>

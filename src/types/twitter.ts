@@ -32,7 +32,7 @@ type TweetMedia =
       duration_ms: 105405
     }
 
-type TweetEntryTextEntity = {
+interface TweetEntryTextEntity {
   start: number
   end: number
 }

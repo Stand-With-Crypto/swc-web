@@ -7,8 +7,16 @@ import twilio from 'twilio'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
 import { identifyIncomingKeyword } from '@/utils/server/sms/identifyIncomingKeyword'
-import * as messages from '@/utils/server/sms/messages'
-import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
+import { getSMSMessages } from '@/utils/server/sms/messages'
+import {
+  getCountryCodeFromPhoneNumber,
+  getUserByPhoneNumber,
+  verifySignature,
+} from '@/utils/server/sms/utils'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 interface SMSMessageEvent {
   ToCountry: string
@@ -56,7 +64,16 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
+  const userCountryCode = user?.countryCode as SupportedCountryCodes | undefined
+
+  const countryCode =
+    userCountryCode ??
+    getCountryCodeFromPhoneNumber(phoneNumber, userCountryCode) ??
+    DEFAULT_SUPPORTED_COUNTRY_CODE
+
   const keyword = identifyIncomingKeyword(body.Body)
+
+  const smsMessages = getSMSMessages(countryCode)
 
   let message = ''
 
@@ -64,12 +81,12 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   // This is because we can't get the messageId when replying with Twilio
   // And for both cases the phone number is already normalized so we don't need to send the country code
   if (keyword?.isOptOutKeyword) {
-    await smsActions.optOutUser({ phoneNumber, user })
+    await smsActions.optOutUser({ phoneNumber, user, countryCode })
   } else if (keyword?.isUnstopKeyword) {
-    await smsActions.optUserBackIn({ phoneNumber, user })
+    await smsActions.optUserBackIn({ phoneNumber, user, countryCode })
   } else if (keyword?.isHelpKeyword) {
     // We don't want to track this message, so we can just reply with twilio
-    message = messages.HELP_MESSAGE
+    message = smsMessages.helpMessage
   } else if (keyword?.isUnidentifiedKeyword) {
     Sentry.captureMessage(`Unable to identify keyword`, {
       extra: {

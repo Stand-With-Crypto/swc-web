@@ -12,7 +12,7 @@ import { NFTSlug } from '@/utils/shared/nft'
 import { USUserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
-export type UserActionFormLiveEventProps = {
+export interface UserActionFormLiveEventProps {
   slug: USUserActionLiveEventCampaignName
   onClose: () => void
   isLoggedIn: boolean

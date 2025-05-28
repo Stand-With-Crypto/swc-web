@@ -54,6 +54,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
           {!!presidential && presidential?.length > 0 && (
             <RaceSectionWrapper>
               <DTSIPersonHeroCardSection
+                shouldHideStanceScores={false}
                 {...dtsiPersonHeroCardSectionProps}
                 countryCode={countryCode}
                 people={presidential}
@@ -67,6 +68,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
               <hr />
               <RaceSectionWrapper>
                 <DTSIPersonHeroCardSection
+                  shouldHideStanceScores={false}
                   {...dtsiPersonHeroCardSectionProps}
                   countryCode={countryCode}
                   people={senate}
@@ -81,6 +83,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
               <hr />
               <RaceSectionWrapper className={cn(!showPACFooter && 'pb-6')}>
                 <DTSIPersonHeroCardSection
+                  shouldHideStanceScores={false}
                   {...dtsiPersonHeroCardSectionProps}
                   countryCode={countryCode}
                   people={congressional}

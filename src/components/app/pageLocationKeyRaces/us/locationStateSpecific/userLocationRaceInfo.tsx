@@ -23,7 +23,7 @@ import {
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-type UserLocationRaceInfoProps = {
+interface UserLocationRaceInfoProps {
   groups: ReturnType<typeof organizeStateSpecificPeople>
   stateCode: USStateCode
   stateName: string
@@ -113,6 +113,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
               cryptoStanceGrade={DTSIFormattedLetterGrade}
               isRecommended
               person={recommended}
+              shouldHideStanceScores={false}
               subheader="role"
             />
           )}
@@ -122,6 +123,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
               cryptoStanceGrade={DTSIFormattedLetterGrade}
               key={person.id}
               person={person}
+              shouldHideStanceScores={false}
               subheader={person.isIncumbent ? 'Incumbent' : 'role'}
             />
           ))}

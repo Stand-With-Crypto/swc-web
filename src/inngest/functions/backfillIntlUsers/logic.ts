@@ -27,7 +27,7 @@ export const PROCESS_BATCH_EVENT_NAME = 'script/backfill-intl-users.process-batc
 export const PROCESS_BATCH_FUNCTION_ID = 'script.backfill-intl-users.process-batch'
 const TRANSACTION_CONNECTION_LIMIT = 50
 
-export type ProcessBatchSchema = {
+export interface ProcessBatchSchema {
   name: typeof PROCESS_BATCH_EVENT_NAME
   data: {
     countryCode: SupportedCountryCodes
@@ -38,7 +38,7 @@ export type ProcessBatchSchema = {
   }
 }
 
-type UserProcessingResult = {
+interface UserProcessingResult {
   action: 'created' | 'updated' | 'skipped' | 'error'
   email: string
   userId?: string

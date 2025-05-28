@@ -22,8 +22,8 @@ type Props = PageProps<{ page: string[] }>
 
 export async function generateMetadata(_props: Props): Promise<Metadata> {
   return generateMetadataDetails({
-    title: 'District Referral Leaderboard',
-    description: 'See which districts are leading in referrals.',
+    title: 'District Leaderboard',
+    description: 'See which districts have the most number of advocates',
   })
 }
 

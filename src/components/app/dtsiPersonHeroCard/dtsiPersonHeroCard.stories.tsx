@@ -59,6 +59,7 @@ const getDefaultProps = () => {
     countryCode: SupportedCountryCodes.US,
     person,
     cryptoStanceGrade: DTSIFormattedLetterGrade,
+    shouldHideStanceScores: false,
   }
   return props
 }

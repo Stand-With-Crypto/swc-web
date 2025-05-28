@@ -14,7 +14,7 @@ import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
-  isPoliticianDetailsStanceHidden,
+  shouldPersonHaveStanceScoresHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getStateNameResolver, getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
@@ -107,7 +107,7 @@ export const getDTSIClientPersonDataTableColumns = ({
         },
         cell: ({ row }) => (
           <div className="flex items-center gap-2">
-            {!isPoliticianDetailsStanceHidden(row.original.slug) ? (
+            {!shouldPersonHaveStanceScoresHidden(row.original) ? (
               <>
                 <DtsiGradeComponent className="h-7 w-7" person={row.original} />
                 <span className="hidden md:inline">

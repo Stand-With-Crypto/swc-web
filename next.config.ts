@@ -314,6 +314,16 @@ const nextConfig: NextConfig = {
         destination: '/gb/:path*',
         permanent: false,
       },
+      {
+        source: '/gb/politicians',
+        destination: '/gb',
+        permanent: false,
+      },
+      {
+        source: '/gb/politicians/person/:slug',
+        destination: '/gb',
+        permanent: false,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
@@ -425,6 +435,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // SMS shortlinks
+      {
+        source: '/s/founders-push/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/genius/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=genius-1&sessionId=:sessionId*',
+        permanent: true,
+      },
       {
         source: '/s/paul-atkins',
         destination: 'https://speak4.app/lp/b901vnot/?ts=1744310543',
