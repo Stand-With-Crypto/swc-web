@@ -54,6 +54,7 @@ export interface DataTableBodyProps<TData extends Person = Person> extends DataT
   getGlobalFilterDefaults: () => ColumnFiltersState
   getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
   globalFilter: string
+  id?: string
   setGlobalFilter: SetStateAction<any>
 }
 
@@ -103,14 +104,15 @@ DataTable.GlobalFilter = DataTableGlobalFilter
 
 function DataTableBody<TData extends Person = Person>({
   columns = [],
-  data = [],
-  loadState,
-  globalFilterFn,
   countryCode,
-  globalFiltersComponent: GlobalFiltersComponent,
+  data = [],
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
   globalFilter,
+  globalFilterFn,
+  globalFiltersComponent: GlobalFiltersComponent,
+  id,
+  loadState,
   setGlobalFilter,
   ...rest
 }: DataTableBodyProps<TData>) {
@@ -161,7 +163,7 @@ function DataTableBody<TData extends Person = Person>({
   const tableRowModel = table.getRowModel()
 
   return (
-    <div className="md:container">
+    <div className="md:container" id={id}>
       <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
         <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 lg:top-[84px] lg:flex-row lg:p-6">
           <PageTitle className="text-left" size="md">

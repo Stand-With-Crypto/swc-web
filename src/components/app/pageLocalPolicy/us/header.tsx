@@ -8,7 +8,7 @@ export function UsHeader() {
   return (
     <Header>
       <Header.Title>{STATE_SEARCH_TITLE}</Header.Title>
-      <Header.Subtitle>{STATE_SEARCH_SUBTITLE}</Header.Subtitle>
+      <Header.SubTitle>{STATE_SEARCH_SUBTITLE}</Header.SubTitle>
     </Header>
   )
 }
