@@ -26,6 +26,14 @@ export type EmailEvent = {
   category?: string
 } & { [key: string]: string }
 
+export type MarketingEmailEvent = EmailEvent & {
+  mc_stats: string
+  mc_pod_id: number
+  singlesend_id: string
+  singlesend_name: string
+  phase_id: string
+}
+
 export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string> = {
   [EmailEventName.PROCESSED]: 'Processed',
   [EmailEventName.DEFERRED]: 'Deferred',
