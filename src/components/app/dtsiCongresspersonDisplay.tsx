@@ -3,8 +3,8 @@ import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSI_PersonRole, DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import {
-  UseGetDTSIPeopleFromUSAddressResponse,
   formatGetDTSIPeopleFromUSAddressNotFoundReason,
+  UseGetDTSIPeopleFromUSAddressResponse,
 } from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
