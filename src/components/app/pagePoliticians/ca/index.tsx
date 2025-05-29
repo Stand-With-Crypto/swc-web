@@ -9,13 +9,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export const PAGE_POLITICIANS_TITLE = 'Find out where politicians stand on crypto'
 export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives Canada innovation. Find out how political leaders have addressed crypto issues.`
 
-export function CaPagePoliticians({
-  politicians,
-  countryCode,
-}: {
-  politicians: DTSIPersonDataTablePeople
-  countryCode: SupportedCountryCodes
-}) {
+const countryCode = SupportedCountryCodes.CA
+
+export function CaPagePoliticians({ politicians }: { politicians: DTSIPersonDataTablePeople }) {
   return (
     <PagePoliticiansLayout>
       <PagePoliticiansLayout.IntroductionSection>

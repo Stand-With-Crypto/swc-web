@@ -9,13 +9,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export const PAGE_POLITICIANS_TITLE = 'Find out where politicians stand on crypto'
 export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives British innovation. Discover the politicians fighting to keep crypto in the UK.`
 
-export function GbPagePoliticians({
-  politicians,
-  countryCode,
-}: {
-  politicians: DTSIPersonDataTablePeople
-  countryCode: SupportedCountryCodes
-}) {
+const countryCode = SupportedCountryCodes.GB
+
+export function GbPagePoliticians({ politicians }: { politicians: DTSIPersonDataTablePeople }) {
   return (
     <PagePoliticiansLayout>
       <PagePoliticiansLayout.IntroductionSection>
