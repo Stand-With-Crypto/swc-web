@@ -2,15 +2,21 @@ import Script from 'next/script'
 
 export function AuLayoutScript() {
   const twitterEventId = process.env.NEXT_PUBLIC_AU_TWITTER_EVENT_ID
-
   const linkedInPartnerId = process.env.NEXT_PUBLIC_AU_LINKEDIN_PARTNER_ID
 
   return (
     <>
       {twitterEventId && (
-        <Script id="twitterEvent" type="text/javascript">
-          {`twq('event', '${twitterEventId}', {});`}
-        </Script>
+        <>
+          <Script
+            id="twitter-uw"
+            src="https://static.ads-twitter.com/uwt.js"
+            strategy="afterInteractive"
+          />
+          <Script id="twitterEvent" type="text/javascript">
+            {`if (typeof twq !== 'undefined') { twq('event', '${twitterEventId}', {}); }`}
+          </Script>
+        </>
       )}
 
       {linkedInPartnerId && (
