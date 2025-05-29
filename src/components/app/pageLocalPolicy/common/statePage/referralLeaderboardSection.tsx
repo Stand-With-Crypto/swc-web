@@ -15,7 +15,7 @@ interface ReferralLeaderboardButtonProps extends React.PropsWithChildren {
 }
 
 export function ReferralLeaderboard({ children }: React.PropsWithChildren) {
-  return <div className="standard-spacing-from-navbar space-y-8">{children}</div>
+  return <div className="space-y-8">{children}</div>
 }
 
 function ReferralLeaderboardContent({ countryCode, data }: ReferralLeaderboardContentProps) {

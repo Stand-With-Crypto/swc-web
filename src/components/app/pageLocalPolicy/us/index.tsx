@@ -8,13 +8,9 @@ import { UsHeader } from '@/components/app/pageLocalPolicy/us/header'
 import { UsSearchError } from '@/components/app/pageLocalPolicy/us/searchError'
 import { UsSearchResult } from '@/components/app/pageLocalPolicy/us/searchResult'
 import { UsStateList } from '@/components/app/pageLocalPolicy/us/stateList'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-const countryCode = SupportedCountryCodes.US
-
-const urls = getIntlUrls(countryCode)
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export function UsLocalPolicy() {
   const [searchErrorCode, setSearchErrorCode] = useState<SearchErrorCode>(null)
@@ -32,13 +28,9 @@ export function UsLocalPolicy() {
 
       <UsSearchError code={searchErrorCode} />
 
-      <UsSearchResult countryCode={countryCode} searchResult={searchResult} urls={urls} />
+      <UsSearchResult searchResult={searchResult} />
 
-      <UsStateList
-        searchResult={searchResult}
-        states={US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
-        urls={urls}
-      />
+      <UsStateList searchResult={searchResult} />
     </Layout>
   )
 }

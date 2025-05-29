@@ -3,15 +3,17 @@ import {
   PoliticiansSectionProps,
 } from '@/components/app/pageLocalPolicy/common/statePage/politiciansSection'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 const SECTION_TITLE = 'Elected officials'
 
-interface UsPoliticiansSectionProps extends PoliticiansSectionProps {
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+interface UsPoliticiansSectionProps extends Omit<PoliticiansSectionProps, 'countryCode'> {
   stateName: string
 }
 
 export function UsPoliticiansSection({
-  countryCode,
   highestScores,
   lowestScores,
   stateCode,

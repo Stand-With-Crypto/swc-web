@@ -4,14 +4,15 @@ import { Header } from '@/components/app/pageLocalPolicy/common/statePage/header
 import { useApiAdvocatesCountByState } from '@/hooks/useApiAdvocatesCountByState'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 const CTA_LABEL = 'Join SWC'
 
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
 interface UsHeaderProps {
-  countryCode: SupportedCountryCodes
   initialTotalAdvocates: number
   stateCode: string
   stateName: string
@@ -31,12 +32,7 @@ function getHeaderDescription(advocatesCount: number) {
   return `${formatNumber(advocatesCount)} advocates`
 }
 
-export function UsHeader({
-  countryCode,
-  initialTotalAdvocates,
-  stateCode,
-  stateName,
-}: UsHeaderProps) {
+export function UsHeader({ initialTotalAdvocates, stateCode, stateName }: UsHeaderProps) {
   const session = useSession()
 
   const hasHydrated = useHasHydrated()

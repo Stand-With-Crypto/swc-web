@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 export default async function CommunityLeaderboardPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
-  const { countryCode, page } = params
+  const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
@@ -58,7 +58,5 @@ export default async function CommunityLeaderboardPage(props: Props) {
     leaderboardData: undefined,
   }
 
-  return (
-    <UsPageCommunity {...dataProps} countryCode={countryCode} offset={offset} pageNum={pageNum} />
-  )
+  return <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} />
 }
