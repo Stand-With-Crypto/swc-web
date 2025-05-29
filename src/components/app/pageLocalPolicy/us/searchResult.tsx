@@ -1,22 +1,22 @@
 import { SearchResult } from '@/components/app/pageLocalPolicy/common/searchResult'
 import { StateCard } from '@/components/app/pageLocalPolicy/common/stateCard'
-import {
-  IntlUrls,
-  SearchResult as SearchResultType,
-} from '@/components/app/pageLocalPolicy/common/types'
+import { SearchResult as SearchResultType } from '@/components/app/pageLocalPolicy/common/types'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 const STATE_RESULT_TITLE = 'Your state'
 const STATE_RESULT_BUTTON_LABEL = 'View local policy'
 
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+const urls = getIntlUrls(countryCode)
+
 interface UsSearchResultProps {
-  countryCode: SupportedCountryCodes
   searchResult: SearchResultType
-  urls: IntlUrls
 }
 
-export function UsSearchResult({ countryCode, searchResult, urls }: UsSearchResultProps) {
+export function UsSearchResult({ searchResult }: UsSearchResultProps) {
   if (!searchResult) {
     return null
   }

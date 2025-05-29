@@ -12,11 +12,13 @@ import {
 } from '@/components/app/pageCommunity/us'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
-import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
+import {
+  getDistrictsLeaderboardData,
+  getDistrictsLeaderboardDataByState,
+} from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 60 // 1 minute
-export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -37,7 +39,7 @@ export async function generateStaticParams() {
 export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
-  const { countryCode, page } = params
+  const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
@@ -45,19 +47,37 @@ export default async function CommunityReferralsPage(props: Props) {
 
   const offset = (pageNum - 1) * itemsPerPage
 
-  const { items: leaderboardData } = await getDistrictsLeaderboardData({
+  const searchParams = await props.searchParams
+  const state = searchParams?.state as string | undefined
+
+  const commonParams = {
     limit: itemsPerPage,
     offset,
-  })
-
-  const dataProps: PageLeaderboardInferredProps = {
-    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
-    leaderboardData,
-    sumDonationsByUser: undefined,
-    publicRecentActivity: undefined,
   }
 
+  const { items: leaderboardData, total } = state
+    ? await getDistrictsLeaderboardDataByState({
+        ...commonParams,
+        stateCode: state.toUpperCase(),
+      })
+    : await getDistrictsLeaderboardData(commonParams)
+
+  const dataProps: PageLeaderboardInferredProps = {
+    leaderboardData,
+    publicRecentActivity: undefined,
+    sumDonationsByUser: undefined,
+    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+  }
+
+  const totalPages = state ? Math.ceil(total / itemsPerPage) : undefined
+
   return (
-    <UsPageCommunity {...dataProps} countryCode={countryCode} offset={offset} pageNum={pageNum} />
+    <UsPageCommunity
+      {...dataProps}
+      offset={offset}
+      pageNum={pageNum}
+      stateCode={state}
+      totalPages={totalPages}
+    />
   )
 }
