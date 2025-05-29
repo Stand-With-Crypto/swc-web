@@ -13,7 +13,7 @@ import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromUSAddress'
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
@@ -58,10 +58,10 @@ const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
 function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromAddress(
-    POLITICIAN_CATEGORY,
-    address === 'loading' ? null : address?.description,
-  )
+  const res = useGetDTSIPeopleFromAddress({
+    category: POLITICIAN_CATEGORY,
+    address: address === 'loading' ? null : address?.description,
+  })
   const shouldShowSubtitle = !address || !res.data
 
   if (!address || address === 'loading' || !res.data) {

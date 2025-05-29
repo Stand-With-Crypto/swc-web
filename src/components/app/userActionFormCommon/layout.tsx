@@ -6,7 +6,7 @@ import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
-import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromUSAddress'
+import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { cn } from '@/utils/web/cn'
 
 interface UserActionFormLayoutProps extends React.PropsWithChildren {

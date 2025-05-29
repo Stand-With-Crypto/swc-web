@@ -12,7 +12,7 @@ import {
 import { UserActionFormCallCongresspersonSuccess } from '@/components/app/userActionFormCallCongressperson/sections/success'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromUSAddress'
+import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { zodAddress } from '@/validation/fields/zodAddress'
 

@@ -39,7 +39,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromUSAddress'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -98,10 +98,10 @@ export function UserActionFormEmailCongressperson({
 
   const addressField = form.watch('address')
 
-  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress(
-    politicianCategory,
-    addressField?.description,
-  )
+  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
+    category: politicianCategory,
+    address: addressField?.description,
+  })
 
   const dtsiPeople = useMemo(() => {
     return dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data

@@ -4,7 +4,10 @@ import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getConstituencyFromAddress } from '@/utils/shared/getConstituencyFromAddress'
+import {
+  GetConstituencyFromAddressSuccess,
+  getConstituencyFromAddress,
+} from '@/utils/shared/getConstituencyFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import {
@@ -13,7 +16,11 @@ import {
 } from '@/utils/shared/yourPoliticianCategory'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
-export type UseGetDTSIPeopleFromPlaceIdResponse = Awaited<
+export interface DTSIPeopleFromCongressionalDistrict extends GetConstituencyFromAddressSuccess {
+  dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult
+}
+
+export type UseGetDTSIPeopleFromAddressResponse = Awaited<
   ReturnType<typeof getDTSIPeopleFromAddress>
 >
 
@@ -114,7 +121,7 @@ export function useGetDTSIPeopleFromAddress({
 }
 
 export function formatGetDTSIPeopleFromAddressNotFoundReason(
-  data: Pick<UseGetDTSIPeopleFromPlaceIdResponse, 'notFoundReason'> | undefined | null,
+  data: Pick<UseGetDTSIPeopleFromAddressResponse, 'notFoundReason'> | undefined | null,
 ) {
   const defaultError = "We can't find your representative right now, we're working on a fix"
   if (!data || !('notFoundReason' in data)) {

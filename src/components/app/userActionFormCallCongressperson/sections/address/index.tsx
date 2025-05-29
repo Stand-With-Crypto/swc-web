@@ -26,7 +26,7 @@ import { InternalLink } from '@/components/ui/link'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   getDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromUSAddress'
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -43,6 +43,7 @@ import {
   FORM_NAME,
   getDefaultValues,
 } from './formConfig'
+import { useCountryCode } from '@/hooks/useCountryCode'
 
 interface AddressProps
   extends Pick<
@@ -204,6 +205,7 @@ export function useCongresspersonData({
   address?: FindRepresentativeCallFormValues['address']
 }) {
   const { isLoaded } = useGoogleMapsScript()
+  const countryCode = useCountryCode()
 
   const result = useSWR(
     address && isLoaded ? `useCongresspersonData-${address.description}` : null,
@@ -212,10 +214,11 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromAddress(
-        CALL_FLOW_POLITICIANS_CATEGORY,
-        address.description,
-      )
+      const dtsiResponse = await getDTSIPeopleFromAddress({
+        category: CALL_FLOW_POLITICIANS_CATEGORY,
+        address: address.description,
+        countryCode,
+      })
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
       }
