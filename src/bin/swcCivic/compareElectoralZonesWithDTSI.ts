@@ -14,12 +14,12 @@ async function compareDatabaseDistrictsWithDTSI() {
 
   for (const countryCode of ORDERED_SUPPORTED_COUNTRIES) {
     console.log(`\nAnalyzing ${countryCode}...`)
-    const constituencies = await civicPrismaClient.constituencies.findMany({
+    const electoralZones = await civicPrismaClient.electoralZones.findMany({
       where: {
         countryCode,
       },
       select: {
-        constituencyName: true,
+        zoneName: true,
       },
     })
     const dtsiResults = await queryDTSIDistrictsByCountryCode({
@@ -27,30 +27,30 @@ async function compareDatabaseDistrictsWithDTSI() {
     })
 
     // Convert both lists to Sets for efficient comparison
-    // For constituencies, we use the name field which is common across all types
-    const constituencySet = new Set(constituencies.map(c => c.constituencyName))
+    // For electoral zones, we use the name field which is common across all types
+    const electoralZoneSet = new Set(electoralZones.map(c => c.zoneName))
     // For DTSI results, we use the primaryDistricts array
     const dtsiSet = new Set(dtsiResults.primaryDistricts.sort((a, b) => a.localeCompare(b)) || [])
 
     // Find common elements
-    const commonElements = [...constituencySet].filter(name => name && dtsiSet.has(name))
+    const commonElements = [...electoralZoneSet].filter(name => name && dtsiSet.has(name))
 
-    // Find elements only in constituencies
-    const onlyInConstituencies = [...constituencySet].filter(name => name && !dtsiSet.has(name))
+    // Find elements only in electoral zones
+    const onlyInElectoralZones = [...electoralZoneSet].filter(name => name && !dtsiSet.has(name))
 
     // Find elements only in dtsiResults
-    const onlyInDTSI = [...dtsiSet].filter(name => !constituencySet.has(name))
+    const onlyInDTSI = [...dtsiSet].filter(name => !electoralZoneSet.has(name))
 
     console.log(`Common elements: ${commonElements.length}`)
-    console.log(`Only in constituencies: ${onlyInConstituencies.length}`)
+    console.log(`Only in electoral zones: ${onlyInElectoralZones.length}`)
     console.log(`Only in DTSI: ${onlyInDTSI.length}`)
 
     // Create worksheet data
-    const maxLength = Math.max(onlyInConstituencies.length, onlyInDTSI.length)
+    const maxLength = Math.max(onlyInElectoralZones.length, onlyInDTSI.length)
     const worksheetData = [
       ['Only in Database', 'Only in DTSI'], // Header row
       ...Array.from({ length: maxLength }, (_, i) => [
-        onlyInConstituencies[i] || '', // Empty string if no more items
+        onlyInElectoralZones[i] || '', // Empty string if no more items
         onlyInDTSI[i] || '',
       ]),
     ]

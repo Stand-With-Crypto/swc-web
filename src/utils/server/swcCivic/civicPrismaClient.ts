@@ -12,7 +12,7 @@ import { toBool } from '@/utils/shared/toBool'
 const SWC_CIVIC_DATABASE_URL = requiredOutsideLocalEnv(
   process.env.SWC_CIVIC_DATABASE_URL,
   'SWC_CIVIC_DATABASE_URL',
-  'swc-civic | Query constituency by lat/long',
+  'swc-civic | Query electoral zone by lat/long',
 )
 
 neonConfig.webSocketConstructor = WebSocket

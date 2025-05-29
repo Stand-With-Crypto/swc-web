@@ -10,33 +10,33 @@ import {
 import { civicPrismaClient } from '@/utils/server/swcCivic/civicPrismaClient'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const constituencyData = [
+const electoralZonesData = [
   {
     countryCode: SupportedCountryCodes.GB,
     dataFilePath: 'data/uk_parliamentary_constituencies.geojson',
-    constituencyNameField: 'PCON24NM',
+    electoralZoneNameField: 'PCON24NM',
     persist: true,
   },
   {
     countryCode: SupportedCountryCodes.US,
     dataFilePath: 'data/us_congressional_districts.geojson',
-    constituencyNameField: 'NAMELSAD',
+    electoralZoneNameField: 'NAMELSAD',
     stateCodeField: 'STATEFP',
-    normalizeConstituency: normalizeUSDistrictName,
+    normalizeElectoralZoneName: normalizeUSDistrictName,
     normalizeStateCode: normalizeUSStateCode,
     persist: true,
   },
   {
     countryCode: SupportedCountryCodes.CA,
     dataFilePath: 'data/FED_CA_2023_EN.kmz',
-    constituencyNameField: 'Name',
-    normalizeConstituency: normalizeCADistrictName,
+    electoralZoneNameField: 'Name',
+    normalizeElectoralZoneName: normalizeCADistrictName,
     persist: true,
   },
   {
     countryCode: SupportedCountryCodes.AU,
     dataFilePath: 'data/au/2021_ELB_region.shp',
-    constituencyNameField: 'Elect_div',
+    electoralZoneNameField: 'Elect_div',
     persist: true,
   },
 ]
@@ -52,12 +52,12 @@ async function seedSWCCivicDB() {
   for (const {
     countryCode,
     dataFilePath,
-    constituencyNameField,
+    electoralZoneNameField,
     stateCodeField,
-    normalizeConstituency,
+    normalizeElectoralZoneName,
     normalizeStateCode,
     persist,
-  } of constituencyData) {
+  } of electoralZonesData) {
     console.log(`\nProcessing country: ${countryCode}`)
     console.log(`Reading data from: ${dataFilePath}`)
 
@@ -72,15 +72,15 @@ async function seedSWCCivicDB() {
       }
 
       const geojsonData = data as unknown as GeoJSONData
-      console.log(`Found ${geojsonData.features.length} constituencies for ${countryCode}`)
+      console.log(`Found ${geojsonData.features.length} electoral zones for ${countryCode}`)
 
       let processedCount = 0
       for (const feature of geojsonData.features) {
-        const constituencyName = feature.properties?.[constituencyNameField]?.trim()
+        const electoralZoneName = feature.properties?.[electoralZoneNameField]?.trim()
         const stateCode = stateCodeField ? feature.properties?.[stateCodeField] : undefined
 
-        const normalizedConstituencyName =
-          normalizeConstituency?.(constituencyName) || constituencyName
+        const normalizedElectoralZoneName =
+          normalizeElectoralZoneName?.(electoralZoneName) || electoralZoneName
 
         const normalizedStateCode = stateCode
           ? normalizeStateCode?.(stateCode) || stateCode
@@ -91,12 +91,12 @@ async function seedSWCCivicDB() {
         try {
           if (persist) {
             await civicPrismaClient.$executeRaw`
-            INSERT INTO constituencies (constituency_name, state_code, country_code, geometry)
-            VALUES (${normalizedConstituencyName}, ${normalizedStateCode}, ${countryCode}, ST_Force3D(ST_GeomFromGeoJSON(${geometry})))
+            INSERT INTO electoral_zones (zone_name, state_code, country_code, zone_coordinates, created_at, updated_at)
+            VALUES (${normalizedElectoralZoneName}, ${normalizedStateCode}, ${countryCode}, ST_Force3D(ST_GeomFromGeoJSON(${geometry})), now(), now())
             `
           } else {
             console.log(
-              `Would have inserted constituency ${normalizedConstituencyName} for ${countryCode}`,
+              `Would have inserted electoral zone ${normalizedElectoralZoneName} for ${countryCode}`,
             )
           }
 
@@ -104,18 +104,18 @@ async function seedSWCCivicDB() {
 
           if (processedCount % 100 === 0) {
             console.log(
-              `Processed ${processedCount}/${geojsonData.features.length} constituencies for ${countryCode}`,
+              `Processed ${processedCount}/${geojsonData.features.length} electoral zones for ${countryCode}`,
             )
           }
         } catch (error) {
           console.error(
-            `Error inserting constituency ${normalizedConstituencyName} for ${countryCode}:`,
+            `Error inserting electoral zone ${normalizedElectoralZoneName} for ${countryCode}:`,
             error,
           )
         }
       }
 
-      console.log(`Completed processing ${processedCount} constituencies for ${countryCode}`)
+      console.log(`Completed processing ${processedCount} electoral zones for ${countryCode}`)
     } catch (error) {
       console.error(`Error processing country ${countryCode}:`, error)
     }

@@ -34,9 +34,9 @@ async function getDTSIPeopleFromCongressionalDistrict(
   }
 
   const data = await fetchReq(
-    apiUrls.dtsiPeopleByCongressionalDistrict({
+    apiUrls.dtsiPeopleByElectoralZone({
+      electoralZone: String(result.districtNumber),
       stateCode: String(result.stateCode),
-      congressionalDistrict: String(result.districtNumber),
       countryCode: SupportedCountryCodes.US,
     }),
   )

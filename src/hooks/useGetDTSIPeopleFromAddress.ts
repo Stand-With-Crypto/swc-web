@@ -4,7 +4,7 @@ import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getConstituencyFromAddress } from '@/utils/shared/getConstituencyFromAddress'
+import { getElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import {
@@ -26,22 +26,22 @@ export async function getDTSIPeopleFromAddress({
   category: YourPoliticianCategory
   countryCode: SupportedCountryCodes
 }) {
-  const constituencyData = await getConstituencyFromAddress(address)
+  const electoralZone = await getElectoralZoneFromAddress(address)
 
-  if ('notFoundReason' in constituencyData) {
-    return constituencyData
+  if ('notFoundReason' in electoralZone) {
+    return electoralZone
   }
 
-  if (countryCode !== constituencyData.countryCode) {
+  if (countryCode !== electoralZone.countryCode) {
     return {
       notFoundReason: 'INVALID_COUNTRY_CODE' as const,
     }
   }
 
   const data = await fetchReq(
-    apiUrls.dtsiPeopleByCongressionalDistrict({
-      congressionalDistrict: constituencyData.constituencyName,
-      stateCode: constituencyData.stateCode,
+    apiUrls.dtsiPeopleByElectoralZone({
+      electoralZone: electoralZone.zoneName,
+      stateCode: electoralZone.stateCode,
       countryCode,
     }),
   )
@@ -88,7 +88,7 @@ export async function getDTSIPeopleFromAddress({
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
   }
 
-  return { ...constituencyData, dtsiPeople: filteredData }
+  return { ...electoralZone, dtsiPeople: filteredData }
 }
 
 export function useGetDTSIPeopleFromAddress({
@@ -124,7 +124,7 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
   switch (data.notFoundReason) {
     case 'INVALID_COUNTRY_CODE':
       return 'Please enter an address from your selected country'
-    case 'CONSTITUENCY_NOT_FOUND':
+    case 'ELECTORAL_ZONE_NOT_FOUND':
     case 'MISSING_FROM_DTSI':
     case 'UNEXPECTED_ERROR':
     default:

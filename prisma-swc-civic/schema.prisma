@@ -19,12 +19,15 @@ model spatial_ref_sys {
   proj4text String? @db.VarChar(2048)
 }
 
-model constituencies {
-  id               Int                                      @id @default(autoincrement())
-  constituencyName String                                   @map("constituency_name")
-  stateCode        String?                                  @map("state_code")
-  geometry         Unsupported("geometry(GeometryZ,4326)")? @map("geometry")
-  countryCode      String?                                  @map("country_code")
+model electoralZones {
+  id              Int                                      @id @default(autoincrement())
+  zoneName        String                                   @map("zone_name")
+  stateCode       String?                                  @map("state_code")
+  zoneCoordinates Unsupported("geometry(GeometryZ,4326)")? @map("zone_coordinates")
+  countryCode     String                                   @map("country_code")
+  createdAt       DateTime                                 @default(now()) @map("created_at")
+  updatedAt       DateTime                                 @updatedAt @map("updated_at")
 
-  @@index([geometry], map: "constituencies_geometry_geom_idx", type: Gist)
+  @@index([zoneCoordinates], map: "electoral_zones_coordinates_geom_idx", type: Gist)
+  @@map("electoral_zones")
 }

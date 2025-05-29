@@ -168,23 +168,23 @@ export const getIntlUrls = (
 }
 
 export const apiUrls = {
-  dtsiPeopleByCongressionalDistrict: ({
+  dtsiPeopleByElectoralZone: ({
+    electoralZone,
     stateCode,
-    congressionalDistrict,
     countryCode,
   }: {
-    stateCode?: string
-    congressionalDistrict: string
+    stateCode: string | null
+    electoralZone: string
     countryCode: SupportedCountryCodes
   }) => {
     if (countryCode === SupportedCountryCodes.US && stateCode) {
-      return `/api/public/dtsi/by-geography/usa/${stateCode}/${congressionalDistrict}`
+      return `/api/public/dtsi/by-geography/usa/${stateCode}/${electoralZone}`
     }
 
-    return `/api/public/dtsi/by-geography/${countryCode}/${congressionalDistrict}`
+    return `/api/public/dtsi/by-geography/${countryCode}/${electoralZone}`
   },
-  swcCivicConstituencyFromAddress: (address: string) =>
-    `/api/public/swc-civic/constituency?address=${encodeURIComponent(address.trim())}`,
+  swcCivicElectoralZoneFromAddress: (address: string) =>
+    `/api/public/swc-civic/electoral-zone?address=${encodeURIComponent(address.trim())}`,
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,

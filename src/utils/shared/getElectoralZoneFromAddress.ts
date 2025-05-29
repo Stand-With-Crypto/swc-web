@@ -1,48 +1,46 @@
 import { Address } from '@prisma/client'
 
-import type { SWCCivicConstituency } from '@/utils/server/swcCivic/queries/queryConstituencyFromLatLong'
+import type { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { apiUrls } from '@/utils/shared/urls'
 
-export type ConstituencyFromAddress = Awaited<ReturnType<typeof getConstituencyFromAddress>>
+export type ElectoralZoneFromAddress = Awaited<ReturnType<typeof getElectoralZoneFromAddress>>
 
-const logger = getLogger('getConstituencyFromAddress')
+const logger = getLogger('getElectoralZoneFromAddress')
 
-export async function maybeGetConstituencyFromAddress(
+export function maybeGetElectoralZoneFromAddress(
   address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null,
 ) {
   if (!address) {
     return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
   }
 
-  const constituency = await getConstituencyFromAddress(address.formattedDescription)
-
-  return constituency
+  return getElectoralZoneFromAddress(address.formattedDescription)
 }
 
-export async function getConstituencyFromAddress(address: string) {
+export async function getElectoralZoneFromAddress(address: string) {
   try {
-    const response = await fetchReq(apiUrls.swcCivicConstituencyFromAddress(address))
+    const response = await fetchReq(apiUrls.swcCivicElectoralZoneFromAddress(address))
 
-    const data = (await response.json()) as SWCCivicConstituency
+    const data = (await response.json()) as ElectoralZone
 
     if (!data) {
       return {
-        notFoundReason: 'CONSTITUENCY_NOT_FOUND' as const,
+        notFoundReason: 'ELECTORAL_ZONE_NOT_FOUND' as const,
       }
     }
 
     return data
   } catch (error) {
-    logger.error('Error fetching constituency:', error)
+    logger.error('Error fetching electoral zone:', error)
 
     if (error instanceof Response) {
       logger.info('Response error status:', error.status)
       if (error.status === 404) {
-        logger.info('Constituency not found (404)')
+        logger.info('Electoral zone not found (404)')
         return {
-          notFoundReason: 'CONSTITUENCY_NOT_FOUND' as const,
+          notFoundReason: 'ELECTORAL_ZONE_NOT_FOUND' as const,
         }
       }
       logger.info('Unexpected response error:', error.status)
