@@ -16,13 +16,13 @@ import {
 } from '@/utils/shared/yourPoliticianCategory'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
-export interface DTSIPeopleFromCongressionalDistrict
+export interface DTSIPeopleFromUSCongressionalDistrict
   extends GetCongressionalDistrictFromAddressSuccess {
   dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult
 }
 
-export type UseGetDTSIPeopleFromAddressResponse = Awaited<
-  ReturnType<typeof getDTSIPeopleFromAddress>
+export type UseGetDTSIPeopleFromUSAddressResponse = Awaited<
+  ReturnType<typeof getDTSIPeopleFromUSAddress>
 >
 
 async function getDTSIPeopleFromCongressionalDistrict(
@@ -90,7 +90,8 @@ async function getDTSIPeopleFromCongressionalDistrict(
   return { ...result, dtsiPeople: filteredData }
 }
 
-export async function getDTSIPeopleFromAddress(
+/** @deprecated Use getDTSIPeopleFromAddress instead */
+export async function getDTSIPeopleFromUSAddress(
   category: YourPoliticianCategory,
   address?: string | null,
 ) {
@@ -98,16 +99,20 @@ export async function getDTSIPeopleFromAddress(
 
   return getDTSIPeopleFromCongressionalDistrict(result, category)
 }
-export function useGetDTSIPeopleFromAddress(
+
+/** @deprecated Use useGetDTSIPeopleFromAddress instead */
+export function useGetDTSIPeopleFromUSAddress(
   category: YourPoliticianCategory,
   address?: string | null,
 ) {
   return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, () =>
-    getDTSIPeopleFromAddress(category, address),
+    getDTSIPeopleFromUSAddress(category, address),
   )
 }
-export function formatGetDTSIPeopleFromAddressNotFoundReason(
-  data: Pick<UseGetDTSIPeopleFromAddressResponse, 'notFoundReason'> | undefined | null,
+
+/** @deprecated Use formatGetDTSIPeopleFromAddressNotFoundReason instead */
+export function formatGetDTSIPeopleFromUSAddressNotFoundReason(
+  data: Pick<UseGetDTSIPeopleFromUSAddressResponse, 'notFoundReason'> | undefined | null,
 ) {
   const defaultError = "We can't find your representative right now, we're working on a fix"
   if (!data || !('notFoundReason' in data)) {

@@ -3,8 +3,8 @@ import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSI_PersonRole, DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  UseGetDTSIPeopleFromAddressResponse,
+  UseGetDTSIPeopleFromUSAddressResponse,
+  formatGetDTSIPeopleFromUSAddressNotFoundReason,
 } from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
@@ -31,10 +31,10 @@ export function DtsiCongresspersonDisplay({
   maxPeopleDisplayed,
 }: {
   maxPeopleDisplayed?: number
-  dtsiPeopleResponse?: UseGetDTSIPeopleFromAddressResponse
+  dtsiPeopleResponse?: UseGetDTSIPeopleFromUSAddressResponse
 }) {
   if (!dtsiPeopleResponse || 'notFoundReason' in dtsiPeopleResponse) {
-    return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPeopleResponse)}</div>
+    return <div>{formatGetDTSIPeopleFromUSAddressNotFoundReason(dtsiPeopleResponse)}</div>
   }
 
   const { dtsiPeople } = dtsiPeopleResponse
