@@ -110,7 +110,6 @@ export function useGetDTSIPeopleFromUSAddress(
   )
 }
 
-/** @deprecated Use formatGetDTSIPeopleFromAddressNotFoundReason instead */
 export function formatGetDTSIPeopleFromUSAddressNotFoundReason(
   data: Pick<UseGetDTSIPeopleFromUSAddressResponse, 'notFoundReason'> | undefined | null,
 ) {
