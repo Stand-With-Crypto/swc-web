@@ -19,12 +19,16 @@ import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import type { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import type { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+const urls = getIntlUrls(countryCode)
 
 const TAB_OPTIONS: {
   value: RecentActivityAndLeaderboardTabs
@@ -65,7 +69,6 @@ export type PageLeaderboardInferredProps =
     }
 
 type PageLeaderboardProps = PageLeaderboardInferredProps & {
-  countryCode: SupportedCountryCodes
   offset: number
   pageNum: number
   stateCode?: string
@@ -73,19 +76,15 @@ type PageLeaderboardProps = PageLeaderboardInferredProps & {
 }
 
 export function UsPageCommunity({
-  tab,
-  countryCode,
+  leaderboardData,
   offset,
   pageNum,
-  sumDonationsByUser,
   publicRecentActivity,
-  leaderboardData,
   stateCode,
-  totalPages: totalPagesAfterFiltering,
+  sumDonationsByUser,
+  tab,
+  totalPages = COMMUNITY_PAGINATION_DATA[tab].totalPages,
 }: PageLeaderboardProps) {
-  const urls = getIntlUrls(countryCode)
-  const totalPages = totalPagesAfterFiltering || COMMUNITY_PAGINATION_DATA[tab].totalPages
-
   return (
     <PageLayout className="space-y-7">
       <PageLayout.Title>{PAGE_LEADERBOARD_TITLE}</PageLayout.Title>

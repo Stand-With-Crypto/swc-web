@@ -2,20 +2,24 @@ import { useMemo } from 'react'
 
 import { StateList } from '@/components/app/pageLocalPolicy/common/stateList'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
-import { IntlUrls } from '@/components/app/pageLocalPolicy/common/types'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 const STATE_LIST_SECTION_TITLE = 'Other states'
 const STATE_LIST_SECTION_SUBTITLE = 'Dive deeper and discover races in other states.'
 
-export function UsStateListSection({
-  stateCode,
-  states,
-  urls,
-}: {
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+const urls = getIntlUrls(countryCode)
+
+const states = US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+
+interface UsStateListSectionProps {
   stateCode: string
-  states: Record<string, string>
-  urls: IntlUrls
-}) {
+}
+
+export function UsStateListSection({ stateCode }: UsStateListSectionProps) {
   const otherStates = useMemo(() => {
     const statesList = Object.entries(states).map(([code, name]) => ({
       code,
@@ -24,7 +28,7 @@ export function UsStateListSection({
     }))
 
     return statesList.filter(({ code }) => code !== stateCode)
-  }, [stateCode, states, urls])
+  }, [stateCode])
 
   return (
     <Section>

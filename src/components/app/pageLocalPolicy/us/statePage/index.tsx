@@ -6,51 +6,41 @@ import { UsRecentActivitySection } from '@/components/app/pageLocalPolicy/us/sta
 import { UsReferralLeaderboardSection } from '@/components/app/pageLocalPolicy/us/statePage/referralLeaderboardSection'
 import { UsStateListSection } from '@/components/app/pageLocalPolicy/us/statePage/stateListSection'
 import { getAdvocatesCountByState } from '@/data/aggregations/getAdvocatesCountByState'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
-const urls = getIntlUrls(countryCode)
+const stateNameResolver = getStateNameResolver(countryCode)
 
-export async function UsLocalPolicyStatePage({ stateCode }: LocalPolicyStatePageProps) {
+export async function UsLocalPolicyStatePage({
+  politiciansData,
+  stateCode,
+}: LocalPolicyStatePageProps) {
   const initialTotalAdvocates = await getAdvocatesCountByState(stateCode)
 
-  const stateNameResolver = getStateNameResolver(countryCode)
   const stateName = stateNameResolver(stateCode.toUpperCase())
 
   return (
     <Layout>
       <UsHeader
-        countryCode={countryCode}
         initialTotalAdvocates={initialTotalAdvocates.advocatesCount}
         stateCode={stateCode}
         stateName={stateName}
       />
 
-      <UsPoliticiansSection countryCode={countryCode} stateCode={stateCode} stateName={stateName} />
-
-      <UsRecentActivitySection
-        countryCode={countryCode}
+      <UsPoliticiansSection
+        highestScores={politiciansData.highestScores}
+        lowestScores={politiciansData.lowestScores}
         stateCode={stateCode}
         stateName={stateName}
-        urls={urls}
       />
 
-      <UsReferralLeaderboardSection
-        countryCode={countryCode}
-        stateCode={stateCode}
-        stateName={stateName}
-        urls={urls}
-      />
+      <UsRecentActivitySection stateCode={stateCode} stateName={stateName} />
 
-      <UsStateListSection
-        stateCode={stateCode.toUpperCase()}
-        states={US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
-        urls={urls}
-      />
+      <UsReferralLeaderboardSection stateCode={stateCode} stateName={stateName} />
+
+      <UsStateListSection stateCode={stateCode.toUpperCase()} />
     </Layout>
   )
 }

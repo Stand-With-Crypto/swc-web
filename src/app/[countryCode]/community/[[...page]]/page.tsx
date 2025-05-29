@@ -12,10 +12,8 @@ import {
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 30 // 30 seconds
-// export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -38,25 +36,26 @@ export default async function CommunityRecentActivityPage(props: Props) {
   const params = await props.params
   const searchParams = await props.searchParams
 
+  const stateCode = searchParams?.state as string | undefined
+
   const { publicRecentActivity, pageNum, offset, totalPages } = await getPageData(
     params,
     searchParams,
   )
 
   const dataProps: PageLeaderboardInferredProps = {
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    leaderboardData: undefined,
     publicRecentActivity,
     sumDonationsByUser: undefined,
-    leaderboardData: undefined,
+    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
   }
 
   return (
     <UsPageCommunity
       {...dataProps}
-      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
       offset={offset}
       pageNum={pageNum}
-      stateCode={searchParams?.state as string | undefined}
+      stateCode={stateCode}
       totalPages={totalPages}
     />
   )

@@ -145,10 +145,13 @@ export const getIntlUrls = (
       return `${countryPrefix}${tabPrefix}${tabSuffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
     },
     partners: () => `${countryPrefix}/partners`,
-    politiciansHomepage: (filters?: Partial<{ state: string }>) => {
+    politiciansHomepage: ({
+      filters,
+      hash,
+    }: { filters?: Partial<{ state: string }>; hash?: string } = {}) => {
       const params = new URLSearchParams(filters).toString()
 
-      return `${countryPrefix}/politicians${params ? `?${params}` : ''}`
+      return `${countryPrefix}/politicians${params ? `?${params}` : ''}${hash ? `#${hash}` : ''}`
     },
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
