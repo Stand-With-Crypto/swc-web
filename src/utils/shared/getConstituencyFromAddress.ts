@@ -7,23 +7,28 @@ import { apiUrls } from '@/utils/shared/urls'
 
 export type ConstituencyFromAddress = Awaited<ReturnType<typeof getConstituencyFromAddress>>
 
+export type GetConstituencyFromAddressSuccess = NonNullable<SWCCivicConstituency>
+
 const logger = getLogger('getConstituencyFromAddress')
 
 export async function maybeGetConstituencyFromAddress(
-  address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null,
+  address?: Pick<Address, 'countryCode' | 'formattedDescription' | 'googlePlaceId'> | null,
 ) {
   if (!address) {
     return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
   }
 
-  const constituency = await getConstituencyFromAddress(address.formattedDescription)
+  const constituency = await getConstituencyFromAddress(
+    address.formattedDescription,
+    address.googlePlaceId,
+  )
 
   return constituency
 }
 
-export async function getConstituencyFromAddress(address: string) {
+export async function getConstituencyFromAddress(address: string, placeId?: string | null) {
   try {
-    const response = await fetchReq(apiUrls.swcCivicConstituencyFromAddress(address))
+    const response = await fetchReq(apiUrls.swcCivicConstituencyFromAddress({ address, placeId }))
 
     const data = (await response.json()) as SWCCivicConstituency
 

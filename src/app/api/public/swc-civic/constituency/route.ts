@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server'
 
-import { getLatLongFromAddress } from '@/utils/server/getLatLongFromAddress'
+import { getLatLongFromAddress } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 import { querySWCCivicConstituencyFromLatLong } from '@/utils/server/swcCivic/queries/queryConstituencyFromLatLong'
 
 export const GET = async (req: Request) => {
   const url = new URL(req.url)
   const address = url.searchParams.get('address')
+  const placeId = url.searchParams.get('placeId')
 
   if (!address) {
     return NextResponse.json({ error: 'Address is required' }, { status: 400 })
@@ -15,7 +16,7 @@ export const GET = async (req: Request) => {
   let longitude: number | null = null
 
   try {
-    const { latitude: lat, longitude: lng } = await getLatLongFromAddress(address)
+    const { latitude: lat, longitude: lng } = await getLatLongFromAddress(address, placeId)
 
     latitude = lat
     longitude = lng

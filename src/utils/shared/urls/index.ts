@@ -183,8 +183,14 @@ export const apiUrls = {
 
     return `/api/public/dtsi/by-geography/${countryCode}/${congressionalDistrict}`
   },
-  swcCivicConstituencyFromAddress: (address: string) =>
-    `/api/public/swc-civic/constituency?address=${encodeURIComponent(address.trim())}`,
+  swcCivicConstituencyFromAddress: ({
+    address,
+    placeId,
+  }: {
+    address: string
+    placeId?: string | null
+  }) =>
+    `/api/public/swc-civic/constituency?address=${encodeURIComponent(address.trim())}&placeId=${placeId ?? ''}`,
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,
