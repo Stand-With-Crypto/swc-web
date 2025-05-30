@@ -32,7 +32,9 @@ export async function UsReferralLeaderboardSection({
   return (
     <Section>
       <Section.Title>{SECTION_TITLE}</Section.Title>
-      <Section.SubTitle>{`See which districts in ${stateName} have the most advocates`}</Section.SubTitle>
+      <Section.SubTitle>
+        See which districts in {stateName} have the most advocates
+      </Section.SubTitle>
 
       <ReferralLeaderboard>
         <ReferralLeaderboard.Content countryCode={countryCode} data={leaderboardData} />
