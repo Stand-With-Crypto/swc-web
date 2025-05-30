@@ -19,12 +19,10 @@ export function UsPoliticiansSection({
   stateCode,
   stateName,
 }: UsPoliticiansSectionProps) {
-  const sectionSubTitle = `See where ${stateName}'s politicians stand on crypto`
-
   return (
     <Section container={false}>
       <Section.Title>{SECTION_TITLE}</Section.Title>
-      <Section.SubTitle>{sectionSubTitle}</Section.SubTitle>
+      <Section.SubTitle>See where {stateName}'s politicians stand on crypto</Section.SubTitle>
 
       <PoliticiansSection
         countryCode={countryCode}

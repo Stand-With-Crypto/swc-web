@@ -14,7 +14,6 @@ import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 30 // 30 seconds
-export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -35,14 +34,29 @@ export async function generateStaticParams() {
 
 export default async function CommunityRecentActivityPage(props: Props) {
   const params = await props.params
-  const { publicRecentActivity, pageNum, offset } = await getPageData(params)
+  const searchParams = await props.searchParams
+
+  const stateCode = searchParams?.state as string | undefined
+
+  const { publicRecentActivity, pageNum, offset, totalPages } = await getPageData({
+    ...params,
+    state: stateCode,
+  })
 
   const dataProps: PageLeaderboardInferredProps = {
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    leaderboardData: undefined,
     publicRecentActivity,
     sumDonationsByUser: undefined,
-    leaderboardData: undefined,
+    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
   }
 
-  return <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} />
+  return (
+    <UsPageCommunity
+      {...dataProps}
+      offset={offset}
+      pageNum={pageNum}
+      stateCode={stateCode}
+      totalPages={totalPages}
+    />
+  )
 }

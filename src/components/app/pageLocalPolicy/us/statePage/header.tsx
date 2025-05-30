@@ -42,17 +42,16 @@ export function UsHeader({ initialTotalAdvocates, stateCode, stateName }: UsHead
     stateCode,
   )
 
-  const headerTitle = stateName
-  const headerDescription = `${getHeaderDescription(data.advocatesCountByState)} in ${stateName}`
-
   const isCTAVisible = hasHydrated && !session.isLoggedIn
 
   return (
     <Header>
       <Header.Shield countryCode={countryCode} stateCode={stateCode} />
 
-      <Header.Title>{headerTitle}</Header.Title>
-      <Header.SubTitle>{headerDescription}</Header.SubTitle>
+      <Header.Title>{stateName}</Header.Title>
+      <Header.SubTitle>
+        {getHeaderDescription(data.advocatesCountByState)} in {stateName}
+      </Header.SubTitle>
 
       {isCTAVisible && <Header.CTA>{CTA_LABEL}</Header.CTA>}
     </Header>

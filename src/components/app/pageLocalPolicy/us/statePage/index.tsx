@@ -2,6 +2,7 @@ import { Layout } from '@/components/app/pageLocalPolicy/common/statePage/layout
 import { LocalPolicyStatePageProps } from '@/components/app/pageLocalPolicy/common/statePage/types'
 import { UsHeader } from '@/components/app/pageLocalPolicy/us/statePage/header'
 import { UsPoliticiansSection } from '@/components/app/pageLocalPolicy/us/statePage/politiciansSection'
+import { UsRecentActivitySection } from '@/components/app/pageLocalPolicy/us/statePage/recentActivitySection'
 import { UsReferralLeaderboardSection } from '@/components/app/pageLocalPolicy/us/statePage/referralLeaderboardSection'
 import { UsStateListSection } from '@/components/app/pageLocalPolicy/us/statePage/stateListSection'
 import { getAdvocatesCountByState } from '@/data/aggregations/getAdvocatesCountByState'
@@ -34,6 +35,8 @@ export async function UsLocalPolicyStatePage({
         stateCode={stateCode}
         stateName={stateName}
       />
+
+      <UsRecentActivitySection stateCode={stateCode} stateName={stateName} />
 
       <UsReferralLeaderboardSection stateCode={stateCode} stateName={stateName} />
 

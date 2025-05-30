@@ -195,8 +195,15 @@ export const apiUrls = {
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/public/dtsi/all-people/${countryCode}`,
-  recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
-    `/api/public/recent-activity/${limit}/${countryCode}`,
+  recentActivity: ({
+    limit,
+    countryCode,
+    stateCode,
+  }: {
+    limit: number
+    countryCode: string
+    stateCode?: string
+  }) => `/api/public/recent-activity/${limit}/${countryCode}${stateCode ? `/${stateCode}` : ''}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
