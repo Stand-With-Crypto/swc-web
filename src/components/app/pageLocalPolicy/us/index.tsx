@@ -22,6 +22,7 @@ export function UsLocalPolicy() {
 
       <StateSearch
         countryCode={countryCode}
+        searchResult={searchResult}
         setSearchErrorCode={setSearchErrorCode}
         setSearchResult={setSearchResult}
       />

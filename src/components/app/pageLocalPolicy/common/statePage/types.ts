@@ -3,6 +3,7 @@ import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTa
 type Scores = ReturnType<typeof sortDTSIPersonDataTable>
 
 export interface LocalPolicyStatePageProps {
+  initialTotalAdvocates: { advocatesCount: number }
   politiciansData: {
     highestScores: Scores
     lowestScores: Scores
