@@ -12,7 +12,7 @@ The main query logic is implemented in [`queryElectoralZoneFromLatLong.ts`](../s
 
 ### For Core Contributors
 
-If you're a core contributor and need to make changes to the database, go to the Neon platform and create a branch from `development`.
+If you're a core contributor and need to make changes to the database, go to the [Neon platform](https://console.neon.tech/) and create a branch from `development`.
 
 ### For Local Development
 
