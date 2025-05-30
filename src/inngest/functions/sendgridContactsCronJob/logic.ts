@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
 import {
@@ -220,6 +221,15 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error)
         logger.error(`Error syncing ${countryCode} contacts:`, errorMessage)
+        Sentry.captureException(error, {
+          extra: {
+            countryCode,
+            batchParams,
+            contactListId,
+            error: errorMessage,
+          },
+          tags: { domain: 'SendgridMarketing' },
+        })
         return {
           success: false,
           jobId: null,
