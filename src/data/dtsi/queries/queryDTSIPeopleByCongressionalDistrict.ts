@@ -1,25 +1,35 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import {
-  DTSI_PeopleByUsCongressionalDistrictQuery,
-  DTSI_PeopleByUsCongressionalDistrictQueryVariables,
+  DTSI_PeopleByPrimaryDistrictQuery,
+  DTSI_PeopleByPrimaryDistrictQueryVariables,
 } from '@/data/dtsi/generated'
+import { PERSON_ROLE_GROUPINGS_FOR_CURRENT_PEOPLE_BY_CONGRESS_DISTRICT_QUERY } from '@/data/dtsi/queries/constants'
 import { orderDTSICongressionalDistrictResults } from '@/utils/shared/orderSenatorsByImportanceForOutreach'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const query = /* GraphQL */ `
-  query PeopleByUSCongressionalDistrict($congressionalDistrict: Int!, $stateCode: String!) {
-    peopleByUSCongressionalDistrict(
-      congressionalDistrict: $congressionalDistrict
-      stateCode: $stateCode
+const queryByPrimaryDistrict = /* GraphQL */ `
+  query PeopleByPrimaryDistrict(
+    $congressionalDistrict: String!
+    $personRoleGroupingOr: [PersonGrouping!]
+    $stateCode: String
+    $includeStateReps: Boolean!
+  ) {
+    people(
+      limit: 1500
+      offset: 0
+      personRolePrimaryDistrict: $congressionalDistrict
+      personRolePrimaryState: $stateCode
+      personRoleGroupingOr: $personRoleGroupingOr
     ) {
       ...PersonCard
     }
     stateReps: people(
-      limit: 999
+      limit: 1500
       offset: 0
-      personRolePrimaryState: $stateCode
-      personRoleGroupingOr: [CURRENT_US_STATE_ATTORNEY_GENERAL, CURRENT_US_STATE_GOVERNOR]
-    ) {
+      specificPersonRole: { primaryState: $stateCode, primaryDistrict: "" }
+      personRoleGroupingOr: $personRoleGroupingOr
+    ) @include(if: $includeStateReps) {
       ...PersonCard
     }
   }
@@ -28,21 +38,30 @@ const query = /* GraphQL */ `
 
 export const queryDTSIPeopleByCongressionalDistrict = async ({
   stateCode,
-  districtNumber,
+  congressionalDistrict,
+  countryCode,
 }: {
-  stateCode: string
-  districtNumber: number
+  // TODO: we should use LocationStateCode type here
+  stateCode?: string
+  congressionalDistrict: string
+  countryCode: SupportedCountryCodes
 }) => {
-  const data = await fetchDTSI<
-    DTSI_PeopleByUsCongressionalDistrictQuery,
-    DTSI_PeopleByUsCongressionalDistrictQueryVariables
-  >(query, {
+  const personRoleGroupingOr =
+    PERSON_ROLE_GROUPINGS_FOR_CURRENT_PEOPLE_BY_CONGRESS_DISTRICT_QUERY[countryCode]
+
+  const peopleByPrimaryDistrictData = await fetchDTSI<
+    DTSI_PeopleByPrimaryDistrictQuery,
+    DTSI_PeopleByPrimaryDistrictQueryVariables
+  >(queryByPrimaryDistrict, {
     stateCode,
-    congressionalDistrict: districtNumber,
+    congressionalDistrict,
+    personRoleGroupingOr,
+    includeStateReps: !!stateCode,
   })
+
   const people = [
-    ...orderDTSICongressionalDistrictResults(data.peopleByUSCongressionalDistrict),
-    ...orderDTSICongressionalDistrictResults(data.stateReps),
+    ...peopleByPrimaryDistrictData.people,
+    ...(peopleByPrimaryDistrictData.stateReps || []),
   ]
 
   return orderDTSICongressionalDistrictResults(people)

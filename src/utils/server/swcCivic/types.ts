@@ -1,11 +1,3 @@
-interface LatLong {
-  latitude: number
-  longitude: number
-}
+import { electoralZones } from '@/data/prisma/generated/swc-civic'
 
-export interface GetConstituencyResult {
-  name: string
-  stateCode?: string
-}
-
-export type GetConstituencyQuery = (params: LatLong) => Promise<GetConstituencyResult | undefined>
+export type ElectoralZone = Pick<electoralZones, 'zoneName' | 'stateCode' | 'countryCode'>
