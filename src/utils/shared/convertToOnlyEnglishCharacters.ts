@@ -113,6 +113,8 @@ export function convertToOnlyEnglishCharacters(word: string) {
     ŝ: 's',
     ĺ: 'l',
     ŕ: 'r',
+    Î: 'I',
+    É: 'E',
   }
 
   // Split name into array of characters

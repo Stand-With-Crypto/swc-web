@@ -24,9 +24,9 @@ import {
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  getDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+  formatGetDTSIPeopleFromUSAddressNotFoundReason,
+  getDTSIPeopleFromUSAddress,
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -108,7 +108,7 @@ export function Address({
     if (!('dtsiPeople' in liveCongressPersonData)) {
       setError('address', {
         type: 'manual',
-        message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
+        message: formatGetDTSIPeopleFromUSAddressNotFoundReason(liveCongressPersonData),
       })
       return
     } else {
@@ -212,7 +212,7 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromAddress(
+      const dtsiResponse = await getDTSIPeopleFromUSAddress(
         CALL_FLOW_POLITICIANS_CATEGORY,
         address.description,
       )

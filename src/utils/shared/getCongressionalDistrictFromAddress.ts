@@ -76,6 +76,7 @@ export interface GetCongressionalDistrictFromAddressParams {
   stateCode?: USStateCode
 }
 
+/** @deprecated Use maybeGetElectoralZoneFromAddress instead */
 export async function maybeGetCongressionalDistrictFromAddress(
   address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null,
   params?: GetCongressionalDistrictFromAddressParams,
@@ -96,6 +97,7 @@ export async function maybeGetCongressionalDistrictFromAddress(
   return usCongressionalDistrict
 }
 
+/** @deprecated Use getElectoralZoneFromAddress instead */
 export async function getCongressionalDistrictFromAddress(
   address?: string | null,
   params?: GetCongressionalDistrictFromAddressParams,

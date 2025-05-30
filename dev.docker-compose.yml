@@ -12,3 +12,24 @@ services:
       - '3306:3306'
     volumes:
       - ./.docker/dbdata:/var/lib/mysql
+
+  postgis:
+    image: postgis/postgis:17-3.5
+    container_name: swc_dev_postgis
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: swc_civic
+    ports:
+      - 5432:5432
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: swc_dev_pgadmin
+    tty: true
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@user.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    ports:
+      - 9001:80
