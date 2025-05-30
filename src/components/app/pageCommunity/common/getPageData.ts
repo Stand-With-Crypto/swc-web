@@ -6,16 +6,15 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { RECENT_ACTIVITY_PAGINATION } from './constants'
 import { validatePageNum } from './pageValidator'
 
-export async function getPageData(
-  {
-    page,
-    countryCode,
-  }: {
-    countryCode: SupportedCountryCodes
-    page: string[]
-  },
-  searchParams?: { state?: string },
-) {
+export async function getPageData({
+  countryCode,
+  page,
+  state,
+}: {
+  countryCode: SupportedCountryCodes
+  page: string[]
+  state?: string
+}) {
   const { itemsPerPage } = RECENT_ACTIVITY_PAGINATION
 
   const pageNum = validatePageNum(page ?? [])
@@ -28,12 +27,12 @@ export async function getPageData(
     limit: itemsPerPage,
     offset,
     countryCode,
-    ...(searchParams?.state && { stateCode: searchParams.state.toUpperCase() }),
+    ...(state && { stateCode: state.toUpperCase() }),
   })
 
   return {
     publicRecentActivity,
-    totalPages: searchParams?.state
+    totalPages: state
       ? Math.ceil(publicRecentActivity.count / itemsPerPage)
       : RECENT_ACTIVITY_PAGINATION.totalPages,
     pageNum,

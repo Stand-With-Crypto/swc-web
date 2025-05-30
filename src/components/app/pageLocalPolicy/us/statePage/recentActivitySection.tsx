@@ -33,7 +33,7 @@ export async function UsRecentActivitySection({
   return (
     <Section>
       <Section.Title>{RECENT_ACTIVITY_TITLE}</Section.Title>
-      <Section.SubTitle>{`See what actions people in ${stateName} are taking`}</Section.SubTitle>
+      <Section.SubTitle>See what actions people in {stateName} are taking</Section.SubTitle>
 
       <RecentActivity>
         <RecentActivity.Content

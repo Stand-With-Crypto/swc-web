@@ -38,10 +38,10 @@ export default async function CommunityRecentActivityPage(props: Props) {
 
   const stateCode = searchParams?.state as string | undefined
 
-  const { publicRecentActivity, pageNum, offset, totalPages } = await getPageData(
-    params,
-    searchParams,
-  )
+  const { publicRecentActivity, pageNum, offset, totalPages } = await getPageData({
+    ...params,
+    state: stateCode,
+  })
 
   const dataProps: PageLeaderboardInferredProps = {
     leaderboardData: undefined,
