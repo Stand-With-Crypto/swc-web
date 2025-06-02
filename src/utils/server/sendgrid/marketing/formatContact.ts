@@ -1,23 +1,23 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { SendgridField } from '@/utils/server/sendgrid/marketing/constants'
 import { SendgridContact } from '@/utils/server/sendgrid/marketing/contacts'
-import {
-  fetchSendgridCustomFields,
-  mapSendgridFieldToFieldIds,
-} from '@/utils/server/sendgrid/marketing/customFields'
 
 /**
- * Map custom fields to their respective Sendgrid ID.
+ * Map Contact's custom_fields entries to their respective Sendgrid ID.
+ * @param contact - The contact to format.
+ * @param customFieldsMap - Object mapping Sendgrid field names to their respective Sendgrid ID.
+ * @returns The formatted contact.
  */
-export async function formatContactCustomFields(contact: SendgridContact) {
-  const sendgridFieldDefinitions = await fetchSendgridCustomFields()
-  const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
-
+export function formatContactCustomFields(
+  contact: SendgridContact,
+  customFieldsMap: Record<SendgridField, string | null>,
+) {
   const { custom_fields, ...standardFields } = contact
   const customFieldsMappedToIds: Record<string, string | number> = {}
 
   typedObjectEntries(custom_fields).forEach(([fieldName, fieldValue]) => {
-    const fieldId = fieldIds[fieldName]
+    const fieldId = customFieldsMap[fieldName]
     if (fieldId) {
       customFieldsMappedToIds[fieldId] = fieldValue
     } else {
@@ -28,7 +28,7 @@ export async function formatContactCustomFields(contact: SendgridContact) {
         extra: {
           fieldName,
           fieldValue,
-          sendgridFieldDefinitions,
+          customFieldsMap,
         },
       })
     }

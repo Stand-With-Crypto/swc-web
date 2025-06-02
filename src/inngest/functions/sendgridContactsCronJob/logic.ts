@@ -9,6 +9,7 @@ import {
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { SendgridField } from '@/utils/server/sendgrid/marketing/constants'
 import {
   SendgridContact,
   upsertSendgridContactsArray,
@@ -63,6 +64,7 @@ export interface SyncSendgridContactsProcessorSchema {
     countryCode: SupportedCountryCodes
     batchParams: BatchParams
     contactListId: string
+    customFieldsMap: Record<SendgridField, string | null>
   }
 }
 
@@ -110,16 +112,16 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
   { id: SYNC_SENDGRID_CONTACTS_PROCESSOR_FUNCTION_ID, onFailure: onScriptFailure },
   { event: SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { countryCode, batchParams, contactListId } = event.data
-    logger.info(`Syncing ${countryCode} contacts`, event.data)
+    const { countryCode, batchParams, contactListId, customFieldsMap } = event.data
 
+    logger.info(`Syncing ${countryCode} contacts`, event.data)
     return await step.run(`sync-${countryCode}-contacts`, async () => {
       try {
         logger.info(`Querying users`)
         const users = await prismaClient.user.findMany({
           where: {
             countryCode,
-            primaryUserEmailAddress: { emailAddress: { not: '' }, isVerified: true },
+            primaryUserEmailAddress: { isVerified: true },
           },
           select: {
             id: true,
@@ -160,7 +162,10 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
           }
         }
 
-        const validContacts = users.map(user => convertUserToContact(user))
+        const validContacts = users
+          .filter(user => Boolean(user.primaryUserEmailAddress?.emailAddress))
+          .map(user => convertUserToContact(user))
+
         if (validContacts.length === 0) {
           logger.info(`No valid contacts found`)
           return {
@@ -187,7 +192,11 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         ) {
           logger.info(`Uploading contacts to SendGrid`)
           const uploadResult = await pRetry(
-            () => uploadSendgridContactsCSV(validContacts, { listIds: [contactListId] }),
+            () =>
+              uploadSendgridContactsCSV(validContacts, {
+                listIds: [contactListId],
+                customFieldsMap,
+              }),
             {
               minTimeout: MIN_TIMEOUT,
               maxTimeout: MAX_RETRY_TIME,
@@ -209,7 +218,11 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         } else {
           logger.info(`Upserting contacts to SendGrid`)
           const upsertResult = await pRetry(
-            () => upsertSendgridContactsArray(validContacts, { listIds: [contactListId] }),
+            () =>
+              upsertSendgridContactsArray(validContacts, {
+                listIds: [contactListId],
+                customFieldsMap,
+              }),
             {
               minTimeout: MIN_TIMEOUT,
               maxTimeout: MAX_RETRY_TIME,
