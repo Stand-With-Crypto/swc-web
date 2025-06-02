@@ -18,8 +18,7 @@ const queryByPrimaryDistrict = /* GraphQL */ `
     people(
       limit: 1500
       offset: 0
-      personRolePrimaryDistrict: $congressionalDistrict
-      personRolePrimaryState: $stateCode
+      specificPersonRole: { primaryState: $stateCode, primaryDistrict: $congressionalDistrict }
       personRoleGroupingOr: $personRoleGroupingOr
     ) {
       ...PersonCard
@@ -41,7 +40,6 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
   congressionalDistrict,
   countryCode,
 }: {
-  // TODO: we should use LocationStateCode type here
   stateCode?: string
   congressionalDistrict: string
   countryCode: SupportedCountryCodes
