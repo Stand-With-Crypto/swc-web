@@ -1,13 +1,11 @@
 'use client'
 import { Suspense, useCallback, useEffect } from 'react'
 import { noop } from 'lodash-es'
-import { useRouter } from 'next/navigation'
 
 import { SearchErrorCode, SearchResult } from '@/components/app/pageLocalPolicy/common/types'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
@@ -15,7 +13,6 @@ import {
 
 interface StateSearchProps {
   countryCode: SupportedCountryCodes
-  searchResult: SearchResult
   setSearchErrorCode: React.Dispatch<React.SetStateAction<SearchErrorCode>>
   setSearchResult: React.Dispatch<React.SetStateAction<SearchResult>>
 }
@@ -36,33 +33,12 @@ function PlacesSelect(
 
 function SuspenseStateSearch({
   countryCode,
-  searchResult,
   setSearchErrorCode,
   setSearchResult,
 }: StateSearchProps) {
   const { address, setAddress } = useMutableCurrentUserAddress()
 
-  const router = useRouter()
-
-  const urls = getIntlUrls(countryCode)
-
   const isAddressLoading = address === 'loading'
-
-  useEffect(() => {
-    async function handleRedirect() {
-      if (!address || isAddressLoading || searchResult) {
-        return
-      }
-
-      const details = await convertGooglePlaceAutoPredictionToAddressSchema(address)
-
-      if (details.countryCode.toLowerCase() === countryCode && details.administrativeAreaLevel1) {
-        router.push(urls.localPolicy(details.administrativeAreaLevel1))
-      }
-    }
-
-    void handleRedirect()
-  }, [address, countryCode, isAddressLoading, router, searchResult, urls])
 
   const onChangeAddress = useCallback(
     async (prediction: GooglePlaceAutocompletePrediction | null) => {

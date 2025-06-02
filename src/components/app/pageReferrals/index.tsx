@@ -11,24 +11,29 @@ import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRan
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface PageReferralsProps {
+  countryCode: SupportedCountryCodes
   leaderboardData: DistrictRankingEntryWithRank[]
   page: number
-  countryCode: SupportedCountryCodes
+  stateCode?: string
+  totalPages?: number
 }
 
 export function PageReferrals(props: PageReferralsProps) {
-  const { leaderboardData, page, countryCode } = props
+  const { countryCode, page, leaderboardData, stateCode } = props
   const tab = RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
   const urls = getIntlUrls(countryCode)
-  const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
+  const totalPages = props.totalPages || COMMUNITY_PAGINATION_DATA[tab].totalPages
+
+  const stateNameResolver = getStateNameResolver(countryCode)
 
   return (
     <div className="standard-spacing-from-navbar container space-y-8">
-      <PageReferralsHeading />
+      <PageReferralsHeading stateName={stateCode ? stateNameResolver(stateCode) : undefined} />
       <UserReferralUrlWithApi />
       <ReferralsCounter>
         <UserReferralsCount />
@@ -42,7 +47,7 @@ export function PageReferrals(props: PageReferralsProps) {
           getPageUrl={pageNumber =>
             pageNumber < 1 || pageNumber > totalPages
               ? ''
-              : urls.leaderboard({ pageNum: pageNumber, tab })
+              : urls.leaderboard({ pageNum: pageNumber, stateCode, tab })
           }
           totalPages={totalPages}
         />

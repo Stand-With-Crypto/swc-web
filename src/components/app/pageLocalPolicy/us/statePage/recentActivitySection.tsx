@@ -31,27 +31,29 @@ export async function UsRecentActivitySection({
   })
 
   return (
-    <Section>
-      <Section.Title>{RECENT_ACTIVITY_TITLE}</Section.Title>
-      <Section.SubTitle>See what actions people in {stateName} are taking</Section.SubTitle>
+    count > 0 && (
+      <Section>
+        <Section.Title>{RECENT_ACTIVITY_TITLE}</Section.Title>
+        <Section.SubTitle>See what actions people in {stateName} are taking</Section.SubTitle>
 
-      <RecentActivity>
-        <RecentActivity.Content
-          countryCode={countryCode}
-          publicRecentActivity={publicRecentActivity}
-        />
+        <RecentActivity>
+          <RecentActivity.Content
+            countryCode={countryCode}
+            publicRecentActivity={publicRecentActivity}
+          />
 
-        {count > ITEMS_PER_PAGE && (
-          <RecentActivity.Button
-            href={urls.leaderboard({
-              stateCode,
-              tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-            })}
-          >
-            {RECENT_ACTIVITY_BUTTON_LABEL}
-          </RecentActivity.Button>
-        )}
-      </RecentActivity>
-    </Section>
+          {count > ITEMS_PER_PAGE && (
+            <RecentActivity.Button
+              href={urls.leaderboard({
+                stateCode,
+                tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+              })}
+            >
+              {RECENT_ACTIVITY_BUTTON_LABEL}
+            </RecentActivity.Button>
+          )}
+        </RecentActivity>
+      </Section>
+    )
   )
 }
