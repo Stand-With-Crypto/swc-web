@@ -11,6 +11,7 @@ import {
   COUNTRIES_TO_SYNC,
   DB_READ_LIMIT,
   SENDGRID_API_RATE_LIMIT,
+  SENDGRID_API_RATE_LIMIT_COOLDOWN,
 } from '@/inngest/functions/sendgridContactsCronJob/config'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -136,7 +137,10 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
         customFieldsMap,
       })
       countriesResults.push(countryResult)
-      await step.sleep(`[${countryCode}]-sleep-sync-contacts-coordinator`, 30000)
+      await step.sleep(
+        `[${countryCode}]-sleep-sync-contacts-coordinator`,
+        SENDGRID_API_RATE_LIMIT_COOLDOWN,
+      )
     }
 
     const jobIdsToMonitor = countriesResults
@@ -225,7 +229,10 @@ async function processCountry(config: {
     requestsSent++
     if (requestsSent > SENDGRID_API_RATE_LIMIT) {
       logger.info(`Waiting for ${SENDGRID_API_RATE_LIMIT} to avoid rate limiting`)
-      await step.sleep(`[${countryCode}]-sleep-sync-contacts-coordinator`, 15000)
+      await step.sleep(
+        `[${countryCode}]-sleep-sync-contacts-coordinator`,
+        SENDGRID_API_RATE_LIMIT_COOLDOWN,
+      )
       requestsSent = 0
     }
   }
