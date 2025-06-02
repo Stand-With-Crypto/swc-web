@@ -17,6 +17,7 @@ import { cn } from '@/utils/web/cn'
 export interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUserWithENSData }
   countryCode: SupportedCountryCodes
+  showActionLocation?: boolean
 }
 
 export function RecentActivityRowBase({
@@ -24,6 +25,7 @@ export function RecentActivityRowBase({
   action,
   children,
   onFocusContent: OnFocusContent,
+  showActionLocation = false,
 }: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: React.ComponentType }) {
   const [hasFocus, setHasFocus] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: true })
@@ -54,7 +56,11 @@ export function RecentActivityRowBase({
               <OnFocusContent />
             </motion.div>
           ) : (
-            <ActionAdditionalInfo action={action} countryCode={countryCode} />
+            <ActionAdditionalInfo
+              action={action}
+              countryCode={countryCode}
+              showActionLocation={showActionLocation}
+            />
           )}
         </div>
       </div>
@@ -65,16 +71,20 @@ export function RecentActivityRowBase({
 interface ActionAdditionalInfoProps {
   action: RecentActivityRowProps['action']
   countryCode: SupportedCountryCodes
+  showActionLocation?: boolean
 }
 
-function ActionAdditionalInfo({ action, countryCode }: ActionAdditionalInfoProps) {
+function ActionAdditionalInfo({
+  action,
+  countryCode,
+  showActionLocation,
+}: ActionAdditionalInfoProps) {
   const hasHydrated = useHasHydrated()
   if (!hasHydrated) {
     return <Skeleton>a while ago</Skeleton>
   }
 
-  // TODO: Change this to a prop instead of hardcoded based on the countryCode
-  if (countryCode === SupportedCountryCodes.GB) {
+  if (showActionLocation) {
     const { administrativeAreaLevel1, countryCode: userLocationCountryCode } =
       action.user.userLocationDetails ?? {}
     const hasUserChangedLocationSinceActionCompleted =

@@ -10,11 +10,12 @@ import { sendSMS, SendSMSError, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import {
   countSegments,
+  getCountryCodeFromPhoneNumber,
   getUserByPhoneNumber,
-  isPhoneNumberCountrySupported,
 } from '@/utils/server/sms/utils'
 import { applySMSVariables, UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getLogger } from '@/utils/shared/logger'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
@@ -166,7 +167,9 @@ export async function enqueueMessages(
 
   const enqueueMessagesPromise = payload
     .map(async ({ messages, phoneNumber }) => {
-      if (!isPhoneNumberCountrySupported(phoneNumber, countryCode)) {
+      const phoneNumberCountryCode = getCountryCodeFromPhoneNumber(phoneNumber, countryCode)
+
+      if (!phoneNumberCountryCode || !isSmsSupportedInCountry(phoneNumberCountryCode)) {
         return
       }
 

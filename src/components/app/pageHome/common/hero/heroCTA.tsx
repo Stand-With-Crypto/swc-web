@@ -2,7 +2,7 @@
 import { SMSStatus } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { SMSOptInCTA } from '@/components/app/smsOptInCTA'
+import { SMSOptInCTA } from '@/components/app/sms/smsOptInCTA'
 import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -30,9 +30,11 @@ function getCountryCTA(countryCode: SupportedCountryCodes) {
 export function HeroCTA({
   countryCode,
   ctaText = getCountryCTA(countryCode),
+  darkMode = false,
 }: {
   countryCode: SupportedCountryCodes
   ctaText?: string
+  darkMode?: boolean
 }) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
@@ -59,9 +61,7 @@ export function HeroCTA({
     ) {
       return (
         <SMSOptInCTA
-          initialValues={{
-            phoneNumber: user.phoneNumber,
-          }}
+          darkMode={darkMode}
           onSuccess={({ phoneNumber }) =>
             void profileReq.mutate({
               user: {
@@ -70,6 +70,7 @@ export function HeroCTA({
               },
             })
           }
+          user={user}
         />
       )
     }

@@ -2,7 +2,7 @@ import { CapitolCanaryInstance, SMSStatus, User } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
-import { CAPITOL_CANARY_SUPPORTED_COUNTRY_CODES } from '@/inngest/functions/capitolCanary/constants'
+import { isAdvocateSupported } from '@/inngest/functions/capitolCanary/isAdvocateSupported'
 import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
@@ -39,7 +39,12 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   async ({ event, step }) => {
     const data = event.data
 
-    if (!CAPITOL_CANARY_SUPPORTED_COUNTRY_CODES.includes(data.user.countryCode)) {
+    if (
+      !isAdvocateSupported({
+        advocateId: data.user.capitolCanaryAdvocateId,
+        countryCode: data.user.countryCode,
+      })
+    ) {
       return {
         success: 1,
         advocateid: null,
