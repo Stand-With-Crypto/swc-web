@@ -9,6 +9,7 @@ import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { Spinner } from '@/components/ui/spinner'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
@@ -58,7 +59,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
     address: address === 'loading' ? null : address?.description,
   })
 
-  if (!address || address === 'loading' || !res?.data) {
+  if (!address || address === 'loading') {
     return (
       <DefaultPlacesSelect
         loading={address === 'loading'}
@@ -67,6 +68,15 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
       />
     )
   }
+
+  if (!res.data || res.isLoading) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        <Spinner className="h-8 w-8" />
+      </div>
+    )
+  }
+
   if ('notFoundReason' in res.data) {
     return (
       <PageSubTitle as="h4" size="sm">
