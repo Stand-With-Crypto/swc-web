@@ -5,14 +5,18 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
 
-export function PageReferralsHeading() {
+interface PageReferralsHeadingProps {
+  stateName?: string
+}
+
+export function PageReferralsHeading({ stateName }: PageReferralsHeadingProps) {
   const { isLoggedIn, isLoading } = useSession()
   const hasHydrated = useHasHydrated()
 
   if (!isLoggedIn || isLoading || !hasHydrated) {
     return (
       <section className="space-y-7 text-center">
-        <PageTitle>District Leaderboard</PageTitle>
+        <PageTitle>{stateName || 'District'} Leaderboard</PageTitle>
         <PageSubTitle>
           See which districts have the most number of Stand With Crypto advocates.
         </PageSubTitle>

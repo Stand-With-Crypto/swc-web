@@ -167,10 +167,11 @@ export const getIntlUrls = (
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
-    referrals: (pageNum?: number) => {
+    referrals: ({ pageNum, stateCode }: Partial<{ pageNum: number; stateCode: string }> = {}) => {
       const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
-      return `${countryPrefix}/referrals${pageSuffix}`
+      const stateSuffix = stateCode ? `?state=${stateCode.toLowerCase()}` : ''
+      return `${countryPrefix}/referrals${pageSuffix}${stateSuffix}`
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,

@@ -4,6 +4,8 @@ import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
+const MIN_SCORES = 3
+
 type Scores = ReturnType<typeof sortDTSIPersonDataTable>
 
 interface PoliticiansGridProps {
@@ -13,6 +15,7 @@ interface PoliticiansGridProps {
   }>
   countryCode: SupportedCountryCodes
   highestScores: Scores
+  minScores?: number
   lowestScores: Scores
   showGroupTitle?: boolean
   stateCode?: string
@@ -22,6 +25,7 @@ export function PoliticiansGrid({
   CryptoStanceGrade,
   countryCode,
   highestScores,
+  minScores = MIN_SCORES,
   lowestScores,
   showGroupTitle = true,
   stateCode,
@@ -30,7 +34,7 @@ export function PoliticiansGrid({
 
   return (
     <Politicians>
-      {highestScores.length >= 3 && (
+      {highestScores.length >= minScores && (
         <Politicians.Group>
           {showGroupTitle && <Politicians.GroupTitle stanceScore={100} text="Pro-crypto" />}
           <Politicians.GroupContent
@@ -41,7 +45,7 @@ export function PoliticiansGrid({
         </Politicians.Group>
       )}
 
-      {lowestScores.length >= 3 && (
+      {lowestScores.length >= minScores && (
         <Politicians.Group>
           {showGroupTitle && <Politicians.GroupTitle stanceScore={0} text="Anti-crypto" />}
           <Politicians.GroupContent

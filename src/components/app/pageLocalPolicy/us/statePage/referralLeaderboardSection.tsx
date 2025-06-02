@@ -1,4 +1,3 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { ReferralLeaderboard } from '@/components/app/pageLocalPolicy/common/statePage/referralLeaderboardSection'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
@@ -41,9 +40,8 @@ export async function UsReferralLeaderboardSection({
 
         {total > ITEMS_PER_PAGE && (
           <ReferralLeaderboard.Button
-            href={urls.leaderboard({
+            href={urls.referrals({
               stateCode,
-              tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
             })}
           >
             {SECTION_BUTTON_LABEL}
