@@ -18,7 +18,8 @@ const queryByPrimaryDistrict = /* GraphQL */ `
     people(
       limit: 1500
       offset: 0
-      specificPersonRole: { primaryState: $stateCode, primaryDistrict: $congressionalDistrict }
+      personRolePrimaryDistrict: $congressionalDistrict
+      personRolePrimaryState: $stateCode
       personRoleGroupingOr: $personRoleGroupingOr
     ) {
       ...PersonCard
@@ -26,7 +27,8 @@ const queryByPrimaryDistrict = /* GraphQL */ `
     stateReps: people(
       limit: 1500
       offset: 0
-      specificPersonRole: { primaryState: $stateCode, primaryDistrict: "" }
+      personRolePrimaryDistrict: ""
+      personRolePrimaryState: $stateCode
       personRoleGroupingOr: $personRoleGroupingOr
     ) @include(if: $includeStateReps) {
       ...PersonCard
