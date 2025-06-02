@@ -111,9 +111,11 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
   { event: SYNC_SENDGRID_CONTACTS_PROCESSOR_EVENT_NAME },
   async ({ event, step, logger }) => {
     const { countryCode, batchParams, contactListId } = event.data
+    logger.info(`Syncing ${countryCode} contacts`, event.data)
 
     return await step.run(`sync-${countryCode}-contacts`, async () => {
       try {
+        logger.info(`Querying users`)
         const users = await prismaClient.user.findMany({
           where: {
             countryCode,
@@ -149,6 +151,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         })
 
         if (users.length === 0) {
+          logger.info(`No users found`)
           return {
             success: false,
             jobId: null,
@@ -159,6 +162,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
 
         const validContacts = users.map(user => convertUserToContact(user))
         if (validContacts.length === 0) {
+          logger.info(`No valid contacts found`)
           return {
             success: true,
             validContactsCount: 0,
@@ -167,17 +171,21 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
           }
         }
 
+        logger.info(`Valid contacts found: ${validContacts.length}`)
+
         /**
          * SendGrid has a limit of 30,000 contacts per batch or 6MB of data, whichever is smaller.
          * The CSV upload limit is 1,000,000 contacts or 5GB of data, whichever is smaller.
          * The direct API upsert (non-CSV) has a stricter gRPC message limit around 4MB.
          */
         const contactsDataSize = Buffer.from(JSON.stringify(validContacts), 'utf-8').length
+        logger.info(`Contacts data size: ${contactsDataSize}`)
 
         if (
           validContacts.length > SENDGRID_CONTACTS_API_LIMIT ||
           contactsDataSize > SENDGRID_CONTACTS_API_LIMIT_BYTES
         ) {
+          logger.info(`Uploading contacts to SendGrid`)
           const uploadResult = await pRetry(
             () => uploadSendgridContactsCSV(validContacts, { listIds: [contactListId] }),
             {
@@ -191,6 +199,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
               },
             },
           )
+          logger.info(`Upload result:`, uploadResult)
           return {
             success: uploadResult.success,
             validContactsCount: validContacts.length,
@@ -198,6 +207,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
             method: 'csv-upload',
           }
         } else {
+          logger.info(`Upserting contacts to SendGrid`)
           const upsertResult = await pRetry(
             () => upsertSendgridContactsArray(validContacts, { listIds: [contactListId] }),
             {
@@ -211,6 +221,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
               },
             },
           )
+          logger.info(`Upsert result:`, upsertResult)
           return {
             success: true,
             validContactsCount: validContacts.length,
