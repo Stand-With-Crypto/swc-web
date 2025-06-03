@@ -6,7 +6,7 @@ import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dt
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { EmailActionFormValues } from '@/components/app/userActionFormEmailCongressperson'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
-import { getEmailBodyText } from '@/components/app/userActionFormEmailCongressperson/us/campaignMetadata'
+import { GetTextProps } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
@@ -31,6 +31,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
+import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 
 export function EmailCongressperson({ children }: { children: ReactNode }) {
   return (
@@ -90,7 +91,7 @@ EmailCongressperson.Heading = function Heading({
   )
 }
 
-EmailCongressperson.PersonalInformation = function PersonalInformation() {
+EmailCongressperson.PersonalInformationFields = function PersonalInformation() {
   const { control } = useFormContext<EmailActionFormValues>()
 
   return (
@@ -157,24 +158,16 @@ EmailCongressperson.PersonalInformation = function PersonalInformation() {
   )
 }
 
-EmailCongressperson.Representative = function Representative({
+EmailCongressperson.Representatives = function Representative({
   countryCode,
   politicianCategory,
+  dtsiPeopleFromAddressResponse,
 }: {
   countryCode: SupportedCountryCodes
   politicianCategory: YourPoliticianCategory
+  dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
 }) {
   const { control, setValue, getValues } = useFormContext<EmailActionFormValues>()
-
-  const addressField = useWatch({
-    control: control,
-    name: 'address',
-  })
-
-  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress(
-    politicianCategory,
-    addressField?.description,
-  )
 
   const dtsiPeople = useMemo(() => {
     return dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
@@ -212,7 +205,10 @@ EmailCongressperson.Representative = function Representative({
   )
 }
 
-EmailCongressperson.Message = function Message() {
+interface MessageProps {
+  getEmailBodyText: (props: GetTextProps & { address?: string }) => string
+}
+EmailCongressperson.Message = function Message({ getEmailBodyText }: MessageProps) {
   const hasModifiedMessage = useRef(false)
 
   const { control, setValue } = useFormContext<EmailActionFormValues>()
@@ -247,7 +243,7 @@ EmailCongressperson.Message = function Message() {
         address: addressField?.description,
       }),
     )
-  }, [firstName, lastName, addressField, setValue])
+  }, [firstName, lastName, addressField, setValue, getEmailBodyText])
 
   return (
     <FormField

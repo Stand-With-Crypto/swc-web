@@ -6,23 +6,25 @@ import { useRouter } from 'next/navigation'
 import { GeoGate } from '@/components/app/geoGate'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
-import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
-import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
-import { USUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/us'
+import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/common/skeleton'
+import { FormFields } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 
-function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
+function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) {
   usePreventOverscroll()
 
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const router = useRouter()
-  const countryCode = useCountryCode()
   const urls = getIntlUrls(countryCode)
   const { user } = fetchUser.data || { user: null }
 
@@ -44,7 +46,7 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   }
 
   return (
-    <USUserActionFormEmailCongressperson
+    <UserActionFormEmailCongressperson
       countryCode={countryCode}
       initialValues={initialValues}
       onCancel={() => router.replace(urls.home())}
@@ -53,17 +55,18 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   )
 }
 
-export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
-  const countryCode = useCountryCode()
+export function UserActionFormEmailCongresspersonDeeplinkWrapper({
+  countryCode,
+}: {
+  countryCode: SupportedCountryCodes
+}) {
   return (
     <GeoGate
-      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      unavailableContent={
-        <UserActionFormActionUnavailable countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
-      }
+      countryCode={countryCode}
+      unavailableContent={<UserActionFormActionUnavailable countryCode={countryCode} />}
     >
       <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
-        <UserActionFormEmailCongresspersonDeeplinkWrapperContent />
+        <UserActionFormEmailCongresspersonDeeplinkWrapperContent countryCode={countryCode} />
       </Suspense>
     </GeoGate>
   )

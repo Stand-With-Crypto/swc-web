@@ -68,7 +68,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
         ),
@@ -81,7 +81,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'You helped bring more advocates to the cause by tweeting about SWC.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
         ),
@@ -139,7 +139,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'You emailed your representative about FIT21.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -188,7 +188,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -201,7 +201,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'The 119th Congress needs to hear from you!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -214,7 +214,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your senator to sign the discharge petition',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -227,7 +227,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -240,7 +240,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -253,7 +253,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -266,7 +266,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Support Crucial Crypto Legislation.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -279,7 +279,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Support Crucial Crypto Legislation',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
             {children}
           </UserActionFormEmailCongresspersonDialog>
         ),
@@ -432,7 +432,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper
             authenticatedContent={
-              <UserActionFormReferDialog countryCode={SupportedCountryCodes.US}>
+              <UserActionFormReferDialog countryCode={countryCode}>
                 {children}
               </UserActionFormReferDialog>
             }

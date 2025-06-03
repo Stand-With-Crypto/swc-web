@@ -173,7 +173,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           default:
             return {
               onFocusContent: () => (
-                <UserActionFormEmailCongresspersonDialog>
+                <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
                   <Button>Email yours</Button>
                 </UserActionFormEmailCongresspersonDialog>
               ),

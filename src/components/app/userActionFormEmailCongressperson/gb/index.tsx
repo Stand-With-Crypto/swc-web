@@ -38,14 +38,13 @@ import {
   getEmailBodyText,
 } from './campaignMetadata'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { useMemo } from 'react'
 
-const countryCode = SupportedCountryCodes.US
+const countryCode = SupportedCountryCodes.GB
 
 export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
-export function USUserActionFormEmailCongressperson({
+export function GBUserActionFormEmailCongressperson({
   user,
   initialValues,
   politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
