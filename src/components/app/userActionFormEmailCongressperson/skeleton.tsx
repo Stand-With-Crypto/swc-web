@@ -6,7 +6,7 @@ import {
   DIALOG_TITLE,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
   getEmailBodyText,
-} from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
+} from '@/components/app/userActionFormEmailCongressperson/us/campaignMetadata'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
