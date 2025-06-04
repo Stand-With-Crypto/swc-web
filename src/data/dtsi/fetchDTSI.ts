@@ -42,8 +42,6 @@ export const fetchDTSI = async <R, V = object>(
   if (USE_DTSI_PRODUCTION_API && NEXT_PUBLIC_ENVIRONMENT !== 'production') {
     logger.debug(`OVERRIDE: production DTSI API`)
   }
-
-  logger.info(`fetchDTSI called with API_ENDPOINT: ${API_ENDPOINT}`)
   logger.debug(`fetchDTSI called`)
   const response = await pRetry(
     attemptCount =>
