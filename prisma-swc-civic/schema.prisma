@@ -1,0 +1,33 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../src/data/prisma/generated/swc-civic"
+  previewFeatures = ["driverAdapters", "postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("SWC_CIVIC_DATABASE_URL")
+  extensions = [postgis(schema: "public")]
+}
+
+// This table is automatically created by the postgis extension
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+}
+
+model electoralZones {
+  id              Int                                      @id @default(autoincrement())
+  zoneName        String                                   @map("zone_name")
+  stateCode       String?                                  @map("state_code")
+  zoneCoordinates Unsupported("geometry(GeometryZ,4326)")? @map("zone_coordinates")
+  countryCode     String                                   @map("country_code")
+  createdAt       DateTime                                 @default(now()) @map("created_at")
+  updatedAt       DateTime                                 @updatedAt @map("updated_at")
+
+  @@index([zoneCoordinates], map: "electoral_zones_coordinates_geom_idx", type: Gist)
+  @@map("electoral_zones")
+}

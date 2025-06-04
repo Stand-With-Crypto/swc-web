@@ -91,7 +91,7 @@ If you have been assigned to fix an issue or develop a new feature, please follo
 
 ### Useful development tips
 
-- `npx prisma generate` - generates [Prisma ORM](https://www.prisma.io/) TypeScript definitions (_i.e._ DB client code) based on `prisma/prisma.schema`
+- `npm run db:generate` - generates [Prisma ORM](https://www.prisma.io/) TypeScript definitions (_i.e._ DB client code) based on `prisma/prisma.schema`
   - Whenever you make Prisma schema changes, you should run the generate command
 - `npx prisma studio` - spins up a full database UI for the database you are connected to
 - `npm run db:seed` - resets the database you are connected to, then populates it with seed data
@@ -113,7 +113,7 @@ If you are not a core contributor, reach out to one to make any DB schema update
 > Be mindful of merging schema changes to `testing` and `production` as it affects directly other developers, so try as much as possible to keep in sync with the work of the team.
 
 1. First of all you should change `schema.prisma` with the database changes you want to make
-2. Run `npx prisma generate`, that will generate updated TypeScript definitions for your local env
+2. Run `npm run db:generate`, that will generate updated TypeScript definitions for your local env
 3. With the `DATABASE_URL` env configured to your personal PlanetScale branch, run `npx prisma db push`, that will push the new schema to your DB
 4. Run `npm run db:seed` to fill the preview database with mocked data
 5. When testing your feature in preview, you should link your preview env to your personal database branch. To do that do the following
