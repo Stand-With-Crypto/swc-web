@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
-import { getLatLongFromAddress } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
+import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 
 export const GET = async (req: Request) => {
   const url = new URL(req.url)
@@ -15,7 +15,7 @@ export const GET = async (req: Request) => {
   let longitude: number | null = null
 
   try {
-    const { latitude: lat, longitude: lng } = await getLatLongFromAddress(address)
+    const { latitude: lat, longitude: lng } = await getLatLongFromAddressOrPlaceId({ address })
 
     latitude = lat
     longitude = lng
