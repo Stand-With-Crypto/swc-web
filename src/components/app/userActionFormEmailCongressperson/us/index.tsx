@@ -16,6 +16,7 @@ import { EmailCongressperson } from '@/components/app/userActionFormEmailCongres
 import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/common/sections/success'
 import { UserActionFormEmailCongresspersonProps } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -37,8 +38,6 @@ import {
   getDefaultFormValuesWithCampaignMetadata,
   getEmailBodyText,
 } from './campaignMetadata'
-import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { useMemo } from 'react'
 
 const countryCode = SupportedCountryCodes.US
 
@@ -133,8 +132,8 @@ export function USUserActionFormEmailCongressperson({
             <EmailCongressperson.PersonalInformationFields />
             <EmailCongressperson.Representatives
               countryCode={countryCode}
-              politicianCategory={politicianCategory}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
+              politicianCategory={politicianCategory}
             />
             <EmailCongressperson.Message getEmailBodyText={getEmailBodyText} />
             <EmailCongressperson.Disclaimer

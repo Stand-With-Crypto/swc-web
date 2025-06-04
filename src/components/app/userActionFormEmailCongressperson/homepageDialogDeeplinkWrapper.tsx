@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { GeoGate } from '@/components/app/geoGate'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
+import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/common/skeleton'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/common/types'
@@ -14,7 +15,6 @@ import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValu
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
   countryCode,

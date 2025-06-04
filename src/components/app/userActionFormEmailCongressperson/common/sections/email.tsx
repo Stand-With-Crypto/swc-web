@@ -31,7 +31,6 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 
 export function EmailCongressperson({ children }: { children: ReactNode }) {
   return (
