@@ -27,7 +27,7 @@ const queryByPrimaryElectoralZone = /* GraphQL */ `
     stateReps: people(
       limit: 1500
       offset: 0
-      specificPersonRole: { primaryState: $stateCode, primaryDistrict: "" }
+      specificPersonRole: { primaryState: $stateCode, primaryDistrict: "", status: HELD }
       personRoleGroupingOr: $personRoleGroupingOr
     ) @include(if: $includeStateReps) {
       ...PersonCard
