@@ -1,6 +1,6 @@
 'use client'
 
-import type { UserActionType } from '@prisma/client'
+import { UserActionType } from '@prisma/client'
 
 import { UserActionGridCampaignsDialogContent } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
 import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
@@ -24,7 +24,12 @@ function UserActionFormViewKeyPageHomepageDialogDeeplinkContent({
     performedUserActionTypes,
   })
 
-  const cta = getUserActionCTAsByCountry(countryCode)[actionName]
+  const viewKeyPageCta = getUserActionCTAsByCountry(countryCode)[actionName]
+  const emailCta = getUserActionCTAsByCountry(countryCode)[UserActionType.EMAIL]
+  const cta = {
+    ...viewKeyPageCta,
+    campaigns: [...viewKeyPageCta.campaigns, ...(emailCta?.campaigns ?? [])],
+  }
 
   return (
     <div className={dialogContentPaddingStyles}>

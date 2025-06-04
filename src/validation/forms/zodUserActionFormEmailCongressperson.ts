@@ -1,5 +1,8 @@
-import { array, nativeEnum, object, string } from 'zod'
+import { array, nativeEnum, object, string, union } from 'zod'
 
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { withEnhancedDescription } from '@/utils/shared/zod'
 import { GENERIC_ERROR_DESCRIPTION } from '@/utils/web/errorUtils'
@@ -19,7 +22,12 @@ const base = object({
     triggerException: true,
     message: GENERIC_ERROR_DESCRIPTION,
   }),
-  campaignName: nativeEnum(USUserActionEmailCampaignName),
+  campaignName: union([
+    nativeEnum(USUserActionEmailCampaignName),
+    nativeEnum(GBUserActionEmailCampaignName),
+    nativeEnum(AUUserActionEmailCampaignName),
+    nativeEnum(CAUserActionEmailCampaignName),
+  ]),
   politicianCategory: zodYourPoliticianCategory,
 }).merge(zodFirstAndLastNames)
 
