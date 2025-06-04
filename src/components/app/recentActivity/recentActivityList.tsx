@@ -2,5 +2,5 @@ import { RecentActivityRowAnimatedContainer } from '@/components/app/recentActiv
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
 export function RecentActivityList({ actions }: { actions: PublicRecentActivity }) {
-  return <RecentActivityRowAnimatedContainer actions={actions} />
+  return <RecentActivityRowAnimatedContainer actions={actions.data} />
 }
