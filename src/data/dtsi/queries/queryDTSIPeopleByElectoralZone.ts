@@ -1,16 +1,16 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import {
-  DTSI_PeopleByPrimaryDistrictQuery,
-  DTSI_PeopleByPrimaryDistrictQueryVariables,
+  DTSI_PeopleByElectoralZoneQuery,
+  DTSI_PeopleByElectoralZoneQueryVariables,
 } from '@/data/dtsi/generated'
 import { PERSON_ROLE_GROUPINGS_FOR_CURRENT_PEOPLE_BY_CONGRESS_DISTRICT_QUERY } from '@/data/dtsi/queries/constants'
 import { orderDTSICongressionalDistrictResults } from '@/utils/shared/orderSenatorsByImportanceForOutreach'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const queryByPrimaryDistrict = /* GraphQL */ `
-  query PeopleByPrimaryDistrict(
-    $congressionalDistrict: String!
+const queryByPrimaryElectoralZone = /* GraphQL */ `
+  query PeopleByElectoralZone(
+    $electoralZone: String!
     $personRoleGroupingOr: [PersonGrouping!]
     $stateCode: String
     $includeStateReps: Boolean!
@@ -18,7 +18,7 @@ const queryByPrimaryDistrict = /* GraphQL */ `
     people(
       limit: 1500
       offset: 0
-      personRolePrimaryDistrict: $congressionalDistrict
+      personRolePrimaryDistrict: $electoralZone
       personRolePrimaryState: $stateCode
       personRoleGroupingOr: $personRoleGroupingOr
     ) {
@@ -27,8 +27,7 @@ const queryByPrimaryDistrict = /* GraphQL */ `
     stateReps: people(
       limit: 1500
       offset: 0
-      personRolePrimaryDistrict: ""
-      personRolePrimaryState: $stateCode
+      specificPersonRole: { primaryState: $stateCode, primaryDistrict: "" }
       personRoleGroupingOr: $personRoleGroupingOr
     ) @include(if: $includeStateReps) {
       ...PersonCard
@@ -37,24 +36,24 @@ const queryByPrimaryDistrict = /* GraphQL */ `
   ${fragmentDTSIPersonCard}
 `
 
-export const queryDTSIPeopleByCongressionalDistrict = async ({
+export const queryDTSIPeopleByElectoralZone = async ({
   stateCode,
-  congressionalDistrict,
+  electoralZone,
   countryCode,
 }: {
   stateCode?: string
-  congressionalDistrict: string
+  electoralZone: string
   countryCode: SupportedCountryCodes
 }) => {
   const personRoleGroupingOr =
     PERSON_ROLE_GROUPINGS_FOR_CURRENT_PEOPLE_BY_CONGRESS_DISTRICT_QUERY[countryCode]
 
   const peopleByPrimaryDistrictData = await fetchDTSI<
-    DTSI_PeopleByPrimaryDistrictQuery,
-    DTSI_PeopleByPrimaryDistrictQueryVariables
-  >(queryByPrimaryDistrict, {
+    DTSI_PeopleByElectoralZoneQuery,
+    DTSI_PeopleByElectoralZoneQueryVariables
+  >(queryByPrimaryElectoralZone, {
     stateCode,
-    congressionalDistrict,
+    electoralZone,
     personRoleGroupingOr,
     includeStateReps: !!stateCode,
   })
@@ -67,6 +66,6 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
   return orderDTSICongressionalDistrictResults(people)
 }
 
-export type DTSIPeopleByCongressionalDistrictQueryResult = NonNullable<
-  Awaited<ReturnType<typeof queryDTSIPeopleByCongressionalDistrict>>
+export type DTSIPeopleByElectoralZoneQueryResult = NonNullable<
+  Awaited<ReturnType<typeof queryDTSIPeopleByElectoralZone>>
 >

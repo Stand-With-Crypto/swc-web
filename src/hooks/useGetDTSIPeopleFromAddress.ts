@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
@@ -46,14 +46,14 @@ export async function getDTSIPeopleFromAddress({
     }),
   )
     .then(res => res.json())
-    .then(data => data as DTSIPeopleByCongressionalDistrictQueryResult)
+    .then(data => data as DTSIPeopleByElectoralZoneQueryResult)
     .catch(e => {
       catchUnexpectedServerErrorAndTriggerToast(e)
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
     })
-  const dtsiPeople = data as DTSIPeopleByCongressionalDistrictQueryResult
+  const dtsiPeople = data as DTSIPeopleByElectoralZoneQueryResult
 
-  let filteredData: DTSIPeopleByCongressionalDistrictQueryResult = []
+  let filteredData: DTSIPeopleByElectoralZoneQueryResult = []
 
   switch (category) {
     case 'senate':
