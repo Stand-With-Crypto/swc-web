@@ -1,7 +1,16 @@
+import { groupBy, isNumber, mapValues, mergeWith, sumBy } from 'lodash-es'
+
 import { runBin } from '@/bin/runBin'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
+import { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
+
+const UNKNOWN = 'Unknown'
+
+function getElectoralZoneFullName(stateCode: string, zoneName: string) {
+  return `${stateCode}${zoneName}`
+}
 
 async function getAdvocatesCountByElectoralZone() {
   const usAddressesByElectoralZonePromise = prismaClient.address.groupBy({
@@ -10,7 +19,7 @@ async function getAdvocatesCountByElectoralZone() {
     },
     by: ['usCongressionalDistrict', 'administrativeAreaLevel1'],
     where: {
-      countryCode: 'US',
+      countryCode: { in: ['US', 'us'] },
       usCongressionalDistrict: {
         not: null,
       },
@@ -25,12 +34,12 @@ async function getAdvocatesCountByElectoralZone() {
     where: {
       OR: [
         {
-          countryCode: 'US',
+          countryCode: { in: ['US', 'us'] },
           usCongressionalDistrict: null,
         },
         {
           countryCode: {
-            not: 'US',
+            notIn: ['US', 'us'],
           },
         },
       ],
@@ -42,12 +51,8 @@ async function getAdvocatesCountByElectoralZone() {
     otherAddressesPromise,
   ])
 
-  const otherAddressesByElectoralZone = await Promise.all(
+  const otherAddressesWithElectoralZone = await Promise.allSettled(
     otherAddresses.map(async address => {
-      if (!address.googlePlaceId) {
-        return { ...address, electoralZone: undefined }
-      }
-
       const location = await getLatLongFromAddressOrPlaceId({
         address: address.formattedDescription,
         placeId: address.googlePlaceId ?? undefined,
@@ -62,21 +67,66 @@ async function getAdvocatesCountByElectoralZone() {
     }),
   )
 
-  const usElectoralZones = usAddressesByElectoralZone
-    .map(address => ({
-      zone: `${address.administrativeAreaLevel1}${address.usCongressionalDistrict!}`,
-      advocates: address._count.id,
-    }))
-    .sort((a, b) => b.advocates - a.advocates)
+  const usElectoralZones = Object.fromEntries(
+    usAddressesByElectoralZone.map(address => [
+      getElectoralZoneFullName(address.administrativeAreaLevel1, address.usCongressionalDistrict!),
+      address._count.id,
+    ]),
+  )
 
-  const otherElectoralZones = otherAddressesByElectoralZone.map(address => ({
-    countryCode: address.electoralZone?.countryCode || 'Unknown',
-    zone: address.electoralZone?.zoneName || 'Unknown',
-    advocates: address._count.id,
-  }))
-  const otherElectoralZonesByCountry = Object.groupBy(otherElectoralZones, item => item.countryCode)
+  const otherElectoralZones = otherAddressesWithElectoralZone
+    .filter(address => address.status === 'fulfilled')
+    .map(({ value: address }) => {
+      const electoralZone = address.electoralZone || ({} as ElectoralZone)
 
-  console.log({ usElectoralZones, otherElectoralZonesByCountry })
+      return {
+        countryCode: electoralZone.countryCode || UNKNOWN,
+        state: electoralZone.stateCode || UNKNOWN,
+        zone: electoralZone?.zoneName || UNKNOWN,
+        advocates: address._count.id,
+      }
+    })
+  const otherElectoralZonesByCountry = groupBy(otherElectoralZones, 'countryCode')
+  const otherElectoralZonesByCountryAndEZ = Object.fromEntries(
+    Object.entries(otherElectoralZonesByCountry).map(([countryCode, electoralZones]) => {
+      return [
+        countryCode,
+        mapValues(
+          groupBy(electoralZones, electoralZone =>
+            getElectoralZoneFullName(
+              countryCode === 'us' ? electoralZone.state : '',
+              electoralZone.zone,
+            ),
+          ),
+          electoralZone => sumBy(electoralZone, 'advocates'),
+        ),
+      ]
+    }),
+  )
+
+  const usResult = mergeWith(
+    {},
+    usElectoralZones,
+    otherElectoralZonesByCountryAndEZ['us'],
+    (a, b) => {
+      if (isNumber(a) && isNumber(b)) {
+        return a + b
+      }
+    },
+  )
+
+  const result = { ...otherElectoralZonesByCountryAndEZ, us: usResult }
+
+  const sortedResult = Object.fromEntries(
+    Object.entries(result).map(([countryCode, electoralZones]) => {
+      return [
+        countryCode,
+        Object.fromEntries(Object.entries(electoralZones).sort(([, a], [, b]) => b - a)),
+      ]
+    }),
+  )
+
+  console.log(sortedResult)
 }
 
 void runBin(getAdvocatesCountByElectoralZone)
