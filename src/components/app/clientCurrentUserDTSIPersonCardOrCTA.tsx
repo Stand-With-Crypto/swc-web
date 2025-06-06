@@ -17,9 +17,10 @@ import {
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
+  filterDTSIPeopleByPoliticalCategory,
   getYourPoliticianCategoryDisplayName,
   YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/us'
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -52,10 +53,10 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
   countryCode: SupportedCountryCodes
 }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromAddress(
-    POLITICIAN_CATEGORY,
-    address === 'loading' ? null : address?.description,
-  )
+  const res = useGetDTSIPeopleFromAddress({
+    filterFn: filterDTSIPeopleByPoliticalCategory(POLITICIAN_CATEGORY),
+    address: address === 'loading' ? null : address?.description,
+  })
   if (!address || address === 'loading' || !res.data) {
     return (
       <DefaultPlacesSelect
