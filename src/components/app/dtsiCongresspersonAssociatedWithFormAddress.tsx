@@ -14,21 +14,17 @@ import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import {
-  getYourPoliticianCategoryDisplayName,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 
 export function DTSICongresspersonAssociatedWithFormAddress({
   address,
   onChangeAddress,
-  politicianCategory,
+  categoryDisplayName,
   dtsiPeopleFromAddressResponse,
   countryCode,
 }: {
   countryCode: SupportedCountryCodes
-  politicianCategory: YourPoliticianCategory
+  categoryDisplayName: string
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
   onChangeAddress: (args: {
     location?: {
@@ -49,7 +45,6 @@ export function DTSICongresspersonAssociatedWithFormAddress({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dtsiPeopleFromAddressResponse?.data])
 
-  const categoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   if (!address || dtsiPeopleFromAddressResponse?.isLoading) {
     return (
       <div className="flex items-center gap-4">

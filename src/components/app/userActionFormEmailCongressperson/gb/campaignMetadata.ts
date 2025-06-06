@@ -5,13 +5,13 @@ import {
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/gb'
 
 const CAMPAIGN_NAME = GBUserActionEmailCampaignName.DEFAULT
 
 const SUBJECT = 'Support GENIUS Act'
 
-export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
+export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'mp'
 
 export const DIALOG_TITLE = 'Email your MP'
 

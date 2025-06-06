@@ -1,6 +1,5 @@
 import useSWR from 'swr'
 
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
@@ -9,10 +8,6 @@ import {
   GetCongressionalDistrictFromAddressSuccess,
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
-import {
-  LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 export interface DTSIPeopleFromCongressionalDistrict
@@ -24,9 +19,13 @@ export type UseGetDTSIPeopleFromAddressResponse = Awaited<
   ReturnType<typeof getDTSIPeopleFromAddress>
 >
 
+export type DTSIPeopleFromCongressionalDistrictFilter = (
+  dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult,
+) => DTSIPeopleByCongressionalDistrictQueryResult
+
 async function getDTSIPeopleFromCongressionalDistrict(
   result: CongressionalDistrictFromAddress,
-  category: YourPoliticianCategory,
+  filterFn: DTSIPeopleFromCongressionalDistrictFilter,
 ) {
   if ('notFoundReason' in result) {
     return result
@@ -45,36 +44,7 @@ async function getDTSIPeopleFromCongressionalDistrict(
     return data
   }
 
-  let filteredData: DTSIPeopleByCongressionalDistrictQueryResult = []
-
-  switch (category) {
-    case 'senate':
-      filteredData = dtsiPeople.filter(
-        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE,
-      )
-      break
-    case 'house':
-      filteredData = dtsiPeople.filter(
-        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-      )
-      break
-    case 'senate-and-house':
-      filteredData = dtsiPeople.filter(
-        person =>
-          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE ||
-          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-      )
-      break
-    case 'legislative-and-executive':
-      filteredData = dtsiPeople.filter(
-        person =>
-          person.primaryRole?.roleCategory &&
-          LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES.includes(person.primaryRole.roleCategory),
-      )
-      break
-    default:
-      filteredData = dtsiPeople
-  }
+  const filteredData = filterFn(dtsiPeople)
 
   if (!filteredData.length) {
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
@@ -83,20 +53,21 @@ async function getDTSIPeopleFromCongressionalDistrict(
   return { ...result, dtsiPeople: filteredData }
 }
 
-export async function getDTSIPeopleFromAddress(
-  category: YourPoliticianCategory,
-  address?: string | null,
-) {
-  const result = await getCongressionalDistrictFromAddress(address)
-
-  return getDTSIPeopleFromCongressionalDistrict(result, category)
+interface GetDTSIPeopleFromAddressProps {
+  filterFn: DTSIPeopleFromCongressionalDistrictFilter
+  address?: string | null
 }
-export function useGetDTSIPeopleFromAddress(
-  category: YourPoliticianCategory,
-  address?: string | null,
-) {
+export async function getDTSIPeopleFromAddress(props: GetDTSIPeopleFromAddressProps) {
+  const { filterFn, address } = props
+  const result = await getCongressionalDistrictFromAddress(address)
+  return getDTSIPeopleFromCongressionalDistrict(result, filterFn)
+}
+
+type UseGetDTSIPeopleFromAddressProps = GetDTSIPeopleFromAddressProps
+export function useGetDTSIPeopleFromAddress(props: UseGetDTSIPeopleFromAddressProps) {
+  const { filterFn, address } = props
   return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, () =>
-    getDTSIPeopleFromAddress(category, address),
+    getDTSIPeopleFromAddress({ address, filterFn }),
   )
 }
 export function formatGetDTSIPeopleFromAddressNotFoundReason(

@@ -52,8 +52,8 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
+import { YourPoliticianCategory } from '@/validation/fields/zodYourPoliticianCategory'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
@@ -257,6 +257,12 @@ function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) 
         return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
       case 'legislative-and-executive':
         return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+      default:
+        /**
+         * TODO: Replace CapitolCanary with Sendgrid.
+         * Intl geos will not use CapitolCanary.
+         */
+        throw new Error(`Invalid politician category: ${politicianCategory}`)
     }
   }
 
@@ -269,6 +275,12 @@ function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) 
       return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
     case 'legislative-and-executive':
       return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+    default:
+      /**
+       * TODO: Replace CapitolCanary with Sendgrid.
+       * Intl geos will not use CapitolCanary.
+       */
+      throw new Error(`Invalid politician category: ${politicianCategory}`)
   }
 }
 

@@ -26,7 +26,7 @@ import {
   USUserActionVotingDayCampaignName,
   USUserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory/us'
 
 const countryCode = SupportedCountryCodes.US
 const urls = getIntlUrls(countryCode)

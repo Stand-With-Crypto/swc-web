@@ -14,13 +14,18 @@ import {
 } from '@/components/app/userActionFormEmailCongressperson/common/constants'
 import { EmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/common/sections/email'
 import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/common/sections/success'
-import { UserActionFormEmailCongresspersonProps } from '@/components/app/userActionFormEmailCongressperson/common/types'
+import { UserActionFormEmailCongresspersonPropsBase } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import {
+  filterDTSIPeopleByPoliticalCategory,
+  getYourPoliticianCategoryDisplayName,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory/us'
 import { cn } from '@/utils/web/cn'
 import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -44,12 +49,16 @@ const countryCode = SupportedCountryCodes.US
 export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
+interface USUserActionFormEmailCongresspersonProps
+  extends UserActionFormEmailCongresspersonPropsBase {
+  politicianCategory?: YourPoliticianCategory
+}
 export function USUserActionFormEmailCongressperson({
   user,
   initialValues,
   politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
   onCancel,
-}: UserActionFormEmailCongresspersonProps) {
+}: USUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
   const urls = getIntlUrls(countryCode)
   const userDefaultValues = getDefaultFormValuesWithCampaignMetadata({ user, dtsiSlugs: [] })
@@ -118,10 +127,10 @@ export function USUserActionFormEmailCongressperson({
   }
 
   const addressField = form.watch('address')
-  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress(
-    politicianCategory,
-    addressField?.description,
-  )
+  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
+    address: addressField?.description,
+    filterFn: filterDTSIPeopleByPoliticalCategory(politicianCategory),
+  })
 
   switch (sectionProps.currentSection) {
     case SectionNames.EMAIL:
@@ -131,9 +140,9 @@ export function USUserActionFormEmailCongressperson({
             <EmailCongressperson.Heading subtitle={DIALOG_SUBTITLE} title={DIALOG_TITLE} />
             <EmailCongressperson.PersonalInformationFields />
             <EmailCongressperson.Representatives
+              categoryDisplayName={getYourPoliticianCategoryDisplayName(politicianCategory)}
               countryCode={countryCode}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
-              politicianCategory={politicianCategory}
             />
             <EmailCongressperson.Message getEmailBodyText={getEmailBodyText} />
             <EmailCongressperson.Disclaimer

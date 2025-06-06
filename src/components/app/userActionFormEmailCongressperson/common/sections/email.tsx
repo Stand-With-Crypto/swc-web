@@ -28,7 +28,6 @@ import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 
@@ -159,11 +158,11 @@ EmailCongressperson.PersonalInformationFields = function PersonalInformation() {
 
 EmailCongressperson.Representatives = function Representative({
   countryCode,
-  politicianCategory,
+  categoryDisplayName,
   dtsiPeopleFromAddressResponse,
 }: {
   countryCode: SupportedCountryCodes
-  politicianCategory: YourPoliticianCategory
+  categoryDisplayName: string
   dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
 }) {
   const { control, setValue, getValues } = useFormContext<EmailActionFormValues>()
@@ -193,10 +192,10 @@ EmailCongressperson.Representatives = function Representative({
         <div className="w-full">
           <DTSICongresspersonAssociatedWithFormAddress
             address={addressProps.field.value}
+            categoryDisplayName={categoryDisplayName}
             countryCode={countryCode}
             dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             onChangeAddress={noop}
-            politicianCategory={politicianCategory}
           />
         </div>
       )}

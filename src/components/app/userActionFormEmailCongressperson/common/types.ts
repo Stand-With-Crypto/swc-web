@@ -1,13 +1,15 @@
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
-export interface UserActionFormEmailCongresspersonProps {
-  countryCode: SupportedCountryCodes
+export interface UserActionFormEmailCongresspersonPropsBase {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   initialValues?: FormFields
-  politicianCategory?: YourPoliticianCategory
+}
+
+export interface UserActionFormEmailCongresspersonProps
+  extends UserActionFormEmailCongresspersonPropsBase {
+  countryCode: SupportedCountryCodes
 }
 
 export interface FormFields {

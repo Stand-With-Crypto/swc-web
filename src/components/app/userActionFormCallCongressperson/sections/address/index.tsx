@@ -31,9 +31,10 @@ import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
+  filterDTSIPeopleByPoliticalCategory,
   getYourPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/us'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -212,10 +213,10 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromAddress(
-        CALL_FLOW_POLITICIANS_CATEGORY,
-        address.description,
-      )
+      const dtsiResponse = await getDTSIPeopleFromAddress({
+        address: address.description,
+        filterFn: filterDTSIPeopleByPoliticalCategory(CALL_FLOW_POLITICIANS_CATEGORY),
+      })
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
       }

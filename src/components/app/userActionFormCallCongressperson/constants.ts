@@ -1,4 +1,4 @@
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/us'
 
 export enum SectionNames {
   INTRO = 'Intro',
