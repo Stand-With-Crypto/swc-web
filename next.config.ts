@@ -493,6 +493,11 @@ const nextConfig: NextConfig = {
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=crenshawvote&sessionId=:sessionId*',
         permanent: true,
       },
+      {
+        source: '/c/clarity-house',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+      },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
         source: '/vg/:campaignId/:sessionId*',
