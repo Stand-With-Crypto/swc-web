@@ -593,3 +593,11 @@ model UserCommunication {
   @@index([userCommunicationJourneyId])
   @@map("user_communication")
 }
+
+model UserDeletionLog {
+  userId       String   @id @map("user_id")
+  emailAddress String   @map("email_address")
+  date         DateTime @default(now())
+
+  @@map("user_deletion_log")
+}
