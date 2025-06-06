@@ -5,7 +5,7 @@ import {
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/us'
 
 const CAMPAIGN_NAME = USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025
 

@@ -1,4 +1,5 @@
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 
 export type YourPoliticianCategory =
   | 'senate'
@@ -56,5 +57,36 @@ export function getYourPoliticianCategoryShortDisplayName(
       return maxCount === 1 ? 'politician' : 'politicians'
     case 'legislative-and-executive':
       return 'politicians'
+  }
+}
+
+export function filterDTSIPeopleByPoliticalCategory(category: YourPoliticianCategory) {
+  return (
+    dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult,
+  ): DTSIPeopleByCongressionalDistrictQueryResult => {
+    switch (category) {
+      case 'senate':
+        return dtsiPeople.filter(
+          person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE,
+        )
+      case 'house':
+        return dtsiPeople.filter(
+          person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
+        )
+      case 'senate-and-house':
+        return dtsiPeople.filter(
+          person =>
+            person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE ||
+            person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
+        )
+      case 'legislative-and-executive':
+        return dtsiPeople.filter(
+          person =>
+            person.primaryRole?.roleCategory &&
+            LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES.includes(person.primaryRole.roleCategory),
+        )
+      default:
+        return dtsiPeople
+    }
   }
 }
