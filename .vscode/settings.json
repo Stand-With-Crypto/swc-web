@@ -82,7 +82,9 @@
     "viem",
     "Warpcast",
     "newmode",
-    "debanking"
+    "debanking",
+    "postgis",
+    "pgadmin"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[prisma]": {

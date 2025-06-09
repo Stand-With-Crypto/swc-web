@@ -163,18 +163,30 @@ export const getIntlUrls = (
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
+    contentClarity: () => `${countryPrefix}/content/clarity`,
+    contentGenius: () => `${countryPrefix}/content/genius`,
     ...RACES_ROUTES,
   }
 }
 
 export const apiUrls = {
-  dtsiPeopleByCongressionalDistrict: ({
+  dtsiPeopleByElectoralZone: ({
+    electoralZone,
     stateCode,
-    districtNumber,
+    countryCode,
   }: {
-    stateCode: string
-    districtNumber: number
-  }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
+    stateCode: string | null
+    electoralZone: string
+    countryCode: SupportedCountryCodes
+  }) => {
+    if (countryCode === SupportedCountryCodes.US && stateCode) {
+      return `/api/public/dtsi/by-geography/usa/${stateCode}/${electoralZone}`
+    }
+
+    return `/api/public/dtsi/by-geography/${countryCode}/${electoralZone}`
+  },
+  swcCivicElectoralZoneFromAddress: (address: string) =>
+    `/api/public/swc-civic/electoral-zone?address=${encodeURIComponent(address.trim())}`,
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,
