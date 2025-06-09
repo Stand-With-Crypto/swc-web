@@ -7,6 +7,7 @@ import {
   BASE_NAME,
   getElectoralZoneFromAddress,
   getElectoralZoneFullName,
+  getStateCode,
   retrieveDataWithPagination,
 } from '@/bin/swcCivic/advocatesCountByElectoralZone/utils'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -48,7 +49,7 @@ async function getOtherAddressesByElectoralZone() {
       _count: {
         id: true,
       },
-      by: ['googlePlaceId', 'formattedDescription', 'id'],
+      by: ['googlePlaceId', 'formattedDescription', 'countryCode', 'id'],
       orderBy: [{ id: 'asc' }],
       where: {
         OR: [
@@ -85,14 +86,16 @@ async function getAdvocatesCountByElectoralZone() {
   }
 
   const usElectoralZones = Object.fromEntries(
-    usAddressesByElectoralZone.map(address => [
-      getElectoralZoneFullName(
-        'us',
-        address.administrativeAreaLevel1,
-        address.usCongressionalDistrict!,
-      ),
-      address._count.id,
-    ]),
+    usAddressesByElectoralZone
+      .map(address => ({
+        ...address,
+        stateCode: getStateCode('us', address.administrativeAreaLevel1),
+      }))
+      .filter(address => address.stateCode)
+      .map(address => [
+        getElectoralZoneFullName('us', address.usCongressionalDistrict!, address.stateCode!),
+        address._count.id,
+      ]),
   )
 
   const otherElectoralZones = otherAddressesWithElectoralZone.map(address => {
@@ -101,7 +104,7 @@ async function getAdvocatesCountByElectoralZone() {
 
     return {
       countryCode: countryCode ? countryCode.toLowerCase() : UNKNOWN,
-      state: stateCode || UNKNOWN,
+      state: stateCode ? getStateCode(countryCode, stateCode) || UNKNOWN : UNKNOWN,
       zone: zoneName || UNKNOWN,
       advocates: address._count.id,
     }
@@ -113,7 +116,7 @@ async function getAdvocatesCountByElectoralZone() {
         countryCode,
         mapValues(
           groupBy(electoralZones, electoralZone =>
-            getElectoralZoneFullName(countryCode, electoralZone.state, electoralZone.zone),
+            getElectoralZoneFullName(countryCode, electoralZone.zone, electoralZone.state),
           ),
           electoralZone => sumBy(electoralZone, 'advocates'),
         ),

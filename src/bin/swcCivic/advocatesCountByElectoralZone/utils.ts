@@ -19,21 +19,25 @@ const ERRORS_FILE_NAME: FileName = `${BASE_NAME}.errors.json`
 export const cache = JSON.parse(readFile(CACHE_FILE_NAME) || '[]') as CacheContent
 export const errors = JSON.parse(readFile(ERRORS_FILE_NAME) || '{}') as ErrorsContent
 
-export function getElectoralZoneFullName(
-  countryCode: string,
-  stateCodeOrName: string,
-  zoneName: string,
-) {
+export function getStateCode(countryCode: string, stateCodeOrName: string) {
   if (countryCode === 'us') {
     if (stateCodeOrName.toUpperCase() in US_STATE_CODE_TO_DISPLAY_NAME_MAP) {
-      return `${stateCodeOrName}${zoneName}`
+      return stateCodeOrName
     }
 
     const state = Object.entries(US_STATE_CODE_TO_DISPLAY_NAME_MAP).find(
       ([_, stateName]) => stateName === stateCodeOrName,
     )
 
-    return state ? `${state[0]}${zoneName}` : `${stateCodeOrName}${zoneName}`
+    return state ? state[0] : null
+  }
+
+  return stateCodeOrName
+}
+
+export function getElectoralZoneFullName(countryCode: string, zoneName: string, stateCode: string) {
+  if (countryCode === 'us') {
+    return `${stateCode}${zoneName === 'At-Large' ? 0 : zoneName}`
   }
 
   return zoneName

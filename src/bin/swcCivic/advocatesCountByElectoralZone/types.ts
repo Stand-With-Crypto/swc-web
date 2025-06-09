@@ -14,6 +14,7 @@ export type ErrorsContent = Record<string, string>
 
 export interface Address {
   _count: { id: number }
+  countryCode: string
   formattedDescription: string
   googlePlaceId: string | null
   id: string
