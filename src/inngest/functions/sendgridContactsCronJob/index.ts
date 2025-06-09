@@ -1,4 +1,6 @@
 import { NonRetriableError } from 'inngest'
+import { createStepTools } from 'inngest/components/InngestStepTools'
+import { Logger } from 'inngest/middleware/logger'
 
 import { checkCustomFields } from '@/inngest/functions/sendgridContactsCronJob/checkCustomFields'
 import {
@@ -8,10 +10,17 @@ import {
 import {
   COUNTRIES_TO_SYNC,
   DB_READ_LIMIT,
+  SENDGRID_API_RATE_LIMIT,
+  SENDGRID_API_RATE_LIMIT_COOLDOWN,
 } from '@/inngest/functions/sendgridContactsCronJob/config'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { SendgridField } from '@/utils/server/sendgrid/marketing/constants'
+import {
+  fetchSendgridCustomFields,
+  mapSendgridFieldToFieldIds,
+} from '@/utils/server/sendgrid/marketing/customFields'
 import {
   fetchSendgridContactList,
   getSendgridContactListName,
@@ -27,8 +36,6 @@ export const SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME =
 export const SYNC_SENDGRID_CONTACTS_COORDINATOR_FUNCTION_ID =
   'script.sync-sendgrid-contacts-coordinator'
 const SYNC_SENDGRID_CONTACTS_COORDINATOR_CRON_JOB_SCHEDULE = '0 */6 * * *' // every 6 hours
-
-const SENDGRID_RATE_LIMIT = 4
 
 export interface SyncSendgridContactsCoordinatorSchema {
   name: typeof SYNC_SENDGRID_CONTACTS_COORDINATOR_INNGEST_EVENT_NAME
@@ -116,10 +123,24 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
       }
     })
 
+    const customFieldsMap = await step.run('get-custom-fields-definitions', async () => {
+      const customFieldsDefinitions = await fetchSendgridCustomFields()
+      return mapSendgridFieldToFieldIds(customFieldsDefinitions)
+    })
+
     const countriesResults = []
     for (const countryCode of COUNTRIES_TO_SYNC) {
-      const countryResult = await processCountry(countryCode, step, logger)
+      const countryResult = await processCountry({
+        countryCode,
+        step,
+        logger,
+        customFieldsMap,
+      })
       countriesResults.push(countryResult)
+      await step.sleep(
+        `[${countryCode}]-sleep-sync-contacts-coordinator`,
+        SENDGRID_API_RATE_LIMIT_COOLDOWN,
+      )
     }
 
     const jobIdsToMonitor = countriesResults
@@ -145,11 +166,14 @@ export const syncSendgridContactsCoordinator = inngest.createFunction(
   },
 )
 
-async function processCountry(
-  countryCode: SupportedCountryCodes,
-  step: any,
-  logger: any,
-): Promise<CountryProcessingResult> {
+async function processCountry(config: {
+  countryCode: SupportedCountryCodes
+  step: ReturnType<typeof createStepTools>
+  logger: Logger
+  customFieldsMap: Record<SendgridField, string | null>
+}): Promise<CountryProcessingResult> {
+  const { countryCode, step, logger, customFieldsMap } = config
+
   const contactListId = await step.run(`[${countryCode}]-get-contact-list-id`, async () => {
     const list = await fetchSendgridContactList(getSendgridContactListName(countryCode))
     return list.id
@@ -159,7 +183,7 @@ async function processCountry(
     return prismaClient.user.count({
       where: {
         countryCode,
-        primaryUserEmailAddress: { emailAddress: { not: '' }, isVerified: true },
+        primaryUserEmailAddress: { isVerified: true },
       },
     })
   })
@@ -180,7 +204,7 @@ async function processCountry(
     `Processing ${countryCode} users in ${numDbChunks} batches of up to ${DB_READ_LIMIT} users each`,
   )
 
-  const batchResults: BatchResult[] = []
+  const batchesPromises: Promise<BatchResult>[] = []
   let requestsSent = 0
   for (let chunkIndex = 0; chunkIndex < numDbChunks; chunkIndex++) {
     const take = DB_READ_LIMIT
@@ -190,35 +214,45 @@ async function processCountry(
       `Processing batch ${chunkIndex + 1}/${numDbChunks} for ${countryCode}: skip=${skip}, take=${take}`,
     )
 
-    const batchResult = await step.invoke(`[${countryCode}]-sync-contacts.batch-${chunkIndex}`, {
-      function: syncSendgridContactsProcessor,
-      data: {
-        countryCode,
-        batchParams: { skip, take },
-        contactListId,
-      },
-    })
-    logger.info(`Batch ${chunkIndex + 1} result:`, batchResult)
-    batchResults.push(batchResult)
+    batchesPromises.push(
+      step.invoke(`[${countryCode}]-sync-contacts.batch-${chunkIndex}`, {
+        function: syncSendgridContactsProcessor,
+        data: {
+          countryCode,
+          batchParams: { skip, take },
+          contactListId,
+          customFieldsMap,
+        },
+      }),
+    )
+
     requestsSent++
-    if (requestsSent >= SENDGRID_RATE_LIMIT) {
-      logger.info(`Waiting for ${SENDGRID_RATE_LIMIT} to avoid rate limiting`)
-      await step.sleep(10000)
+    if (requestsSent > SENDGRID_API_RATE_LIMIT) {
+      logger.info(`Waiting for ${SENDGRID_API_RATE_LIMIT} to avoid rate limiting`)
+      await step.sleep(
+        `[${countryCode}]-sleep-sync-contacts-coordinator`,
+        SENDGRID_API_RATE_LIMIT_COOLDOWN,
+      )
       requestsSent = 0
     }
   }
+
+  logger.info(`Waiting for ${batchesPromises.length} batches to complete`)
+  const batchResults = await Promise.allSettled(batchesPromises)
 
   const successfulBatches: BatchResult[] = []
   const failedBatches: BatchResult[] = []
   const errors: PromiseSettledResult<BatchResult>[] = []
 
-  for (const batchResult of batchResults) {
-    if (batchResult.success) {
-      successfulBatches.push(batchResult)
+  batchResults.forEach(batchResult => {
+    if (batchResult.status === 'fulfilled' && batchResult.value.success) {
+      successfulBatches.push(batchResult.value)
+    } else if (batchResult.status === 'fulfilled' && !batchResult.value.success) {
+      failedBatches.push(batchResult.value)
     } else {
-      failedBatches.push(batchResult)
+      errors.push(batchResult)
     }
-  }
+  })
 
   return {
     countryCode,

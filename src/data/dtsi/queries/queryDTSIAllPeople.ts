@@ -13,7 +13,12 @@ import {
 
 export const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
 
-const PEOPLE_OUTSIDE_FILTERS_TO_INCLUDE = ['wiley---nickel']
+const PEOPLE_OUTSIDE_FILTERS_TO_INCLUDE: Record<SupportedCountryCodes, string[]> = {
+  [SupportedCountryCodes.US]: ['wiley---nickel'],
+  [SupportedCountryCodes.CA]: [],
+  [SupportedCountryCodes.GB]: [],
+  [SupportedCountryCodes.AU]: [],
+}
 
 const query = /* GraphQL */ `
   query AllPeople(
@@ -48,7 +53,7 @@ export const queryDTSIAllPeople = async ({
     {
       limit,
       personRoleGroupingOr: PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY[countryCode],
-      peopleOutsideFilters: PEOPLE_OUTSIDE_FILTERS_TO_INCLUDE,
+      peopleOutsideFilters: PEOPLE_OUTSIDE_FILTERS_TO_INCLUDE[countryCode],
     },
     {
       nextTags: [DTSI_AllPeopleQueryTag],

@@ -19,7 +19,7 @@ export function getSendgridUserActionCustomFieldName(
  * Sendgrid supported field types.
  */
 export type FieldType = 'Text' | 'Number' | 'Date'
-interface FieldDefinitionsResponse {
+export interface FieldDefinitionsResponse {
   custom_fields?: Array<{
     id: string
     name: string
@@ -81,6 +81,11 @@ export const createSendgridCustomField = async (name: string, fieldType: FieldTy
   }
 }
 
+/**
+ * Map Sendgrid field names to their respective Sendgrid ID.
+ * @param fieldDefinitions - The field definitions from Sendgrid.
+ * @returns A record of field names to their respective Sendgrid ID.
+ */
 export function mapSendgridFieldToFieldIds(fieldDefinitions: FieldDefinitionsResponse) {
   const allFields: SendgridField[] = [...SENDGRID_RESERVED_FIELDS, ...SENDGRID_CUSTOM_FIELDS]
   return allFields.reduce(
