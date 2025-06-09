@@ -92,6 +92,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
       # database
       DATABASE_URL: mysql://root:root@localhost:3306/swc-web
+      SWC_CIVIC_DATABASE_URL: ${{ secrets.SWC_CIVIC_DATABASE_URL }}
       SEED_SIZE: SM
       IS_DEVELOPING_OFFLINE: true
 
