@@ -48,7 +48,7 @@ export async function removeFromGlobalSuppressionGroup(emailAddress: string) {
   }
 
   try {
-    const [response] = await SendgridClient.request({
+    await SendgridClient.request({
       url: `/v3/asm/suppressions/global/${emailAddress}`,
       method: 'DELETE',
     })

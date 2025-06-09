@@ -1,4 +1,4 @@
-import { ResubscribeButton } from '@/components/app/pageUnsubscribe/resubscribeButton'
+import { SuspenseResubscribeButton } from '@/components/app/pageUnsubscribe/resubscribeButton'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -34,7 +34,7 @@ export default function UnsubscribeSuccessPage() {
         </PageSubTitle>
       </section>
 
-      <ResubscribeButton />
+      <SuspenseResubscribeButton />
     </div>
   )
 }

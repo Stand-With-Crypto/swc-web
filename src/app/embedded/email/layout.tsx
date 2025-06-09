@@ -4,12 +4,12 @@ import { Metadata, Viewport } from 'next'
 
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
+import { Toaster } from '@/components/ui/sonner'
 import { PageProps } from '@/types'
 import { viewport as defaultViewport } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { fontClassName } from '@/utils/web/fonts'
-import { Toaster } from '@/components/ui/sonner'
 
 const title = `${
   NEXT_PUBLIC_ENVIRONMENT === 'production'
