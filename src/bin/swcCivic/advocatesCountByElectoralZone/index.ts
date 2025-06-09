@@ -147,7 +147,9 @@ async function getAdvocatesCountByElectoralZone() {
     ] as const
   })
 
-  const fileContent = sortedResult
+  const header = 'Country;Electoral Zone;Advocates\n'
+
+  const content = sortedResult
     .map(([countryCode, electoralZones]) =>
       electoralZones
         .map(([electoralZone, count]) => `${countryCode};${electoralZone};${count}`)
@@ -155,7 +157,7 @@ async function getAdvocatesCountByElectoralZone() {
     )
     .join('\n')
 
-  writeFile(OUTPUT_FILE_NAME, fileContent)
+  writeFile(OUTPUT_FILE_NAME, `${header}${content}`)
 }
 
 void runBin(getAdvocatesCountByElectoralZone)
