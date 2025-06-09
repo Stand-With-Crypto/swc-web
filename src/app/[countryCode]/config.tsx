@@ -96,7 +96,8 @@ export const footerConfig: FooterProps = {
       text: 'Questionnaire',
     },
     { href: urls.leaderboard(), text: 'Community' },
-    { href: urls.contentClarity(), text: 'CLARITY resources' },
+    // TODO: add this back in when policy gets the page live
+    // { href: urls.contentClarity(), text: 'CLARITY resources' },
     { href: urls.contentGenius(), text: 'GENIUS resources' },
   ],
   socialLinks: [
