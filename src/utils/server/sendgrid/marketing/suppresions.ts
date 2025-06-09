@@ -1,3 +1,6 @@
+'use server'
+import 'server-only'
+
 import * as Sentry from '@sentry/nextjs'
 
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
@@ -33,6 +36,37 @@ export async function addToGlobalSuppressionGroup(emailAddresses: string[]) {
       extra: {
         emailsCount: emailAddresses.length,
         emailAddresses,
+      },
+    })
+    throw error
+  }
+}
+
+export async function removeFromGlobalSuppressionGroup(emailAddress: string) {
+  if (!emailAddress) {
+    throw new Error('Email address is required')
+  }
+
+  try {
+    const [response] = await SendgridClient.request({
+      url: `/v3/asm/suppressions/global/${emailAddress}`,
+      method: 'DELETE',
+    })
+
+    /**
+     * This Sendgrid endpoint returns a empty body, so we're returning a message instead.
+     */
+    return {
+      message: 'Successfully removed email from global suppression group',
+    }
+  } catch (error) {
+    logger.error('Error removing email from global suppression group:', error)
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'SendgridMarketing',
+      },
+      extra: {
+        emailAddress,
       },
     })
     throw error
