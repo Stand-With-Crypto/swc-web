@@ -118,10 +118,10 @@ export function AUUserActionFormEmailCongressperson({
   }
 
   const addressField = form.watch('address')
-  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress(
-    politicianCategory,
-    addressField?.description,
-  )
+  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
+    category: politicianCategory,
+    address: addressField?.description,
+  })
 
   switch (sectionProps.currentSection) {
     case SectionNames.EMAIL:
