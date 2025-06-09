@@ -24,14 +24,13 @@ import {
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  getDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+  formatGetDTSIPeopleFromUSAddressNotFoundReason,
+  getDTSIPeopleFromUSAddress,
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
-  filterDTSIPeopleByPoliticalCategory,
   getYourPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
 } from '@/utils/shared/yourPoliticianCategory/us'
@@ -109,7 +108,7 @@ export function Address({
     if (!('dtsiPeople' in liveCongressPersonData)) {
       setError('address', {
         type: 'manual',
-        message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
+        message: formatGetDTSIPeopleFromUSAddressNotFoundReason(liveCongressPersonData),
       })
       return
     } else {
@@ -213,10 +212,10 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromAddress({
-        address: address.description,
-        filterFn: filterDTSIPeopleByPoliticalCategory(CALL_FLOW_POLITICIANS_CATEGORY),
-      })
+      const dtsiResponse = await getDTSIPeopleFromUSAddress(
+        CALL_FLOW_POLITICIANS_CATEGORY,
+        address.description,
+      )
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
       }

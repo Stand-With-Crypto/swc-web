@@ -22,7 +22,7 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
-  filterDTSIPeopleByPoliticalCategory,
+  filterDTSIPeopleByAUPoliticalCategory,
   getYourPoliticianCategoryDisplayName,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/au'
@@ -129,7 +129,7 @@ export function AUUserActionFormEmailCongressperson({
   const addressField = form.watch('address')
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
     address: addressField?.description,
-    filterFn: filterDTSIPeopleByPoliticalCategory(politicianCategory),
+    filterFn: filterDTSIPeopleByAUPoliticalCategory(politicianCategory),
   })
 
   switch (sectionProps.currentSection) {

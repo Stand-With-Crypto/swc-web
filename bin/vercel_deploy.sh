@@ -22,7 +22,7 @@ checkDbSchema() {
 # removed temporarily until we have a better way to check the DB schema
 # checkDbSchema
 
-npx prisma generate
+npm run db:generate
 npm run codegen
 echo "Running build"
 npm run build

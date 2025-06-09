@@ -28,8 +28,8 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
   onChangeAddress: (args: {
     location?: {
-      districtNumber: number
-      stateCode: string
+      zoneName: string
+      stateCode: string | null
     }
   }) => void
   dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
@@ -38,8 +38,8 @@ export function DTSICongresspersonAssociatedWithFormAddress({
 
   useEffect(() => {
     if (dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data) {
-      const { districtNumber, stateCode } = dtsiPeopleFromAddressResponse.data
-      onChangeAddress({ location: { districtNumber, stateCode } })
+      const { stateCode, zoneName } = dtsiPeopleFromAddressResponse.data
+      onChangeAddress({ location: { zoneName, stateCode } })
     }
     // onChangeAddress shouldnt be passed as a dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps

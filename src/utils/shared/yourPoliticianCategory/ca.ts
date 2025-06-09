@@ -1,5 +1,5 @@
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 
 export type YourPoliticianCategory = 'senate' | 'house-of-commons'
 
@@ -39,10 +39,10 @@ export function getYourPoliticianCategoryShortDisplayName(
   }
 }
 
-export function filterDTSIPeopleByPoliticalCategory(category: YourPoliticianCategory) {
+export function filterDTSIPeopleByCAPoliticalCategory(category: YourPoliticianCategory) {
   return (
-    dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult,
-  ): DTSIPeopleByCongressionalDistrictQueryResult => {
+    dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
+  ): DTSIPeopleByElectoralZoneQueryResult => {
     switch (category) {
       case 'senate':
         return dtsiPeople.filter(

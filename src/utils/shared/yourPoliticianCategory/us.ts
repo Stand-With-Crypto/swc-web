@@ -1,5 +1,5 @@
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 
 export type YourPoliticianCategory =
   | 'senate'
@@ -19,6 +19,7 @@ export const LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES = [
   DTSI_PersonRoleCategory.CONGRESS,
   DTSI_PersonRoleCategory.GOVERNOR,
   DTSI_PersonRoleCategory.ATTORNEY_GENERAL,
+  DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
 ]
 
 export function getYourPoliticianCategoryDisplayName(
@@ -60,10 +61,10 @@ export function getYourPoliticianCategoryShortDisplayName(
   }
 }
 
-export function filterDTSIPeopleByPoliticalCategory(category: YourPoliticianCategory) {
+export function filterDTSIPeopleByUSPoliticalCategory(category: YourPoliticianCategory) {
   return (
-    dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult,
-  ): DTSIPeopleByCongressionalDistrictQueryResult => {
+    dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
+  ): DTSIPeopleByElectoralZoneQueryResult => {
     switch (category) {
       case 'senate':
         return dtsiPeople.filter(

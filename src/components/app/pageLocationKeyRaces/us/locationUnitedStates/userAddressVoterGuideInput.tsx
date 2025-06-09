@@ -21,7 +21,7 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
-  filterDTSIPeopleByPoliticalCategory,
+  filterDTSIPeopleByUSPoliticalCategory,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/us'
 
@@ -63,7 +63,7 @@ function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressV
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress({
     address: address === 'loading' ? null : address?.description,
-    filterFn: filterDTSIPeopleByPoliticalCategory(POLITICIAN_CATEGORY),
+    filterFn: filterDTSIPeopleByUSPoliticalCategory(POLITICIAN_CATEGORY),
   })
   const shouldShowSubtitle = !address || !res.data
 

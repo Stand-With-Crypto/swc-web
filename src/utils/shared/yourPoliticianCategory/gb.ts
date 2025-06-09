@@ -1,5 +1,5 @@
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 
 export type YourPoliticianCategory = 'mp' | 'lord'
 
@@ -36,10 +36,10 @@ export function getYourPoliticianCategoryShortDisplayName(
   }
 }
 
-export function filterDTSIPeopleByPoliticalCategory(category: YourPoliticianCategory) {
+export function filterDTSIPeopleByGBPoliticalCategory(category: YourPoliticianCategory) {
   return (
-    dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult,
-  ): DTSIPeopleByCongressionalDistrictQueryResult => {
+    dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
+  ): DTSIPeopleByElectoralZoneQueryResult => {
     switch (category) {
       case 'mp':
         return dtsiPeople.filter(
