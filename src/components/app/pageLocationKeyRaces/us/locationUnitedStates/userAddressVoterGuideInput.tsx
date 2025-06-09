@@ -11,9 +11,9 @@ import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  useGetDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+  formatGetDTSIPeopleFromUSAddressNotFoundReason,
+  useGetDTSIPeopleFromUSAddress,
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
@@ -58,7 +58,7 @@ const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
 function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromAddress(
+  const res = useGetDTSIPeopleFromUSAddress(
     POLITICIAN_CATEGORY,
     address === 'loading' ? null : address?.description,
   )
@@ -79,7 +79,7 @@ function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressV
     return (
       <ContentContainer shouldShowSubtitle={shouldShowSubtitle}>
         <PageSubTitle as="h4" size="sm">
-          {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
+          {formatGetDTSIPeopleFromUSAddressNotFoundReason(res.data)}{' '}
           <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
             Try another address.
           </button>

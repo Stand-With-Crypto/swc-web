@@ -170,13 +170,23 @@ export const getIntlUrls = (
 }
 
 export const apiUrls = {
-  dtsiPeopleByCongressionalDistrict: ({
+  dtsiPeopleByElectoralZone: ({
+    electoralZone,
     stateCode,
-    districtNumber,
+    countryCode,
   }: {
-    stateCode: string
-    districtNumber: number
-  }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
+    stateCode: string | null
+    electoralZone: string
+    countryCode: SupportedCountryCodes
+  }) => {
+    if (countryCode === SupportedCountryCodes.US && stateCode) {
+      return `/api/public/dtsi/by-geography/usa/${stateCode}/${electoralZone}`
+    }
+
+    return `/api/public/dtsi/by-geography/${countryCode}/${electoralZone}`
+  },
+  swcCivicElectoralZoneFromAddress: (address: string) =>
+    `/api/public/swc-civic/electoral-zone?address=${encodeURIComponent(address.trim())}`,
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,
