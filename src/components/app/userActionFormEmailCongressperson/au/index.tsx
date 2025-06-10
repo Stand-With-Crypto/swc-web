@@ -7,7 +7,7 @@ import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
-import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
+import { actionCreateUserActionEmailCongresspersonIntl } from '@/actions/actionCreateUserActionEmailCongresspersonIntl'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   SectionNames,
@@ -112,7 +112,7 @@ export function AUUserActionFormEmailCongressperson({
         },
       },
       payload =>
-        actionCreateUserActionEmailCongressperson(payload).then(async actionResultPromise => {
+        actionCreateUserActionEmailCongresspersonIntl(payload).then(async actionResultPromise => {
           const actionResult = await actionResultPromise
           if (actionResult && 'user' in actionResult && actionResult.user) {
             identifyUserOnClient(actionResult.user)
