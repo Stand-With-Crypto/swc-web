@@ -47,9 +47,9 @@ import { userFullName } from '@/utils/shared/userFullName'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
-const SENDGRID_CONTACT_YOUR_REP_SENDER = requiredOutsideLocalEnv(
-  process.env.SENDGRID_CONTACT_YOUR_REP_SENDER,
-  'SENDGRID_CONTACT_YOUR_REP_SENDER',
+const SENDGRID_SENDER_REP = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER_REP,
+  'SENDGRID_SENDER_REP',
   'Sendgrid Contact Your Rep Email Sends',
 )
 
@@ -163,7 +163,6 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
           senderEmail: validatedFields.data.emailAddress,
           firstName: validatedFields.data.firstName,
           lastName: validatedFields.data.lastName,
-
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
@@ -201,7 +200,7 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     payload: {
       // TODO: replace with Quorum email address
       to: 'eduardo.picolo@coinbase.com',
-      from: SENDGRID_CONTACT_YOUR_REP_SENDER,
+      from: SENDGRID_SENDER_REP,
       subject: validatedFields.data.subject,
       html: await render(<EmailToRepresentative body={validatedFields.data.contactMessage} />),
       customArgs: {

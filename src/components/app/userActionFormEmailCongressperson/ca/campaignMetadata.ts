@@ -1,10 +1,11 @@
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { EmailActionFormValues } from '@/components/app/userActionFormEmailCongressperson'
 import {
-  getAdvocateLocationSignOff,
+  getConstituentLocationSignOff,
   getFullNameSignOff,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/ca'
 
@@ -18,18 +19,29 @@ export const DIALOG_TITLE = 'Email Your MP'
 
 export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
 
-export function getEmailBodyText(props?: GetTextProps & { address?: string }) {
-  const { firstName, lastName, address } = props || {}
+export function getEmailBodyText(
+  dtsiPeopleFromAddressResponse?: ReturnType<typeof useGetDTSIPeopleFromAddress>,
+) {
+  const dtsiPeople =
+    dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
+      ? dtsiPeopleFromAddressResponse.data.dtsiPeople
+      : []
+  const representativeName =
+    `${dtsiPeople?.[0]?.firstName || ''} ${dtsiPeople?.[0]?.lastName || ''}`.trim() ||
+    'Representative'
 
-  const fullNameSignOff = getFullNameSignOff({
-    firstName,
-    lastName,
-  })
-  const locationSignOff = getAdvocateLocationSignOff({
-    address,
-  })
+  return (props?: GetTextProps & { address?: string }) => {
+    const { firstName, lastName, address } = props || {}
 
-  return `Dear [MP Name],
+    const fullNameSignOff = getFullNameSignOff({
+      firstName,
+      lastName,
+    })
+    const locationSignOff = getConstituentLocationSignOff({
+      address,
+    })
+
+    return `Dear ${representativeName},
 
 I’m writing as someone who cares about Canada’s economic resilience and future competitiveness. I know you share those priorities too.
 
@@ -40,6 +52,7 @@ Other countries are already moving to integrate blockchain into their innovation
 As Parliament continues its work, I hope you’ll consider the role blockchain can play in advancing innovation and improving public outcomes.
 
 Thank you for your leadership and service.${fullNameSignOff}${locationSignOff}`
+  }
 }
 
 export function getDefaultFormValuesWithCampaignMetadata({
@@ -54,7 +67,7 @@ export function getDefaultFormValuesWithCampaignMetadata({
     firstName: '',
     lastName: '',
     emailAddress: '',
-    contactMessage: getEmailBodyText(),
+    contactMessage: getEmailBodyText()(),
     subject: SUBJECT,
     address: undefined,
     dtsiSlugs,
@@ -66,7 +79,7 @@ export function getDefaultFormValuesWithCampaignMetadata({
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      contactMessage: getEmailBodyText({
+      contactMessage: getEmailBodyText()({
         firstName: user.firstName,
         lastName: user.lastName,
         address: user.address?.formattedDescription,

@@ -144,7 +144,9 @@ export function CAUserActionFormEmailCongressperson({
               countryCode={countryCode}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
-            <EmailCongressperson.Message getEmailBodyText={getEmailBodyText} />
+            <EmailCongressperson.Message
+              getEmailBodyText={getEmailBodyText(dtsiPeopleFromAddressResponse)}
+            />
             <EmailCongressperson.Disclaimer
               countryCode={countryCode}
               quorumPrivacyPolicyUrl={urls.privacyPolicy()}

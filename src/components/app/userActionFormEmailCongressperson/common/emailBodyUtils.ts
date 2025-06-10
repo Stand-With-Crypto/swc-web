@@ -28,7 +28,7 @@ export function getFullNameSignOff({
   return firstName && lastName ? `\n\nSincerely,\n${firstName} ${lastName}` : ''
 }
 
-export function getAdvocateLocationSignOff({ address }: { address?: string }) {
+export function getConstituentLocationSignOff({ address }: { address?: string }) {
   return address ? `\n${address}` : ''
 }
 
