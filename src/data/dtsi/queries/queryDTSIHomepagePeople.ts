@@ -5,12 +5,13 @@ import { PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY } from '@/data/dtsi/queries/
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const query = /* GraphQL */ `
-  query HomepagePeople($personRoleGroupingOr: [PersonGrouping!]) {
+  query HomepagePeople($personRoleGroupingOr: [PersonGrouping!], $personRolePrimaryState: String) {
     lowestScores: people(
       limit: 4
       offset: 0
       stanceScoreLte: 49
       personRoleGroupingOr: $personRoleGroupingOr
+      personRolePrimaryState: $personRolePrimaryState
     ) {
       ...PersonCard
     }
@@ -19,6 +20,7 @@ const query = /* GraphQL */ `
       offset: 0
       stanceScoreGte: 51
       personRoleGroupingOr: $personRoleGroupingOr
+      personRolePrimaryState: $personRolePrimaryState
     ) {
       ...PersonCard
     }
@@ -28,10 +30,13 @@ const query = /* GraphQL */ `
 
 export const queryDTSIHomepagePeople = ({
   countryCode,
+  stateCode,
 }: {
   countryCode: SupportedCountryCodes
+  stateCode?: string
 }) => {
   return fetchDTSI<DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables>(query, {
     personRoleGroupingOr: PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY[countryCode],
+    personRolePrimaryState: stateCode,
   })
 }
