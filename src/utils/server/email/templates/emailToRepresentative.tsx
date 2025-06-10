@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Section, Text } from '@react-email/components'
 
-import { USWrapper } from '@/utils/server/email/templates/us/wrapper'
+import { Wrapper } from '@/utils/server/email/templates/common/ui/wrapper'
 
 interface EmailToRepresentativeProps {
   previewText?: string
@@ -10,11 +10,11 @@ interface EmailToRepresentativeProps {
 
 const EmailToRepresentative = ({ previewText, body }: EmailToRepresentativeProps) => {
   return (
-    <USWrapper previewText={previewText}>
+    <Wrapper previewText={previewText}>
       <Section>
         <Text>{body}</Text>
       </Section>
-    </USWrapper>
+    </Wrapper>
   )
 }
 

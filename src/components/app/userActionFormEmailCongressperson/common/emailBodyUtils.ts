@@ -28,6 +28,10 @@ export function getFullNameSignOff({
   return firstName && lastName ? `\n\nSincerely,\n${firstName} ${lastName}` : ''
 }
 
+export function getAdvocateLocationSignOff({ address }: { address?: string }) {
+  return address ? `\n${address}` : ''
+}
+
 function getDTSILastName(dtsiLastName?: string) {
   if (!dtsiLastName || typeof dtsiLastName !== 'string') return ''
 

@@ -2,7 +2,6 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
@@ -179,28 +178,6 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
             {children}
           </UserActionFormFollowLinkedInDialog>
-        ),
-      },
-    ],
-  },
-  [UserActionType.EMAIL]: {
-    title: 'TEST Email your MP',
-    description: 'TEST Email your MP to stand up for crypto.',
-    mobileCTADescription: 'Email your MP to stand up for crypto.',
-    campaignsModalDescription: 'Email your MP to stand up for crypto.',
-    image: '/gb/actionTypeIcons/email.png',
-    campaigns: [
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: GBUserActionLinkedInCampaignName.DEFAULT,
-        isCampaignActive: true,
-        title: 'TEST Email your MP',
-        description: 'TEST Email your MP to stand up for crypto.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionFormEmailCongresspersonDialog countryCode={countryCode}>
-            {children}
-          </UserActionFormEmailCongresspersonDialog>
         ),
       },
     ],
