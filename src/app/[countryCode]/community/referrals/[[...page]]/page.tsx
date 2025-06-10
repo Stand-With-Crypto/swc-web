@@ -56,10 +56,7 @@ export default async function CommunityReferralsPage(props: Props) {
   }
 
   const { items: leaderboardData, total } = state
-    ? await getDistrictsLeaderboardDataByState({
-        ...commonParams,
-        stateCode: state.toUpperCase(),
-      })
+    ? await getDistrictsLeaderboardDataByState(state.toUpperCase(), commonParams)
     : await getDistrictsLeaderboardData(commonParams)
 
   const dataProps: PageLeaderboardInferredProps = {
