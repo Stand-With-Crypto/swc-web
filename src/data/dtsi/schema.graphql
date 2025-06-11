@@ -366,12 +366,13 @@ enum PersonStanceVerificationStatus {
 
 type PublicUser {
   displayName: String!
-  id: ID!
   importanceScore: Int!
+  organizationId: String
   profilePictureUrl: String!
   profilePictureUrlDimensions: Json
   profilePictureUrlUnoptimized: String!
   twitterUsername: String
+  userId: ID!
 }
 
 type Query {
