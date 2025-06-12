@@ -153,30 +153,53 @@ async function updateUserCountryCode(
 
 async function getCountryCodeFromGooglePlaceId(googlePlaceId: string, logger: Logger) {
   const response = await fetchReq(
-    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(
-      googlePlaceId,
-    )}&key=${GOOGLE_PLACES_BACKEND_API_KEY}`,
+    `https://places.googleapis.com/v1/places/${encodeURIComponent(googlePlaceId)}`,
     {
       headers: {
         'Content-Type': 'application/json',
+        'X-Goog-Api-Key': GOOGLE_PLACES_BACKEND_API_KEY,
+        'X-Goog-FieldMask': 'addressComponents',
       },
     },
   )
 
-  const data = (await response.json()) as {
-    result: Pick<google.maps.places.PlaceResult, 'address_components'>
+  const data = (await response.json()) as
+    | {
+        addressComponents: Array<{
+          shortText: string
+          types: string[]
+        }>
+      }
+    | {
+        error: {
+          code: number
+          message: string
+          status: string
+        }
+      }
+
+  if ('error' in data) {
+    if (data.error.code === 400 && data.error.status === 'INVALID_ARGUMENT') {
+      logger.error('Invalid google place id', googlePlaceId)
+
+      return null
+    }
+
+    logger.error('Error', JSON.stringify({ googlePlaceId, data }, null, 2))
+
+    return null
   }
 
-  if (!data?.result) {
+  if (!('addressComponents' in data)) {
     logger.error('No result', JSON.stringify({ googlePlaceId }, null, 2))
 
     return null
   }
 
-  const addressComponents = data.result.address_components
+  const addressComponents = data.addressComponents
   const countryCodeFromAddress = addressComponents?.find(x =>
     x.types.includes('country'),
-  )?.short_name
+  )?.shortText
 
   const validatedCountryCode = zodSupportedCountryCode.safeParse(
     countryCodeFromAddress?.toLowerCase(),

@@ -11,7 +11,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
-import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useGetDTSIPeopleFromUSAddress } from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
@@ -58,7 +58,9 @@ export function UserActionFormEmailCongresspersonSkeleton({
             <div className="w-full">
               <DTSICongresspersonAssociatedWithFormAddress
                 countryCode={countryCode}
-                dtsiPeopleFromAddressResponse={{} as ReturnType<typeof useGetDTSIPeopleFromAddress>}
+                dtsiPeopleFromAddressResponse={
+                  {} as ReturnType<typeof useGetDTSIPeopleFromUSAddress>
+                }
                 onChangeAddress={noop}
                 politicianCategory={campaignMetadata.politicianCategory}
               />

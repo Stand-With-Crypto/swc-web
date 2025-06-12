@@ -7,9 +7,9 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  useGetDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+  formatGetDTSIPeopleFromUSAddressNotFoundReason,
+  useGetDTSIPeopleFromUSAddress,
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
@@ -36,7 +36,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       stateCode: string
     }
   }) => void
-  dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
+  dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromUSAddress>
 }) {
   const roleNameResolver = getRoleNameResolver(countryCode)
 
@@ -72,7 +72,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   ) {
     return (
       <div className="font-bold text-destructive">
-        {formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPeopleFromAddressResponse.data)}
+        {formatGetDTSIPeopleFromUSAddressNotFoundReason(dtsiPeopleFromAddressResponse.data)}
       </div>
     )
   }

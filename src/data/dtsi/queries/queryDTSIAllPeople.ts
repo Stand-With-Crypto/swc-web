@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import { uniqBy } from 'lodash-es'
 
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
@@ -12,9 +13,23 @@ import {
 
 export const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
 
+const PEOPLE_OUTSIDE_FILTERS_TO_INCLUDE: Record<SupportedCountryCodes, string[]> = {
+  [SupportedCountryCodes.US]: ['wiley---nickel'],
+  [SupportedCountryCodes.CA]: [],
+  [SupportedCountryCodes.GB]: [],
+  [SupportedCountryCodes.AU]: [],
+}
+
 const query = /* GraphQL */ `
-  query AllPeople($limit: Int!, $personRoleGroupingOr: [PersonGrouping!]) {
+  query AllPeople(
+    $limit: Int!
+    $personRoleGroupingOr: [PersonGrouping!]
+    $peopleOutsideFilters: [String!]
+  ) {
     people(limit: $limit, offset: 0, personRoleGroupingOr: $personRoleGroupingOr) {
+      ...PersonCard
+    }
+    additionalPeople: people(limit: $limit, offset: 0, slugIn: $peopleOutsideFilters) {
       ...PersonCard
     }
   }
@@ -38,6 +53,7 @@ export const queryDTSIAllPeople = async ({
     {
       limit,
       personRoleGroupingOr: PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY[countryCode],
+      peopleOutsideFilters: PEOPLE_OUTSIDE_FILTERS_TO_INCLUDE[countryCode],
     },
     {
       nextTags: [DTSI_AllPeopleQueryTag],
@@ -50,5 +66,14 @@ export const queryDTSIAllPeople = async ({
       { extra: { resultsLength: results.people.length } },
     )
   }
-  return results
+  return mergeAllPeopleResults(results)
+}
+
+function mergeAllPeopleResults(
+  results: DTSI_AllPeopleQuery,
+): Omit<DTSI_AllPeopleQuery, 'additionalPeople'> {
+  const mergedList = [...results.people, ...results.additionalPeople]
+  return {
+    people: uniqBy(mergedList, 'slug'),
+  }
 }

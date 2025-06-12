@@ -245,7 +245,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email Your Member of Congress',
         description: 'Support Crucial Crypto Legislation',
         canBeTriggeredMultipleTimes: true,
