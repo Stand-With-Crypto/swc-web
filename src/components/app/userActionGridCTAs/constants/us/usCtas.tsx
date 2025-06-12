@@ -253,17 +253,6 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
         ),
       },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.TEST_CAMPAIGN_CREATED_BY_CURSOR,
-        isCampaignActive: true,
-        title: 'Hello World Title',
-        description: 'Hello WOrld Description',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName(
-          USUserActionEmailCampaignName.TEST_CAMPAIGN_CREATED_BY_CURSOR,
-        ),
-      },
     ],
   },
   [UserActionType.CALL]: {
