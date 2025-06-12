@@ -27,7 +27,7 @@ const COUNTRY_CODE_TO_QUORUM_MOST_RECENT_REGION: Record<SupportedCountryCodes, s
 // filters for legislators/parliamentarians
 const QUORUM_MOST_RECENT_PERSON_TYPE_IN = '1,3,7'
 
-const logger = getLogger('getQuorumPoliticianByElectoralZone')
+const logger = getLogger('fetchQuorum')
 
 export interface NormalizedQuorumPolitician {
   id: string
@@ -37,7 +37,6 @@ export interface NormalizedQuorumPolitician {
   email: string
   phone: string
   imageUrl: string
-  // remove this later
   title: string
 }
 
@@ -66,7 +65,7 @@ export async function fetchQuorumByPersonName({
   limit?: number
 }): Promise<NormalizedQuorumPolitician[] | undefined> {
   if (!QUORUM_API_KEY || !QUORUM_API_USERNAME) {
-    logger.info('No QUORUM_API_KEY or QUORUM_API_USERNAME')
+    logger.info('Missing QUORUM_API_KEY and QUORUM_API_USERNAME')
     return
   }
 
@@ -74,8 +73,6 @@ export async function fetchQuorumByPersonName({
 
   url.searchParams.set('api_key', QUORUM_API_KEY)
   url.searchParams.set('username', QUORUM_API_USERNAME)
-  // shows only current officials.
-  // url.searchParams.set('ph_current', 'true')
   url.searchParams.set('limit', limit.toString())
 
   if (countryCode === SupportedCountryCodes.US) {
@@ -88,22 +85,31 @@ export async function fetchQuorumByPersonName({
 
   url.searchParams.set('most_recent_region', COUNTRY_CODE_TO_QUORUM_MOST_RECENT_REGION[countryCode])
 
-  console.log(`Fetching ${url.toString()}`)
-
-  const response = await fetchReq(url.toString())
+  const response = await fetchReq(url.toString(), undefined, {
+    withScope: scope => {
+      scope.setTags({
+        domain: 'quorum',
+        countryCode,
+        function: 'fetchQuorumByPersonName',
+      })
+      scope.setExtras({
+        ...Object.fromEntries(url.searchParams.entries()),
+      })
+    },
+  })
 
   const data = (await response.json()) as QuorumNewPersonResponse
 
-  if (data.objects.length === 0) {
+  if (!data?.objects || data.objects.length === 0) {
     return
   }
 
-  return data?.objects.map(normalizeQuorumPolitician)
+  return data.objects.map(normalizeQuorumPolitician)
 }
 
 export async function fetchQuorumByPersonId(personId: string) {
   if (!QUORUM_API_KEY || !QUORUM_API_USERNAME) {
-    logger.info('No QUORUM_API_KEY or QUORUM_API_USERNAME')
+    logger.info('Missing QUORUM_API_KEY and QUORUM_API_USERNAME')
     return
   }
 
@@ -112,9 +118,17 @@ export async function fetchQuorumByPersonId(personId: string) {
   url.searchParams.set('api_key', QUORUM_API_KEY)
   url.searchParams.set('username', QUORUM_API_USERNAME)
 
-  console.log(`Fetching ${url.toString()}`)
-
-  const response = await fetchReq(url.toString())
+  const response = await fetchReq(url.toString(), undefined, {
+    withScope: scope => {
+      scope.setTags({
+        domain: 'quorum',
+        function: 'fetchQuorumByPersonId',
+      })
+      scope.setExtras({
+        ...Object.fromEntries(url.searchParams.entries()),
+      })
+    },
+  })
 
   const data = (await response.json()) as QuorumPolitician
 
@@ -135,7 +149,7 @@ export async function fetchQuorumByRegionRepresented({
   limit?: number
 }) {
   if (!QUORUM_API_KEY || !QUORUM_API_USERNAME) {
-    logger.info('No QUORUM_API_KEY or QUORUM_API_USERNAME')
+    logger.info('Missing QUORUM_API_KEY and QUORUM_API_USERNAME')
     return
   }
 
@@ -143,15 +157,10 @@ export async function fetchQuorumByRegionRepresented({
 
   url.searchParams.set('api_key', QUORUM_API_KEY)
   url.searchParams.set('username', QUORUM_API_USERNAME)
-  // shows only current officials.
-  // url.searchParams.set('ph_current', 'false')
   url.searchParams.set('limit', limit.toString())
 
   if (countryCode === SupportedCountryCodes.US) {
     url.searchParams.set('ph_major_role_type', '54,55,63,60,56,11,12,65,64,66,18,19,29,61')
-  }
-
-  if (countryCode === SupportedCountryCodes.US) {
     url.searchParams.set('quick_search', regionRepresented)
   } else {
     url.searchParams.set('region_represented', regionRepresented)
@@ -161,17 +170,26 @@ export async function fetchQuorumByRegionRepresented({
 
   url.searchParams.set('most_recent_region', COUNTRY_CODE_TO_QUORUM_MOST_RECENT_REGION[countryCode])
 
-  console.log(`Fetching ${url.toString()}`)
-
-  const response = await fetchReq(url.toString())
+  const response = await fetchReq(url.toString(), undefined, {
+    withScope: scope => {
+      scope.setTags({
+        domain: 'quorum',
+        countryCode,
+        function: 'fetchQuorumByRegionRepresented',
+      })
+      scope.setExtras({
+        ...Object.fromEntries(url.searchParams.entries()),
+      })
+    },
+  })
 
   const data = (await response.json()) as QuorumNewPersonResponse
 
-  if (data.objects.length === 0) {
+  if (!data?.objects || data?.objects.length === 0) {
     return
   }
 
-  return data?.objects.map(normalizeQuorumPolitician)
+  return data.objects.map(normalizeQuorumPolitician)
 }
 
 function normalizeQuorumPolitician(politician: QuorumPolitician): NormalizedQuorumPolitician {
