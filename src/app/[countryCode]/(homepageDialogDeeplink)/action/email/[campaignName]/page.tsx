@@ -1,29 +1,43 @@
 import { UserActionType } from '@prisma/client'
+import { notFound } from 'next/navigation'
 
 import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/us'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { PageProps } from '@/types'
-import { ErrorBoundary } from '@/utils/web/errorBoundary'
-import { EMAIL_ACTION_DEEPLINK_SLUG_TO_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/campaigns/deeplinkConfig'
+import { slugify } from '@/utils/shared/slugify'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
 export const dynamicParams = true
 
-// export async function generateStaticParams() {
-//   return Object.keys(EMAIL_ACTION_DEEPLINK_SLUG_TO_CAMPAIGN_NAME).map(slug => ({
-//     campaignSlug: slug,
-//   }))
-// }
+export async function generateStaticParams() {
+  return Object.values(USUserActionEmailCampaignName).map(campaignName => {
+    if (campaignName === USUserActionEmailCampaignName.DEFAULT) {
+      return {
+        campaignName: 'default',
+      }
+    }
+
+    return {
+      campaignName: slugify(campaignName),
+    }
+  })
+}
 
 export default async function UserActionEmailCongresspersonDeepLink(
-  props: PageProps<{ campaignSlug: string }>,
+  props: PageProps<{ campaignName: string }>,
 ) {
   const params = await props.params
-  const campaignSlug = params.campaignSlug
-  const campaignName = EMAIL_ACTION_DEEPLINK_SLUG_TO_CAMPAIGN_NAME[campaignSlug]
+  const campaignName = deSlugifyCampaignName(params.campaignName)
+
+  console.log('params.campaignName', params.campaignName)
   console.log('campaignName', campaignName)
+
+  if (!campaignName) {
+    notFound()
+  }
 
   return (
     <USHomepageDialogDeeplinkLayout pageParams={params}>
@@ -42,5 +56,15 @@ export default async function UserActionEmailCongresspersonDeepLink(
         <UserActionFormEmailCongresspersonDeeplinkWrapper campaignName={campaignName} />
       </ErrorBoundary>
     </USHomepageDialogDeeplinkLayout>
+  )
+}
+
+function deSlugifyCampaignName(slugifiedCampaignName: string) {
+  if (slugifiedCampaignName === 'default') {
+    return USUserActionEmailCampaignName.DEFAULT
+  }
+
+  return Object.values(USUserActionEmailCampaignName).find(
+    campaignName => slugify(campaignName) === slugifiedCampaignName,
   )
 }

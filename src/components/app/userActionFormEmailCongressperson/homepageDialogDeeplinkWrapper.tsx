@@ -19,8 +19,8 @@ import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValu
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { cn } from '@/utils/web/cn'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { cn } from '@/utils/web/cn'
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
   campaignName,
@@ -50,8 +50,8 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
 
   return fetchUser.isLoading || loadingParams ? (
     <UserActionFormEmailCongresspersonSkeleton
-      countryCode={countryCode}
       campaignName={campaignName}
+      countryCode={countryCode}
     />
   ) : state === 'form' ? (
     <UserActionFormEmailCongressperson
@@ -87,8 +87,8 @@ export function UserActionFormEmailCongresspersonDeeplinkWrapper({
       <Suspense
         fallback={
           <UserActionFormEmailCongresspersonSkeleton
-            countryCode={countryCode}
             campaignName={campaignName}
+            countryCode={countryCode}
           />
         }
       >
