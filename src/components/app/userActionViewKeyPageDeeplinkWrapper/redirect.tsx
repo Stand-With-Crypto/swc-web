@@ -18,17 +18,15 @@ interface UserActionViewKeyPageDeeplinkLoadingProps {
   campaignName: string
   countryCode: SupportedCountryCodes
   minWaitTimeInSeconds?: number
-  pathName: string
 }
 
 const MIN_WAIT_TIME_IN_SECONDS = 1
 
-export function UserActionViewKeyPageDeeplinkLoading({
+export function UserActionViewKeyPageDeeplinkRedirect({
   campaignMetadata,
   campaignName,
   countryCode,
   minWaitTimeInSeconds = MIN_WAIT_TIME_IN_SECONDS,
-  pathName,
 }: UserActionViewKeyPageDeeplinkLoadingProps) {
   const router = useRouter()
 
@@ -36,15 +34,7 @@ export function UserActionViewKeyPageDeeplinkLoading({
 
   const [actionHasBeenCreated, setActionHasBeenCreated] = useState(false)
 
-  useEffect(() => {
-    const minWaitTimeTimeout = setTimeout(() => {
-      setStatus('ready')
-    }, minWaitTimeInSeconds * 1_000)
-
-    return () => {
-      clearInterval(minWaitTimeTimeout)
-    }
-  }, [minWaitTimeInSeconds])
+  useTimeout(() => setStatus('ready'), minWaitTimeInSeconds)
 
   useEffect(() => {
     async function runServerAction() {
@@ -52,7 +42,7 @@ export function UserActionViewKeyPageDeeplinkLoading({
         await actionCreateUserActionViewKeyPage({
           campaignName,
           countryCode,
-          path: pathName,
+          path: campaignMetadata.url,
         })
 
         setActionHasBeenCreated(true)
@@ -64,11 +54,21 @@ export function UserActionViewKeyPageDeeplinkLoading({
     }
 
     void runServerAction()
-  }, [actionHasBeenCreated, campaignMetadata, campaignName, countryCode, pathName, router, status])
+  }, [actionHasBeenCreated, campaignMetadata, campaignName, countryCode, router, status])
 
   return (
     <div className="fixed left-0 top-0 z-50 h-dvh w-full">
       <LoadingOverlay />
     </div>
   )
+}
+
+function useTimeout(callback: () => void, delayInSeconds: number) {
+  useEffect(() => {
+    const timeoutRef = setTimeout(callback, delayInSeconds * 1_000)
+
+    return () => {
+      clearTimeout(timeoutRef)
+    }
+  }, [callback, delayInSeconds])
 }

@@ -24,7 +24,6 @@ export function GbUserActionViewKeyPageDeeplinkWrapper({
     <UserActionViewKeyPageDeeplinkWrapper
       campaignMetadataMap={campaignMetadataMap}
       countryCode={countryCode}
-      pathName="/gb/action/view-key-page"
       searchParams={searchParams}
     />
   )

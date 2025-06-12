@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation'
 
 import {
   CampaignMetadata,
-  UserActionViewKeyPageDeeplinkLoading,
-} from '@/components/app/userActionViewKeyPageDeeplinkWrapper/loading'
+  UserActionViewKeyPageDeeplinkRedirect,
+} from '@/components/app/userActionViewKeyPageDeeplinkWrapper/redirect'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export type dynamic = 'error'
@@ -15,7 +15,6 @@ interface UserActionViewKeyPageDeeplinkWrapperProps<K extends Uppercase<string>>
   campaignMetadataMap: CampaignMetadataMap<K>
   countryCode: SupportedCountryCodes
   minWaitTimeInSeconds?: number
-  pathName: string
   searchParams: SearchParams | undefined
 }
 
@@ -23,7 +22,6 @@ export async function UserActionViewKeyPageDeeplinkWrapper<K extends Uppercase<s
   campaignMetadataMap,
   countryCode,
   minWaitTimeInSeconds,
-  pathName,
   searchParams,
 }: UserActionViewKeyPageDeeplinkWrapperProps<K>) {
   const campaignName = (searchParams?.campaignName || null) as K | null
@@ -35,12 +33,11 @@ export async function UserActionViewKeyPageDeeplinkWrapper<K extends Uppercase<s
   }
 
   return (
-    <UserActionViewKeyPageDeeplinkLoading
+    <UserActionViewKeyPageDeeplinkRedirect
       campaignMetadata={campaignMetadata}
       campaignName={campaignName}
       countryCode={countryCode}
       minWaitTimeInSeconds={minWaitTimeInSeconds}
-      pathName={pathName}
     />
   )
 }
