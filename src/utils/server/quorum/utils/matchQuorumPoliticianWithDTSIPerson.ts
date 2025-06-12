@@ -1,7 +1,8 @@
-import { NormalizedQuorumPolitician } from '@/utils/server/quorum/utils/fetchQuorum'
-import { getLogger } from '@/utils/shared/logger'
 import Fuse from 'fuse.js'
 import { uniqBy } from 'lodash-es'
+
+import { NormalizedQuorumPolitician } from '@/utils/server/quorum/utils/fetchQuorum'
+import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('matchQuorumPoliticianWithDTSIPerson')
 
