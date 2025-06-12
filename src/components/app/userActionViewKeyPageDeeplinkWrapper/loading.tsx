@@ -1,10 +1,11 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { actionCreateUserActionViewKeyPage } from '@/actions/actionCreateUserActionViewKeyPage'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
 type Status = 'waiting' | 'ready'
 
@@ -43,7 +44,7 @@ export function UserActionViewKeyPageDeeplinkLoading({
     return () => {
       clearInterval(minWaitTimeTimeout)
     }
-  }, [])
+  }, [minWaitTimeInSeconds])
 
   useEffect(() => {
     async function runServerAction() {
@@ -63,7 +64,7 @@ export function UserActionViewKeyPageDeeplinkLoading({
     }
 
     void runServerAction()
-  }, [actionHasBeenCreated])
+  }, [actionHasBeenCreated, campaignMetadata, campaignName, countryCode, pathName, router, status])
 
   return (
     <div className="fixed left-0 top-0 z-50 h-dvh w-full">
