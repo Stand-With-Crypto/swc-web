@@ -47,15 +47,15 @@ export function UserActionFormEmailCongresspersonDialog({
       <Suspense
         fallback={
           <UserActionFormEmailCongresspersonSkeleton
-            countryCode={countryCode}
             campaignName={campaignName}
+            countryCode={countryCode}
           />
         }
       >
         {fetchUser.isLoading ? (
           <UserActionFormEmailCongresspersonSkeleton
-            countryCode={countryCode}
             campaignName={campaignName}
+            countryCode={countryCode}
           />
         ) : state === 'form' ? (
           <LazyUserActionFormEmailCongressperson
