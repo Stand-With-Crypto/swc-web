@@ -56,7 +56,7 @@ import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/z
 export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
-interface UserActionFormEmailCongresspersonProps {
+export interface UserActionFormEmailCongresspersonProps {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void

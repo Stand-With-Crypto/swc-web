@@ -1,5 +1,4 @@
 import { CampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/campaigns/types'
-import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 import * as DEFAULT from './1-default'
@@ -30,35 +29,6 @@ const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
     FOUNDERS_PUSH_MAY_14_2025.campaignMetadata,
 }
 
-const EMAIL_ACTION_CAMPAIGN_NAME_TO_CTA_CONFIG: Record<
-  USUserActionEmailCampaignName,
-  UserActionGridCTACampaign
-> = {
-  // Legacy (for type safety only)
-  [USUserActionEmailCampaignName.FIT21_2024_04]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.SEC_COMMISSIONER_2024]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.WELCOME_119_CONGRESS_2025]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD]:
-    DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]:
-    DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025]: DEFAULT.campaignCTAConfig,
-
-  // New
-  [USUserActionEmailCampaignName.DEFAULT]: DEFAULT.campaignCTAConfig,
-  [USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025]:
-    FOUNDERS_PUSH_MAY_14_2025.campaignCTAConfig,
-}
-
 export function getEmailActionCampaignMetadata(campaignName: USUserActionEmailCampaignName) {
   return EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA[campaignName]
-}
-
-export function getEmailActionCTAConfigByCampaign(campaignName: USUserActionEmailCampaignName) {
-  return EMAIL_ACTION_CAMPAIGN_NAME_TO_CTA_CONFIG[campaignName]
 }

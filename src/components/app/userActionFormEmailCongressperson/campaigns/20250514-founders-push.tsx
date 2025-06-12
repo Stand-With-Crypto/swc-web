@@ -1,17 +1,12 @@
-import { UserActionType } from '@prisma/client'
-
-import {
-  UserActionFormEmailCongresspersonDialog,
-  type UserActionFormEmailCongresspersonDialogProps,
-} from '@/components/app/userActionFormEmailCongressperson/dialog'
 import {
   getFullNameSignOff,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/emailBodyUtils'
-import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 import type { CampaignMetadata } from './types'
+
+const CAMPAIGN_NAME = USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025
 
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
@@ -28,32 +23,11 @@ In the past, you’ve shown a commitment to thoughtful and forward-looking legis
 When you stand with crypto, you stand with millions of Americans across the country. Thank you.${fullNameSignOff}`
 }
 
-export const DEEPLINK_SLUG = 'founders-push'
-
 export const campaignMetadata: CampaignMetadata = {
-  campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+  campaignName: CAMPAIGN_NAME,
   dialogTitle: 'Email Your Member of Congress',
   dialogSubtitle: 'Support Crucial Crypto Legislation',
   politicianCategory: 'house',
   subject: 'Support Crypto Legislation',
   getEmailBodyText,
-}
-
-const WrapperComponent = (
-  props: Omit<UserActionFormEmailCongresspersonDialogProps, 'campaignName'>,
-) => (
-  <UserActionFormEmailCongresspersonDialog
-    {...props}
-    campaignName={campaignMetadata.campaignName}
-  />
-)
-
-export const campaignCTAConfig: UserActionGridCTACampaign = {
-  actionType: UserActionType.EMAIL,
-  campaignName: campaignMetadata.campaignName,
-  isCampaignActive: true,
-  title: campaignMetadata.dialogTitle,
-  description: campaignMetadata.dialogSubtitle,
-  canBeTriggeredMultipleTimes: true,
-  WrapperComponent,
 }

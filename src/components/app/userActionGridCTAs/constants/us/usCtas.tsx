@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { getEmailActionCTAConfigByCampaign } from '@/components/app/userActionFormEmailCongressperson/campaigns/ctaConfig'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
@@ -130,7 +130,17 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
     campaigns: [
-      getEmailActionCTAConfigByCampaign(USUserActionEmailCampaignName.DEFAULT),
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: `Email your ${getYourPoliticianCategoryShortDisplayName('house')}`,
+        description: 'You emailed your representative about FIT21.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName(
+          USUserActionEmailCampaignName.DEFAULT,
+        ),
+      },
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.DEFAULT,
@@ -224,13 +234,25 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        isCampaignActive: true,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName(
+          USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        ),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
         isCampaignActive: false,
         title: 'Email Your Senator',
         description: 'Support Crucial Crypto Legislation.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName(
+          USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        ),
       },
-      getEmailActionCTAConfigByCampaign(USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025),
     ],
   },
   [UserActionType.CALL]: {
