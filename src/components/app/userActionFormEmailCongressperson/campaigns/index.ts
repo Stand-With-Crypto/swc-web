@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { CampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/campaigns/types'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 import * as DEFAULT from './1-default'
-import * as FOUNDERS_PUSH_MAY_14_2025 from './20250514-founders-push'
 
 const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
   USUserActionEmailCampaignName,
@@ -21,12 +21,13 @@ const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
   [USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH]:
     DEFAULT.campaignMetadata,
   [USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025]: DEFAULT.campaignMetadata,
-  [USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025]: DEFAULT.campaignMetadata,
 
   // New
   [USUserActionEmailCampaignName.DEFAULT]: DEFAULT.campaignMetadata,
-  [USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025]:
-    FOUNDERS_PUSH_MAY_14_2025.campaignMetadata,
+  [USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025]:
+    require('./20250513-genius-act').campaignMetadata,
+  [USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025]: require('./20250514-founders-push')
+    .campaignMetadata,
 }
 
 export function getEmailActionCampaignMetadata(campaignName: USUserActionEmailCampaignName) {
