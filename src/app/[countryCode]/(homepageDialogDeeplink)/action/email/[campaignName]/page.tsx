@@ -32,9 +32,6 @@ export default async function UserActionEmailCongresspersonDeepLink(
   const params = await props.params
   const campaignName = deSlugifyCampaignName(params.campaignName)
 
-  console.log('params.campaignName', params.campaignName)
-  console.log('campaignName', campaignName)
-
   if (!campaignName) {
     notFound()
   }
