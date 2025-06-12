@@ -324,6 +324,11 @@ const nextConfig: NextConfig = {
         destination: '/gb',
         permanent: false,
       },
+      {
+        source: '/action/email',
+        destination: '/action/email/default',
+        permanent: true,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
@@ -784,10 +789,6 @@ const nextConfig: NextConfig = {
         {
           source: '/:locale/races/(province|state)/:stateCode/constituency/:path*',
           destination: '/:locale/races/state/:stateCode/district/:path*',
-        },
-        {
-          source: '/action/email',
-          destination: '/action/email/default',
         },
       ],
       afterFiles: [],
