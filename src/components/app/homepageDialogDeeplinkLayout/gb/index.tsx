@@ -14,9 +14,18 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.GB
 
+type GBHomepageDialogDeeplinkLayoutWithDialog = {
+  hidePseudoDialog?: false;
+} & HomepageDialogDeeplinkLayoutProps;
+
+type GBHomepageDialogDeeplinkLayoutWithoutDialog = {
+  hidePseudoDialog: true;
+  children: React.ReactNode;
+};
+
 type GBHomepageDialogDeeplinkLayoutProps =
-  | ({ hidePseudoDialog?: false } & HomepageDialogDeeplinkLayoutProps)
-  | { hidePseudoDialog: true; children: React.ReactNode }
+  | GBHomepageDialogDeeplinkLayoutWithDialog
+  | GBHomepageDialogDeeplinkLayoutWithoutDialog;
 
 export async function GBHomepageDialogDeeplinkLayout({
   children,
