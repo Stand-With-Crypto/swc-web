@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
+import { getDeeplinkUrlByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getDeeplinkUrl'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
-import { slugify } from '@/utils/shared/slugify'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
@@ -161,8 +161,7 @@ export const getUserActionDeeplink = <
   }
 
   if (actionType === UserActionType.EMAIL) {
-    const slugifiedCampaignName = slugify(campaign) ?? ''
-    return `${getIntlPrefix(config.countryCode)}/action/email/${slugifiedCampaignName}`
+    return getDeeplinkUrlByCampaignName(campaign as USUserActionEmailCampaignName)
   }
 
   throw new Error(`No deeplink found for actionType: ${actionType} and campaign: ${campaign}`)
