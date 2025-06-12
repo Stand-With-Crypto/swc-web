@@ -14,11 +14,14 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.GB
 
+type GBHomepageDialogDeeplinkLayoutProps =
+  | ({ hidePseudoDialog?: false } & HomepageDialogDeeplinkLayoutProps)
+  | { hidePseudoDialog: true; children: React.ReactNode }
+
 export async function GBHomepageDialogDeeplinkLayout({
   children,
-  size = 'md',
-  className,
-}: HomepageDialogDeeplinkLayoutProps) {
+  ...props
+}: GBHomepageDialogDeeplinkLayoutProps) {
   const [topLevelMetrics, recentActivity, partners, founders, dtsiHomepagePoliticians] =
     await Promise.all([
       getHomepageTopLevelMetrics(),
@@ -33,9 +36,17 @@ export async function GBHomepageDialogDeeplinkLayout({
 
   return (
     <>
-      <PseudoDialog className={className} countryCode={countryCode} size={size}>
-        {children}
-      </PseudoDialog>
+      {props.hidePseudoDialog ? (
+        children
+      ) : (
+        <PseudoDialog
+          className={props.className}
+          countryCode={countryCode}
+          size={props.size || 'md'}
+        >
+          {children}
+        </PseudoDialog>
+      )}
 
       <GbPageHome
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
