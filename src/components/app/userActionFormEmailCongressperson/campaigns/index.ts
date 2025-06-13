@@ -28,6 +28,8 @@ const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
     require('./20250513-genius-act').campaignMetadata,
   [USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025]: require('./20250514-founders-push')
     .campaignMetadata,
+  [USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025]:
+    require('./20250613-clarity-act-house').campaignMetadata,
 }
 
 export function getEmailActionCampaignMetadata(campaignName: USUserActionEmailCampaignName) {

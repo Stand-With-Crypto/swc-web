@@ -132,6 +132,28 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+        isCampaignActive: true,
+        title: 'Email Your House Rep',
+        description: 'Pass Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName(
+          USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+        ),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        isCampaignActive: true,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName(
+          USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        ),
+      },
+      {
+        actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.DEFAULT,
         isCampaignActive: false,
         title: `Email your ${getYourPoliticianCategoryShortDisplayName('house')}`,
@@ -230,17 +252,6 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
-        isCampaignActive: true,
-        title: 'Email Your Senator',
-        description: 'Support Crucial Crypto Legislation.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName(
-          USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
-        ),
       },
       {
         actionType: UserActionType.EMAIL,
