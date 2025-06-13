@@ -47,7 +47,7 @@ export function matchQuorumPoliticianWithDTSIPerson({
     state: normalizedDTSIPersonState,
   }
 
-  console.log('normalizedDTSIPerson', normalizedDTSIPerson)
+  logger.info('normalizedDTSIPerson', normalizedDTSIPerson)
 
   const normalizedQuorumPoliticians = quorumPoliticians.map(quorumPolitician => ({
     ...quorumPolitician,
@@ -104,8 +104,6 @@ function findExactMatch({
   normalizedQuorumPoliticians: NormalizedQuorumPolitician[]
   countryCode: SupportedCountryCodes
 }) {
-  logger.info('Trying to find exact match for ', normalizedDTSIPerson)
-
   for (const quorumPolitician of normalizedQuorumPoliticians) {
     logger.info('Checking exact match with quorumPolitician', quorumPolitician)
     if (
@@ -185,10 +183,7 @@ function findPossibleMatch({
   normalizedQuorumPoliticians: NormalizedQuorumPolitician[]
   countryCode: SupportedCountryCodes
 }) {
-  // console.log('normalizedQuorumPoliticians', normalizedQuorumPoliticians)
-
   function maybeGetPossibleMatch(by: string, possibleMatches: NormalizedQuorumPolitician[]) {
-    console.log(`possibleMatches by ${by}`, possibleMatches)
     logger.info(`Checking possible matches by ${by}`, possibleMatches)
 
     if (possibleMatches.length === 1) {
