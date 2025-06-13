@@ -324,11 +324,6 @@ const nextConfig: NextConfig = {
         destination: '/gb',
         permanent: false,
       },
-      {
-        source: '/action/email',
-        destination: '/action/email/default',
-        permanent: true,
-      },
       // vanity urls
       {
         source: '/join/:referralId',

@@ -10,7 +10,7 @@ import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 3600 // 1 hour
 export const dynamic = 'error'
-export const dynamicParams = true
+export const dynamicParams = false
 
 export async function generateStaticParams() {
   return Object.values(USUserActionEmailCampaignName).map(campaignName => {

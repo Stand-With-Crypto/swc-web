@@ -4,6 +4,9 @@ import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 
 import * as DEFAULT from './1-default'
 
+export const DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME =
+  USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025
+
 const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
   USUserActionEmailCampaignName,
   CampaignMetadata
