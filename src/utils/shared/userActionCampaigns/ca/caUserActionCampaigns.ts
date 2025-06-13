@@ -54,6 +54,7 @@ export enum CAUserActionPollCampaignName {
 }
 
 export enum CAUserActionEmailCampaignName {
+  DEFAULT = 'DEFAULT',
   CA_MOMENTUM_AHEAD_HOUSE_RISING = 'CA_MOMENTUM_AHEAD_HOUSE_RISING',
 }
 
@@ -92,5 +93,5 @@ export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName.H1_2025,
   [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
   [UserActionType.POLL]: CAUserActionPollCampaignName.CRYPTO_NEWS,
-  [UserActionType.EMAIL]: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
+  [UserActionType.EMAIL]: CAUserActionEmailCampaignName.DEFAULT,
 } satisfies Record<CAActiveClientUserActionWithCampaignType, string>

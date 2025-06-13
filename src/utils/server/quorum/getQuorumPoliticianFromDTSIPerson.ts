@@ -12,13 +12,7 @@ import { redis } from '@/utils/server/redis'
 import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const QUORUM_POLITICIANS_CACHE_KEY = 'quorum:politicians'
-
 const logger = getLogger('getQuorumPoliticianByDTSIPerson')
-
-function getPersonLastName(person: DTSIPersonByElectoralZone) {
-  return normalizeQuorumString(person.lastName.split(' ').at(-1) ?? person.lastName)
-}
 
 export async function getQuorumPoliticianByDTSIPerson({
   countryCode,
@@ -37,40 +31,10 @@ export async function getQuorumPoliticianByDTSIPerson({
     return quorumPolitician
   }
 
-  const lastName = getPersonLastName(person)
-
-  let limit = undefined
-
-  if (lastName.toLowerCase() === 'smith' && countryCode === SupportedCountryCodes.GB) {
-    limit = 200
-  }
-
-  const redisCacheKey = `${QUORUM_POLITICIANS_CACHE_KEY}:${countryCode}:${lastName}`
-
-  const quorumPoliticians: NormalizedQuorumPolitician[] = []
-
-  const cachedPoliticians = await redis.get<NormalizedQuorumPolitician[]>(redisCacheKey)
-
-  if (cachedPoliticians) {
-    logger.info(
-      `Found ${cachedPoliticians.length} cached politicians for ${lastName} in ${countryCode}`,
-    )
-    quorumPoliticians.push(...cachedPoliticians)
-  } else {
-    logger.info(`Fetching ${lastName} in ${countryCode} from Quorum`)
-    const politicians = await fetchQuorumByAdvancedSearch({
-      countryCode,
-      query: lastName,
-      limit,
-    })
-
-    if (politicians) {
-      quorumPoliticians.push(...politicians)
-    }
-
-    logger.info(`Caching ${quorumPoliticians.length} politicians for ${lastName} in ${countryCode}`)
-    await redis.set(redisCacheKey, quorumPoliticians)
-  }
+  const quorumPoliticians = await getQuorumPeopleFromPersonLastName({
+    countryCode,
+    lastName: person.lastName,
+  })
 
   if (!quorumPoliticians.length) {
     return
@@ -96,6 +60,57 @@ export async function getQuorumPoliticianByDTSIPerson({
   }
 
   return match
+}
+
+const QUORUM_POLITICIANS_CACHE_KEY = 'quorum:politicians'
+
+const REDIS_CACHE_TTL = 6 * 60 * 60 // 6 hours
+
+async function getQuorumPeopleFromPersonLastName({
+  countryCode,
+  lastName,
+}: {
+  countryCode: SupportedCountryCodes
+  lastName: string
+}) {
+  const personLastName = normalizeQuorumString(lastName.split(' ').at(-1) ?? lastName).toLowerCase()
+
+  let limit = undefined
+
+  if (personLastName === 'smith' && countryCode === SupportedCountryCodes.GB) {
+    limit = 200
+  }
+
+  const redisCacheKey = `${QUORUM_POLITICIANS_CACHE_KEY}:${countryCode}:${personLastName}`
+
+  const cachedPoliticians = await redis.get<NormalizedQuorumPolitician[]>(redisCacheKey)
+
+  if (cachedPoliticians) {
+    logger.info(
+      `Found ${cachedPoliticians.length} cached politicians for ${personLastName} in ${countryCode}`,
+    )
+    return cachedPoliticians
+  } else {
+    logger.info(`Fetching ${personLastName} in ${countryCode} from Quorum`)
+    const politicians = await fetchQuorumByAdvancedSearch({
+      countryCode,
+      query: personLastName,
+      limit,
+    })
+
+    if (politicians) {
+      logger.info(
+        `Caching ${politicians.length} politicians for ${personLastName} in ${countryCode}`,
+      )
+      await redis.set(redisCacheKey, politicians, {
+        ex: REDIS_CACHE_TTL,
+      })
+
+      return politicians
+    }
+  }
+
+  return []
 }
 
 const MANUAL_MATCHES: Record<SupportedCountryCodes, Record<string, string>> = {
