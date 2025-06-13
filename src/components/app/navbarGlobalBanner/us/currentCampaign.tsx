@@ -11,7 +11,7 @@ export function UsCurrentNavbarGlobalBannerCampaign() {
   return (
     <CampaignWrapper url={campaignUrl}>
       <p>
-        Key Vote Alert – Cloture on the GENIUS Act
+        Key Vote Alert – Final Passage on the GENIUS Act
         <br className="block sm:hidden" />
         <span className="hidden sm:inline"> – </span>
         <strong>
