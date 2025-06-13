@@ -18,6 +18,7 @@ import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { sendMail } from '@/utils/server/email'
+import { IPPoolName } from '@/utils/server/email/sendMail'
 import EmailToRepresentative from '@/utils/server/email/templates/emailToRepresentative'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
@@ -201,6 +202,7 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
       // TODO: replace with Quorum email address
       to: 'eduardo.picolo@coinbase.com',
       from: SENDGRID_SENDER_REP,
+      ...(process.env.VERCEL_ENV === 'production' && { ip_pool_name: IPPoolName.REPRESENTATIVES }),
       subject: validatedFields.data.subject,
       html: await render(<EmailToRepresentative body={validatedFields.data.contactMessage} />),
       customArgs: {
