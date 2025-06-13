@@ -3,11 +3,11 @@ import { EmailActionFormValues } from '@/components/app/userActionFormEmailCongr
 import {
   getFullNameSignOff,
   GetTextProps,
-} from '@/components/app/userActionFormEmailCongressperson/emailBodyUtils'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+} from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/ca'
 
-const CAMPAIGN_NAME = USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025
+const CAMPAIGN_NAME = CAUserActionEmailCampaignName.DEFAULT
 
 const SUBJECT = 'Support GENIUS Act'
 

@@ -4,9 +4,7 @@ import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dt
 import {
   DIALOG_SUBTITLE,
   DIALOG_TITLE,
-  EMAIL_FLOW_POLITICIANS_CATEGORY,
-  getEmailBodyText,
-} from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
+} from '@/components/app/userActionFormEmailCongressperson/us/campaignMetadata'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -16,17 +14,14 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
-import { useGetDTSIPeopleFromUSAddress } from '@/hooks/useGetDTSIPeopleFromUSAddress'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
 export function UserActionFormEmailCongresspersonSkeleton({
   countryCode,
-  politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
 }: {
   countryCode: SupportedCountryCodes
-  politicianCategory?: YourPoliticianCategory
 }) {
   const urls = getIntlUrls(countryCode)
   return (
@@ -60,12 +55,10 @@ export function UserActionFormEmailCongresspersonSkeleton({
             </div>
             <div className="w-full">
               <DTSICongresspersonAssociatedWithFormAddress
+                categoryDisplayName={'senate'}
                 countryCode={countryCode}
-                dtsiPeopleFromAddressResponse={
-                  {} as ReturnType<typeof useGetDTSIPeopleFromUSAddress>
-                }
+                dtsiPeopleFromAddressResponse={{} as ReturnType<typeof useGetDTSIPeopleFromAddress>}
                 onChangeAddress={noop}
-                politicianCategory={politicianCategory}
               />
             </div>
             <div className="relative">
@@ -78,7 +71,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
                 <Textarea
                   autoComplete="off"
                   autoCorrect="off"
-                  defaultValue={getEmailBodyText()}
+                  defaultValue={''}
                   placeholder="Your message..."
                   rows={16}
                   spellCheck={false}

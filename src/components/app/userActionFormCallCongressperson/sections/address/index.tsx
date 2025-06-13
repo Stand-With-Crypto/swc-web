@@ -33,7 +33,7 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import {
   getYourPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/us'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 

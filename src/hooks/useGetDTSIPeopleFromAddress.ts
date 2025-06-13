@@ -1,29 +1,28 @@
 import useSWR from 'swr'
 
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
-import {
-  LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 export type UseGetDTSIPeopleFromPlaceIdResponse = Awaited<
   ReturnType<typeof getDTSIPeopleFromAddress>
 >
 
+export type DTSIPeopleFromAddressFilter = (
+  dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
+) => DTSIPeopleByElectoralZoneQueryResult
+
 export async function getDTSIPeopleFromAddress({
   address,
-  category,
+  filterFn,
   countryCode,
 }: {
   address: string
-  category: YourPoliticianCategory
+  filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
 }) {
   const electoralZone = await getElectoralZoneFromAddress(address)
@@ -53,36 +52,7 @@ export async function getDTSIPeopleFromAddress({
     })
   const dtsiPeople = data as DTSIPeopleByElectoralZoneQueryResult
 
-  let filteredData: DTSIPeopleByElectoralZoneQueryResult = []
-
-  switch (category) {
-    case 'senate':
-      filteredData = dtsiPeople.filter(
-        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE,
-      )
-      break
-    case 'house':
-      filteredData = dtsiPeople.filter(
-        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-      )
-      break
-    case 'senate-and-house':
-      filteredData = dtsiPeople.filter(
-        person =>
-          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE ||
-          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-      )
-      break
-    case 'legislative-and-executive':
-      filteredData = dtsiPeople.filter(
-        person =>
-          person.primaryRole?.roleCategory &&
-          LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES.includes(person.primaryRole.roleCategory),
-      )
-      break
-    default:
-      filteredData = dtsiPeople
-  }
+  const filteredData = filterFn(dtsiPeople)
 
   if (!filteredData.length) {
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
@@ -93,10 +63,10 @@ export async function getDTSIPeopleFromAddress({
 
 export function useGetDTSIPeopleFromAddress({
   address,
-  category,
+  filterFn,
 }: {
   address?: string | null
-  category: YourPoliticianCategory
+  filterFn: DTSIPeopleFromAddressFilter
 }) {
   const countryCode = useCountryCode()
 
@@ -108,7 +78,7 @@ export function useGetDTSIPeopleFromAddress({
     return getDTSIPeopleFromAddress({
       address,
       countryCode,
-      category,
+      filterFn,
     })
   })
 }

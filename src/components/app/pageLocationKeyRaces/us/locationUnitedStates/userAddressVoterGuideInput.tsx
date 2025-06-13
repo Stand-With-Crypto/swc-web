@@ -11,16 +11,19 @@ import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
-  formatGetDTSIPeopleFromUSAddressNotFoundReason,
-  useGetDTSIPeopleFromUSAddress,
-} from '@/hooks/useGetDTSIPeopleFromUSAddress'
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+  useGetDTSIPeopleFromAddress,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import {
+  filterDTSIPeopleByUSPoliticalCategory,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory/us'
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -58,10 +61,10 @@ const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
 function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromUSAddress(
-    POLITICIAN_CATEGORY,
-    address === 'loading' ? null : address?.description,
-  )
+  const res = useGetDTSIPeopleFromAddress({
+    address: address === 'loading' ? null : address?.description,
+    filterFn: filterDTSIPeopleByUSPoliticalCategory(POLITICIAN_CATEGORY),
+  })
   const shouldShowSubtitle = !address || !res.data
 
   if (!address || address === 'loading' || !res.data) {
@@ -79,7 +82,7 @@ function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressV
     return (
       <ContentContainer shouldShowSubtitle={shouldShowSubtitle}>
         <PageSubTitle as="h4" size="sm">
-          {formatGetDTSIPeopleFromUSAddressNotFoundReason(res.data)}{' '}
+          {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
           <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
             Try another address.
           </button>
