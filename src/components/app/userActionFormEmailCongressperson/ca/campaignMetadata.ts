@@ -5,7 +5,7 @@ import {
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/ca'
 
 const CAMPAIGN_NAME = CAUserActionEmailCampaignName.DEFAULT
 
