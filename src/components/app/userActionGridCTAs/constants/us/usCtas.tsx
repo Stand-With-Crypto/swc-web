@@ -133,7 +133,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email Your House Rep',
         description: 'Pass Crucial Crypto Legislation',
         canBeTriggeredMultipleTimes: true,
