@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useMemo, useRef } from 'react'
-import { useFormContext, UseFormReturn, useWatch } from 'react-hook-form'
+import { useFieldArray, useFormContext, UseFormReturn, useWatch } from 'react-hook-form'
 import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
@@ -167,6 +167,11 @@ EmailCongressperson.Representatives = function Representative({
 }) {
   const { control, setValue, getValues } = useFormContext<EmailActionFormValues>()
 
+  const { replace, remove } = useFieldArray({
+    control,
+    name: 'dtsiPeople',
+  })
+
   const dtsiPeople = useMemo(() => {
     return dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
       ? dtsiPeopleFromAddressResponse.data.dtsiPeople
@@ -174,15 +179,24 @@ EmailCongressperson.Representatives = function Representative({
   }, [dtsiPeopleFromAddressResponse?.data])
 
   useEffect(() => {
-    if (dtsiPeople.length === 0) setValue('dtsiSlugs', [])
+    if (dtsiPeople.length === 0) {
+      setValue('dtsiSlugs', [])
+      remove()
+      return
+    }
 
-    const currentSlugs = getValues('dtsiSlugs')
+    const currentSlugs = getValues('dtsiSlugs') || []
+    const newSlugs = dtsiPeople.map(person => person.slug)
 
-    if (!dtsiPeople?.some((person, index) => person.slug !== currentSlugs[index])) return
+    const slugsAreEqual =
+      currentSlugs.length === newSlugs.length &&
+      newSlugs.every((slug, index) => slug === currentSlugs[index])
+    if (slugsAreEqual) return
 
-    const newDtsiSlugs = dtsiPeople.map(person => person.slug)
-    setValue('dtsiSlugs', newDtsiSlugs)
-  }, [dtsiPeople, setValue, getValues])
+    replace(dtsiPeople)
+    setValue('dtsiSlugs', newSlugs)
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only when dtsiPeople changes
+  }, [dtsiPeople])
 
   return (
     <FormField
