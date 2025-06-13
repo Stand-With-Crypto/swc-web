@@ -1,4 +1,4 @@
-import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
+import { normalizeQuorumString } from '@/utils/server/quorum/utils/quorumNormalizers'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
@@ -37,7 +37,9 @@ export interface NormalizedQuorumPolitician {
   email: string
   phone: string
   imageUrl: string
-  title: string
+  nameAndTitle: string
+  regionRepresented?: string
+  stateRepresented?: string
 }
 
 interface QuorumPolitician {
@@ -49,19 +51,21 @@ interface QuorumPolitician {
   most_recent_role_phone: string
   image_url: string
   name: string
+  region_represented?: string
+  most_recent_role_state?: string
 }
 
 interface QuorumNewPersonResponse {
   objects: QuorumPolitician[]
 }
 
-export async function fetchQuorumByPersonName({
+export async function fetchQuorumByAdvancedSearch({
   countryCode,
-  personName,
-  limit = 20,
+  query,
+  limit = 100,
 }: {
   countryCode: SupportedCountryCodes
-  personName: string
+  query: string
   limit?: number
 }): Promise<NormalizedQuorumPolitician[] | undefined> {
   if (!QUORUM_API_KEY || !QUORUM_API_USERNAME) {
@@ -75,13 +79,9 @@ export async function fetchQuorumByPersonName({
   url.searchParams.set('username', QUORUM_API_USERNAME)
   url.searchParams.set('limit', limit.toString())
 
-  if (countryCode === SupportedCountryCodes.US) {
-    url.searchParams.set('ph_major_role_type', '54,55,63,60,56,11,12,65,64,66,18,19,29,61')
-  }
-
   url.searchParams.set('most_recent_person_type__in', QUORUM_MOST_RECENT_PERSON_TYPE_IN)
 
-  url.searchParams.set('advanced_search', convertToOnlyEnglishCharacters(personName.toLowerCase()))
+  url.searchParams.set('advanced_search', normalizeQuorumString(query))
 
   url.searchParams.set('most_recent_region', COUNTRY_CODE_TO_QUORUM_MOST_RECENT_REGION[countryCode])
 
@@ -139,59 +139,6 @@ export async function fetchQuorumByPersonId(personId: string) {
   return normalizeQuorumPolitician(data)
 }
 
-export async function fetchQuorumByRegionRepresented({
-  countryCode,
-  regionRepresented,
-  limit = 20,
-}: {
-  countryCode: SupportedCountryCodes
-  regionRepresented: string
-  limit?: number
-}) {
-  if (!QUORUM_API_KEY || !QUORUM_API_USERNAME) {
-    logger.info('Missing QUORUM_API_KEY and QUORUM_API_USERNAME')
-    return
-  }
-
-  const url = new URL(`${QUORUM_BASE_API_URL}/newperson`)
-
-  url.searchParams.set('api_key', QUORUM_API_KEY)
-  url.searchParams.set('username', QUORUM_API_USERNAME)
-  url.searchParams.set('limit', limit.toString())
-
-  if (countryCode === SupportedCountryCodes.US) {
-    url.searchParams.set('ph_major_role_type', '54,55,63,60,56,11,12,65,64,66,18,19,29,61')
-    url.searchParams.set('quick_search', regionRepresented)
-  } else {
-    url.searchParams.set('region_represented', regionRepresented)
-  }
-
-  url.searchParams.set('most_recent_person_type__in', QUORUM_MOST_RECENT_PERSON_TYPE_IN)
-
-  url.searchParams.set('most_recent_region', COUNTRY_CODE_TO_QUORUM_MOST_RECENT_REGION[countryCode])
-
-  const response = await fetchReq(url.toString(), undefined, {
-    withScope: scope => {
-      scope.setTags({
-        domain: 'quorum',
-        countryCode,
-        function: 'fetchQuorumByRegionRepresented',
-      })
-      scope.setExtras({
-        ...Object.fromEntries(url.searchParams.entries()),
-      })
-    },
-  })
-
-  const data = (await response.json()) as QuorumNewPersonResponse
-
-  if (!data?.objects || data?.objects.length === 0) {
-    return
-  }
-
-  return data.objects.map(normalizeQuorumPolitician)
-}
-
 function normalizeQuorumPolitician(politician: QuorumPolitician): NormalizedQuorumPolitician {
   return {
     email: politician.email,
@@ -201,6 +148,8 @@ function normalizeQuorumPolitician(politician: QuorumPolitician): NormalizedQuor
     phone: politician.most_recent_role_phone,
     id: politician.id,
     imageUrl: politician.image_url,
-    title: politician.name,
+    nameAndTitle: politician.name,
+    regionRepresented: politician.region_represented,
+    stateRepresented: politician.most_recent_role_state,
   }
 }
