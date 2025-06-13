@@ -170,7 +170,11 @@ function maybeFindPossibleMatch({
 
   let possibleMatch: NormalizedQuorumPolitician | undefined = undefined
 
-  if (countryCode === SupportedCountryCodes.US) {
+  if (
+    countryCode === SupportedCountryCodes.US &&
+    normalizedDTSIPerson.state &&
+    normalizedDTSIPerson.electoralZone
+  ) {
     // US politicians in Quorum have a property called name, which includes the state and district in the format: John Smith (R-NY-1)
     const quorumDistrictMatchingString = `${normalizedDTSIPerson.state}-${normalizedDTSIPerson.electoralZone}`
 
@@ -190,7 +194,11 @@ function maybeFindPossibleMatch({
         ? normalizeQuorumElectoralZone(quorumPolitician.regionRepresented)
         : undefined
 
-      if (countryCode === SupportedCountryCodes.AU && normalizedDTSIPerson.state) {
+      if (
+        countryCode === SupportedCountryCodes.AU &&
+        normalizedDTSIPerson.state &&
+        normalizedDTSIPerson.electoralZone
+      ) {
         const auStateName = getAUStateNameFromStateCode(normalizedDTSIPerson.state)
 
         // Most of the MPs in Australia have their region represented as a string with the format: "region, state"
