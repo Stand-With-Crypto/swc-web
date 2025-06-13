@@ -11,13 +11,7 @@ import { z } from 'zod'
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import {
-  DIALOG_SUBTITLE,
-  DIALOG_TITLE,
-  EMAIL_FLOW_POLITICIANS_CATEGORY,
-  getDefaultFormValuesWithCampaignMetadata,
-  getEmailBodyText,
-} from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
+import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/campaigns/useEmailActionCampaignMetadata'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
@@ -43,6 +37,7 @@ import { useGetDTSIPeopleFromUSAddress } from '@/hooks/useGetDTSIPeopleFromUSAdd
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
@@ -61,33 +56,50 @@ import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/z
 export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
-export function UserActionFormEmailCongressperson({
-  onSuccess,
-  user,
-  initialValues,
-  politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
-}: {
+export interface UserActionFormEmailCongresspersonProps {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
   initialValues?: FormFields
   politicianCategory?: YourPoliticianCategory
-}) {
+  campaignName: USUserActionEmailCampaignName
+}
+
+export function UserActionFormEmailCongressperson({
+  onSuccess,
+  user,
+  initialValues,
+  campaignName,
+}: UserActionFormEmailCongresspersonProps) {
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
   const countryCode = useCountryCode()
   const hasModifiedMessage = useRef(false)
-  const userDefaultValues = getDefaultFormValuesWithCampaignMetadata({ user, dtsiSlugs: [] })
+  const campaignMetadata = useEmailActionCampaignMetadata(campaignName)
+
+  const userAddress = user?.address?.route
+    ? {
+        description: user.address.formattedDescription,
+        place_id: user.address.googlePlaceId,
+      }
+    : undefined
   const form = useForm<EmailActionFormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: {
-      ...userDefaultValues,
-      address: initialValues?.address || userDefaultValues.address,
-      emailAddress: initialValues?.email || userDefaultValues.emailAddress,
-      firstName: initialValues?.firstName || userDefaultValues.firstName,
-      lastName: initialValues?.lastName || userDefaultValues.lastName,
-      politicianCategory,
+      campaignName: campaignMetadata.campaignName,
+      contactMessage: campaignMetadata.getEmailBodyText({
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        address: user?.address?.formattedDescription,
+      }),
+      subject: campaignMetadata.subject,
+      politicianCategory: campaignMetadata.politicianCategory,
+      firstName: initialValues?.firstName || user?.firstName || '',
+      lastName: initialValues?.lastName || user?.lastName || '',
+      emailAddress: initialValues?.email || user?.primaryUserEmailAddress?.emailAddress || '',
+      address: initialValues?.address || userAddress,
+      dtsiSlugs: [],
     },
   })
   const { setFocus } = form
@@ -99,7 +111,7 @@ export function UserActionFormEmailCongressperson({
   const addressField = form.watch('address')
 
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromUSAddress(
-    politicianCategory,
+    campaignMetadata.politicianCategory,
     addressField?.description,
   )
 
@@ -140,13 +152,13 @@ export function UserActionFormEmailCongressperson({
 
     form.setValue(
       'contactMessage',
-      getEmailBodyText({
+      campaignMetadata.getEmailBodyText({
         firstName,
         lastName,
         address: addressField?.description,
       }),
     )
-  }, [firstName, lastName, addressField, form])
+  }, [firstName, lastName, addressField, form, campaignMetadata])
 
   return (
     <Form {...form}>
@@ -200,9 +212,9 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              {DIALOG_TITLE}
+              {campaignMetadata.dialogTitle}
             </PageTitle>
-            <PageSubTitle className="mb-7">{DIALOG_SUBTITLE}</PageSubTitle>
+            <PageSubTitle className="mb-7">{campaignMetadata.dialogSubtitle}</PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField
@@ -274,7 +286,7 @@ export function UserActionFormEmailCongressperson({
                       countryCode={countryCode}
                       dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
                       onChangeAddress={noop}
-                      politicianCategory={politicianCategory}
+                      politicianCategory={campaignMetadata.politicianCategory}
                     />
                   </div>
                 )}
