@@ -1,5 +1,6 @@
 'use client'
 
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -28,12 +29,16 @@ import {
 } from '@/utils/shared/yourPoliticianCategory/ca'
 import { cn } from '@/utils/web/cn'
 import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import {
   catchUnexpectedServerErrorAndTriggerToast,
   toastGenericError,
 } from '@/utils/web/toastUtils'
+import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 import {
@@ -132,6 +137,22 @@ export function CAUserActionFormEmailCongressperson({
     filterFn: filterDTSIPeopleByCAPoliticalCategory(politicianCategory),
   })
 
+  const [locality, setLocality] = useState<z.infer<typeof zodAddress> | null>(null)
+  const onChangeAddress = useCallback(
+    async (prediction: GooglePlaceAutocompletePrediction | null) => {
+      if (!prediction) {
+        setLocality(null)
+        return
+      }
+      const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(prediction)
+      setLocality(addressSchema)
+    },
+    [],
+  )
+  useEffect(() => {
+    void onChangeAddress(addressField)
+  }, [addressField, onChangeAddress])
+
   switch (sectionProps.currentSection) {
     case SectionNames.EMAIL:
       return (
@@ -145,7 +166,7 @@ export function CAUserActionFormEmailCongressperson({
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
             <EmailCongressperson.Message
-              getEmailBodyText={getEmailBodyText(dtsiPeopleFromAddressResponse)}
+              getEmailBodyText={getEmailBodyText(dtsiPeopleFromAddressResponse, locality)}
             />
             <EmailCongressperson.Disclaimer
               countryCode={countryCode}

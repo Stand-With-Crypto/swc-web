@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { EmailActionFormValues } from '@/components/app/userActionFormEmailCongressperson'
 import {
@@ -8,6 +10,7 @@ import {
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/ca'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 const CAMPAIGN_NAME = CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING
 
@@ -21,6 +24,7 @@ export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
 
 export function getEmailBodyText(
   dtsiPeopleFromAddressResponse?: ReturnType<typeof useGetDTSIPeopleFromAddress>,
+  addressSchema?: z.infer<typeof zodAddress> | null,
 ) {
   const dtsiPeople =
     dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
@@ -30,16 +34,14 @@ export function getEmailBodyText(
     `${dtsiPeople?.[0]?.firstName || ''} ${dtsiPeople?.[0]?.lastName || ''}`.trim() ||
     'Representative'
 
-  return (props?: GetTextProps & { address?: string }) => {
-    const { firstName, lastName, address } = props || {}
+  return (props?: GetTextProps) => {
+    const { firstName, lastName } = props || {}
 
     const fullNameSignOff = getFullNameSignOff({
       firstName,
       lastName,
     })
-    const locationSignOff = getConstituentLocationSignOff({
-      address,
-    })
+    const locationSignOff = getConstituentLocationSignOff(addressSchema)
 
     return `Dear ${representativeName},
 
@@ -82,7 +84,6 @@ export function getDefaultFormValuesWithCampaignMetadata({
       contactMessage: getEmailBodyText()({
         firstName: user.firstName,
         lastName: user.lastName,
-        address: user.address?.formattedDescription,
       }),
       address: user.address?.route
         ? {
