@@ -2,11 +2,13 @@
 import Link from 'next/link'
 
 import { CampaignWrapper } from '@/components/app/navbarGlobalBanner/common/campaignWrapper'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
+import { getDeeplinkUrlByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getDeeplinkUrl'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export function UsCurrentNavbarGlobalBannerCampaign() {
-  const campaignUrl = getIntlUrls(DEFAULT_SUPPORTED_COUNTRY_CODE).emailDeeplink()
+  const campaignUrl = getDeeplinkUrlByCampaignName(
+    USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+  )
 
   return (
     <CampaignWrapper url={campaignUrl}>

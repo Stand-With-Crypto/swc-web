@@ -173,7 +173,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           default:
             return {
               onFocusContent: () => (
-                <UserActionFormEmailCongresspersonDialog>
+                <UserActionFormEmailCongresspersonDialog
+                  campaignName={action.campaignName as USUserActionEmailCampaignName}
+                >
                   <Button>Email yours</Button>
                 </UserActionFormEmailCongresspersonDialog>
               ),

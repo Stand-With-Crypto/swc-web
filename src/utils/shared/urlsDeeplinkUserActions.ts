@@ -1,5 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
+import { getDeeplinkUrlByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getDeeplinkUrl'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
@@ -157,6 +158,10 @@ export const getUserActionDeeplink = <
 
   if (USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]) {
     return USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]?.(config)
+  }
+
+  if (actionType === UserActionType.EMAIL) {
+    return getDeeplinkUrlByCampaignName(campaign as USUserActionEmailCampaignName)
   }
 
   throw new Error(`No deeplink found for actionType: ${actionType} and campaign: ${campaign}`)

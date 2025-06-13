@@ -13,17 +13,21 @@ import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { cn } from '@/utils/web/cn'
+
+export interface UserActionFormEmailCongresspersonDialogProps extends React.PropsWithChildren {
+  defaultOpen?: boolean
+  initialValues?: FormFields
+  campaignName: USUserActionEmailCampaignName
+}
 
 export function UserActionFormEmailCongresspersonDialog({
   children,
   defaultOpen = false,
   initialValues,
-}: {
-  children: React.ReactNode
-  defaultOpen?: boolean
-  initialValues?: FormFields
-}) {
+  campaignName = USUserActionEmailCampaignName.DEFAULT,
+}: UserActionFormEmailCongresspersonDialogProps) {
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
@@ -40,11 +44,22 @@ export function UserActionFormEmailCongresspersonDialog({
 
   return (
     <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
-      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
+      <Suspense
+        fallback={
+          <UserActionFormEmailCongresspersonSkeleton
+            campaignName={campaignName}
+            countryCode={countryCode}
+          />
+        }
+      >
         {fetchUser.isLoading ? (
-          <UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />
+          <UserActionFormEmailCongresspersonSkeleton
+            campaignName={campaignName}
+            countryCode={countryCode}
+          />
         ) : state === 'form' ? (
           <LazyUserActionFormEmailCongressperson
+            campaignName={campaignName}
             initialValues={initialValues}
             onCancel={() => dialogProps.onOpenChange(false)}
             onSuccess={() => setState('success')}

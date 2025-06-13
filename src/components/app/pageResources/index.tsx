@@ -4,6 +4,7 @@ import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userAc
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export function PageResources() {
   return (
@@ -22,7 +23,9 @@ export function PageResources() {
           Take a look at some FIT21 resources below.
         </PageSubTitle>
         <div className="align-center flex flex-col justify-center gap-6 sm:flex-row">
-          <UserActionFormEmailCongresspersonDialog>
+          <UserActionFormEmailCongresspersonDialog
+            campaignName={USUserActionEmailCampaignName.DEFAULT}
+          >
             <Button className="w-full sm:w-auto">Email your congressperson</Button>
           </UserActionFormEmailCongresspersonDialog>
           <UserActionFormCallCongresspersonDialog>
