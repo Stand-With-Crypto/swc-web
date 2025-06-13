@@ -25,8 +25,8 @@ When you stand with crypto, you stand with millions of Americans across the coun
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: 'Email Your Senator',
-  dialogSubtitle: 'Support Crucial Crypto Legislation',
+  dialogTitle: 'Email your Senator',
+  dialogSubtitle: 'Support Stablecoin Regulation (GENIUS Act)',
   politicianCategory: 'senate',
   subject: 'Support GENIUS Act',
   getEmailBodyText,
