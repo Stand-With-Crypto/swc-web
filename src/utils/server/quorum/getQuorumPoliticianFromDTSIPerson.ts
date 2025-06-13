@@ -12,8 +12,6 @@ import { redis } from '@/utils/server/redis'
 import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const QUORUM_POLITICIANS_CACHE_KEY = 'quorum:politicians'
-
 const logger = getLogger('getQuorumPoliticianByDTSIPerson')
 
 export async function getQuorumPoliticianByDTSIPerson({
@@ -64,6 +62,10 @@ export async function getQuorumPoliticianByDTSIPerson({
   return match
 }
 
+const QUORUM_POLITICIANS_CACHE_KEY = 'quorum:politicians'
+
+const REDIS_CACHE_TTL = 6 * 60 * 60 // 6 hours
+
 async function getQuorumPeopleFromPersonLastName({
   countryCode,
   lastName,
@@ -100,7 +102,9 @@ async function getQuorumPeopleFromPersonLastName({
       logger.info(
         `Caching ${politicians.length} politicians for ${personLastName} in ${countryCode}`,
       )
-      await redis.set(redisCacheKey, politicians)
+      await redis.set(redisCacheKey, politicians, {
+        ex: REDIS_CACHE_TTL,
+      })
 
       return politicians
     }
