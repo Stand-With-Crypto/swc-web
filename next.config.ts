@@ -26,6 +26,7 @@ const contentSecurityPolicy = {
   ],
   'script-src': [
     "'self'",
+    'http://p2a.co/js/embed/widget/advocacywidget.min.js',
     !isProd
       ? // NextJS requires 'unsafe-eval' in dev (faster source maps)
         "'unsafe-eval' 'unsafe-inline' blob:"
@@ -109,6 +110,7 @@ const contentSecurityPolicy = {
     'https://www.figma.com',
     'https://*.newmode.net/',
     'https://js.stripe.com/', // Required for newmode
+    'http://p2a.co/',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
