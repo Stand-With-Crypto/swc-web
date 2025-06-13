@@ -61,63 +61,19 @@ export function matchQuorumPoliticianWithDTSIPerson({
     stateRepresented: quorumPolitician.stateRepresented?.toUpperCase(),
   }))
 
-  const exactMatch = findExactMatch({
-    countryCode,
-    normalizedDTSIPerson,
-    normalizedQuorumPoliticians,
-  })
-
-  logger.info('exactMatch', exactMatch)
-
-  if (exactMatch) {
-    return exactMatch
-  }
-
-  const possibleMatch = findPossibleMatch({
-    normalizedDTSIPerson,
-    normalizedQuorumPoliticians,
-    countryCode,
-  })
-
-  logger.info('possibleMatch', possibleMatch)
-
-  return possibleMatch
-}
-
-/**
- * Finds an exact match between a DTSI person and Quorum politicians.
- *
- * An exact match is found when:
- * 1. First name and last name match exactly
- * 2. First nickname and last name match exactly
- * 3. Full name (first + last) matches exactly
- * 4. Full name with nickname (nickname + last) matches exactly
- * 5. Full name matches Quorum's full name including middle name
- * 6. For US politicians: the state-district combination matches the nameAndTitle field
- */
-function findExactMatch({
-  normalizedDTSIPerson,
-  normalizedQuorumPoliticians,
-  countryCode,
-}: {
-  normalizedDTSIPerson: NormalizedDTSIPerson
-  normalizedQuorumPoliticians: NormalizedQuorumPolitician[]
-  countryCode: SupportedCountryCodes
-}) {
-  for (const quorumPolitician of normalizedQuorumPoliticians) {
-    logger.info('Checking exact match with quorumPolitician', quorumPolitician)
+  const maybeExactMatches = normalizedQuorumPoliticians.filter(quorumPolitician => {
     if (
       quorumPolitician.firstName === normalizedDTSIPerson.firstName &&
       quorumPolitician.lastName === normalizedDTSIPerson.lastName
     ) {
-      return quorumPolitician
+      return true
     }
 
     if (
       quorumPolitician.firstName === normalizedDTSIPerson.firstNickname &&
       quorumPolitician.lastName === normalizedDTSIPerson.lastName
     ) {
-      return quorumPolitician
+      return true
     }
 
     const dtsiPersonFullName = `${normalizedDTSIPerson.firstName} ${normalizedDTSIPerson.lastName}`
@@ -126,55 +82,60 @@ function findExactMatch({
     const quorumPersonFullName = `${quorumPolitician.firstName} ${quorumPolitician.lastName}`
 
     if (dtsiPersonFullName === quorumPersonFullName) {
-      return quorumPolitician
+      return true
     }
 
     if (dtsiPersonFullNameWithNickname === quorumPersonFullName) {
-      return quorumPolitician
+      return true
     }
 
     if (quorumPolitician.middleName.length > 0) {
       const quorumPersonFullNameWithMiddleName = `${quorumPolitician.firstName} ${quorumPolitician.middleName} ${quorumPolitician.lastName}`
 
       if (dtsiPersonFullName === quorumPersonFullNameWithMiddleName) {
-        return quorumPolitician
+        return true
       }
 
       if (dtsiPersonFullNameWithNickname === quorumPersonFullNameWithMiddleName) {
-        return quorumPolitician
+        return true
       }
     }
+  })
 
-    if (
-      countryCode === SupportedCountryCodes.US &&
-      normalizedDTSIPerson.electoralZone &&
-      normalizedDTSIPerson.state
-    ) {
-      // US politicians in Quorum have a property called name, which includes the state and district in the format: John Smith (R-NY-1)
-      const dtsiDistrictMatchingString = `${normalizedDTSIPerson.state}-${normalizedDTSIPerson.electoralZone}`
+  logger.info('maybeExactMatches', maybeExactMatches)
 
-      if (quorumPolitician.nameAndTitle.includes(dtsiDistrictMatchingString)) {
-        return quorumPolitician
-      }
-    }
+  let possibleMatch = maybeFindPossibleMatch({
+    normalizedDTSIPerson,
+    normalizedQuorumPoliticians: maybeExactMatches,
+    countryCode,
+  })
+
+  if (possibleMatch) {
+    return possibleMatch
+  }
+
+  const dtsiPersonLastNames = normalizedDTSIPerson.lastName.replace(/-/g, ' ').split(' ')
+
+  const maybeMatchesByLastName = normalizedQuorumPoliticians.filter(quorumPolitician => {
+    const quorumPoliticianLastNames = quorumPolitician.lastName.replace(/-/g, ' ').split(' ')
+
+    return quorumPoliticianLastNames.some(lastName => dtsiPersonLastNames.includes(lastName))
+  })
+
+  logger.info('maybeMatchesByLastName', maybeMatchesByLastName)
+
+  possibleMatch = maybeFindPossibleMatch({
+    normalizedDTSIPerson,
+    normalizedQuorumPoliticians: maybeMatchesByLastName,
+    countryCode,
+  })
+
+  if (possibleMatch) {
+    return possibleMatch
   }
 }
 
-/**
- * Finds possible matches between a DTSI person and Quorum politicians when no exact match is found.
- *
- * A "possible match" is determined by:
- * 1. Shared last name components (handles hyphenated names like "Smith-Jones")
- * 2. Filtering by electoral zone/district (except for US where Quorum data is inconsistent)
- * 3. State-level filtering
- *
- * Returns a single match if:
- * - Only one candidate remains after filtering
- * - Multiple candidates exist but all have identical first, middle name and last names (likely duplicates)
- *
- * Otherwise returns no match.
- */
-function findPossibleMatch({
+function maybeFindPossibleMatch({
   normalizedDTSIPerson,
   normalizedQuorumPoliticians,
   countryCode,
@@ -192,37 +153,39 @@ function findPossibleMatch({
 
     if (possibleMatches.length > 1) {
       // If all the possible matches have the same name and last name, we can return the first one
-      const possibleMatch = possibleMatches[0]
+      const maybePossibleMatch = possibleMatches[0]
 
       if (
         possibleMatches.every(quorumPolitician => {
           return (
-            quorumPolitician.firstName === possibleMatch.firstName &&
-            quorumPolitician.lastName === possibleMatch.lastName &&
-            quorumPolitician.middleName === possibleMatch.middleName
+            quorumPolitician.firstName === maybePossibleMatch.firstName &&
+            quorumPolitician.lastName === maybePossibleMatch.lastName
           )
         })
       ) {
-        return possibleMatch
+        return maybePossibleMatch
       }
     }
   }
 
-  const dtsiPersonLastNames = normalizedDTSIPerson.lastName.replace(/-/g, ' ').split(' ')
+  let possibleMatch: NormalizedQuorumPolitician | undefined = undefined
 
-  const possibleMatches = []
+  if (countryCode === SupportedCountryCodes.US) {
+    // US politicians in Quorum have a property called name, which includes the state and district in the format: John Smith (R-NY-1)
+    const quorumDistrictMatchingString = `${normalizedDTSIPerson.state}-${normalizedDTSIPerson.electoralZone}`
 
-  for (const quorumPolitician of normalizedQuorumPoliticians) {
-    const quorumPoliticianLastNames = quorumPolitician.lastName.replace(/-/g, ' ').split(' ')
+    const possibleMatchesByElectoralZone = normalizedQuorumPoliticians.filter(quorumPolitician => {
+      return quorumPolitician.nameAndTitle.includes(quorumDistrictMatchingString)
+    })
 
-    if (quorumPoliticianLastNames.some(lastName => dtsiPersonLastNames.includes(lastName))) {
-      possibleMatches.push(quorumPolitician)
+    possibleMatch = maybeGetPossibleMatch('electoralZone', possibleMatchesByElectoralZone)
+
+    if (possibleMatch) {
+      return possibleMatch
     }
-  }
-
-  // In Quorum all US Reps have their role_state set to DC, so we can't use that to match
-  if (countryCode !== SupportedCountryCodes.US) {
-    const possibleMatchesByElectoralZone = possibleMatches.filter(quorumPolitician => {
+  } else {
+    // In Quorum, all US Representatives have their role_state set to DC, so we can't use state to match US politicians
+    const possibleMatchesByElectoralZone = normalizedQuorumPoliticians.filter(quorumPolitician => {
       const normalizedQuorumPoliticianRegionRepresented = quorumPolitician.regionRepresented
         ? normalizeQuorumElectoralZone(quorumPolitician.regionRepresented)
         : undefined
@@ -237,9 +200,7 @@ function findPossibleMatch({
 
         if (
           normalizedQuorumPoliticianRegionRepresented &&
-          (dtsiAURegionRepresented === normalizedQuorumPoliticianRegionRepresented ||
-            normalizedQuorumPoliticianRegionRepresented ===
-              normalizeQuorumElectoralZone(auStateName))
+          dtsiAURegionRepresented === normalizedQuorumPoliticianRegionRepresented
         ) {
           return true
         }
@@ -251,13 +212,13 @@ function findPossibleMatch({
       )
     })
 
-    let possibleMatch = maybeGetPossibleMatch('electoralZone', possibleMatchesByElectoralZone)
+    possibleMatch = maybeGetPossibleMatch('electoralZone', possibleMatchesByElectoralZone)
 
     if (possibleMatch) {
       return possibleMatch
     }
 
-    const possibleMatchesByState = possibleMatches.filter(
+    const possibleMatchesByState = normalizedQuorumPoliticians.filter(
       quorumPolitician =>
         quorumPolitician.stateRepresented &&
         quorumPolitician.stateRepresented.toUpperCase() ===
@@ -271,7 +232,7 @@ function findPossibleMatch({
     }
   }
 
-  const possibleMatch = maybeGetPossibleMatch('lastNames', possibleMatches)
+  possibleMatch = maybeGetPossibleMatch('all', normalizedQuorumPoliticians)
 
   if (possibleMatch) {
     return possibleMatch
