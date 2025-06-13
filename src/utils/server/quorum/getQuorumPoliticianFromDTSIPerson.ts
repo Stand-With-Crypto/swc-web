@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/node'
+
 import { DTSIPersonByElectoralZone } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import {
   fetchQuorumByAdvancedSearch,
@@ -6,10 +7,10 @@ import {
   NormalizedQuorumPolitician,
 } from '@/utils/server/quorum/utils/fetchQuorum'
 import { matchQuorumPoliticianWithDTSIPerson } from '@/utils/server/quorum/utils/matchQuorumPoliticianWithDTSIPerson'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { redis } from '@/utils/server/redis'
 import { normalizeQuorumString } from '@/utils/server/quorum/utils/quorumNormalizers'
+import { redis } from '@/utils/server/redis'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const QUORUM_POLITICIANS_CACHE_KEY = 'quorum:politicians'
 

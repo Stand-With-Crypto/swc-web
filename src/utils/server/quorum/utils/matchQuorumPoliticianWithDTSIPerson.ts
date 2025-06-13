@@ -1,12 +1,12 @@
-import { NormalizedQuorumPolitician } from '@/utils/server/quorum/utils/fetchQuorum'
-import { getLogger } from '@/utils/shared/logger'
 import { DTSIPersonByElectoralZone } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { NormalizedQuorumPolitician } from '@/utils/server/quorum/utils/fetchQuorum'
 import {
   normalizeQuorumElectoralZone,
   normalizeQuorumString,
 } from '@/utils/server/quorum/utils/quorumNormalizers'
+import { getLogger } from '@/utils/shared/logger'
+import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('matchQuorumPoliticianWithDTSIPerson')
 
