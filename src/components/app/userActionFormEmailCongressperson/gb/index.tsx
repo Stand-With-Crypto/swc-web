@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import { z } from 'zod'
 
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import {
@@ -14,7 +13,10 @@ import {
 } from '@/components/app/userActionFormEmailCongressperson/common/constants'
 import { EmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/common/sections/email'
 import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/common/sections/success'
-import { UserActionFormEmailCongresspersonPropsBase } from '@/components/app/userActionFormEmailCongressperson/common/types'
+import {
+  EmailActionFormValues,
+  UserActionFormEmailCongresspersonPropsBase,
+} from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/common/useEmailActionCampaignMetadata'
 import { getGBEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/gb/campaigns'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -30,7 +32,7 @@ import {
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/gb'
 import { cn } from '@/utils/web/cn'
-import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import {
@@ -44,9 +46,6 @@ const countryCode = SupportedCountryCodes.GB
 const DEFAULT_POLITICIAN_CATEGORY = getGBEmailActionCampaignMetadata(
   GBUserActionEmailCampaignName.DEFAULT,
 ).politicianCategory
-
-export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
-  GenericErrorFormValues
 
 interface GBUserActionFormEmailCongresspersonProps
   extends UserActionFormEmailCongresspersonPropsBase {

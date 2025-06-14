@@ -1,7 +1,6 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { z } from 'zod'
 
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/common/skeleton'
@@ -15,8 +14,6 @@ import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { GenericErrorFormValues } from '@/utils/web/formUtils'
-import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 const USUserActionFormEmailCongressperson = dynamic(
   () =>
@@ -77,9 +74,6 @@ const GBUserActionFormEmailCongressperson = dynamic(
     ),
   },
 )
-
-export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
-  GenericErrorFormValues
 
 export function UserActionFormEmailCongressperson(props: UserActionFormEmailCongresspersonProps) {
   const { countryCode } = props

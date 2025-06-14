@@ -1,9 +1,13 @@
+import { z } from 'zod'
+
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { GenericErrorFormValues } from '@/utils/web/formUtils'
+import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 export interface UserActionFormEmailCongresspersonPropsBase {
   user: GetUserFullProfileInfoResponse['user']
@@ -40,3 +44,6 @@ export interface FormFields {
   firstName: string
   lastName: string
 }
+
+export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
+  GenericErrorFormValues
