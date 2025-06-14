@@ -1,7 +1,7 @@
 import {
   getFullNameSignOff,
   GetTextProps,
-} from '@/components/app/userActionFormEmailCongressperson/emailBodyUtils'
+} from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 import type { CampaignMetadata } from './types'

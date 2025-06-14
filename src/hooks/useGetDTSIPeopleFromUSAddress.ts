@@ -13,7 +13,7 @@ import { apiUrls } from '@/utils/shared/urls'
 import {
   LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
   YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/us'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 export interface DTSIPeopleFromUSCongressionalDistrict

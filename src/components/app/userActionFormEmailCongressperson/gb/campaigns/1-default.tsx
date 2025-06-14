@@ -3,20 +3,20 @@ import {
   getFullNameSignOff,
   getRepIntro,
   GetTextProps,
-} from '@/components/app/userActionFormEmailCongressperson/emailBodyUtils'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+} from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/gb'
 
 import type { CampaignMetadata } from './types'
 
-const CAMPAIGN_NAME = USUserActionEmailCampaignName.DEFAULT
+const CAMPAIGN_NAME = GBUserActionEmailCampaignName.DEFAULT
 
-export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
+export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'mp'
 
-export const DIALOG_TITLE = 'Email Your Member of Congress'
+export const DIALOG_TITLE = 'Email Your Senator'
 
 export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
 
@@ -32,9 +32,9 @@ function getEmailBodyText(props?: GetTextProps & { address?: string }) {
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('house')}`,
-  dialogSubtitle: 'You emailed your representative about FIT21.',
-  politicianCategory: 'house',
+  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('mp')}`,
+  dialogSubtitle: 'You emailed your MP about crypto.',
+  politicianCategory: 'mp',
   subject: 'Support Crypto Legislation',
   getEmailBodyText,
 }

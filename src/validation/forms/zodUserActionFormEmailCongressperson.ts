@@ -1,16 +1,20 @@
-import { array, nativeEnum, object, string } from 'zod'
+import { array, nativeEnum, object, string, union } from 'zod'
 
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { withEnhancedDescription } from '@/utils/shared/zod'
 import { GENERIC_ERROR_DESCRIPTION } from '@/utils/web/errorUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
+import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstAndLastNames } from '@/validation/fields/zodName'
 import { zodYourPoliticianCategory } from '@/validation/fields/zodYourPoliticianCategory'
 
 const base = object({
-  emailAddress: string().trim().email('Please enter a valid email address').toLowerCase(),
+  emailAddress: zodEmailAddress,
   contactMessage: string()
     .min(1, 'Please enter a message')
     .max(2000, 'Your message should not exceed 2000 characters'),
@@ -19,7 +23,12 @@ const base = object({
     triggerException: true,
     message: GENERIC_ERROR_DESCRIPTION,
   }),
-  campaignName: nativeEnum(USUserActionEmailCampaignName),
+  campaignName: union([
+    nativeEnum(USUserActionEmailCampaignName),
+    nativeEnum(AUUserActionEmailCampaignName),
+    nativeEnum(GBUserActionEmailCampaignName),
+    nativeEnum(CAUserActionEmailCampaignName),
+  ]),
   politicianCategory: zodYourPoliticianCategory,
 }).merge(zodFirstAndLastNames)
 

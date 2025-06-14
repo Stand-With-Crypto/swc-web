@@ -37,6 +37,10 @@ const queryByPrimaryElectoralZone = /* GraphQL */ `
   ${fragmentDTSIPersonCard}
 `
 
+export type DTSIPersonByElectoralZone = Awaited<
+  ReturnType<typeof queryDTSIPeopleByElectoralZone>
+>[number]
+
 export const queryDTSIPeopleByElectoralZone = async ({
   stateCode,
   electoralZone,
