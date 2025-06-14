@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useCallback } from 'react'
+import { lazy, Suspense, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
@@ -15,19 +15,10 @@ import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-const UserActionFormEmailCongressperson = dynamic(
-  () =>
-    import('@/components/app/userActionFormEmailCongressperson').then(
-      mod => mod.UserActionFormEmailCongressperson,
-    ),
-  {
-    loading: () => (
-      <UserActionFormEmailCongresspersonSkeleton
-        campaignName={USUserActionEmailCampaignName.DEFAULT}
-        countryCode={SupportedCountryCodes.US}
-      />
-    ),
-  },
+const LazyUserActionFormEmailCongressperson = lazy(() =>
+  import('@/components/app/userActionFormEmailCongressperson').then(m => ({
+    default: m.UserActionFormEmailCongressperson,
+  })),
 )
 
 export type UserActionFormEmailCongresspersonDialogProps = React.PropsWithChildren & {
@@ -84,7 +75,7 @@ export function UserActionFormEmailCongresspersonDialog({
       trigger={children}
     >
       <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton {...props} />}>
-        <UserActionFormEmailCongressperson {...props} onCancel={onCancel} user={user} />
+        <LazyUserActionFormEmailCongressperson {...props} onCancel={onCancel} user={user} />
       </Suspense>
     </UserActionFormDialog>
   )
