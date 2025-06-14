@@ -4,9 +4,9 @@ import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { EmailActionFormValues } from '@/components/app/userActionFormEmailCongressperson'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
 import { GetTextProps } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { EmailActionFormValues } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {

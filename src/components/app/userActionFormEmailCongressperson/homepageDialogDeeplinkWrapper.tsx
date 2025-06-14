@@ -15,12 +15,33 @@ import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValu
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
-  countryCode,
-}: {
-  countryCode: SupportedCountryCodes
-}) {
+type UserActionFormEmailCongresspersonDeeplinkWrapperProps =
+  | {
+      countryCode: SupportedCountryCodes.US
+      campaignName: USUserActionEmailCampaignName
+    }
+  | {
+      countryCode: SupportedCountryCodes.CA
+      campaignName: CAUserActionEmailCampaignName
+    }
+  | {
+      countryCode: SupportedCountryCodes.GB
+      campaignName: GBUserActionEmailCampaignName
+    }
+  | {
+      countryCode: SupportedCountryCodes.AU
+      campaignName: AUUserActionEmailCampaignName
+    }
+
+function UserActionFormEmailCongresspersonDeeplinkWrapperContent(
+  props: UserActionFormEmailCongresspersonDeeplinkWrapperProps,
+) {
+  const { countryCode } = props
   usePreventOverscroll()
 
   const fetchUser = useApiResponseForUserFullProfileInfo()
@@ -42,12 +63,12 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
   }, [])
 
   if (fetchUser.isLoading || loadingParams) {
-    return <UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />
+    return <UserActionFormEmailCongresspersonSkeleton {...props} />
   }
 
   return (
     <UserActionFormEmailCongressperson
-      countryCode={countryCode}
+      {...props}
       initialValues={initialValues}
       onCancel={() => router.replace(urls.home())}
       user={user}
@@ -55,18 +76,18 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent({
   )
 }
 
-export function UserActionFormEmailCongresspersonDeeplinkWrapper({
-  countryCode,
-}: {
-  countryCode: SupportedCountryCodes
-}) {
+export function UserActionFormEmailCongresspersonDeeplinkWrapper(
+  props: UserActionFormEmailCongresspersonDeeplinkWrapperProps,
+) {
+  const { countryCode } = props
+
   return (
     <GeoGate
       countryCode={countryCode}
       unavailableContent={<UserActionFormActionUnavailable countryCode={countryCode} />}
     >
-      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
-        <UserActionFormEmailCongresspersonDeeplinkWrapperContent countryCode={countryCode} />
+      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton {...props} />}>
+        <UserActionFormEmailCongresspersonDeeplinkWrapperContent {...props} />
       </Suspense>
     </GeoGate>
   )

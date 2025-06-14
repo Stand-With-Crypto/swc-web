@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export function PageResources() {
   return (
@@ -23,7 +24,10 @@ export function PageResources() {
           Take a look at some FIT21 resources below.
         </PageSubTitle>
         <div className="align-center flex flex-col justify-center gap-6 sm:flex-row">
-          <UserActionFormEmailCongresspersonDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormEmailCongresspersonDialog
+            campaignName={USUserActionEmailCampaignName.DEFAULT}
+            countryCode={SupportedCountryCodes.US}
+          >
             <Button className="w-full sm:w-auto">Email your congressperson</Button>
           </UserActionFormEmailCongresspersonDialog>
           <UserActionFormCallCongresspersonDialog>
