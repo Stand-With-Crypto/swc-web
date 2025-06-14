@@ -1,17 +1,19 @@
 'use client'
 
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 
-import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
+import { actionCreateUserActionEmailCongresspersonIntl } from '@/actions/actionCreateUserActionEmailCongresspersonIntl'
 import { getCAEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   SectionNames,
 } from '@/components/app/userActionFormEmailCongressperson/common/constants'
+import { GetTextProps } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { EmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/common/sections/email'
 import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/common/sections/success'
 import {
@@ -129,7 +131,7 @@ export function CAUserActionFormEmailCongressperson({
         },
       },
       payload =>
-        actionCreateUserActionEmailCongressperson(payload).then(async actionResultPromise => {
+        actionCreateUserActionEmailCongresspersonIntl(payload).then(async actionResultPromise => {
           const actionResult = await actionResultPromise
           if (actionResult && 'user' in actionResult && actionResult.user) {
             identifyUserOnClient(actionResult.user)
@@ -149,6 +151,16 @@ export function CAUserActionFormEmailCongressperson({
     filterFn: filterDTSIPeopleByCAPoliticalCategory(politicianCategory),
   })
 
+  const getEmailBodyTextWithDTSI = useCallback(
+    (props: GetTextProps) => {
+      return campaignMetadata.getEmailBodyText({
+        ...props,
+        dtsiPeopleFromAddressResponse,
+      })
+    },
+    [campaignMetadata, dtsiPeopleFromAddressResponse],
+  )
+
   switch (sectionProps.currentSection) {
     case SectionNames.EMAIL:
       return (
@@ -164,7 +176,7 @@ export function CAUserActionFormEmailCongressperson({
               countryCode={countryCode}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
-            <EmailCongressperson.Message getEmailBodyText={campaignMetadata.getEmailBodyText} />
+            <EmailCongressperson.Message getEmailBodyText={getEmailBodyTextWithDTSI} />
             <EmailCongressperson.Disclaimer
               countryCode={countryCode}
               quorumPrivacyPolicyUrl={urls.privacyPolicy()}

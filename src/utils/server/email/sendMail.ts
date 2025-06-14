@@ -57,12 +57,23 @@ interface CommonPayload {
   subject: string
   html: string
   from?: string
+  ip_pool_name?: IPPoolName
   customArgs?: {
     variant?: string
     userId?: string
     campaign?: string
     [key: string]: string | undefined
   }
+}
+
+export enum IPPoolName {
+  MARKETING = 'Marketing',
+  /**
+   * The "DO NOT USE" is so that the marketing team doesn't
+   * accidentally use it in the Sendgrid UI.
+   */
+  REPRESENTATIVES = 'Representatives',
+  TRANSACTIONAL = 'DO NOT USE - Transactional',
 }
 
 /**
@@ -72,6 +83,7 @@ interface CommonPayload {
 interface PersonalizationData {
   to: EmailData | EmailData[]
   from?: EmailData
+  ip_pool_name?: IPPoolName
   cc?: EmailData | EmailData[]
   bcc?: EmailData | EmailData[]
   subject?: string
@@ -129,10 +141,13 @@ export async function sendMail({
   }
 
   const isMultiple = Array.isArray(payload)
+  const ipPoolName =
+    process.env.VERCEL_ENV === 'production' ? { ip_pool_name: IPPoolName.TRANSACTIONAL } : {}
 
   const parsedPayload = isMultiple
     ? payload.map(currentMessage => ({
         from: senderEmail,
+        ...ipPoolName,
         mailSettings: {
           sandboxMode: {
             enable: SENDGRID_SANDBOX_MODE === 'true',
@@ -142,6 +157,7 @@ export async function sendMail({
       }))
     : {
         from: senderEmail,
+        ...ipPoolName,
         mailSettings: {
           sandboxMode: {
             enable: SENDGRID_SANDBOX_MODE === 'true',

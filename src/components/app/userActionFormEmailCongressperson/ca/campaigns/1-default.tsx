@@ -4,6 +4,7 @@ import {
   getRepIntro,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
@@ -20,7 +21,12 @@ export const DIALOG_TITLE = 'Email Your Member of Parliament'
 
 export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
 
-function getEmailBodyText(props?: GetTextProps & { address?: string }) {
+function getEmailBodyText(
+  props?: GetTextProps & {
+    address?: string
+    dtsiPeopleFromAddressResponse?: ReturnType<typeof useGetDTSIPeopleFromAddress>
+  },
+) {
   const fullNameSignOff = getFullNameSignOff({
     firstName: props?.firstName,
     lastName: props?.lastName,

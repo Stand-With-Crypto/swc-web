@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
@@ -11,6 +12,7 @@ import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
+  CAUserActionEmailCampaignName,
   CAUserActionLinkedInCampaignName,
   CAUserActionPollCampaignName,
   CAUserActionReferCampaignName,
@@ -217,6 +219,27 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
             {children}
           </UserActionFormFollowLinkedInDialog>
         ),
+      },
+    ],
+  },
+  [UserActionType.EMAIL]: {
+    title: 'Email your MP',
+    description: 'Support Crucial Crypto Legislation',
+    mobileCTADescription: 'Support Crucial Crypto Legislation',
+    campaignsModalDescription: 'Support Crucial Crypto Legislation',
+    image: '/ca/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
+        isCampaignActive: true,
+        title: 'Email your MP',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
+        }),
       },
     ],
   },

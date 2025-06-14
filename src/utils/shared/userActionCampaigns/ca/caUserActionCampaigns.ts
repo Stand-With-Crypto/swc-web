@@ -55,6 +55,7 @@ export enum CAUserActionPollCampaignName {
 
 export enum CAUserActionEmailCampaignName {
   DEFAULT = 'DEFAULT',
+  CA_MOMENTUM_AHEAD_HOUSE_RISING = 'CA_MOMENTUM_AHEAD_HOUSE_RISING',
 }
 
 export type CAUserActionCampaignName =
