@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
@@ -10,6 +10,10 @@ import { FormFields } from '@/components/app/userActionFormEmailCongressperson/c
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const UserActionFormEmailCongressperson = dynamic(
   () =>
@@ -18,24 +22,43 @@ const UserActionFormEmailCongressperson = dynamic(
     ),
   {
     loading: () => (
-      <UserActionFormEmailCongresspersonSkeleton countryCode={SupportedCountryCodes.US} />
+      <UserActionFormEmailCongresspersonSkeleton
+        campaignName={USUserActionEmailCampaignName.DEFAULT}
+        countryCode={SupportedCountryCodes.US}
+      />
     ),
   },
 )
 
-interface UserActionFormEmailCongresspersonDialogProps {
-  children: React.ReactNode
+export type UserActionFormEmailCongresspersonDialogProps = React.PropsWithChildren & {
   defaultOpen?: boolean
   initialValues?: FormFields
-  countryCode: SupportedCountryCodes
-}
+} & (
+    | {
+        countryCode: SupportedCountryCodes.US
+        campaignName: USUserActionEmailCampaignName
+      }
+    | {
+        countryCode: SupportedCountryCodes.CA
+        campaignName: CAUserActionEmailCampaignName
+      }
+    | {
+        countryCode: SupportedCountryCodes.GB
+        campaignName: GBUserActionEmailCampaignName
+      }
+    | {
+        countryCode: SupportedCountryCodes.AU
+        campaignName: AUUserActionEmailCampaignName
+      }
+  )
 
 export function UserActionFormEmailCongresspersonDialog({
   children,
   defaultOpen = false,
-  initialValues,
-  countryCode,
+  ...props
 }: UserActionFormEmailCongresspersonDialogProps) {
+  const { countryCode } = props
+
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
@@ -43,10 +66,12 @@ export function UserActionFormEmailCongresspersonDialog({
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const { user } = fetchUser.data || { user: null }
 
+  const onCancel = useCallback(() => dialogProps.onOpenChange(false), [dialogProps])
+
   if (fetchUser.isLoading) {
     return (
       <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
-        <UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />
+        <UserActionFormEmailCongresspersonSkeleton {...props} />
       </UserActionFormDialog>
     )
   }
@@ -58,13 +83,8 @@ export function UserActionFormEmailCongresspersonDialog({
       padding={false}
       trigger={children}
     >
-      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
-        <UserActionFormEmailCongressperson
-          countryCode={countryCode}
-          initialValues={initialValues}
-          onCancel={() => dialogProps.onOpenChange(false)}
-          user={user}
-        />
+      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton {...props} />}>
+        <UserActionFormEmailCongressperson {...props} onCancel={onCancel} user={user} />
       </Suspense>
     </UserActionFormDialog>
   )

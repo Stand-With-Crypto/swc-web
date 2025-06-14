@@ -8,7 +8,7 @@ export const YOUR_POLITICIAN_CATEGORY_OPTIONS: readonly YourPoliticianCategory[]
   'house-of-reps',
 ]
 
-export function getYourPoliticianCategoryDisplayName(
+export function getAUPoliticianCategoryDisplayName(
   category: YourPoliticianCategory,
   {
     maxCount,

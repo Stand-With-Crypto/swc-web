@@ -22,7 +22,7 @@ export const LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES = [
   DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
 ]
 
-export function getYourPoliticianCategoryDisplayName(
+export function getUSPoliticianCategoryDisplayName(
   category: YourPoliticianCategory,
   {
     maxCount,

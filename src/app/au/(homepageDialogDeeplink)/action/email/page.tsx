@@ -1,29 +1,20 @@
-import { UserActionType } from '@prisma/client'
+import { notFound, redirect, RedirectType } from 'next/navigation'
 
-import { AUHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/au'
-import { UserActionViewKeyPageDeeplinkWrapper } from '@/components/app/userActionFormViewKeyPage/homepageDialogDeeplinkWrapper'
-import { ErrorBoundary } from '@/utils/web/errorBoundary'
+import { DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/au/campaigns'
+import { PageProps } from '@/types'
+import { slugify } from '@/utils/shared/slugify'
 
-export const revalidate = 3600 // 1 hour
-export const dynamic = 'error'
+export default async function UserActionEmailDeepLink(props: PageProps) {
+  const slugifiedCampaignName = slugify(DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME)
 
-export default async function UserActionEmailCongresspersonDeepLink() {
-  return (
-    <AUHomepageDialogDeeplinkLayout className="max-w-xl">
-      <ErrorBoundary
-        extras={{
-          action: {
-            isDeeplink: true,
-            actionType: UserActionType.VIEW_KEY_PAGE,
-          },
-        }}
-        severityLevel="error"
-        tags={{
-          domain: 'UserActionEmailCongresspersonDeepLink',
-        }}
-      >
-        <UserActionViewKeyPageDeeplinkWrapper />
-      </ErrorBoundary>
-    </AUHomepageDialogDeeplinkLayout>
-  )
+  if (!slugifiedCampaignName) {
+    return notFound()
+  }
+
+  const searchParams = await props.searchParams
+  const urlParams = new URLSearchParams(searchParams as Record<string, string>)
+  const searchParamsString = urlParams.toString()
+  const redirectUrl = `/au/action/email/${slugifiedCampaignName}${searchParamsString ? `?${searchParamsString}` : ''}`
+
+  return redirect(redirectUrl, RedirectType.replace)
 }

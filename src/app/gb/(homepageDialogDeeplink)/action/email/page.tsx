@@ -1,32 +1,20 @@
-import { UserActionType } from '@prisma/client'
+import { notFound, redirect, RedirectType } from 'next/navigation'
 
-import { GBHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/gb'
-import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { ErrorBoundary } from '@/utils/web/errorBoundary'
+import { DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/gb/campaigns'
+import { PageProps } from '@/types'
+import { slugify } from '@/utils/shared/slugify'
 
-export const revalidate = 3600 // 1 hour
-export const dynamic = 'error'
+export default async function UserActionEmailDeepLink(props: PageProps) {
+  const slugifiedCampaignName = slugify(DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME)
 
-const countryCode = SupportedCountryCodes.GB
+  if (!slugifiedCampaignName) {
+    return notFound()
+  }
 
-export default async function UserActionEmailCongresspersonDeepLink() {
-  return (
-    <GBHomepageDialogDeeplinkLayout>
-      <ErrorBoundary
-        extras={{
-          action: {
-            isDeeplink: true,
-            actionType: UserActionType.EMAIL,
-          },
-        }}
-        severityLevel="error"
-        tags={{
-          domain: 'UserActionEmailCongresspersonDeepLink',
-        }}
-      >
-        <UserActionFormEmailCongresspersonDeeplinkWrapper countryCode={countryCode} />
-      </ErrorBoundary>
-    </GBHomepageDialogDeeplinkLayout>
-  )
+  const searchParams = await props.searchParams
+  const urlParams = new URLSearchParams(searchParams as Record<string, string>)
+  const searchParamsString = urlParams.toString()
+  const redirectUrl = `/gb/action/email/${slugifiedCampaignName}${searchParamsString ? `?${searchParamsString}` : ''}`
+
+  return redirect(redirectUrl, RedirectType.replace)
 }

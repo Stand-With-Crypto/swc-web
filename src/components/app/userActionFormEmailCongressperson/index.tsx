@@ -11,6 +11,10 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { GenericErrorFormValues } from '@/utils/web/formUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
@@ -21,7 +25,10 @@ const USUserActionFormEmailCongressperson = dynamic(
     ),
   {
     loading: () => (
-      <UserActionFormEmailCongresspersonSkeleton countryCode={SupportedCountryCodes.US} />
+      <UserActionFormEmailCongresspersonSkeleton
+        campaignName={USUserActionEmailCampaignName.DEFAULT}
+        countryCode={SupportedCountryCodes.US}
+      />
     ),
   },
 )
@@ -33,7 +40,10 @@ const AUUserActionFormEmailCongressperson = dynamic(
     ),
   {
     loading: () => (
-      <UserActionFormEmailCongresspersonSkeleton countryCode={SupportedCountryCodes.AU} />
+      <UserActionFormEmailCongresspersonSkeleton
+        campaignName={AUUserActionEmailCampaignName.DEFAULT}
+        countryCode={SupportedCountryCodes.AU}
+      />
     ),
   },
 )
@@ -45,7 +55,10 @@ const CAUserActionFormEmailCongressperson = dynamic(
     ),
   {
     loading: () => (
-      <UserActionFormEmailCongresspersonSkeleton countryCode={SupportedCountryCodes.CA} />
+      <UserActionFormEmailCongresspersonSkeleton
+        campaignName={CAUserActionEmailCampaignName.DEFAULT}
+        countryCode={SupportedCountryCodes.CA}
+      />
     ),
   },
 )
@@ -57,7 +70,10 @@ const GBUserActionFormEmailCongressperson = dynamic(
     ),
   {
     loading: () => (
-      <UserActionFormEmailCongresspersonSkeleton countryCode={SupportedCountryCodes.GB} />
+      <UserActionFormEmailCongresspersonSkeleton
+        campaignName={GBUserActionEmailCampaignName.DEFAULT}
+        countryCode={SupportedCountryCodes.GB}
+      />
     ),
   },
 )
