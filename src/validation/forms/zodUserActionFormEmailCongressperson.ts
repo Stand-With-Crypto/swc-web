@@ -1,5 +1,6 @@
-import { array, nativeEnum, object, string, union } from 'zod'
+import { array, custom, nativeEnum, object, string, union } from 'zod'
 
+import { DTSIPersonByElectoralZone } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
@@ -20,6 +21,10 @@ const base = object({
     .max(2000, 'Your message should not exceed 2000 characters'),
   subject: string().trim(),
   dtsiSlugs: withEnhancedDescription(array(zodDTSISlug).min(1), {
+    triggerException: true,
+    message: GENERIC_ERROR_DESCRIPTION,
+  }),
+  dtsiPeople: withEnhancedDescription(array(custom<DTSIPersonByElectoralZone>()).min(1), {
     triggerException: true,
     message: GENERIC_ERROR_DESCRIPTION,
   }),

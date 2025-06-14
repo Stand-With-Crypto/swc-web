@@ -23,6 +23,7 @@ import EmailToRepresentative from '@/utils/server/email/templates/emailToReprese
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getQuorumPoliticianByDTSIPerson } from '@/utils/server/quorum/getQuorumPoliticianFromDTSIPerson'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
@@ -103,6 +104,20 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     }
   }
   logger.info('validated fields')
+
+  const quorumPoliticians = await Promise.all(
+    validatedFields.data.dtsiPeople.map(person =>
+      getQuorumPoliticianByDTSIPerson({
+        person,
+        countryCode,
+      }),
+    ),
+  )
+
+  if (!quorumPoliticians.every(politician => politician?.email)) {
+    logger.error('Quorum politicians not found')
+    throw new Error('Quorum politicians not found')
+  }
 
   const localUser = await parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
@@ -196,21 +211,35 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
-  await sendMail({
-    countryCode,
-    payload: {
-      // TODO: replace with Quorum email address
-      to: 'eduardo.picolo@coinbase.com',
-      from: SENDGRID_SENDER_REP,
-      ...(process.env.VERCEL_ENV === 'production' && { ip_pool_name: IPPoolName.REPRESENTATIVES }),
-      subject: validatedFields.data.subject,
-      html: await render(<EmailToRepresentative body={validatedFields.data.contactMessage} />),
-      customArgs: {
-        campaign: validatedFields.data.campaignName,
-        userId: user.id,
-      },
-    },
-  })
+  const quorumPoliticianEmails = quorumPoliticians
+    .map(politician => politician?.email)
+    .filter(Boolean)
+  if (quorumPoliticianEmails.length === 0) {
+    logger.error('Quorum politicians emails not found')
+    throw new Error('Quorum politicians emails not found')
+  }
+
+  const html = await render(<EmailToRepresentative body={validatedFields.data.contactMessage} />)
+  await Promise.all(
+    quorumPoliticianEmails.map(email =>
+      sendMail({
+        countryCode,
+        payload: {
+          to: email,
+          from: SENDGRID_SENDER_REP,
+          ...(process.env.VERCEL_ENV === 'production' && {
+            ip_pool_name: IPPoolName.REPRESENTATIVES,
+          }),
+          subject: validatedFields.data.subject,
+          html,
+          customArgs: {
+            campaign: validatedFields.data.campaignName,
+            userId: user.id,
+          },
+        },
+      }),
+    ),
+  )
 
   waitUntil(beforeFinish())
   return { user: getClientUser(user) }
