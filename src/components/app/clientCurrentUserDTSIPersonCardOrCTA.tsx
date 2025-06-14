@@ -19,7 +19,7 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   filterDTSIPeopleByUSPoliticalCategory,
-  getYourPoliticianCategoryDisplayName,
+  getUSPoliticianCategoryDisplayName,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/us'
 import { cn } from '@/utils/web/cn'
@@ -89,7 +89,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
     )
   }
   const people = res.data.dtsiPeople
-  const categoryDisplayName = getYourPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
+  const categoryDisplayName = getUSPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
 
   return (
     <div>

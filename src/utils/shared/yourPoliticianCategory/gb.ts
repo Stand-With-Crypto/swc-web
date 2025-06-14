@@ -5,7 +5,7 @@ export type YourPoliticianCategory = 'mp' | 'lord'
 
 export const YOUR_POLITICIAN_CATEGORY_OPTIONS: readonly YourPoliticianCategory[] = ['mp', 'lord']
 
-export function getYourPoliticianCategoryDisplayName(
+export function getGBPoliticianCategoryDisplayName(
   category: YourPoliticianCategory,
   {
     maxCount,
