@@ -1,17 +1,20 @@
 'use client'
 
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
+import { z } from 'zod'
 
-import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
+import { actionCreateUserActionEmailCongresspersonIntl } from '@/actions/actionCreateUserActionEmailCongresspersonIntl'
 import { getCAEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   SectionNames,
 } from '@/components/app/userActionFormEmailCongressperson/common/constants'
+import { GetTextProps } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { EmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/common/sections/email'
 import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/common/sections/success'
 import {
@@ -21,6 +24,7 @@ import {
 import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/common/useEmailActionCampaignMetadata'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useSections } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -33,12 +37,16 @@ import {
 } from '@/utils/shared/yourPoliticianCategory/ca'
 import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import {
   catchUnexpectedServerErrorAndTriggerToast,
   toastGenericError,
 } from '@/utils/web/toastUtils'
+import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 const countryCode = SupportedCountryCodes.CA
@@ -129,7 +137,7 @@ export function CAUserActionFormEmailCongressperson({
         },
       },
       payload =>
-        actionCreateUserActionEmailCongressperson(payload).then(async actionResultPromise => {
+        actionCreateUserActionEmailCongresspersonIntl(payload).then(async actionResultPromise => {
           const actionResult = await actionResultPromise
           if (actionResult && 'user' in actionResult && actionResult.user) {
             identifyUserOnClient(actionResult.user)
@@ -149,6 +157,35 @@ export function CAUserActionFormEmailCongressperson({
     filterFn: filterDTSIPeopleByCAPoliticalCategory(politicianCategory),
   })
 
+  const scriptStatus = useGoogleMapsScript()
+  const [locality, setLocality] = useState<z.infer<typeof zodAddress> | null>(null)
+  const onChangeAddress = useCallback(
+    async (prediction: GooglePlaceAutocompletePrediction | null) => {
+      if (!scriptStatus.isLoaded) return
+      if (!prediction) {
+        setLocality(null)
+        return
+      }
+      const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(prediction)
+      setLocality(addressSchema)
+    },
+    [scriptStatus.isLoaded],
+  )
+  useEffect(() => {
+    void onChangeAddress(addressField)
+  }, [addressField, onChangeAddress])
+
+  const getEmailBodyTextWithDTSI = useCallback(
+    (props: GetTextProps) => {
+      return campaignMetadata.getEmailBodyText({
+        ...props,
+        addressSchema: locality,
+        dtsiPeopleFromAddressResponse,
+      })
+    },
+    [campaignMetadata, dtsiPeopleFromAddressResponse, locality],
+  )
+
   switch (sectionProps.currentSection) {
     case SectionNames.EMAIL:
       return (
@@ -164,7 +201,7 @@ export function CAUserActionFormEmailCongressperson({
               countryCode={countryCode}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
-            <EmailCongressperson.Message getEmailBodyText={campaignMetadata.getEmailBodyText} />
+            <EmailCongressperson.Message getEmailBodyText={getEmailBodyTextWithDTSI} />
             <EmailCongressperson.Disclaimer
               countryCode={countryCode}
               quorumPrivacyPolicyUrl={urls.privacyPolicy()}

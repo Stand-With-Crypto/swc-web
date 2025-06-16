@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { CampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns/types'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
@@ -10,6 +11,8 @@ const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
   CampaignMetadata
 > = {
   [CAUserActionEmailCampaignName.DEFAULT]: DEFAULT.campaignMetadata,
+  [CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING]:
+    require('./20250613-momentum-ahead-rising').campaignMetadata,
 }
 
 export function getCAEmailActionCampaignMetadata(campaignName: CAUserActionEmailCampaignName) {

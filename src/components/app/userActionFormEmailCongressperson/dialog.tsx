@@ -1,7 +1,6 @@
 'use client'
 
 import { lazy, Suspense, useCallback } from 'react'
-import dynamic from 'next/dynamic'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
