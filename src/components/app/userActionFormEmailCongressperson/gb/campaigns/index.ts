@@ -4,7 +4,7 @@ import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 
 import * as DEFAULT from './1-default'
 
-export const DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME = GBUserActionEmailCampaignName.DEFAULT
+export const DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME = GBUserActionEmailCampaignName.STABLECOINS
 
 const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
   GBUserActionEmailCampaignName,
