@@ -436,6 +436,12 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/ca/s/new-government',
+        destination:
+          '/ca/action/email?utm_source=swc&utm_medium=sms&utm_campaign=2025-new-ca-government-1',
+        permanent: true,
+      },
+      {
         source: '/s/founders-push/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
