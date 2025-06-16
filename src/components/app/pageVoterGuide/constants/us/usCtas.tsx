@@ -1,12 +1,14 @@
 import { Suspense } from 'react'
 import { UserActionType } from '@prisma/client'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { VoterGuideStep } from '@/components/app/pageVoterGuide/types'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
+import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
-  USUserActionVoterAttestationCampaignName,
   USUserActionVoterRegistrationCampaignName,
   USUserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
@@ -15,13 +17,14 @@ export const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Ge
 
 export const US_VOTER_GUIDE_CTAS: VoterGuideStep[] = [
   {
-    title: 'Get informed',
-    description: 'See where politicians on your ballot stand on crypto.',
-    WrapperComponent: KeyRacesDialog,
-    action: UserActionType.VOTER_ATTESTATION,
-    campaignName: USUserActionVoterAttestationCampaignName['H1_2025'],
-    image: '/actionTypeIcons/getInformedAction.png',
-    wideDesktopImage: true,
+    action: UserActionType.OPT_IN,
+    campaignName: UserActionOptInCampaignName.DEFAULT,
+    title: 'Join Stand With Crypto',
+    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
+    WrapperComponent: ({ children }) => (
+      <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
+    ),
+    image: '/actionTypeIcons/optIn.png',
   },
   {
     title: 'Check your voter registration',
