@@ -394,6 +394,11 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/gb/action/email',
+        destination: '/',
+        permanent: false,
+      },
       // tweet at person campaigns
       {
         source: '/pizza',

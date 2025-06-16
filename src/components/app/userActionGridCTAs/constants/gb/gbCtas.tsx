@@ -54,14 +54,11 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: GBUserActionEmailCampaignName.STABLECOINS,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your Member of Parliament',
         description: 'Make stablecoin leadership a strategic priority',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: GBUserActionEmailCampaignName.STABLECOINS,
-        }),
+        WrapperComponent: null,
       },
     ],
   },
