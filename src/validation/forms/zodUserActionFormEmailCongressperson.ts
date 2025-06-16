@@ -18,7 +18,7 @@ const base = object({
   emailAddress: zodEmailAddress,
   contactMessage: string()
     .min(1, 'Please enter a message')
-    .max(2000, 'Your message should not exceed 2000 characters'),
+    .max(3000, 'Your message should not exceed 2000 characters'),
   subject: string().trim(),
   dtsiSlugs: withEnhancedDescription(array(zodDTSISlug).min(1), {
     triggerException: true,

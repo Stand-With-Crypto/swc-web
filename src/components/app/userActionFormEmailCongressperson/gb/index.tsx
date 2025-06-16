@@ -84,10 +84,6 @@ export function GBUserActionFormEmailCongressperson({
     resolver: zodResolver(
       zodUserActionFormEmailCongresspersonFields.extend({
         campaignName: z.nativeEnum(GBUserActionEmailCampaignName),
-        contactMessage: z
-          .string()
-          .min(1, 'Please enter a message')
-          .max(2500, 'Your message should not exceed 2500 characters'),
       }),
     ),
     defaultValues: {
