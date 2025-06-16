@@ -3,24 +3,30 @@ import {
   getFullNameSignOff,
   getRepIntro,
   GetTextProps,
-} from '@/components/app/userActionFormEmailCongressperson/emailBodyUtils'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+} from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/ca'
 
 import type { CampaignMetadata } from './types'
 
-const CAMPAIGN_NAME = USUserActionEmailCampaignName.DEFAULT
+const CAMPAIGN_NAME = CAUserActionEmailCampaignName.DEFAULT
 
-export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
+export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house-of-commons'
 
-export const DIALOG_TITLE = 'Email Your Member of Congress'
+export const DIALOG_TITLE = 'Email Your Member of Parliament'
 
 export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
 
-function getEmailBodyText(props?: GetTextProps & { address?: string }) {
+function getEmailBodyText(
+  props?: GetTextProps & {
+    address?: string
+    dtsiPeopleFromAddressResponse?: ReturnType<typeof useGetDTSIPeopleFromAddress>
+  },
+) {
   const fullNameSignOff = getFullNameSignOff({
     firstName: props?.firstName,
     lastName: props?.lastName,
@@ -32,9 +38,9 @@ function getEmailBodyText(props?: GetTextProps & { address?: string }) {
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('house')}`,
-  dialogSubtitle: 'You emailed your representative about FIT21.',
-  politicianCategory: 'house',
+  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('house-of-commons')}`,
+  dialogSubtitle: 'You emailed your representative about crypto.',
+  politicianCategory: 'house-of-commons',
   subject: 'Support Crypto Legislation',
   getEmailBodyText,
 }
