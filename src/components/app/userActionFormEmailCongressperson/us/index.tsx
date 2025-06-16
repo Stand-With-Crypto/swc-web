@@ -24,7 +24,6 @@ import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress
 import { useSections } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import {
   filterDTSIPeopleByUSPoliticalCategory,
@@ -61,7 +60,6 @@ export function USUserActionFormEmailCongressperson({
   campaignName,
 }: USUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
-  const urls = getIntlUrls(countryCode)
   const campaignMetadata = useEmailActionCampaignMetadata({
     campaignName,
     countryCode,
@@ -166,10 +164,7 @@ export function USUserActionFormEmailCongressperson({
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
             <EmailCongressperson.Message getEmailBodyText={campaignMetadata.getEmailBodyText} />
-            <EmailCongressperson.Disclaimer
-              countryCode={countryCode}
-              quorumPrivacyPolicyUrl={urls.privacyPolicy()}
-            />
+            <EmailCongressperson.Disclaimer countryCode={countryCode} />
           </EmailCongressperson.Form>
         </EmailCongressperson>
       )

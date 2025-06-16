@@ -25,7 +25,6 @@ import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress
 import { useSections } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import {
   filterDTSIPeopleByGBPoliticalCategory,
@@ -61,7 +60,6 @@ export function GBUserActionFormEmailCongressperson({
   onCancel,
 }: GBUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
-  const urls = getIntlUrls(countryCode)
   const campaignMetadata = useEmailActionCampaignMetadata({
     campaignName,
     countryCode,
@@ -170,10 +168,7 @@ export function GBUserActionFormEmailCongressperson({
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
             <EmailCongressperson.Message getEmailBodyText={campaignMetadata.getEmailBodyText} />
-            <EmailCongressperson.Disclaimer
-              countryCode={countryCode}
-              quorumPrivacyPolicyUrl={urls.privacyPolicy()}
-            />
+            <EmailCongressperson.Disclaimer countryCode={countryCode} />
           </EmailCongressperson.Form>
         </EmailCongressperson>
       )

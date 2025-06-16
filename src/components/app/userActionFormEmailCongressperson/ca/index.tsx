@@ -28,7 +28,6 @@ import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useSections } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import {
   filterDTSIPeopleByCAPoliticalCategory,
@@ -68,7 +67,6 @@ export function CAUserActionFormEmailCongressperson({
   onCancel,
 }: CAUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
-  const urls = getIntlUrls(countryCode)
   const campaignMetadata = useEmailActionCampaignMetadata({
     campaignName,
     countryCode,
@@ -206,10 +204,7 @@ export function CAUserActionFormEmailCongressperson({
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
             <EmailCongressperson.Message getEmailBodyText={getEmailBodyTextWithDTSI} />
-            <EmailCongressperson.Disclaimer
-              countryCode={countryCode}
-              quorumPrivacyPolicyUrl={urls.privacyPolicy()}
-            />
+            <EmailCongressperson.Disclaimer countryCode={countryCode} />
           </EmailCongressperson.Form>
         </EmailCongressperson>
       )

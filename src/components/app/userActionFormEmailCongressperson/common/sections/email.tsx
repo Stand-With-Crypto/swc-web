@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -295,10 +295,8 @@ EmailCongressperson.Message = function Message({ getEmailBodyText }: MessageProp
 
 EmailCongressperson.Disclaimer = function Disclaimer({
   countryCode,
-  quorumPrivacyPolicyUrl,
 }: {
   countryCode: SupportedCountryCodes
-  quorumPrivacyPolicyUrl: string
 }) {
   const urls = getIntlUrls(countryCode)
 
@@ -307,8 +305,7 @@ EmailCongressperson.Disclaimer = function Disclaimer({
       <p className="text-xs text-fontcolor-muted">
         By submitting, I understand that Stand With Crypto and its vendors may collect and use my
         personal information subject to the{' '}
-        <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and the{' '}
-        <ExternalLink href={quorumPrivacyPolicyUrl}>Quorum Privacy Policy</ExternalLink>.
+        <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> .
       </p>
     </div>
   )
