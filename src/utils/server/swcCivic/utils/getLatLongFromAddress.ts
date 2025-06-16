@@ -33,6 +33,9 @@ export async function getLatLongFromAddress(address: string) {
   if (!data?.location) {
     Sentry.captureMessage(`getLatLongFromAddress latitude and longitude not found`, {
       extra: { address, data },
+      tags: {
+        domain: 'swc-civic',
+      },
     })
     throw new Error('No latitude and longitude found for address')
   }
