@@ -45,7 +45,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Sign Our Petition to Government',
+    title: 'Email your Member of Parliament',
     description: 'Make stablecoin leadership a strategic priority',
     mobileCTADescription: 'Make stablecoin leadership a strategic priority',
     campaignsModalDescription: 'Make stablecoin leadership a strategic priority',
@@ -55,7 +55,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: GBUserActionEmailCampaignName.STABLECOINS,
         isCampaignActive: true,
-        title: 'Sign Our Petition to Government',
+        title: 'Email your Member of Parliament',
         description: 'Make stablecoin leadership a strategic priority',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({

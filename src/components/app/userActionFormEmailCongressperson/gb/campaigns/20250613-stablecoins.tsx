@@ -14,7 +14,7 @@ const CAMPAIGN_NAME = GBUserActionEmailCampaignName.STABLECOINS
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'mp'
 
-export const DIALOG_TITLE = 'Sign Our Petition to Government'
+export const DIALOG_TITLE = 'Email your Member of Parliament'
 
 export const DIALOG_SUBTITLE = 'Make stablecoin leadership a strategic priority'
 
