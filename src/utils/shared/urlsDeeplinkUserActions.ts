@@ -161,7 +161,10 @@ export const getUserActionDeeplink = <
   }
 
   if (actionType === UserActionType.EMAIL) {
-    return getDeeplinkUrlByCampaignName(campaign as USUserActionEmailCampaignName)
+    return getDeeplinkUrlByCampaignName({
+      countryCode: config.countryCode,
+      campaignName: campaign as USUserActionEmailCampaignName,
+    })
   }
 
   throw new Error(`No deeplink found for actionType: ${actionType} and campaign: ${campaign}`)

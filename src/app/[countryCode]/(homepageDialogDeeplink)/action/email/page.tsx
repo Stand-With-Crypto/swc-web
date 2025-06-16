@@ -1,6 +1,6 @@
 import { notFound, redirect, RedirectType } from 'next/navigation'
 
-import { DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/campaigns'
+import { DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/us/campaigns'
 import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
 
