@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { VoterGuideStep } from '@/components/app/pageVoterGuide/types'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
