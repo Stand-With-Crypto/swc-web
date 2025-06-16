@@ -300,11 +300,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/gb/action/email',
-        destination: '/gb/content/debanking',
-        permanent: true,
-      },
-      {
         source: '/uk',
         destination: '/gb',
         permanent: false,
@@ -396,6 +391,11 @@ const nextConfig: NextConfig = {
       // cnn debate campaign
       {
         source: '/action/email-cnn',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/gb/action/email',
         destination: '/',
         permanent: false,
       },

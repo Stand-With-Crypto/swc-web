@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { CampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/campaigns/types'
+import { CampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/us/campaigns/types'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 import * as DEFAULT from './1-default'
@@ -35,6 +35,6 @@ const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
     require('./20250613-clarity-act-house').campaignMetadata,
 }
 
-export function getEmailActionCampaignMetadata(campaignName: USUserActionEmailCampaignName) {
+export function getUSEmailActionCampaignMetadata(campaignName: USUserActionEmailCampaignName) {
   return EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA[campaignName]
 }
