@@ -225,8 +225,7 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
       sendMail({
         countryCode,
         payload: {
-          // to: email,
-          to: 'eduardo.picolo@coinbase.com',
+          to: email,
           from: SENDGRID_SENDER_REP,
           ...(process.env.VERCEL_ENV === 'production' && {
             ip_pool_name: IPPoolName.REPRESENTATIVES,

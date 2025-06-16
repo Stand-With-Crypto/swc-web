@@ -21,7 +21,7 @@ export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house-of
 
 export const DIALOG_TITLE = 'Email Your MP'
 
-export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
+export const DIALOG_SUBTITLE = 'Support Innovation and Growth'
 
 export function getEmailBodyText(
   props?: GetTextProps & {
@@ -61,9 +61,9 @@ Thank you for your leadership and service.${fullNameSignOff}${locationSignOff}`
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('house-of-commons')}`,
-  dialogSubtitle: 'You emailed your representative about crypto.',
-  politicianCategory: 'house-of-commons',
-  subject: 'Support Crypto Legislation',
+  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
+  dialogSubtitle: 'Support Innovation and Growth',
+  politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
+  subject: 'Support Blockchain as a Priority for Canada’s Innovation Agenda',
   getEmailBodyText,
 }

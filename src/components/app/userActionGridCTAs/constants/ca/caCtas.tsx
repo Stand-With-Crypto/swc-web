@@ -6,7 +6,6 @@ import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/u
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
-import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -50,9 +49,9 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.EMAIL]: {
     title: 'Email your MP',
-    description: 'Support Crucial Crypto Legislation',
-    mobileCTADescription: 'Support Crucial Crypto Legislation',
-    campaignsModalDescription: 'Support Crucial Crypto Legislation',
+    description: 'Support Innovation and Growth',
+    mobileCTADescription: 'Support Innovation and Growth',
+    campaignsModalDescription: 'Support Innovation and Growth',
     image: '/ca/actionTypeIcons/email.png',
     campaigns: [
       {
@@ -60,7 +59,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
         isCampaignActive: true,
         title: 'Email your MP',
-        description: 'Support Crucial Crypto Legislation',
+        description: 'Support Innovation and Growth',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
@@ -81,15 +80,11 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your Member of Parliament',
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog countryCode={countryCode} url={urls.newmodeElectionAction()}>
-            {children}
-          </UserActionViewKeyPageDialog>
-        ),
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.VIEW_KEY_PAGE,

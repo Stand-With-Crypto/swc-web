@@ -14,9 +14,9 @@ const CAMPAIGN_NAME = GBUserActionEmailCampaignName.STABLECOINS
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'mp'
 
-export const DIALOG_TITLE = 'Email Your MP'
+export const DIALOG_TITLE = 'Sign Our Petition to Government'
 
-export const DIALOG_SUBTITLE = 'Support Stablecoins'
+export const DIALOG_SUBTITLE = 'Make stablecoin leadership a strategic priority'
 
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
@@ -49,9 +49,9 @@ Thank you for taking the time to consider these requests and I look forward to h
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('mp')}`,
-  dialogSubtitle: 'You emailed your MP about crypto.',
-  politicianCategory: 'mp',
-  subject: 'Support Crypto Legislation',
+  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
+  dialogSubtitle: 'Make stablecoin leadership a strategic priority',
+  politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
+  subject: 'Support UK Blockchain Action Plan petition',
   getEmailBodyText,
 }
