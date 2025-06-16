@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 import {
   getConstituentLocationSignOff,
   getFullNameSignOff,
@@ -9,6 +11,7 @@ import {
   getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/ca'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 import type { CampaignMetadata } from './types'
 
@@ -24,9 +27,10 @@ export function getEmailBodyText(
   props?: GetTextProps & {
     address?: string
     dtsiPeopleFromAddressResponse?: ReturnType<typeof useGetDTSIPeopleFromAddress>
+    addressSchema?: z.infer<typeof zodAddress> | null
   },
 ) {
-  const { firstName, lastName, address, dtsiPeopleFromAddressResponse } = props || {}
+  const { firstName, lastName, addressSchema, dtsiPeopleFromAddressResponse } = props || {}
 
   const dtsiPeople =
     dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
@@ -40,9 +44,7 @@ export function getEmailBodyText(
     firstName,
     lastName,
   })
-  const locationSignOff = getConstituentLocationSignOff({
-    address,
-  })
+  const locationSignOff = getConstituentLocationSignOff(addressSchema)
 
   return `Dear ${representativeName},
 
