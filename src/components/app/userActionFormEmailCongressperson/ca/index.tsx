@@ -63,9 +63,9 @@ interface CAUserActionFormEmailCongresspersonProps
 export function CAUserActionFormEmailCongressperson({
   user,
   initialValues,
+  campaignName,
   politicianCategory = DEFAULT_POLITICIAN_CATEGORY,
   onCancel,
-  campaignName,
 }: CAUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
   const urls = getIntlUrls(countryCode)
@@ -88,7 +88,11 @@ export function CAUserActionFormEmailCongressperson({
     : undefined
 
   const form = useForm<EmailActionFormValues>({
-    resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
+    resolver: zodResolver(
+      zodUserActionFormEmailCongresspersonFields.extend({
+        campaignName: z.nativeEnum(CAUserActionEmailCampaignName),
+      }),
+    ),
     defaultValues: {
       campaignName: campaignMetadata.campaignName,
       contactMessage: campaignMetadata.getEmailBodyText({

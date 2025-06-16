@@ -2,15 +2,16 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
-import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
+  GBUserActionEmailCampaignName,
   GBUserActionLinkedInCampaignName,
   GBUserActionPollCampaignName,
   GBUserActionReferCampaignName,
@@ -40,6 +41,27 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
         ),
+      },
+    ],
+  },
+  [UserActionType.EMAIL]: {
+    title: 'Sign Our Petition to Government',
+    description: 'Make stablecoin leadership a strategic priority',
+    mobileCTADescription: 'Make stablecoin leadership a strategic priority',
+    campaignsModalDescription: 'Make stablecoin leadership a strategic priority',
+    image: '/gb/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: GBUserActionEmailCampaignName.STABLECOINS,
+        isCampaignActive: true,
+        title: 'Sign Our Petition to Government',
+        description: 'Make stablecoin leadership a strategic priority',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: GBUserActionEmailCampaignName.STABLECOINS,
+        }),
       },
     ],
   },
@@ -76,18 +98,11 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your MP to stop unfair debanking',
         description: 'Urge them to stand up for financial access and innovation.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={urls.newmodeDebankingAction()}
-          >
-            {children}
-          </UserActionViewKeyPageDialog>
-        ),
+        WrapperComponent: null,
       },
     ],
   },

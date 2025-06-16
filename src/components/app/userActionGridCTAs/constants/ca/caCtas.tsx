@@ -48,6 +48,27 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
     ],
   },
+  [UserActionType.EMAIL]: {
+    title: 'Email your MP',
+    description: 'Support Crucial Crypto Legislation',
+    mobileCTADescription: 'Support Crucial Crypto Legislation',
+    campaignsModalDescription: 'Support Crucial Crypto Legislation',
+    image: '/ca/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
+        isCampaignActive: true,
+        title: 'Email your MP',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
+        }),
+      },
+    ],
+  },
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Email your Member of Parliament',
     description:
@@ -55,7 +76,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaignsModalDescription:
       'Make your voice heard on important crypto policy issues by emailing your representatives.',
     image: '/ca/actionTypeIcons/email.png',
-    link: ({ children }) => <Link href={urls.emailDeeplink()}>{children}</Link>,
+    link: ({ children }) => <Link href={urls.newmodeElectionAction()}>{children}</Link>,
     campaigns: [
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
@@ -73,18 +94,11 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_NEWMODE_DEBANKING,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your MP to stop unfair debanking',
         description: 'Urge them to stand up for financial access and innovation.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={urls.newmodeDebankingAction()}
-          >
-            {children}
-          </UserActionViewKeyPageDialog>
-        ),
+        WrapperComponent: null,
       },
     ],
   },
@@ -219,27 +233,6 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
             {children}
           </UserActionFormFollowLinkedInDialog>
         ),
-      },
-    ],
-  },
-  [UserActionType.EMAIL]: {
-    title: 'Email your MP',
-    description: 'Support Crucial Crypto Legislation',
-    mobileCTADescription: 'Support Crucial Crypto Legislation',
-    campaignsModalDescription: 'Support Crucial Crypto Legislation',
-    image: '/ca/actionTypeIcons/email.png',
-    campaigns: [
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
-        isCampaignActive: true,
-        title: 'Email your MP',
-        description: 'Support Crucial Crypto Legislation',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
-        }),
       },
     ],
   },

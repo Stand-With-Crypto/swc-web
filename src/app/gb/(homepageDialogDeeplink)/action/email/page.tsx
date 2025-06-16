@@ -1,6 +1,6 @@
 import { notFound, redirect, RedirectType } from 'next/navigation'
 
-import { DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns'
+import { DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/gb/campaigns'
 import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
 
@@ -14,7 +14,7 @@ export default async function UserActionEmailDeepLink(props: PageProps) {
   const searchParams = await props.searchParams
   const urlParams = new URLSearchParams(searchParams as Record<string, string>)
   const searchParamsString = urlParams.toString()
-  const redirectUrl = `/ca/action/email/${slugifiedCampaignName}${searchParamsString ? `?${searchParamsString}` : ''}`
+  const redirectUrl = `/gb/action/email/${slugifiedCampaignName}${searchParamsString ? `?${searchParamsString}` : ''}`
 
   return redirect(redirectUrl, RedirectType.replace)
 }

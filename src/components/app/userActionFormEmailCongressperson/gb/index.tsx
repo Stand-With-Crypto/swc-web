@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
+import { z } from 'zod'
 
 import { actionCreateUserActionEmailCongresspersonIntl } from '@/actions/actionCreateUserActionEmailCongresspersonIntl'
 import {
@@ -55,13 +56,14 @@ interface GBUserActionFormEmailCongresspersonProps
 export function GBUserActionFormEmailCongressperson({
   user,
   initialValues,
+  campaignName,
   politicianCategory = DEFAULT_POLITICIAN_CATEGORY,
   onCancel,
 }: GBUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
   const urls = getIntlUrls(countryCode)
   const campaignMetadata = useEmailActionCampaignMetadata({
-    campaignName: GBUserActionEmailCampaignName.DEFAULT,
+    campaignName,
     countryCode,
   })
 
@@ -79,7 +81,15 @@ export function GBUserActionFormEmailCongressperson({
     : undefined
 
   const form = useForm<EmailActionFormValues>({
-    resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
+    resolver: zodResolver(
+      zodUserActionFormEmailCongresspersonFields.extend({
+        campaignName: z.nativeEnum(GBUserActionEmailCampaignName),
+        contactMessage: z
+          .string()
+          .min(1, 'Please enter a message')
+          .max(2500, 'Your message should not exceed 2500 characters'),
+      }),
+    ),
     defaultValues: {
       campaignName: campaignMetadata.campaignName,
       contactMessage: campaignMetadata.getEmailBodyText({

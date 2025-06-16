@@ -4,7 +4,8 @@ import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 
 import * as DEFAULT from './1-default'
 
-export const DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME = CAUserActionEmailCampaignName.DEFAULT
+export const DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME =
+  CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING
 
 const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
   CAUserActionEmailCampaignName,
