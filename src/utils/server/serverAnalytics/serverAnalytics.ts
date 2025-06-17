@@ -166,7 +166,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     actionType: UserActionType
     campaignName: string
     creationMethod?: CreationMethod
-    reason: 'Too Many Recent' | 'Already Exists' | 'Missing Quorum Email Address'
+    reason: 'Too Many Recent' | 'Already Exists'
     userState: AnalyticsUserActionUserState
   } & AnalyticProperties) => {
     return trackAnalytic(

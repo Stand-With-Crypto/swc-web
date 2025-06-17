@@ -218,18 +218,6 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
       return politician?.email
     })
     .filter(Boolean)
-  if (quorumPoliticianEmails.length === 0) {
-    analytics.trackUserActionCreatedIgnored({
-      actionType,
-      campaignName,
-      reason: 'Missing Quorum Email Address',
-      creationMethod: 'On Site',
-      userState,
-      ...convertAddressToAnalyticsProperties(validatedFields.data.address),
-    })
-    logger.warn('No representatives emails found, skipping email & analytics')
-    return { user: getClientUser(user) }
-  }
 
   analytics.trackUserActionCreated({
     actionType,
@@ -237,6 +225,7 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
     creationMethod: 'On Site',
     userState,
+    skippedEmail: quorumPoliticianEmails.length === 0,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
   peopleAnalytics.set({
@@ -244,6 +233,11 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     $email: validatedFields.data.emailAddress,
     $name: userFullName(validatedFields.data),
   })
+
+  if (quorumPoliticianEmails.length === 0) {
+    logger.warn('No representatives emails found, skipping email')
+    return { user: getClientUser(user) }
+  }
 
   const html = await render(<EmailToRepresentative body={validatedFields.data.contactMessage} />)
   await Promise.all(
