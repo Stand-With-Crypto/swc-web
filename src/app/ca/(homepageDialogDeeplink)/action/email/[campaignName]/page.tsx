@@ -7,6 +7,7 @@ import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { deSlugifyCampaignName } from '@/utils/shared/userActionCampaigns/deSlugifyCampaignName'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 3600 // 1 hour
@@ -33,7 +34,7 @@ export default async function UserActionEmailCongresspersonDeepLink(
   props: PageProps<{ campaignName: string }>,
 ) {
   const params = await props.params
-  const campaignName = deSlugifyCampaignName(params.campaignName)
+  const campaignName = deSlugifyCampaignName(params.campaignName, CAUserActionEmailCampaignName)
 
   if (!campaignName) {
     notFound()
@@ -59,15 +60,5 @@ export default async function UserActionEmailCongresspersonDeepLink(
         />
       </ErrorBoundary>
     </CAHomepageDialogDeeplinkLayout>
-  )
-}
-
-function deSlugifyCampaignName(slugifiedCampaignName: string) {
-  if (slugifiedCampaignName === 'default') {
-    return CAUserActionEmailCampaignName.DEFAULT
-  }
-
-  return Object.values(CAUserActionEmailCampaignName).find(
-    campaignName => slugify(campaignName) === slugifiedCampaignName,
   )
 }
