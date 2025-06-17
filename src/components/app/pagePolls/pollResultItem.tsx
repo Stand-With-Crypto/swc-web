@@ -63,7 +63,7 @@ export function PollResultItem({
         <span className="text-sm text-gray-600">{isLoading ? <BlankVoteInfo /> : votesInfo}</span>
         {!isLoading && isUserVote && (
           <div className="relative h-4 w-4">
-            <CheckIcon completed={true} index={0} svgClassname="bg-muted h-4 w-4" />
+            <CheckIcon completed={true} svgClassname="bg-muted h-4 w-4" />
           </div>
         )}
       </div>
@@ -100,7 +100,7 @@ export function PollResultItemOther({
         <span className="text-sm text-gray-600">{isLoading ? <BlankVoteInfo /> : votesInfo}</span>
         {!isLoading && isUserVote && (
           <div className="relative h-4 w-4">
-            <CheckIcon completed={true} index={0} svgClassname="bg-muted h-4 w-4" />
+            <CheckIcon completed={true} svgClassname="bg-muted h-4 w-4" />
           </div>
         )}
       </div>

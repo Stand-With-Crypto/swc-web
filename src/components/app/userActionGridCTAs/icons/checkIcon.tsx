@@ -2,19 +2,16 @@ import { cn } from '@/utils/web/cn'
 
 export function CheckIcon({
   completed,
-  index,
   svgClassname,
 }: {
   completed?: boolean
-  index: number
   svgClassname?: string
 }) {
   return (
     <svg
-      className={cn('absolute bottom-0 top-0 rounded-full', svgClassname)}
+      className={cn('rounded-full', svgClassname)}
       fill="none"
       height="32"
-      style={{ left: index > 0 ? `${index * 16}px` : 0, zIndex: index }}
       viewBox="0 0 32 32"
       width="32"
       xmlns="http://www.w3.org/2000/svg"
