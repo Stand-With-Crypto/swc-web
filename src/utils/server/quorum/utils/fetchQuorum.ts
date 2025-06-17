@@ -34,8 +34,8 @@ export interface NormalizedQuorumPolitician {
   firstName: string
   lastName: string
   middleName: string
-  email: string
-  phone: string
+  email: string | null
+  phone: string | null
   imageUrl: string
   nameAndTitle: string
   regionRepresented?: string
