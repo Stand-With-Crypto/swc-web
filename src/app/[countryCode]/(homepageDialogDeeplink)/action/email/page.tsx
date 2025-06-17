@@ -9,7 +9,7 @@ export default async function UserActionEmailDeepLink(props: PageProps) {
   const params = await props.params
 
   return (
-    <USHomepageDialogDeeplinkLayout pageParams={params}>
+    <USHomepageDialogDeeplinkLayout pageParams={params} size="sm">
       <ErrorBoundary
         extras={{
           action: {
