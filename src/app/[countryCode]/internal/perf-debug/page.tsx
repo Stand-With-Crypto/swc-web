@@ -15,7 +15,7 @@ export default async function PerfDebug() {
     <div className="container flex flex-col gap-4">
       <PageTitle>PerfDebug</PageTitle>
       <PageSubTitle>
-        Refreshed at: <strong>{new Date().toISOString()}</strong>
+        Refreshed at: <strong>{new Date().toLocaleString()}</strong>
       </PageSubTitle>
       <div className="mx-auto">
         <RevalidateButton />
