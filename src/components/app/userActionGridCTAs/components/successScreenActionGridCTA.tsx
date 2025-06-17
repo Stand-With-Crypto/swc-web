@@ -8,15 +8,18 @@ import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
+import { useSuccessScreenDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 
 export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
+  const { shouldCloseSuccessScreenDialog } = useSuccessScreenDialogContext()
+
   const countryCode = useCountryCode()
 
   if (props.link) {
     const LinkComponent = props.link
     return (
       <LinkComponent>
-        <SuccessScreenActionCard {...props} />
+        <SuccessScreenActionCard {...props} onClick={shouldCloseSuccessScreenDialog} />
       </LinkComponent>
     )
   }
@@ -34,7 +37,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
 
     return (
       <Link href={url}>
-        <SuccessScreenActionCard {...props} />
+        <SuccessScreenActionCard {...props} onClick={shouldCloseSuccessScreenDialog} />
       </Link>
     )
   }

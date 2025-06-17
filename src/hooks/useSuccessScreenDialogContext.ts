@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react'
 
 export const SWCSuccessDialogContext = createContext<{
-  onCtaClick: () => void
+  shouldCloseSuccessScreenDialog: () => void
 }>({
-  onCtaClick: () => {},
+  shouldCloseSuccessScreenDialog: () => {},
 })
 
 export function useSuccessScreenDialogContext() {

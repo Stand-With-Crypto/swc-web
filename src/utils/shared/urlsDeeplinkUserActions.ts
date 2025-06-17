@@ -152,19 +152,19 @@ export const getUserActionDeeplink = <
     isActionSupportedForCountry(config.countryCode, actionType) &&
     campaign === COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[config.countryCode][actionType]
 
+  if (actionType === UserActionType.EMAIL) {
+    return getDeeplinkUrlByCampaignName({
+      countryCode: config.countryCode,
+      campaignName: campaign as USUserActionEmailCampaignName,
+    })
+  }
+
   if (!campaign || isDefaultCampaign) {
     return USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl(config)
   }
 
   if (USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]) {
     return USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]?.(config)
-  }
-
-  if (actionType === UserActionType.EMAIL) {
-    return getDeeplinkUrlByCampaignName({
-      countryCode: config.countryCode,
-      campaignName: campaign as USUserActionEmailCampaignName,
-    })
   }
 
   throw new Error(`No deeplink found for actionType: ${actionType} and campaign: ${campaign}`)

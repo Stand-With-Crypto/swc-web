@@ -34,7 +34,9 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
 
   return (
     <SWCSuccessDialogContext.Provider
-      value={{ onCtaClick: () => dialogProps?.onOpenChange?.(false) }}
+      value={{
+        shouldCloseSuccessScreenDialog: () => dialogProps?.onOpenChange?.(false),
+      }}
     >
       <Dialog {...dialogProps}>
         <DialogContent a11yTitle="Joined Stand With Crypto" className="max-w-3xl">
