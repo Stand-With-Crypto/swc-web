@@ -48,6 +48,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
       description={props.campaignsModalDescription}
       performedUserActions={props.performedUserActions}
       shouldOpenDeeplink={true}
+      onClickAction={shouldCloseSuccessScreenDialog}
     >
       <SuccessScreenActionCard {...props} />
     </UserActionGridCampaignsDialog>

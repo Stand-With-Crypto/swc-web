@@ -8,7 +8,6 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
-import { useSuccessScreenDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
@@ -22,6 +21,7 @@ interface UserActionGridCampaignsDialogProps {
   campaigns: Array<UserActionGridCTACampaign>
   performedUserActions: Record<string, any>
   shouldOpenDeeplink?: boolean
+  onClickAction?: () => void
 }
 
 export function UserActionGridCampaignsDialog(props: UserActionGridCampaignsDialogProps) {
@@ -43,9 +43,9 @@ export function UserActionGridCampaignsDialogContent({
   campaigns,
   performedUserActions,
   shouldOpenDeeplink,
+  onClickAction,
 }: Omit<UserActionGridCampaignsDialogProps, 'children'>) {
   const countryCode = useCountryCode()
-  const { shouldCloseSuccessScreenDialog } = useSuccessScreenDialogContext()
 
   const activeCampaigns = campaigns.filter(campaign => campaign.isCampaignActive)
   const completedInactiveCampaigns = campaigns.filter(
@@ -81,12 +81,11 @@ export function UserActionGridCampaignsDialogContent({
 
             if (url) {
               return (
-                <Link href={url} key={campaignKey}>
+                <Link href={url} key={campaignKey} onClick={onClickAction}>
                   <CampaignCard
                     description={campaign.description}
                     isCompleted={isCompleted}
                     isReadOnly
-                    onClick={shouldCloseSuccessScreenDialog}
                     title={campaign.title}
                   />
                 </Link>
@@ -99,6 +98,7 @@ export function UserActionGridCampaignsDialogContent({
                   description={campaign.description}
                   isCompleted={isCompleted}
                   key={campaignKey}
+                  onClick={onClickAction}
                   title={campaign.title}
                 />
               )
@@ -109,6 +109,7 @@ export function UserActionGridCampaignsDialogContent({
                 <CampaignCard
                   description={campaign.description}
                   isCompleted={isCompleted}
+                  onClick={onClickAction}
                   title={campaign.title}
                 />
               </WrapperComponent>
@@ -142,7 +143,7 @@ export function UserActionGridCampaignsDialogContent({
 
                 if (url) {
                   return (
-                    <Link href={url} key={campaignKey} onClick={shouldCloseSuccessScreenDialog}>
+                    <Link href={url} key={campaignKey} onClick={onClickAction}>
                       <CampaignCard
                         description={campaign.description}
                         isCompleted={isCompleted}
@@ -160,6 +161,7 @@ export function UserActionGridCampaignsDialogContent({
                       isCompleted={isCompleted}
                       isReadOnly
                       key={campaignKey}
+                      onClick={onClickAction}
                       title={campaign.title}
                     />
                   )
@@ -171,6 +173,7 @@ export function UserActionGridCampaignsDialogContent({
                       description={campaign.description}
                       isCompleted={isCompleted}
                       isReadOnly
+                      onClick={onClickAction}
                       title={campaign.title}
                     />
                   </WrapperComponent>
