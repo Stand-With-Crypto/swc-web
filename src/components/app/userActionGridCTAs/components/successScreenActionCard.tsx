@@ -59,7 +59,7 @@ export function SuccessScreenActionCard({
           {mobileCTADescription ?? description}
         </p>
 
-        <div className="mt-auto flex w-full items-center justify-between gap-2 pt-5">
+        <div className="mt-auto flex w-full items-center gap-2 pt-5">
           <CampaignsCheckmarks
             campaignsLength={campaignsLength}
             completedCampaigns={completedCampaigns}
