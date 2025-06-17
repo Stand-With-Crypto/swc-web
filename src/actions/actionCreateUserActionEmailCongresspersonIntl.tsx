@@ -209,7 +209,7 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
               dtsiSlugs: validatedFields.data.dtsiSlugs,
             },
             tags: {
-              domain: `Quorum`,
+              domain: `quorum`,
             },
             level: 'warning',
           },
@@ -219,6 +219,14 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     })
     .filter(Boolean)
   if (quorumPoliticianEmails.length === 0) {
+    analytics.trackUserActionCreatedIgnored({
+      actionType,
+      campaignName,
+      reason: 'Missing Quorum Email Address',
+      creationMethod: 'On Site',
+      userState,
+      ...convertAddressToAnalyticsProperties(validatedFields.data.address),
+    })
     logger.warn('No representatives emails found, skipping email & analytics')
     return { user: getClientUser(user) }
   }
