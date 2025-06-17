@@ -29,7 +29,7 @@ function UserActionFormEmailCongresspersonHomepageRootDialogDeeplinkContent({
         campaigns={cta.campaigns}
         description={cta.description}
         performedUserActions={performedUserActionObj}
-        shouldOpenDeeplink={true}
+        shouldOpenDeeplink={false}
         title={cta.title}
       />
     </div>
