@@ -1,7 +1,6 @@
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { NextImage } from '@/components/ui/image'
-import { useSuccessScreenDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 import { cn } from '@/utils/web/cn'
 
 export function SuccessScreenActionCard({

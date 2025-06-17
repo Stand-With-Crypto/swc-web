@@ -8,12 +8,12 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
+import { useSuccessScreenDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 import { cn } from '@/utils/web/cn'
-import { useSuccessScreenDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 
 interface UserActionGridCampaignsDialogProps {
   children: ReactNode
@@ -83,10 +83,10 @@ export function UserActionGridCampaignsDialogContent({
               return (
                 <Link href={url} key={campaignKey}>
                   <CampaignCard
-                    onClick={shouldCloseSuccessScreenDialog}
                     description={campaign.description}
                     isCompleted={isCompleted}
                     isReadOnly
+                    onClick={shouldCloseSuccessScreenDialog}
                     title={campaign.title}
                   />
                 </Link>
