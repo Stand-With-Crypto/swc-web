@@ -8,7 +8,7 @@ export function RevalidateButton() {
   return (
     <Button
       onClick={() => {
-        revalidatePath('/internal/perf-debug')
+        revalidatePath('/[countryCode]/internal/perf-debug')
       }}
     >
       Revalidate
