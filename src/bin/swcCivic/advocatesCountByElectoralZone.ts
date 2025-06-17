@@ -173,13 +173,21 @@ async function getAdvocatesCountByElectoralZone() {
 
   const otherAddressesWithElectoralZone = []
 
+  let index = 1
+
   for await (const address of otherAddresses) {
+    console.info(
+      `Retrieving electoral zone for address ${index} of ${otherAddresses.length} addresses...`,
+    )
     const electoralZone = await getElectoralZoneFromAddress({
       ...address,
       advocates: Number(address.advocates),
     })
     otherAddressesWithElectoralZone.push(electoralZone)
+    index++
   }
+
+  console.info('Finished retrieving electoral zones from addresses.')
 
   const usElectoralZones = Object.fromEntries(
     usAddressesByElectoralZone
@@ -273,14 +281,17 @@ async function getAdvocatesCountByElectoralZone() {
 
     const footer = [countryCode, 'TOTAL', total].join(';')
 
-    writeFileSync(
-      join(LOCAL_CACHE_PATH, `getAdvocatesCountByElectoralZone-${countryCode}.csv`),
-      `${header}\n${content}\n${footer}`,
-      {
-        encoding: 'utf8',
-        flag: 'w',
-      },
+    const outfileFilePath = join(
+      LOCAL_CACHE_PATH,
+      `getAdvocatesCountByElectoralZone-${countryCode}.csv`,
     )
+
+    writeFileSync(outfileFilePath, `${header}\n${content}\n${footer}`, {
+      encoding: 'utf8',
+      flag: 'w',
+    })
+
+    console.info(`Results for ${countryCode} written to ${outfileFilePath}.`)
   })
 }
 
