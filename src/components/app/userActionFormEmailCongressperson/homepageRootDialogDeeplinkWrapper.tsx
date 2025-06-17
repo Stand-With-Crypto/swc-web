@@ -1,7 +1,9 @@
 'use client'
 
 import { UserActionType } from '@prisma/client'
+import { notFound } from 'next/navigation'
 
+import { GeoGate } from '@/components/app/geoGate'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { EmailActionCampaignNames } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
@@ -57,7 +59,7 @@ export function UserActionEmailCongresspersonRootPageDeeplinkWrapper() {
   }
 
   if (pageCta.campaigns.length === 0) {
-    return <UserActionFormActionUnavailable countryCode={countryCode} />
+    return notFound()
   }
 
   if (pageCta.campaigns.length === 1) {
@@ -72,9 +74,14 @@ export function UserActionEmailCongresspersonRootPageDeeplinkWrapper() {
   }
 
   return (
-    <UserActionFormEmailCongresspersonHomepageRootDialogDeeplinkContent
-      cta={pageCta}
-      performedUserActionObj={performedUserActionObj}
-    />
+    <GeoGate
+      countryCode={countryCode}
+      unavailableContent={<UserActionFormActionUnavailable countryCode={countryCode} />}
+    >
+      <UserActionFormEmailCongresspersonHomepageRootDialogDeeplinkContent
+        cta={pageCta}
+        performedUserActionObj={performedUserActionObj}
+      />
+    </GeoGate>
   )
 }
