@@ -1,62 +1,80 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useCallback } from 'react'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
-import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
-import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
-import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
-import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/success'
-import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
+import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/common/skeleton'
+import { FormFields } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'
-import { cn } from '@/utils/web/cn'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+
+const LazyUserActionFormEmailCongressperson = lazy(() =>
+  import('@/components/app/userActionFormEmailCongressperson').then(m => ({
+    default: m.UserActionFormEmailCongressperson,
+  })),
+)
+
+export type UserActionFormEmailCongresspersonDialogProps = React.PropsWithChildren & {
+  defaultOpen?: boolean
+  initialValues?: FormFields
+} & (
+    | {
+        countryCode: SupportedCountryCodes.US
+        campaignName: USUserActionEmailCampaignName
+      }
+    | {
+        countryCode: SupportedCountryCodes.CA
+        campaignName: CAUserActionEmailCampaignName
+      }
+    | {
+        countryCode: SupportedCountryCodes.GB
+        campaignName: GBUserActionEmailCampaignName
+      }
+    | {
+        countryCode: SupportedCountryCodes.AU
+        campaignName: AUUserActionEmailCampaignName
+      }
+  )
 
 export function UserActionFormEmailCongresspersonDialog({
   children,
   defaultOpen = false,
-  initialValues,
-}: {
-  children: React.ReactNode
-  defaultOpen?: boolean
-  initialValues?: FormFields
-}) {
+  ...props
+}: UserActionFormEmailCongresspersonDialogProps) {
+  const { countryCode } = props
+
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   })
-  const countryCode = useCountryCode()
   const fetchUser = useApiResponseForUserFullProfileInfo()
-  const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
-  useEffect(() => {
-    if (!dialogProps.open && state !== 'form') {
-      setState('form')
-    }
-  }, [dialogProps.open, state])
+
+  const onCancel = useCallback(() => dialogProps.onOpenChange(false), [dialogProps])
+
+  if (fetchUser.isLoading) {
+    return (
+      <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
+        <UserActionFormEmailCongresspersonSkeleton {...props} />
+      </UserActionFormDialog>
+    )
+  }
 
   return (
-    <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
-      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />}>
-        {fetchUser.isLoading ? (
-          <UserActionFormEmailCongresspersonSkeleton countryCode={countryCode} />
-        ) : state === 'form' ? (
-          <LazyUserActionFormEmailCongressperson
-            initialValues={initialValues}
-            onCancel={() => dialogProps.onOpenChange(false)}
-            onSuccess={() => setState('success')}
-            user={user}
-          />
-        ) : (
-          <div className={cn(dialogContentPaddingStyles, 'h-full')}>
-            <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
-              <UserActionFormEmailCongresspersonSuccess />
-            </UserActionFormSuccessScreen>
-          </div>
-        )}
+    <UserActionFormDialog
+      {...dialogProps}
+      countryCode={countryCode}
+      padding={false}
+      trigger={children}
+    >
+      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton {...props} />}>
+        <LazyUserActionFormEmailCongressperson {...props} onCancel={onCancel} user={user} />
       </Suspense>
     </UserActionFormDialog>
   )

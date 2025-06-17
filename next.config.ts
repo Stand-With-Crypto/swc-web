@@ -300,11 +300,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/gb/action/email',
-        destination: '/gb/content/debanking',
-        permanent: true,
-      },
-      {
         source: '/uk',
         destination: '/gb',
         permanent: false,
@@ -396,6 +391,11 @@ const nextConfig: NextConfig = {
       // cnn debate campaign
       {
         source: '/action/email-cnn',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/gb/action/email',
         destination: '/',
         permanent: false,
       },
@@ -496,7 +496,7 @@ const nextConfig: NextConfig = {
       {
         source: '/c/clarity-house',
         destination:
-          '/action/email?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+          '/action/email/clarity_act_house_jun_13_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
         permanent: false,
       },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document

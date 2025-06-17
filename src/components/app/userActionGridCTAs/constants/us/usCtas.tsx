@@ -4,8 +4,7 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
-import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
@@ -26,7 +25,7 @@ import {
   USUserActionVotingDayCampaignName,
   USUserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory/us'
 
 const countryCode = SupportedCountryCodes.US
 const urls = getIntlUrls(countryCode)
@@ -68,7 +67,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
         ),
@@ -81,7 +80,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'You helped bring more advocates to the cause by tweeting about SWC.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
+          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
             {children}
           </UserActionFormShareOnTwitterDialog>
         ),
@@ -125,20 +124,47 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email Your Senator',
-    description: 'Support Crucial Crypto Legislation.',
+    title: 'Email Your Policymaker',
+    description: 'Support Crucial Crypto Legislation',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+        isCampaignActive: true,
+        title: 'Email your House Rep',
+        description: 'Support Market Structure Regulation (CLARITY Act)',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        isCampaignActive: true,
+        title: 'Email your Senator',
+        description: 'Support Stablecoin Regulation (GENIUS Act)',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.DEFAULT,
         isCampaignActive: false,
-        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
+        title: `Email your ${getYourPoliticianCategoryShortDisplayName('house')}`,
         description: 'You emailed your representative about FIT21.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.DEFAULT,
+        }),
       },
       {
         actionType: UserActionType.EMAIL,
@@ -183,7 +209,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Email Your Senator',
         description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -192,7 +218,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contacted and welcomed the 119 congress',
         description: 'The 119th Congress needs to hear from you!',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -201,7 +227,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Member of Congress',
         description: 'Tell your senator to sign the discharge petition',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -210,7 +236,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Member of Congress',
         description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -219,7 +245,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Member of Congress',
         description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -228,16 +254,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Contact your Senator',
         description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
-        isCampaignActive: true,
-        title: 'Email Your Senator',
-        description: 'Support Crucial Crypto Legislation.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: null,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -246,7 +263,10 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Email Your Member of Congress',
         description: 'Support Crucial Crypto Legislation',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        }),
       },
     ],
   },
@@ -396,7 +416,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper
             authenticatedContent={
-              <UserActionFormReferDialog countryCode={SupportedCountryCodes.US}>
+              <UserActionFormReferDialog countryCode={countryCode}>
                 {children}
               </UserActionFormReferDialog>
             }
