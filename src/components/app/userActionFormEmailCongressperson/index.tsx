@@ -12,6 +12,10 @@ import {
 } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 export function UserActionFormEmailCongressperson(props: UserActionFormEmailCongresspersonProps) {
   const { countryCode } = props
@@ -19,13 +23,33 @@ export function UserActionFormEmailCongressperson(props: UserActionFormEmailCong
   const LazyUserActionFormEmailCongressperson = useMemo(() => {
     switch (countryCode) {
       case SupportedCountryCodes.US:
-        return <LazyUSUserActionFormEmailCongressperson {...props} />
+        return (
+          <LazyUSUserActionFormEmailCongressperson
+            {...props}
+            campaignName={props.campaignName as USUserActionEmailCampaignName}
+          />
+        )
       case SupportedCountryCodes.AU:
-        return <LazyAUUserActionFormEmailCongressperson {...props} />
+        return (
+          <LazyAUUserActionFormEmailCongressperson
+            {...props}
+            campaignName={props.campaignName as AUUserActionEmailCampaignName}
+          />
+        )
       case SupportedCountryCodes.CA:
-        return <LazyCAUserActionFormEmailCongressperson {...props} />
+        return (
+          <LazyCAUserActionFormEmailCongressperson
+            {...props}
+            campaignName={props.campaignName as CAUserActionEmailCampaignName}
+          />
+        )
       case SupportedCountryCodes.GB:
-        return <LazyGBUserActionFormEmailCongressperson {...props} />
+        return (
+          <LazyGBUserActionFormEmailCongressperson
+            {...props}
+            campaignName={props.campaignName as GBUserActionEmailCampaignName}
+          />
+        )
       default:
         return gracefullyError({
           msg: `Country implementation not found for UserActionFormEmailCongressperson`,
