@@ -40,10 +40,7 @@ import * as smsActions from '@/utils/server/sms/actions'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
-import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -272,30 +269,30 @@ async function maybeUpsertUser({
       logger.error('error getting `googlePlaceId`:' + e)
     }
 
-    const isUSAddress = dbAddress.countryCode?.toUpperCase() === 'US'
-    if (isUSAddress) {
-      try {
-        const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(dbAddress)
+    try {
+      const electoralZone = await maybeGetElectoralZoneFromAddress(dbAddress)
 
-        if ('notFoundReason' in usCongressionalDistrict) {
-          logCongressionalDistrictNotFound({
-            address: dbAddress.formattedDescription,
-            notFoundReason: usCongressionalDistrict.notFoundReason,
-            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-          })
-        }
-        if ('districtNumber' in usCongressionalDistrict) {
-          dbAddress.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
-        }
-      } catch (error) {
-        logger.error('error getting `usCongressionalDistrict`:' + error)
-        Sentry.captureException(error, {
+      if ('notFoundReason' in electoralZone) {
+        Sentry.captureMessage('electoralZone not found', {
           tags: {
             domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-            message: 'error getting usCongressionalDistrict',
+          },
+          extra: {
+            notFoundReason: electoralZone.notFoundReason,
+            address: dbAddress.formattedDescription,
           },
         })
+      } else if (electoralZone.zoneName) {
+        dbAddress.electoralZone = electoralZone.zoneName
       }
+    } catch (error) {
+      logger.error('error getting `electoralZone`:' + error)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+          message: 'error getting electoralZone',
+        },
+      })
     }
   }
 

@@ -1,4 +1,4 @@
-import { object, string, ZodIssueCode } from 'zod'
+import { object, string, z, ZodIssueCode } from 'zod'
 
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
@@ -16,6 +16,7 @@ export const zodAddress = object({
   postalCodeSuffix: string(),
   countryCode: string().length(2),
   usCongressionalDistrict: string().optional(),
+  electoralZone: string().optional(),
 })
 
 export const zodStateDistrict = object({
@@ -56,3 +57,5 @@ export const zodStateDistrict = object({
     })
   }
 })
+
+export type ZodAddress = z.infer<typeof zodAddress>

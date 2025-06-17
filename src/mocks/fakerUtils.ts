@@ -15,5 +15,6 @@ export const fakerFields = {
   phoneNumber: mockValidPhoneNumber,
   stateCode: (options?: { abbreviated?: boolean }) => faker.location.state(options),
   usCongressionalDistrict: () => faker.number.int({ min: 1, max: 20 }).toString(),
+  electoralZone: () => faker.number.int({ min: 1, max: 20 }).toString(),
   generateReferralId: () => faker.string.uuid().slice(0, 12),
 }

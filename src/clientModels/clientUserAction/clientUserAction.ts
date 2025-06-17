@@ -119,7 +119,7 @@ interface ClientUserActionRsvpEvent {
 }
 type ClientUserActionViewKeyRaces = Pick<
   UserActionViewKeyRaces,
-  'usaState' | 'usCongressionalDistrict'
+  'usaState' | 'electoralZone' | 'usCongressionalDistrict'
 > & {
   actionType: typeof UserActionType.VIEW_KEY_RACES
 }
@@ -308,13 +308,14 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...rsvpEventFields })
     },
     [UserActionType.VIEW_KEY_RACES]: () => {
-      const { usaState, usCongressionalDistrict } = getRelatedModel(
+      const { usaState, usCongressionalDistrict, electoralZone } = getRelatedModel(
         record,
         'userActionViewKeyRaces',
       )
       const keyRacesFields: ClientUserActionViewKeyRaces = {
         usaState,
         usCongressionalDistrict,
+        electoralZone,
         actionType: UserActionType.VIEW_KEY_RACES,
       }
       return getClientModel({ ...sharedProps, ...keyRacesFields })

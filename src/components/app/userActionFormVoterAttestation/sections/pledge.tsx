@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { useWatch } from 'react-hook-form'
 
 import { ContentSection } from '@/components/app/ContentSection'
 import {
@@ -40,8 +41,9 @@ export function PledgeSection({
   isSubmitting,
 }: PledgeSectionProps) {
   const countryCode = useCountryCode()
-  const { congressional, senate, presidential, stateCode, districtNumber } =
-    racesByAddressData ?? {}
+  const { congressional, senate, presidential, stateCode, zoneName } = racesByAddressData ?? {}
+
+  const electoralZone = zoneName
 
   const handleSuccess = useCallback(() => {
     if (isLoading) {
@@ -121,7 +123,7 @@ export function PledgeSection({
                       shouldHideStanceScores={false}
                       {...dtsiPersonHeroCardSectionProps}
                       people={congressional}
-                      title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
+                      title={`Congressional District${electoralZone ? ` ${electoralZone}` : ''}`}
                     />
                   </PledgeSectionWrapper>
                 </>

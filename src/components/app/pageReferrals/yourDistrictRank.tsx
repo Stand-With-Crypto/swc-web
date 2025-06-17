@@ -119,7 +119,10 @@ export function SuspenseYourDistrictRank() {
 
   const district = useMemo(() => {
     if (!districtResponse.data) return null
-    return 'districtNumber' in districtResponse.data ? districtResponse.data : null
+    if ('notFoundReason' in districtResponse.data) return null
+    if (!districtResponse.data.zoneName) return null
+
+    return districtResponse.data
   }, [districtResponse.data])
 
   if (!address || isLoadingAddress) {
@@ -142,7 +145,7 @@ export function SuspenseYourDistrictRank() {
   }
   return (
     <YourDistrictRankContent
-      districtNumber={district?.districtNumber?.toString() ?? null}
+      districtNumber={district?.zoneName?.toString() ?? null}
       stateCode={district?.stateCode as USStateCode}
     />
   )

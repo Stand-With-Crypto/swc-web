@@ -41,10 +41,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
-import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -101,25 +98,26 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('validated fields')
 
   try {
-    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
-      validatedFields.data.address,
-    )
-    if ('notFoundReason' in usCongressionalDistrict) {
-      logCongressionalDistrictNotFound({
-        address: validatedFields.data.address.formattedDescription,
-        notFoundReason: usCongressionalDistrict.notFoundReason,
-        domain: 'actionCreateUserActionEmailCongressperson',
+    const electoralZone = await maybeGetElectoralZoneFromAddress(validatedFields.data.address)
+    if ('notFoundReason' in electoralZone) {
+      Sentry.captureMessage('electoralZone not found', {
+        tags: {
+          domain: 'actionCreateUserActionEmailCongressperson',
+        },
+        extra: {
+          notFoundReason: electoralZone.notFoundReason,
+          address: validatedFields.data.address.formattedDescription,
+        },
       })
-    }
-    if ('districtNumber' in usCongressionalDistrict) {
-      validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    } else if (electoralZone.zoneName) {
+      validatedFields.data.address.electoralZone = electoralZone.zoneName
     }
   } catch (error) {
-    logger.error('error getting `usCongressionalDistrict`:' + error)
+    logger.error('error getting `electoralZone`:' + error)
     Sentry.captureException(error, {
       tags: {
         domain: 'actionCreateUserActionEmailCongressperson',
-        message: 'error getting usCongressionalDistrict',
+        message: 'error getting electoralZone',
       },
     })
   }

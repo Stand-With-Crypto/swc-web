@@ -1,11 +1,9 @@
 import { EventSchemas } from 'inngest'
 
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
-import type { BackfillUsCongressionalDistrictsInngestCronJobSchema } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
+import type { BackfillElectoralZonesInngestCronJobSchema } from '@/inngest/functions/backfillElectoralZoneCronJob'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
-import { BackfillIntlUsersSchema } from '@/inngest/functions/backfillIntlUsers'
-import { ProcessBatchSchema } from '@/inngest/functions/backfillIntlUsers/logic'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
@@ -44,7 +42,7 @@ type EventTypes =
   | CapitolCanaryCheckSmsOptInReplySchema
   | AirdropNftInngestSchema
   | BackfillCountryCodesEventSchema
-  | BackfillUsCongressionalDistrictsInngestCronJobSchema
+  | BackfillElectoralZonesInngestCronJobSchema
   | BackfillFailedNftInngestSchema
   | BackfillNftInngestSchema
   | BackfillNftInngestCronJobSchema
@@ -70,8 +68,6 @@ type EventTypes =
   | BackfillOptedOutUsersSchema
   | UpdateDistrictsRankingsCronJobSchema
   | BackfillUserCountryCodeEmptyInngestSchema
-  | BackfillIntlUsersSchema
-  | ProcessBatchSchema
   | BackfillMissingCommunicationsInngestEventSchema
   | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
   | SyncSendgridContactsCoordinatorSchema

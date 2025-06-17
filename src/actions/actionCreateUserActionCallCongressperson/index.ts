@@ -24,10 +24,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
-import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -128,25 +125,26 @@ async function _actionCreateUserActionCallCongressperson(
   }
 
   try {
-    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
-      validatedInput.data.address,
-    )
-    if ('notFoundReason' in usCongressionalDistrict) {
-      logCongressionalDistrictNotFound({
-        notFoundReason: usCongressionalDistrict.notFoundReason,
-        address: validatedInput.data.address.formattedDescription,
-        domain: 'actionCreateUserActionCallCongressperson',
+    const electoralZone = await maybeGetElectoralZoneFromAddress(validatedInput.data.address)
+    if ('notFoundReason' in electoralZone) {
+      Sentry.captureMessage('electoralZone not found', {
+        tags: {
+          domain: 'actionCreateUserActionCallCongressperson',
+        },
+        extra: {
+          notFoundReason: electoralZone.notFoundReason,
+          address: validatedInput.data.address.formattedDescription,
+        },
       })
-    }
-    if ('districtNumber' in usCongressionalDistrict) {
-      validatedInput.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    } else if (electoralZone.zoneName) {
+      validatedInput.data.address.electoralZone = electoralZone.zoneName
     }
   } catch (error) {
-    logger.error('error getting `usCongressionalDistrict`:' + error)
+    logger.error('error getting `electoralZone`:' + error)
     Sentry.captureException(error, {
       tags: {
         domain: 'actionCreateUserActionCallCongressperson',
-        message: 'error getting usCongressionalDistrict',
+        message: 'error getting electoralZone',
       },
     })
   }

@@ -37,6 +37,7 @@ export function mockCreateAddressInput() {
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
     usCongressionalDistrict: '12',
+    electoralZone: '12',
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
     ...partial,
@@ -64,6 +65,7 @@ export function mockCreateAddressInputWithDC() {
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
     usCongressionalDistrict: district,
+    electoralZone: district,
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
     ...partial,

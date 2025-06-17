@@ -8,6 +8,7 @@ export function mockCreateUserActionViewKeyRacesInput() {
     usCongressionalDistrict: fakerFields.usCongressionalDistrict(),
     stateCode: fakerFields.stateCode({ abbreviated: true }),
     constituency: fakerFields.usCongressionalDistrict(),
+    electoralZone: fakerFields.electoralZone(),
   } satisfies Prisma.UserActionViewKeyRacesCreateInput
 }
 

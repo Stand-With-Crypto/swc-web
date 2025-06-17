@@ -23,16 +23,20 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import {
-  formatGetDTSIPeopleFromUSAddressNotFoundReason,
-  getDTSIPeopleFromUSAddress,
-} from '@/hooks/useGetDTSIPeopleFromUSAddress'
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+  getDTSIPeopleFromAddress,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
   getUSPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
+  LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
 } from '@/utils/shared/yourPoliticianCategory/us'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -108,7 +112,7 @@ export function Address({
     if (!('dtsiPeople' in liveCongressPersonData)) {
       setError('address', {
         type: 'manual',
-        message: formatGetDTSIPeopleFromUSAddressNotFoundReason(liveCongressPersonData),
+        message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
       })
       return
     } else {
@@ -198,12 +202,20 @@ export function ChangeAddress(props: Omit<AddressProps, 'initialValues'>) {
   )
 }
 
+const filterLegislativeAndExecutive = (dtsiPeople: DTSIPeopleByElectoralZoneQueryResult) =>
+  dtsiPeople.filter(
+    person =>
+      person.primaryRole?.roleCategory &&
+      LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES.includes(person.primaryRole.roleCategory),
+  )
+
 export function useCongresspersonData({
   address,
 }: {
   address?: FindRepresentativeCallFormValues['address']
 }) {
   const { isLoaded } = useGoogleMapsScript()
+  const countryCode = useCountryCode()
 
   const result = useSWR(
     address && isLoaded ? `useCongresspersonData-${address.description}` : null,
@@ -212,10 +224,12 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromUSAddress(
-        CALL_FLOW_POLITICIANS_CATEGORY,
-        address.description,
-      )
+      const dtsiResponse = await getDTSIPeopleFromAddress({
+        address: address.description,
+        countryCode,
+        filterFn: filterLegislativeAndExecutive,
+      })
+
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
       }
