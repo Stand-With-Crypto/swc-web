@@ -186,20 +186,6 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     },
   })
 
-  analytics.trackUserActionCreated({
-    actionType,
-    campaignName,
-    'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
-    creationMethod: 'On Site',
-    userState,
-    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
-  })
-  peopleAnalytics.set({
-    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
-    $email: validatedFields.data.emailAddress,
-    $name: userFullName(validatedFields.data),
-  })
-
   const quorumPoliticians = await Promise.all(
     validatedFields.data.dtsiPeople.map(person =>
       getQuorumPoliticianByDTSIPerson({
@@ -232,8 +218,24 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
       return politician?.email
     })
     .filter(Boolean)
+
+  analytics.trackUserActionCreated({
+    actionType,
+    campaignName,
+    'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
+    creationMethod: 'On Site',
+    userState,
+    skippedEmail: quorumPoliticianEmails.length === 0,
+    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
+  })
+  peopleAnalytics.set({
+    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
+    $email: validatedFields.data.emailAddress,
+    $name: userFullName(validatedFields.data),
+  })
+
   if (quorumPoliticianEmails.length === 0) {
-    logger.warn('No representatives emails found, skipping email & analytics')
+    logger.warn('No representatives emails found, skipping email')
     return { user: getClientUser(user) }
   }
 
