@@ -1,12 +1,12 @@
 import { UserActionType } from '@prisma/client'
 import { notFound } from 'next/navigation'
 
-import { CAHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/ca'
+import { AUHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/au'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 3600 // 1 hour
@@ -14,8 +14,8 @@ export const dynamic = 'error'
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  return Object.values(CAUserActionEmailCampaignName).map(campaignName => {
-    if (campaignName === CAUserActionEmailCampaignName.DEFAULT) {
+  return Object.values(AUUserActionEmailCampaignName).map(campaignName => {
+    if (campaignName === AUUserActionEmailCampaignName.DEFAULT) {
       return {
         campaignName: 'default',
       }
@@ -27,7 +27,7 @@ export async function generateStaticParams() {
   })
 }
 
-const countryCode = SupportedCountryCodes.CA
+const countryCode = SupportedCountryCodes.AU
 
 export default async function UserActionEmailCongresspersonDeepLink(
   props: PageProps<{ campaignName: string }>,
@@ -40,7 +40,7 @@ export default async function UserActionEmailCongresspersonDeepLink(
   }
 
   return (
-    <CAHomepageDialogDeeplinkLayout>
+    <AUHomepageDialogDeeplinkLayout>
       <ErrorBoundary
         extras={{
           action: {
@@ -58,16 +58,16 @@ export default async function UserActionEmailCongresspersonDeepLink(
           countryCode={countryCode}
         />
       </ErrorBoundary>
-    </CAHomepageDialogDeeplinkLayout>
+    </AUHomepageDialogDeeplinkLayout>
   )
 }
 
 function deSlugifyCampaignName(slugifiedCampaignName: string) {
   if (slugifiedCampaignName === 'default') {
-    return CAUserActionEmailCampaignName.DEFAULT
+    return AUUserActionEmailCampaignName.DEFAULT
   }
 
-  return Object.values(CAUserActionEmailCampaignName).find(
+  return Object.values(AUUserActionEmailCampaignName).find(
     campaignName => slugify(campaignName) === slugifiedCampaignName,
   )
 }

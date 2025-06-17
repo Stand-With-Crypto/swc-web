@@ -27,6 +27,8 @@ export async function generateStaticParams() {
   })
 }
 
+const countryCode = SupportedCountryCodes.GB
+
 export default async function UserActionEmailCongresspersonDeepLink(
   props: PageProps<{ campaignName: string }>,
 ) {
@@ -53,7 +55,7 @@ export default async function UserActionEmailCongresspersonDeepLink(
       >
         <UserActionFormEmailCongresspersonDeeplinkWrapper
           campaignName={campaignName}
-          countryCode={SupportedCountryCodes.GB}
+          countryCode={countryCode}
         />
       </ErrorBoundary>
     </GBHomepageDialogDeeplinkLayout>

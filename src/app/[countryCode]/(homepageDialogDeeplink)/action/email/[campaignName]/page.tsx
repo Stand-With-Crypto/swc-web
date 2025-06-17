@@ -5,7 +5,7 @@ import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogD
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
@@ -26,6 +26,8 @@ export async function generateStaticParams() {
     }
   })
 }
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export default async function UserActionEmailCongresspersonDeepLink(
   props: PageProps<{ campaignName: string }>,
@@ -53,7 +55,7 @@ export default async function UserActionEmailCongresspersonDeepLink(
       >
         <UserActionFormEmailCongresspersonDeeplinkWrapper
           campaignName={campaignName}
-          countryCode={SupportedCountryCodes.US}
+          countryCode={countryCode}
         />
       </ErrorBoundary>
     </USHomepageDialogDeeplinkLayout>
