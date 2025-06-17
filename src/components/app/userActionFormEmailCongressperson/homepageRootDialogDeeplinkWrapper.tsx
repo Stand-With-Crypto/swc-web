@@ -1,6 +1,7 @@
 'use client'
 
 import { UserActionType } from '@prisma/client'
+import { notFound } from 'next/navigation'
 
 import { EmailActionCampaignNames } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
@@ -44,6 +45,10 @@ export function UserActionEmailCongresspersonRootPageDeeplinkWrapper() {
   })
 
   const pageCta = getUserActionCTAsByCountry(countryCode)[actionName]
+
+  if (!pageCta) {
+    return notFound()
+  }
 
   if (pageCta.campaigns.length === 1) {
     const campaign = pageCta.campaigns[0]
