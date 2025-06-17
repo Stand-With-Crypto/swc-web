@@ -1,8 +1,8 @@
 'use client'
 
 import { UserActionType } from '@prisma/client'
-import { notFound } from 'next/navigation'
 
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { EmailActionCampaignNames } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { UserActionGridCampaignsDialogContent } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
@@ -12,7 +12,7 @@ import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useCountryCode } from '@/hooks/useCountryCode'
 
-const actionName: UserActionType = 'EMAIL'
+const actionName: UserActionType = UserActionType.EMAIL
 
 function UserActionFormEmailCongresspersonHomepageRootDialogDeeplinkContent({
   cta,
@@ -44,10 +44,20 @@ export function UserActionEmailCongresspersonRootPageDeeplinkWrapper() {
     performedUserActionTypes,
   })
 
-  const pageCta = getUserActionCTAsByCountry(countryCode)[actionName]
+  const emailCta = getUserActionCTAsByCountry(countryCode)[actionName]
+  // TODO: remove this once we end the newmode campaigns
+  const newmodeCta = getUserActionCTAsByCountry(countryCode)[UserActionType.VIEW_KEY_PAGE]
 
-  if (!pageCta) {
-    return notFound()
+  const pageCta = {
+    ...emailCta,
+    ...newmodeCta,
+    campaigns: [...(emailCta?.campaigns ?? []), ...(newmodeCta?.campaigns ?? [])].filter(
+      ({ isCampaignActive }) => isCampaignActive,
+    ),
+  }
+
+  if (pageCta.campaigns.length === 0) {
+    return <UserActionFormActionUnavailable countryCode={countryCode} />
   }
 
   if (pageCta.campaigns.length === 1) {
