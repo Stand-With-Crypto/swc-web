@@ -14,6 +14,9 @@ import {
   USUserActionEmailCampaignName,
   USUserActionPollCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { AUUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { GBUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { CAUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 
 const parseQueryString = (queryString?: string) => {
   if (!queryString) return ''
@@ -111,6 +114,23 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     [campaign in UserActionCampaignNames]?: DeeplinkFunction
   }
 } = {
+  [UserActionType.VIEW_KEY_PAGE]: {
+    [AUUserActionViewKeyPageCampaignName.AU_NEWMODE_DEBANKING]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/debanking`
+    },
+    [AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/election`
+    },
+    [GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/debanking`
+    },
+    [CAUserActionViewKeyPageCampaignName.CA_NEWMODE_DEBANKING]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/debanking`
+    },
+    [CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/election`
+    },
+  },
   [UserActionType.EMAIL]: {
     [USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email-debate`
