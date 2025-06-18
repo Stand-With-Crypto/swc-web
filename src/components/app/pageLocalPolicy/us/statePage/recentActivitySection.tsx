@@ -1,4 +1,3 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/pageLocalPolicy/common/statePage/recentActivitySection'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
@@ -43,12 +42,7 @@ export async function UsRecentActivitySection({
           />
 
           {count > ITEMS_PER_PAGE && (
-            <RecentActivity.Button
-              href={urls.leaderboard({
-                stateCode,
-                tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-              })}
-            >
+            <RecentActivity.Button href={urls.recentActivity({ stateCode })}>
               {RECENT_ACTIVITY_BUTTON_LABEL}
             </RecentActivity.Button>
           )}
