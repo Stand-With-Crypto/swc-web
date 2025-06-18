@@ -52,6 +52,11 @@ const US_STATE_NUMBER_TO_STATE_CODE: Record<number, USStateCode> = {
   54: 'WV',
   55: 'WI',
   56: 'WY',
+  60: 'AS',
+  66: 'GU',
+  72: 'PR',
+  78: 'VI',
+  69: 'PW',
 }
 
 export function normalizeUSStateCode(stateCode: string) {
