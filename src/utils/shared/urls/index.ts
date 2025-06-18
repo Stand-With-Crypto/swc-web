@@ -119,6 +119,13 @@ export const getIntlUrls = (
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
+    recentActivity: (params: Partial<{ pageNumber: number; stateCode: string }> = {}) => {
+      const pageNumber = params.pageNumber || 1
+      const shouldSuppressPageNumber = pageNumber === 1
+      const suffix = shouldSuppressPageNumber ? '' : `/${pageNumber}`
+
+      return `/recent-activity${suffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
+    },
     leaderboard: (params?: {
       pageNum?: number
       stateCode?: string
