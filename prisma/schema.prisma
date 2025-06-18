@@ -41,6 +41,8 @@ model Address {
   countryCode              String   @map("country_code")
   // this field is optional because not all addresses will have a congressional district associated with them
   usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
+  // this field is going to replace the usCongressionalDistrict field
+  electoralZone            String?  @map("electoral_zone")
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
@@ -471,6 +473,7 @@ model UserActionViewKeyRaces {
   id                      String     @id @default(uuid())
   userAction              UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usCongressionalDistrict String?    @map("us_congressional_district")
+  electoralZone           String?    @map("electoral_zone")
   usaState                String?    @map("usa_state")
   stateCode               String?    @map("state_code")
   constituency            String?    @map("constituency")
