@@ -163,6 +163,7 @@ export const getIntlUrls = (
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
+    newmodeMomentumAheadHouseRisingAction: () => `${countryPrefix}/content/houserising`,
     contentClarity: () => `${countryPrefix}/content/clarity`,
     contentGenius: () => `${countryPrefix}/content/genius`,
     ...RACES_ROUTES,

@@ -34,7 +34,9 @@ export function UserActionViewKeyPageDialog(props: UserActionViewKeyPageDialogPr
         </UserActionFormDialog>
       }
     >
-      <Link href={url}>{children}</Link>
+      <Link className="w-full" href={url}>
+        {children}
+      </Link>
     </GeoGate>
   )
 }

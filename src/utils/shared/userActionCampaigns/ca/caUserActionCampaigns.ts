@@ -45,6 +45,7 @@ export enum CAUserActionRsvpEventCampaignName {
 export enum CAUserActionViewKeyPageCampaignName {
   CA_Q2_2025_ELECTION = 'CA_Q2_2025_ELECTION',
   CA_NEWMODE_DEBANKING = 'CA_NEWMODE_DEBANKING',
+  CA_MOMENTUM_AHEAD_HOUSE_RISING = 'CA_MOMENTUM_AHEAD_HOUSE_RISING',
 }
 
 export enum CAUserActionPollCampaignName {
@@ -91,7 +92,8 @@ export const CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.RSVP_EVENT]: CAUserActionRsvpEventCampaignName.DEFAULT,
   [UserActionType.VIEW_KEY_RACES]: CAUserActionViewKeyRacesCampaignName.H1_2025,
   [UserActionType.VOTER_ATTESTATION]: CAUserActionVoterAttestationCampaignName.H1_2025,
-  [UserActionType.VIEW_KEY_PAGE]: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
+  [UserActionType.VIEW_KEY_PAGE]:
+    CAUserActionViewKeyPageCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
   [UserActionType.POLL]: CAUserActionPollCampaignName.CRYPTO_NEWS,
   [UserActionType.EMAIL]: CAUserActionEmailCampaignName.DEFAULT,
 } satisfies Record<CAActiveClientUserActionWithCampaignType, string>
