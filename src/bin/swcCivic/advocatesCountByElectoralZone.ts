@@ -18,14 +18,14 @@ const LOCAL_CACHE_PATH = join(__dirname, '../localCache')
 
 interface Address {
   advocates: number
-  countryCode: string
+  countryCode: SupportedCountryCodes
   formattedDescription: string
   googlePlaceId: string | null
   id: string
 }
 
-export function getStateCode(countryCode: string, stateCodeOrName: string) {
-  if (countryCode === 'us') {
+export function getStateCode(countryCode: SupportedCountryCodes, stateCodeOrName: string) {
+  if (countryCode === SupportedCountryCodes.US) {
     if (stateCodeOrName.toUpperCase() in US_STATE_CODE_TO_DISPLAY_NAME_MAP) {
       return stateCodeOrName
     }
@@ -40,7 +40,11 @@ export function getStateCode(countryCode: string, stateCodeOrName: string) {
   return stateCodeOrName
 }
 
-export function getElectoralZoneFullName(countryCode: string, zoneName: string, stateCode: string) {
+export function getElectoralZoneFullName(
+  countryCode: SupportedCountryCodes,
+  zoneName: string,
+  stateCode: string,
+) {
   if (countryCode === SupportedCountryCodes.US) {
     return stateCode === UNKNOWN || zoneName === UNKNOWN
       ? UNKNOWN
@@ -140,7 +144,7 @@ async function getOtherAddressesByElectoralZone() {
       prismaClient.$queryRaw<
         {
           advocates: bigint
-          countryCode: string
+          countryCode: Exclude<SupportedCountryCodes, 'us'>
           formattedDescription: string
           googlePlaceId: string | null
           id: string
@@ -192,10 +196,15 @@ async function getAdvocatesCountByElectoralZone() {
   const usElectoralZones = Object.fromEntries(
     usAddressesByElectoralZone
       .map(address => {
-        const stateCode = getStateCode('us', address.administrativeAreaLevel1) || UNKNOWN
+        const stateCode =
+          getStateCode(SupportedCountryCodes.US, address.administrativeAreaLevel1) || UNKNOWN
 
         return [
-          getElectoralZoneFullName('us', address.usCongressionalDistrict!, stateCode),
+          getElectoralZoneFullName(
+            SupportedCountryCodes.US,
+            address.usCongressionalDistrict!,
+            stateCode,
+          ),
           Number(address.advocates),
         ] as const
       })
@@ -222,7 +231,7 @@ async function getAdvocatesCountByElectoralZone() {
     const { stateCode, zoneName } = electoralZone
 
     return {
-      countryCode: address.countryCode.toLowerCase(),
+      countryCode: address.countryCode,
       state: stateCode ? getStateCode(address.countryCode, stateCode) : UNKNOWN,
       zone: zoneName || UNKNOWN,
       advocates: address.advocates,
@@ -235,7 +244,11 @@ async function getAdvocatesCountByElectoralZone() {
         countryCode,
         mapValues(
           groupBy(electoralZones, electoralZone =>
-            getElectoralZoneFullName(countryCode, electoralZone.zone, electoralZone.state),
+            getElectoralZoneFullName(
+              countryCode as SupportedCountryCodes,
+              electoralZone.zone,
+              electoralZone.state,
+            ),
           ),
           electoralZone => sumBy(electoralZone, 'advocates'),
         ),
