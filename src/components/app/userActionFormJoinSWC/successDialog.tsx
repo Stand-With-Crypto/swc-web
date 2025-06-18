@@ -35,7 +35,7 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
   return (
     <SWCSuccessDialogContext.Provider
       value={{
-        shouldCloseSuccessScreenDialog: () => dialogProps?.onOpenChange?.(false),
+        closeSuccessScreenDialogAfterNavigating: () => dialogProps?.onOpenChange?.(false),
       }}
     >
       <Dialog {...dialogProps}>

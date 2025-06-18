@@ -11,7 +11,7 @@ import {
 } from '@/utils/shared/urlsDeeplinkUserActions'
 
 export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
-  const { shouldCloseSuccessScreenDialog } = useSuccessScreenDialogContext()
+  const { closeSuccessScreenDialogAfterNavigating } = useSuccessScreenDialogContext()
 
   const countryCode = useCountryCode()
 
@@ -19,7 +19,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
     const LinkComponent = props.link
     return (
       <LinkComponent>
-        <SuccessScreenActionCard {...props} onClick={shouldCloseSuccessScreenDialog} />
+        <SuccessScreenActionCard {...props} onClick={closeSuccessScreenDialogAfterNavigating} />
       </LinkComponent>
     )
   }
@@ -37,7 +37,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
 
     return (
       <Link href={url}>
-        <SuccessScreenActionCard {...props} onClick={shouldCloseSuccessScreenDialog} />
+        <SuccessScreenActionCard {...props} onClick={closeSuccessScreenDialogAfterNavigating} />
       </Link>
     )
   }
@@ -46,7 +46,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
     <UserActionGridCampaignsDialog
       {...props}
       description={props.campaignsModalDescription}
-      onClickAction={shouldCloseSuccessScreenDialog}
+      onClickAction={closeSuccessScreenDialogAfterNavigating}
       performedUserActions={props.performedUserActions}
       shouldOpenDeeplink={true}
     >
