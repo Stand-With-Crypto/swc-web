@@ -11,7 +11,7 @@ export const electoralZonesDataConfigs = [
     countryCode: SupportedCountryCodes.GB,
     dataFilePath: 'data/uk_parliamentary_constituencies.geojson',
     electoralZoneNameField: 'PCON24NM',
-    persist: false,
+    persist: true,
   },
   {
     countryCode: SupportedCountryCodes.US,
@@ -27,13 +27,13 @@ export const electoralZonesDataConfigs = [
     dataFilePath: 'data/FED_CA_2023_EN.kmz',
     electoralZoneNameField: 'Name',
     normalizeElectoralZoneName: normalizeCADistrictName,
-    persist: false,
+    persist: true,
   },
   {
     countryCode: SupportedCountryCodes.AU,
     dataFilePath: 'data/au/AUS_ELB_region.shp',
     electoralZoneNameField: 'Elect_div',
     normalizeElectoralZoneName: normalizeAUDistrictName,
-    persist: false,
+    persist: true,
   },
 ]
