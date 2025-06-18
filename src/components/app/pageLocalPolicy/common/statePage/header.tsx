@@ -15,7 +15,7 @@ export function Header({ children }: React.PropsWithChildren) {
 }
 
 function HeaderShield({ countryCode, stateCode }: HeaderShieldProps) {
-  return <StateShield countryCode={countryCode} size={150} state={stateCode} />
+  return <StateShield countryCode={countryCode} size={150} state={stateCode.toUpperCase()} />
 }
 Header.Shield = HeaderShield
 
