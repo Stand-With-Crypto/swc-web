@@ -4,10 +4,10 @@ import xlsx from 'xlsx'
 import { runBin } from '@/bin/runBin'
 import { readGISData } from '@/bin/swcCivic/utils/readGISData'
 import { queryDTSIDistrictsByCountryCode } from '@/data/dtsi/queries/queryDTSIDistrictsByCountryCode'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { electoralZonesDataConfigs } from './electoralZoneDataConfigs'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 
 async function compareGISDataWithDTSI() {
   const localCacheDir = path.join(__dirname, '..', 'localCache')

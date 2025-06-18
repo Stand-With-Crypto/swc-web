@@ -123,7 +123,7 @@ async function updateExistingElectoralZones(
   console.log(`Found ${electoralZonesToUpdate.length} electoral zones to update`)
 
   await chunkAndRun(electoralZonesToUpdate, 100, async electoralZoneKeyToUpdate => {
-    const { zoneName, zoneCoordinates, stateCode, countryCode } =
+    const { zoneCoordinates, stateCode } =
       normalizedElectoralZonesOnGISDataMap[electoralZoneKeyToUpdate]
 
     const currentElectoralZone = currentElectoralZonesOnDatabaseMap[electoralZoneKeyToUpdate]
