@@ -2,12 +2,11 @@ import path from 'path'
 import xlsx from 'xlsx'
 
 import { runBin } from '@/bin/runBin'
+import { electoralZonesDataConfigs } from '@/bin/swcCivic/electoralZoneDataConfigs'
 import { readGISData } from '@/bin/swcCivic/utils/readGISData'
 import { queryDTSIDistrictsByCountryCode } from '@/data/dtsi/queries/queryDTSIDistrictsByCountryCode'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-import { electoralZonesDataConfigs } from './electoralZoneDataConfigs'
 
 async function compareGISDataWithDTSI() {
   const localCacheDir = path.join(__dirname, '..', 'localCache')
@@ -75,38 +74,32 @@ async function compareGISDataWithDTSI() {
         })
         .filter(Boolean),
     )
-    // For DTSI results, we use the primaryDistricts array
-    const dtsiSet = new Set(dtsiDistricts.sort((a, b) => a.localeCompare(b)) || [])
 
-    // Find common elements
+    const dtsiSet = new Set(dtsiDistricts)
+
     const commonElements = [...electoralZoneSet].filter(name => name && dtsiSet.has(name))
 
-    // Find elements only in electoral zones
     const onlyInElectoralZones = [...electoralZoneSet].filter(name => name && !dtsiSet.has(name))
 
-    // Find elements only in dtsiResults
     const onlyInDTSI = [...dtsiSet].filter(name => !electoralZoneSet.has(name))
 
     console.log(`Common elements: ${commonElements.length}`)
     console.log(`Only in GIS Data: ${onlyInElectoralZones.length}`)
     console.log(`Only in DTSI: ${onlyInDTSI.length}`)
 
-    // Create worksheet data
     const maxLength = Math.max(onlyInElectoralZones.length, onlyInDTSI.length)
     const worksheetData = [
-      ['Only in GIS Data', 'Only in DTSI'], // Header row
+      ['Only in GIS Data', 'Only in DTSI'],
       ...Array.from({ length: maxLength }, (_, i) => [
-        onlyInElectoralZones[i] || '', // Empty string if no more items
+        onlyInElectoralZones[i] || '',
         onlyInDTSI[i] || '',
       ]),
     ]
 
-    // Create worksheet
     const worksheet = xlsx.utils.aoa_to_sheet(worksheetData)
 
     const worksheetName = countryCode.toUpperCase()
 
-    // Add worksheet to workbook
     xlsx.utils.book_append_sheet(workbook, worksheet, worksheetName)
 
     if (onlyInDTSI.length > 0) {
@@ -120,7 +113,6 @@ async function compareGISDataWithDTSI() {
     }
   }
 
-  // Write workbook to file
   const outputPath = path.join(localCacheDir, 'district-comparison.xlsx')
   xlsx.writeFile(workbook, outputPath)
   console.log(`\nResults written to: ${outputPath}`)
