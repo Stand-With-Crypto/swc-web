@@ -35,69 +35,55 @@ export const backfillAddressElectoralZoneCoordinator = inngest.createFunction(
     if (!persist) {
       logger.info('DRY RUN MODE: No changes will be written to the database.')
     }
-    const addressCount = await step.run('get-address-count', async () => {
-      return prismaClient.address.count({
+
+    const addressCount = await step.run('get-address-count', () =>
+      prismaClient.address.count({
         where: {
           electoralZone: null,
         },
-      })
-    })
-    logger.info(`Found ${addressCount} addresses to backfill.`)
+      }),
+    )
 
-    const addressCursors: string[] = []
-    let lastCursor: string | undefined
-
-    const totalBatches = Math.ceil(addressCount / BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE)
-    logger.info(`Splitting into ${totalBatches} batches.`)
-
-    for (
-      let i = 0;
-      i < addressCount * BATCH_BUFFER;
-      i += BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE
-    ) {
-      const row = await step.run(`get-address-cursor-${i}`, async () => {
-        return prismaClient.address.findFirst({
-          select: { id: true },
-          orderBy: { id: 'asc' },
-          where: {
-            electoralZone: null,
-            ...(lastCursor && { id: { gt: lastCursor } }),
-          },
-        })
-      })
-      if (row) {
-        addressCursors.push(row.id)
-        const lastRowInBatch = await prismaClient.address.findFirst({
-          select: { id: true },
-          orderBy: { id: 'asc' },
-          where: {
-            electoralZone: null,
-            id: { gte: row.id },
-          },
-          skip: BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE - 1,
-        })
-        lastCursor = lastRowInBatch?.id || row.id
-      } else {
-        break
+    if (addressCount === 0) {
+      logger.info('No addresses to backfill.')
+      return {
+        message: 'No addresses to backfill.',
       }
     }
 
+    const totalBatches = Math.ceil(addressCount / BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE)
     logger.info(
-      `${!persist ? '[DRY RUN] ' : ''}Fan out to ${addressCursors.length} processor jobs.`,
+      `Found ${addressCount} addresses to backfill, splitting into ${totalBatches} batches.`,
     )
-    for (const cursor of addressCursors) {
-      await step.invoke(`send-batch-of-addresses-${cursor}`, {
-        function: backfillAddressElectoralZoneProcessor,
-        data: {
-          addressCursor: cursor,
-          persist,
-        },
+
+    const invokeEvents = []
+    for (let i = 0; i < totalBatches * BATCH_BUFFER; i++) {
+      invokeEvents.push(
+        step.invoke(`invoke-processor-batch-${i}`, {
+          function: backfillAddressElectoralZoneProcessor,
+          data: {
+            skip: i * BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE,
+            take: BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE,
+            persist,
+          },
+        }),
+      )
+    }
+
+    const results = await Promise.allSettled(invokeEvents)
+
+    const failedInvocations = results.filter(r => r.status === 'rejected')
+    if (failedInvocations.length > 0) {
+      logger.error(`Failed to invoke ${failedInvocations.length} processor jobs.`, {
+        errors: failedInvocations.map(f => f.reason),
       })
     }
 
     return {
       dryRun: !persist,
-      message: `Successfully enqueued ${addressCursors.length} batches.`,
+      message: `Finished processing ${totalBatches} batches.`,
+      successfulBatches: totalBatches - failedInvocations.length,
+      failedBatches: failedInvocations.length,
     }
   },
 )
