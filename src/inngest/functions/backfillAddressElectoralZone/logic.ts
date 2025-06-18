@@ -1,20 +1,14 @@
-import { NonRetriableError } from 'inngest'
-import { chunk } from 'lodash-es'
+import { chunk, isNull } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import {
-  BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE,
-  CONCURRENCY_LIMIT,
-  MINI_BATCH_SIZE,
-  SLEEP_DURATION,
-  SUB_BATCH_SIZE,
-} from './config'
+import { CONCURRENCY_LIMIT, MINI_BATCH_SIZE, SLEEP_DURATION } from './config'
+import { Prisma } from '@prisma/client'
+import pRetry from 'p-retry'
 
 const PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_FUNCTION_ID =
   'script.backfill-address-electoral-zone-processor'
@@ -24,7 +18,8 @@ const PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_EVENT_NAME =
 export interface ProcessAddressElectoralZoneProcessorEventSchema {
   name: typeof PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_EVENT_NAME
   data: {
-    addressCursor: string
+    skip: number
+    take: number
     persist?: boolean
   }
 }
@@ -37,143 +32,167 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
   },
   { event: PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { addressCursor, persist } = event.data
-    if (!addressCursor) {
-      throw new NonRetriableError('missing address cursor in event data')
-    }
+    const { skip, take, persist } = event.data
 
     if (!persist) {
       logger.info(
-        `DRY RUN MODE for batch with cursor ${addressCursor}. No changes will be written to the database.`,
+        `DRY RUN MODE for batch with skip: ${skip}, take: ${take}. No changes will be written to the database.`,
       )
     }
 
-    const numMiniBatches = Math.ceil(BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE / MINI_BATCH_SIZE)
-    let totalProcessed = 0
-    let totalFailed = 0
+    const addresses = await step.run('get-addresses', () =>
+      prismaClient.address.findMany({
+        where: { electoralZone: null },
+        skip,
+        take,
+        orderBy: { id: 'asc' },
+        select: {
+          id: true,
+          usCongressionalDistrict: true,
+          countryCode: true,
+          googlePlaceId: true,
+          formattedDescription: true,
+        },
+      }),
+    )
 
-    for (let i = 0; i < numMiniBatches; i++) {
-      const addresses = await step.run(`get-addresses-batch-${i}`, () =>
-        prismaClient.address.findMany({
-          where: { electoralZone: null },
-          cursor: { id: addressCursor },
-          skip: i * MINI_BATCH_SIZE,
-          take: MINI_BATCH_SIZE,
-          orderBy: { id: 'asc' },
-        }),
+    if (addresses.length === 0) {
+      logger.info('No Addresses to process')
+      return {
+        totalProcessed: 0,
+        totalFailed: 0,
+      }
+    }
+
+    const addressChunks = chunk(addresses, MINI_BATCH_SIZE)
+    let chunkIndex = 0
+    let totalSuccess = 0
+    let totalFailed = 0
+    for (const addressChunk of addressChunks) {
+      const electoralZoneResults = await step.run(
+        `get-electoral-zones-for-batch-${chunkIndex}`,
+        async () =>
+          await Promise.allSettled(
+            addressChunk.map(address =>
+              pRetry(async () => await getElectoralZone(address), {
+                shouldRetry(error) {
+                  return (
+                    !error.message.includes('No place ID found for address') &&
+                    !error.message.includes('404')
+                  )
+                },
+              }),
+            ),
+          ),
       )
 
-      if (addresses.length === 0) {
-        logger.info(`No addresses found to process for batch ${i}.`)
-        break
+      const updatesToPerform = electoralZoneResults
+        .map((result, index) => {
+          if (result.status === 'fulfilled' && !isNull(result.value)) {
+            return result.value
+          }
+          logger.error('Electoral zone not found for address', addressChunk[index])
+          totalFailed++
+          return null
+        })
+        .filter(Boolean)
+
+      if (!updatesToPerform.length) {
+        logger.info(`No updates to perform for batch ${chunkIndex}`)
+        continue
       }
 
-      /**
-       * Further chunk the mini-batches into smaller batches to prevent overwhelming the database.
-       */
-      const addressChunks = chunk(addresses, SUB_BATCH_SIZE)
-      let chunkIndex = 0
-      for (const addressChunk of addressChunks) {
-        const electoralZoneResults = await step.run(
-          `get-electoral-zones-for-batch-${i}-${chunkIndex}`,
-          async () => {
-            const promises = addressChunk.map(async address => {
-              if (
-                address.usCongressionalDistrict &&
-                address.countryCode === SupportedCountryCodes.US
-              ) {
-                return { addressId: address.id, electoralZone: address.usCongressionalDistrict }
-              }
-
-              if (address.googlePlaceId || address.formattedDescription) {
-                const location = await getLatLongFromAddressOrPlaceId({
-                  address: address.formattedDescription,
-                  placeId: address.googlePlaceId || undefined,
-                })
-                const swcCivicElectoralZone = await querySWCCivicElectoralZoneFromLatLong(
-                  location.latitude,
-                  location.longitude,
-                )
-                if (swcCivicElectoralZone) {
-                  return {
-                    addressId: address.id,
-                    electoralZone: swcCivicElectoralZone.zoneName,
-                  }
-                }
-              }
-
-              return null
-            })
-            return Promise.allSettled(promises)
-          },
-        )
-
-        const updatesToPerform: { addressId: string; electoralZone: string }[] = []
-        electoralZoneResults.forEach((result, index) => {
-          if (result.status === 'fulfilled' && result.value) {
-            updatesToPerform.push(result.value)
-          } else if (result.status === 'rejected') {
-            logger.error(`error fetching electoral zone for address ${addressChunk[index].id}`, {
-              error: result.reason,
-            })
-            totalFailed++
-          }
-        })
-
-        if (persist) {
-          if (!updatesToPerform.length) {
-            logger.info(`No updates to perform for batch ${i}-${chunkIndex}`)
-            continue
-          }
-          try {
-            await step.run(`update-db-for-batch-${i}-${chunkIndex}`, async () => {
-              await prismaClient.$transaction(async prisma => {
-                const updatePromises = updatesToPerform.map(({ addressId, electoralZone }) =>
-                  prisma.address.update({
-                    where: { id: addressId },
-                    data: { electoralZone },
-                  }),
-                )
-                const results = await Promise.allSettled(updatePromises)
-                results.forEach(result => {
-                  if (result.status === 'fulfilled') {
-                    totalProcessed++
-                  } else {
-                    logger.error('Failed to update address in database transaction', {
-                      error: result.reason,
-                    })
-                    totalFailed++
-                  }
-                })
-              })
-            })
-          } catch (error) {
-            logger.error('Database transaction failed entirely', { error })
-            totalFailed += updatesToPerform.length
-          }
-        } else {
-          updatesToPerform.forEach(({ addressId, electoralZone }) => {
-            logger.info(
-              `[DRY RUN] Would update address ${addressId} with electoralZone: ${electoralZone}`,
-            )
-          })
-          totalProcessed += updatesToPerform.length
+      const chunkUpdateResults = await step.run(`update-db-for-batch-${chunkIndex}`, async () => {
+        if (!persist) {
+          logger.info(
+            `[DRY RUN] Would update ${updatesToPerform.length} addresses in batch ${chunkIndex}.`,
+          )
+          return updatesToPerform
         }
 
-        logger.info(
-          `${!persist ? '[DRY RUN] ' : ''}Processed ${updatesToPerform.length}/${addressChunk.length} addresses in sub-batch.`,
+        return await prismaClient.$transaction(
+          async prisma => {
+            const updatePromises = updatesToPerform.map(update =>
+              prisma.address.update({
+                where: { id: update.addressId },
+                data: { electoralZone: update.electoralZone },
+                select: { id: true, electoralZone: true },
+              }),
+            )
+            const results = await Promise.allSettled(updatePromises)
+            return results.map((result, index) => {
+              if (result.status === 'fulfilled') {
+                return result.value
+              }
+              logger.error(
+                `Failed to update address ${updatesToPerform[index].addressId}`,
+                result.reason,
+              )
+              return null
+            })
+          },
+          {
+            timeout: 20000,
+          },
         )
-        chunkIndex++
-        await step.sleep(`sleep-after-sub-batch-${i}-${chunkIndex}`, SLEEP_DURATION)
-      }
+      })
+
+      const successfulUpdatesInChunk = chunkUpdateResults.filter(Boolean).length
+      const failedUpdatesInChunk = updatesToPerform.length - successfulUpdatesInChunk
+      totalSuccess += successfulUpdatesInChunk
+      totalFailed += failedUpdatesInChunk
+
+      logger.info(
+        `${!persist ? '[DRY RUN] ' : ''}Processed ${
+          successfulUpdatesInChunk
+        }/${updatesToPerform.length} addresses in batch ${chunkIndex}.`,
+      )
+      await step.sleep(`sleep-after-batch-${chunkIndex}`, SLEEP_DURATION)
+      chunkIndex++
     }
 
     logger.info(
-      `${!persist ? '[DRY RUN] ' : ''}Finished processing batch from cursor ${addressCursor}. Total processed: ${totalProcessed}. Total failed: ${totalFailed}.`,
+      `${!persist ? '[DRY RUN] ' : ''}Finished processing batch with skip: ${skip}.
+			Total addresses successfully updated: ${totalSuccess}.
+			Total addresses failed to update: ${totalFailed}.
+			Total addresses processed: ${addresses.length}.`,
     )
     return {
-      totalProcessed,
+      totalSuccess,
       totalFailed,
     }
   },
 )
+
+async function getElectoralZone(
+  address: Prisma.AddressGetPayload<{
+    select: {
+      id: true
+      usCongressionalDistrict: true
+      countryCode: true
+      googlePlaceId: true
+      formattedDescription: true
+    }
+  }>,
+) {
+  if (address.usCongressionalDistrict) {
+    return { addressId: address.id, electoralZone: address.usCongressionalDistrict }
+  }
+  if (address.googlePlaceId || address.formattedDescription) {
+    const location = await getLatLongFromAddressOrPlaceId({
+      address: address.formattedDescription,
+      placeId: address.googlePlaceId || undefined,
+    })
+    const swcCivicElectoralZone = await querySWCCivicElectoralZoneFromLatLong(
+      location.latitude,
+      location.longitude,
+    )
+    if (swcCivicElectoralZone) {
+      return {
+        addressId: address.id,
+        electoralZone: swcCivicElectoralZone.zoneName,
+      }
+    }
+  }
+  return null
+}
