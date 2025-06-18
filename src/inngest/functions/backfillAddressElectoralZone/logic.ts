@@ -114,6 +114,7 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
                 logger.info(
                   `[DRY RUN] Would update address ${address.id} with electoralZone: ${electoralZone}`,
                 )
+                totalProcessed++
                 return { addressId: address.id, electoralZone }
               }
             })
