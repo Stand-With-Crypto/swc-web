@@ -57,7 +57,6 @@ const US_TERRITORY_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   VI: 'Virgin Islands',
   AS: 'American Samoa',
   DC: 'District Of Columbia',
-  PW: 'Palau',
 }
 
 export const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
