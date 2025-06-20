@@ -3,6 +3,7 @@ import { noop } from 'lodash-es'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { EmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/common/sections/email'
+import { EmailActionCampaignNames } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/common/useEmailActionCampaignMetadata'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -15,30 +16,13 @@ import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
-import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
-import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { getYourPoliticianCategoryDisplayName } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 
-type UserActionFormEmailCongresspersonSkeletonProps =
-  | {
-      countryCode: SupportedCountryCodes.US
-      campaignName: USUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.AU
-      campaignName: AUUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.CA
-      campaignName: CAUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.GB
-      campaignName: GBUserActionEmailCampaignName
-    }
+interface UserActionFormEmailCongresspersonSkeletonProps {
+  countryCode: SupportedCountryCodes
+  campaignName: EmailActionCampaignNames
+}
 
 export function UserActionFormEmailCongresspersonSkeleton(
   props: UserActionFormEmailCongresspersonSkeletonProps,

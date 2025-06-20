@@ -8,35 +8,21 @@ import { UserActionFormActionUnavailable } from '@/components/app/userActionForm
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/common/skeleton'
-import { FormFields } from '@/components/app/userActionFormEmailCongressperson/common/types'
+import {
+  EmailActionCampaignNames,
+  FormFields,
+} from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
-import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
-import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-type UserActionFormEmailCongresspersonDeeplinkWrapperProps =
-  | {
-      countryCode: SupportedCountryCodes.US
-      campaignName: USUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.CA
-      campaignName: CAUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.GB
-      campaignName: GBUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.AU
-      campaignName: AUUserActionEmailCampaignName
-    }
+interface UserActionFormEmailCongresspersonDeeplinkWrapperProps {
+  countryCode: SupportedCountryCodes
+  campaignName: EmailActionCampaignNames
+}
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent(
   props: UserActionFormEmailCongresspersonDeeplinkWrapperProps,

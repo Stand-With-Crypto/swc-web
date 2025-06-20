@@ -5,7 +5,8 @@ import { USHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogD
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { deSlugifyCampaignName } from '@/utils/shared/userActionCampaigns/deSlugifyCampaignName'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
@@ -27,11 +28,13 @@ export async function generateStaticParams() {
   })
 }
 
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
 export default async function UserActionEmailCongresspersonDeepLink(
   props: PageProps<{ campaignName: string }>,
 ) {
   const params = await props.params
-  const campaignName = deSlugifyCampaignName(params.campaignName)
+  const campaignName = deSlugifyCampaignName(params.campaignName, USUserActionEmailCampaignName)
 
   if (!campaignName) {
     notFound()
@@ -53,19 +56,9 @@ export default async function UserActionEmailCongresspersonDeepLink(
       >
         <UserActionFormEmailCongresspersonDeeplinkWrapper
           campaignName={campaignName}
-          countryCode={SupportedCountryCodes.US}
+          countryCode={countryCode}
         />
       </ErrorBoundary>
     </USHomepageDialogDeeplinkLayout>
-  )
-}
-
-function deSlugifyCampaignName(slugifiedCampaignName: string) {
-  if (slugifiedCampaignName === 'default') {
-    return USUserActionEmailCampaignName.DEFAULT
-  }
-
-  return Object.values(USUserActionEmailCampaignName).find(
-    campaignName => slugify(campaignName) === slugifiedCampaignName,
   )
 }
