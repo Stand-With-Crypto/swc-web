@@ -28,7 +28,7 @@ export function DelayedRecentActivityWithMap({
   countryCode: SupportedCountryCodes
   advocatesMapPageData?: Awaited<ReturnType<typeof getAdvocatesMapData>>
 }) {
-  const recentActivity = useApiRecentActivity(actions, {
+  const { data: recentActivity } = useApiRecentActivity(actions, {
     limit: 30,
     countryCode,
   })
@@ -40,7 +40,12 @@ export function DelayedRecentActivityWithMap({
 
   return isMobile || !advocatesMapPageData ? (
     <TabsContent ref={ref} value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-      <RecentActivity.List actions={visibleActions} />
+      <RecentActivity.List
+        actions={{
+          data: visibleActions,
+          count: recentActivity.count,
+        }}
+      />
       <RecentActivity.Footer>
         <Button asChild>
           <InternalLink href={urls.donate()}>Donate</InternalLink>
@@ -65,7 +70,7 @@ export function DelayedRecentActivityWithMap({
       }}
     >
       <AdvocatesHeatmap
-        actions={recentActivity.data}
+        actions={recentActivity}
         advocatesMapPageData={advocatesMapPageData}
         countUsers={countUsers}
         countryCode={countryCode}

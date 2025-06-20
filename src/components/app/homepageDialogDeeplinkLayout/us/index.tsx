@@ -44,7 +44,7 @@ export async function USHomepageDialogDeeplinkLayout({
       </PseudoDialog>
 
       <UsPageHome
-        actions={[]}
+        actions={{ count: 0, data: [] }}
         dtsiHomepagePeople={{ lowestScores: [], highestScores: [] }}
         leaderboardData={leaderboardData.items}
         params={pageParams}
