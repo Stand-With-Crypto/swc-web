@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
@@ -56,7 +57,13 @@ export function PageSignupDeeplink() {
     }
   }, [session.isLoggedIn, session.hasOptInUserAction, handleRedirectOnLogin])
 
-  if (session.isLoading || session.isLoggedIn) return null
+  if (session.isLoading || session.isLoggedIn) {
+    return (
+      <div className="h-[400px] w-full">
+        <LoadingOverlay />
+      </div>
+    )
+  }
 
   return (
     <div
