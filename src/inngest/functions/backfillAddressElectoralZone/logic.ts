@@ -5,8 +5,6 @@ import pRetry from 'p-retry'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
-import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 
 import { CONCURRENCY_LIMIT, MINI_BATCH_SIZE } from './config'
 
@@ -176,22 +174,6 @@ async function getElectoralZone(
 ) {
   if (address.usCongressionalDistrict) {
     return { addressId: address.id, electoralZone: address.usCongressionalDistrict }
-  }
-  if (address.googlePlaceId || address.formattedDescription) {
-    const location = await getLatLongFromAddressOrPlaceId({
-      address: address.formattedDescription,
-      placeId: address.googlePlaceId || undefined,
-    })
-    const swcCivicElectoralZone = await querySWCCivicElectoralZoneFromLatLong(
-      location.latitude,
-      location.longitude,
-    )
-    if (swcCivicElectoralZone) {
-      return {
-        addressId: address.id,
-        electoralZone: swcCivicElectoralZone.zoneName,
-      }
-    }
   }
   return null
 }
