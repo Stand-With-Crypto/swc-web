@@ -52,8 +52,8 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email Your Policymaker',
-    description: 'Support Crucial Crypto Legislation',
+    title: 'Email your House Rep',
+    description: 'Support Market Structure Regulation (CLARITY Act)',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -73,7 +73,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your Senator',
         description: 'Support Stablecoin Regulation (GENIUS Act)',
         canBeTriggeredMultipleTimes: true,

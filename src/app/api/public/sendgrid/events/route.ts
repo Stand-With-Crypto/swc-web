@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { Prisma } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -18,7 +19,7 @@ import {
   verifySignature,
 } from '@/utils/server/email'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getServerAnalytics, ServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { getLogger, logger } from '@/utils/shared/logger'
@@ -53,7 +54,19 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
   const log = getLogger(`Sendgrid Event Webhook - ${messageId}`)
 
   for await (const eventEntry of events) {
-    const { analytics, user } = await getServerAnalyticsFromEvent(eventEntry)
+    let analytics: ServerAnalytics | null = null
+    let user: Prisma.UserGetPayload<{ include: { address: true } }> | null = null
+    try {
+      const serverAnalytics = await getServerAnalyticsFromEvent(eventEntry)
+      analytics = serverAnalytics.analytics
+      user = serverAnalytics.user
+    } catch (error) {
+      if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {
+        continue
+      }
+      throw error
+    }
+
     log.info(`tracking event: ${eventEntry.event}`)
     analytics.track(`Email Communication Event`, {
       'Event Name': EVENT_NAME_TO_HUMAN_READABLE_STRING[eventEntry.event] ?? eventEntry.event,

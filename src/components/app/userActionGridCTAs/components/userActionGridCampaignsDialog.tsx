@@ -215,7 +215,7 @@ function CampaignCard({
         <p className="text-left text-muted-foreground">{description}</p>
       </div>
       <div className="relative h-8 w-8">
-        <CheckIcon completed={isCompleted} index={0} />
+        <CheckIcon completed={isCompleted} />
       </div>
     </button>
   )

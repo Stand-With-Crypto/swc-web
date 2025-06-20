@@ -436,6 +436,12 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/ca/s/house-rising',
+        destination:
+          '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
+        permanent: true,
+      },
+      {
         source: '/s/founders-push/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',

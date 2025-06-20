@@ -13,6 +13,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import { render } from '@react-email/components'
+import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
@@ -105,20 +106,6 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
   }
   logger.info('validated fields')
 
-  const quorumPoliticians = await Promise.all(
-    validatedFields.data.dtsiPeople.map(person =>
-      getQuorumPoliticianByDTSIPerson({
-        person,
-        countryCode,
-      }),
-    ),
-  )
-
-  if (!quorumPoliticians.every(politician => politician?.email)) {
-    logger.error('Quorum politicians not found')
-    throw new Error('Quorum politicians not found')
-  }
-
   const localUser = await parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
@@ -128,6 +115,7 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     onUpsertUser: triggerRateLimiterAtMostOnce,
     countryCode,
   })
+
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
@@ -197,12 +185,47 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
       userActionEmail: true,
     },
   })
+
+  const quorumPoliticians = await Promise.all(
+    validatedFields.data.dtsiPeople.map(person =>
+      getQuorumPoliticianByDTSIPerson({
+        person,
+        countryCode,
+      }),
+    ),
+  )
+  const quorumPoliticianEmails = quorumPoliticians
+    .map(politician => {
+      if (politician && !politician?.email) {
+        logger.warn(
+          `Missing email address for representative ${politician.firstName} ${politician.lastName}`,
+        )
+        Sentry.captureMessage(
+          `Missing email address for representative ${politician.firstName} ${politician.lastName}`,
+          {
+            extra: {
+              politician,
+              countryCode,
+              dtsiSlugs: validatedFields.data.dtsiSlugs,
+            },
+            tags: {
+              domain: `quorum`,
+            },
+            level: 'warning',
+          },
+        )
+      }
+      return politician?.email
+    })
+    .filter(Boolean)
+
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
     'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
     creationMethod: 'On Site',
     userState,
+    skippedEmail: quorumPoliticianEmails.length === 0,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
   peopleAnalytics.set({
@@ -211,12 +234,9 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
-  const quorumPoliticianEmails = quorumPoliticians
-    .map(politician => politician?.email)
-    .filter(Boolean)
   if (quorumPoliticianEmails.length === 0) {
-    logger.error('Quorum politicians emails not found')
-    throw new Error('Quorum politicians emails not found')
+    logger.warn('No representatives emails found, skipping email')
+    return { user: getClientUser(user) }
   }
 
   const html = await render(<EmailToRepresentative body={validatedFields.data.contactMessage} />)
