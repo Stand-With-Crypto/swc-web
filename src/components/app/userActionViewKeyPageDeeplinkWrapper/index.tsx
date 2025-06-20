@@ -9,16 +9,16 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export type dynamic = 'error'
 
-export type CampaignMetadataMap<K extends Uppercase<string>> = Partial<Record<K, CampaignMetadata>>
+export type CampaignMetadataMap<K extends string> = Partial<Record<K, CampaignMetadata>>
 
-interface UserActionViewKeyPageDeeplinkWrapperProps<K extends Uppercase<string>> {
+interface UserActionViewKeyPageDeeplinkWrapperProps<K extends string> {
   campaignMetadataMap: CampaignMetadataMap<K>
   countryCode: SupportedCountryCodes
   minWaitTimeInSeconds?: number
   searchParams: SearchParams | undefined
 }
 
-export async function UserActionViewKeyPageDeeplinkWrapper<K extends Uppercase<string>>({
+export async function UserActionViewKeyPageDeeplinkWrapper<K extends string>({
   campaignMetadataMap,
   countryCode,
   minWaitTimeInSeconds,

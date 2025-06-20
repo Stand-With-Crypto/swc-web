@@ -9,8 +9,8 @@ import { GBUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCa
 
 const countryCode = SupportedCountryCodes.GB
 
-const campaignMetadataMap: CampaignMetadataMap<keyof typeof GBUserActionViewKeyPageCampaignName> = {
-  NEWMODE_EMAIL_ACTION: {
+const campaignMetadataMap: CampaignMetadataMap<GBUserActionViewKeyPageCampaignName> = {
+  [GBUserActionViewKeyPageCampaignName.STABLE_COINS_PETITION_JUN_2025]: {
     url: 'https://www.google.com/',
   },
 }
