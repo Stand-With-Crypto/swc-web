@@ -83,6 +83,12 @@ export function PageUserProfile({
     countryCode,
   })
 
+  const onEditProfileSuccess = () => {
+    if (session.user?.primaryUserCryptoAddress?.wasRecentlyUpdated) {
+      successDialogProps.onOpenChange(true)
+    }
+  }
+
   return (
     <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
       {successDialogProps.open ? (
@@ -118,7 +124,7 @@ export function PageUserProfile({
 
           {!isMobile && (
             <div className="flex items-center gap-4">
-              <EditProfileButton user={user} />
+              <EditProfileButton onSuccess={onEditProfileSuccess} user={user} />
             </div>
           )}
         </div>
@@ -185,14 +191,7 @@ export function PageUserProfile({
       </section>
       {isMobile && (
         <div className="flex items-center gap-4">
-          <EditProfileButton
-            onSuccess={() => {
-              if (session.user?.primaryUserCryptoAddress?.wasRecentlyUpdated) {
-                successDialogProps.onOpenChange(true)
-              }
-            }}
-            user={user}
-          />
+          <EditProfileButton onSuccess={onEditProfileSuccess} user={user} />
         </div>
       )}
       <section>
