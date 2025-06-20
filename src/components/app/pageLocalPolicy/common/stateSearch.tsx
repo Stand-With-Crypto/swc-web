@@ -17,7 +17,7 @@ interface StateSearchProps {
   setSearchResult: React.Dispatch<React.SetStateAction<SearchResult>>
 }
 
-function PlacesSelect(
+export function PlacesSelect(
   props: Required<Pick<GooglePlacesSelectProps, 'loading' | 'onChange' | 'value'>>,
 ) {
   return (
