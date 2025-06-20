@@ -8,7 +8,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 
-import { CONCURRENCY_LIMIT, MINI_BATCH_SIZE, SLEEP_DURATION } from './config'
+import { CONCURRENCY_LIMIT, MINI_BATCH_SIZE } from './config'
 
 const PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_FUNCTION_ID =
   'script.backfill-address-electoral-zone-processor'
@@ -108,37 +108,36 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
           logger.info(
             `[DRY RUN] Would update ${updatesToPerform.length} addresses in batch ${chunkIndex}.`,
           )
-          return updatesToPerform
+          return { affectedRows: updatesToPerform.length }
         }
 
-        return await prismaClient.$transaction(
-          async prisma => {
-            const updatePromises = updatesToPerform.map(update =>
-              prisma.address.update({
-                where: { id: update.addressId },
-                data: { electoralZone: update.electoralZone },
-                select: { id: true, electoralZone: true },
-              }),
-            )
-            const results = await Promise.allSettled(updatePromises)
-            return results.map((result, index) => {
-              if (result.status === 'fulfilled') {
-                return result.value
-              }
-              logger.error(
-                `Failed to update address ${updatesToPerform[index].addressId}`,
-                result.reason,
-              )
-              return null
-            })
-          },
-          {
-            timeout: 20000,
-          },
+        if (updatesToPerform.length === 0) {
+          return { affectedRows: 0 }
+        }
+
+        const caseClauses = Prisma.join(
+          updatesToPerform.map(
+            update => Prisma.sql`WHEN ${update.addressId} THEN ${update.electoralZone}`,
+          ),
+          ' ',
         )
+        const idsToUpdate = Prisma.join(updatesToPerform.map(update => update.addressId))
+
+        try {
+          const affectedRows = await prismaClient.$executeRaw`
+            UPDATE address
+            SET electoral_zone = CASE id ${caseClauses} END
+            WHERE id IN (${idsToUpdate})
+          `
+          logger.info(`UPDATED Updated ${affectedRows} addresses in batch ${chunkIndex}`)
+          return { affectedRows }
+        } catch (error) {
+          logger.error(`Raw SQL update failed for batch ${chunkIndex}`, { error })
+          return { affectedRows: 0 }
+        }
       })
 
-      const successfulUpdatesInChunk = chunkUpdateResults.filter(Boolean).length
+      const successfulUpdatesInChunk = chunkUpdateResults.affectedRows
       const failedUpdatesInChunk = updatesToPerform.length - successfulUpdatesInChunk
       totalSuccess += successfulUpdatesInChunk
       totalFailed += failedUpdatesInChunk
@@ -148,7 +147,6 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
           successfulUpdatesInChunk
         }/${updatesToPerform.length} addresses in batch ${chunkIndex}.`,
       )
-      await step.sleep(`sleep-after-batch-${chunkIndex}`, SLEEP_DURATION)
       chunkIndex++
     }
 
