@@ -81,6 +81,9 @@ export function viewKeyPageRecentActivityRow({
         </InternalLink>
       ),
     },
+    [GBUserActionViewKeyPageCampaignName.STABLE_COINS_PETITION_JUN_2025]: {
+      children: <RecentActivityRowMainText>Someone viewed a key page</RecentActivityRowMainText>,
+    },
   }
 
   return (
