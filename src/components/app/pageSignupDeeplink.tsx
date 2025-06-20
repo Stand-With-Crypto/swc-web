@@ -5,14 +5,17 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSession } from '@/hooks/useSession'
 import { getCallbackDestination } from '@/utils/server/searchParams'
 import { cn } from '@/utils/web/cn'
+import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
 export function PageSignupDeeplink() {
   usePreventOverscroll()
+  const { mutate } = useApiResponseForUserFullProfileInfo()
 
   const urls = useIntlUrls()
   const router = useRouter()
@@ -21,12 +24,14 @@ export function PageSignupDeeplink() {
 
   const queryString = searchParams?.toString()
 
-  const { destination } = getCallbackDestination({
-    queryString,
-    defaultDestination: 'profile',
-  })
+  const handleRedirectOnLogin = React.useCallback(async () => {
+    const { user } = (await mutate()) ?? {}
 
-  const handleRedirectOnLogin = React.useCallback(() => {
+    const { destination } = getCallbackDestination({
+      queryString,
+      defaultDestination: user && !hasCompleteUserProfile(user) ? 'updateProfile' : 'profile',
+    })
+
     // if the destination returned is not actually a valid destination,
     // we should gracefully fail, redirecting the user to the profile page
     try {
@@ -43,11 +48,11 @@ export function PageSignupDeeplink() {
       })
       return router.replace(urls.profile())
     }
-  }, [destination, router, urls, queryString])
+  }, [mutate, queryString, router, urls])
 
   React.useEffect(() => {
     if (session.isLoggedIn && session.hasOptInUserAction) {
-      handleRedirectOnLogin()
+      void handleRedirectOnLogin()
     }
   }, [session.isLoggedIn, session.hasOptInUserAction, handleRedirectOnLogin])
 

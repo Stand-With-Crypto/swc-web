@@ -2,8 +2,10 @@
 
 import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
+import dynamic from 'next/dynamic'
 
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
+import { ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC } from '@/components/app/authentication/constants'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
@@ -14,10 +16,12 @@ import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useDialog } from '@/hooks/useDialog'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSession } from '@/hooks/useSession'
@@ -26,6 +30,16 @@ import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
+
+const UserActionFormJoinSWCSuccessDialog = dynamic(
+  () =>
+    import('@/components/app/userActionFormJoinSWC/successDialog').then(
+      module => module.UserActionFormJoinSWCSuccessDialog,
+    ),
+  {
+    loading: () => <LoadingOverlay />,
+  },
+)
 
 export interface PageUserProfileProps {
   user: PageUserProfileUser
@@ -40,6 +54,11 @@ export function PageUserProfile({
 }: PageUserProfileProps) {
   const isMobile = useIsMobile({
     defaultState: true,
+  })
+  const session = useSession()
+
+  const successDialogProps = useDialog({
+    analytics: ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
   })
 
   const { data } = useApiResponseForUserFullProfileInfo()
@@ -66,6 +85,10 @@ export function PageUserProfile({
 
   return (
     <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
+      {successDialogProps.open ? (
+        <UserActionFormJoinSWCSuccessDialog {...successDialogProps} />
+      ) : null}
+
       {/* LATER-TASK enable this feature */}
       {/* {!!user.mergeAlerts.length && (
         <div className="mb-6 space-y-2">
@@ -74,7 +97,6 @@ export function PageUserProfile({
           ))}
         </div>
       )} */}
-
       <section>
         <div className="mb-6 flex items-center justify-between md:mx-4">
           <div className="flex items-center gap-2">
@@ -161,13 +183,18 @@ export function PageUserProfile({
           </div>
         )}
       </section>
-
       {isMobile && (
         <div className="flex items-center gap-4">
-          <EditProfileButton user={user} />
+          <EditProfileButton
+            onSuccess={() => {
+              if (session.user?.primaryUserCryptoAddress?.wasRecentlyUpdated) {
+                successDialogProps.onOpenChange(true)
+              }
+            }}
+            user={user}
+          />
         </div>
       )}
-
       <section>
         <PageTitle className="mb-4" size="md">
           Your advocacy progress
@@ -182,7 +209,6 @@ export function PageUserProfile({
 
         <UserActionGridCTAs />
       </section>
-
       <section>
         <a className="mt-[-72px] h-0 pt-[72px]" id="nfts" />
         <PageTitle className="mb-4" size="md">
@@ -195,7 +221,6 @@ export function PageUserProfile({
           <NFTDisplay userActions={userActions} />
         </div>
       </section>
-
       <section>
         <Refer>
           <PageTitle size="md">Invite a friend to join Stand With Crypto</PageTitle>
@@ -218,7 +243,13 @@ function filterUserActionsByCountry(
   )
 }
 
-function EditProfileButton({ user }: { user: PageUserProfileUser }) {
+function EditProfileButton({
+  user,
+  onSuccess,
+}: {
+  user: PageUserProfileUser
+  onSuccess?: () => void
+}) {
   const session = useSession()
   const hasHydrated = useHasHydrated()
 
@@ -227,7 +258,7 @@ function EditProfileButton({ user }: { user: PageUserProfileUser }) {
   }
 
   return (
-    <UpdateUserProfileFormDialog user={user}>
+    <UpdateUserProfileFormDialog onSuccess={onSuccess} user={user}>
       {hasCompleteUserProfile(user) ? (
         <Button className="w-full lg:w-auto" variant="secondary">
           Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
