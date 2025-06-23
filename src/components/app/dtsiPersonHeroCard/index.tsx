@@ -174,8 +174,8 @@ export function DTSIPersonHeroCard(props: DTSIPersonHeroCardProps) {
                 <div className="mt-2">
                   <div
                     className={cn(
-                      'inline-block truncate rounded-full bg-muted/20 px-2 py-2 text-sm text-white',
-                      !forceMobile && 'lg:px-3 xl:px-5',
+                      'inline-block truncate rounded-full bg-muted/20 px-2 py-2 text-xs text-white',
+                      !forceMobile && 'lg:px-1 xl:px-5',
                     )}
                   >
                     {subheaderString}

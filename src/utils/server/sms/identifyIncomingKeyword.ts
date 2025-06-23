@@ -1,5 +1,5 @@
 const optOutKeywords = ['STOPALL', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT', 'STOP']
-const helpKeywords = ['HELP']
+const helpKeywords = ['HELP', 'INFO', 'AIDE']
 const unstopKeywords = ['YES', 'START', 'CONTINUE', 'UNSTOP']
 
 export function identifyIncomingKeyword(keyword: string | undefined) {

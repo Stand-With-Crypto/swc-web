@@ -7,10 +7,6 @@ import {
   SendgridField,
 } from '@/utils/server/sendgrid/marketing/constants'
 import { SendgridContact } from '@/utils/server/sendgrid/marketing/contacts'
-import {
-  fetchSendgridCustomFields,
-  mapSendgridFieldToFieldIds,
-} from '@/utils/server/sendgrid/marketing/customFields'
 import { isSendgridError } from '@/utils/server/sendgrid/marketing/utils'
 import { SendgridClient } from '@/utils/server/sendgrid/sendgridClient'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -25,23 +21,32 @@ interface SendgridImportResponse {
 
 interface Options {
   listIds: string[]
+  customFieldsMap: Record<SendgridField, string | null>
 }
 
-async function getCSVHeaders() {
-  const sendgridFieldDefinitions = await fetchSendgridCustomFields()
-  const fieldIds = mapSendgridFieldToFieldIds(sendgridFieldDefinitions)
-  if (!fieldIds.email) {
-    throw new Error('Required email field not found in SendGrid')
+async function getCSVHeaders(customFieldsMap: Record<SendgridField, string | null>) {
+  if (!customFieldsMap.email) {
+    throw new Error('Required email field ID not found in SendGrid')
   }
 
   const allFieldNames: SendgridField[] = [...SENDGRID_RESERVED_FIELDS, ...SENDGRID_CUSTOM_FIELDS]
   const csvSheetHeaders: string[] = []
   const sendgridApiMappings: string[] = []
   allFieldNames.forEach(fieldName => {
-    const fieldId = fieldIds[fieldName]
+    const fieldId = customFieldsMap[fieldName]
     if (fieldId) {
       csvSheetHeaders.push(fieldName)
       sendgridApiMappings.push(fieldId)
+    } else {
+      Sentry.captureMessage(`Custom field ${fieldName} not found in SendGrid definitions`, {
+        tags: {
+          domain: 'SendgridMarketing',
+        },
+        extra: {
+          fieldName,
+          customFieldsMap,
+        },
+      })
     }
   })
 
@@ -77,9 +82,11 @@ function formatContactsForCSV(contacts: SendgridContact[]) {
   return flattenedContactsData
 }
 
-export async function uploadSendgridContactsCSV(contacts: SendgridContact[], options?: Options) {
+export async function uploadSendgridContactsCSV(contacts: SendgridContact[], options: Options) {
+  const { listIds, customFieldsMap } = options
+
   try {
-    const { csvSheetHeaders, sendgridApiMappings } = await getCSVHeaders()
+    const { csvSheetHeaders, sendgridApiMappings } = await getCSVHeaders(customFieldsMap)
     const formattedContacts = formatContactsForCSV(contacts)
     const worksheet = XLSX.utils.json_to_sheet(formattedContacts, {
       header: csvSheetHeaders,
@@ -88,7 +95,7 @@ export async function uploadSendgridContactsCSV(contacts: SendgridContact[], opt
 
     const { upload_uri, upload_headers, job_id } = await getUploadUrl(
       sendgridApiMappings,
-      options?.listIds || [],
+      listIds || [],
     )
     const uploadResponse = await fetchReq(upload_uri, {
       method: 'PUT',
