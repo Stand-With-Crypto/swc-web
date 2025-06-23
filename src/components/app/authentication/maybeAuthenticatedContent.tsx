@@ -2,6 +2,10 @@
 
 import { useSession } from '@/hooks/useSession'
 
+/**
+ * Always provide either a loadingFallback or children (unauthenticated content)
+ * to avoid hydration issues when the session is loading
+ */
 export function MaybeAuthenticatedContent({
   children,
   authenticatedContent,
