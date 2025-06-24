@@ -41,6 +41,7 @@ export async function getPageDetails(
       tags: {
         domain: 'builder.io',
         model: pageModelName,
+        countryCode,
       },
     })
     return {
