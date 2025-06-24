@@ -1,9 +1,9 @@
 import { Layout } from '@/components/app/pageLocalPolicy/common/statePage/layout'
 import { LocalPolicyStatePageProps } from '@/components/app/pageLocalPolicy/common/statePage/types'
+import { UsDistrictLeaderboardSection } from '@/components/app/pageLocalPolicy/us/statePage/districtLeaderboardSection'
 import { UsHeader } from '@/components/app/pageLocalPolicy/us/statePage/header'
 import { UsPoliticiansSection } from '@/components/app/pageLocalPolicy/us/statePage/politiciansSection'
 import { UsRecentActivitySection } from '@/components/app/pageLocalPolicy/us/statePage/recentActivitySection'
-import { UsReferralLeaderboardSection } from '@/components/app/pageLocalPolicy/us/statePage/referralLeaderboardSection'
 import { UsStateListSection } from '@/components/app/pageLocalPolicy/us/statePage/stateListSection'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
@@ -36,7 +36,7 @@ export async function UsLocalPolicyStatePage({
 
       <UsRecentActivitySection stateCode={stateCode} stateName={stateName} />
 
-      <UsReferralLeaderboardSection stateCode={stateCode} stateName={stateName} />
+      <UsDistrictLeaderboardSection stateCode={stateCode} stateName={stateName} />
 
       <UsStateListSection stateCode={stateCode.toUpperCase()} />
     </Layout>

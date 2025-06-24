@@ -5,30 +5,30 @@ import { InternalLink } from '@/components/ui/link'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-interface ReferralLeaderboardContentProps extends React.PropsWithChildren {
+interface DistrictLeaderboardContentProps extends React.PropsWithChildren {
   countryCode: SupportedCountryCodes
   data: DistrictRankingEntryWithRank[]
 }
 
-interface ReferralLeaderboardButtonProps extends React.PropsWithChildren {
+interface DistrictLeaderboardButtonProps extends React.PropsWithChildren {
   href: string
 }
 
-export function ReferralLeaderboard({ children }: React.PropsWithChildren) {
+export function DistrictLeaderboard({ children }: React.PropsWithChildren) {
   return <div className="space-y-8">{children}</div>
 }
 
-function ReferralLeaderboardContent({ countryCode, data }: ReferralLeaderboardContentProps) {
+function DistrictLeaderboardContent({ countryCode, data }: DistrictLeaderboardContentProps) {
   return (
     <>
-      <YourDistrictRank />
+      <YourDistrictRank filteredByState />
       <DistrictsLeaderboard countryCode={countryCode} data={data} />
     </>
   )
 }
-ReferralLeaderboard.Content = ReferralLeaderboardContent
+DistrictLeaderboard.Content = DistrictLeaderboardContent
 
-function ReferralLeaderboardButton({ children, href }: ReferralLeaderboardButtonProps) {
+function DistrictLeaderboardButton({ children, href }: DistrictLeaderboardButtonProps) {
   return (
     <div className="container space-x-4 text-center">
       <Button asChild variant="secondary">
@@ -37,4 +37,4 @@ function ReferralLeaderboardButton({ children, href }: ReferralLeaderboardButton
     </div>
   )
 }
-ReferralLeaderboard.Button = ReferralLeaderboardButton
+DistrictLeaderboard.Button = DistrictLeaderboardButton

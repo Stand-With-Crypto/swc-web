@@ -34,12 +34,17 @@ export function PageReferrals(props: PageReferralsProps) {
   return (
     <div className="standard-spacing-from-navbar container space-y-8">
       <PageReferralsHeading stateName={stateCode ? stateNameResolver(stateCode) : undefined} />
-      <UserReferralUrlWithApi />
-      <ReferralsCounter>
-        <UserReferralsCount />
-        <UserDistrictRank />
-      </ReferralsCounter>
-      <YourDistrictRank />
+      {!stateCode && (
+        <>
+          <UserReferralUrlWithApi />
+          <ReferralsCounter>
+            <UserReferralsCount />
+            <UserDistrictRank />
+          </ReferralsCounter>
+        </>
+      )}
+
+      <YourDistrictRank filteredByState={!!stateCode} />
       <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
       <div className="flex justify-center">
         <PaginationLinks

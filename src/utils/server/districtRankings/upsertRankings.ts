@@ -207,14 +207,12 @@ export async function getDistrictsLeaderboardData(
 }
 
 export async function getDistrictsLeaderboardDataByState(
-  options: {
-    limit?: number
-    offset?: number
-    stateCode?: string
-  } = {},
+  stateCode: string,
+  pagination?: {
+    limit: number
+    offset: number
+  },
 ): Promise<LeaderboardPaginationData> {
-  const { limit = 5, offset = 0, stateCode } = options
-
   const rawResults = await redisWithCache.zrange(CURRENT_DISTRICT_RANKING, 0, -1, {
     rev: true,
     withScores: true,
@@ -227,13 +225,28 @@ export async function getDistrictsLeaderboardDataByState(
     count: score,
   }))
 
-  const filteredItems = items.filter(item => item.state === stateCode)
+  const filteredItems = items
+    .filter(item => item.state === stateCode)
+    .map((item, index) => ({ ...item, rank: index + 1 }))
 
   return {
-    items: filteredItems
-      .slice(offset, offset + limit)
-      .map((item, index) => ({ ...item, rank: offset + index + 1 })),
+    items: pagination
+      ? filteredItems.slice(pagination.offset, pagination.offset + pagination.limit)
+      : filteredItems,
     total: filteredItems.length,
+  }
+}
+
+export async function getDistrictRankByState(member: RedisEntryData) {
+  const { items } = await getDistrictsLeaderboardDataByState(member.state)
+
+  const result = items.find(
+    item => item.state === member.state && item.district === member.district,
+  )
+
+  return {
+    rank: result?.rank ?? null,
+    score: result?.count ?? null,
   }
 }
 
