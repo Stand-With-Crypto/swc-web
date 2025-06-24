@@ -58,7 +58,7 @@ Builder.registerComponent(
     }
 
     return (
-      <MaybeAuthenticatedContent authenticatedContent={AuthenticatedBlock}>
+      <MaybeAuthenticatedContent authenticatedContent={AuthenticatedBlock} loadingFallback={<></>}>
         {UnauthenticatedBlock}
       </MaybeAuthenticatedContent>
     )
