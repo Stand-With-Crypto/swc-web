@@ -65,10 +65,7 @@ export default async function ReferralsPage(props: Props) {
   }
 
   const { items: leaderboardData, total } = state
-    ? await getDistrictsLeaderboardDataByState({
-        ...commonParams,
-        stateCode: state.toUpperCase(),
-      })
+    ? await getDistrictsLeaderboardDataByState(state.toUpperCase(), commonParams)
     : await getDistrictsLeaderboardData(commonParams)
 
   const totalPages = state ? Math.ceil(total / itemsPerPage) : undefined
