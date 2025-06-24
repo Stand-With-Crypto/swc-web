@@ -16,6 +16,7 @@ const shouldSuppress = toBool(process.env.NEXT_PUBLIC_SUPPRESS_SENTRY_ERRORS_ON_
 const GOOGLE_PLACES_API_ERRORS_TO_GROUP = [
   '429 from GET https://places.googleapis.com',
   '400 from GET https://places.googleapis.com',
+  '403 from GET https://places.googleapis.com',
   '404 from GET https://places.googleapis.com',
   '500 from GET https://places.googleapis.com',
 ]
