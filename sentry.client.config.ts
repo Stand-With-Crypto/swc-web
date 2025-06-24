@@ -117,6 +117,9 @@ Sentry.init({
     'ResizeObserver loop limit exceeded',
     'ResizeObserver loop completed with undelivered notifications',
     /As of March 1st, 2025, google\.maps\.places.*/i,
+    // Network errors are being ignored here because of this investigation: https://github.com/Stand-With-Crypto/swc-web/issues/2408
+    'network error',
+    /^TypeError: network error$/,
   ],
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry
