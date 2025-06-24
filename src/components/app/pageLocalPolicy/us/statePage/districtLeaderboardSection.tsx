@@ -4,9 +4,6 @@ import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRanki
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-const SECTION_TITLE = 'District leaderboard'
-const SECTION_BUTTON_LABEL = 'View all'
-
 const ITEMS_PER_PAGE = 5
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
@@ -33,7 +30,7 @@ export async function UsDistrictLeaderboardSection({
   return (
     total > 1 && (
       <Section>
-        <Section.Title>{SECTION_TITLE}</Section.Title>
+        <Section.Title>District leaderboard</Section.Title>
         <Section.SubTitle>
           See which districts in {stateName} have the most advocates
         </Section.SubTitle>
@@ -47,7 +44,7 @@ export async function UsDistrictLeaderboardSection({
                 stateCode,
               })}
             >
-              {SECTION_BUTTON_LABEL}
+              View all
             </DistrictLeaderboard.Button>
           )}
         </DistrictLeaderboard>
