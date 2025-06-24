@@ -37,7 +37,8 @@ const parseCongressionalDistrictString = (districtString: string) => {
   // ocd-division/country:us/state:ny/cd:5
   const slashParts = districtString.split('/')
   const [cdStr, districtNumString] = slashParts[slashParts.length - 1].split(':')
-  const districtNum = parseInt(districtNumString, 10)
+  const districtNum =
+    districtNumString.toLowerCase() === 'at-large' ? 1 : parseInt(districtNumString, 10)
   if (cdStr !== 'cd' || !isInteger(districtNum)) {
     Sentry.captureMessage('unexpected district string structure', {
       tags: { domain: 'getCongressionalDistrictFromAddress' },
