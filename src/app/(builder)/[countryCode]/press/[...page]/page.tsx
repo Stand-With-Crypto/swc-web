@@ -50,7 +50,6 @@ export async function generateStaticParams() {
   const countryPagePathsPromises = ORDERED_SUPPORTED_COUNTRIES.map(countryCode =>
     getPagePaths({
       pageModelName: PAGE_MODEL,
-      limit: 10,
       countryCode,
     }),
   )

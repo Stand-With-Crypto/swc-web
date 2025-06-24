@@ -4,14 +4,12 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface GetPagePathsInput {
   pageModelName: BuilderPageModelIdentifiers
-  limit?: number
   countryCode?: SupportedCountryCodes
 }
 
 /** Retrieves a list of all existing routes under a specific page model  */
 export async function getPagePaths({
   pageModelName,
-  limit,
   countryCode,
 }: GetPagePathsInput): Promise<string[]> {
   return builderSDKClient
@@ -24,7 +22,6 @@ export async function getPagePaths({
       options: {
         noTargeting: true,
       },
-      limit,
       sort: {
         createdDate: -1,
       },
