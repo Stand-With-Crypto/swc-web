@@ -4,9 +4,8 @@ import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builde
 import { PageProps } from '@/types'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
-import { getPagePaths } from '@/utils/server/builder/models/page/utils/getPagePaths'
+import { generateBuilderPageStaticParams } from '@/utils/server/builder/models/page/utils/generateBuilderPageStatisParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 export const dynamicParams = true
@@ -46,21 +45,4 @@ export async function generateMetadata(props: PressReleasePageProps): Promise<Me
   })
 }
 
-export async function generateStaticParams() {
-  const countryPagePathsPromises = ORDERED_SUPPORTED_COUNTRIES.map(countryCode =>
-    getPagePaths({
-      pageModelName: PAGE_MODEL,
-      countryCode,
-    }),
-  )
-
-  const countryPagePaths = await Promise.all(countryPagePathsPromises)
-
-  return countryPagePaths.flat().map(path => {
-    return {
-      params: {
-        page: path?.replace(PAGE_PREFIX, '').split('/'),
-      },
-    }
-  })
-}
+export const generateStaticParams = generateBuilderPageStaticParams(PAGE_MODEL, PAGE_PREFIX)
