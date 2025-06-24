@@ -309,16 +309,6 @@ const nextConfig: NextConfig = {
         destination: '/gb/:path*',
         permanent: false,
       },
-      {
-        source: '/gb/politicians',
-        destination: '/gb',
-        permanent: false,
-      },
-      {
-        source: '/gb/politicians/person/:slug',
-        destination: '/gb',
-        permanent: false,
-      },
       // vanity urls
       {
         source: '/join/:referralId',
