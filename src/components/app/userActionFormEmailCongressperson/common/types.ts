@@ -15,25 +15,11 @@ export interface UserActionFormEmailCongresspersonPropsBase {
   initialValues?: FormFields
 }
 
-export type UserActionFormEmailCongresspersonProps = UserActionFormEmailCongresspersonPropsBase &
-  (
-    | {
-        countryCode: SupportedCountryCodes.US
-        campaignName: USUserActionEmailCampaignName
-      }
-    | {
-        countryCode: SupportedCountryCodes.CA
-        campaignName: CAUserActionEmailCampaignName
-      }
-    | {
-        countryCode: SupportedCountryCodes.GB
-        campaignName: GBUserActionEmailCampaignName
-      }
-    | {
-        countryCode: SupportedCountryCodes.AU
-        campaignName: AUUserActionEmailCampaignName
-      }
-  )
+export interface UserActionFormEmailCongresspersonProps
+  extends UserActionFormEmailCongresspersonPropsBase {
+  countryCode: SupportedCountryCodes
+  campaignName: EmailActionCampaignNames
+}
 
 export interface FormFields {
   address: {
@@ -47,3 +33,9 @@ export interface FormFields {
 
 export type EmailActionFormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
+
+export type EmailActionCampaignNames =
+  | USUserActionEmailCampaignName
+  | CAUserActionEmailCampaignName
+  | GBUserActionEmailCampaignName
+  | AUUserActionEmailCampaignName

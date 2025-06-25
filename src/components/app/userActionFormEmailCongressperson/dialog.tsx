@@ -5,14 +5,13 @@ import { lazy, Suspense, useCallback } from 'react'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/common/constants'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/common/skeleton'
-import { FormFields } from '@/components/app/userActionFormEmailCongressperson/common/types'
+import {
+  EmailActionCampaignNames,
+  FormFields,
+} from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
-import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
-import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const LazyUserActionFormEmailCongressperson = lazy(() =>
   import('@/components/app/userActionFormEmailCongressperson').then(m => ({
@@ -23,24 +22,9 @@ const LazyUserActionFormEmailCongressperson = lazy(() =>
 export type UserActionFormEmailCongresspersonDialogProps = React.PropsWithChildren & {
   defaultOpen?: boolean
   initialValues?: FormFields
-} & (
-    | {
-        countryCode: SupportedCountryCodes.US
-        campaignName: USUserActionEmailCampaignName
-      }
-    | {
-        countryCode: SupportedCountryCodes.CA
-        campaignName: CAUserActionEmailCampaignName
-      }
-    | {
-        countryCode: SupportedCountryCodes.GB
-        campaignName: GBUserActionEmailCampaignName
-      }
-    | {
-        countryCode: SupportedCountryCodes.AU
-        campaignName: AUUserActionEmailCampaignName
-      }
-  )
+  countryCode: SupportedCountryCodes
+  campaignName: EmailActionCampaignNames
+}
 
 export function UserActionFormEmailCongresspersonDialog({
   children,

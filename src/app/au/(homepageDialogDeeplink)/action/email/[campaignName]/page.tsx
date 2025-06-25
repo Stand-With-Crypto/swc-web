@@ -1,13 +1,13 @@
 import { UserActionType } from '@prisma/client'
 import { notFound } from 'next/navigation'
 
-import { GBHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/gb'
+import { AUHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/au'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { deSlugifyCampaignName } from '@/utils/shared/userActionCampaigns/deSlugifyCampaignName'
-import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export const revalidate = 3600 // 1 hour
@@ -15,8 +15,8 @@ export const dynamic = 'error'
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  return Object.values(GBUserActionEmailCampaignName).map(campaignName => {
-    if (campaignName === GBUserActionEmailCampaignName.DEFAULT) {
+  return Object.values(AUUserActionEmailCampaignName).map(campaignName => {
+    if (campaignName === AUUserActionEmailCampaignName.DEFAULT) {
       return {
         campaignName: 'default',
       }
@@ -28,20 +28,20 @@ export async function generateStaticParams() {
   })
 }
 
-const countryCode = SupportedCountryCodes.GB
+const countryCode = SupportedCountryCodes.AU
 
 export default async function UserActionEmailCongresspersonDeepLink(
   props: PageProps<{ campaignName: string }>,
 ) {
   const params = await props.params
-  const campaignName = deSlugifyCampaignName(params.campaignName, GBUserActionEmailCampaignName)
+  const campaignName = deSlugifyCampaignName(params.campaignName, AUUserActionEmailCampaignName)
 
   if (!campaignName) {
     notFound()
   }
 
   return (
-    <GBHomepageDialogDeeplinkLayout>
+    <AUHomepageDialogDeeplinkLayout>
       <ErrorBoundary
         extras={{
           action: {
@@ -59,6 +59,6 @@ export default async function UserActionEmailCongresspersonDeepLink(
           countryCode={countryCode}
         />
       </ErrorBoundary>
-    </GBHomepageDialogDeeplinkLayout>
+    </AUHomepageDialogDeeplinkLayout>
   )
 }
