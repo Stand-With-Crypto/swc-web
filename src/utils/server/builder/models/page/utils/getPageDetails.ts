@@ -31,6 +31,20 @@ export async function getPageDetails(
       fields: 'data',
     })
     .toPromise()
+    .catch(error => {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'builder.io',
+          model: pageModelName,
+          countryCode,
+        },
+        extra: {
+          pathname,
+        },
+        level: 'error',
+      })
+      throw error
+    })
 
   if (!content?.data) {
     Sentry.captureMessage(`Page content not found for model ${pageModelName}`, {
@@ -41,6 +55,7 @@ export async function getPageDetails(
       tags: {
         domain: 'builder.io',
         model: pageModelName,
+        countryCode,
       },
     })
     return {
