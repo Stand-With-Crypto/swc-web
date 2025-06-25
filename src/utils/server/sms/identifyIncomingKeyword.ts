@@ -11,7 +11,7 @@ export function identifyIncomingKeyword(keyword: string | undefined) {
     ?.toUpperCase()
     .trim()
     .replace(/\n/g, ' ')
-    .replace(/".*?"/g, '') // Remove quoted content from message reactions (e.g., 'Liked "Thanks for subscribing..."' becomes 'Liked')
+    .replace(/["“”].*?["“”]/g, '') // Remove quoted content from message reactions (e.g., 'Liked "Thanks for subscribing..."' becomes 'Liked')
 
   const isOptOutKeyword =
     optOutKeywords.includes(normalizedKeyword) ||
