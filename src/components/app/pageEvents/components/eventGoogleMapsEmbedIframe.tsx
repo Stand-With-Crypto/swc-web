@@ -12,7 +12,8 @@ const NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY = requiredEnv(
 // This component is memoized because it was blinking on rerender.
 export const GoogleMapsEmbedIFrame = memo(({ address }: { address: string }) => {
   const isMobile = useIsMobile()
-  const width = isMobile ? window.innerWidth - 48 : 466
+  const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1280
+  const width = isMobile ? windowWidth - 48 : 466
 
   return (
     <div className="flex items-center justify-center">
