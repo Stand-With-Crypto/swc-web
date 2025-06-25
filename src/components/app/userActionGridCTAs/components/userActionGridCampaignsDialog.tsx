@@ -21,6 +21,7 @@ interface UserActionGridCampaignsDialogProps {
   campaigns: Array<UserActionGridCTACampaign>
   performedUserActions: Record<string, any>
   shouldOpenDeeplink?: boolean
+  onClickAction?: () => void
 }
 
 export function UserActionGridCampaignsDialog(props: UserActionGridCampaignsDialogProps) {
@@ -42,6 +43,7 @@ export function UserActionGridCampaignsDialogContent({
   campaigns,
   performedUserActions,
   shouldOpenDeeplink,
+  onClickAction,
 }: Omit<UserActionGridCampaignsDialogProps, 'children'>) {
   const countryCode = useCountryCode()
 
@@ -67,6 +69,28 @@ export function UserActionGridCampaignsDialogContent({
             const WrapperComponent = campaign.WrapperComponent
             const campaignKey = `${campaign.actionType}-${campaign.campaignName}`
             const isCompleted = !!performedUserActions[campaignKey]
+            const url = shouldOpenDeeplink
+              ? getUserActionDeeplink({
+                  actionType: campaign.actionType as UserActionTypesWithDeeplink,
+                  config: {
+                    countryCode,
+                  },
+                  campaign: campaign.campaignName,
+                })
+              : null
+
+            if (url) {
+              return (
+                <Link href={url} key={campaignKey} onClick={onClickAction}>
+                  <CampaignCard
+                    description={campaign.description}
+                    isCompleted={isCompleted}
+                    isReadOnly
+                    title={campaign.title}
+                  />
+                </Link>
+              )
+            }
 
             if (!WrapperComponent) {
               return (
@@ -74,6 +98,7 @@ export function UserActionGridCampaignsDialogContent({
                   description={campaign.description}
                   isCompleted={isCompleted}
                   key={campaignKey}
+                  onClick={onClickAction}
                   title={campaign.title}
                 />
               )
@@ -84,6 +109,7 @@ export function UserActionGridCampaignsDialogContent({
                 <CampaignCard
                   description={campaign.description}
                   isCompleted={isCompleted}
+                  onClick={onClickAction}
                   title={campaign.title}
                 />
               </WrapperComponent>
@@ -107,7 +133,7 @@ export function UserActionGridCampaignsDialogContent({
                       config: {
                         countryCode,
                       },
-                      campaign: campaign.campaignName as any,
+                      campaign: campaign.campaignName,
                     })
                   : null
 
@@ -117,7 +143,7 @@ export function UserActionGridCampaignsDialogContent({
 
                 if (url) {
                   return (
-                    <Link href={url} key={campaignKey}>
+                    <Link href={url} key={campaignKey} onClick={onClickAction}>
                       <CampaignCard
                         description={campaign.description}
                         isCompleted={isCompleted}
@@ -135,6 +161,7 @@ export function UserActionGridCampaignsDialogContent({
                       isCompleted={isCompleted}
                       isReadOnly
                       key={campaignKey}
+                      onClick={onClickAction}
                       title={campaign.title}
                     />
                   )
@@ -146,6 +173,7 @@ export function UserActionGridCampaignsDialogContent({
                       description={campaign.description}
                       isCompleted={isCompleted}
                       isReadOnly
+                      onClick={onClickAction}
                       title={campaign.title}
                     />
                   </WrapperComponent>
@@ -172,6 +200,7 @@ function CampaignCard({
   description: string
   isCompleted: boolean
   isReadOnly?: boolean
+  onClick?: () => void
 }) {
   return (
     <button
