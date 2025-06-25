@@ -4,8 +4,8 @@ import Script from 'next/script'
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
 import { PageProps } from '@/types'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { generateBuilderPageStaticParams } from '@/utils/server/builder/models/page/generateBuilderPageStatisParams'
 import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
-import { getPagePaths } from '@/utils/server/builder/models/page/utils/getPagePaths'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
@@ -47,16 +47,4 @@ export async function generateMetadata(props: DynamicPageProps): Promise<Metadat
   })
 }
 
-export async function generateStaticParams() {
-  const paths = await getPagePaths({
-    pageModelName: PAGE_MODEL,
-  })
-
-  return paths.map(path => {
-    return {
-      params: {
-        page: path?.replace(PAGE_PREFIX, '').split('/'),
-      },
-    }
-  })
-}
+export const generateStaticParams = generateBuilderPageStaticParams(PAGE_MODEL, PAGE_PREFIX)
