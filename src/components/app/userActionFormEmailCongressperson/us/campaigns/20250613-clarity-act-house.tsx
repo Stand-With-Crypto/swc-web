@@ -17,7 +17,7 @@ function getEmailBodyText(props?: GetTextProps & { address?: string }) {
     lastName: props?.lastName,
   })
 
-  return `On behalf of more than 52 million American crypto owners and counting—I urge you to support the Digital Asset Market Structure Clarity (CLARITY) Act. The CLARITY Act(H.R. 3633) would establish a clear, common-sense regulatory framework for digital assets—one that protects consumers, fosters innovation, and ensures the U.S. remains a global economic leader.
+  return `On behalf of more than 52 million American crypto owners and counting—I urge you to support the Digital Asset Market Structure Clarity (CLARITY) Act. The CLARITY Act (H.R. 3633) would establish a clear, common-sense regulatory framework for digital assets—one that protects consumers, fosters innovation, and ensures the U.S. remains a global economic leader.
 
 For too long, innovators in the crypto industry have had to navigate a patchwork of outdated regulations never intended for blockchain technology. This lack of clarity hasn’t just stifled innovation—it’s hindered broader U.S. economic growth. Since 2018, the U.S. share of global blockchain developers has dropped by approximately 14%, falling to just 26% in 2023. Regulatory uncertainty has pushed developers overseas, discouraged businesses from embracing blockchain, and limited opportunities for financial inclusion. Most critically, it has left consumers vulnerable to fraud  instability and systemic risk in the digital asset markets.
 
