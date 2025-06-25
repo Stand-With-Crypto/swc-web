@@ -48,8 +48,7 @@ export function TotalAdvocatesPerStateTooltip({
 
   // Calculate the adjusted position so it does not overflow the window
   const centeredX = mousePosition.x - offsetX
-  const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1280
-  const adjustedX = Math.min(Math.max(centeredX, 0), windowWidth - tooltipWidth)
+  const adjustedX = Math.min(Math.max(centeredX, 0), window.innerWidth - tooltipWidth)
 
   return (
     <div
