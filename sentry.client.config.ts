@@ -36,6 +36,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'The operation is insecure',
   'The object can not be found here',
   'Properties can only be defined on Objects',
+  'Cannot assign to read only property',
   'network error',
   'localStorage',
   'TLS connection',

@@ -18,7 +18,7 @@ import Script from 'next/script'
 //       value: localStorageNoop,
 //       configurable: true,
 //       enumerable: true,
-//       writable: false,
+//       writable: true,
 //     })
 //   }
 // }
@@ -38,13 +38,18 @@ export function OverrideGlobalLocalStorage() {
           removeItem: () => null,
           setItem: () => null,
         }
-        window.localStorage = localStorageNoop
-        Object.defineProperty(window, 'localStorage', {
-          value: localStorageNoop,
-          configurable: true,
-          enumerable: true,
-          writable: false,
-        })
+        // Try to assign directly first
+        try {
+          window.localStorage = localStorageNoop
+        } catch (directAssignError) {
+          // If direct assignment fails, use defineProperty but with writable: true
+          Object.defineProperty(window, 'localStorage', {
+            value: localStorageNoop,
+            configurable: true,
+            enumerable: true,
+            writable: true,
+          })
+        }
       }
       try {
         sessionStorage.getItem('doesNotExist')
@@ -57,13 +62,18 @@ export function OverrideGlobalLocalStorage() {
           removeItem: () => null,
           setItem: () => null,
         }
-        window.sessionStorage = sessionStorageNoop
-        Object.defineProperty(window, 'sessionStorage', {
-          value: sessionStorageNoop,
-          configurable: true,
-          enumerable: true,
-          writable: false,
-        })
+        // Try to assign directly first
+        try {
+          window.sessionStorage = sessionStorageNoop
+        } catch (directAssignError) {
+          // If direct assignment fails, use defineProperty but with writable: true
+          Object.defineProperty(window, 'sessionStorage', {
+            value: sessionStorageNoop,
+            configurable: true,
+            enumerable: true,
+            writable: true,
+          })
+        }
       }
       `}
     </Script>
