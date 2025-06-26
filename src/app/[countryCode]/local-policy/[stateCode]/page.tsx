@@ -2,12 +2,14 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/utils'
-import { states } from '@/components/app/pageLocalPolicy/us/config'
 import { UsLocalPolicyStatePage } from '@/components/app/pageLocalPolicy/us/statePage'
 import { getAdvocatesCountByState } from '@/data/aggregations/getAdvocatesCountByState'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import {
+  US_MAIN_STATE_CODE_WITH_DC_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
 }
 
 export function generateStaticParams() {
-  return Object.keys(states).map(stateCode => ({
+  return Object.keys(US_MAIN_STATE_CODE_WITH_DC_TO_DISPLAY_NAME_MAP).map(stateCode => ({
     countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
     stateCode: stateCode.toLowerCase() as USStateCode,
   }))
@@ -41,7 +43,10 @@ export default async function LocalPolicyStatePageRoot({
 }) {
   const { countryCode, stateCode } = await params
 
-  if (countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE || !(stateCode.toUpperCase() in states)) {
+  if (
+    countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE ||
+    !(stateCode.toUpperCase() in US_MAIN_STATE_CODE_WITH_DC_TO_DISPLAY_NAME_MAP)
+  ) {
     notFound()
   }
 

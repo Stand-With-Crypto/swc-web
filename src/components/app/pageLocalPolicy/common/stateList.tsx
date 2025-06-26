@@ -23,11 +23,8 @@ function StateListContent({ states }: StateListContentProps) {
   return (
     <ul className="container mx-auto mb-16 flex flex-wrap justify-center gap-x-8 gap-y-6">
       {states.map(({ code, name, url }) => (
-        <li className="w-[130px] text-center" key={code}>
-          <InternalLink
-            className="whitespace-nowrap text-sm font-bold text-primary-cta hover:underline"
-            href={url}
-          >
+        <li className="w-[150px] text-center" key={code}>
+          <InternalLink className="text-sm font-bold text-primary-cta hover:underline" href={url}>
             {name}
           </InternalLink>
         </li>
