@@ -6,7 +6,7 @@ import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export default async function UserActionEmailDeepLink() {
   return (
-    <AUHomepageDialogDeeplinkLayout size="sm">
+    <AUHomepageDialogDeeplinkLayout>
       <ErrorBoundary
         extras={{
           action: {
