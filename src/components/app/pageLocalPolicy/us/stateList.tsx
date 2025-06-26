@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { StateList } from '@/components/app/pageLocalPolicy/common/stateList'
 import { SearchResult } from '@/components/app/pageLocalPolicy/common/types'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import { states } from '@/components/app/pageLocalPolicy/us/config'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -11,8 +11,6 @@ const STATE_LIST_TITLE = 'Explore other states'
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 const urls = getIntlUrls(countryCode)
-
-const states = US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
 
 interface UsStateListProps {
   searchResult: SearchResult

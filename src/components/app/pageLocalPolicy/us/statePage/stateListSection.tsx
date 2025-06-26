@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { StateList } from '@/components/app/pageLocalPolicy/common/stateList'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import { states } from '@/components/app/pageLocalPolicy/us/config'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -12,8 +12,6 @@ const STATE_LIST_SECTION_SUBTITLE = 'Dive deeper and discover races in other sta
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 const urls = getIntlUrls(countryCode)
-
-const states = US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
 
 interface UsStateListSectionProps {
   stateCode: string

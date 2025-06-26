@@ -57,7 +57,7 @@ const US_TERRITORY_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   VI: 'Virgin Islands',
   AS: 'American Samoa',
   DC: 'District Of Columbia',
-}
+} as const
 
 export const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   ...US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
