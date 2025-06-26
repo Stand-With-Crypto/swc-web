@@ -225,6 +225,9 @@ export const apiUrls = {
     stateCode: string
     district: number
   }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
+  internal: {
+    userActions: () => '/api/internal/user-actions',
+  },
 }
 
 export * from './externalUrls'
