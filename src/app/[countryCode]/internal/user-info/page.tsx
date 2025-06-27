@@ -2,7 +2,7 @@
 
 import { useCookie } from 'react-use'
 
-import { UserActionsTable } from '@/components/app/userActionsDebugTable'
+import { UserActionsDebugTable } from '@/components/pageInternal/userActionsDebugTable'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -41,7 +41,7 @@ export default function UserSettingsPage() {
           </div>
         </div>
 
-        <UserActionsTable
+        <UserActionsDebugTable
           isLoading={userActionsQuery.isLoading}
           userActions={userActionsQuery.data?.userActions ?? []}
         />
