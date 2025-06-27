@@ -92,7 +92,7 @@ export function UserDistrictRank({ className }: { className?: string }) {
     }
 
     if (!rank || !districtRankingResponse.data) {
-      return null
+      return <p>N/A</p>
     }
 
     return (
