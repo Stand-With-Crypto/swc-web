@@ -40,6 +40,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   "Cannot assign to read only property 'toString' of object '#<Object>'",
   "Cannot assign to read only property 'error' of object '#<Object>'",
   "Cannot assign to read only property 'constructor' of object '[object Object]'",
+  'Could not assign Magic Eden provider',
   'network error',
   'localStorage',
   'TLS connection',
