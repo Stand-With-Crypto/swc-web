@@ -25,10 +25,6 @@ export function ReferralsCounter(props: ReferralsCounterProps) {
   const { isLoggedIn, isLoading } = useSession()
   const hasHydrated = useHasHydrated()
 
-  if (!isLoggedIn || isLoading || !hasHydrated) {
-    return null
-  }
-
   return <div className={cn('flex w-full gap-4', className)}>{children}</div>
 }
 
@@ -88,7 +84,7 @@ export function UserDistrictRank({ className }: { className?: string }) {
     }
 
     if (!address) {
-      return <p>Finish your profile to see your district ranking</p>
+      return <p>N/A</p>
     }
 
     if (!rank || !districtRankingResponse.data) {
