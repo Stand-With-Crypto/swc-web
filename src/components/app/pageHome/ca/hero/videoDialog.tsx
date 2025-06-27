@@ -11,7 +11,7 @@ export function CaHeroVideoDialog({ children }: React.PropsWithChildren) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         a11yTitle="Hero Announcement card video dialog"
-        className="flex !h-full w-full max-w-3xl flex-col items-center justify-center"
+        className="flex w-full max-w-3xl flex-col items-center justify-center"
         padding={false}
       >
         <Video
