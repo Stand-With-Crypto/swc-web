@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useMemo } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { isNil, noop } from 'lodash-es'
 
 import { DistrictsLeaderboardRow } from '@/components/app/pageReferrals/districtsLeaderboardRow'
@@ -12,7 +12,8 @@ import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
-import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 function Heading() {
   return (
@@ -46,13 +47,36 @@ interface YourDistrictRankContentProps {
 function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   const { stateCode, districtNumber } = props
   const countryCode = useCountryCode()
+  const [isUSAddress, setIsUSAddress] = useState(true)
 
   const { setAddress, address } = useMutableCurrentUserAddress()
+  const isLoadingAddress = address === 'loading'
 
   const districtRankingResponse = useGetDistrictRank({
     stateCode,
     districtNumber,
   })
+
+  const { data } = districtRankingResponse
+
+  const checkIfUSAddress = useCallback(async () => {
+    // Check if the address is still loading, if the address is not yet loaded, or if stateCode is already present.
+    // If stateCode is present, we don't need to request the country code again.
+    if (isLoadingAddress || !address || stateCode) return
+
+    const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
+
+    if (addressDetails.countryCode.toLocaleLowerCase() === SupportedCountryCodes.US) {
+      setIsUSAddress(true)
+      return
+    }
+
+    setIsUSAddress(false)
+  }, [isLoadingAddress, address, stateCode])
+
+  useEffect(() => {
+    void checkIfUSAddress()
+  }, [checkIfUSAddress])
 
   if (districtRankingResponse.isLoading) {
     return (
@@ -63,18 +87,22 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
     )
   }
 
-  const { data } = districtRankingResponse
   if (!data) {
+    let message = 'District rank not found, please try a different address.'
+
+    if (!isUSAddress) {
+      message =
+        "Looks like your address is outside the U.S., so it's not part of any district here."
+    }
+
     return (
       <div className="space-y-3">
         <DefaultPlacesSelect
           loading={districtRankingResponse.isLoading}
           onChange={setAddress}
-          value={address === 'loading' ? null : address}
+          value={isLoadingAddress ? null : address}
         />
-        <p className="pl-4 text-sm text-fontcolor-muted">
-          Looks like your address is outside the U.S., so it's not part of any district here.
-        </p>
+        <p className="pl-4 text-sm text-fontcolor-muted">{message}</p>
       </div>
     )
   }
