@@ -47,7 +47,7 @@ interface YourDistrictRankContentProps {
 function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   const { stateCode, districtNumber } = props
   const countryCode = useCountryCode()
-  const [isUSAddress, setIsUSAddress] = useState(true)
+  const [isUSAddress, setIsUSAddress] = useState<boolean | 'loading'>(false)
 
   const { setAddress, address } = useMutableCurrentUserAddress()
   const isLoadingAddress = address === 'loading'
@@ -64,6 +64,8 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
     // If stateCode is present, we don't need to request the country code again.
     if (isLoadingAddress || !address || stateCode) return
 
+    setIsUSAddress('loading')
+
     const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
 
     if (addressDetails.countryCode.toLocaleLowerCase() === SupportedCountryCodes.US) {
@@ -78,7 +80,9 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
     void checkIfUSAddress()
   }, [checkIfUSAddress])
 
-  if (districtRankingResponse.isLoading) {
+  const isLoading = districtRankingResponse.isLoading || isUSAddress === 'loading'
+
+  if (isLoading) {
     return (
       <div className="space-y-3">
         <Heading />
@@ -97,11 +101,7 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
 
     return (
       <div className="space-y-3">
-        <DefaultPlacesSelect
-          loading={districtRankingResponse.isLoading}
-          onChange={setAddress}
-          value={isLoadingAddress ? null : address}
-        />
+        <DefaultPlacesSelect onChange={setAddress} value={isLoadingAddress ? null : address} />
         <p className="pl-4 text-sm text-fontcolor-muted">{message}</p>
       </div>
     )
