@@ -24,16 +24,16 @@ import {
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  getDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+  formatGetDTSIPeopleFromUSAddressNotFoundReason,
+  getDTSIPeopleFromUSAddress,
+} from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
-  getYourPoliticianCategoryDisplayName,
+  getUSPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/us'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -64,7 +64,7 @@ export function Address({
   initialValues,
   heading = (
     <UserActionFormLayout.Heading
-      subtitle={`Your address will be used to connect you with your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}. Stand With Crypto will never share your data with any third-parties.`}
+      subtitle={`Your address will be used to connect you with your ${getUSPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}. Stand With Crypto will never share your data with any third-parties.`}
       title={`Find your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
     />
   ),
@@ -108,7 +108,7 @@ export function Address({
     if (!('dtsiPeople' in liveCongressPersonData)) {
       setError('address', {
         type: 'manual',
-        message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
+        message: formatGetDTSIPeopleFromUSAddressNotFoundReason(liveCongressPersonData),
       })
       return
     } else {
@@ -212,7 +212,7 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromAddress(
+      const dtsiResponse = await getDTSIPeopleFromUSAddress(
         CALL_FLOW_POLITICIANS_CATEGORY,
         address.description,
       )

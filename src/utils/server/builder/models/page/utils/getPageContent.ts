@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/nextjs'
+
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -24,4 +26,18 @@ export function getPageContent(
       cachebust: true,
     })
     .toPromise()
+    .catch(error => {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'builder.io',
+          model: pageModelName,
+          countryCode,
+        },
+        extra: {
+          pathname,
+        },
+        level: 'error',
+      })
+      throw error
+    })
 }

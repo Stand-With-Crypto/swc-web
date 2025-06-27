@@ -300,11 +300,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/gb/action/email',
-        destination: '/gb/content/debanking',
-        permanent: true,
-      },
-      {
         source: '/uk',
         destination: '/gb',
         permanent: false,
@@ -323,6 +318,11 @@ const nextConfig: NextConfig = {
         source: '/gb/politicians/person/:slug',
         destination: '/gb',
         permanent: false,
+      },
+      {
+        source: '/press/stand-with-crypto-reacts-to-passage-of-fit21-legislation',
+        destination: '/press/stand-with-crypto-reacts-to-passage-of-fit-21-legislation',
+        permanent: true,
       },
       // vanity urls
       {
@@ -399,6 +399,11 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/gb/action/email',
+        destination: '/',
+        permanent: false,
+      },
       // tweet at person campaigns
       {
         source: '/pizza',
@@ -435,6 +440,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // SMS shortlinks
+      {
+        source: '/ca/s/house-rising',
+        destination:
+          '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
+        permanent: true,
+      },
       {
         source: '/s/founders-push/:sessionId*',
         destination:
@@ -492,6 +503,12 @@ const nextConfig: NextConfig = {
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=crenshawvote&sessionId=:sessionId*',
         permanent: true,
+      },
+      {
+        source: '/c/clarity-house',
+        destination:
+          '/action/email/clarity_act_house_jun_13_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+        permanent: false,
       },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
