@@ -1,13 +1,25 @@
 import { CaHeroVideoDialog } from '@/components/app/pageHome/ca/hero/videoDialog'
 import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/hero'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = SupportedCountryCodes.CA
 
-const urls = getIntlUrls(countryCode)
-
 export function CaHero() {
+  const videoDialogRender = (
+    <CaHeroVideoDialog>
+      <HeroAnnouncementCard.Image
+        media={{
+          src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
+          alt: 'Help UK lead stablecoin innovation',
+        }}
+      >
+        <HeroAnnouncementCard.CTA buttonText="Watch video">
+          Help UK lead stablecoin innovation.
+        </HeroAnnouncementCard.CTA>
+      </HeroAnnouncementCard.Image>
+    </CaHeroVideoDialog>
+  )
+
   return (
     <Hero>
       <Hero.Heading>
@@ -22,32 +34,8 @@ export function CaHero() {
         <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
       <HeroAnnouncementCard
-        authenticatedContent={
-          <CaHeroVideoDialog>
-            <HeroAnnouncementCard.Image
-              media={{
-                src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
-                alt: 'Help UK lead stablecoin innovation',
-              }}
-            >
-              <HeroAnnouncementCard.CTA buttonText="Watch video">
-                Help UK lead stablecoin innovation.
-              </HeroAnnouncementCard.CTA>
-            </HeroAnnouncementCard.Image>
-          </CaHeroVideoDialog>
-        }
-        unauthenticatedContent={
-          <HeroAnnouncementCard.Image
-            media={{
-              src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
-              alt: 'Help UK lead stablecoin innovation',
-            }}
-          >
-            <HeroAnnouncementCard.CTA buttonText="Join">
-              Join the movement for crypto in Canada
-            </HeroAnnouncementCard.CTA>
-          </HeroAnnouncementCard.Image>
-        }
+        authenticatedContent={videoDialogRender}
+        unauthenticatedContent={videoDialogRender}
       />
     </Hero>
   )
