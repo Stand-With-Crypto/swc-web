@@ -12,6 +12,7 @@ export function CaHeroVideoDialog({ children }: React.PropsWithChildren) {
       <DialogContent
         a11yTitle="Hero Announcement card video dialog"
         className="flex w-full max-w-3xl flex-col items-center justify-center"
+        closeClassName="text-white"
         padding={false}
       >
         <Video
