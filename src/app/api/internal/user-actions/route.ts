@@ -9,7 +9,7 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('api/internal/user-actions')
 
-export const revalidate = 0 // No cache for internal debugging
+export const revalidate = 0
 
 export async function GET() {
   try {
@@ -63,11 +63,12 @@ export async function GET() {
       getSensitiveDataClientUserAction({ record }),
     )
 
-    logger.info(`Fetched ${userActions.length} user actions for user ${user.id}`)
-
     return NextResponse.json({ userActions })
   } catch (error) {
-    logger.error('Error fetching user actions:', error)
-    return NextResponse.json({ error: 'Failed to fetch user actions' }, { status: 500 })
+    logger.error('Error fetching user actions for internal page:', error)
+    return NextResponse.json(
+      { error: 'Failed to fetch user actions for internal page' },
+      { status: 500 },
+    )
   }
 }
