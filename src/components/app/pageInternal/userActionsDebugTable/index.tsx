@@ -16,7 +16,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { ActionSpecificData } from './renderActionSpecificData'
+import { ActionSpecificData } from './ActionSpecificData'
 
 interface UserActionsDebugTableProps {
   userActions: SensitiveDataClientUserAction[]

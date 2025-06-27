@@ -4,7 +4,7 @@ import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/s
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-import { ActionSpecificData } from './renderActionSpecificData'
+import { ActionSpecificData } from './ActionSpecificData'
 
 interface UserActionDetailsDialogProps {
   userAction: SensitiveDataClientUserAction | null
