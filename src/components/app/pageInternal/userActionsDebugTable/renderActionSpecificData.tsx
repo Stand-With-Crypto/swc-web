@@ -2,7 +2,11 @@ import { UserActionType } from '@prisma/client'
 
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 
-export function renderActionSpecificData(userAction: SensitiveDataClientUserAction) {
+interface ActionSpecificDataProps {
+  userAction: SensitiveDataClientUserAction
+}
+
+export function ActionSpecificData({ userAction }: ActionSpecificDataProps) {
   switch (userAction.actionType) {
     case UserActionType.EMAIL:
       if ('senderEmail' in userAction) {

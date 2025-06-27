@@ -1,12 +1,10 @@
 'use client'
 
-import { UserActionType } from '@prisma/client'
-
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-import { renderActionSpecificData } from './renderActionSpecificData'
+import { ActionSpecificData } from './renderActionSpecificData'
 
 interface UserActionDetailsDialogProps {
   userAction: SensitiveDataClientUserAction | null
@@ -21,6 +19,8 @@ export function UserActionDetailsDialog({
 }: UserActionDetailsDialogProps) {
   if (!userAction) return null
 
+  const createdAt = new Date(userAction.datetimeCreated)
+
   return (
     <Dialog analytics="User Action Details Dialog" onOpenChange={onOpenChange} open={open}>
       <DialogContent a11yTitle="User Action Details" className="max-w-2xl">
@@ -29,7 +29,6 @@ export function UserActionDetailsDialog({
         </DialogHeader>
         <ScrollArea className="max-h-[70vh]">
           <div className="space-y-4">
-            {/* Basic Information */}
             <div className="space-y-2">
               <h3 className="text-lg font-semibold">Basic Information</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
@@ -46,13 +45,11 @@ export function UserActionDetailsDialog({
                   <span className="font-semibold">Country:</span> {userAction.countryCode}
                 </div>
                 <div className="col-span-2">
-                  <span className="font-semibold">Created:</span>{' '}
-                  {new Date(userAction.datetimeCreated).toLocaleString()}
+                  <span className="font-semibold">Created:</span> {createdAt.toLocaleString()}
                 </div>
               </div>
             </div>
 
-            {/* NFT Mint Information (if present) */}
             {userAction.nftMint && (
               <div className="space-y-2">
                 <h3 className="text-lg font-semibold">NFT Mint</h3>
@@ -62,13 +59,11 @@ export function UserActionDetailsDialog({
               </div>
             )}
 
-            {/* Action-Specific Data */}
             <div className="space-y-2">
               <h3 className="text-lg font-semibold">Action-Specific Data</h3>
-              {renderActionSpecificData(userAction)}
+              <ActionSpecificData userAction={userAction} />
             </div>
 
-            {/* Raw Data */}
             <div className="space-y-2">
               <h3 className="text-lg font-semibold">Raw Data</h3>
               <pre className="overflow-auto rounded bg-gray-100 p-2 text-xs">

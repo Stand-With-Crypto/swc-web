@@ -1,13 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { UserActionType } from '@prisma/client'
 
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
+import { UserActionsDebugTableSkeleton } from '@/components/app/pageInternal/userActionsDebugTable/userActionsDebugTableSkeleton'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Skeleton } from '@/components/ui/skeleton'
 import {
   Table,
   TableBody,
@@ -17,7 +16,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { renderActionSpecificData } from './renderActionSpecificData'
+import { ActionSpecificData } from './renderActionSpecificData'
 
 interface UserActionsDebugTableProps {
   userActions: SensitiveDataClientUserAction[]
@@ -55,22 +54,7 @@ export function UserActionsDebugTable({ userActions, isLoading }: UserActionsDeb
   })
 
   if (isLoading) {
-    return (
-      <div className="space-y-4">
-        <div className="h-10 w-full">
-          <Skeleton className="h-full w-full" />
-        </div>
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div className="flex space-x-4" key={i}>
-            <Skeleton className="h-8 flex-1" />
-            <Skeleton className="h-8 flex-1" />
-            <Skeleton className="h-8 flex-1" />
-            <Skeleton className="h-8 flex-1" />
-            <Skeleton className="h-8 flex-1" />
-          </div>
-        ))}
-      </div>
-    )
+    return <UserActionsDebugTableSkeleton />
   }
 
   return (
@@ -169,11 +153,11 @@ export function UserActionsDebugTable({ userActions, isLoading }: UserActionsDeb
       </div>
 
       <Dialog
-        analytics="User Action Details Dialog"
+        analytics="User Action Details Dialog - Internal Page"
         onOpenChange={(open: boolean) => !open && setSelectedAction(null)}
         open={!!selectedAction}
       >
-        <DialogContent a11yTitle="User Action Details" className="max-w-2xl">
+        <DialogContent a11yTitle="User Action Details - Internal Page" className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>User Action Details</DialogTitle>
           </DialogHeader>
@@ -205,7 +189,7 @@ export function UserActionsDebugTable({ userActions, isLoading }: UserActionsDeb
 
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold">Action-Specific Data</h3>
-                  {renderActionSpecificData(selectedAction)}
+                  <ActionSpecificData userAction={selectedAction} />
                 </div>
 
                 <div className="space-y-2">

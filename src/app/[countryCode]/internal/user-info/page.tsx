@@ -2,7 +2,7 @@
 
 import { useCookie } from 'react-use'
 
-import { UserActionsDebugTable } from '@/components/pageInternal/userActionsDebugTable'
+import { UserActionsDebugTable } from '@/components/app/pageInternal/userActionsDebugTable'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PageTitle } from '@/components/ui/pageTitleText'
