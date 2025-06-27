@@ -44,6 +44,7 @@ export enum GBUserActionVoterAttestationCampaignName {
 
 export enum GBUserActionViewKeyPageCampaignName {
   NEWMODE_EMAIL_ACTION = 'NEWMODE_EMAIL_ACTION',
+  UK_STABLE_COINS_PETITION_JUN_2025 = 'UK_STABLE_COINS_PETITION_JUN_2025',
 }
 
 export enum GBUserActionPollCampaignName {
