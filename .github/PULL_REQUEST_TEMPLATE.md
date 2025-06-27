@@ -17,6 +17,8 @@ If there are UX changes please do one or both of the following:
 
 ## Notes to reviewers
 
+- [ ] AI Generated
+
 <!-- Here’s where you can give brief guidance on how to review the PR.
 (Often it’s helpful to tell reviewers where the “main change” of the PR can be found,
 if other diffs in the PR are “ripples” caused by it.)
