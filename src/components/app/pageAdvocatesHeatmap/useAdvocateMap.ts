@@ -14,7 +14,7 @@ export interface MapMarker {
   amountUsd?: number
 }
 
-const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMarker[] => {
+const createMarkersFromActions = (recentActivity: PublicRecentActivity['data']): MapMarker[] => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
 
@@ -77,7 +77,7 @@ export function useAdvocateMap(actions: PublicRecentActivity) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
   const [totalMarkers, setTotalMarkers] = useState<number>(INITIAL_MARKERS - 1)
 
-  const markers = useMemo(() => createMarkersFromActions(actions), [actions])
+  const markers = useMemo(() => createMarkersFromActions(actions.data), [actions])
 
   useEffect(() => {
     const intervalId = setInterval(() => {

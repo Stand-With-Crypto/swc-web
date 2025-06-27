@@ -8,17 +8,19 @@ import { apiUrls } from '@/utils/shared/urls'
 interface UseGetDistrictRankProps {
   stateCode: USStateCode
   districtNumber: string | null
+  filteredByState?: boolean
   config?: SWRConfiguration<GetDistrictRankResponse>
 }
 
 export function useGetDistrictRank(props: UseGetDistrictRankProps) {
-  const { stateCode, districtNumber, config } = props
+  const { stateCode, districtNumber, filteredByState, config } = props
 
   const districtRankingResponse = useSWR(
     stateCode && districtNumber
       ? apiUrls.districtRanking({
           stateCode,
           districtNumber,
+          filteredByState,
         })
       : null,
     url =>
