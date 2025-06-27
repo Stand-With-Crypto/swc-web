@@ -3,10 +3,10 @@
 import { useCookie } from 'react-use'
 
 import { UserActionsDebugTable } from '@/components/app/pageInternal/userActionsDebugTable'
+import { useGetUserActionsForInternalPage } from '@/components/app/pageInternal/userActionsDebugTable/hooks/useGetUserActionsForInternalPage'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useApiUserActions } from '@/hooks/useApiUserActions'
 import { useSession } from '@/hooks/useSession'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
@@ -14,7 +14,7 @@ export default function UserSettingsPage() {
   const [countryCode] = useCookie(USER_ACCESS_LOCATION_COOKIE_NAME)
   const parsedCountryCode = countryCode?.toLowerCase()
   const session = useSession()
-  const userActionsQuery = useApiUserActions()
+  const userActionsQuery = useGetUserActionsForInternalPage()
 
   return (
     <div className="container mx-auto max-w-6xl space-y-8">
