@@ -73,7 +73,7 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
           value={address === 'loading' ? null : address}
         />
         <p className="pl-4 text-sm text-fontcolor-muted">
-          District rank not found, please try a different address.
+          Looks like your address is outside the U.S., so it's not part of any district here.
         </p>
       </div>
     )
