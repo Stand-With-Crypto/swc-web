@@ -1,5 +1,4 @@
-import Link from 'next/link'
-
+import { CaHeroVideoDialog } from '@/components/app/pageHome/ca/hero/videoDialog'
 import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/hero'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -24,24 +23,24 @@ export function CaHero() {
       </Hero.Heading>
       <HeroAnnouncementCard
         authenticatedContent={
-          <Link href={urls.profile()}>
+          <CaHeroVideoDialog>
             <HeroAnnouncementCard.Image
               media={{
-                src: '/ca/home/hero.svg',
-                alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+                src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
+                alt: 'Help UK lead stablecoin innovation',
               }}
             >
-              <HeroAnnouncementCard.CTA buttonText="Get started">
-                Join the movement for crypto in Canada
+              <HeroAnnouncementCard.CTA buttonText="Watch video">
+                Help UK lead stablecoin innovation.
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
-          </Link>
+          </CaHeroVideoDialog>
         }
         unauthenticatedContent={
           <HeroAnnouncementCard.Image
             media={{
-              src: '/ca/home/hero.svg',
-              alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+              src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
+              alt: 'Help UK lead stablecoin innovation',
             }}
           >
             <HeroAnnouncementCard.CTA buttonText="Join">
