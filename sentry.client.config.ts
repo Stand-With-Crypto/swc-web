@@ -28,6 +28,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'ResizeObserver loop', // ResizeObserver loop completed with undelivered notifications.
   'Load failed',
   'Failed to fetch',
+  'Could not assign Magic Eden provider',
   "Failed to read the 'localStorage'",
   'Converting circular structure to JSON',
   "Cannot read properties of undefined (reading 'call')",
