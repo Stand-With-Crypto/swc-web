@@ -11,6 +11,8 @@ import { ProcessBatchSchema } from '@/inngest/functions/backfillIntlUsers/logic'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
+import { BackfillUserActionElectoralZoneCoordinatorEventSchema } from '@/inngest/functions/backfillUserActionElectoralZone'
+import { ProcessUserActionElectoralZoneProcessorEventSchema } from '@/inngest/functions/backfillUserActionElectoralZone/logic'
 import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import { BackfillUserCountryCodeEmptyInngestSchema } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import type {
@@ -80,5 +82,7 @@ type EventTypes =
   | SyncSendgridContactsProcessorSchema
   | BackfillAddressElectoralZoneCoordinatorEventSchema
   | ProcessAddressElectoralZoneProcessorEventSchema
+  | BackfillUserActionElectoralZoneCoordinatorEventSchema
+  | ProcessUserActionElectoralZoneProcessorEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
