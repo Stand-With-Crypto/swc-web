@@ -10,7 +10,7 @@ export function GbHero() {
     <GBHeroVideoDialog>
       <HeroAnnouncementCard.Image
         media={{
-          src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
+          src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/gb/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
           alt: 'Help UK lead stablecoin innovation',
         }}
       >

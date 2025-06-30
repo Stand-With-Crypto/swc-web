@@ -54,8 +54,8 @@ export function GBHeroVideoDialog({ children }: React.PropsWithChildren) {
                   loop={false}
                   muted={false}
                   playsInline={false}
-                  poster="/ca/home/hero-video-thumbnail.png"
-                  src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/sablecoin_hero.mp4"
+                  poster="/gb/home/hero-video-thumbnail.png"
+                  src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/gb/sablecoin_hero.mp4"
                 />
               </div>
             </div>
