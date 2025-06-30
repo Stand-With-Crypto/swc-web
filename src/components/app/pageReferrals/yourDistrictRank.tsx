@@ -66,12 +66,7 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
 
     const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
 
-    if (addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US) {
-      setIsUSAddress(true)
-      return
-    }
-
-    setIsUSAddress(false)
+    setIsUSAddress(addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US)
   }, [isLoadingAddress, address, stateCode])
 
   useEffect(() => {
