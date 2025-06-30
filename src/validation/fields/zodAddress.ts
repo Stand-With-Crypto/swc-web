@@ -15,7 +15,6 @@ export const zodAddress = object({
   postalCode: string(),
   postalCodeSuffix: string(),
   countryCode: string().length(2),
-  usCongressionalDistrict: string().optional(),
   electoralZone: string().optional(),
 })
 

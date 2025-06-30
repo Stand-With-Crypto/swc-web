@@ -18,10 +18,13 @@ import {
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
-  filterDTSIPeopleByUSPoliticalCategory,
-  getUSPoliticianCategoryDisplayName,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory/us'
+  filterDTSIPeopleByPoliticalCategory,
+  getYourPoliticianCategoryDisplayName,
+} from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory as AUYourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/au'
+import { YourPoliticianCategory as CAYourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/ca'
+import { YourPoliticianCategory as GBYourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/gb'
+import { YourPoliticianCategory as USYourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/us'
 import { cn } from '@/utils/web/cn'
 
 function DefaultPlacesSelect(
@@ -37,9 +40,28 @@ function DefaultPlacesSelect(
     </div>
   )
 }
-export function ClientCurrentUserDTSIPersonCardOrCTA(props: {
-  countryCode: SupportedCountryCodes
-}) {
+
+type ClientCurrentUserDTSIPersonCardOrCTAProps =
+  | {
+      countryCode: SupportedCountryCodes.US
+      category: USYourPoliticianCategory
+    }
+  | {
+      countryCode: SupportedCountryCodes.AU
+      category: AUYourPoliticianCategory
+    }
+  | {
+      countryCode: SupportedCountryCodes.CA
+      category: CAYourPoliticianCategory
+    }
+  | {
+      countryCode: SupportedCountryCodes.GB
+      category: GBYourPoliticianCategory
+    }
+
+export function ClientCurrentUserDTSIPersonCardOrCTA(
+  props: ClientCurrentUserDTSIPersonCardOrCTAProps,
+) {
   return (
     <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
       <SuspenseClientCurrentUserDTSIPersonCardOrCTA {...props} />
@@ -47,16 +69,14 @@ export function ClientCurrentUserDTSIPersonCardOrCTA(props: {
   )
 }
 
-const POLITICIAN_CATEGORY: YourPoliticianCategory = 'legislative-and-executive'
+function SuspenseClientCurrentUserDTSIPersonCardOrCTA(
+  props: ClientCurrentUserDTSIPersonCardOrCTAProps,
+) {
+  const { countryCode } = props
 
-function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
-  countryCode,
-}: {
-  countryCode: SupportedCountryCodes
-}) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress({
-    filterFn: filterDTSIPeopleByUSPoliticalCategory(POLITICIAN_CATEGORY),
+    filterFn: filterDTSIPeopleByPoliticalCategory(props),
     address: address === 'loading' ? null : address?.description,
   })
 
@@ -89,7 +109,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
     )
   }
   const people = res.data.dtsiPeople
-  const categoryDisplayName = getUSPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
+  const categoryDisplayName = getYourPoliticianCategoryDisplayName(props)
 
   return (
     <div>

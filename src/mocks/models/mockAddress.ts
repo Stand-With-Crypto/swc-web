@@ -36,7 +36,6 @@ export function mockCreateAddressInput() {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
-    usCongressionalDistrict: '12',
     electoralZone: '12',
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
@@ -64,7 +63,6 @@ export function mockCreateAddressInputWithDC() {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
-    usCongressionalDistrict: district,
     electoralZone: district,
   } satisfies Partial<Prisma.AddressCreateInput>
   return {

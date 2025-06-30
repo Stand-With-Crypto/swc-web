@@ -40,20 +40,14 @@ export function getYourPoliticianCategoryShortDisplayName(
 }
 
 export function filterDTSIPeopleByAUPoliticalCategory(category: YourPoliticianCategory) {
-  return (
-    dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
-  ): DTSIPeopleByElectoralZoneQueryResult => {
+  return (dtsiPerson: DTSIPeopleByElectoralZoneQueryResult[number]): boolean => {
     switch (category) {
       case 'senate':
-        return dtsiPeople.filter(
-          person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE,
-        )
+        return dtsiPerson.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE
       case 'house-of-reps':
-        return dtsiPeople.filter(
-          person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-        )
+        return dtsiPerson.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS
       default:
-        return dtsiPeople
+        return true
     }
   }
 }
