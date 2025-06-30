@@ -68,15 +68,8 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
     try {
       const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
       setIsUSAddress(addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US)
-    } catch (error) {
+    } catch {
       setIsUSAddress(true)
-
-      Sentry.captureException(error, {
-        tags: {
-          domain: 'pageReferrals/yourDistrictRank/checkIfUSAddress',
-          message: `error getting address details`,
-        },
-      })
     }
   }, [isLoadingAddress, address, stateCode])
 
