@@ -9,30 +9,13 @@ export function GBHeroVideoDialog({ children }: React.PropsWithChildren) {
   const [open, setOpen] = useState(false)
   const modalRef = useRef<HTMLDivElement>(null)
 
-  // Close on Escape key
-  useEffect(() => {
-    if (!open) return
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [open])
+  useManualDialogEffects({ open, setOpen, modalRef })
 
-  // Close on overlay click
   const handleOverlayClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) setOpen(false)
-  }, [])
-
-  // Trap focus in modal
-  useEffect(() => {
-    if (!open || !modalRef.current) return
-    const previouslyFocused = document.activeElement as HTMLElement | null
-    modalRef.current.focus()
-    return () => {
-      previouslyFocused?.focus()
+    if (e.target === e.currentTarget) {
+      setOpen(false)
     }
-  }, [open])
+  }, [])
 
   return (
     <>
@@ -45,14 +28,14 @@ export function GBHeroVideoDialog({ children }: React.PropsWithChildren) {
         >
           <div
             aria-modal="true"
-            className="relative flex flex-col items-center justify-center bg-transparent p-0 shadow-xl outline-none"
+            className="relative flex max-h-[90vh] w-[90vw] max-w-[768px] flex-col items-center justify-center bg-transparent p-0 shadow-xl outline-none"
             ref={modalRef}
             role="dialog"
-            style={{ maxWidth: 768, width: '90vw', maxHeight: '90vh' }}
             tabIndex={0}
           >
             <div
               className="flex items-center justify-center"
+              // Arbitrary tailwind values do not work here, so we need to use inline styles
               style={{ width: 'min(90vw, 90vh, 768px)', height: 'min(90vw, 90vh, 768px)' }}
             >
               <div className="relative">
@@ -81,4 +64,33 @@ export function GBHeroVideoDialog({ children }: React.PropsWithChildren) {
       )}
     </>
   )
+}
+
+function useManualDialogEffects({
+  open,
+  setOpen,
+  modalRef,
+}: {
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  modalRef: React.RefObject<HTMLDivElement | null>
+}) {
+  useEffect(() => {
+    if (!open) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [open, setOpen])
+
+  // Trap focus
+  useEffect(() => {
+    if (!open || !modalRef.current) return
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    modalRef.current.focus()
+    return () => {
+      previouslyFocused?.focus()
+    }
+  }, [open, modalRef])
 }
