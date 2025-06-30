@@ -1,7 +1,6 @@
 'use client'
 
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
-import * as Sentry from '@sentry/nextjs'
 import { isNil, noop } from 'lodash-es'
 
 import { DistrictsLeaderboardRow } from '@/components/app/pageReferrals/districtsLeaderboardRow'
