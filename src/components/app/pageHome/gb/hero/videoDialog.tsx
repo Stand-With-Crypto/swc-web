@@ -20,11 +20,14 @@ export function GBHeroVideoDialog({ children }: React.PropsWithChildren) {
 
   useManualDialogEffects({ open, setOpen, modalRef })
 
-  const handleOverlayClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      setOpen(false)
-    }
-  }, [])
+  const handleOverlayClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target === e.currentTarget) {
+        setOpen(false)
+      }
+    },
+    [setOpen],
+  )
 
   return (
     <>
