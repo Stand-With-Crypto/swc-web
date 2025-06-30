@@ -1,14 +1,26 @@
-import Link from 'next/link'
-
 import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/hero'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
+
+import { GBHeroVideoDialog } from './videoDialog'
 
 const countryCode = SupportedCountryCodes.GB
 
-const urls = getIntlUrls(countryCode)
-
 export function GbHero() {
+  const videoDialogRender = (
+    <GBHeroVideoDialog>
+      <HeroAnnouncementCard.Image
+        media={{
+          src: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/ca/hero_image-nL27jTXESAmKGh7PDNHk959O2QVtMf.gif',
+          alt: 'Help UK lead stablecoin innovation',
+        }}
+      >
+        <HeroAnnouncementCard.CTA buttonText="Watch video">
+          Help UK lead stablecoin innovation.
+        </HeroAnnouncementCard.CTA>
+      </HeroAnnouncementCard.Image>
+    </GBHeroVideoDialog>
+  )
+
   return (
     <Hero>
       <Hero.Heading>
@@ -22,20 +34,10 @@ export function GbHero() {
         </Hero.Subtitle>
         <Hero.HeadingCTA countryCode={countryCode} />
       </Hero.Heading>
-      <div className="order-0 self-start md:container lg:order-1 lg:col-span-2 lg:px-0">
-        <Link href={urls.newmodeDebankingAction()}>
-          <HeroAnnouncementCard.Image
-            media={{
-              src: '/gb/home/hero.svg',
-              alt: 'Stay up to date on crypto policy by following @StandWCrypto_UK on X.',
-            }}
-          >
-            <HeroAnnouncementCard.CTA buttonText="Take action">
-              Email your MP to stop unfair debanking
-            </HeroAnnouncementCard.CTA>
-          </HeroAnnouncementCard.Image>
-        </Link>
-      </div>
+      <HeroAnnouncementCard
+        authenticatedContent={videoDialogRender}
+        unauthenticatedContent={videoDialogRender}
+      />
     </Hero>
   )
 }
