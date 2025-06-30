@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { X } from 'lucide-react'
 
 import { Video } from '@/components/ui/video'
 
@@ -60,19 +61,8 @@ export function GBHeroVideoDialog({ children }: React.PropsWithChildren) {
                   className="absolute right-4 top-4 z-10 rounded-full bg-black/60 p-2 text-white hover:bg-black/80 focus:outline-none"
                   onClick={() => setOpen(false)}
                 >
-                  <svg
-                    fill="none"
-                    height="24"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    width="24"
-                  >
-                    <line x1="18" x2="6" y1="6" y2="18" />
-                    <line x1="6" x2="18" y1="6" y2="18" />
-                  </svg>
+                  <X size={20} />
+                  <span className="sr-only">Close</span>
                 </button>
                 <Video
                   autoPlay
