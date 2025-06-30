@@ -2,7 +2,6 @@ import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
-import { backfillElectoralZoneCronJob } from '@/inngest/functions/backfillElectoralZoneCronJob'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
@@ -71,7 +70,6 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
-    backfillElectoralZoneCronJob,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
     ...globalSendEventNotifications,
@@ -87,5 +85,6 @@ export const { GET, POST, PUT } = serve({
     deleteNotSupportedCountryCodeAdvocates,
     syncSendgridContactsCoordinator,
     syncSendgridContactsProcessor,
+    a,
   ],
 })

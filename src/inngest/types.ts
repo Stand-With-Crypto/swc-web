@@ -2,7 +2,6 @@ import { EventSchemas } from 'inngest'
 
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
-import type { BackfillElectoralZonesInngestCronJobSchema } from '@/inngest/functions/backfillElectoralZoneCronJob'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
@@ -42,7 +41,6 @@ type EventTypes =
   | CapitolCanaryCheckSmsOptInReplySchema
   | AirdropNftInngestSchema
   | BackfillCountryCodesEventSchema
-  | BackfillElectoralZonesInngestCronJobSchema
   | BackfillFailedNftInngestSchema
   | BackfillNftInngestSchema
   | BackfillNftInngestCronJobSchema
