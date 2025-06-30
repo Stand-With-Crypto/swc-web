@@ -1,6 +1,7 @@
 'use client'
 
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { isNil, noop } from 'lodash-es'
 
 import { DistrictsLeaderboardRow } from '@/components/app/pageReferrals/districtsLeaderboardRow'
@@ -64,9 +65,19 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
 
     setIsUSAddress('loading')
 
-    const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
+    try {
+      const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
+      setIsUSAddress(addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US)
+    } catch (error) {
+      setIsUSAddress(true)
 
-    setIsUSAddress(addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'pageReferrals/yourDistrictRank/checkIfUSAddress',
+          message: `error getting address details`,
+        },
+      })
+    }
   }, [isLoadingAddress, address, stateCode])
 
   useEffect(() => {
@@ -85,17 +96,14 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   }
 
   if (!data) {
-    let message = 'District rank not found, please try a different address.'
-
-    if (!isUSAddress) {
-      message =
-        "Looks like your address is outside the U.S., so it's not part of any district here."
-    }
+    const invalidAddressErrorMessage = isUSAddress
+      ? 'District rank not found, please try a different address.'
+      : "Looks like your address is outside the U.S., so it's not part of any district here."
 
     return (
       <div className="space-y-3">
         <DefaultPlacesSelect onChange={setAddress} value={isLoadingAddress ? null : address} />
-        <p className="pl-4 text-sm text-fontcolor-muted">{message}</p>
+        <p className="pl-4 text-sm text-fontcolor-muted">{invalidAddressErrorMessage}</p>
       </div>
     )
   }
