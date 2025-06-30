@@ -1,6 +1,8 @@
 import { EventSchemas } from 'inngest'
 
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
+import type { BackfillAddressElectoralZoneCoordinatorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone'
+import type { ProcessAddressElectoralZoneProcessorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone/logic'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
 import type { BackfillElectoralZonesInngestCronJobSchema } from '@/inngest/functions/backfillElectoralZoneCronJob'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
@@ -72,5 +74,7 @@ type EventTypes =
   | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
   | SyncSendgridContactsCoordinatorSchema
   | SyncSendgridContactsProcessorSchema
+  | BackfillAddressElectoralZoneCoordinatorEventSchema
+  | ProcessAddressElectoralZoneProcessorEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

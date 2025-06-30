@@ -27,6 +27,10 @@ const maybeParseBody = async (response: Response) =>
 
 const maybeWithoutQueryParams = (url: string) => {
   try {
+    if (url.startsWith('/')) {
+      return url.split('?')[0]
+    }
+
     const urlParts = new URL(url)
     return `${urlParts.origin}${urlParts.pathname}`
   } catch {

@@ -51,81 +51,9 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
     ],
   },
-  [UserActionType.TWEET]: {
-    title: 'Follow us on X',
-    description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-    mobileCTADescription: 'Stay up to date on crypto policy.',
-    campaignsModalDescription:
-      'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-    image: '/actionTypeIcons/tweet.png',
-    campaigns: [
-      {
-        actionType: UserActionType.TWEET,
-        campaignName: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
-        isCampaignActive: true,
-        title: 'Follow us on X',
-        description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
-            {children}
-          </UserActionFormShareOnTwitterDialog>
-        ),
-      },
-      {
-        actionType: UserActionType.TWEET,
-        campaignName: USUserActionTweetCampaignName.DEFAULT,
-        isCampaignActive: false,
-        title: 'Tweet Campaign',
-        description: 'You helped bring more advocates to the cause by tweeting about SWC.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionFormShareOnTwitterDialog countryCode={countryCode}>
-            {children}
-          </UserActionFormShareOnTwitterDialog>
-        ),
-      },
-    ],
-  },
-  [UserActionType.VOTING_DAY]: {
-    title: 'I voted!',
-    description: 'Claim your "proof-of-vote" NFT.',
-    mobileCTADescription: 'Claim your "proof-of-vote" NFT.',
-    campaignsModalDescription: 'Claim your "proof-of-vote" NFT.',
-    image: '/actionTypeIcons/iVoted.png',
-    campaigns: [
-      {
-        actionType: UserActionType.VOTING_DAY,
-        campaignName: USUserActionVotingDayCampaignName['H1_2025'],
-        isCampaignActive: false,
-        title: 'I voted!',
-        description: 'Claimed your "proof-of-vote" NFT.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null,
-      },
-    ],
-  },
-  [UserActionType.DONATION]: {
-    title: 'Make a donation',
-    description: 'Donate fiat or crypto to help keep crypto in America.',
-    campaignsModalDescription: 'Donate fiat or crypto to help keep crypto in America.',
-    image: '/actionTypeIcons/donate.png',
-    link: ({ children }) => <Link href={urls.donate()}>{children}</Link>,
-    campaigns: [
-      {
-        actionType: UserActionType.DONATION,
-        campaignName: USUserActionDonationCampaignName.DEFAULT,
-        isCampaignActive: true,
-        title: 'Make a donation',
-        description: 'Donate fiat or crypto to help keep crypto in America.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null, // This is null because the donate CTA is a link to the donate page,
-      },
-    ],
-  },
   [UserActionType.EMAIL]: {
-    title: 'Email Your Policymaker',
-    description: 'Support Crucial Crypto Legislation',
+    title: 'Email your House Rep',
+    description: 'Support Market Structure Regulation (CLARITY Act)',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -145,7 +73,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your Senator',
         description: 'Support Stablecoin Regulation (GENIUS Act)',
         canBeTriggeredMultipleTimes: true,
@@ -267,6 +195,78 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           countryCode,
           campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
         }),
+      },
+    ],
+  },
+  [UserActionType.TWEET]: {
+    title: 'Follow us on X',
+    description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+    mobileCTADescription: 'Stay up to date on crypto policy.',
+    campaignsModalDescription:
+      'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+    image: '/actionTypeIcons/tweet.png',
+    campaigns: [
+      {
+        actionType: UserActionType.TWEET,
+        campaignName: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
+        isCampaignActive: true,
+        title: 'Follow us on X',
+        description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
+            {children}
+          </UserActionFormShareOnTwitterDialog>
+        ),
+      },
+      {
+        actionType: UserActionType.TWEET,
+        campaignName: USUserActionTweetCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: 'Tweet Campaign',
+        description: 'You helped bring more advocates to the cause by tweeting about SWC.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
+            {children}
+          </UserActionFormShareOnTwitterDialog>
+        ),
+      },
+    ],
+  },
+  [UserActionType.VOTING_DAY]: {
+    title: 'I voted!',
+    description: 'Claim your "proof-of-vote" NFT.',
+    mobileCTADescription: 'Claim your "proof-of-vote" NFT.',
+    campaignsModalDescription: 'Claim your "proof-of-vote" NFT.',
+    image: '/actionTypeIcons/iVoted.png',
+    campaigns: [
+      {
+        actionType: UserActionType.VOTING_DAY,
+        campaignName: USUserActionVotingDayCampaignName['H1_2025'],
+        isCampaignActive: false,
+        title: 'I voted!',
+        description: 'Claimed your "proof-of-vote" NFT.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+    ],
+  },
+  [UserActionType.DONATION]: {
+    title: 'Make a donation',
+    description: 'Donate fiat or crypto to help keep crypto in America.',
+    campaignsModalDescription: 'Donate fiat or crypto to help keep crypto in America.',
+    image: '/actionTypeIcons/donate.png',
+    link: ({ children }) => <Link href={urls.donate()}>{children}</Link>,
+    campaigns: [
+      {
+        actionType: UserActionType.DONATION,
+        campaignName: USUserActionDonationCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Make a donation',
+        description: 'Donate fiat or crypto to help keep crypto in America.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null, // This is null because the donate CTA is a link to the donate page,
       },
     ],
   },

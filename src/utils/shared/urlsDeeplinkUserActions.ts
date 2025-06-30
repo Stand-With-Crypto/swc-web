@@ -4,6 +4,9 @@ import { getDeeplinkUrlByCampaignName } from '@/components/app/userActionFormEma
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
+import { AUUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CAUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GBUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import {
   COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   isActionSupportedForCountry,
@@ -95,7 +98,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
   },
   [UserActionType.VIEW_KEY_PAGE]: {
     getDeeplinkUrl: ({ countryCode }) => {
-      return `${getIntlPrefix(countryCode)}/action/email`
+      return `${getIntlPrefix(countryCode)}/content/election`
     },
   },
   [UserActionType.LINKEDIN]: {
@@ -111,6 +114,23 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     [campaign in UserActionCampaignNames]?: DeeplinkFunction
   }
 } = {
+  [UserActionType.VIEW_KEY_PAGE]: {
+    [AUUserActionViewKeyPageCampaignName.AU_NEWMODE_DEBANKING]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/debanking`
+    },
+    [AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/election`
+    },
+    [GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/debanking`
+    },
+    [CAUserActionViewKeyPageCampaignName.CA_NEWMODE_DEBANKING]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/debanking`
+    },
+    [CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/content/election`
+    },
+  },
   [UserActionType.EMAIL]: {
     [USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email-debate`
@@ -152,19 +172,19 @@ export const getUserActionDeeplink = <
     isActionSupportedForCountry(config.countryCode, actionType) &&
     campaign === COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[config.countryCode][actionType]
 
+  if (actionType === UserActionType.EMAIL) {
+    return getDeeplinkUrlByCampaignName({
+      countryCode: config.countryCode,
+      campaignName: campaign as USUserActionEmailCampaignName,
+    })
+  }
+
   if (!campaign || isDefaultCampaign) {
     return USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl(config)
   }
 
   if (USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]) {
     return USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]?.(config)
-  }
-
-  if (actionType === UserActionType.EMAIL) {
-    return getDeeplinkUrlByCampaignName({
-      countryCode: config.countryCode,
-      campaignName: campaign as USUserActionEmailCampaignName,
-    })
   }
 
   throw new Error(`No deeplink found for actionType: ${actionType} and campaign: ${campaign}`)

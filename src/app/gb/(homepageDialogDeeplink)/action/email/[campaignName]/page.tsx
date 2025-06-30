@@ -6,6 +6,7 @@ import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/a
 import { PageProps } from '@/types'
 import { slugify } from '@/utils/shared/slugify'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { deSlugifyCampaignName } from '@/utils/shared/userActionCampaigns/deSlugifyCampaignName'
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
@@ -27,11 +28,13 @@ export async function generateStaticParams() {
   })
 }
 
+const countryCode = SupportedCountryCodes.GB
+
 export default async function UserActionEmailCongresspersonDeepLink(
   props: PageProps<{ campaignName: string }>,
 ) {
   const params = await props.params
-  const campaignName = deSlugifyCampaignName(params.campaignName)
+  const campaignName = deSlugifyCampaignName(params.campaignName, GBUserActionEmailCampaignName)
 
   if (!campaignName) {
     notFound()
@@ -53,19 +56,9 @@ export default async function UserActionEmailCongresspersonDeepLink(
       >
         <UserActionFormEmailCongresspersonDeeplinkWrapper
           campaignName={campaignName}
-          countryCode={SupportedCountryCodes.GB}
+          countryCode={countryCode}
         />
       </ErrorBoundary>
     </GBHomepageDialogDeeplinkLayout>
-  )
-}
-
-function deSlugifyCampaignName(slugifiedCampaignName: string) {
-  if (slugifiedCampaignName === 'default') {
-    return GBUserActionEmailCampaignName.DEFAULT
-  }
-
-  return Object.values(GBUserActionEmailCampaignName).find(
-    campaignName => slugify(campaignName) === slugifiedCampaignName,
   )
 }

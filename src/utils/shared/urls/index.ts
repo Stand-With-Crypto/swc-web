@@ -119,7 +119,18 @@ export const getIntlUrls = (
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
-    leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
+    recentActivity: (params: Partial<{ pageNumber: number; stateCode: string }> = {}) => {
+      const pageNumber = params.pageNumber || 1
+      const shouldSuppressPageNumber = pageNumber === 1
+      const suffix = shouldSuppressPageNumber ? '' : `/${pageNumber}`
+
+      return `/recent-activity${suffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
+    },
+    leaderboard: (params?: {
+      pageNum?: number
+      stateCode?: string
+      tab: RecentActivityAndLeaderboardTabs
+    }) => {
       const getTabPrefix = (tab = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY) => {
         switch (tab) {
           case RecentActivityAndLeaderboardTabs.LEADERBOARD:
@@ -138,10 +149,17 @@ export const getIntlUrls = (
       const pageNum = params.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${countryPrefix}${tabPrefix}${tabSuffix}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
     },
     partners: () => `${countryPrefix}/partners`,
-    politiciansHomepage: () => `${countryPrefix}/politicians`,
+    politiciansHomepage: ({
+      filters,
+      hash,
+    }: { filters?: Partial<{ state: string }>; hash?: string } = {}) => {
+      const params = new URLSearchParams(filters).toString()
+
+      return `${countryPrefix}/politicians${params ? `?${params}` : ''}${hash ? `#${hash}` : ''}`
+    },
     politicianDetails: (dtsiSlug: string) => `${countryPrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${countryPrefix}/profile`,
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
@@ -156,16 +174,20 @@ export const getIntlUrls = (
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
-    referrals: (pageNum?: number) => {
+    referrals: ({ pageNum, stateCode }: Partial<{ pageNum: number; stateCode: string }> = {}) => {
       const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
-      return `${countryPrefix}/referrals${pageSuffix}`
+      const stateSuffix = stateCode ? `?state=${stateCode.toLowerCase()}` : ''
+      return `${countryPrefix}/referrals${pageSuffix}${stateSuffix}`
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
+    newmodeMomentumAheadHouseRisingAction: () => `${countryPrefix}/content/houserising`,
     contentClarity: () => `${countryPrefix}/content/clarity`,
     contentGenius: () => `${countryPrefix}/content/genius`,
     ...RACES_ROUTES,
+    localPolicy: (stateCode?: string) =>
+      `${countryPrefix}/local-policy${stateCode ? `/${stateCode.toLowerCase()}` : ''}`,
   }
 }
 
@@ -194,13 +216,21 @@ export const apiUrls = {
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/public/dtsi/all-people/${countryCode}`,
-  recentActivity: ({ limit, countryCode }: { limit: number; countryCode: string }) =>
-    `/api/public/recent-activity/${limit}/${countryCode}`,
+  recentActivity: ({
+    limit,
+    countryCode,
+    stateCode,
+  }: {
+    limit: number
+    countryCode: string
+    stateCode?: string
+  }) => `/api/public/recent-activity/${limit}/${countryCode}${stateCode ? `/${stateCode}` : ''}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,
   totalAdvocatesPerState: () => '/api/public/advocates-map/total-advocates-per-state',
+  advocatesCountByState: (stateCode: string) => `/api/public/state-advocates/${stateCode}`,
   smsStatusCallback: ({
     campaignName,
     journeyType,
@@ -215,8 +245,16 @@ export const apiUrls = {
     `/api/${countryCode}/identified-user/polls-votes-from-user`,
   pollsResultsData: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/public/polls`,
-  districtRanking: ({ stateCode, districtNumber }: { stateCode: string; districtNumber: string }) =>
-    `/api/public/referrals/${stateCode}/${districtNumber}`,
+  districtRanking: ({
+    stateCode,
+    districtNumber,
+    filteredByState,
+  }: {
+    stateCode: string
+    districtNumber: string
+    filteredByState?: boolean
+  }) =>
+    `/api/public/referrals/${stateCode}/${districtNumber}${filteredByState ? '?filteredByState=true' : ''}`,
   dtsiRacesByCongressionalDistrict: ({
     stateCode,
     district,

@@ -1,53 +1,26 @@
-import { Feature, Geometry } from 'geojson'
-import { ogr2ogr } from 'ogr2ogr'
+import fs from 'fs'
+import { chunk } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
-import { normalizeCADistrictName } from '@/bin/swcCivic/normalizers/normalizeCADistricts'
-import {
-  normalizeUSDistrictName,
-  normalizeUSStateCode,
-} from '@/bin/swcCivic/normalizers/normalizeUSDistrict'
+import { electoralZonesDataConfigs } from '@/bin/swcCivic/electoralZoneDataConfigs'
+import { readGISData } from '@/bin/swcCivic/utils/readGISData'
 import { civicPrismaClient } from '@/utils/server/swcCivic/civicPrismaClient'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const electoralZonesData = [
-  {
-    countryCode: SupportedCountryCodes.GB,
-    dataFilePath: 'data/uk_parliamentary_constituencies.geojson',
-    electoralZoneNameField: 'PCON24NM',
-    persist: true,
-  },
-  {
-    countryCode: SupportedCountryCodes.US,
-    dataFilePath: 'data/us_congressional_districts.geojson',
-    electoralZoneNameField: 'NAMELSAD',
-    stateCodeField: 'STATEFP',
-    normalizeElectoralZoneName: normalizeUSDistrictName,
-    normalizeStateCode: normalizeUSStateCode,
-    persist: true,
-  },
-  {
-    countryCode: SupportedCountryCodes.CA,
-    dataFilePath: 'data/FED_CA_2023_EN.kmz',
-    electoralZoneNameField: 'Name',
-    normalizeElectoralZoneName: normalizeCADistrictName,
-    persist: true,
-  },
-  {
-    countryCode: SupportedCountryCodes.AU,
-    dataFilePath: 'data/au/2021_ELB_region.shp',
-    electoralZoneNameField: 'Elect_div',
-    persist: true,
-  },
-]
-
-interface GeoJSONData {
-  type: string
-  features: Feature<Geometry, { [key: string]: string }>[]
-}
-
+/**
+ * NOTE: Before running this script, make sure to compare the GIS data with DTSI data and audit if the normalization functions are correct.
+ * To do this, run the following command:
+ *
+ * npm run ts src/bin/swcCivic/compareGISDataWithDTSI.ts
+ */
 async function seedSWCCivicDB() {
   console.log('Starting SWC Civic database seeding process...')
+
+  for (const { dataFilePath } of electoralZonesDataConfigs) {
+    if (!fs.existsSync(dataFilePath)) {
+      console.error(`\nError: File ${dataFilePath} does not exist`)
+      return
+    }
+  }
 
   for (const {
     countryCode,
@@ -57,62 +30,68 @@ async function seedSWCCivicDB() {
     normalizeElectoralZoneName,
     normalizeStateCode,
     persist,
-  } of electoralZonesData) {
+  } of electoralZonesDataConfigs) {
     console.log(`\nProcessing country: ${countryCode}`)
     console.log(`Reading data from: ${dataFilePath}`)
 
     try {
-      const { data } = await ogr2ogr(dataFilePath, {
-        maxBuffer: 1024 * 1024 * 400, // 400MB
-      })
+      const GISData = await readGISData(dataFilePath)
 
-      if (!data) {
-        console.error(`Error: No data returned from ogr2ogr for ${countryCode}`)
+      if (!GISData) {
+        console.error(`Error: No data returned from readGISData for ${countryCode}`)
         continue
       }
 
-      const geojsonData = data as unknown as GeoJSONData
-      console.log(`Found ${geojsonData.features.length} electoral zones for ${countryCode}`)
+      console.log(`Found ${GISData.features.length} electoral zones for ${countryCode}`)
 
       let processedCount = 0
-      for (const feature of geojsonData.features) {
-        const electoralZoneName = feature.properties?.[electoralZoneNameField]?.trim()
-        const stateCode = stateCodeField ? feature.properties?.[stateCodeField] : undefined
 
-        const normalizedElectoralZoneName =
-          normalizeElectoralZoneName?.(electoralZoneName) || electoralZoneName
+      const electoralZoneChunks = chunk(GISData.features, 100)
 
-        const normalizedStateCode = stateCode
-          ? normalizeStateCode?.(stateCode) || stateCode
-          : undefined
+      for (const electoralZoneChunk of electoralZoneChunks) {
+        await Promise.all(
+          electoralZoneChunk.map(async electoralZone => {
+            const electoralZoneName = electoralZone.properties?.[electoralZoneNameField]?.trim()
+            const stateCode = stateCodeField
+              ? electoralZone.properties?.[stateCodeField]
+              : undefined
 
-        const geometry = feature.geometry
+            const normalizedElectoralZoneName =
+              normalizeElectoralZoneName?.(electoralZoneName) || electoralZoneName
 
-        try {
-          if (persist) {
-            await civicPrismaClient.$executeRaw`
-            INSERT INTO electoral_zones (zone_name, state_code, country_code, zone_coordinates, created_at, updated_at)
-            VALUES (${normalizedElectoralZoneName}, ${normalizedStateCode}, ${countryCode}, ST_Force3D(ST_GeomFromGeoJSON(${geometry})), now(), now())
-            `
-          } else {
-            console.log(
-              `Would have inserted electoral zone ${normalizedElectoralZoneName} for ${countryCode}`,
-            )
-          }
+            const normalizedStateCode = stateCode
+              ? normalizeStateCode?.(stateCode) || stateCode
+              : undefined
 
-          processedCount++
+            const geometry = electoralZone.geometry
 
-          if (processedCount % 100 === 0) {
-            console.log(
-              `Processed ${processedCount}/${geojsonData.features.length} electoral zones for ${countryCode}`,
-            )
-          }
-        } catch (error) {
-          console.error(
-            `Error inserting electoral zone ${normalizedElectoralZoneName} for ${countryCode}:`,
-            error,
-          )
-        }
+            try {
+              if (persist) {
+                await civicPrismaClient.$executeRaw`
+              INSERT INTO electoral_zones (zone_name, state_code, country_code, zone_coordinates, created_at, updated_at)
+              VALUES (${normalizedElectoralZoneName}, ${normalizedStateCode}, ${countryCode}, ST_Force3D(ST_GeomFromGeoJSON(${geometry})), now(), now())
+              `
+              } else {
+                console.log(
+                  `Would have inserted electoral zone ${normalizedElectoralZoneName} for ${countryCode}`,
+                )
+              }
+
+              processedCount++
+
+              if (processedCount % 100 === 0) {
+                console.log(
+                  `Processed ${processedCount}/${GISData.features.length} electoral zones for ${countryCode}`,
+                )
+              }
+            } catch (error) {
+              console.error(
+                `Error inserting electoral zone ${normalizedElectoralZoneName} for ${countryCode}:`,
+                error,
+              )
+            }
+          }),
+        )
       }
 
       console.log(`Completed processing ${processedCount} electoral zones for ${countryCode}`)

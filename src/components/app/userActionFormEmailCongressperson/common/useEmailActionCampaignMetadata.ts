@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 
 import { getAUEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/au/campaigns'
 import { getCAEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns'
+import { EmailActionCampaignNames } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { getGBEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/gb/campaigns'
 import { getUSEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/us/campaigns'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
@@ -11,36 +12,23 @@ import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
-export type UseEmailActionCampaignMetadataProps =
-  | {
-      countryCode: SupportedCountryCodes.US
-      campaignName: USUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.AU
-      campaignName: AUUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.CA
-      campaignName: CAUserActionEmailCampaignName
-    }
-  | {
-      countryCode: SupportedCountryCodes.GB
-      campaignName: GBUserActionEmailCampaignName
-    }
+interface UseEmailActionCampaignMetadataProps {
+  countryCode: SupportedCountryCodes
+  campaignName: EmailActionCampaignNames
+}
 
 export function useEmailActionCampaignMetadata(props: UseEmailActionCampaignMetadataProps) {
   const { campaignName, countryCode } = props
   return useMemo(() => {
     switch (countryCode) {
       case SupportedCountryCodes.US:
-        return getUSEmailActionCampaignMetadata(campaignName)
+        return getUSEmailActionCampaignMetadata(campaignName as USUserActionEmailCampaignName)
       case SupportedCountryCodes.AU:
-        return getAUEmailActionCampaignMetadata(campaignName)
+        return getAUEmailActionCampaignMetadata(campaignName as AUUserActionEmailCampaignName)
       case SupportedCountryCodes.CA:
-        return getCAEmailActionCampaignMetadata(campaignName)
+        return getCAEmailActionCampaignMetadata(campaignName as CAUserActionEmailCampaignName)
       case SupportedCountryCodes.GB:
-        return getGBEmailActionCampaignMetadata(campaignName)
+        return getGBEmailActionCampaignMetadata(campaignName as GBUserActionEmailCampaignName)
       default:
         return gracefullyError({
           msg: `useEmailActionCampaignMetadata received invalid country code`,

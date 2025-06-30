@@ -6,21 +6,24 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const query = /* GraphQL */ `
-  query DistrictsByCountryCode($primaryCountryCode: String!) {
-    primaryDistricts(primaryCountryCode: $primaryCountryCode)
+  query DistrictsByCountryCode($primaryCountryCode: String!, $primaryState: String) {
+    primaryDistricts(primaryCountryCode: $primaryCountryCode, primaryState: $primaryState)
   }
 `
 
 export const queryDTSIDistrictsByCountryCode = async ({
   countryCode,
+  stateCode,
 }: {
   countryCode: SupportedCountryCodes
+  stateCode?: string
 }) => {
   const results = await fetchDTSI<
     DTSI_DistrictsByCountryCodeQuery,
     DTSI_DistrictsByCountryCodeQueryVariables
   >(query, {
     primaryCountryCode: countryCode,
+    primaryState: stateCode,
   })
 
   return results

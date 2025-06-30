@@ -1,20 +1,26 @@
-import { notFound, redirect, RedirectType } from 'next/navigation'
+import { UserActionType } from '@prisma/client'
 
-import { DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns'
-import { PageProps } from '@/types'
-import { slugify } from '@/utils/shared/slugify'
+import { CAHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/ca'
+import { UserActionEmailCongresspersonRootPageDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageRootDialogDeeplinkWrapper'
+import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
-export default async function UserActionEmailDeepLink(props: PageProps) {
-  const slugifiedCampaignName = slugify(DEFAULT_DEEPLINK_URL_CAMPAIGN_NAME)
-
-  if (!slugifiedCampaignName) {
-    return notFound()
-  }
-
-  const searchParams = await props.searchParams
-  const urlParams = new URLSearchParams(searchParams as Record<string, string>)
-  const searchParamsString = urlParams.toString()
-  const redirectUrl = `/ca/action/email/${slugifiedCampaignName}${searchParamsString ? `?${searchParamsString}` : ''}`
-
-  return redirect(redirectUrl, RedirectType.replace)
+export default async function UserActionEmailDeepLink() {
+  return (
+    <CAHomepageDialogDeeplinkLayout>
+      <ErrorBoundary
+        extras={{
+          action: {
+            isDeeplink: true,
+            actionType: UserActionType.EMAIL,
+          },
+        }}
+        severityLevel="error"
+        tags={{
+          domain: 'UserActionEmailCongresspersonDeepLink',
+        }}
+      >
+        <UserActionEmailCongresspersonRootPageDeeplinkWrapper />
+      </ErrorBoundary>
+    </CAHomepageDialogDeeplinkLayout>
+  )
 }

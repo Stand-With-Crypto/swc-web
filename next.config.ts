@@ -319,6 +319,11 @@ const nextConfig: NextConfig = {
         destination: '/gb',
         permanent: false,
       },
+      {
+        source: '/press/stand-with-crypto-reacts-to-passage-of-fit21-legislation',
+        destination: '/press/stand-with-crypto-reacts-to-passage-of-fit-21-legislation',
+        permanent: true,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
@@ -435,6 +440,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // SMS shortlinks
+      {
+        source: '/ca/s/house-rising',
+        destination:
+          '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
+        permanent: true,
+      },
       {
         source: '/s/founders-push/:sessionId*',
         destination:
