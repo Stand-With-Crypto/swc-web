@@ -79,7 +79,7 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
   },
   [SupportedCountryCodes.GB]: {
     projectionUrl:
-      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/gb-countries-boundaries-2024-eH2rACXCrEPRdj8veZTcvIBiheS1Zc.geojson',
+      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/gb-countries-boundaries-2024-UhkWqtG8KpE4IirXzXASMaLLvdzOO2.json',
     projection: 'geoMercator',
     projectionConfig: {
       center: [-3.5, 56.0],
