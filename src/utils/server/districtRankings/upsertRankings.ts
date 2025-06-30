@@ -206,6 +206,50 @@ export async function getDistrictsLeaderboardData(
   }
 }
 
+export async function getDistrictsLeaderboardDataByState(
+  stateCode: string,
+  pagination?: {
+    limit: number
+    offset: number
+  },
+): Promise<LeaderboardPaginationData> {
+  const rawResults = await redisWithCache.zrange(CURRENT_DISTRICT_RANKING, 0, -1, {
+    rev: true,
+    withScores: true,
+  })
+
+  const results = chunk(rawResults, 2) as RedisInterlacedResult
+
+  const items = results.map(([member, score]) => ({
+    ...parseMemberKey(member),
+    count: score,
+  }))
+
+  const filteredItems = items
+    .filter(item => item.state === stateCode)
+    .map((item, index) => ({ ...item, rank: index + 1 }))
+
+  return {
+    items: pagination
+      ? filteredItems.slice(pagination.offset, pagination.offset + pagination.limit)
+      : filteredItems,
+    total: filteredItems.length,
+  }
+}
+
+export async function getDistrictRankByState(member: RedisEntryData) {
+  const { items } = await getDistrictsLeaderboardDataByState(member.state)
+
+  const result = items.find(
+    item => item.state === member.state && item.district === member.district,
+  )
+
+  return {
+    rank: result?.rank ?? null,
+    score: result?.count ?? null,
+  }
+}
+
 export async function getDistrictRank(
   redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
   member: RedisEntryData,
