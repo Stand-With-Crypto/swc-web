@@ -3,11 +3,20 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { X } from 'lucide-react'
 
+import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { Video } from '@/components/ui/video'
 
 export function GBHeroVideoDialog({ children }: React.PropsWithChildren) {
-  const [open, setOpen] = useState(false)
+  const [open, _setOpen] = useState(false)
   const modalRef = useRef<HTMLDivElement>(null)
+
+  const setOpen = useCallback(
+    (newOpen: boolean) => {
+      trackDialogOpen({ open: newOpen, analytics: 'Hero Video Dialog' })
+      _setOpen(newOpen)
+    },
+    [_setOpen],
+  )
 
   useManualDialogEffects({ open, setOpen, modalRef })
 
@@ -72,7 +81,7 @@ function useManualDialogEffects({
   modalRef,
 }: {
   open: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setOpen: (open: boolean) => void
   modalRef: React.RefObject<HTMLDivElement | null>
 }) {
   useEffect(() => {
