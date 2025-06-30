@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { ComposableMapProps } from 'react-simple-maps'
 import { UserActionType } from '@prisma/client'
 
 import {
@@ -8,6 +9,7 @@ import {
   IconProps,
   JoinIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const STATE_COORDS: Record<string, [number, number]> = {
   AL: [-86.9023, 32.3182],
@@ -63,8 +65,28 @@ export const STATE_COORDS: Record<string, [number, number]> = {
   DC: [-77.026, 38.8964],
 }
 
-export const ADVOCATES_HEATMAP_GEO_URL =
-  'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json'
+interface MapProjectionConfig {
+  projectionUrl: string
+  projection?: ComposableMapProps['projection']
+  projectionConfig?: ComposableMapProps['projectionConfig']
+}
+
+export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapProjectionConfig>> = {
+  [SupportedCountryCodes.US]: {
+    projectionUrl:
+      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json',
+    projection: 'geoAlbersUsa',
+  },
+  [SupportedCountryCodes.GB]: {
+    projectionUrl:
+      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/gb-countries-boundaries-2024-eH2rACXCrEPRdj8veZTcvIBiheS1Zc.geojson',
+    projection: 'geoMercator',
+    projectionConfig: {
+      center: [-3.5, 56.0],
+      scale: 1500,
+    },
+  },
+}
 
 export const ADVOCATES_ACTIONS: Partial<
   Record<

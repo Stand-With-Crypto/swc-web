@@ -11,7 +11,7 @@ import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmap
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
@@ -109,7 +109,7 @@ export function AdvocatesHeatmap({
           'flex w-full flex-col items-start gap-4',
           isEmbedded
             ? 'md:flex-row'
-            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
+            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-10'}`,
         )}
       >
         {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
@@ -188,14 +188,21 @@ const MapComponent = ({
     setActionInfo(null)
   }, [])
 
+  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
+
+  if (!mapConfig) {
+    return null
+  }
+
   return (
     <>
       <ComposableMap
-        projection="geoAlbersUsa"
+        projection={mapConfig.projection}
+        projectionConfig={mapConfig.projectionConfig}
         style={{ width: '100%', height: '100%' }}
         viewBox="-20 40 850 550"
       >
-        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+        <Geographies geography={mapConfig.projectionUrl}>
           {({ geographies }) => (
             <>
               {geographies.map(geo => (

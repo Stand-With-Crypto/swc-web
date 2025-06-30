@@ -1,12 +1,20 @@
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
+import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
+import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
 import { RecentActivity } from '@/components/app/recentActivity'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
+import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -15,7 +23,14 @@ import { GbHero } from './hero'
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
 
-export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders }: HomePageProps) {
+export function GbPageHome({
+  topLevelMetrics,
+  recentActivity,
+  partners,
+  founders,
+  actions,
+  countUsers,
+}: HomePageProps & Awaited<ReturnType<typeof getHomepageData>>) {
   return (
     <>
       <GbHero />
@@ -28,6 +43,73 @@ export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders
           useGlobalLabels
         />
       </section>
+
+      <HomePageSection>
+        <HomePageSection.Title>Our community</HomePageSection.Title>
+        <HomePageSection.Subtitle className="md:hidden">
+          See how our community is taking a stand to safeguard the future of crypto in America.
+        </HomePageSection.Subtitle>
+        <RecentActivity>
+          <ResponsiveTabsOrSelect
+            analytics={'Homepage Our Community Tabs'}
+            data-testid="community-leaderboard-tabs"
+            defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+            options={[
+              {
+                value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                label: 'Recent activity',
+                content: (
+                  <>
+                    <HomePageSection.Subtitle className="hidden md:block">
+                      See the most recent actions our community has taken to safeguard the future of
+                      crypto in America.
+                    </HomePageSection.Subtitle>
+                    <DelayedRecentActivityWithMap
+                      actions={actions}
+                      // TODO: add advocate per state data
+                      advocatesMapPageData={{
+                        advocatesMapData: {
+                          totalAdvocatesPerState: [],
+                        },
+                      }}
+                      countUsers={countUsers.count}
+                      countryCode={countryCode}
+                    />
+                  </>
+                ),
+              },
+              {
+                value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+                label: 'Top Districts',
+                content: (
+                  <div className="space-y-4">
+                    <HomePageSection.Subtitle className="hidden md:block">
+                      See which district has the most number of advocates.
+                    </HomePageSection.Subtitle>
+                    <YourDistrictRank />
+                    {/* TODO: add leaderboard data */}
+                    <DistrictsLeaderboard countryCode={countryCode} data={[]} />
+                    <div className="mx-auto flex w-fit justify-center gap-2">
+                      <LoginDialogWrapper
+                        authenticatedContent={
+                          <UserActionFormReferDialog countryCode={countryCode}>
+                            <Button className="w-full">Refer</Button>
+                          </UserActionFormReferDialog>
+                        }
+                      >
+                        <Button className="w-full">Join</Button>
+                      </LoginDialogWrapper>
+                      <Button asChild variant="secondary">
+                        <InternalLink href={urls.referrals()}>View all</InternalLink>
+                      </Button>
+                    </div>
+                  </div>
+                ),
+              },
+            ]}
+          />
+        </RecentActivity>
+      </HomePageSection>
 
       <HomePageSection>
         <HomePageSection.Title>
