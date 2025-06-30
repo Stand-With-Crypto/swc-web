@@ -28,6 +28,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'ResizeObserver loop', // ResizeObserver loop completed with undelivered notifications.
   'Load failed',
   'Failed to fetch',
+  'Could not assign Magic Eden provider',
   "Failed to read the 'localStorage'",
   'Converting circular structure to JSON',
   "Cannot read properties of undefined (reading 'call')",
@@ -36,6 +37,10 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'The operation is insecure',
   'The object can not be found here',
   'Properties can only be defined on Objects',
+  "Cannot assign to read only property 'push' of object '[object Array]'",
+  "Cannot assign to read only property 'toString' of object '#<Object>'",
+  "Cannot assign to read only property 'error' of object '#<Object>'",
+  "Cannot assign to read only property 'constructor' of object '[object Object]'",
   'network error',
   'localStorage',
   'TLS connection',

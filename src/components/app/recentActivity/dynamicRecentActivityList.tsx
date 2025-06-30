@@ -12,17 +12,20 @@ export interface DynamicRecentActivityListProps {
   actions: PublicRecentActivity
   countryCode: SupportedCountryCodes
   pageSize: number
+  stateCode?: string
 }
 
 function DynamicRecentActivityListContent({
   actions: initialActions,
   countryCode,
   pageSize,
+  stateCode,
 }: DynamicRecentActivityListProps) {
-  const actions = useApiRecentActivity(initialActions, {
+  const { data: actions } = useApiRecentActivity(initialActions, {
     limit: pageSize,
     countryCode: countryCode,
-  }).data
+    stateCode: stateCode,
+  })
   return <RecentActivityList actions={actions} />
 }
 

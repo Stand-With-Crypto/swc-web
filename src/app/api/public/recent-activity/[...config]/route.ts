@@ -12,23 +12,26 @@ export const dynamic = 'error'
 const zodParams = z.object({
   limit: z.string().pipe(z.coerce.number().int().gte(0).lt(100)),
   countryCode: zodSupportedCountryCode,
+  stateCode: z.string().length(2).optional(),
 })
 
 export async function GET(
   _request: NextRequest,
-  props: { params: Promise<{ config: [string, string?] }> },
+  props: { params: Promise<{ config: [string, string, string?] }> },
 ) {
   const params = await props.params
-  const [rawLimit, rawCountryCode] = params.config
+  const [rawLimit, rawCountryCode, rawStateCode] = params.config
 
-  const { limit, countryCode } = zodParams.parse({
-    limit: rawLimit,
+  const { countryCode, limit, stateCode } = zodParams.parse({
     countryCode: rawCountryCode,
+    limit: rawLimit,
+    stateCode: rawStateCode,
   })
 
   const data = await getPublicRecentActivity({
     limit,
     countryCode,
+    stateCode,
   })
   return NextResponse.json(data)
 }

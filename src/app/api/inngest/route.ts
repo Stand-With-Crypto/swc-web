@@ -11,6 +11,8 @@ import { processIntlUsersBatch } from '@/inngest/functions/backfillIntlUsers/log
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
+import { backfillUserActionElectoralZoneCoordinator } from '@/inngest/functions/backfillUserActionElectoralZone'
+import { backfillUserActionElectoralZoneProcessor } from '@/inngest/functions/backfillUserActionElectoralZone/logic'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import { backfillUserCountryCodeEmptyWithInngest } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import {
@@ -95,5 +97,7 @@ export const { GET, POST, PUT } = serve({
     syncSendgridContactsProcessor,
     backfillAddressElectoralZoneCoordinator,
     backfillAddressElectoralZoneProcessor,
+    backfillUserActionElectoralZoneCoordinator,
+    backfillUserActionElectoralZoneProcessor,
   ],
 })
