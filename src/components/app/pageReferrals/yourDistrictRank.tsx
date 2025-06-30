@@ -60,15 +60,13 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
   const { data } = districtRankingResponse
 
   const checkIfUSAddress = useCallback(async () => {
-    // Check if the address is still loading, if the address is not yet loaded, or if stateCode is already present.
-    // If stateCode is present, we don't need to request the country code again.
     if (isLoadingAddress || !address || stateCode) return
 
     setIsUSAddress('loading')
 
     const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
 
-    if (addressDetails.countryCode.toLocaleLowerCase() === SupportedCountryCodes.US) {
+    if (addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US) {
       setIsUSAddress(true)
       return
     }
