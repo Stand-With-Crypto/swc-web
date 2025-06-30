@@ -253,8 +253,7 @@ export const apiUrls = {
     stateCode: string
     districtNumber: string
     filteredByState?: boolean
-  }) =>
-    `/api/public/referrals/${stateCode}/${districtNumber}${filteredByState ? '?filteredByState=true' : ''}`,
+  }) => `/api/public/referrals/${stateCode}/${districtNumber}${filteredByState ? '/by-state' : ''}`,
   dtsiRacesByCongressionalDistrict: ({
     stateCode,
     district,
