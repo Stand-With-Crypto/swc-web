@@ -23,8 +23,6 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -34,9 +32,9 @@ import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
+  filterDTSIPeopleByUSPoliticalCategory,
   getUSPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
-  LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
 } from '@/utils/shared/yourPoliticianCategory/us'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -202,13 +200,6 @@ export function ChangeAddress(props: Omit<AddressProps, 'initialValues'>) {
   )
 }
 
-const filterLegislativeAndExecutive = (dtsiPeople: DTSIPeopleByElectoralZoneQueryResult) =>
-  dtsiPeople.filter(
-    person =>
-      person.primaryRole?.roleCategory &&
-      LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES.includes(person.primaryRole.roleCategory),
-  )
-
 export function useCongresspersonData({
   address,
 }: {
@@ -227,7 +218,7 @@ export function useCongresspersonData({
       const dtsiResponse = await getDTSIPeopleFromAddress({
         address: address.description,
         countryCode,
-        filterFn: filterLegislativeAndExecutive,
+        filterFn: filterDTSIPeopleByUSPoliticalCategory('legislative-and-executive'),
       })
 
       if ('notFoundReason' in dtsiResponse) {

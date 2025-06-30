@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { useWatch } from 'react-hook-form'
 
 import { ContentSection } from '@/components/app/ContentSection'
 import {
@@ -41,9 +40,14 @@ export function PledgeSection({
   isSubmitting,
 }: PledgeSectionProps) {
   const countryCode = useCountryCode()
-  const { congressional, senate, presidential, stateCode, zoneName } = racesByAddressData ?? {}
 
-  const electoralZone = zoneName
+  const {
+    congressional,
+    senate,
+    presidential,
+    stateCode,
+    zoneName: electoralZone,
+  } = racesByAddressData ?? {}
 
   const handleSuccess = useCallback(() => {
     if (isLoading) {
