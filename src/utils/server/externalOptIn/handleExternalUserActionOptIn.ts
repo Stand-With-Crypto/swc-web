@@ -264,9 +264,9 @@ async function maybeUpsertUser({
       googlePlaceId: undefined,
     }
     try {
-      const { placeId, location, addressComponents } = await getPlaceDataFromAddress(
-        getFormattedDescription(address, false),
-      )
+      const { placeId, location, addressComponents } = await getPlaceDataFromAddress({
+        address: getFormattedDescription(address, false),
+      })
       dbAddress = formatGooglePlacesResultToAddress({
         address_components: addressComponents,
         geometry: {

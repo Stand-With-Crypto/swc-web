@@ -6,6 +6,10 @@ import { z } from 'zod'
 import { getLogger } from '@/utils/shared/logger'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
+export const GOOGLE_PLACES_TEXT_SEARCH_API_URL =
+  'https://places.googleapis.com/v1/places:searchText'
+export const GOOGLE_PLACES_DETAILS_API_URL = 'https://places.googleapis.com/v1/places'
+
 const logger = getLogger('formatGooglePlacesResultToAddress')
 
 export type GooglePlaceAutocompletePrediction = Pick<
