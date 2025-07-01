@@ -55,7 +55,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     title: 'Email your House Rep',
     description: 'Support Market Structure Regulation (CLARITY Act)',
     campaignsModalDescription:
-      'One of the most effective ways of making your voice heard. We've drafted emails to make it easy for you.',
+      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
     campaigns: [
       {
@@ -330,9 +330,9 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.VOTER_REGISTRATION]: {
     title: 'Check your voter registration',
-    description: 'Make sure you're registered to vote in this year's election.',
-    mobileCTADescription: 'Make sure you're registered to vote in this year's election.',
-    campaignsModalDescription: 'Make sure you're registered to vote in this year's election.',
+    description: 'Make sure you’re registered to vote in this year’s election.',
+    mobileCTADescription: 'Make sure you’re registered to vote in this year’s election.',
+    campaignsModalDescription: 'Make sure you’re registered to vote in this year’s election.',
     image: '/actionTypeIcons/voterAttestation.png',
     campaigns: [
       {
@@ -340,7 +340,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: USUserActionVoterRegistrationCampaignName['H1_2025'],
         isCampaignActive: false,
         title: 'Check your voter registration',
-        description: 'Make sure you're registered to vote in this year's election.',
+        description: 'Make sure you’re registered to vote in this year’s election.',
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: null,
       },
