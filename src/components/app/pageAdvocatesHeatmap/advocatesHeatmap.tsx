@@ -11,7 +11,10 @@ import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmap
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  MAP_PROJECTION_CONFIG,
+  MapProjectionConfig,
+} from '@/components/app/pageAdvocatesHeatmap/constants'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
@@ -44,26 +47,40 @@ export function AdvocatesHeatmap({
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
   const markers = useAdvocateMap(actions)
 
+  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
+
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
 
   const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
 
   const getTotalAdvocatesPerState = useCallback(
     (stateName: string) => {
-      const stateCode = getUSStateCodeFromStateName(stateName)
-      return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+      if (countryCode === SupportedCountryCodes.US) {
+        const stateCode = getUSStateCodeFromStateName(stateName)
+        return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+      }
+      if (countryCode === SupportedCountryCodes.GB) {
+        return totalAdvocatesPerState.find(
+          total => total.state.toUpperCase() === stateName.toUpperCase(),
+        )?.totalAdvocates
+      }
     },
-    [totalAdvocatesPerState],
+    [countryCode, totalAdvocatesPerState],
   )
 
   const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
-  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
-    const { clientX, clientY } = event
-    setMousePosition({ x: clientX, y: clientY })
-    setHoveredStateName(geo.properties.name)
-  }, [])
+  const handleStateMouseHover = useCallback(
+    (geo: any, event: MouseEvent<SVGPathElement>) => {
+      const stateName = geo.properties[mapConfig?.geoPropertyStateNameKey ?? 'name']
+
+      const { clientX, clientY } = event
+      setMousePosition({ x: clientX, y: clientY })
+      setHoveredStateName(stateName)
+    },
+    [mapConfig],
+  )
 
   const handleStateMouseOut = useCallback(() => {
     setHoveredStateName(null)
@@ -102,6 +119,10 @@ export function AdvocatesHeatmap({
     )
   }
 
+  if (!mapConfig) {
+    return null
+  }
+
   return (
     <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
       <div
@@ -120,6 +141,7 @@ export function AdvocatesHeatmap({
           handleStateMouseHover={handleStateMouseHover}
           handleStateMouseOut={handleStateMouseOut}
           isEmbedded={isEmbedded}
+          mapConfig={mapConfig}
           markers={markers}
         />
         <TotalAdvocatesPerStateTooltip
@@ -154,12 +176,14 @@ const MapComponent = ({
   handleStateMouseOut,
   countryCode,
   isEmbedded,
+  mapConfig,
 }: {
   markers: MapMarker[]
   handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
   handleStateMouseOut: () => void
   countryCode: SupportedCountryCodes
   isEmbedded?: boolean
+  mapConfig: MapProjectionConfig
 }) => {
   const [actionInfo, setActionInfo] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
@@ -189,12 +213,6 @@ const MapComponent = ({
     setMousePosition(null)
     setActionInfo(null)
   }, [])
-
-  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
-
-  if (!mapConfig) {
-    return null
-  }
 
   return (
     <>

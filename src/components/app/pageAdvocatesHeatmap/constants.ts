@@ -71,11 +71,12 @@ export const STATE_COORDS: Record<string, [number, number]> = {
   ['NORTHERN IRELAND']: [-7.5, 55],
 }
 
-interface MapProjectionConfig {
+export interface MapProjectionConfig {
   projectionUrl: string
   projection?: ComposableMapProps['projection']
   projectionConfig?: ComposableMapProps['projectionConfig']
   markerOffset?: number
+  geoPropertyStateNameKey: string
 }
 
 export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapProjectionConfig>> = {
@@ -87,6 +88,7 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       scale: 1000,
     },
     markerOffset: 1.2,
+    geoPropertyStateNameKey: 'name',
   },
   [SupportedCountryCodes.GB]: {
     projectionUrl:
@@ -97,6 +99,7 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       scale: 1500,
     },
     markerOffset: 0.67,
+    geoPropertyStateNameKey: 'CTRY24NM',
   },
 }
 

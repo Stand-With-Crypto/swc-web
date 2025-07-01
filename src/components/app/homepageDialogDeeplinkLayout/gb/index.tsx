@@ -6,6 +6,7 @@ import { PseudoDialog } from '@/components/app/homepageDialogDeeplinkLayout/comm
 import { HomepageDialogDeeplinkLayoutProps } from '@/components/app/homepageDialogDeeplinkLayout/common/types'
 import { GbPageHome } from '@/components/app/pageHome/gb'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData, getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { getFounders } from '@/utils/server/builder/models/data/founders'
@@ -19,22 +20,30 @@ export async function GBHomepageDialogDeeplinkLayout({
   size = 'md',
   className,
 }: HomepageDialogDeeplinkLayoutProps) {
-  const [asyncProps, topLevelMetrics, recentActivity, partners, founders, dtsiHomepagePoliticians] =
-    await Promise.all([
-      getHomepageData({
-        recentActivityLimit: 30,
-        restrictToUS: true,
-        countryCode,
-      }),
-      getHomepageTopLevelMetrics(),
-      getPublicRecentActivity({
-        limit: 10,
-        countryCode,
-      }),
-      getPartners({ countryCode }),
-      getFounders({ countryCode }),
-      queryDTSIHomepagePeople({ countryCode }),
-    ])
+  const [
+    asyncProps,
+    advocatePerStateDataProps,
+    topLevelMetrics,
+    recentActivity,
+    partners,
+    founders,
+    dtsiHomepagePoliticians,
+  ] = await Promise.all([
+    getHomepageData({
+      recentActivityLimit: 30,
+      restrictToUS: true,
+      countryCode,
+    }),
+    getAdvocatesMapData({ countryCode }),
+    getHomepageTopLevelMetrics(),
+    getPublicRecentActivity({
+      limit: 10,
+      countryCode,
+    }),
+    getPartners({ countryCode }),
+    getFounders({ countryCode }),
+    queryDTSIHomepagePeople({ countryCode }),
+  ])
 
   return (
     <>
@@ -43,6 +52,7 @@ export async function GBHomepageDialogDeeplinkLayout({
       </PseudoDialog>
 
       <GbPageHome
+        advocatePerStateDataProps={advocatePerStateDataProps}
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
         founders={founders}
         partners={partners}

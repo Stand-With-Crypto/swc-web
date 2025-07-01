@@ -22,7 +22,7 @@ export default async function Home(props: PageProps) {
       restrictToUS: true,
       countryCode,
     }),
-    getAdvocatesMapData(),
+    getAdvocatesMapData({ countryCode }),
     getPartners({ countryCode }),
     getDistrictsLeaderboardData({ limit: 10 }),
   ])

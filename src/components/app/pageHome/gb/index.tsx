@@ -14,6 +14,7 @@ import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -30,7 +31,11 @@ export function GbPageHome({
   founders,
   actions,
   countUsers,
-}: HomePageProps & Awaited<ReturnType<typeof getHomepageData>>) {
+  advocatePerStateDataProps,
+}: HomePageProps &
+  Awaited<ReturnType<typeof getHomepageData>> & {
+    advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  }) {
   return (
     <>
       <GbHero />
@@ -66,12 +71,7 @@ export function GbPageHome({
                     </HomePageSection.Subtitle>
                     <DelayedRecentActivityWithMap
                       actions={actions}
-                      // TODO: add advocate per state data
-                      advocatesMapPageData={{
-                        advocatesMapData: {
-                          totalAdvocatesPerState: [],
-                        },
-                      }}
+                      advocatesMapPageData={advocatePerStateDataProps}
                       countUsers={countUsers.count}
                       countryCode={countryCode}
                     />
