@@ -55,7 +55,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     title: 'Email your House Rep',
     description: 'Support Market Structure Regulation (CLARITY Act)',
     campaignsModalDescription:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+      'One of the most effective ways of making your voice heard. We've drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
     campaigns: [
       {
@@ -162,7 +162,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
         isCampaignActive: false,
         title: 'Contact your Member of Congress',
-        description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
+        description: 'Tell your Senator to Vote "Yes" for S.J.Res.3.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
       },
@@ -171,7 +171,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
         isCampaignActive: false,
         title: 'Contact your Member of Congress',
-        description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
+        description: 'Tell your Member to Vote "Yes" for H.J.Res.25.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
       },
@@ -180,7 +180,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
         isCampaignActive: false,
         title: 'Contact your Senator',
-        description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
+        description: 'Tell your Senator to Vote "Yes" on opening debate on the GENIUS Act.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
       },
@@ -194,6 +194,18 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CRYPTO_ADVOCACY_PUSH_JULY_2024,
+        isCampaignActive: true,
+        title: 'Crypto Advocacy Push',
+        description: 'Tell Congress to support pro-crypto policies',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CRYPTO_ADVOCACY_PUSH_JULY_2024,
         }),
       },
     ],
@@ -318,9 +330,9 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.VOTER_REGISTRATION]: {
     title: 'Check your voter registration',
-    description: 'Make sure you’re registered to vote in this year’s election.',
-    mobileCTADescription: 'Make sure you’re registered to vote in this year’s election.',
-    campaignsModalDescription: 'Make sure you’re registered to vote in this year’s election.',
+    description: 'Make sure you're registered to vote in this year's election.',
+    mobileCTADescription: 'Make sure you're registered to vote in this year's election.',
+    campaignsModalDescription: 'Make sure you're registered to vote in this year's election.',
     image: '/actionTypeIcons/voterAttestation.png',
     campaigns: [
       {
@@ -328,7 +340,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: USUserActionVoterRegistrationCampaignName['H1_2025'],
         isCampaignActive: false,
         title: 'Check your voter registration',
-        description: 'Make sure you’re registered to vote in this year’s election.',
+        description: 'Make sure you're registered to vote in this year's election.',
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: null,
       },
