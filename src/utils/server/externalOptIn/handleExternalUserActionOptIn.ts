@@ -285,7 +285,14 @@ async function maybeUpsertUser({
     const isUSAddress = dbAddress.countryCode?.toUpperCase() === 'US'
     if (isUSAddress) {
       try {
-        const electoralZone = await maybeGetElectoralZoneFromAddress(dbAddress)
+        const electoralZone = await maybeGetElectoralZoneFromAddress({
+          address: {
+            countryCode: dbAddress.countryCode,
+            formattedDescription: dbAddress.formattedDescription,
+          },
+          latitude: dbAddress.latitude,
+          longitude: dbAddress.longitude,
+        })
 
         if ('notFoundReason' in electoralZone) {
           logCongressionalDistrictNotFound({

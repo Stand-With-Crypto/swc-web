@@ -3,25 +3,40 @@ import { Address } from '@prisma/client'
 import type { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
-import { apiUrls } from '@/utils/shared/urls'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 export type ElectoralZoneFromAddress = Awaited<ReturnType<typeof getElectoralZoneFromAddress>>
 
 const logger = getLogger('getElectoralZoneFromAddress')
 
-export function maybeGetElectoralZoneFromAddress(
-  address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null,
-) {
+export function maybeGetElectoralZoneFromAddress({
+  address,
+  latitude,
+  longitude,
+}: {
+  address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null
+  latitude?: number | null
+  longitude?: number | null
+}) {
   if (!address) {
     return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
   }
-
-  return getElectoralZoneFromAddress(address.formattedDescription)
+  return getElectoralZoneFromAddress({ address: address.formattedDescription, latitude, longitude })
 }
 
-export async function getElectoralZoneFromAddress(address: string) {
+export async function getElectoralZoneFromAddress({
+  address,
+  latitude,
+  longitude,
+}: {
+  address: string
+  latitude?: number | null
+  longitude?: number | null
+}) {
   try {
-    const response = await fetchReq(apiUrls.swcCivicElectoralZoneFromAddress(address))
+    const response = await fetchReq(
+      fullUrl(apiUrls.swcCivicElectoralZoneFromAddress({ address, latitude, longitude })),
+    )
 
     const data = (await response.json()) as ElectoralZone
 

@@ -25,7 +25,7 @@ export async function getDTSIPeopleFromAddress({
   filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
 }) {
-  const electoralZone = await getElectoralZoneFromAddress(address)
+  const electoralZone = await getElectoralZoneFromAddress({ address })
 
   if ('notFoundReason' in electoralZone) {
     return electoralZone

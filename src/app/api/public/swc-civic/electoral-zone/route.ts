@@ -10,25 +10,29 @@ const logger = getLogger('swcCivicElectoralZoneRoute')
 export const GET = async (req: Request) => {
   const url = new URL(req.url)
   const address = url.searchParams.get('address')
+  const latitudeParam = url.searchParams.get('latitude')
+  const longitudeParam = url.searchParams.get('longitude')
 
-  logger.info('GET', { address })
+  let latitude: number | null = latitudeParam ? Number(latitudeParam) : null
+  let longitude: number | null = longitudeParam ? Number(longitudeParam) : null
+
+  logger.info('GET', { address, latitude, longitude })
 
   if (!address) {
     return NextResponse.json({ error: 'Address is required' }, { status: 400 })
   }
 
-  let latitude: number | null = null
-  let longitude: number | null = null
+  if (!latitude || !longitude) {
+    try {
+      logger.info('Getting latitude and longitude for address', address)
 
-  try {
-    logger.info('Getting latitude and longitude for address', address)
+      const { latitude: lat, longitude: lng } = await getLatLongFromAddressOrPlaceId({ address })
 
-    const { latitude: lat, longitude: lng } = await getLatLongFromAddressOrPlaceId({ address })
-
-    latitude = lat
-    longitude = lng
-  } catch {
-    return NextResponse.json({ error: 'Unable to get latitude and longitude' }, { status: 400 })
+      latitude = lat
+      longitude = lng
+    } catch {
+      return NextResponse.json({ error: 'Unable to get latitude and longitude' }, { status: 400 })
+    }
   }
 
   logger.info('Getting electoral zone for lat/long', { latitude, longitude })

@@ -207,8 +207,22 @@ export const apiUrls = {
 
     return `/api/public/dtsi/by-geography/${countryCode}/${electoralZone}`
   },
-  swcCivicElectoralZoneFromAddress: (address: string) =>
-    `/api/public/swc-civic/electoral-zone?address=${encodeURIComponent(address.trim())}`,
+  swcCivicElectoralZoneFromAddress: ({
+    address,
+    latitude,
+    longitude,
+  }: {
+    address: string
+    latitude?: number | null
+    longitude?: number | null
+  }) => {
+    const searchParams = new URLSearchParams({
+      address: encodeURIComponent(address.trim()),
+    })
+    if (latitude) searchParams.set('latitude', latitude.toString())
+    if (longitude) searchParams.set('longitude', longitude.toString())
+    return `/api/public/swc-civic/electoral-zone?${searchParams.toString()}`
+  },
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,
