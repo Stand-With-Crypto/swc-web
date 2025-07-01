@@ -2,8 +2,7 @@ import 'server-only'
 
 import { NextRequest, NextResponse } from 'next/server'
 
-import { CURRENT_DISTRICT_RANKING } from '@/utils/server/districtRankings/constants'
-import { getDistrictRank } from '@/utils/server/districtRankings/upsertRankings'
+import { getDistrictRankByState } from '@/utils/server/districtRankings/upsertRankings'
 import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
 export const revalidate = 60 // 1 minute
@@ -26,9 +25,9 @@ export async function GET(
     district: parseResult.data.district,
   }
 
-  const data = await getDistrictRank(CURRENT_DISTRICT_RANKING, member)
+  const data = await getDistrictRankByState(member)
 
   return NextResponse.json(data)
 }
 
-export type GetDistrictRankResponse = Awaited<ReturnType<typeof getDistrictRank>>
+export type GetDistrictRankResponse = Awaited<ReturnType<typeof getDistrictRankByState>>
