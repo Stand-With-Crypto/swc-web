@@ -17,7 +17,7 @@ type GooglePlacesResponse = Required<
   Pick<google.maps.places.PlaceResult, 'address_components' | 'geometry'>
 >
 
-const formatGooglePlacesResultToAddress = (
+export const formatGooglePlacesResultToAddress = (
   result: GooglePlacesResponse & {
     placeId: string
     formattedDescription: string

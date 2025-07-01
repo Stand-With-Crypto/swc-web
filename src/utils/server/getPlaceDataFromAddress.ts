@@ -10,10 +10,13 @@ const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
   'GOOGLE_PLACES_BACKEND_API_KEY',
 )
 
+type AddressComponents = google.maps.GeocoderAddressComponent[]
+
 interface GooglePlacesTextSearchResponse {
   places?: Array<{
     id: string
     formattedAddress?: string
+    addressComponents?: AddressComponents
     location?: {
       latitude: number
       longitude: number
@@ -29,6 +32,7 @@ interface GooglePlacesTextSearchRequest {
 export interface PlaceData {
   placeId: string
   formattedAddress: string
+  addressComponents: AddressComponents
   location: {
     latitude: number
     longitude: number
@@ -54,7 +58,8 @@ export async function getPlaceDataFromAddress(address: string): Promise<PlaceDat
     headers: {
       'Content-Type': 'application/json',
       'X-Goog-Api-Key': GOOGLE_PLACES_BACKEND_API_KEY,
-      'X-Goog-FieldMask': 'places.id,places.formattedAddress,places.location',
+      'X-Goog-FieldMask':
+        'places.id,places.formattedAddress,places.location,places.addressComponents',
     },
   })
 
@@ -93,6 +98,7 @@ export async function getPlaceDataFromAddress(address: string): Promise<PlaceDat
   return {
     placeId: firstPlace.id,
     formattedAddress: firstPlace.formattedAddress || '',
+    addressComponents: firstPlace.addressComponents || [],
     location: {
       latitude: firstPlace.location.latitude,
       longitude: firstPlace.location.longitude,
