@@ -28,7 +28,7 @@ import {
   Input,
   UserWithRelations,
 } from '@/utils/server/externalOptIn/types'
-import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
+import { getPlaceDataFromAddress } from '@/utils/server/getPlaceDataFromAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -40,10 +40,8 @@ import * as smsActions from '@/utils/server/sms/actions'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
-import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { logCongressionalDistrictNotFound } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -263,11 +261,16 @@ async function maybeUpsertUser({
       ...address,
       formattedDescription: formattedDescription,
       googlePlaceId: undefined,
+      latitude: null,
+      longitude: null,
     }
     try {
-      dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(
+      const { placeId, location } = await getPlaceDataFromAddress(
         getFormattedDescription(address, false),
       )
+      dbAddress.googlePlaceId = placeId
+      dbAddress.latitude = location.latitude
+      dbAddress.longitude = location.longitude
     } catch (e) {
       logger.error('error getting `googlePlaceId`:' + e)
     }
@@ -275,24 +278,24 @@ async function maybeUpsertUser({
     const isUSAddress = dbAddress.countryCode?.toUpperCase() === 'US'
     if (isUSAddress) {
       try {
-        const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(dbAddress)
+        const electoralZone = await maybeGetElectoralZoneFromAddress(dbAddress)
 
-        if ('notFoundReason' in usCongressionalDistrict) {
+        if ('notFoundReason' in electoralZone) {
           logCongressionalDistrictNotFound({
             address: dbAddress.formattedDescription,
-            notFoundReason: usCongressionalDistrict.notFoundReason,
+            notFoundReason: electoralZone.notFoundReason,
             domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
           })
         }
-        if ('districtNumber' in usCongressionalDistrict) {
-          dbAddress.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+        if ('zoneName' in electoralZone) {
+          dbAddress.electoralZone = `${electoralZone.zoneName}`
         }
       } catch (error) {
-        logger.error('error getting `usCongressionalDistrict`:' + error)
+        logger.error('error getting `electoralZone`:' + error)
         Sentry.captureException(error, {
           tags: {
             domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-            message: 'error getting usCongressionalDistrict',
+            message: 'error getting electoralZone',
           },
         })
       }
