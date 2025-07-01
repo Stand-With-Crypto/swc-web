@@ -13,13 +13,17 @@ export type GooglePlaceAutocompletePrediction = Pick<
   'description' | 'place_id'
 >
 
+type GooglePlacesResponse = Required<
+  Pick<google.maps.places.PlaceResult, 'address_components' | 'geometry'>
+>
+
 const formatGooglePlacesResultToAddress = (
-  result: Required<Pick<google.maps.places.PlaceResult, 'address_components'>> & {
+  result: GooglePlacesResponse & {
     placeId: string
     formattedDescription: string
   },
 ): z.infer<typeof zodAddress> => {
-  const { address_components: addressComponents, formattedDescription, placeId } = result
+  const { address_components: addressComponents, formattedDescription, placeId, geometry } = result
   logger.info('normalizing google place result', result)
   return {
     googlePlaceId: placeId,
@@ -37,14 +41,16 @@ const formatGooglePlacesResultToAddress = (
     postalCodeSuffix:
       addressComponents.find(x => x.types.includes('postal_code_suffix'))?.long_name || '',
     countryCode: addressComponents.find(x => x.types.includes('country'))!.short_name,
+    latitude: geometry.location?.lat() || null,
+    longitude: geometry.location?.lng() || null,
   }
 }
 
 async function fetchAddressComponents(placeId: string) {
   return getDetails({
     placeId,
-    fields: ['address_components'],
-  }) as Promise<Required<Pick<google.maps.places.PlaceResult, 'address_components'>>>
+    fields: ['address_components', 'geometry'],
+  }) as Promise<GooglePlacesResponse>
 }
 
 async function refreshPlaceId(placeId: string) {
