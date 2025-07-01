@@ -112,7 +112,9 @@ export function AdvocatesHeatmap({
             : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-10'}`,
         )}
       >
-        {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
+        {isEmbedded && (
+          <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
+        )}
         <MapComponent
           countryCode={countryCode}
           handleStateMouseHover={handleStateMouseHover}
@@ -139,7 +141,7 @@ export function AdvocatesHeatmap({
             countryCode={countryCode}
           />
         ) : (
-          <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
+          <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
         )}
       </div>
     </div>

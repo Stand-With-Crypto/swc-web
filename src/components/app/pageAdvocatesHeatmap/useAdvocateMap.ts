@@ -1,8 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { ADVOCATES_ACTIONS, STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  AdvocateHeatmapAction,
+  ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
+  MAP_PROJECTION_CONFIG,
+  STATE_COORDS,
+} from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface MapMarker {
   id: string
@@ -10,13 +17,25 @@ export interface MapMarker {
   coordinates: [number, number]
   actionType: UserActionType
   datetimeCreated: string
-  iconType: (typeof ADVOCATES_ACTIONS)[keyof typeof ADVOCATES_ACTIONS]
+  iconType: AdvocateHeatmapAction
   amountUsd?: number
 }
 
-const createMarkersFromActions = (recentActivity: PublicRecentActivity['data']): MapMarker[] => {
+const createMarkersFromActions = (
+  recentActivity: PublicRecentActivity['data'],
+  countryCode: SupportedCountryCodes,
+): MapMarker[] => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
+
+  const actions = ADVOCATES_ACTIONS_BY_COUNTRY_CODE[countryCode]
+  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
+
+  const mapMarkerOffset = mapConfig?.markerOffset || 1
+
+  if (!actions) {
+    return markers
+  }
 
   recentActivity.forEach(item => {
     const userLocation = item.user.userLocationDetails
@@ -24,23 +43,22 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity['data']):
     if (userLocation && userLocation.administrativeAreaLevel1) {
       const state = userLocation.administrativeAreaLevel1
 
-      const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
+      const coordinates = STATE_COORDS[state.toUpperCase()]
 
       if (coordinates) {
         let offsetX = 0
         let offsetY = 0
 
         if (stateCount[state]) {
-          offsetX = stateCount[state] % 2 === 0 ? 1.2 : -1.2
-          offsetY = stateCount[state] % 2 === 0 ? -1.2 : 1.2
+          offsetX = stateCount[state] % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
+          offsetY = stateCount[state] % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
 
           stateCount[state] += 1
         } else {
           stateCount[state] = 1
         }
 
-        const currentIconActionType =
-          ADVOCATES_ACTIONS[item.actionType as keyof typeof ADVOCATES_ACTIONS]
+        const currentIconActionType = actions[item.actionType]
 
         if (!currentIconActionType) {
           return
@@ -76,8 +94,12 @@ const ADVOCATE_MAP_INTERVAL = 2000
 export function useAdvocateMap(actions: PublicRecentActivity) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
   const [totalMarkers, setTotalMarkers] = useState<number>(INITIAL_MARKERS - 1)
+  const countryCode = useCountryCode()
 
-  const markers = useMemo(() => createMarkersFromActions(actions.data), [actions])
+  const markers = useMemo(
+    () => createMarkersFromActions(actions.data, countryCode),
+    [actions, countryCode],
+  )
 
   useEffect(() => {
     const intervalId = setInterval(() => {

@@ -5,12 +5,14 @@ import { UserActionType } from '@prisma/client'
 import {
   DonateIcon,
   EmailIcon,
+  FollowOnLinkedInIcon,
   FollowOnXIcon,
   IconProps,
   JoinIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
+// Coordinates format: [longitude, latitude] (equivalent to [X, Y])
 export const STATE_COORDS: Record<string, [number, number]> = {
   AL: [-86.9023, 32.3182],
   AK: [-152.4044, 61.3707],
@@ -63,12 +65,17 @@ export const STATE_COORDS: Record<string, [number, number]> = {
   WI: [-89.6165, 44.2685],
   WY: [-107.3025, 42.756],
   DC: [-77.026, 38.8964],
+  ENGLAND: [-2, 53],
+  SCOTLAND: [-4.3, 57],
+  WALES: [-4.6, 52.9],
+  ['NORTHERN IRELAND']: [-7.5, 55],
 }
 
 interface MapProjectionConfig {
   projectionUrl: string
   projection?: ComposableMapProps['projection']
   projectionConfig?: ComposableMapProps['projectionConfig']
+  markerOffset?: number
 }
 
 export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapProjectionConfig>> = {
@@ -76,6 +83,10 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
     projectionUrl:
       'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json',
     projection: 'geoAlbersUsa',
+    projectionConfig: {
+      scale: 1000,
+    },
+    markerOffset: 1.2,
   },
   [SupportedCountryCodes.GB]: {
     projectionUrl:
@@ -85,75 +96,110 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       center: [-3.5, 56.0],
       scale: 1500,
     },
+    markerOffset: 0.67,
   },
 }
 
-export const ADVOCATES_ACTIONS: Partial<
-  Record<
-    UserActionType,
-    {
-      icon: (args: IconProps) => ReactNode
-      label: string
-      labelMobile: string
-      labelActionTooltip: (extraText?: string) => string
-    }
-  >
-> = {
-  // removed call and email for the voting day
-  // CALL: {
-  //   icon: CallIcon,
-  //   label: 'Call made to congress',
-  //   labelMobile: 'called',
-  //   labelActionTooltip: () => 'called their rep',
-  // },
+export interface AdvocateHeatmapAction {
+  icon: (args: IconProps) => ReactNode
+  label: string
+  labelMobile: string
+  labelActionTooltip: (extraText?: string) => string
+}
 
-  OPT_IN: {
-    icon: JoinIcon,
-    label: 'New member joined',
-    labelMobile: 'joined',
-    labelActionTooltip: () => 'joined SWC',
+export const ADVOCATES_ACTIONS_BY_COUNTRY_CODE: Partial<
+  Record<SupportedCountryCodes, Partial<Record<UserActionType, AdvocateHeatmapAction>>>
+> = {
+  [SupportedCountryCodes.US]: {
+    // removed call and email for the voting day
+    // CALL: {
+    //   icon: CallIcon,
+    //   label: 'Call made to congress',
+    //   labelMobile: 'called',
+    //   labelActionTooltip: () => 'called their rep',
+    // },
+    OPT_IN: {
+      icon: JoinIcon,
+      label: 'New member joined',
+      labelMobile: 'joined',
+      labelActionTooltip: () => 'joined SWC',
+    },
+    EMAIL: {
+      icon: EmailIcon,
+      label: 'Email sent to senate',
+      labelMobile: 'emailed',
+      labelActionTooltip: () => 'emailed their rep',
+    },
+    TWEET: {
+      icon: FollowOnXIcon,
+      label: 'Followed SWC on X',
+      labelMobile: 'Followed SWC on X',
+      labelActionTooltip: () => 'followed SWC on X',
+    },
+    // VOTING_DAY: {
+    //   icon: VotedIcon,
+    //   label: 'Claimed "I Voted" NFT',
+    //   labelMobile: 'Claimed "I Voted" NFT',
+    //   labelActionTooltip: () => 'claimed the "I Voted" NFT',
+    // },
+    DONATION: {
+      icon: DonateIcon,
+      label: 'Donated to SWC',
+      labelMobile: 'Donated to SWC',
+      labelActionTooltip: extraText =>
+        extraText ? `donated ${extraText} to SWC` : 'donated to SWC',
+    },
+    // removed call and email for the voting day
+    // VOTER_REGISTRATION: {
+    //   icon: VoterRegIcon,
+    //   label: 'Checked voter registration',
+    //   labelMobile: 'checked voter reg.',
+    //   labelActionTooltip: () => 'checked voter registration',
+    // },
+    // VOTER_ATTESTATION: {
+    //   icon: VoterAttestationIcon,
+    //   label: 'Pledged to vote',
+    //   labelMobile: 'pledged to vote',
+    //   labelActionTooltip: () => 'pledged to vote',
+    // },
+    // VOTING_INFORMATION_RESEARCHED: {
+    //   icon: PrepareToVoteIcon,
+    //   label: 'Prepared to vote',
+    //   labelMobile: 'prepared',
+    //   labelActionTooltip: () => 'prepared to vote',
+    // },
   },
-  EMAIL: {
-    icon: EmailIcon,
-    label: 'Email sent to senate',
-    labelMobile: 'emailed',
-    labelActionTooltip: () => 'emailed their rep',
+  [SupportedCountryCodes.GB]: {
+    OPT_IN: {
+      icon: JoinIcon,
+      label: 'New member joined',
+      labelMobile: 'joined',
+      labelActionTooltip: () => 'joined SWC',
+    },
+    // TODO: Uncomment this when we remove newmode
+    // EMAIL: {
+    //   icon: EmailIcon,
+    //   label: 'Email sent to senate',
+    //   labelMobile: 'emailed',
+    //   labelActionTooltip: () => 'emailed their rep',
+    // },
+    VIEW_KEY_PAGE: {
+      icon: EmailIcon,
+      label: 'Email sent to senate',
+      labelMobile: 'emailed',
+      labelActionTooltip: () => 'emailed their rep',
+    },
+    TWEET: {
+      icon: FollowOnXIcon,
+      label: 'Followed SWC on X',
+      labelMobile: 'Followed SWC on X',
+      labelActionTooltip: () => 'followed SWC on X',
+    },
+    LINKEDIN: {
+      icon: FollowOnLinkedInIcon,
+      label: 'Followed SWC on LinkedIn',
+      labelMobile: 'Followed SWC on LinkedIn',
+      labelActionTooltip: () => 'followed SWC on LinkedIn',
+    },
   },
-  TWEET: {
-    icon: FollowOnXIcon,
-    label: 'Followed SWC on X',
-    labelMobile: 'Followed SWC on X',
-    labelActionTooltip: () => 'followed SWC on X',
-  },
-  // VOTING_DAY: {
-  //   icon: VotedIcon,
-  //   label: 'Claimed "I Voted" NFT',
-  //   labelMobile: 'Claimed "I Voted" NFT',
-  //   labelActionTooltip: () => 'claimed the "I Voted" NFT',
-  // },
-  DONATION: {
-    icon: DonateIcon,
-    label: 'Donated to SWC',
-    labelMobile: 'Donated to SWC',
-    labelActionTooltip: extraText => (extraText ? `donated ${extraText} to SWC` : 'donated to SWC'),
-  },
-  // removed call and email for the voting day
-  // VOTER_REGISTRATION: {
-  //   icon: VoterRegIcon,
-  //   label: 'Checked voter registration',
-  //   labelMobile: 'checked voter reg.',
-  //   labelActionTooltip: () => 'checked voter registration',
-  // },
-  // VOTER_ATTESTATION: {
-  //   icon: VoterAttestationIcon,
-  //   label: 'Pledged to vote',
-  //   labelMobile: 'pledged to vote',
-  //   labelActionTooltip: () => 'pledged to vote',
-  // },
-  // VOTING_INFORMATION_RESEARCHED: {
-  //   icon: PrepareToVoteIcon,
-  //   label: 'Prepared to vote',
-  //   labelMobile: 'prepared',
-  //   labelActionTooltip: () => 'prepared to vote',
-  // },
 }
