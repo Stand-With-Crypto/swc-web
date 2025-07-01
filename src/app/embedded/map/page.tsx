@@ -27,7 +27,7 @@ export default async function MapPage(props: PageProps) {
     restrictToUS: true,
     countryCode: params.countryCode,
   })
-  const advocatePerStateDataProps = await getAdvocatesMapData()
+  const advocatePerStateDataProps = await getAdvocatesMapData({ countryCode: params.countryCode })
 
   return (
     <AdvocatesHeatmapPage
