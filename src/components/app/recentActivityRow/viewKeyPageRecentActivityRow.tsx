@@ -11,6 +11,7 @@ import { USUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCa
 interface ViewKeyPageRecentActivityRowProps {
   campaignName: string
   countryCode: SupportedCountryCodes
+  inStateOrEmpty: string
 }
 
 type ViewKeyPageCampaignName =
@@ -22,6 +23,7 @@ type ViewKeyPageCampaignName =
 export function viewKeyPageRecentActivityRow({
   campaignName,
   countryCode,
+  inStateOrEmpty,
 }: ViewKeyPageRecentActivityRowProps) {
   const urls = getIntlUrls(countryCode)
 
@@ -82,7 +84,11 @@ export function viewKeyPageRecentActivityRow({
       ),
     },
     [GBUserActionViewKeyPageCampaignName.UK_STABLE_COINS_PETITION_JUN_2025]: {
-      children: <RecentActivityRowMainText>Someone viewed a key page</RecentActivityRowMainText>,
+      children: (
+        <RecentActivityRowMainText>
+          Someone {inStateOrEmpty} viewed the Stablecoins Petition
+        </RecentActivityRowMainText>
+      ),
     },
   }
 
