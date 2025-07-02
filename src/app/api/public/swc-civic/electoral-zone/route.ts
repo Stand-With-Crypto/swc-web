@@ -2,9 +2,9 @@ import * as Sentry from '@sentry/nextjs'
 import { NextResponse } from 'next/server'
 
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
+import { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 import { getLogger } from '@/utils/shared/logger'
-import { ElectoralZone } from '@/utils/server/swcCivic/types'
 
 const logger = getLogger('swcCivicElectoralZoneRoute')
 
@@ -15,8 +15,8 @@ export const GET = async (req: Request) => {
   const latitudeParam = url.searchParams.get('latitude')
   const longitudeParam = url.searchParams.get('longitude')
 
-  let latitude: number | null = latitudeParam ? Number(latitudeParam) : null
-  let longitude: number | null = longitudeParam ? Number(longitudeParam) : null
+  const latitude: number | null = latitudeParam ? Number(latitudeParam) : null
+  const longitude: number | null = longitudeParam ? Number(longitudeParam) : null
 
   logger.info('GET', { address, latitude, longitude, placeId })
 
