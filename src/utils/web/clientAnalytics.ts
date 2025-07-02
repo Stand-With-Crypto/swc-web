@@ -1,5 +1,6 @@
 import mixpanel, { Callback, RequestOptions } from 'mixpanel-browser'
 
+import { isKnownBotClient } from '@/utils/shared/botUserAgent'
 import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 import { mapPersistedLocalUserToExperimentAnalyticsProperties } from '@/utils/shared/localUser'
 import { customLogger } from '@/utils/shared/logger'
@@ -20,6 +21,9 @@ const environmentHasAnalyticsEnabled =
 
 let init = false
 export function maybeInitClientAnalytics() {
+  if (isKnownBotClient()) {
+    return
+  }
   if (!init) {
     mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
       track_pageview: false,
@@ -29,6 +33,9 @@ export function maybeInitClientAnalytics() {
   }
 }
 export function identifyClientAnalyticsUser(userId: string) {
+  if (isKnownBotClient()) {
+    return
+  }
   const hasTargetingEnabled = getClientCookieConsent(
     getCountryCodeForClientAnalytics() as SupportedCountryCodes,
   ).targeting
@@ -54,6 +61,9 @@ export function trackClientAnalytic(
   _eventProperties?: AnalyticProperties,
   optionsOrCallback?: RequestOptions | Callback,
 ) {
+  if (isKnownBotClient()) {
+    return
+  }
   const countryCode = getCountryCodeForClientAnalytics()
   const eventProperties = { ...getExperimentProperties(), ..._eventProperties, countryCode }
   customLogger(

@@ -4,6 +4,7 @@
 
 import * as Sentry from '@sentry/nextjs'
 
+import { isKnownBotClient } from '@/utils/shared/botUserAgent'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -127,6 +128,11 @@ Sentry.init({
     /^TypeError: network error$/,
   ],
   beforeSend: (event, hint) => {
+    // Suppress Sentry if user agent is a known bot
+    if (isKnownBotClient()) {
+      return null
+    }
+
     // prevent local errors from triggering sentry
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
       console.debug(

@@ -27,6 +27,14 @@ export function withServerActionMiddleware<TAction extends ServerAction<any, any
     const currentHeaders = await headers()
     const userSession = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
 
+    // Block known bots globally for all server actions
+    const isBot = currentHeaders.get('x-known-bot') === 'true'
+    if (isBot) {
+      console.log('Blocked server action execution due to known bot')
+      // Try to match the common return shape for actions
+      return { user: null, error: 'Blocked by known bot detection' } as Awaited<ReturnType<TAction>>
+    }
+
     const countryCode = await getCountryCodeFromHeaders(currentHeaders)
 
     if (userSession) {
