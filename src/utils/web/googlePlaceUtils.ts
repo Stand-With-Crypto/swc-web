@@ -1,14 +1,9 @@
 import * as Sentry from '@sentry/nextjs'
 import { isError } from 'lodash-es'
 import { getDetails } from 'use-places-autocomplete'
-import { z } from 'zod'
 
+import { formatGooglePlacesResultToAddress } from '@/utils/shared/formatGooglePlacesResultToAddress'
 import { getLogger } from '@/utils/shared/logger'
-import { zodAddress } from '@/validation/fields/zodAddress'
-
-export const GOOGLE_PLACES_TEXT_SEARCH_API_URL =
-  'https://places.googleapis.com/v1/places:searchText'
-export const GOOGLE_PLACES_DETAILS_API_URL = 'https://places.googleapis.com/v1/places'
 
 const logger = getLogger('formatGooglePlacesResultToAddress')
 
@@ -20,35 +15,6 @@ export type GooglePlaceAutocompletePrediction = Pick<
 type GooglePlacesResponse = Required<
   Pick<google.maps.places.PlaceResult, 'address_components' | 'geometry'>
 >
-
-export const formatGooglePlacesResultToAddress = (
-  result: GooglePlacesResponse & {
-    placeId: string
-    formattedDescription: string
-  },
-): z.infer<typeof zodAddress> => {
-  const { address_components: addressComponents, formattedDescription, placeId, geometry } = result
-  logger.info('normalizing google place result', result)
-  return {
-    googlePlaceId: placeId,
-    formattedDescription: formattedDescription,
-    streetNumber: addressComponents.find(x => x.types.includes('street_number'))?.long_name || '',
-    route: addressComponents.find(x => x.types.includes('route'))?.long_name || '',
-    subpremise: addressComponents.find(x => x.types.includes('subpremise'))?.long_name || '',
-    locality: addressComponents.find(x => x.types.includes('locality'))?.long_name || '',
-    administrativeAreaLevel1:
-      addressComponents.find(x => x.types.includes('administrative_area_level_1'))?.short_name ||
-      '',
-    administrativeAreaLevel2:
-      addressComponents.find(x => x.types.includes('administrative_area_level_2'))?.long_name || '',
-    postalCode: addressComponents.find(x => x.types.includes('postal_code'))?.long_name || '',
-    postalCodeSuffix:
-      addressComponents.find(x => x.types.includes('postal_code_suffix'))?.long_name || '',
-    countryCode: addressComponents.find(x => x.types.includes('country'))!.short_name,
-    latitude: geometry.location?.lat() || null,
-    longitude: geometry.location?.lng() || null,
-  }
-}
 
 async function fetchAddressComponents(placeId: string) {
   return getDetails({
