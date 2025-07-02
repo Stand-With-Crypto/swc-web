@@ -16,6 +16,7 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
+import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 
 export function DelayedRecentActivityWithMap({
   actions,
@@ -38,7 +39,9 @@ export function DelayedRecentActivityWithMap({
   const urls = useIntlUrls()
   const isMobile = useIsMobile()
 
-  return isMobile || !advocatesMapPageData ? (
+  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
+
+  return isMobile || !advocatesMapPageData || !mapConfig ? (
     <TabsContent ref={ref} value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
       <RecentActivity.List
         actions={{
@@ -70,6 +73,7 @@ export function DelayedRecentActivityWithMap({
       }}
     >
       <AdvocatesHeatmap
+        mapConfig={mapConfig}
         actions={recentActivity}
         advocatesMapPageData={advocatesMapPageData}
         countUsers={countUsers}

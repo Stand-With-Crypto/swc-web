@@ -31,7 +31,6 @@ export async function GBHomepageDialogDeeplinkLayout({
   ] = await Promise.all([
     getHomepageData({
       recentActivityLimit: 30,
-      restrictToUS: true,
       countryCode,
     }),
     getAdvocatesMapData({ countryCode }),

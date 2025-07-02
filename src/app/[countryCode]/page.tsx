@@ -19,7 +19,6 @@ export default async function Home(props: PageProps) {
   const [asyncProps, advocatePerStateDataProps, partners, leaderboardData] = await Promise.all([
     getHomepageData({
       recentActivityLimit: 30,
-      restrictToUS: true,
       countryCode,
     }),
     getAdvocatesMapData({ countryCode }),

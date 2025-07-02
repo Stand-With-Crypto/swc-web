@@ -11,10 +11,7 @@ import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmap
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import {
-  MAP_PROJECTION_CONFIG,
-  MapProjectionConfig,
-} from '@/components/app/pageAdvocatesHeatmap/constants'
+import type { MapProjectionConfig } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
@@ -33,6 +30,7 @@ interface RenderMapProps {
   countUsers: number
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   isEmbedded?: boolean
+  mapConfig: MapProjectionConfig
 }
 
 export function AdvocatesHeatmap({
@@ -41,13 +39,12 @@ export function AdvocatesHeatmap({
   countUsers,
   advocatesMapPageData,
   isEmbedded,
+  mapConfig,
 }: RenderMapProps) {
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
   const markers = useAdvocateMap(actions)
-
-  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
 
@@ -73,7 +70,7 @@ export function AdvocatesHeatmap({
 
   const handleStateMouseHover = useCallback(
     (geo: any, event: MouseEvent<SVGPathElement>) => {
-      const stateName = geo.properties[mapConfig?.geoPropertyStateNameKey ?? 'name']
+      const stateName = geo.properties[mapConfig.geoPropertyStateNameKey]
 
       const { clientX, clientY } = event
       setMousePosition({ x: clientX, y: clientY })
@@ -119,12 +116,8 @@ export function AdvocatesHeatmap({
     )
   }
 
-  if (!mapConfig) {
-    return null
-  }
-
   return (
-    <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
+    <div className={cn('flex flex-col items-start', isEmbedded ? '' : 'gap-8')}>
       <div
         className={cn(
           'flex w-full flex-col items-start gap-4',

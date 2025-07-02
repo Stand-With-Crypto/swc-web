@@ -24,7 +24,6 @@ export default async function GbHomePage() {
   ] = await Promise.all([
     getHomepageData({
       recentActivityLimit: 30,
-      restrictToUS: true,
       countryCode,
     }),
     getAdvocatesMapData({ countryCode }),

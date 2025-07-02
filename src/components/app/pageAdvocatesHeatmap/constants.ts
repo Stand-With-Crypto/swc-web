@@ -179,7 +179,7 @@ export const ADVOCATES_ACTIONS_BY_COUNTRY_CODE: Partial<
       labelMobile: 'joined',
       labelActionTooltip: () => 'joined SWC',
     },
-    // TODO: Uncomment this when we remove newmode
+    // TODO: Uncomment this and remove VIEW_KEY_PAGE when we remove newmode
     // EMAIL: {
     //   icon: EmailIcon,
     //   label: 'Email sent to senate',

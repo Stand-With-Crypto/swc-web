@@ -50,10 +50,10 @@ export function GbPageHome({
       </section>
 
       <HomePageSection>
-        <HomePageSection.Title>Our community</HomePageSection.Title>
-        <HomePageSection.Subtitle className="md:hidden">
-          See how our community is taking a stand to safeguard the future of crypto in America.
-        </HomePageSection.Subtitle>
+        <HomePageSection.Title>
+          <span className="text-primary-cta">Brits</span> believe in crypto
+        </HomePageSection.Title>
+
         <RecentActivity>
           <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
@@ -66,8 +66,8 @@ export function GbPageHome({
                 content: (
                   <>
                     <HomePageSection.Subtitle className="hidden md:block">
-                      See the most recent actions our community has taken to safeguard the future of
-                      crypto in America.
+                      See how the community is taking a stand to safeguard the future of crypto in
+                      the UK.
                     </HomePageSection.Subtitle>
                     <DelayedRecentActivityWithMap
                       actions={actions}
@@ -108,24 +108,6 @@ export function GbPageHome({
               },
             ]}
           />
-        </RecentActivity>
-      </HomePageSection>
-
-      <HomePageSection>
-        <HomePageSection.Title>
-          <span className="text-primary-cta">Brits</span> believe in crypto
-        </HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          See how the community is taking a stand to safeguard the future of crypto in the UK.
-        </HomePageSection.Subtitle>
-
-        <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
-          <RecentActivity.Footer>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </RecentActivity.Footer>
         </RecentActivity>
       </HomePageSection>
 
