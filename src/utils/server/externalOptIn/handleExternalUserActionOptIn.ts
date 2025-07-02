@@ -28,7 +28,7 @@ import {
   Input,
   UserWithRelations,
 } from '@/utils/server/externalOptIn/types'
-import { convertAddressDescriptionToAddressSchema } from '@/utils/server/getPlaceDataFromAddress'
+import { getAddressSchemaFromGooglePlacePrediction } from '@/utils/server/getPlaceDataFromAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -265,9 +265,13 @@ async function maybeUpsertUser({
       longitude: null,
     }
     try {
-      dbAddress = await convertAddressDescriptionToAddressSchema({
+      const addressSchema = await getAddressSchemaFromGooglePlacePrediction({
         description: formattedDescription,
       })
+      dbAddress = {
+        ...dbAddress,
+        ...addressSchema,
+      }
     } catch (e) {
       logger.error('error getting `googlePlaceId`:' + e)
     }

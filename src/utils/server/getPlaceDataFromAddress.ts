@@ -16,7 +16,7 @@ const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
 
 type AddressComponents = google.maps.GeocoderAddressComponent[]
 
-export interface PlaceData {
+interface PlaceData {
   placeId: string
   formattedAddress: string
   addressComponents: AddressComponents
@@ -43,7 +43,7 @@ type Args =
  * @returns Place data with ID, formatted address, address components, and location
  * @throws Error if no place is found or if the API request fails
  */
-export async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<PlaceData> {
+async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<PlaceData> {
   let data: GooglePlacesDetailsResponse | undefined
   let response: Response
   if (placeId) {
@@ -145,7 +145,7 @@ async function fetchDataByPlaceId(placeId: string) {
   })
 }
 
-export async function convertAddressDescriptionToAddressSchema(
+export async function getAddressSchemaFromGooglePlacePrediction(
   prediction: Partial<google.maps.places.AutocompletePrediction> & { description: string },
 ) {
   const result = await getPlaceDataFromAddress({
