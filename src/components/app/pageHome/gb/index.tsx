@@ -26,7 +26,6 @@ const urls = getIntlUrls(countryCode)
 
 export function GbPageHome({
   topLevelMetrics,
-  recentActivity,
   partners,
   founders,
   actions,

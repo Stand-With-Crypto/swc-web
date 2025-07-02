@@ -1,12 +1,12 @@
-import * as Sentry from '@sentry/nextjs'
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
+import { notFound } from 'next/navigation'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { PageAdvocatesHeatmapProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
+import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { notFound } from 'next/navigation'
 
 export function AdvocatesHeatmapPage({
   title,
