@@ -5,40 +5,37 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
-export type ElectoralZoneFromAddress = Awaited<ReturnType<typeof getElectoralZoneFromAddress>>
+export type GetElectoralZoneResult = Awaited<ReturnType<typeof getElectoralZone>>
 
 const logger = getLogger('getElectoralZoneFromAddress')
 
 export function maybeGetElectoralZoneFromAddress({
   address,
-  latitude,
-  longitude,
 }: {
-  address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null
-  latitude?: number | null
-  longitude?: number | null
+  address?: Pick<Address, 'countryCode' | 'formattedDescription' | 'latitude' | 'longitude'> | null
 }) {
   if (!address) {
     return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
   }
-  return getElectoralZoneFromAddress({ address: address.formattedDescription, latitude, longitude })
+  if (address.latitude && address.longitude) {
+    return getElectoralZoneFromLatLong({
+      latitude: address.latitude,
+      longitude: address.longitude,
+    })
+  }
+  return getElectoralZoneFromAddressDescription({
+    address: address.formattedDescription,
+  })
 }
 
-export async function getElectoralZoneFromAddress({
-  address,
-  placeId,
-  latitude,
-  longitude,
-}: {
-  address: string
+async function getElectoralZone(params: {
+  address?: string
   placeId?: string | null
   latitude?: number | null
   longitude?: number | null
 }) {
   try {
-    const response = await fetchReq(
-      fullUrl(apiUrls.swcCivicElectoralZoneFromAddress({ address, latitude, longitude, placeId })),
-    )
+    const response = await fetchReq(fullUrl(apiUrls.swcCivicElectoralZoneFromAddress(params)))
 
     const data = (await response.json()) as ElectoralZone
 
@@ -71,4 +68,24 @@ export async function getElectoralZoneFromAddress({
       notFoundReason: 'UNEXPECTED_ERROR' as const,
     }
   }
+}
+
+export function getElectoralZoneFromAddressDescription({
+  address,
+  placeId,
+}: {
+  address: string
+  placeId?: string | null
+}) {
+  return getElectoralZone({ address, placeId })
+}
+
+export function getElectoralZoneFromLatLong({
+  latitude,
+  longitude,
+}: {
+  latitude: number
+  longitude: number
+}) {
+  return getElectoralZone({ latitude, longitude })
 }

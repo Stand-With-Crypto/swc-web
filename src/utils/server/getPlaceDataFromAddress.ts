@@ -1,13 +1,14 @@
+'use server'
+
 import * as Sentry from '@sentry/nextjs'
 import _isEmpty from 'lodash-es/isEmpty'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { formatGooglePlacesResultToAddress } from '@/utils/shared/formatGooglePlacesResultToAddress'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import {
-  GOOGLE_PLACES_DETAILS_API_URL,
-  GOOGLE_PLACES_TEXT_SEARCH_API_URL,
-} from '@/utils/web/googlePlaceUtils'
 
+const GOOGLE_PLACES_TEXT_SEARCH_API_URL = 'https://places.googleapis.com/v1/places:searchText'
+const GOOGLE_PLACES_DETAILS_API_URL = 'https://places.googleapis.com/v1/places'
 const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
   process.env.GOOGLE_PLACES_BACKEND_API_KEY,
   'GOOGLE_PLACES_BACKEND_API_KEY',
@@ -45,12 +46,12 @@ type Args =
 export async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<PlaceData> {
   let data: GooglePlacesDetailsResponse | undefined
   let response: Response
-  if (address) {
-    response = await fetchDataByAddress(address)
-    data = ((await response.json()) as GooglePlacesTextSearchResponse).places?.[0]
-  } else if (placeId) {
+  if (placeId) {
     response = await fetchDataByPlaceId(placeId)
     data = (await response.json()) as GooglePlacesDetailsResponse
+  } else if (address) {
+    response = await fetchDataByAddress(address)
+    data = ((await response.json()) as GooglePlacesTextSearchResponse).places?.[0]
   } else {
     throw new Error('Either address or placeId must be provided')
   }
@@ -141,5 +142,25 @@ async function fetchDataByPlaceId(placeId: string) {
       'X-Goog-Api-Key': GOOGLE_PLACES_BACKEND_API_KEY,
       'X-Goog-FieldMask': 'id,formattedAddress,location,addressComponents',
     },
+  })
+}
+
+export async function convertAddressDescriptionToAddressSchema(
+  prediction: Partial<google.maps.places.AutocompletePrediction> & { description: string },
+) {
+  const result = await getPlaceDataFromAddress({
+    address: prediction.description,
+    placeId: prediction.place_id,
+  })
+  return formatGooglePlacesResultToAddress({
+    address_components: result.addressComponents,
+    geometry: {
+      location: {
+        lat: () => result.location.latitude,
+        lng: () => result.location.longitude,
+      },
+    } as google.maps.places.PlaceGeometry,
+    placeId: result.placeId,
+    formattedDescription: result.formattedAddress,
   })
 }

@@ -213,14 +213,13 @@ export const apiUrls = {
     longitude,
     placeId,
   }: {
-    address: string
+    address?: string
     latitude?: number | null
     longitude?: number | null
     placeId?: string | null
   }) => {
-    const searchParams = new URLSearchParams({
-      address: address.trim(),
-    })
+    const searchParams = new URLSearchParams()
+    if (address) searchParams.set('address', address.trim())
     if (latitude) searchParams.set('latitude', latitude.toString())
     if (longitude) searchParams.set('longitude', longitude.toString())
     if (placeId) searchParams.set('placeId', placeId)

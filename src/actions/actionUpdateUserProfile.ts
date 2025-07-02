@@ -71,9 +71,11 @@ async function actionUpdateUserProfileWithoutMiddleware(
   try {
     if (validatedFields.data.address) {
       const electoralZone = await maybeGetElectoralZoneFromAddress({
-        address: validatedFields.data.address,
-        latitude: validatedFields.data.address.latitude,
-        longitude: validatedFields.data.address.longitude,
+        address: {
+          ...validatedFields.data.address,
+          latitude: validatedFields.data.address.latitude || null,
+          longitude: validatedFields.data.address.longitude || null,
+        },
       })
       if ('notFoundReason' in electoralZone) {
         logCongressionalDistrictNotFound({

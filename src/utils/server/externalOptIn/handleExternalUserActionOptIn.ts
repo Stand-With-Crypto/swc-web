@@ -28,7 +28,7 @@ import {
   Input,
   UserWithRelations,
 } from '@/utils/server/externalOptIn/types'
-import { getPlaceDataFromAddress } from '@/utils/server/getPlaceDataFromAddress'
+import { convertAddressDescriptionToAddressSchema } from '@/utils/server/getPlaceDataFromAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -48,7 +48,6 @@ import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
-import { formatGooglePlacesResultToAddress } from '@/utils/web/googlePlaceUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger('handleExternalUserActionOptIn')
@@ -262,57 +261,44 @@ async function maybeUpsertUser({
       ...address,
       formattedDescription: formattedDescription,
       googlePlaceId: undefined,
+      latitude: null,
+      longitude: null,
     }
     try {
-      const { placeId, location, addressComponents } = await getPlaceDataFromAddress({
-        address: getFormattedDescription(address, false),
-      })
-      dbAddress = formatGooglePlacesResultToAddress({
-        address_components: addressComponents,
-        geometry: {
-          location: {
-            lat: () => location.latitude,
-            lng: () => location.longitude,
-          },
-        } as google.maps.places.PlaceGeometry,
-        placeId,
-        formattedDescription,
+      dbAddress = await convertAddressDescriptionToAddressSchema({
+        description: formattedDescription,
       })
     } catch (e) {
       logger.error('error getting `googlePlaceId`:' + e)
     }
 
-    const isUSAddress = dbAddress.countryCode?.toUpperCase() === 'US'
-    if (isUSAddress) {
-      try {
-        const electoralZone = await maybeGetElectoralZoneFromAddress({
-          address: {
-            countryCode: dbAddress.countryCode,
-            formattedDescription: dbAddress.formattedDescription,
-          },
-          latitude: dbAddress.latitude,
-          longitude: dbAddress.longitude,
-        })
+    try {
+      const electoralZone = await maybeGetElectoralZoneFromAddress({
+        address: {
+          ...dbAddress,
+          latitude: dbAddress?.latitude || null,
+          longitude: dbAddress?.longitude || null,
+        },
+      })
 
-        if ('notFoundReason' in electoralZone) {
-          logCongressionalDistrictNotFound({
-            address: dbAddress.formattedDescription,
-            notFoundReason: electoralZone.notFoundReason,
-            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-          })
-        }
-        if ('zoneName' in electoralZone) {
-          dbAddress.electoralZone = `${electoralZone.zoneName}`
-        }
-      } catch (error) {
-        logger.error('error getting `electoralZone`:' + error)
-        Sentry.captureException(error, {
-          tags: {
-            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-            message: 'error getting electoralZone',
-          },
+      if ('notFoundReason' in electoralZone) {
+        logCongressionalDistrictNotFound({
+          address: dbAddress.formattedDescription,
+          notFoundReason: electoralZone.notFoundReason,
+          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
       }
+      if ('zoneName' in electoralZone) {
+        dbAddress.electoralZone = `${electoralZone.zoneName}`
+      }
+    } catch (error) {
+      logger.error('error getting `electoralZone`:' + error)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+          message: 'error getting electoralZone',
+        },
+      })
     }
   }
 

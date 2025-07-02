@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import { getElectoralZoneFromAddressDescription } from '@/utils/shared/getElectoralZoneFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
@@ -27,7 +27,7 @@ export async function getDTSIPeopleFromAddress({
   filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
 }) {
-  const electoralZone = await getElectoralZoneFromAddress({ address, placeId })
+  const electoralZone = await getElectoralZoneFromAddressDescription({ address, placeId })
 
   if ('notFoundReason' in electoralZone) {
     return electoralZone
