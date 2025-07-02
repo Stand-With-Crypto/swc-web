@@ -182,13 +182,13 @@ export const ADVOCATES_ACTIONS_BY_COUNTRY_CODE: Partial<
     // TODO: Uncomment this and remove VIEW_KEY_PAGE when we remove newmode
     // EMAIL: {
     //   icon: EmailIcon,
-    //   label: 'Email sent to senate',
+    //   label: 'Email sent to MP',
     //   labelMobile: 'emailed',
     //   labelActionTooltip: () => 'emailed their rep',
     // },
     VIEW_KEY_PAGE: {
       icon: EmailIcon,
-      label: 'Email sent to senate',
+      label: 'Email sent to MP',
       labelMobile: 'emailed',
       labelActionTooltip: () => 'emailed their rep',
     },
