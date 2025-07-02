@@ -170,7 +170,7 @@ function DataTableBody<TData extends Person = Person>({
 
   const handleResetFilters = useCallback(() => {
     setColumnFilters(getGlobalFilterDefaults())
-  }, [setColumnFilters, getGlobalFilterDefaults, setGlobalFilter])
+  }, [setColumnFilters, getGlobalFilterDefaults])
 
   return (
     <div className="md:container" id={id}>
@@ -181,8 +181,8 @@ function DataTableBody<TData extends Person = Person>({
           </PageTitle>
           <GlobalFiltersComponent
             columns={table.getAllColumns()}
-            onResetFilters={handleResetFilters}
             isResetButtonDisabled={isResetButtonDisabled}
+            onResetFilters={handleResetFilters}
           />
         </div>
 

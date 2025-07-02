@@ -4,8 +4,11 @@ import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 import { PERSON_TABLE_COLUMNS_IDS } from '@/components/app/dtsiClientPersonDataTable/common/columns'
-import { StanceOnCryptoOptions } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import {
+  type MultipleSearchParamConfig,
+  useMultipleSearchParamState,
+} from '@/hooks/useMultipleSearchParamState'
 import { useSearchParamState } from '@/hooks/useSearchParamState'
 
 export function useSearchFilter(
@@ -64,38 +67,35 @@ export function useSortingFilter(
   return [hasHydrated ? sortedValue : [], handleSortingValue]
 }
 
+const roleKey = PERSON_TABLE_COLUMNS_IDS.ROLE
+const partyKey = PERSON_TABLE_COLUMNS_IDS.PARTY
+const stateKey = PERSON_TABLE_COLUMNS_IDS.STATE
+const stanceKey = PERSON_TABLE_COLUMNS_IDS.STANCE
+
 export function useColumnFilters(): [
   ColumnFiltersState,
   Dispatch<SetStateAction<ColumnFiltersState>>,
 ] {
   const hasHydrated = useHasHydrated()
 
-  const [stanceValue, setStanceValue] = useSearchParamState(
-    PERSON_TABLE_COLUMNS_IDS.STANCE,
-    StanceOnCryptoOptions.ALL,
-  )
-  const [roleValue, setRoleValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.ROLE, 'All')
-  const [partyValue, setPartyValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.PARTY, 'All')
-  const [stateValue, setStateValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.STATE, 'All')
+  const [searchParamValues, setSearchParamValues] = useMultipleSearchParamState({
+    [roleKey]: 'All',
+    [partyKey]: 'All',
+    [stateKey]: 'All',
+    [stanceKey]: 'All',
+  })
+
+  const roleValue = searchParamValues[roleKey]
+  const partyValue = searchParamValues[partyKey]
+  const stateValue = searchParamValues[stateKey]
+  const stanceValue = searchParamValues[stanceKey]
 
   const filters: ColumnFiltersState = useMemo(
     () => [
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.STANCE,
-        value: stanceValue,
-      },
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.ROLE,
-        value: roleValue,
-      },
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.PARTY,
-        value: partyValue,
-      },
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.STATE,
-        value: stateValue,
-      },
+      { id: stanceKey, value: stanceValue },
+      { id: roleKey, value: roleValue },
+      { id: partyKey, value: partyValue },
+      { id: stateKey, value: stateValue },
     ],
     [partyValue, roleValue, stanceValue, stateValue],
   )
@@ -104,29 +104,31 @@ export function useColumnFilters(): [
     newValue => {
       const valueToSet = typeof newValue === 'function' ? newValue(filters) : newValue
 
-      const newStanceValue = valueToSet.find(
-        filter => filter.id === PERSON_TABLE_COLUMNS_IDS.STANCE,
-      )
+      const newSearchParamValues: MultipleSearchParamConfig = {}
+
+      const newStanceValue = valueToSet.find(filter => filter.id === stanceKey)
       if (newStanceValue?.value) {
-        setStanceValue(newStanceValue.value as string)
+        newSearchParamValues[stanceKey] = newStanceValue.value as string
       }
 
-      const newRoleValue = valueToSet.find(filter => filter.id === PERSON_TABLE_COLUMNS_IDS.ROLE)
+      const newRoleValue = valueToSet.find(filter => filter.id === roleKey)
       if (newRoleValue?.value) {
-        setRoleValue(newRoleValue.value as string)
+        newSearchParamValues[roleKey] = newRoleValue.value as string
       }
 
-      const newPartyValue = valueToSet.find(filter => filter.id === PERSON_TABLE_COLUMNS_IDS.PARTY)
+      const newPartyValue = valueToSet.find(filter => filter.id === partyKey)
       if (newPartyValue?.value) {
-        setPartyValue(newPartyValue.value as string)
+        newSearchParamValues[partyKey] = newPartyValue.value as string
       }
 
-      const newStateValue = valueToSet.find(filter => filter.id === PERSON_TABLE_COLUMNS_IDS.STATE)
+      const newStateValue = valueToSet.find(filter => filter.id === stateKey)
       if (newStateValue?.value) {
-        setStateValue(newStateValue.value as string)
+        newSearchParamValues[stateKey] = newStateValue.value as string
       }
+
+      setSearchParamValues(newSearchParamValues)
     },
-    [filters, setPartyValue, setRoleValue, setStanceValue, setStateValue],
+    [filters, setSearchParamValues],
   )
 
   return [hasHydrated ? filters : [], setValue]
