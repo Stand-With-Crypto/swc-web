@@ -115,7 +115,15 @@ export function UsDTSIClientPersonDataTable({
   )
 }
 
-function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
+function UsGlobalFilters({
+  columns,
+  onResetFilters,
+  isResetButtonDisabled,
+}: {
+  columns?: Column<Person>[]
+  onResetFilters: () => void
+  isResetButtonDisabled: boolean
+}) {
   const namedColumns = useMemo(() => {
     if (!columns) return {}
 
@@ -150,6 +158,8 @@ function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         partyOptions={PARTY_OPTIONS}
       />
+
+      <GlobalFilters.ResetButton disabled={isResetButtonDisabled} onResetFilters={onResetFilters} />
     </GlobalFilters>
   )
 }

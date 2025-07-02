@@ -115,7 +115,15 @@ export function CaDTSIClientPersonDataTable({
   )
 }
 
-function CaGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
+function CaGlobalFilters({
+  columns,
+  onResetFilters,
+  isResetButtonDisabled,
+}: {
+  columns?: Column<Person>[]
+  onResetFilters: () => void
+  isResetButtonDisabled: boolean
+}) {
   const namedColumns = useMemo(() => {
     if (!columns) return {}
 
@@ -154,6 +162,8 @@ function CaGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         partyOptions={PARTY_OPTIONS}
       />
+
+      <GlobalFilters.ResetButton disabled={isResetButtonDisabled} onResetFilters={onResetFilters} />
     </GlobalFilters>
   )
 }

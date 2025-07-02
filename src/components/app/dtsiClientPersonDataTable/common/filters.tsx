@@ -1,11 +1,13 @@
 'use client'
 
 import { Column } from '@tanstack/react-table'
+import { X } from 'lucide-react'
 
 import {
   Person,
   PERSON_TABLE_COLUMNS_IDS,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -166,3 +168,26 @@ function GlobalFiltersStateSelect({
 }
 
 GlobalFilters.StateSelect = GlobalFiltersStateSelect
+
+function GlobalFiltersResetButton({
+  onResetFilters,
+  disabled,
+}: {
+  onResetFilters: () => void
+  disabled?: boolean
+}) {
+  return (
+    <Button
+      className="flex-shrink-0"
+      onClick={onResetFilters}
+      size="sm"
+      variant="secondary"
+      disabled={disabled}
+    >
+      <X className="mr-2 h-4 w-4" />
+      Reset Filters
+    </Button>
+  )
+}
+
+GlobalFilters.ResetButton = GlobalFiltersResetButton

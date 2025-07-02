@@ -115,7 +115,15 @@ export function GbDTSIClientPersonDataTable({
   )
 }
 
-function GbGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
+function GbGlobalFilters({
+  columns,
+  onResetFilters,
+  isResetButtonDisabled,
+}: {
+  columns?: Column<Person>[]
+  onResetFilters: () => void
+  isResetButtonDisabled: boolean
+}) {
   const namedColumns = useMemo(() => {
     if (!columns) return {}
 
@@ -151,6 +159,8 @@ function GbGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         partyOptions={PARTY_OPTIONS}
       />
+
+      <GlobalFilters.ResetButton disabled={isResetButtonDisabled} onResetFilters={onResetFilters} />
     </GlobalFilters>
   )
 }

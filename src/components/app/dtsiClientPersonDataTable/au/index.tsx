@@ -114,7 +114,15 @@ export function AuDTSIClientPersonDataTable({
   )
 }
 
-function AuGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
+function AuGlobalFilters({
+  columns,
+  onResetFilters,
+  isResetButtonDisabled,
+}: {
+  columns?: Column<Person>[]
+  onResetFilters: () => void
+  isResetButtonDisabled: boolean
+}) {
   const namedColumns = useMemo(() => {
     if (!columns) return {}
 
@@ -150,6 +158,8 @@ function AuGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         partyOptions={PARTY_OPTIONS}
       />
+
+      <GlobalFilters.ResetButton disabled={isResetButtonDisabled} onResetFilters={onResetFilters} />
     </GlobalFilters>
   )
 }
