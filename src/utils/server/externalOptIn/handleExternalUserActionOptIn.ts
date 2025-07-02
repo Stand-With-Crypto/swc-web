@@ -280,6 +280,7 @@ async function maybeUpsertUser({
       const electoralZone = await maybeGetElectoralZoneFromAddress({
         address: {
           ...dbAddress,
+          googlePlaceId: dbAddress?.googlePlaceId || null,
           latitude: dbAddress?.latitude || null,
           longitude: dbAddress?.longitude || null,
         },

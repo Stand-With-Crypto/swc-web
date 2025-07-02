@@ -12,42 +12,67 @@ const logger = getLogger('getElectoralZoneFromAddress')
 export function maybeGetElectoralZoneFromAddress({
   address,
 }: {
-  address?: Pick<Address, 'countryCode' | 'formattedDescription' | 'latitude' | 'longitude'> | null
+  address?: Pick<
+    Address,
+    'countryCode' | 'formattedDescription' | 'latitude' | 'longitude' | 'googlePlaceId'
+  > | null
 }) {
   if (!address) {
     return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
   }
   if (address.latitude && address.longitude) {
-    return getElectoralZoneFromLatLong({
+    return getElectoralZoneFromGeolocation({
       latitude: address.latitude,
       longitude: address.longitude,
     })
   }
-  return getElectoralZoneFromAddressDescription({
+  return getElectoralZoneFromAddressOrPlaceId({
     address: address.formattedDescription,
+    placeId: address?.googlePlaceId || undefined,
   })
 }
 
-async function getElectoralZone(params: {
-  address?: string
-  placeId?: string | null
-  latitude?: number | null
-  longitude?: number | null
+export function getElectoralZoneFromAddressOrPlaceId({
+  address,
+  placeId,
+}: {
+  address: string
+  placeId?: string
 }) {
+  const params = { address, placeId }
+  return getElectoralZone(apiUrls.swcCivicElectoralZoneByAddress(params), { params })
+}
+
+export function getElectoralZoneFromGeolocation({
+  latitude,
+  longitude,
+}: {
+  latitude: number
+  longitude: number
+}) {
+  const params = { latitude, longitude }
+  return getElectoralZone(apiUrls.swcCivicElectoralZoneByGeolocation(params), { params })
+}
+
+async function getElectoralZone(
+  url: string,
+  {
+    params,
+  }: {
+    params: Record<string, any>
+  },
+) {
   try {
-    const response = await fetchReq(fullUrl(apiUrls.swcCivicElectoralZoneFromAddress(params)))
-
+    const response = await fetchReq(fullUrl(url))
     const data = (await response.json()) as ElectoralZone
-
     if (!data) {
       return {
         notFoundReason: 'ELECTORAL_ZONE_NOT_FOUND' as const,
       }
     }
-
     return data
   } catch (error) {
-    logger.error('Error fetching electoral zone:', error)
+    logger.error('Error fetching electoral zone:', { error, params })
 
     if (error instanceof Response) {
       logger.info('Response error status:', error.status)
@@ -68,24 +93,4 @@ async function getElectoralZone(params: {
       notFoundReason: 'UNEXPECTED_ERROR' as const,
     }
   }
-}
-
-export function getElectoralZoneFromAddressDescription({
-  address,
-  placeId,
-}: {
-  address: string
-  placeId?: string | null
-}) {
-  return getElectoralZone({ address, placeId })
-}
-
-export function getElectoralZoneFromLatLong({
-  latitude,
-  longitude,
-}: {
-  latitude: number
-  longitude: number
-}) {
-  return getElectoralZone({ latitude, longitude })
 }

@@ -9,11 +9,25 @@ const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
   'GOOGLE_PLACES_BACKEND_API_KEY',
 )
 
-export async function getLatLongFromAddressOrPlaceId(params: {
-  address: string
-  placeId?: string
-}) {
-  const placeId = params.placeId || (await getGooglePlaceIdFromAddress(params.address))
+type Args =
+  | {
+      address: string
+      placeId?: string
+    }
+  | {
+      address?: string
+      placeId: string
+    }
+
+export async function getLatLongFromAddressOrPlaceId(params: Args) {
+  let placeId: string
+  if (params.placeId) {
+    placeId = params.placeId
+  } else if (params.address) {
+    placeId = await getGooglePlaceIdFromAddress(params.address)
+  } else {
+    throw new Error('Either address or placeId must be provided')
+  }
 
   const response = await fetchReq(
     `https://places.googleapis.com/v1/places/${placeId}?key=${GOOGLE_PLACES_BACKEND_API_KEY}`,

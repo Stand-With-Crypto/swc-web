@@ -207,23 +207,23 @@ export const apiUrls = {
 
     return `/api/public/dtsi/by-geography/${countryCode}/${electoralZone}`
   },
-  swcCivicElectoralZoneFromAddress: ({
-    address,
+  swcCivicElectoralZoneByAddress: ({ address, placeId }: { address: string; placeId?: string }) => {
+    const searchParams = new URLSearchParams()
+    searchParams.set('address', address.trim())
+    if (placeId) searchParams.set('placeId', placeId)
+    return `/api/public/swc-civic/electoral-zone-by-address?${searchParams.toString()}`
+  },
+  swcCivicElectoralZoneByGeolocation: ({
     latitude,
     longitude,
-    placeId,
   }: {
-    address?: string
-    latitude?: number | null
-    longitude?: number | null
-    placeId?: string | null
+    latitude: number
+    longitude: number
   }) => {
     const searchParams = new URLSearchParams()
-    if (address) searchParams.set('address', address.trim())
-    if (latitude) searchParams.set('latitude', latitude.toString())
-    if (longitude) searchParams.set('longitude', longitude.toString())
-    if (placeId) searchParams.set('placeId', placeId)
-    return `/api/public/swc-civic/electoral-zone?${searchParams.toString()}`
+    searchParams.set('latitude', latitude.toString())
+    searchParams.set('longitude', longitude.toString())
+    return `/api/public/swc-civic/electoral-zone-by-geolocation?${searchParams.toString()}`
   },
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
