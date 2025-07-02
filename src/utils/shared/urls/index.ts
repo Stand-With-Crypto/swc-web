@@ -211,16 +211,19 @@ export const apiUrls = {
     address,
     latitude,
     longitude,
+    placeId,
   }: {
     address: string
     latitude?: number | null
     longitude?: number | null
+    placeId?: string | null
   }) => {
     const searchParams = new URLSearchParams({
-      address: encodeURIComponent(address.trim()),
+      address: address.trim(),
     })
     if (latitude) searchParams.set('latitude', latitude.toString())
     if (longitude) searchParams.set('longitude', longitude.toString())
+    if (placeId) searchParams.set('placeId', placeId)
     return `/api/public/swc-civic/electoral-zone?${searchParams.toString()}`
   },
   totalDonations: () => '/api/public/total-donations',

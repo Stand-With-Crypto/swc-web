@@ -10,13 +10,14 @@ const logger = getLogger('swcCivicElectoralZoneRoute')
 export const GET = async (req: Request) => {
   const url = new URL(req.url)
   const address = url.searchParams.get('address')
+  const placeId = url.searchParams.get('placeId') || undefined
   const latitudeParam = url.searchParams.get('latitude')
   const longitudeParam = url.searchParams.get('longitude')
 
   let latitude: number | null = latitudeParam ? Number(latitudeParam) : null
   let longitude: number | null = longitudeParam ? Number(longitudeParam) : null
 
-  logger.info('GET', { address, latitude, longitude })
+  logger.info('GET', { address, latitude, longitude, placeId })
 
   if (!address) {
     return NextResponse.json({ error: 'Address is required' }, { status: 400 })
@@ -26,7 +27,10 @@ export const GET = async (req: Request) => {
     try {
       logger.info('Getting latitude and longitude for address', address)
 
-      const { latitude: lat, longitude: lng } = await getLatLongFromAddressOrPlaceId({ address })
+      const { latitude: lat, longitude: lng } = await getLatLongFromAddressOrPlaceId({
+        address,
+        placeId,
+      })
 
       latitude = lat
       longitude = lng

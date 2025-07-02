@@ -20,12 +20,14 @@ export async function getDTSIPeopleFromAddress({
   address,
   filterFn,
   countryCode,
+  placeId,
 }: {
   address: string
+  placeId?: string | null
   filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
 }) {
-  const electoralZone = await getElectoralZoneFromAddress({ address })
+  const electoralZone = await getElectoralZoneFromAddress({ address, placeId })
 
   if ('notFoundReason' in electoralZone) {
     return electoralZone
@@ -64,23 +66,29 @@ export async function getDTSIPeopleFromAddress({
 export function useGetDTSIPeopleFromAddress({
   address,
   filterFn,
+  placeId,
 }: {
   address?: string | null
+  placeId?: string | null
   filterFn: DTSIPeopleFromAddressFilter
 }) {
   const countryCode = useCountryCode()
 
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, async () => {
-    if (!address) {
-      return
-    }
+  return useSWR(
+    address || placeId ? `useGetDTSIPeopleFromAddress-${address || placeId || ''}` : null,
+    async () => {
+      if (!address && !placeId) {
+        return
+      }
 
-    return getDTSIPeopleFromAddress({
-      address,
-      countryCode,
-      filterFn,
-    })
-  })
+      return getDTSIPeopleFromAddress({
+        address: address || '',
+        placeId: placeId || '',
+        countryCode,
+        filterFn,
+      })
+    },
+  )
 }
 
 export function formatGetDTSIPeopleFromAddressNotFoundReason(

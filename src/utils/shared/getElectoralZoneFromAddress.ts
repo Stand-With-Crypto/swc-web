@@ -26,16 +26,18 @@ export function maybeGetElectoralZoneFromAddress({
 
 export async function getElectoralZoneFromAddress({
   address,
+  placeId,
   latitude,
   longitude,
 }: {
   address: string
+  placeId?: string | null
   latitude?: number | null
   longitude?: number | null
 }) {
   try {
     const response = await fetchReq(
-      fullUrl(apiUrls.swcCivicElectoralZoneFromAddress({ address, latitude, longitude })),
+      fullUrl(apiUrls.swcCivicElectoralZoneFromAddress({ address, latitude, longitude, placeId })),
     )
 
     const data = (await response.json()) as ElectoralZone
