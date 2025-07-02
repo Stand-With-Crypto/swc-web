@@ -55,6 +55,8 @@ export enum AUUserActionPollCampaignName {
 
 export enum AUUserActionEmailCampaignName {
   DEFAULT = 'DEFAULT',
+  AU_Q2_2025_ELECTION = 'AU_Q2_2025_ELECTION',
+  AU_NEWMODE_DEBANKING = 'AU_NEWMODE_DEBANKING',
 }
 
 export type AUUserActionCampaignName =
