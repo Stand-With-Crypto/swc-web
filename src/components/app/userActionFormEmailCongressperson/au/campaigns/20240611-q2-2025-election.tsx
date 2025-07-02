@@ -1,5 +1,4 @@
 import {
-  getConstituentIntroduction,
   getFullNameSignOff,
   getRepIntro,
   GetTextProps,
@@ -16,19 +15,13 @@ const CAMPAIGN_NAME = AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house-of-reps'
 
-export const DIALOG_TITLE = 'Email your Member of Parliament'
-
-export const DIALOG_SUBTITLE =
-  'Tell your MP to support responsible crypto policy — send an email now!'
-
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
     firstName: props?.firstName,
     lastName: props?.lastName,
   })
-  const maybeDistrictIntro = getConstituentIntroduction(props?.location)
 
-  return `${getRepIntro({ dtsiLastName: props?.dtsiLastName })}\n\n${maybeDistrictIntro}, and I wanted to write to you and let you know that I care about crypto and blockchain technology.\n\nCrypto needs clear rules, regulations, and guidelines to thrive in Australia, and we need members of Parliament like you to champion this powerful technology so that it can reach its full potential. If crypto doesn't succeed in Australia, then jobs, innovation, and new technologies will be driven overseas and our country will miss out on the massive benefits.\n\nI hope that you will keep the views of pro-crypto constituents like myself in mind as you carry on your work in Parliament.${fullNameSignOff}`
+  return `${getRepIntro({ dtsiLastName: props?.dtsiLastName })}\n\nAs a voter in your electorate, I’m writing to express my strong support for crypto and blockchain innovation in Australia. This industry represents a major opportunity for economic growth, job creation, and financial inclusion.\n\nOther countries are moving forward with smart, balanced regulations that foster innovation while protecting consumers. Australia must do the same—or risk losing talent and investment to more forward-thinking jurisdictions.\n\nI’m supporting candidates who understand the importance of crypto and will champion policies that allow the industry to thrive responsibly here. I urge you to take a clear stance on this issue.${fullNameSignOff}`
 }
 
 export const campaignMetadata: CampaignMetadata = {
