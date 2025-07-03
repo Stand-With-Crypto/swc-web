@@ -327,6 +327,7 @@ model UserAction {
   @@index([actionType, userId])
   @@index([actionType, campaignName])
   @@index([actionType, nftMintId, datetimeCreated(sort: Desc)])
+  @@index([actionType, nftMintId, datetimeCreated(sort: Asc)], map: "user_action_action_type_nft_mint_id_datetime_created_asc_idx")
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([userEmailAddressId])
