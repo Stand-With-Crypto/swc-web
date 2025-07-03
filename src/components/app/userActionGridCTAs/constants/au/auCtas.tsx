@@ -68,18 +68,6 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
-        isCampaignActive: true,
-        title: `Email your Member of Parliament`,
-        description: 'Tell your MP to support responsible crypto policy — send an email now!',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
-        }),
-      },
-      {
-        actionType: UserActionType.EMAIL,
         campaignName: AUUserActionEmailCampaignName.AU_NEWMODE_DEBANKING,
         isCampaignActive: false,
         title: 'Email your MP to stop unfair debanking',
@@ -88,6 +76,18 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: AUUserActionEmailCampaignName.AU_NEWMODE_DEBANKING,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
+        isCampaignActive: true,
+        title: `Email your Member of Parliament`,
+        description: 'Tell your MP to support responsible crypto policy — send an email now!',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
         }),
       },
     ],
