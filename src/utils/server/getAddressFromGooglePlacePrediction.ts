@@ -69,7 +69,7 @@ async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<Plac
         extra: { address },
       },
     )
-    throw new Error(`Failed to search for place: ${response.status}`)
+    throw new Error(`Failed to search for place: ${response.status} ${errorText}`)
   }
 
   if (_isEmpty(data) || !data) {
