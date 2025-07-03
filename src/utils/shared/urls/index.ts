@@ -211,7 +211,7 @@ export const apiUrls = {
     const searchParams = new URLSearchParams()
     searchParams.set('address', address.trim())
     if (placeId) searchParams.set('placeId', placeId)
-    return `/api/public/swc-civic/electoral-zone-by-address?${searchParams.toString()}`
+    return `/api/public/swc-civic/electoral-zone/by-address?${searchParams.toString()}`
   },
   swcCivicElectoralZoneByGeolocation: ({
     latitude,
@@ -223,7 +223,7 @@ export const apiUrls = {
     const searchParams = new URLSearchParams()
     searchParams.set('latitude', latitude.toString())
     searchParams.set('longitude', longitude.toString())
-    return `/api/public/swc-civic/electoral-zone-by-geolocation?${searchParams.toString()}`
+    return `/api/public/swc-civic/electoral-zone/by-geolocation?${searchParams.toString()}`
   },
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
