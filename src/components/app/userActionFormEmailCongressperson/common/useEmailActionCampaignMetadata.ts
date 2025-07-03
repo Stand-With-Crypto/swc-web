@@ -21,17 +21,14 @@ interface UseEmailActionCampaignMetadataProps<TCountryCode extends SupportedCoun
   campaignName: EmailActionCampaignNames
 }
 
-// This is ugly, but it's the only way to get the type of the campaign metadata for the country
-// And we need to do this because of the politicianCategory field which is different for each country
-// TODO: Refactor to keep type safety and not have to do this
+interface CampaignMetadataMap {
+  [SupportedCountryCodes.US]: USCampaignMetadata
+  [SupportedCountryCodes.AU]: AUCampaignMetadata
+  [SupportedCountryCodes.CA]: CACampaignMetadata
+  [SupportedCountryCodes.GB]: GBCampaignMetadata
+}
 type CampaignMetadata<TCountryCode extends SupportedCountryCodes> =
-  TCountryCode extends SupportedCountryCodes.US
-    ? USCampaignMetadata
-    : TCountryCode extends SupportedCountryCodes.AU
-      ? AUCampaignMetadata
-      : TCountryCode extends SupportedCountryCodes.CA
-        ? CACampaignMetadata
-        : GBCampaignMetadata
+  CampaignMetadataMap[TCountryCode]
 
 export function useEmailActionCampaignMetadata<TCountryCode extends SupportedCountryCodes>(
   props: UseEmailActionCampaignMetadataProps<TCountryCode>,
