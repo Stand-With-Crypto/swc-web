@@ -72,6 +72,8 @@ const partyKey = PERSON_TABLE_COLUMNS_IDS.PARTY
 const stateKey = PERSON_TABLE_COLUMNS_IDS.STATE
 const stanceKey = PERSON_TABLE_COLUMNS_IDS.STANCE
 
+const defaultFiltersValue = 'All'
+
 export function useColumnFilters(): [
   ColumnFiltersState,
   Dispatch<SetStateAction<ColumnFiltersState>>,
@@ -79,10 +81,10 @@ export function useColumnFilters(): [
   const hasHydrated = useHasHydrated()
 
   const [searchParamValues, setSearchParamValues] = useMultipleSearchParamState({
-    [roleKey]: 'All',
-    [partyKey]: 'All',
-    [stateKey]: 'All',
-    [stanceKey]: 'All',
+    [roleKey]: defaultFiltersValue,
+    [partyKey]: defaultFiltersValue,
+    [stateKey]: defaultFiltersValue,
+    [stanceKey]: defaultFiltersValue,
   })
 
   const roleValue = searchParamValues[roleKey]
