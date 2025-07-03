@@ -145,7 +145,7 @@ async function fetchDataByPlaceId(placeId: string) {
   })
 }
 
-export async function getAddressSchemaFromGooglePlacePrediction(
+export async function getAddressFromGooglePlacePrediction(
   prediction: Partial<google.maps.places.AutocompletePrediction> & { description: string },
 ) {
   const result = await getPlaceDataFromAddress({
