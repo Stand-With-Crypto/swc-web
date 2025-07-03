@@ -40,7 +40,7 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-interface GlobalFiltersProps<TData extends Person = Person> {
+export interface GlobalFiltersProps<TData extends Person = Person> {
   columns?: Column<TData>[]
   onResetFilters: () => void
   isResetButtonDisabled: boolean
@@ -165,8 +165,13 @@ function DataTableBody<TData extends Person = Person>({
   const tableRowModel = table.getRowModel()
 
   const isResetButtonDisabled = useMemo(() => {
-    return !columnFilters.some(filter => filter.value !== 'All')
-  }, [columnFilters])
+    const defaultFilters = getGlobalFilterDefaults()
+
+    return defaultFilters.every(defaultFilter => {
+      const currentFilter = columnFilters.find(columnFilter => columnFilter.id === defaultFilter.id)
+      return currentFilter?.value === defaultFilter.value
+    })
+  }, [columnFilters, getGlobalFilterDefaults])
 
   const handleResetFilters = useCallback(() => {
     setColumnFilters(getGlobalFilterDefaults())
