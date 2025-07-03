@@ -3,6 +3,8 @@ import { serve } from 'inngest/next'
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { backfillAddressElectoralZoneCoordinator } from '@/inngest/functions/backfillAddressElectoralZone'
 import { backfillAddressElectoralZoneProcessor } from '@/inngest/functions/backfillAddressElectoralZone/logic'
+import { backfillAddressFieldsWithGooglePlacesCoordinator } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
+import { backfillAddressFieldsWithGooglePlacesProcessor } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
@@ -99,5 +101,7 @@ export const { GET, POST, PUT } = serve({
     backfillAddressElectoralZoneProcessor,
     backfillUserActionElectoralZoneCoordinator,
     backfillUserActionElectoralZoneProcessor,
+    backfillAddressFieldsWithGooglePlacesCoordinator,
+    backfillAddressFieldsWithGooglePlacesProcessor,
   ],
 })
