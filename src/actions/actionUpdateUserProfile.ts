@@ -31,10 +31,8 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
-import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { logCongressionalDistrictNotFound } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
@@ -70,29 +68,33 @@ async function actionUpdateUserProfileWithoutMiddleware(
     }
   }
 
-  const isUSAddress = validatedFields.data.address?.countryCode?.toUpperCase() === 'US'
   try {
-    if (isUSAddress && validatedFields.data.address) {
-      const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
-        validatedFields.data.address,
-      )
-      if ('notFoundReason' in usCongressionalDistrict) {
+    if (validatedFields.data.address) {
+      const electoralZone = await maybeGetElectoralZoneFromAddress({
+        address: {
+          ...validatedFields.data.address,
+          googlePlaceId: validatedFields.data.address.googlePlaceId || null,
+          latitude: validatedFields.data.address.latitude || null,
+          longitude: validatedFields.data.address.longitude || null,
+        },
+      })
+      if ('notFoundReason' in electoralZone) {
         logCongressionalDistrictNotFound({
           address: validatedFields.data.address.formattedDescription,
-          notFoundReason: usCongressionalDistrict.notFoundReason,
+          notFoundReason: electoralZone.notFoundReason,
           domain: 'actionUpdateUserProfile',
         })
       }
-      if ('districtNumber' in usCongressionalDistrict) {
-        validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+      if ('zoneName' in electoralZone) {
+        validatedFields.data.address.electoralZone = `${electoralZone.zoneName}`
       }
     }
   } catch (error) {
-    logger.error('error getting `usCongressionalDistrict`:' + error)
+    logger.error('error getting `electoralZone`:' + error)
     Sentry.captureException(error, {
       tags: {
         domain: 'actionUpdateUserProfile',
-        message: 'error getting usCongressionalDistrict',
+        message: 'error getting electoralZone',
       },
     })
   }
