@@ -179,10 +179,10 @@ function GlobalFiltersResetButton({
   return (
     <Button
       className="flex-shrink-0"
+      disabled={disabled}
       onClick={onResetFilters}
       size="sm"
       variant="secondary"
-      disabled={disabled}
     >
       <X className="mr-2 h-4 w-4" />
       Reset Filters
