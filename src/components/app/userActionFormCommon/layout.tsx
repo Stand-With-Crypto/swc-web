@@ -2,11 +2,11 @@ import React, { ReactNode } from 'react'
 import { ArrowLeft } from 'lucide-react'
 
 import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
+import { DTSIPeopleFromAddress } from '@/components/app/userActionFormCallCongressperson'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
-import { DTSIPeopleFromUSCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { cn } from '@/utils/web/cn'
 
 interface UserActionFormLayoutProps extends React.PropsWithChildren {
@@ -80,7 +80,7 @@ function CongresspersonDisplayFooter({
   maxPeopleDisplayed,
 }: React.PropsWithChildren<{
   maxPeopleDisplayed?: number
-  dtsiPeopleResponse?: DTSIPeopleFromUSCongressionalDistrict
+  dtsiPeopleResponse?: DTSIPeopleFromAddress
 }>) {
   return (
     <div className="z-10 mt-auto flex w-full flex-col gap-4 border-t bg-background p-6 pb-0 pt-3 md:flex-row md:items-center md:justify-between md:px-12">

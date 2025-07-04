@@ -12,7 +12,8 @@ import {
 import { UserActionFormCallCongresspersonSuccess } from '@/components/app/userActionFormCallCongressperson/sections/success'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { DTSIPeopleFromUSCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromUSAddress'
+import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
+import { UseGetDTSIPeopleFromPlaceIdResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
@@ -20,14 +21,19 @@ import { Address, ChangeAddress, useCongresspersonData } from './sections/addres
 import { Intro } from './sections/intro'
 import { SuggestedScript } from './sections/suggestedScript'
 
-type OnFindCongressPersonPayload = DTSIPeopleFromUSCongressionalDistrict & {
+export type DTSIPeopleFromAddress = Extract<
+  UseGetDTSIPeopleFromPlaceIdResponse,
+  { dtsiPeople: DTSIPeopleByElectoralZoneQueryResult }
+>
+
+type OnFindCongressPersonPayload = DTSIPeopleFromAddress & {
   addressSchema: z.infer<typeof zodAddress>
 }
 
 export interface CallCongresspersonActionSharedData extends UseSectionsReturn<SectionNames> {
   user: GetUserFullProfileInfoResponse['user']
   onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
-  congressPersonData: OnFindCongressPersonPayload
+  congressPersonData?: OnFindCongressPersonPayload
 }
 
 interface UserActionFormCallCongresspersonProps {
@@ -50,7 +56,9 @@ export function UserActionFormCallCongressperson({
   })
   const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 
-  const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
+  const [congressPersonData, setCongresspersonData] = React.useState<
+    OnFindCongressPersonPayload | undefined
+  >()
 
   const initialAddress = initialValues?.address
     ? initialValues.address

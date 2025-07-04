@@ -8,12 +8,12 @@ import {
 } from '@/data/dtsi/generated'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
-  CongressionalDistrictFromAddress,
-  getCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+  getElectoralZoneFromAddressOrPlaceId,
+  GetElectoralZoneResult,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
 
-export type RacesByAddressData = Awaited<ReturnType<typeof getDTSIRacesFromCongressionalDistrict>>
+export type RacesByAddressData = Awaited<ReturnType<typeof getDTSIRacesFromElectoralZone>>
 
 export function useRacesByAddress(
   _address?: string | null,
@@ -22,30 +22,36 @@ export function useRacesByAddress(
   return useSWR<RacesByAddressData>(
     _address ? [_address, 'useRacesByAddress'] : null,
     async ([address]) => {
-      const result = await getCongressionalDistrictFromAddress(address)
-      return getDTSIRacesFromCongressionalDistrict(result)
+      const result = await getElectoralZoneFromAddressOrPlaceId({
+        address,
+      })
+      return getDTSIRacesFromElectoralZone(result)
     },
     options,
   )
 }
 
-async function getDTSIRacesFromCongressionalDistrict(result: CongressionalDistrictFromAddress) {
+async function getDTSIRacesFromElectoralZone(result: GetElectoralZoneResult) {
   if ('notFoundReason' in result) {
     throw new Error(getErrorMessageByNotFoundReason(result.notFoundReason))
+  }
+
+  if (!result.stateCode) {
+    throw new Error('State code not found for this address')
   }
 
   const data = await fetchReq(
     apiUrls.dtsiRacesByCongressionalDistrict({
       stateCode: result.stateCode,
-      district: result.districtNumber,
+      district: parseInt(result.zoneName, 10),
     }),
   )
     .then(res => res.json())
     .then(data => data as DTSI_LocationSpecificRacesInformationQuery)
     .catch(e => {
       Sentry.captureException(e, {
-        tags: { domain: 'getDTSIRacesFromCongressionalDistrict' },
-        extra: { congressionalDistrictFromAddressResult: result },
+        tags: { domain: 'getDTSIRacesFromElectoralZone' },
+        extra: { electoralZoneFromAddressResult: result },
       })
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
     })
@@ -61,7 +67,7 @@ async function getDTSIRacesFromCongressionalDistrict(result: CongressionalDistri
       presidential: [],
       senate: [],
       stateCode: result.stateCode,
-      districtNumber: result.districtNumber,
+      zoneName: result.zoneName,
     }
   }
 
@@ -96,14 +102,12 @@ function getErrorMessageByNotFoundReason(notFoundReason: string) {
   switch (notFoundReason) {
     case 'NOT_USA_ADDRESS':
       return 'Please enter a US-based address.'
-    case 'NOT_SAME_STATE':
-      return "Looks like you entered an address that's not in this state."
+    case 'ELECTORAL_ZONE_NOT_FOUND':
+      return "We can't find your representative right now, we're working on a fix"
     case 'NOT_SPECIFIC_ENOUGH':
       return 'Please enter a specific address that includes street-level information.'
     case 'CIVIC_API_DOWN':
       return "Looks like we're having some issues finding your representative right now. Please come back later and try again."
-    case 'MISSING_FROM_DTSI':
-    case 'UNEXPECTED_ERROR':
     default:
       return "We can't find your representative right now, we're working on a fix"
   }

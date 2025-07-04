@@ -72,12 +72,15 @@ export function UserDistrictRank({ className }: { className?: string }) {
 
   const district = useMemo(() => {
     if (!districtResponse.data) return null
-    return 'districtNumber' in districtResponse.data ? districtResponse.data : null
+    if ('notFoundReason' in districtResponse.data) return null
+    if (!districtResponse.data.zoneName) return null
+
+    return districtResponse.data
   }, [districtResponse.data])
 
   const districtRankingResponse = useGetDistrictRank({
     stateCode: district?.stateCode as USStateCode,
-    districtNumber: district?.districtNumber?.toString() ?? null,
+    districtNumber: district?.zoneName?.toString() ?? null,
   })
 
   const rank = districtRankingResponse.data?.rank

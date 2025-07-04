@@ -31,7 +31,7 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
-import { logCongressionalDistrictNotFound } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -79,7 +79,7 @@ async function actionUpdateUserProfileWithoutMiddleware(
         },
       })
       if ('notFoundReason' in electoralZone) {
-        logCongressionalDistrictNotFound({
+        logElectoralZoneNotFound({
           address: validatedFields.data.address.formattedDescription,
           notFoundReason: electoralZone.notFoundReason,
           domain: 'actionUpdateUserProfile',
