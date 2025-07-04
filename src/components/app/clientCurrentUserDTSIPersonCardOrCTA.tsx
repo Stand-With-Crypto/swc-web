@@ -18,9 +18,10 @@ import {
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
-  getYourPoliticianCategoryDisplayName,
+  filterDTSIPeopleByUSPoliticalCategory,
+  getUSPoliticianCategoryDisplayName,
   YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/us'
 import { cn } from '@/utils/web/cn'
 
 function DefaultPlacesSelect(
@@ -55,8 +56,9 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
 }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress({
-    category: POLITICIAN_CATEGORY,
+    filterFn: filterDTSIPeopleByUSPoliticalCategory(POLITICIAN_CATEGORY),
     address: address === 'loading' ? null : address?.description,
+    placeId: address === 'loading' ? null : address?.place_id,
   })
 
   if (!address || address === 'loading') {
@@ -88,7 +90,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA({
     )
   }
   const people = res.data.dtsiPeople
-  const categoryDisplayName = getYourPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
+  const categoryDisplayName = getUSPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
 
   return (
     <div>

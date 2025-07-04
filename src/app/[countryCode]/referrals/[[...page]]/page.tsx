@@ -7,12 +7,14 @@ import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageReferrals } from '@/components/app/pageReferrals'
 import { PageProps } from '@/types'
-import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
+import {
+  getDistrictsLeaderboardData,
+  getDistrictsLeaderboardDataByState,
+} from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
-export const dynamic = 'error'
 export const dynamicParams = true
 
 const TOTAL_PREGENERATED_PAGES =
@@ -54,16 +56,27 @@ export default async function ReferralsPage(props: Props) {
 
   const offset = (pageNum - 1) * itemsPerPage
 
-  const { items: leaderboardData } = await getDistrictsLeaderboardData({
+  const searchParams = await props.searchParams
+  const state = searchParams?.state as string | undefined
+
+  const commonParams = {
     limit: itemsPerPage,
     offset,
-  })
+  }
+
+  const { items: leaderboardData, total } = state
+    ? await getDistrictsLeaderboardDataByState(state.toUpperCase(), commonParams)
+    : await getDistrictsLeaderboardData(commonParams)
+
+  const totalPages = state ? Math.ceil(total / itemsPerPage) : undefined
 
   return (
     <PageReferrals
       countryCode={countryCode as SupportedCountryCodes}
       leaderboardData={leaderboardData}
       page={pageNum}
+      stateCode={state}
+      totalPages={totalPages}
     />
   )
 }

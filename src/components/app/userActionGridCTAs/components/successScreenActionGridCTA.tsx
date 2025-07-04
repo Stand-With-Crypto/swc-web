@@ -4,19 +4,22 @@ import { SuccessScreenActionCard } from '@/components/app/userActionGridCTAs/com
 import { UserActionGridCampaignsDialog } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { useSuccessScreenDialogContext } from '@/hooks/useSuccessScreenDialogContext'
 import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 
 export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
+  const { closeSuccessScreenDialogAfterNavigating } = useSuccessScreenDialogContext()
+
   const countryCode = useCountryCode()
 
   if (props.link) {
     const LinkComponent = props.link
     return (
       <LinkComponent>
-        <SuccessScreenActionCard {...props} />
+        <SuccessScreenActionCard {...props} onClick={closeSuccessScreenDialogAfterNavigating} />
       </LinkComponent>
     )
   }
@@ -34,7 +37,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
 
     return (
       <Link href={url}>
-        <SuccessScreenActionCard {...props} />
+        <SuccessScreenActionCard {...props} onClick={closeSuccessScreenDialogAfterNavigating} />
       </Link>
     )
   }
@@ -43,6 +46,7 @@ export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
     <UserActionGridCampaignsDialog
       {...props}
       description={props.campaignsModalDescription}
+      onClickAction={closeSuccessScreenDialogAfterNavigating}
       performedUserActions={props.performedUserActions}
       shouldOpenDeeplink={true}
     >

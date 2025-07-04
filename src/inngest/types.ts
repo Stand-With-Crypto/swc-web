@@ -1,6 +1,8 @@
 import { EventSchemas } from 'inngest'
 
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
+import type { BackfillAddressElectoralZoneCoordinatorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone'
+import type { ProcessAddressElectoralZoneProcessorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone/logic'
 import type { BackfillUsCongressionalDistrictsInngestCronJobSchema } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
@@ -9,6 +11,8 @@ import { ProcessBatchSchema } from '@/inngest/functions/backfillIntlUsers/logic'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
+import { BackfillUserActionElectoralZoneCoordinatorEventSchema } from '@/inngest/functions/backfillUserActionElectoralZone'
+import { ProcessUserActionElectoralZoneProcessorEventSchema } from '@/inngest/functions/backfillUserActionElectoralZone/logic'
 import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import { BackfillUserCountryCodeEmptyInngestSchema } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import type {
@@ -76,5 +80,9 @@ type EventTypes =
   | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
   | SyncSendgridContactsCoordinatorSchema
   | SyncSendgridContactsProcessorSchema
+  | BackfillAddressElectoralZoneCoordinatorEventSchema
+  | ProcessAddressElectoralZoneProcessorEventSchema
+  | BackfillUserActionElectoralZoneCoordinatorEventSchema
+  | ProcessUserActionElectoralZoneProcessorEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

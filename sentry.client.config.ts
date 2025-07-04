@@ -12,6 +12,15 @@ import { getIsSupportedBrowser, maybeDetectBrowser } from './maybeDetectBrowser'
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 const shouldSuppress = toBool(process.env.NEXT_PUBLIC_SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
 
+// We need to group these errors because the URL includes the placeId
+const GOOGLE_PLACES_API_ERRORS_TO_GROUP = [
+  '429 from GET https://places.googleapis.com',
+  '400 from GET https://places.googleapis.com',
+  '403 from GET https://places.googleapis.com',
+  '404 from GET https://places.googleapis.com',
+  '500 from GET https://places.googleapis.com',
+]
+
 const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'No internet connection detected',
   "Failed to execute 'removeChild",
@@ -19,6 +28,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'ResizeObserver loop', // ResizeObserver loop completed with undelivered notifications.
   'Load failed',
   'Failed to fetch',
+  'Could not assign Magic Eden provider',
   "Failed to read the 'localStorage'",
   'Converting circular structure to JSON',
   "Cannot read properties of undefined (reading 'call')",
@@ -27,6 +37,10 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'The operation is insecure',
   'The object can not be found here',
   'Properties can only be defined on Objects',
+  "Cannot assign to read only property 'push' of object '[object Array]'",
+  "Cannot assign to read only property 'toString' of object '#<Object>'",
+  "Cannot assign to read only property 'error' of object '#<Object>'",
+  "Cannot assign to read only property 'constructor' of object '[object Object]'",
   'network error',
   'localStorage',
   'TLS connection',
@@ -41,6 +55,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'Connection closed',
   '500 from GET /api/public/recent-activity/30/restrictToUS',
   '500 from GET /api/public/homepage/top-level-metrics/not-set',
+  ...GOOGLE_PLACES_API_ERRORS_TO_GROUP,
 ]
 
 const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/api/js']
@@ -107,6 +122,9 @@ Sentry.init({
     'ResizeObserver loop limit exceeded',
     'ResizeObserver loop completed with undelivered notifications',
     /As of March 1st, 2025, google\.maps\.places.*/i,
+    // Network errors are being ignored here because of this investigation: https://github.com/Stand-With-Crypto/swc-web/issues/2408
+    'network error',
+    /^TypeError: network error$/,
   ],
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry

@@ -1,32 +1,33 @@
 import useSWR from 'swr'
 
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import { getElectoralZoneFromAddressOrPlaceId } from '@/utils/shared/getElectoralZoneFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
-import {
-  LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 export type UseGetDTSIPeopleFromPlaceIdResponse = Awaited<
   ReturnType<typeof getDTSIPeopleFromAddress>
 >
 
+export type DTSIPeopleFromAddressFilter = (
+  dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
+) => DTSIPeopleByElectoralZoneQueryResult
+
 export async function getDTSIPeopleFromAddress({
   address,
-  category,
+  filterFn,
   countryCode,
+  placeId,
 }: {
   address: string
-  category: YourPoliticianCategory
+  placeId?: string
+  filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
 }) {
-  const electoralZone = await getElectoralZoneFromAddress(address)
+  const electoralZone = await getElectoralZoneFromAddressOrPlaceId({ address, placeId })
 
   if ('notFoundReason' in electoralZone) {
     return electoralZone
@@ -51,38 +52,14 @@ export async function getDTSIPeopleFromAddress({
       catchUnexpectedServerErrorAndTriggerToast(e)
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
     })
+
+  if ('notFoundReason' in data) {
+    return data
+  }
+
   const dtsiPeople = data as DTSIPeopleByElectoralZoneQueryResult
 
-  let filteredData: DTSIPeopleByElectoralZoneQueryResult = []
-
-  switch (category) {
-    case 'senate':
-      filteredData = dtsiPeople.filter(
-        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE,
-      )
-      break
-    case 'house':
-      filteredData = dtsiPeople.filter(
-        person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-      )
-      break
-    case 'senate-and-house':
-      filteredData = dtsiPeople.filter(
-        person =>
-          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.SENATE ||
-          person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-      )
-      break
-    case 'legislative-and-executive':
-      filteredData = dtsiPeople.filter(
-        person =>
-          person.primaryRole?.roleCategory &&
-          LEGISLATIVE_AND_EXECUTIVE_ROLE_CATEGORIES.includes(person.primaryRole.roleCategory),
-      )
-      break
-    default:
-      filteredData = dtsiPeople
-  }
+  const filteredData = filterFn(dtsiPeople)
 
   if (!filteredData.length) {
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
@@ -93,24 +70,30 @@ export async function getDTSIPeopleFromAddress({
 
 export function useGetDTSIPeopleFromAddress({
   address,
-  category,
+  filterFn,
+  placeId,
 }: {
   address?: string | null
-  category: YourPoliticianCategory
+  placeId?: string | null
+  filterFn: DTSIPeopleFromAddressFilter
 }) {
   const countryCode = useCountryCode()
 
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, async () => {
-    if (!address) {
-      return
-    }
+  return useSWR(
+    address || placeId ? `useGetDTSIPeopleFromAddress-${address || placeId || ''}` : null,
+    async () => {
+      if (!address && !placeId) {
+        return
+      }
 
-    return getDTSIPeopleFromAddress({
-      address,
-      countryCode,
-      category,
-    })
-  })
+      return getDTSIPeopleFromAddress({
+        address: address || '',
+        placeId: placeId || '',
+        countryCode,
+        filterFn,
+      })
+    },
+  )
 }
 
 export function formatGetDTSIPeopleFromAddressNotFoundReason(

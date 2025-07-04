@@ -12,6 +12,7 @@ export const GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VOTER_ATTESTATION,
   UserActionType.VIEW_KEY_PAGE,
   UserActionType.POLL,
+  UserActionType.EMAIL,
 ] as const
 
 export type GBActiveClientUserActionWithCampaignType =
@@ -52,6 +53,11 @@ export enum GBUserActionPollCampaignName {
   ENCOURAGE = '71c9f42180414e87b6bc362e630e710c',
 }
 
+export enum GBUserActionEmailCampaignName {
+  DEFAULT = 'DEFAULT',
+  STABLECOINS = 'STABLECOINS',
+}
+
 export type GBUserActionCampaignName =
   | UserActionOptInCampaignName
   | GBUserActionTweetCampaignName
@@ -62,6 +68,7 @@ export type GBUserActionCampaignName =
   | GBUserActionVoterAttestationCampaignName
   | GBUserActionViewKeyPageCampaignName
   | GBUserActionPollCampaignName
+  | GBUserActionEmailCampaignName
 
 export interface GBUserActionCampaigns {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
@@ -73,6 +80,7 @@ export interface GBUserActionCampaigns {
   [UserActionType.VOTER_ATTESTATION]: GBUserActionVoterAttestationCampaignName
   [UserActionType.VIEW_KEY_PAGE]: GBUserActionViewKeyPageCampaignName
   [UserActionType.POLL]: GBUserActionPollCampaignName
+  [UserActionType.EMAIL]: GBUserActionEmailCampaignName
 }
 
 export const GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -85,4 +93,5 @@ export const GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTER_ATTESTATION]: GBUserActionVoterAttestationCampaignName.H1_2025,
   [UserActionType.VIEW_KEY_PAGE]: GBUserActionViewKeyPageCampaignName.NEWMODE_EMAIL_ACTION,
   [UserActionType.POLL]: GBUserActionPollCampaignName.CRYPTO_NEWS,
+  [UserActionType.EMAIL]: GBUserActionEmailCampaignName.DEFAULT,
 } satisfies Record<GBActiveClientUserActionWithCampaignType, string>

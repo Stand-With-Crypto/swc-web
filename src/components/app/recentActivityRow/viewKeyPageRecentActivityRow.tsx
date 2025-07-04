@@ -45,6 +45,14 @@ export function viewKeyPageRecentActivityRow({
         </InternalLink>
       ),
     },
+    [CAUserActionViewKeyPageCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING]: {
+      children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
+      onFocusContent: () => (
+        <InternalLink className="block" href={urls.newmodeMomentumAheadHouseRisingAction()}>
+          <Button>Email yours</Button>
+        </InternalLink>
+      ),
+    },
     [CAUserActionViewKeyPageCampaignName.CA_NEWMODE_DEBANKING]: {
       children: (
         <RecentActivityRowMainText>Someone took action to stop debanking</RecentActivityRowMainText>

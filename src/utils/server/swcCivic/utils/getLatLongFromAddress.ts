@@ -9,8 +9,25 @@ const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
   'GOOGLE_PLACES_BACKEND_API_KEY',
 )
 
-export async function getLatLongFromAddress(address: string) {
-  const placeId = await getGooglePlaceIdFromAddress(address)
+type Args =
+  | {
+      address: string
+      placeId?: string
+    }
+  | {
+      address?: string
+      placeId: string
+    }
+
+export async function getLatLongFromAddressOrPlaceId(params: Args) {
+  let placeId: string
+  if (params.placeId) {
+    placeId = params.placeId
+  } else if (params.address) {
+    placeId = await getGooglePlaceIdFromAddress(params.address)
+  } else {
+    throw new Error('Either address or placeId must be provided')
+  }
 
   const response = await fetchReq(
     `https://places.googleapis.com/v1/places/${placeId}?key=${GOOGLE_PLACES_BACKEND_API_KEY}`,
@@ -32,7 +49,10 @@ export async function getLatLongFromAddress(address: string) {
 
   if (!data?.location) {
     Sentry.captureMessage(`getLatLongFromAddress latitude and longitude not found`, {
-      extra: { address, data },
+      extra: { ...params, data },
+      tags: {
+        domain: 'swc-civic',
+      },
     })
     throw new Error('No latitude and longitude found for address')
   }

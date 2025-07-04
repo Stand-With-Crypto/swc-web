@@ -1,9 +1,10 @@
 import { forwardRef } from 'react'
 
-import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
+
+import { CampaignsCheckmarks } from './campaignsCheckmarks'
 
 export const UserActionCard = forwardRef<
   HTMLButtonElement,
@@ -78,23 +79,11 @@ export const UserActionCard = forwardRef<
             {mobileCTADescription ?? description}
           </p>
 
-          <div className="mt-auto flex items-center gap-4 pt-5">
-            <div
-              className="relative h-8"
-              style={{
-                width:
-                  campaignsLength === 1 ? `${campaignsLength * 24}px` : `${campaignsLength * 19}px`,
-              }}
-            >
-              {Array.from({ length: campaignsLength }, (_, index) => (
-                <CheckIcon
-                  completed={index < completedCampaigns && completedCampaigns > 0}
-                  index={index}
-                  key={index}
-                  svgClassname="border-2 border-muted bg-muted"
-                />
-              ))}
-            </div>
+          <div className="mt-auto flex w-full items-center gap-2 pt-5">
+            <CampaignsCheckmarks
+              campaignsLength={campaignsLength}
+              completedCampaigns={completedCampaigns}
+            />
             <span className="text-xs lg:text-base">{getProgressText()}</span>
           </div>
         </div>

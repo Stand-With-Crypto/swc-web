@@ -12,6 +12,10 @@ export const navbarConfig: NavbarProps = {
   showDonateButton: true,
   items: [
     {
+      href: urls.localPolicy(),
+      text: 'Local policy',
+    },
+    {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
     },
@@ -96,8 +100,7 @@ export const footerConfig: FooterProps = {
       text: 'Questionnaire',
     },
     { href: urls.leaderboard(), text: 'Community' },
-    // TODO: add this back in when policy gets the page live
-    // { href: urls.contentClarity(), text: 'CLARITY resources' },
+    { href: urls.contentClarity(), text: 'CLARITY resources' },
     { href: urls.contentGenius(), text: 'GENIUS resources' },
   ],
   socialLinks: [

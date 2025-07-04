@@ -1,0 +1,75 @@
+---
+description: Create a new email action campaign
+globs: 
+alwaysApply: false
+---
+# Creating new email action campaigns
+
+## Creating the campaign name
+
+1. Go to [usUserActionCampaigns.ts](mdc:src/utils/shared/userActionCampaigns/us/usUserActionCampaigns.ts)
+2. Add a value to the `USUserActionEmailCampaignName` enum with your arbitrary campaign name, the value should equal the key in that enum
+
+## Setting the action CTA
+
+1. We'll go to [usCtas.tsx](mdc:src/components/app/userActionGridCTAs/constants/us/usCtas.tsx) file 
+2. Add a new entry to the end of the `US_USER_ACTION_CTAS_FOR_GRID_DISPLAY[UserActionType.EMAIL].campaigns` array
+    - Use the previous object on that array as a base 
+    - This entry should have a `title` and `description` with arbitrary strings
+    - `isCampaignActive` and `canBeTriggeredMultipleTimes` should be defaulted to true
+    - `actionType` should always be `UserActionType.EMAIL`
+    - `WrapperComponent` should follow the same pattern as the last one with the new campaign
+    - The `campaignName` is arbitrary and should be the same as the one you created on the last step
+
+## Create the campaign metadata file
+
+1. Go to `src/components/app/userActionFormEmailCongressperson/campaigns` and create a new file on the format: `{current_year}{current_month_number}{current_day}-{dash_case_campaign_name}.tsx`
+2. File template:
+    ```tsx
+    import {
+    getConstituentIntroduction,
+    getFullNameSignOff,
+    getRepIntro,
+    GetTextProps,
+    } from '@/components/app/userActionFormEmailCongressperson/emailBodyUtils'
+    import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+    import {
+    getYourPoliticianCategoryShortDisplayName,
+    YourPoliticianCategory,
+    } from '@/utils/shared/yourPoliticianCategory'
+
+    import type { CampaignMetadata } from './types'
+
+    const CAMPAIGN_NAME = USUserActionEmailCampaignName.DEFAULT
+
+    export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
+
+    function getEmailBodyText(props?: GetTextProps & { address?: string }) {
+    const fullNameSignOff = getFullNameSignOff({
+        firstName: props?.firstName,
+        lastName: props?.lastName,
+    })
+    const maybeDistrictIntro = getConstituentIntroduction(props?.location)
+
+    return `${getRepIntro({ dtsiLastName: props?.dtsiLastName })}\n\n${maybeDistrictIntro}, and I wanted to write to you and let you know that I care about crypto and blockchain technology.\n\nLike the other 52 million Americans who own crypto, I know that this technology can unlock the creation of millions of jobs in the U.S. and ensure America remains a global leader in technology. That’s good for our economic and national security.\n\nCrypto needs clear rules, regulations, and guidelines to thrive in America, and we need members of Congress like you to champion this powerful technology so that it can reach its full potential. If crypto doesn’t succeed in America, then jobs, innovation, and new technologies will be driven overseas and our country will miss out on the massive benefits.\n\nI hope that you will keep the views of pro-crypto constituents like myself in mind as you carry on your work in Congress.${fullNameSignOff}`
+    }
+
+    export const campaignMetadata: CampaignMetadata = {
+    campaignName: CAMPAIGN_NAME,
+    dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('house')}`,
+    dialogSubtitle: 'You emailed your representative about FIT21.',
+    politicianCategory: 'house',
+    subject: 'Support Crypto Legislation',
+    getEmailBodyText,
+    }
+    ```
+3. Update that file with the copy/info for your campaign
+
+## Import the metadata file on the email action
+
+1. Go to [index.ts](mdc:src/components/app/userActionFormEmailCongressperson/campaigns/index.ts) 
+2. Add an entry with the key being your campaign name to `EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA`, the value should be a `require` of the relative path of the file you created in the last step, it should be on the same folder
+
+
+
+
