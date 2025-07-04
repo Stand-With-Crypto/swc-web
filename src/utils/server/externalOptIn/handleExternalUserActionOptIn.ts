@@ -268,6 +268,7 @@ async function maybeUpsertUser({
       const googleAddressData = await getAddressFromGooglePlacePrediction({
         description: formattedDescription,
       })
+      // Filter out fields without data to avoid overwriting existing data from the external source
       const filteredGoogleAddressData = Object.fromEntries(
         Object.entries(googleAddressData).filter(([_, value]) => Boolean(value)),
       )

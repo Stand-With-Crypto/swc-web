@@ -48,7 +48,7 @@ type Args =
  * @returns Place data with ID, formatted address, address components, and location
  * @throws Error if no place is found or if the API request fails
  */
-export async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<PlaceData> {
+async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<PlaceData> {
   let data: GooglePlacesDetailsResponse | undefined
   let response: Response
   if (placeId) {
