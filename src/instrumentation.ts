@@ -3,6 +3,12 @@ import * as Sentry from '@sentry/nextjs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
+//
+const SENTRY_SUPPRESSED_INNGEST_FUNCTIONS = [
+  'script.backfill-address-electoral-zone-processor',
+  'script.backfill-address-fields-with-google-places-processor',
+]
+
 export function register() {
   const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 
@@ -21,9 +27,18 @@ export function register() {
       debug: false,
       beforeSend: (event, hint) => {
         if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-          const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
+          const requestUrl = event.request?.url
+
+          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(name =>
+            requestUrl?.includes(`${name}`),
+          )
+
+          const shouldSuppress =
+            toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) ||
+            !dsn ||
+            isSuppressedInngestFunction
           console.error(
-            `${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
+            `${isSuppressedInngestFunction ? 'Inngest ' : ''}${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
             hint?.originalException || hint?.syntheticException,
           )
           if (shouldSuppress) {
@@ -50,7 +65,16 @@ export function register() {
       debug: false,
       beforeSend: (event, hint) => {
         if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-          const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
+          const requestUrl = event.request?.url
+
+          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(name =>
+            requestUrl?.includes(`fnId=${name}`),
+          )
+
+          const shouldSuppress =
+            toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) ||
+            !dsn ||
+            isSuppressedInngestFunction
           console.error(
             `${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
             hint?.originalException || hint?.syntheticException,
