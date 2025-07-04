@@ -5,6 +5,7 @@ import { TabsContent } from '@radix-ui/react-tabs'
 import { useInView } from 'motion/react'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
+import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { Button } from '@/components/ui/button'
@@ -38,7 +39,9 @@ export function DelayedRecentActivityWithMap({
   const urls = useIntlUrls()
   const isMobile = useIsMobile()
 
-  return isMobile || !advocatesMapPageData ? (
+  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
+
+  return isMobile || !advocatesMapPageData || !mapConfig ? (
     <TabsContent ref={ref} value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
       <RecentActivity.List
         actions={{
@@ -75,6 +78,7 @@ export function DelayedRecentActivityWithMap({
         countUsers={countUsers}
         countryCode={countryCode}
         isEmbedded={false}
+        mapConfig={mapConfig}
       />
     </ErrorBoundary>
   )

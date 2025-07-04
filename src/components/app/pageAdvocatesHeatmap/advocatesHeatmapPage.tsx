@@ -1,7 +1,10 @@
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
+import { notFound } from 'next/navigation'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { PageAdvocatesHeatmapProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
+import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -13,6 +16,18 @@ export function AdvocatesHeatmapPage({
   advocatesMapPageData,
   isEmbedded,
 }: PageAdvocatesHeatmapProps) {
+  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
+
+  if (!mapConfig) {
+    Sentry.captureMessage(`Map config not found for country code: ${countryCode}`, {
+      level: 'error',
+      extra: {
+        countryCode,
+      },
+    })
+    return notFound()
+  }
+
   return (
     <div
       className={
@@ -40,6 +55,7 @@ export function AdvocatesHeatmapPage({
           countUsers={homepageData.countUsers.count}
           countryCode={countryCode}
           isEmbedded={isEmbedded}
+          mapConfig={mapConfig}
         />
       </section>
     </div>

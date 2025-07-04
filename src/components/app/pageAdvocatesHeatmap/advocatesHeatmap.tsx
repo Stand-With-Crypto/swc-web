@@ -11,7 +11,7 @@ import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmap
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import type { MapProjectionConfig } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
@@ -30,6 +30,7 @@ interface RenderMapProps {
   countUsers: number
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   isEmbedded?: boolean
+  mapConfig: MapProjectionConfig
 }
 
 export function AdvocatesHeatmap({
@@ -38,6 +39,7 @@ export function AdvocatesHeatmap({
   countUsers,
   advocatesMapPageData,
   isEmbedded,
+  mapConfig,
 }: RenderMapProps) {
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
@@ -50,20 +52,32 @@ export function AdvocatesHeatmap({
 
   const getTotalAdvocatesPerState = useCallback(
     (stateName: string) => {
-      const stateCode = getUSStateCodeFromStateName(stateName)
-      return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+      if (countryCode === SupportedCountryCodes.US) {
+        const stateCode = getUSStateCodeFromStateName(stateName)
+        return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+      }
+      if (countryCode === SupportedCountryCodes.GB) {
+        return totalAdvocatesPerState.find(
+          total => total.state.toUpperCase() === stateName.toUpperCase(),
+        )?.totalAdvocates
+      }
     },
-    [totalAdvocatesPerState],
+    [countryCode, totalAdvocatesPerState],
   )
 
   const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
-  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
-    const { clientX, clientY } = event
-    setMousePosition({ x: clientX, y: clientY })
-    setHoveredStateName(geo.properties.name)
-  }, [])
+  const handleStateMouseHover = useCallback(
+    (geo: any, event: MouseEvent<SVGPathElement>) => {
+      const stateName = geo.properties[mapConfig.geoPropertyStateNameKey]
+
+      const { clientX, clientY } = event
+      setMousePosition({ x: clientX, y: clientY })
+      setHoveredStateName(stateName)
+    },
+    [mapConfig],
+  )
 
   const handleStateMouseOut = useCallback(() => {
     setHoveredStateName(null)
@@ -103,21 +117,24 @@ export function AdvocatesHeatmap({
   }
 
   return (
-    <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
+    <div className={cn('flex flex-col items-start', isEmbedded ? '' : 'gap-8')}>
       <div
         className={cn(
           'flex w-full flex-col items-start gap-4',
           isEmbedded
             ? 'md:flex-row'
-            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
+            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-10'}`,
         )}
       >
-        {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
+        {isEmbedded && (
+          <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
+        )}
         <MapComponent
           countryCode={countryCode}
           handleStateMouseHover={handleStateMouseHover}
           handleStateMouseOut={handleStateMouseOut}
           isEmbedded={isEmbedded}
+          mapConfig={mapConfig}
           markers={markers}
         />
         <TotalAdvocatesPerStateTooltip
@@ -139,7 +156,7 @@ export function AdvocatesHeatmap({
             countryCode={countryCode}
           />
         ) : (
-          <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
+          <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
         )}
       </div>
     </div>
@@ -152,12 +169,14 @@ const MapComponent = ({
   handleStateMouseOut,
   countryCode,
   isEmbedded,
+  mapConfig,
 }: {
   markers: MapMarker[]
   handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
   handleStateMouseOut: () => void
   countryCode: SupportedCountryCodes
   isEmbedded?: boolean
+  mapConfig: MapProjectionConfig
 }) => {
   const [actionInfo, setActionInfo] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
@@ -191,11 +210,12 @@ const MapComponent = ({
   return (
     <>
       <ComposableMap
-        projection="geoAlbersUsa"
+        projection={mapConfig.projection}
+        projectionConfig={mapConfig.projectionConfig}
         style={{ width: '100%', height: '100%' }}
         viewBox="-20 40 850 550"
       >
-        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+        <Geographies geography={mapConfig.projectionUrl}>
           {({ geographies }) => (
             <>
               {geographies.map(geo => (

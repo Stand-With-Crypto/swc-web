@@ -785,6 +785,14 @@ const nextConfig: NextConfig = {
         // and before all files including _next/public files which
         // allows overriding page files
         {
+          source: '/embedded/map',
+          destination: '/embedded/us/map',
+        },
+        {
+          source: '/embedded/uk/map',
+          destination: '/embedded/gb/map',
+        },
+        {
           source: '/:locale/(mission|manifesto)',
           destination: '/:locale/about',
         },
