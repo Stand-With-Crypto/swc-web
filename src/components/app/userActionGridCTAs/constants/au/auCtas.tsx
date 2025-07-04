@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
@@ -10,6 +11,7 @@ import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
+  AUUserActionEmailCampaignName,
   AUUserActionLinkedInCampaignName,
   AUUserActionPollCampaignName,
   AUUserActionReferCampaignName,
@@ -44,6 +46,52 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
     ],
   },
+  [UserActionType.EMAIL]: {
+    title: 'Email your Member of Parliament',
+    description:
+      'Make your voice heard on important crypto policy issues by emailing your representatives',
+    campaignsModalDescription:
+      'Make your voice heard on important crypto policy issues by emailing your representatives',
+    image: '/au/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: AUUserActionEmailCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: `Email your Member of Parliament`,
+        description: 'Tell your MP to support responsible crypto policy — send an email now!',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: AUUserActionEmailCampaignName.DEFAULT,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: AUUserActionEmailCampaignName.AU_NEWMODE_DEBANKING,
+        isCampaignActive: false,
+        title: 'Email your MP to stop unfair debanking',
+        description: 'Urge them to stand up for financial access and innovation.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: AUUserActionEmailCampaignName.AU_NEWMODE_DEBANKING,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
+        isCampaignActive: true,
+        title: `Email your Member of Parliament`,
+        description: 'Tell your MP to support responsible crypto policy — send an email now!',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
+        }),
+      },
+    ],
+  },
   [UserActionType.VIEW_KEY_PAGE]: {
     title: 'Email your Member of Parliament',
     description:
@@ -55,7 +103,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: `Email your Member of Parliament`,
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
@@ -68,7 +116,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: AUUserActionViewKeyPageCampaignName.AU_NEWMODE_DEBANKING,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your MP to stop unfair debanking',
         description: 'Urge them to stand up for financial access and innovation.',
         canBeTriggeredMultipleTimes: true,
