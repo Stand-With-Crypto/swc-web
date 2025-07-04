@@ -3,7 +3,6 @@ import * as Sentry from '@sentry/nextjs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
-//
 const SENTRY_SUPPRESSED_INNGEST_FUNCTIONS = [
   'script.backfill-address-electoral-zone-processor',
   'script.backfill-address-fields-with-google-places-processor',
