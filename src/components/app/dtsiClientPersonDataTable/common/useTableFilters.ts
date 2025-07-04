@@ -67,12 +67,12 @@ export function useSortingFilter(
   return [hasHydrated ? sortedValue : [], handleSortingValue]
 }
 
-const roleKey = PERSON_TABLE_COLUMNS_IDS.ROLE
-const partyKey = PERSON_TABLE_COLUMNS_IDS.PARTY
-const stateKey = PERSON_TABLE_COLUMNS_IDS.STATE
-const stanceKey = PERSON_TABLE_COLUMNS_IDS.STANCE
+const ROLE_KEY = PERSON_TABLE_COLUMNS_IDS.ROLE
+const PARTY_KEY = PERSON_TABLE_COLUMNS_IDS.PARTY
+const STATE_KEY = PERSON_TABLE_COLUMNS_IDS.STATE
+const STANCE_KEY = PERSON_TABLE_COLUMNS_IDS.STANCE
 
-const defaultFiltersValue = 'All'
+const DEFAULT_FILTERS_VALUE = 'All'
 
 export function useColumnFilters(): [
   ColumnFiltersState,
@@ -81,23 +81,23 @@ export function useColumnFilters(): [
   const hasHydrated = useHasHydrated()
 
   const [searchParamValues, setSearchParamValues] = useMultipleSearchParamState({
-    [roleKey]: defaultFiltersValue,
-    [partyKey]: defaultFiltersValue,
-    [stateKey]: defaultFiltersValue,
-    [stanceKey]: defaultFiltersValue,
+    [ROLE_KEY]: DEFAULT_FILTERS_VALUE,
+    [PARTY_KEY]: DEFAULT_FILTERS_VALUE,
+    [STATE_KEY]: DEFAULT_FILTERS_VALUE,
+    [STANCE_KEY]: DEFAULT_FILTERS_VALUE,
   })
 
-  const roleValue = searchParamValues[roleKey]
-  const partyValue = searchParamValues[partyKey]
-  const stateValue = searchParamValues[stateKey]
-  const stanceValue = searchParamValues[stanceKey]
+  const roleValue = searchParamValues[ROLE_KEY]
+  const partyValue = searchParamValues[PARTY_KEY]
+  const stateValue = searchParamValues[STATE_KEY]
+  const stanceValue = searchParamValues[STANCE_KEY]
 
   const filters: ColumnFiltersState = useMemo(
     () => [
-      { id: stanceKey, value: stanceValue },
-      { id: roleKey, value: roleValue },
-      { id: partyKey, value: partyValue },
-      { id: stateKey, value: stateValue },
+      { id: STANCE_KEY, value: stanceValue },
+      { id: ROLE_KEY, value: roleValue },
+      { id: PARTY_KEY, value: partyValue },
+      { id: STATE_KEY, value: stateValue },
     ],
     [partyValue, roleValue, stanceValue, stateValue],
   )
@@ -108,24 +108,24 @@ export function useColumnFilters(): [
 
       const newSearchParamValues: MultipleSearchParamConfig = {}
 
-      const newStanceValue = valueToSet.find(filter => filter.id === stanceKey)
+      const newStanceValue = valueToSet.find(filter => filter.id === STANCE_KEY)
       if (newStanceValue?.value) {
-        newSearchParamValues[stanceKey] = newStanceValue.value as string
+        newSearchParamValues[STANCE_KEY] = newStanceValue.value as string
       }
 
-      const newRoleValue = valueToSet.find(filter => filter.id === roleKey)
+      const newRoleValue = valueToSet.find(filter => filter.id === ROLE_KEY)
       if (newRoleValue?.value) {
-        newSearchParamValues[roleKey] = newRoleValue.value as string
+        newSearchParamValues[ROLE_KEY] = newRoleValue.value as string
       }
 
-      const newPartyValue = valueToSet.find(filter => filter.id === partyKey)
+      const newPartyValue = valueToSet.find(filter => filter.id === PARTY_KEY)
       if (newPartyValue?.value) {
-        newSearchParamValues[partyKey] = newPartyValue.value as string
+        newSearchParamValues[PARTY_KEY] = newPartyValue.value as string
       }
 
-      const newStateValue = valueToSet.find(filter => filter.id === stateKey)
+      const newStateValue = valueToSet.find(filter => filter.id === STATE_KEY)
       if (newStateValue?.value) {
-        newSearchParamValues[stateKey] = newStateValue.value as string
+        newSearchParamValues[STATE_KEY] = newStateValue.value as string
       }
 
       setSearchParamValues(newSearchParamValues)
