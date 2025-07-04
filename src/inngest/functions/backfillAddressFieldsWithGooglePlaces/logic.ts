@@ -111,10 +111,6 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
               data: {
                 ...result.value.completeAddress,
                 electoralZone: result.value.electoralZone,
-                usCongressionalDistrict:
-                  countryCode === SupportedCountryCodes.US
-                    ? result.value.completeAddress.electoralZone
-                    : undefined,
               },
             })
           }
@@ -201,7 +197,10 @@ async function getAddressFromGooglePlaces(
   }
   return {
     addressId: address.id,
-    completeAddress,
+    // Remove null and empty strings
+    completeAddress: Object.fromEntries(
+      Object.entries(completeAddress).filter(([_, value]) => Boolean(value)),
+    ),
     electoralZone: electoralZone?.zoneName,
   }
 }
