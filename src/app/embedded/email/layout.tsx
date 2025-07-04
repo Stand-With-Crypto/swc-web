@@ -4,6 +4,7 @@ import { Metadata, Viewport } from 'next'
 
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
+import { Toaster } from '@/components/ui/sonner'
 import { PageProps } from '@/types'
 import { viewport as defaultViewport } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -33,6 +34,7 @@ export default function Layout({ children }: PageProps & { children: React.React
         <FullHeight.Container>
           <FullHeight.Content>{children}</FullHeight.Content>
         </FullHeight.Container>
+        <Toaster />
         <SpeedInsights debug={false} sampleRate={0.01} />
       </body>
     </html>
