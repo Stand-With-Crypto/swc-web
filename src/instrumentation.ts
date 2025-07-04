@@ -27,10 +27,10 @@ export function register() {
       debug: false,
       beforeSend: (event, hint) => {
         if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-          const requestUrl = event.request?.url
+          const requestUrl = event?.request?.url
 
-          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(name =>
-            requestUrl?.includes(`${name}`),
+          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(functionId =>
+            requestUrl?.includes(functionId),
           )
 
           const shouldSuppress =
@@ -65,10 +65,10 @@ export function register() {
       debug: false,
       beforeSend: (event, hint) => {
         if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-          const requestUrl = event.request?.url
+          const requestUrl = event?.request?.url
 
-          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(name =>
-            requestUrl?.includes(`fnId=${name}`),
+          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(functionId =>
+            requestUrl?.includes(functionId),
           )
 
           const shouldSuppress =
@@ -76,7 +76,7 @@ export function register() {
             !dsn ||
             isSuppressedInngestFunction
           console.error(
-            `${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
+            `${isSuppressedInngestFunction ? 'Inngest ' : ''}${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
             hint?.originalException || hint?.syntheticException,
           )
           if (shouldSuppress) {
