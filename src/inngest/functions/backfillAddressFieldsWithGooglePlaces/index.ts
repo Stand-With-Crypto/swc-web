@@ -40,9 +40,10 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     const { countryCode: countryCodeParam, persist = false, limit } = event.data
 
     if (countryCodeParam && !ORDERED_SUPPORTED_COUNTRIES.includes(countryCodeParam.toLowerCase())) {
-      logger.info('Country code is not supported.')
+      const message = `Country code ${countryCodeParam} is not supported.`
+      logger.info(message)
       return {
-        message: 'Country code is not supported.',
+        message,
       }
     }
 
@@ -74,9 +75,10 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     )
 
     if (addressCount === 0) {
-      logger.info('No addresses to backfill.')
+      const message = 'No addresses to backfill.'
+      logger.info(message)
       return {
-        message: 'No addresses to backfill.',
+        message,
       }
     }
 
@@ -84,12 +86,13 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     const totalBatches = Math.ceil(
       addressesToProcess / BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
     )
+    const batchesWithBuffer = Math.ceil(totalBatches * BATCH_BUFFER)
+
     logger.info(
-      `Found ${addressCount} addresses matching criteria${limit ? `, limited to ${addressesToProcess}` : ''}. Splitting into ${totalBatches} batches (${Math.ceil(totalBatches * BATCH_BUFFER)} with buffer).`,
+      `Found ${addressCount} addresses matching criteria${limit ? `, limited to ${addressesToProcess}` : ''}. Splitting into ${totalBatches} batches (${batchesWithBuffer} with buffer).`,
     )
 
     const invokeEvents = []
-    const batchesWithBuffer = Math.ceil(totalBatches * BATCH_BUFFER)
 
     for (let i = 0; i < batchesWithBuffer; i++) {
       const skip = i * BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE
