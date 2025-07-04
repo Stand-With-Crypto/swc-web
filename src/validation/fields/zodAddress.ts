@@ -59,5 +59,3 @@ export const zodStateDistrict = object({
     })
   }
 })
-
-export type ZodAddress = z.infer<typeof zodAddress>

@@ -8,8 +8,8 @@ import {
 } from '@/data/dtsi/generated'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
-  ElectoralZoneFromAddress,
-  getElectoralZoneFromAddress,
+  getElectoralZoneFromAddressOrPlaceId,
+  GetElectoralZoneResult,
 } from '@/utils/shared/getElectoralZoneFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
 
@@ -22,14 +22,16 @@ export function useRacesByAddress(
   return useSWR<RacesByAddressData>(
     _address ? [_address, 'useRacesByAddress'] : null,
     async ([address]) => {
-      const result = await getElectoralZoneFromAddress(address)
+      const result = await getElectoralZoneFromAddressOrPlaceId({
+        address,
+      })
       return getDTSIRacesFromElectoralZone(result)
     },
     options,
   )
 }
 
-async function getDTSIRacesFromElectoralZone(result: ElectoralZoneFromAddress) {
+async function getDTSIRacesFromElectoralZone(result: GetElectoralZoneResult) {
   if ('notFoundReason' in result) {
     throw new Error(getErrorMessageByNotFoundReason(result.notFoundReason))
   }

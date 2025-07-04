@@ -14,7 +14,7 @@ export function maybeGetElectoralZoneFromAddress({
 }: {
   address?: Pick<
     Address,
-    'countryCode' | 'formattedDescription' | 'latitude' | 'longitude' | 'googlePlaceId'
+    'formattedDescription' | 'latitude' | 'longitude' | 'googlePlaceId'
   > | null
 }) {
   if (!address) {

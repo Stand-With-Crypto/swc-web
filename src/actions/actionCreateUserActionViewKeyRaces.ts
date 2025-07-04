@@ -163,15 +163,17 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     userAddress?.address?.administrativeAreaLevel1 ?? validatedInput.data?.usaState ?? null
 
   const maybeElectoralZone = await maybeGetElectoralZoneFromAddress({
-    countryCode: userAddress?.address?.countryCode || validatedInput.data.countryCode,
-    formattedDescription:
-      userAddress?.address?.formattedDescription ||
-      validatedInput.data.address?.formattedDescription ||
-      '',
+    address: {
+      formattedDescription:
+        userAddress?.address?.formattedDescription ||
+        validatedInput.data.address?.formattedDescription ||
+        '',
+      googlePlaceId: userAddress?.address?.googlePlaceId || null,
+      latitude: userAddress?.address?.latitude || null,
+      longitude: userAddress?.address?.longitude || null,
+    },
   })
-
   const userAddressElectoralZone = userAddress?.address?.electoralZone
-
   const currentElectoralZone =
     userAddressElectoralZone ||
     validatedInput.data?.electoralZone ||
@@ -340,6 +342,9 @@ async function getUserAddress(userId: string) {
           electoralZone: true,
           formattedDescription: true,
           countryCode: true,
+          googlePlaceId: true,
+          latitude: true,
+          longitude: true,
         },
       },
     },

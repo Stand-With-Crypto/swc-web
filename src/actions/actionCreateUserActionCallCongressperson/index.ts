@@ -125,7 +125,14 @@ async function _actionCreateUserActionCallCongressperson(
   }
 
   try {
-    const electoralZone = await maybeGetElectoralZoneFromAddress(validatedInput.data.address)
+    const electoralZone = await maybeGetElectoralZoneFromAddress({
+      address: {
+        ...validatedInput.data.address,
+        googlePlaceId: validatedInput.data.address.googlePlaceId || null,
+        latitude: validatedInput.data.address.latitude || null,
+        longitude: validatedInput.data.address.longitude || null,
+      },
+    })
     if ('notFoundReason' in electoralZone) {
       Sentry.captureMessage('electoralZone not found', {
         tags: {
