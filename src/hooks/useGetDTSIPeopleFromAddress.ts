@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import { getElectoralZoneFromAddressOrPlaceId } from '@/utils/shared/getElectoralZoneFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
@@ -20,12 +20,14 @@ export async function getDTSIPeopleFromAddress({
   address,
   filterFn,
   countryCode,
+  placeId,
 }: {
   address: string
+  placeId?: string
   filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
 }) {
-  const electoralZone = await getElectoralZoneFromAddress(address)
+  const electoralZone = await getElectoralZoneFromAddressOrPlaceId({ address, placeId })
 
   if ('notFoundReason' in electoralZone) {
     return electoralZone
@@ -50,6 +52,11 @@ export async function getDTSIPeopleFromAddress({
       catchUnexpectedServerErrorAndTriggerToast(e)
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
     })
+
+  if ('notFoundReason' in data) {
+    return data
+  }
+
   const dtsiPeople = data as DTSIPeopleByElectoralZoneQueryResult
 
   const filteredData = filterFn(dtsiPeople)
@@ -64,23 +71,29 @@ export async function getDTSIPeopleFromAddress({
 export function useGetDTSIPeopleFromAddress({
   address,
   filterFn,
+  placeId,
 }: {
   address?: string | null
+  placeId?: string | null
   filterFn: DTSIPeopleFromAddressFilter
 }) {
   const countryCode = useCountryCode()
 
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, async () => {
-    if (!address) {
-      return
-    }
+  return useSWR(
+    address || placeId ? `useGetDTSIPeopleFromAddress-${address || placeId || ''}` : null,
+    async () => {
+      if (!address && !placeId) {
+        return
+      }
 
-    return getDTSIPeopleFromAddress({
-      address,
-      countryCode,
-      filterFn,
-    })
-  })
+      return getDTSIPeopleFromAddress({
+        address: address || '',
+        placeId: placeId || '',
+        countryCode,
+        filterFn,
+      })
+    },
+  )
 }
 
 export function formatGetDTSIPeopleFromAddressNotFoundReason(

@@ -43,6 +43,8 @@ model Address {
   usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
   // this field is going to replace the usCongressionalDistrict field
   electoralZone            String?  @map("electoral_zone")
+  latitude                 Float?   @map("latitude")
+  longitude                Float?   @map("longitude")
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
@@ -327,6 +329,7 @@ model UserAction {
   @@index([actionType, userId])
   @@index([actionType, campaignName])
   @@index([actionType, nftMintId, datetimeCreated(sort: Desc)])
+  @@index([actionType, nftMintId, datetimeCreated(sort: Asc)], map: "user_action_action_type_nft_mint_id_datetime_created_asc_idx")
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([userEmailAddressId])

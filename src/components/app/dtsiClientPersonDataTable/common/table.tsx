@@ -40,8 +40,10 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-interface GlobalFiltersProps<TData extends Person = Person> {
+export interface GlobalFiltersProps<TData extends Person = Person> {
   columns?: Column<TData>[]
+  onResetFilters: () => void
+  isResetButtonDisabled: boolean
 }
 
 interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
@@ -162,6 +164,19 @@ function DataTableBody<TData extends Person = Person>({
 
   const tableRowModel = table.getRowModel()
 
+  const isResetButtonDisabled = useMemo(() => {
+    const defaultFilters = getGlobalFilterDefaults()
+
+    return defaultFilters.every(defaultFilter => {
+      const currentFilter = columnFilters.find(columnFilter => columnFilter.id === defaultFilter.id)
+      return currentFilter?.value === defaultFilter.value
+    })
+  }, [columnFilters, getGlobalFilterDefaults])
+
+  const handleResetFilters = useCallback(() => {
+    setColumnFilters(getGlobalFilterDefaults())
+  }, [setColumnFilters, getGlobalFilterDefaults])
+
   return (
     <div className="md:container" id={id}>
       <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
@@ -169,7 +184,11 @@ function DataTableBody<TData extends Person = Person>({
           <PageTitle className="text-left" size="md">
             Politicians
           </PageTitle>
-          <GlobalFiltersComponent columns={table.getAllColumns()} />
+          <GlobalFiltersComponent
+            columns={table.getAllColumns()}
+            isResetButtonDisabled={isResetButtonDisabled}
+            onResetFilters={handleResetFilters}
+          />
         </div>
 
         <div className="relative w-full">

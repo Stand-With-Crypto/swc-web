@@ -4,8 +4,11 @@ import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { ColumnFiltersState, SortingState } from '@tanstack/react-table'
 
 import { PERSON_TABLE_COLUMNS_IDS } from '@/components/app/dtsiClientPersonDataTable/common/columns'
-import { StanceOnCryptoOptions } from '@/components/app/dtsiClientPersonDataTable/common/filters'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import {
+  type MultipleSearchParamConfig,
+  useMultipleSearchParamState,
+} from '@/hooks/useMultipleSearchParamState'
 import { useSearchParamState } from '@/hooks/useSearchParamState'
 
 export function useSearchFilter(
@@ -64,38 +67,37 @@ export function useSortingFilter(
   return [hasHydrated ? sortedValue : [], handleSortingValue]
 }
 
+const ROLE_KEY = PERSON_TABLE_COLUMNS_IDS.ROLE
+const PARTY_KEY = PERSON_TABLE_COLUMNS_IDS.PARTY
+const STATE_KEY = PERSON_TABLE_COLUMNS_IDS.STATE
+const STANCE_KEY = PERSON_TABLE_COLUMNS_IDS.STANCE
+
+const DEFAULT_FILTERS_VALUE = 'All'
+
 export function useColumnFilters(): [
   ColumnFiltersState,
   Dispatch<SetStateAction<ColumnFiltersState>>,
 ] {
   const hasHydrated = useHasHydrated()
 
-  const [stanceValue, setStanceValue] = useSearchParamState(
-    PERSON_TABLE_COLUMNS_IDS.STANCE,
-    StanceOnCryptoOptions.ALL,
-  )
-  const [roleValue, setRoleValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.ROLE, 'All')
-  const [partyValue, setPartyValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.PARTY, 'All')
-  const [stateValue, setStateValue] = useSearchParamState(PERSON_TABLE_COLUMNS_IDS.STATE, 'All')
+  const [searchParamValues, setSearchParamValues] = useMultipleSearchParamState({
+    [ROLE_KEY]: DEFAULT_FILTERS_VALUE,
+    [PARTY_KEY]: DEFAULT_FILTERS_VALUE,
+    [STATE_KEY]: DEFAULT_FILTERS_VALUE,
+    [STANCE_KEY]: DEFAULT_FILTERS_VALUE,
+  })
+
+  const roleValue = searchParamValues[ROLE_KEY]
+  const partyValue = searchParamValues[PARTY_KEY]
+  const stateValue = searchParamValues[STATE_KEY]
+  const stanceValue = searchParamValues[STANCE_KEY]
 
   const filters: ColumnFiltersState = useMemo(
     () => [
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.STANCE,
-        value: stanceValue,
-      },
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.ROLE,
-        value: roleValue,
-      },
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.PARTY,
-        value: partyValue,
-      },
-      {
-        id: PERSON_TABLE_COLUMNS_IDS.STATE,
-        value: stateValue,
-      },
+      { id: STANCE_KEY, value: stanceValue },
+      { id: ROLE_KEY, value: roleValue },
+      { id: PARTY_KEY, value: partyValue },
+      { id: STATE_KEY, value: stateValue },
     ],
     [partyValue, roleValue, stanceValue, stateValue],
   )
@@ -104,29 +106,31 @@ export function useColumnFilters(): [
     newValue => {
       const valueToSet = typeof newValue === 'function' ? newValue(filters) : newValue
 
-      const newStanceValue = valueToSet.find(
-        filter => filter.id === PERSON_TABLE_COLUMNS_IDS.STANCE,
-      )
+      const newSearchParamValues: MultipleSearchParamConfig = {}
+
+      const newStanceValue = valueToSet.find(filter => filter.id === STANCE_KEY)
       if (newStanceValue?.value) {
-        setStanceValue(newStanceValue.value as string)
+        newSearchParamValues[STANCE_KEY] = newStanceValue.value as string
       }
 
-      const newRoleValue = valueToSet.find(filter => filter.id === PERSON_TABLE_COLUMNS_IDS.ROLE)
+      const newRoleValue = valueToSet.find(filter => filter.id === ROLE_KEY)
       if (newRoleValue?.value) {
-        setRoleValue(newRoleValue.value as string)
+        newSearchParamValues[ROLE_KEY] = newRoleValue.value as string
       }
 
-      const newPartyValue = valueToSet.find(filter => filter.id === PERSON_TABLE_COLUMNS_IDS.PARTY)
+      const newPartyValue = valueToSet.find(filter => filter.id === PARTY_KEY)
       if (newPartyValue?.value) {
-        setPartyValue(newPartyValue.value as string)
+        newSearchParamValues[PARTY_KEY] = newPartyValue.value as string
       }
 
-      const newStateValue = valueToSet.find(filter => filter.id === PERSON_TABLE_COLUMNS_IDS.STATE)
+      const newStateValue = valueToSet.find(filter => filter.id === STATE_KEY)
       if (newStateValue?.value) {
-        setStateValue(newStateValue.value as string)
+        newSearchParamValues[STATE_KEY] = newStateValue.value as string
       }
+
+      setSearchParamValues(newSearchParamValues)
     },
-    [filters, setPartyValue, setRoleValue, setStanceValue, setStateValue],
+    [filters, setSearchParamValues],
   )
 
   return [hasHydrated ? filters : [], setValue]
