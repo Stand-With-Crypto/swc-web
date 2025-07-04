@@ -5,6 +5,7 @@ import _isEmpty from 'lodash-es/isEmpty'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { formatGooglePlacesResultToAddress } from '@/utils/shared/formatGooglePlacesResultToAddress'
+import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const GOOGLE_PLACES_TEXT_SEARCH_API_URL = 'https://places.googleapis.com/v1/places:searchText'
@@ -13,6 +14,8 @@ const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
   process.env.GOOGLE_PLACES_BACKEND_API_KEY,
   'GOOGLE_PLACES_BACKEND_API_KEY',
 )
+
+const logger = getLogger('getAddressFromGooglePlacePrediction')
 
 type AddressComponents = google.maps.GeocoderAddressComponent[]
 
@@ -47,9 +50,11 @@ async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<Plac
   let data: GooglePlacesDetailsResponse | undefined
   let response: Response
   if (placeId) {
+    logger.info('fetching by placeId', placeId)
     response = await fetchDataByPlaceId(placeId)
     data = (await response.json()) as GooglePlacesDetailsResponse
   } else if (address) {
+    logger.info('fetching by address', address)
     response = await fetchDataByAddress(address)
     data = ((await response.json()) as GooglePlacesTextSearchResponse).places?.[0]
   } else {

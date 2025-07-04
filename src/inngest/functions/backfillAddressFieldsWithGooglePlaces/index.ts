@@ -23,6 +23,7 @@ export interface BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema {
   data: {
     persist?: boolean
     countryCode?: string
+    limit?: number
   }
 }
 
@@ -36,7 +37,7 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     event: BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_COORDINATOR_EVENT_NAME,
   },
   async ({ step, logger, event }) => {
-    const { countryCode: countryCodeParam, persist = false } = event.data
+    const { countryCode: countryCodeParam, persist = false, limit } = event.data
 
     if (countryCodeParam && !ORDERED_SUPPORTED_COUNTRIES.includes(countryCodeParam.toLowerCase())) {
       logger.info('Country code is not supported.')
@@ -79,21 +80,33 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       }
     }
 
+    const addressesToProcess = limit ? Math.min(addressCount, limit) : addressCount
     const totalBatches = Math.ceil(
-      addressCount / BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
+      addressesToProcess / BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
     )
     logger.info(
-      `Found ${addressCount} addresses to backfill, splitting into ${totalBatches} batches.`,
+      `Found ${addressCount} addresses matching criteria${limit ? `, limited to ${addressesToProcess}` : ''}. Splitting into ${totalBatches} batches (${Math.ceil(totalBatches * BATCH_BUFFER)} with buffer).`,
     )
 
     const invokeEvents = []
-    for (let i = 0; i < totalBatches * BATCH_BUFFER; i++) {
+    const batchesWithBuffer = Math.ceil(totalBatches * BATCH_BUFFER)
+
+    for (let i = 0; i < batchesWithBuffer; i++) {
+      const skip = i * BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE
+      const remainingAddresses = addressesToProcess - skip
+      const take = Math.min(
+        BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
+        remainingAddresses,
+      )
+
+      if (take <= 0) break
+
       invokeEvents.push(
         step.invoke(`invoke-processor-batch-${i}`, {
           function: backfillAddressFieldsWithGooglePlacesProcessor,
           data: {
-            skip: i * BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
-            take: BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
+            skip,
+            take,
             persist,
             countryCode,
           },
@@ -112,9 +125,10 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
 
     return {
       dryRun: !persist,
-      message: `Finished processing ${totalBatches} batches.`,
-      successfulBatches: totalBatches - failedInvocations.length,
+      message: `Finished processing ${batchesWithBuffer} batches${limit ? ` (limited to ${addressesToProcess} addresses)` : ''}.`,
+      successfulBatches: batchesWithBuffer - failedInvocations.length,
       failedBatches: failedInvocations.length,
+      totalAddressesTargeted: addressesToProcess,
     }
   },
 )

@@ -4,7 +4,7 @@ import pRetry from 'p-retry'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { getAddressSchemaFromGooglePlacePrediction } from '@/utils/server/getPlaceDataFromAddress'
+import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { ElectoralZone } from '@/utils/server/swcCivic/types'
@@ -108,7 +108,14 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
           if (result.status === 'fulfilled' && !isNull(result.value)) {
             return prismaClient.address.update({
               where: { id: result.value.addressId },
-              data: { ...result.value.completeAddress, electoralZone: result.value.electoralZone },
+              data: {
+                ...result.value.completeAddress,
+                electoralZone: result.value.electoralZone,
+                usCongressionalDistrict:
+                  countryCode === SupportedCountryCodes.US
+                    ? result.value.completeAddress.electoralZone
+                    : undefined,
+              },
             })
           }
           logger.error('Results not found for address', addressChunk[index])
@@ -181,7 +188,7 @@ async function getAddressFromGooglePlaces(
     }
   }>,
 ) {
-  const completeAddress = await getAddressSchemaFromGooglePlacePrediction({
+  const completeAddress = await getAddressFromGooglePlacePrediction({
     description: address.formattedDescription,
     place_id: address.googlePlaceId ?? undefined,
   })
