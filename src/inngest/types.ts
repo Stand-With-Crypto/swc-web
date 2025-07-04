@@ -3,6 +3,8 @@ import { EventSchemas } from 'inngest'
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
 import type { BackfillAddressElectoralZoneCoordinatorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone'
 import type { ProcessAddressElectoralZoneProcessorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone/logic'
+import { BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
+import { ProcessAddressFieldsWithGooglePlacesProcessorEventSchema } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import type { BackfillUsCongressionalDistrictsInngestCronJobSchema } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
@@ -84,5 +86,7 @@ type EventTypes =
   | ProcessAddressElectoralZoneProcessorEventSchema
   | BackfillUserActionElectoralZoneCoordinatorEventSchema
   | ProcessUserActionElectoralZoneProcessorEventSchema
+  | BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema
+  | ProcessAddressFieldsWithGooglePlacesProcessorEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
