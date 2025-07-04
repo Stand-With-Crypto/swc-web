@@ -333,6 +333,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return viewKeyPageRecentActivityRow({
           campaignName,
           countryCode,
+          inStateOrEmpty,
         })
       }
       case UserActionType.LINKEDIN: {
