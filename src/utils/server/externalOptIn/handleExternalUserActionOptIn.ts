@@ -28,7 +28,7 @@ import {
   Input,
   UserWithRelations,
 } from '@/utils/server/externalOptIn/types'
-import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
+import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -37,6 +37,7 @@ import {
 } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import * as smsActions from '@/utils/server/sms/actions'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
@@ -260,30 +261,42 @@ async function maybeUpsertUser({
       ...address,
       formattedDescription: formattedDescription,
       googlePlaceId: undefined,
+      latitude: null,
+      longitude: null,
     }
     try {
-      dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(
-        getFormattedDescription(address, false),
-      )
+      const googleAddressData = await getAddressFromGooglePlacePrediction({
+        description: formattedDescription,
+      })
+      dbAddress = {
+        ...dbAddress,
+        ...googleAddressData,
+      }
     } catch (e) {
       logger.error('error getting `googlePlaceId`:' + e)
     }
 
     try {
-      const electoralZone = await maybeGetElectoralZoneFromAddress(dbAddress)
+      const electoralZone = await maybeGetElectoralZoneFromAddress({
+        address: {
+          ...dbAddress,
+          googlePlaceId: dbAddress?.googlePlaceId || null,
+          latitude: dbAddress?.latitude || null,
+          longitude: dbAddress?.longitude || null,
+        },
+      })
 
       if ('notFoundReason' in electoralZone) {
-        Sentry.captureMessage('electoralZone not found', {
-          tags: {
-            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-          },
-          extra: {
-            notFoundReason: electoralZone.notFoundReason,
-            address: dbAddress.formattedDescription,
-          },
+        logElectoralZoneNotFound({
+          address: dbAddress.formattedDescription,
+          notFoundReason: electoralZone.notFoundReason,
+          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
       } else if (electoralZone.zoneName) {
         dbAddress.electoralZone = electoralZone.zoneName
+      }
+      if ('zoneName' in electoralZone) {
+        dbAddress.electoralZone = `${electoralZone.zoneName}`
       }
     } catch (error) {
       logger.error('error getting `electoralZone`:' + error)

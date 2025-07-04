@@ -78,6 +78,7 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA(
   const res = useGetDTSIPeopleFromAddress({
     filterFn: filterDTSIPeopleByPoliticalCategory(props),
     address: address === 'loading' ? null : address?.description,
+    placeId: address === 'loading' ? null : address?.place_id,
   })
 
   if (!address || address === 'loading') {

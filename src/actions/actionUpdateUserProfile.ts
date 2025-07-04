@@ -31,6 +31,7 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -69,19 +70,23 @@ async function actionUpdateUserProfileWithoutMiddleware(
 
   try {
     if (validatedFields.data.address) {
-      const electoralZone = await maybeGetElectoralZoneFromAddress(validatedFields.data.address)
+      const electoralZone = await maybeGetElectoralZoneFromAddress({
+        address: {
+          ...validatedFields.data.address,
+          googlePlaceId: validatedFields.data.address.googlePlaceId || null,
+          latitude: validatedFields.data.address.latitude || null,
+          longitude: validatedFields.data.address.longitude || null,
+        },
+      })
       if ('notFoundReason' in electoralZone) {
-        Sentry.captureMessage('electoralZone not found', {
-          tags: {
-            domain: 'actionUpdateUserProfile',
-          },
-          extra: {
-            notFoundReason: electoralZone.notFoundReason,
-            address: validatedFields.data.address.formattedDescription,
-          },
+        logElectoralZoneNotFound({
+          address: validatedFields.data.address.formattedDescription,
+          notFoundReason: electoralZone.notFoundReason,
+          domain: 'actionUpdateUserProfile',
         })
-      } else if (electoralZone.zoneName) {
-        validatedFields.data.address.electoralZone = electoralZone.zoneName
+      }
+      if ('zoneName' in electoralZone) {
+        validatedFields.data.address.electoralZone = `${electoralZone.zoneName}`
       }
     }
   } catch (error) {
