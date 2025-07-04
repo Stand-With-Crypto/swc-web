@@ -26,7 +26,9 @@ export async function UserActionViewKeyPageDeeplinkWrapper<K extends string>({
 }: UserActionViewKeyPageDeeplinkWrapperProps<K>) {
   const campaignName = (searchParams?.campaignName || null) as K | null
 
-  const campaignMetadata = campaignName ? campaignMetadataMap[campaignName] : null
+  const campaignMetadata = campaignName
+    ? campaignMetadataMap[campaignName.toUpperCase() as K]
+    : null
 
   if (!campaignName || !campaignMetadata) {
     notFound()
