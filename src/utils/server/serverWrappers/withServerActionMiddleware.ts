@@ -27,6 +27,15 @@ export function withServerActionMiddleware<TAction extends ServerAction<any, any
     const currentHeaders = await headers()
     const userSession = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
 
+    const isBot = currentHeaders.get('x-known-bot') === 'true'
+    if (isBot) {
+      Sentry.captureMessage('Blocked known bot', {
+        level: 'info',
+        tags: { domain: 'withServerActionMiddleware', action: name },
+      })
+      return { error: 'Blocked by known bot detection' } as Awaited<ReturnType<TAction>>
+    }
+
     const countryCode = await getCountryCodeFromHeaders(currentHeaders)
 
     if (userSession) {

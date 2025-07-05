@@ -1,0 +1,21 @@
+---
+description: Branch naming convention
+globs: 
+alwaysApply: false
+---
+## Branch Naming Prefixes
+The branch specification by describing with `feature/`, `fix/`, `hotfix/` and `chore/` and it should be structured as follows:
+
+`<type>/<optional issue number>/<description>`
+
+`feature/`: For new features (e.g., `feature/add-login-page`)
+`fix/`: For bug fixes (e.g., `fix/fix-header-bug`)
+`hotfix/`: For urgent fixes (e.g., `hotfix/security-patch`)
+`chore/`: For non-code tasks like dependency, docs updates (e.g., `chore/update-dependencies`)
+
+## Basic Rules
+
+Use Lowercase Alphanumeric and Hyphens: Always use lowercase letters (a-z), numbers (0-9), and hyphens to separate words. Avoid special characters, underscores, or spaces.
+No Consecutive or Trailing Hyphens: Ensure that hyphens are used singly, with no consecutive hyphens (`feature/new--login`) or at the end (`feature/new-login-`).
+Keep It Clear and Concise: The branch name should be descriptive yet concise, clearly indicating the purpose of the work.
+Include Ticket Numbers: If applicable, include the ticket number from your project management tool to make tracking easier. For example, for a #123 issue, the branch name could be `feature/123/new-login`.
