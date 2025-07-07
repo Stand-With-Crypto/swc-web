@@ -54,11 +54,6 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
       prismaClient.address.findMany({
         where: {
           countryCode,
-          formattedDescription: {
-            not: {
-              contains: 'test',
-            },
-          },
           OR: [
             {
               electoralZone: null,
@@ -100,7 +95,9 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
         Promise.allSettled(
           addressChunk.map(address =>
             pRetry(async () => await getAddressFromGooglePlaces(address), {
-              retries: 2,
+              retries: 5,
+              factor: 2,
+              minTimeout: 1000,
               shouldRetry(error) {
                 return (
                   !error.message.includes('No place ID found for address') &&
