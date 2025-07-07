@@ -1,5 +1,6 @@
 import mixpanel, { Callback, RequestOptions } from 'mixpanel-browser'
 
+import { isKnownBotClient } from '@/utils/shared/botUserAgent'
 import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 import { mapPersistedLocalUserToExperimentAnalyticsProperties } from '@/utils/shared/localUser'
 import { customLogger } from '@/utils/shared/logger'
@@ -55,7 +56,13 @@ export function trackClientAnalytic(
   optionsOrCallback?: RequestOptions | Callback,
 ) {
   const countryCode = getCountryCodeForClientAnalytics()
-  const eventProperties = { ...getExperimentProperties(), ..._eventProperties, countryCode }
+  const eventProperties = {
+    ...getExperimentProperties(),
+    ..._eventProperties,
+    countryCode,
+    isBot: isKnownBotClient(),
+    ...(typeof navigator !== 'undefined' ? { userAgent: navigator.userAgent } : {}),
+  }
   customLogger(
     {
       category: 'analytics',

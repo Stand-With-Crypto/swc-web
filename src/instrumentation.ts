@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { isKnownBotUserAgent } from '@/utils/shared/botUserAgent'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -34,6 +35,13 @@ function suppressSentryErrorOrReturnEvent(
       hint?.originalException || hint?.syntheticException,
     )
     return null
+  }
+
+  // tag errors if user agent is a known bot
+  const headers = event.request?.headers
+  const isBot = isKnownBotUserAgent(headers?.['user-agent'])
+  if (isBot) {
+    event.tags = { ...(event.tags || {}), agent: 'bot' }
   }
 
   return event
