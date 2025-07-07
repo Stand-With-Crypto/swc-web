@@ -128,9 +128,9 @@ Sentry.init({
     /^TypeError: network error$/,
   ],
   beforeSend: (event, hint) => {
-    // Suppress Sentry if user agent is a known bot
+    // tag errors if user agent is a known bot
     if (isKnownBotClient()) {
-      return null
+      event.tags = { ...(event.tags || {}), agent: 'bot' }
     }
 
     // prevent local errors from triggering sentry

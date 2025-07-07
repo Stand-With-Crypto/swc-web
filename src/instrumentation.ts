@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { isKnownBotUserAgent } from '@/utils/shared/botUserAgent'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -20,6 +21,13 @@ export function register() {
       // Setting this option to true will print useful information to the console while you're setting up Sentry.
       debug: false,
       beforeSend: (event, hint) => {
+        // tag errors if user agent is a known bot
+        const headers = event.request?.headers
+        const isBot = isKnownBotUserAgent(headers?.['user-agent'])
+        if (isBot) {
+          event.tags = { ...(event.tags || {}), agent: 'bot' }
+        }
+
         if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
           const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
           console.error(

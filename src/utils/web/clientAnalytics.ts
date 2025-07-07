@@ -21,9 +21,6 @@ const environmentHasAnalyticsEnabled =
 
 let init = false
 export function maybeInitClientAnalytics() {
-  if (isKnownBotClient()) {
-    return
-  }
   if (!init) {
     mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
       track_pageview: false,
@@ -33,9 +30,6 @@ export function maybeInitClientAnalytics() {
   }
 }
 export function identifyClientAnalyticsUser(userId: string) {
-  if (isKnownBotClient()) {
-    return
-  }
   const hasTargetingEnabled = getClientCookieConsent(
     getCountryCodeForClientAnalytics() as SupportedCountryCodes,
   ).targeting
@@ -61,11 +55,14 @@ export function trackClientAnalytic(
   _eventProperties?: AnalyticProperties,
   optionsOrCallback?: RequestOptions | Callback,
 ) {
-  if (isKnownBotClient()) {
-    return
-  }
   const countryCode = getCountryCodeForClientAnalytics()
-  const eventProperties = { ...getExperimentProperties(), ..._eventProperties, countryCode }
+  const eventProperties = {
+    ...getExperimentProperties(),
+    ..._eventProperties,
+    countryCode,
+    isBot: isKnownBotClient(),
+    ...(typeof navigator !== 'undefined' ? { userAgent: navigator.userAgent } : {}),
+  }
   customLogger(
     {
       category: 'analytics',
