@@ -24,6 +24,7 @@ export interface BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema {
     persist?: boolean
     countryCode?: string
     limit?: number
+    getAddressBatchSize?: number
   }
 }
 
@@ -37,7 +38,12 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     event: BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_COORDINATOR_EVENT_NAME,
   },
   async ({ step, logger, event }) => {
-    const { countryCode: countryCodeParam, persist = false, limit } = event.data
+    const {
+      countryCode: countryCodeParam,
+      persist = false,
+      limit,
+      getAddressBatchSize,
+    } = event.data
 
     if (countryCodeParam && !ORDERED_SUPPORTED_COUNTRIES.includes(countryCodeParam.toLowerCase())) {
       const message = `Country code ${countryCodeParam} is not supported.`
@@ -112,25 +118,34 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
             take,
             persist,
             countryCode,
+            getAddressBatchSize,
           },
         }),
       )
     }
 
-    const results = await Promise.allSettled(invokeEvents)
+    let totalFailedInvocations = 0
+    let totalSuccessInvocations = 0
 
-    const failedInvocations = results.filter(r => r.status === 'rejected')
-    if (failedInvocations.length > 0) {
-      logger.error(`Failed to invoke ${failedInvocations.length} processor jobs.`, {
-        errors: failedInvocations.map(f => f.reason),
-      })
+    for (const eventPromise of invokeEvents) {
+      if (totalSuccessInvocations > 0) {
+        await step.sleep('sleep-between-invocations', 1000)
+      }
+
+      try {
+        await eventPromise
+        totalSuccessInvocations += 1
+      } catch (error) {
+        logger.error('Failed to invoke processor job', { error })
+        totalFailedInvocations += 1
+      }
     }
 
     return {
       dryRun: !persist,
       message: `Finished processing ${batchesWithBuffer} batches${limit ? ` (limited to ${addressesToProcess} addresses)` : ''}.`,
-      successfulBatches: batchesWithBuffer - failedInvocations.length,
-      failedBatches: failedInvocations.length,
+      successfulBatches: batchesWithBuffer - totalFailedInvocations,
+      failedBatches: totalFailedInvocations,
       totalAddressesTargeted: addressesToProcess,
     }
   },
