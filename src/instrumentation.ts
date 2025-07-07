@@ -8,6 +8,37 @@ const SENTRY_SUPPRESSED_INNGEST_FUNCTIONS = [
   'script.backfill-address-fields-with-google-places-processor',
 ]
 
+function suppressSentryErrorOrReturnEvent(
+  event: Sentry.ErrorEvent,
+  hint: Sentry.EventHint,
+  dsn: string | undefined,
+) {
+  const requestUrl = event?.request?.url
+
+  const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(functionId =>
+    requestUrl?.includes(functionId),
+  )
+
+  let shouldSuppress = false
+
+  if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
+    shouldSuppress =
+      toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn || isSuppressedInngestFunction
+  } else {
+    shouldSuppress = isSuppressedInngestFunction
+  }
+
+  if (shouldSuppress) {
+    console.error(
+      `${isSuppressedInngestFunction ? 'Inngest ' : ''}${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
+      hint?.originalException || hint?.syntheticException,
+    )
+    return null
+  }
+
+  return event
+}
+
 export function register() {
   const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 
@@ -25,26 +56,7 @@ export function register() {
       // Setting this option to true will print useful information to the console while you're setting up Sentry.
       debug: false,
       beforeSend: (event, hint) => {
-        if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-          const requestUrl = event?.request?.url
-
-          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(functionId =>
-            requestUrl?.includes(functionId),
-          )
-
-          const shouldSuppress =
-            toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) ||
-            !dsn ||
-            isSuppressedInngestFunction
-          console.error(
-            `${isSuppressedInngestFunction ? 'Inngest ' : ''}${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
-            hint?.originalException || hint?.syntheticException,
-          )
-          if (shouldSuppress) {
-            return null
-          }
-        }
-        return event
+        return suppressSentryErrorOrReturnEvent(event, hint, dsn)
       },
     })
   }
@@ -63,26 +75,7 @@ export function register() {
       // Setting this option to true will print useful information to the console while you're setting up Sentry.
       debug: false,
       beforeSend: (event, hint) => {
-        if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-          const requestUrl = event?.request?.url
-
-          const isSuppressedInngestFunction = SENTRY_SUPPRESSED_INNGEST_FUNCTIONS.some(functionId =>
-            requestUrl?.includes(functionId),
-          )
-
-          const shouldSuppress =
-            toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) ||
-            !dsn ||
-            isSuppressedInngestFunction
-          console.error(
-            `${isSuppressedInngestFunction ? 'Inngest ' : ''}${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
-            hint?.originalException || hint?.syntheticException,
-          )
-          if (shouldSuppress) {
-            return null
-          }
-        }
-        return event
+        return suppressSentryErrorOrReturnEvent(event, hint, dsn)
       },
     })
   }

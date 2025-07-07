@@ -10,7 +10,7 @@ import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/q
 import { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { CONCURRENCY_LIMIT, MINI_BATCH_SIZE } from './config'
+import { CONCURRENCY_LIMIT, DEFAULT_MINI_BATCH_SIZE } from './config'
 
 const PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_FUNCTION_ID =
   'script.backfill-address-fields-with-google-places-processor'
@@ -24,6 +24,7 @@ export interface ProcessAddressFieldsWithGooglePlacesProcessorEventSchema {
     take: number
     persist?: boolean
     countryCode: SupportedCountryCodes
+    getAddressBatchSize?: number
   }
 }
 
@@ -35,7 +36,13 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
   },
   { event: PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { skip, take, persist, countryCode } = event.data
+    const {
+      skip,
+      take,
+      persist,
+      countryCode,
+      getAddressBatchSize = DEFAULT_MINI_BATCH_SIZE,
+    } = event.data
 
     if (!persist) {
       logger.info(
@@ -80,7 +87,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
       }
     }
 
-    const addressChunks = chunk(addresses, MINI_BATCH_SIZE)
+    const addressChunks = chunk(addresses, getAddressBatchSize)
     let chunkIndex = 0
     let totalSuccess = 0
     let totalFailed = 0
