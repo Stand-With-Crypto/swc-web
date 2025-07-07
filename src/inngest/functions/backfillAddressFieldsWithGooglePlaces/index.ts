@@ -125,16 +125,10 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     }
 
     let totalFailedInvocations = 0
-    let totalSuccessInvocations = 0
 
     for (const eventPromise of invokeEvents) {
-      if (totalSuccessInvocations > 0) {
-        await step.sleep('sleep-between-invocations', 1000)
-      }
-
       try {
         await eventPromise
-        totalSuccessInvocations += 1
       } catch (error) {
         logger.error('Failed to invoke processor job', { error })
         totalFailedInvocations += 1

@@ -92,6 +92,10 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
     let totalSuccess = 0
     let totalFailed = 0
     for (const addressChunk of addressChunks) {
+      if (chunkIndex > 0) {
+        await step.sleep('sleep-between-chunks', 60_000)
+      }
+
       const completeAddressesResults = await step.run(`get-address-for-batch-${chunkIndex}`, () =>
         Promise.allSettled(
           addressChunk.map(address =>
