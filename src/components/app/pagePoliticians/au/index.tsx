@@ -9,7 +9,7 @@ import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/au
 
 export const PAGE_POLITICIANS_TITLE = 'Find out where politicians stand on crypto'
 export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives Australian innovation. Discover the politicians fighting to keep crypto in Australia.`
-const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate'
+const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
 const countryCode = SupportedCountryCodes.AU
 
