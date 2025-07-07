@@ -4,6 +4,7 @@
 
 import * as Sentry from '@sentry/nextjs'
 
+import { isKnownBotClient } from '@/utils/shared/botUserAgent'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -133,6 +134,11 @@ Sentry.init({
     /AutoConnect timeout/i,
   ],
   beforeSend: (event, hint) => {
+    // tag errors if user agent is a known bot
+    if (isKnownBotClient()) {
+      event.tags = { ...(event.tags || {}), agent: 'bot' }
+    }
+
     // prevent local errors from triggering sentry
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
       console.debug(
