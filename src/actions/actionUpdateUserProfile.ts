@@ -31,8 +31,9 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
+import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
+import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
-import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
@@ -50,9 +51,9 @@ export const actionUpdateUserProfile = withServerActionMiddleware(
 
 const logger = getLogger(`actionUpdateUserProfile`)
 
-async function actionUpdateUserProfileWithoutMiddleware(
-  data: z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>,
-) {
+type Input = z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>
+
+async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
   const authUser = await appRouterGetAuthUser()
 
   if (!authUser) {
@@ -68,35 +69,28 @@ async function actionUpdateUserProfileWithoutMiddleware(
     }
   }
 
-  try {
-    if (validatedFields.data.address) {
-      const electoralZone = await maybeGetElectoralZoneFromAddress({
-        address: {
-          ...validatedFields.data.address,
-          googlePlaceId: validatedFields.data.address.googlePlaceId || null,
-          latitude: validatedFields.data.address.latitude || null,
-          longitude: validatedFields.data.address.longitude || null,
-        },
-      })
-      if ('notFoundReason' in electoralZone) {
+  if (validatedFields.data.address) {
+    try {
+      const electoralZone = await getElectoralZone(validatedFields.data.address)
+      if (!electoralZone) {
         logElectoralZoneNotFound({
           address: validatedFields.data.address.formattedDescription,
-          notFoundReason: electoralZone.notFoundReason,
+          notFoundReason: 'ELECTORAL_ZONE_NOT_FOUND' as const,
           domain: 'actionUpdateUserProfile',
         })
       }
-      if ('zoneName' in electoralZone) {
+      if (electoralZone && 'zoneName' in electoralZone) {
         validatedFields.data.address.electoralZone = `${electoralZone.zoneName}`
       }
+    } catch (error) {
+      logger.error('error getting `electoralZone`:' + error)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'actionUpdateUserProfile',
+          message: 'error getting electoralZone',
+        },
+      })
     }
-  } catch (error) {
-    logger.error('error getting `electoralZone`:' + error)
-    Sentry.captureException(error, {
-      tags: {
-        domain: 'actionUpdateUserProfile',
-        message: 'error getting electoralZone',
-      },
-    })
   }
 
   await throwIfRateLimited({ context: 'authenticated' })
@@ -291,5 +285,29 @@ async function handleCapitolCanaryAdvocateUpsert(
           }),
       },
     })
+  }
+}
+
+async function getElectoralZone(address: NonNullable<Input['address']>) {
+  const { latitude, longitude, googlePlaceId, formattedDescription } = address
+
+  if (latitude && longitude) {
+    logger.info('Getting electoral zone for latitude and longitude', {
+      latitude,
+      longitude,
+    })
+    return await querySWCCivicElectoralZoneFromLatLong(latitude, longitude)
+  }
+
+  if (googlePlaceId || formattedDescription) {
+    logger.info('Getting latitude and longitude for address/placeId', {
+      address: formattedDescription,
+      placeId: googlePlaceId,
+    })
+    const result = await getLatLongFromAddressOrPlaceId({
+      address: formattedDescription || '',
+      placeId: googlePlaceId || '',
+    })
+    return await querySWCCivicElectoralZoneFromLatLong(result.latitude, result.longitude)
   }
 }
