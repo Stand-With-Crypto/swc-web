@@ -1,6 +1,8 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
+import { backfillAddressFieldsWithGooglePlacesCoordinator } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
+import { backfillAddressFieldsWithGooglePlacesProcessor } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
@@ -85,5 +87,7 @@ export const { GET, POST, PUT } = serve({
     deleteNotSupportedCountryCodeAdvocates,
     syncSendgridContactsCoordinator,
     syncSendgridContactsProcessor,
+    backfillAddressFieldsWithGooglePlacesCoordinator,
+    backfillAddressFieldsWithGooglePlacesProcessor,
   ],
 })

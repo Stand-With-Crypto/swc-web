@@ -1,5 +1,5 @@
 import { GeoGate } from '@/components/app/geoGate'
-import { MintingAnNFTButton, SumDonationsCounter } from '@/components/app/pageDonate'
+import { SumDonationsCounter } from '@/components/app/pageDonate'
 import { DonateButton } from '@/components/app/pageDonate/donateButton'
 import { PageDonateProps } from '@/components/app/pageDonate/pageDonate.types'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -12,12 +12,16 @@ export function Heading({ countryCode, title, description, sumDonations }: PageD
       <SumDonationsCounter countryCode={countryCode} initialData={sumDonations} />
       <PageTitle>{title}</PageTitle>
       <PageSubTitle>{description}</PageSubTitle>
-      <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}>
+      <GeoGate
+        countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+        unavailableContent={
+          <PageSubTitle className="text-xs lg:text-sm">
+            Action only available for users in the United States.
+          </PageSubTitle>
+        }
+      >
         <DonateButton />
       </GeoGate>
-      <PageSubTitle className="text-xs lg:text-sm">
-        You can also contribute by <MintingAnNFTButton />
-      </PageSubTitle>
     </section>
   )
 }

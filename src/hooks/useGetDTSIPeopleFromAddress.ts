@@ -52,6 +52,11 @@ export async function getDTSIPeopleFromAddress({
       catchUnexpectedServerErrorAndTriggerToast(e)
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
     })
+
+  if ('notFoundReason' in data) {
+    return data
+  }
+
   const dtsiPeople = data as DTSIPeopleByElectoralZoneQueryResult
 
   const filteredData = dtsiPeople.filter(filterFn)

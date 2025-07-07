@@ -5,6 +5,7 @@ import _isEmpty from 'lodash-es/isEmpty'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { formatGooglePlacesResultToAddress } from '@/utils/shared/formatGooglePlacesResultToAddress'
+import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const GOOGLE_PLACES_TEXT_SEARCH_API_URL = 'https://places.googleapis.com/v1/places:searchText'
@@ -14,12 +15,18 @@ const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
   'GOOGLE_PLACES_BACKEND_API_KEY',
 )
 
-type AddressComponents = google.maps.GeocoderAddressComponent[]
+interface AddressComponent {
+  longText: string
+  shortText: string
+  types: string[]
+  languageCode: string
+}
+const logger = getLogger('getAddressFromGooglePlacePrediction')
 
 interface PlaceData {
   placeId: string
   formattedAddress: string
-  addressComponents: AddressComponents
+  addressComponents: AddressComponent[]
   location: {
     latitude: number
     longitude: number
@@ -47,9 +54,11 @@ async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<Plac
   let data: GooglePlacesDetailsResponse | undefined
   let response: Response
   if (placeId) {
+    logger.info('fetching by placeId', placeId)
     response = await fetchDataByPlaceId(placeId)
     data = (await response.json()) as GooglePlacesDetailsResponse
   } else if (address) {
+    logger.info('fetching by address', address)
     response = await fetchDataByAddress(address)
     data = ((await response.json()) as GooglePlacesTextSearchResponse).places?.[0]
   } else {
@@ -64,7 +73,7 @@ async function getPlaceDataFromAddress({ address, placeId }: Args): Promise<Plac
         extra: { address },
       },
     )
-    throw new Error(`Failed to search for place: ${response.status}`)
+    throw new Error(`Failed to search for place: ${response.status} ${errorText}`)
   }
 
   if (_isEmpty(data) || !data) {
@@ -95,7 +104,7 @@ interface GooglePlacesTextSearchResponse {
   places?: Array<{
     id: string
     formattedAddress: string
-    addressComponents: AddressComponents
+    addressComponents: AddressComponent[]
     location: {
       latitude: number
       longitude: number
@@ -127,7 +136,7 @@ async function fetchDataByAddress(address: string) {
 interface GooglePlacesDetailsResponse {
   id: string
   formattedAddress: string
-  addressComponents: AddressComponents
+  addressComponents: AddressComponent[]
   location: {
     latitude: number
     longitude: number
@@ -153,7 +162,11 @@ export async function getAddressFromGooglePlacePrediction(
     placeId: prediction.place_id,
   })
   return formatGooglePlacesResultToAddress({
-    address_components: result.addressComponents,
+    address_components: result.addressComponents.map(component => ({
+      ...component,
+      long_name: component.longText,
+      short_name: component.shortText,
+    })),
     geometry: {
       location: {
         lat: () => result.location.latitude,

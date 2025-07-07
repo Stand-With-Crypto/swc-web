@@ -1,6 +1,8 @@
 import { EventSchemas } from 'inngest'
 
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
+import { BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
+import { ProcessAddressFieldsWithGooglePlacesProcessorEventSchema } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
@@ -70,5 +72,7 @@ type EventTypes =
   | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
   | SyncSendgridContactsCoordinatorSchema
   | SyncSendgridContactsProcessorSchema
+  | BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema
+  | ProcessAddressFieldsWithGooglePlacesProcessorEventSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
