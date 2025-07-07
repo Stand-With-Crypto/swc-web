@@ -12,10 +12,6 @@ export const navbarConfig: NavbarProps = {
   showDonateButton: true,
   items: [
     {
-      href: urls.localPolicy(),
-      text: 'Local policy',
-    },
-    {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
     },
