@@ -16,7 +16,10 @@ import {
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
-import { DataTable } from '@/components/app/dtsiClientPersonDataTable/common/table'
+import {
+  DataTable,
+  type GlobalFiltersProps,
+} from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -114,7 +117,7 @@ export function AuDTSIClientPersonDataTable({
   )
 }
 
-function AuGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
+function AuGlobalFilters({ columns, onResetFilters, isResetButtonDisabled }: GlobalFiltersProps) {
   const namedColumns = useMemo(() => {
     if (!columns) return {}
 
@@ -150,6 +153,8 @@ function AuGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         partyOptions={PARTY_OPTIONS}
       />
+
+      <GlobalFilters.ResetButton disabled={isResetButtonDisabled} onResetFilters={onResetFilters} />
     </GlobalFilters>
   )
 }

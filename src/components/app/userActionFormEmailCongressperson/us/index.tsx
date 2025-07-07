@@ -18,7 +18,6 @@ import {
   UserActionFormEmailCongresspersonPropsBase,
 } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/common/useEmailActionCampaignMetadata'
-import { getUSEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/us/campaigns'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections } from '@/hooks/useSections'
@@ -28,7 +27,6 @@ import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 import {
   filterDTSIPeopleByUSPoliticalCategory,
   getUSPoliticianCategoryDisplayName,
-  YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/us'
 import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -42,20 +40,14 @@ import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/z
 
 const countryCode = SupportedCountryCodes.US
 
-const DEFAULT_POLITICIAN_CATEGORY = getUSEmailActionCampaignMetadata(
-  USUserActionEmailCampaignName.DEFAULT,
-).politicianCategory
-
 interface USUserActionFormEmailCongresspersonProps
   extends UserActionFormEmailCongresspersonPropsBase {
   campaignName: USUserActionEmailCampaignName
-  politicianCategory?: YourPoliticianCategory
 }
 
 export function USUserActionFormEmailCongressperson({
   user,
   initialValues,
-  politicianCategory = DEFAULT_POLITICIAN_CATEGORY,
   onCancel,
   campaignName,
 }: USUserActionFormEmailCongresspersonProps) {
@@ -145,7 +137,7 @@ export function USUserActionFormEmailCongressperson({
   const addressField = form.watch('address')
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
     address: addressField?.description,
-    filterFn: filterDTSIPeopleByUSPoliticalCategory(politicianCategory),
+    filterFn: filterDTSIPeopleByUSPoliticalCategory(campaignMetadata.politicianCategory),
   })
 
   switch (sectionProps.currentSection) {
@@ -159,7 +151,9 @@ export function USUserActionFormEmailCongressperson({
             />
             <EmailCongressperson.PersonalInformationFields />
             <EmailCongressperson.Representatives
-              categoryDisplayName={getUSPoliticianCategoryDisplayName(politicianCategory)}
+              categoryDisplayName={getUSPoliticianCategoryDisplayName(
+                campaignMetadata.politicianCategory,
+              )}
               countryCode={countryCode}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />
