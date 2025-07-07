@@ -34,8 +34,8 @@ ${fullNameSignOff}`
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: 'Email your House Rep',
-  dialogSubtitle: 'Support Market Structure Regulation (CLARITY Act)',
+  dialogTitle: 'Email Your House Rep',
+  dialogSubtitle: 'Pass Crucial Crypto Legislation',
   politicianCategory: 'house',
   subject: 'Vote YES on CLARITY Act',
   getEmailBodyText,
