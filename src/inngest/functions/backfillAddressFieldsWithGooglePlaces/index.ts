@@ -63,11 +63,6 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       prismaClient.address.count({
         where: {
           countryCode,
-          formattedDescription: {
-            not: {
-              contains: 'test',
-            },
-          },
           OR: [
             {
               electoralZone: null,
@@ -98,7 +93,7 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       `Found ${addressCount} addresses matching criteria${limit ? `, limited to ${addressesToProcess}` : ''}. Splitting into ${totalBatches} batches (${batchesWithBuffer} with buffer).`,
     )
 
-    const invokeEvents = []
+    let totalFailedInvocations = 0
 
     for (let i = 0; i < batchesWithBuffer; i++) {
       const skip = i * BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE
@@ -110,8 +105,8 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
 
       if (take <= 0) break
 
-      invokeEvents.push(
-        step.invoke(`invoke-processor-batch-${i}`, {
+      try {
+        await step.invoke(`invoke-processor-batch-${i}`, {
           function: backfillAddressFieldsWithGooglePlacesProcessor,
           data: {
             skip,
@@ -120,15 +115,7 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
             countryCode,
             getAddressBatchSize,
           },
-        }),
-      )
-    }
-
-    let totalFailedInvocations = 0
-
-    for (const eventPromise of invokeEvents) {
-      try {
-        await eventPromise
+        })
       } catch (error) {
         logger.error('Failed to invoke processor job', { error })
         totalFailedInvocations += 1
