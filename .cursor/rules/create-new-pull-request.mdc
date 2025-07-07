@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 # Creating a new Pull Request
 
-If the user has Github MCP [mcp.json](mdc:/Users/lucas/.cursor/mcp.json) configured, use it. If not, use GitHub CLI.
+If the user has Github MCP configured, use it. If not, use GitHub CLI.
 
 ## Pre-PR Checklist
 1. Ensure we're on a proper feature branch (not main/master)
@@ -14,18 +14,18 @@ If the user has Github MCP [mcp.json](mdc:/Users/lucas/.cursor/mcp.json) configu
 4. For UI changes, request screenshots for mobile/web
 
 ## Branches & Commits
-- Use [conventional commits](mdc:https:/www.conventionalcommits.org/en/v1.0.0) and [conventional branch](mdc:https:/conventional-branch.github.io)
+- Use [commit-message-conventions.mdc](mdc:.cursor/rules/commit-message-conventions.mdc) and [branch-name-convention.mdc](mdc:.cursor/rules/branch-name-convention.mdc)
 - Target `main` branch unless specified otherwise
 - Separate commits by scope/functionality of the PR
 
 ## Steps to create the PR
-1. Use the template from [PULL_REQUEST_TEMPLATE.md](mdc:.github/PULL_REQUEST_TEMPLATE.md)
+1. Use the template from [PULL_REQUEST_TEMPLATE.md](mdc:.github/PULL_REQUEST_TEMPLATE.md) and follow it strictly
 2. Request the user about closing issues:
-   - GitHub issues: Read from [swc-web](mdc:https:/github.com/Stand-With-Crypto/swc-web) repo and link as [issue-id](mdc:issue-link) in `closes` section
+   - GitHub issues: Read from [swc-web](mdc:https:/github.com/Stand-With-Crypto/swc-web) repo and link as [issue-id](mdc:issue-link) in `closes` sectionp
    - GitHub URLs: Link as [issue-id](mdc:issue-link) in `closes` section
    - Sentry issues: Link in `fixes` section (e.g., PROD-SWC-WEB-1JE)
    - If none provided, remove `fixes` and `closes`
 3. When prisma schema changes, request PlanetScale deploy request URL
 4. Ensure testing checkboxes are appropriately marked
-5. Mark "AI Generated" in Notes to Reviewers
+5. Mark "AI Generated" with a checkbox in Notes to Reviewers
 6. For large/complex changes, consider creating as draft initially

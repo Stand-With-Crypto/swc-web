@@ -4,6 +4,7 @@
 
 import * as Sentry from '@sentry/nextjs'
 
+import { isKnownBotClient } from '@/utils/shared/botUserAgent'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -122,11 +123,22 @@ Sentry.init({
     'ResizeObserver loop limit exceeded',
     'ResizeObserver loop completed with undelivered notifications',
     /As of March 1st, 2025, google\.maps\.places.*/i,
+
     // Network errors are being ignored here because of this investigation: https://github.com/Stand-With-Crypto/swc-web/issues/2408
     'network error',
     /^TypeError: network error$/,
+
+    // Thirdweb error spam on wallet connection
+    /cannot initialize wallet, no user logged in/i,
+    /Error auto connecting wallet: Cannot set a wallet without an account as active/i,
+    /AutoConnect timeout/i,
   ],
   beforeSend: (event, hint) => {
+    // tag errors if user agent is a known bot
+    if (isKnownBotClient()) {
+      event.tags = { ...(event.tags || {}), agent: 'bot' }
+    }
+
     // prevent local errors from triggering sentry
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
       console.debug(
