@@ -510,6 +510,12 @@ const nextConfig: NextConfig = {
           '/action/email/clarity_act_house_jun_13_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
         permanent: false,
       },
+      {
+        source: '/mp-welcome',
+        destination:
+          '/action/email/welcome_mp_back_to_parliament_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-au-mp-welcome',
+        permanent: false,
+      },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
         source: '/vg/:campaignId/:sessionId*',
