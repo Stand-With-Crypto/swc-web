@@ -145,16 +145,25 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
           return { affectedRows: 0 }
         }
 
-        try {
-          const affectedRows = await prismaClient.$transaction(updatesToPerform)
-          logger.info(`UPDATED Updated ${affectedRows.length} addresses in batch ${chunkIndex}`, {
-            affectedRows,
-          })
-          return { affectedRows: affectedRows.length }
-        } catch (error) {
-          logger.error(`Raw SQL update failed for batch ${chunkIndex}`, { error })
-          return { affectedRows: 0 }
+        const updateRowsResults = await Promise.allSettled(updatesToPerform)
+
+        const successfulUpdates = updateRowsResults.filter(result => result.status === 'fulfilled')
+        const failedUpdates = updateRowsResults.filter(result => result.status === 'rejected')
+
+        if (successfulUpdates.length > 0) {
+          logger.info(`Updated ${successfulUpdates.length} addresses in batch ${chunkIndex}`)
         }
+
+        if (failedUpdates.length > 0) {
+          logger.error(
+            `Failed to update ${failedUpdates.length} addresses in batch ${chunkIndex}`,
+            {
+              failedUpdates,
+            },
+          )
+        }
+
+        return { affectedRows: successfulUpdates.length }
       })
 
       const successfulUpdatesInChunk = chunkUpdateResults.affectedRows
