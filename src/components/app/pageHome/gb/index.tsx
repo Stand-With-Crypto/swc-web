@@ -1,6 +1,8 @@
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -15,7 +17,13 @@ import { GbHero } from './hero'
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
 
-export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders }: HomePageProps) {
+export function GbPageHome({
+  topLevelMetrics,
+  recentActivity,
+  partners,
+  founders,
+  dtsiHomepagePoliticians,
+}: HomePageProps) {
   return (
     <>
       <GbHero />
@@ -82,6 +90,12 @@ export function GbPageHome({ topLevelMetrics, recentActivity, partners, founders
           <FoundersCarousel founders={founders} />
         </HomePageSection>
       )}
+
+      <HomepagePoliticiansSection
+        countryCode={countryCode}
+        cryptoStanceGrade={DTSIFormattedLetterGrade}
+        dtsiHomepagePoliticians={dtsiHomepagePoliticians}
+      />
     </>
   )
 }
