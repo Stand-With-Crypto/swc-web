@@ -24,7 +24,6 @@ export interface BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema {
     persist?: boolean
     countryCode?: string
     limit?: number
-    getAddressBatchSize?: number
   }
 }
 
@@ -38,12 +37,7 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     event: BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_COORDINATOR_EVENT_NAME,
   },
   async ({ step, logger, event }) => {
-    const {
-      countryCode: countryCodeParam,
-      persist = false,
-      limit,
-      getAddressBatchSize,
-    } = event.data
+    const { countryCode: countryCodeParam, persist = false, limit } = event.data
 
     if (countryCodeParam && !ORDERED_SUPPORTED_COUNTRIES.includes(countryCodeParam.toLowerCase())) {
       const message = `Country code ${countryCodeParam} is not supported.`
@@ -113,7 +107,6 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
             take,
             persist,
             countryCode,
-            getAddressBatchSize,
           },
         })
       } catch (error) {
