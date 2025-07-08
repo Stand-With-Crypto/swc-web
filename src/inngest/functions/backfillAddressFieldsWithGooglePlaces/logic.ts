@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Address, Prisma } from '@prisma/client'
 import { chunk, isNull } from 'lodash-es'
 import pRetry from 'p-retry'
 
@@ -10,7 +10,7 @@ import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/q
 import { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { CONCURRENCY_LIMIT, DEFAULT_MINI_BATCH_SIZE } from './config'
+import { MINI_BATCH_SIZE } from './config'
 
 const PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_FUNCTION_ID =
   'script.backfill-address-fields-with-google-places-processor'
@@ -24,7 +24,6 @@ export interface ProcessAddressFieldsWithGooglePlacesProcessorEventSchema {
     take: number
     persist?: boolean
     countryCode: SupportedCountryCodes
-    getAddressBatchSize?: number
   }
 }
 
@@ -32,17 +31,10 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
   {
     id: PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_FUNCTION_ID,
     onFailure: onScriptFailure,
-    concurrency: CONCURRENCY_LIMIT,
   },
   { event: PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const {
-      skip,
-      take,
-      persist,
-      countryCode,
-      getAddressBatchSize = DEFAULT_MINI_BATCH_SIZE,
-    } = event.data
+    const { skip, take, persist, countryCode } = event.data
 
     if (!persist) {
       logger.info(
@@ -65,12 +57,24 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
         },
         skip,
         take,
-        orderBy: { id: 'asc' },
         select: {
           id: true,
-          googlePlaceId: true,
           formattedDescription: true,
+          googlePlaceId: true,
+          electoralZone: true,
+          streetNumber: true,
+          route: true,
+          locality: true,
+          administrativeAreaLevel1: true,
+          administrativeAreaLevel2: true,
+          countryCode: true,
+          postalCode: true,
+          postalCodeSuffix: true,
+          latitude: true,
+          longitude: true,
+          subpremise: true,
         },
+        orderBy: { id: 'asc' },
       }),
     )
 
@@ -82,7 +86,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
       }
     }
 
-    const addressChunks = chunk(addresses, getAddressBatchSize)
+    const addressChunks = chunk(addresses, MINI_BATCH_SIZE)
     let chunkIndex = 0
     let totalSuccess = 0
     let totalFailed = 0
@@ -114,13 +118,18 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
       const updatesToPerform = completeAddressesResults
         .map((result, index) => {
           if (result.status === 'fulfilled' && !isNull(result.value)) {
-            return prismaClient.address.update({
-              where: { id: result.value.addressId },
-              data: {
+            const existingAddress = addressChunk[index]
+            const { id, ...existingAddressWithoutId } = existingAddress
+
+            return {
+              addressId: id,
+              existingGooglePlaceId: existingAddress.googlePlaceId, // Store original DB value
+              updateData: {
+                ...existingAddressWithoutId,
                 ...result.value.completeAddress,
-                electoralZone: result.value.electoralZone,
-              },
-            })
+                electoralZone: result.value.electoralZone || existingAddress.electoralZone,
+              } as Record<keyof Address, string | number | null>,
+            }
           }
           logger.error('Results not found for address', addressChunk[index])
           totalFailed++
@@ -133,7 +142,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
         continue
       }
 
-      const chunkUpdateResults = await step.run(`update-db-for-batch-${chunkIndex}`, async () => {
+      const chunkUpdateResult = await step.run(`update-addresses-batch-${chunkIndex}`, async () => {
         if (!persist) {
           logger.info(
             `[DRY RUN] Would update ${updatesToPerform.length} addresses in batch ${chunkIndex}.`,
@@ -145,28 +154,143 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
           return { affectedRows: 0 }
         }
 
-        const updateRowsResults = await Promise.allSettled(updatesToPerform)
+        try {
+          const allFields = new Set<keyof Address>()
+          updatesToPerform.forEach(update => {
+            Object.keys(update.updateData).forEach(field => allFields.add(field as keyof Address))
+          })
 
-        const successfulUpdates = updateRowsResults.filter(result => result.status === 'fulfilled')
-        const failedUpdates = updateRowsResults.filter(result => result.status === 'rejected')
+          const fieldMapping: Partial<Record<keyof Address, string>> = {
+            electoralZone: 'electoral_zone',
+            streetNumber: 'street_number',
+            route: 'route',
+            locality: 'locality',
+            administrativeAreaLevel1: 'administrative_area_level_1',
+            administrativeAreaLevel2: 'administrative_area_level_2',
+            countryCode: 'country_code',
+            postalCode: 'postal_code',
+            postalCodeSuffix: 'postal_code_suffix',
+            latitude: 'latitude',
+            longitude: 'longitude',
+            formattedDescription: 'formatted_description',
+            googlePlaceId: 'google_place_id',
+            subpremise: 'subpremise',
+          }
 
-        if (successfulUpdates.length > 0) {
-          logger.info(`Updated ${successfulUpdates.length} addresses in batch ${chunkIndex}`)
-        }
+          // Check for duplicate googlePlaceIds within this batch to avoid constraint violations
+          const googlePlaceIdCounts = new Map<string, number>()
+          updatesToPerform.forEach(update => {
+            const placeId = String(update.updateData.googlePlaceId)
+            if (placeId) {
+              googlePlaceIdCounts.set(placeId, (googlePlaceIdCounts.get(placeId) || 0) + 1)
+            }
+          })
 
-        if (failedUpdates.length > 0) {
-          logger.error(
-            `Failed to update ${failedUpdates.length} addresses in batch ${chunkIndex}`,
-            {
-              failedUpdates,
-            },
+          const batchDuplicatePlaceIds = Array.from(googlePlaceIdCounts.entries())
+            .filter(([_, count]) => count > 1)
+            .map(([placeId, _]) => placeId)
+
+          if (batchDuplicatePlaceIds.length > 0) {
+            logger.warn(
+              `Found ${batchDuplicatePlaceIds.length} duplicate googlePlaceIds within batch ${chunkIndex}. These will be skipped to avoid constraint violations.`,
+              { batchDuplicatePlaceIds },
+            )
+
+            // Restore existing googlePlaceId for batch duplicates to avoid batch failure
+            updatesToPerform.forEach(update => {
+              const placeId = String(update.updateData.googlePlaceId)
+              if (placeId && batchDuplicatePlaceIds.includes(placeId)) {
+                update.updateData.googlePlaceId = update.existingGooglePlaceId
+                logger.debug(
+                  `Restored existing googlePlaceId (${update.existingGooglePlaceId ?? 'null'}) for address ${update.addressId} to prevent batch duplicate`,
+                )
+              }
+            })
+          }
+
+          // Check for existing googlePlaceIds in database to avoid constraint violations
+          const newGooglePlaceIds = updatesToPerform
+            .map(update => String(update.updateData.googlePlaceId))
+            .filter(Boolean)
+
+          if (newGooglePlaceIds.length > 0) {
+            const existingAddresses = await prismaClient.address.findMany({
+              where: {
+                googlePlaceId: { in: newGooglePlaceIds },
+                id: { notIn: updatesToPerform.map(u => u.addressId) }, // Exclude current addresses being updated
+              },
+              select: { googlePlaceId: true },
+            })
+
+            const existingPlaceIds = new Set(existingAddresses.map(addr => addr.googlePlaceId))
+
+            if (existingPlaceIds.size > 0) {
+              logger.warn(
+                `Found ${existingPlaceIds.size} googlePlaceIds that already exist in database. These will be skipped to avoid constraint violations.`,
+                { existingPlaceIds: Array.from(existingPlaceIds) },
+              )
+
+              // Restore existing googlePlaceId for existing ones to avoid batch failure
+              updatesToPerform.forEach(update => {
+                const placeId = String(update.updateData.googlePlaceId)
+                if (placeId && existingPlaceIds.has(placeId)) {
+                  update.updateData.googlePlaceId = update.existingGooglePlaceId
+                  logger.debug(
+                    `Restored existing googlePlaceId (${update.existingGooglePlaceId ?? 'null'}) for address ${update.addressId} to prevent database constraint violation`,
+                  )
+                }
+              })
+            }
+          }
+
+          const setClauses: Prisma.Sql[] = []
+
+          for (const field of allFields) {
+            const columnName = fieldMapping[field]
+            if (!columnName) {
+              logger.warn(`Unknown field '${field}' - skipping update for this field`)
+              continue
+            }
+
+            const caseClauses = Prisma.join(
+              updatesToPerform.map(update => {
+                const value = update.updateData[field]
+                return Prisma.sql`WHEN ${update.addressId} THEN ${value}`
+              }),
+              ' ',
+            )
+
+            setClauses.push(Prisma.sql`${Prisma.raw(columnName)} = CASE id ${caseClauses} END`)
+          }
+
+          setClauses.push(Prisma.sql`datetime_updated = NOW()`)
+
+          if (setClauses.length === 0) {
+            logger.info(`No valid fields to update for batch ${chunkIndex}`)
+            return { affectedRows: 0 }
+          }
+
+          const idsToUpdate = Prisma.join(updatesToPerform.map(update => update.addressId))
+          const setClause = Prisma.join(setClauses, ', ')
+
+          logger.info(
+            `Batch ${chunkIndex}: Processing ${updatesToPerform.length} addresses with ${allFields.size} fields`,
           )
-        }
 
-        return { affectedRows: successfulUpdates.length }
+          const affectedRows = await prismaClient.$executeRaw`
+            UPDATE address
+            SET ${setClause}
+            WHERE id IN (${idsToUpdate})
+          `
+          logger.info(`Updated ${affectedRows} addresses in batch ${chunkIndex}`)
+          return { affectedRows }
+        } catch (error) {
+          logger.error(`Raw SQL update failed for batch ${chunkIndex}`, { error })
+          return { affectedRows: 0 }
+        }
       })
 
-      const successfulUpdatesInChunk = chunkUpdateResults.affectedRows
+      const successfulUpdatesInChunk = chunkUpdateResult.affectedRows
       const failedUpdatesInChunk = updatesToPerform.length - successfulUpdatesInChunk
       totalSuccess += successfulUpdatesInChunk
       totalFailed += failedUpdatesInChunk
@@ -193,13 +317,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
 )
 
 async function getAddressFromGooglePlaces(
-  address: Prisma.AddressGetPayload<{
-    select: {
-      id: true
-      googlePlaceId: true
-      formattedDescription: true
-    }
-  }>,
+  address: Pick<Address, 'id' | 'formattedDescription' | 'googlePlaceId'>,
 ) {
   const completeAddress = await getAddressFromGooglePlacePrediction({
     description: address.formattedDescription,
