@@ -10,7 +10,7 @@ import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/q
 import { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { CONCURRENCY_LIMIT, DEFAULT_MINI_BATCH_SIZE } from './config'
+import { DATABASE_UPDATE_CONCURRENCY, MINI_BATCH_SIZE } from './config'
 
 const PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_FUNCTION_ID =
   'script.backfill-address-fields-with-google-places-processor'
@@ -32,17 +32,10 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
   {
     id: PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_FUNCTION_ID,
     onFailure: onScriptFailure,
-    concurrency: CONCURRENCY_LIMIT,
   },
   { event: PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const {
-      skip,
-      take,
-      persist,
-      countryCode,
-      getAddressBatchSize = DEFAULT_MINI_BATCH_SIZE,
-    } = event.data
+    const { skip, take, persist, countryCode } = event.data
 
     if (!persist) {
       logger.info(
@@ -82,7 +75,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
       }
     }
 
-    const addressChunks = chunk(addresses, getAddressBatchSize)
+    const addressChunks = chunk(addresses, MINI_BATCH_SIZE)
     let chunkIndex = 0
     let totalSuccess = 0
     let totalFailed = 0
@@ -133,43 +126,57 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
         continue
       }
 
-      const chunkUpdateResults = await step.run(`update-db-for-batch-${chunkIndex}`, async () => {
-        if (!persist) {
-          logger.info(
-            `[DRY RUN] Would update ${updatesToPerform.length} addresses in batch ${chunkIndex}.`,
-          )
-          return { affectedRows: updatesToPerform.length }
+      let dbChunkIndex = 0
+
+      let totalSuccessfulUpdates = 0
+      let totalFailedUpdates = 0
+
+      const updateChunks = chunk(updatesToPerform, DATABASE_UPDATE_CONCURRENCY)
+
+      for (const updateChunk of updateChunks) {
+        if (dbChunkIndex > 0) {
+          await step.sleep('sleep-between-db-chunks', 30_000)
         }
 
-        if (updatesToPerform.length === 0) {
-          return { affectedRows: 0 }
-        }
+        const updateChunkResult = await step.run(
+          `update-db-for-batch-${chunkIndex}-chunk-${dbChunkIndex}`,
+          async () => {
+            const updateRowsResults = await Promise.allSettled(updateChunk)
 
-        const updateRowsResults = await Promise.allSettled(updatesToPerform)
+            const successfulUpdates = updateRowsResults.filter(
+              result => result.status === 'fulfilled',
+            )
+            const failedUpdates = updateRowsResults.filter(result => result.status === 'rejected')
 
-        const successfulUpdates = updateRowsResults.filter(result => result.status === 'fulfilled')
-        const failedUpdates = updateRowsResults.filter(result => result.status === 'rejected')
+            if (successfulUpdates.length > 0) {
+              logger.info(`Updated ${successfulUpdates.length} addresses in batch ${chunkIndex}`)
+            }
 
-        if (successfulUpdates.length > 0) {
-          logger.info(`Updated ${successfulUpdates.length} addresses in batch ${chunkIndex}`)
-        }
+            if (failedUpdates.length > 0) {
+              logger.error(
+                `Failed to update ${failedUpdates.length} addresses in batch ${chunkIndex}`,
+                {
+                  failedUpdates,
+                },
+              )
+            }
 
-        if (failedUpdates.length > 0) {
-          logger.error(
-            `Failed to update ${failedUpdates.length} addresses in batch ${chunkIndex}`,
-            {
-              failedUpdates,
-            },
-          )
-        }
+            return {
+              successfulUpdates: successfulUpdates.length,
+              failedUpdates: failedUpdates.length,
+            }
+          },
+        )
 
-        return { affectedRows: successfulUpdates.length }
-      })
+        totalSuccessfulUpdates += updateChunkResult.successfulUpdates
+        totalFailedUpdates += updateChunkResult.failedUpdates
 
-      const successfulUpdatesInChunk = chunkUpdateResults.affectedRows
-      const failedUpdatesInChunk = updatesToPerform.length - successfulUpdatesInChunk
+        dbChunkIndex++
+      }
+
+      const successfulUpdatesInChunk = totalSuccessfulUpdates
       totalSuccess += successfulUpdatesInChunk
-      totalFailed += failedUpdatesInChunk
+      totalFailed += totalFailedUpdates
 
       logger.info(
         `${!persist ? '[DRY RUN] ' : ''}Processed ${
