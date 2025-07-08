@@ -122,7 +122,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
             const { id, ...existingAddressWithoutId } = existingAddress
 
             return {
-              addressId: result.value.addressId,
+              addressId: id,
               existingGooglePlaceId: existingAddress.googlePlaceId, // Store original DB value
               updateData: {
                 ...existingAddressWithoutId,
@@ -202,7 +202,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
               if (placeId && batchDuplicatePlaceIds.includes(placeId)) {
                 update.updateData.googlePlaceId = update.existingGooglePlaceId
                 logger.debug(
-                  `Restored existing googlePlaceId (${update.existingGooglePlaceId}) for address ${update.addressId} to prevent batch duplicate`,
+                  `Restored existing googlePlaceId (${update.existingGooglePlaceId ?? 'null'}) for address ${update.addressId} to prevent batch duplicate`,
                 )
               }
             })
@@ -236,7 +236,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
                 if (placeId && existingPlaceIds.has(placeId)) {
                   update.updateData.googlePlaceId = update.existingGooglePlaceId
                   logger.debug(
-                    `Restored existing googlePlaceId (${update.existingGooglePlaceId}) for address ${update.addressId} to prevent database constraint violation`,
+                    `Restored existing googlePlaceId (${update.existingGooglePlaceId ?? 'null'}) for address ${update.addressId} to prevent database constraint violation`,
                   )
                 }
               })
