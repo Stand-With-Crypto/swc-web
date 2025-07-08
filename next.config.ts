@@ -310,16 +310,6 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: '/gb/politicians',
-        destination: '/gb',
-        permanent: false,
-      },
-      {
-        source: '/gb/politicians/person/:slug',
-        destination: '/gb',
-        permanent: false,
-      },
-      {
         source: '/press/stand-with-crypto-reacts-to-passage-of-fit21-legislation',
         destination: '/press/stand-with-crypto-reacts-to-passage-of-fit-21-legislation',
         permanent: true,
