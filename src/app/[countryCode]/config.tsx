@@ -20,13 +20,12 @@ export const navbarConfig: NavbarProps = {
       text: 'Events',
     },
     {
+      href: urls.donate(),
+      text: 'Donate',
+    },
+    {
       text: 'Resources',
       children: [
-        {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: <Icons.DonateIcon />,
-        },
         {
           href: urls.referrals(),
           text: 'Referrals',
@@ -62,7 +61,6 @@ export const navbarConfig: NavbarProps = {
           text: 'Advocacy toolkit',
           icon: <Icons.AdvocacyToolkitIcon />,
         },
-
         {
           href: urls.press(),
           text: 'Press',
@@ -74,10 +72,6 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.PollsIcon />,
         },
       ],
-    },
-    {
-      href: urls.donate(),
-      text: 'Donate',
     },
   ],
 }
@@ -102,7 +96,8 @@ export const footerConfig: FooterProps = {
       text: 'Questionnaire',
     },
     { href: urls.leaderboard(), text: 'Community' },
-    { href: urls.resources(), text: 'FIT21 resources' },
+    { href: urls.contentClarity(), text: 'CLARITY resources' },
+    { href: urls.contentGenius(), text: 'GENIUS resources' },
   ],
   socialLinks: [
     {

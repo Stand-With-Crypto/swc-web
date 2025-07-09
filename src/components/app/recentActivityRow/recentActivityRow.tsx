@@ -12,10 +12,12 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX } from '@/utils/shared/intl/displayNames'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { cn } from '@/utils/web/cn'
 
 export interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUserWithENSData }
   countryCode: SupportedCountryCodes
+  showActionLocation?: boolean
 }
 
 export function RecentActivityRowBase({
@@ -23,34 +25,44 @@ export function RecentActivityRowBase({
   action,
   children,
   onFocusContent: OnFocusContent,
+  showActionLocation = false,
 }: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: React.ComponentType }) {
   const [hasFocus, setHasFocus] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: true })
   return (
     <div
       // added min height to prevent height shifting on hover
-      className="flex min-h-[41px] items-center justify-between gap-5"
+      className="flex min-h-[41px] items-center gap-4"
       onMouseEnter={() => isMobile || setHasFocus(true)}
       onMouseLeave={() => isMobile || setHasFocus(false)}
     >
-      <div className="flex items-center gap-4">
-        <div className="flex-shrink-0">
-          <ActivityAvatar actionType={action.actionType} size={44} />
-        </div>
-        <div>{children}</div>
+      <div className="flex-shrink-0">
+        <ActivityAvatar actionType={action.actionType} size={44} />
       </div>
-      <div className="shrink-0 text-xs text-gray-500 lg:text-base">
-        {hasFocus && OnFocusContent ? (
-          <motion.div
-            animate={{ opacity: 1, transform: 'translateX(0)' }}
-            initial={{ opacity: 0, transform: 'translateX(10px)' }}
-            transition={{ duration: 0.5 }}
-          >
-            <OnFocusContent />
-          </motion.div>
-        ) : (
-          <ActionAdditionalInfo action={action} countryCode={countryCode} />
-        )}
+
+      <div
+        className={cn('flex w-full flex-col justify-between gap-1.5 sm:flex-row sm:items-center', {
+          'flex-row': hasFocus,
+        })}
+      >
+        <div>{children}</div>
+        <div className="shrink-0 text-xs text-gray-500 lg:text-base">
+          {hasFocus && OnFocusContent ? (
+            <motion.div
+              animate={{ opacity: 1, transform: 'translateX(0)' }}
+              initial={{ opacity: 0, transform: 'translateX(10px)' }}
+              transition={{ duration: 0.5 }}
+            >
+              <OnFocusContent />
+            </motion.div>
+          ) : (
+            <ActionAdditionalInfo
+              action={action}
+              countryCode={countryCode}
+              showActionLocation={showActionLocation}
+            />
+          )}
+        </div>
       </div>
     </div>
   )
@@ -59,16 +71,20 @@ export function RecentActivityRowBase({
 interface ActionAdditionalInfoProps {
   action: RecentActivityRowProps['action']
   countryCode: SupportedCountryCodes
+  showActionLocation?: boolean
 }
 
-function ActionAdditionalInfo({ action, countryCode }: ActionAdditionalInfoProps) {
+function ActionAdditionalInfo({
+  action,
+  countryCode,
+  showActionLocation,
+}: ActionAdditionalInfoProps) {
   const hasHydrated = useHasHydrated()
   if (!hasHydrated) {
     return <Skeleton>a while ago</Skeleton>
   }
 
-  // TODO: Change this to a prop instead of hardcoded based on the countryCode
-  if (countryCode !== SupportedCountryCodes.US) {
+  if (showActionLocation) {
     const { administrativeAreaLevel1, countryCode: userLocationCountryCode } =
       action.user.userLocationDetails ?? {}
     const hasUserChangedLocationSinceActionCompleted =

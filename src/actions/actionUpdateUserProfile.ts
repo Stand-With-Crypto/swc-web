@@ -37,7 +37,10 @@ import {
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 import { getZodUpdateUserProfileFormActionSchema } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
@@ -67,8 +70,9 @@ async function actionUpdateUserProfileWithoutMiddleware(
     }
   }
 
+  const isUSAddress = validatedFields.data.address?.countryCode?.toUpperCase() === 'US'
   try {
-    if (validatedFields.data.address) {
+    if (isUSAddress && validatedFields.data.address) {
       const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
         validatedFields.data.address,
       )
@@ -192,7 +196,10 @@ async function actionUpdateUserProfileWithoutMiddleware(
     updatedUser.smsStatus = await smsActions.optInUser({
       phoneNumber,
       user,
-      countryCode: addressCountryCode,
+      countryCode:
+        addressCountryCode ??
+        (user.countryCode as SupportedCountryCodes) ??
+        DEFAULT_SUPPORTED_COUNTRY_CODE,
     })
   }
 

@@ -23,12 +23,11 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { BILLS_IDS } from '@/utils/shared/constants'
-import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { USUserActionCallCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
-import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory/us'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -132,7 +131,7 @@ export function SuggestedScript({
   CallCongresspersonActionSharedData,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
 >) {
-  const { dtsiPeople, addressSchema, googleCivicData } = congressPersonData
+  const { dtsiPeople, addressSchema } = congressPersonData
 
   const isMobile = useIsMobile()
   const responsiveContent = RESPONSIVE_CONTENT[isMobile ? 'mobile' : 'desktop']
@@ -141,15 +140,10 @@ export function SuggestedScript({
 
   const dtsiPerson = dtsiPeople[0]
   const phoneNumber = React.useMemo(() => {
-    const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, googleCivicData)
-
-    if (!official) {
-      toastGenericError()
-      return null
-    }
-
-    return official.phones[0]
-  }, [dtsiPerson, googleCivicData])
+    // TODO: get the official phone number information once we have it from quorum
+    toastGenericError()
+    return null
+  }, [])
 
   const { data: congresspersonBillVote } = useCongresspersonBillVote({
     slug: dtsiPerson.slug,

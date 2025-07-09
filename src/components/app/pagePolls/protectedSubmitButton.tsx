@@ -3,18 +3,18 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { GeoGate } from '@/components/app/geoGate'
 import { Button } from '@/components/ui/button'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import { COUNTRY_CODE_TO_DEMONYM } from '@/utils/shared/intl/displayNames'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export function ProtectedSubmitButton({
   isDisabled,
   isMultiple,
-  countryCode,
 }: {
   isDisabled: boolean
   isMultiple: boolean
-  countryCode: SupportedCountryCodes
 }) {
+  const countryCode = useCountryCode()
+
   return (
     <LoginDialogWrapper
       authenticatedContent={

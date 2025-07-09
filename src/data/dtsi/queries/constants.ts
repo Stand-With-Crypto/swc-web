@@ -8,7 +8,9 @@ export const PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY: Record<
   [SupportedCountryCodes.US]: [
     DTSI_PersonGrouping.CURRENT_US_HOUSE_OF_REPS,
     DTSI_PersonGrouping.CURRENT_US_SENATE,
-    DTSI_PersonGrouping.US_PRESIDENT,
+    DTSI_PersonGrouping.CURRENT_US_PRESIDENT,
+    DTSI_PersonGrouping.CURRENT_US_STATE_ATTORNEY_GENERAL,
+    DTSI_PersonGrouping.CURRENT_US_STATE_GOVERNOR,
     DTSI_PersonGrouping.RUNNING_FOR_US_HOUSE_OF_REPS,
     DTSI_PersonGrouping.RUNNING_FOR_US_SENATE,
     DTSI_PersonGrouping.RUNNING_FOR_PRESIDENT,
@@ -92,4 +94,29 @@ export const PERSON_ROLE_GROUPINGS_FOR_DISTRICT_SPECIFIC_QUERY: Record<
   [SupportedCountryCodes.AU]: [DTSI_PersonGrouping.RUNNING_FOR_AU_HOUSE_OF_REPS],
   [SupportedCountryCodes.GB]: [DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_COMMONS],
   [SupportedCountryCodes.CA]: [DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS],
+}
+
+export const PERSON_ROLE_GROUPINGS_FOR_CURRENT_PEOPLE_BY_CONGRESS_DISTRICT_QUERY: Record<
+  SupportedCountryCodes,
+  DTSI_PersonGrouping[]
+> = {
+  [SupportedCountryCodes.US]: [
+    DTSI_PersonGrouping.CURRENT_US_HOUSE_OF_REPS,
+    DTSI_PersonGrouping.CURRENT_US_SENATE,
+    DTSI_PersonGrouping.CURRENT_US_PRESIDENT,
+    DTSI_PersonGrouping.CURRENT_US_STATE_ATTORNEY_GENERAL,
+    DTSI_PersonGrouping.CURRENT_US_STATE_GOVERNOR,
+  ],
+  [SupportedCountryCodes.AU]: [
+    DTSI_PersonGrouping.CURRENT_AU_HOUSE_OF_REPS,
+    DTSI_PersonGrouping.CURRENT_AU_SENATE,
+  ],
+  [SupportedCountryCodes.GB]: [
+    DTSI_PersonGrouping.CURRENT_UK_HOUSE_OF_COMMONS,
+    DTSI_PersonGrouping.CURRENT_UK_HOUSE_OF_LORDS,
+  ],
+  [SupportedCountryCodes.CA]: [
+    DTSI_PersonGrouping.CURRENT_CA_HOUSE_OF_COMMONS,
+    DTSI_PersonGrouping.CURRENT_CA_SENATE,
+  ],
 }

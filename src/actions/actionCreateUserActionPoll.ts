@@ -7,38 +7,46 @@ import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
-import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import {
+  ServerActionConfig,
+  withServerActionMiddleware,
+} from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger(`actionCreateUserActionPoll`)
 
-export type CreatePollVoteInput = {
+export interface CreatePollVoteInput {
   campaignName: string
   answers: { answer: string; isOtherAnswer: boolean }[]
 }
 
 export const actionCreateUserActionPoll = withServerActionMiddleware(
   'actionCreateUserActionPoll',
-  withValidations([createCountryCodeValidation()], actionCreateUserActionPollWithoutMiddleware),
+  withValidations(
+    [createCountryCodeValidation(Object.values(ORDERED_SUPPORTED_COUNTRIES))],
+    actionCreateUserActionPollWithoutMiddleware,
+  ),
 )
 
-async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVoteInput) {
+async function actionCreateUserActionPollWithoutMiddleware(
+  input: CreatePollVoteInput,
+  { countryCode }: ServerActionConfig,
+) {
   logger.info('triggered')
 
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({ context: 'unauthenticated' })
 
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
-  const countryCode = await getUserAccessLocationCookie()
 
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
@@ -52,7 +60,7 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
   }
 
   const user = await prismaClient.user.findFirstOrThrow({
-    where: { id: authUser.userId },
+    where: { id: authUser.userId, countryCode },
     include: { primaryUserCryptoAddress: true, address: true },
   })
 
@@ -68,7 +76,7 @@ async function actionCreateUserActionPollWithoutMiddleware(input: CreatePollVote
   const actionType = UserActionType.POLL
 
   const userAction = await prismaClient.userAction.findFirst({
-    where: { actionType, campaignName, userId: user.id },
+    where: { actionType, campaignName, userId: user.id, countryCode },
     include: { userActionPoll: true },
   })
 

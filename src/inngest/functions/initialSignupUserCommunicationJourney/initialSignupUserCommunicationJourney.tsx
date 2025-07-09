@@ -16,7 +16,7 @@ import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXRemi
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'
@@ -60,12 +60,6 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     const userCommunicationJourney = await step.run('create-communication-journey', () =>
       createCommunicationJourney(payload.userId),
     )
-
-    const userForCountryCodeCheck = await getUser(payload.userId)
-    // TODO: remove this once we have templates for all countries
-    if (userForCountryCodeCheck.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
-      return
-    }
 
     let done = false
     do {
@@ -269,33 +263,42 @@ async function sendInitialSignUpEmail({
 } & Pick<InitialSignupUserCommunicationDataSchema, 'userId' | 'sessionId'>) {
   const user = await getUser(userId)
 
-  // TODO: remove this once we have templates for all countries
-  if (!user.primaryUserEmailAddress || user.countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
+  if (!user.primaryUserEmailAddress) {
     return null
   }
 
-  const Template = TEMPLATE_BY_STEP[step]
+  const countryCode = user.countryCode as SupportedCountryCodes
+  const Template = TEMPLATE_BY_STEP[step](countryCode)
+
+  if (!Template) {
+    return null
+  }
+
   const messageId = await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: Template.subjectLine,
-    html: await render(
-      <Template
-        completedActionTypes={user.userActions
-          .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
-          .map(action => `${action.actionType}` as EmailActiveActions)}
-        session={
-          sessionId
-            ? {
-                userId: user.id,
-                sessionId,
-              }
-            : null
-        }
-      />,
-    ),
-    customArgs: {
-      userId: user.id,
-      campaign: Template.campaign,
+    countryCode,
+    payload: {
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: Template.subjectLine,
+      html: await render(
+        <Template
+          completedActionTypes={user.userActions
+            .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
+            .map(action => `${action.actionType}` as EmailActiveActions)}
+          countryCode={countryCode}
+          session={
+            sessionId
+              ? {
+                  userId: user.id,
+                  sessionId,
+                }
+              : null
+          }
+        />,
+      ),
+      customArgs: {
+        userId: user.id,
+        campaign: Template.campaign,
+      },
     },
   }).catch(err => {
     Sentry.captureException(err, {

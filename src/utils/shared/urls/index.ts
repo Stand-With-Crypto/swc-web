@@ -163,18 +163,31 @@ export const getIntlUrls = (
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
+    newmodeMomentumAheadHouseRisingAction: () => `${countryPrefix}/content/houserising`,
+    contentClarity: () => `${countryPrefix}/content/clarity`,
+    contentGenius: () => `${countryPrefix}/content/genius`,
     ...RACES_ROUTES,
   }
 }
 
 export const apiUrls = {
-  dtsiPeopleByCongressionalDistrict: ({
+  dtsiPeopleByElectoralZone: ({
+    electoralZone,
     stateCode,
-    districtNumber,
+    countryCode,
   }: {
-    stateCode: string
-    districtNumber: number
-  }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
+    stateCode: string | null
+    electoralZone: string
+    countryCode: SupportedCountryCodes
+  }) => {
+    if (countryCode === SupportedCountryCodes.US && stateCode) {
+      return `/api/public/dtsi/by-geography/usa/${stateCode}/${electoralZone}`
+    }
+
+    return `/api/public/dtsi/by-geography/${countryCode}/${electoralZone}`
+  },
+  swcCivicElectoralZoneFromAddress: (address: string) =>
+    `/api/public/swc-civic/electoral-zone?address=${encodeURIComponent(address.trim())}`,
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,
@@ -199,9 +212,10 @@ export const apiUrls = {
     hasWelcomeMessageInBody?: boolean
   }) =>
     `/api/public/sms/events/status?campaignName=${campaignName}&journeyType=${journeyType}&hasWelcomeMessageInBody=${String(hasWelcomeMessageInBody ?? false)}`,
-  pollsVotesFromUser: ({ userId }: { userId?: string }) =>
-    `/api/identified-user/polls-votes-from-user?userId=${userId ?? ''}`,
-  pollsResultsData: () => `/api/public/polls`,
+  pollsVotesFromUser: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/${countryCode}/identified-user/polls-votes-from-user`,
+  pollsResultsData: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/${countryCode}/public/polls`,
   districtRanking: ({ stateCode, districtNumber }: { stateCode: string; districtNumber: string }) =>
     `/api/public/referrals/${stateCode}/${districtNumber}`,
   dtsiRacesByCongressionalDistrict: ({

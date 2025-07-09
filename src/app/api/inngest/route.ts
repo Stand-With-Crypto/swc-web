@@ -1,6 +1,8 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
+import { backfillAddressElectoralZoneCoordinator } from '@/inngest/functions/backfillAddressElectoralZone'
+import { backfillAddressElectoralZoneProcessor } from '@/inngest/functions/backfillAddressElectoralZone/logic'
 import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
@@ -16,6 +18,7 @@ import {
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import { checkSMSOptInReplyWithInngest } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { deleteNotSupportedCountryCodeAdvocates } from '@/inngest/functions/capitolCanary/deleteNotSupportedCountryCodeAdvocates'
 import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
@@ -25,8 +28,11 @@ import { updateDistrictsRankings } from '@/inngest/functions/districtsRankings/u
 import { globalSendEventNotifications } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
+import { syncSendgridContactsCoordinator } from '@/inngest/functions/sendgridContactsCronJob'
+import { syncSendgridContactsProcessor } from '@/inngest/functions/sendgridContactsCronJob/logic'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
+  backfillMissingCommunications,
   backfillOptedOutUsers,
   backfillPhoneNumberValidation,
   bulkSMSCommunicationJourney,
@@ -83,5 +89,11 @@ export const { GET, POST, PUT } = serve({
     backfillUserCountryCodeEmptyWithInngest,
     backfillIntlUsersWithInngest,
     processIntlUsersBatch,
+    backfillMissingCommunications,
+    deleteNotSupportedCountryCodeAdvocates,
+    syncSendgridContactsCoordinator,
+    syncSendgridContactsProcessor,
+    backfillAddressElectoralZoneCoordinator,
+    backfillAddressElectoralZoneProcessor,
   ],
 })

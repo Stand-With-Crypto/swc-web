@@ -14,11 +14,12 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { TWILIO_RATE_LIMIT } from '@/utils/server/sms'
-import { BULK_WELCOME_MESSAGE } from '@/utils/server/sms/messages'
-import { isPhoneNumberCountrySupported } from '@/utils/server/sms/utils'
+import { getSMSMessages } from '@/utils/server/sms/messages'
+import { getCountryCodeFromPhoneNumber } from '@/utils/server/sms/utils'
 import { prettyStringify } from '@/utils/shared/prettyLog'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   ORDERED_SUPPORTED_COUNTRIES,
@@ -104,6 +105,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       await step.sleep('scheduled-sleep', sleepTime)
     }
 
+    const smsMessages = getSMSMessages(countryCode)
+
+    const addWelcomeMessage = (message: string) => message + `\n\n${smsMessages.bulkWelcomeMessage}`
+
     const enqueueMessagesPayloadChunks: EnqueueMessagePayload[][] = []
     let totalSegmentsCount = 0
     let totalMessagesCount = 0
@@ -127,47 +132,55 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         const customWhere = mergeWhereParams(
           { ...userWhereInput },
           {
-            UserCommunicationJourney: userHasWelcomeMessage
+            ...(userHasWelcomeMessage
               ? {
-                  some: {
-                    journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                    userCommunications: {
-                      some: {
-                        status: CommunicationMessageStatus.DELIVERED,
+                  UserCommunicationJourney: {
+                    some: {
+                      journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                      userCommunications: {
+                        some: {
+                          status: CommunicationMessageStatus.DELIVERED,
+                        },
                       },
-                    },
-                    datetimeCreated: {
-                      gt: SHORT_CODE_GO_LIVE_DATE,
+                      datetimeCreated: {
+                        gt: SHORT_CODE_GO_LIVE_DATE,
+                      },
                     },
                   },
                 }
               : {
-                  every: {
-                    OR: [
-                      {
-                        journeyType: {
-                          not: UserCommunicationJourneyType.WELCOME_SMS,
+                  OR: [
+                    {
+                      UserCommunicationJourney: {
+                        none: {
+                          journeyType: UserCommunicationJourneyType.WELCOME_SMS,
                         },
                       },
-                      {
-                        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                        datetimeCreated: {
-                          lt: SHORT_CODE_GO_LIVE_DATE,
+                    },
+                    {
+                      UserCommunicationJourney: {
+                        every: {
+                          journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                          datetimeCreated: {
+                            lt: SHORT_CODE_GO_LIVE_DATE,
+                          },
                         },
                       },
-                      {
-                        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-                        userCommunications: {
-                          every: {
-                            status: {
-                              not: CommunicationMessageStatus.DELIVERED,
+                    },
+                    {
+                      UserCommunicationJourney: {
+                        every: {
+                          journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+                          userCommunications: {
+                            none: {
+                              status: CommunicationMessageStatus.DELIVERED,
                             },
                           },
                         },
                       },
-                    ],
-                  },
-                },
+                    },
+                  ],
+                }),
           },
         )
 
@@ -201,9 +214,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           index += 1
 
           allPhoneNumbers.push(
-            ...phoneNumberList.filter(phoneNumber =>
-              isPhoneNumberCountrySupported(phoneNumber, countryCode),
-            ),
+            ...phoneNumberList.filter(phoneNumber => {
+              const phoneNumberCountryCode = getCountryCodeFromPhoneNumber(phoneNumber)
+
+              return !!phoneNumberCountryCode && isSmsSupportedInCountry(phoneNumberCountryCode)
+            }),
           )
 
           logger.info(`phoneNumberList.length ${phoneNumberList.length}. Next skipping ${skip}`)
@@ -383,10 +398,6 @@ function formatTime(seconds: number) {
 
 // Doing this so lodash merge is typed
 const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroupByArgs['where']>
-
-// Add a space before the welcome message to ensure proper formatting. If the message ends with a link,
-// appending the welcome message directly could break the link.
-const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
 
 export interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean

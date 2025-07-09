@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { DTSIPeopleFromUSCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromUSAddress'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import {
@@ -37,7 +37,7 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
-type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
+type OnFindCongressPersonPayload = DTSIPeopleFromUSCongressionalDistrict & {
   addressSchema: z.infer<typeof zodAddress>
 }
 
@@ -185,6 +185,7 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
             isClickable={false}
             isRecommended={false}
             person={representative}
+            shouldHideStanceScores={false}
             subheader="role-w-state"
           />
         </div>

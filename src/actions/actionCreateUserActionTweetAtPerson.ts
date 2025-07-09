@@ -11,7 +11,6 @@ import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -21,7 +20,10 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import {
+  ServerActionConfig,
+  withServerActionMiddleware,
+} from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -52,7 +54,7 @@ export const actionCreateUserActionTweetedAtPerson = withServerActionMiddleware(
   _actionCreateUserActionTweetedAtPerson,
 )
 
-type CampaignDuration = {
+interface CampaignDuration {
   START_TIME: Date | null
   END_TIME: Date | null
 }
@@ -68,7 +70,10 @@ const CAMPAIGN_DURATION: Record<USUserActionTweetAtPersonCampaignName, CampaignD
   },
 }
 
-async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAtPersonInput) {
+async function _actionCreateUserActionTweetedAtPerson(
+  input: CreateActionTweetAtPersonInput,
+  { countryCode }: ServerActionConfig,
+) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
@@ -109,7 +114,6 @@ async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAt
 
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
-  const countryCode = await getUserAccessLocationCookie()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
@@ -152,7 +156,11 @@ async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAt
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction,
+      userCryptoAddress: user.primaryUserCryptoAddress,
+      countryCode,
+    })
   }
 
   waitUntil(beforeFinish())

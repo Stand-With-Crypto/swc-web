@@ -21,7 +21,9 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.REFER,
   UserActionType.POLL,
   UserActionType.VIEW_KEY_PAGE,
+  UserActionType.LINKEDIN,
 ] as const
+
 export type USActiveClientUserActionWithCampaignType =
   (typeof US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
 
@@ -36,6 +38,10 @@ export enum USUserActionEmailCampaignName {
   BROKER_REPORTING_RULE_SJ_RES_3 = 'BROKER_REPORTING_RULE_SJ_RES_3',
   BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD',
   BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH = 'BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH',
+  GENIUS_ACT_8_MAY_2025 = 'GENIUS_ACT_8_MAY_2025',
+  GENIUS_ACT_MAY_13_2025 = 'GENIUS_ACT_MAY_13_2025',
+  FOUNDERS_PUSH_MAY_14_2025 = 'FOUNDERS_PUSH_MAY_14_2025',
+  CLARITY_ACT_HOUSE_JUN_13_2025 = 'CLARITY_ACT_HOUSE_JUN_13_2025',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
@@ -95,6 +101,9 @@ export enum USUserActionReferCampaignName {
 export enum USUserActionViewKeyPageCampaignName {
   DEFAULT = 'DEFAULT',
 }
+export enum USUserActionLinkedinCampaignName {
+  DEFAULT = 'DEFAULT',
+}
 
 export type USUserActionCampaignName =
   | USUserActionEmailCampaignName
@@ -112,8 +121,8 @@ export type USUserActionCampaignName =
   | USUserActionVotingDayCampaignName
   | USUserActionReferCampaignName
   | USUserActionPollCampaignName
-
-export type USUserActionCampaigns = {
+  | USUserActionLinkedinCampaignName
+export interface USUserActionCampaigns {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName
   [UserActionType.CALL]: USUserActionCallCampaignName
   [UserActionType.DONATION]: USUserActionDonationCampaignName
@@ -131,10 +140,11 @@ export type USUserActionCampaigns = {
   [UserActionType.REFER]: USUserActionReferCampaignName
   [UserActionType.POLL]: USUserActionPollCampaignName
   [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName
+  [UserActionType.LINKEDIN]: USUserActionLinkedinCampaignName
 }
 
 export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
-  [UserActionType.EMAIL]: USUserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
+  [UserActionType.EMAIL]: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
   [UserActionType.CALL]: USUserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: USUserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
@@ -152,4 +162,5 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.REFER]: USUserActionReferCampaignName.DEFAULT,
   [UserActionType.POLL]: USUserActionPollCampaignName.CRYPTO_NEWS,
   [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName.DEFAULT,
+  [UserActionType.LINKEDIN]: USUserActionLinkedinCampaignName.DEFAULT,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>

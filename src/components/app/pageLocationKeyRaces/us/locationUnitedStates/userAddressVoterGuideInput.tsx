@@ -20,7 +20,10 @@ import {
 } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import {
+  filterDTSIPeopleByUSPoliticalCategory,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory/us'
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -58,10 +61,10 @@ const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
 function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromAddress(
-    POLITICIAN_CATEGORY,
-    address === 'loading' ? null : address?.description,
-  )
+  const res = useGetDTSIPeopleFromAddress({
+    address: address === 'loading' ? null : address?.description,
+    filterFn: filterDTSIPeopleByUSPoliticalCategory(POLITICIAN_CATEGORY),
+  })
   const shouldShowSubtitle = !address || !res.data
 
   if (!address || address === 'loading' || !res.data) {

@@ -20,6 +20,7 @@ export interface DTSIPersonHeroCardSectionProps {
   recommend?: boolean
   forceMobile?: boolean
   target?: React.HTMLAttributeAnchorTarget
+  shouldHideStanceScores: boolean
 }
 
 export function DTSIPersonHeroCardSection({
@@ -32,6 +33,7 @@ export function DTSIPersonHeroCardSection({
   recommend = true,
   forceMobile = false,
   target,
+  shouldHideStanceScores,
 }: DTSIPersonHeroCardSectionProps) {
   const { recommended, others } = recommend
     ? findRecommendedCandidate(people)
@@ -46,6 +48,7 @@ export function DTSIPersonHeroCardSection({
             forceMobile={forceMobile}
             isRecommended
             person={recommended}
+            shouldHideStanceScores={shouldHideStanceScores}
             subheader="role"
             target={target}
           />
@@ -57,6 +60,7 @@ export function DTSIPersonHeroCardSection({
             forceMobile={forceMobile}
             key={person.id}
             person={person}
+            shouldHideStanceScores={shouldHideStanceScores}
             subheader={person.isIncumbent ? 'Incumbent' : 'role'}
             target={target}
           />

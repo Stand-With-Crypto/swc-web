@@ -41,6 +41,8 @@ model Address {
   countryCode              String   @map("country_code")
   // this field is optional because not all addresses will have a congressional district associated with them
   usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
+  // this field is going to replace the usCongressionalDistrict field
+  electoralZone            String?  @map("electoral_zone")
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
@@ -261,23 +263,24 @@ model UserCryptoAddress {
 }
 
 enum UserActionType {
-  EMAIL
   CALL
   DONATION
-  OPT_IN
-  TWEET
-  NFT_MINT
-  VOTER_REGISTRATION
+  EMAIL
+  LINKEDIN
   LIVE_EVENT
-  TWEET_AT_PERSON
-  VOTER_ATTESTATION
-  RSVP_EVENT
-  VIEW_KEY_RACES
-  VOTING_INFORMATION_RESEARCHED
-  VOTING_DAY
-  REFER
+  NFT_MINT
+  OPT_IN
   POLL
+  REFER
+  RSVP_EVENT
+  TWEET
+  TWEET_AT_PERSON
   VIEW_KEY_PAGE
+  VIEW_KEY_RACES
+  VOTER_ATTESTATION
+  VOTER_REGISTRATION
+  VOTING_DAY
+  VOTING_INFORMATION_RESEARCHED
 }
 
 model UserAction {
@@ -323,6 +326,7 @@ model UserAction {
   @@index([userId, actionType, campaignName])
   @@index([actionType, userId])
   @@index([actionType, campaignName])
+  @@index([actionType, nftMintId, datetimeCreated(sort: Desc)])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([userEmailAddressId])
@@ -469,6 +473,7 @@ model UserActionViewKeyRaces {
   id                      String     @id @default(uuid())
   userAction              UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usCongressionalDistrict String?    @map("us_congressional_district")
+  electoralZone           String?    @map("electoral_zone")
   usaState                String?    @map("usa_state")
   stateCode               String?    @map("state_code")
   constituency            String?    @map("constituency")
@@ -591,4 +596,12 @@ model UserCommunication {
   @@index([status])
   @@index([userCommunicationJourneyId])
   @@map("user_communication")
+}
+
+model UserDeletionLog {
+  userId       String   @id @map("user_id")
+  emailAddress String   @map("email_address")
+  date         DateTime @default(now())
+
+  @@map("user_deletion_log")
 }

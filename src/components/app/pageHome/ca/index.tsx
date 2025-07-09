@@ -1,4 +1,4 @@
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -87,7 +87,7 @@ export function CaPageHome({
         <HomePageSection container={false}>
           <HomePageSection.Title>Founders</HomePageSection.Title>
           <HomePageSection.Subtitle>
-            Members from our community that have founded crypto-related businesses in the UK.
+            Members from our community that have founded crypto-related businesses in Canada.
           </HomePageSection.Subtitle>
 
           <FoundersCarousel founders={founders} />
@@ -96,7 +96,7 @@ export function CaPageHome({
 
       <HomepagePoliticiansSection
         countryCode={countryCode}
-        cryptoStanceGrade={DTSIThumbsUpOrDownGrade}
+        cryptoStanceGrade={DTSIFormattedLetterGrade}
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
       />
     </>

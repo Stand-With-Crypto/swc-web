@@ -44,6 +44,17 @@ const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
   requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
+/**
+ * This is to avoid hitting the connection pool limit when using large seed sizes.
+ * Adding `?connection_limit=100` to the DATABASE_URL should also help.
+ */
+async function waitForConnectionLimit() {
+  if (process.env.SEED_SIZE === SeedSize.LG) {
+    await new Promise(resolve => setTimeout(resolve, 30000))
+  }
+  return Promise.resolve()
+}
+
 enum SeedSize {
   SM = 'SM',
   MD = 'MD',
@@ -436,6 +447,8 @@ async function seed() {
       }),
   )
 
+  await waitForConnectionLimit()
+
   /*
   userActionViewKeyPage
   */
@@ -570,6 +583,8 @@ async function seed() {
   const userActionVoterAttestation = await prismaClient.userActionVoterAttestation.findMany()
   logEntity({ userActionVoterAttestation })
 
+  await waitForConnectionLimit()
+
   /*
   userActionViewKeyRaces
   */
@@ -625,23 +640,6 @@ async function seed() {
   const userActionVotingDay = await prismaClient.userActionVotingDay.findMany()
   logEntity({ userActionVotingDay })
 
-  /*
-  userActionPoll
-  */
-  await batchAsyncAndLog(
-    userActionsByType[UserActionType.POLL].map(action => {
-      return {
-        id: action.id,
-      }
-    }),
-    data =>
-      prismaClient.userActionPoll.createMany({
-        data,
-      }),
-  )
-  const userActionPoll = await prismaClient.userActionPoll.findMany()
-  logEntity({ userActionPoll })
-
   /* userActionRefer */
   await batchAsyncAndLog(
     userActionsByType[UserActionType.REFER].map(action => {
@@ -659,12 +657,29 @@ async function seed() {
   logEntity({ userActionRefer })
 
   /*
+  userActionPoll
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.POLL].map(action => {
+      return {
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionPoll.createMany({
+        data,
+      }),
+  )
+  const userActionPoll = await prismaClient.userActionPoll.findMany()
+  logEntity({ userActionPoll })
+
+  /*
   userActionPollAnswer
   */
   await batchAsyncAndLog(
     userActionsByType[UserActionType.POLL].map(action => {
       return {
-        ...mockCreateUserActionPollAnswerInput(action.campaignName as USUserActionPollCampaignName),
+        ...mockCreateUserActionPollAnswerInput(),
         id: action.id,
         userActionPollId: faker.helpers.arrayElement(userActionPoll).id,
       }

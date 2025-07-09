@@ -37,7 +37,8 @@ const parseCongressionalDistrictString = (districtString: string) => {
   // ocd-division/country:us/state:ny/cd:5
   const slashParts = districtString.split('/')
   const [cdStr, districtNumString] = slashParts[slashParts.length - 1].split(':')
-  const districtNum = parseInt(districtNumString, 10)
+  const districtNum =
+    districtNumString.toLowerCase() === 'at-large' ? 1 : parseInt(districtNumString, 10)
   if (cdStr !== 'cd' || !isInteger(districtNum)) {
     Sentry.captureMessage('unexpected district string structure', {
       tags: { domain: 'getCongressionalDistrictFromAddress' },
@@ -72,10 +73,11 @@ export type CongressionalDistrictFromAddress = Awaited<
   ReturnType<typeof getCongressionalDistrictFromAddress>
 >
 
-export type GetCongressionalDistrictFromAddressParams = {
+export interface GetCongressionalDistrictFromAddressParams {
   stateCode?: USStateCode
 }
 
+/** @deprecated Use maybeGetElectoralZoneFromAddress instead */
 export async function maybeGetCongressionalDistrictFromAddress(
   address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null,
   params?: GetCongressionalDistrictFromAddressParams,
@@ -96,6 +98,7 @@ export async function maybeGetCongressionalDistrictFromAddress(
   return usCongressionalDistrict
 }
 
+/** @deprecated Use getElectoralZoneFromAddress instead */
 export async function getCongressionalDistrictFromAddress(
   address?: string | null,
   params?: GetCongressionalDistrictFromAddressParams,

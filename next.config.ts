@@ -300,14 +300,29 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/australia',
-        destination: 'https://au.standwithcrypto.org',
+        source: '/uk',
+        destination: '/gb',
         permanent: false,
       },
       {
-        source: '/canada',
-        destination: 'https://ca.standwithcrypto.org',
+        source: '/uk/:path*',
+        destination: '/gb/:path*',
         permanent: false,
+      },
+      {
+        source: '/gb/politicians',
+        destination: '/gb',
+        permanent: false,
+      },
+      {
+        source: '/gb/politicians/person/:slug',
+        destination: '/gb',
+        permanent: false,
+      },
+      {
+        source: '/press/stand-with-crypto-reacts-to-passage-of-fit21-legislation',
+        destination: '/press/stand-with-crypto-reacts-to-passage-of-fit-21-legislation',
+        permanent: true,
       },
       // vanity urls
       {
@@ -384,6 +399,11 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/gb/action/email',
+        destination: '/',
+        permanent: false,
+      },
       // tweet at person campaigns
       {
         source: '/pizza',
@@ -420,6 +440,29 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // SMS shortlinks
+      {
+        source: '/ca/s/house-rising',
+        destination:
+          '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
+        permanent: true,
+      },
+      {
+        source: '/s/founders-push/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/genius/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=genius-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/paul-atkins',
+        destination: 'https://speak4.app/lp/b901vnot/?ts=1744310543',
+        permanent: true,
+      },
       {
         source: '/s/sb-1797',
         destination: 'https://speak4.app/lp/jk01insm/?ts=1744055112',
@@ -460,6 +503,12 @@ const nextConfig: NextConfig = {
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=crenshawvote&sessionId=:sessionId*',
         permanent: true,
+      },
+      {
+        source: '/c/clarity-house',
+        destination:
+          '/action/email/clarity_act_house_jun_13_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+        permanent: false,
       },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
       {
@@ -719,12 +768,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/canada',
-        destination: '/ca?utm_source=billboard',
+        destination: '/ca/action/sign-up?utm_source=billboard',
         permanent: true,
       },
       {
         source: '/australia',
-        destination: '/au?utm_source=billboard',
+        destination: '/au/action/sign-up?utm_source=billboard',
         permanent: true,
       },
     ]

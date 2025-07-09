@@ -32,13 +32,13 @@ export enum AnalyticActionType {
   keyPress = 'Key Press',
 }
 
-export type AnalyticProperties = {
+export interface AnalyticProperties {
   action?: AnalyticActionType
   component?: AnalyticComponentType
   [key: string]: string | number | boolean | undefined | null | Date | string[] | number[]
 }
 
-export type AnalyticsPeopleProperties = {
+export interface AnalyticsPeopleProperties {
   // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
   // if we end up using other tools, we might need to map these reserved names to other values
   $email?: string

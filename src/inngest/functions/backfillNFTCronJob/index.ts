@@ -11,6 +11,7 @@ import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalanc
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 // This is the milliseconds to wait before processing the next batch of user actions.
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
@@ -138,13 +139,26 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
 
       // Claim the NFT for the user actions.
       await step.run(`script.claim-nfts-${batchNum}`, async () => {
-        await Promise.all(
+        const results = await Promise.allSettled(
           userActionBatch.map(userAction =>
-            claimNFT(userAction, userAction.user.primaryUserCryptoAddress!, {
-              skipTransactionFeeCheck: true,
+            claimNFT({
+              userAction,
+              userCryptoAddress: userAction.user.primaryUserCryptoAddress!,
+              countryCode: userAction.user.countryCode as SupportedCountryCodes,
+              config: { skipTransactionFeeCheck: true },
             }),
           ),
         )
+
+        const failedClaims = results.filter(
+          (result): result is PromiseRejectedResult => result.status === 'rejected',
+        )
+
+        if (failedClaims.length > 0) {
+          logger.warn(
+            `${failedClaims.length}/${results.length} NFT claims failed in batch ${batchNum}`,
+          )
+        }
       })
       batchNum += 1
 

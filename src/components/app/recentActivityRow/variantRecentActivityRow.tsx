@@ -1,7 +1,9 @@
 'use client'
 import React from 'react'
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
+import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/[countryCode]/performed-user-action-types/route'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
 import { RecentActivityRowMainText as MainText } from '@/components/app/recentActivityRow/mainText'
@@ -12,6 +14,7 @@ import {
 import { viewKeyPageRecentActivityRow } from '@/components/app/recentActivityRow/viewKeyPageRecentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -30,10 +33,7 @@ import {
 } from '@/utils/shared/stateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import {
-  USUserActionEmailCampaignName,
-  USUserActionTweetCampaignName,
-} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const DTSIPersonName = ({
@@ -64,6 +64,11 @@ const getSWCDisplayText = () => (
   </>
 )
 
+const hasTakenAction = (
+  actionType: UserActionType,
+  performedUserActionTypes?: GetUserPerformedUserActionTypesResponse['performedUserActionTypes'],
+) => performedUserActionTypes?.some(performedAction => performedAction.actionType === actionType)
+
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   countryCode,
@@ -75,9 +80,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const { userLocationDetails } = action.user
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
   const { data } = useApiResponseForUserPerformedUserActionTypes()
-  const hasSignedUp = data?.performedUserActionTypes.some(
-    performedAction => performedAction.actionType === UserActionType.OPT_IN,
-  )
+
+  const hasSignedUp = hasTakenAction(UserActionType.OPT_IN, data?.performedUserActionTypes)
+  const hasJoinedLinkedIn = hasTakenAction(UserActionType.LINKEDIN, data?.performedUserActionTypes)
+  const hasVotedInPoll = hasTakenAction(UserActionType.POLL, data?.performedUserActionTypes)
+
   const fromStateOrEmpty = isStateAvailable
     ? `from ${userLocationDetails.administrativeAreaLevel1}`
     : ''
@@ -166,7 +173,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           default:
             return {
               onFocusContent: () => (
-                <UserActionFormEmailCongresspersonDialog>
+                <UserActionFormEmailCongresspersonDialog
+                  campaignName={action.campaignName as USUserActionEmailCampaignName}
+                  countryCode={action.countryCode as SupportedCountryCodes.US}
+                >
                   <Button>Email yours</Button>
                 </UserActionFormEmailCongresspersonDialog>
               ),
@@ -215,14 +225,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
-          children:
-            action.campaignName === USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
-              <MainText>
-                New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
-              </MainText>
-            ) : (
-              <MainText>Tweet sent in support of {getSWCDisplayText()}</MainText>
-            ),
+          children: (
+            <MainText>
+              New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
+            </MainText>
+          ),
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
@@ -311,7 +318,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.POLL: {
         return {
-          onFocusContent: () => null,
+          onFocusContent: hasVotedInPoll
+            ? undefined
+            : () => (
+                <Button asChild>
+                  <Link href={urls.polls()}>Vote</Link>
+                </Button>
+              ),
           children: <MainText>Someone voted in a poll</MainText>,
         }
       }
@@ -321,6 +334,18 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           campaignName,
           countryCode,
         })
+      }
+      case UserActionType.LINKEDIN: {
+        return {
+          onFocusContent: hasJoinedLinkedIn
+            ? undefined
+            : () => (
+                <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
+                  <Button>Follow</Button>
+                </UserActionFormFollowLinkedInDialog>
+              ),
+          children: <MainText>Someone followed SWC on LinkedIn</MainText>,
+        }
       }
     }
     return gracefullyError({

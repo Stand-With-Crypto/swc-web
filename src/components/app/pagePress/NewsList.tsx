@@ -108,7 +108,7 @@ function NewsListItem({
             />
           </div>
         )}
-        <div className="text-center">
+        <div className="flex flex-col items-center text-center">
           <strong className="text-primary group-hover:underline group-focus:underline">
             {source}: {title}
           </strong>

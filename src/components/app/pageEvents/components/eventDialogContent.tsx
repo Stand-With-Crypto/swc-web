@@ -24,6 +24,7 @@ import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
+import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
@@ -43,7 +44,7 @@ export function EventDialogContent({ event, countryCode }: EventDialogContentPro
   usePreventOverscroll()
   const { data: userFullProfileInfoResponse } = useApiResponseForUserFullProfileInfo()
   const { user } = userFullProfileInfoResponse ?? { user: null }
-  const hasPhoneInformation = !!user?.phoneNumber
+  const hasOptedInToSMS = userHasOptedInToSMS(user)
 
   const sectionProps = useSections({
     sections: Object.values(SectionNames),
@@ -85,14 +86,14 @@ export function EventDialogContent({ event, countryCode }: EventDialogContentPro
   }
 
   if (sectionProps.currentSection === SectionNames.PHONE_SECTION) {
-    return <EventDialogPhoneNumber onSuccess={handleGetUpdates} />
+    return <EventDialogPhoneNumber onSuccess={handleGetUpdates} user={user} />
   }
 
   return (
     <EventInformation
       event={event}
       handleGetUpdatesButtonClick={async () => {
-        if (!hasPhoneInformation) return sectionProps.goToSection(SectionNames.PHONE_SECTION)
+        if (!hasOptedInToSMS) return sectionProps.goToSection(SectionNames.PHONE_SECTION)
 
         await handleGetUpdates()
       }}

@@ -2,7 +2,6 @@ import React from 'react'
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
-import { DTSIThumbsUpOrDownGrade } from '@/components/app/dtsiThumbsUpOrDownGrade'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_HouseSpecificInformationQuery } from '@/data/dtsi/generated'
@@ -13,14 +12,14 @@ interface LocationRacesDetailedCandidateListItemProps {
   person: DTSI_HouseSpecificInformationQuery['people'][number]
   isRecommended: boolean
   countryCode: SupportedCountryCodes
-  useThumbsUpOrDownGrade?: boolean
+  shouldHideStanceScores: boolean
 }
 
 export function LocationRacesDetailedCandidateListItem({
   person,
   isRecommended,
   countryCode,
-  useThumbsUpOrDownGrade = false,
+  shouldHideStanceScores,
 }: LocationRacesDetailedCandidateListItemProps) {
   return (
     <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row md:border-b-2">
@@ -28,11 +27,10 @@ export function LocationRacesDetailedCandidateListItem({
         <div className="sticky top-24 text-center">
           <DTSIPersonHeroCard
             countryCode={countryCode}
-            cryptoStanceGrade={
-              useThumbsUpOrDownGrade ? DTSIThumbsUpOrDownGrade : DTSIFormattedLetterGrade
-            }
+            cryptoStanceGrade={DTSIFormattedLetterGrade}
             isRecommended={isRecommended}
             person={person}
+            shouldHideStanceScores={shouldHideStanceScores}
             subheader="role"
           />
         </div>
@@ -46,6 +44,7 @@ export function LocationRacesDetailedCandidateListItem({
             <MaybeOverflowedStances
               countryCode={countryCode}
               person={person}
+              shouldHideStanceScores={shouldHideStanceScores}
               stances={person.stances}
             />
           </>

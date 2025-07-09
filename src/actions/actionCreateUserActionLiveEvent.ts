@@ -47,7 +47,7 @@ export const actionCreateUserActionLiveEvent = withServerActionMiddleware(
   _actionCreateUserActionLiveEvent,
 )
 
-type EventDuration = {
+interface EventDuration {
   START_TIME: Date
   END_TIME: Date
 }
@@ -139,7 +139,11 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification({
+      userAction,
+      userCryptoAddress: user.primaryUserCryptoAddress,
+      countryCode,
+    })
   }
 
   waitUntil(beforeFinish())

@@ -78,6 +78,7 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
                           <DTSIPersonHeroCardSection
                             countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
                             people={democraticPeople}
+                            shouldHideStanceScores
                           />
                         ),
                       },
@@ -88,6 +89,7 @@ export function USKeyRaces({ groups }: USKeyRacesProps) {
                           <DTSIPersonHeroCardSection
                             countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
                             people={republicanPeople}
+                            shouldHideStanceScores
                           />
                         ),
                       },

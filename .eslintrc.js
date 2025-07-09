@@ -20,7 +20,7 @@ const sortImports = {
 
 module.exports = {
   root: true,
-  ignorePatterns: ['**/**/*.generated.ts', '*.js'],
+  ignorePatterns: ['**/**/*.generated.ts', '*.js', '**/generated/**'],
   extends: [
     'next',
     'next/core-web-vitals',
@@ -93,5 +93,6 @@ module.exports = {
       },
     ],
     'react/no-unstable-nested-components': ['error', { allowAsProps: true }],
+    '@typescript-eslint/consistent-type-definitions': 'error',
   },
 }

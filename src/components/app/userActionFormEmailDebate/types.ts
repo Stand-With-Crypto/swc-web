@@ -1,4 +1,4 @@
-export type UserActionEmailDebateFormFields = {
+export interface UserActionEmailDebateFormFields {
   address: {
     description: string
     place_id: string

@@ -15,6 +15,7 @@ export function UpdateUserProfileFormDialog({
   ...formProps
 }: Omit<React.ComponentProps<typeof UpdateUserProfileFormContainer>, 'onCancel' | 'onSuccess'> & {
   children: React.ReactNode
+  onSuccess?: () => void
 }) {
   const dialogProps = useQueryParamDialog({
     queryParamKey: OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY,
@@ -26,7 +27,10 @@ export function UpdateUserProfileFormDialog({
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUpdateUserProfileForm
             {...formProps}
-            onSuccess={() => dialogProps.onOpenChange?.(false)}
+            onSuccess={() => {
+              dialogProps.onOpenChange?.(false)
+              formProps.onSuccess?.()
+            }}
           />
         </Suspense>
       </DialogContent>
