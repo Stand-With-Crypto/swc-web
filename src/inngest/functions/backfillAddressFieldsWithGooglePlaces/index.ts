@@ -11,7 +11,7 @@ import {
   BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_RETRY_LIMIT,
   BATCH_BUFFER,
 } from './config'
-import { backfillAddressFieldsWithGooglePlacesProcessor } from './logic'
+import { backfillAddressFieldsWithGooglePlacesProcessor, ProcessorResult } from './logic'
 
 const BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_COORDINATOR_FUNCTION_ID =
   'script.backfill-address-fields-with-google-places-coordinator'
@@ -24,7 +24,6 @@ export interface BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema {
     persist?: boolean
     countryCode?: string
     limit?: number
-    getAddressBatchSize?: number
   }
 }
 
@@ -38,12 +37,7 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
     event: BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_COORDINATOR_EVENT_NAME,
   },
   async ({ step, logger, event }) => {
-    const {
-      countryCode: countryCodeParam,
-      persist = false,
-      limit,
-      getAddressBatchSize,
-    } = event.data
+    const { countryCode: countryCodeParam, persist = false, limit } = event.data
 
     if (countryCodeParam && !ORDERED_SUPPORTED_COUNTRIES.includes(countryCodeParam.toLowerCase())) {
       const message = `Country code ${countryCodeParam} is not supported.`
@@ -63,11 +57,6 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       prismaClient.address.count({
         where: {
           countryCode,
-          formattedDescription: {
-            not: {
-              contains: 'test',
-            },
-          },
           OR: [
             {
               electoralZone: null,
@@ -88,6 +77,10 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       }
     }
 
+    let lastProcessedId: string | undefined = undefined
+    let totalFailedInvocations = 0
+    let processedCount = 0
+
     const addressesToProcess = limit ? Math.min(addressCount, limit) : addressCount
     const totalBatches = Math.ceil(
       addressesToProcess / BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
@@ -98,43 +91,30 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       `Found ${addressCount} addresses matching criteria${limit ? `, limited to ${addressesToProcess}` : ''}. Splitting into ${totalBatches} batches (${batchesWithBuffer} with buffer).`,
     )
 
-    const invokeEvents = []
-
     for (let i = 0; i < batchesWithBuffer; i++) {
-      const skip = i * BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE
-      const remainingAddresses = addressesToProcess - skip
+      const remainingToProcess = addressesToProcess - processedCount
       const take = Math.min(
         BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_BATCH_SIZE,
-        remainingAddresses,
+        remainingToProcess,
       )
 
       if (take <= 0) break
 
-      invokeEvents.push(
-        step.invoke(`invoke-processor-batch-${i}`, {
+      try {
+        const result: ProcessorResult = await step.invoke(`invoke-processor-batch-${i}`, {
           function: backfillAddressFieldsWithGooglePlacesProcessor,
           data: {
-            skip,
+            lastProcessedId,
             take,
             persist,
             countryCode,
-            getAddressBatchSize,
           },
-        }),
-      )
-    }
+        })
 
-    let totalFailedInvocations = 0
-    let totalSuccessInvocations = 0
-
-    for (const eventPromise of invokeEvents) {
-      if (totalSuccessInvocations > 0) {
-        await step.sleep('sleep-between-invocations', 1000)
-      }
-
-      try {
-        await eventPromise
-        totalSuccessInvocations += 1
+        if (result) {
+          lastProcessedId = result.lastProcessedId
+          processedCount += (result.totalSuccess || 0) + (result.totalFailed || 0)
+        }
       } catch (error) {
         logger.error('Failed to invoke processor job', { error })
         totalFailedInvocations += 1
@@ -147,6 +127,7 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       successfulBatches: batchesWithBuffer - totalFailedInvocations,
       failedBatches: totalFailedInvocations,
       totalAddressesTargeted: addressesToProcess,
+      finalLastProcessedId: lastProcessedId,
     }
   },
 )

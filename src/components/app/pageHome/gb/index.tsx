@@ -1,7 +1,9 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
+import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
@@ -31,6 +33,7 @@ export function GbPageHome({
   actions,
   countUsers,
   advocatePerStateDataProps,
+  dtsiHomepagePoliticians,
 }: HomePageProps &
   Awaited<ReturnType<typeof getHomepageData>> & {
     advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
@@ -145,6 +148,12 @@ export function GbPageHome({
           <FoundersCarousel founders={founders} />
         </HomePageSection>
       )}
+
+      <HomepagePoliticiansSection
+        countryCode={countryCode}
+        cryptoStanceGrade={DTSIFormattedLetterGrade}
+        dtsiHomepagePoliticians={dtsiHomepagePoliticians}
+      />
     </>
   )
 }
