@@ -1,4 +1,3 @@
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
@@ -7,15 +6,9 @@ import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/pol
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
-import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
-import { RecentActivity } from '@/components/app/recentActivity'
-import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -56,61 +49,15 @@ export function GbPageHome({
           <span className="text-primary-cta">Brits</span> believe in crypto
         </HomePageSection.Title>
 
-        <RecentActivity>
-          <ResponsiveTabsOrSelect
-            analytics={'Homepage Our Community Tabs'}
-            data-testid="community-leaderboard-tabs"
-            defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
-            options={[
-              {
-                value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-                label: 'Recent activity',
-                content: (
-                  <>
-                    <HomePageSection.Subtitle className="hidden md:block">
-                      See how the community is taking a stand to safeguard the future of crypto in
-                      the UK.
-                    </HomePageSection.Subtitle>
-                    <DelayedRecentActivityWithMap
-                      actions={actions}
-                      advocatesMapPageData={advocatePerStateDataProps}
-                      countUsers={countUsers.count}
-                      countryCode={countryCode}
-                    />
-                  </>
-                ),
-              },
-              {
-                value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
-                label: 'Top Districts',
-                content: (
-                  <div className="space-y-4">
-                    <HomePageSection.Subtitle className="hidden md:block">
-                      See which district has the most number of advocates.
-                    </HomePageSection.Subtitle>
-                    <YourDistrictRank />
-                    {/* TODO: add leaderboard data */}
-                    <DistrictsLeaderboard countryCode={countryCode} data={[]} />
-                    <div className="mx-auto flex w-fit justify-center gap-2">
-                      <LoginDialogWrapper
-                        authenticatedContent={
-                          <UserActionFormReferDialog countryCode={countryCode}>
-                            <Button className="w-full">Refer</Button>
-                          </UserActionFormReferDialog>
-                        }
-                      >
-                        <Button className="w-full">Join</Button>
-                      </LoginDialogWrapper>
-                      <Button asChild variant="secondary">
-                        <InternalLink href={urls.referrals()}>View all</InternalLink>
-                      </Button>
-                    </div>
-                  </div>
-                ),
-              },
-            ]}
-          />
-        </RecentActivity>
+        <HomePageSection.Subtitle className="hidden md:block">
+          See how the community is taking a stand to safeguard the future of crypto in the UK.
+        </HomePageSection.Subtitle>
+        <DelayedRecentActivityWithMap
+          actions={actions}
+          advocatesMapPageData={advocatePerStateDataProps}
+          countUsers={countUsers.count}
+          countryCode={countryCode}
+        />
       </HomePageSection>
 
       {partners && (
