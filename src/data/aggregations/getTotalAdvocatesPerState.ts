@@ -1,7 +1,6 @@
 import 'server-only'
 
 import { prismaClient } from '@/utils/server/prismaClient'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type TotalAdvocatesPerStateQuery = {
@@ -23,14 +22,9 @@ const fetchAllFromPrisma = async (countryCode: SupportedCountryCodes) => {
 }
 
 const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerStateQuery) => {
-  const multiplier =
-    NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? 1
-      : Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000
-
   return totalAdvocatesPerState.map(({ state, totalAdvocates }) => ({
     state,
-    totalAdvocates: parseInt(totalAdvocates.toString(), 10) * multiplier,
+    totalAdvocates: parseInt(totalAdvocates.toString(), 10),
   }))
 }
 
