@@ -14,11 +14,16 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.GB
 
+interface GBHomepageDialogDeeplinkLayoutProps extends HomepageDialogDeeplinkLayoutProps {
+  hidePseudoDialog?: boolean
+}
+
 export async function GBHomepageDialogDeeplinkLayout({
   children,
-  size = 'md',
   className,
-}: HomepageDialogDeeplinkLayoutProps) {
+  hidePseudoDialog,
+  size = 'md',
+}: GBHomepageDialogDeeplinkLayoutProps) {
   const [
     asyncProps,
     advocatePerStateDataProps,
@@ -40,9 +45,13 @@ export async function GBHomepageDialogDeeplinkLayout({
 
   return (
     <>
-      <PseudoDialog className={className} countryCode={countryCode} size={size}>
-        {children}
-      </PseudoDialog>
+      {hidePseudoDialog ? (
+        children
+      ) : (
+        <PseudoDialog className={className} countryCode={countryCode} size={size}>
+          {children}
+        </PseudoDialog>
+      )}
 
       <GbPageHome
         advocatePerStateDataProps={advocatePerStateDataProps}
