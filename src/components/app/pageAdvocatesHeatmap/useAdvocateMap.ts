@@ -64,7 +64,7 @@ const createMarkersFromActions = (
 
         markers.push({
           id: item.id,
-          name: state,
+          name: userLocation.administrativeAreaLevel1,
           coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
           actionType: item.actionType,
           datetimeCreated: item.datetimeCreated,
