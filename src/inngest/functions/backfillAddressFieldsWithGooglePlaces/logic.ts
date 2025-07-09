@@ -44,7 +44,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
 
     if (!persist) {
       logger.info(
-        `DRY RUN MODE for batch with lastProcessedId: ${lastProcessedId}, take: ${take}. No changes will be written to the database.`,
+        `DRY RUN MODE for batch with lastProcessedId: ${lastProcessedId ?? 'beginning'}, take: ${take}. No changes will be written to the database.`,
       )
     }
 
@@ -326,7 +326,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
     }
 
     logger.info(
-      `${!persist ? '[DRY RUN] ' : ''}Finished processing batch with lastProcessedId: ${lastProcessedId}.
+      `${!persist ? '[DRY RUN] ' : ''}Finished processing batch with lastProcessedId: ${lastProcessedId ?? 'beginning'}.
 			Total addresses successfully updated: ${totalSuccess}.
 			Total addresses failed to update: ${totalFailed}.
 			Total addresses processed: ${addresses.length}.
