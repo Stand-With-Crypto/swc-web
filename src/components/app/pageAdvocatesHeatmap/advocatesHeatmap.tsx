@@ -44,7 +44,7 @@ export function AdvocatesHeatmap({
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
-  const markers = useAdvocateMap(actions)
+  const markers = useAdvocateMap(actions, mapConfig)
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
 

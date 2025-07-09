@@ -4,7 +4,7 @@ import { UserActionType } from '@prisma/client'
 import {
   AdvocateHeatmapAction,
   ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
-  MAP_PROJECTION_CONFIG,
+  MapProjectionConfig,
   STATE_COORDS,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
@@ -24,14 +24,12 @@ export interface MapMarker {
 const createMarkersFromActions = (
   recentActivity: PublicRecentActivity['data'],
   countryCode: SupportedCountryCodes,
+  mapMarkerOffset = 1,
 ): MapMarker[] => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
 
   const actions = ADVOCATES_ACTIONS_BY_COUNTRY_CODE[countryCode]
-  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
-
-  const mapMarkerOffset = mapConfig?.markerOffset || 1
 
   if (!actions) {
     return markers
@@ -41,9 +39,9 @@ const createMarkersFromActions = (
     const userLocation = item.user.userLocationDetails
 
     if (userLocation && userLocation.administrativeAreaLevel1) {
-      const state = userLocation.administrativeAreaLevel1
+      const state = userLocation.administrativeAreaLevel1.toUpperCase()
 
-      const coordinates = STATE_COORDS[state.toUpperCase()]
+      const coordinates = STATE_COORDS[state]
 
       if (coordinates) {
         let offsetX = 0
@@ -91,14 +89,14 @@ const INITIAL_MARKERS = 5
 const MAX_MARKERS = 20
 const ADVOCATE_MAP_INTERVAL = 2000
 
-export function useAdvocateMap(actions: PublicRecentActivity) {
+export function useAdvocateMap(actions: PublicRecentActivity, mapConfig: MapProjectionConfig) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
   const [totalMarkers, setTotalMarkers] = useState<number>(INITIAL_MARKERS - 1)
   const countryCode = useCountryCode()
 
   const markers = useMemo(
-    () => createMarkersFromActions(actions.data, countryCode),
-    [actions, countryCode],
+    () => createMarkersFromActions(actions.data, countryCode, mapConfig.markerOffset),
+    [actions, countryCode, mapConfig],
   )
 
   useEffect(() => {
