@@ -9,8 +9,6 @@ import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delay
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
-import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -27,10 +25,7 @@ export function GbPageHome({
   countUsers,
   advocatePerStateDataProps,
   dtsiHomepagePoliticians,
-}: HomePageProps &
-  Awaited<ReturnType<typeof getHomepageData>> & {
-    advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
-  }) {
+}: HomePageProps) {
   return (
     <>
       <GbHero />
@@ -44,21 +39,23 @@ export function GbPageHome({
         />
       </section>
 
-      <HomePageSection>
-        <HomePageSection.Title>
-          <span className="text-primary-cta">Brits</span> believe in crypto
-        </HomePageSection.Title>
+      {countUsers && actions && (
+        <HomePageSection>
+          <HomePageSection.Title>
+            <span className="text-primary-cta">Brits</span> believe in crypto
+          </HomePageSection.Title>
 
-        <HomePageSection.Subtitle className="hidden md:block">
-          See how the community is taking a stand to safeguard the future of crypto in the UK.
-        </HomePageSection.Subtitle>
-        <DelayedRecentActivityWithMap
-          actions={actions}
-          advocatesMapPageData={advocatePerStateDataProps}
-          countUsers={countUsers.count}
-          countryCode={countryCode}
-        />
-      </HomePageSection>
+          <HomePageSection.Subtitle className="hidden md:block">
+            See how the community is taking a stand to safeguard the future of crypto in the UK.
+          </HomePageSection.Subtitle>
+          <DelayedRecentActivityWithMap
+            actions={actions}
+            advocatesMapPageData={advocatePerStateDataProps}
+            countUsers={countUsers.count}
+            countryCode={countryCode}
+          />
+        </HomePageSection>
+      )}
 
       {partners && (
         <HomePageSection>

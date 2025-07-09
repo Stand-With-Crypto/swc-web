@@ -37,24 +37,26 @@ export function CaPageHome({
         />
       </section>
 
-      <HomePageSection>
-        <HomePageSection.Title>
-          People in <span className="text-primary-cta">Canada</span> are joining the movement for
-          crypto
-        </HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          See how the community is taking a stand to safeguard the future of crypto in Canada.
-        </HomePageSection.Subtitle>
+      {recentActivity && (
+        <HomePageSection>
+          <HomePageSection.Title>
+            People in <span className="text-primary-cta">Canada</span> are joining the movement for
+            crypto
+          </HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            See how the community is taking a stand to safeguard the future of crypto in Canada.
+          </HomePageSection.Subtitle>
 
-        <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
-          <RecentActivity.Footer>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </RecentActivity.Footer>
-        </RecentActivity>
-      </HomePageSection>
+          <RecentActivity>
+            <RecentActivity.List actions={recentActivity} />
+            <RecentActivity.Footer>
+              <Button asChild variant="secondary">
+                <InternalLink href={urls.leaderboard()}>View all</InternalLink>
+              </Button>
+            </RecentActivity.Footer>
+          </RecentActivity>
+        </HomePageSection>
+      )}
 
       {partners && (
         <HomePageSection>

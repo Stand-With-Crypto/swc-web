@@ -38,18 +38,20 @@ export function AuPageHome({
         />
       </section>
 
-      <HomePageSection>
-        <HomePageSection.Title>
-          People in <span className="text-primary-cta">Australia</span> believe in crypto
-        </HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          See how the community is taking a stand to safeguard the future of crypto in Australia.
-        </HomePageSection.Subtitle>
+      {recentActivity && (
+        <HomePageSection>
+          <HomePageSection.Title>
+            People in <span className="text-primary-cta">Australia</span> believe in crypto
+          </HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            See how the community is taking a stand to safeguard the future of crypto in Australia.
+          </HomePageSection.Subtitle>
 
-        <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
-        </RecentActivity>
-      </HomePageSection>
+          <RecentActivity>
+            <RecentActivity.List actions={recentActivity} />
+          </RecentActivity>
+        </HomePageSection>
+      )}
 
       {partners && (
         <HomePageSection>

@@ -8,7 +8,6 @@ import { GbPageHome } from '@/components/app/pageHome/gb'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData, getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
-import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { getFounders } from '@/utils/server/builder/models/data/founders'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -24,7 +23,6 @@ export async function GBHomepageDialogDeeplinkLayout({
     asyncProps,
     advocatePerStateDataProps,
     topLevelMetrics,
-    recentActivity,
     partners,
     founders,
     dtsiHomepagePoliticians,
@@ -35,10 +33,6 @@ export async function GBHomepageDialogDeeplinkLayout({
     }),
     getAdvocatesMapData({ countryCode }),
     getHomepageTopLevelMetrics(),
-    getPublicRecentActivity({
-      limit: 10,
-      countryCode,
-    }),
     getPartners({ countryCode }),
     getFounders({ countryCode }),
     queryDTSIHomepagePeople({ countryCode }),
@@ -55,7 +49,6 @@ export async function GBHomepageDialogDeeplinkLayout({
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
         founders={founders}
         partners={partners}
-        recentActivity={recentActivity}
         topLevelMetrics={topLevelMetrics}
         {...asyncProps}
       />
