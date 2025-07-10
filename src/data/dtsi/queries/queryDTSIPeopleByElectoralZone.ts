@@ -58,7 +58,7 @@ export const queryDTSIPeopleByElectoralZone = async ({
     DTSI_PeopleByElectoralZoneQueryVariables
   >(queryByPrimaryElectoralZone, {
     stateCode,
-    electoralZone,
+    electoralZone: formatElectoralZoneForDTSIQuery(electoralZone),
     personRoleGroupingOr,
     includeStateReps: !!stateCode,
   })
@@ -74,3 +74,11 @@ export const queryDTSIPeopleByElectoralZone = async ({
 export type DTSIPeopleByElectoralZoneQueryResult = NonNullable<
   Awaited<ReturnType<typeof queryDTSIPeopleByElectoralZone>>
 >
+
+function formatElectoralZoneForDTSIQuery(electoralZone: string) {
+  if (electoralZone === '0' || electoralZone === '1') {
+    return 'At-Large'
+  }
+
+  return electoralZone
+}
