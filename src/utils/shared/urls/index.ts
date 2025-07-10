@@ -152,22 +152,23 @@ export const getIntlUrls = (
         | RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
       stateCode: string
     }) => {
+      const statePrefix = `/community/${params.stateCode.toLowerCase()}`
       const getTabPrefix = (
         tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
       ) => {
         switch (tab) {
           case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
-            return '/community/referrals'
+            return `${statePrefix}/referrals`
           case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
-            return '/community/activity'
+            return statePrefix
         }
       }
       const tabPrefix = getTabPrefix(params.tab)
       const pageNum = params.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${countryPrefix}${tabPrefix}/${params.stateCode.toLowerCase()}${tabSuffix}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
     politiciansHomepage: ({
@@ -196,7 +197,7 @@ export const getIntlUrls = (
       const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
       if (stateCode) {
-        return `${countryPrefix}/referrals/${stateCode.toLowerCase()}${pageSuffix}`
+        return `${countryPrefix}/referrals/state/${stateCode.toLowerCase()}${pageSuffix}`
       }
       return `${countryPrefix}/referrals${pageSuffix}`
     },
