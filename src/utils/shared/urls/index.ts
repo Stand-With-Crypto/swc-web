@@ -160,7 +160,7 @@ export const getIntlUrls = (
             return '/community/referrals'
           case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
-            return '/community'
+            return '/community/activity'
         }
       }
       const tabPrefix = getTabPrefix(params.tab)
