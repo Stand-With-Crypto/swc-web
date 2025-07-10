@@ -64,6 +64,10 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
             {
               administrativeAreaLevel1: '',
             },
+            {
+              latitude: null,
+              longitude: null,
+            },
           ],
         },
         take,
