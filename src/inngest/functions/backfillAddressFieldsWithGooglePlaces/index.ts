@@ -64,6 +64,10 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
             {
               administrativeAreaLevel1: '',
             },
+            {
+              latitude: null,
+              longitude: null,
+            },
           ],
         },
       }),
