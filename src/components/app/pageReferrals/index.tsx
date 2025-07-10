@@ -49,11 +49,7 @@ export function PageReferrals(props: PageReferralsProps) {
       <div className="flex justify-center">
         <PaginationLinks
           currentPageNumber={page}
-          getPageUrl={pageNumber =>
-            stateCode
-              ? urls.communityStateSpecific({ pageNum: pageNumber, stateCode, tab })
-              : urls.community({ pageNum: pageNumber, tab })
-          }
+          getPageUrl={pageNumber => urls.referrals({ pageNum: pageNumber, stateCode })}
           totalPages={totalPages}
         />
       </div>

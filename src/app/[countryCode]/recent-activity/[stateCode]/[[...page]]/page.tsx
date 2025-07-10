@@ -8,38 +8,51 @@ import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
   PageLeaderboardInferredProps,
-  UsPageCommunity,
 } from '@/components/app/pageCommunity/us'
+import { UsStateSpecificCommunityPage } from '@/components/app/pageCommunity/us/stateSpecificPage'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import {
+  US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+} from '@/utils/shared/stateMappings/usStateUtils'
 
 export const revalidate = 30 // 30 seconds
+export const dynamic = 'error'
 export const dynamicParams = true
 
-type Props = PageProps<{ page: string[] }>
+type Props = PageProps<{ page: string[]; stateCode: string }>
 
-export async function generateMetadata(_props: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { stateCode } = await props.params
+  const stateName =
+    US_STATE_CODE_TO_DISPLAY_NAME_MAP[
+      stateCode.toUpperCase() as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+    ]
   return generateMetadataDetails({
-    title: PAGE_LEADERBOARD_TITLE,
+    title: `Recent Activity in ${stateName} - ${PAGE_LEADERBOARD_TITLE}`,
     description: PAGE_LEADERBOARD_DESCRIPTION,
   })
 }
 
-// pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
     COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).flatMap((stateCode: string) =>
+    flatten(
+      times(totalPregeneratedPages).map(i => ({
+        stateCode: stateCode.toLowerCase(),
+        page: i ? [`${i + 1}`] : [],
+      })),
+    ),
+  )
 }
 
-export default async function CommunityRecentActivityPage(props: Props) {
+export default async function RecentActivityStateSpecificPage(props: Props) {
   const params = await props.params
-  const searchParams = await props.searchParams
 
-  const stateCode = searchParams?.state as string | undefined
-
+  const { stateCode } = params
   if (!stateCode || !(stateCode.toUpperCase() in US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)) {
     notFound()
   }
@@ -57,6 +70,12 @@ export default async function CommunityRecentActivityPage(props: Props) {
   }
 
   return (
-    <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={totalPages} />
+    <UsStateSpecificCommunityPage
+      {...dataProps}
+      offset={offset}
+      pageNum={pageNum}
+      stateCode={stateCode}
+      totalPages={totalPages}
+    />
   )
 }

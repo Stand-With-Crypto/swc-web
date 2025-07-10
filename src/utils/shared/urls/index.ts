@@ -119,23 +119,24 @@ export const getIntlUrls = (
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
-    recentActivity: (params: Partial<{ pageNumber: number; stateCode: string }> = {}) => {
+    recentActivity: (params: { stateCode: string; pageNumber?: number }) => {
       const pageNumber = params.pageNumber || 1
       const shouldSuppressPageNumber = pageNumber === 1
       const suffix = shouldSuppressPageNumber ? '' : `/${pageNumber}`
-
-      return `/recent-activity${suffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
+      return `${countryPrefix}/recent-activity/${params.stateCode.toLowerCase()}${suffix}`
     },
     community: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const getTabPrefix = (
         tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
       ) => {
         switch (tab) {
+          case RecentActivityAndLeaderboardTabs.LEADERBOARD:
+            return '/community/leaderboard'
           case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
             return '/community/referrals'
           case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
-            return '/community'
+            return '/community/activity'
         }
       }
       const tabPrefix = getTabPrefix(params?.tab)
@@ -190,11 +191,14 @@ export const getIntlUrls = (
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
-    referrals: ({ pageNum, stateCode }: Partial<{ pageNum: number; stateCode: string }> = {}) => {
+    referrals: (params: Partial<{ pageNum: number; stateCode: string }> = {}) => {
+      const { pageNum, stateCode } = params
       const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
-      const stateSuffix = stateCode ? `?state=${stateCode.toLowerCase()}` : ''
-      return `${countryPrefix}/referrals${pageSuffix}${stateSuffix}`
+      if (stateCode) {
+        return `${countryPrefix}/referrals/${stateCode.toLowerCase()}${pageSuffix}`
+      }
+      return `${countryPrefix}/referrals${pageSuffix}`
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
