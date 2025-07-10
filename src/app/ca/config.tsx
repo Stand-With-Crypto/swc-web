@@ -67,6 +67,7 @@ export const footerConfig: FooterProps = {
     </div>
   ),
   links: [
+    { href: urls.termsOfService(), text: 'Terms of service' },
     {
       href: urls.privacyPolicy(),
       text: 'Privacy',
