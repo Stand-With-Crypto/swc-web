@@ -1,6 +1,6 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect, RedirectType } from 'next/navigation'
 
 import { STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
@@ -18,10 +18,14 @@ import {
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/stateMappings/usStateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 export const dynamicParams = true
+
+const urls = getIntlUrls(DEFAULT_SUPPORTED_COUNTRY_CODE)
 
 type Props = PageProps<{ page: string[]; stateCode: string }>
 
@@ -58,6 +62,15 @@ export default async function CommunityReferralsPage(props: Props) {
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
+  }
+  if (!stateCode || !(stateCode.toUpperCase() in US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)) {
+    redirect(
+      urls.community({
+        tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+        pageNum,
+      }),
+      RedirectType.replace,
+    )
   }
 
   const offset = (pageNum - 1) * itemsPerPage

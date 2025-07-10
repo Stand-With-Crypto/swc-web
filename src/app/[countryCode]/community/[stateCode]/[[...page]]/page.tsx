@@ -1,5 +1,6 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
+import { redirect, RedirectType } from 'next/navigation'
 
 import { getPageData } from '@/components/app/pageCommunity'
 import { STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
@@ -16,10 +17,14 @@ import {
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/stateMappings/usStateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 export const dynamicParams = true
+
+const urls = getIntlUrls(DEFAULT_SUPPORTED_COUNTRY_CODE)
 
 type Props = PageProps<{ page: string[]; stateCode: string }>
 
@@ -56,6 +61,15 @@ export default async function CommunityStateSpecificRecentActivityPage(props: Pr
   const params = await props.params
 
   const stateCode = params.stateCode
+
+  if (!stateCode || !(stateCode.toUpperCase() in US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)) {
+    redirect(
+      urls.community({
+        tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+      }),
+      RedirectType.replace,
+    )
+  }
 
   const { publicRecentActivity, pageNum, offset, totalPages } = await getPageData({
     ...params,
