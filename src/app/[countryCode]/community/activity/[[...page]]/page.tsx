@@ -35,13 +35,8 @@ export async function generateStaticParams() {
 
 export default async function CommunityRecentActivityPage(props: Props) {
   const params = await props.params
-  const searchParams = await props.searchParams
-
-  const stateCode = searchParams?.state as string | undefined
-
   const { publicRecentActivity, pageNum, offset, totalPages } = await getPageData({
     ...params,
-    state: stateCode,
   })
 
   const dataProps: PageLeaderboardInferredProps = {
@@ -52,12 +47,6 @@ export default async function CommunityRecentActivityPage(props: Props) {
   }
 
   return (
-    <UsPageCommunity
-      {...dataProps}
-      offset={offset}
-      pageNum={pageNum}
-      stateCode={stateCode}
-      totalPages={totalPages}
-    />
+    <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={totalPages} />
   )
 }

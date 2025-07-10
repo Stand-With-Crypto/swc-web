@@ -30,3 +30,16 @@ export const COMMUNITY_PAGINATION_DATA: Record<RecentActivityAndLeaderboardTabs,
       totalPregeneratedPages: maybeIgnorePreGeneration(9),
     },
   }
+
+export const STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA: Record<string, PaginationConfig> = {
+  [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: {
+    totalPages: 10,
+    itemsPerPage: 30,
+    totalPregeneratedPages: maybeIgnorePreGeneration(2),
+  },
+  [RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]: {
+    totalPages: 4,
+    itemsPerPage: 25,
+    totalPregeneratedPages: maybeIgnorePreGeneration(2),
+  },
+}

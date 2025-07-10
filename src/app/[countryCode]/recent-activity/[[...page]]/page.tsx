@@ -57,12 +57,6 @@ export default async function CommunityRecentActivityPage(props: Props) {
   }
 
   return (
-    <UsPageCommunity
-      {...dataProps}
-      offset={offset}
-      pageNum={pageNum}
-      stateCode={stateCode}
-      totalPages={totalPages}
-    />
+    <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={totalPages} />
   )
 }

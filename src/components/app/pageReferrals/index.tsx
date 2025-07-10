@@ -50,9 +50,9 @@ export function PageReferrals(props: PageReferralsProps) {
         <PaginationLinks
           currentPageNumber={page}
           getPageUrl={pageNumber =>
-            pageNumber < 1 || pageNumber > totalPages
-              ? ''
-              : urls.leaderboard({ pageNum: pageNumber, stateCode, tab })
+            stateCode
+              ? urls.communityStateSpecific({ pageNum: pageNumber, stateCode, tab })
+              : urls.community({ pageNum: pageNumber, tab })
           }
           totalPages={totalPages}
         />
