@@ -41,7 +41,7 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
 
       const getDistrictRank = () => {
         const stateCode = user.address?.administrativeAreaLevel1
-        const districtNumber = user.address?.usCongressionalDistrict
+        const districtNumber = user.address?.electoralZone
 
         const parseResult = zodStateDistrict.safeParse({
           state: stateCode,
@@ -65,7 +65,7 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
           sessionId: user.userSessions?.[0]?.id,
           address: {
             district: {
-              name: user.address?.usCongressionalDistrict ?? undefined,
+              name: user.address?.electoralZone ?? undefined,
               rank: getDistrictRank(),
             },
             state: {
@@ -87,7 +87,7 @@ async function getDistrictRankMap(users: Array<User & { address: Address | null 
     users
       .map(user => {
         const stateCode = user.address?.administrativeAreaLevel1
-        const districtNumber = user.address?.usCongressionalDistrict
+        const districtNumber = user.address?.electoralZone
 
         const parseResult = zodStateDistrict.safeParse({
           state: stateCode,

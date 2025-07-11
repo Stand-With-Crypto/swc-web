@@ -13,8 +13,8 @@ export type UseGetDTSIPeopleFromPlaceIdResponse = Awaited<
 >
 
 export type DTSIPeopleFromAddressFilter = (
-  dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
-) => DTSIPeopleByElectoralZoneQueryResult
+  dtsiPerson: DTSIPeopleByElectoralZoneQueryResult[number],
+) => boolean
 
 export async function getDTSIPeopleFromAddress({
   address,
@@ -59,7 +59,7 @@ export async function getDTSIPeopleFromAddress({
 
   const dtsiPeople = data as DTSIPeopleByElectoralZoneQueryResult
 
-  const filteredData = filterFn(dtsiPeople)
+  const filteredData = dtsiPeople.filter(filterFn)
 
   if (!filteredData.length) {
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }

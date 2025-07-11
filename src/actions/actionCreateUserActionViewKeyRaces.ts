@@ -16,14 +16,10 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import {
-  GetCongressionalDistrictFromAddressSuccess,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -34,7 +30,7 @@ const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
 const createActionViewKeyRacesInputValidationSchema = object({
   campaignName: string().optional(),
   address: zodAddress.optional(),
-  usCongressionalDistrict: string().optional(),
+  electoralZone: string().optional(),
   usaState: string().optional(),
   shouldBypassAuth: z.boolean().optional(),
   stateCode: string().optional(),
@@ -166,21 +162,22 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const currentUsaState =
     userAddress?.address?.administrativeAreaLevel1 ?? validatedInput.data?.usaState ?? null
 
-  const maybeCongressionalDistrict = (await maybeGetCongressionalDistrictFromAddress(
-    { countryCode: 'US', formattedDescription: userAddress?.address?.formattedDescription ?? '' },
-    { stateCode: currentUsaState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP },
-  )) as GetCongressionalDistrictFromAddressSuccess
-
-  const userAddressCongressionalDistrict =
-    userAddress?.address?.usCongressionalDistrict &&
-    userAddress?.address?.usCongressionalDistrict !== '0'
-      ? userAddress?.address?.usCongressionalDistrict
-      : null
-
-  const currentCongressionalDistrict =
-    userAddressCongressionalDistrict ||
-    validatedInput.data?.usCongressionalDistrict ||
-    maybeCongressionalDistrict?.districtNumber?.toString() ||
+  const maybeElectoralZone = await maybeGetElectoralZoneFromAddress({
+    address: {
+      formattedDescription:
+        userAddress?.address?.formattedDescription ||
+        validatedInput.data.address?.formattedDescription ||
+        '',
+      googlePlaceId: userAddress?.address?.googlePlaceId || null,
+      latitude: userAddress?.address?.latitude || null,
+      longitude: userAddress?.address?.longitude || null,
+    },
+  })
+  const userAddressElectoralZone = userAddress?.address?.electoralZone
+  const currentElectoralZone =
+    userAddressElectoralZone ||
+    validatedInput.data?.electoralZone ||
+    ('zoneName' in maybeElectoralZone && maybeElectoralZone.zoneName) ||
     null
 
   await createUserActionViewKeyRaces(
@@ -188,7 +185,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     countryCode,
     campaignName,
     currentUsaState,
-    currentCongressionalDistrict,
+    currentElectoralZone,
     validatedInput.data?.stateCode ?? null,
     validatedInput.data?.constituency ?? null,
   )
@@ -260,7 +257,7 @@ async function createUserActionViewKeyRaces(
   countryCode: string,
   campaignName: string,
   usaState: string | null,
-  usCongressionalDistrict: string | null,
+  electoralZone: string | null,
   stateCode: string | null,
   constituency: string | null,
 ) {
@@ -278,7 +275,7 @@ async function createUserActionViewKeyRaces(
       campaignName,
       userActionViewKeyRaces: {
         create: {
-          usCongressionalDistrict,
+          electoralZone,
           usaState,
           stateCode,
           constituency,
@@ -342,9 +339,12 @@ async function getUserAddress(userId: string) {
       address: {
         select: {
           administrativeAreaLevel1: true,
-          usCongressionalDistrict: true,
+          electoralZone: true,
           formattedDescription: true,
           countryCode: true,
+          googlePlaceId: true,
+          latitude: true,
+          longitude: true,
         },
       },
     },
