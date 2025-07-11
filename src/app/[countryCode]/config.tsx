@@ -1,6 +1,7 @@
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
 import * as Icons from '@/components/app/navbar/navbarDrawerIcons'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { usExternalUrls } from '@/utils/shared/urls/externalUrls'
@@ -11,10 +12,6 @@ export const navbarConfig: NavbarProps = {
   countryCode: DEFAULT_SUPPORTED_COUNTRY_CODE,
   showDonateButton: true,
   items: [
-    {
-      href: urls.localPolicy(),
-      text: 'Local policy',
-    },
     {
       href: urls.politiciansHomepage(),
       text: 'Politician scores',
@@ -41,7 +38,7 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.MissionIcon />,
         },
         {
-          href: urls.community(),
+          href: urls.community({ tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY }),
           text: 'Community',
           icon: <Icons.CommunityIcon />,
         },
@@ -99,7 +96,10 @@ export const footerConfig: FooterProps = {
       href: urls.questionnaire(),
       text: 'Questionnaire',
     },
-    { href: urls.leaderboard(), text: 'Community' },
+    {
+      href: urls.community({ tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY }),
+      text: 'Community',
+    },
     { href: urls.contentClarity(), text: 'CLARITY resources' },
     { href: urls.contentGenius(), text: 'GENIUS resources' },
   ],

@@ -49,11 +49,7 @@ export function PageReferrals(props: PageReferralsProps) {
       <div className="flex justify-center">
         <PaginationLinks
           currentPageNumber={page}
-          getPageUrl={pageNumber =>
-            pageNumber < 1 || pageNumber > totalPages
-              ? ''
-              : urls.leaderboard({ pageNum: pageNumber, stateCode, tab })
-          }
+          getPageUrl={pageNumber => urls.referrals({ pageNum: pageNumber, stateCode })}
           totalPages={totalPages}
         />
       </div>

@@ -50,7 +50,7 @@ export function CaPageHome({
           <RecentActivity.List actions={recentActivity} />
           <RecentActivity.Footer>
             <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
+              <InternalLink href={urls.community()}>View all</InternalLink>
             </Button>
           </RecentActivity.Footer>
         </RecentActivity>
