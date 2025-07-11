@@ -6,14 +6,16 @@ import { EventsMap } from '@/components/app/pageEvents/components/eventsMap'
 import { UpcomingEventsList } from '@/components/app/pageEvents/components/upcomingEvents'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 
 interface AllUpcomingEventsProps {
   events: SWCEvents
   showMap?: boolean
+  countryCode: SupportedCountryCodes
 }
 
-export function AllUpcomingEvents({ events, showMap = true }: AllUpcomingEventsProps) {
+export function AllUpcomingEvents({ events, showMap = true, countryCode }: AllUpcomingEventsProps) {
   const isMobile = useIsMobile()
 
   const [displayOption, setDisplayOption] = useState<'map' | 'list'>(
@@ -42,7 +44,7 @@ export function AllUpcomingEvents({ events, showMap = true }: AllUpcomingEventsP
       )}
 
       {displayOption === 'map' ? (
-        <EventsMap events={events} />
+        <EventsMap countryCode={countryCode} events={events} />
       ) : (
         <UpcomingEventsList events={events} />
       )}
