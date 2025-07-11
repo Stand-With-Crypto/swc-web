@@ -53,6 +53,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const result = await verifiedSWCPartnersUserActionOptIn({
     ...validatedFields,
     partner,
+    hasValidPhoneNumber: phoneNumberValidationResult.success,
   })
 
   return NextResponse.json(result)

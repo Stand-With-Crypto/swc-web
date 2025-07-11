@@ -126,7 +126,7 @@ export async function handleExternalUserActionOptIn(
     },
   }
 
-  if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber) {
+  if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber && input.hasValidPhoneNumber) {
     const optInUserPayload = { phoneNumber: input.phoneNumber, user, countryCode }
 
     after(async () => {
@@ -252,6 +252,7 @@ async function maybeUpsertUser({
     phoneNumber,
     hasOptedInToMembership,
     address,
+    hasValidPhoneNumber,
   } = input
 
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
@@ -320,6 +321,7 @@ async function maybeUpsertUser({
       ...(firstName && !existingUser.firstName && { firstName }),
       ...(lastName && !existingUser.lastName && { lastName }),
       ...(phoneNumber && !existingUser.phoneNumber && { phoneNumber }),
+      ...(hasValidPhoneNumber !== existingUser.hasValidPhoneNumber && { hasValidPhoneNumber }),
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
@@ -441,6 +443,7 @@ async function maybeUpsertUser({
       firstName,
       lastName,
       phoneNumber,
+      hasValidPhoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       countryCode,
