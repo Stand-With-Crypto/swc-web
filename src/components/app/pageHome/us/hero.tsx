@@ -1,8 +1,14 @@
 import { Hero, HeroAnnouncementCard } from '@/components/app/pageHome/common/hero'
-import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const countryCode = SupportedCountryCodes.US
+
+const ClarityActWrapper = getEmailActionWrapperComponentByCampaignName({
+  countryCode,
+  campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+})
 
 export function UsHero() {
   return (
@@ -18,36 +24,38 @@ export function UsHero() {
       </Hero.Heading>
       <HeroAnnouncementCard
         authenticatedContent={
-          <UserActionFormShareOnTwitterDialog countryCode={SupportedCountryCodes.US}>
+          <ClarityActWrapper>
             <HeroAnnouncementCard.Image
               media={{
                 videoSrc: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
                 fallback: {
                   src: '/homepageHero.webp',
-                  alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+                  alt: 'Email your House Member to pass the CLARITY Act',
                 },
               }}
             >
-              <HeroAnnouncementCard.CTA buttonText="Follow">
-                Stay up to date on crypto policy by following @StandWithCrypto on X.
+              <HeroAnnouncementCard.CTA buttonText="Take action">
+                Email your House Member to pass the CLARITY Act
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
-          </UserActionFormShareOnTwitterDialog>
+          </ClarityActWrapper>
         }
         unauthenticatedContent={
-          <HeroAnnouncementCard.Image
-            media={{
-              videoSrc: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
-              fallback: {
-                src: '/homepageHero.webp',
-                alt: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
-              },
-            }}
-          >
-            <HeroAnnouncementCard.CTA buttonText="Join">
-              Join Stand With Crypto and help us defend your right to own crypto in America.
-            </HeroAnnouncementCard.CTA>
-          </HeroAnnouncementCard.Image>
+          <ClarityActWrapper>
+            <HeroAnnouncementCard.Image
+              media={{
+                videoSrc: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
+                fallback: {
+                  src: '/homepageHero.webp',
+                  alt: 'Email your House Member to pass the CLARITY Act',
+                },
+              }}
+            >
+              <HeroAnnouncementCard.CTA buttonText="Take action">
+                Email your House Member to pass the CLARITY Act
+              </HeroAnnouncementCard.CTA>
+            </HeroAnnouncementCard.Image>
+          </ClarityActWrapper>
         }
       />
     </Hero>

@@ -12,13 +12,11 @@ import {
 } from '@/components/app/pageCommunity/us'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
-import {
-  getDistrictsLeaderboardData,
-  getDistrictsLeaderboardDataByState,
-} from '@/utils/server/districtRankings/upsertRankings'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 60 // 1 minute
+export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -47,17 +45,12 @@ export default async function CommunityReferralsPage(props: Props) {
 
   const offset = (pageNum - 1) * itemsPerPage
 
-  const searchParams = await props.searchParams
-  const state = searchParams?.state as string | undefined
-
   const commonParams = {
     limit: itemsPerPage,
     offset,
   }
 
-  const { items: leaderboardData, total } = state
-    ? await getDistrictsLeaderboardDataByState(state.toUpperCase(), commonParams)
-    : await getDistrictsLeaderboardData(commonParams)
+  const { items: leaderboardData } = await getDistrictsLeaderboardData(commonParams)
 
   const dataProps: PageLeaderboardInferredProps = {
     leaderboardData,
@@ -66,15 +59,5 @@ export default async function CommunityReferralsPage(props: Props) {
     tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
   }
 
-  const totalPages = state ? Math.ceil(total / itemsPerPage) : undefined
-
-  return (
-    <UsPageCommunity
-      {...dataProps}
-      offset={offset}
-      pageNum={pageNum}
-      stateCode={state}
-      totalPages={totalPages}
-    />
-  )
+  return <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={undefined} />
 }

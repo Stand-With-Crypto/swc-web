@@ -56,7 +56,7 @@ export function DelayedRecentActivityWithMap({
           </Button>
         )}
         <Button asChild variant="secondary">
-          <InternalLink href={urls.leaderboard()}>View all</InternalLink>
+          <InternalLink href={urls.community()}>View all</InternalLink>
         </Button>
       </RecentActivity.Footer>
     </div>
