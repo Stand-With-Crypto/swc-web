@@ -37,7 +37,7 @@ export function CaPageCommunity({
           <RecentActivity.Pagination
             currentPageNumber={pageNum}
             getPageUrl={pageNumber =>
-              urls.leaderboard({
+              urls.community({
                 pageNum: pageNumber,
                 tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
               })

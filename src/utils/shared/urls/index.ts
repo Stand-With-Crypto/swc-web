@@ -119,19 +119,16 @@ export const getIntlUrls = (
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
-    recentActivity: (params: Partial<{ pageNumber: number; stateCode: string }> = {}) => {
+    recentActivity: (params: { stateCode: string; pageNumber?: number }) => {
       const pageNumber = params.pageNumber || 1
       const shouldSuppressPageNumber = pageNumber === 1
       const suffix = shouldSuppressPageNumber ? '' : `/${pageNumber}`
-
-      return `/recent-activity${suffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
+      return `${countryPrefix}/recent-activity/${params.stateCode.toLowerCase()}${suffix}`
     },
-    leaderboard: (params?: {
-      pageNum?: number
-      stateCode?: string
-      tab: RecentActivityAndLeaderboardTabs
-    }) => {
-      const getTabPrefix = (tab = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY) => {
+    community: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
+      const getTabPrefix = (
+        tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+      ) => {
         switch (tab) {
           case RecentActivityAndLeaderboardTabs.LEADERBOARD:
             return '/community/leaderboard'
@@ -139,17 +136,39 @@ export const getIntlUrls = (
             return '/community/referrals'
           case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
-            return '/community'
+            return '/community/activity'
         }
       }
       const tabPrefix = getTabPrefix(params?.tab)
-      if (!params) {
-        return `${countryPrefix}${tabPrefix}`
+      const pageNum = params?.pageNum ?? 1
+      const shouldSuppressPageNum = pageNum === 1
+      const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}`
+    },
+    communityStateSpecific: (params: {
+      pageNum?: number
+      tab:
+        | RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+        | RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+      stateCode: string
+    }) => {
+      const statePrefix = `/community/${params.stateCode.toLowerCase()}`
+      const getTabPrefix = (
+        tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+      ) => {
+        switch (tab) {
+          case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+            return `${statePrefix}/referrals`
+          case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          default:
+            return statePrefix
+        }
       }
+      const tabPrefix = getTabPrefix(params.tab)
       const pageNum = params.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${countryPrefix}${tabPrefix}${tabSuffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
     politiciansHomepage: ({
@@ -165,7 +184,6 @@ export const getIntlUrls = (
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
     internalHomepage: () => '/internal',
     becomeMember: () => `${countryPrefix}/action/become-member`,
-    community: () => `${countryPrefix}/community`,
     events: () => `${countryPrefix}/events`,
     eventDeepLink: (state: string, eventSlug: string) =>
       `${countryPrefix}/events/${state}/${eventSlug}`,
@@ -174,11 +192,14 @@ export const getIntlUrls = (
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
-    referrals: ({ pageNum, stateCode }: Partial<{ pageNum: number; stateCode: string }> = {}) => {
+    referrals: (params: Partial<{ pageNum: number; stateCode: string }> = {}) => {
+      const { pageNum, stateCode } = params
       const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
-      const stateSuffix = stateCode ? `?state=${stateCode.toLowerCase()}` : ''
-      return `${countryPrefix}/referrals${pageSuffix}${stateSuffix}`
+      if (stateCode) {
+        return `${countryPrefix}/referrals/state/${stateCode.toLowerCase()}${pageSuffix}`
+      }
+      return `${countryPrefix}/referrals${pageSuffix}`
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
