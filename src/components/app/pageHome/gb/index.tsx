@@ -45,7 +45,7 @@ export function GbPageHome({
             <span className="text-primary-cta">Brits</span> believe in crypto
           </HomePageSection.Title>
 
-          <HomePageSection.Subtitle className="hidden md:block">
+          <HomePageSection.Subtitle>
             See how the community is taking a stand to safeguard the future of crypto in the UK.
           </HomePageSection.Subtitle>
           <DelayedRecentActivityWithMap
@@ -53,6 +53,7 @@ export function GbPageHome({
             advocatesMapPageData={advocatePerStateDataProps}
             countUsers={countUsers.count}
             countryCode={countryCode}
+            showDonateButton={false}
           />
         </HomePageSection>
       )}

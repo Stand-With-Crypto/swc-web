@@ -1,12 +1,10 @@
 'use client'
 
 import { useRef } from 'react'
-import { TabsContent } from '@radix-ui/react-tabs'
 import { useInView } from 'motion/react'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -23,11 +21,13 @@ export function DelayedRecentActivityWithMap({
   countUsers,
   countryCode,
   advocatesMapPageData,
+  showDonateButton = true,
 }: {
   actions: PublicRecentActivity
   countUsers: number
   countryCode: SupportedCountryCodes
   advocatesMapPageData?: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  showDonateButton?: boolean
 }) {
   const { data: recentActivity } = useApiRecentActivity(actions, {
     limit: 30,
@@ -42,7 +42,7 @@ export function DelayedRecentActivityWithMap({
   const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
 
   return isMobile || !advocatesMapPageData || !mapConfig ? (
-    <TabsContent ref={ref} value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
+    <div>
       <RecentActivity.List
         actions={{
           data: visibleActions,
@@ -50,14 +50,16 @@ export function DelayedRecentActivityWithMap({
         }}
       />
       <RecentActivity.Footer>
-        <Button asChild>
-          <InternalLink href={urls.donate()}>Donate</InternalLink>
-        </Button>
+        {showDonateButton && (
+          <Button asChild>
+            <InternalLink href={urls.donate()}>Donate</InternalLink>
+          </Button>
+        )}
         <Button asChild variant="secondary">
           <InternalLink href={urls.leaderboard()}>View all</InternalLink>
         </Button>
       </RecentActivity.Footer>
-    </TabsContent>
+    </div>
   ) : (
     <ErrorBoundary
       extras={{
