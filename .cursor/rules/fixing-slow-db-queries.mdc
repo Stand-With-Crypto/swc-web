@@ -1,0 +1,44 @@
+---
+description: Fixing slow database queries
+globs:
+alwaysApply: false
+---
+
+When a slow database query is identified (e.g., via Sentry), follow this process to diagnose and resolve the performance issue systematically.
+
+### 1. Benchmark the Original Query
+
+Before making any changes, establish a baseline.
+
+- **Create a Benchmark Script:** Write a dedicated script (e.g., in `src/bin/benchmarks`) to isolate and test the slow query.
+- **Use `EXPLAIN` and `EXPLAIN ANALYZE`:**
+  - `EXPLAIN`: Shows the query execution plan, revealing how the database intends to fetch the data. Look for full table scans or inefficient index usage.
+  - `EXPLAIN ANALYZE`: Executes the query and provides the actual execution plan, including timings and row counts. This is crucial for identifying discrepancies between the planner's estimates and reality.
+- **Measure Execution Time:** Record the wall-clock time it takes for the query to complete.
+
+### 2. Analyze the Results
+
+Carefully examine the output from your benchmark script.
+
+- **Query Plan:** Is the database using the indexes you expect? Is it performing a full table scan (`type: ALL`) when an index scan (`type: index` or `range`) would be better?
+- **Row Counts:** Compare the `rows` (estimated) and `actual time` (actual) values in the `EXPLAIN ANALYZE` output. A large discrepancy indicates that the query planner is working with outdated statistics, which can lead to suboptimal plans.
+- **Bottlenecks:** Identify the most time-consuming parts of the query plan.
+
+### 3. Explore Performance Improvements
+
+Based on your analysis, explore one or more of the following paths.
+
+- **Modify the Query:** Sometimes, rewriting a query can lead to a more efficient execution plan.
+- **Add or Modify Indexes:** If the query is not using an index effectively, you may need to add a new one or modify an existing one. The order of columns in a composite index matters greatly.
+- **Split the Query (Concurrency):** For queries that aggregate data over a large set (e.g., all US states), consider breaking it down into smaller, independent queries that can be run in parallel.
+
+### 4. Validate Changes
+
+After applying a potential fix, re-run your benchmark script to verify that the change has improved performance. Compare the new results against your original baseline.
+
+### Important Considerations
+
+- **Production-like Data:** For the most accurate metrics, connect to a production or staging database that has a realistic data volume. You can typically do this by temporarily setting the `DATABASE_URL` environment variable to point to the production database. **Never run write operations against a production database.**
+- **Concurrency Benchmarking:** When benchmarking a concurrent approach, ensure you are measuring the total wall-clock time to execute all parallel queries. This provides a fair comparison to the single-query approach.
+- **Connection Pooling:** When running many queries in parallel, be mindful of database connection limits. Implement batching to avoid exhausting the connection pool, especially in serverless environments.
+- **Retry Logic:** For concurrent operations that might fail intermittently, consider wrapping them in a retry mechanism (like `p-retry`) to improve reliability.
