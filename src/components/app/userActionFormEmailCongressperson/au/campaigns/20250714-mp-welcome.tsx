@@ -22,59 +22,60 @@ const CAMPAIGN_NAME = AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMEN
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house-of-reps'
 
+const DTSI_DANIEL_MULINO = {
+  id: '1ffd9148-3b96-414d-9a7a-58321dfbb3b7',
+  slug: 'daniel---mulino---au',
+  firstName: 'Daniel',
+  lastName: 'Mulino',
+  firstNickname: '',
+  nameSuffix: '',
+  politicalAffiliation: 'Labor',
+  politicalAffiliationCategory: DTSI_PersonPoliticalAffiliationCategory.LABOR,
+  computedStanceScore: null,
+  computedSumStanceScoreWeight: null,
+  manuallyOverriddenStanceScore: null,
+  profilePictureUrl:
+    'https://db0prh5pvbqwd.cloudfront.net/all/images/d41053b6-ddac-4942-8dd4-f2cdd36ff2fd.jpg',
+  profilePictureUrlDimensions: {
+    type: 'jpg',
+    width: 150,
+    height: 239,
+  },
+  promotedPositioning: null,
+  stanceCount: 0,
+  primaryRole: {
+    dateEnd: null,
+    dateStart: '2025-07-09T00:00:00.000Z',
+    id: '409f079b-2700-4266-9504-cc4e60efd681',
+    primaryCity: '',
+    primaryCountryCode: 'AU',
+    primaryDistrict: 'Fraser',
+    primaryState: 'VIC',
+    roleCategory: DTSI_PersonRoleCategory.CONGRESS,
+    status: DTSI_PersonRoleStatus.HELD,
+    title: '',
+    group: {
+      id: '9b39cf2b-7361-4221-bd7f-e470e12a0835',
+      category: DTSI_PersonRoleGroupCategory.CONGRESS,
+      groupInstance: '48',
+    },
+  },
+  twitterAccounts: [],
+}
+
+/**
+ * Per marketing team request, returning Daniel Mulino as fallback if no other local MP is found for the advocate address.
+ */
 export function filterDTSIPeopleByAUPoliticalCategoryWithFallback(
   category: YourPoliticianCategory,
 ) {
   const baseFilter = filterDTSIPeopleByAUPoliticalCategory(category)
   return (people: DTSIPeopleByElectoralZoneQueryResult): DTSIPeopleByElectoralZoneQueryResult => {
-    console.log('people', people)
-
     const filtered = baseFilter(people)
     if (filtered.length > 0) {
       return filtered
     }
-    return [
-      {
-        id: '1ffd9148-3b96-414d-9a7a-58321dfbb3b7',
-        slug: 'daniel---mulino---au',
-        firstName: 'Daniel',
-        lastName: 'Mulino',
-        firstNickname: '',
-        nameSuffix: '',
-        politicalAffiliation: 'Labor',
-        politicalAffiliationCategory: DTSI_PersonPoliticalAffiliationCategory.LABOR,
-        computedStanceScore: null,
-        computedSumStanceScoreWeight: null,
-        manuallyOverriddenStanceScore: null,
-        profilePictureUrl:
-          'https://db0prh5pvbqwd.cloudfront.net/all/images/d41053b6-ddac-4942-8dd4-f2cdd36ff2fd.jpg',
-        profilePictureUrlDimensions: {
-          type: 'jpg',
-          width: 150,
-          height: 239,
-        },
-        promotedPositioning: null,
-        stanceCount: 0,
-        primaryRole: {
-          dateEnd: null,
-          dateStart: '2025-07-09T00:00:00.000Z',
-          id: '409f079b-2700-4266-9504-cc4e60efd681',
-          primaryCity: '',
-          primaryCountryCode: 'AU',
-          primaryDistrict: 'Fraser',
-          primaryState: 'VIC',
-          roleCategory: DTSI_PersonRoleCategory.CONGRESS,
-          status: DTSI_PersonRoleStatus.HELD,
-          title: '',
-          group: {
-            id: '9b39cf2b-7361-4221-bd7f-e470e12a0835',
-            category: DTSI_PersonRoleGroupCategory.CONGRESS,
-            groupInstance: '48',
-          },
-        },
-        twitterAccounts: [],
-      },
-    ]
+    return [DTSI_DANIEL_MULINO]
   }
 }
 
