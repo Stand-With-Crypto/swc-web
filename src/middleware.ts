@@ -4,6 +4,7 @@ import { internationalRedirectHandler } from '@/utils/edge/internationalRedirect
 import { obfuscateURLCountryCode } from '@/utils/edge/obfuscateURLCountryCode'
 import { setResponseCookie } from '@/utils/edge/setResponseCookie'
 import { setSessionCookiesFromRequest } from '@/utils/edge/setSessionCookies'
+import { isKnownBotUserAgent } from '@/utils/shared/botUserAgent'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import {
   USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
@@ -28,6 +29,13 @@ export function middleware(request: NextRequest) {
       cookieValue: userAccessLocationCookie,
       maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
     })
+  }
+
+  // Set the custom header on the response for downstream logic
+  const userAgent = request.headers.get('user-agent')
+  const isBot = isKnownBotUserAgent(userAgent)
+  if (isBot) {
+    response.headers.set('x-known-bot', 'true')
   }
 
   return response

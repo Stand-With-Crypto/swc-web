@@ -109,7 +109,7 @@ export function UsPageHome({
                       </Button>
                       <Button asChild variant="secondary">
                         <InternalLink
-                          href={urls.leaderboard({
+                          href={urls.community({
                             tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
                           })}
                         >

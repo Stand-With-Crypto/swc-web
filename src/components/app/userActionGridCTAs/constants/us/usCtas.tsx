@@ -6,6 +6,7 @@ import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormC
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
+import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
@@ -17,6 +18,7 @@ import {
   USUserActionCallCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
+  USUserActionNftMintCampaignName,
   USUserActionPollCampaignName,
   USUserActionReferCampaignName,
   USUserActionTweetCampaignName,
@@ -52,8 +54,8 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email your House Rep',
-    description: 'Support Market Structure Regulation (CLARITY Act)',
+    title: 'Email Your House Rep',
+    description: 'Pass Crucial Crypto Legislation',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -62,8 +64,8 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
         isCampaignActive: true,
-        title: 'Email your House Rep',
-        description: 'Support Market Structure Regulation (CLARITY Act)',
+        title: 'Email Your House Rep',
+        description: 'Pass crucial crypto legislation',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
@@ -424,6 +426,24 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
             {children}
           </LoginDialogWrapper>
         ),
+      },
+    ],
+  },
+  [UserActionType.NFT_MINT]: {
+    title: 'Mint your Supporter NFT',
+    description: 'All mint proceeds are donated to the movement.',
+    mobileCTADescription: 'All mint proceeds are donated to the movement.',
+    campaignsModalDescription: 'All mint proceeds are donated to the movement.',
+    image: '/actionTypeIcons/mintNFT.png',
+    campaigns: [
+      {
+        actionType: UserActionType.NFT_MINT,
+        campaignName: USUserActionNftMintCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Mint your Supporter NFT',
+        description: 'All mint proceeds are donated to the movement.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormNFTMintDialog,
       },
     ],
   },
