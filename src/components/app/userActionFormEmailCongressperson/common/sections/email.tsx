@@ -243,6 +243,11 @@ EmailCongressperson.Message = function Message({ getEmailBodyText }: MessageProp
     control: control,
     name: 'lastName',
   })
+  const dtsiPeople = useWatch({
+    control: control,
+    name: 'dtsiPeople',
+  })
+  const dtsiLastName = dtsiPeople?.[0]?.lastName
 
   useEffect(() => {
     if (hasModifiedMessage.current) return
@@ -253,9 +258,10 @@ EmailCongressperson.Message = function Message({ getEmailBodyText }: MessageProp
         firstName,
         lastName,
         address: addressField?.description,
+        dtsiLastName,
       }),
     )
-  }, [firstName, lastName, addressField, setValue, getEmailBodyText])
+  }, [firstName, lastName, addressField, setValue, getEmailBodyText, dtsiLastName])
 
   return (
     <FormField
