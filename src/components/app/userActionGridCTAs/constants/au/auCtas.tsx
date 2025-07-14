@@ -49,9 +49,9 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.EMAIL]: {
     title: 'Email your Member of Parliament',
     description:
-      'Make your voice heard on important crypto policy issues by emailing your representatives',
+      'Tell your MP to support Blockchain as a priority for Australia’s Productivity Agenda',
     campaignsModalDescription:
-      'Make your voice heard on important crypto policy issues by emailing your representatives',
+      'Tell your MP to support Blockchain as a priority for Australia’s Productivity Agenda',
     image: '/au/actionTypeIcons/email.png',
     campaigns: [
       {
@@ -59,7 +59,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025,
         isCampaignActive: true,
         title: 'Email your MP',
-        description: 'Support Blockchain as a Priority for Australia’s Productivity Agenda.',
+        description: 'Advocate for crypto reforms',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,

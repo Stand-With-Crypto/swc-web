@@ -42,7 +42,7 @@ Thank you for your consideration.${fullNameSignOff}`
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
   dialogTitle: 'Email your MP',
-  dialogSubtitle: 'Welcome MP to parliament and advocate for crypto reforms.',
+  dialogSubtitle: 'Advocate for crypto reforms',
   politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
   subject: 'Support Blockchain as a Priority for Australia’s Productivity Agenda',
   getEmailBodyText,
