@@ -2,8 +2,8 @@ import * as Sentry from '@sentry/nextjs'
 import { NextResponse } from 'next/server'
 
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
-import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 import { getLogger } from '@/utils/shared/logger'
+import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 
 const logger = getLogger('swcCivicElectoralZoneByAddressRoute')
 
@@ -22,9 +22,9 @@ export const GET = async (req: Request) => {
   try {
     logger.info('Getting latitude and longitude for address/placeId', { address, placeId })
 
-    const result = await getLatLongFromAddressOrPlaceId({
-      address: address || '',
-      placeId: placeId || '',
+    const result = await getAddressFromGooglePlacePrediction({
+      description: address || '',
+      place_id: placeId || '',
     })
     latitude = result.latitude
     longitude = result.longitude
@@ -36,6 +36,9 @@ export const GET = async (req: Request) => {
         domain: 'swc-civic',
       },
     })
+  }
+
+  if (!latitude || !longitude) {
     return NextResponse.json({ error: 'Unable to get latitude and longitude' }, { status: 400 })
   }
 
