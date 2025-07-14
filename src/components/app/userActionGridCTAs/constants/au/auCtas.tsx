@@ -56,18 +56,6 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
-        campaignName: AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025,
-        isCampaignActive: true,
-        title: 'Email your MP',
-        description: 'Advocate for crypto reforms',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025,
-        }),
-      },
-      {
-        actionType: UserActionType.EMAIL,
         campaignName: AUUserActionEmailCampaignName.DEFAULT,
         isCampaignActive: false,
         title: `Email your Member of Parliament`,
@@ -100,6 +88,18 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025,
+        isCampaignActive: true,
+        title: 'Email your MP',
+        description: 'Advocate for crypto reforms',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025,
         }),
       },
     ],
