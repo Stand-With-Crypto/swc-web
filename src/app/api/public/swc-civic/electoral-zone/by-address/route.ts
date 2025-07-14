@@ -1,9 +1,9 @@
 import * as Sentry from '@sentry/nextjs'
 import { NextResponse } from 'next/server'
 
+import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { getLogger } from '@/utils/shared/logger'
-import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 
 const logger = getLogger('swcCivicElectoralZoneByAddressRoute')
 
