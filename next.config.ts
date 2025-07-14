@@ -443,6 +443,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/s/clarity/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=clarity-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/s/genius/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=genius-1&sessionId=:sessionId*',
@@ -498,6 +504,12 @@ const nextConfig: NextConfig = {
         source: '/c/clarity-house',
         destination:
           '/action/email/clarity_act_house_jun_13_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+        permanent: false,
+      },
+      {
+        source: '/mp-welcome',
+        destination:
+          '/action/email/welcome_mp_back_to_parliament_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-au-mp-welcome',
         permanent: false,
       },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
