@@ -34,7 +34,7 @@ Based on your analysis, explore one or more of the following paths.
 
 ### 4. Validate Changes
 
-After applying a potential fix, re-run your benchmark script to verify that the change has improved performance. Compare the new results against your original baseline.
+After applying a potential fix, re-run your benchmark script to verify that the change has improved performance. Compare the new results against your original baseline. Summary the benchmark results (both the new and old) and add them to the PR description.
 
 ### Important Considerations
 
