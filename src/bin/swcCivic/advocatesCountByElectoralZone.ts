@@ -158,7 +158,7 @@ async function getOtherAddressesByElectoralZone() {
         FROM address
         JOIN user ON user.address_id = address.id
         WHERE address.country_code IN ('au', 'ca', 'gb') OR
-              (address.country_code = 'us' AND address.us_congressional_district IS NULL)
+              (address.country_code = 'us' AND address.electoral_zone IS NULL)
         GROUP BY address.google_place_id,
                 address.formatted_description,
                 address.country_code,
