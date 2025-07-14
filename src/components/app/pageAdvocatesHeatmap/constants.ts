@@ -12,7 +12,7 @@ import {
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-// Coordinates format: [longitude, latitude] (equivalent to [X, Y])
+// Coordinates format: [longitude, latitude]
 export const STATE_COORDS: Record<string, [number, number]> = {
   AL: [-86.9023, 32.3182],
   AK: [-152.4044, 61.3707],
@@ -92,14 +92,14 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
   },
   [SupportedCountryCodes.GB]: {
     projectionUrl:
-      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/gb-countries-boundaries-2024-UhkWqtG8KpE4IirXzXASMaLLvdzOO2.json',
+      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/NUTS_Level_1_January_2018_GCB_in_the_United_Kingdom_2022_-2753267915301604886.json',
     projection: 'geoMercator',
     projectionConfig: {
       center: [-3.5, 56.0],
       scale: 1500,
     },
     markerOffset: 0.67,
-    geoPropertyStateNameKey: 'CTRY24NM',
+    geoPropertyStateNameKey: 'nuts118nm',
   },
 }
 
