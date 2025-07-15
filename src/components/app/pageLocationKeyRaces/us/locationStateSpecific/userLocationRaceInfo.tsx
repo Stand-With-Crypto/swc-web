@@ -62,7 +62,10 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
 
 function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDistrictFromAddress(address === 'loading' ? null : address?.description)
+  const res = useGetDistrictFromAddress({
+    address: address === 'loading' ? null : address?.description,
+    placeId: address === 'loading' ? null : address?.place_id,
+  })
   const shouldShowSubtitle = !address || !res.data
 
   if (!address || address === 'loading' || !res.data) {

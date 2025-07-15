@@ -66,9 +66,10 @@ ReferralsCounter.UserReferralsCount = UserReferralsCount
 
 export function UserDistrictRank({ className }: { className?: string }) {
   const { address } = useMutableCurrentUserAddress()
-  const districtResponse = useGetDistrictFromAddress(
-    address === 'loading' ? null : address?.description,
-  )
+  const districtResponse = useGetDistrictFromAddress({
+    address: address === 'loading' ? null : address?.description,
+    placeId: address === 'loading' ? null : address?.place_id,
+  })
 
   const district = useMemo(() => {
     if (!districtResponse.data) return null
