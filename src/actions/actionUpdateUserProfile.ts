@@ -25,6 +25,7 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
+import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -32,7 +33,6 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
-import { getLatLongFromAddressOrPlaceId } from '@/utils/server/swcCivic/utils/getLatLongFromAddress'
 import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -80,6 +80,9 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
         })
       }
       if (electoralZone && 'zoneName' in electoralZone) {
+        logger.info(
+          `Found electoral zone ${electoralZone.zoneName} for address ${validatedFields.data.address.formattedDescription}`,
+        )
         validatedFields.data.address.electoralZone = `${electoralZone.zoneName}`
       }
     } catch (error) {
@@ -113,7 +116,7 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
           googlePlaceId: validatedFields.data.address.googlePlaceId,
         },
         create: validatedFields.data.address,
-        update: {},
+        update: validatedFields.data.address,
       })
     : null
 
@@ -304,10 +307,12 @@ async function getElectoralZone(address: NonNullable<Input['address']>) {
       address: formattedDescription,
       placeId: googlePlaceId,
     })
-    const result = await getLatLongFromAddressOrPlaceId({
-      address: formattedDescription || '',
-      placeId: googlePlaceId || '',
+    const result = await getAddressFromGooglePlacePrediction({
+      description: formattedDescription,
+      place_id: googlePlaceId,
     })
-    return await querySWCCivicElectoralZoneFromLatLong(result.latitude, result.longitude)
+    if (result.latitude && result.longitude) {
+      return await querySWCCivicElectoralZoneFromLatLong(result.latitude, result.longitude)
+    }
   }
 }
