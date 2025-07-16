@@ -132,6 +132,9 @@ Sentry.init({
     /cannot initialize wallet, no user logged in/i,
     /Error auto connecting wallet: Cannot set a wallet without an account as active/i,
     /AutoConnect timeout/i,
+
+    // iOS WebKit messageHandlers compatibility errors in Facebook browser and other in-app browsers
+    /undefined is not an object \(evaluating 'window\.webkit\.messageHandlers/i,
   ],
   beforeSend: (event, hint) => {
     // tag errors if user agent is a known bot
