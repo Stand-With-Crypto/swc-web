@@ -12,9 +12,8 @@ const logger = getLogger('getElectoralZoneFromAddress')
 export async function maybeGetElectoralZoneFromAddress({
   address,
 }: {
-  address?: Pick<
-    Address,
-    'formattedDescription' | 'latitude' | 'longitude' | 'googlePlaceId'
+  address?: Partial<
+    Pick<Address, 'formattedDescription' | 'latitude' | 'longitude' | 'googlePlaceId'>
   > | null
 }) {
   if (!address) {
@@ -27,8 +26,8 @@ export async function maybeGetElectoralZoneFromAddress({
     })
   }
   return getElectoralZoneFromAddressOrPlaceId({
-    address: address.formattedDescription,
-    placeId: address?.googlePlaceId || undefined,
+    address: address.formattedDescription || '',
+    placeId: address.googlePlaceId || '',
   })
 }
 

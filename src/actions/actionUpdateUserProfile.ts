@@ -70,14 +70,8 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
 
   if (validatedFields.data.address) {
     try {
-      // const electoralZone = await getElectoralZone(validatedFields.data.address)
       const electoralZone = await maybeGetElectoralZoneFromAddress({
-        address: {
-          ...validatedFields.data.address,
-          googlePlaceId: validatedFields.data.address.googlePlaceId || null,
-          latitude: validatedFields.data.address.latitude || null,
-          longitude: validatedFields.data.address.longitude || null,
-        },
+        address: validatedFields.data.address,
       })
       if ('notFoundReason' in electoralZone) {
         logElectoralZoneNotFound({
