@@ -3,7 +3,7 @@ import { Address } from '@prisma/client'
 import type { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
-import { apiUrls } from '@/utils/shared/urls'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 export type GetElectoralZoneResult = Awaited<ReturnType<typeof parseCivicApiResults>>
 
@@ -41,7 +41,7 @@ export async function getElectoralZoneFromAddressOrPlaceId({
 }) {
   const params = { address, placeId }
   try {
-    const response = await fetchReq(apiUrls.swcCivicElectoralZoneByAddress(params))
+    const response = await fetchReq(fullUrl(apiUrls.swcCivicElectoralZoneByAddress(params)))
     return parseCivicApiResults(response)
   } catch (error) {
     return parseCivicApiError(error)
@@ -57,7 +57,7 @@ export async function getElectoralZoneFromGeolocation({
 }) {
   const params = { latitude, longitude }
   try {
-    const response = await fetchReq(apiUrls.swcCivicElectoralZoneByGeolocation(params))
+    const response = await fetchReq(fullUrl(apiUrls.swcCivicElectoralZoneByGeolocation(params)))
     return parseCivicApiResults(response)
   } catch (error) {
     return parseCivicApiError(error)

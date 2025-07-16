@@ -25,15 +25,14 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
-import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
@@ -71,7 +70,22 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
 
   if (validatedFields.data.address) {
     try {
-      const electoralZone = await getElectoralZone(validatedFields.data.address)
+      // const electoralZone = await getElectoralZone(validatedFields.data.address)
+      const electoralZone = await maybeGetElectoralZoneFromAddress({
+        address: {
+          ...validatedFields.data.address,
+          googlePlaceId: validatedFields.data.address.googlePlaceId || null,
+          latitude: validatedFields.data.address.latitude || null,
+          longitude: validatedFields.data.address.longitude || null,
+        },
+      })
+      if ('notFoundReason' in electoralZone) {
+        logElectoralZoneNotFound({
+          address: validatedFields.data.address.formattedDescription,
+          notFoundReason: electoralZone.notFoundReason,
+          domain: 'actionUpdateUserProfile',
+        })
+      }
       if (!electoralZone) {
         logElectoralZoneNotFound({
           address: validatedFields.data.address.formattedDescription,
@@ -288,31 +302,5 @@ async function handleCapitolCanaryAdvocateUpsert(
           }),
       },
     })
-  }
-}
-
-async function getElectoralZone(address: NonNullable<Input['address']>) {
-  const { latitude, longitude, googlePlaceId, formattedDescription } = address
-
-  if (latitude && longitude) {
-    logger.info('Getting electoral zone for latitude and longitude', {
-      latitude,
-      longitude,
-    })
-    return await querySWCCivicElectoralZoneFromLatLong(latitude, longitude)
-  }
-
-  if (googlePlaceId || formattedDescription) {
-    logger.info('Getting latitude and longitude for address/placeId', {
-      address: formattedDescription,
-      placeId: googlePlaceId,
-    })
-    const result = await getAddressFromGooglePlacePrediction({
-      description: formattedDescription,
-      place_id: googlePlaceId,
-    })
-    if (result.latitude && result.longitude) {
-      return await querySWCCivicElectoralZoneFromLatLong(result.latitude, result.longitude)
-    }
   }
 }
