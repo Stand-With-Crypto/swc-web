@@ -4,7 +4,7 @@ import { HomePageSection } from '@/components/app/pageHome/common/homePageSectio
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
-import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
+import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/common/delayedRecentActivity'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
 import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
