@@ -66,7 +66,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email Your House Rep',
         description: 'Pass crucial crypto legislation',
         canBeTriggeredMultipleTimes: true,
@@ -199,6 +199,18 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
+        isCampaignActive: true,
+        title: 'Email Your House Rep',
+        description: 'Pass Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
         }),
       },
     ],
