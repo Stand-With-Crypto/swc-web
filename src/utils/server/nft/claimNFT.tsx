@@ -120,7 +120,7 @@ export const ACTION_NFT_SLUG: Record<
     [USUserActionLinkedinCampaignName.DEFAULT]: null,
   },
   [UserActionType.CLAIM_NFT]: {
-    [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.SWC_SHIELD,
+    [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.GENIUS_ACT_2025,
   },
 }
 

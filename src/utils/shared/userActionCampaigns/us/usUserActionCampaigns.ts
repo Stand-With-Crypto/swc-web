@@ -63,9 +63,6 @@ export enum USUserActionTweetCampaignName {
   DEFAULT = 'DEFAULT',
   'FOLLOW_SWC_ON_X_2024' = 'FOLLOW_SWC_ON_X_2024',
 }
-export enum USUserActionClaimNftCampaignName {
-  GENIUS_ACT_2025 = 'GENIUS_ACT_2025',
-}
 export enum USUserActionNftMintCampaignName {
   DEFAULT = 'DEFAULT',
 }
@@ -107,6 +104,9 @@ export enum USUserActionViewKeyPageCampaignName {
 }
 export enum USUserActionLinkedinCampaignName {
   DEFAULT = 'DEFAULT',
+}
+export enum USUserActionClaimNftCampaignName {
+  GENIUS_ACT_2025 = 'GENIUS_ACT_2025',
 }
 
 export type USUserActionCampaignName =

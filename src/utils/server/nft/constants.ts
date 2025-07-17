@@ -94,8 +94,8 @@ export const NFT_SLUG_BACKEND_METADATA: Record<
     associatedWallet: SWC_DOT_ETH_WALLET,
   },
   // TODO: add this once we have the contract address
-  // [NFTSlug.GENIUS_ACT_2025]: {
-  //   contractAddress: SWC_GENIUS_ACT_2025_NFT_CONTRACT_ADDRESS,
-  //   associatedWallet: SWC_DOT_ETH_WALLET,
-  // },
+  [NFTSlug.GENIUS_ACT_2025]: {
+    contractAddress: SWC_SHIELD_NFT_CONTRACT_ADDRESS,
+    associatedWallet: LEGACY_NFT_DEPLOYER_WALLET,
+  },
 }

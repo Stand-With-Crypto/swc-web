@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { ClaimNFTIntro } from 'src/components/app/userActionFormClaimNFT/common/sections/intro'
 import { UserActionFormClaimNFTProps } from 'src/components/app/userActionFormClaimNFT/common/types'
@@ -34,7 +34,9 @@ export function USUserActionFormClaimNFT({
     }
   }, [trackMount])
 
+  const [isClaiming, setIsClaiming] = useState(false)
   const handleSubmit = async () => {
+    setIsClaiming(true)
     const result = await triggerServerActionForForm(
       {
         formName: 'User Action Form Claim NFT',
@@ -46,7 +48,7 @@ export function USUserActionFormClaimNFT({
         },
       },
       actionCreateUserActionClaimNFT,
-    )
+    ).finally(() => setIsClaiming(false))
 
     if (result.status === 'success') {
       sectionProps.goToSection(UserActionFormClaimNFTSectionNames.SUCCESS)
@@ -59,7 +61,7 @@ export function USUserActionFormClaimNFT({
         <ClaimNFTIntro>
           <ClaimNFTIntro.ContractMetadataDisplay contractMetadata={NFT_CLIENT_METADATA[nftSlug]} />
           <ClaimNFTIntro.Footer disclaimer="This NFT is purely commemorative in nature and has no value or utility. It is not intended for trading.">
-            <ClaimNFTIntro.ClaimButton onClick={handleSubmit} />
+            <ClaimNFTIntro.ClaimButton onClick={handleSubmit} disabled={isClaiming} />
           </ClaimNFTIntro.Footer>
         </ClaimNFTIntro>
       )
