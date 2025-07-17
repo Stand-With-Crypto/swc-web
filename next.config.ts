@@ -36,6 +36,7 @@ const contentSecurityPolicy = {
         */
         "'unsafe-inline'",
     isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
+    'https://snap.licdn.com/li.lms-analytics/insight.min.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
