@@ -39,7 +39,7 @@ export function PageReferrals(props: PageReferralsProps) {
           <UserReferralUrlWithApi />
           <ReferralsCounter>
             <UserReferralsCount />
-            <UserDistrictRank />
+            <UserDistrictRank countryCode={countryCode} />
           </ReferralsCounter>
         </>
       )}
