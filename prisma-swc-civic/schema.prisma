@@ -20,13 +20,14 @@ model spatial_ref_sys {
 }
 
 model electoralZones {
-  id              Int                                      @id @default(autoincrement())
-  zoneName        String                                   @map("zone_name")
-  stateCode       String?                                  @map("state_code")
-  zoneCoordinates Unsupported("geometry(GeometryZ,4326)")? @map("zone_coordinates")
-  countryCode     String                                   @map("country_code")
-  createdAt       DateTime                                 @default(now()) @map("created_at")
-  updatedAt       DateTime                                 @updatedAt @map("updated_at")
+  id                 Int                                      @id @default(autoincrement())
+  zoneName           String                                   @map("zone_name")
+  stateCode          String?                                  @map("state_code")
+  administrativeArea String?                                  @map("administrative_area")
+  zoneCoordinates    Unsupported("geometry(GeometryZ,4326)")? @map("zone_coordinates")
+  countryCode        String                                   @map("country_code")
+  createdAt          DateTime                                 @default(now()) @map("created_at")
+  updatedAt          DateTime                                 @updatedAt @map("updated_at")
 
   @@index([zoneCoordinates], map: "electoral_zones_coordinates_geom_idx", type: Gist)
   @@map("electoral_zones")
