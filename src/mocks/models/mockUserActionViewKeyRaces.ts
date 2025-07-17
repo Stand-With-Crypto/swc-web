@@ -5,6 +5,7 @@ import { fakerFields } from '@/mocks/fakerUtils'
 export function mockCreateUserActionViewKeyRacesInput() {
   return {
     usaState: fakerFields.stateCode({ abbreviated: true }),
+    usCongressionalDistrict: fakerFields.electoralZone(),
     electoralZone: fakerFields.electoralZone(),
     stateCode: fakerFields.stateCode({ abbreviated: true }),
     constituency: fakerFields.electoralZone(),

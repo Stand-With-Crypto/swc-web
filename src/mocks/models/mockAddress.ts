@@ -80,5 +80,6 @@ export function mockAddress(): Address {
     ...mockCreateAddressInput(),
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
+    usCongressionalDistrict: null,
   }
 }
