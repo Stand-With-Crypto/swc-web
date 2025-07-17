@@ -16,9 +16,8 @@ export function UsCurrentNavbarGlobalBannerCampaign() {
   return (
     <CampaignWrapper url={campaignUrl}>
       <p>
-        Key Vote Alert – Floor Vote on the CLARITY ACT
-        <br className="block sm:hidden" />
-        <span className="hidden sm:inline"> – </span>
+        Key Vote Alert – Floor Vote TODAY on The CLARITY Act and The GENIUS Act
+        <span> – </span>
         <strong>
           <Link href={campaignUrl}>Email your House Member now</Link>
         </strong>
