@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
 import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -16,6 +17,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
+  USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
   USUserActionNftMintCampaignName,
@@ -28,6 +30,7 @@ import {
   USUserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory/us'
+import { NFTSlug } from '@/utils/shared/nft'
 
 const countryCode = SupportedCountryCodes.US
 const urls = getIntlUrls(countryCode)
@@ -444,6 +447,28 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'All mint proceeds are donated to the movement.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormNFTMintDialog,
+      },
+    ],
+  },
+  [UserActionType.CLAIM_NFT]: {
+    title: 'Claim your NFT',
+    description: 'Claim your NFT and commemorate the GENIUS Act.',
+    mobileCTADescription: 'Claim your NFT and commemorate the GENIUS Act.',
+    campaignsModalDescription: 'Claim your NFT and commemorate the GENIUS Act.',
+    image: '/nfts/Genius_NFT_2.png',
+    campaigns: [
+      {
+        actionType: UserActionType.CLAIM_NFT,
+        campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
+        isCampaignActive: true,
+        title: 'Claim your GENIUS Act NFT',
+        description: 'Claim your NFT and commemorate the GENIUS Act.',
+        canBeTriggeredMultipleTimes: false,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
+            {children}
+          </UserActionFormClaimNFTDialog>
+        ),
       },
     ],
   },

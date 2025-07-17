@@ -32,6 +32,7 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/
 import {
   USActiveClientUserActionWithCampaignType,
   USUserActionCallCampaignName,
+  USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
   USUserActionLinkedinCampaignName,
@@ -117,6 +118,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.LINKEDIN]: {
     [USUserActionLinkedinCampaignName.DEFAULT]: null,
+  },
+  [UserActionType.CLAIM_NFT]: {
+    [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.SWC_SHIELD,
   },
 }
 

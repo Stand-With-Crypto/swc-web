@@ -26,6 +26,10 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Omit<
     title: 'You joined Stand With Crypto!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITH_NFT'],
   },
+  [UserActionType.CLAIM_NFT]: {
+    title: 'You claimed your NFT!',
+    description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITH_NFT'],
+  },
   [UserActionType.VOTER_REGISTRATION]: {
     title: 'You registered to vote!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
