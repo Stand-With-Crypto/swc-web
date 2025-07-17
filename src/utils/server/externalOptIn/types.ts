@@ -18,6 +18,7 @@ export type UserWithRelations = User & {
 
 export type Input = z.infer<ReturnType<typeof getZodExternalUserActionOptInSchema>> & {
   partner?: VerifiedSWCPartner
+  hasValidPhoneNumber: boolean
 }
 
 export interface ExternalUserActionOptInResponse<ResultOptions extends string> {
