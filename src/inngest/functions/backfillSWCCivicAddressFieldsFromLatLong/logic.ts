@@ -5,32 +5,34 @@ import pRetry from 'p-retry'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { CONCURRENCY_LIMIT, MINI_BATCH_SIZE } from './config'
+import { MINI_BATCH_SIZE } from './config'
 
-const PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_FUNCTION_ID =
-  'script.backfill-address-electoral-zone-processor'
-const PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_EVENT_NAME =
-  'script/backfill-address-electoral-zone-processor'
+const BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_FUNCTION_ID =
+  'script.backfill-swc-civic-address-fields-processor'
+const BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_EVENT_NAME =
+  'script/backfill-swc-civic-address-fields-processor'
 
-export interface ProcessAddressElectoralZoneProcessorEventSchema {
-  name: typeof PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_EVENT_NAME
+export interface BackfillSWCCivicAddressFieldsProcessorEventSchema {
+  name: typeof BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_EVENT_NAME
   data: {
     skip: number
     take: number
     persist?: boolean
+    countryCode: SupportedCountryCodes
   }
 }
 
-export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
+export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
   {
-    id: PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_FUNCTION_ID,
+    id: BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_FUNCTION_ID,
     onFailure: onScriptFailure,
-    concurrency: CONCURRENCY_LIMIT,
   },
-  { event: PROCESS_ADDRESS_ELECTORAL_ZONE_PROCESSOR_EVENT_NAME },
+  { event: BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { skip, take, persist } = event.data
+    const { skip, take, persist, countryCode } = event.data
 
     if (!persist) {
       logger.info(
@@ -40,16 +42,18 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
 
     const addresses = await step.run('get-addresses', () =>
       prismaClient.address.findMany({
-        where: { electoralZone: null },
+        where: {
+          OR: [{ electoralZone: null }, { swcCivicAdministrativeArea: null }],
+          AND: [{ latitude: { not: null } }, { longitude: { not: null } }],
+          countryCode,
+        },
         skip,
         take,
         orderBy: { id: 'asc' },
         select: {
           id: true,
-          usCongressionalDistrict: true,
-          countryCode: true,
-          googlePlaceId: true,
-          formattedDescription: true,
+          latitude: true,
+          longitude: true,
         },
       }),
     )
@@ -72,14 +76,11 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
         async () =>
           await Promise.allSettled(
             addressChunk.map(address =>
-              pRetry(async () => await getElectoralZone(address), {
-                shouldRetry(error) {
-                  return (
-                    !error.message.includes('No place ID found for address') &&
-                    !error.message.includes('404') &&
-                    !error.message.includes('The provided Place ID is no longer valid')
-                  )
-                },
+              pRetry(async () => await getSWCCivicFieldsToUpdate(address), {
+                retries: 3,
+                factor: 2,
+                minTimeout: 1000,
+                maxTimeout: 10000,
               }),
             ),
           ),
@@ -113,9 +114,16 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
           return { affectedRows: 0 }
         }
 
-        const caseClauses = Prisma.join(
+        const electoralZoneCaseClauses = Prisma.join(
           updatesToPerform.map(
             update => Prisma.sql`WHEN ${update.addressId} THEN ${update.electoralZone}`,
+          ),
+          ' ',
+        )
+        const administrativeAreaCaseClauses = Prisma.join(
+          updatesToPerform.map(
+            update =>
+              Prisma.sql`WHEN ${update.addressId} THEN ${update.swcCivicAdministrativeArea}`,
           ),
           ' ',
         )
@@ -124,7 +132,9 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
         try {
           const affectedRows = await prismaClient.$executeRaw`
             UPDATE address
-            SET electoral_zone = CASE id ${caseClauses} END
+            SET 
+              electoral_zone = CASE id ${electoralZoneCaseClauses} END,
+              swc_civic_administrative_area = CASE id ${administrativeAreaCaseClauses} END
             WHERE id IN (${idsToUpdate})
           `
           logger.info(`UPDATED Updated ${affectedRows} addresses in batch ${chunkIndex}`)
@@ -161,19 +171,33 @@ export const backfillAddressElectoralZoneProcessor = inngest.createFunction(
   },
 )
 
-async function getElectoralZone(
+async function getSWCCivicFieldsToUpdate(
   address: Prisma.AddressGetPayload<{
     select: {
       id: true
-      usCongressionalDistrict: true
-      countryCode: true
-      googlePlaceId: true
-      formattedDescription: true
+      latitude: true
+      longitude: true
     }
   }>,
 ) {
-  if (address.usCongressionalDistrict) {
-    return { addressId: address.id, electoralZone: address.usCongressionalDistrict }
+  const { latitude, longitude } = address
+
+  if (!latitude || !longitude) {
+    return null
   }
-  return null
+
+  const electoralZone = await querySWCCivicElectoralZoneFromLatLong(
+    Number(latitude),
+    Number(longitude),
+  )
+
+  if (!electoralZone) {
+    return null
+  }
+
+  return {
+    addressId: address.id,
+    electoralZone: electoralZone.zoneName,
+    swcCivicAdministrativeArea: electoralZone.administrativeArea,
+  }
 }

@@ -1,8 +1,6 @@
 import { EventSchemas } from 'inngest'
 
 import type { AirdropNftInngestSchema } from '@/inngest/functions/airdropNFT/airdropNFT'
-import type { BackfillAddressElectoralZoneCoordinatorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone'
-import type { ProcessAddressElectoralZoneProcessorEventSchema } from '@/inngest/functions/backfillAddressElectoralZone/logic'
 import { BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
 import { ProcessAddressFieldsWithGooglePlacesProcessorEventSchema } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import type { BackfillUsCongressionalDistrictsInngestCronJobSchema } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
@@ -13,6 +11,8 @@ import { ProcessBatchSchema } from '@/inngest/functions/backfillIntlUsers/logic'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
+import type { BackfillSWCCivicAddressFieldsCoordinatorEventSchema } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong'
+import type { BackfillSWCCivicAddressFieldsProcessorEventSchema } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong/logic'
 import { BackfillUserActionElectoralZoneCoordinatorEventSchema } from '@/inngest/functions/backfillUserActionElectoralZone'
 import { ProcessUserActionElectoralZoneProcessorEventSchema } from '@/inngest/functions/backfillUserActionElectoralZone/logic'
 import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
@@ -82,8 +82,8 @@ type EventTypes =
   | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
   | SyncSendgridContactsCoordinatorSchema
   | SyncSendgridContactsProcessorSchema
-  | BackfillAddressElectoralZoneCoordinatorEventSchema
-  | ProcessAddressElectoralZoneProcessorEventSchema
+  | BackfillSWCCivicAddressFieldsCoordinatorEventSchema
+  | BackfillSWCCivicAddressFieldsProcessorEventSchema
   | BackfillUserActionElectoralZoneCoordinatorEventSchema
   | ProcessUserActionElectoralZoneProcessorEventSchema
   | BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema

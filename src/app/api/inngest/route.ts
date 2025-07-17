@@ -1,8 +1,6 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
-import { backfillAddressElectoralZoneCoordinator } from '@/inngest/functions/backfillAddressElectoralZone'
-import { backfillAddressElectoralZoneProcessor } from '@/inngest/functions/backfillAddressElectoralZone/logic'
 import { backfillAddressFieldsWithGooglePlacesCoordinator } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
 import { backfillAddressFieldsWithGooglePlacesProcessor } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
@@ -13,6 +11,8 @@ import { processIntlUsersBatch } from '@/inngest/functions/backfillIntlUsers/log
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
+import { backfillSWCCivicAddressFieldsCoordinator } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong'
+import { backfillSWCCivicAddressFieldsProcessor } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong/logic'
 import { backfillUserActionElectoralZoneCoordinator } from '@/inngest/functions/backfillUserActionElectoralZone'
 import { backfillUserActionElectoralZoneProcessor } from '@/inngest/functions/backfillUserActionElectoralZone/logic'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
@@ -97,8 +97,8 @@ export const { GET, POST, PUT } = serve({
     deleteNotSupportedCountryCodeAdvocates,
     syncSendgridContactsCoordinator,
     syncSendgridContactsProcessor,
-    backfillAddressElectoralZoneCoordinator,
-    backfillAddressElectoralZoneProcessor,
+    backfillSWCCivicAddressFieldsCoordinator,
+    backfillSWCCivicAddressFieldsProcessor,
     backfillUserActionElectoralZoneCoordinator,
     backfillUserActionElectoralZoneProcessor,
     backfillAddressFieldsWithGooglePlacesCoordinator,
