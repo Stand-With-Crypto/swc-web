@@ -14,7 +14,7 @@ export function AuCurrentNavbarGlobalBannerCampaign() {
   })
 
   return (
-    <CampaignWrapper url={campaignUrl}>
+    <CampaignWrapper>
       <p>
         <strong>
           <Link href={campaignUrl}>Email Your MP</Link>
