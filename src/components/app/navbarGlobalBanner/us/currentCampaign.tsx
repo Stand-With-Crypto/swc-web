@@ -10,7 +10,7 @@ import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 export function UsCurrentNavbarGlobalBannerCampaign() {
   const campaignUrl = getDeeplinkUrlByCampaignName({
     countryCode: SupportedCountryCodes.US,
-    campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+    campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
   })
 
   return (
