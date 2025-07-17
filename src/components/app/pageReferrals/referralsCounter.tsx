@@ -12,6 +12,7 @@ import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 interface ReferralsCounterProps {
@@ -64,7 +65,13 @@ export function UserReferralsCount({ className }: { className?: string }) {
 }
 ReferralsCounter.UserReferralsCount = UserReferralsCount
 
-export function UserDistrictRank({ className }: { className?: string }) {
+export function UserDistrictRank({
+  className,
+  countryCode,
+}: {
+  className?: string
+  countryCode: SupportedCountryCodes
+}) {
   const { address } = useMutableCurrentUserAddress()
   const districtResponse = useGetDistrictFromAddress({
     address: address === 'loading' ? null : address?.description,
@@ -80,6 +87,7 @@ export function UserDistrictRank({ className }: { className?: string }) {
   }, [districtResponse.data])
 
   const districtRankingResponse = useGetDistrictRank({
+    countryCode,
     stateCode: district?.stateCode as USStateCode,
     districtNumber: district?.zoneName?.toString() ?? null,
   })
