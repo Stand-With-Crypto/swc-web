@@ -47,6 +47,7 @@ async function apiResponseForUserFullProfileInfo() {
               },
             },
             userActionViewKeyPage: true,
+            userActionClaimNft: true,
           },
         },
       },

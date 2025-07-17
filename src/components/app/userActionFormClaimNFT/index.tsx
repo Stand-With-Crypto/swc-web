@@ -1,11 +1,11 @@
 'use client'
+import { Suspense, useMemo } from 'react'
 import dynamic from 'next/dynamic'
 
 import { UserActionFormClaimNFTSkeleton } from '@/components/app/userActionFormClaimNFT/common/skeleton'
 import { UserActionFormClaimNFTProps } from '@/components/app/userActionFormClaimNFT/common/types'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { Suspense, useMemo } from 'react'
 
 const USUserActionFormClaimNFT = dynamic(() =>
   import('@/components/app/userActionFormClaimNFT/us').then(mod => mod.USUserActionFormClaimNFT),

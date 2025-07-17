@@ -70,6 +70,7 @@ export async function getAuthenticatedData() {
         },
       },
       userActionViewKeyPage: true,
+      userActionClaimNft: true,
     },
   })
 

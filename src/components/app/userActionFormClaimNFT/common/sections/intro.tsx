@@ -1,5 +1,7 @@
 'use client'
 
+import { noop } from 'lodash-es'
+
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
   NFTDisplay,
@@ -12,7 +14,6 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useSession } from '@/hooks/useSession'
 import { NFTClientMetadata } from '@/utils/web/nft'
-import { noop } from 'lodash-es'
 
 export function ClaimNFTIntro({ children }: { children: React.ReactNode }) {
   return (

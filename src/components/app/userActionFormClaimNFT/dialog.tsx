@@ -1,14 +1,14 @@
 'use client'
 
+import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
 import { ANALYTICS_NAME_USER_ACTION_FORM_CLAIM_NFT } from '@/components/app/userActionFormClaimNFT/common/constants'
+import { UserActionFormClaimNFTSkeleton } from '@/components/app/userActionFormClaimNFT/common/skeleton'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { useDialog } from '@/hooks/useDialog'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { NFTSlug } from '@/utils/shared/nft'
-import { Suspense } from 'react'
-import { UserActionFormClaimNFTSkeleton } from '@/components/app/userActionFormClaimNFT/common/skeleton'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const UserActionFormClaimNFT = dynamic(() =>
   import('@/components/app/userActionFormClaimNFT').then(mod => mod.UserActionFormClaimNFT),

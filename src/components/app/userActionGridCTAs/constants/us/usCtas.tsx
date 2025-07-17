@@ -12,6 +12,7 @@ import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
@@ -30,7 +31,6 @@ import {
   USUserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory/us'
-import { NFTSlug } from '@/utils/shared/nft'
 
 const countryCode = SupportedCountryCodes.US
 const urls = getIntlUrls(countryCode)
