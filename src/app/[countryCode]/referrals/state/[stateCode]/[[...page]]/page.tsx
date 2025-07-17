@@ -19,7 +19,7 @@ export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 export const dynamicParams = true
 
-type Props = PageProps<{ page: string[]; stateCode: string }>
+type Props = PageProps<{ page: string[]; stateCode: string; countryCode: SupportedCountryCodes }>
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { stateCode } = await props.params
@@ -70,6 +70,7 @@ export default async function ReferralsStateSpecificPage(props: Props) {
   }
 
   const { items: leaderboardData, total } = await getDistrictsLeaderboardDataByState(
+    countryCode,
     stateCode.toUpperCase(),
     commonParams,
   )
@@ -78,7 +79,7 @@ export default async function ReferralsStateSpecificPage(props: Props) {
 
   return (
     <PageReferrals
-      countryCode={countryCode as SupportedCountryCodes}
+      countryCode={countryCode}
       leaderboardData={leaderboardData}
       page={pageNum}
       stateCode={stateCode}

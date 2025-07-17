@@ -58,7 +58,7 @@ export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } =
     STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
-  const { page, stateCode } = params
+  const { page, stateCode, countryCode } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
@@ -81,6 +81,7 @@ export default async function CommunityReferralsPage(props: Props) {
   }
 
   const { items: leaderboardData, total } = await getDistrictsLeaderboardDataByState(
+    countryCode,
     stateCode.toUpperCase(),
     commonParams,
   )
