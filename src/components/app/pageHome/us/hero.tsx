@@ -7,7 +7,7 @@ const countryCode = SupportedCountryCodes.US
 
 const ClarityActWrapper = getEmailActionWrapperComponentByCampaignName({
   countryCode,
-  campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+  campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
 })
 
 export function UsHero() {
@@ -35,7 +35,7 @@ export function UsHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Take action">
-                Email your House Member to pass the CLARITY Act
+                Email your House Member to pass crypto legislation
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </ClarityActWrapper>
@@ -52,7 +52,7 @@ export function UsHero() {
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Take action">
-                Email your House Member to pass the CLARITY Act
+                Email your House Member to pass crypto legislation
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </ClarityActWrapper>
