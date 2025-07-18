@@ -145,6 +145,9 @@ interface ClientUserActionViewKeyPage {
   actionType: typeof UserActionType.VIEW_KEY_PAGE
   path: string
 }
+interface ClientUserActionClaimNft {
+  actionType: typeof UserActionType.CLAIM_NFT
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -172,6 +175,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionRefer
       | ClientUserActionPoll
       | ClientUserActionViewKeyPage
+      | ClientUserActionClaimNft
     )
 >
 
@@ -364,6 +368,9 @@ export const getClientUserAction = ({
     },
     [UserActionType.LINKEDIN]: () => {
       return getClientModel({ ...sharedProps, actionType: UserActionType.LINKEDIN })
+    },
+    [UserActionType.CLAIM_NFT]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.CLAIM_NFT })
     },
   }
 

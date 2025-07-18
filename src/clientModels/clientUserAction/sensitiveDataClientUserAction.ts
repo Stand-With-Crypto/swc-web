@@ -156,6 +156,10 @@ type SensitiveDataClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'
   actionType: typeof UserActionType.REFER
 }
 
+interface SensitiveDataClientUserActionClaimNft {
+  actionType: typeof UserActionType.CLAIM_NFT
+}
+
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -183,6 +187,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionRefer
       | SensitiveDataClientUserActionPoll
       | SensitiveDataClientUserActionViewKeyPage
+      | SensitiveDataClientUserActionClaimNft
     )
 >
 
@@ -373,6 +378,9 @@ export const getSensitiveDataClientUserAction = ({
     },
     [UserActionType.LINKEDIN]: () => {
       return getClientModel({ ...sharedProps, actionType: UserActionType.LINKEDIN })
+    },
+    [UserActionType.CLAIM_NFT]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.CLAIM_NFT })
     },
   }
 

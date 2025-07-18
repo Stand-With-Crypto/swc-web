@@ -14,5 +14,6 @@ const US_ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.VOTING_DAY,
   UserActionType.REFER,
   UserActionType.POLL,
+  UserActionType.CLAIM_NFT,
 ] as const
 export type USActiveClientUserActionType = (typeof US_ACTIVE_CLIENT_USER_ACTION_TYPES)[number]

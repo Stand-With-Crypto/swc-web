@@ -24,6 +24,7 @@ const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.POLL]: '/activityFeedIcons/vote.svg',
   [UserActionType.REFER]: '/activityFeedIcons/refer.svg',
   [UserActionType.VIEW_KEY_PAGE]: '/activityFeedIcons/email.svg',
+  [UserActionType.CLAIM_NFT]: '/activityFeedIcons/donate.svg',
 }
 
 interface ActivityAvatarProps {

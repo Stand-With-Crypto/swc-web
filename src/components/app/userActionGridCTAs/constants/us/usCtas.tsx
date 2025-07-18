@@ -16,6 +16,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
+  USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
   USUserActionNftMintCampaignName,
@@ -468,6 +469,24 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'All mint proceeds are donated to the movement.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormNFTMintDialog,
+      },
+    ],
+  },
+  [UserActionType.CLAIM_NFT]: {
+    title: 'Claim your commemorative NFT',
+    description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    mobileCTADescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    campaignsModalDescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    image: '/nfts/Genius_NFT_2.png',
+    campaigns: [
+      {
+        actionType: UserActionType.CLAIM_NFT,
+        campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
+        isCampaignActive: false,
+        title: 'Claim your commemorative GENIUS Act NFT',
+        description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+        canBeTriggeredMultipleTimes: false,
+        WrapperComponent: null,
       },
     ],
   },
