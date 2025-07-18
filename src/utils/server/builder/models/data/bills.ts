@@ -104,7 +104,6 @@ export async function getBillsFromBuilderIO({
     const filteredIncompleteBills = entries
       .map(entry => {
         const validEntry = zodBillSchemaValidation.safeParse(entry)
-        console.log({ validEntry })
         return validEntry.success ? validEntry.data : null
       })
       .filter(Boolean) as SWCBillsFromBuilderIO

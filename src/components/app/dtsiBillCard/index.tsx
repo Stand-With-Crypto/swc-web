@@ -12,7 +12,7 @@ import { cn } from '@/utils/web/cn'
 export type DTSIBill = DTSI_BillCardFragment
 
 interface DTSIBillCardProps {
-  bill: SWCBill
+  bill: Pick<SWCBill, 'dtsiSlug' | 'title'>
   description?: string
   countryCode: SupportedCountryCodes
   children?: ReactElement<typeof CryptoSupportHighlight>
