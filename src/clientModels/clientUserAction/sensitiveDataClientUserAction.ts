@@ -124,7 +124,7 @@ type SensitiveDataClientUserActionVoterAttestation = Pick<
 }
 type SensitiveDataClientUserActionViewKeyRaces = Pick<
   UserActionViewKeyRaces,
-  'usaState' | 'usCongressionalDistrict'
+  'usaState' | 'electoralZone'
 > & {
   actionType: typeof UserActionType.VIEW_KEY_RACES
 }
@@ -318,13 +318,10 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, ...voterAttestationFields })
     },
     [UserActionType.VIEW_KEY_RACES]: () => {
-      const { usaState, usCongressionalDistrict } = getRelatedModel(
-        record,
-        'userActionViewKeyRaces',
-      )
+      const { usaState, electoralZone } = getRelatedModel(record, 'userActionViewKeyRaces')
       const keyRacesFields: SensitiveDataClientUserActionViewKeyRaces = {
         usaState,
-        usCongressionalDistrict,
+        electoralZone,
         actionType: UserActionType.VIEW_KEY_RACES,
       }
       return getClientModel({ ...sharedProps, ...keyRacesFields })

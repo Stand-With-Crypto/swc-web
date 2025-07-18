@@ -1,7 +1,8 @@
 'use client'
 
 import React, { Suspense, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { UserActionType } from '@prisma/client'
+import { notFound, useRouter } from 'next/navigation'
 
 import { GeoGate } from '@/components/app/geoGate'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
@@ -12,6 +13,7 @@ import {
   EmailActionCampaignNames,
   FormFields,
 } from '@/components/app/userActionFormEmailCongressperson/common/types'
+import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
@@ -34,6 +36,8 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent(
   const router = useRouter()
   const urls = getIntlUrls(countryCode)
   const { user } = fetchUser.data || { user: null }
+  const cta = getUserActionCTAsByCountry(countryCode)[UserActionType.EMAIL]
+  const campaign = cta.campaigns.find(campaign => campaign.campaignName === props.campaignName)
 
   const [initialValues, loadingParams] = useEncodedInitialValuesQueryParam<FormFields>({
     address: {
@@ -49,6 +53,15 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent(
   }, [])
 
   if (fetchUser.isLoading || loadingParams) {
+    return <UserActionFormEmailCongresspersonSkeleton {...props} />
+  }
+
+  if (!campaign) {
+    return notFound()
+  }
+
+  if (!campaign.isCampaignActive) {
+    window.location.href = urls.emailDeeplink()
     return <UserActionFormEmailCongresspersonSkeleton {...props} />
   }
 
