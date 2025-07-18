@@ -1,3 +1,5 @@
+import pRetry from 'p-retry'
+
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
@@ -41,9 +43,12 @@ export const updateDistrictsRankings = inngest.createFunction(
       'Get Advocates Count by District',
       async () => {
         logger.info('Getting Advocates Count by District')
-        const promises = stateCodes.map(getAdvocatesCountByDistrict)
-        const results = await Promise.all(promises)
-        return results.flat()
+        const promises = stateCodes.map(stateCode =>
+          pRetry(async () => await getAdvocatesCountByDistrict(stateCode)),
+        )
+        const settledResults = await Promise.allSettled(promises)
+        const successfulResults = settledResults.filter(result => result.status === 'fulfilled')
+        return successfulResults.map(result => result.value).flat()
       },
     )
 
@@ -51,11 +56,15 @@ export const updateDistrictsRankings = inngest.createFunction(
       'Get Referrals Count by District',
       async () => {
         logger.info('Getting Referrals Count by District')
-        const promises = stateCodes.map(getReferralsCountByDistrict)
-        const results = await Promise.all(promises)
-        return results.flat()
+        const promises = stateCodes.map(stateCode =>
+          pRetry(async () => await getReferralsCountByDistrict(stateCode)),
+        )
+        const settledResults = await Promise.allSettled(promises)
+        const successfulResults = settledResults.filter(result => result.status === 'fulfilled')
+        return successfulResults.map(result => result.value).flat()
       },
     )
+
     const [advocatesRankingResults, referralsRankingResults] = await Promise.all([
       step.run('Update Districts Advocates Rankings', async () => {
         const upsertDistrictAdvocatesRanking = await createDistrictRankingUpserter(
