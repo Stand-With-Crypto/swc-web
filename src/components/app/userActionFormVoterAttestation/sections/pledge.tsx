@@ -40,8 +40,14 @@ export function PledgeSection({
   isSubmitting,
 }: PledgeSectionProps) {
   const countryCode = useCountryCode()
-  const { congressional, senate, presidential, stateCode, districtNumber } =
-    racesByAddressData ?? {}
+
+  const {
+    congressional,
+    senate,
+    presidential,
+    stateCode,
+    zoneName: electoralZone,
+  } = racesByAddressData ?? {}
 
   const handleSuccess = useCallback(() => {
     if (isLoading) {
@@ -121,7 +127,7 @@ export function PledgeSection({
                       shouldHideStanceScores={false}
                       {...dtsiPersonHeroCardSectionProps}
                       people={congressional}
-                      title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
+                      title={`Congressional District${electoralZone ? ` ${electoralZone}` : ''}`}
                     />
                   </PledgeSectionWrapper>
                 </>

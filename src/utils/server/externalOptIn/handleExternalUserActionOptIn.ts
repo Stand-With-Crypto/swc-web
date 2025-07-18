@@ -37,10 +37,10 @@ import {
 } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import * as smsActions from '@/utils/server/sms/actions'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
-import { logCongressionalDistrictNotFound } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -126,7 +126,7 @@ export async function handleExternalUserActionOptIn(
     },
   }
 
-  if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber) {
+  if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber && input.hasValidPhoneNumber) {
     const optInUserPayload = { phoneNumber: input.phoneNumber, user, countryCode }
 
     after(async () => {
@@ -252,6 +252,7 @@ async function maybeUpsertUser({
     phoneNumber,
     hasOptedInToMembership,
     address,
+    hasValidPhoneNumber,
   } = input
 
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
@@ -291,11 +292,13 @@ async function maybeUpsertUser({
       })
 
       if ('notFoundReason' in electoralZone) {
-        logCongressionalDistrictNotFound({
+        logElectoralZoneNotFound({
           address: dbAddress.formattedDescription,
           notFoundReason: electoralZone.notFoundReason,
           domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
+      } else if (electoralZone.zoneName) {
+        dbAddress.electoralZone = electoralZone.zoneName
       }
       if ('zoneName' in electoralZone) {
         dbAddress.electoralZone = `${electoralZone.zoneName}`
@@ -320,6 +323,7 @@ async function maybeUpsertUser({
       ...(firstName && !existingUser.firstName && { firstName }),
       ...(lastName && !existingUser.lastName && { lastName }),
       ...(phoneNumber && !existingUser.phoneNumber && { phoneNumber }),
+      ...(hasValidPhoneNumber !== existingUser.hasValidPhoneNumber && { hasValidPhoneNumber }),
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
@@ -441,6 +445,7 @@ async function maybeUpsertUser({
       firstName,
       lastName,
       phoneNumber,
+      hasValidPhoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       countryCode,
