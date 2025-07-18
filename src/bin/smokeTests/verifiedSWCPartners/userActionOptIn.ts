@@ -45,7 +45,10 @@ async function smokeTestUserActionOptIn() {
       campaignName: 'foobar',
       hasOptedInToEmails: true,
       countryCode: SupportedCountryCodes.US,
-    } satisfies Omit<Parameters<typeof verifiedSWCPartnersUserActionOptIn>[0], 'partner'>),
+    } satisfies Omit<
+      Parameters<typeof verifiedSWCPartnersUserActionOptIn>[0],
+      'partner' | 'hasValidPhoneNumber'
+    >),
   }).catch(e => {
     console.error(e)
     return null

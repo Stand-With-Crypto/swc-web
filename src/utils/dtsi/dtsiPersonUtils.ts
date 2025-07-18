@@ -4,6 +4,7 @@ import {
   DTSI_PersonRole,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const dtsiPersonFullName = (
   person: Pick<DTSI_Person, 'firstName' | 'lastName' | 'firstNickname' | 'nameSuffix'>,
@@ -39,6 +40,7 @@ export const dtsiPersonPoliticalAffiliationCategoryAbbreviation = (
 
 export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
   category: DTSI_PersonPoliticalAffiliationCategory,
+  countryCode: SupportedCountryCodes,
 ) => {
   switch (category) {
     case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
@@ -54,7 +56,12 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
     case DTSI_PersonPoliticalAffiliationCategory.GREEN:
       return 'Green'
     case DTSI_PersonPoliticalAffiliationCategory.LABOR:
-      return 'Labor'
+      switch (countryCode) {
+        case SupportedCountryCodes.GB:
+          return 'Labour'
+        default:
+          return 'Labor'
+      }
     case DTSI_PersonPoliticalAffiliationCategory.LIBERAL:
       return 'Liberal'
     case DTSI_PersonPoliticalAffiliationCategory.LIBERAL_DEMOCRAT:

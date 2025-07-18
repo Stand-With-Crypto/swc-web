@@ -98,7 +98,7 @@ export function getPartyOptionDisplayName(party: string) {
     case PARTY_OPTIONS.CONSERVATIVE:
       return 'Conservative'
     case PARTY_OPTIONS.LABOR:
-      return 'Labor'
+      return 'Labour'
     case PARTY_OPTIONS.LIBERAL_DEMOCRAT:
       return 'Liberal Democrat'
     case PARTY_OPTIONS.GREEN:

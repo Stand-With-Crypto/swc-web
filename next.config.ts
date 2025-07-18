@@ -444,6 +444,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/s/clarity-genius/:sessionId*',
+        destination:
+          '/action/email/clarity_genius_acts_jul_17_2025?utm_source=swc&utm_medium=sms&utm_campaign=sms-clarity-genius-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/s/clarity/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=clarity-1&sessionId=:sessionId*',

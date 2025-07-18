@@ -1,16 +1,16 @@
 import useSWR from 'swr'
 
-import {
-  getCongressionalDistrictFromAddress,
-  GetCongressionalDistrictFromAddressParams,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { getElectoralZoneFromAddressOrPlaceId } from '@/utils/shared/getElectoralZoneFromAddress'
 
-export function useGetDistrictFromAddress(
-  address?: string | null,
-  params?: GetCongressionalDistrictFromAddressParams,
-) {
+export function useGetDistrictFromAddress({
+  address,
+  placeId,
+}: {
+  address?: string | null
+  placeId?: string | null
+}) {
   return useSWR(
-    address ? `useGetDistrictFromAddress-${address}-${JSON.stringify(params)}` : null,
-    () => getCongressionalDistrictFromAddress(address, params),
+    address || placeId ? `useGetDistrictFromAddress-${address || ''}-${placeId || ''}` : null,
+    () => getElectoralZoneFromAddressOrPlaceId({ address: address || '', placeId: placeId || '' }),
   )
 }
