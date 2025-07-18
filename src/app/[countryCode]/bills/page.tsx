@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
 
 import { PageBills } from '@/components/app/pageBills'
-import { queryDTSIAllBills } from '@/data/dtsi/queries/queryDTSIAllBills'
+import { getAllBills } from '@/data/bills/getAllBills'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 }
 
 export default async function BillsPage(props: PageProps) {
-  const results = await queryDTSIAllBills()
+  const results = await getAllBills(DEFAULT_SUPPORTED_COUNTRY_CODE)
 
   return (
     <PageBills
