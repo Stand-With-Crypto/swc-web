@@ -13,7 +13,10 @@ import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 
 function Heading() {
   return (
@@ -39,18 +42,29 @@ function DefaultPlacesSelect(
   )
 }
 
+function DistrictNotFound(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>) {
+  return (
+    <div className="space-y-3">
+      <DefaultPlacesSelect {...props} />
+      <p className="pl-4 text-sm text-fontcolor-muted">
+        District not found, please try a different address.
+      </p>
+    </div>
+  )
+}
+
 interface YourDistrictRankContentProps {
   stateCode: USStateCode
-  districtNumber: string | null
+  districtNumber: string
   filteredByState?: boolean
+  address: 'loading' | GooglePlaceAutocompletePrediction | null
+  setAddress: (p: GooglePlaceAutocompletePrediction | null) => void
 }
 
 function YourDistrictRankContent(props: YourDistrictRankContentProps) {
-  const { stateCode, districtNumber, filteredByState } = props
+  const { stateCode, districtNumber, filteredByState, address, setAddress } = props
   const countryCode = useCountryCode()
-  const [isUSAddress, setIsUSAddress] = useState<boolean | 'loading'>(false)
 
-  const { setAddress, address } = useMutableCurrentUserAddress()
   const isLoadingAddress = address === 'loading'
 
   const districtRankingResponse = useGetDistrictRank({
@@ -59,28 +73,7 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
     filteredByState,
   })
 
-  const { data } = districtRankingResponse
-
-  const checkIfUSAddress = useCallback(async () => {
-    if (isLoadingAddress || !address || stateCode) return
-
-    setIsUSAddress('loading')
-
-    try {
-      const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
-      setIsUSAddress(addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US)
-    } catch {
-      setIsUSAddress(true)
-    }
-  }, [isLoadingAddress, address, stateCode])
-
-  useEffect(() => {
-    void checkIfUSAddress()
-  }, [checkIfUSAddress])
-
-  const isLoading = districtRankingResponse.isLoading || isUSAddress === 'loading'
-
-  if (isLoading) {
+  if (districtRankingResponse.isLoading) {
     return (
       <div className="space-y-3">
         <Heading />
@@ -89,21 +82,12 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
     )
   }
 
-  if (!data) {
-    const invalidAddressErrorMessage = isUSAddress
-      ? 'District rank not found, please try a different address.'
-      : "Looks like your address is outside the U.S., so it's not part of any district here."
-
-    return (
-      <div className="space-y-3">
-        <DefaultPlacesSelect onChange={setAddress} value={isLoadingAddress ? null : address} />
-        <p className="pl-4 text-sm text-fontcolor-muted">{invalidAddressErrorMessage}</p>
-      </div>
-    )
+  if (!districtRankingResponse.data) {
+    return <DistrictNotFound onChange={setAddress} value={isLoadingAddress ? null : address} />
   }
 
-  const count = data.score
-  const rank = data.rank
+  const count = districtRankingResponse.data.score
+  const rank = districtRankingResponse.data.rank
 
   if (isNil(count) || isNil(rank)) {
     return null
@@ -127,35 +111,51 @@ function YourDistrictRankContent(props: YourDistrictRankContentProps) {
 export function SuspenseYourDistrictRank({ filteredByState }: { filteredByState?: boolean }) {
   const profileResponse = useApiResponseForUserFullProfileInfo()
   const { setAddress, address: mutableAddress } = useMutableCurrentUserAddress()
+  const [isUSAddress, setIsUSAddress] = useState<boolean | 'loading'>(false)
   const isLoadingAddress = profileResponse.isLoading || mutableAddress === 'loading'
 
   const address = useMemo(() => {
     if (isLoadingAddress) return null
     if (profileResponse.data?.user?.address) {
-      return profileResponse.data.user.address.formattedDescription
+      return {
+        description: profileResponse.data.user.address.formattedDescription,
+        place_id: profileResponse.data.user.address.googlePlaceId,
+      }
     }
-    if (mutableAddress) return mutableAddress.description
+    if (mutableAddress) return mutableAddress
     return null
   }, [isLoadingAddress, mutableAddress, profileResponse.data?.user?.address])
 
-  const districtResponse = useGetDistrictFromAddress(address)
+  const checkIfUSAddress = useCallback(async () => {
+    if (isLoadingAddress || !address) {
+      setIsUSAddress(true)
+      return
+    }
+    setIsUSAddress('loading')
+    try {
+      const addressDetails = await convertGooglePlaceAutoPredictionToAddressSchema(address)
+      setIsUSAddress(addressDetails.countryCode.toLowerCase() === SupportedCountryCodes.US)
+    } catch {
+      setIsUSAddress(true)
+    }
+  }, [isLoadingAddress, address])
+  useEffect(() => {
+    void checkIfUSAddress()
+  }, [checkIfUSAddress])
+
+  const districtResponse = useGetDistrictFromAddress({
+    address: address?.description,
+    placeId: address?.place_id,
+  })
 
   const district = useMemo(() => {
     if (!districtResponse.data) return null
-    return 'districtNumber' in districtResponse.data ? districtResponse.data : null
+    if ('notFoundReason' in districtResponse.data) return null
+    if (!districtResponse.data.zoneName) return null
+    return districtResponse.data
   }, [districtResponse.data])
 
-  if (!address || isLoadingAddress) {
-    return (
-      <DefaultPlacesSelect
-        loading={isLoadingAddress}
-        onChange={setAddress}
-        value={mutableAddress === 'loading' ? null : mutableAddress}
-      />
-    )
-  }
-
-  if (districtResponse.isLoading) {
+  if (districtResponse.isLoading || isLoadingAddress || isUSAddress === 'loading') {
     return (
       <div className="space-y-3">
         <Heading />
@@ -163,11 +163,43 @@ export function SuspenseYourDistrictRank({ filteredByState }: { filteredByState?
       </div>
     )
   }
+
+  if (!address && !isLoadingAddress) {
+    return (
+      <DefaultPlacesSelect
+        loading={isLoadingAddress}
+        onChange={setAddress}
+        value={mutableAddress}
+      />
+    )
+  }
+
+  if (!isUSAddress) {
+    return (
+      <div className="space-y-3">
+        <DefaultPlacesSelect onChange={setAddress} value={isLoadingAddress ? null : address} />
+        <p className="pl-4 text-sm text-fontcolor-muted">
+          Looks like your address is outside the U.S., so it's not part of any district here.
+        </p>
+      </div>
+    )
+  }
+
+  if (!district && !districtResponse.isLoading) {
+    return <DistrictNotFound onChange={setAddress} value={address} />
+  }
+
+  if (!district?.stateCode || !district?.zoneName) {
+    return <DistrictNotFound onChange={setAddress} value={address} />
+  }
+
   return (
     <YourDistrictRankContent
-      districtNumber={district?.districtNumber?.toString() ?? null}
+      address={mutableAddress}
+      districtNumber={district.zoneName}
       filteredByState={filteredByState}
-      stateCode={district?.stateCode as USStateCode}
+      setAddress={setAddress}
+      stateCode={district.stateCode as USStateCode}
     />
   )
 }

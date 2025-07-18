@@ -45,10 +45,10 @@ export async function getAdvocatesCountByDistrict(
   const results = await prismaClient.$queryRaw<AdvocatesCountByDistrictQueryResult[]>`
     SELECT
       a.administrative_area_level_1 as state,
-      -- Handle NULL district for DC, map it to '1' for consistency
+      -- Handle NULL district for DC, map it to 'At-Large' for consistency
       CASE
-        WHEN a.administrative_area_level_1 = 'DC' THEN '1'
-        ELSE a.us_congressional_district
+        WHEN a.administrative_area_level_1 = 'DC' THEN 'At-Large'
+        ELSE a.electoral_zone
       END as district,
       COUNT(DISTINCT u.id) as count
     FROM user_action ua
@@ -78,10 +78,10 @@ export async function getReferralsCountByDistrict(
   const results = await prismaClient.$queryRaw<ReferralsCountByDistrictQueryResult[]>`
     SELECT
       a.administrative_area_level_1 as state,
-      -- Handle NULL district for DC, map it to '1' for consistency
+      -- Handle NULL district for DC, map it to 'At-Large' for consistency
       CASE
-        WHEN a.administrative_area_level_1 = 'DC' THEN '1'
-        ELSE a.us_congressional_district
+        WHEN a.administrative_area_level_1 = 'DC' THEN 'At-Large'
+        ELSE a.electoral_zone
       END as district,
       COUNT(DISTINCT ua.id) as refer_actions_count,
       SUM(uar.referrals_count) as referrals
