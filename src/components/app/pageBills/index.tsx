@@ -4,8 +4,8 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBillCardInfo } from '@/data/bills/types'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface PageBillsProps {
   title: string

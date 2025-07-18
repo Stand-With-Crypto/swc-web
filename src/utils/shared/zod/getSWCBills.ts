@@ -1,5 +1,6 @@
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { array, boolean, nativeEnum, object, string, z } from 'zod'
+
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export enum BILL_CHAMBER_ORIGIN_OPTIONS {
   LOWER_CHAMBER = 'Lower Chamber',
@@ -61,7 +62,7 @@ export const zodBillSchemaValidation = object({
 
 export type SWCBillFromBuilderIO = z.infer<typeof zodBillSchemaValidation>['data']
 
-export type SWCBill = {
+export interface SWCBill {
   administrativeAreaLevel1?: string
   analysis: string
   auAdministrativeAreaLevel1?: string
