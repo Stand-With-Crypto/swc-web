@@ -28,7 +28,7 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Omit<
   },
   [UserActionType.CLAIM_NFT]: {
     title: 'You claimed your NFT!',
-    description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITH_NFT'],
+    description: 'Complete the actions below to continue your progress as a crypto advocate.',
   },
   [UserActionType.VOTER_REGISTRATION]: {
     title: 'You registered to vote!',
