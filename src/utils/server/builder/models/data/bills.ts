@@ -19,14 +19,14 @@ const logger = getLogger(`builderIOEvents`)
 
 const isProduction = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
-export async function getBillFromBuilderIO(dtsiSlug: string): Promise<SWCBill | null> {
+export async function getBillFromBuilderIO(billNumber: string): Promise<SWCBill | null> {
   try {
     const entry = await pRetry(
       () =>
         builderSDKClient.get(BuilderDataModelIdentifiers.BILLS, {
           query: {
             data: {
-              dtsiSlug,
+              billNumber,
             },
             ...(isProduction && { published: 'published' }),
           },

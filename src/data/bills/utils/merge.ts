@@ -6,8 +6,8 @@ export type DTSI_BillDetails = Pick<
   | 'computedStanceScore'
   | 'congressDotGovUrl'
   | 'dateIntroduced'
+  | 'id'
   | 'shortTitle'
-  | 'slug'
   | 'status'
   | 'summary'
   | 'title'
@@ -32,7 +32,7 @@ export function mergeBillFromBuilderIOAndDTSI(
       '',
     computedStanceScore: billFromDTSI.computedStanceScore,
     dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
-    dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.slug,
+    dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
     officialBillUrl: billFromBuilderIO.officialBillUrl || billFromDTSI.congressDotGovUrl,
     summary: billFromBuilderIO.summary || billFromDTSI.summary,
     title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
@@ -47,13 +47,9 @@ export function mergeBillsFromBuilderIOAndDTSI(
     return billsFromBuilderIO
   }
 
-  const mergedBills: SWCBill[] = []
+  return billsFromBuilderIO.map(billFromBuilderIO => {
+    const billFromDTSI = billsFromDTSI.find(bill => bill.id === billFromBuilderIO.dtsiSlug)
 
-  for (const billFromBuilderIO of billsFromBuilderIO) {
-    const billFromDTSI = billsFromDTSI.find(bill => bill.slug === billFromBuilderIO.dtsiSlug)
-
-    mergedBills.push(mergeBillFromBuilderIOAndDTSI(billFromBuilderIO, billFromDTSI))
-  }
-
-  return mergedBills
+    return mergeBillFromBuilderIOAndDTSI(billFromBuilderIO, billFromDTSI)
+  })
 }
