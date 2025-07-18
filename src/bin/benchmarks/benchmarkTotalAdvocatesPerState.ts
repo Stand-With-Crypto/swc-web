@@ -44,14 +44,6 @@ async function benchmarkAdvocatesPerState() {
   console.log('\n--- Running EXPLAIN ANALYZE for getTotalAdvocatesPerState ---')
   const explainAnalyzeResult = await getTotalAdvocatesPerStateExplainAnalyze()
   console.log(explainAnalyzeResult)
-
-  // console.log('\n--- Benchmarking getTotalAdvocatesPerState (Original) ---')
-  // const start = performance.now()
-  // const result = await getTotalAdvocatesByState()
-  // const end = performance.now()
-  // const duration = end - start
-  // console.log(`Query executed in: ${duration.toFixed(2)}ms`)
-  // console.log('Query Result:', result)
 }
 
 // New query with EXPLAIN
