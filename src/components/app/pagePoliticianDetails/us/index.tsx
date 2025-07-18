@@ -20,7 +20,6 @@ export function UsPagePoliticianDetails({
     <PagePoliticianDetails>
       <section>
         <PagePoliticianDetails.Header countryCode={countryCode} person={person} />
-        <PagePoliticianDetails.Links person={person} />
         <ScoreExplainer person={person} />
       </section>
 

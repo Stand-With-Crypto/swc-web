@@ -9,14 +9,11 @@ import {
   StanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
-import { MaybeNextImg, NextImage } from '@/components/ui/image'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
+import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
+import { ProfileAvatar } from '@/components/ui/profileAvatar'
 import { FormattedUserTweet, TweetEntityOptionsWithType } from '@/types/twitter'
-import {
-  dtsiPersonFullName,
-  getDTSIPersonProfilePictureUrlDimensions,
-} from '@/utils/dtsi/dtsiPersonUtils'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
@@ -192,33 +189,13 @@ export const DTSIStanceDetailsTweet: React.FC<
 > = ({ stance, person, countryCode, bodyClassName, hideImages }) => {
   const isOwnTweet = stance.tweet.twitterAccount.personId === person.id
   return (
-    <article className="rounded-lg text-gray-800">
+    <div className="rounded-lg text-gray-800">
       <div
-        className={cn(
-          'mb-3 flex justify-between gap-2 pb-3',
-          isOwnTweet || 'border-b border-gray-300',
-        )}
+        className={cn('mb-8 flex justify-between gap-2', isOwnTweet || 'border-b border-gray-300')}
       >
         {isOwnTweet ? (
           <div className="flex items-center gap-2">
-            {person.profilePictureUrl ? (
-              <div className="h-12 w-12 overflow-hidden rounded-full">
-                <MaybeNextImg
-                  alt={`profile picture of ${dtsiPersonFullName(person)}`}
-                  sizes="48px"
-                  {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
-                  src={person.profilePictureUrl}
-                />
-              </div>
-            ) : (
-              <div>
-                <InitialsAvatar
-                  firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
-                  lastInitial={person.lastName.slice(0, 1)}
-                  size={48}
-                />
-              </div>
-            )}
+            <ProfileAvatar person={person} size={48} />
             <div>
               <p className="text-sm font-bold">{dtsiPersonFullName(person)}</p>
               <p className="text-sm text-muted-foreground">
@@ -235,7 +212,10 @@ export const DTSIStanceDetailsTweet: React.FC<
         <NextImage alt="x.com logo" height={24} src={'/misc/xDotComLogo.svg'} width={24} />
       </div>
 
-      <div className={cn('mb-3 whitespace-pre-line ', bodyClassName)} style={{ lineHeight: 1.2 }}>
+      <div
+        className={cn('mb-3 whitespace-pre-line text-lg', bodyClassName)}
+        style={{ lineHeight: 1.2 }}
+      >
         <TweetBody tweet={stance.tweet} />
       </div>
       {!hideImages && stance.tweet.tweetMedia.length ? (
@@ -274,6 +254,6 @@ export const DTSIStanceDetailsTweet: React.FC<
           on X
         </ExternalLink>
       </div>
-    </article>
+    </div>
   )
 }

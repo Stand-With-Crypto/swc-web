@@ -31,13 +31,13 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
     >
       <div className="max-md:text-center">
         <InternalLink
-          className={cn(linkBoxLinkClassName, 'line-clamp-3 text-lg font-semibold')}
+          className={cn(linkBoxLinkClassName, 'line-clamp-3 text-xl font-semibold')}
           data-link-box-subject
           href={getIntlUrls(countryCode).billDetails(bill.id)}
         >
           {bill.shortTitle || bill.title}
         </InternalLink>
-        <p className="mt-2 text-fontcolor-muted">{description}</p>
+        <p className="text-fontcolor-muted">{description}</p>
       </div>
 
       {children}

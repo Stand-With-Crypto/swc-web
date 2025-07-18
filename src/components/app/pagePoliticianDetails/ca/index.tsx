@@ -22,9 +22,9 @@ export function CaPagePoliticianDetails({
         <PagePoliticianDetails.Header
           countryCode={countryCode}
           person={person}
+          showDonateButton={false}
           showRoleLocation={false}
         />
-        <PagePoliticianDetails.Links person={person} showDonateButton={false} />
         <ScoreExplainer person={person} />
       </section>
 

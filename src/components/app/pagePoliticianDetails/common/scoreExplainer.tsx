@@ -2,6 +2,7 @@
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { InfoCard } from '@/components/ui/infoCard'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import {
@@ -21,7 +22,7 @@ export function ScoreExplainer({ person }: ScoreExplainerProps) {
   const isStanceHidden = shouldPersonHaveStanceScoresHidden(person)
 
   return (
-    <div className="my-8 flex w-full items-center gap-4 rounded-3xl bg-secondary p-3 text-left md:my-12">
+    <InfoCard className="my-8 flex items-center gap-4 text-left sm:mb-16 sm:mt-10 sm:p-6">
       {!isStanceHidden && (
         <div>
           <DTSIFormattedLetterGrade className="h-14 w-14" person={person} />
@@ -29,7 +30,7 @@ export function ScoreExplainer({ person }: ScoreExplainerProps) {
       )}
       <div>
         {!isStanceHidden && (
-          <h3 className="mb-1 font-bold md:text-xl">
+          <h3 className="font-semibold md:text-xl">
             {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
           </h3>
         )}
@@ -42,6 +43,6 @@ export function ScoreExplainer({ person }: ScoreExplainerProps) {
           {pluralize({ singular: 'statement', count: person.stances.length })} about crypto.
         </h4>
       </div>
-    </div>
+    </InfoCard>
   )
 }
