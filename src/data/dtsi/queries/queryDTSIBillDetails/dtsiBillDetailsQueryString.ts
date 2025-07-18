@@ -51,7 +51,6 @@ export const dtsiBillDetailsQueryString = /* GraphQL */ `
       congressDotGovUrl
       dateIntroduced
       datetimeCreated
-
       analysis {
         ...BillAnalysis
       }
