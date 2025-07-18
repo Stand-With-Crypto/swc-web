@@ -5,12 +5,12 @@ import { DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCBill } from '@/utils/shared/zod/getSWCBills'
+import { SWCBillCardInfo } from '@/data/bills/types'
 
 interface PageBillsProps {
   title: string
   description: string
-  bills: SWCBill[]
+  bills: SWCBillCardInfo[]
   countryCode: SupportedCountryCodes
 }
 
