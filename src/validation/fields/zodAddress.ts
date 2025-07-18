@@ -1,7 +1,10 @@
 import { number, object, string, ZodIssueCode } from 'zod'
 
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
-import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/stateMappings/usStateUtils'
 
 export const zodAddress = object({
   googlePlaceId: string().optional(),
@@ -15,7 +18,6 @@ export const zodAddress = object({
   postalCode: string(),
   postalCodeSuffix: string(),
   countryCode: string().length(2),
-  usCongressionalDistrict: string().optional(),
   electoralZone: string().optional(),
   latitude: number().optional().nullable(),
   longitude: number().optional().nullable(),
@@ -23,12 +25,12 @@ export const zodAddress = object({
 
 export const zodStateDistrict = object({
   state: string().refine(
-    (val): val is USStateCode => val in US_STATE_CODE_TO_DISTRICT_COUNT_MAP,
+    (val): val is USStateCode => val in US_STATE_CODE_TO_DISPLAY_NAME_MAP,
     'Invalid state code',
   ),
   district: string(),
 }).superRefine((data, ctx) => {
-  if (!(data.state in US_STATE_CODE_TO_DISTRICT_COUNT_MAP)) {
+  if (!(data.state in US_STATE_CODE_TO_DISPLAY_NAME_MAP)) {
     ctx.addIssue({
       code: ZodIssueCode.custom,
       message: 'Invalid state code',
@@ -37,19 +39,9 @@ export const zodStateDistrict = object({
     return
   }
 
-  const districtCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[data.state as USStateCode]
-  if (districtCount === 0) {
-    // Special case for DC
-    if (data.district !== 'N/A' && data.district.toString() !== '1') {
-      ctx.addIssue({
-        code: ZodIssueCode.custom,
-        message: 'District must be N/A or 1 for this state',
-        path: ['district'],
-      })
-    }
-    return
-  }
+  if (data.district.toString() === 'At-Large') return
 
+  const districtCount = US_STATE_CODE_TO_DISTRICT_COUNT_MAP[data.state as USStateCode]
   const districtNum = parseInt(data.district, 10)
   if (isNaN(districtNum) || districtNum <= 0 || districtNum > districtCount) {
     ctx.addIssue({
@@ -57,5 +49,6 @@ export const zodStateDistrict = object({
       message: `District must be a number between 1 and ${districtCount}`,
       path: ['district'],
     })
+    return
   }
 })

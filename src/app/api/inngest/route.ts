@@ -1,20 +1,13 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
-import { backfillAddressElectoralZoneCoordinator } from '@/inngest/functions/backfillAddressElectoralZone'
-import { backfillAddressElectoralZoneProcessor } from '@/inngest/functions/backfillAddressElectoralZone/logic'
 import { backfillAddressFieldsWithGooglePlacesCoordinator } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
 import { backfillAddressFieldsWithGooglePlacesProcessor } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
-import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
-import { backfillIntlUsersWithInngest } from '@/inngest/functions/backfillIntlUsers'
-import { processIntlUsersBatch } from '@/inngest/functions/backfillIntlUsers/logic'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
-import { backfillUserActionElectoralZoneCoordinator } from '@/inngest/functions/backfillUserActionElectoralZone'
-import { backfillUserActionElectoralZoneProcessor } from '@/inngest/functions/backfillUserActionElectoralZone/logic'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import { backfillUserCountryCodeEmptyWithInngest } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import {
@@ -79,7 +72,6 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
-    backfillCongressionalDistrictCronJob,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
     ...globalSendEventNotifications,
@@ -91,16 +83,10 @@ export const { GET, POST, PUT } = serve({
     cleanupDatadogSyntheticTestsWithInngest,
     updateDistrictsRankings,
     backfillUserCountryCodeEmptyWithInngest,
-    backfillIntlUsersWithInngest,
-    processIntlUsersBatch,
     backfillMissingCommunications,
     deleteNotSupportedCountryCodeAdvocates,
     syncSendgridContactsCoordinator,
     syncSendgridContactsProcessor,
-    backfillAddressElectoralZoneCoordinator,
-    backfillAddressElectoralZoneProcessor,
-    backfillUserActionElectoralZoneCoordinator,
-    backfillUserActionElectoralZoneProcessor,
     backfillAddressFieldsWithGooglePlacesCoordinator,
     backfillAddressFieldsWithGooglePlacesProcessor,
   ],

@@ -96,8 +96,7 @@ export function ActionSpecificData({ userAction }: ActionSpecificDataProps) {
               <span className="font-semibold">USA State:</span> {userAction.usaState}
             </div>
             <div>
-              <span className="font-semibold">Congressional District:</span>{' '}
-              {userAction.usCongressionalDistrict}
+              <span className="font-semibold">Electoral Zone:</span> {userAction.electoralZone}
             </div>
           </div>
         )
