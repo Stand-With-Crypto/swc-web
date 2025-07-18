@@ -100,12 +100,10 @@ function FooterSkeleton() {
   return <Skeleton className="h-14 w-32" />
 }
 
-type ContractMetadataDisplaySkeletonProps = ContractMetadataDisplayProps
-
 ClaimNFTIntro.ContractMetadataDisplaySkeleton = function ContractMetadataDisplaySkeleton({
   contractMetadata,
   subtitle,
-}: ContractMetadataDisplaySkeletonProps) {
+}: ContractMetadataDisplayProps) {
   return (
     <div className="flex flex-col gap-6 md:flex-row">
       <NFTDisplaySkeleton size="lg" />

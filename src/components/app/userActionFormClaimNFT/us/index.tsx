@@ -28,13 +28,14 @@ export function USUserActionFormClaimNFT({
     initialSectionId: UserActionFormClaimNFTSectionNames.INTRO,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_CLAIM_NFT,
   })
+  const [isClaiming, setIsClaiming] = useState(false)
+
   useEffect(() => {
     if (trackMount) {
       trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_CLAIM_NFT })
     }
   }, [trackMount])
 
-  const [isClaiming, setIsClaiming] = useState(false)
   const handleSubmit = async () => {
     setIsClaiming(true)
     const result = await triggerServerActionForForm(

@@ -3,7 +3,6 @@ import {
   NFTMint,
   UserAction,
   UserActionCall,
-  UserActionClaimNft,
   UserActionDonation,
   UserActionEmail,
   UserActionEmailRecipient,
@@ -65,7 +64,6 @@ type ClientUserActionDatabaseQuery = UserAction & {
       })
     | null
   userActionViewKeyPage: UserActionViewKeyPage | null
-  userActionClaimNft: UserActionClaimNft | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {

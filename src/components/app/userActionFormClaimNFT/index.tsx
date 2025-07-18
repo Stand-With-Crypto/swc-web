@@ -25,8 +25,6 @@ function UserActionFormClaimNFTContent(props: UserActionFormClaimNFTProps) {
           level: 'error',
           tags: {
             domain: 'UserActionFormClaimNFT',
-          },
-          extra: {
             countryCode,
           },
         },

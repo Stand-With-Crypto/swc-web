@@ -63,7 +63,6 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
             },
           },
           userActionViewKeyPage: true,
-          userActionClaimNft: true,
         },
         where,
       })

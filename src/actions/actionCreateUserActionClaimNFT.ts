@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserActionType } from '@prisma/client'
+import { Prisma, User, UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
@@ -155,12 +155,16 @@ async function createAction({
   analytics,
   countryCode,
 }: {
-  user: User & { primaryUserCryptoAddress: any }
+  user: Prisma.UserGetPayload<{
+    include: {
+      primaryUserCryptoAddress: true
+    }
+  }>
   validatedInput: CreateActionClaimNFTInput
   analytics: ReturnType<typeof getServerAnalytics>
   countryCode: string
 }) {
-  if (!user.primaryUserCryptoAddress) {
+  if (!user?.primaryUserCryptoAddress?.id) {
     throw new Error('User does not have a primary crypto address to claim NFT')
   }
   const userAction = await prismaClient.userAction.create({
@@ -170,9 +174,6 @@ async function createAction({
       campaignName: validatedInput.campaignName,
       userCryptoAddress: { connect: { id: user.primaryUserCryptoAddress.id } },
       countryCode,
-      userActionClaimNft: {
-        create: {},
-      },
     },
   })
 

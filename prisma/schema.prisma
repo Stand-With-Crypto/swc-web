@@ -323,7 +323,6 @@ model UserAction {
   userActionRefer                       UserActionRefer?
   userActionPoll                        UserActionPoll?
   userActionViewKeyPage                 UserActionViewKeyPage?
-  userActionClaimNft                    UserActionClaimNft?
 
   @@index([datetimeCreated])
   @@index([userId, nftMintId])
@@ -512,13 +511,6 @@ model UserActionVoterAttestation {
   usaState   String?    @map("usa_state")
 
   @@map("user_action_voter_attestation")
-}
-
-model UserActionClaimNft {
-  id         String     @id @default(uuid())
-  userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
-
-  @@map("user_action_claim_nft")
 }
 
 model UserActionTweetAtPerson {
