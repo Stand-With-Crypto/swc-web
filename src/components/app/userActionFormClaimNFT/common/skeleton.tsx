@@ -10,14 +10,12 @@ interface UserActionFormClaimNFTSkeletonProps {
 export function UserActionFormClaimNFTSkeleton({ nftSlug }: UserActionFormClaimNFTSkeletonProps) {
   return (
     <ClaimNFTIntro>
-      <UserActionFormLayout.Container>
-        <ClaimNFTIntro.ContractMetadataDisplaySkeleton
-          contractMetadata={NFT_CLIENT_METADATA[nftSlug]}
-        />
-        <ClaimNFTIntro.Footer>
-          <ClaimNFTIntro.ClaimButton disabled />
-        </ClaimNFTIntro.Footer>
-      </UserActionFormLayout.Container>
+      <ClaimNFTIntro.ContractMetadataDisplaySkeleton
+        contractMetadata={NFT_CLIENT_METADATA[nftSlug]}
+      />
+      <ClaimNFTIntro.Footer>
+        <ClaimNFTIntro.ClaimButton disabled />
+      </ClaimNFTIntro.Footer>
     </ClaimNFTIntro>
   )
 }

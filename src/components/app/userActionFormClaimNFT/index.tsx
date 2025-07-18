@@ -11,33 +11,33 @@ const USUserActionFormClaimNFT = dynamic(() =>
   import('@/components/app/userActionFormClaimNFT/us').then(mod => mod.USUserActionFormClaimNFT),
 )
 
-export function UserActionFormClaimNFT(props: UserActionFormClaimNFTProps) {
+function UserActionFormClaimNFTContent(props: UserActionFormClaimNFTProps) {
   const { countryCode } = props
 
-  const LazyUserActionFormClaimNFT = useMemo(() => {
-    switch (countryCode) {
-      case SupportedCountryCodes.US:
-        return <USUserActionFormClaimNFT {...props} />
-      default:
-        return gracefullyError({
-          msg: `Country implementation not found for UserActionFormClaimNFT`,
-          fallback: null,
-          hint: {
-            level: 'error',
-            tags: {
-              domain: 'UserActionFormClaimNFT',
-            },
-            extra: {
-              countryCode,
-            },
+  switch (countryCode) {
+    case SupportedCountryCodes.US:
+      return <USUserActionFormClaimNFT {...props} />
+    default:
+      return gracefullyError({
+        msg: `Country implementation not found for UserActionFormClaimNFT`,
+        fallback: null,
+        hint: {
+          level: 'error',
+          tags: {
+            domain: 'UserActionFormClaimNFT',
           },
-        })
-    }
-  }, [countryCode, props])
+          extra: {
+            countryCode,
+          },
+        },
+      })
+  }
+}
 
+export function UserActionFormClaimNFT(props: UserActionFormClaimNFTProps) {
   return (
     <Suspense fallback={<UserActionFormClaimNFTSkeleton nftSlug={props.nftSlug} />}>
-      {LazyUserActionFormClaimNFT}
+      <UserActionFormClaimNFTContent {...props} />
     </Suspense>
   )
 }
