@@ -1,16 +1,14 @@
 import React, { ReactNode } from 'react'
-import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { Button } from '@/components/ui/button'
-import { MaybeNextImg, NextImage } from '@/components/ui/image'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
+import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
+import { ProfileAvatar } from '@/components/ui/profileAvatar'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import { useCategorizedStances } from '@/hooks/useCategorizedStances'
 import {
   getDTSIPersonRoleLocation,
   getFormattedDTSIPersonRoleDateRange,
@@ -20,60 +18,43 @@ import {
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
-  getDTSIPersonProfilePictureUrlDimensions,
   shouldPersonHaveStanceScoresHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const POLITICIAN_IMAGE_SIZE_PX = 230
+import { cn } from '@/utils/web/cn'
 
 export function PagePoliticianDetails({ children }: { children: ReactNode }) {
-  return <div className="standard-spacing-from-navbar container max-w-3xl">{children}</div>
+  return (
+    <div className="standard-spacing-from-navbar container max-w-3xl font-sans">{children}</div>
+  )
 }
 
 function PoliticianHeader({
   person,
   countryCode,
   showRoleLocation = true,
+  showDonateButton = true,
 }: {
   person: DTSIPersonDetails
   countryCode: SupportedCountryCodes
   showRoleLocation?: boolean
+  showDonateButton?: boolean
 }) {
   const roleNameResolver = getRoleNameResolver(countryCode)
 
   return (
-    <>
-      {person.profilePictureUrl ? (
-        <div
-          className="mx-auto mb-6 overflow-hidden rounded-xl"
-          style={{ maxWidth: POLITICIAN_IMAGE_SIZE_PX }}
-        >
-          <MaybeNextImg
-            alt={`profile picture of ${dtsiPersonFullName(person)}`}
-            sizes={`${POLITICIAN_IMAGE_SIZE_PX}px`}
-            {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
-            className="w-full"
-            src={person.profilePictureUrl}
-          />
-        </div>
-      ) : (
-        <div className="mx-auto mb-6 max-w-[100px]">
-          <InitialsAvatar
-            firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
-            lastInitial={person.lastName.slice(0, 1)}
-            size={100}
-          />
-        </div>
-      )}
-      <PageTitle className="mb-3" size="lg">
-        {dtsiPersonFullName(person)}
-      </PageTitle>
-      <PageSubTitle className="mb-3">
+    <div className="flex flex-col items-center sm:flex-row">
+      <ProfileAvatar className="box-mb-6 sm:mb-0 sm:mr-7" person={person} size={200} />
+
+      <div className="flex flex-col sm:items-start">
+        <PageTitle className="mb-3" size="lg">
+          {dtsiPersonFullName(person)}
+        </PageTitle>
+
         {person.primaryRole && (
-          <>
-            <PageSubTitle>
+          <div>
+            <p className="mb-5 font-sans text-xl font-normal text-black/80">
               {person.politicalAffiliationCategory && (
                 <>
                   {dtsiPersonPoliticalAffiliationCategoryDisplayName(
@@ -83,21 +64,22 @@ function PoliticianHeader({
               )}
               {roleNameResolver(person.primaryRole)}
               {showRoleLocation && getDTSIPersonRoleLocation(person.primaryRole) && (
-                <span className="font-normal text-gray-500">
+                <span className="font-normal">
                   {' '}
                   from {getDTSIPersonRoleLocation(person.primaryRole)}
                 </span>
               )}
-            </PageSubTitle>
+            </p>
+
             {getHasDTSIPersonRoleEnded(person.primaryRole) && (
-              <div className="text-gray-500">
-                {getFormattedDTSIPersonRoleDateRange(person.primaryRole)}
-              </div>
+              <div>{getFormattedDTSIPersonRoleDateRange(person.primaryRole)}</div>
             )}
-          </>
+
+            <PoliticianLinks person={person} showDonateButton={showDonateButton} />
+          </div>
         )}
-      </PageSubTitle>
-    </>
+      </div>
+    </div>
   )
 }
 
@@ -111,29 +93,31 @@ function PoliticianLinks({
   showDonateButton?: boolean
 }) {
   return (
-    <div className="flex items-center justify-center gap-3">
+    <div className="flex items-center justify-center gap-3 sm:justify-start">
       {showDonateButton && person.donationUrl && (
-        <Button asChild>
+        <Button asChild className="px-8 text-base">
           <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
         </Button>
       )}
+
       {Boolean(person.officialUrl) && (
-        <Button asChild className="h-11 w-11 rounded-full p-3" variant="secondary">
+        <Button asChild className="h-12 w-12 rounded-full p-3" variant="secondary">
           <ExternalLink href={person.officialUrl}>
-            <Globe className="h-6 w-6" />
+            <Globe className="h-7 w-7" />
             <span className="sr-only">{person.officialUrl}</span>
           </ExternalLink>
         </Button>
       )}
+
       {person.twitterAccounts.slice(0, 1).map(account => (
         <Button
           asChild
-          className="h-11 w-11 rounded-full p-[14px]"
+          className="h-12 w-12 rounded-full p-[14px]"
           key={account.id}
           variant="secondary"
         >
           <ExternalLink href={dtsiTwitterAccountUrl(account)}>
-            <NextImage alt="x.com logo" height={20} src={'/misc/xDotComLogo.svg'} width={20} />
+            <NextImage alt="x.com logo" height={22} src={'/misc/xDotComLogo.svg'} width={22} />
             <span className="sr-only">{dtsiTwitterAccountUrl(account)}</span>
           </ExternalLink>
         </Button>
@@ -151,30 +135,57 @@ function PoliticianStances({
   person: DTSIPersonDetails
   countryCode: SupportedCountryCodes
 }) {
-  const stances = orderBy(person.stances, [
-    x => (x.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP ? 0 : 1),
-    x => -1 * new Date(x.dateStanceMade).getTime(),
-  ])
+  const { billRelationship, noBillRelationship } = useCategorizedStances(person.stances)
+
+  const votesExtraClassNames =
+    '[&>.info-card:first-child]:border-none [&>.info-card]:rounded-none [&>.info-card]:border-t-2 [&>.info-card]:border-t-white'
 
   return (
     <section>
-      <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="md">
-        Notable statements
+      <PageTitle as="h2" className="text-center" size="md">
+        Vote History
       </PageTitle>
-      <div className="space-y-14 md:space-y-16">
-        {!stances.length && (
-          <div className="flex items-center justify-center">No recent statements.</div>
-        )}
-        {stances.map(stance => (
-          <DTSIStanceDetails
-            countryCode={countryCode}
-            isStanceHidden={shouldPersonHaveStanceScoresHidden(person)}
-            key={stance.id}
-            person={person}
-            stance={stance}
-          />
-        ))}
-      </div>
+
+      {billRelationship.length ? (
+        <div
+          className={cn(
+            'mb-16 mt-8 box-border space-y-0 overflow-hidden rounded-3xl',
+            votesExtraClassNames,
+          )}
+        >
+          {billRelationship.map(stance => (
+            <DTSIStanceDetails
+              countryCode={countryCode}
+              isStanceHidden={shouldPersonHaveStanceScoresHidden(person)}
+              key={stance.id}
+              person={person}
+              stance={stance}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="mb-11 flex items-center justify-center">No recent votes.</div>
+      )}
+
+      <PageTitle as="h2" className="text-center" size="md">
+        Statements
+      </PageTitle>
+
+      {noBillRelationship.length ? (
+        <div className="mt-8 space-y-1 md:space-y-1 [&>.info-card+.info-card]:mt-16">
+          {noBillRelationship.map(stance => (
+            <DTSIStanceDetails
+              countryCode={countryCode}
+              isStanceHidden={shouldPersonHaveStanceScoresHidden(person)}
+              key={stance.id}
+              person={person}
+              stance={stance}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="mb-11 flex items-center justify-center">No recent statements.</div>
+      )}
     </section>
   )
 }
