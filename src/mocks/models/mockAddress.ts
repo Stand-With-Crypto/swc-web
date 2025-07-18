@@ -36,7 +36,6 @@ export function mockCreateAddressInput() {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
-    usCongressionalDistrict: '12',
     electoralZone: '12',
     latitude: null,
     longitude: null,
@@ -66,7 +65,6 @@ export function mockCreateAddressInputWithDC() {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
-    usCongressionalDistrict: district,
     electoralZone: district,
     latitude: null,
     longitude: null,
@@ -82,5 +80,6 @@ export function mockAddress(): Address {
     ...mockCreateAddressInput(),
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
+    usCongressionalDistrict: null,
   }
 }

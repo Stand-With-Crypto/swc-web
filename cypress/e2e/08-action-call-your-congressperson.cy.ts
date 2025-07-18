@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-import { GoogleCivicInfoOfficial, GoogleCivicInfoResponse } from 'cypress/utils/googleCivicInfo'
-
 it.skip('action - call your congressperson', () => {
   cy.viewport('iphone-6')
   cy.visit('/')
@@ -30,48 +28,55 @@ it.skip('action - call your congressperson', () => {
   })
   cy.contains('Please enter a US-based address.').should('be.visible')
 
-  cy.intercept<any, GoogleCivicInfoResponse>(
+  const addressForTest = '350 Fifth Avenue New York, NY 10118'
+  cy.intercept(
+    'GET',
+    `/api/public/swc-civic/electoral-zone?address=${encodeURIComponent(addressForTest)}`,
     {
-      method: 'GET',
-      url: /https:\/\/www.googleapis.com\/civicinfo\/v2\/representatives\?.*/,
+      statusCode: 200,
+      body: {
+        zoneName: '10',
+        stateCode: 'NY',
+        countryCode: 'USA',
+      },
     },
-    req => {
-      req.reply(res => {
-        const originalResponse = res.body
+  ).as('getElectoralZone')
 
-        const mockedOfficial: GoogleCivicInfoOfficial = {
-          name: 'Lindsey Olson-Rogahn DDS',
-          address: [
-            {
-              line1: '350 Fifth Avenue',
-              city: 'City',
-              state: 'NY',
-              zip: '10118',
-            },
-          ],
-          party: 'Democratic Party',
-          phones: ['(202) 225-5635'],
-          photoUrl:
-            'https://db0prh5pvbqwd.cloudfront.net/all/images/12b0866e-c3ab-418d-8914-bc0fba709fb5.jpg',
-          urls: ['https://nadler.house.gov/'],
-          channels: [],
-        }
-
-        originalResponse.officials.push(mockedOfficial)
-
-        res.send(originalResponse)
-      })
-    },
-  ).as('getRepresentatives')
+  cy.intercept('GET', '/api/public/dtsi/by-geography/**', {
+    statusCode: 200,
+    body: [
+      {
+        slug: 'lindsey-olson-rogahn-dds',
+        id: 'a2b37805-4034-4a57-824a-1a877a56d079',
+        firstNickname: 'Lindsey',
+        lastName: 'Olson-Rogahn DDS',
+        nameSuffix: null,
+        profilePictureUrl:
+          'https://db0prh5pvbqwd.cloudfront.net/all/images/12b0866e-c3ab-418d-8914-bc0fba709fb5.jpg',
+        primaryRole: {
+          roleCategory: 'legislative-federal',
+          title: 'Representative',
+          primaryState: 'NY',
+          primaryDistrict: '10',
+          status: 'active',
+          endDate: null,
+        },
+        politicalAffiliation: {
+          name: 'Democratic Party',
+        },
+      },
+    ],
+  }).as('getDTSIPeople')
 
   // validate success
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
-    searchText: '350 Fifth Avenue New York, NY 10118',
+    searchText: addressForTest,
     typingRequired: true,
   })
 
-  cy.wait('@getRepresentatives')
+  cy.wait('@getElectoralZone')
+  cy.wait('@getDTSIPeople')
 
   cy.contains(/Your representative is .+/)
     .should('be.visible')

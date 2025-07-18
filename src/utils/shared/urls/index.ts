@@ -283,14 +283,17 @@ export const apiUrls = {
   pollsResultsData: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/public/polls`,
   districtRanking: ({
+    countryCode,
     stateCode,
     districtNumber,
     filteredByState,
   }: {
+    countryCode: SupportedCountryCodes
     stateCode: string
     districtNumber: string
     filteredByState?: boolean
-  }) => `/api/public/referrals/${stateCode}/${districtNumber}${filteredByState ? '/by-state' : ''}`,
+  }) =>
+    `/api/public/referrals/${countryCode}/${stateCode}/${districtNumber}${filteredByState ? '/by-state' : ''}`,
   dtsiRacesByCongressionalDistrict: ({
     stateCode,
     district,

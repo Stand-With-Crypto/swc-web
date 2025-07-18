@@ -37,10 +37,10 @@ import {
 } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import * as smsActions from '@/utils/server/sms/actions'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
-import { logCongressionalDistrictNotFound } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -292,11 +292,13 @@ async function maybeUpsertUser({
       })
 
       if ('notFoundReason' in electoralZone) {
-        logCongressionalDistrictNotFound({
+        logElectoralZoneNotFound({
           address: dbAddress.formattedDescription,
           notFoundReason: electoralZone.notFoundReason,
           domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
+      } else if (electoralZone.zoneName) {
+        dbAddress.electoralZone = electoralZone.zoneName
       }
       if ('zoneName' in electoralZone) {
         dbAddress.electoralZone = `${electoralZone.zoneName}`

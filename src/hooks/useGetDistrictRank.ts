@@ -1,23 +1,26 @@
 import useSWR, { SWRConfiguration } from 'swr'
 
-import { GetDistrictRankResponse } from '@/app/api/public/referrals/[stateCode]/[districtNumber]/route'
+import { GetDistrictRankResponse } from '@/app/api/public/referrals/[countryCode]/[stateCode]/[districtNumber]/route'
+import { StateCode } from '@/utils/server/districtRankings/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 
 interface UseGetDistrictRankProps {
-  stateCode: USStateCode
+  countryCode: SupportedCountryCodes
+  stateCode: StateCode | null
   districtNumber: string | null
   filteredByState?: boolean
   config?: SWRConfiguration<GetDistrictRankResponse>
 }
 
 export function useGetDistrictRank(props: UseGetDistrictRankProps) {
-  const { stateCode, districtNumber, filteredByState, config } = props
+  const { countryCode, stateCode, districtNumber, filteredByState, config } = props
 
   const districtRankingResponse = useSWR(
     stateCode && districtNumber
       ? apiUrls.districtRanking({
+          countryCode,
           stateCode,
           districtNumber,
           filteredByState,

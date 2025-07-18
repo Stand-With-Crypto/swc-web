@@ -31,7 +31,7 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
-import { logCongressionalDistrictNotFound } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -50,9 +50,9 @@ export const actionUpdateUserProfile = withServerActionMiddleware(
 
 const logger = getLogger(`actionUpdateUserProfile`)
 
-async function actionUpdateUserProfileWithoutMiddleware(
-  data: z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>,
-) {
+type Input = z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>
+
+async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
   const authUser = await appRouterGetAuthUser()
 
   if (!authUser) {
@@ -68,35 +68,40 @@ async function actionUpdateUserProfileWithoutMiddleware(
     }
   }
 
-  try {
-    if (validatedFields.data.address) {
+  if (validatedFields.data.address) {
+    try {
       const electoralZone = await maybeGetElectoralZoneFromAddress({
-        address: {
-          ...validatedFields.data.address,
-          googlePlaceId: validatedFields.data.address.googlePlaceId || null,
-          latitude: validatedFields.data.address.latitude || null,
-          longitude: validatedFields.data.address.longitude || null,
-        },
+        address: validatedFields.data.address,
       })
       if ('notFoundReason' in electoralZone) {
-        logCongressionalDistrictNotFound({
+        logElectoralZoneNotFound({
           address: validatedFields.data.address.formattedDescription,
           notFoundReason: electoralZone.notFoundReason,
           domain: 'actionUpdateUserProfile',
         })
       }
-      if ('zoneName' in electoralZone) {
+      if (!electoralZone) {
+        logElectoralZoneNotFound({
+          address: validatedFields.data.address.formattedDescription,
+          notFoundReason: 'ELECTORAL_ZONE_NOT_FOUND' as const,
+          domain: 'actionUpdateUserProfile',
+        })
+      }
+      if (electoralZone && 'zoneName' in electoralZone) {
+        logger.info(
+          `Found electoral zone ${electoralZone.zoneName} for address ${validatedFields.data.address.formattedDescription}`,
+        )
         validatedFields.data.address.electoralZone = `${electoralZone.zoneName}`
       }
+    } catch (error) {
+      logger.error('error getting `electoralZone`:' + error)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'actionUpdateUserProfile',
+          message: 'error getting electoralZone',
+        },
+      })
     }
-  } catch (error) {
-    logger.error('error getting `electoralZone`:' + error)
-    Sentry.captureException(error, {
-      tags: {
-        domain: 'actionUpdateUserProfile',
-        message: 'error getting electoralZone',
-      },
-    })
   }
 
   await throwIfRateLimited({ context: 'authenticated' })
@@ -119,7 +124,7 @@ async function actionUpdateUserProfileWithoutMiddleware(
           googlePlaceId: validatedFields.data.address.googlePlaceId,
         },
         create: validatedFields.data.address,
-        update: {},
+        update: validatedFields.data.address,
       })
     : null
 

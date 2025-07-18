@@ -6,7 +6,6 @@ import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/u
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
-import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -50,15 +49,17 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.EMAIL]: {
     title: 'Email your MP',
-    description: 'Support Innovation and Growth',
+    description:
+      'Make your voice heard on important crypto policy issues by emailing your representatives.',
     mobileCTADescription: 'Support Innovation and Growth',
-    campaignsModalDescription: 'Support Innovation and Growth',
+    campaignsModalDescription:
+      'Make your voice heard on important crypto policy issues by emailing your representatives.',
     image: '/ca/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
         campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
-        isCampaignActive: false,
+        isCampaignActive: true,
         title: 'Email your MP',
         description: 'Support Innovation and Growth',
         canBeTriggeredMultipleTimes: true,
@@ -101,18 +102,11 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your MP',
         description: 'Support Innovation and Growth',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={urls.newmodeMomentumAheadHouseRisingAction()}
-          >
-            {children}
-          </UserActionViewKeyPageDialog>
-        ),
+        WrapperComponent: null,
       },
     ],
   },

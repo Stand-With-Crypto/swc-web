@@ -20,6 +20,7 @@ export function DistrictsLeaderboard(props: DistrictsLeaderboardProps) {
       {data.map(({ state, district, count, rank }) => (
         <DistrictsLeaderboardRow
           count={count}
+          countryCode={countryCode}
           district={district}
           key={`${state}-${district}`}
           locale={COUNTRY_CODE_TO_LOCALE[countryCode]}

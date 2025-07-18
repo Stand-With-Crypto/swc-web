@@ -38,7 +38,7 @@ import {
 } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
-import { filterDTSIPeopleByAUPoliticalCategoryWithFallback } from './campaigns/20250714-mp-welcome'
+import { dtsiPeopleFromAddressResponseWithFallback } from './campaigns/20250714-mp-welcome'
 
 const countryCode = SupportedCountryCodes.AU
 
@@ -138,10 +138,7 @@ export function AUUserActionFormEmailCongressperson({
   const addressField = form.watch('address')
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
     address: addressField?.description,
-    filterFn:
-      campaignName === AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025
-        ? filterDTSIPeopleByAUPoliticalCategoryWithFallback(campaignMetadata.politicianCategory)
-        : filterDTSIPeopleByAUPoliticalCategory(campaignMetadata.politicianCategory),
+    filterFn: filterDTSIPeopleByAUPoliticalCategory(campaignMetadata.politicianCategory),
   })
 
   switch (sectionProps.currentSection) {
@@ -159,7 +156,9 @@ export function AUUserActionFormEmailCongressperson({
                 campaignMetadata.politicianCategory,
               )}
               countryCode={countryCode}
-              dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
+              dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponseWithFallback(
+                dtsiPeopleFromAddressResponse,
+              )}
             />
             <EmailCongressperson.Message getEmailBodyText={campaignMetadata.getEmailBodyText} />
             <EmailCongressperson.Disclaimer countryCode={countryCode} />
