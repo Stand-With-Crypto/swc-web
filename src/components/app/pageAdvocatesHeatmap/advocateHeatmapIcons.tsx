@@ -699,3 +699,79 @@ export function DonateIcon({ isPulsing = false, height = 40, width = 40, ...rest
     </svg>
   )
 }
+
+export function FollowOnLinkedInIcon({
+  isPulsing = false,
+  height = 40,
+  width = 40,
+  ...rest
+}: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect fill="#0C0049" height="40" rx="20" width="40.0007" />
+      <g clipPath="url(#clip0_17_136)">
+        <path
+          d="M26.9821 12.125C27.5893 12.125 28.125 12.6607 28.125 13.3036V26.9821C28.125 27.625 27.5893 28.125 26.9821 28.125H13.2321C12.625 28.125 12.125 27.625 12.125 26.9821V13.3036C12.125 12.6607 12.625 12.125 13.2321 12.125H26.9821ZM16.9464 25.8393V18.2321H14.5893V25.8393H16.9464ZM15.7679 17.1607C16.5179 17.1607 17.125 16.5536 17.125 15.8036C17.125 15.0536 16.5179 14.4107 15.7679 14.4107C14.9821 14.4107 14.375 15.0536 14.375 15.8036C14.375 16.5536 14.9821 17.1607 15.7679 17.1607ZM25.8393 25.8393V21.6607C25.8393 19.625 25.375 18.0179 22.9821 18.0179C21.8393 18.0179 21.0536 18.6607 20.7321 19.2679H20.6964V18.2321H18.4464V25.8393H20.8036V22.0893C20.8036 21.0893 20.9821 20.125 22.2321 20.125C23.4464 20.125 23.4464 21.2679 23.4464 22.125V25.8393H25.8393Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_17_136">
+          <rect fill="white" height="20" transform="translate(10 10)" width="20" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#0C0049"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#0C0049"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}

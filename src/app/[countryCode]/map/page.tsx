@@ -24,10 +24,9 @@ export default async function MapPage(props: PageProps) {
   const params = await props.params
   const homeDataProps = await getHomepageData({
     recentActivityLimit: 20,
-    restrictToUS: true,
     countryCode: params.countryCode,
   })
-  const advocatePerStateDataProps = await getAdvocatesMapData()
+  const advocatePerStateDataProps = await getAdvocatesMapData({ countryCode: params.countryCode })
 
   return (
     <AdvocatesHeatmapPage
