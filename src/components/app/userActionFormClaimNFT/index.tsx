@@ -1,5 +1,5 @@
 'use client'
-import { Suspense, useMemo } from 'react'
+import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
 import { UserActionFormClaimNFTSkeleton } from '@/components/app/userActionFormClaimNFT/common/skeleton'

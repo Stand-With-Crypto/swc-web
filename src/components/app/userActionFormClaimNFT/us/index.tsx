@@ -61,7 +61,7 @@ export function USUserActionFormClaimNFT({
         <ClaimNFTIntro>
           <ClaimNFTIntro.ContractMetadataDisplay contractMetadata={NFT_CLIENT_METADATA[nftSlug]} />
           <ClaimNFTIntro.Footer disclaimer="This NFT is purely commemorative in nature and has no value or utility. It is not intended for trading.">
-            <ClaimNFTIntro.ClaimButton onClick={handleSubmit} disabled={isClaiming} />
+            <ClaimNFTIntro.ClaimButton disabled={isClaiming} onClick={handleSubmit} />
           </ClaimNFTIntro.Footer>
         </ClaimNFTIntro>
       )

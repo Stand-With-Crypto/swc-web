@@ -1,5 +1,4 @@
 import { ClaimNFTIntro } from '@/components/app/userActionFormClaimNFT/common/sections/intro'
-import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { NFTSlug } from '@/utils/shared/nft'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 

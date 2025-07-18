@@ -463,18 +463,18 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.CLAIM_NFT]: {
-    title: 'Claim your NFT',
-    description: 'Claim your NFT and commemorate the GENIUS Act.',
-    mobileCTADescription: 'Claim your NFT and commemorate the GENIUS Act.',
-    campaignsModalDescription: 'Claim your NFT and commemorate the GENIUS Act.',
+    title: 'Claim your commemorative NFT',
+    description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    mobileCTADescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    campaignsModalDescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
     image: '/nfts/Genius_NFT_2.png',
     campaigns: [
       {
         actionType: UserActionType.CLAIM_NFT,
         campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
         isCampaignActive: true,
-        title: 'Claim your GENIUS Act NFT',
-        description: 'Claim your NFT and commemorate the GENIUS Act.',
+        title: 'Claim your commemorative GENIUS Act NFT',
+        description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
