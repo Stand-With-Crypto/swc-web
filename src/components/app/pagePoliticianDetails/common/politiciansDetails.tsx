@@ -162,7 +162,7 @@ function PoliticianStances({
       <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="md">
         Notable statements
       </PageTitle>
-      <div className="space-y-14 md:space-y-16">
+      <div className="space-y-14 overflow-hidden md:space-y-16">
         {!stances.length && (
           <div className="flex items-center justify-center">No recent statements.</div>
         )}
