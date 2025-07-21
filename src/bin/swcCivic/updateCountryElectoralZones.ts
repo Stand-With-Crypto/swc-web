@@ -12,7 +12,6 @@ import { civicPrismaClient } from '@/utils/server/swcCivic/civicPrismaClient'
 interface ElectoralZoneToUpdate {
   zoneName: string
   zoneCoordinates: Geometry
-  stateCode?: string
   administrativeArea?: string
   countryCode: string
 }
@@ -28,10 +27,8 @@ async function updateCountryElectoralZones() {
     countryCode,
     dataFilePath,
     electoralZoneNameField,
-    stateCodeField,
     normalizeElectoralZoneName,
     normalizeAdministrativeArea,
-    normalizeStateCode,
     persist,
     administrativeAreaFieldPath,
     administrativeAreaFilePath,
@@ -69,7 +66,6 @@ async function updateCountryElectoralZones() {
         }
 
         const zoneName = feature.properties?.[electoralZoneNameField]
-        const stateCode = stateCodeField ? feature.properties?.[stateCodeField] : undefined
 
         const electoralZoneGeometry = getGeometryFromGISData(feature)
 
@@ -95,14 +91,13 @@ async function updateCountryElectoralZones() {
                 matchingAdministrativeAreaGISData.properties?.[administrativeAreaFieldPath]
             }
           }
+        } else if (administrativeAreaFieldPath) {
+          administrativeArea = feature.properties?.[administrativeAreaFieldPath]
         }
 
         const normalizedAdministrativeArea = normalizeAdministrativeArea?.(administrativeArea)
 
         const normalizedZoneName = normalizeElectoralZoneName?.(zoneName) || zoneName
-        const normalizedStateCode = stateCode
-          ? normalizeStateCode?.(stateCode) || stateCode
-          : undefined
 
         const zoneCoordinates = feature.geometry
 
@@ -110,7 +105,10 @@ async function updateCountryElectoralZones() {
           return acc
         }
 
-        const electoralZoneKey = getElectoralZoneKey(normalizedZoneName, normalizedStateCode)
+        const electoralZoneKey = getElectoralZoneKey(
+          normalizedZoneName,
+          normalizedAdministrativeArea,
+        )
 
         return {
           ...acc,
@@ -118,7 +116,6 @@ async function updateCountryElectoralZones() {
             zoneName: normalizedZoneName,
             zoneCoordinates,
             administrativeArea: normalizedAdministrativeArea,
-            stateCode: normalizedStateCode,
             countryCode,
           },
         }
@@ -142,7 +139,8 @@ async function updateCountryElectoralZones() {
       (acc, electoralZone) => {
         const electoralZoneKey = getElectoralZoneKey(
           electoralZone.zoneName,
-          electoralZone.stateCode,
+          // TODO: remove || electoralZone.stateCode once we delete the stateCode field
+          electoralZone.administrativeArea || electoralZone.stateCode,
         )
 
         return {
@@ -182,7 +180,7 @@ async function updateExistingElectoralZones(
   console.log(`Found ${electoralZonesToUpdate.length} electoral zones to update`)
 
   await chunkAndRun(electoralZonesToUpdate, 100, async electoralZoneKeyToUpdate => {
-    const { zoneCoordinates, stateCode, administrativeArea } =
+    const { zoneCoordinates, administrativeArea } =
       normalizedElectoralZonesOnGISDataMap[electoralZoneKeyToUpdate]
 
     const currentElectoralZone = currentElectoralZonesOnDatabaseMap[electoralZoneKeyToUpdate]
@@ -191,7 +189,7 @@ async function updateExistingElectoralZones(
 
     await civicPrismaClient.$executeRaw`
       UPDATE electoral_zones
-        SET zone_coordinates = ST_Force3D(ST_GeomFromGeoJSON(${zoneCoordinates})), state_code = ${stateCode}, updated_at = now(), administrative_area = ${administrativeArea}
+        SET zone_coordinates = ST_Force3D(ST_GeomFromGeoJSON(${zoneCoordinates})), updated_at = now(), administrative_area = ${administrativeArea}
         WHERE id = ${currentElectoralZone.id}
     `
   })
@@ -236,14 +234,14 @@ async function createNewElectoralZones(
   console.log(`Found ${electoralZonesToCreate.length} electoral zones to create`)
 
   await chunkAndRun(electoralZonesToCreate, 100, async electoralZoneKeyToCreate => {
-    const { zoneName, zoneCoordinates, stateCode, countryCode, administrativeArea } =
+    const { zoneName, zoneCoordinates, countryCode, administrativeArea } =
       normalizedElectoralZonesOnGISDataMap[electoralZoneKeyToCreate]
 
     console.log(`Creating electoral zone ${electoralZoneKeyToCreate}...`)
 
     await civicPrismaClient.$executeRaw`
-        INSERT INTO electoral_zones (zone_name, state_code, administrative_area, country_code, zone_coordinates, created_at, updated_at)
-        VALUES (${zoneName}, ${stateCode}, ${administrativeArea}, ${countryCode}, ST_Force3D(ST_GeomFromGeoJSON(${zoneCoordinates})), now(), now())
+        INSERT INTO electoral_zones (zone_name, administrative_area, country_code, zone_coordinates, created_at, updated_at)
+        VALUES (${zoneName}, ${administrativeArea}, ${countryCode}, ST_Force3D(ST_GeomFromGeoJSON(${zoneCoordinates})), now(), now())
     `
   })
 }
@@ -256,8 +254,8 @@ async function chunkAndRun<T>(items: T[], chunkSize: number, fn: (item: T) => Pr
   }
 }
 
-function getElectoralZoneKey(zoneName: string, stateCode?: string | null) {
-  return stateCode ? `${zoneName}-${stateCode}` : zoneName
+function getElectoralZoneKey(zoneName: string, administrativeArea?: string | null) {
+  return administrativeArea ? `${zoneName}-${administrativeArea}` : zoneName
 }
 
 void runBin(updateCountryElectoralZones)

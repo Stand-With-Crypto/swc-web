@@ -3,11 +3,23 @@ import { normalizeCADistrictName } from '@/bin/swcCivic/normalizers/normalizeCAD
 import { normalizeGBAdministrativeArea } from '@/bin/swcCivic/normalizers/normalizeGBAdministrativeArea'
 import {
   normalizeUSDistrictName,
-  normalizeUSStateCode,
+  normalizeUSAdministrativeArea,
 } from '@/bin/swcCivic/normalizers/normalizeUSDistrict'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export const electoralZonesDataConfigs = [
+interface ElectoralZoneDataConfig {
+  countryCode: SupportedCountryCodes
+  dataFilePath: string
+  administrativeAreaFieldPath?: string
+  normalizeAdministrativeArea?: (administrativeArea?: string) => string | undefined
+  normalizeElectoralZoneName?: (electoralZoneName?: string) => string | undefined
+  // If no administrativeAreaFilePath is provided, we will use the administrativeAreaFieldPath to get the administrative area from the data file
+  administrativeAreaFilePath?: string
+  electoralZoneNameField: string
+  persist: boolean
+}
+
+export const electoralZonesDataConfigs: ElectoralZoneDataConfig[] = [
   {
     countryCode: SupportedCountryCodes.GB,
     dataFilePath: 'data/uk_parliamentary_constituencies.geojson',
@@ -22,11 +34,9 @@ export const electoralZonesDataConfigs = [
     countryCode: SupportedCountryCodes.US,
     dataFilePath: 'data/us_congressional_districts.geojson',
     electoralZoneNameField: 'NAMELSAD',
-    // TODO: replace this with administrativeAreaFieldPath
-    stateCodeField: 'STATEFP',
+    administrativeAreaFieldPath: 'STATEFP',
     normalizeElectoralZoneName: normalizeUSDistrictName,
-    // TODO: replace this with normalizeAdministrativeArea
-    normalizeStateCode: normalizeUSStateCode,
+    normalizeAdministrativeArea: normalizeUSAdministrativeArea,
     persist: false,
   },
   {
@@ -43,4 +53,4 @@ export const electoralZonesDataConfigs = [
     normalizeElectoralZoneName: normalizeAUDistrictName,
     persist: false,
   },
-]
+] as const
