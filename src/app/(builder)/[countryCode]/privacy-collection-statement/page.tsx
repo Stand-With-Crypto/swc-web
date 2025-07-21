@@ -10,7 +10,7 @@ export const dynamic = 'error'
 export const revalidate = 86400 // 1 day
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
-const PATHNAME = '/privacy-collection'
+const PATHNAME = '/privacy-collection-statement'
 
 export default async function PrivacyCollectionPage(props: PageProps) {
   const { countryCode } = await props.params
