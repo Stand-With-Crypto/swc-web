@@ -112,11 +112,7 @@ export function UpdateUserProfileForm({
       actionUpdateUserProfile,
     )
     if (result.status === 'success') {
-      const { countryCode: newCountryCode } = (
-        result.response as {
-          user: ClientUserWithENSData
-        }
-      ).user
+      const newCountryCode = (result.response as { user: ClientUserWithENSData })?.user?.countryCode
 
       if (ORDERED_SUPPORTED_COUNTRIES.includes(newCountryCode) && newCountryCode !== countryCode) {
         router.push(getIntlUrls(newCountryCode as SupportedCountryCodes).profile())

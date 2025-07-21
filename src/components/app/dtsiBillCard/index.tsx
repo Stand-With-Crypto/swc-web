@@ -12,7 +12,7 @@ import { cn } from '@/utils/web/cn'
 export type DTSIBill = DTSI_BillCardFragment
 
 interface DTSIBillCardProps {
-  bill: Pick<SWCBill, 'billNumber' | 'title'>
+  bill: Pick<SWCBill, 'dtsiSlug' | 'title'>
   description?: string
   countryCode: SupportedCountryCodes
   children?: ReactElement<typeof CryptoSupportHighlight>
@@ -34,7 +34,10 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         <InternalLink
           className={cn(linkBoxLinkClassName, 'line-clamp-3 text-lg font-semibold')}
           data-link-box-subject
-          href={getIntlUrls(countryCode).billDetails(bill.billNumber!)}
+          /**
+           * @todo: Use the billNumber instead of dtsiSlug for the URL (https://github.com/Stand-With-Crypto/swc-web/issues/2525)
+           */
+          href={getIntlUrls(countryCode).billDetails(bill.dtsiSlug!)}
         >
           {bill.title}
         </InternalLink>

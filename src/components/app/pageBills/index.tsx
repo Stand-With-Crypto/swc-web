@@ -3,11 +3,11 @@ import { partition, sortBy } from 'lodash-es'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { SWCBillCardInfo } from '@/data/bills/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCBill } from '@/utils/shared/zod/getSWCBills'
 
 interface PageBillsProps {
-  bills: SWCBill[]
+  bills: SWCBillCardInfo[]
   countryCode: SupportedCountryCodes
 }
 
@@ -33,7 +33,7 @@ export function PageBills(props: PageBillsProps) {
           )}
           <div className="flex flex-col gap-4 lg:gap-8">
             {results.map(bill => (
-              <DTSIBillCard bill={bill} countryCode={countryCode} key={bill.billNumber}>
+              <DTSIBillCard bill={bill} countryCode={countryCode} key={bill.dtsiSlug}>
                 <CryptoSupportHighlight
                   className="flex-shrink-0 rounded-full text-base"
                   stanceScore={bill.computedStanceScore}

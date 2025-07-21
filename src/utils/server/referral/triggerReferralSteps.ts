@@ -81,7 +81,7 @@ export function triggerReferralSteps({
         if (newUser.address) {
           await incrementDistrictAdvocatesRanking({
             state: newUser.address.administrativeAreaLevel1 as USStateCode,
-            district: newUser.address.usCongressionalDistrict || '1',
+            district: newUser.address.electoralZone || '1',
             count: 1,
           })
         }
@@ -96,7 +96,7 @@ export function triggerReferralSteps({
         if (referrer?.address) {
           await incrementDistrictReferralsRanking({
             state: referrer.address.administrativeAreaLevel1 as USStateCode,
-            district: referrer.address.usCongressionalDistrict || '1',
+            district: referrer.address.electoralZone || '1',
             count: 1,
           })
         }

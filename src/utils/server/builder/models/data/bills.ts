@@ -11,7 +11,6 @@ import {
   BILL_KEY_DATE_CATEGORY_OPTIONS,
   SWCBill,
   SWCBillFromBuilderIO,
-  SWCBillsFromBuilderIO,
   zodBillSchemaValidation,
 } from '@/utils/shared/zod/getSWCBills'
 
@@ -19,14 +18,14 @@ const logger = getLogger(`builderIOEvents`)
 
 const isProduction = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
-export async function getBillFromBuilderIO(dtsiSlug: string): Promise<SWCBill | null> {
+export async function getBillFromBuilderIO(billNumber: string): Promise<SWCBill | null> {
   try {
     const entry = await pRetry(
       () =>
         builderSDKClient.get(BuilderDataModelIdentifiers.BILLS, {
           query: {
             data: {
-              dtsiSlug,
+              billNumber,
             },
             ...(isProduction && { published: 'published' }),
           },
@@ -58,14 +57,14 @@ export async function getBillFromBuilderIO(dtsiSlug: string): Promise<SWCBill | 
 
 const LIMIT = 100
 
-async function getAllBillsWithOffset({
+function getAllBillsWithOffset({
   offset,
   countryCode,
 }: {
   offset: number
   countryCode: SupportedCountryCodes
-}): Promise<SWCBillsFromBuilderIO> {
-  return (await pRetry(
+}) {
+  return pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.BILLS, {
         query: {
@@ -83,7 +82,7 @@ async function getAllBillsWithOffset({
       retries: 3,
       minTimeout: 10000,
     },
-  )) as SWCBillsFromBuilderIO
+  ) as Promise<SWCBillFromBuilderIO[]>
 }
 
 export async function getBillsFromBuilderIO({
@@ -106,7 +105,7 @@ export async function getBillsFromBuilderIO({
         const validEntry = zodBillSchemaValidation.safeParse(entry)
         return validEntry.success ? validEntry.data : null
       })
-      .filter(Boolean) as SWCBillsFromBuilderIO
+      .filter(Boolean) as { data: SWCBillFromBuilderIO }[]
 
     if (filteredIncompleteBills.length === 0) {
       return []
@@ -131,6 +130,7 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
       bill.caAdministrativeAreaLevel1 ||
       bill.gbAdministrativeAreaLevel1 ||
       bill.usAdministrativeAreaLevel1,
+    countryCode: bill.countryCode.toUpperCase() as SupportedCountryCodes,
     isKeyBill: bill.isKeyBill ?? false,
     keyDates: [
       {
