@@ -54,6 +54,10 @@ export const footerConfig: FooterProps = {
       href: urls.privacyPolicy(),
       text: 'Privacy',
     },
+    {
+      href: urls.privacyCollectionStatement(),
+      text: 'Privacy Collection Statement',
+    },
   ],
   socialLinks: [
     {

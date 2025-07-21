@@ -111,6 +111,7 @@ export const getIntlUrls = (
     termsOfService: () => `${countryPrefix}/terms-of-service`,
     privacyPolicy: () => `${countryPrefix}/privacy`,
     about: () => `${countryPrefix}/about`,
+    privacyCollectionStatement: () => `${countryPrefix}/privacy-collection-statement`,
     // Uses Next.js rewrite function to render the same page as /about
     manifesto: () => `${countryPrefix}/manifesto`,
     resources: () => `${countryPrefix}/resources`,
