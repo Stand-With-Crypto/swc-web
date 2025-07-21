@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 
+import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
 import { PageBills } from '@/components/app/pageBills'
 import { getAllBills } from '@/data/bills/getAllBills'
 import { PageProps } from '@/types'
+import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
-import { getPageContent, getPageDetails } from '@/utils/server/builder/models/page/utils'
-import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
