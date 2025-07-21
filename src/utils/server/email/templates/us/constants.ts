@@ -9,6 +9,7 @@ export enum USEmailActiveActions {
 
 export enum USEmailEnabledActionNFTs {
   CALL = 'CALL',
+  CLAIM_NFT = 'CLAIM_NFT',
 }
 
 export type USEmailEnabledActionNFTsNames = `${USEmailEnabledActionNFTs}`
@@ -17,6 +18,7 @@ export const US_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION: Partial<
   Record<NFTSlug, USEmailEnabledActionNFTs>
 > = {
   [NFTSlug.CALL_REPRESENTATIVE_SEPT_11]: USEmailEnabledActionNFTs.CALL,
+  [NFTSlug.GENIUS_ACT_2025]: USEmailEnabledActionNFTs.CLAIM_NFT,
 }
 
 // Keys in this object are still type enforced, we don't want to use the prisma enum due to errors on dev environment
@@ -81,5 +83,9 @@ export const US_NFT_IMAGES_BY_ACTION: Record<
   CALL: {
     src: '/email/nfts/call.png',
     alt: 'Call Action NFT',
+  },
+  CLAIM_NFT: {
+    src: '/email/nfts/claim-nft.png',
+    alt: 'Claim NFT',
   },
 }

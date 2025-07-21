@@ -38,7 +38,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
     if (districtCount === 0) {
       districts.push({
         state: state as USStateCode,
-        district: '1',
+        district: 'At-Large',
         count: 0,
       })
     } else {

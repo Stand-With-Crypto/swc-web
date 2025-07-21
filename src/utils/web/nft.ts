@@ -90,4 +90,14 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'I voted nft',
     },
   },
+  [NFTSlug.GENIUS_ACT_2025]: {
+    name: 'The GENIUS Act: Passed in the USA',
+    description: `This collectible commemorates the GENIUS Act, the first crypto law in U.S. history, which regulates stablecoins and marks a step toward modernizing the financial system. It honors the Stand With Crypto advocates whose votes, calls, and emails made clear that the Crypto Voter matters`,
+    image: {
+      url: '/nfts/Genius_NFT_2.png',
+      width: 160,
+      height: 160,
+      alt: 'A vintage postage stamp design featuring the U.S. Capitol, labeled "GENIUS ACT July 2025" with a "Passed in the USA" badge in the corner',
+    },
+  },
 }

@@ -23,14 +23,16 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import {
-  formatGetDTSIPeopleFromUSAddressNotFoundReason,
-  getDTSIPeopleFromUSAddress,
-} from '@/hooks/useGetDTSIPeopleFromUSAddress'
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+  getDTSIPeopleFromAddress,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
+  filterDTSIPeopleByUSPoliticalCategory,
   getUSPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
 } from '@/utils/shared/yourPoliticianCategory/us'
@@ -108,7 +110,7 @@ export function Address({
     if (!('dtsiPeople' in liveCongressPersonData)) {
       setError('address', {
         type: 'manual',
-        message: formatGetDTSIPeopleFromUSAddressNotFoundReason(liveCongressPersonData),
+        message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
       })
       return
     } else {
@@ -204,6 +206,7 @@ export function useCongresspersonData({
   address?: FindRepresentativeCallFormValues['address']
 }) {
   const { isLoaded } = useGoogleMapsScript()
+  const countryCode = useCountryCode()
 
   const result = useSWR(
     address && isLoaded ? `useCongresspersonData-${address.description}` : null,
@@ -212,10 +215,12 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromUSAddress(
-        CALL_FLOW_POLITICIANS_CATEGORY,
-        address.description,
-      )
+      const dtsiResponse = await getDTSIPeopleFromAddress({
+        address: address.description,
+        countryCode,
+        filterFn: filterDTSIPeopleByUSPoliticalCategory('legislative-and-executive'),
+      })
+
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
       }

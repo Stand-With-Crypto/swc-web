@@ -9,12 +9,11 @@ export type GetElectoralZoneResult = Awaited<ReturnType<typeof parseCivicApiResu
 
 const logger = getLogger('getElectoralZoneFromAddress')
 
-export function maybeGetElectoralZoneFromAddress({
+export async function maybeGetElectoralZoneFromAddress({
   address,
 }: {
-  address?: Pick<
-    Address,
-    'countryCode' | 'formattedDescription' | 'latitude' | 'longitude' | 'googlePlaceId'
+  address?: Partial<
+    Pick<Address, 'formattedDescription' | 'latitude' | 'longitude' | 'googlePlaceId'>
   > | null
 }) {
   if (!address) {
@@ -27,8 +26,8 @@ export function maybeGetElectoralZoneFromAddress({
     })
   }
   return getElectoralZoneFromAddressOrPlaceId({
-    address: address.formattedDescription,
-    placeId: address?.googlePlaceId || undefined,
+    address: address.formattedDescription || '',
+    placeId: address.googlePlaceId || '',
   })
 }
 

@@ -9,12 +9,9 @@ import {
   DTSI_PersonRoleGroupCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
-import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
-import {
-  filterDTSIPeopleByAUPoliticalCategory,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory/au'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/au'
 
 import type { CampaignMetadata } from './types'
 
@@ -66,17 +63,33 @@ const DTSI_DANIEL_MULINO = {
 /**
  * Per marketing team request, returning Daniel Mulino as fallback if no other local MP is found for the advocate address.
  */
-export function filterDTSIPeopleByAUPoliticalCategoryWithFallback(
-  category: YourPoliticianCategory,
+export function dtsiPeopleFromAddressResponseWithFallback(
+  dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>,
 ) {
-  const baseFilter = filterDTSIPeopleByAUPoliticalCategory(category)
-  return (people: DTSIPeopleByElectoralZoneQueryResult): DTSIPeopleByElectoralZoneQueryResult => {
-    const filtered = baseFilter(people)
-    if (filtered.length > 0) {
-      return filtered
+  if (
+    dtsiPeopleFromAddressResponse?.data &&
+    'notFoundReason' in dtsiPeopleFromAddressResponse.data
+  ) {
+    if (dtsiPeopleFromAddressResponse.data.notFoundReason === 'INVALID_COUNTRY_CODE') {
+      return {
+        ...dtsiPeopleFromAddressResponse,
+        data: { ...dtsiPeopleFromAddressResponse.data, dtsiPeople: [DTSI_DANIEL_MULINO] },
+      }
     }
-    return [DTSI_DANIEL_MULINO]
+    return dtsiPeopleFromAddressResponse
   }
+
+  if (dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data) {
+    if (dtsiPeopleFromAddressResponse.data.dtsiPeople.length > 0) {
+      return dtsiPeopleFromAddressResponse
+    }
+    return {
+      ...dtsiPeopleFromAddressResponse,
+      data: { ...dtsiPeopleFromAddressResponse.data, dtsiPeople: [DTSI_DANIEL_MULINO] },
+    }
+  }
+
+  return dtsiPeopleFromAddressResponse
 }
 
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
