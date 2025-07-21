@@ -27,7 +27,7 @@ export interface ProcessAddressFieldsWithGooglePlacesProcessorEventSchema {
   }
 }
 
-export interface ProcessorResult {
+export interface ProcessAddressFieldsWithGooglePlacesProcessorResult {
   totalSuccess: number
   totalFailed: number
   lastProcessedId?: string
@@ -39,7 +39,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
     onFailure: onScriptFailure,
   },
   { event: PROCESS_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_PROCESSOR_EVENT_NAME },
-  async ({ event, step, logger }): Promise<ProcessorResult> => {
+  async ({ event, step, logger }): Promise<ProcessAddressFieldsWithGooglePlacesProcessorResult> => {
     const { lastProcessedId, take, persist, countryCode } = event.data
 
     if (!persist) {

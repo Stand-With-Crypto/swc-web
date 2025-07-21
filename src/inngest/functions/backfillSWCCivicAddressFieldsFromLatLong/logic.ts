@@ -8,7 +8,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { MINI_BATCH_SIZE } from './config'
+import { MINI_BATCH_SIZE, BACKFILL_ADDRESS_ELECTORAL_ZONE_RETRY_LIMIT } from './config'
 
 const BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_FUNCTION_ID =
   'script.backfill-swc-civic-address-fields-processor'
@@ -18,11 +18,17 @@ const BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_EVENT_NAME =
 export interface BackfillSWCCivicAddressFieldsProcessorEventSchema {
   name: typeof BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_EVENT_NAME
   data: {
-    skip: number
     take: number
     persist?: boolean
     countryCode: SupportedCountryCodes
+    cursor?: string
   }
+}
+
+export interface BackfillSWCCivicAddressFieldsProcessorResult {
+  totalSuccess: number
+  totalFailed: number
+  newCursor?: string
 }
 
 export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
@@ -31,12 +37,12 @@ export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
     onFailure: onScriptFailure,
   },
   { event: BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_EVENT_NAME },
-  async ({ event, step, logger }) => {
-    const { skip, take, persist, countryCode } = event.data
+  async ({ event, step, logger }): Promise<BackfillSWCCivicAddressFieldsProcessorResult> => {
+    const { take, persist, countryCode, cursor } = event.data
 
     if (!persist) {
       logger.info(
-        `DRY RUN MODE for batch with skip: ${skip}, take: ${take}. No changes will be written to the database.`,
+        `DRY RUN MODE for batch with cursor: ${cursor ?? 'none'}, take: ${take}. No changes will be written to the database.`,
       )
     }
 
@@ -47,13 +53,15 @@ export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
           AND: [{ latitude: { not: null } }, { longitude: { not: null } }],
           countryCode,
         },
-        skip,
+        cursor: cursor ? { id: cursor } : undefined,
         take,
         orderBy: { id: 'asc' },
         select: {
           id: true,
           latitude: true,
           longitude: true,
+          administrativeAreaLevel1: true,
+          electoralZone: true,
         },
       }),
     )
@@ -61,7 +69,7 @@ export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
     if (addresses.length === 0) {
       logger.info('No Addresses to process')
       return {
-        totalProcessed: 0,
+        totalSuccess: 0,
         totalFailed: 0,
       }
     }
@@ -75,14 +83,26 @@ export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
         `get-electoral-zones-for-batch-${chunkIndex}`,
         async () =>
           await Promise.allSettled(
-            addressChunk.map(address =>
-              pRetry(async () => await getSWCCivicFieldsToUpdate(address), {
-                retries: 3,
+            addressChunk.map(address => {
+              if (
+                countryCode === SupportedCountryCodes.US &&
+                address.administrativeAreaLevel1 &&
+                address.electoralZone
+              ) {
+                return {
+                  addressId: address.id,
+                  electoralZone: address.electoralZone,
+                  swcCivicAdministrativeArea: address.administrativeAreaLevel1,
+                }
+              }
+
+              return pRetry(async () => await getSWCCivicFieldsToUpdate(address), {
+                retries: BACKFILL_ADDRESS_ELECTORAL_ZONE_RETRY_LIMIT,
                 factor: 2,
                 minTimeout: 1000,
                 maxTimeout: 10000,
-              }),
-            ),
+              })
+            }),
           ),
       )
 
@@ -158,8 +178,10 @@ export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
       chunkIndex++
     }
 
+    const newCursor = addresses.length > 0 ? addresses[addresses.length - 1]?.id : undefined
+
     logger.info(
-      `${!persist ? '[DRY RUN] ' : ''}Finished processing batch with skip: ${skip}.
+      `${!persist ? '[DRY RUN] ' : ''}Finished processing batch with cursor: ${cursor ?? 'none'}.
 			Total addresses successfully updated: ${totalSuccess}.
 			Total addresses failed to update: ${totalFailed}.
 			Total addresses processed: ${addresses.length}.`,
@@ -167,6 +189,7 @@ export const backfillSWCCivicAddressFieldsProcessor = inngest.createFunction(
     return {
       totalSuccess,
       totalFailed,
+      newCursor,
     }
   },
 )

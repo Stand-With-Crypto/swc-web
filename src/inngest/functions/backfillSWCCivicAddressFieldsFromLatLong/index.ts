@@ -11,7 +11,10 @@ import {
   BACKFILL_ADDRESS_ELECTORAL_ZONE_RETRY_LIMIT,
   BATCH_BUFFER,
 } from './config'
-import { backfillSWCCivicAddressFieldsProcessor } from './logic'
+import {
+  backfillSWCCivicAddressFieldsProcessor,
+  BackfillSWCCivicAddressFieldsProcessorResult,
+} from './logic'
 
 const BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_COORDINATOR_FUNCTION_ID =
   'script.backfill-swc-civic-address-fields-coordinator'
@@ -23,6 +26,7 @@ export interface BackfillSWCCivicAddressFieldsCoordinatorEventSchema {
   data: {
     persist?: boolean
     countryCode?: string
+    limit?: number
   }
 }
 
@@ -36,7 +40,7 @@ export const backfillSWCCivicAddressFieldsCoordinator = inngest.createFunction(
     event: BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_COORDINATOR_EVENT_NAME,
   },
   async ({ step, logger, event }) => {
-    const { persist = false, countryCode: countryCodeParam } = event.data
+    const { persist = false, countryCode: countryCodeParam, limit } = event.data
 
     if (!persist) {
       logger.info('DRY RUN MODE: No changes will be written to the database.')
@@ -69,40 +73,66 @@ export const backfillSWCCivicAddressFieldsCoordinator = inngest.createFunction(
       }
     }
 
-    const totalBatches = Math.ceil(addressCount / BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE)
-    logger.info(
-      `Found ${addressCount} addresses to backfill, splitting into ${totalBatches} batches.`,
-    )
+    const addressesToProcess = limit ? Math.min(addressCount, limit) : addressCount
+    const totalBatches = Math.ceil(addressesToProcess / BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE)
 
-    const invokeEvents = []
-    for (let i = 0; i < totalBatches * BATCH_BUFFER; i++) {
-      invokeEvents.push(
-        step.invoke(`invoke-processor-batch-${i}`, {
-          function: backfillSWCCivicAddressFieldsProcessor,
-          data: {
-            skip: i * BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE,
-            take: BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE,
-            persist,
-            countryCode,
-          },
-        }),
+    if (limit) {
+      logger.info(
+        `Found ${addressCount} addresses, limiting to ${limit}. Processing ${addressesToProcess} addresses in ${totalBatches} batches.`,
+      )
+    } else {
+      logger.info(
+        `Found ${addressCount} addresses to backfill, splitting into ${totalBatches} batches.`,
       )
     }
 
-    const results = await Promise.allSettled(invokeEvents)
+    let cursor: string | undefined = undefined
 
-    const failedInvocations = results.filter(r => r.status === 'rejected')
-    if (failedInvocations.length > 0) {
-      logger.error(`Failed to invoke ${failedInvocations.length} processor jobs.`, {
-        errors: failedInvocations.map(f => f.reason),
-      })
+    let totalFailedInvocations = 0
+    let totalSuccessfulInvocations = 0
+    let totalProcessedAddresses = 0
+
+    for (let i = 0; i < totalBatches * BATCH_BUFFER; i++) {
+      if (limit && totalProcessedAddresses >= limit) {
+        logger.info(`Reached limit of ${limit} addresses. Stopping processing.`)
+        break
+      }
+
+      if (i > 0) {
+        await step.sleep('sleep-to-prevent-rate-limiting', 60000)
+      }
+
+      // Calculate take size for this batch, considering the limit
+      const remainingAddresses = limit ? limit - totalProcessedAddresses : undefined
+      const batchSize = remainingAddresses
+        ? Math.min(BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE, remainingAddresses)
+        : BACKFILL_ADDRESS_ELECTORAL_ZONE_BATCH_SIZE
+
+      const results: BackfillSWCCivicAddressFieldsProcessorResult = await step.invoke(
+        `invoke-processor-batch-${i}`,
+        {
+          function: backfillSWCCivicAddressFieldsProcessor,
+          data: {
+            take: batchSize,
+            persist,
+            countryCode,
+            cursor,
+          },
+        },
+      )
+
+      cursor = results.newCursor
+      totalFailedInvocations += results.totalFailed
+      totalSuccessfulInvocations += results.totalSuccess
+      totalProcessedAddresses += results.totalSuccess + results.totalFailed
     }
 
     return {
       dryRun: !persist,
-      message: `Finished processing ${totalBatches} batches.`,
-      successfulBatches: totalBatches - failedInvocations.length,
-      failedBatches: failedInvocations.length,
+      message: `Finished processing ${totalBatches} batches${limit ? ` (limited to ${limit} addresses)` : ''}.`,
+      successfulBatches: totalSuccessfulInvocations,
+      failedBatches: totalFailedInvocations,
+      totalProcessedAddresses,
     }
   },
 )
