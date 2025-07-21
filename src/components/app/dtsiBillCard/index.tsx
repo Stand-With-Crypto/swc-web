@@ -34,6 +34,9 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         <InternalLink
           className={cn(linkBoxLinkClassName, 'line-clamp-3 text-lg font-semibold')}
           data-link-box-subject
+          /**
+           * @todo: Use the billNumber instead of dtsiSlug for the URL (https://github.com/Stand-With-Crypto/swc-web/issues/2525)
+           */
           href={getIntlUrls(countryCode).billDetails(bill.dtsiSlug!)}
         >
           {bill.title}
