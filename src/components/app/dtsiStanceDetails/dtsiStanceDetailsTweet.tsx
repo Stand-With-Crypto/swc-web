@@ -213,7 +213,7 @@ export const DTSIStanceDetailsTweet: React.FC<
       </div>
 
       <div
-        className={cn('mb-3 whitespace-pre-line text-lg', bodyClassName)}
+        className={cn('mb-3 whitespace-pre-line break-words text-lg', bodyClassName)}
         style={{ lineHeight: 1.2 }}
       >
         <TweetBody tweet={stance.tweet} />

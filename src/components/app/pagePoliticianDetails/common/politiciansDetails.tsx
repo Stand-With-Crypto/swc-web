@@ -59,6 +59,7 @@ function PoliticianHeader({
                 <>
                   {dtsiPersonPoliticalAffiliationCategoryDisplayName(
                     person.politicalAffiliationCategory,
+                    countryCode,
                   )}{' '}
                 </>
               )}
