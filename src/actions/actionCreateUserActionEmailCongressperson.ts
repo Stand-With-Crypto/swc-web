@@ -52,6 +52,7 @@ import { userFullName } from '@/utils/shared/userFullName'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
 import { YourPoliticianCategory } from '@/validation/fields/zodYourPoliticianCategory'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -106,25 +107,26 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
         longitude: validatedFields.data.address.longitude || null,
       },
     })
-    if ('notFoundReason' in electoralZone) {
-      Sentry.captureMessage('electoralZone not found', {
-        tags: {
-          domain: 'actionCreateUserActionEmailCongressperson',
-        },
-        extra: {
-          notFoundReason: electoralZone.notFoundReason,
-          address: validatedFields.data.address.formattedDescription,
-        },
+    if ('notFoundReason' in electoralZone || !electoralZone) {
+      logElectoralZoneNotFound({
+        address: validatedFields.data.address.formattedDescription,
+        placeId: validatedFields.data.address.googlePlaceId,
+        countryCode,
+        notFoundReason: electoralZone.notFoundReason ?? 'ELECTORAL_ZONE_NOT_FOUND',
+        domain: 'actionCreateUserActionEmailCongressperson',
       })
-    } else if (electoralZone.zoneName) {
+    } else {
       validatedFields.data.address.electoralZone = electoralZone.zoneName
+      if (electoralZone.administrativeArea) {
+        validatedFields.data.address.swcCivicAdministrativeArea = electoralZone.administrativeArea
+      }
     }
   } catch (error) {
     logger.error('error getting `electoralZone`:' + error)
     Sentry.captureException(error, {
+      fingerprint: ['error getting electoralZone'],
       tags: {
         domain: 'actionCreateUserActionEmailCongressperson',
-        message: 'error getting electoralZone',
       },
     })
   }

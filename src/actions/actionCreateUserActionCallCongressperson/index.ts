@@ -37,6 +37,7 @@ import { USUserActionCallCampaignName } from '@/utils/shared/userActionCampaigns
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 
 const getCreateActionCallCongresspersonInputValidationSchema = (
   countryCode: SupportedCountryCodes,
@@ -133,25 +134,26 @@ async function _actionCreateUserActionCallCongressperson(
         longitude: validatedInput.data.address.longitude || null,
       },
     })
-    if ('notFoundReason' in electoralZone) {
-      Sentry.captureMessage('electoralZone not found', {
-        tags: {
-          domain: 'actionCreateUserActionCallCongressperson',
-        },
-        extra: {
-          notFoundReason: electoralZone.notFoundReason,
-          address: validatedInput.data.address.formattedDescription,
-        },
+    if ('notFoundReason' in electoralZone || !electoralZone) {
+      logElectoralZoneNotFound({
+        address: validatedInput.data.address.formattedDescription,
+        placeId: validatedInput.data.address.googlePlaceId,
+        countryCode,
+        notFoundReason: electoralZone.notFoundReason ?? 'ELECTORAL_ZONE_NOT_FOUND',
+        domain: 'actionCreateUserActionCallCongressperson',
       })
-    } else if (electoralZone.zoneName) {
+    } else {
       validatedInput.data.address.electoralZone = electoralZone.zoneName
+      if (electoralZone.administrativeArea) {
+        validatedInput.data.address.swcCivicAdministrativeArea = electoralZone.administrativeArea
+      }
     }
   } catch (error) {
     logger.error('error getting `electoralZone`:' + error)
     Sentry.captureException(error, {
+      fingerprint: ['error getting electoralZone'],
       tags: {
         domain: 'actionCreateUserActionCallCongressperson',
-        message: 'error getting electoralZone',
       },
     })
   }

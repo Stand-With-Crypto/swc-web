@@ -42,7 +42,7 @@ export async function getDTSIPeopleFromAddress({
   const data = await fetchReq(
     apiUrls.dtsiPeopleByElectoralZone({
       electoralZone: electoralZone.zoneName,
-      stateCode: electoralZone.stateCode,
+      stateCode: electoralZone.administrativeArea,
       countryCode,
     }),
   )

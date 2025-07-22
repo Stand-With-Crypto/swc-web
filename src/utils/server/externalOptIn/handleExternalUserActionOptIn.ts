@@ -291,24 +291,24 @@ async function maybeUpsertUser({
         },
       })
 
-      if ('notFoundReason' in electoralZone) {
+      if ('notFoundReason' in electoralZone || !electoralZone) {
         logElectoralZoneNotFound({
           address: dbAddress.formattedDescription,
-          notFoundReason: electoralZone.notFoundReason,
+          notFoundReason: electoralZone.notFoundReason || 'ELECTORAL_ZONE_NOT_FOUND',
           domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
-      } else if (electoralZone.zoneName) {
+      } else {
         dbAddress.electoralZone = electoralZone.zoneName
-      }
-      if ('zoneName' in electoralZone) {
-        dbAddress.electoralZone = `${electoralZone.zoneName}`
+        if (electoralZone.administrativeArea) {
+          dbAddress.swcCivicAdministrativeArea = electoralZone.administrativeArea
+        }
       }
     } catch (error) {
       logger.error('error getting `electoralZone`:' + error)
       Sentry.captureException(error, {
+        fingerprint: ['error getting electoralZone'],
         tags: {
           domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-          message: 'error getting electoralZone',
         },
       })
     }
