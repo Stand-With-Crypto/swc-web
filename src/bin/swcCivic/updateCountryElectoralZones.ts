@@ -8,12 +8,26 @@ import { getGeometryFromGISData } from '@/bin/swcCivic/utils/getGeometryFromGISD
 import { readGISData } from '@/bin/swcCivic/utils/readGISData'
 import { electoralZones as ElectoralZones } from '@/data/prisma/generated/swc-civic'
 import { civicPrismaClient } from '@/utils/server/swcCivic/civicPrismaClient'
+import {
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 interface ElectoralZoneToUpdate {
   zoneName: string
   zoneCoordinates: Geometry
   administrativeArea?: string
   countryCode: string
+}
+
+function getCountriesToUpdateFromEnv() {
+  const countriesToUpdate = process.env.COUNTRIES_TO_UPDATE?.split(',')
+
+  if (!countriesToUpdate) {
+    return ORDERED_SUPPORTED_COUNTRIES
+  }
+
+  return countriesToUpdate.map(countryCode => countryCode as SupportedCountryCodes)
 }
 
 /**
@@ -23,17 +37,18 @@ interface ElectoralZoneToUpdate {
  * npm run ts src/bin/swcCivic/compareGISDataWithDTSI.ts
  */
 async function updateCountryElectoralZones() {
+  const countriesToUpdate = getCountriesToUpdateFromEnv()
+
   for (const {
     countryCode,
     dataFilePath,
     electoralZoneNameField,
     normalizeElectoralZoneName,
     normalizeAdministrativeArea,
-    persist,
     administrativeAreaFieldPath,
     administrativeAreaFilePath,
   } of electoralZonesDataConfigs) {
-    if (!persist) {
+    if (!countriesToUpdate.includes(countryCode)) {
       console.log(`Skipping ${countryCode} because it is not set to persist`)
       continue
     }

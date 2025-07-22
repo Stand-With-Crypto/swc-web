@@ -27,18 +27,15 @@ If you are a core contributor and need to make changes to the database, use the 
 
 If you are not a core contributor or want to run the database locally, follow these steps:
 
-1. Download the [geographic data](https://drive.google.com/drive/folders/16MaPdsQojd9_dioiQBK4cMuMHqy16cG3?usp=drive_link) for each country. If you do not have access to the folder, refer to the [Useful Links](#useful-links) section below.
-2. Save the files into a `data` folder at the root of the project. If you save them elsewhere, ensure the path is correctly set in the [configuration file](#configuration-file)
-3. Generate the Prisma schema:
+1. Generate the Prisma schema:
    ```bash
    npm run db:generate
    ```
-4. Start the Docker containers:
+2. Start the Docker containers:
    ```bash
    npm run db:start-dev
    ```
-5. Ensure all `persist` flags in the [configuration file](#configuration-file) are set to `true`.
-6. Seed the database:
+3. Seed the database:
    ```bash
    npm run db:seed-swc-civic
    ```
