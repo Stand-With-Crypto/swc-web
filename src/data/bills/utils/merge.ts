@@ -28,6 +28,23 @@ export function mergeBillFromBuilderIOAndDTSI(
   }
 }
 
+export function mergePartialBillFromBuilderIOAndDTSI(
+  billFromBuilderIO: SWCBillCardInfo,
+  billFromDTSI: BillCardInfoFromDTSI | null | undefined,
+): SWCBillCardInfo {
+  if (!billFromDTSI) {
+    return billFromBuilderIO
+  }
+
+  return {
+    billNumber: billFromBuilderIO.billNumber,
+    computedStanceScore: billFromDTSI.computedStanceScore,
+    dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
+    isKeyBill: billFromBuilderIO.isKeyBill || false,
+    title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
+  }
+}
+
 export function mergeBillsFromBuilderIOAndDTSI(
   billsFromBuilderIO: SWCBill[],
   billsFromDTSI: BillCardInfoFromDTSI[] | null | undefined,
@@ -43,13 +60,6 @@ export function mergeBillsFromBuilderIOAndDTSI(
       return billFromBuilderIO
     }
 
-    return {
-      billNumber: billFromBuilderIO.billNumber,
-      computedStanceScore: billFromDTSI.computedStanceScore,
-      dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
-      dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
-      isKeyBill: billFromBuilderIO.isKeyBill || false,
-      title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
-    }
+    return mergePartialBillFromBuilderIOAndDTSI(billFromBuilderIO, billFromDTSI)
   })
 }

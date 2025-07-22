@@ -18,6 +18,8 @@ const logger = getLogger(`builderIOEvents`)
 
 const isProduction = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
+type BillFilters = Partial<{ dtsiSlug: string; isKeyBill: boolean }>
+
 export async function getBillFromBuilderIO(billNumber: string): Promise<SWCBill | null> {
   try {
     const entry = await pRetry(
@@ -58,11 +60,13 @@ export async function getBillFromBuilderIO(billNumber: string): Promise<SWCBill 
 const LIMIT = 100
 
 function getAllBillsWithOffset({
-  offset,
   countryCode,
+  filters,
+  offset,
 }: {
-  offset: number
   countryCode: SupportedCountryCodes
+  filters?: BillFilters
+  offset: number
 }) {
   return pRetry(
     () =>
@@ -70,7 +74,8 @@ function getAllBillsWithOffset({
         query: {
           ...(isProduction && { published: 'published' }),
           data: {
-            countryCode: countryCode.toUpperCase(),
+            countryCode: countryCode?.toUpperCase(),
+            ...filters,
           },
         },
         includeUnpublished: !isProduction,
@@ -87,17 +92,19 @@ function getAllBillsWithOffset({
 
 export async function getBillsFromBuilderIO({
   countryCode,
+  filters,
 }: {
   countryCode: SupportedCountryCodes
+  filters?: BillFilters
 }): Promise<SWCBill[]> {
   try {
     let offset = 0
 
-    const entries = await getAllBillsWithOffset({ offset, countryCode })
+    const entries = await getAllBillsWithOffset({ countryCode, filters, offset })
 
     while (entries.length === LIMIT + offset) {
       offset += entries.length
-      entries.push(...(await getAllBillsWithOffset({ offset, countryCode })))
+      entries.push(...(await getAllBillsWithOffset({ countryCode, filters, offset })))
     }
 
     const filteredIncompleteBills = entries
@@ -120,6 +127,20 @@ export async function getBillsFromBuilderIO({
     })
     return []
   }
+}
+
+export async function getBillFromBuilderIOByDTSISlug(
+  countryCode: SupportedCountryCodes,
+  dtsiSlug: string,
+) {
+  const bills = await getBillsFromBuilderIO({
+    countryCode,
+    filters: {
+      dtsiSlug,
+    },
+  })
+
+  return bills.length > 0 ? bills[0] : null
 }
 
 function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
