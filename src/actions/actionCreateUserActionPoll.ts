@@ -43,7 +43,7 @@ async function actionCreateUserActionPollWithoutMiddleware(
 ) {
   logger.info('triggered')
 
-  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({ context: 'unauthenticated' })
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({ context: 'authenticated' })
 
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
