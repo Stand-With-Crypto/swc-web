@@ -1,8 +1,8 @@
 import { runBin } from '@/bin/runBin'
-import { readGISData } from '@/bin/swcCivic/utils/readGISData'
-import { getGeometryFromGISData } from '@/bin/swcCivic/utils/getGeometryFromGISData'
 import { electoralZonesDataConfigs } from '@/bin/swcCivic/electoralZoneDataConfigs'
 import { findMatchingAdministrativeAreaIndex } from '@/bin/swcCivic/utils/findMatchingAdministrativeAreaIndex'
+import { getGeometryFromGISData } from '@/bin/swcCivic/utils/getGeometryFromGISData'
+import { readGISData } from '@/bin/swcCivic/utils/readGISData'
 
 async function auditAdministrativeAreaAndElectoralZoneAssociations() {
   for (const {
