@@ -22,6 +22,7 @@ export function mergeBillFromBuilderIOAndDTSI(
     dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
     dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
     officialBillUrl: billFromBuilderIO.officialBillUrl || billFromDTSI.congressDotGovUrl,
+    relationships: billFromDTSI.relationships,
     summary: billFromBuilderIO.summary || billFromDTSI.summary,
     title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
   }
@@ -43,8 +44,8 @@ export function mergeBillsFromBuilderIOAndDTSI(
     }
 
     return {
+      billNumber: billFromBuilderIO.billNumber,
       computedStanceScore: billFromDTSI.computedStanceScore,
-      dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
       title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
     }
   })

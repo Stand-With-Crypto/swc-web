@@ -3,16 +3,16 @@ import { ReactElement } from 'react'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { SWCBillCardInfo } from '@/data/bills/types'
 import { DTSI_BillCardFragment } from '@/data/dtsi/generated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { SWCBill } from '@/utils/shared/zod/getSWCBills'
 import { cn } from '@/utils/web/cn'
 
 export type DTSIBill = DTSI_BillCardFragment
 
 interface DTSIBillCardProps {
-  bill: Pick<SWCBill, 'dtsiSlug' | 'title'>
+  bill: SWCBillCardInfo
   description?: string
   countryCode: SupportedCountryCodes
   children?: ReactElement<typeof CryptoSupportHighlight>
@@ -34,10 +34,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         <InternalLink
           className={cn(linkBoxLinkClassName, 'line-clamp-3 text-lg font-semibold')}
           data-link-box-subject
-          /**
-           * @todo: Use the billNumber instead of dtsiSlug for the URL (https://github.com/Stand-With-Crypto/swc-web/issues/2525)
-           */
-          href={getIntlUrls(countryCode).billDetails(bill.dtsiSlug!)}
+          href={getIntlUrls(countryCode).billDetails(bill.billNumber)}
         >
           {bill.title}
         </InternalLink>

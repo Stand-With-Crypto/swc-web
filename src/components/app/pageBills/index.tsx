@@ -19,8 +19,8 @@ const KEY_BILLS = ['HR3633', 'S1582', 'hr4763', 'hjres109', 'SJRES3', 'HJRES25',
 export function PageBills(props: PageBillsProps) {
   const { title, description, bills, countryCode } = props
 
-  const [keyBills, otherBills] = partition(bills, bill => KEY_BILLS.includes(bill.dtsiSlug!))
-  const sortedKeyBills = sortBy(keyBills, bill => KEY_BILLS.indexOf(bill.dtsiSlug!))
+  const [keyBills, otherBills] = partition(bills, bill => KEY_BILLS.includes(bill.billNumber))
+  const sortedKeyBills = sortBy(keyBills, bill => KEY_BILLS.indexOf(bill.billNumber))
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
@@ -39,7 +39,7 @@ export function PageBills(props: PageBillsProps) {
           </PageTitle>
           <div className="flex flex-col gap-4 lg:gap-8">
             {results.map(bill => (
-              <DTSIBillCard bill={bill} countryCode={countryCode} key={bill.dtsiSlug}>
+              <DTSIBillCard bill={bill} countryCode={countryCode} key={bill.billNumber}>
                 <CryptoSupportHighlight
                   className="flex-shrink-0 rounded-full text-base"
                   stanceScore={bill.computedStanceScore}
