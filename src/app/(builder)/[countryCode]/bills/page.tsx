@@ -36,7 +36,7 @@ export default async function BillsPage(props: PageProps) {
   return (
     <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
       <RenderBuilderContent content={content} model={PAGE_MODEL} />
-      <PageBills bills={results} countryCode={(await props.params).countryCode} />
+      <PageBills bills={results} countryCode={countryCode} />
     </BuilderPageLayout>
   )
 }
