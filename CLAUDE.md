@@ -103,7 +103,7 @@ src/app/
 
 - **Framework**: Next.js 15 with App Router and React Server Components
 - **Database**: Prisma ORM with MySQL (PlanetScale) + PostgreSQL (Neon)
-- **Styling**: Tailwind CSS + Radix UI components
+- **Styling**: Tailwind CSS + Radix UI components + shadcn/ui component patterns
 - **Authentication**: Thirdweb for Web3 wallets + traditional email
 - **Background Jobs**: Inngest for resilient workflows
 - **Analytics**: Mixpanel, Google Analytics
@@ -185,6 +185,19 @@ export async function actionCreateUserAction(data: FormData) {
 - Country-specific routing with `[countryCode]` segments
 - Geo-gating for certain features (US-only vs international)
 - Address normalization supporting global formats
+
+### CTA Creation Pattern
+
+Country-specific Call-to-Action (CTA) configuration follows a structured pattern:
+
+- **Main CTA Config**: `src/components/app/userActionGridCTAs/constants/ctas.tsx` imports country-specific CTAs
+- **Country Files**: Each country has its own CTA file (e.g., `us/usCtas.tsx`, `au/auCtas.tsx`, `ca/caCtas.tsx`, `gb/gbCtas.tsx`)
+- **Structure**: Each CTA defines:
+  - `UserActionType` mapping with title, description, image
+  - Multiple campaigns per action type with active/inactive states
+  - `WrapperComponent` for dialog handling and authentication
+  - Country-specific campaign names and messaging
+- **Usage**: CTAs are retrieved via `getUserActionCTAsByCountry(countryCode)` with graceful fallback to US config
 
 ## Testing Strategy
 
