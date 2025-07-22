@@ -123,6 +123,16 @@ jobs:
             sleep 4;
           done
 
+      # Install GDAL for the db:seed-swc-civic command
+      # The cypress_build.sh script runs db:seed-swc-civic, which uses the ogr2ogr npm package
+      # This npm package is a Node.js wrapper that requires the native ogr2ogr command-line tool
+      # ogr2ogr is part of GDAL and processes geospatial data files (GeoJSON, Shapefiles, etc.)
+      # Without this, the build fails with "spawn ogr2ogr ENOENT"
+      - name: Install GDAL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin
+
       - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6.7.0
