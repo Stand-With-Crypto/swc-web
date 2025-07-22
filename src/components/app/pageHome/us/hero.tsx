@@ -7,7 +7,7 @@ const countryCode = SupportedCountryCodes.US
 
 const ClarityActWrapper = getEmailActionWrapperComponentByCampaignName({
   countryCode,
-  campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+  campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
 })
 
 export function UsHero() {
@@ -30,12 +30,12 @@ export function UsHero() {
                 videoSrc: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
                 fallback: {
                   src: '/homepageHero.webp',
-                  alt: 'Email your House Member to pass the CLARITY Act',
+                  alt: 'Stand With Crypto Shield',
                 },
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Take action">
-                Email your House Member to pass the CLARITY Act
+                Email your Senators to pass crypto legislation
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </ClarityActWrapper>
@@ -47,12 +47,12 @@ export function UsHero() {
                 videoSrc: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4',
                 fallback: {
                   src: '/homepageHero.webp',
-                  alt: 'Email your House Member to pass the CLARITY Act',
+                  alt: 'Stand With Crypto Shield',
                 },
               }}
             >
               <HeroAnnouncementCard.CTA buttonText="Take action">
-                Email your House Member to pass the CLARITY Act
+                Email your Senators to pass crypto legislation
               </HeroAnnouncementCard.CTA>
             </HeroAnnouncementCard.Image>
           </ClarityActWrapper>

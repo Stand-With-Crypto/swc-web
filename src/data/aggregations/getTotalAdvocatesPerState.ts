@@ -1,22 +1,23 @@
 import 'server-only'
 
 import { prismaClient } from '@/utils/server/prismaClient'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 type TotalAdvocatesPerStateQuery = {
   state: string
   totalAdvocates: bigint
 }[]
 
-const fetchAllFromPrisma = async (countryCode: SupportedCountryCodes) => {
+const fetchAllFromPrismaByState = async (stateCode: USStateCode) => {
   return prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
     SELECT
       address.administrative_area_level_1 AS state,
       COUNT(user.id) AS totalAdvocates
     FROM address
     JOIN user ON user.address_id = address.id
-    WHERE address.country_code = ${countryCode}
-    AND address.administrative_area_level_1 != ''
+    WHERE address.administrative_area_level_1 = ${stateCode}
+    AND address.country_code = ${DEFAULT_SUPPORTED_COUNTRY_CODE}
     GROUP BY address.administrative_area_level_1;
   `
 }
@@ -28,8 +29,8 @@ const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerSt
   }))
 }
 
-export const getTotalAdvocatesPerState = async (countryCode: SupportedCountryCodes) => {
-  const rawTotalAdvocatesPerState = await fetchAllFromPrisma(countryCode)
+export const getTotalAdvocatesByState = async (stateCode: USStateCode) => {
+  const rawTotalAdvocatesPerState = await fetchAllFromPrismaByState(stateCode)
   const totalAdvocatesPerState = parseTotalAdvocatesPerState(rawTotalAdvocatesPerState)
 
   return totalAdvocatesPerState

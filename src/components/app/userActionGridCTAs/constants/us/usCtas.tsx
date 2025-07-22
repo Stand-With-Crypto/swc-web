@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
 import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -11,11 +12,13 @@ import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
+  USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
   USUserActionNftMintCampaignName,
@@ -54,7 +57,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email Your House Rep',
+    title: 'Email Your Senator',
     description: 'Pass Crucial Crypto Legislation',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
@@ -63,7 +66,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email Your House Rep',
         description: 'Pass crucial crypto legislation',
         canBeTriggeredMultipleTimes: true,
@@ -196,6 +199,30 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
+        isCampaignActive: false,
+        title: 'Email Your House Rep',
+        description: 'Pass Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
+        isCampaignActive: true,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
         }),
       },
     ],
@@ -444,6 +471,28 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'All mint proceeds are donated to the movement.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormNFTMintDialog,
+      },
+    ],
+  },
+  [UserActionType.CLAIM_NFT]: {
+    title: 'Claim your commemorative NFT',
+    description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    mobileCTADescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    campaignsModalDescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    image: '/actionTypeIcons/claimNFT.png',
+    campaigns: [
+      {
+        actionType: UserActionType.CLAIM_NFT,
+        campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
+        isCampaignActive: true,
+        title: 'Claim your commemorative GENIUS Act NFT',
+        description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+        canBeTriggeredMultipleTimes: false,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
+            {children}
+          </UserActionFormClaimNFTDialog>
+        ),
       },
     ],
   },

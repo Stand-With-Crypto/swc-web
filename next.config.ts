@@ -36,6 +36,7 @@ const contentSecurityPolicy = {
         */
         "'unsafe-inline'",
     isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
+    'https://snap.licdn.com/li.lms-analytics/insight.min.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
@@ -440,6 +441,12 @@ const nextConfig: NextConfig = {
         source: '/s/founders-push/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/clarity-genius/:sessionId*',
+        destination:
+          '/action/email/clarity_genius_acts_jul_17_2025?utm_source=swc&utm_medium=sms&utm_campaign=sms-clarity-genius-1&sessionId=:sessionId*',
         permanent: true,
       },
       {

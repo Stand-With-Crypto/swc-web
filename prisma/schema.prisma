@@ -39,9 +39,6 @@ model Address {
   postalCode               String   @map("postal_code") // ex: 06890
   postalCodeSuffix         String   @map("postal_code_suffix") // ex 7620
   countryCode              String   @map("country_code")
-  // this field is optional because not all addresses will have a congressional district associated with them
-  usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
-  // this field is going to replace the usCongressionalDistrict field
   electoralZone            String?  @map("electoral_zone")
   latitude                 Float?   @map("latitude")
   longitude                Float?   @map("longitude")
@@ -283,6 +280,7 @@ enum UserActionType {
   VOTER_REGISTRATION
   VOTING_DAY
   VOTING_INFORMATION_RESEARCHED
+  CLAIM_NFT
 }
 
 model UserAction {
@@ -473,13 +471,12 @@ model UserActionVotingDay {
 }
 
 model UserActionViewKeyRaces {
-  id                      String     @id @default(uuid())
-  userAction              UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
-  usCongressionalDistrict String?    @map("us_congressional_district")
-  electoralZone           String?    @map("electoral_zone")
-  usaState                String?    @map("usa_state")
-  stateCode               String?    @map("state_code")
-  constituency            String?    @map("constituency")
+  id            String     @id @default(uuid())
+  userAction    UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
+  electoralZone String?    @map("electoral_zone")
+  usaState      String?    @map("usa_state")
+  stateCode     String?    @map("state_code")
+  constituency  String?    @map("constituency")
 
   // We're making it flexible to store the state code and constituency for non-US countries
   // TODO: backfill existing data with the correct state code and constituency

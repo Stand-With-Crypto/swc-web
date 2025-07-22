@@ -1,26 +1,27 @@
 'use client'
 
+import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { CampaignWrapper } from '@/components/app/navbarGlobalBanner/common/campaignWrapper'
-import { getDeeplinkUrlByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getDeeplinkUrl'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { getUserActionDeeplink } from '@/utils/shared/urlsDeeplinkUserActions'
 
 export function UsCurrentNavbarGlobalBannerCampaign() {
-  const campaignUrl = getDeeplinkUrlByCampaignName({
-    countryCode: SupportedCountryCodes.US,
-    campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+  const campaignUrl = getUserActionDeeplink({
+    actionType: UserActionType.CLAIM_NFT,
+    config: {
+      countryCode: SupportedCountryCodes.US,
+    },
   })
 
   return (
-    <CampaignWrapper url={campaignUrl}>
+    <CampaignWrapper>
       <p>
-        Key Vote Alert – Floor Vote on the CLARITY ACT
-        <br className="block sm:hidden" />
-        <span className="hidden sm:inline"> – </span>
+        Historic Crypto Wins! U.S. House Passes CLARITY and GENIUS Acts
+        <span> – </span>
         <strong>
-          <Link href={campaignUrl}>Email your House Member now</Link>
+          <Link href={campaignUrl}>Claim your commemorative NFT!</Link>
         </strong>
       </p>
     </CampaignWrapper>

@@ -103,13 +103,13 @@ async function _actionCreateUserActionVotingInformationResearched(
     stateCode:
       existingVotingInformationResearchAction?.userActionVotingInformationResearched?.address
         ?.administrativeAreaLevel1 ?? null,
-    congressionalDistrict:
+    electoralZone:
       existingVotingInformationResearchAction?.userActionVotingInformationResearched?.address
-        ?.usCongressionalDistrict ?? null,
+        ?.electoralZone ?? null,
   }
   const newAddress = {
     stateCode: validatedInput.data.address?.administrativeAreaLevel1 ?? null,
-    congressionalDistrict: validatedInput.data.address?.usCongressionalDistrict ?? null,
+    electoralZone: validatedInput.data.address?.electoralZone ?? null,
   }
 
   if (existingVotingInformationResearchAction) {
@@ -119,7 +119,7 @@ async function _actionCreateUserActionVotingInformationResearched(
 
     const shouldUpdateAction =
       existingActionAddress.stateCode !== newAddress.stateCode ||
-      existingActionAddress.congressionalDistrict !== newAddress.congressionalDistrict
+      existingActionAddress.electoralZone !== newAddress.electoralZone
 
     if (shouldUpdateAction) {
       const { updatedUser } = await updateAction({

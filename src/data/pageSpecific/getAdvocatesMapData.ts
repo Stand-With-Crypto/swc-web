@@ -1,10 +1,11 @@
 import 'server-only'
 
-import { getTotalAdvocatesPerState } from '@/data/aggregations/getTotalAdvocatesPerState'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getTotalAdvocatesPerStateByCountry } from '@/data/aggregations/getTotalAdvocatesPerStateByCountry'
 
 export async function getAdvocatesMapData({ countryCode }: { countryCode: SupportedCountryCodes }) {
-  const [totalAdvocatesPerState] = await Promise.all([getTotalAdvocatesPerState(countryCode)])
+  const results = await getTotalAdvocatesPerStateByCountry(countryCode)
+  const totalAdvocatesPerState = results.flat()
 
   return {
     advocatesMapData: {
@@ -12,5 +13,4 @@ export async function getAdvocatesMapData({ countryCode }: { countryCode: Suppor
     },
   }
 }
-
 export type GetAdvocatesMapDataResponse = Awaited<ReturnType<typeof getAdvocatesMapData>>

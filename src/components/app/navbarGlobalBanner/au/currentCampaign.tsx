@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 import { CampaignWrapper } from '@/components/app/navbarGlobalBanner/common/campaignWrapper'
@@ -12,7 +14,7 @@ export function AuCurrentNavbarGlobalBannerCampaign() {
   })
 
   return (
-    <CampaignWrapper url={campaignUrl}>
+    <CampaignWrapper>
       <p>
         <strong>
           <Link href={campaignUrl}>Email Your MP</Link>

@@ -10,7 +10,7 @@ import { ReactNode } from 'react'
  *   const campaignUrl = urls.emailDeeplink();
  *
  *   return (
- *     <CampaignWrapper url={campaignUrl}>
+ *     <CampaignWrapper>
  *       <p>
  *         KEY VOTE ALERT IN THE HOUSE – VOTE "YES" ON H.J.RES.25
  *         {isMobile ? <br /> : <span> – </span>}
@@ -28,7 +28,7 @@ import { ReactNode } from 'react'
  * }
  */
 
-export function CampaignWrapper({ children }: { children: ReactNode; url: string }) {
+export function CampaignWrapper({ children }: { children: ReactNode }) {
   return (
     <div className="flex w-full items-center justify-center bg-primary-cta px-1 py-3">
       <div className="flex h-full w-full items-center text-center">
