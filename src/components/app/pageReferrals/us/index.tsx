@@ -1,6 +1,8 @@
+'use client'
+
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { PageReferralsWrapper } from '@/components/app/pageReferrals'
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
 import { UsPageReferralsHeading } from '@/components/app/pageReferrals/us/heading'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
@@ -29,7 +31,7 @@ export function UsPageReferrals(props: PageReferralsProps) {
   const totalPages = props.totalPages || COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
-    <PageReferrals.Wrapper>
+    <PageReferralsWrapper>
       <UsPageReferralsHeading
         stateName={stateCode ? getUSStateNameFromStateCode(stateCode) : undefined}
       />
@@ -52,6 +54,6 @@ export function UsPageReferrals(props: PageReferralsProps) {
           totalPages={totalPages}
         />
       </div>
-    </PageReferrals.Wrapper>
+    </PageReferralsWrapper>
   )
 }

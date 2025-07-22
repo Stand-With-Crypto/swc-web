@@ -1,6 +1,6 @@
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { PageReferralsWrapper } from '@/components/app/pageReferrals'
 import { AuPageReferralsHeading } from '@/components/app/pageReferrals/au/heading'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisionRanking'
@@ -29,7 +29,7 @@ export function AuPageReferrals(props: PageReferralsProps) {
   const totalPages = props.totalPages || COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
-    <PageReferrals.Wrapper>
+    <PageReferralsWrapper>
       <AuPageReferralsHeading
         stateName={stateCode ? getAUStateNameFromStateCode(stateCode) : undefined}
       />
@@ -52,6 +52,6 @@ export function AuPageReferrals(props: PageReferralsProps) {
           totalPages={totalPages}
         />
       </div>
-    </PageReferrals.Wrapper>
+    </PageReferralsWrapper>
   )
 }
