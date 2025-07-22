@@ -155,8 +155,6 @@ export function UsSuspenseYourDistrictRank({ filteredByState }: { filteredByStat
     void checkIfValidAddress()
   }, [checkIfValidAddress])
 
-  console.log('address sent', address)
-
   const districtResponse = useGetDistrictFromAddress({
     address: address?.description,
     placeId: address?.place_id,
