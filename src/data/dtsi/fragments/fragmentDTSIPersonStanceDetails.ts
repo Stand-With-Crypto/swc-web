@@ -17,6 +17,10 @@ export const fragmentDTSIPersonStanceDetails = /* GraphQL */ `
         formattedSlug
         dateIntroduced
         computedStanceScore
+        votes {
+          voteType
+          significanceDescription
+        }
       }
     }
     quote {
