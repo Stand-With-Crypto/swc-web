@@ -1,6 +1,7 @@
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferralsHeading } from '@/components/app/pageReferrals/ca/heading'
+import { PageReferrals } from '@/components/app/pageReferrals'
+import { CaPageReferralsHeading } from '@/components/app/pageReferrals/ca/heading'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import { CaUserConstituencyRank } from '@/components/app/pageReferrals/ca/userConstituencyRank'
 import { CaYourConstituencyRank } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
@@ -31,8 +32,8 @@ export function CaPageReferrals(props: PageReferralsProps) {
   const totalPages = props.totalPages || COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
-    <div className="standard-spacing-from-navbar container space-y-8">
-      <PageReferralsHeading
+    <PageReferrals.Wrapper>
+      <CaPageReferralsHeading
         stateName={provinceCode ? getCAProvinceOrTerritoryNameFromCode(provinceCode) : undefined}
       />
       {!provinceCode && (
@@ -56,6 +57,6 @@ export function CaPageReferrals(props: PageReferralsProps) {
           totalPages={totalPages}
         />
       </div>
-    </div>
+    </PageReferrals.Wrapper>
   )
 }

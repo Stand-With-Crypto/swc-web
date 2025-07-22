@@ -1,7 +1,8 @@
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { PageReferrals } from '@/components/app/pageReferrals'
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
-import { PageReferralsHeading } from '@/components/app/pageReferrals/us/heading'
+import { UsPageReferralsHeading } from '@/components/app/pageReferrals/us/heading'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
@@ -28,8 +29,8 @@ export function UsPageReferrals(props: PageReferralsProps) {
   const totalPages = props.totalPages || COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
-    <div className="standard-spacing-from-navbar container space-y-8">
-      <PageReferralsHeading
+    <PageReferrals.Wrapper>
+      <UsPageReferralsHeading
         stateName={stateCode ? getUSStateNameFromStateCode(stateCode) : undefined}
       />
       {!stateCode && (
@@ -51,6 +52,6 @@ export function UsPageReferrals(props: PageReferralsProps) {
           totalPages={totalPages}
         />
       </div>
-    </div>
+    </PageReferrals.Wrapper>
   )
 }

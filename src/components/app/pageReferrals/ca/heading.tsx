@@ -1,5 +1,6 @@
 'use client'
 
+import { PageReferrals } from '@/components/app/pageReferrals'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
@@ -9,25 +10,25 @@ interface PageReferralsHeadingProps {
   stateName?: string
 }
 
-export function PageReferralsHeading({ stateName }: PageReferralsHeadingProps) {
+export function CaPageReferralsHeading({ stateName }: PageReferralsHeadingProps) {
   const { isLoggedIn, isLoading } = useSession()
   const hasHydrated = useHasHydrated()
 
   if (!isLoggedIn || isLoading || !hasHydrated || stateName) {
     return (
-      <section className="space-y-7 text-center">
+      <PageReferrals.Heading>
         <PageTitle>Constituencies Leaderboard</PageTitle>
         <PageSubTitle>
           {stateName
             ? `See which constituencies in ${stateName} have the most advocates.`
             : 'See which constituencies have the most number of Stand With Crypto advocates.'}
         </PageSubTitle>
-      </section>
+      </PageReferrals.Heading>
     )
   }
 
   return (
-    <section className="space-y-7 text-center">
+    <PageReferrals.Heading>
       <PageTitle>
         Invite a friend to join
         <br />
@@ -36,6 +37,6 @@ export function PageReferralsHeading({ stateName }: PageReferralsHeadingProps) {
       <PageSubTitle>
         Send your friends your unique referral code to encourage them to signup and take action
       </PageSubTitle>
-    </section>
+    </PageReferrals.Heading>
   )
 }
