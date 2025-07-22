@@ -2,10 +2,10 @@ import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageReferralsHeading } from '@/components/app/pageReferrals/ca/heading'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
+import { CaUserConstituencyRank } from '@/components/app/pageReferrals/ca/userConstituencyRank'
 import { CaYourConstituencyRank } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
 import {
   ReferralsCounter,
-  UserElectoralZoneRank,
   UserReferralsCount,
 } from '@/components/app/pageReferrals/common/referralsCounter'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
@@ -40,7 +40,7 @@ export function CaPageReferrals(props: PageReferralsProps) {
           <UserReferralUrlWithApi />
           <ReferralsCounter>
             <UserReferralsCount />
-            <UserElectoralZoneRank countryCode={COUNTRY_CODE} />
+            <CaUserConstituencyRank />
           </ReferralsCounter>
         </>
       )}

@@ -1,3 +1,5 @@
+'use client'
+
 import { AdvocatesLeaderboard } from '@/components/app/pageReferrals/common/leaderboard'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'

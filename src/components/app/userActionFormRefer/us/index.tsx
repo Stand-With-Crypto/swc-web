@@ -8,7 +8,6 @@ import { Refer } from '@/components/app/userActionFormRefer/common/sections/refe
 import { SuccessSection } from '@/components/app/userActionFormRefer/common/sections/success'
 import { UserActionFormReferProps } from '@/components/app/userActionFormRefer/common/types'
 import { useSections } from '@/hooks/useSections'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export function USUserActionFormRefer({ onClose }: UserActionFormReferProps) {
   const sectionProps = useSections({
@@ -27,7 +26,7 @@ export function USUserActionFormRefer({ onClose }: UserActionFormReferProps) {
 
           <Refer.Counter className="flex-col md:flex-row">
             <Refer.Counter.UserReferralsCount />
-            <Refer.Counter.UserElectoralZoneRank countryCode={SupportedCountryCodes.US} />
+            <Refer.Counter.UsUserDistrictRank />
           </Refer.Counter>
         </Refer>
       )

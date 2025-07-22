@@ -1,10 +1,6 @@
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import {
-  ReferralsCounter,
-  UserElectoralZoneRank,
-  UserReferralsCount,
-} from '@/components/app/pageReferrals/common/referralsCounter'
+import { ReferralsCounter } from '@/components/app/pageReferrals/common/referralsCounter'
 import { PageReferralsHeading } from '@/components/app/pageReferrals/us/heading'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
@@ -40,8 +36,8 @@ export function UsPageReferrals(props: PageReferralsProps) {
         <>
           <UserReferralUrlWithApi />
           <ReferralsCounter>
-            <UserReferralsCount />
-            <UserElectoralZoneRank countryCode={COUNTRY_CODE} />
+            <ReferralsCounter.UserReferralsCount />
+            <ReferralsCounter.UsUserDistrictRank />
           </ReferralsCounter>
         </>
       )}
