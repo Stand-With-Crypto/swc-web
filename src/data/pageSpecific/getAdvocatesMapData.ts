@@ -5,11 +5,10 @@ import { getTotalAdvocatesPerStateByCountry } from '@/data/aggregations/getTotal
 
 export async function getAdvocatesMapData({ countryCode }: { countryCode: SupportedCountryCodes }) {
   const results = await getTotalAdvocatesPerStateByCountry(countryCode)
-  const totalAdvocatesPerState = results.flat()
 
   return {
     advocatesMapData: {
-      totalAdvocatesPerState,
+      totalAdvocatesPerState: results,
     },
   }
 }
