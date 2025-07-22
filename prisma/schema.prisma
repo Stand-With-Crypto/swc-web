@@ -280,6 +280,7 @@ enum UserActionType {
   VOTER_REGISTRATION
   VOTING_DAY
   VOTING_INFORMATION_RESEARCHED
+  CLAIM_NFT
 }
 
 model UserAction {
