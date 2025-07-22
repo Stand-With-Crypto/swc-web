@@ -98,10 +98,6 @@ export const backfillSWCCivicAddressFieldsCoordinator = inngest.createFunction(
         break
       }
 
-      if (i > 0) {
-        await step.sleep('sleep-to-prevent-rate-limiting', 60000)
-      }
-
       // Calculate take size for this batch, considering the limit
       const remainingAddresses = limit ? limit - totalProcessedAddresses : undefined
       const batchSize = remainingAddresses
