@@ -3,7 +3,7 @@ import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/r
 import { PageReferralsHeading } from '@/components/app/pageReferrals/au/heading'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisionRanking'
-import { ReferralsCounter } from '@/components/app/pageReferrals/common/referralsCounter'
+import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'

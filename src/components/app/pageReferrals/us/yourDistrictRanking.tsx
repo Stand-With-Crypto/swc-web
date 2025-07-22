@@ -4,7 +4,7 @@ import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { isNil, noop } from 'lodash-es'
 import { z } from 'zod'
 
-import { LeaderboardRow } from '@/components/app/pageReferrals/common/leaderboard/row'
+import { LeaderboardRow } from '@/components/app/pageReferrals/leaderboard/row'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'

@@ -1,4 +1,4 @@
-import { AdvocatesLeaderboard } from '@/components/app/pageReferrals/common/leaderboard'
+import { AdvocatesLeaderboard } from '@/components/app/pageReferrals/leaderboard'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'

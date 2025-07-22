@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 
-import { UserLocationRank } from '@/components/app/pageReferrals/common/userLocationRank'
+import { UserLocationRank } from '@/components/app/pageReferrals/userLocationRank'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'

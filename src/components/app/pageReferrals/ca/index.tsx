@@ -7,7 +7,7 @@ import { CaYourConstituencyRank } from '@/components/app/pageReferrals/ca/yourCo
 import {
   ReferralsCounter,
   UserReferralsCount,
-} from '@/components/app/pageReferrals/common/referralsCounter'
+} from '@/components/app/pageReferrals/referralsCounter'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
