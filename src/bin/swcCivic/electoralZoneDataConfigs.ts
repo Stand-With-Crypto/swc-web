@@ -28,7 +28,7 @@ export const electoralZonesDataConfigs: ElectoralZoneDataConfig[] = [
     administrativeAreaFieldPath: 'nuts118nm',
     normalizeAdministrativeArea: normalizeGBAdministrativeArea,
     administrativeAreaFilePath:
-      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/NUTS_Level_1_January_2018_GCB_in_the_United_Kingdom_2022_-2753267915301604886_simplified.json',
+      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/NUTS_Level_1_2018_United_Kingdom_2022_simplified.json',
     electoralZoneNameField: 'PCON24NM',
   },
   {

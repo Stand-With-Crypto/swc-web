@@ -42,7 +42,7 @@ If you are not a core contributor or want to run the database locally, follow th
 
 ## Data Validation
 
-A script called [`compareGISDataWithDTSI.ts`](../src/bin/swcCivic/compareGISDataWithDTSI.ts) is provided to compare the electoral zones in the GIS data file with those from DTSI, saving the results in a spreadsheet.
+A script called [`compareGISDataWithDTSI.ts`](../src/bin/swcCivic/validations/compareGISDataWithDTSI.ts) is provided to compare the electoral zones in the GIS data file with those from DTSI, saving the results in a spreadsheet.
 
 When analyzing the results, you may encounter the following scenarios:
 
@@ -57,7 +57,7 @@ When analyzing the results, you may encounter the following scenarios:
 To run this validation, use:
 
 ```bash
-npm run ts src/bin/swcCivic/compareGISDataWithDTSI.ts
+npm run ts src/bin/swcCivic/validations/compareGISDataWithDTSI.ts
 ```
 
 ## Updating the Database

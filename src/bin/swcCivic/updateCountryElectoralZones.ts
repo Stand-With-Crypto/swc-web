@@ -34,7 +34,7 @@ function getCountriesToUpdateFromEnv() {
  * NOTE: Before running this script, make sure to compare the GIS data with DTSI data and audit if the normalization functions are correct.
  * To do this, run the following command:
  *
- * npm run ts src/bin/swcCivic/compareGISDataWithDTSI.ts
+ * npm run ts src/bin/swcCivic/validations/compareGISDataWithDTSI.ts
  */
 async function updateCountryElectoralZones() {
   const countriesToUpdate = getCountriesToUpdateFromEnv()
