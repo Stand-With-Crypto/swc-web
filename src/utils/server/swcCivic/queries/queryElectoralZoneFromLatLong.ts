@@ -13,7 +13,7 @@ export async function querySWCCivicElectoralZoneFromLatLong(
 
   // Prisma doesn't support postgis, so we're using raw SQL
   const electoralZoneMatches = (await civicPrismaClient.$queryRaw`
-    SELECT zone_name, state_code, country_code FROM electoral_zones
+    SELECT zone_name, country_code, administrative_area FROM electoral_zones
     WHERE ST_Contains(
       zone_coordinates,
       ST_GeomFromText(${geometryText}, 4326)
@@ -21,7 +21,6 @@ export async function querySWCCivicElectoralZoneFromLatLong(
     ORDER BY updated_at DESC
   `) as {
     zone_name: string
-    state_code: string | null
     country_code: string
     administrative_area: string | null
   }[]
@@ -50,7 +49,6 @@ export async function querySWCCivicElectoralZoneFromLatLong(
 
   return {
     zoneName: electoralZone.zone_name,
-    stateCode: electoralZone.state_code,
     countryCode: electoralZone.country_code,
     administrativeArea: electoralZone.administrative_area,
   }

@@ -87,6 +87,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
           latitude: true,
           longitude: true,
           subpremise: true,
+          swcCivicAdministrativeArea: true,
         },
         orderBy: { id: 'asc' },
       }),
@@ -180,6 +181,7 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
 
               const fieldMapping: Partial<Record<keyof Address, string>> = {
                 electoralZone: 'electoral_zone',
+                swcCivicAdministrativeArea: 'swc_civic_administrative_area',
                 streetNumber: 'street_number',
                 route: 'route',
                 locality: 'locality',
@@ -366,5 +368,6 @@ async function getAddressFromGooglePlaces(
       Object.entries(completeAddress).filter(([_, value]) => Boolean(value)),
     ),
     electoralZone: electoralZone?.zoneName,
+    swcCivicAdministrativeArea: electoralZone?.administrativeArea,
   }
 }
