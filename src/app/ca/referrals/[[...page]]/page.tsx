@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { CaPageReferrals } from '@/components/app/pageReferrals/ca'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -66,11 +66,6 @@ export default async function ReferralsPage(props: Props) {
   const totalPages = Math.ceil(total / itemsPerPage)
 
   return (
-    <PageReferrals
-      countryCode={COUNTRY_CODE}
-      leaderboardData={leaderboardData}
-      page={pageNum}
-      totalPages={totalPages}
-    />
+    <CaPageReferrals leaderboardData={leaderboardData} page={pageNum} totalPages={totalPages} />
   )
 }

@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { UsPageReferrals } from '@/components/app/pageReferrals/us'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -46,7 +46,7 @@ export async function generateStaticParams() {
 export default async function ReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
-  const { countryCode, page } = params
+  const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
@@ -57,15 +57,10 @@ export default async function ReferralsPage(props: Props) {
   const commonParams = {
     limit: itemsPerPage,
     offset,
+    countryCode: SupportedCountryCodes.US,
   }
 
   const { items: leaderboardData } = await getDistrictsLeaderboardData(commonParams)
 
-  return (
-    <PageReferrals
-      countryCode={countryCode as SupportedCountryCodes}
-      leaderboardData={leaderboardData}
-      page={pageNum}
-    />
-  )
+  return <UsPageReferrals leaderboardData={leaderboardData} page={pageNum} />
 }

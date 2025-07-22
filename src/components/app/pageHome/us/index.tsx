@@ -6,8 +6,8 @@ import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/pol
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
-import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
+import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
+import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -128,8 +128,8 @@ export function UsPageHome({
                     <HomePageSection.Subtitle className="hidden md:block">
                       See which district has the most number of advocates.
                     </HomePageSection.Subtitle>
-                    <YourDistrictRank />
-                    <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
+                    <UsYourDistrictRank />
+                    <USAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper
                         authenticatedContent={

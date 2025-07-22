@@ -1,8 +1,8 @@
 import { STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from 'src/components/app/pageCommunity/common/constants'
 
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
-import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
+import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
+import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { PageLayout } from '@/components/ui/pageLayout'
@@ -87,8 +87,8 @@ export function UsStateSpecificCommunityPage({
         ) : null}
         {tab === RecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
           <>
-            <YourDistrictRank />
-            <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
+            <UsYourDistrictRank />
+            <USAdvocatesLeaderboard data={leaderboardData} />
           </>
         )}
       </div>

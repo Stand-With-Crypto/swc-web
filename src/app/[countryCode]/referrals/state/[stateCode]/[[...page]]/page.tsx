@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { UsPageReferrals } from '@/components/app/pageReferrals/us'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -78,8 +78,7 @@ export default async function ReferralsStateSpecificPage(props: Props) {
   const totalPages = Math.ceil(total / itemsPerPage)
 
   return (
-    <PageReferrals
-      countryCode={countryCode}
+    <UsPageReferrals
       leaderboardData={leaderboardData}
       page={pageNum}
       stateCode={stateCode}

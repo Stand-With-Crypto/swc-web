@@ -65,7 +65,7 @@ export function UserReferralsCount({ className }: { className?: string }) {
 }
 ReferralsCounter.UserReferralsCount = UserReferralsCount
 
-export function UserDistrictRank({
+export function UserElectoralZoneRank({
   className,
   countryCode,
 }: {
@@ -133,4 +133,5 @@ export function UserDistrictRank({
     </div>
   )
 }
-ReferralsCounter.UserDistrictRank = UserDistrictRank
+
+ReferralsCounter.UserElectoralZoneRank = UserElectoralZoneRank
