@@ -15,7 +15,10 @@ export type BillFromDTSI = Pick<
 
 export type BillCardInfoFromDTSI = Pick<
   DTSI_Bill,
-  'computedStanceScore' | 'id' | 'shortTitle' | 'title'
+  'computedStanceScore' | 'dateIntroduced' | 'id' | 'shortTitle' | 'title'
 >
 
-export type SWCBillCardInfo = Pick<SWCBill, 'computedStanceScore' | 'dtsiSlug' | 'title'>
+export type SWCBillCardInfo = Pick<
+  SWCBill,
+  'computedStanceScore' | 'dateIntroduced' | 'dtsiSlug' | 'isKeyBill' | 'title'
+>

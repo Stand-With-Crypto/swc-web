@@ -44,6 +44,8 @@ export function mergeBillsFromBuilderIOAndDTSI(
 
     return {
       computedStanceScore: billFromDTSI.computedStanceScore,
+      dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
+      isKeyBill: billFromBuilderIO.isKeyBill || false,
       dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
       title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
     }
