@@ -2,8 +2,8 @@ import { normalizeAUDistrictName } from '@/bin/swcCivic/normalizers/normalizeAUD
 import { normalizeCADistrictName } from '@/bin/swcCivic/normalizers/normalizeCADistricts'
 import { normalizeGBAdministrativeArea } from '@/bin/swcCivic/normalizers/normalizeGBAdministrativeArea'
 import {
-  normalizeUSDistrictName,
   normalizeUSAdministrativeArea,
+  normalizeUSDistrictName,
 } from '@/bin/swcCivic/normalizers/normalizeUSDistrict'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 

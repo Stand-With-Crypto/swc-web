@@ -8,7 +8,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { MINI_BATCH_SIZE, BACKFILL_ADDRESS_ELECTORAL_ZONE_RETRY_LIMIT } from './config'
+import { BACKFILL_ADDRESS_ELECTORAL_ZONE_RETRY_LIMIT, MINI_BATCH_SIZE } from './config'
 
 const BACKFILL_SWC_CIVIC_ADDRESS_FIELDS_PROCESSOR_FUNCTION_ID =
   'script.backfill-swc-civic-address-fields-processor'
