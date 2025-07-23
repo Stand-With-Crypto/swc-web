@@ -1,21 +1,16 @@
 'use client'
 
-import { ComponentProps, useMemo, useRef, useState } from 'react'
-import { Info, Loader2 } from 'lucide-react'
+import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
 
+import { actionUpdateUserHasOptedInToSMS } from '@/actions/actionUpdateUserHasOptedInSMS'
+import { CommunicationsPreferenceForm } from '@/components/app/pageUserProfile/common/communicationsPreferenceForm'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/utils/web/cn'
+import { SMSOptInConsentText } from '@/components/app/sms/smsOptInConsentText'
+import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
-import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
-import { actionUpdateUserHasOptedInToSMS } from '@/actions/actionUpdateUserHasOptedInSMS'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SMSOptInConsentText } from '@/components/app/sms/smsOptInConsentText'
-import { CommunicationsPreferenceForm } from '@/components/app/pageUserProfile/common/communicationsPreferenceForm'
 
 const FORM_NAME = 'User Communication Preferences'
 
