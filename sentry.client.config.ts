@@ -52,10 +52,22 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'fetch failed',
   'undefined is not an object',
   'null is not an object',
-  'Unknown root exit status',
   'Connection closed',
   '500 from GET /api/public/recent-activity/30/restrictToUS',
   '500 from GET /api/public/homepage/top-level-metrics/not-set',
+  'Could not load "places_impl"',
+  'Could not load "util"',
+  'No place found for address',
+  'Electoral zone not found',
+  'window.webkit.messageHandlers',
+  'Invalid `prisma.user.update()` invocation',
+  "Right-hand side of 'instanceof' is not an object",
+  'ObjectMultiplex - malformed chunk without name',
+  'Refused to evaluate a string as JavaScript',
+  'No officials found for your information',
+  'TOO_SHORT',
+  "unsafe-eval' is not an allowed source of script",
+
   ...GOOGLE_PLACES_API_ERRORS_TO_GROUP,
 ]
 
