@@ -4,20 +4,24 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/campaignMetadata'
-import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
+import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
+  USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
+  USUserActionNftMintCampaignName,
   USUserActionPollCampaignName,
   USUserActionReferCampaignName,
   USUserActionTweetCampaignName,
@@ -26,7 +30,7 @@ import {
   USUserActionVotingDayCampaignName,
   USUserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory/us'
 
 const countryCode = SupportedCountryCodes.US
 const urls = getIntlUrls(countryCode)
@@ -49,6 +53,177 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
         ),
+      },
+    ],
+  },
+  [UserActionType.EMAIL]: {
+    title: 'Email Your Senator',
+    description: 'Pass Crucial Crypto Legislation',
+    campaignsModalDescription:
+      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
+    image: '/actionTypeIcons/email.png',
+    campaigns: [
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+        isCampaignActive: false,
+        title: 'Email Your House Rep',
+        description: 'Pass crucial crypto legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        isCampaignActive: false,
+        title: 'Email your Senator',
+        description: 'Support Stablecoin Regulation (GENIUS Act)',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: `Email your ${getYourPoliticianCategoryShortDisplayName('house')}`,
+        description: 'You emailed your representative about FIT21.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.DEFAULT,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: 'FIT21 Email Campaign',
+        description: 'You emailed your representative and asked them to vote YES on FIT21.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.FIT21_2024_04,
+        isCampaignActive: false,
+        title: 'FIT21 Email Campaign',
+        description: 'You emailed your representative and asked them to vote YES on FIT21.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
+        isCampaignActive: false,
+        title: 'CNN Presidential Debate 2024',
+        description: "You emailed CNN and asked them to include the candidates' stance on crypto.",
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
+        isCampaignActive: false,
+        title: 'ABC Presidential Debate 2024',
+        description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormEmailDebateDialog,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.SEC_COMMISSIONER_2024,
+        isCampaignActive: false,
+        title: 'Email Your Senator',
+        description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
+        isCampaignActive: false,
+        title: 'Contacted and welcomed the 119 congress',
+        description: 'The 119th Congress needs to hear from you!',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
+        isCampaignActive: false,
+        title: 'Contact your Member of Congress',
+        description: 'Tell your senator to sign the discharge petition',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
+        isCampaignActive: false,
+        title: 'Contact your Member of Congress',
+        description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
+        isCampaignActive: false,
+        title: 'Contact your Member of Congress',
+        description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
+        isCampaignActive: false,
+        title: 'Contact your Senator',
+        description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        isCampaignActive: false,
+        title: 'Email Your Member of Congress',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
+        isCampaignActive: false,
+        title: 'Email Your House Rep',
+        description: 'Pass Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
+        isCampaignActive: true,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
+        }),
       },
     ],
   },
@@ -121,132 +296,6 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Donate fiat or crypto to help keep crypto in America.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null, // This is null because the donate CTA is a link to the donate page,
-      },
-    ],
-  },
-  [UserActionType.EMAIL]: {
-    title: 'Email Your Senator',
-    description: 'Support Crucial Crypto Legislation.',
-    campaignsModalDescription:
-      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
-    image: '/actionTypeIcons/email.png',
-    campaigns: [
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.DEFAULT,
-        isCampaignActive: false,
-        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        description: 'You emailed your representative about FIT21.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.DEFAULT,
-        isCampaignActive: false,
-        title: 'FIT21 Email Campaign',
-        description: 'You emailed your representative and asked them to vote YES on FIT21.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.FIT21_2024_04,
-        isCampaignActive: false,
-        title: 'FIT21 Email Campaign',
-        description: 'You emailed your representative and asked them to vote YES on FIT21.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
-        isCampaignActive: false,
-        title: 'CNN Presidential Debate 2024',
-        description: "You emailed CNN and asked them to include the candidates' stance on crypto.",
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
-        isCampaignActive: false,
-        title: 'ABC Presidential Debate 2024',
-        description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailDebateDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.SEC_COMMISSIONER_2024,
-        isCampaignActive: false,
-        title: 'Email Your Senator',
-        description: 'Told your Senator you oppose anti-crypto commissioners on the SEC.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.WELCOME_119_CONGRESS_2025,
-        isCampaignActive: false,
-        title: 'Contacted and welcomed the 119 congress',
-        description: 'The 119th Congress needs to hear from you!',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3,
-        isCampaignActive: false,
-        title: 'Contact your Member of Congress',
-        description: 'Tell your senator to sign the discharge petition',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_3RD,
-        isCampaignActive: false,
-        title: 'Contact your Member of Congress',
-        description: 'Tell your Senator to Vote “Yes” for S.J.Res.3.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.BROKER_REPORTING_RULE_SJ_RES_3_MARCH_10TH,
-        isCampaignActive: false,
-        title: 'Contact your Member of Congress',
-        description: 'Tell your Member to Vote “Yes” for H.J.Res.25.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_8_MAY_2025,
-        isCampaignActive: false,
-        title: 'Contact your Senator',
-        description: 'Tell your Senator to Vote “Yes” on opening debate on the GENIUS Act.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025,
-        isCampaignActive: true,
-        title: 'Email Your Senator',
-        description: 'Support Crucial Crypto Legislation.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
-        isCampaignActive: false,
-        title: 'Email Your Member of Congress',
-        description: 'Support Crucial Crypto Legislation',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
     ],
   },
@@ -396,13 +445,53 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper
             authenticatedContent={
-              <UserActionFormReferDialog countryCode={SupportedCountryCodes.US}>
+              <UserActionFormReferDialog countryCode={countryCode}>
                 {children}
               </UserActionFormReferDialog>
             }
           >
             {children}
           </LoginDialogWrapper>
+        ),
+      },
+    ],
+  },
+  [UserActionType.NFT_MINT]: {
+    title: 'Mint your Supporter NFT',
+    description: 'All mint proceeds are donated to the movement.',
+    mobileCTADescription: 'All mint proceeds are donated to the movement.',
+    campaignsModalDescription: 'All mint proceeds are donated to the movement.',
+    image: '/actionTypeIcons/mintNFT.png',
+    campaigns: [
+      {
+        actionType: UserActionType.NFT_MINT,
+        campaignName: USUserActionNftMintCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Mint your Supporter NFT',
+        description: 'All mint proceeds are donated to the movement.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormNFTMintDialog,
+      },
+    ],
+  },
+  [UserActionType.CLAIM_NFT]: {
+    title: 'Claim your commemorative NFT',
+    description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    mobileCTADescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    campaignsModalDescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    image: '/actionTypeIcons/claimNFT.png',
+    campaigns: [
+      {
+        actionType: UserActionType.CLAIM_NFT,
+        campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
+        isCampaignActive: true,
+        title: 'Claim your commemorative GENIUS Act NFT',
+        description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+        canBeTriggeredMultipleTimes: false,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
+            {children}
+          </UserActionFormClaimNFTDialog>
         ),
       },
     ],

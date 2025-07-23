@@ -1,17 +1,17 @@
+import * as Sentry from '@sentry/nextjs'
+
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface GetPagePathsInput {
   pageModelName: BuilderPageModelIdentifiers
-  limit?: number
   countryCode?: SupportedCountryCodes
 }
 
 /** Retrieves a list of all existing routes under a specific page model  */
 export async function getPagePaths({
   pageModelName,
-  limit,
   countryCode,
 }: GetPagePathsInput): Promise<string[]> {
   return builderSDKClient
@@ -24,7 +24,6 @@ export async function getPagePaths({
       options: {
         noTargeting: true,
       },
-      limit,
       sort: {
         createdDate: -1,
       },
@@ -32,4 +31,15 @@ export async function getPagePaths({
       cachebust: true,
     })
     .then(res => res?.map(({ data }) => data?.url) ?? [])
+    .catch(error => {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'builder.io',
+          model: pageModelName,
+          countryCode,
+        },
+        level: 'error',
+      })
+      throw error
+    })
 }

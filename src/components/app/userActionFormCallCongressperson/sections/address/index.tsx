@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
+import { useCountryCode } from '@/hooks/useCountryCode'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   getDTSIPeopleFromAddress,
@@ -31,9 +32,10 @@ import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
-  getYourPoliticianCategoryDisplayName,
+  filterDTSIPeopleByUSPoliticalCategory,
+  getUSPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
-} from '@/utils/shared/yourPoliticianCategory'
+} from '@/utils/shared/yourPoliticianCategory/us'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -64,7 +66,7 @@ export function Address({
   initialValues,
   heading = (
     <UserActionFormLayout.Heading
-      subtitle={`Your address will be used to connect you with your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}. Stand With Crypto will never share your data with any third-parties.`}
+      subtitle={`Your address will be used to connect you with your ${getUSPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}. Stand With Crypto will never share your data with any third-parties.`}
       title={`Find your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
     />
   ),
@@ -204,6 +206,7 @@ export function useCongresspersonData({
   address?: FindRepresentativeCallFormValues['address']
 }) {
   const { isLoaded } = useGoogleMapsScript()
+  const countryCode = useCountryCode()
 
   const result = useSWR(
     address && isLoaded ? `useCongresspersonData-${address.description}` : null,
@@ -212,10 +215,12 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromAddress(
-        CALL_FLOW_POLITICIANS_CATEGORY,
-        address.description,
-      )
+      const dtsiResponse = await getDTSIPeopleFromAddress({
+        address: address.description,
+        countryCode,
+        filterFn: filterDTSIPeopleByUSPoliticalCategory('legislative-and-executive'),
+      })
+
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
       }

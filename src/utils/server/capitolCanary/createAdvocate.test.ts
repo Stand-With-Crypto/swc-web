@@ -11,6 +11,14 @@ import {
 import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 
+jest.mock('@/utils/shared/sms/smsProvider', () => ({
+  SMSProviders: {
+    TWILIO: 'twilio',
+    CAPITOL_CANARY: 'capitol-canary',
+  },
+  smsProvider: 'capitol-canary',
+}))
+
 it('formats the "create capitol canary advocate" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
   faker.seed(1)

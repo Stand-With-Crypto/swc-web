@@ -1,11 +1,9 @@
 'use client'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { DTSIPeopleFromAddress } from '@/components/app/userActionFormCallCongressperson'
 import { DTSI_PersonRole, DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
-  UseGetDTSIPeopleFromAddressResponse,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+import { formatGetDTSIPeopleFromAddressNotFoundReason } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
@@ -31,7 +29,7 @@ export function DtsiCongresspersonDisplay({
   maxPeopleDisplayed,
 }: {
   maxPeopleDisplayed?: number
-  dtsiPeopleResponse?: UseGetDTSIPeopleFromAddressResponse
+  dtsiPeopleResponse?: DTSIPeopleFromAddress
 }) {
   if (!dtsiPeopleResponse || 'notFoundReason' in dtsiPeopleResponse) {
     return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPeopleResponse)}</div>

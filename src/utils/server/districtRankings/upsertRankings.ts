@@ -38,7 +38,7 @@ function getAllPossibleDistricts(): DistrictRankingEntry[] {
     if (districtCount === 0) {
       districts.push({
         state: state as USStateCode,
-        district: '1',
+        district: 'At-Large',
         count: 0,
       })
     } else {
@@ -203,6 +203,50 @@ export async function getDistrictsLeaderboardData(
   return {
     items,
     total,
+  }
+}
+
+export async function getDistrictsLeaderboardDataByState(
+  stateCode: string,
+  pagination?: {
+    limit: number
+    offset: number
+  },
+): Promise<LeaderboardPaginationData> {
+  const rawResults = await redisWithCache.zrange(CURRENT_DISTRICT_RANKING, 0, -1, {
+    rev: true,
+    withScores: true,
+  })
+
+  const results = chunk(rawResults, 2) as RedisInterlacedResult
+
+  const items = results.map(([member, score]) => ({
+    ...parseMemberKey(member),
+    count: score,
+  }))
+
+  const filteredItems = items
+    .filter(item => item.state === stateCode)
+    .map((item, index) => ({ ...item, rank: index + 1 }))
+
+  return {
+    items: pagination
+      ? filteredItems.slice(pagination.offset, pagination.offset + pagination.limit)
+      : filteredItems,
+    total: filteredItems.length,
+  }
+}
+
+export async function getDistrictRankByState(member: RedisEntryData) {
+  const { items } = await getDistrictsLeaderboardDataByState(member.state)
+
+  const result = items.find(
+    item => item.state === member.state && item.district === member.district,
+  )
+
+  return {
+    rank: result?.rank ?? null,
+    score: result?.count ?? null,
   }
 }
 

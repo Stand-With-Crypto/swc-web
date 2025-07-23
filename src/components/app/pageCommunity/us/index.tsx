@@ -19,12 +19,16 @@ import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import type { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import type { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+const urls = getIntlUrls(countryCode)
 
 const TAB_OPTIONS: {
   value: RecentActivityAndLeaderboardTabs
@@ -65,33 +69,33 @@ export type PageLeaderboardInferredProps =
     }
 
 type PageLeaderboardProps = PageLeaderboardInferredProps & {
-  countryCode: SupportedCountryCodes
   offset: number
   pageNum: number
+  totalPages?: number
 }
 
 export function UsPageCommunity({
-  tab,
-  countryCode,
+  leaderboardData,
   offset,
   pageNum,
-  sumDonationsByUser,
   publicRecentActivity,
-  leaderboardData,
+  sumDonationsByUser,
+  tab,
+  totalPages = COMMUNITY_PAGINATION_DATA[tab].totalPages,
 }: PageLeaderboardProps) {
-  const urls = getIntlUrls(countryCode)
-  const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
-
   return (
     <PageLayout className="space-y-7">
       <PageLayout.Title>{PAGE_LEADERBOARD_TITLE}</PageLayout.Title>
       <PageLayout.Subtitle>
-        {PAGE_LEADERBOARD_DESCRIPTION} Donations to{' '}
-        <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
-          Fairshake
-        </ExternalLink>
-        , a pro-crypto Super PAC, are not included on the leaderboard.
+        <>
+          {PAGE_LEADERBOARD_DESCRIPTION} Donations to{' '}
+          <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
+            Fairshake
+          </ExternalLink>
+          , a pro-crypto Super PAC, are not included on the leaderboard.
+        </>
       </PageLayout.Subtitle>
+
       <div className="text-center">
         {/* Mobile: Select */}
         <div className="sm:hidden">
@@ -111,7 +115,7 @@ export function UsPageCommunity({
                 <SelectItem key={option.value} value={option.value}>
                   <InternalLink
                     className={cn(tabTriggerStyles, 'px-0')}
-                    href={urls.leaderboard({
+                    href={urls.community({
                       tab: option.value,
                     })}
                   >
@@ -130,7 +134,7 @@ export function UsPageCommunity({
               <InternalLink
                 className={tabTriggerStyles}
                 data-state={tab === option.value ? 'active' : undefined}
-                href={urls.leaderboard({
+                href={urls.community({
                   tab: option.value,
                 })}
                 key={option.value}
@@ -141,6 +145,7 @@ export function UsPageCommunity({
           </div>
         </div>
       </div>
+
       <div className="space-y-8 lg:space-y-10">
         {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
           pageNum === 1 ? (
@@ -154,7 +159,7 @@ export function UsPageCommunity({
             />
           ) : (
             <>
-              {publicRecentActivity.map(action => (
+              {publicRecentActivity.data.map(action => (
                 <VariantRecentActivityRow
                   action={action}
                   countryCode={countryCode}
@@ -187,11 +192,13 @@ export function UsPageCommunity({
         <div className="flex justify-center">
           <PaginationLinks
             currentPageNumber={pageNum}
-            getPageUrl={pageNumber =>
-              pageNumber < 1 || pageNumber > totalPages
-                ? ''
-                : urls.leaderboard({ pageNum: pageNumber, tab })
-            }
+            getPageUrl={pageNumber => {
+              if (pageNumber < 1 || pageNumber > totalPages) {
+                return ''
+              }
+
+              return urls.community({ pageNum: pageNumber, tab })
+            }}
             totalPages={totalPages}
           />
         </div>

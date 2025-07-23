@@ -12,6 +12,7 @@ import {
 } from '@/actions/actionCreateUserActionTweetAtPerson'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
+import { DTSIPeopleFromAddress } from '@/components/app/userActionFormCallCongressperson'
 import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import {
   CAMPAIGN_METADATA,
@@ -22,7 +23,6 @@ import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import {
@@ -37,7 +37,7 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
-type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
+type OnFindCongressPersonPayload = DTSIPeopleFromAddress & {
   addressSchema: z.infer<typeof zodAddress>
 }
 
@@ -71,13 +71,13 @@ export function TweetAtPersonSection({
   function getTweetMessageBasedOnRepresentativeScore() {
     if (congressPersonNotFound) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it's more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
       `
     }
 
     if (!representative) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it's more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
       `
     }
 
@@ -92,17 +92,17 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
       switch (convertDTSIPersonStanceScoreToLetterGrade(representative)) {
         case DTSILetterGrade.A:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
+May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans' right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
         case DTSILetterGrade.B:
         case DTSILetterGrade.C:
         case null:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
+May 22nd is Bitcoin Pizza Day! I'm asking my representative ${representativeXHandle} to protect Americans' right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
         case DTSILetterGrade.D:
         case DTSILetterGrade.F:
         default:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto`
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it's more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto`
       }
     })()
   }

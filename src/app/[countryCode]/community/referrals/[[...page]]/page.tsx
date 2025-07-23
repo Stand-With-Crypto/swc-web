@@ -37,7 +37,7 @@ export async function generateStaticParams() {
 export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
-  const { countryCode, page } = params
+  const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
@@ -45,19 +45,19 @@ export default async function CommunityReferralsPage(props: Props) {
 
   const offset = (pageNum - 1) * itemsPerPage
 
-  const { items: leaderboardData } = await getDistrictsLeaderboardData({
+  const commonParams = {
     limit: itemsPerPage,
     offset,
-  })
-
-  const dataProps: PageLeaderboardInferredProps = {
-    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
-    leaderboardData,
-    sumDonationsByUser: undefined,
-    publicRecentActivity: undefined,
   }
 
-  return (
-    <UsPageCommunity {...dataProps} countryCode={countryCode} offset={offset} pageNum={pageNum} />
-  )
+  const { items: leaderboardData } = await getDistrictsLeaderboardData(commonParams)
+
+  const dataProps: PageLeaderboardInferredProps = {
+    leaderboardData,
+    publicRecentActivity: undefined,
+    sumDonationsByUser: undefined,
+    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+  }
+
+  return <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={undefined} />
 }

@@ -54,10 +54,12 @@ export default async function ReferralsPage(props: Props) {
 
   const offset = (pageNum - 1) * itemsPerPage
 
-  const { items: leaderboardData } = await getDistrictsLeaderboardData({
+  const commonParams = {
     limit: itemsPerPage,
     offset,
-  })
+  }
+
+  const { items: leaderboardData } = await getDistrictsLeaderboardData(commonParams)
 
   return (
     <PageReferrals

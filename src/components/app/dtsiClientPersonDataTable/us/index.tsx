@@ -8,7 +8,10 @@ import {
   Person,
 } from '@/components/app/dtsiClientPersonDataTable/common/columns'
 import { GlobalFilters } from '@/components/app/dtsiClientPersonDataTable/common/filters'
-import { DataTable } from '@/components/app/dtsiClientPersonDataTable/common/table'
+import {
+  DataTable,
+  type GlobalFiltersProps,
+} from '@/components/app/dtsiClientPersonDataTable/common/table'
 import { useGetAllPeople } from '@/components/app/dtsiClientPersonDataTable/common/useGetAllPeople'
 import { useSearchFilter } from '@/components/app/dtsiClientPersonDataTable/common/useTableFilters'
 import {
@@ -107,6 +110,7 @@ export function UsDTSIClientPersonDataTable({
             getUSStateNameFromStateCode(state)?.toLowerCase().includes(parsedFilterValue)
           )
         }}
+        id="table"
         key={data?.people ? 'loaded' : 'static'}
         loadState={data?.people ? 'loaded' : 'static'}
       />
@@ -114,7 +118,7 @@ export function UsDTSIClientPersonDataTable({
   )
 }
 
-function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
+function UsGlobalFilters({ columns, onResetFilters, isResetButtonDisabled }: GlobalFiltersProps) {
   const namedColumns = useMemo(() => {
     if (!columns) return {}
 
@@ -149,6 +153,8 @@ function UsGlobalFilters({ columns }: { columns?: Column<Person>[] }) {
         namedColumns={namedColumns}
         partyOptions={PARTY_OPTIONS}
       />
+
+      <GlobalFilters.ResetButton disabled={isResetButtonDisabled} onResetFilters={onResetFilters} />
     </GlobalFilters>
   )
 }

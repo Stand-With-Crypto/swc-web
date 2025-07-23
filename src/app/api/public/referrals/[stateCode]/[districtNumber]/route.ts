@@ -10,7 +10,7 @@ export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 export async function GET(
-  _request: NextRequest,
+  _: NextRequest,
   props: { params: Promise<{ stateCode: string; districtNumber: string }> },
 ) {
   const params = await props.params
@@ -21,10 +21,12 @@ export async function GET(
     return NextResponse.json({ error: parseResult.error.errors }, { status: 400 })
   }
 
-  const data = await getDistrictRank(CURRENT_DISTRICT_RANKING, {
+  const member = {
     state: parseResult.data.state,
     district: parseResult.data.district,
-  })
+  }
+
+  const data = await getDistrictRank(CURRENT_DISTRICT_RANKING, member)
 
   return NextResponse.json(data)
 }

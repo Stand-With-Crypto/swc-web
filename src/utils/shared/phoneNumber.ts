@@ -79,13 +79,18 @@ function parsePhoneNumber(phoneNumber: string, countryCode = DEFAULT_SUPPORTED_C
     return parsePhoneNumberWithError(phoneNumber, phoneLibCountryCode, phoneNumberMetadata)
   } catch (e) {
     if (e instanceof ParseError) {
-      Sentry.captureException(e, {
-        tags: {
+      const errorName = `Error parsing phone number: ${e.message}`
+
+      Sentry.withScope(scope => {
+        scope.setTransactionName(errorName)
+        scope.setTags({
           domain: 'parsePhoneNumberWithError',
-        },
-        extra: {
+        })
+        scope.setExtras({
           payload: phoneNumber,
-        },
+          countryCode,
+        })
+        Sentry.captureException(e)
       })
     }
     throw e

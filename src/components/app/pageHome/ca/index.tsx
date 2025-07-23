@@ -50,7 +50,7 @@ export function CaPageHome({
           <RecentActivity.List actions={recentActivity} />
           <RecentActivity.Footer>
             <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
+              <InternalLink href={urls.community()}>View all</InternalLink>
             </Button>
           </RecentActivity.Footer>
         </RecentActivity>
@@ -87,7 +87,7 @@ export function CaPageHome({
         <HomePageSection container={false}>
           <HomePageSection.Title>Founders</HomePageSection.Title>
           <HomePageSection.Subtitle>
-            Members from our community that have founded crypto-related businesses in the UK.
+            Members from our community that have founded crypto-related businesses in Canada.
           </HomePageSection.Subtitle>
 
           <FoundersCarousel founders={founders} />

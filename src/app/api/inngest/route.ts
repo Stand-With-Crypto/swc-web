@@ -1,11 +1,10 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
-import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
+import { backfillAddressFieldsWithGooglePlacesCoordinator } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces'
+import { backfillAddressFieldsWithGooglePlacesProcessor } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
-import { backfillIntlUsersWithInngest } from '@/inngest/functions/backfillIntlUsers'
-import { processIntlUsersBatch } from '@/inngest/functions/backfillIntlUsers/logic'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
@@ -73,7 +72,6 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
-    backfillCongressionalDistrictCronJob,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
     ...globalSendEventNotifications,
@@ -85,11 +83,11 @@ export const { GET, POST, PUT } = serve({
     cleanupDatadogSyntheticTestsWithInngest,
     updateDistrictsRankings,
     backfillUserCountryCodeEmptyWithInngest,
-    backfillIntlUsersWithInngest,
-    processIntlUsersBatch,
     backfillMissingCommunications,
     deleteNotSupportedCountryCodeAdvocates,
     syncSendgridContactsCoordinator,
     syncSendgridContactsProcessor,
+    backfillAddressFieldsWithGooglePlacesCoordinator,
+    backfillAddressFieldsWithGooglePlacesProcessor,
   ],
 })

@@ -35,22 +35,26 @@ export const usExternalUrls = {
   youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
   swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
   swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
+  quorumPrivacyPolicy: () => 'https://www.quorum.us/privacy-policy/',
 }
 
 export const auExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_AU',
   linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-australia',
   emailFeedback: () => 'info@swcinternational.org',
+  quorumPrivacyPolicy: () => 'https://www.quorum.us/privacy-policy/',
 }
 
 export const gbExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_UK',
   linkedin: () => 'https://www.linkedin.com/company/standwithcryptouk',
   emailFeedback: () => 'info@swcinternational.org',
+  quorumPrivacyPolicy: () => 'https://www.quorum.us/privacy-policy/',
 }
 
 export const caExternalUrls = {
   twitter: () => 'https://x.com/StandWCrypto_CA',
   linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-canada',
   emailFeedback: () => 'info@swcinternational.org',
+  quorumPrivacyPolicy: () => 'https://www.quorum.us/privacy-policy/',
 }

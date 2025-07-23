@@ -27,7 +27,7 @@ import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { USUserActionCallCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
-import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory/us'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -100,7 +100,7 @@ const RESPONSIVE_CONTENT: Record<'mobile' | 'desktop', DynamicContent> = {
           {address}
         </ExternalLink>
         .<br />
-        Call the number below and then click “Call complete” when finished.
+        Call the number below and then click "Call complete" when finished.
       </>
     ),
     PhoneNumberDisplay: ({ phoneNumber }) => {
@@ -122,45 +122,41 @@ const RESPONSIVE_CONTENT: Record<'mobile' | 'desktop', DynamicContent> = {
   },
 }
 
-export function SuggestedScript({
-  user,
-  congressPersonData,
-  goToSection,
-  goBackSection,
-}: Pick<
-  CallCongresspersonActionSharedData,
-  'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
->) {
-  const { dtsiPeople, addressSchema } = congressPersonData
+export function SuggestedScript(
+  props: Pick<
+    CallCongresspersonActionSharedData,
+    'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
+  >,
+) {
+  const { user, congressPersonData, goToSection, goBackSection } = props
 
   const isMobile = useIsMobile()
-  const responsiveContent = RESPONSIVE_CONTENT[isMobile ? 'mobile' : 'desktop']
-
   const router = useRouter()
+  const [callingState, setCallingState] = useState<
+    'not-calling' | 'pressed-called' | 'loading-call-complete' | 'call-complete' | 'error'
+  >('not-calling')
+  const dtsiPerson = congressPersonData?.dtsiPeople[0]
+  const { data: congresspersonBillVote } = useCongresspersonBillVote({
+    slug: dtsiPerson?.slug,
+    billId: BILLS_IDS.FIT21,
+  })
 
-  const dtsiPerson = dtsiPeople[0]
   const phoneNumber = React.useMemo(() => {
     // TODO: get the official phone number information once we have it from quorum
     toastGenericError()
     return null
   }, [])
 
-  const { data: congresspersonBillVote } = useCongresspersonBillVote({
-    slug: dtsiPerson.slug,
-    billId: BILLS_IDS.FIT21,
-  })
-
-  const [callingState, setCallingState] = useState<
-    'not-calling' | 'pressed-called' | 'loading-call-complete' | 'call-complete' | 'error'
-  >('not-calling')
-
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
+      if (!congressPersonData) {
+        return
+      }
       const data: CreateActionCallCongresspersonInput = {
         campaignName: USUserActionCallCampaignName.FIT21_2024_04,
-        dtsiSlug: dtsiPerson.slug,
+        dtsiSlug: congressPersonData.dtsiPeople[0].slug,
         phoneNumber: phoneNumberToCall,
-        address: addressSchema,
+        address: congressPersonData.addressSchema,
       }
       setCallingState('loading-call-complete')
 
@@ -194,8 +190,14 @@ export function SuggestedScript({
         setCallingState('error')
       }
     },
-    [addressSchema, dtsiPerson.slug, goToSection, router],
+    [congressPersonData, goToSection, router],
   )
+  const responsiveContent = RESPONSIVE_CONTENT[isMobile ? 'mobile' : 'desktop']
+
+  if (!congressPersonData) {
+    return null
+  }
+  const { addressSchema } = congressPersonData
 
   return (
     <div className="flex h-full max-h-full flex-col">
@@ -222,7 +224,7 @@ export function SuggestedScript({
 
               {getSuggestedScriptCopy({
                 billVote: congresspersonBillVote || 'NO_VOTE',
-                dtsiPerson,
+                dtsiPerson: congressPersonData.dtsiPeople[0],
                 address: addressSchema,
               })}
 

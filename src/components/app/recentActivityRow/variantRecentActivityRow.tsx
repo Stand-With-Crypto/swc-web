@@ -13,6 +13,7 @@ import {
 } from '@/components/app/recentActivityRow/recentActivityRow'
 import { viewKeyPageRecentActivityRow } from '@/components/app/recentActivityRow/viewKeyPageRecentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -27,6 +28,7 @@ import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { NFTSlug } from '@/utils/shared/nft'
 import {
   getElectoralZoneDescriptorByCountryCode,
   getStateNameResolver,
@@ -173,7 +175,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           default:
             return {
               onFocusContent: () => (
-                <UserActionFormEmailCongresspersonDialog>
+                <UserActionFormEmailCongresspersonDialog
+                  campaignName={action.campaignName as USUserActionEmailCampaignName}
+                  countryCode={action.countryCode as SupportedCountryCodes.US}
+                >
                   <Button>Email yours</Button>
                 </UserActionFormEmailCongresspersonDialog>
               ),
@@ -330,6 +335,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return viewKeyPageRecentActivityRow({
           campaignName,
           countryCode,
+          inStateOrEmpty,
         })
       }
       case UserActionType.LINKEDIN: {
@@ -342,6 +348,20 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                 </UserActionFormFollowLinkedInDialog>
               ),
           children: <MainText>Someone followed SWC on LinkedIn</MainText>,
+        }
+      }
+      case UserActionType.CLAIM_NFT: {
+        return {
+          onFocusContent: () =>
+            action?.nftMint?.nftSlug ? (
+              <UserActionFormClaimNFTDialog
+                countryCode={countryCode}
+                nftSlug={action?.nftMint?.nftSlug as NFTSlug}
+              >
+                <Button>Claim yours</Button>
+              </UserActionFormClaimNFTDialog>
+            ) : null,
+          children: <MainText>Someone {inStateOrEmpty} claimed an NFT</MainText>,
         }
       }
     }

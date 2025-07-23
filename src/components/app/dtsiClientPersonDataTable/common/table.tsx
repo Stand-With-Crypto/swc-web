@@ -40,8 +40,10 @@ import {
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-interface GlobalFiltersProps<TData extends Person = Person> {
+export interface GlobalFiltersProps<TData extends Person = Person> {
   columns?: Column<TData>[]
+  onResetFilters: () => void
+  isResetButtonDisabled: boolean
 }
 
 interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
@@ -54,6 +56,7 @@ export interface DataTableBodyProps<TData extends Person = Person> extends DataT
   getGlobalFilterDefaults: () => ColumnFiltersState
   getPersonDataTableFilterFns: () => Record<PERSON_TABLE_COLUMNS_IDS, FilterFn<Person>>
   globalFilter: string
+  id?: string
   setGlobalFilter: SetStateAction<any>
 }
 
@@ -103,14 +106,15 @@ DataTable.GlobalFilter = DataTableGlobalFilter
 
 function DataTableBody<TData extends Person = Person>({
   columns = [],
-  data = [],
-  loadState,
-  globalFilterFn,
   countryCode,
-  globalFiltersComponent: GlobalFiltersComponent,
+  data = [],
   getGlobalFilterDefaults,
   getPersonDataTableFilterFns,
   globalFilter,
+  globalFilterFn,
+  globalFiltersComponent: GlobalFiltersComponent,
+  id,
+  loadState,
   setGlobalFilter,
   ...rest
 }: DataTableBodyProps<TData>) {
@@ -160,14 +164,31 @@ function DataTableBody<TData extends Person = Person>({
 
   const tableRowModel = table.getRowModel()
 
+  const isResetButtonDisabled = useMemo(() => {
+    const defaultFilters = getGlobalFilterDefaults()
+
+    return defaultFilters.every(defaultFilter => {
+      const currentFilter = columnFilters.find(columnFilter => columnFilter.id === defaultFilter.id)
+      return currentFilter?.value === defaultFilter.value
+    })
+  }, [columnFilters, getGlobalFilterDefaults])
+
+  const handleResetFilters = useCallback(() => {
+    setColumnFilters(getGlobalFilterDefaults())
+  }, [setColumnFilters, getGlobalFilterDefaults])
+
   return (
-    <div className="md:container">
+    <div className="md:container" id={id}>
       <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
         <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 lg:top-[84px] lg:flex-row lg:p-6">
           <PageTitle className="text-left" size="md">
             Politicians
           </PageTitle>
-          <GlobalFiltersComponent columns={table.getAllColumns()} />
+          <GlobalFiltersComponent
+            columns={table.getAllColumns()}
+            isResetButtonDisabled={isResetButtonDisabled}
+            onResetFilters={handleResetFilters}
+          />
         </div>
 
         <div className="relative w-full">

@@ -22,6 +22,7 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.POLL,
   UserActionType.VIEW_KEY_PAGE,
   UserActionType.LINKEDIN,
+  UserActionType.CLAIM_NFT,
 ] as const
 
 export type USActiveClientUserActionWithCampaignType =
@@ -41,6 +42,9 @@ export enum USUserActionEmailCampaignName {
   GENIUS_ACT_8_MAY_2025 = 'GENIUS_ACT_8_MAY_2025',
   GENIUS_ACT_MAY_13_2025 = 'GENIUS_ACT_MAY_13_2025',
   FOUNDERS_PUSH_MAY_14_2025 = 'FOUNDERS_PUSH_MAY_14_2025',
+  CLARITY_ACT_HOUSE_JUN_13_2025 = 'CLARITY_ACT_HOUSE_JUN_13_2025',
+  CLARITY_GENIUS_ACTS_JUL_17_2025 = 'CLARITY_GENIUS_ACTS_JUL_17_2025',
+  CLARITY_ACT_SENATE_JUL_17_2025 = 'CLARITY_ACT_SENATE_JUL_17_2025',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
@@ -103,6 +107,9 @@ export enum USUserActionViewKeyPageCampaignName {
 export enum USUserActionLinkedinCampaignName {
   DEFAULT = 'DEFAULT',
 }
+export enum USUserActionClaimNftCampaignName {
+  GENIUS_ACT_2025 = 'GENIUS_ACT_2025',
+}
 
 export type USUserActionCampaignName =
   | USUserActionEmailCampaignName
@@ -121,6 +128,7 @@ export type USUserActionCampaignName =
   | USUserActionReferCampaignName
   | USUserActionPollCampaignName
   | USUserActionLinkedinCampaignName
+  | USUserActionClaimNftCampaignName
 export interface USUserActionCampaigns {
   [UserActionType.EMAIL]: USUserActionEmailCampaignName
   [UserActionType.CALL]: USUserActionCallCampaignName
@@ -128,6 +136,7 @@ export interface USUserActionCampaigns {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
   [UserActionType.TWEET]: USUserActionTweetCampaignName
   [UserActionType.NFT_MINT]: USUserActionNftMintCampaignName
+  [UserActionType.CLAIM_NFT]: USUserActionClaimNftCampaignName
   [UserActionType.VOTER_REGISTRATION]: USUserActionVoterRegistrationCampaignName
   [UserActionType.LIVE_EVENT]: USUserActionLiveEventCampaignName
   [UserActionType.TWEET_AT_PERSON]: USUserActionTweetAtPersonCampaignName
@@ -149,6 +158,7 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: USUserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
   [UserActionType.NFT_MINT]: USUserActionNftMintCampaignName.DEFAULT,
+  [UserActionType.CLAIM_NFT]: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
   [UserActionType.VOTER_REGISTRATION]: USUserActionVoterRegistrationCampaignName['H1_2025'],
   [UserActionType.LIVE_EVENT]: USUserActionLiveEventCampaignName['2024_03_04_LA'],
   [UserActionType.TWEET_AT_PERSON]: USUserActionTweetAtPersonCampaignName.DEFAULT,

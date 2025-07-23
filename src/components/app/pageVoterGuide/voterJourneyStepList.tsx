@@ -89,7 +89,6 @@ export function VoterJourneyStepList({ className }: VoterJourneyStepListProps) {
                 <div className="relative h-8 w-6">
                   <CheckIcon
                     completed={status === 'complete'}
-                    index={0}
                     svgClassname="border-2 border-muted bg-muted"
                   />
                 </div>

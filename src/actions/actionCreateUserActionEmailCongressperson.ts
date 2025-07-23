@@ -41,10 +41,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
-import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -52,8 +49,8 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
+import { YourPoliticianCategory } from '@/validation/fields/zodYourPoliticianCategory'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
@@ -101,25 +98,33 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('validated fields')
 
   try {
-    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
-      validatedFields.data.address,
-    )
-    if ('notFoundReason' in usCongressionalDistrict) {
-      logCongressionalDistrictNotFound({
-        address: validatedFields.data.address.formattedDescription,
-        notFoundReason: usCongressionalDistrict.notFoundReason,
-        domain: 'actionCreateUserActionEmailCongressperson',
+    const electoralZone = await maybeGetElectoralZoneFromAddress({
+      address: {
+        ...validatedFields.data.address,
+        googlePlaceId: validatedFields.data.address.googlePlaceId || null,
+        latitude: validatedFields.data.address.latitude || null,
+        longitude: validatedFields.data.address.longitude || null,
+      },
+    })
+    if ('notFoundReason' in electoralZone) {
+      Sentry.captureMessage('electoralZone not found', {
+        tags: {
+          domain: 'actionCreateUserActionEmailCongressperson',
+        },
+        extra: {
+          notFoundReason: electoralZone.notFoundReason,
+          address: validatedFields.data.address.formattedDescription,
+        },
       })
-    }
-    if ('districtNumber' in usCongressionalDistrict) {
-      validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    } else if (electoralZone.zoneName) {
+      validatedFields.data.address.electoralZone = electoralZone.zoneName
     }
   } catch (error) {
-    logger.error('error getting `usCongressionalDistrict`:' + error)
+    logger.error('error getting `electoralZone`:' + error)
     Sentry.captureException(error, {
       tags: {
         domain: 'actionCreateUserActionEmailCongressperson',
-        message: 'error getting usCongressionalDistrict',
+        message: 'error getting electoralZone',
       },
     })
   }
@@ -257,6 +262,12 @@ function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) 
         return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
       case 'legislative-and-executive':
         return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+      default:
+        /**
+         * TODO: Replace CapitolCanary with Sendgrid.
+         * Intl geos will not use CapitolCanary.
+         */
+        throw new Error(`Invalid politician category: ${politicianCategory}`)
     }
   }
 
@@ -269,6 +280,12 @@ function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) 
       return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
     case 'legislative-and-executive':
       return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+    default:
+      /**
+       * TODO: Replace CapitolCanary with Sendgrid.
+       * Intl geos will not use CapitolCanary.
+       */
+      throw new Error(`Invalid politician category: ${politicianCategory}`)
   }
 }
 

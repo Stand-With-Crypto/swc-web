@@ -28,7 +28,7 @@ import {
   Input,
   UserWithRelations,
 } from '@/utils/server/externalOptIn/types'
-import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
+import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -37,13 +37,11 @@ import {
 } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import * as smsActions from '@/utils/server/sms/actions'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
-import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -128,7 +126,7 @@ export async function handleExternalUserActionOptIn(
     },
   }
 
-  if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber) {
+  if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber && input.hasValidPhoneNumber) {
     const optInUserPayload = { phoneNumber: input.phoneNumber, user, countryCode }
 
     after(async () => {
@@ -254,6 +252,7 @@ async function maybeUpsertUser({
     phoneNumber,
     hasOptedInToMembership,
     address,
+    hasValidPhoneNumber,
   } = input
 
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
@@ -263,39 +262,55 @@ async function maybeUpsertUser({
       ...address,
       formattedDescription: formattedDescription,
       googlePlaceId: undefined,
+      latitude: null,
+      longitude: null,
     }
     try {
-      dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(
-        getFormattedDescription(address, false),
+      const googleAddressData = await getAddressFromGooglePlacePrediction({
+        description: formattedDescription,
+      })
+      // Filter out fields without data to avoid overwriting existing data from the external source
+      const filteredGoogleAddressData = Object.fromEntries(
+        Object.entries(googleAddressData).filter(([_, value]) => Boolean(value)),
       )
+      dbAddress = {
+        ...dbAddress,
+        ...filteredGoogleAddressData,
+      }
     } catch (e) {
       logger.error('error getting `googlePlaceId`:' + e)
     }
 
-    const isUSAddress = dbAddress.countryCode?.toUpperCase() === 'US'
-    if (isUSAddress) {
-      try {
-        const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(dbAddress)
+    try {
+      const electoralZone = await maybeGetElectoralZoneFromAddress({
+        address: {
+          ...dbAddress,
+          googlePlaceId: dbAddress?.googlePlaceId || null,
+          latitude: dbAddress?.latitude || null,
+          longitude: dbAddress?.longitude || null,
+        },
+      })
 
-        if ('notFoundReason' in usCongressionalDistrict) {
-          logCongressionalDistrictNotFound({
-            address: dbAddress.formattedDescription,
-            notFoundReason: usCongressionalDistrict.notFoundReason,
-            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-          })
-        }
-        if ('districtNumber' in usCongressionalDistrict) {
-          dbAddress.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
-        }
-      } catch (error) {
-        logger.error('error getting `usCongressionalDistrict`:' + error)
-        Sentry.captureException(error, {
-          tags: {
-            domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-            message: 'error getting usCongressionalDistrict',
-          },
+      if ('notFoundReason' in electoralZone) {
+        logElectoralZoneNotFound({
+          address: dbAddress.formattedDescription,
+          notFoundReason: electoralZone.notFoundReason,
+          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
+      } else if (electoralZone.zoneName) {
+        dbAddress.electoralZone = electoralZone.zoneName
       }
+      if ('zoneName' in electoralZone) {
+        dbAddress.electoralZone = `${electoralZone.zoneName}`
+      }
+    } catch (error) {
+      logger.error('error getting `electoralZone`:' + error)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+          message: 'error getting electoralZone',
+        },
+      })
     }
   }
 
@@ -308,6 +323,7 @@ async function maybeUpsertUser({
       ...(firstName && !existingUser.firstName && { firstName }),
       ...(lastName && !existingUser.lastName && { lastName }),
       ...(phoneNumber && !existingUser.phoneNumber && { phoneNumber }),
+      ...(hasValidPhoneNumber !== existingUser.hasValidPhoneNumber && { hasValidPhoneNumber }),
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
@@ -429,6 +445,7 @@ async function maybeUpsertUser({
       firstName,
       lastName,
       phoneNumber,
+      hasValidPhoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       countryCode,

@@ -36,6 +36,7 @@ const contentSecurityPolicy = {
         */
         "'unsafe-inline'",
     isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
+    'https://snap.licdn.com/li.lms-analytics/insight.min.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
@@ -300,11 +301,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/gb/action/email',
-        destination: '/gb/content/debanking',
-        permanent: true,
-      },
-      {
         source: '/uk',
         destination: '/gb',
         permanent: false,
@@ -315,14 +311,9 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: '/gb/politicians',
-        destination: '/gb',
-        permanent: false,
-      },
-      {
-        source: '/gb/politicians/person/:slug',
-        destination: '/gb',
-        permanent: false,
+        source: '/press/stand-with-crypto-reacts-to-passage-of-fit21-legislation',
+        destination: '/press/stand-with-crypto-reacts-to-passage-of-fit-21-legislation',
+        permanent: true,
       },
       // vanity urls
       {
@@ -399,6 +390,11 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/gb/action/email',
+        destination: '/',
+        permanent: false,
+      },
       // tweet at person campaigns
       {
         source: '/pizza',
@@ -436,9 +432,27 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/ca/s/house-rising',
+        destination:
+          '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
+        permanent: true,
+      },
+      {
         source: '/s/founders-push/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/clarity-genius/:sessionId*',
+        destination:
+          '/action/email/clarity_genius_acts_jul_17_2025?utm_source=swc&utm_medium=sms&utm_campaign=sms-clarity-genius-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/clarity/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=clarity-1&sessionId=:sessionId*',
         permanent: true,
       },
       {
@@ -496,7 +510,19 @@ const nextConfig: NextConfig = {
       {
         source: '/c/clarity-house',
         destination:
-          '/action/email?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+          '/action/email/clarity_act_house_jun_13_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+        permanent: false,
+      },
+      {
+        source: '/mp-welcome',
+        destination:
+          '/action/email/welcome_mp_back_to_parliament_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-au-mp-welcome',
+        permanent: false,
+      },
+      {
+        source: '/action/email/welcome_mp_back_to_parliament_2025',
+        destination:
+          '/au/action/email/welcome_mp_back_to_parliament_2025?utm_source=coinbase&utm_medium=partner&utm_campaign=au-mp-welcome-jul-2025',
         permanent: false,
       },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
