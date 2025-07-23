@@ -72,7 +72,7 @@ export function normalizeUSDistrictName(name?: string) {
   }
 
   if (name.toLowerCase().includes('not defined')) {
-    return '0'
+    return
   }
 
   if (name.toLowerCase().includes('at large')) {
