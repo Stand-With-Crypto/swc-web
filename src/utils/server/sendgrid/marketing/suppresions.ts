@@ -72,3 +72,17 @@ export async function removeFromGlobalSuppressionGroup(emailAddress: string) {
     throw error
   }
 }
+
+interface SendgridSuppressionResponse {
+  body: {
+    recipient_email: string
+  }
+}
+export async function getEmailUnsubscriptionStatus(emailAddress: string) {
+  const [response] = (await SendgridClient.request({
+    url: `/v3/asm/suppressions/global/${emailAddress}`,
+    method: 'GET',
+  })) as [SendgridSuppressionResponse, unknown]
+
+  return response.body.recipient_email
+}
