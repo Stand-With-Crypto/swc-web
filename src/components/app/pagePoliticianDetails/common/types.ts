@@ -1,0 +1,28 @@
+import { DTSIPersonDetails, DTSIPersonStance } from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import { NormalizedQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+export type BillStance = Omit<DTSIPersonStance, 'quote' | 'tweet'> & {}
+
+export type BillData = {
+  id: string
+  bill: NonNullable<DTSIPersonStance['billRelationship']>['bill']
+  dateForSorting: string | undefined
+  stances: BillStance[]
+}
+
+export type BillsMap = Record<string, BillData>
+
+export interface PoliticianDetails extends Omit<DTSIPersonDetails, 'stances'> {
+  stancesCount: number
+  stances: {
+    bills: BillData[]
+    noBills: DTSIPersonStance[]
+  }
+}
+
+export type PoliticianDetailsPageProps = {
+  person: PoliticianDetails
+  countryCode: SupportedCountryCodes
+  questionnaire: NormalizedQuestionnaire | null
+}

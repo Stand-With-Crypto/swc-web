@@ -1,14 +1,11 @@
 import React, { ReactNode } from 'react'
 import { Globe } from 'lucide-react'
 
-import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ProfileAvatar } from '@/components/ui/profileAvatar'
-import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
-import { useCategorizedStances } from '@/hooks/useCategorizedStances'
 import {
   getDTSIPersonRoleLocation,
   getFormattedDTSIPersonRoleDateRange,
@@ -22,12 +19,13 @@ import {
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { cn } from '@/utils/web/cn'
+import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
+
+import VoteSection from './partials/voteSection'
+import StatementSection from '@/components/app/pagePoliticianDetails/common/partials/statementSection'
 
 export function PagePoliticianDetails({ children }: { children: ReactNode }) {
-  return (
-    <div className="standard-spacing-from-navbar container max-w-3xl font-sans">{children}</div>
-  )
+  return <div className="standard-spacing-from-navbar container max-w-3xl">{children}</div>
 }
 
 function PoliticianHeader({
@@ -36,7 +34,7 @@ function PoliticianHeader({
   showRoleLocation = true,
   showDonateButton = true,
 }: {
-  person: DTSIPersonDetails
+  person: PoliticianDetails
   countryCode: SupportedCountryCodes
   showRoleLocation?: boolean
   showDonateButton?: boolean
@@ -54,7 +52,7 @@ function PoliticianHeader({
 
         {person.primaryRole && (
           <div>
-            <p className="mb-5 font-sans text-xl font-normal text-black/80">
+            <p className="mb-5 text-xl font-normal text-black/80">
               {person.politicalAffiliationCategory && (
                 <>
                   {dtsiPersonPoliticalAffiliationCategoryDisplayName(
@@ -90,7 +88,7 @@ function PoliticianLinks({
   person,
   showDonateButton = true,
 }: {
-  person: DTSIPersonDetails
+  person: PoliticianDetails
   showDonateButton?: boolean
 }) {
   return (
@@ -133,60 +131,13 @@ function PoliticianStances({
   person,
   countryCode,
 }: {
-  person: DTSIPersonDetails
+  person: PoliticianDetails
   countryCode: SupportedCountryCodes
 }) {
-  const { billRelationship, noBillRelationship } = useCategorizedStances(person.stances)
-
-  const votesExtraClassNames =
-    '[&>.info-card:first-child]:border-none [&>.info-card]:rounded-none [&>.info-card]:border-t-2 [&>.info-card]:border-t-white'
-
   return (
     <section>
-      <PageTitle as="h2" className="text-center" size="md">
-        Vote History
-      </PageTitle>
-
-      {billRelationship.length ? (
-        <div
-          className={cn(
-            'mb-16 mt-8 box-border space-y-0 overflow-hidden rounded-3xl',
-            votesExtraClassNames,
-          )}
-        >
-          {billRelationship.map(stance => (
-            <DTSIStanceDetails
-              countryCode={countryCode}
-              isStanceHidden={shouldPersonHaveStanceScoresHidden(person)}
-              key={stance.id}
-              person={person}
-              stance={stance}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="mb-11 flex items-center justify-center">No recent votes.</div>
-      )}
-
-      <PageTitle as="h2" className="text-center" size="md">
-        Statements
-      </PageTitle>
-
-      {noBillRelationship.length ? (
-        <div className="mt-8 space-y-1 md:space-y-1 [&>.info-card+.info-card]:mt-16">
-          {noBillRelationship.map(stance => (
-            <DTSIStanceDetails
-              countryCode={countryCode}
-              isStanceHidden={shouldPersonHaveStanceScoresHidden(person)}
-              key={stance.id}
-              person={person}
-              stance={stance}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="mb-11 flex items-center justify-center">No recent statements.</div>
-      )}
+      <VoteSection person={person} countryCode={countryCode} />
+      <StatementSection person={person} countryCode={countryCode} />
     </section>
   )
 }

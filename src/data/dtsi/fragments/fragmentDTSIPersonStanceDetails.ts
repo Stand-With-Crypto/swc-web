@@ -7,6 +7,13 @@ export const fragmentDTSIPersonStanceDetails = /* GraphQL */ `
     billRelationship {
       id
       relationshipType
+      billVotePersonPosition {
+        billVote {
+          category
+          voteType
+          significanceDescription
+        }
+      }
       bill {
         id
         title
@@ -17,10 +24,6 @@ export const fragmentDTSIPersonStanceDetails = /* GraphQL */ `
         formattedSlug
         dateIntroduced
         computedStanceScore
-        votes {
-          voteType
-          significanceDescription
-        }
       }
     }
     quote {

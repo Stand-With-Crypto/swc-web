@@ -3,7 +3,6 @@
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InfoCard } from '@/components/ui/infoCard'
-import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import {
   dtsiPersonFullName,
@@ -12,9 +11,10 @@ import {
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
+import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 
 interface ScoreExplainerProps {
-  person: DTSIPersonDetails
+  person: PoliticianDetails
 }
 
 export function ScoreExplainer({ person }: ScoreExplainerProps) {
@@ -37,10 +37,10 @@ export function ScoreExplainer({ person }: ScoreExplainerProps) {
         <h4 className="text-sm text-fontcolor-muted md:text-base">
           {dtsiPersonFullName(person)} has made{' '}
           <FormattedNumber
-            amount={person.stances.length}
+            amount={person.stancesCount}
             locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
           />{' '}
-          {pluralize({ singular: 'statement', count: person.stances.length })} about crypto.
+          {pluralize({ singular: 'statement', count: person.stancesCount })} about crypto.
         </h4>
       </div>
     </InfoCard>

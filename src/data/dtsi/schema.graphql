@@ -51,6 +51,7 @@ enum BillAnalysisVerificationStatus {
 type BillPersonRelationship {
   bill: Bill!
   billId: String!
+  billVotePersonPosition: BillVotePersonPosition
   dateRelationOccurred: DateTime!
   datetimeCreated: DateTime!
   datetimeUpdated: DateTime!
@@ -75,6 +76,7 @@ enum BillStatus {
 }
 
 type BillVote {
+  bill: Bill!
   category: BillVoteCategory!
   datetimeOccurred: DateTime!
   id: ID!
@@ -93,6 +95,7 @@ enum BillVoteCategory {
 }
 
 type BillVotePersonPosition {
+  billVote: BillVote!
   id: ID!
   person: Person!
   positionType: BillVotePersonPositionType!
