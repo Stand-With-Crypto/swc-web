@@ -29,10 +29,8 @@ export function withServerActionMiddleware<TAction extends ServerAction<any, any
 
     const isBot = currentHeaders.get('x-known-bot') === 'true'
     if (isBot) {
-      Sentry.captureMessage('Blocked known bot', {
-        level: 'info',
-        tags: { domain: 'withServerActionMiddleware', action: name },
-      })
+      // Bot detection is working as expected, no need to log to Sentry
+      // as this creates unnecessary noise in error tracking
       return { error: 'Blocked by known bot detection' } as Awaited<ReturnType<TAction>>
     }
 
