@@ -39,21 +39,24 @@ const createMarkersFromActions = (
     const userLocation = item.user.userLocationDetails
 
     if (userLocation && userLocation.administrativeAreaLevel1) {
-      const state = userLocation.administrativeAreaLevel1.toUpperCase()
+      const administrativeArea =
+        userLocation.swcCivicAdministrativeArea as keyof typeof STATE_COORDS
 
-      const coordinates = STATE_COORDS[state]
+      if (!administrativeArea || !STATE_COORDS[administrativeArea]) return
+
+      const coordinates = STATE_COORDS[administrativeArea]
 
       if (coordinates) {
         let offsetX = 0
         let offsetY = 0
 
-        if (stateCount[state]) {
-          offsetX = stateCount[state] % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
-          offsetY = stateCount[state] % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
+        if (stateCount[administrativeArea]) {
+          offsetX = stateCount[administrativeArea] % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
+          offsetY = stateCount[administrativeArea] % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
 
-          stateCount[state] += 1
+          stateCount[administrativeArea] += 1
         } else {
-          stateCount[state] = 1
+          stateCount[administrativeArea] = 1
         }
 
         const currentIconActionType = actions[item.actionType]

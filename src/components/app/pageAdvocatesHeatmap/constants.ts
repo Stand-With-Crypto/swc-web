@@ -11,9 +11,11 @@ import {
   JoinIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { GB_NUTS_1_AREA_NAMES } from '@/utils/shared/stateMappings/gbCountryUtils'
 
 // Coordinates format: [longitude, latitude]
-export const STATE_COORDS: Record<string, [number, number]> = {
+export const STATE_COORDS: Partial<Record<USStateCode | GB_NUTS_1_AREA_NAMES, [number, number]>> = {
   AL: [-86.9023, 32.3182],
   AK: [-152.4044, 61.3707],
   AZ: [-111.4312, 34.0489],
@@ -65,10 +67,19 @@ export const STATE_COORDS: Record<string, [number, number]> = {
   WI: [-89.6165, 44.2685],
   WY: [-107.3025, 42.756],
   DC: [-77.026, 38.8964],
-  ENGLAND: [-2, 53],
-  SCOTLAND: [-4.3, 57],
-  WALES: [-4.6, 52.9],
-  ['NORTHERN IRELAND']: [-7.5, 55],
+
+  'East Midlands England': [-1.2577, 52.8832],
+  'East of England': [0.4042, 52.2228],
+  'North East England': [-1.6178, 54.9772],
+  'North West England': [-2.4167, 53.5242],
+  'South East England': [0.5056, 51.4775],
+  'South West England': [-2.5586, 51.4545],
+  'West Midlands England': [-2.1333, 52.5833],
+  'Yorkshire and The Humber': [-1.5358, 53.8007],
+  Wales: [-3.4359, 51.6154],
+  'Northern Ireland': [-6.2675, 54.65],
+  London: [-0.1278, 51.5074],
+  Scotland: [-4.2555, 56.1833],
 }
 
 export interface MapProjectionConfig {
@@ -96,7 +107,7 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
     projection: 'geoMercator',
     projectionConfig: {
       center: [-3.5, 56.0],
-      scale: 1500,
+      scale: 1600,
     },
     markerOffset: 0.67,
     geoPropertyStateNameKey: 'nuts118nm',
