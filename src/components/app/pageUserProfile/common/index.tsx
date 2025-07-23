@@ -7,8 +7,10 @@ import dynamic from 'next/dynamic'
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC } from '@/components/app/authentication/constants'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
+import { CommunicationsPreferenceForm } from '@/components/app/pageUserProfile/common/communicationsPreferenceForm'
 import { EmailSubscriptionForm } from '@/components/app/pageUserProfile/common/emailSubscriptionForm'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
+import { SMSSubscriptionForm } from '@/components/app/pageUserProfile/common/smsSubscriptionForm'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { Refer } from '@/components/app/userActionFormRefer/common/sections/refer'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
@@ -233,9 +235,10 @@ export function PageUserProfile({
         <PageSubTitle className="mb-5">
           Choose how you'd like to stay informed about our campaigns and important news.
         </PageSubTitle>
-        <div className="flex justify-center">
+        <CommunicationsPreferenceForm>
           <EmailSubscriptionForm user={user} />
-        </div>
+          <SMSSubscriptionForm countryCode={countryCode} user={user} />
+        </CommunicationsPreferenceForm>
       </section>
     </div>
   )
