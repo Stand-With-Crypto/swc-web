@@ -52,18 +52,17 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'fetch failed',
   'undefined is not an object',
   'null is not an object',
-  'Unknown root exit status',
   'Connection closed',
   '500 from GET /api/public/recent-activity/30/restrictToUS',
   '500 from GET /api/public/homepage/top-level-metrics/not-set',
 
-  // High-volume errors from recent Sentry data (30 days)
+  // High-volume errors
   'Failed to fetch TypeError',
   'Load failed TypeError',
   'Event request via fetch failed',
   'Global Error Page Displayed',
 
-  // Google Maps/Places API errors (beyond existing ones)
+  // Google Maps/Places API errors
   'Could not load "places_impl"',
   'Failed to load Google Maps script',
   'Could not load "util"',
