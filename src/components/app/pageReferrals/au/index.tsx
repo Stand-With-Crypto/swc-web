@@ -3,8 +3,12 @@ import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/r
 import { PageReferralsWrapper } from '@/components/app/pageReferrals'
 import { AuPageReferralsHeading } from '@/components/app/pageReferrals/au/heading'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
+import { AuUserDivisionRank } from '@/components/app/pageReferrals/au/userDivisionRank'
 import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisionRanking'
-import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
+import {
+  ReferralsCounter,
+  UserReferralsCount,
+} from '@/components/app/pageReferrals/referralsCounter'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
@@ -37,8 +41,8 @@ export function AuPageReferrals(props: PageReferralsProps) {
         <>
           <UserReferralUrlWithApi />
           <ReferralsCounter>
-            <ReferralsCounter.UserReferralsCount />
-            <ReferralsCounter.AuUserDivisionRank />
+            <UserReferralsCount />
+            <AuUserDivisionRank />
           </ReferralsCounter>
         </>
       )}
