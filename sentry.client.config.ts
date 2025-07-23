@@ -60,7 +60,6 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'No place found for address',
   'Electoral zone not found',
   'window.webkit.messageHandlers',
-  'Invalid `prisma.user.update()` invocation',
   "Right-hand side of 'instanceof' is not an object",
   'ObjectMultiplex - malformed chunk without name',
   'Refused to evaluate a string as JavaScript',
