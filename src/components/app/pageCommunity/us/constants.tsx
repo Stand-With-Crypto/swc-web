@@ -10,28 +10,30 @@ interface PaginationConfig {
   totalPregeneratedPages: number
 }
 
-export const RECENT_ACTIVITY_PAGINATION: PaginationConfig = {
+export const US_RECENT_ACTIVITY_PAGINATION: PaginationConfig = {
   totalPages: 10,
   itemsPerPage: 30,
   totalPregeneratedPages: maybeIgnorePreGeneration(10),
 }
 
-export const COMMUNITY_PAGINATION_DATA: Record<RecentActivityAndLeaderboardTabs, PaginationConfig> =
-  {
-    [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: RECENT_ACTIVITY_PAGINATION,
-    [RecentActivityAndLeaderboardTabs.LEADERBOARD]: {
-      totalPages: 4,
-      itemsPerPage: 100,
-      totalPregeneratedPages: maybeIgnorePreGeneration(4),
-    },
-    [RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]: {
-      totalPages: 9,
-      itemsPerPage: 50,
-      totalPregeneratedPages: maybeIgnorePreGeneration(9),
-    },
-  }
+export const US_COMMUNITY_PAGINATION_DATA: Record<
+  RecentActivityAndLeaderboardTabs,
+  PaginationConfig
+> = {
+  [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: US_RECENT_ACTIVITY_PAGINATION,
+  [RecentActivityAndLeaderboardTabs.LEADERBOARD]: {
+    totalPages: 4,
+    itemsPerPage: 100,
+    totalPregeneratedPages: maybeIgnorePreGeneration(4),
+  },
+  [RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]: {
+    totalPages: 9,
+    itemsPerPage: 50,
+    totalPregeneratedPages: maybeIgnorePreGeneration(9),
+  },
+}
 
-export const STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA: Record<string, PaginationConfig> = {
+export const US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA: Record<string, PaginationConfig> = {
   [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: {
     totalPages: 10,
     itemsPerPage: 30,

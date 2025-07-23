@@ -1,4 +1,6 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs as AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs as CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs as USRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
@@ -52,6 +54,11 @@ const COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS: Record<
     district: 'constituency',
   },
 }
+
+type RecentActivityAndLeaderboardTabs =
+  | USRecentActivityAndLeaderboardTabs
+  | AuRecentActivityAndLeaderboardTabs
+  | CaRecentActivityAndLeaderboardTabs
 
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -127,14 +134,18 @@ export const getIntlUrls = (
     },
     community: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const getTabPrefix = (
-        tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+        tab: RecentActivityAndLeaderboardTabs = USRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
       ) => {
         switch (tab) {
-          case RecentActivityAndLeaderboardTabs.LEADERBOARD:
+          case USRecentActivityAndLeaderboardTabs.LEADERBOARD:
             return '/community/leaderboard'
-          case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case USRecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS:
+          case CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES:
             return '/community/referrals'
-          case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case USRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
             return '/community/activity'
         }
@@ -148,18 +159,18 @@ export const getIntlUrls = (
     communityStateSpecific: (params: {
       pageNum?: number
       tab:
-        | RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
-        | RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+        | USRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+        | USRecentActivityAndLeaderboardTabs.TOP_DISTRICTS
       stateCode: string
     }) => {
       const statePrefix = `/community/${params.stateCode.toLowerCase()}`
       const getTabPrefix = (
-        tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+        tab: USRecentActivityAndLeaderboardTabs = USRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
       ) => {
         switch (tab) {
-          case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case USRecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
             return `${statePrefix}/referrals`
-          case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case USRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
             return statePrefix
         }

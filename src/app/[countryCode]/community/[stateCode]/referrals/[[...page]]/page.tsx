@@ -2,7 +2,7 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound, redirect, RedirectType } from 'next/navigation'
 
-import { STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
+import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
@@ -43,7 +43,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   return Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).flatMap((stateCode: string) =>
     flatten(
       times(totalPregeneratedPages).map(i => ({
@@ -57,7 +57,7 @@ export async function generateStaticParams() {
 export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } =
-    STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   const { page, stateCode, countryCode } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {

@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { UsPageReferrals } from '@/components/app/pageReferrals/us'
 import { PageProps } from '@/types'
@@ -16,7 +16,7 @@ export const dynamic = 'error'
 export const dynamicParams = true
 
 const TOTAL_PREGENERATED_PAGES =
-  COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS].totalPages
+  US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS].totalPages
 
 type Props = PageProps<{ page: string[] }>
 
@@ -45,7 +45,8 @@ export async function generateStaticParams() {
 
 export default async function ReferralsPage(props: Props) {
   const params = await props.params
-  const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+  const { itemsPerPage } =
+    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {

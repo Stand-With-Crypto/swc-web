@@ -1,4 +1,4 @@
-import { STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from 'src/components/app/pageCommunity/common/constants'
+import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
@@ -67,7 +67,7 @@ export function UsStateSpecificCommunityPage({
               actions={publicRecentActivity}
               countryCode={countryCode}
               pageSize={
-                STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[
+                US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[
                   RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
                 ].itemsPerPage
               }

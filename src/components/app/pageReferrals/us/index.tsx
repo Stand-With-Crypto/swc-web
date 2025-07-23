@@ -1,6 +1,6 @@
 'use client'
 
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageReferralsWrapper } from '@/components/app/pageReferrals'
 import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
@@ -28,7 +28,7 @@ export function UsPageReferrals(props: PageReferralsProps) {
 
   const tab = RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
   const urls = getIntlUrls(COUNTRY_CODE)
-  const totalPages = props.totalPages || COMMUNITY_PAGINATION_DATA[tab].totalPages
+  const totalPages = props.totalPages || US_COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
     <PageReferralsWrapper>

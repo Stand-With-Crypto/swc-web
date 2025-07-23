@@ -1,5 +1,5 @@
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { AU_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/au/constants'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { PageReferralsWrapper } from '@/components/app/pageReferrals'
 import { AuPageReferralsHeading } from '@/components/app/pageReferrals/au/heading'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
@@ -24,9 +24,9 @@ const COUNTRY_CODE = SupportedCountryCodes.AU as const
 export function AuPageReferrals(props: PageReferralsProps) {
   const { page, leaderboardData, stateCode } = props
 
-  const tab = RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+  const tab = RecentActivityAndLeaderboardTabs.TOP_DIVISIONS
   const urls = getIntlUrls(COUNTRY_CODE)
-  const totalPages = props.totalPages || COMMUNITY_PAGINATION_DATA[tab].totalPages
+  const totalPages = props.totalPages || AU_COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
     <PageReferralsWrapper>

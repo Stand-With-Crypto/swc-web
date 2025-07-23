@@ -1,4 +1,4 @@
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
@@ -81,7 +81,7 @@ export function UsPageCommunity({
   publicRecentActivity,
   sumDonationsByUser,
   tab,
-  totalPages = COMMUNITY_PAGINATION_DATA[tab].totalPages,
+  totalPages = US_COMMUNITY_PAGINATION_DATA[tab].totalPages,
 }: PageLeaderboardProps) {
   return (
     <PageLayout className="space-y-7">
@@ -153,7 +153,7 @@ export function UsPageCommunity({
               actions={publicRecentActivity}
               countryCode={countryCode}
               pageSize={
-                COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+                US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
                   .itemsPerPage
               }
             />

@@ -1,12 +1,12 @@
-import { RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/common/constants'
-import { getPageData } from '@/components/app/pageCommunity/common/getPageData'
+import { CA_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/ca/constants'
+import { CAGetPageData } from '@/components/app/pageCommunity/ca/getPageData'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { PageLayout } from '@/components/ui/pageLayout'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-type CaPageLeaderboardProps = Awaited<ReturnType<typeof getPageData>>
+type CaPageLeaderboardProps = Awaited<ReturnType<typeof CAGetPageData>>
 
 const countryCode = SupportedCountryCodes.CA
 const urls = getIntlUrls(countryCode)
@@ -28,7 +28,7 @@ export function CaPageCommunity({
           <RecentActivity.DynamicList
             actions={publicRecentActivity}
             countryCode={countryCode}
-            pageSize={RECENT_ACTIVITY_PAGINATION.itemsPerPage}
+            pageSize={CA_RECENT_ACTIVITY_PAGINATION.itemsPerPage}
           />
         ) : (
           <RecentActivity.List actions={publicRecentActivity} />

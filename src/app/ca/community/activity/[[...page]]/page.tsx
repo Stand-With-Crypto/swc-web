@@ -2,14 +2,11 @@ import React from 'react'
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { getPageData } from '@/components/app/pageCommunity'
+import { CAGetPageData } from '@/components/app/pageCommunity'
 import { CaPageCommunity } from '@/components/app/pageCommunity/ca'
-import { RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/common/constants'
+import { CA_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/ca/constants'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const countryCode = SupportedCountryCodes.CA
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
@@ -26,7 +23,7 @@ export async function generateMetadata(_: CaCommunityRecentActivityPageProps): P
 }
 
 export async function generateStaticParams() {
-  const { totalPregeneratedPages } = RECENT_ACTIVITY_PAGINATION
+  const { totalPregeneratedPages } = CA_RECENT_ACTIVITY_PAGINATION
   return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
@@ -34,9 +31,8 @@ export default async function CaCommunityRecentActivityPage(
   props: CaCommunityRecentActivityPageProps,
 ) {
   const params = await props.params
-  const pageData = await getPageData({
+  const pageData = await CAGetPageData({
     page: params.page,
-    countryCode,
   })
 
   return <CaPageCommunity {...pageData} />
