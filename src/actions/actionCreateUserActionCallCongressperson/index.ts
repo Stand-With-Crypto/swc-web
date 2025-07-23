@@ -25,7 +25,10 @@ import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withSe
 import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
-import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import {
+  ElectoralZoneNotFoundReason,
+  maybeGetElectoralZoneFromAddress,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -139,7 +142,8 @@ async function _actionCreateUserActionCallCongressperson(
         address: validatedInput.data.address.formattedDescription,
         placeId: validatedInput.data.address.googlePlaceId,
         countryCode,
-        notFoundReason: electoralZone.notFoundReason ?? 'ELECTORAL_ZONE_NOT_FOUND',
+        notFoundReason:
+          electoralZone.notFoundReason ?? ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
         domain: 'actionCreateUserActionCallCongressperson',
       })
     } else {

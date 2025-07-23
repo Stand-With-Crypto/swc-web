@@ -32,7 +32,10 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
 import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
-import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import {
+  ElectoralZoneNotFoundReason,
+  maybeGetElectoralZoneFromAddress,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
@@ -78,7 +81,8 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
           address: validatedFields.data.address.formattedDescription,
           placeId: validatedFields.data.address.googlePlaceId,
           countryCode: validatedFields.data.address.countryCode,
-          notFoundReason: electoralZone.notFoundReason ?? 'ELECTORAL_ZONE_NOT_FOUND',
+          notFoundReason:
+            electoralZone.notFoundReason ?? ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
           domain: 'actionUpdateUserProfile',
         })
       } else {

@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { ElectoralZoneNotFoundReason } from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('logElectoralZoneNotFound')
@@ -13,12 +14,17 @@ export function logElectoralZoneNotFound({
 }: {
   address: string
   placeId?: string
-  notFoundReason: string
+  notFoundReason: ElectoralZoneNotFoundReason
   countryCode?: string
   domain: string
 }) {
   logger.error(`No electoral zone found for address ${address} with code ${notFoundReason}`)
-  if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(notFoundReason)) {
+  if (
+    [
+      ElectoralZoneNotFoundReason.CIVIC_API_DOWN,
+      ElectoralZoneNotFoundReason.UNEXPECTED_ERROR,
+    ].includes(notFoundReason)
+  ) {
     Sentry.captureMessage(`No electoral zone found for address`, {
       tags: {
         domain,

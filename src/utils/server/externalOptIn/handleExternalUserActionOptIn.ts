@@ -41,7 +41,10 @@ import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElect
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
-import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import {
+  ElectoralZoneNotFoundReason,
+  maybeGetElectoralZoneFromAddress,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -294,7 +297,8 @@ async function maybeUpsertUser({
       if ('notFoundReason' in electoralZone || !electoralZone) {
         logElectoralZoneNotFound({
           address: dbAddress.formattedDescription,
-          notFoundReason: electoralZone.notFoundReason || 'ELECTORAL_ZONE_NOT_FOUND',
+          notFoundReason:
+            electoralZone.notFoundReason || ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
           domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
       } else {
