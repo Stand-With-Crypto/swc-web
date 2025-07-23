@@ -1,16 +1,16 @@
 import { format, parseISO } from 'date-fns'
 
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { cn } from '@/utils/web/cn'
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { BillStance, PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 import { InfoCard } from '@/components/ui/infoCard'
-import { DTSIBillCard } from '@/components/app/dtsiBillCard'
-import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_BillPersonRelationshipType } from '@/data/dtsi/generated'
+import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
 import { shouldPersonHaveStanceScoresHidden } from '@/utils/dtsi/dtsiPersonUtils'
+import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { cn } from '@/utils/web/cn'
 
 const MAPPED_VOTE_TYPES = {
   EXECUTIVE_OR_EXTERNAL_ACTION: 'Executive orders',
@@ -79,6 +79,7 @@ function VoteSection({
                 'mb-16 mt-8 box-border space-y-0 overflow-hidden rounded-3xl',
                 votesExtraClassNames,
               )}
+              key={bill.id}
             >
               {stances.map(stance => {
                 const { stanceTitle, stanceDescription } = handleStanceTitleAndDescription({
@@ -93,9 +94,9 @@ function VoteSection({
                 return (
                   <InfoCard as="article" key={stance.id}>
                     <DTSIBillCard
-                      countryCode={countryCode}
                       bill={bill}
                       className="p-0 sm:p-0"
+                      countryCode={countryCode}
                       description={stanceDescription}
                       title={stanceTitle}
                     >

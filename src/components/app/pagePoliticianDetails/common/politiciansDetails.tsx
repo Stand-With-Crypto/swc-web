@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react'
 import { Globe } from 'lucide-react'
 
+import StatementSection from '@/components/app/pagePoliticianDetails/common/partials/statementSection'
+import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
@@ -15,14 +17,11 @@ import {
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
-  shouldPersonHaveStanceScoresHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 
 import VoteSection from './partials/voteSection'
-import StatementSection from '@/components/app/pagePoliticianDetails/common/partials/statementSection'
 
 export function PagePoliticianDetails({ children }: { children: ReactNode }) {
   return <div className="standard-spacing-from-navbar container max-w-3xl">{children}</div>
@@ -136,8 +135,8 @@ function PoliticianStances({
 }) {
   return (
     <section>
-      <VoteSection person={person} countryCode={countryCode} />
-      <StatementSection person={person} countryCode={countryCode} />
+      <VoteSection countryCode={countryCode} person={person} />
+      <StatementSection countryCode={countryCode} person={person} />
     </section>
   )
 }

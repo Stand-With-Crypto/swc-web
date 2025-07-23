@@ -1,8 +1,8 @@
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { shouldPersonHaveStanceScoresHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
+import { PageTitle } from '@/components/ui/pageTitleText'
+import { shouldPersonHaveStanceScoresHidden } from '@/utils/dtsi/dtsiPersonUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 function StatementSection({
   person,

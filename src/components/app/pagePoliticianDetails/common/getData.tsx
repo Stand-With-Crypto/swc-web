@@ -1,11 +1,11 @@
 import { cache } from 'react'
 
+import { BillsMap } from '@/components/app/pagePoliticianDetails/common/types'
 import { DTSI_Bill, DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import {
   DTSIPersonStance,
   queryDTSIPersonDetails,
 } from '@/data/dtsi/queries/queryDTSIPersonDetails'
-import { BillsMap } from '@/components/app/pagePoliticianDetails/common/types'
 
 const transformBillsInArrayAndSortByDate = (bills: BillsMap) => {
   return Object.values(bills)
@@ -27,7 +27,7 @@ const groupStancesByBill = (stances: DTSIPersonStance[]) => {
 
   for (const stance of stances) {
     if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
-      const { billRelationship, quote, tweet, ...rest } = stance
+      const { billRelationship, quote: _quote, tweet: _tweet, ...rest } = stance
 
       const bill = billRelationship?.bill as DTSI_Bill
 

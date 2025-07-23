@@ -4,7 +4,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export type BillStance = Omit<DTSIPersonStance, 'quote' | 'tweet'> & {}
 
-export type BillData = {
+export interface BillData {
   id: string
   bill: NonNullable<DTSIPersonStance['billRelationship']>['bill']
   dateForSorting: string | undefined
@@ -21,7 +21,7 @@ export interface PoliticianDetails extends Omit<DTSIPersonDetails, 'stances'> {
   }
 }
 
-export type PoliticianDetailsPageProps = {
+export interface PoliticianDetailsPageProps {
   person: PoliticianDetails
   countryCode: SupportedCountryCodes
   questionnaire: NormalizedQuestionnaire | null

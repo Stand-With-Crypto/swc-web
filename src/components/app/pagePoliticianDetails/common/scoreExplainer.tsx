@@ -1,6 +1,7 @@
 'use client'
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InfoCard } from '@/components/ui/infoCard'
 import { useCountryCode } from '@/hooks/useCountryCode'
@@ -11,7 +12,6 @@ import {
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
-import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 
 interface ScoreExplainerProps {
   person: PoliticianDetails
