@@ -16,10 +16,13 @@ interface DTSIBillCardProps {
   countryCode: SupportedCountryCodes
   children?: ReactElement<typeof CryptoSupportHighlight>
   className?: string
+  title?: string
 }
 
 export function DTSIBillCard(props: DTSIBillCardProps) {
-  const { bill, description, countryCode, children, className } = props
+  const { bill, description, countryCode, children, className, title } = props
+
+  const billTitle = title || bill.shortTitle || bill.title
 
   return (
     <LinkBox
@@ -35,9 +38,11 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
           data-link-box-subject
           href={getIntlUrls(countryCode).billDetails(bill.id)}
         >
-          {bill.shortTitle || bill.title}
+          {billTitle}
         </InternalLink>
-        <p className="text-fontcolor-muted">{description}</p>
+        <p className="w-full max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap text-fontcolor-muted">
+          {description}
+        </p>
       </div>
 
       {children}
