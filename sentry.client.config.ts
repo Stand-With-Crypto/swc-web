@@ -55,59 +55,17 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'Connection closed',
   '500 from GET /api/public/recent-activity/30/restrictToUS',
   '500 from GET /api/public/homepage/top-level-metrics/not-set',
-
-  // High-volume errors
-  'Failed to fetch TypeError',
-  'Load failed TypeError',
-  'Event request via fetch failed',
-  'Global Error Page Displayed',
-
-  // Google Maps/Places API errors
   'Could not load "places_impl"',
-  'Failed to load Google Maps script',
   'Could not load "util"',
-  'place ID is no longer valid',
   'No place found for address',
   'Electoral zone not found',
-
-  // WebKit/Mobile browser errors
   'window.webkit.messageHandlers',
-
-  // Database/Prisma errors
   'Invalid `prisma.user.update()` invocation',
-  'Record to update not found',
-  'Object Not Found Matching Id',
-  'MethodName:update, ParamCount:4',
-
-  // JavaScript runtime errors
   "Right-hand side of 'instanceof' is not an object",
   'ObjectMultiplex - malformed chunk without name',
   'Refused to evaluate a string as JavaScript',
-
-  // SMS/Communication errors
-  'SMS event ERROR',
-  'client error for emailing via capitol canary',
   'No officials found for your information',
-  'Received message from an unused phone number',
-  'Unable to identify keyword',
-
-  // Phone number validation errors
-  'Error parsing phone number',
-  'NOT_A_NUMBER',
   'TOO_SHORT',
-
-  // API authentication errors
-  '401 from GET /api/us/identified-user/polls-votes-from-user',
-  'Blocked known bot',
-
-  // User profile errors
-  "Cannot destructure property 'countryCode' of 't.response.user'",
-
-  // Application-specific errors
-  'Detected old user action that is missing NFT',
-  'Unexpected error type passed to catchUnexpectedServerErrorAndTriggerToast',
-
-  // Content Security Policy errors
   "unsafe-eval' is not an allowed source of script",
 
   ...GOOGLE_PLACES_API_ERRORS_TO_GROUP,
