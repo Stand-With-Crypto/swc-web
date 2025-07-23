@@ -1,4 +1,5 @@
 import { SuspenseResubscribeButton } from '@/components/app/pageUnsubscribe/resubscribeButton'
+import { SocialIcons } from '@/components/app/pageUnsubscribe/socialIcons'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -18,23 +19,25 @@ export default function UnsubscribeSuccessPage() {
       />
 
       <section className="space-y-8">
-        <PageTitle size="md">Unsubscribe Successful</PageTitle>
+        <PageTitle size="md">Unsubscribed Successfully</PageTitle>
 
         <PageSubTitle className="max-w-[600px]">
-          We're sorry to see you go, but there's still ways to be involved without communicating
-          with us via email.
+          We're sorry to see you go.
           <br />
-          <br />
-          Check out{' '}
-          <InternalLink href={getIntlUrls(SupportedCountryCodes.US).home()} replace>
-            www.StandWithCrypto.org
-          </InternalLink>{' '}
-          for easy tools that let you reach out to lawmakers, check your voter registration, and
-          more. And don't forget to follow SWC on social media for the latest updates.
+          Please <span className="text-primary-cta">resubscribe</span> if you've changed your mind.
         </PageSubTitle>
+
+        <SuspenseResubscribeButton />
       </section>
 
-      <SuspenseResubscribeButton />
+      <section className="space-y-4 text-center">
+        <SocialIcons />
+        <div>
+          <InternalLink href={getIntlUrls(SupportedCountryCodes.US).home()}>
+            StandWithCrypto.org
+          </InternalLink>
+        </div>
+      </section>
     </div>
   )
 }
