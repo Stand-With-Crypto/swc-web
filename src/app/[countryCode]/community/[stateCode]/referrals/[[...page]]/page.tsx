@@ -2,13 +2,13 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound, redirect, RedirectType } from 'next/navigation'
 
-import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
   PageLeaderboardInferredProps,
 } from '@/components/app/pageCommunity/us'
+import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { UsStateSpecificCommunityPage } from '@/components/app/pageCommunity/us/stateSpecificPage'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'

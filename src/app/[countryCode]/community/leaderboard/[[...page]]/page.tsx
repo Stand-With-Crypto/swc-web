@@ -2,7 +2,6 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
@@ -10,6 +9,7 @@ import {
   PageLeaderboardInferredProps,
   UsPageCommunity,
 } from '@/components/app/pageCommunity/us'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { PageProps } from '@/types'

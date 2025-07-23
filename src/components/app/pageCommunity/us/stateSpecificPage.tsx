@@ -1,5 +1,4 @@
 import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
-
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
