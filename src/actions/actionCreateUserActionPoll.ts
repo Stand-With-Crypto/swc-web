@@ -129,8 +129,6 @@ async function actionCreateUserActionPollWithoutMiddleware(
     return { user: getClientUser(user) }
   }
 
-  await triggerRateLimiterAtMostOnce()
-
   await prismaClient.userAction.create({
     data: {
       countryCode,
