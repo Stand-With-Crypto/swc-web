@@ -3,6 +3,7 @@
 import { FC, MouseEvent, useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 import { useMedia, useOrientation } from 'react-use'
+import { Settings } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 
 import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionList'
@@ -11,8 +12,16 @@ import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmap
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import type { MapProjectionConfig } from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  AREA_COORDS_BY_COUNTRY_CODE,
+  AreaCoordinates,
+  AreaCoordinatesKey,
+  type MapProjectionConfig,
+} from '@/components/app/pageAdvocatesHeatmap/constants'
+import { MapDebugger } from '@/components/app/pageAdvocatesHeatmap/debugger'
+import { useMockedAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/debugger/useMockedAdvocateMap'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
+import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -20,6 +29,7 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getUSStateCodeFromStateName } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
@@ -41,12 +51,30 @@ export function AdvocatesHeatmap({
   isEmbedded,
   mapConfig,
 }: RenderMapProps) {
+  const [mockedCoordinates, setMockedCoordinates] = useState<AreaCoordinates>({
+    ...AREA_COORDS_BY_COUNTRY_CODE[countryCode],
+  })
+  const [mockedSelectedAreas, setMockedSelectedAreas] = useState<AreaCoordinatesKey[]>(
+    Object.keys(mockedCoordinates) as AreaCoordinatesKey[],
+  )
+  const [mockedActionsLimit, setMockedActionsLimit] = useState(20)
+
+  const [isMockMode, setIsMockMode] = useState(false)
+  const [isEditorOpen, setIsEditorOpen] = useState(false)
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
-  const markers = useAdvocateMap(actions, mapConfig)
+
+  const mockedMarkers = useMockedAdvocateMap({
+    mapConfig,
+    coordinates: mockedCoordinates,
+    selectedAreas: mockedSelectedAreas,
+    actionsLimit: mockedActionsLimit,
+  })
+  const markers = useAdvocateMap({ actions, mapConfig })
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
+  const isLocalEnvironment = NEXT_PUBLIC_ENVIRONMENT === 'local'
 
   const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
 
@@ -129,14 +157,27 @@ export function AdvocatesHeatmap({
         {isEmbedded && (
           <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
         )}
-        <MapComponent
-          countryCode={countryCode}
-          handleStateMouseHover={handleStateMouseHover}
-          handleStateMouseOut={handleStateMouseOut}
-          isEmbedded={isEmbedded}
-          mapConfig={mapConfig}
-          markers={markers}
-        />
+        <div className="relative w-full">
+          {isLocalEnvironment && (
+            <Button
+              className="absolute right-2 top-2 z-10 bg-yellow-500 text-black hover:bg-yellow-600"
+              onClick={() => setIsEditorOpen(true)}
+              size="sm"
+              variant="default"
+            >
+              <Settings className="mr-2 h-4 w-4" />
+              Debugger
+            </Button>
+          )}
+          <MapComponent
+            countryCode={countryCode}
+            handleStateMouseHover={handleStateMouseHover}
+            handleStateMouseOut={handleStateMouseOut}
+            isEmbedded={isEmbedded}
+            mapConfig={mapConfig}
+            markers={isMockMode ? mockedMarkers : markers}
+          />
+        </div>
         <TotalAdvocatesPerStateTooltip
           countryCode={countryCode}
           getTotalAdvocatesPerState={getTotalAdvocatesPerState}
@@ -159,6 +200,21 @@ export function AdvocatesHeatmap({
           <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
         )}
       </div>
+
+      {isLocalEnvironment && (
+        <MapDebugger
+          coordinates={mockedCoordinates}
+          isMockMode={isMockMode}
+          isOpen={isEditorOpen}
+          onAreasChange={setMockedSelectedAreas}
+          onClose={() => setIsEditorOpen(false)}
+          onMockModeChange={setIsMockMode}
+          onSaveCoordinates={setMockedCoordinates}
+          selectedAreas={mockedSelectedAreas}
+          actionsLimit={mockedActionsLimit}
+          onActionsLimitChange={setMockedActionsLimit}
+        />
+      )}
     </div>
   )
 }
@@ -269,6 +325,7 @@ const MapComponent = ({
                       handleActionMouseLeave={handleActionMouseLeave}
                       handleActionMouseOver={handleActionMouseOver}
                       key={markerKey}
+                      size={mapConfig.markerSize}
                     />
                   )
                 })}
