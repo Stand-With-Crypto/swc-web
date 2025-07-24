@@ -36,7 +36,7 @@ async function getBillFromBuilderIO(filters: BillFilters): Promise<SWCBill | nul
           query: {
             data: {
               ...filters,
-              countryCode: filters.countryCode?.toUpperCase(),
+              countryCode: filters.countryCode.toUpperCase(),
             },
             ...(isProduction && { published: 'published' }),
           },
@@ -76,7 +76,7 @@ export function getBillFromBuilderIOByBillNumber(
   })
 }
 
-export async function getBillFromBuilderIOByDTSISlug(
+export function getBillFromBuilderIOByDTSISlug(
   countryCode: SupportedCountryCodes,
   dtsiSlug: string,
 ) {
@@ -101,7 +101,7 @@ function getAllBillsWithOffset({
         query: {
           ...(isProduction && { published: 'published' }),
           data: {
-            countryCode: countryCode?.toUpperCase(),
+            countryCode: countryCode.toUpperCase(),
           },
         },
         includeUnpublished: !isProduction,

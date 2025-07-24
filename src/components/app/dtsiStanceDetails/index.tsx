@@ -13,11 +13,7 @@ import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBil
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
 
-async function StanceTypeContent({
-  stance: passedStance,
-  isStanceHidden,
-  ...props
-}: StanceDetailsProps) {
+function StanceTypeContent({ stance: passedStance, isStanceHidden, ...props }: StanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
 
   if (stance.stanceType === DTSI_PersonStanceType.TWEET) {
