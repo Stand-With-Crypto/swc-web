@@ -44,7 +44,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email your Member of Parliament',
+    title: 'Email your member of Parliament',
     description: 'Make stablecoin leadership a strategic priority',
     mobileCTADescription: 'Make stablecoin leadership a strategic priority',
     campaignsModalDescription: 'Make stablecoin leadership a strategic priority',
@@ -54,7 +54,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: GBUserActionEmailCampaignName.STABLECOINS,
         isCampaignActive: false,
-        title: 'Email your Member of Parliament',
+        title: 'Email your member of Parliament',
         description: 'Make stablecoin leadership a strategic priority',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
@@ -103,7 +103,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.REFER]: {
-    title: 'Refer a Friend',
+    title: 'Refer a friend',
     description: 'Get your friend to signup for Stand With Crypto and verify their account.',
     mobileCTADescription:
       'Get your friend to signup for Stand With Crypto and verify their account.',
@@ -114,7 +114,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.REFER,
         campaignName: GBUserActionReferCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Refer a Friend',
+        title: 'Refer a friend',
         description: 'You have referred friends to join Stand With Crypto.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (

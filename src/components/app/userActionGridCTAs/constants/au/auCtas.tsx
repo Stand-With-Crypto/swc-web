@@ -47,7 +47,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email your Member of Parliament',
+    title: 'Email your member of Parliament',
     description:
       'Tell your MP to support Blockchain as a priority for Australia’s Productivity Agenda',
     campaignsModalDescription:
@@ -58,7 +58,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: AUUserActionEmailCampaignName.DEFAULT,
         isCampaignActive: false,
-        title: `Email your Member of Parliament`,
+        title: `Email your member of Parliament`,
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
@@ -82,7 +82,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: AUUserActionEmailCampaignName.AU_Q2_2025_ELECTION,
         isCampaignActive: false,
-        title: `Email your Member of Parliament`,
+        title: `Email your member of Parliament`,
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
@@ -105,7 +105,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Email your Member of Parliament',
+    title: 'Email your member of Parliament',
     description:
       'Make your voice heard on important crypto policy issues by emailing your representatives',
     campaignsModalDescription:
@@ -116,7 +116,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
         isCampaignActive: false,
-        title: `Email your Member of Parliament`,
+        title: `Email your member of Parliament`,
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
@@ -187,7 +187,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.REFER]: {
-    title: 'Refer a Friend',
+    title: 'Refer a friend',
     description: 'Get your friend to signup for Stand With Crypto and verify their account.',
     mobileCTADescription:
       'Get your friend to signup for Stand With Crypto and verify their account.',
@@ -198,7 +198,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.REFER,
         campaignName: AUUserActionReferCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Refer a Friend',
+        title: 'Refer a friend',
         description: 'You have referred friends to join Stand With Crypto.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (

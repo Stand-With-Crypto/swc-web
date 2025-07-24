@@ -71,7 +71,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Email your Member of Parliament',
+    title: 'Email your member of Parliament',
     description:
       'Make your voice heard on important crypto policy issues by emailing your representatives.',
     campaignsModalDescription:
@@ -85,7 +85,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
         isCampaignActive: false,
-        title: 'Email your Member of Parliament',
+        title: 'Email your member of Parliament',
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
@@ -111,7 +111,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_RACES]: {
-    title: 'View Key Races in Canada',
+    title: 'View key races in Canada',
     description:
       'View the key races occurring across Canada that will impact the future of crypto.',
     campaignsModalDescription:
@@ -122,7 +122,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.VIEW_KEY_RACES,
         campaignName: CAUserActionViewKeyRacesCampaignName.H1_2025,
         isCampaignActive: false,
-        title: 'View Key Races in Canada',
+        title: 'View key races in Canada',
         description:
           'Viewed the key races occurring across Canada that would impact the future of crypto in early 2025.',
         canBeTriggeredMultipleTimes: true,
@@ -154,7 +154,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.REFER]: {
-    title: 'Refer a Friend',
+    title: 'Refer a friend',
     description: 'Get your friend to signup for Stand With Crypto and verify their account.',
     mobileCTADescription:
       'Get your friend to signup for Stand With Crypto and verify their account.',
@@ -165,7 +165,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.REFER,
         campaignName: CAUserActionReferCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Refer a Friend',
+        title: 'Refer a friend',
         description: 'You have referred friends to join Stand With Crypto.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
