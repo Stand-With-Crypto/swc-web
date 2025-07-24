@@ -13,10 +13,10 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 const MAPPED_VOTE_TYPES = {
-  EXECUTIVE_OR_EXTERNAL_ACTION: 'Executive orders',
-  FINAL_PASSAGE: 'Final passage out of Senate',
-  LEGISLATIVE_ACTION: 'Introduced in House',
-  PROCEDURAL_ACTION: 'Cloture Vote',
+  EXECUTIVE_OR_EXTERNAL_ACTION: 'Executive Branch Actioned',
+  FINAL_PASSAGE: 'Final passage out of {category}',
+  LEGISLATIVE_ACTION: 'Legislative Vote in {category}',
+  PROCEDURAL_ACTION: 'Procedural Vote in {category}',
 }
 
 const handleStanceTitleAndDescription = ({ stance }: { stance: BillStance }) => {
@@ -26,9 +26,18 @@ const handleStanceTitleAndDescription = ({ stance }: { stance: BillStance }) => 
   const dateStanceMade = format(parseISO(stance.dateStanceMade), 'MMMM d, yyyy')
   const significanceDescription = billVote?.significanceDescription
 
-  const stanceTitle = billVotePersonPosition
-    ? MAPPED_VOTE_TYPES[billVote?.voteType as keyof typeof MAPPED_VOTE_TYPES]
-    : 'Introduced in House'
+  let stanceTitle = ''
+
+  if (billVotePersonPosition) {
+    const voteTitle = MAPPED_VOTE_TYPES[billVote?.voteType as keyof typeof MAPPED_VOTE_TYPES]
+    const billCategory = billVotePersonPosition.billVote.category.toLowerCase()
+    const category = `${billCategory[0].toUpperCase()}${billCategory.slice(1)}`
+
+    stanceTitle = voteTitle.replace('{category}', category)
+  } else {
+    stanceTitle = 'Introduced in House'
+  }
+
   const stanceDescription = `${dateStanceMade}${significanceDescription ? ` - ${significanceDescription}` : ''}`
 
   return { stanceTitle, stanceDescription }
