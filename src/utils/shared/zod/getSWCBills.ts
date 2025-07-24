@@ -8,19 +8,31 @@ export enum BILL_CHAMBER_ORIGIN_OPTIONS {
 }
 
 export enum BILL_KEY_DATE_CATEGORY_OPTIONS {
-  BILL_INTRODUCED_LOWER_CHAMBER = 'BILL_INTRODUCED_LOWER_CHAMBER',
-  BILL_PASSED_LOWER_CHAMBER_COMMITTEE = 'BILL_PASSED_LOWER_CHAMBER_COMMITTEE',
-  BILL_FAILED_LOWER_CHAMBER_COMMITTEE = 'BILL_FAILED_LOWER_CHAMBER_COMMITTEE',
-  BILL_PASSED_LOWER_CHAMBER = 'BILL_PASSED_LOWER_CHAMBER',
-  BILL_FAILED_LOWER_CHAMBER = 'BILL_FAILED_LOWER_CHAMBER',
-  BILL_INTRODUCED_UPPER_CHAMBER = 'BILL_INTRODUCED_UPPER_CHAMBER',
-  BILL_PASSED_UPPER_CHAMBER_COMMITTEE = 'BILL_PASSED_UPPER_CHAMBER_COMMITTEE',
-  BILL_FAILED_UPPER_CHAMBER_COMMITTEE = 'BILL_FAILED_UPPER_CHAMBER_COMMITTEE',
-  BILL_PASSED_UPPER_CHAMBER = 'BILL_PASSED_UPPER_CHAMBER',
-  BILL_FAILED_UPPER_CHAMBER = 'BILL_FAILED_UPPER_CHAMBER',
-  PRESIDENT_SIGNED = 'PRESIDENT_SIGNED',
-  PRESIDENT_VETOED = 'PRESIDENT_VETOED',
+  BILL_FAILED_LOWER_CHAMBER = 'Bill Failed Lower Chamber',
+  BILL_FAILED_LOWER_CHAMBER_COMMITTEE = 'Bill Failed Lower Chamber Committee',
+  BILL_FAILED_UPPER_CHAMBER = 'Bill Failed Upper Chamber',
+  BILL_FAILED_UPPER_CHAMBER_COMMITTEE = 'Bill Failed Upper Chamber Committee',
+  BILL_INTRODUCED_LOWER_CHAMBER = 'Bill Introduced Lower Chamber',
+  BILL_INTRODUCED_UPPER_CHAMBER = 'Bill Introduced Upper Chamber',
+  BILL_PASSED_LOWER_CHAMBER = 'Bill Passed Lower Chamber',
+  BILL_PASSED_LOWER_CHAMBER_COMMITTEE = 'Bill Passed Lower Chamber Committee',
+  BILL_PASSED_UPPER_CHAMBER = 'Bill Passed Upper Chamber',
+  BILL_PASSED_UPPER_CHAMBER_COMMITTEE = 'Bill Passed Upper Chamber Committee',
+  OTHER = 'Other',
+  PRESIDENT_SIGNED = 'President Signed',
+  PRESIDENT_VETOED = 'President Vetoed',
 }
+
+export const BILL_SUCCESSFUL_KEY_DATES: BILL_KEY_DATE_CATEGORY_OPTIONS[] = [
+  BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_LOWER_CHAMBER,
+  BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_UPPER_CHAMBER,
+  BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER_COMMITTEE,
+  BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER,
+  BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_UPPER_CHAMBER_COMMITTEE,
+  BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_UPPER_CHAMBER,
+  BILL_KEY_DATE_CATEGORY_OPTIONS.OTHER,
+  BILL_KEY_DATE_CATEGORY_OPTIONS.PRESIDENT_SIGNED,
+]
 
 export const zodBillSchemaValidation = object({
   data: object({
@@ -62,6 +74,14 @@ export const zodBillSchemaValidation = object({
 
 export type SWCBillFromBuilderIO = z.infer<typeof zodBillSchemaValidation>['data']
 
+export interface SWCBillKeyDate {
+  category: BILL_KEY_DATE_CATEGORY_OPTIONS
+  date: string
+  description: string
+  isMajorMilestone: boolean
+  title: string
+}
+
 export interface SWCBill {
   administrativeAreaLevel1?: string
   analysis: string
@@ -79,13 +99,7 @@ export interface SWCBill {
   dtsiSlug?: string
   gbAdministrativeAreaLevel1?: string
   isKeyBill: boolean
-  keyDates: {
-    category: BILL_KEY_DATE_CATEGORY_OPTIONS
-    date: string
-    description: string
-    isMajorMilestone: boolean
-    title: string
-  }[]
+  keyDates: SWCBillKeyDate[]
   officialBillUrl: string
   relatedUrls: {
     title: string
