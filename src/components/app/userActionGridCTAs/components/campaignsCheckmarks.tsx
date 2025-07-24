@@ -34,7 +34,8 @@ export function CampaignsCheckmarks({
           svgClassname={cn(
             'h-6 w-6 border-background box-content bg-muted lg:h-8 lg:w-8',
             index % ICONS_PER_ROW !== 0 && '-ml-4',
-            { 'border-none': isCompleted && campaignsLength === 1 },
+            //once the border is added and box-sizing: content-box is set, the content expands to out of the box, making the section bigger
+            //the -mt-1 (margin-top: -4px) fixes this, while border-2 adds the border of 2 pixels on top and bottom
             { 'border-2 -mt-1': campaignsLength > 1 },
           )}
         />
