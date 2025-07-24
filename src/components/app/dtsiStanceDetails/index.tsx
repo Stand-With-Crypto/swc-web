@@ -31,7 +31,7 @@ async function StanceTypeContent({
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
     const billFromBuilderIO = await getBillFromBuilderIOByDTSISlug(
       props.countryCode,
-      stance.billRelationship?.bill.slug,
+      stance.billRelationship.bill.id,
     )
 
     if (!billFromBuilderIO) {
