@@ -67,5 +67,11 @@ export const getPoliticianDetailsData = cache(async (dtsiSlug: string) => {
 
   const stancesCount = person.stances.length
 
-  return { ...person, stancesCount, stances: { bills, noBills } }
+  const parsedPerson = {
+    ...person,
+    stancesCount,
+    stances: { bills, noBills },
+  }
+
+  return parsedPerson
 })

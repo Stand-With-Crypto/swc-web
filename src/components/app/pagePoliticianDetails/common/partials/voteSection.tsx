@@ -19,34 +19,17 @@ const MAPPED_VOTE_TYPES = {
   PROCEDURAL_ACTION: 'Cloture Vote',
 }
 
-const handleStanceTitleAndDescription = ({
-  stance,
-  isMultipleStances,
-}: {
-  stance: BillStance
-  isMultipleStances: boolean
-}) => {
+const handleStanceTitleAndDescription = ({ stance }: { stance: BillStance }) => {
   const billVotePersonPosition = stance?.billRelationship?.billVotePersonPosition
-  const bill = stance?.billRelationship?.bill
-  const billVote = stance?.billRelationship?.billVotePersonPosition?.billVote
+  const billVote = billVotePersonPosition?.billVote
 
-  let stanceTitle = ''
-  let stanceDescription = ''
+  const dateStanceMade = format(parseISO(stance.dateStanceMade), 'MMMM d, yyyy')
+  const significanceDescription = billVote?.significanceDescription
 
-  if (!isMultipleStances || !billVotePersonPosition) {
-    const stanceScoreToCryptoSupportLanguage = convertDTSIStanceScoreToCryptoSupportLanguage(
-      bill?.computedStanceScore,
-    ).toLowerCase()
-
-    stanceTitle = bill?.shortTitle || bill?.title || ''
-    stanceDescription = `This bill is ${stanceScoreToCryptoSupportLanguage}.`
-  } else {
-    const significanceDescription = billVote?.significanceDescription
-    const dateStanceMade = format(parseISO(stance.dateStanceMade), 'MMMM d, yyyy')
-
-    stanceTitle = MAPPED_VOTE_TYPES[billVote?.voteType as keyof typeof MAPPED_VOTE_TYPES]
-    stanceDescription = `${dateStanceMade}${significanceDescription ? ` - ${significanceDescription}` : ''}`
-  }
+  const stanceTitle = billVotePersonPosition
+    ? MAPPED_VOTE_TYPES[billVote?.voteType as keyof typeof MAPPED_VOTE_TYPES]
+    : 'Introduced in House'
+  const stanceDescription = `${dateStanceMade}${significanceDescription ? ` - ${significanceDescription}` : ''}`
 
   return { stanceTitle, stanceDescription }
 }
@@ -73,6 +56,13 @@ function VoteSection({
         bills.map(billData => {
           const { stances, bill } = billData
 
+          const stanceScoreToCryptoSupportLanguage = convertDTSIStanceScoreToCryptoSupportLanguage(
+            bill?.computedStanceScore,
+          ).toLowerCase()
+
+          const billTitle = bill?.shortTitle || bill.title
+          const billDescription = `This bill is ${stanceScoreToCryptoSupportLanguage}.`
+
           return (
             <div
               className={cn(
@@ -81,10 +71,19 @@ function VoteSection({
               )}
               key={bill.id}
             >
+              <InfoCard as="article">
+                <DTSIBillCard
+                  bill={bill}
+                  className="p-0 sm:p-0"
+                  countryCode={countryCode}
+                  description={billDescription}
+                  title={billTitle}
+                />
+              </InfoCard>
+
               {stances.map(stance => {
                 const { stanceTitle, stanceDescription } = handleStanceTitleAndDescription({
                   stance,
-                  isMultipleStances: stances.length > 1,
                 })
 
                 const cryptoSupportText = dtsiPersonBillRelationshipTypeAsVerb(
