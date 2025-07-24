@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PageBillDetails } from '@/components/app/pageBillDetails'
-import { getAllBillNumbers } from '@/data/bills/getAllBillNumbers'
+import { getAllBillSlugs } from '@/data/bills/getAllBillSlugs'
 import { getBill } from '@/data/bills/getBill'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -15,15 +15,15 @@ export const dynamicParams = true
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
-type Props = PageProps<{ billNumber: string }>
+type Props = PageProps<{ billSlug: string }>
 
-export const getData = cache(async (billNumber: string) => {
-  const bill = await getBill(billNumber).catch(() => null)
+export const getData = cache(async (billSlug: string) => {
+  const bill = await getBill(countryCode, billSlug).catch(() => null)
   return bill
 })
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const bill = await getData((await props.params).billNumber)
+  const bill = await getData((await props.params).billSlug)
 
   if (!bill) {
     return {}
@@ -37,15 +37,26 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const response = await getAllBillNumbers(countryCode)
-  const numbers = response.map(billNumber => ({ billNumber }))
-  return numbers
+  const response = await getAllBillSlugs(countryCode)
+
+  const slugs = []
+
+  for (const bill of response) {
+    slugs.push(bill.billNumber)
+    if (bill.dtsiSlug) {
+      slugs.push(bill.dtsiSlug)
+    }
+  }
+
+  const uniqueSlugs = Array.from(new Set(slugs))
+
+  return uniqueSlugs.map(billSlug => ({ billSlug }))
 }
 
 export default async function BillDetails(props: Props) {
   const params = await props.params
 
-  const bill = await getBill(params.billNumber)
+  const bill = await getBill(countryCode, params.billSlug)
 
   if (!bill) {
     notFound()

@@ -20,5 +20,7 @@ export type BillCardInfoFromDTSI = Pick<
 
 export type SWCBillCardInfo = Pick<
   SWCBill,
-  'billNumber' | 'computedStanceScore' | 'dateIntroduced' | 'isKeyBill' | 'title'
->
+  'computedStanceScore' | 'dateIntroduced' | 'isKeyBill' | 'title'
+> & {
+  billNumberOrDTSISlug: string
+}

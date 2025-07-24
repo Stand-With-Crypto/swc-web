@@ -3,11 +3,22 @@ import 'server-only'
 import { BillFromDTSI } from '@/data/bills/types'
 import { mergeBillFromBuilderIOAndDTSI } from '@/data/bills/utils/merge'
 import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
-import { getBillFromBuilderIO } from '@/utils/server/builder/models/data/bills'
+import {
+  getBillFromBuilderIOByBillNumber,
+  getBillFromBuilderIOByDTSISlug,
+} from '@/utils/server/builder/models/data/bills'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBill } from '@/utils/shared/zod/getSWCBills'
 
-export async function getBill(billNumber: string): Promise<SWCBill | null> {
-  const billFromBuilderIO = await getBillFromBuilderIO(billNumber)
+export async function getBill(
+  countryCode: SupportedCountryCodes,
+  billNumberOrDTSISlug: string,
+): Promise<SWCBill | null> {
+  let billFromBuilderIO = await getBillFromBuilderIOByBillNumber(countryCode, billNumberOrDTSISlug)
+
+  if (!billFromBuilderIO) {
+    billFromBuilderIO = await getBillFromBuilderIOByDTSISlug(countryCode, billNumberOrDTSISlug)
+  }
 
   if (!billFromBuilderIO) {
     return null

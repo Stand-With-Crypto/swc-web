@@ -28,7 +28,7 @@ export function mergeBillFromBuilderIOAndDTSI(
   }
 }
 
-export function mergePartialBillFromBuilderIOAndDTSI(
+function mergePartialBillFromBuilderIOAndDTSI(
   billFromBuilderIO: SWCBillCardInfo,
   billFromDTSI: BillCardInfoFromDTSI | null | undefined,
 ): SWCBillCardInfo {
@@ -37,7 +37,7 @@ export function mergePartialBillFromBuilderIOAndDTSI(
   }
 
   return {
-    billNumber: billFromBuilderIO.billNumber,
+    billNumberOrDTSISlug: billFromBuilderIO.billNumberOrDTSISlug,
     computedStanceScore: billFromDTSI.computedStanceScore,
     dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
     isKeyBill: billFromBuilderIO.isKeyBill || false,
@@ -49,11 +49,16 @@ export function mergeBillsFromBuilderIOAndDTSI(
   billsFromBuilderIO: SWCBill[],
   billsFromDTSI: BillCardInfoFromDTSI[] | null | undefined,
 ): SWCBillCardInfo[] {
+  const bills = billsFromBuilderIO.map(bill => ({
+    ...bill,
+    billNumberOrDTSISlug: bill.billNumber,
+  }))
+
   if (!billsFromDTSI || billsFromDTSI.length === 0) {
-    return billsFromBuilderIO
+    return bills
   }
 
-  return billsFromBuilderIO.map(billFromBuilderIO => {
+  return bills.map(billFromBuilderIO => {
     const billFromDTSI = billsFromDTSI.find(bill => bill.id === billFromBuilderIO.dtsiSlug)
 
     if (!billFromDTSI) {

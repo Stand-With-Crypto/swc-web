@@ -33,7 +33,7 @@ export function PageBills(props: PageBillsProps) {
           )}
           <div className="flex flex-col gap-4 lg:gap-8">
             {results.map(bill => (
-              <DTSIBillCard bill={bill} countryCode={countryCode} key={bill.billNumber}>
+              <DTSIBillCard bill={bill} countryCode={countryCode} key={bill.billNumberOrDTSISlug}>
                 <CryptoSupportHighlight
                   className="flex-shrink-0 rounded-full text-base"
                   stanceScore={bill.computedStanceScore}

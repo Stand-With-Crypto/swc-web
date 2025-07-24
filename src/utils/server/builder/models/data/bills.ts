@@ -18,16 +18,25 @@ const logger = getLogger(`builderIOEvents`)
 
 const isProduction = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
-type BillFilters = Partial<{ dtsiSlug: string; isKeyBill: boolean }>
+interface BillFilters {
+  billNumber?: string
+  countryCode: SupportedCountryCodes
+  dtsiSlug?: string
+}
 
-export async function getBillFromBuilderIO(billNumber: string): Promise<SWCBill | null> {
+async function getBillFromBuilderIO(filters: BillFilters): Promise<SWCBill | null> {
   try {
+    if (!filters.billNumber && !filters.dtsiSlug) {
+      throw new Error("You must provide either 'billNumber' or 'dtsiSlug'.")
+    }
+
     const entry = await pRetry(
       () =>
         builderSDKClient.get(BuilderDataModelIdentifiers.BILLS, {
           query: {
             data: {
-              billNumber,
+              ...filters,
+              countryCode: filters.countryCode?.toUpperCase(),
             },
             ...(isProduction && { published: 'published' }),
           },
@@ -57,15 +66,33 @@ export async function getBillFromBuilderIO(billNumber: string): Promise<SWCBill 
   }
 }
 
+export function getBillFromBuilderIOByBillNumber(
+  countryCode: SupportedCountryCodes,
+  billNumber: string,
+) {
+  return getBillFromBuilderIO({
+    countryCode,
+    billNumber,
+  })
+}
+
+export async function getBillFromBuilderIOByDTSISlug(
+  countryCode: SupportedCountryCodes,
+  dtsiSlug: string,
+) {
+  return getBillFromBuilderIO({
+    countryCode,
+    dtsiSlug,
+  })
+}
+
 const LIMIT = 100
 
 function getAllBillsWithOffset({
   countryCode,
-  filters,
   offset,
 }: {
   countryCode: SupportedCountryCodes
-  filters?: BillFilters
   offset: number
 }) {
   return pRetry(
@@ -75,7 +102,6 @@ function getAllBillsWithOffset({
           ...(isProduction && { published: 'published' }),
           data: {
             countryCode: countryCode?.toUpperCase(),
-            ...filters,
           },
         },
         includeUnpublished: !isProduction,
@@ -92,19 +118,17 @@ function getAllBillsWithOffset({
 
 export async function getBillsFromBuilderIO({
   countryCode,
-  filters,
 }: {
   countryCode: SupportedCountryCodes
-  filters?: BillFilters
 }): Promise<SWCBill[]> {
   try {
     let offset = 0
 
-    const entries = await getAllBillsWithOffset({ countryCode, filters, offset })
+    const entries = await getAllBillsWithOffset({ countryCode, offset })
 
     while (entries.length === LIMIT + offset) {
       offset += entries.length
-      entries.push(...(await getAllBillsWithOffset({ countryCode, filters, offset })))
+      entries.push(...(await getAllBillsWithOffset({ countryCode, offset })))
     }
 
     const filteredIncompleteBills = entries
@@ -127,20 +151,6 @@ export async function getBillsFromBuilderIO({
     })
     return []
   }
-}
-
-export async function getBillFromBuilderIOByDTSISlug(
-  countryCode: SupportedCountryCodes,
-  dtsiSlug: string,
-) {
-  const bills = await getBillsFromBuilderIO({
-    countryCode,
-    filters: {
-      dtsiSlug,
-    },
-  })
-
-  return bills.length > 0 ? bills[0] : null
 }
 
 function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {

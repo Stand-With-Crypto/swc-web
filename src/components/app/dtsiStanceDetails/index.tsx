@@ -8,11 +8,9 @@ import {
   DTSIStanceDetailsStanceProp,
   StanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
-import { mergePartialBillFromBuilderIOAndDTSI } from '@/data/bills/utils/merge'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { getBillFromBuilderIOByDTSISlug } from '@/utils/server/builder/models/data/bills'
 import { cn } from '@/utils/web/cn'
 
 async function StanceTypeContent({
@@ -29,21 +27,14 @@ async function StanceTypeContent({
     return <DTSIStanceDetailsQuote isStanceHidden={isStanceHidden} {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
-    const billFromBuilderIO = await getBillFromBuilderIOByDTSISlug(
-      props.countryCode,
-      stance.billRelationship.bill.id,
-    )
-
-    if (!billFromBuilderIO) {
-      return null
-    }
+    const bill = stance.billRelationship?.bill
 
     return (
       <DTSIBillCard
-        bill={mergePartialBillFromBuilderIOAndDTSI(
-          billFromBuilderIO,
-          stance.billRelationship?.bill,
-        )}
+        bill={{
+          ...bill,
+          billNumberOrDTSISlug: bill.slug,
+        }}
         className="p-0 sm:p-0"
         description={`This bill is ${convertDTSIStanceScoreToCryptoSupportLanguage(stance.billRelationship.bill.computedStanceScore).toLowerCase()}.`}
         {...props}
