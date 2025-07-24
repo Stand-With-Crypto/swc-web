@@ -37,7 +37,7 @@ export const UserActionCard = forwardRef<
         return completedCampaigns === 1 ? 'Complete' : 'Not complete'
       }
 
-      return `${completedCampaigns}/${campaignsLength} complete`
+      return `${completedCampaigns}/${campaignsLength} Complete`
     }
 
     const isPrepareToVoteAction = campaigns.some(
