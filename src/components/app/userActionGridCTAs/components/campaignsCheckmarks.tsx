@@ -32,13 +32,15 @@ export function CampaignsCheckmarks({
           completed={isCompleted}
           key={index}
           svgClassname={cn(
-            'border-2 border-muted bg-muted',
+            'h-6 w-6 border-background box-content bg-muted lg:h-8 lg:w-8',
             index % ICONS_PER_ROW !== 0 && '-ml-4',
+            { 'border-none': isCompleted && campaignsLength === 1 },
+            { 'border-2 -mt-1': campaignsLength > 1 },
           )}
         />
       )
     })
-  }, [iconsToDisplay, completedCampaigns, hasMoreThanMaxChecks, hasPendingChecks])
+  }, [iconsToDisplay, completedCampaigns, hasMoreThanMaxChecks, hasPendingChecks, campaignsLength])
 
   return (
     <div className="flex items-end">

@@ -137,7 +137,11 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
+    link: ({ children }) => (
+      <Link className="w-full" href={urls.polls()}>
+        {children}
+      </Link>
+    ),
     campaigns: [
       {
         actionType: UserActionType.POLL,
