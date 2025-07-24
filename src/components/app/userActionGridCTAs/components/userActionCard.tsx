@@ -69,7 +69,7 @@ export const UserActionCard = forwardRef<
             width={80}
           />
         </div>
-        <div className="flex h-auto w-full flex-col items-start justify-between rounded-bl-3xl rounded-tl-3xl lg:h-full lg:rounded-br-3xl lg:rounded-tl-none">
+        <div className="flex h-auto w-full flex-col items-start justify-between rounded-bl-3xl rounded-tl-3xl border-t border-muted lg:h-full lg:rounded-br-3xl lg:rounded-tl-none lg:border-none">
           <div className="flex flex-col gap-1 p-4 lg:gap-4 lg:p-6">
             <strong className="text-left font-sans text-sm font-bold lg:text-2xl lg:leading-none lg:-tracking-[0.24px]">
               {title}
