@@ -3,7 +3,10 @@
 import { useMemo, useState } from 'react'
 import { toast } from 'sonner'
 
-import { actionUpdateUserHasOptedInToSMS } from '@/actions/actionUpdateUserHasOptedInSMS'
+import {
+  actionUpdateUserHasOptedInToSMS,
+  UpdateUserHasOptedInToSMSPayload,
+} from '@/actions/actionUpdateUserHasOptedInSMS'
 import { CommunicationsPreferenceForm } from '@/components/app/pageUserProfile/common/communicationsPreferenceForm'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { SMSOptInConsentText } from '@/components/app/sms/smsOptInConsentText'
@@ -26,12 +29,12 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
 
   const hasOptedInToSMS = userHasOptedInToSMS(user)
 
-  const handleSMSOptInChange = async (smsOptIn: boolean) => {
+  const handleSMSOptInChange = async (optedInToSms: boolean) => {
     setIsSubmitting(true)
 
-    const payload = {
+    const payload: UpdateUserHasOptedInToSMSPayload = {
       phoneNumber,
-      optedInToSms: smsOptIn,
+      optedInToSms,
     }
     const result = await triggerServerActionForForm(
       {
@@ -44,7 +47,7 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
 
     if (result.status === 'success') {
       toast.success(
-        smsOptIn
+        optedInToSms
           ? 'Successfully subscribed to our text messages!'
           : 'Successfully unsubscribed from our text messages!',
       )

@@ -1,4 +1,3 @@
-import { SocialIcons } from '@/components/app/pageUnsubscribe/socialIcons'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -7,6 +6,8 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 export const dynamic = 'error'
+
+const countryCode = SupportedCountryCodes.US
 
 export default function ResubscribeSuccessPageRoot() {
   return (
@@ -21,7 +22,6 @@ export default function ResubscribeSuccessPageRoot() {
 
       <section className="space-y-8">
         <PageTitle size="md">Welcome Back</PageTitle>
-
         <PageSubTitle>
           Your email address has been added again for the latest news from Stand With Crypto.
           <br />
@@ -31,12 +31,7 @@ export default function ResubscribeSuccessPageRoot() {
       </section>
 
       <section className="space-y-8">
-        <SocialIcons />
-        <div>
-          <InternalLink href={getIntlUrls(SupportedCountryCodes.US).home()}>
-            StandWithCrypto.org
-          </InternalLink>
-        </div>
+        <InternalLink href={getIntlUrls(countryCode).home()}>StandWithCrypto.org</InternalLink>
       </section>
     </div>
   )

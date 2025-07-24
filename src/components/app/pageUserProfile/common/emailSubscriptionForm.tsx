@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 import { CommunicationsPreferenceForm } from '@/components/app/pageUserProfile/common/communicationsPreferenceForm'
@@ -65,12 +65,9 @@ export function EmailSubscriptionForm({ user }: EmailSubscriptionFormProps) {
     setIsSubmitting(false)
   }
 
-  const helpText = useMemo(() => {
-    if (!emailAddress) {
-      return 'Please provide an email address to subscribe to our emails.'
-    }
-    return ''
-  }, [emailAddress])
+  const helpText = !emailAddress
+    ? 'Please provide an email address to subscribe to our emails.'
+    : ''
 
   const isEmailFieldDisabled = !emailAddress || isSubmitting || isFirstLoad.current
 

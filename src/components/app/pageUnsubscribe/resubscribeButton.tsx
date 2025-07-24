@@ -35,6 +35,7 @@ function ResubscribeButton() {
         form,
         formName: FORM_NAME,
         payload: emailAddress,
+        onError: toastGenericError,
       },
       removeFromGlobalSuppressionGroup,
     )
@@ -42,8 +43,6 @@ function ResubscribeButton() {
     if (result.status === 'success') {
       toast.success('Successfully resubscribed to our mailing list!')
       router.push('/embedded/email/resubscribe-success')
-    } else {
-      toastGenericError()
     }
   }
 
