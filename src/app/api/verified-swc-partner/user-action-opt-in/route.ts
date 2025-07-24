@@ -44,9 +44,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       extra: {
         partner,
         requestBody,
-        phoneNumberFormat: requestBody.phoneNumber
-          ? getNumberFormat(requestBody.phoneNumber)
-          : null,
+        template: requestBody.phoneNumber ? getNumberFormat(requestBody.phoneNumber) : null,
       },
       level: 'warning',
     })
