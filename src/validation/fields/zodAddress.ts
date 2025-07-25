@@ -18,6 +18,7 @@ export const zodAddress = object({
   postalCode: string(),
   postalCodeSuffix: string(),
   countryCode: string().length(2),
+  swcCivicAdministrativeArea: string().optional(),
   electoralZone: string().optional(),
   latitude: number().optional().nullable(),
   longitude: number().optional().nullable(),

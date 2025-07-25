@@ -9,11 +9,13 @@ import {
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
 
+import { getNumberFormat } from './getNumberFormat'
+
 type RequestBody = z.infer<ReturnType<typeof getZodVerifiedSWCPartnersUserActionOptInSchema>>
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const partner = await authenticateAndGetVerifiedSWCPartnerFromHeader()
-  const requestBody = await request.json()
+  const requestBody = (await request.json()) as RequestBody
 
   const baseValidationResult = getZodVerifiedSWCPartnersUserActionOptInSchema()
     .omit({ phoneNumber: true })
@@ -33,7 +35,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   const phoneNumberValidationResult = getZodVerifiedSWCPartnersUserActionOptInSchema(
     countryCode,
-  ).shape.phoneNumber.safeParse((requestBody as RequestBody)?.phoneNumber)
+  ).shape.phoneNumber.safeParse(requestBody.phoneNumber)
 
   let validatedFields: RequestBody = baseValidationResult.data as RequestBody
 
@@ -42,6 +44,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       extra: {
         partner,
         requestBody,
+        template: requestBody.phoneNumber ? getNumberFormat(requestBody.phoneNumber) : null,
       },
       level: 'warning',
     })

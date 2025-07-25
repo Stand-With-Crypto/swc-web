@@ -9,6 +9,13 @@ export type GetElectoralZoneResult = Awaited<ReturnType<typeof parseCivicApiResu
 
 const logger = getLogger('getElectoralZoneFromAddress')
 
+export enum ElectoralZoneNotFoundReason {
+  ELECTORAL_ZONE_NOT_FOUND = 'ELECTORAL_ZONE_NOT_FOUND',
+  USER_WITHOUT_ADDRESS = 'USER_WITHOUT_ADDRESS',
+  UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
+  CIVIC_API_DOWN = 'CIVIC_API_DOWN',
+}
+
 export async function maybeGetElectoralZoneFromAddress({
   address,
 }: {
@@ -17,7 +24,7 @@ export async function maybeGetElectoralZoneFromAddress({
   > | null
 }) {
   if (!address) {
-    return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
+    return { notFoundReason: ElectoralZoneNotFoundReason.USER_WITHOUT_ADDRESS }
   }
   if (address.latitude && address.longitude) {
     return getElectoralZoneFromGeolocation({
@@ -68,7 +75,7 @@ async function parseCivicApiResults(response: Response) {
     const data = (await response.json()) as ElectoralZone
     if (!data) {
       return {
-        notFoundReason: 'ELECTORAL_ZONE_NOT_FOUND' as const,
+        notFoundReason: ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
       }
     }
     return data
@@ -84,7 +91,7 @@ function parseCivicApiError(error: unknown) {
     if (error.status === 404) {
       logger.info('Electoral zone not found (404)')
       return {
-        notFoundReason: 'ELECTORAL_ZONE_NOT_FOUND' as const,
+        notFoundReason: ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
       }
     }
     logger.info('Unexpected response error:', error.status)
@@ -95,6 +102,6 @@ function parseCivicApiError(error: unknown) {
     error instanceof Error ? error.message : 'Unknown error type',
   )
   return {
-    notFoundReason: 'UNEXPECTED_ERROR' as const,
+    notFoundReason: ElectoralZoneNotFoundReason.UNEXPECTED_ERROR,
   }
 }

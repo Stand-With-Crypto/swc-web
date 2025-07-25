@@ -3,10 +3,14 @@ import xlsx from 'xlsx'
 
 import { runBin } from '@/bin/runBin'
 import { electoralZonesDataConfigs } from '@/bin/swcCivic/electoralZoneDataConfigs'
+import { findMatchingAdministrativeAreaIndex } from '@/bin/swcCivic/utils/findMatchingAdministrativeAreaIndex'
+import { getGeometryFromGISData } from '@/bin/swcCivic/utils/getGeometryFromGISData'
 import { readGISData } from '@/bin/swcCivic/utils/readGISData'
 import { queryDTSIDistrictsByCountryCode } from '@/data/dtsi/queries/queryDTSIDistrictsByCountryCode'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const DTSI_COUNTRIES_WITH_ADMINISTRATIVE_AREA = [SupportedCountryCodes.US]
 
 async function compareGISDataWithDTSI() {
   const localCacheDir = path.join(__dirname, '..', 'localCache')
@@ -17,10 +21,13 @@ async function compareGISDataWithDTSI() {
     dataFilePath,
     electoralZoneNameField,
     normalizeElectoralZoneName,
-    normalizeStateCode,
-    stateCodeField,
+    administrativeAreaFilePath,
+    normalizeAdministrativeArea,
+    administrativeAreaFieldPath,
   } of electoralZonesDataConfigs) {
     console.log(`\nAnalyzing ${countryCode}...`)
+
+    console.log(`Reading GIS data...`)
 
     const GISData = await readGISData(dataFilePath)
 
@@ -28,6 +35,18 @@ async function compareGISDataWithDTSI() {
       console.error(`Error: No data returned from readGISData for ${countryCode}`)
       continue
     }
+
+    if (administrativeAreaFilePath) {
+      console.log(`Reading administrative area GIS data`)
+    }
+
+    const administrativeAreaGISData = administrativeAreaFilePath
+      ? await readGISData(administrativeAreaFilePath)
+      : undefined
+
+    const administrativeAreaGeometries = administrativeAreaGISData
+      ? administrativeAreaGISData.features.map(getGeometryFromGISData)
+      : []
 
     const dtsiDistricts: string[] = []
 
@@ -57,7 +76,34 @@ async function compareGISDataWithDTSI() {
       GISData.features
         .map(f => {
           const zoneName = f.properties?.[electoralZoneNameField]
-          const stateCode = stateCodeField ? f.properties?.[stateCodeField] : undefined
+
+          const electoralZoneGeometry = getGeometryFromGISData(f)
+
+          let administrativeArea: string | undefined = undefined
+
+          if (
+            electoralZoneGeometry &&
+            administrativeAreaGeometries.length > 0 &&
+            administrativeAreaGISData &&
+            administrativeAreaFieldPath
+          ) {
+            const administrativeAreaIndex = findMatchingAdministrativeAreaIndex(
+              electoralZoneGeometry,
+              administrativeAreaGeometries,
+            )
+
+            if (administrativeAreaIndex !== -1) {
+              const matchingAdministrativeAreaGISData =
+                administrativeAreaGISData.features[administrativeAreaIndex]
+
+              if (matchingAdministrativeAreaGISData) {
+                administrativeArea =
+                  matchingAdministrativeAreaGISData.properties?.[administrativeAreaFieldPath]
+              }
+            }
+          } else if (administrativeAreaFieldPath) {
+            administrativeArea = f.properties?.[administrativeAreaFieldPath]
+          }
 
           if (!zoneName) {
             return null
@@ -65,9 +111,9 @@ async function compareGISDataWithDTSI() {
 
           const normalizedZoneName = normalizeElectoralZoneName?.(zoneName) || zoneName
 
-          if (stateCode) {
-            const normalizedStateCode = normalizeStateCode?.(stateCode) || stateCode
-            return getElectoralZoneKey(normalizedZoneName, normalizedStateCode)
+          if (administrativeArea && DTSI_COUNTRIES_WITH_ADMINISTRATIVE_AREA.includes(countryCode)) {
+            const normalizedAdministrativeArea = normalizeAdministrativeArea?.(administrativeArea)
+            return getElectoralZoneKey(normalizedZoneName, normalizedAdministrativeArea)
           }
 
           return normalizedZoneName
@@ -118,8 +164,8 @@ async function compareGISDataWithDTSI() {
   console.log(`\nResults written to: ${outputPath}`)
 }
 
-function getElectoralZoneKey(zoneName: string, stateCode?: string | null) {
-  return stateCode ? `${zoneName}-${stateCode}` : zoneName
+function getElectoralZoneKey(zoneName: string, administrativeArea?: string | null) {
+  return administrativeArea ? `${zoneName}-${administrativeArea}` : zoneName
 }
 
 void runBin(compareGISDataWithDTSI)

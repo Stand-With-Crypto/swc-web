@@ -24,6 +24,7 @@ const getDistrict = (stateCode: USStateCode) => {
 
 export function mockCreateAddressInput() {
   const countryCode = faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES))
+  const administrativeAreaLevel1 = faker.location.state({ abbreviated: true })
 
   const partial = {
     googlePlaceId: null,
@@ -31,11 +32,12 @@ export function mockCreateAddressInput() {
     route: faker.location.street(),
     subpremise: faker.location.secondaryAddress(),
     locality: faker.location.city(),
-    administrativeAreaLevel1: faker.location.state({ abbreviated: true }),
+    administrativeAreaLevel1: administrativeAreaLevel1,
     administrativeAreaLevel2: '',
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
+    swcCivicAdministrativeArea: administrativeAreaLevel1,
     electoralZone: '12',
     latitude: null,
     longitude: null,
@@ -65,6 +67,7 @@ export function mockCreateAddressInputWithDC() {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: countryCode.toUpperCase(),
+
     electoralZone: district,
     latitude: null,
     longitude: null,

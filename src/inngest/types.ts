@@ -8,6 +8,8 @@ import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfil
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
+import type { BackfillSWCCivicAddressFieldsCoordinatorEventSchema } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong'
+import type { BackfillSWCCivicAddressFieldsProcessorEventSchema } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong/logic'
 import { BackfillUserCommunicationMessageStatusSchema } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import { BackfillUserCountryCodeEmptyInngestSchema } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import type {
@@ -72,6 +74,8 @@ type EventTypes =
   | CapitolCanaryDeleteNotSupportedCountryCodeAdvocatesInngestSchema
   | SyncSendgridContactsCoordinatorSchema
   | SyncSendgridContactsProcessorSchema
+  | BackfillSWCCivicAddressFieldsCoordinatorEventSchema
+  | BackfillSWCCivicAddressFieldsProcessorEventSchema
   | BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema
   | ProcessAddressFieldsWithGooglePlacesProcessorEventSchema
 
