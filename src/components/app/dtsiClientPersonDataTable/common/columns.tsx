@@ -129,9 +129,10 @@ export const getDTSIClientPersonDataTableColumns = ({
         header: ({ column }) => {
           return <SortableHeader column={column}>Role</SortableHeader>
         },
-        cell: ({ row }) => (
-          <>{row.original.primaryRole ? roleNameResolver(row.original.primaryRole) : '-'}</>
-        ),
+        cell: ({ row }) => {
+          const role = row.original.primaryRole
+          return <>{role ? roleNameResolver(role) : '-'}</>
+        },
       },
     ),
     personColumnHelper.accessor(

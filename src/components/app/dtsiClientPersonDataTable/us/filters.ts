@@ -11,6 +11,7 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
+import { getHasDTSIPersonRoleEnded } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { shouldPersonHaveStanceScoresHidden } from '@/utils/dtsi/dtsiPersonUtils'
 
 /**
@@ -59,6 +60,13 @@ export const getPersonDataTableFilterFns = (): Record<
   [PERSON_TABLE_COLUMNS_IDS.ROLE]: (row, _columnId, filterValue, _addMeta) => {
     const personRoleCategory = row.original.primaryRole?.roleCategory
     const personRoleStatus = row.original.primaryRole?.status
+    const personRoleDateEnd = row.original.primaryRole?.dateEnd
+    const isOutOfOffice = getHasDTSIPersonRoleEnded({ dateEnd: personRoleDateEnd })
+
+    if (isOutOfOffice) {
+      return filterValue === ROLE_OPTIONS.ALL_OTHER || filterValue === ROLE_OPTIONS.ALL
+    }
+
     switch (filterValue as (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]) {
       case ROLE_OPTIONS.ALL:
         return true
