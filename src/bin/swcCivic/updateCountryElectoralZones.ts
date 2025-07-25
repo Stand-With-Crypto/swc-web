@@ -154,8 +154,7 @@ async function updateCountryElectoralZones() {
       (acc, electoralZone) => {
         const electoralZoneKey = getElectoralZoneKey(
           electoralZone.zoneName,
-          // TODO: remove || electoralZone.stateCode once we delete the stateCode field
-          electoralZone.administrativeArea || electoralZone.stateCode,
+          electoralZone.administrativeArea,
         )
 
         return {
