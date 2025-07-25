@@ -12,7 +12,7 @@ export const dynamic = 'error'
 const zodParams = z.object({
   countryCode: zodSupportedCountryCode,
   electoralZone: z.string(),
-  stateCode: z.string().min(2).max(3).optional(),
+  stateCode: z.string().optional(),
 })
 
 export async function GET(

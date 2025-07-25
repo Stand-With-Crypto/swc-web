@@ -8,6 +8,8 @@ import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
+import { backfillSWCCivicAddressFieldsCoordinator } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong'
+import { backfillSWCCivicAddressFieldsProcessor } from '@/inngest/functions/backfillSWCCivicAddressFieldsFromLatLong/logic'
 import { backfillUserCommunicationMessageStatus } from '@/inngest/functions/backfillUserCommunicationMessageStatus'
 import { backfillUserCountryCodeEmptyWithInngest } from '@/inngest/functions/backfillUserCountryCodeEmpty'
 import {
@@ -87,6 +89,8 @@ export const { GET, POST, PUT } = serve({
     deleteNotSupportedCountryCodeAdvocates,
     syncSendgridContactsCoordinator,
     syncSendgridContactsProcessor,
+    backfillSWCCivicAddressFieldsCoordinator,
+    backfillSWCCivicAddressFieldsProcessor,
     backfillAddressFieldsWithGooglePlacesCoordinator,
     backfillAddressFieldsWithGooglePlacesProcessor,
   ],
