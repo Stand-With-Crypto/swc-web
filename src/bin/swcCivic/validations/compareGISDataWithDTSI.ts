@@ -13,7 +13,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 const DTSI_COUNTRIES_WITH_ADMINISTRATIVE_AREA = [SupportedCountryCodes.US]
 
 async function compareGISDataWithDTSI() {
-  const localCacheDir = path.join(__dirname, '..', 'localCache')
+  const localCacheDir = path.join(__dirname, '..', '..', 'localCache')
   const workbook = xlsx.utils.book_new()
 
   for (const {
