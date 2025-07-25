@@ -79,6 +79,7 @@ type BillVote {
   bill: Bill!
   category: BillVoteCategory!
   datetimeOccurred: DateTime!
+  displayName: String!
   id: ID!
   personPositions: [BillVotePersonPosition!]!
   question: String!

@@ -23,13 +23,12 @@ const handleStanceTitleAndDescription = ({ stance }: { stance: BillStance }) => 
   const billVotePersonPosition = stance?.billRelationship?.billVotePersonPosition
   const billVote = billVotePersonPosition?.billVote
 
-  const dateStanceMade = format(parseISO(stance.dateStanceMade), 'MMMM d, yyyy')
-  const significanceDescription = billVote?.significanceDescription
-
   let stanceTitle = ''
 
   if (billVotePersonPosition) {
-    const voteTitle = MAPPED_VOTE_TYPES[billVote?.voteType as keyof typeof MAPPED_VOTE_TYPES]
+    const voteTitle =
+      billVote?.displayName ||
+      MAPPED_VOTE_TYPES[billVote?.voteType as keyof typeof MAPPED_VOTE_TYPES]
     const billCategory = billVotePersonPosition.billVote.category.toLowerCase()
     const category = `${billCategory[0].toUpperCase()}${billCategory.slice(1)}`
 
@@ -37,6 +36,9 @@ const handleStanceTitleAndDescription = ({ stance }: { stance: BillStance }) => 
   } else {
     stanceTitle = 'Introduced in House'
   }
+
+  const dateStanceMade = format(parseISO(stance.dateStanceMade), 'MMMM d, yyyy')
+  const significanceDescription = billVote?.significanceDescription
 
   const stanceDescription = `${dateStanceMade}${significanceDescription ? ` - ${significanceDescription}` : ''}`
 

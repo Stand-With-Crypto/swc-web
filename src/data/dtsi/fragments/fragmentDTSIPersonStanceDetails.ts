@@ -11,6 +11,7 @@ export const fragmentDTSIPersonStanceDetails = /* GraphQL */ `
         billVote {
           category
           voteType
+          displayName
           significanceDescription
         }
       }

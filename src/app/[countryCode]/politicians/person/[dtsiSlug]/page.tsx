@@ -23,7 +23,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   if (!person) {
     return {}
   }
-
   const title = `${dtsiPersonFullName(person)} Crypto Policy Stance`
   return {
     title,

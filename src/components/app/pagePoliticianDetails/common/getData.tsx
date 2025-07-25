@@ -21,7 +21,13 @@ const transformBillsInArrayAndSortByDate = (bills: BillsMap) => {
     )
 }
 
-const groupStancesByBill = (stances: DTSIPersonStance[]) => {
+const sortNoBillsByDate = (noBills: DTSIPersonStance[]) => {
+  return noBills.sort(
+    (a, b) => new Date(b.dateStanceMade).getTime() - new Date(a.dateStanceMade).getTime(),
+  )
+}
+
+const groupStancesByBillAndSortByDate = (stances: DTSIPersonStance[]) => {
   const noBills: DTSIPersonStance[] = []
   const bills: BillsMap = {}
 
@@ -52,7 +58,7 @@ const groupStancesByBill = (stances: DTSIPersonStance[]) => {
 
   return {
     bills: transformBillsInArrayAndSortByDate(bills),
-    noBills,
+    noBills: sortNoBillsByDate(noBills),
   }
 }
 
@@ -63,7 +69,7 @@ export const getPoliticianDetailsData = cache(async (dtsiSlug: string) => {
   })
   if (!person) return person
 
-  const { bills, noBills } = groupStancesByBill(person.stances)
+  const { bills, noBills } = groupStancesByBillAndSortByDate(person.stances)
 
   const stancesCount = person.stances.length
 
