@@ -38,8 +38,8 @@ export function DTSICongresspersonAssociatedWithFormAddress({
 
   useEffect(() => {
     if (dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data) {
-      const { stateCode, zoneName } = dtsiPeopleFromAddressResponse.data
-      onChangeAddress({ location: { zoneName, stateCode } })
+      const { administrativeArea, zoneName } = dtsiPeopleFromAddressResponse.data
+      onChangeAddress({ location: { zoneName, stateCode: administrativeArea } })
     }
     // onChangeAddress shouldnt be passed as a dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps

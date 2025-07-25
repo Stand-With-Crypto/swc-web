@@ -118,6 +118,7 @@ export const getIntlUrls = (
     termsOfService: () => `${countryPrefix}/terms-of-service`,
     privacyPolicy: () => `${countryPrefix}/privacy`,
     about: () => `${countryPrefix}/about`,
+    privacyCollectionStatement: () => `${countryPrefix}/privacy-collection-statement`,
     // Uses Next.js rewrite function to render the same page as /about
     manifesto: () => `${countryPrefix}/manifesto`,
     resources: () => `${countryPrefix}/resources`,
@@ -220,6 +221,7 @@ export const getIntlUrls = (
     ...RACES_ROUTES,
     localPolicy: (stateCode?: string) =>
       `${countryPrefix}/local-policy${stateCode ? `/${stateCode.toLowerCase()}` : ''}`,
+    resubscribeSuccess: () => `${countryPrefix}/email/resubscribe-success`,
   }
 }
 
@@ -306,12 +308,12 @@ export const apiUrls = {
   }) =>
     `/api/public/referrals/${countryCode}/${stateCode}/${districtNumber}${filteredByState ? '/by-state' : ''}`,
   dtsiRacesByCongressionalDistrict: ({
-    stateCode,
+    administrativeArea,
     district,
   }: {
-    stateCode: string
+    administrativeArea: string
     district: number
-  }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
+  }) => `/api/public/dtsi/races/usa/${administrativeArea}/${district}`,
 }
 
 export * from './externalUrls'
