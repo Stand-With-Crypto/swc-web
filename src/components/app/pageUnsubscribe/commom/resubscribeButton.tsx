@@ -8,6 +8,8 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Form, FormGeneralErrorMessage } from '@/components/ui/form'
 import { removeFromGlobalSuppressionGroup } from '@/utils/server/sendgrid/marketing/suppresions'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
@@ -17,7 +19,7 @@ interface ResubscribeFormValues {
   emailAddress: string
 }
 
-function ResubscribeButton() {
+function ResubscribeButton({ countryCode }: { countryCode: SupportedCountryCodes }) {
   const router = useRouter()
 
   const searchParams = useSearchParams()
@@ -42,7 +44,7 @@ function ResubscribeButton() {
 
     if (result.status === 'success') {
       toast.success('Successfully resubscribed to our mailing list!')
-      router.push('/embedded/email/resubscribe-success')
+      router.push(getIntlUrls(countryCode).resubscribeSuccess())
     }
   }
 
@@ -63,18 +65,7 @@ function ResubscribeButton() {
   )
 }
 
-ResubscribeButton.ResubscribeText = function ResubscribeText() {
-  return (
-    <div className="flex max-w-xl flex-col items-center gap-4">
-      <p className="text-sm text-muted-foreground">
-        Changed your mind? Resubscribe to our mailing list for the latest crypto policy updates and
-        ways to take action.
-      </p>
-    </div>
-  )
-}
-
-export function SuspenseResubscribeButton() {
+export function SuspenseResubscribeButton({ countryCode }: { countryCode: SupportedCountryCodes }) {
   return (
     <Suspense
       fallback={
@@ -83,7 +74,7 @@ export function SuspenseResubscribeButton() {
         </div>
       }
     >
-      <ResubscribeButton />
+      <ResubscribeButton countryCode={countryCode} />
     </Suspense>
   )
 }
