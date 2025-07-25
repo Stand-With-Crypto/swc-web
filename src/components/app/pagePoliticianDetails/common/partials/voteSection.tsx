@@ -54,9 +54,6 @@ function VoteSection({
 }) {
   const { bills } = person.stances
 
-  const votesExtraClassNames =
-    '[&>.info-card:first-child]:border-none [&>.info-card]:rounded-none [&>.info-card]:border-t-2 [&>.info-card]:border-t-white'
-
   return (
     <div>
       <PageTitle as="h2" className="text-center" size="md">
@@ -76,13 +73,10 @@ function VoteSection({
 
           return (
             <div
-              className={cn(
-                'mb-16 mt-8 box-border space-y-0 overflow-hidden rounded-3xl',
-                votesExtraClassNames,
-              )}
+              className="mb-16 mt-8 box-border space-y-0 overflow-hidden rounded-3xl"
               key={bill.id}
             >
-              <InfoCard as="article">
+              <InfoCard as="article" className="rounded-none">
                 <DTSIBillCard
                   bill={bill}
                   className="p-0 sm:p-0"
@@ -102,7 +96,11 @@ function VoteSection({
                 )
 
                 return (
-                  <InfoCard as="article" key={stance.id}>
+                  <InfoCard
+                    as="article"
+                    className="rounded-none border-t-2 border-t-white"
+                    key={stance.id}
+                  >
                     <DTSIBillCard
                       bill={bill}
                       className="p-0 sm:p-0"
