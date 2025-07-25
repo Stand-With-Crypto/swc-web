@@ -13,6 +13,7 @@ export const titleVariantsConfig = {
     sm: twNoop('text-lg md:text-xl lg:text-2xl'),
     md: twNoop('text-xl md:text-2xl lg:text-3xl'),
     lg: twNoop('text-3xl md:text-4xl lg:text-5xl'),
+    xlg: twNoop('text-4xl md:text-5xl lg:text-6xl'),
     [DEFAULT_PAGE_TITLE_SIZE]: twNoop('text-4xl md:text-5xl lg:text-6xl'),
   },
 }
