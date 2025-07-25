@@ -10,7 +10,7 @@ import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
-import { getHasDTSIPersonRoleEnded, getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
@@ -131,8 +131,6 @@ export const getDTSIClientPersonDataTableColumns = ({
         },
         cell: ({ row }) => {
           const role = row.original.primaryRole
-          const hasEnded = getHasDTSIPersonRoleEnded({ dateEnd: role?.dateEnd })
-          if (hasEnded) return 'Other Political Figure'
           return <>{role ? roleNameResolver(role) : '-'}</>
         },
       },

@@ -52,7 +52,11 @@ const COMMON_ROLE_DISPLAY_NAME_MAP = {
 export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
   const GET_ROLE_DISPLAY_NAME_BY_COUNTRY_CODE_MAP = {
     [SupportedCountryCodes.US]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
-      if (role.status !== DTSI_PersonRoleStatus.HELD || usGetIsRoleInFuture(role)) {
+      if (
+        role.status !== DTSI_PersonRoleStatus.HELD ||
+        usGetIsRoleInFuture(role) ||
+        getHasDTSIPersonRoleEnded({ dateEnd: role.dateEnd })
+      ) {
         return 'Political Figure'
       }
       const roleDisplayNames = {
@@ -69,6 +73,10 @@ export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
       )
     },
     [SupportedCountryCodes.AU]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
+      if (getHasDTSIPersonRoleEnded({ dateEnd: role.dateEnd })) {
+        return 'Political Figure'
+      }
+
       const currentRoleDisplayName = {
         ...COMMON_ROLE_DISPLAY_NAME_MAP,
         [DTSI_PersonRoleCategory.CONGRESS]: 'Member of Parliament',
@@ -98,6 +106,9 @@ export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
       return 'Candidate'
     },
     [SupportedCountryCodes.CA]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
+      if (getHasDTSIPersonRoleEnded({ dateEnd: role.dateEnd })) {
+        return 'Political Figure'
+      }
       if (role.status !== DTSI_PersonRoleStatus.HELD || caGetIsRoleInFuture(role)) {
         return 'Candidate'
       }
@@ -109,6 +120,9 @@ export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
       return roleDisplayNames[role.roleCategory as keyof typeof roleDisplayNames] || 'Candidate'
     },
     [SupportedCountryCodes.GB]: (role: DTSIPersonRoleCategoryDisplayNameProps) => {
+      if (getHasDTSIPersonRoleEnded({ dateEnd: role.dateEnd })) {
+        return 'Political Figure'
+      }
       if (role.status !== DTSI_PersonRoleStatus.HELD || gbGetIsRoleInFuture(role)) {
         return 'Candidate'
       }
