@@ -8,7 +8,11 @@ import { Toaster } from '@/components/ui/sonner'
 import { PageProps } from '@/types'
 import { viewport as defaultViewport } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import {
+  COUNTRY_CODE_TO_LOCALE,
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  ORDERED_SUPPORTED_COUNTRIES,
+} from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
 const title = `${
@@ -26,9 +30,18 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = defaultViewport
 
-export default function Layout({ children }: PageProps & { children: React.ReactNode }) {
+export default async function Layout({
+  children,
+  params,
+}: PageProps & { children: React.ReactNode }) {
+  let { countryCode } = await params
+
+  if (!ORDERED_SUPPORTED_COUNTRIES.includes(countryCode)) {
+    countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+  }
+
   return (
-    <html lang={SupportedLocale.EN_US} translate="no">
+    <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <FullHeight.Container>
