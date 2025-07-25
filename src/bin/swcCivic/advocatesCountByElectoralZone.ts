@@ -228,11 +228,11 @@ async function getAdvocatesCountByElectoralZone() {
 
   const otherElectoralZones = otherAddressesWithElectoralZone.map(address => {
     const electoralZone = address.electoralZone || ({} as ElectoralZone)
-    const { stateCode, zoneName } = electoralZone
+    const { administrativeArea, zoneName } = electoralZone
 
     return {
       countryCode: address.countryCode,
-      state: stateCode ? getStateCode(address.countryCode, stateCode) : UNKNOWN,
+      state: administrativeArea ? getStateCode(address.countryCode, administrativeArea) : UNKNOWN,
       zone: zoneName || UNKNOWN,
       advocates: address.advocates,
     }

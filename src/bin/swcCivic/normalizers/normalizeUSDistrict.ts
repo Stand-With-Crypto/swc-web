@@ -58,11 +58,23 @@ const US_STATE_NUMBER_TO_STATE_CODE: Record<number, USStateCode> = {
   78: 'VI',
 }
 
-export function normalizeUSStateCode(stateCode: string) {
+export function normalizeUSAdministrativeArea(stateCode?: string) {
+  if (!stateCode) {
+    return
+  }
+
   return US_STATE_NUMBER_TO_STATE_CODE[Number(stateCode)] ?? stateCode
 }
 
-export function normalizeUSDistrictName(name: string) {
+export function normalizeUSDistrictName(name?: string) {
+  if (!name) {
+    return
+  }
+
+  if (name.toLowerCase().includes('not defined')) {
+    return
+  }
+
   if (name.toLowerCase().includes('at large')) {
     return 'At-Large'
   }

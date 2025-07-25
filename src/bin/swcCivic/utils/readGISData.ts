@@ -8,7 +8,7 @@ interface GISData {
 }
 
 export async function readGISData(dataFilePath: string) {
-  if (!fs.existsSync(dataFilePath)) {
+  if (!fs.existsSync(dataFilePath) && !dataFilePath.startsWith('https')) {
     console.error(`\nError: File ${dataFilePath} does not exist`)
     return
   }

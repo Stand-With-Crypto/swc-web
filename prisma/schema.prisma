@@ -25,25 +25,26 @@ model AuthenticationNonce {
 // this is why we don't use more US-centric names like "state", "addressLine1", etc
 // these names are based on the google places api
 model Address {
-  id                       String   @id @default(uuid())
+  id                         String   @id @default(uuid())
   // Ensures we can prepopulate the address field with a user's previous address
   // this field is optional to ensure if google rate limits us the site doesn't break
-  googlePlaceId            String?  @unique @map("google_place_id") @db.VarChar(680)
-  formattedDescription     String   @map("formatted_description") // We could compute this from the fields, but in the interest of matching the user selection exactly let's persist for now. ex: 123 East 86th St, Apt 13a, New York, NY 06890
-  streetNumber             String   @map("street_number") // ex: 123
-  route                    String   @map("route") // ex: East 86th St
-  subpremise               String   @map("subpremise") // ex: Apt 13a
-  locality                 String   @map("locality") // ex: Boston
-  administrativeAreaLevel1 String   @map("administrative_area_level_1") // ex: NY
-  administrativeAreaLevel2 String   @map("administrative_area_level_2") // ex: New York County (not used in US)
-  postalCode               String   @map("postal_code") // ex: 06890
-  postalCodeSuffix         String   @map("postal_code_suffix") // ex 7620
-  countryCode              String   @map("country_code")
-  electoralZone            String?  @map("electoral_zone")
-  latitude                 Float?   @map("latitude")
-  longitude                Float?   @map("longitude")
-  datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
-  datetimeCreated          DateTime @default(now()) @map("datetime_created")
+  googlePlaceId              String?  @unique @map("google_place_id") @db.VarChar(680)
+  formattedDescription       String   @map("formatted_description") // We could compute this from the fields, but in the interest of matching the user selection exactly let's persist for now. ex: 123 East 86th St, Apt 13a, New York, NY 06890
+  streetNumber               String   @map("street_number") // ex: 123
+  route                      String   @map("route") // ex: East 86th St
+  subpremise                 String   @map("subpremise") // ex: Apt 13a
+  locality                   String   @map("locality") // ex: Boston
+  administrativeAreaLevel1   String   @map("administrative_area_level_1") // ex: NY
+  administrativeAreaLevel2   String   @map("administrative_area_level_2") // ex: New York County (not used in US)
+  postalCode                 String   @map("postal_code") // ex: 06890
+  postalCodeSuffix           String   @map("postal_code_suffix") // ex 7620
+  countryCode                String   @map("country_code")
+  electoralZone              String?  @map("electoral_zone")
+  swcCivicAdministrativeArea String?  @map("swc_civic_administrative_area")
+  latitude                   Float?   @map("latitude")
+  longitude                  Float?   @map("longitude")
+  datetimeUpdated            DateTime @updatedAt @map("datetime_updated")
+  datetimeCreated            DateTime @default(now()) @map("datetime_created")
 
   userActionEmails                      UserActionEmail[]
   userActionCalls                       UserActionCall[]

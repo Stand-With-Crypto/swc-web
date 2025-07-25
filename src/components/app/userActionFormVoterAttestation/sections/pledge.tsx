@@ -45,7 +45,7 @@ export function PledgeSection({
     congressional,
     senate,
     presidential,
-    stateCode,
+    administrativeArea,
     zoneName: electoralZone,
   } = racesByAddressData ?? {}
 
@@ -112,7 +112,7 @@ export function PledgeSection({
                       shouldHideStanceScores={false}
                       {...dtsiPersonHeroCardSectionProps}
                       people={senate}
-                      title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
+                      title={`U.S. Senate Race${administrativeArea ? ` (${administrativeArea})` : ''}`}
                     />
                   </PledgeSectionWrapper>
                 </>

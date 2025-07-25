@@ -11,6 +11,14 @@ jobs:
     environment: preview
     runs-on: ubuntu-latest
     services:
+      postgis:
+        image: postgis/postgis:17-3.5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: swc_civic
+        ports:
+          - 5432:5432
       mysql:
         image: mysql:8.0
         env:
@@ -93,7 +101,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
       # database
       DATABASE_URL: mysql://root:root@localhost:3306/swc-web
-      SWC_CIVIC_DATABASE_URL: ${{ secrets.SWC_CIVIC_DATABASE_URL }}
+      SWC_CIVIC_DATABASE_URL: postgres://postgres:postgres@localhost:5432/swc_civic
       SEED_SIZE: SM
       IS_DEVELOPING_OFFLINE: true
 
@@ -107,6 +115,23 @@ jobs:
             echo "Waiting for MySQL to be ready...";
             sleep 4;
           done
+
+      - name: Wait for PostGIS
+        run: |
+          until pg_isready -h 127.0.0.1 -p 5432 -U postgres -d swc_civic; do
+            echo "Waiting for PostGIS to be ready...";
+            sleep 4;
+          done
+
+      # Install GDAL for the db:seed-swc-civic command
+      # The cypress_build.sh script runs db:seed-swc-civic, which uses the ogr2ogr npm package
+      # This npm package is a Node.js wrapper that requires the native ogr2ogr command-line tool
+      # ogr2ogr is part of GDAL and processes geospatial data files (GeoJSON, Shapefiles, etc.)
+      # Without this, the build fails with "spawn ogr2ogr ENOENT"
+      - name: Install GDAL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gdal-bin
 
       - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
