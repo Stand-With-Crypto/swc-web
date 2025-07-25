@@ -43,6 +43,8 @@ interface RenderMapProps {
   mapConfig: MapProjectionConfig
 }
 
+const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
+
 export function AdvocatesHeatmap({
   countryCode,
   actions,
@@ -74,7 +76,6 @@ export function AdvocatesHeatmap({
   const markers = useAdvocateMap({ actions, mapConfig })
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
-  const isLocalEnvironment = NEXT_PUBLIC_ENVIRONMENT === 'local'
 
   const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
 
@@ -158,7 +159,7 @@ export function AdvocatesHeatmap({
           <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
         )}
         <div className="relative w-full">
-          {isLocalEnvironment && (
+          {!isProd && (
             <Button
               className="absolute right-2 top-2 z-10 bg-yellow-500 text-black hover:bg-yellow-600"
               onClick={() => setIsEditorOpen(true)}
@@ -201,7 +202,7 @@ export function AdvocatesHeatmap({
         )}
       </div>
 
-      {isLocalEnvironment && (
+      {!isProd && (
         <MapDebugger
           actionsLimit={mockedActionsLimit}
           coordinates={mockedCoordinates}
