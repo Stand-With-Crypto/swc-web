@@ -22,6 +22,7 @@
     "initial": "npm run db:generate && npm run codegen && npm run db:seed",
     "inngest": "npx inngest-cli@latest dev --no-discovery -u http://localhost:3000/api/inngest",
     "lint": "concurrently \"next lint --max-warnings=0\"  \"prettier --check .\"",
+    "lint:fix": "concurrently \"next lint --max-warnings=0 --fix\"  \"prettier --check . --write\"",
     "lint:cypress": "eslint ./cypress",
     "newbranch": "npm i && npm run db:generate && npm run codegen",
     "postbuild": "next-sitemap",
