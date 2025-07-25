@@ -10,7 +10,6 @@ import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBil
 import { shouldPersonHaveStanceScoresHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { cn } from '@/utils/web/cn'
 
 const MAPPED_VOTE_TYPES = {
   EXECUTIVE_OR_EXTERNAL_ACTION: 'Executive Branch Actioned',
