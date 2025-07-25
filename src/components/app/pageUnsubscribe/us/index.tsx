@@ -13,7 +13,7 @@ export function UsUnsubscribeSuccessPage() {
       <PageUnsubscribeLayout.Logo src="/logo/shield.svg" />
       <PageUnsubscribeLayout.ContentSection>
         <PageUnsubscribeLayout.Heading />
-        <SuspenseResubscribeButton />
+        <SuspenseResubscribeButton countryCode={countryCode} />
       </PageUnsubscribeLayout.ContentSection>
 
       <PageUnsubscribeLayout.SocialSection>

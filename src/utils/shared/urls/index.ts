@@ -210,6 +210,7 @@ export const getIntlUrls = (
     ...RACES_ROUTES,
     localPolicy: (stateCode?: string) =>
       `${countryPrefix}/local-policy${stateCode ? `/${stateCode.toLowerCase()}` : ''}`,
+    resubscribeSuccess: () => `${countryPrefix}/email/resubscribe-success`,
   }
 }
 
