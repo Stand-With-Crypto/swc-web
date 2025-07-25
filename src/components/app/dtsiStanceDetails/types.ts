@@ -30,7 +30,14 @@ export interface DTSIStanceDetailsBillRelationshipProp {
   billRelationship: Pick<DTSI_BillPersonRelationship, 'id' | 'relationshipType'> & {
     bill: Pick<
       DTSI_Bill,
-      'id' | 'summary' | 'title' | 'shortTitle' | 'status' | 'computedStanceScore' | 'slug'
+      | 'computedStanceScore'
+      | 'dateIntroduced'
+      | 'id'
+      | 'shortTitle'
+      | 'slug'
+      | 'status'
+      | 'summary'
+      | 'title'
     >
   }
 }

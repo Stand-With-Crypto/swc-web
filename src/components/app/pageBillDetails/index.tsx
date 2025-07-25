@@ -1,41 +1,29 @@
 import { orderBy } from 'lodash-es'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFormatter'
-import { RichTextEditorValue } from '@/components/app/dtsiRichText/types'
 import { VotesSection } from '@/components/app/pageBillDetails/votesSection'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCBill } from '@/utils/shared/zod/getSWCBills'
 
 interface PageBillDetailsProps {
-  bill: DTSIBillDetails
+  bill: SWCBill
   countryCode: SupportedCountryCodes
 }
 
 export function PageBillDetails(props: PageBillDetailsProps) {
   const { bill, countryCode } = props
 
-  const analyses = bill.analysis.filter(
-    analysis =>
-      analysis.richTextCommentary &&
-      (analysis.richTextCommentary as RichTextEditorValue).length > 0,
-  )
   const relationships = orderBy(bill.relationships, x => x.person.firstName)
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
       <section className="space-y-8 text-center">
-        <PageTitle size="sm">{bill.shortTitle || bill.title}</PageTitle>
-        <PageSubTitle>
-          {
-            // Some bills don't have a summary but have a really long title, so we use the title as a fallback
-            bill.summary || bill.title
-          }
-        </PageSubTitle>
+        <PageTitle size="sm">{bill.title}</PageTitle>
+        <PageSubTitle>{bill.summary}</PageSubTitle>
         <p className="font-semibold">
           <FormattedDatetime
             date={new Date(bill.dateIntroduced)}
@@ -43,22 +31,21 @@ export function PageBillDetails(props: PageBillDetailsProps) {
             locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
           />
         </p>
-        <ExternalLink className="inline-block" href={bill.congressDotGovUrl}>
-          {bill.congressDotGovUrl}
+        <ExternalLink className="inline-block" href={bill.officialBillUrl}>
+          {bill.officialBillUrl}
         </ExternalLink>
         <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
       </section>
 
-      {!!analyses.length && (
+      {bill.analysis && (
         <section className="space-y-8 text-center">
           <p className="text-lg font-semibold">Analysis</p>
 
           <div className="space-y-6 text-center text-fontcolor-muted">
-            {analyses.map(analysis => (
-              <div className="space-y-2" key={analysis.id}>
-                <RichTextFormatter richText={analysis.richTextCommentary} />
-              </div>
-            ))}
+            {/**
+             * @todo: Replace with the following component <RichTextFormatter richText={bill.analysis} />
+             */}
+            {bill.analysis}
           </div>
         </section>
       )}
