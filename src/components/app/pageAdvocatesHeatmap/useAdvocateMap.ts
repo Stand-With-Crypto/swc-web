@@ -90,7 +90,8 @@ const createMarkersFromActions = (
     }
   })
 
-  return markers
+  // Using reverse to make the markers appear in the order they were created
+  return markers.reverse()
 }
 
 const markersAreSame = (arr1: MapMarker[], arr2: MapMarker[]): boolean => {
