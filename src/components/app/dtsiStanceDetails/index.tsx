@@ -23,9 +23,14 @@ function StanceTypeContent({ stance: passedStance, isStanceHidden, ...props }: S
     return <DTSIStanceDetailsQuote isStanceHidden={isStanceHidden} {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
+    const bill = stance.billRelationship?.bill
+
     return (
       <DTSIBillCard
-        bill={stance.billRelationship?.bill}
+        bill={{
+          ...bill,
+          billNumberOrDTSISlug: bill.slug,
+        }}
         className="p-0 sm:p-0"
         description={`This bill is ${convertDTSIStanceScoreToCryptoSupportLanguage(stance.billRelationship.bill.computedStanceScore).toLowerCase()}.`}
         {...props}
