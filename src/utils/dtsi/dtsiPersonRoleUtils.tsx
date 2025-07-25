@@ -130,7 +130,7 @@ export const getRoleNameResolver = (countryCode: SupportedCountryCodes) => {
 
 export type DTSIPersonRoleCategoryDisplayNameProps = Pick<
   DTSI_PersonRole,
-  'roleCategory' | 'title' | 'status' | 'primaryState' | 'dateStart'
+  'roleCategory' | 'title' | 'status' | 'primaryState' | 'dateStart' | 'dateEnd'
 > & {
   group: null | undefined | { groupInstance: string }
 }
