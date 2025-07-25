@@ -23,6 +23,7 @@ const fragmentDTSIBillRelationships = /* GraphQL */ `
         title
         primaryState
         dateStart
+        dateEnd
         group {
           id
           category
