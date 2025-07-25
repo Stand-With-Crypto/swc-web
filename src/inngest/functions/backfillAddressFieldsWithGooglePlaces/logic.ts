@@ -145,6 +145,9 @@ export const backfillAddressFieldsWithGooglePlacesProcessor = inngest.createFunc
                 ...existingAddressWithoutId,
                 ...result.value.completeAddress,
                 electoralZone: result.value.electoralZone || existingAddress.electoralZone,
+                swcCivicAdministrativeArea:
+                  result.value.swcCivicAdministrativeArea ||
+                  existingAddress.swcCivicAdministrativeArea,
               } as Record<keyof Address, string | number | null>,
             }
           }
