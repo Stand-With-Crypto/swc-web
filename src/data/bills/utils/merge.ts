@@ -22,7 +22,25 @@ export function mergeBillFromBuilderIOAndDTSI(
     dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
     dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
     officialBillUrl: billFromBuilderIO.officialBillUrl || billFromDTSI.congressDotGovUrl,
+    relationships: billFromDTSI.relationships,
     summary: billFromBuilderIO.summary || billFromDTSI.summary,
+    title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
+  }
+}
+
+function mergePartialBillFromBuilderIOAndDTSI(
+  billFromBuilderIO: SWCBillCardInfo,
+  billFromDTSI: BillCardInfoFromDTSI | null | undefined,
+): SWCBillCardInfo {
+  if (!billFromDTSI) {
+    return billFromBuilderIO
+  }
+
+  return {
+    billNumberOrDTSISlug: billFromBuilderIO.billNumberOrDTSISlug,
+    computedStanceScore: billFromDTSI.computedStanceScore,
+    dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
+    isKeyBill: billFromBuilderIO.isKeyBill || false,
     title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
   }
 }
@@ -31,23 +49,22 @@ export function mergeBillsFromBuilderIOAndDTSI(
   billsFromBuilderIO: SWCBill[],
   billsFromDTSI: BillCardInfoFromDTSI[] | null | undefined,
 ): SWCBillCardInfo[] {
+  const bills = billsFromBuilderIO.map(bill => ({
+    ...bill,
+    billNumberOrDTSISlug: bill.billNumber,
+  }))
+
   if (!billsFromDTSI || billsFromDTSI.length === 0) {
-    return billsFromBuilderIO
+    return bills
   }
 
-  return billsFromBuilderIO.map(billFromBuilderIO => {
+  return bills.map(billFromBuilderIO => {
     const billFromDTSI = billsFromDTSI.find(bill => bill.id === billFromBuilderIO.dtsiSlug)
 
     if (!billFromDTSI) {
       return billFromBuilderIO
     }
 
-    return {
-      computedStanceScore: billFromDTSI.computedStanceScore,
-      dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
-      isKeyBill: billFromBuilderIO.isKeyBill || false,
-      dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
-      title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
-    }
+    return mergePartialBillFromBuilderIOAndDTSI(billFromBuilderIO, billFromDTSI)
   })
 }
