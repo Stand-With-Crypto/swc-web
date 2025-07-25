@@ -57,8 +57,8 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email Your Senator',
-    description: 'Pass Crucial Crypto Legislation',
+    title: 'Email your senator',
+    description: 'Pass crucial crypto legislation',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -387,7 +387,11 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
+    link: ({ children }) => (
+      <Link className="w-full" href={urls.polls()}>
+        {children}
+      </Link>
+    ),
     campaigns: [
       {
         actionType: UserActionType.POLL,
@@ -428,7 +432,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.REFER]: {
-    title: 'Refer a Friend',
+    title: 'Refer a friend',
     description: 'Get your friend to signup for Stand With Crypto and verify their account.',
     mobileCTADescription:
       'Get your friend to signup for Stand With Crypto and verify their account.',
@@ -439,7 +443,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.REFER,
         campaignName: USUserActionReferCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Refer a Friend',
+        title: 'Refer a friend',
         description: 'You have referred friends to join Stand With Crypto.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
@@ -457,7 +461,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.NFT_MINT]: {
-    title: 'Mint your Supporter NFT',
+    title: 'Mint your supporter NFT',
     description: 'All mint proceeds are donated to the movement.',
     mobileCTADescription: 'All mint proceeds are donated to the movement.',
     campaignsModalDescription: 'All mint proceeds are donated to the movement.',
@@ -467,7 +471,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.NFT_MINT,
         campaignName: USUserActionNftMintCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Mint your Supporter NFT',
+        title: 'Mint your supporter NFT',
         description: 'All mint proceeds are donated to the movement.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormNFTMintDialog,
