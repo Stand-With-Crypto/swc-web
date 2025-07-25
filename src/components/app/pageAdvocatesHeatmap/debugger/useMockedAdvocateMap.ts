@@ -12,8 +12,8 @@ import {
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { MapMarker } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('useMockedAdvocateMap')
 
@@ -165,7 +165,7 @@ export const useMockedAdvocateMap = ({
         actionsLimit,
       }),
     )
-  }, [countryCode, mapConfig, coordinates, selectedAreas])
+  }, [countryCode, mapConfig, coordinates, selectedAreas, actionsLimit])
 
   return displayedMarkers
 }

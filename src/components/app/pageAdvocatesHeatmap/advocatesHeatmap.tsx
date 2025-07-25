@@ -203,16 +203,16 @@ export function AdvocatesHeatmap({
 
       {isLocalEnvironment && (
         <MapDebugger
+          actionsLimit={mockedActionsLimit}
           coordinates={mockedCoordinates}
           isMockMode={isMockMode}
           isOpen={isEditorOpen}
+          onActionsLimitChange={setMockedActionsLimit}
           onAreasChange={setMockedSelectedAreas}
           onClose={() => setIsEditorOpen(false)}
           onMockModeChange={setIsMockMode}
           onSaveCoordinates={setMockedCoordinates}
           selectedAreas={mockedSelectedAreas}
-          actionsLimit={mockedActionsLimit}
-          onActionsLimitChange={setMockedActionsLimit}
         />
       )}
     </div>

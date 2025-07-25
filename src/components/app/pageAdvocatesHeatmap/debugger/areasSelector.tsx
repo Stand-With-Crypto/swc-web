@@ -1,8 +1,8 @@
 'use client'
 
 import {
-  AreaCoordinatesKey,
   AREA_COORDS_BY_COUNTRY_CODE,
+  AreaCoordinatesKey,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -77,17 +77,17 @@ export const AreasSelector = ({
 
       <div className="space-y-3">
         <div className="flex items-center gap-3">
-          <label htmlFor="actions-limit" className="whitespace-nowrap text-sm font-medium">
+          <label className="whitespace-nowrap text-sm font-medium" htmlFor="actions-limit">
             Actions Limit:
           </label>
           <Input
-            id="actions-limit"
-            type="number"
-            min="0"
-            value={actionsLimit}
-            onChange={e => handleActionsLimitChange(e.target.value)}
             className="h-8 w-24"
+            id="actions-limit"
+            min="0"
+            onChange={e => handleActionsLimitChange(e.target.value)}
             placeholder="0"
+            type="number"
+            value={actionsLimit}
           />
         </div>
 
