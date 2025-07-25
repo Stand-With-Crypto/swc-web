@@ -5,7 +5,6 @@ export const GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP = {
   WLS: 'Wales',
 } as const
 
-// TODO: use this enum on normalizeGBAdministrativeArea
 export enum GB_NUTS_1_AREA_NAMES {
   Wales = 'Wales',
   NorthernIreland = 'Northern Ireland',
