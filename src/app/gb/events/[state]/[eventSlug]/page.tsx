@@ -58,7 +58,7 @@ export default async function EventDetailsPageRoot(props: Props) {
   const events = await getEvents({ countryCode })
 
   return (
-    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events} showMap={false}>
+    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
       <EventDialogContent countryCode={countryCode} event={event.data} />
     </EventsPageDialogDeeplinkLayout>
   )

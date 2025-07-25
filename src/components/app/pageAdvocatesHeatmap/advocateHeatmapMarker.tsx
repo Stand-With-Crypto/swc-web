@@ -12,9 +12,11 @@ export function AdvocateHeatmapMarker({
   handleActionMouseLeave,
   handleActionMouseOver,
   currentActionInfo,
+  size,
 }: {
   coordinates: [number, number]
   IconComponent: React.FC<IconProps>
+  size?: number
   handleActionMouseLeave: (event: React.MouseEvent<SVGElement, MouseEvent>) => void
   handleActionMouseOver: (
     currentActionInfo: string,
@@ -32,7 +34,7 @@ export function AdvocateHeatmapMarker({
       transition={{ duration: 0.5 }}
     >
       <Marker coordinates={coordinates}>
-        <IconComponent isPulsing={true} />
+        <IconComponent height={size} isPulsing={true} width={size} />
       </Marker>
     </motion.g>
   )
