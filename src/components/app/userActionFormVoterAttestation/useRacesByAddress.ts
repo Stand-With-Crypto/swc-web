@@ -36,13 +36,13 @@ async function getDTSIRacesFromElectoralZone(result: GetElectoralZoneResult) {
     throw new Error(getErrorMessageByNotFoundReason(result.notFoundReason))
   }
 
-  if (!result.stateCode) {
+  if (!result.administrativeArea) {
     throw new Error('State code not found for this address')
   }
 
   const data = await fetchReq(
     apiUrls.dtsiRacesByCongressionalDistrict({
-      stateCode: result.stateCode,
+      administrativeArea: result.administrativeArea,
       district: parseInt(result.zoneName, 10),
     }),
   )
@@ -66,7 +66,7 @@ async function getDTSIRacesFromElectoralZone(result: GetElectoralZoneResult) {
       congressional: [],
       presidential: [],
       senate: [],
-      stateCode: result.stateCode,
+      administrativeArea: result.administrativeArea,
       zoneName: result.zoneName,
     }
   }
