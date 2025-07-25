@@ -168,12 +168,12 @@ export function AuSuspenseYourDivisionRank({ filteredByState }: { filteredByStat
   }, [districtResponse.data])
 
   const stateCode = useMemo<StateCode | null>(() => {
-    if (district?.stateCode) return district.stateCode as StateCode
+    if (district?.administrativeArea) return district.administrativeArea as StateCode
     if (addressDetails?.administrativeAreaLevel1) {
       return addressDetails.administrativeAreaLevel1 as StateCode
     }
     return null
-  }, [addressDetails, district?.stateCode])
+  }, [addressDetails, district?.administrativeArea])
 
   if (districtResponse.isLoading || isLoadingAddress || isValidAddress === 'loading') {
     return (

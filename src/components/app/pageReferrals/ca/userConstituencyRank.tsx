@@ -28,7 +28,7 @@ export function CaUserConstituencyRank({ className }: { className?: string }) {
 
   const districtRankingResponse = useGetDistrictRank({
     countryCode: COUNTRY_CODE,
-    stateCode: district?.stateCode as CAProvinceCode,
+    stateCode: district?.administrativeArea as CAProvinceCode,
     districtNumber: district?.zoneName?.toString() ?? null,
   })
 

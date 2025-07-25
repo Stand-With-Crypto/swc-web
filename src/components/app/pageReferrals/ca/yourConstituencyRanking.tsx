@@ -174,12 +174,12 @@ export function CaSuspenseYourConstituencyRank({
   }, [constituencyResponse.data])
 
   const provinceCode = useMemo<StateCode | null>(() => {
-    if (constituency?.stateCode) return constituency.stateCode as StateCode
+    if (constituency?.administrativeArea) return constituency.administrativeArea as StateCode
     if (addressDetails?.administrativeAreaLevel1) {
       return addressDetails.administrativeAreaLevel1 as StateCode
     }
     return null
-  }, [addressDetails, constituency?.stateCode])
+  }, [addressDetails, constituency?.administrativeArea])
 
   if (constituencyResponse.isLoading || isLoadingAddress || isValidAddress === 'loading') {
     return (
