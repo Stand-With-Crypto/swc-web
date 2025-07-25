@@ -45,13 +45,13 @@ function PoliticianHeader({
       <ProfileAvatar className="box-mb-6 sm:mb-0 sm:mr-7" person={person} size={200} />
 
       <div className="flex flex-col sm:items-start">
-        <PageTitle className="mb-3" size="lg">
+        <PageTitle className="mb-3 mt-4 sm:mt-0" size="lg">
           {dtsiPersonFullName(person)}
         </PageTitle>
 
         {person.primaryRole && (
           <div>
-            <p className="mb-5 text-xl font-normal text-black/80">
+            <p className="mb-5 text-center text-xl font-normal text-black/80 sm:text-left">
               {person.politicalAffiliationCategory && (
                 <>
                   {dtsiPersonPoliticalAffiliationCategoryDisplayName(

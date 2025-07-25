@@ -72,10 +72,14 @@ export const getPoliticianDetailsData = cache(async (dtsiSlug: string) => {
   const { bills, noBills } = groupStancesByBillAndSortByDate(person.stances)
 
   const stancesCount = person.stances.length
+  const statementsCount = noBills.length
+  const votesCount = bills.reduce((acc, bill) => acc + bill.stances.length, 0)
 
   const parsedPerson = {
     ...person,
     stancesCount,
+    statementsCount,
+    votesCount,
     stances: { bills, noBills },
   }
 

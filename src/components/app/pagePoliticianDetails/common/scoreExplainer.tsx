@@ -5,10 +5,7 @@ import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InfoCard } from '@/components/ui/infoCard'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import {
-  dtsiPersonFullName,
-  shouldPersonHaveStanceScoresHidden,
-} from '@/utils/dtsi/dtsiPersonUtils'
+import { shouldPersonHaveStanceScoresHidden } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
@@ -34,13 +31,25 @@ export function ScoreExplainer({ person }: ScoreExplainerProps) {
             {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
           </h3>
         )}
+
         <h4 className="text-sm text-fontcolor-muted md:text-base">
-          {dtsiPersonFullName(person)} has made{' '}
-          <FormattedNumber
-            amount={person.stancesCount}
-            locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-          />{' '}
-          {pluralize({ singular: 'statement', count: person.stancesCount })} about crypto.
+          {person.stancesCount ? (
+            <>
+              Based on{' '}
+              <FormattedNumber
+                amount={person.statementsCount}
+                locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+              />{' '}
+              {pluralize({ singular: 'statement', count: person.statementsCount })} and{' '}
+              <FormattedNumber
+                amount={person.votesCount}
+                locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+              />{' '}
+              {pluralize({ singular: 'vote', count: person.votesCount })}.
+            </>
+          ) : (
+            '0 statements'
+          )}
         </h4>
       </div>
     </InfoCard>

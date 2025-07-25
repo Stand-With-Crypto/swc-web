@@ -15,6 +15,8 @@ export type BillsMap = Record<string, BillData>
 
 export interface PoliticianDetails extends Omit<DTSIPersonDetails, 'stances'> {
   stancesCount: number
+  statementsCount: number
+  votesCount: number
   stances: {
     bills: BillData[]
     noBills: DTSIPersonStance[]
