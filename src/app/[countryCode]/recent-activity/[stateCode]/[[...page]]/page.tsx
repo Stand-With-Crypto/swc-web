@@ -2,13 +2,13 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { getPageData } from '@/components/app/pageCommunity'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
+import { USGetPageData } from '@/components/app/pageCommunity'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
   PageLeaderboardInferredProps,
 } from '@/components/app/pageCommunity/us'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { UsStateSpecificCommunityPage } from '@/components/app/pageCommunity/us/stateSpecificPage'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
@@ -38,7 +38,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
   return Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).flatMap((stateCode: string) =>
     flatten(
       times(totalPregeneratedPages).map(i => ({
@@ -57,7 +57,7 @@ export default async function RecentActivityStateSpecificPage(props: Props) {
     notFound()
   }
 
-  const { offset, pageNum, publicRecentActivity, totalPages } = await getPageData({
+  const { offset, pageNum, publicRecentActivity, totalPages } = await USGetPageData({
     ...params,
     state: stateCode,
   })

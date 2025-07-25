@@ -1,5 +1,7 @@
 import { DistrictLeaderboard } from '@/components/app/pageLocalPolicy/common/statePage/districtLeaderboardSection'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
+import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
+import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -20,6 +22,7 @@ export async function UsDistrictLeaderboardSection({
   stateName,
 }: UsDistrictLeaderboardSectionProps) {
   const { items: leaderboardData, total } = await getDistrictsLeaderboardDataByState(
+    countryCode,
     stateCode.toUpperCase(),
     {
       limit: ITEMS_PER_PAGE,
@@ -36,7 +39,8 @@ export async function UsDistrictLeaderboardSection({
         </Section.SubTitle>
 
         <DistrictLeaderboard>
-          <DistrictLeaderboard.Content countryCode={countryCode} data={leaderboardData} />
+          <UsYourDistrictRank filteredByState />
+          <USAdvocatesLeaderboard data={leaderboardData} />
 
           {total > ITEMS_PER_PAGE && (
             <DistrictLeaderboard.Button

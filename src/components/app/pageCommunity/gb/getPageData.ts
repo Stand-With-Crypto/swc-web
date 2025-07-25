@@ -1,23 +1,16 @@
 import { notFound } from 'next/navigation'
+import { validatePageNum } from 'src/components/app/pageCommunity/common/pageValidator'
+import { GB_RECENT_ACTIVITY_PAGINATION } from 'src/components/app/pageCommunity/gb/constants'
 
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { RECENT_ACTIVITY_PAGINATION } from './constants'
-import { validatePageNum } from './pageValidator'
-
 const MAX_PAGES = 10
 
-export async function getPageData({
-  countryCode,
-  page,
-  state,
-}: {
-  countryCode: SupportedCountryCodes
-  page: string[]
-  state?: string
-}) {
-  const { itemsPerPage } = RECENT_ACTIVITY_PAGINATION
+const COUNTRY_CODE = SupportedCountryCodes.GB
+
+export async function GBGetPageData({ page, state }: { page: string[]; state?: string }) {
+  const { itemsPerPage } = GB_RECENT_ACTIVITY_PAGINATION
 
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
@@ -28,7 +21,7 @@ export async function getPageData({
   const publicRecentActivity = await getPublicRecentActivity({
     limit: itemsPerPage,
     offset,
-    countryCode,
+    countryCode: COUNTRY_CODE,
     ...(state && { stateCode: state.toUpperCase() }),
   })
 
@@ -36,7 +29,7 @@ export async function getPageData({
     publicRecentActivity,
     totalPages: state
       ? Math.min(Math.ceil(publicRecentActivity.count / itemsPerPage), MAX_PAGES)
-      : RECENT_ACTIVITY_PAGINATION.totalPages,
+      : GB_RECENT_ACTIVITY_PAGINATION.totalPages,
     pageNum,
     offset,
   }

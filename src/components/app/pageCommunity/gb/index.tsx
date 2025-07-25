@@ -1,12 +1,12 @@
-import { RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/common/constants'
-import { getPageData } from '@/components/app/pageCommunity/common/getPageData'
+import { GB_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/gb/constants'
+import { GBGetPageData } from '@/components/app/pageCommunity/gb/getPageData'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { PageLayout } from '@/components/ui/pageLayout'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-type GbPageLeaderboardProps = Awaited<ReturnType<typeof getPageData>>
+type GbPageLeaderboardProps = Awaited<ReturnType<typeof GBGetPageData>>
 
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)
@@ -28,7 +28,7 @@ export function GbPageCommunity({
           <RecentActivity.DynamicList
             actions={publicRecentActivity}
             countryCode={countryCode}
-            pageSize={RECENT_ACTIVITY_PAGINATION.itemsPerPage}
+            pageSize={GB_RECENT_ACTIVITY_PAGINATION.itemsPerPage}
           />
         ) : (
           <RecentActivity.List actions={publicRecentActivity} />
