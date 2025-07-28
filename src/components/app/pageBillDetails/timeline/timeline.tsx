@@ -2,14 +2,14 @@
 
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { useIsMobile } from '@/hooks/useIsMobile'
-import { Milestone, TimelinePlotPoint } from '@/components/app/pageBillDetails/timeline/types'
 import {
   HIGHLIGHTED_POINT_SIZE,
   MajorMilestone,
 } from '@/components/app/pageBillDetails/timeline/majorMilestone'
 import { MinorMilestone } from '@/components/app/pageBillDetails/timeline/minorMilestone'
+import { Milestone, TimelinePlotPoint } from '@/components/app/pageBillDetails/timeline/types'
+import { useIsMobile } from '@/hooks/useIsMobile'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface TimelineProps {
   countryCode: SupportedCountryCodes
@@ -24,7 +24,7 @@ const TIMELINE_SPACING_MOBILE = 24
 
 const BAR_THICKNESS = 2
 
-const DEFAULT_ANIMATION_DURATION = 1_000
+const DEFAULT_ANIMATION_DURATION = 2_000
 
 export function Timeline(props: TimelineProps) {
   const isMobile = useIsMobile()
@@ -135,10 +135,10 @@ export function Timeline(props: TimelineProps) {
           <MajorMilestone
             countryCode={props.countryCode}
             isFirstMilestone={index === 0}
+            isHighlightEnabled={index < majorMilestonesCount}
             isMobile={isMobile}
             key={index}
             milestone={majorMilestone}
-            isHighlightEnabled={index < majorMilestonesCount}
           />
         )
       })}
@@ -147,10 +147,10 @@ export function Timeline(props: TimelineProps) {
         return (
           <MinorMilestone
             countryCode={props.countryCode}
+            isHighlightEnabled={index < minorMilestonesCount}
             isMobile={isMobile}
             key={index}
             milestone={minorMilestone}
-            isHighlightEnabled={index < minorMilestonesCount}
           />
         )
       })}
@@ -211,6 +211,7 @@ function useTimelineAnimation({
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetPercent, duration])
 
   return { currentPercent, majorMilestonesCount, minorMilestonesCount }

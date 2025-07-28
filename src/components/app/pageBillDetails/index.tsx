@@ -1,6 +1,7 @@
 import { orderBy } from 'lodash-es'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { TimelineSection } from '@/components/app/pageBillDetails/timelineSection'
 import { VotesSection } from '@/components/app/pageBillDetails/votesSection'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
@@ -8,7 +9,6 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBill } from '@/utils/shared/zod/getSWCBills'
-import { TimelineSection } from '@/components/app/pageBillDetails/timelineSection'
 
 interface PageBillDetailsProps {
   bill: SWCBill

@@ -1,11 +1,12 @@
+import { CSSProperties, useMemo } from 'react'
+import { Check, ScrollTextIcon, XIcon } from 'lucide-react'
+
 import { Milestone } from '@/components/app/pageBillDetails/timeline/types'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
-import { Check, ScrollTextIcon, XIcon } from 'lucide-react'
-import { CSSProperties, useMemo } from 'react'
 
-type MajorMilestoneProps = {
+interface MajorMilestoneProps {
   countryCode: SupportedCountryCodes
   isFirstMilestone: boolean
   isHighlightEnabled?: boolean
@@ -88,7 +89,7 @@ export function MajorMilestone({
     <>
       <div
         className={cn(
-          'absolute flex items-center justify-center rounded-full transition-colors duration-300',
+          'absolute flex items-center justify-center rounded-full transition-colors duration-500',
 
           {
             'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
