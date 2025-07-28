@@ -8,13 +8,14 @@ export interface InfoCardProps {
   as?: 'div' | 'article'
 }
 
-export const InfoCard: React.FC<InfoCardProps> = ({ className, children, as = 'div' }) => {
-  const Component = as
-  return (
-    <Component className={cn('info-card w-full rounded-3xl bg-secondary p-6 sm:p-8', className)}>
-      {children}
-    </Component>
-  )
-}
+export const InfoCard: React.FC<InfoCardProps> = ({
+  className,
+  children,
+  as: Component = 'div',
+}) => (
+  <Component className={cn('info-card w-full rounded-3xl bg-secondary p-6 sm:p-8', className)}>
+    {children}
+  </Component>
+)
 
 InfoCard.displayName = 'InfoCard'
