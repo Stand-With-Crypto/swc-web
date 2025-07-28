@@ -106,7 +106,8 @@ export async function TimelineSection({ bill, countryCode }: TimeSectionProps) {
         <div>
           <h3 className="text-xl font-bold">Current Status</h3>
           <p className="text-sm text-muted-foreground">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            {bill.timelineDescription ||
+              'This bill is currently in the legislative process and has not yet been passed into law.'}
           </p>
         </div>
 

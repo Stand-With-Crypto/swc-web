@@ -1,10 +1,10 @@
 'use client'
 
-import { CSSProperties, useMemo } from 'react'
+import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { TimelinePlotPoint } from '@/components/app/pageBillDetails/timeline/types'
+import { Milestone, TimelinePlotPoint } from '@/components/app/pageBillDetails/timeline/types'
 import {
   HIGHLIGHTED_POINT_SIZE,
   MajorMilestone,
@@ -23,6 +23,8 @@ const TIMELINE_HEIGHT_MOBILE = 400
 const TIMELINE_SPACING_MOBILE = 24
 
 const BAR_THICKNESS = 2
+
+const DEFAULT_ANIMATION_DURATION = 1_000
 
 export function Timeline(props: TimelineProps) {
   const isMobile = useIsMobile()
@@ -85,6 +87,12 @@ export function Timeline(props: TimelineProps) {
     return { currentMilestone, majorMilestones, minorMilestones }
   }, [props.plotPoints])
 
+  const { currentPercent, majorMilestonesCount, minorMilestonesCount } = useTimelineAnimation({
+    majorMilestones,
+    minorMilestones,
+    targetPercent: currentMilestone.positionPercent,
+  })
+
   const { backBarStyles, frontBarStyles, wrapperStyles } = useMemo(() => {
     const wrapperStyles: CSSProperties = isMobile
       ? { height: TIMELINE_HEIGHT_MOBILE, margin: `${TIMELINE_SPACING_MOBILE}px 0`, width: '100%' }
@@ -107,7 +115,7 @@ export function Timeline(props: TimelineProps) {
       ...(isMobile ? { height: '100%' } : { width: '100%' }),
     }
 
-    const frontBarSize = `${currentMilestone.positionPercent.toFixed(2)}%`
+    const frontBarSize = `${currentPercent.toFixed(2)}%`
 
     const frontBarStyles: CSSProperties = {
       ...barStyles,
@@ -115,7 +123,7 @@ export function Timeline(props: TimelineProps) {
     }
 
     return { backBarStyles, frontBarStyles, wrapperStyles }
-  }, [isMobile, currentMilestone.positionPercent])
+  }, [currentPercent, isMobile])
 
   return (
     <div className="relative" style={wrapperStyles}>
@@ -130,6 +138,7 @@ export function Timeline(props: TimelineProps) {
             isMobile={isMobile}
             key={index}
             milestone={majorMilestone}
+            isHighlightEnabled={index < majorMilestonesCount}
           />
         )
       })}
@@ -141,9 +150,68 @@ export function Timeline(props: TimelineProps) {
             isMobile={isMobile}
             key={index}
             milestone={minorMilestone}
+            isHighlightEnabled={index < minorMilestonesCount}
           />
         )
       })}
     </div>
   )
+}
+
+function useTimelineAnimation({
+  duration = DEFAULT_ANIMATION_DURATION,
+  majorMilestones,
+  minorMilestones,
+  targetPercent,
+}: {
+  duration?: number
+  majorMilestones: Milestone[]
+  minorMilestones: Milestone[]
+  targetPercent: number
+}) {
+  const [currentPercent, setCurrentPercent] = useState(0)
+
+  const animationFrameRef = useRef<number | null>(null)
+
+  const startTimeRef = useRef(0)
+  const incrementRef = useRef(0)
+
+  const majorMilestonesCount = useMemo(
+    () => majorMilestones.filter(milestone => milestone.positionPercent <= currentPercent).length,
+    [currentPercent, majorMilestones],
+  )
+  const minorMilestonesCount = useMemo(
+    () => minorMilestones.filter(milestone => milestone.positionPercent <= currentPercent).length,
+    [currentPercent, minorMilestones],
+  )
+
+  useEffect(() => {
+    setCurrentPercent(0)
+
+    startTimeRef.current = performance.now()
+    const totalFrames = Math.round(duration / (1_000 / 60))
+    incrementRef.current = (targetPercent - currentPercent) / totalFrames
+
+    const runAnimationFrame = (currentTime: number) => {
+      const elapsedTime = currentTime - startTimeRef.current
+      const progress = Math.min(elapsedTime / duration, 1)
+      const newPercent = incrementRef.current * progress
+
+      setCurrentPercent(prev => Math.min(prev + newPercent, targetPercent))
+
+      if (currentPercent < targetPercent) {
+        animationFrameRef.current = requestAnimationFrame(runAnimationFrame)
+      }
+    }
+
+    animationFrameRef.current = requestAnimationFrame(runAnimationFrame)
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [targetPercent, duration])
+
+  return { currentPercent, majorMilestonesCount, minorMilestonesCount }
 }

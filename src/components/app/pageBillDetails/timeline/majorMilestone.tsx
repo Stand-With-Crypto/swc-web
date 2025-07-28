@@ -8,6 +8,7 @@ import { CSSProperties, useMemo } from 'react'
 type MajorMilestoneProps = {
   countryCode: SupportedCountryCodes
   isFirstMilestone: boolean
+  isHighlightEnabled?: boolean
   isMobile: boolean
   milestone: Milestone
 }
@@ -29,6 +30,7 @@ const TITLE_HEIGHT = 28
 export function MajorMilestone({
   countryCode,
   isFirstMilestone,
+  isHighlightEnabled = true,
   isMobile,
   milestone,
 }: MajorMilestoneProps) {
@@ -86,11 +88,14 @@ export function MajorMilestone({
     <>
       <div
         className={cn(
-          'absolute flex items-center justify-center rounded-full',
-          milestone.isHighlighted
-            ? 'bg-primary-cta'
-            : 'border-2 border-[rgba(91,97,110,.5)] bg-[#F2F5F9]',
-          { 'bg-destructive': !milestone.success },
+          'absolute flex items-center justify-center rounded-full transition-colors duration-300',
+
+          {
+            'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
+            'bg-[#5B616E]': milestone.isHighlighted && !isHighlightEnabled,
+            'border-2 border-[rgba(91,97,110,.5)] bg-[#F2F5F9]': !milestone.isHighlighted,
+            'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
+          },
         )}
         style={pointStyles}
       >

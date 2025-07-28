@@ -1,14 +1,17 @@
 'use client'
 
+import { CSSProperties, useMemo, useState } from 'react'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip'
+
 import { Milestone } from '@/components/app/pageBillDetails/timeline/types'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip'
-import { CSSProperties, useMemo, useState } from 'react'
+import { cn } from '@/utils/web/cn'
 
-type MinorMilestoneProps = {
+interface MinorMilestoneProps {
   countryCode: SupportedCountryCodes
+  isHighlightEnabled?: boolean
   isMobile: boolean
   milestone: Milestone
 }
@@ -16,7 +19,12 @@ type MinorMilestoneProps = {
 const POINT_FIXED_SPACING = 30
 const POINT_SIZE = 20
 
-export function MinorMilestone({ countryCode, isMobile, milestone }: MinorMilestoneProps) {
+export function MinorMilestone({
+  countryCode,
+  isHighlightEnabled,
+  isMobile,
+  milestone,
+}: MinorMilestoneProps) {
   const styles: CSSProperties = useMemo(() => {
     const pointDynamicSpacing = `calc(${milestone.positionPercent.toFixed(2)}% - ${POINT_SIZE / 2}px)`
 
@@ -37,7 +45,10 @@ export function MinorMilestone({ countryCode, isMobile, milestone }: MinorMilest
 
   const trigger = (
     <div
-      className="absolute cursor-pointer rounded-full border-4 border-[#F2F5F9] bg-primary-cta hover:border-primary-cta"
+      className={cn(
+        'absolute cursor-pointer rounded-full border-4 border-[#F2F5F9] transition-colors duration-300',
+        isHighlightEnabled ? 'bg-primary-cta hover:border-[#A97BFC]' : 'bg-[#5B616E]',
+      )}
       style={styles}
     />
   )
@@ -61,7 +72,7 @@ export function MinorMilestone({ countryCode, isMobile, milestone }: MinorMilest
     </div>
   )
 
-  return <WithTooltipOrDialog isMobile={isMobile} content={content} trigger={trigger} />
+  return <WithTooltipOrDialog content={content} isMobile={isMobile} trigger={trigger} />
 }
 
 function WithTooltipOrDialog({
@@ -79,8 +90,8 @@ function WithTooltipOrDialog({
     return (
       <Dialog
         analytics={{ Category: 'Bill Timeline' }}
-        open={isTooltipOrDialogOpen}
         onOpenChange={setIsTooltipOrDialogOpen}
+        open={isTooltipOrDialogOpen}
       >
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent

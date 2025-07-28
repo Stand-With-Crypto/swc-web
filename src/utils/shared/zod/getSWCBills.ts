@@ -68,6 +68,7 @@ export const zodBillSchemaValidation = object({
       }),
     ),
     summary: string(),
+    timelineDescription: string().optional(),
     title: string(),
     usAdministrativeAreaLevel1: string().min(2).max(3).optional(),
   }),
@@ -108,6 +109,7 @@ export interface SWCBill {
   }[]
   relationships: DTSI_BillRelationshipsFragment[]
   summary: string
+  timelineDescription?: string
   title: string
   usAdministrativeAreaLevel1?: string
 }
