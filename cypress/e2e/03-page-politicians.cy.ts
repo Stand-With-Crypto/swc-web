@@ -39,14 +39,14 @@ it('page - politicians interactions', () => {
   // filter table by role
   cy.get('[data-testid="role-filter-trigger"]').as('roleFilterTrigger').scrollIntoView()
   cy.get('@roleFilterTrigger').should('be.visible').click()
-  cy.get('[role="option"]').contains('div', 'Senator').as('roleOption')
+  cy.get('[role="option"]').contains('div', 'Other Political Figure').as('roleOption')
   cy.get('@roleOption').should('be.visible').click()
-  cy.get('@roleFilterTrigger').children().should('contain', 'Senator')
+  cy.get('@roleFilterTrigger').children().should('contain', 'Other Political Figure')
   cy.get('tbody')
     .find('td:nth-child(3)')
     .each($cell => {
       const value = $cell.text()
-      cy.wrap(value).should('eq', 'Senator')
+      cy.wrap(value).should('eq', 'Political Figure')
     })
   cy.get('@roleFilterTrigger').click()
   cy.get('[role="option"]').contains('div', 'All').click()
