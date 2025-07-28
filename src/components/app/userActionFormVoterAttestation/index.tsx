@@ -134,7 +134,7 @@ export function UserActionFormVoterAttestation({
     const data: CreateActionVoterAttestationInput = {
       campaignName: USUserActionVoterAttestationCampaignName['H1_2025'],
       address: addressSchema,
-      stateCode: racesByAddressRequest.data.stateCode as USStateCode,
+      stateCode: racesByAddressRequest.data.administrativeArea as USStateCode,
     }
 
     const result = await triggerServerActionForForm(

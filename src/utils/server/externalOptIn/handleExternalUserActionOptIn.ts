@@ -41,7 +41,10 @@ import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElect
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
-import { maybeGetElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import {
+  ElectoralZoneNotFoundReason,
+  maybeGetElectoralZoneFromAddress,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -291,24 +294,25 @@ async function maybeUpsertUser({
         },
       })
 
-      if ('notFoundReason' in electoralZone) {
+      if ('notFoundReason' in electoralZone || !electoralZone) {
         logElectoralZoneNotFound({
           address: dbAddress.formattedDescription,
-          notFoundReason: electoralZone.notFoundReason,
+          notFoundReason:
+            electoralZone.notFoundReason || ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
           domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
         })
-      } else if (electoralZone.zoneName) {
+      } else {
         dbAddress.electoralZone = electoralZone.zoneName
-      }
-      if ('zoneName' in electoralZone) {
-        dbAddress.electoralZone = `${electoralZone.zoneName}`
+        if (electoralZone.administrativeArea) {
+          dbAddress.swcCivicAdministrativeArea = electoralZone.administrativeArea
+        }
       }
     } catch (error) {
       logger.error('error getting `electoralZone`:' + error)
       Sentry.captureException(error, {
+        fingerprint: ['error getting electoralZone'],
         tags: {
           domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
-          message: 'error getting electoralZone',
         },
       })
     }

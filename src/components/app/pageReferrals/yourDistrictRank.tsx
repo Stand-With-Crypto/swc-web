@@ -189,7 +189,7 @@ export function SuspenseYourDistrictRank({ filteredByState }: { filteredByState?
     return <DistrictNotFound onChange={setAddress} value={address} />
   }
 
-  if (!district?.stateCode || !district?.zoneName) {
+  if (!district?.administrativeArea || !district?.zoneName) {
     return <DistrictNotFound onChange={setAddress} value={address} />
   }
 
@@ -199,7 +199,7 @@ export function SuspenseYourDistrictRank({ filteredByState }: { filteredByState?
       districtNumber={district.zoneName}
       filteredByState={filteredByState}
       setAddress={setAddress}
-      stateCode={district.stateCode as USStateCode}
+      stateCode={district.administrativeArea as USStateCode}
     />
   )
 }

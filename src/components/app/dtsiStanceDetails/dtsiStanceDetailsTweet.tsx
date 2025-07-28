@@ -235,7 +235,10 @@ export const DTSIStanceDetailsTweet: React.FC<
         <NextImage alt="x.com logo" height={24} src={'/misc/xDotComLogo.svg'} width={24} />
       </div>
 
-      <div className={cn('mb-3 whitespace-pre-line ', bodyClassName)} style={{ lineHeight: 1.2 }}>
+      <div
+        className={cn('mb-3 whitespace-pre-line break-words', bodyClassName)}
+        style={{ lineHeight: 1.2 }}
+      >
         <TweetBody tweet={stance.tweet} />
       </div>
       {!hideImages && stance.tweet.tweetMedia.length ? (
