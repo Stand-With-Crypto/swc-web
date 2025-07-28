@@ -3,6 +3,7 @@ import { ReactElement } from 'react'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { SWCBillCardInfo } from '@/data/bills/types'
 import { DTSI_BillCardFragment } from '@/data/dtsi/generated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -11,7 +12,7 @@ import { cn } from '@/utils/web/cn'
 export type DTSIBill = DTSI_BillCardFragment
 
 interface DTSIBillCardProps {
-  bill: DTSIBill
+  bill: Omit<SWCBillCardInfo, 'isKeyBill'>
   description?: string
   countryCode: SupportedCountryCodes
   children?: ReactElement<typeof CryptoSupportHighlight>
@@ -22,7 +23,7 @@ interface DTSIBillCardProps {
 export function DTSIBillCard(props: DTSIBillCardProps) {
   const { bill, description, countryCode, children, className, title } = props
 
-  const billTitle = title || bill.shortTitle || bill.title
+  const billTitle = title || bill.title
 
   return (
     <LinkBox
@@ -36,7 +37,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         <InternalLink
           className={cn(linkBoxLinkClassName, 'line-clamp-3 text-xl font-semibold')}
           data-link-box-subject
-          href={getIntlUrls(countryCode).billDetails(bill.id)}
+          href={getIntlUrls(countryCode).billDetails(bill.billNumberOrDTSISlug)}
         >
           {billTitle}
         </InternalLink>

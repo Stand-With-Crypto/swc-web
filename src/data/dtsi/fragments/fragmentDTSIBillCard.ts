@@ -1,11 +1,12 @@
 export const fragmentDTSIBillCard = /* GraphQL */ `
   fragment BillCard on Bill {
+    computedStanceScore
+    dateIntroduced
     id
-    summary
-    title
     shortTitle
     slug
-    computedStanceScore
     status
+    summary
+    title
   }
 `

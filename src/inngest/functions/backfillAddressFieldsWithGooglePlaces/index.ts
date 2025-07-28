@@ -11,7 +11,10 @@ import {
   BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_RETRY_LIMIT,
   BATCH_BUFFER,
 } from './config'
-import { backfillAddressFieldsWithGooglePlacesProcessor, ProcessorResult } from './logic'
+import {
+  backfillAddressFieldsWithGooglePlacesProcessor,
+  ProcessAddressFieldsWithGooglePlacesProcessorResult,
+} from './logic'
 
 const BACKFILL_ADDRESS_FIELDS_WITH_GOOGLE_PLACES_COORDINATOR_FUNCTION_ID =
   'script.backfill-address-fields-with-google-places-coordinator'
@@ -105,15 +108,18 @@ export const backfillAddressFieldsWithGooglePlacesCoordinator = inngest.createFu
       if (take <= 0) break
 
       try {
-        const result: ProcessorResult = await step.invoke(`invoke-processor-batch-${i}`, {
-          function: backfillAddressFieldsWithGooglePlacesProcessor,
-          data: {
-            lastProcessedId,
-            take,
-            persist,
-            countryCode,
+        const result: ProcessAddressFieldsWithGooglePlacesProcessorResult = await step.invoke(
+          `invoke-processor-batch-${i}`,
+          {
+            function: backfillAddressFieldsWithGooglePlacesProcessor,
+            data: {
+              lastProcessedId,
+              take,
+              persist,
+              countryCode,
+            },
           },
-        })
+        )
 
         if (result) {
           lastProcessedId = result.lastProcessedId

@@ -80,7 +80,7 @@ export function UserDistrictRank({ className }: { className?: string }) {
   }, [districtResponse.data])
 
   const districtRankingResponse = useGetDistrictRank({
-    stateCode: district?.stateCode as USStateCode,
+    stateCode: district?.administrativeArea as USStateCode,
     districtNumber: district?.zoneName?.toString() ?? null,
   })
 
