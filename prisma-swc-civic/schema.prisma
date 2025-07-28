@@ -22,7 +22,6 @@ model spatial_ref_sys {
 model electoralZones {
   id                 Int                                      @id @default(autoincrement())
   zoneName           String                                   @map("zone_name")
-  stateCode          String?                                  @map("state_code")
   administrativeArea String?                                  @map("administrative_area")
   zoneCoordinates    Unsupported("geometry(GeometryZ,4326)")? @map("zone_coordinates")
   countryCode        String                                   @map("country_code")
