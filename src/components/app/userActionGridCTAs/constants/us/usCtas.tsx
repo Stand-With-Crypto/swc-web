@@ -488,7 +488,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.CLAIM_NFT,
         campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Claim your commemorative GENIUS Act NFT',
         description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
         canBeTriggeredMultipleTimes: false,
