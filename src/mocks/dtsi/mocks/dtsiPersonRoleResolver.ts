@@ -39,6 +39,7 @@ export const dtsiPersonRoleMockResolver =
         status,
         dateStart: '2024-01-01',
         group: null,
+        dateEnd: null,
       }),
       primaryDistrict:
         roleCategory === DTSI_PersonRoleCategory.CONGRESS
