@@ -8,6 +8,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBill } from '@/utils/shared/zod/getSWCBills'
+import { TimelineSection } from '@/components/app/pageBillDetails/timelineSection'
 
 interface PageBillDetailsProps {
   bill: SWCBill
@@ -36,6 +37,8 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         </ExternalLink>
         <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
       </section>
+
+      <TimelineSection bill={bill} countryCode={countryCode} />
 
       {bill.analysis && (
         <section className="space-y-8 text-center">
