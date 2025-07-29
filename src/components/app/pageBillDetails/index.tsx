@@ -4,11 +4,11 @@ import { FileTextIcon } from 'lucide-react'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { VotesSection } from '@/components/app/pageBillDetails/votesSection'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
+import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { StyledHtmlContent } from '@/components/ui/styledHtmlContent'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBill } from '@/utils/shared/zod/getSWCBills'
-import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFormatter'
 
 interface PageBillDetailsProps {
   bill: SWCBill
@@ -34,9 +34,9 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           </p>
           <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
 
-          <div
-            className="my-10 text-lg text-gray-600"
-            dangerouslySetInnerHTML={{ __html: bill.summary }}
+          <StyledHtmlContent
+            className="my-10 [&_*]:text-lg [&_*]:text-fontcolor-muted"
+            html={bill.summary}
           />
         </div>
       </section>
