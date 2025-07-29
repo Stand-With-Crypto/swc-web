@@ -45,10 +45,7 @@ export function StyledHtmlContent({
   return (
     <div
       {...props}
-      className={cn(
-        'prose max-w-full break-words [&_*::marker]:text-fontcolor-muted [&_*]:text-fontcolor-muted [&_strong]:font-semibold',
-        className,
-      )}
+      className={cn('prose max-w-full break-words [&_strong]:font-semibold', className)}
       dangerouslySetInnerHTML={{
         __html: sanitizeHtml(html, {
           allowedAttributes: {

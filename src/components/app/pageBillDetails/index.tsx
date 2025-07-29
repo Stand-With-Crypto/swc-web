@@ -35,7 +35,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
 
           <StyledHtmlContent
-            className="my-10 [&_h2]:text-lg [&_h2]:font-normal"
+            className="my-10 [&_*]:text-fontcolor-muted [&_h2]:text-lg [&_h2]:font-normal"
             html={bill.summary}
           />
         </div>
@@ -46,7 +46,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           <p className="text-4xl font-bold">Analysis</p>
           <div className="flex flex-col gap-10 lg:flex-row">
             <StyledHtmlContent
-              className="w-full space-y-4 text-start text-lg"
+              className="w-full space-y-4 text-start text-lg [&_*::marker]:text-fontcolor-muted [&_*]:text-fontcolor-muted"
               html={bill.analysis}
             />
             {bill.relatedUrls.length > 0 && (
