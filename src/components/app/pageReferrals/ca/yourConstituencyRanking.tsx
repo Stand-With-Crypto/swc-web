@@ -8,13 +8,13 @@ import { LeaderboardRow } from '@/components/app/pageReferrals/leaderboard/row'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useCountryCode } from '@/hooks/useCountryCode'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { StateCode } from '@/utils/server/districtRankings/types'
 import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
-import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   convertGooglePlaceAutoPredictionToAddressSchema,
   GooglePlaceAutocompletePrediction,
@@ -66,9 +66,10 @@ interface CaYourConstituencyRankContentProps {
   setAddress: (p: GooglePlaceAutocompletePrediction | null) => void
 }
 
+const countryCode = SupportedCountryCodes.CA
+
 function CaYourConstituencyRankContent(props: CaYourConstituencyRankContentProps) {
   const { provinceCode, constituency, filteredByProvinceOrTerritory, address, setAddress } = props
-  const countryCode = useCountryCode()
 
   const isLoadingAddress = address === 'loading'
 
@@ -121,11 +122,12 @@ export function CaSuspenseYourConstituencyRank({
 }) {
   const profileResponse = useApiResponseForUserFullProfileInfo()
   const { setAddress, address: mutableAddress } = useMutableCurrentUserAddress()
-  const [isValidAddress, setIsValidAddress] = useState<boolean | 'loading'>(false)
-  const [addressDetails, setAddressDetails] = useState<z.infer<typeof zodAddress> | null>(null)
+  const [isAddressInCanada, setIsAddressInCanada] = useState<boolean>(false)
+  const [addressDetails, setAddressDetails] = useState<
+    z.infer<typeof zodAddress> | null | 'loading'
+  >(null)
   const isLoadingAddress = profileResponse.isLoading || mutableAddress === 'loading'
-
-  const countryCode = useCountryCode()
+  const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript()
 
   const address = useMemo(() => {
     if (isLoadingAddress) return null
@@ -139,27 +141,17 @@ export function CaSuspenseYourConstituencyRank({
     return null
   }, [isLoadingAddress, mutableAddress, profileResponse.data?.user?.address])
 
-  const checkIfValidAddress = useCallback(async () => {
-    if (isLoadingAddress || !address) {
-      setIsValidAddress(true)
-      return
-    }
+  const loadAddressDetails = useCallback(async () => {
+    if (!address || !isGoogleMapsLoaded) return
 
-    setIsValidAddress('loading')
-
-    try {
-      const addressDetailsResponse = await convertGooglePlaceAutoPredictionToAddressSchema(address)
-
-      setAddressDetails(addressDetailsResponse)
-      setIsValidAddress(addressDetailsResponse.countryCode.toLowerCase() === countryCode)
-    } catch {
-      setIsValidAddress(true)
-    }
-  }, [isLoadingAddress, address, countryCode])
+    const addressDetailsResponse = await convertGooglePlaceAutoPredictionToAddressSchema(address)
+    setAddressDetails(addressDetailsResponse)
+    setIsAddressInCanada(addressDetailsResponse.countryCode.toLowerCase() === countryCode)
+  }, [address, isGoogleMapsLoaded])
 
   useEffect(() => {
-    void checkIfValidAddress()
-  }, [checkIfValidAddress])
+    void loadAddressDetails()
+  }, [loadAddressDetails])
 
   const constituencyResponse = useGetDistrictFromAddress({
     address: address?.description,
@@ -175,13 +167,18 @@ export function CaSuspenseYourConstituencyRank({
 
   const provinceCode = useMemo<StateCode | null>(() => {
     if (constituency?.administrativeArea) return constituency.administrativeArea as StateCode
-    if (addressDetails?.administrativeAreaLevel1) {
+    if (addressDetails !== 'loading' && addressDetails?.administrativeAreaLevel1) {
       return addressDetails.administrativeAreaLevel1 as StateCode
     }
     return null
   }, [addressDetails, constituency?.administrativeArea])
 
-  if (constituencyResponse.isLoading || isLoadingAddress || isValidAddress === 'loading') {
+  if (
+    constituencyResponse.isLoading ||
+    isLoadingAddress ||
+    addressDetails === 'loading' ||
+    !isGoogleMapsLoaded
+  ) {
     return (
       <div className="space-y-3">
         <Heading />
@@ -200,7 +197,7 @@ export function CaSuspenseYourConstituencyRank({
     )
   }
 
-  if (!isValidAddress) {
+  if (!isAddressInCanada) {
     return (
       <div className="space-y-3">
         <DefaultPlacesSelect onChange={setAddress} value={isLoadingAddress ? null : address} />
