@@ -21,11 +21,11 @@ export function PageBillDetails(props: PageBillDetailsProps) {
   const relationships = orderBy(bill.relationships, x => x.person.firstName)
 
   return (
-    <div className="standard-spacing-from-navbar container mt-[120px]">
+    <div className="standard-spacing-from-navbar container mt-10 md:mt-28">
       <section className="space-y-8 text-center">
         <div>
           <PageTitle size="xlg">{bill.title}</PageTitle>
-          <p className="mb-8 mt-2 font-semibold text-gray-600">
+          <p className="mb-8 mt-5 font-semibold text-fontcolor-muted">
             <FormattedDatetime
               date={new Date(bill.dateIntroduced)}
               dateStyle="medium"
