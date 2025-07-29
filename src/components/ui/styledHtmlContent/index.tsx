@@ -37,17 +37,17 @@ function transformLink(tagName: string, attribs: Record<string, string>) {
   return { tagName, attribs }
 }
 
-export function SanitizedHtml({
-  text,
+export function StyledHtmlContent({
+  html,
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement> & { text: string }) {
+}: HTMLAttributes<HTMLDivElement> & { html: string }) {
   return (
     <div
       {...props}
       className={cn('prose max-w-full break-words', className)}
       dangerouslySetInnerHTML={{
-        __html: sanitizeHtml(text, {
+        __html: sanitizeHtml(html, {
           allowedAttributes: {
             '*': ['style', 'class'],
             a: ['href', 'target'],

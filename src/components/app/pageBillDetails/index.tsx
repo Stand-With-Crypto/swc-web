@@ -7,7 +7,7 @@ import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SanitizedHtml } from '@/components/ui/sanitizedHtml'
+import { StyledHtmlContent } from '@/components/ui/styledHtmlContent'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBill } from '@/utils/shared/zod/getSWCBills'
 
@@ -43,9 +43,9 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         <section className="space-y-6 text-center lg:space-y-10">
           <p className="text-4xl font-bold">Analysis</p>
           <div className="flex flex-col gap-10 lg:flex-row">
-            <SanitizedHtml
+            <StyledHtmlContent
               className="w-full space-y-4 text-start text-fontcolor-muted [&_strong]:text-fontcolor-muted"
-              text={bill.analysis}
+              html={bill.analysis}
             />
             {bill.relatedUrls.length > 0 && (
               <div className="flex h-max w-full flex-col gap-6 rounded-3xl border border-muted p-6 lg:w-[478px]">
