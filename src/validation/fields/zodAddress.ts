@@ -73,7 +73,7 @@ export const zodAUStateDistrict = object({
 export const zodCAProvinceDistrict = object({
   state: string().refine(
     (val): val is CAProvinceCode => val in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
-    'Invalid state code',
+    'Invalid province/territory code',
   ),
   district: string(),
 })

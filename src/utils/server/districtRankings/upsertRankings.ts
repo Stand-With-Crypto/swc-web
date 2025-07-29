@@ -60,7 +60,7 @@ export const getMemberKey = (data: RedisEntryData): MemberKey => `${data.state}:
 const parseMemberKey = (key: MemberKey): RedisEntryData => {
   const parts = key.split(':')
   const [state, district] = parts
-  return { state: state as USStateCode, district }
+  return { state: state as StateCode, district }
 }
 
 async function maybeInitializeCacheKey(countryCode: SupportedCountryCodes) {
