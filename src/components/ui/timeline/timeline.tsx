@@ -5,6 +5,7 @@ import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 import { HIGHLIGHTED_POINT_SIZE, MajorMilestone } from '@/components/ui/timeline/majorMilestone'
 import { MinorMilestone } from '@/components/ui/timeline/minorMilestone'
 import { Milestone, TimelinePlotPoint } from '@/components/ui/timeline/types'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -25,6 +26,7 @@ const DEFAULT_ANIMATION_DURATION = 2_000
 
 export function Timeline(props: TimelineProps) {
   const isMobile = useIsMobile()
+  const hasHydrated = useHasHydrated()
 
   const { currentMilestone, majorMilestones, minorMilestones } = useMemo(() => {
     const plotPoints = props.plotPoints.map(point => ({
@@ -122,7 +124,7 @@ export function Timeline(props: TimelineProps) {
     return { backBarStyles, frontBarStyles, wrapperStyles }
   }, [currentPercent, isMobile])
 
-  return (
+  return hasHydrated ? (
     <div className="relative" style={wrapperStyles}>
       <div className="absolute bg-[rgba(91,97,110,0.5)]" style={backBarStyles} />
       <div className="absolute bg-primary-cta" style={frontBarStyles} />
@@ -152,6 +154,8 @@ export function Timeline(props: TimelineProps) {
         )
       })}
     </div>
+  ) : (
+    <div className="h-[160px] w-full animate-pulse rounded-lg bg-slate-200" />
   )
 }
 
