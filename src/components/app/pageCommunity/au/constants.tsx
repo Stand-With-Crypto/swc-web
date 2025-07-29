@@ -23,8 +23,8 @@ export const AU_COMMUNITY_PAGINATION_DATA: Record<
   [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: AU_RECENT_ACTIVITY_PAGINATION,
 
   [RecentActivityAndLeaderboardTabs.TOP_DIVISIONS]: {
-    totalPages: 7,
+    totalPages: 3,
     itemsPerPage: 50,
-    totalPregeneratedPages: maybeIgnorePreGeneration(7),
+    totalPregeneratedPages: maybeIgnorePreGeneration(3),
   },
 }

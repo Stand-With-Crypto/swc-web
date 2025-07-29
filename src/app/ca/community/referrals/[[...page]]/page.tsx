@@ -56,12 +56,17 @@ export default async function CaCommunityRecentActivityPage(
     countryCode: SupportedCountryCodes.CA,
   }
 
-  const { items: leaderboardData } = await getDistrictsLeaderboardData(commonParams)
+  const { items: leaderboardData, total } = await getDistrictsLeaderboardData(commonParams)
 
   const dataProps: PageLeaderboardInferredProps = {
     leaderboardData,
     publicRecentActivity: undefined,
     tab: RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES,
   }
-  return <CaPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={undefined} />
+
+  const totalPages = Math.ceil(total / itemsPerPage)
+
+  return (
+    <CaPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={totalPages} />
+  )
 }

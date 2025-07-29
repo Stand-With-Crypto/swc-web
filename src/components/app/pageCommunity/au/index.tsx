@@ -5,6 +5,7 @@ import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisi
 import { RecentActivity } from '@/components/app/recentActivity'
 import { InternalLink } from '@/components/ui/link'
 import { PageLayout } from '@/components/ui/pageLayout'
+import { PaginationLinks } from '@/components/ui/paginationLinks'
 import {
   Select,
   SelectContent,
@@ -149,6 +150,21 @@ export function AuPageCommunity({
           <>
             <AuYourDivisionRank />
             <AuAdvocatesLeaderboard data={leaderboardData} />
+            {totalPages > 1 && (
+              <div className="flex justify-center">
+                <PaginationLinks
+                  currentPageNumber={pageNum}
+                  getPageUrl={pageNumber => {
+                    if (pageNumber < 1 || pageNumber > totalPages) {
+                      return ''
+                    }
+
+                    return urls.community({ pageNum: pageNumber, tab })
+                  }}
+                  totalPages={totalPages}
+                />
+              </div>
+            )}
           </>
         )}
       </div>

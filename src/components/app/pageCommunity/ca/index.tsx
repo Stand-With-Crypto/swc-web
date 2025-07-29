@@ -5,6 +5,7 @@ import { CaYourConstituencyRank } from '@/components/app/pageReferrals/ca/yourCo
 import { RecentActivity } from '@/components/app/recentActivity'
 import { InternalLink } from '@/components/ui/link'
 import { PageLayout } from '@/components/ui/pageLayout'
+import { PaginationLinks } from '@/components/ui/paginationLinks'
 import {
   Select,
   SelectContent,
@@ -148,6 +149,21 @@ export function CaPageCommunity({
           <>
             <CaYourConstituencyRank />
             <CaAdvocatesLeaderboard data={leaderboardData} />
+            {totalPages > 1 && (
+              <div className="flex justify-center">
+                <PaginationLinks
+                  currentPageNumber={pageNum}
+                  getPageUrl={pageNumber => {
+                    if (pageNumber < 1 || pageNumber > totalPages) {
+                      return ''
+                    }
+
+                    return urls.community({ pageNum: pageNumber, tab })
+                  }}
+                  totalPages={totalPages}
+                />
+              </div>
+            )}
           </>
         )}
       </div>
