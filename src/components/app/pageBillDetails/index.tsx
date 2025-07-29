@@ -24,7 +24,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
     <div className="standard-spacing-from-navbar container mt-10 md:mt-28">
       <section className="space-y-8 text-center">
         <div>
-          <PageTitle size="xlg">{bill.title}</PageTitle>
+          <PageTitle>{bill.title}</PageTitle>
           <p className="mb-8 mt-5 font-semibold text-fontcolor-muted">
             <FormattedDatetime
               date={new Date(bill.dateIntroduced)}
