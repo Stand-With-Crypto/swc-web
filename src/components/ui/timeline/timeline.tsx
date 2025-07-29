@@ -171,7 +171,6 @@ function useTimelineAnimation({
   const animationFrameRef = useRef<number | null>(null)
 
   const startTimeRef = useRef(0)
-  const incrementRef = useRef(0)
 
   const majorMilestonesCount = useMemo(
     () => majorMilestones.filter(milestone => milestone.positionPercent <= currentPercent).length,
@@ -186,17 +185,15 @@ function useTimelineAnimation({
     setCurrentPercent(0)
 
     startTimeRef.current = performance.now()
-    const totalFrames = Math.round(duration / (1_000 / 60))
-    incrementRef.current = (targetPercent - currentPercent) / totalFrames
 
     const runAnimationFrame = (currentTime: number) => {
       const elapsedTime = currentTime - startTimeRef.current
       const progress = Math.min(elapsedTime / duration, 1)
-      const newPercent = incrementRef.current * progress
+      const newPercent = progress * targetPercent
 
-      setCurrentPercent(prev => Math.min(prev + newPercent, targetPercent))
+      setCurrentPercent(Math.min(newPercent, targetPercent))
 
-      if (currentPercent < targetPercent) {
+      if (progress < 1) {
         animationFrameRef.current = requestAnimationFrame(runAnimationFrame)
       }
     }
@@ -208,7 +205,6 @@ function useTimelineAnimation({
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetPercent, duration])
 
   return { currentPercent, majorMilestonesCount, minorMilestonesCount }

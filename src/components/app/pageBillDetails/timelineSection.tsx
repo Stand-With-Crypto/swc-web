@@ -22,7 +22,9 @@ interface TimeSectionProps {
   countryCode: SupportedCountryCodes
 }
 
-const defaultKeyDates: Record<string, KeyDate> = {
+type DefaultKeyDateName = 'passedLowerChamber' | 'passedUpperChamber' | 'presidentSigned'
+
+const DEFAULT_KEY_DATES: Record<DefaultKeyDateName, KeyDate> = {
   passedLowerChamber: {
     category: BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER,
     description: 'Passed House',
@@ -43,17 +45,46 @@ const defaultKeyDates: Record<string, KeyDate> = {
   },
 }
 
-const defaultTimelines: Record<BILL_CHAMBER_ORIGIN_OPTIONS, KeyDate[]> = {
+const DEFAULT_TIMELINES: Record<BILL_CHAMBER_ORIGIN_OPTIONS, KeyDate[]> = {
   [BILL_CHAMBER_ORIGIN_OPTIONS.LOWER_CHAMBER]: [
-    defaultKeyDates.passedLowerChamber,
-    defaultKeyDates.passedUpperChamber,
-    defaultKeyDates.presidentSigned,
+    DEFAULT_KEY_DATES.passedLowerChamber,
+    DEFAULT_KEY_DATES.passedUpperChamber,
+    DEFAULT_KEY_DATES.presidentSigned,
   ],
   [BILL_CHAMBER_ORIGIN_OPTIONS.UPPER_CHAMBER]: [
-    defaultKeyDates.passedUpperChamber,
-    defaultKeyDates.passedLowerChamber,
-    defaultKeyDates.presidentSigned,
+    DEFAULT_KEY_DATES.passedUpperChamber,
+    DEFAULT_KEY_DATES.passedLowerChamber,
+    DEFAULT_KEY_DATES.presidentSigned,
   ],
+}
+
+const KEY_DATE_CATEGORY_MAP: Partial<
+  Record<BILL_KEY_DATE_CATEGORY_OPTIONS, (keyDates: SWCBillKeyDate[]) => boolean>
+> = {
+  [BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER]: keyDates =>
+    keyDates.every(
+      keyDate =>
+        ![
+          BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_FAILED_LOWER_CHAMBER,
+          BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER,
+        ].includes(keyDate.category),
+    ),
+  [BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_UPPER_CHAMBER]: keyDates =>
+    keyDates.every(
+      keyDate =>
+        ![
+          BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_FAILED_UPPER_CHAMBER,
+          BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_UPPER_CHAMBER,
+        ].includes(keyDate.category),
+    ),
+  [BILL_KEY_DATE_CATEGORY_OPTIONS.PRESIDENT_SIGNED]: keyDates =>
+    keyDates.every(
+      keyDate =>
+        ![
+          BILL_KEY_DATE_CATEGORY_OPTIONS.PRESIDENT_SIGNED,
+          BILL_KEY_DATE_CATEGORY_OPTIONS.PRESIDENT_VETOED,
+        ].includes(keyDate.category),
+    ),
 }
 
 function insertMissingTimelineDates(data: BillTimelineFields): TimelinePlotPoint[] {
@@ -63,37 +94,8 @@ function insertMissingTimelineDates(data: BillTimelineFields): TimelinePlotPoint
     success: BILL_SUCCESSFUL_KEY_DATES.includes(keyDate.category),
   }))
 
-  const missingKeyDates = defaultTimelines[data.chamberOrigin]
-    .filter(milestone => {
-      switch (milestone.category) {
-        case BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER:
-          return data.keyDates.every(
-            keyDate =>
-              ![
-                BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_FAILED_LOWER_CHAMBER,
-                BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER,
-              ].includes(keyDate.category),
-          )
-        case BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_UPPER_CHAMBER:
-          return data.keyDates.every(
-            keyDate =>
-              ![
-                BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_FAILED_UPPER_CHAMBER,
-                BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_UPPER_CHAMBER,
-              ].includes(keyDate.category),
-          )
-        case BILL_KEY_DATE_CATEGORY_OPTIONS.PRESIDENT_SIGNED:
-          return data.keyDates.every(
-            keyDate =>
-              ![
-                BILL_KEY_DATE_CATEGORY_OPTIONS.PRESIDENT_SIGNED,
-                BILL_KEY_DATE_CATEGORY_OPTIONS.PRESIDENT_VETOED,
-              ].includes(keyDate.category),
-          )
-        default:
-          return false
-      }
-    })
+  const missingKeyDates = DEFAULT_TIMELINES[data.chamberOrigin]
+    .filter(({ category }) => KEY_DATE_CATEGORY_MAP[category]?.(billKeyDates))
     .map(keyDate => ({ ...keyDate, date: null, isHighlighted: false, success: true }))
 
   return [...billKeyDates, ...missingKeyDates]

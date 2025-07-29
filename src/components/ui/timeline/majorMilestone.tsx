@@ -39,7 +39,7 @@ export function MajorMilestone({
 
   const Icon = isFirstMilestone ? ScrollTextIcon : StatusIcon
 
-  const { pointStyles, titleTextStyle, titleWrapperStyle } = useMemo(() => {
+  const { pointStyles, titleWrapperStyle } = useMemo(() => {
     const notHighlightedPointSpacing =
       POINT_FIXED_SPACING + (HIGHLIGHTED_POINT_SIZE - NOT_HIGHLIGHTED_POINT_SIZE) / 2
     const pointSize = milestone.isHighlighted ? HIGHLIGHTED_POINT_SIZE : NOT_HIGHLIGHTED_POINT_SIZE
@@ -76,13 +76,7 @@ export function MajorMilestone({
           }),
     }
 
-    const titleTextStyle: CSSProperties = isMobile
-      ? {}
-      : {
-          textAlign: 'center',
-        }
-
-    return { pointStyles, titleTextStyle, titleWrapperStyle }
+    return { pointStyles, titleWrapperStyle }
   }, [isMobile, milestone.isHighlighted, milestone.positionPercent])
 
   return (
@@ -104,15 +98,14 @@ export function MajorMilestone({
       </div>
       <div className="absolute flex flex-col font-sans" style={titleWrapperStyle}>
         <span
-          className={cn('line-clamp-2 text-xl font-bold leading-7', {
+          className={cn('line-clamp-2 text-left text-xl font-bold leading-7 md:text-center', {
             'text-[#5B616E80]': !milestone.isHighlighted,
           })}
-          style={titleTextStyle}
         >
           {milestone.title}
         </span>
         {milestone.date && milestone.isHighlighted && (
-          <p className="text-xs text-muted-foreground" style={titleTextStyle}>
+          <p className="text-left text-xs text-muted-foreground md:text-center">
             <FormattedDatetime
               date={milestone.date}
               dateStyle="medium"
