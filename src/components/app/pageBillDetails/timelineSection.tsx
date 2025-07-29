@@ -1,7 +1,6 @@
-import { Timeline } from '@/components/app/pageBillDetails/timeline/timeline'
-import { TimelinePlotPoint } from '@/components/app/pageBillDetails/timeline/types'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { Timeline, TimelinePlotPoint } from '@/components/ui/timeline'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   BILL_CHAMBER_ORIGIN_OPTIONS,
@@ -11,12 +10,19 @@ import {
   SWCBillKeyDate,
 } from '@/utils/shared/zod/getSWCBills'
 
+type BillTimelineFields = Pick<
+  SWCBill,
+  'chamberOrigin' | 'ctaButton' | 'keyDates' | 'timelineDescription'
+>
+
+type KeyDate = Omit<SWCBillKeyDate, 'date'>
+
 interface TimeSectionProps {
-  bill: SWCBill
+  bill: BillTimelineFields
   countryCode: SupportedCountryCodes
 }
 
-const defaultKeyDates: Record<string, Omit<SWCBillKeyDate, 'date'>> = {
+const defaultKeyDates: Record<string, KeyDate> = {
   passedLowerChamber: {
     category: BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_PASSED_LOWER_CHAMBER,
     description: 'Passed House',
@@ -37,7 +43,7 @@ const defaultKeyDates: Record<string, Omit<SWCBillKeyDate, 'date'>> = {
   },
 }
 
-const defaultTimelines: Record<BILL_CHAMBER_ORIGIN_OPTIONS, Omit<SWCBillKeyDate, 'date'>[]> = {
+const defaultTimelines: Record<BILL_CHAMBER_ORIGIN_OPTIONS, KeyDate[]> = {
   [BILL_CHAMBER_ORIGIN_OPTIONS.LOWER_CHAMBER]: [
     defaultKeyDates.passedLowerChamber,
     defaultKeyDates.passedUpperChamber,
@@ -50,9 +56,7 @@ const defaultTimelines: Record<BILL_CHAMBER_ORIGIN_OPTIONS, Omit<SWCBillKeyDate,
   ],
 }
 
-function insertMissingTimelineDates(
-  data: Pick<SWCBill, 'chamberOrigin' | 'keyDates'>,
-): TimelinePlotPoint[] {
+function insertMissingTimelineDates(data: BillTimelineFields): TimelinePlotPoint[] {
   const billKeyDates = data.keyDates.map(keyDate => ({
     ...keyDate,
     isHighlighted: true,

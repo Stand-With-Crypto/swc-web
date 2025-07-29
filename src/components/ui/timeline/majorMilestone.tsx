@@ -1,8 +1,8 @@
 import { CSSProperties, useMemo } from 'react'
 import { Check, ScrollTextIcon, XIcon } from 'lucide-react'
 
-import { Milestone } from '@/components/app/pageBillDetails/timeline/types'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
+import { Milestone } from '@/components/ui/timeline/types'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
@@ -94,7 +94,7 @@ export function MajorMilestone({
           {
             'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
             'bg-[#5B616E]': milestone.isHighlighted && !isHighlightEnabled,
-            'border-2 border-[rgba(91,97,110,.5)] bg-[#F2F5F9]': !milestone.isHighlighted,
+            'border-2 border-[rgba(91,97,110,0.5)] bg-[#F2F5F9]': !milestone.isHighlighted,
             'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
           },
         )}

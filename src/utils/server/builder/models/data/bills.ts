@@ -170,8 +170,7 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
             ? BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_LOWER_CHAMBER
             : BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_UPPER_CHAMBER,
         date: bill.dateIntroduced,
-        description:
-          'The bill was introduced to the assembly, setting the stage for further discussion and consideration.',
+        description: 'Bill Introduced',
         isMajorMilestone: true,
         title: 'Bill Introduced',
       },

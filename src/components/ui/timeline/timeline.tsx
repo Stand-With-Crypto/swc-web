@@ -2,12 +2,9 @@
 
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
-import {
-  HIGHLIGHTED_POINT_SIZE,
-  MajorMilestone,
-} from '@/components/app/pageBillDetails/timeline/majorMilestone'
-import { MinorMilestone } from '@/components/app/pageBillDetails/timeline/minorMilestone'
-import { Milestone, TimelinePlotPoint } from '@/components/app/pageBillDetails/timeline/types'
+import { HIGHLIGHTED_POINT_SIZE, MajorMilestone } from '@/components/ui/timeline/majorMilestone'
+import { MinorMilestone } from '@/components/ui/timeline/minorMilestone'
+import { Milestone, TimelinePlotPoint } from '@/components/ui/timeline/types'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -127,7 +124,7 @@ export function Timeline(props: TimelineProps) {
 
   return (
     <div className="relative" style={wrapperStyles}>
-      <div className="absolute bg-[rgba(91,97,110,.5)]" style={backBarStyles} />
+      <div className="absolute bg-[rgba(91,97,110,0.5)]" style={backBarStyles} />
       <div className="absolute bg-primary-cta" style={frontBarStyles} />
 
       {majorMilestones.map((majorMilestone, index) => {

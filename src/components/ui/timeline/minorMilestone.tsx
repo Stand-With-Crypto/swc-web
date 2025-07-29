@@ -3,9 +3,9 @@
 import { CSSProperties, useMemo, useState } from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip'
 
-import { Milestone } from '@/components/app/pageBillDetails/timeline/types'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
+import { Milestone } from '@/components/ui/timeline/types'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
@@ -72,10 +72,10 @@ export function MinorMilestone({
     </div>
   )
 
-  return <WithTooltipOrDialog content={content} isMobile={isMobile} trigger={trigger} />
+  return <MinorMilestoneWrapper content={content} isMobile={isMobile} trigger={trigger} />
 }
 
-function WithTooltipOrDialog({
+function MinorMilestoneWrapper({
   content,
   isMobile,
   trigger,
