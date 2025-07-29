@@ -5,7 +5,6 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { VotesSection } from '@/components/app/pageBillDetails/votesSection'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { StyledHtmlContent } from '@/components/ui/styledHtmlContent'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -22,29 +21,32 @@ export function PageBillDetails(props: PageBillDetailsProps) {
   const relationships = orderBy(bill.relationships, x => x.person.firstName)
 
   return (
-    <div className="standard-spacing-from-navbar container space-y-16">
+    <div className="standard-spacing-from-navbar container mt-10 md:mt-28">
       <section className="space-y-8 text-center">
-        <PageTitle size="sm">{bill.title}</PageTitle>
-        <PageSubTitle>{bill.summary}</PageSubTitle>
-        <p className="font-semibold">
-          <FormattedDatetime
-            date={new Date(bill.dateIntroduced)}
-            dateStyle="medium"
-            locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+        <div>
+          <PageTitle>{bill.title}</PageTitle>
+          <p className="mb-8 mt-5 font-semibold text-fontcolor-muted">
+            <FormattedDatetime
+              date={new Date(bill.dateIntroduced)}
+              dateStyle="medium"
+              locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
+            />
+          </p>
+          <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
+
+          <StyledHtmlContent
+            className="my-10 [&_*]:text-fontcolor-muted [&_h2]:text-lg [&_h2]:font-normal"
+            html={bill.summary}
           />
-        </p>
-        <ExternalLink className="inline-block" href={bill.officialBillUrl}>
-          {bill.officialBillUrl}
-        </ExternalLink>
-        <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
+        </div>
       </section>
 
       {bill.analysis && (
-        <section className="space-y-6 text-center lg:space-y-10">
+        <section className="mb-20 space-y-6 text-center md:mb-28 lg:space-y-10">
           <p className="text-4xl font-bold">Analysis</p>
           <div className="flex flex-col gap-10 lg:flex-row">
             <StyledHtmlContent
-              className="w-full space-y-4 text-start text-fontcolor-muted [&_strong]:text-fontcolor-muted"
+              className="w-full space-y-4 text-start text-lg [&_*::marker]:text-fontcolor-muted [&_*]:text-fontcolor-muted"
               html={bill.analysis}
             />
             {bill.relatedUrls.length > 0 && (
