@@ -5,6 +5,9 @@ import { INTERNAL_BASE_URL } from '@/utils/shared/urls'
 import { BuilderComponentBaseProps } from '@/utils/web/builder'
 import { cn } from '@/utils/web/cn'
 
+// TODO: move this back to the text component on utils/web/builder folder
+//and extract the logic to a separate file with a different name
+
 function transformLi(tagName: string, attribs: Record<string, string>) {
   if (attribs.style && attribs.style.includes('text-indent')) {
     // Replace text-indent with margin-left because Builder.io applies text-indent to nested lists and
