@@ -11,8 +11,13 @@ import { cn } from '@/utils/web/cn'
 
 export type DTSIBill = DTSI_BillCardFragment
 
+interface BillInfo extends Pick<SWCBillCardInfo, 'title'> {
+  billNumberOrDTSISlug?: string
+  id?: string
+}
+
 interface DTSIBillCardProps {
-  bill: Omit<SWCBillCardInfo, 'isKeyBill'>
+  bill: BillInfo
   description?: string
   countryCode: SupportedCountryCodes
   children?: ReactElement<typeof CryptoSupportHighlight>
@@ -24,6 +29,8 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
   const { bill, description, countryCode, children, className, title } = props
 
   const billTitle = title || bill.title
+
+  const billSlug = bill.billNumberOrDTSISlug || bill.id || ''
 
   return (
     <LinkBox
@@ -37,7 +44,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         <InternalLink
           className={cn(linkBoxLinkClassName, 'line-clamp-3 text-xl font-semibold')}
           data-link-box-subject
-          href={getIntlUrls(countryCode).billDetails(bill.billNumberOrDTSISlug)}
+          href={getIntlUrls(countryCode).billDetails(billSlug)}
         >
           {billTitle}
         </InternalLink>
