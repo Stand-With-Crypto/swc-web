@@ -45,7 +45,10 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         <section className="mb-20 space-y-6 text-center md:mb-28 lg:space-y-10">
           <p className="text-4xl font-bold">Analysis</p>
           <div className="flex flex-col gap-10 lg:flex-row">
-            <StyledHtmlContent className="w-full space-y-4 text-start" html={bill.analysis} />
+            <StyledHtmlContent
+              className="w-full space-y-4 text-start text-lg"
+              html={bill.analysis}
+            />
             {bill.relatedUrls.length > 0 && (
               <div className="flex h-max w-full flex-col gap-6 rounded-3xl border border-muted p-6 lg:w-[478px]">
                 <strong className="text-lg">More Resources</strong>
