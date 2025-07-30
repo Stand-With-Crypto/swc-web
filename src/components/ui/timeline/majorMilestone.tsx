@@ -83,11 +83,10 @@ export function MajorMilestone({
       <div
         className={cn(
           'absolute flex items-center justify-center rounded-full transition-colors duration-500',
-
           {
             'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
-            'bg-[#5B616E]': milestone.isHighlighted && !isHighlightEnabled,
-            'border-2 border-[rgba(91,97,110,0.5)] bg-[#F2F5F9]': !milestone.isHighlighted,
+            'bg-muted-foreground': milestone.isHighlighted && !isHighlightEnabled,
+            'border-2 border-muted-foreground bg-gray-100': !milestone.isHighlighted,
             'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
           },
         )}
@@ -98,7 +97,7 @@ export function MajorMilestone({
       <div className="absolute flex flex-col gap-1 font-sans md:gap-2" style={titleWrapperStyle}>
         <span
           className={cn('line-clamp-2 text-left text-xl font-bold leading-7 md:text-center', {
-            'text-[#5B616E80]': !milestone.isHighlighted,
+            'text-muted-foreground': !milestone.isHighlighted,
           })}
         >
           {milestone.title}

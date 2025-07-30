@@ -2,6 +2,7 @@
 
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
+import { Skeleton } from '@/components/ui/skeleton'
 import { HIGHLIGHTED_POINT_SIZE, MajorMilestone } from '@/components/ui/timeline/majorMilestone'
 import { MinorMilestone } from '@/components/ui/timeline/minorMilestone'
 import { Milestone, TimelinePlotPoint } from '@/components/ui/timeline/types'
@@ -126,7 +127,7 @@ export function Timeline(props: TimelineProps) {
 
   return hasHydrated ? (
     <div className="relative" style={wrapperStyles}>
-      <div className="absolute bg-[rgba(91,97,110,0.5)]" style={backBarStyles} />
+      <div className="absolute bg-muted-foreground/50" style={backBarStyles} />
       <div className="absolute bg-primary-cta" style={frontBarStyles} />
 
       {majorMilestones.map((majorMilestone, index) => {
@@ -155,7 +156,7 @@ export function Timeline(props: TimelineProps) {
       })}
     </div>
   ) : (
-    <div className="h-[160px] w-full animate-pulse rounded-lg bg-slate-200" />
+    <Skeleton className="h-[160px] w-full bg-slate-200" />
   )
 }
 

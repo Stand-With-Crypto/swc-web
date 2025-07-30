@@ -46,8 +46,8 @@ export function MinorMilestone({
   const trigger = (
     <div
       className={cn(
-        'absolute cursor-pointer rounded-full border-4 border-[#F2F5F9] transition-colors duration-500',
-        isHighlightEnabled ? 'bg-primary-cta hover:border-[#A97BFC]' : 'bg-[#5B616E]',
+        'absolute cursor-pointer rounded-full border-4 border-gray-100 transition-colors duration-500',
+        isHighlightEnabled ? 'bg-primary-cta hover:border-[#A97BFC]' : 'bg-muted-foreground',
       )}
       style={styles}
     />

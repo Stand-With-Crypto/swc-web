@@ -9,19 +9,19 @@ export enum BILL_CHAMBER_ORIGIN_OPTIONS {
 }
 
 export enum BILL_KEY_DATE_CATEGORY_OPTIONS {
-  BILL_FAILED_LOWER_CHAMBER = 'Bill Failed Lower Chamber',
-  BILL_FAILED_LOWER_CHAMBER_COMMITTEE = 'Bill Failed Lower Chamber Committee',
-  BILL_FAILED_UPPER_CHAMBER = 'Bill Failed Upper Chamber',
-  BILL_FAILED_UPPER_CHAMBER_COMMITTEE = 'Bill Failed Upper Chamber Committee',
-  BILL_INTRODUCED_LOWER_CHAMBER = 'Bill Introduced Lower Chamber',
-  BILL_INTRODUCED_UPPER_CHAMBER = 'Bill Introduced Upper Chamber',
-  BILL_PASSED_LOWER_CHAMBER = 'Bill Passed Lower Chamber',
-  BILL_PASSED_LOWER_CHAMBER_COMMITTEE = 'Bill Passed Lower Chamber Committee',
-  BILL_PASSED_UPPER_CHAMBER = 'Bill Passed Upper Chamber',
-  BILL_PASSED_UPPER_CHAMBER_COMMITTEE = 'Bill Passed Upper Chamber Committee',
+  BILL_FAILED_LOWER_CHAMBER = 'Bill failed lower chamber',
+  BILL_FAILED_LOWER_CHAMBER_COMMITTEE = 'Bill failed lower chamber committee',
+  BILL_FAILED_UPPER_CHAMBER = 'Bill failed upper chamber',
+  BILL_FAILED_UPPER_CHAMBER_COMMITTEE = 'Bill failed upper chamber committee',
+  BILL_INTRODUCED_LOWER_CHAMBER = 'Bill introduced lower chamber',
+  BILL_INTRODUCED_UPPER_CHAMBER = 'Bill introduced upper chamber',
+  BILL_PASSED_LOWER_CHAMBER = 'Bill passed lower chamber',
+  BILL_PASSED_LOWER_CHAMBER_COMMITTEE = 'Bill passed lower chamber committee',
+  BILL_PASSED_UPPER_CHAMBER = 'Bill passed upper chamber',
+  BILL_PASSED_UPPER_CHAMBER_COMMITTEE = 'Bill passed upper chamber committee',
   OTHER = 'Other',
-  PRESIDENT_SIGNED = 'President Signed',
-  PRESIDENT_VETOED = 'President Vetoed',
+  PRESIDENT_SIGNED = 'President signed',
+  PRESIDENT_VETOED = 'President vetoed',
 }
 
 export const BILL_SUCCESSFUL_KEY_DATES: BILL_KEY_DATE_CATEGORY_OPTIONS[] = [
