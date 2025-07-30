@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Globe } from 'lucide-react'
 
-import StatementSection from '@/components/app/pagePoliticianDetails/common/partials/statementSection'
 import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
@@ -21,6 +20,7 @@ import {
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
+import StatementSection from './partials/statementSection'
 import VoteSection from './partials/voteSection'
 
 export function PagePoliticianDetails({ children }: { children: ReactNode }) {
