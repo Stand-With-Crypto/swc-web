@@ -91,18 +91,34 @@ const LIMIT = 100
 function getAllBillsWithOffset({
   countryCode,
   offset,
+  stateCode,
 }: {
   countryCode: SupportedCountryCodes
   offset: number
+  stateCode?: string
 }) {
+  const filterByCountryCode = { countryCode: countryCode.toUpperCase() }
+
+  const stateFilterKeys = [
+    'usAdministrativeAreaLevel1',
+    'caAdministrativeAreaLevel1',
+    'gbAdministrativeAreaLevel1',
+    'auAdministrativeAreaLevel1',
+  ]
+  const stateFilter = stateFilterKeys.map(key => ({
+    ...filterByCountryCode,
+    [key]: { $eq: stateCode?.toUpperCase() },
+  }))
+  const filterByStateCode = {
+    $or: stateFilter,
+  }
+
   return pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.BILLS, {
         query: {
           ...(isProduction && { published: 'published' }),
-          data: {
-            countryCode: countryCode.toUpperCase(),
-          },
+          data: stateCode ? filterByStateCode : filterByCountryCode,
         },
         includeUnpublished: !isProduction,
         cacheSeconds: 60,
@@ -118,17 +134,19 @@ function getAllBillsWithOffset({
 
 export async function getBillsFromBuilderIO({
   countryCode,
+  stateCode,
 }: {
   countryCode: SupportedCountryCodes
+  stateCode?: string
 }): Promise<SWCBill[]> {
   try {
     let offset = 0
 
-    const entries = await getAllBillsWithOffset({ countryCode, offset })
+    const entries = await getAllBillsWithOffset({ countryCode, offset, stateCode })
 
     while (entries.length === LIMIT + offset) {
       offset += entries.length
-      entries.push(...(await getAllBillsWithOffset({ countryCode, offset })))
+      entries.push(...(await getAllBillsWithOffset({ countryCode, offset, stateCode })))
     }
 
     const filteredIncompleteBills = entries

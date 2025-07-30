@@ -116,6 +116,8 @@ export const getIntlUrls = (
     manifesto: () => `${countryPrefix}/manifesto`,
     resources: () => `${countryPrefix}/resources`,
     bills: () => `${countryPrefix}/bills`,
+    billsStateSpecific: (stateCode: string) =>
+      `${countryPrefix}/bills/state/${stateCode.toLowerCase()}`,
     billDetails: (billSlug: string) => `${countryPrefix}/bills/${billSlug}`,
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
