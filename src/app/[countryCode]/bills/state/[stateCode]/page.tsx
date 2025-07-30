@@ -7,11 +7,11 @@ import {
   US_MAIN_STATE_CODE_WITH_DC_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { getStateNameResolver } from '@/utils/shared/stateUtils'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
