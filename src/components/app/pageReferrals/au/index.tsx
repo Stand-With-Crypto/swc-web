@@ -4,7 +4,10 @@ import { PageReferralsWrapper } from '@/components/app/pageReferrals'
 import { AuPageReferralsHeading } from '@/components/app/pageReferrals/au/heading'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { AuUserDivisionRank } from '@/components/app/pageReferrals/au/userDivisionRank'
-import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisionRanking'
+import {
+  AuYourDivisionRank,
+  AuYourDivisionRankSuspense,
+} from '@/components/app/pageReferrals/au/yourDivisionRanking'
 import {
   ReferralsCounter,
   UserReferralsCount,
@@ -39,19 +42,21 @@ export function AuPageReferrals(props: PageReferralsProps) {
         stateName={stateCode ? getAUStateNameFromStateCode(stateCode) : undefined}
       />
 
-      <UserAddressProvider countryCode={contryCode} filterByAdministrativeArea={!!stateCode}>
-        {!stateCode && (
-          <>
-            <UserReferralUrlWithApi />
-            <ReferralsCounter>
-              <UserReferralsCount />
-              <AuUserDivisionRank />
-            </ReferralsCounter>
-          </>
-        )}
+      <AuYourDivisionRankSuspense>
+        <UserAddressProvider countryCode={contryCode} filterByAdministrativeArea={!!stateCode}>
+          {!stateCode && (
+            <>
+              <UserReferralUrlWithApi />
+              <ReferralsCounter>
+                <UserReferralsCount />
+                <AuUserDivisionRank />
+              </ReferralsCounter>
+            </>
+          )}
 
-        <AuYourDivisionRank />
-      </UserAddressProvider>
+          <AuYourDivisionRank />
+        </UserAddressProvider>
+      </AuYourDivisionRankSuspense>
       <AuAdvocatesLeaderboard data={leaderboardData} />
       <div className="flex justify-center">
         <PaginationLinks

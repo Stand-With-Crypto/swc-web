@@ -1,7 +1,10 @@
 import { CA_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/ca/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
-import { CaYourConstituencyRank } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
+import {
+  CaYourConstituencyRank,
+  CaYourConstituencyRankSuspense,
+} from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
 import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { InternalLink } from '@/components/ui/link'
@@ -148,9 +151,11 @@ export function CaPageCommunity({
         )}
         {tab === RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES && (
           <>
-            <UserAddressProvider countryCode={countryCode}>
-              <CaYourConstituencyRank />
-            </UserAddressProvider>
+            <CaYourConstituencyRankSuspense>
+              <UserAddressProvider countryCode={countryCode}>
+                <CaYourConstituencyRank />
+              </UserAddressProvider>
+            </CaYourConstituencyRankSuspense>
             <CaAdvocatesLeaderboard data={leaderboardData} />
             {totalPages > 1 && (
               <div className="flex justify-center">

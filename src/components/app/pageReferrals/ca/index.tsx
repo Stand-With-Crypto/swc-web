@@ -4,7 +4,10 @@ import { PageReferralsWrapper } from '@/components/app/pageReferrals'
 import { CaPageReferralsHeading } from '@/components/app/pageReferrals/ca/heading'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import { CaUserConstituencyRank } from '@/components/app/pageReferrals/ca/userConstituencyRank'
-import { CaYourConstituencyRank } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
+import {
+  CaYourConstituencyRank,
+  CaYourConstituencyRankSuspense,
+} from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
 import {
   ReferralsCounter,
   UserReferralsCount,
@@ -37,19 +40,21 @@ export function CaPageReferrals(props: PageReferralsProps) {
       <CaPageReferralsHeading
         stateName={provinceCode ? getCAProvinceOrTerritoryNameFromCode(provinceCode) : undefined}
       />
-      <UserAddressProvider countryCode={COUNTRY_CODE} filterByAdministrativeArea={!!provinceCode}>
-        {!provinceCode && (
-          <>
-            <UserReferralUrlWithApi />
-            <ReferralsCounter>
-              <UserReferralsCount />
-              <CaUserConstituencyRank />
-            </ReferralsCounter>
-          </>
-        )}
+      <CaYourConstituencyRankSuspense>
+        <UserAddressProvider countryCode={COUNTRY_CODE} filterByAdministrativeArea={!!provinceCode}>
+          {!provinceCode && (
+            <>
+              <UserReferralUrlWithApi />
+              <ReferralsCounter>
+                <UserReferralsCount />
+                <CaUserConstituencyRank />
+              </ReferralsCounter>
+            </>
+          )}
 
-        <CaYourConstituencyRank />
-      </UserAddressProvider>
+          <CaYourConstituencyRank />
+        </UserAddressProvider>
+      </CaYourConstituencyRankSuspense>
       <CaAdvocatesLeaderboard data={leaderboardData} />
       <div className="flex justify-center">
         <PaginationLinks

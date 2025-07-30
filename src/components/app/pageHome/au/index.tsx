@@ -8,7 +8,10 @@ import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/pol
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
-import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisionRanking'
+import {
+  AuYourDivisionRank,
+  AuYourDivisionRankSuspense,
+} from '@/components/app/pageReferrals/au/yourDivisionRanking'
 import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -82,9 +85,11 @@ export function AuPageHome({
                       See which division has the most number of advocates.
                     </HomePageSection.Subtitle>
 
-                    <UserAddressProvider countryCode={countryCode}>
-                      <AuYourDivisionRank />
-                    </UserAddressProvider>
+                    <AuYourDivisionRankSuspense>
+                      <UserAddressProvider countryCode={countryCode}>
+                        <AuYourDivisionRank />
+                      </UserAddressProvider>
+                    </AuYourDivisionRankSuspense>
                     <AuAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper

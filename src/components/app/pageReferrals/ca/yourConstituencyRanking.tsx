@@ -101,7 +101,7 @@ function CaYourConstituencyRankContent(props: CaYourConstituencyRankContentProps
   )
 }
 
-export function CaSuspenseYourConstituencyRank() {
+export function CaYourConstituencyRank() {
   const {
     address,
     setMutableAddress: setAddress,
@@ -163,10 +163,10 @@ export function CaSuspenseYourConstituencyRank() {
   )
 }
 
-export function CaYourConstituencyRank() {
+export function CaYourConstituencyRankSuspense({ children }: { children: React.ReactNode }) {
   return (
     <Suspense fallback={<DefaultPlacesSelect loading onChange={noop} value={null} />}>
-      <CaSuspenseYourConstituencyRank />
+      {children}
     </Suspense>
   )
 }

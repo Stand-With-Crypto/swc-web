@@ -100,7 +100,7 @@ function AuYourDivisionRankContent(props: AuYourDivisionRankContentProps) {
   )
 }
 
-export function AuSuspenseYourDivisionRank() {
+export function AuYourDivisionRank() {
   const {
     address,
     setMutableAddress: setAddress,
@@ -162,10 +162,10 @@ export function AuSuspenseYourDivisionRank() {
   )
 }
 
-export function AuYourDivisionRank() {
+export function AuYourDivisionRankSuspense({ children }: { children: React.ReactNode }) {
   return (
     <Suspense fallback={<DefaultPlacesSelect loading onChange={noop} value={null} />}>
-      <AuSuspenseYourDivisionRank />
+      {children}
     </Suspense>
   )
 }
