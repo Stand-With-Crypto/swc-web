@@ -9,6 +9,7 @@ import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetric
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import { CaYourConstituencyRank } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
@@ -79,7 +80,9 @@ export function CaPageHome({
                     <HomePageSection.Subtitle className="hidden md:block">
                       See which constituency has the most number of advocates.
                     </HomePageSection.Subtitle>
-                    <CaYourConstituencyRank />
+                    <UserAddressProvider countryCode={countryCode}>
+                      <CaYourConstituencyRank />
+                    </UserAddressProvider>
                     <CaAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper

@@ -48,7 +48,7 @@ export function CaPageReferrals(props: PageReferralsProps) {
           </>
         )}
 
-        <CaYourConstituencyRank filteredByProvinceOrTerritory={!!provinceCode} />
+        <CaYourConstituencyRank />
       </UserAddressProvider>
       <CaAdvocatesLeaderboard data={leaderboardData} />
       <div className="flex justify-center">

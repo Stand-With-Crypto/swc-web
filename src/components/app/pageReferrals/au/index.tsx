@@ -9,6 +9,7 @@ import {
   ReferralsCounter,
   UserReferralsCount,
 } from '@/components/app/pageReferrals/referralsCounter'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
@@ -23,13 +24,13 @@ interface PageReferralsProps {
   totalPages?: number
 }
 
-const COUNTRY_CODE = SupportedCountryCodes.AU as const
+const contryCode = SupportedCountryCodes.AU as const
 
 export function AuPageReferrals(props: PageReferralsProps) {
   const { page, leaderboardData, stateCode } = props
 
   const tab = RecentActivityAndLeaderboardTabs.TOP_DIVISIONS
-  const urls = getIntlUrls(COUNTRY_CODE)
+  const urls = getIntlUrls(contryCode)
   const totalPages = props.totalPages || AU_COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
@@ -37,17 +38,20 @@ export function AuPageReferrals(props: PageReferralsProps) {
       <AuPageReferralsHeading
         stateName={stateCode ? getAUStateNameFromStateCode(stateCode) : undefined}
       />
-      {!stateCode && (
-        <>
-          <UserReferralUrlWithApi />
-          <ReferralsCounter>
-            <UserReferralsCount />
-            <AuUserDivisionRank />
-          </ReferralsCounter>
-        </>
-      )}
 
-      <AuYourDivisionRank filteredByState={!!stateCode} />
+      <UserAddressProvider countryCode={contryCode} filterByAdministrativeArea={!!stateCode}>
+        {!stateCode && (
+          <>
+            <UserReferralUrlWithApi />
+            <ReferralsCounter>
+              <UserReferralsCount />
+              <AuUserDivisionRank />
+            </ReferralsCounter>
+          </>
+        )}
+
+        <AuYourDivisionRank />
+      </UserAddressProvider>
       <AuAdvocatesLeaderboard data={leaderboardData} />
       <div className="flex justify-center">
         <PaginationLinks

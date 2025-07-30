@@ -2,6 +2,7 @@ import { AU_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/au
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisionRanking'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { InternalLink } from '@/components/ui/link'
 import { PageLayout } from '@/components/ui/pageLayout'
@@ -148,7 +149,9 @@ export function AuPageCommunity({
 
         {tab === RecentActivityAndLeaderboardTabs.TOP_DIVISIONS && leaderboardData && (
           <>
-            <AuYourDivisionRank />
+            <UserAddressProvider countryCode={countryCode}>
+              <AuYourDivisionRank />
+            </UserAddressProvider>
             <AuAdvocatesLeaderboard data={leaderboardData} />
             {totalPages > 1 && (
               <div className="flex justify-center">

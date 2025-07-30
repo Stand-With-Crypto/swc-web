@@ -53,7 +53,6 @@ function ConstituencyNotFound(
 interface CaYourConstituencyRankContentProps {
   provinceCode: StateCode
   constituency: string
-  filteredByProvinceOrTerritory?: boolean
   constituencyRanking: GetDistrictRankResponse | null
   address: 'loading' | GooglePlaceAutocompletePrediction | null
   setAddress: (p: GooglePlaceAutocompletePrediction | null) => void
@@ -102,11 +101,7 @@ function CaYourConstituencyRankContent(props: CaYourConstituencyRankContentProps
   )
 }
 
-export function CaSuspenseYourConstituencyRank({
-  filteredByProvinceOrTerritory,
-}: {
-  filteredByProvinceOrTerritory?: boolean
-}) {
+export function CaSuspenseYourConstituencyRank() {
   const {
     address,
     setMutableAddress: setAddress,
@@ -127,7 +122,7 @@ export function CaSuspenseYourConstituencyRank({
     )
   }
 
-  if (!address && !isLoading) {
+  if (!address) {
     return (
       <DefaultPlacesSelect
         loading={isLoading}
@@ -148,7 +143,7 @@ export function CaSuspenseYourConstituencyRank({
     )
   }
 
-  if (!constituency && !isLoading) {
+  if (!constituency) {
     return <ConstituencyNotFound onChange={setAddress} value={address} />
   }
 
@@ -161,7 +156,6 @@ export function CaSuspenseYourConstituencyRank({
       address={mutableAddress}
       constituency={constituency.zoneName}
       constituencyRanking={electoralZoneRanking}
-      filteredByProvinceOrTerritory={filteredByProvinceOrTerritory}
       isLoading={isLoading}
       provinceCode={provinceCode}
       setAddress={setAddress}
@@ -169,16 +163,10 @@ export function CaSuspenseYourConstituencyRank({
   )
 }
 
-export function CaYourConstituencyRank({
-  filteredByProvinceOrTerritory,
-}: {
-  filteredByProvinceOrTerritory?: boolean
-}) {
+export function CaYourConstituencyRank() {
   return (
     <Suspense fallback={<DefaultPlacesSelect loading onChange={noop} value={null} />}>
-      <CaSuspenseYourConstituencyRank
-        filteredByProvinceOrTerritory={filteredByProvinceOrTerritory}
-      />
+      <CaSuspenseYourConstituencyRank />
     </Suspense>
   )
 }

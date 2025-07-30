@@ -21,7 +21,7 @@ export function CaUserConstituencyRank({ className }: { className?: string }) {
       return <p>N/A</p>
     }
 
-    return <UserLocationRank.RankOdometer rank={electoralZoneRanking.rank} />
+    return <UserLocationRank.RankOdometer rank={electoralZoneRanking.rank ?? 0} />
   }, [address?.description, electoralZoneRanking, electoralZone, isLoading])
 
   return (

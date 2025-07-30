@@ -1,25 +1,17 @@
 'use client'
 
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { Suspense } from 'react'
 import { isNil, noop } from 'lodash-es'
-import { z } from 'zod'
 
+import { GetDistrictRankResponse } from '@/app/api/public/referrals/[countryCode]/[stateCode]/[districtNumber]/route'
 import { LeaderboardRow } from '@/components/app/pageReferrals/leaderboard/row'
+import { useUserAddress } from '@/components/app/pageReferrals/userAddress.context'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
-import { useGetElectoralZoneRank } from '@/hooks/useGetElectoralZoneRank'
-import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { StateCode } from '@/utils/server/districtRankings/types'
 import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import {
-  convertGooglePlaceAutoPredictionToAddressSchema,
-  GooglePlaceAutocompletePrediction,
-} from '@/utils/web/googlePlaceUtils'
-import { zodAddress } from '@/validation/fields/zodAddress'
+import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 function Heading() {
   return (
@@ -62,23 +54,18 @@ interface AuYourDivisionRankContentProps {
   filteredByState?: boolean
   address: 'loading' | GooglePlaceAutocompletePrediction | null
   setAddress: (p: GooglePlaceAutocompletePrediction | null) => void
+  isLoading: boolean
+  divisionRanking: GetDistrictRankResponse | null
 }
 
 const countryCode = SupportedCountryCodes.AU
 
 function AuYourDivisionRankContent(props: AuYourDivisionRankContentProps) {
-  const { stateCode, division, filteredByState, address, setAddress } = props
+  const { stateCode, division, address, setAddress, isLoading, divisionRanking } = props
 
   const isLoadingAddress = address === 'loading'
 
-  const districtRankingResponse = useGetElectoralZoneRank({
-    countryCode,
-    stateCode,
-    electoralZone: division,
-    filteredByState,
-  })
-
-  if (districtRankingResponse.isLoading) {
+  if (isLoading) {
     return (
       <div className="space-y-3">
         <Heading />
@@ -87,12 +74,12 @@ function AuYourDivisionRankContent(props: AuYourDivisionRankContentProps) {
     )
   }
 
-  if (!districtRankingResponse.data) {
+  if (!divisionRanking) {
     return <DivisionNotFound onChange={setAddress} value={isLoadingAddress ? null : address} />
   }
 
-  const count = districtRankingResponse.data.score
-  const rank = districtRankingResponse.data.rank
+  const count = divisionRanking.score
+  const rank = divisionRanking.rank
 
   if (isNil(count) || isNil(rank)) {
     return null
@@ -113,66 +100,19 @@ function AuYourDivisionRankContent(props: AuYourDivisionRankContentProps) {
   )
 }
 
-export function AuSuspenseYourDivisionRank({ filteredByState }: { filteredByState?: boolean }) {
-  const profileResponse = useApiResponseForUserFullProfileInfo()
-  const { setAddress, address: mutableAddress } = useMutableCurrentUserAddress()
-  const [isAddressInAustralia, setIsAddressInAustralia] = useState<boolean>(false)
-  const [addressDetails, setAddressDetails] = useState<
-    z.infer<typeof zodAddress> | null | 'loading'
-  >(null)
-  const isLoadingAddress = profileResponse.isLoading || mutableAddress === 'loading'
-  const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript()
+export function AuSuspenseYourDivisionRank() {
+  const {
+    address,
+    setMutableAddress: setAddress,
+    mutableAddress,
+    isAddressInCountry: isAddressInAustralia,
+    isLoading,
+    electoralZone: division,
+    electoralZoneRanking: divisionRanking,
+    administrativeArea: stateCode,
+  } = useUserAddress()
 
-  const address = useMemo(() => {
-    if (isLoadingAddress) return null
-    if (profileResponse.data?.user?.address) {
-      return {
-        description: profileResponse.data.user.address.formattedDescription,
-        place_id: profileResponse.data.user.address.googlePlaceId,
-      }
-    }
-    if (mutableAddress) return mutableAddress
-    return null
-  }, [isLoadingAddress, mutableAddress, profileResponse.data?.user?.address])
-
-  const loadAddressDetails = useCallback(async () => {
-    if (!address || !isGoogleMapsLoaded) return
-
-    const addressDetailsResponse = await convertGooglePlaceAutoPredictionToAddressSchema(address)
-    setAddressDetails(addressDetailsResponse)
-    setIsAddressInAustralia(addressDetailsResponse.countryCode.toLowerCase() === countryCode)
-  }, [address, isGoogleMapsLoaded])
-
-  const districtResponse = useGetElectoralZoneFromAddress({
-    address: address?.description,
-    placeId: address?.place_id,
-  })
-
-  useEffect(() => {
-    void loadAddressDetails()
-  }, [loadAddressDetails])
-
-  const district = useMemo(() => {
-    if (!districtResponse.data) return null
-    if ('notFoundReason' in districtResponse.data) return null
-    if (!districtResponse.data.zoneName) return null
-    return districtResponse.data
-  }, [districtResponse.data])
-
-  const stateCode = useMemo<StateCode | null>(() => {
-    if (district?.administrativeArea) return district.administrativeArea as StateCode
-    if (addressDetails !== 'loading' && addressDetails?.administrativeAreaLevel1) {
-      return addressDetails.administrativeAreaLevel1 as StateCode
-    }
-    return null
-  }, [addressDetails, district?.administrativeArea])
-
-  if (
-    districtResponse.isLoading ||
-    isLoadingAddress ||
-    addressDetails === 'loading' ||
-    !isGoogleMapsLoaded
-  ) {
+  if (isLoading) {
     return (
       <div className="space-y-3">
         <Heading />
@@ -181,12 +121,12 @@ export function AuSuspenseYourDivisionRank({ filteredByState }: { filteredByStat
     )
   }
 
-  if (!address && !isLoadingAddress) {
+  if (!address) {
     return (
       <DefaultPlacesSelect
-        loading={isLoadingAddress}
+        loading={isLoading}
         onChange={setAddress}
-        value={mutableAddress}
+        value={mutableAddress === 'loading' ? null : mutableAddress}
       />
     )
   }
@@ -194,7 +134,7 @@ export function AuSuspenseYourDivisionRank({ filteredByState }: { filteredByStat
   if (!isAddressInAustralia) {
     return (
       <div className="space-y-3">
-        <DefaultPlacesSelect onChange={setAddress} value={isLoadingAddress ? null : address} />
+        <DefaultPlacesSelect onChange={setAddress} value={isLoading ? null : address} />
         <p className="pl-4 text-sm text-fontcolor-muted">
           Looks like your address is not from Australia, so it can't be used to filter
         </p>
@@ -202,29 +142,30 @@ export function AuSuspenseYourDivisionRank({ filteredByState }: { filteredByStat
     )
   }
 
-  if (!district && !districtResponse.isLoading) {
+  if (!division) {
     return <DivisionNotFound onChange={setAddress} value={address} />
   }
 
-  if (!stateCode || !district?.zoneName) {
+  if (!stateCode || !division?.zoneName) {
     return <DivisionNotFound onChange={setAddress} value={address} />
   }
 
   return (
     <AuYourDivisionRankContent
       address={mutableAddress}
-      division={district.zoneName}
-      filteredByState={filteredByState}
+      division={division.zoneName}
+      divisionRanking={divisionRanking}
+      isLoading={isLoading}
       setAddress={setAddress}
       stateCode={stateCode}
     />
   )
 }
 
-export function AuYourDivisionRank({ filteredByState }: { filteredByState?: boolean }) {
+export function AuYourDivisionRank() {
   return (
     <Suspense fallback={<DefaultPlacesSelect loading onChange={noop} value={null} />}>
-      <AuSuspenseYourDivisionRank filteredByState={filteredByState} />
+      <AuSuspenseYourDivisionRank />
     </Suspense>
   )
 }

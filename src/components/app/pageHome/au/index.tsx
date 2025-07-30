@@ -9,6 +9,7 @@ import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetric
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { AuYourDivisionRank } from '@/components/app/pageReferrals/au/yourDivisionRanking'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
@@ -80,7 +81,10 @@ export function AuPageHome({
                     <HomePageSection.Subtitle className="hidden md:block">
                       See which division has the most number of advocates.
                     </HomePageSection.Subtitle>
-                    <AuYourDivisionRank />
+
+                    <UserAddressProvider countryCode={countryCode}>
+                      <AuYourDivisionRank />
+                    </UserAddressProvider>
                     <AuAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper
