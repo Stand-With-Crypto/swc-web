@@ -8,6 +8,40 @@ on:
     types: ['opened', 'edited', 'reopened', 'synchronize', 'ready_for_review']
 
 jobs:
+  # Guide users to use native GitHub Copilot features
+  copilot_guidance:
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    name: Copilot Integration Guidance
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Guide to Copilot Features
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🤖 GitHub Copilot Integration Available
+
+            This PR can benefit from GitHub Copilot's native features:
+
+            ### 📋 **Generate PR Summary**
+            Click the **Copilot icon** ✨ in the PR description above to automatically generate a comprehensive summary.
+
+            ### 🔍 **Request Code Review**  
+            Comment \`@coderabbitai review\` or use Copilot Chat to get detailed code analysis.
+
+            ### 💡 **Get Code Explanations**
+            Select any code and click the Copilot icon to understand what it does.
+
+            ---
+            *These features use your existing Copilot subscription - no additional setup required!*`
+            });
+
   build:
     if: github.event.pull_request.draft == false
     environment: preview
