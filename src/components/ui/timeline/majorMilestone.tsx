@@ -59,10 +59,9 @@ export function MajorMilestone({
           }),
     }
 
-    const titleDynamicSpacing = `calc(${milestone.positionPercent.toFixed(2)}% - ${isMobile ? TITLE_HEIGHT : TITLE_WIDTH / 2}px)`
+    const titleDynamicSpacing = `calc(${milestone.positionPercent.toFixed(2)}% - ${(isMobile ? TITLE_HEIGHT : TITLE_WIDTH) / 2}px)`
 
     const titleWrapperStyle: CSSProperties = {
-      gap: isMobile ? 4 : 12,
       width: TITLE_WIDTH,
       ...(isMobile
         ? {
@@ -96,7 +95,7 @@ export function MajorMilestone({
       >
         {milestone.isHighlighted && <Icon {...ICON_PROPS} />}
       </div>
-      <div className="absolute flex flex-col font-sans" style={titleWrapperStyle}>
+      <div className="absolute flex flex-col gap-1 font-sans md:gap-2" style={titleWrapperStyle}>
         <span
           className={cn('line-clamp-2 text-left text-xl font-bold leading-7 md:text-center', {
             'text-[#5B616E80]': !milestone.isHighlighted,
