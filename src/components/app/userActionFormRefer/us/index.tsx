@@ -1,5 +1,8 @@
 'use client'
 
+import { UsUserDistrictRank } from '@/components/app/pageReferrals/us/userDistrictRank'
+import { UsYourDistrictRankSuspense } from '@/components/app/pageReferrals/us/yourDistrictRanking'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_REFER,
   SectionNames,
@@ -8,6 +11,9 @@ import { Refer } from '@/components/app/userActionFormRefer/common/sections/refe
 import { SuccessSection } from '@/components/app/userActionFormRefer/common/sections/success'
 import { UserActionFormReferProps } from '@/components/app/userActionFormRefer/common/types'
 import { useSections } from '@/hooks/useSections'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.US as const
 
 export function USUserActionFormRefer({ onClose }: UserActionFormReferProps) {
   const sectionProps = useSections({
@@ -26,7 +32,11 @@ export function USUserActionFormRefer({ onClose }: UserActionFormReferProps) {
 
           <Refer.Counter className="flex-col md:flex-row">
             <Refer.Counter.UserReferralsCount />
-            <Refer.Counter.UsUserDistrictRank />
+            <UsYourDistrictRankSuspense>
+              <UserAddressProvider countryCode={countryCode}>
+                <UsUserDistrictRank />
+              </UserAddressProvider>
+            </UsYourDistrictRankSuspense>
           </Refer.Counter>
         </Refer>
       )

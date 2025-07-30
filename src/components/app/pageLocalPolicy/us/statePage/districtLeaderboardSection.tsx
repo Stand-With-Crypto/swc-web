@@ -1,7 +1,11 @@
 import { DistrictLeaderboard } from '@/components/app/pageLocalPolicy/common/statePage/districtLeaderboardSection'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
-import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
+import {
+  UsYourDistrictRank,
+  UsYourDistrictRankSuspense,
+} from '@/components/app/pageReferrals/us/yourDistrictRanking'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -39,7 +43,11 @@ export async function UsDistrictLeaderboardSection({
         </Section.SubTitle>
 
         <DistrictLeaderboard>
-          <UsYourDistrictRank filteredByState />
+          <UsYourDistrictRankSuspense>
+            <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea>
+              <UsYourDistrictRank />
+            </UserAddressProvider>
+          </UsYourDistrictRankSuspense>
           <USAdvocatesLeaderboard data={leaderboardData} />
 
           {total > ITEMS_PER_PAGE && (

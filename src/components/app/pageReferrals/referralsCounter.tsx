@@ -3,9 +3,6 @@
 import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { AuUserDivisionRank } from '@/components/app/pageReferrals/au/userDivisionRank'
-import { CaUserConstituencyRank } from '@/components/app/pageReferrals/ca/userConstituencyRank'
-import { UsUserDistrictRank } from '@/components/app/pageReferrals/us/userDistrictRank'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -77,8 +74,3 @@ export function UserReferralsCount({ className }: { className?: string }) {
 }
 
 ReferralsCounter.UserReferralsCount = UserReferralsCount
-
-//Country specific components
-ReferralsCounter.UsUserDistrictRank = UsUserDistrictRank
-ReferralsCounter.CaUserConstituencyRank = CaUserConstituencyRank
-ReferralsCounter.AuUserDivisionRank = AuUserDivisionRank

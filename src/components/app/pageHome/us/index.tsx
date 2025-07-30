@@ -7,7 +7,11 @@ import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetric
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
-import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
+import {
+  UsYourDistrictRank,
+  UsYourDistrictRankSuspense,
+} from '@/components/app/pageReferrals/us/yourDistrictRanking'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -128,7 +132,12 @@ export function UsPageHome({
                     <HomePageSection.Subtitle className="hidden md:block">
                       See which district has the most number of advocates.
                     </HomePageSection.Subtitle>
-                    <UsYourDistrictRank />
+
+                    <UsYourDistrictRankSuspense>
+                      <UserAddressProvider countryCode={countryCode}>
+                        <UsYourDistrictRank />
+                      </UserAddressProvider>
+                    </UsYourDistrictRankSuspense>
                     <USAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper

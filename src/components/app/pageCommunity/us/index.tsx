@@ -1,7 +1,11 @@
 import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
-import { UsYourDistrictRank } from '@/components/app/pageReferrals/us/yourDistrictRanking'
+import {
+  UsYourDistrictRank,
+  UsYourDistrictRankSuspense,
+} from '@/components/app/pageReferrals/us/yourDistrictRanking'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
@@ -183,7 +187,11 @@ export function UsPageCommunity({
         )}
         {tab === RecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
           <>
-            <UsYourDistrictRank />
+            <UsYourDistrictRankSuspense>
+              <UserAddressProvider countryCode={countryCode}>
+                <UsYourDistrictRank />
+              </UserAddressProvider>
+            </UsYourDistrictRankSuspense>
             <USAdvocatesLeaderboard data={leaderboardData} />
           </>
         )}

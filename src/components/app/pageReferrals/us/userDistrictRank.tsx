@@ -2,59 +2,27 @@
 
 import { useMemo } from 'react'
 
+import { useUserAddress } from '@/components/app/pageReferrals/userAddress.context'
 import { UserLocationRank } from '@/components/app/pageReferrals/userLocationRank'
-import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
-import { useGetElectoralZoneRank } from '@/hooks/useGetElectoralZoneRank'
-import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const COUNTRY_CODE = SupportedCountryCodes.US
 
 export function UsUserDistrictRank({ className }: { className?: string }) {
-  const { address } = useMutableCurrentUserAddress()
-  const districtResponse = useGetElectoralZoneFromAddress({
-    address: address === 'loading' ? null : address?.description,
-    placeId: address === 'loading' ? null : address?.place_id,
-  })
-
-  const district = useMemo(() => {
-    if (!districtResponse.data) return null
-    if ('notFoundReason' in districtResponse.data) return null
-    if (!districtResponse.data.zoneName) return null
-
-    return districtResponse.data
-  }, [districtResponse.data])
-
-  const districtRankingResponse = useGetElectoralZoneRank({
-    countryCode: COUNTRY_CODE,
-    stateCode: district?.administrativeArea as USStateCode,
-    electoralZone: district?.zoneName?.toString() ?? null,
-  })
-
-  const rank = districtRankingResponse.data?.rank
+  const { address, isLoading, electoralZone, electoralZoneRanking } = useUserAddress()
 
   const districtRanking = useMemo(() => {
-    if (districtRankingResponse.isLoading || districtResponse.isLoading || address === 'loading') {
+    if (isLoading) {
       return <UserLocationRank.Skeleton />
     }
 
-    if (!address) {
+    if (!address?.description) {
       return <p>Finish your profile to see your district ranking</p>
     }
 
-    if (!rank || !districtRankingResponse.data) {
+    if (!electoralZoneRanking?.rank || !electoralZone) {
       return <p>N/A</p>
     }
 
-    return <UserLocationRank.RankOdometer rank={rank} />
-  }, [
-    districtRankingResponse.data,
-    districtRankingResponse.isLoading,
-    districtResponse.isLoading,
-    address,
-    rank,
-  ])
+    return <UserLocationRank.RankOdometer rank={electoralZoneRanking.rank ?? 0} />
+  }, [address?.description, electoralZoneRanking, electoralZone, isLoading])
 
   return (
     <UserLocationRank.Wrapper className={className}>
