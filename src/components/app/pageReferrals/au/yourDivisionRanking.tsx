@@ -9,8 +9,8 @@ import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/goo
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
-import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
+import { useGetElectoralZoneRank } from '@/hooks/useGetElectoralZoneRank'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { StateCode } from '@/utils/server/districtRankings/types'
 import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
@@ -71,10 +71,10 @@ function AuYourDivisionRankContent(props: AuYourDivisionRankContentProps) {
 
   const isLoadingAddress = address === 'loading'
 
-  const districtRankingResponse = useGetDistrictRank({
+  const districtRankingResponse = useGetElectoralZoneRank({
     countryCode,
     stateCode,
-    districtNumber: division,
+    electoralZone: division,
     filteredByState,
   })
 
@@ -143,7 +143,7 @@ export function AuSuspenseYourDivisionRank({ filteredByState }: { filteredByStat
     setIsAddressInAustralia(addressDetailsResponse.countryCode.toLowerCase() === countryCode)
   }, [address, isGoogleMapsLoaded])
 
-  const districtResponse = useGetDistrictFromAddress({
+  const districtResponse = useGetElectoralZoneFromAddress({
     address: address?.description,
     placeId: address?.place_id,
   })

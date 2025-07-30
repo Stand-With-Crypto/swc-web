@@ -6,23 +6,23 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 
-interface UseGetDistrictRankProps {
+interface useGetElectoralZoneRankProps {
   countryCode: SupportedCountryCodes
   stateCode: StateCode | null
-  districtNumber: string | null
+  electoralZone: string | null
   filteredByState?: boolean
   config?: SWRConfiguration<GetDistrictRankResponse>
 }
 
-export function useGetDistrictRank(props: UseGetDistrictRankProps) {
-  const { countryCode, stateCode, districtNumber, filteredByState, config } = props
+export function useGetElectoralZoneRank(props: useGetElectoralZoneRankProps) {
+  const { countryCode, stateCode, electoralZone, filteredByState, config } = props
 
   const districtRankingResponse = useSWR(
-    stateCode && districtNumber
-      ? apiUrls.districtRanking({
+    stateCode && electoralZone
+      ? apiUrls.electoralZoneRanking({
           countryCode,
           stateCode,
-          districtNumber,
+          electoralZone,
           filteredByState,
         })
       : null,

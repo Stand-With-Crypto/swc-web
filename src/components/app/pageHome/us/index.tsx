@@ -122,7 +122,7 @@ export function UsPageHome({
               },
               {
                 value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
-                label: 'Top Districts',
+                label: 'Top districts',
                 content: (
                   <div className="space-y-4">
                     <HomePageSection.Subtitle className="hidden md:block">

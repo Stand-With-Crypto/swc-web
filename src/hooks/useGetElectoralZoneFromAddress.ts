@@ -2,7 +2,7 @@ import useSWR from 'swr'
 
 import { getElectoralZoneFromAddressOrPlaceId } from '@/utils/shared/getElectoralZoneFromAddress'
 
-export function useGetDistrictFromAddress({
+export function useGetElectoralZoneFromAddress({
   address,
   placeId,
 }: {
@@ -10,7 +10,7 @@ export function useGetDistrictFromAddress({
   placeId?: string | null
 }) {
   return useSWR(
-    address || placeId ? `useGetDistrictFromAddress-${address || ''}-${placeId || ''}` : null,
+    address || placeId ? `useGetElectoralZoneFromAddress-${address || ''}-${placeId || ''}` : null,
     () => getElectoralZoneFromAddressOrPlaceId({ address: address || '', placeId: placeId || '' }),
   )
 }

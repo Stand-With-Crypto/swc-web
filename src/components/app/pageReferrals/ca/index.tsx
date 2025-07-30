@@ -9,6 +9,7 @@ import {
   ReferralsCounter,
   UserReferralsCount,
 } from '@/components/app/pageReferrals/referralsCounter'
+import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
@@ -36,17 +37,19 @@ export function CaPageReferrals(props: PageReferralsProps) {
       <CaPageReferralsHeading
         stateName={provinceCode ? getCAProvinceOrTerritoryNameFromCode(provinceCode) : undefined}
       />
-      {!provinceCode && (
-        <>
-          <UserReferralUrlWithApi />
-          <ReferralsCounter>
-            <UserReferralsCount />
-            <CaUserConstituencyRank />
-          </ReferralsCounter>
-        </>
-      )}
+      <UserAddressProvider countryCode={COUNTRY_CODE} filterByAdministrativeArea={!!provinceCode}>
+        {!provinceCode && (
+          <>
+            <UserReferralUrlWithApi />
+            <ReferralsCounter>
+              <UserReferralsCount />
+              <CaUserConstituencyRank />
+            </ReferralsCounter>
+          </>
+        )}
 
-      <CaYourConstituencyRank filteredByProvinceOrTerritory={!!provinceCode} />
+        <CaYourConstituencyRank filteredByProvinceOrTerritory={!!provinceCode} />
+      </UserAddressProvider>
       <CaAdvocatesLeaderboard data={leaderboardData} />
       <div className="flex justify-center">
         <PaginationLinks

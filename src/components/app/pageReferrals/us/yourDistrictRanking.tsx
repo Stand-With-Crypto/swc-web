@@ -10,8 +10,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
-import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
+import { useGetElectoralZoneRank } from '@/hooks/useGetElectoralZoneRank'
 import { StateCode } from '@/utils/server/districtRankings/types'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
@@ -70,10 +70,10 @@ function UsYourDistrictRankContent(props: UsYourDistrictRankContentProps) {
 
   const isLoadingAddress = address === 'loading'
 
-  const districtRankingResponse = useGetDistrictRank({
+  const districtRankingResponse = useGetElectoralZoneRank({
     countryCode,
     stateCode,
-    districtNumber,
+    electoralZone: districtNumber,
     filteredByState,
   })
 
@@ -155,7 +155,7 @@ export function UsSuspenseYourDistrictRank({ filteredByState }: { filteredByStat
     void checkIfValidAddress()
   }, [checkIfValidAddress])
 
-  const districtResponse = useGetDistrictFromAddress({
+  const districtResponse = useGetElectoralZoneFromAddress({
     address: address?.description,
     placeId: address?.place_id,
   })

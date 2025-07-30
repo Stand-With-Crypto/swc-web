@@ -295,18 +295,18 @@ export const apiUrls = {
     `/api/${countryCode}/identified-user/polls-votes-from-user`,
   pollsResultsData: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/public/polls`,
-  districtRanking: ({
+  electoralZoneRanking: ({
     countryCode,
     stateCode,
-    districtNumber,
+    electoralZone,
     filteredByState,
   }: {
     countryCode: SupportedCountryCodes
     stateCode: string
-    districtNumber: string
+    electoralZone: string
     filteredByState?: boolean
   }) =>
-    `/api/public/referrals/${countryCode}/${stateCode}/${districtNumber}${filteredByState ? '/by-state' : ''}`,
+    `/api/public/referrals/${countryCode}/${stateCode}/${electoralZone}${filteredByState ? '/by-state' : ''}`,
   dtsiRacesByCongressionalDistrict: ({
     administrativeArea,
     district,

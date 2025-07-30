@@ -4,8 +4,8 @@ import { useMemo } from 'react'
 
 import { UserLocationRank } from '@/components/app/pageReferrals/userLocationRank'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
-import { useGetDistrictRank } from '@/hooks/useGetDistrictRank'
+import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
+import { useGetElectoralZoneRank } from '@/hooks/useGetElectoralZoneRank'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -13,7 +13,7 @@ const COUNTRY_CODE = SupportedCountryCodes.AU
 
 export function AuUserDivisionRank({ className }: { className?: string }) {
   const { address } = useMutableCurrentUserAddress()
-  const districtResponse = useGetDistrictFromAddress({
+  const districtResponse = useGetElectoralZoneFromAddress({
     address: address === 'loading' ? null : address?.description,
     placeId: address === 'loading' ? null : address?.place_id,
   })
@@ -26,10 +26,10 @@ export function AuUserDivisionRank({ className }: { className?: string }) {
     return districtResponse.data
   }, [districtResponse.data])
 
-  const districtRankingResponse = useGetDistrictRank({
+  const districtRankingResponse = useGetElectoralZoneRank({
     countryCode: COUNTRY_CODE,
     stateCode: district?.administrativeArea as AUStateCode,
-    districtNumber: district?.zoneName?.toString() ?? null,
+    electoralZone: district?.zoneName?.toString() ?? null,
   })
 
   const rank = districtRankingResponse.data?.rank
