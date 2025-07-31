@@ -45,7 +45,15 @@ export function UserLocationRanking({
         />
       </div>
     )
-  }, [address?.description, electoralZoneRanking, electoralZone, isLoading])
+  }, [
+    address?.description,
+    electoralZoneRanking,
+    electoralZone,
+    isLoading,
+    finishProfileText,
+    notFoundText,
+    className,
+  ])
 
   return (
     <div
