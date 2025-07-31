@@ -2,7 +2,7 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { USGetPageData } from '@/components/app/pageCommunity'
+import { USGetPageData } from '@/components/app/pageCommunity/getPageData'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,

@@ -2,7 +2,7 @@ import React from 'react'
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { CAGetPageData } from '@/components/app/pageCommunity'
+import { CAGetPageData } from '@/components/app/pageCommunity/getPageData'
 import { CaPageCommunity, PageLeaderboardInferredProps } from '@/components/app/pageCommunity/ca'
 import { CA_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/ca/constants'
 import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'

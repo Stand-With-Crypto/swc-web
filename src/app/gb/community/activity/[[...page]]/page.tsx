@@ -2,7 +2,7 @@ import React from 'react'
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { GBGetPageData } from '@/components/app/pageCommunity'
+import { GBGetPageData } from '@/components/app/pageCommunity/getPageData'
 import { GbPageCommunity } from '@/components/app/pageCommunity/gb'
 import { GB_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/gb/constants'
 import { PageProps } from '@/types'
