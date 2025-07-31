@@ -26,7 +26,6 @@ export type GetHomepageTopLevelMetricsResponse = Awaited<
 
 interface GetHomePageDataProps {
   recentActivityLimit?: number
-  restrictToUS?: boolean
   countryCode: SupportedCountryCodes
 }
 
