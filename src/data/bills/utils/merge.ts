@@ -22,7 +22,6 @@ export function mergeBillFromBuilderIOAndDTSI(
     dateIntroduced: billFromBuilderIO.dateIntroduced || billFromDTSI.dateIntroduced,
     dtsiSlug: billFromBuilderIO.dtsiSlug || billFromDTSI.id,
     officialBillUrl: billFromBuilderIO.officialBillUrl || billFromDTSI.congressDotGovUrl,
-    relationships: billFromDTSI.relationships,
     summary: billFromBuilderIO.summary || billFromDTSI.summary,
     title: billFromBuilderIO.title || billFromDTSI.shortTitle || billFromDTSI.title,
   }
