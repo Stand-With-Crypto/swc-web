@@ -63,7 +63,7 @@ const parseMemberKey = (key: MemberKey): RedisEntryData => {
   return { state: state as StateCode, district }
 }
 
-async function maybeInitializeCacheKey(countryCode: SupportedCountryCodes) {
+async function maybeInitializeUSCacheKey(countryCode: SupportedCountryCodes) {
   if (countryCode !== SupportedCountryCodes.US) {
     return
   }
@@ -102,7 +102,7 @@ export async function createDistrictRankingUpserter(
 ) {
   const redisKey = getAdvocatesRankingRedisKey(countryCode, countType)
   const log = getLog(redisKey)
-  await maybeInitializeCacheKey(countryCode)
+  await maybeInitializeUSCacheKey(countryCode)
 
   return async (entry: DistrictRankingEntry) => {
     if (!isValidDistrictEntry(entry)) {

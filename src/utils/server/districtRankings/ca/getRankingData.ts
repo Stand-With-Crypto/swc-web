@@ -3,12 +3,12 @@ import { UserActionType } from '@prisma/client'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
-  CAProvinceCode,
+  CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface AdvocatesCountResult {
-  state: CAProvinceCode
+  state: CAProvinceOrTerritoryCode
   district: string
   count: number
 }
@@ -31,7 +31,7 @@ function isValidProvince(state: string): boolean {
 }
 
 export async function getCAAdvocatesCountByDistrict(
-  stateCode: CAProvinceCode,
+  stateCode: CAProvinceOrTerritoryCode,
 ): Promise<AdvocatesCountResult[]> {
   const results = await prismaClient.$queryRaw<AdvocatesCountByDistrictQueryResult[]>`
     SELECT
@@ -53,14 +53,14 @@ export async function getCAAdvocatesCountByDistrict(
   return results
     .filter(result => isValidProvince(result.state))
     .map(({ state, district, count }) => ({
-      state: state as CAProvinceCode,
+      state: state as CAProvinceOrTerritoryCode,
       district: district!,
       count: Number(count),
     }))
 }
 
 export async function getCAReferralsCountByDistrict(
-  stateCode: CAProvinceCode,
+  stateCode: CAProvinceOrTerritoryCode,
 ): Promise<AdvocatesCountResult[]> {
   const results = await prismaClient.$queryRaw<ReferralsCountByDistrictQueryResult[]>`
     SELECT
@@ -84,7 +84,7 @@ export async function getCAReferralsCountByDistrict(
   return results
     .filter(result => isValidProvince(result.state))
     .map(result => ({
-      state: result.state as CAProvinceCode,
+      state: result.state as CAProvinceOrTerritoryCode,
       district: result.district!,
       count: Number(result.referrals),
     }))

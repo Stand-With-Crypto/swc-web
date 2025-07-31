@@ -15,7 +15,7 @@ import {
 } from '@/utils/shared/stateMappings/auStateUtils'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
-  CAProvinceCode,
+  CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
@@ -33,7 +33,7 @@ const COUNTRY_CODE_TO_STATES_CODES_MAP: Record<SupportedCountryCodes, string[]> 
   [SupportedCountryCodes.US]: Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[],
   [SupportedCountryCodes.CA]: Object.keys(
     CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
-  ) as CAProvinceCode[],
+  ) as CAProvinceOrTerritoryCode[],
   [SupportedCountryCodes.GB]: [],
   [SupportedCountryCodes.AU]: Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP) as AUStateCode[],
 }

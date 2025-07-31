@@ -11,12 +11,12 @@ import {
   getUSReferralsCountByDistrict,
 } from '@/utils/server/districtRankings/us/getRankingData'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
-import { CAProvinceCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface AdvocatesCountResult {
-  state: USStateCode | CAProvinceCode | AUStateCode
+  state: USStateCode | CAProvinceOrTerritoryCode | AUStateCode
   district: string
   count: number
 }
@@ -24,7 +24,7 @@ export interface AdvocatesCountResult {
 interface StateCode {
   [SupportedCountryCodes.US]: USStateCode
   [SupportedCountryCodes.GB]: string // TODO: Implement
-  [SupportedCountryCodes.CA]: CAProvinceCode
+  [SupportedCountryCodes.CA]: CAProvinceOrTerritoryCode
   [SupportedCountryCodes.AU]: AUStateCode
 }
 

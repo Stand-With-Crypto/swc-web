@@ -6,7 +6,7 @@ import {
 } from '@/utils/shared/stateMappings/auStateUtils'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
-  CAProvinceCode,
+  CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import {
@@ -72,7 +72,8 @@ export const zodAUStateDistrict = object({
 
 export const zodCAProvinceDistrict = object({
   state: string().refine(
-    (val): val is CAProvinceCode => val in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+    (val): val is CAProvinceOrTerritoryCode =>
+      val in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
     'Invalid province/territory code',
   ),
   district: string(),
