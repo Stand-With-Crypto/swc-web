@@ -1,10 +1,10 @@
 import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferralsWrapper } from '@/components/app/pageReferrals'
+import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
 import {
   ReferralsCounter,
   UserReferralsCount,
-} from '@/components/app/pageReferrals/referralsCounter'
+} from '@/components/app/pageReferrals/common/referralsCounter'
 import { UsPageReferralsHeading } from '@/components/app/pageReferrals/us/heading'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import { UsUserDistrictRank } from '@/components/app/pageReferrals/us/userDistrictRank'
@@ -12,7 +12,7 @@ import {
   UsYourDistrictRank,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'

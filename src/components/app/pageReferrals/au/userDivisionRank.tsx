@@ -2,8 +2,8 @@
 
 import { useMemo } from 'react'
 
-import { useUserAddress } from '@/components/app/pageReferrals/userAddress.context'
-import { UserLocationRank } from '@/components/app/pageReferrals/userLocationRank'
+import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
+import { UserLocationRank } from '@/components/app/pageReferrals/common/userLocationRank'
 
 export function AuUserDivisionRank({ className }: { className?: string }) {
   const { address, isLoading, electoralZone, electoralZoneRanking } = useUserAddress()
@@ -17,12 +17,12 @@ export function AuUserDivisionRank({ className }: { className?: string }) {
       return <p>Finish your profile to see your division ranking</p>
     }
 
-    if (!electoralZoneRanking || !electoralZone) {
+    if (!electoralZoneRanking?.rank || !electoralZone) {
       return <p>N/A</p>
     }
 
     return <UserLocationRank.RankOdometer rank={electoralZoneRanking.rank ?? 0} />
-  }, [electoralZoneRanking, electoralZone, isLoading, address?.description])
+  }, [electoralZoneRanking?.rank, electoralZone, isLoading, address?.description])
 
   return (
     <UserLocationRank.Wrapper className={className}>

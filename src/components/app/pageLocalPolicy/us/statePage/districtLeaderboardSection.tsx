@@ -5,7 +5,7 @@ import {
   UsYourDistrictRank,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'

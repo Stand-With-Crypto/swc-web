@@ -12,7 +12,7 @@ import {
   AuYourDivisionRank,
   AuYourDivisionRankSuspense,
 } from '@/components/app/pageReferrals/au/yourDivisionRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'

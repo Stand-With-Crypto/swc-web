@@ -1,6 +1,6 @@
 import { AU_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/au/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
-import { PageReferralsWrapper } from '@/components/app/pageReferrals'
+import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
 import { AuPageReferralsHeading } from '@/components/app/pageReferrals/au/heading'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { AuUserDivisionRank } from '@/components/app/pageReferrals/au/userDivisionRank'
@@ -11,8 +11,8 @@ import {
 import {
   ReferralsCounter,
   UserReferralsCount,
-} from '@/components/app/pageReferrals/referralsCounter'
-import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
+} from '@/components/app/pageReferrals/common/referralsCounter'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'

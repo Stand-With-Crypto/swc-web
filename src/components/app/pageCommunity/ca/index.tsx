@@ -5,7 +5,7 @@ import {
   CaYourConstituencyRank,
   CaYourConstituencyRankSuspense,
 } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { InternalLink } from '@/components/ui/link'
 import { PageLayout } from '@/components/ui/pageLayout'

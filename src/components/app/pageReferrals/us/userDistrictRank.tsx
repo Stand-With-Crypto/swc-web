@@ -2,8 +2,8 @@
 
 import { useMemo } from 'react'
 
-import { useUserAddress } from '@/components/app/pageReferrals/userAddress.context'
-import { UserLocationRank } from '@/components/app/pageReferrals/userLocationRank'
+import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
+import { UserLocationRank } from '@/components/app/pageReferrals/common/userLocationRank'
 
 export function UsUserDistrictRank({ className }: { className?: string }) {
   const { address, isLoading, electoralZone, electoralZoneRanking } = useUserAddress()

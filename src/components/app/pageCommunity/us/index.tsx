@@ -5,7 +5,7 @@ import {
   UsYourDistrictRank,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'

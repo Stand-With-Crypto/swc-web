@@ -1,6 +1,6 @@
 import { CA_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/ca/constants'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
-import { PageReferralsWrapper } from '@/components/app/pageReferrals'
+import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
 import { CaPageReferralsHeading } from '@/components/app/pageReferrals/ca/heading'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import { CaUserConstituencyRank } from '@/components/app/pageReferrals/ca/userConstituencyRank'
@@ -11,8 +11,8 @@ import {
 import {
   ReferralsCounter,
   UserReferralsCount,
-} from '@/components/app/pageReferrals/referralsCounter'
-import { UserAddressProvider } from '@/components/app/pageReferrals/userAddress.context'
+} from '@/components/app/pageReferrals/common/referralsCounter'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'

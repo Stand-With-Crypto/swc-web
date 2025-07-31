@@ -1,6 +1,6 @@
 'use client'
 
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { PageReferrals } from '@/components/app/pageReferrals/common'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
