@@ -83,15 +83,12 @@ export function MajorMilestone({
   return (
     <>
       <div
-        className={cn(
-          'absolute flex items-center justify-center rounded-full transition-colors duration-500',
-          {
-            'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
-            'bg-muted-foreground': milestone.isHighlighted && !isHighlightEnabled,
-            'border-2 border-muted-foreground bg-gray-100': !milestone.isHighlighted,
-            'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
-          },
-        )}
+        className={cn('absolute flex items-center justify-center rounded-full transition-colors', {
+          'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
+          'bg-muted-foreground': milestone.isHighlighted && !isHighlightEnabled,
+          'border-2 border-muted-foreground bg-gray-100': !milestone.isHighlighted,
+          'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
+        })}
         style={pointStyles}
       >
         {milestone.isHighlighted && <Icon {...ICON_PROPS} />}
