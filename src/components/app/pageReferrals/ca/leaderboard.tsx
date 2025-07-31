@@ -9,7 +9,7 @@ interface CaAdvocatesLeaderboardProps {
   data: DistrictRankingEntryWithRank[]
 }
 
-const COUNTRY_CODE = SupportedCountryCodes.CA as const
+const countryCode = SupportedCountryCodes.CA as const
 
 export function CaAdvocatesLeaderboard(props: CaAdvocatesLeaderboardProps) {
   const { data } = props
@@ -24,7 +24,7 @@ export function CaAdvocatesLeaderboard(props: CaAdvocatesLeaderboardProps) {
         <AdvocatesLeaderboard.Row
           count={entry.count}
           key={`${entry.state}-${entry.district}`}
-          locale={COUNTRY_CODE_TO_LOCALE[COUNTRY_CODE]}
+          locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
           rank={entry.rank}
         >
           <AdvocatesLeaderboard.Row.Label>{`${getCAProvinceOrTerritoryNameFromCode(entry.state)} - ${entry.district}`}</AdvocatesLeaderboard.Row.Label>

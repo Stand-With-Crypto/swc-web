@@ -27,12 +27,12 @@ interface PageReferralsProps {
   totalPages?: number
 }
 
-const COUNTRY_CODE = SupportedCountryCodes.CA
+const countryCode = SupportedCountryCodes.CA
 
 export function CaPageReferrals(props: PageReferralsProps) {
   const { page, leaderboardData, provinceCode } = props
   const tab = CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES
-  const urls = getIntlUrls(COUNTRY_CODE)
+  const urls = getIntlUrls(countryCode)
   const totalPages = props.totalPages || CA_COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
@@ -41,7 +41,7 @@ export function CaPageReferrals(props: PageReferralsProps) {
         stateName={provinceCode ? getCAProvinceOrTerritoryNameFromCode(provinceCode) : undefined}
       />
       <CaYourConstituencyRankSuspense>
-        <UserAddressProvider countryCode={COUNTRY_CODE} filterByAdministrativeArea={!!provinceCode}>
+        <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea={!!provinceCode}>
           {!provinceCode && (
             <>
               <UserReferralUrlWithApi />

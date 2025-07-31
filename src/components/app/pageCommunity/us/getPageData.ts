@@ -7,7 +7,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const MAX_PAGES = 10
 
-const COUNTRY_CODE = SupportedCountryCodes.US
+const countryCode = SupportedCountryCodes.US
 
 export async function USGetPageData({ page, state }: { page: string[]; state?: string }) {
   const { itemsPerPage } = US_RECENT_ACTIVITY_PAGINATION
@@ -21,7 +21,7 @@ export async function USGetPageData({ page, state }: { page: string[]; state?: s
   const publicRecentActivity = await getPublicRecentActivity({
     limit: itemsPerPage,
     offset,
-    countryCode: COUNTRY_CODE,
+    countryCode,
     ...(state && { stateCode: state.toUpperCase() }),
   })
 

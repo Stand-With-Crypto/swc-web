@@ -14,7 +14,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 export const dynamicParams = true
-const COUNTRY_CODE = SupportedCountryCodes.CA
+const countryCode = SupportedCountryCodes.CA
 
 const TOTAL_PREGENERATED_PAGES =
   CA_COMMUNITY_PAGINATION_DATA[CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES].totalPages
@@ -59,7 +59,7 @@ export default async function ReferralsPage(props: Props) {
   const commonParams = {
     limit: itemsPerPage,
     offset,
-    countryCode: COUNTRY_CODE,
+    countryCode,
   }
 
   const { items: leaderboardData, total } = await getDistrictsLeaderboardData(commonParams)
