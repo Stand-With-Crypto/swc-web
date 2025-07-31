@@ -3,12 +3,15 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Skeleton } from '@/components/ui/skeleton'
-import { HIGHLIGHTED_POINT_SIZE, MajorMilestone } from '@/components/ui/timeline/majorMilestone'
+import { MAJOR_MILESTONE_CONFIG } from '@/components/ui/timeline/constants'
+import { MajorMilestone } from '@/components/ui/timeline/majorMilestone'
 import { MinorMilestone } from '@/components/ui/timeline/minorMilestone'
 import { Milestone, TimelinePlotPoint } from '@/components/ui/timeline/types'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const { HIGHLIGHTED_POINT_SIZE } = MAJOR_MILESTONE_CONFIG
 
 interface TimelineProps {
   countryCode: SupportedCountryCodes

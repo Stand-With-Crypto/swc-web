@@ -5,9 +5,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
+import { MINOR_MILESTONE_CONFIG } from '@/components/ui/timeline/constants'
 import { Milestone } from '@/components/ui/timeline/types'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
+
+const { POINT_FIXED_SPACING, POINT_SIZE } = MINOR_MILESTONE_CONFIG
 
 interface MinorMilestoneProps {
   countryCode: SupportedCountryCodes
@@ -15,9 +18,6 @@ interface MinorMilestoneProps {
   isMobile: boolean
   milestone: Milestone
 }
-
-const POINT_FIXED_SPACING = 30
-const POINT_SIZE = 20
 
 export function MinorMilestone({
   countryCode,
@@ -46,7 +46,7 @@ export function MinorMilestone({
   const trigger = (
     <div
       className={cn(
-        'absolute cursor-pointer rounded-full border-4 border-gray-100 transition-colors duration-500',
+        'absolute cursor-pointer rounded-full border-4 border-gray-100 transition-colors',
         isHighlightEnabled ? 'bg-primary-cta hover:border-[#A97BFC]' : 'bg-muted-foreground',
       )}
       style={styles}
@@ -106,11 +106,7 @@ function MinorMilestoneWrapper({
 
   return (
     <TooltipProvider>
-      <Tooltip
-        delayDuration={250}
-        onOpenChange={setIsTooltipOrDialogOpen}
-        open={isTooltipOrDialogOpen}
-      >
+      <Tooltip onOpenChange={setIsTooltipOrDialogOpen} open={isTooltipOrDialogOpen}>
         <TooltipTrigger asChild onClick={() => setIsTooltipOrDialogOpen(true)}>
           {trigger}
         </TooltipTrigger>

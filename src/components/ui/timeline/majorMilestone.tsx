@@ -1,10 +1,20 @@
 import { CSSProperties, useMemo } from 'react'
-import { Check, ScrollTextIcon, XIcon } from 'lucide-react'
+import { Check, LucideProps as IconProps, ScrollTextIcon, XIcon } from 'lucide-react'
 
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
+import { MAJOR_MILESTONE_CONFIG } from '@/components/ui/timeline/constants'
 import { Milestone } from '@/components/ui/timeline/types'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
+
+const {
+  HIGHLIGHTED_POINT_SIZE,
+  NOT_HIGHLIGHTED_POINT_SIZE,
+  POINT_FIXED_SPACING,
+  TITLE_FIXED_SPACING,
+  TITLE_HEIGHT,
+  TITLE_WIDTH,
+} = MAJOR_MILESTONE_CONFIG
 
 interface MajorMilestoneProps {
   countryCode: SupportedCountryCodes
@@ -14,19 +24,11 @@ interface MajorMilestoneProps {
   milestone: Milestone
 }
 
-const ICON_PROPS = {
+const ICON_PROPS: IconProps = {
   className: 'mt-0.5',
   color: 'white',
   size: 24,
 }
-
-const POINT_FIXED_SPACING = 20
-export const HIGHLIGHTED_POINT_SIZE = 40
-const NOT_HIGHLIGHTED_POINT_SIZE = 24
-
-const TITLE_FIXED_SPACING = 80
-const TITLE_WIDTH = 200
-const TITLE_HEIGHT = 28
 
 export function MajorMilestone({
   countryCode,
@@ -81,15 +83,12 @@ export function MajorMilestone({
   return (
     <>
       <div
-        className={cn(
-          'absolute flex items-center justify-center rounded-full transition-colors duration-500',
-          {
-            'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
-            'bg-muted-foreground': milestone.isHighlighted && !isHighlightEnabled,
-            'border-2 border-muted-foreground bg-gray-100': !milestone.isHighlighted,
-            'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
-          },
-        )}
+        className={cn('absolute flex items-center justify-center rounded-full transition-colors', {
+          'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
+          'bg-muted-foreground': milestone.isHighlighted && !isHighlightEnabled,
+          'border-2 border-muted-foreground bg-gray-100': !milestone.isHighlighted,
+          'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
+        })}
         style={pointStyles}
       >
         {milestone.isHighlighted && <Icon {...ICON_PROPS} />}
