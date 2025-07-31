@@ -1,33 +1,52 @@
 'use client'
 
+import { useMemo } from 'react'
+
+import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/utils/web/cn'
 
-export function UserLocationRank({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
-}
-
-function UserLocationSkeleton({ className }: { className?: string }) {
-  return <Skeleton className={cn('h-12 w-14 bg-primary-cta/10', className)} />
-}
-
-function UserLocationRankOdometer({ rank }: { rank: number }) {
-  return (
-    <div className="flex gap-1">
-      <span className="text-4xl font-semibold">#</span>
-      <AnimatedNumericOdometer className="justify-start" size={48} value={rank.toString()} />
-    </div>
-  )
-}
-
-function UserLocationRankWrapper({
-  children,
-  className,
-}: {
-  children: React.ReactNode
+interface UserLocationRankingProps {
+  finishProfileText: string
+  label: string
+  notFoundText?: string
   className?: string
-}) {
+}
+
+export function UserLocationRanking({
+  finishProfileText,
+  label,
+  notFoundText = 'N/A',
+  className,
+}: UserLocationRankingProps) {
+  const { address, isLoading, electoralZone, electoralZoneRanking } = useUserAddress()
+
+  const districtRanking = useMemo(() => {
+    if (isLoading) {
+      return <Skeleton className={cn('h-12 w-14 bg-primary-cta/10', className)} />
+    }
+
+    if (!address?.description) {
+      return <p>{finishProfileText}</p>
+    }
+
+    if (!electoralZoneRanking?.rank || !electoralZone) {
+      return <p>{notFoundText}</p>
+    }
+
+    return (
+      <div className="flex gap-1">
+        <span className="text-4xl font-semibold">#</span>
+        <AnimatedNumericOdometer
+          className="justify-start"
+          size={48}
+          value={electoralZoneRanking?.rank?.toString() ?? '0'}
+        />
+      </div>
+    )
+  }, [address?.description, electoralZoneRanking, electoralZone, isLoading])
+
   return (
     <div
       className={cn(
@@ -35,16 +54,8 @@ function UserLocationRankWrapper({
         className,
       )}
     >
-      {children}
+      <p className="font-medium">{label}</p>
+      {districtRanking}
     </div>
   )
 }
-
-function UserLocationRankLabel({ children }: { children: React.ReactNode }) {
-  return <p className="font-medium">{children}</p>
-}
-
-UserLocationRank.Skeleton = UserLocationSkeleton
-UserLocationRank.RankOdometer = UserLocationRankOdometer
-UserLocationRank.Wrapper = UserLocationRankWrapper
-UserLocationRank.Label = UserLocationRankLabel
