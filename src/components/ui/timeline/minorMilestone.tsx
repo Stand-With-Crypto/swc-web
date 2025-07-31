@@ -1,12 +1,12 @@
 'use client'
 
 import { CSSProperties, useMemo, useState } from 'react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@radix-ui/react-tooltip'
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { MINOR_MILESTONE_CONFIG } from '@/components/ui/timeline/constants'
 import { Milestone } from '@/components/ui/timeline/types'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
@@ -47,14 +47,14 @@ export function MinorMilestone({
     <div
       className={cn(
         'absolute cursor-pointer rounded-full border-4 border-gray-100 transition-colors',
-        isHighlightEnabled ? 'bg-primary-cta hover:border-[#A97BFC]' : 'bg-muted-foreground',
+        isHighlightEnabled ? 'bg-primary-cta hover:border-purple-300' : 'bg-muted-foreground',
       )}
       style={styles}
     />
   )
 
   const content = (
-    <div className="max-w-xs space-y-1 bg-white p-4 font-sans">
+    <div className="max-w-xs space-y-1 font-sans">
       <h3 className="text-base font-bold text-foreground">{milestone.title}</h3>
       <p className="text-xs text-muted-foreground">
         {milestone.date && (
@@ -96,7 +96,7 @@ function MinorMilestoneWrapper({
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent
           a11yTitle="Bill key date details"
-          className="max-h-36 w-full max-w-64 px-0 !pt-8 md:px-0"
+          className="max-h-32 w-full max-w-72 rounded-md px-4 !pt-10"
         >
           {content}
         </DialogContent>
@@ -110,7 +110,7 @@ function MinorMilestoneWrapper({
         <TooltipTrigger asChild onClick={() => setIsTooltipOrDialogOpen(true)}>
           {trigger}
         </TooltipTrigger>
-        <TooltipContent side="top" sideOffset={16}>
+        <TooltipContent className="bg-white p-4" side="top" sideOffset={16}>
           {content}
         </TooltipContent>
       </Tooltip>
