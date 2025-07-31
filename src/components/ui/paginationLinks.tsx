@@ -22,8 +22,8 @@ export function PaginationLinks({
         : currentPageNumber - 1
   const visiblePageNumbers = times(Math.min(3, totalPages), i => i + leftMostVisiblePageNumber)
 
-  const isFirstPage = currentPageNumber === 1
-  const isLastPage = currentPageNumber === totalPages
+  const isFirstPage = currentPageNumber <= 1
+  const isLastPage = currentPageNumber >= totalPages
 
   return (
     <div className="flex items-center gap-2">
