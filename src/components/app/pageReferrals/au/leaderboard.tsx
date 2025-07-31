@@ -7,7 +7,7 @@ interface AuAdvocatesLeaderboardProps {
   data: DistrictRankingEntryWithRank[]
 }
 
-const COUNTRY_CODE = SupportedCountryCodes.AU as const
+const countryCode = SupportedCountryCodes.AU as const
 
 export function AuAdvocatesLeaderboard(props: AuAdvocatesLeaderboardProps) {
   const { data } = props
@@ -22,7 +22,7 @@ export function AuAdvocatesLeaderboard(props: AuAdvocatesLeaderboardProps) {
         <AdvocatesLeaderboard.Row
           count={entry.count}
           key={`${entry.state}-${entry.district}`}
-          locale={COUNTRY_CODE_TO_LOCALE[COUNTRY_CODE]}
+          locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
           rank={entry.rank}
         >
           <AdvocatesLeaderboard.Row.Label>{`${getAUStateNameFromStateCode(entry.state)} - ${entry.district}`}</AdvocatesLeaderboard.Row.Label>
