@@ -3,7 +3,7 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Skeleton } from '@/components/ui/skeleton'
-import { MAJOR_MILESTONE_CONFIG } from '@/components/ui/timeline/constants'
+import { MAJOR_MILESTONE_CONFIG, TIMELINE_CONFIG } from '@/components/ui/timeline/constants'
 import { MajorMilestone } from '@/components/ui/timeline/majorMilestone'
 import { MinorMilestone } from '@/components/ui/timeline/minorMilestone'
 import { Milestone, TimelinePlotPoint } from '@/components/ui/timeline/types'
@@ -11,22 +11,20 @@ import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
+const {
+  BAR_THICKNESS,
+  DEFAULT_ANIMATION_DURATION,
+  TIMELINE_HEIGHT_DESKTOP,
+  TIMELINE_HEIGHT_MOBILE,
+  TIMELINE_SPACING_DESKTOP,
+  TIMELINE_SPACING_MOBILE,
+} = TIMELINE_CONFIG
 const { HIGHLIGHTED_POINT_SIZE } = MAJOR_MILESTONE_CONFIG
 
 interface TimelineProps {
   countryCode: SupportedCountryCodes
   plotPoints: TimelinePlotPoint[]
 }
-
-const TIMELINE_HEIGHT_DESKTOP = 160
-const TIMELINE_SPACING_DESKTOP = 120
-
-const TIMELINE_HEIGHT_MOBILE = 400
-const TIMELINE_SPACING_MOBILE = 24
-
-const BAR_THICKNESS = 2
-
-const DEFAULT_ANIMATION_DURATION = 2_000
 
 export function Timeline(props: TimelineProps) {
   const isMobile = useIsMobile()
