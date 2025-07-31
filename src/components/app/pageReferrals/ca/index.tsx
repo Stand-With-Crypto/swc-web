@@ -1,6 +1,5 @@
 import { CA_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/ca/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
-import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { CaPageReferralsHeading } from '@/components/app/pageReferrals/ca/heading'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import { CaUserConstituencyRank } from '@/components/app/pageReferrals/ca/userConstituencyRank'
@@ -8,6 +7,7 @@ import {
   CaYourConstituencyRank,
   CaYourConstituencyRankSuspense,
 } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
+import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
 import {
   ReferralsCounter,
   UserReferralsCount,
@@ -31,7 +31,7 @@ const COUNTRY_CODE = SupportedCountryCodes.CA
 
 export function CaPageReferrals(props: PageReferralsProps) {
   const { page, leaderboardData, provinceCode } = props
-  const tab = RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES
+  const tab = CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES
   const urls = getIntlUrls(COUNTRY_CODE)
   const totalPages = props.totalPages || CA_COMMUNITY_PAGINATION_DATA[tab].totalPages
 

@@ -9,7 +9,7 @@ import {
   AU_RECENT_ACTIVITY_PAGINATION,
 } from '@/components/app/pageCommunity/au/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -39,7 +39,7 @@ export default async function AuCommunityRecentActivityPage(
 ) {
   const params = await props.params
   const { itemsPerPage } =
-    AU_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DIVISIONS]
+    AU_COMMUNITY_PAGINATION_DATA[AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS]
 
   const { page } = params
   const pageNum = validatePageNum(page ?? [])
@@ -61,7 +61,7 @@ export default async function AuCommunityRecentActivityPage(
   const dataProps: PageLeaderboardInferredProps = {
     leaderboardData,
     publicRecentActivity: undefined,
-    tab: RecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
+    tab: AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
   }
 
   const totalPages = Math.ceil(total / itemsPerPage)

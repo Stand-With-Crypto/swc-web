@@ -3,14 +3,14 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
+import { DefaultPlacesSelect } from '@/components/app/pageReferrals/common/defaultPlacesSelect'
+import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leaderboard/heading'
 import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
+import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
+import { YourLocationRanking } from '@/components/app/pageReferrals/common/yourLocationRanking'
 import { GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { DefaultPlacesSelect } from '@/components/app/pageReferrals/common/defaultPlacesSelect'
-import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leaderboard/heading'
-import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
-import { YourLocationRanking } from '@/components/app/pageReferrals/common/yourLocationRanking'
 
 function Heading() {
   return (
@@ -24,7 +24,7 @@ function Heading() {
 function UsDefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
 ) {
-  return <DefaultPlacesSelect title="Your district" placeholder="Enter your address" {...props} />
+  return <DefaultPlacesSelect placeholder="Enter your address" title="Your district" {...props} />
 }
 
 function DistrictNotFound(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>) {

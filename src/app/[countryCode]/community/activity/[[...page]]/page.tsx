@@ -9,7 +9,7 @@ import {
   UsPageCommunity,
 } from '@/components/app/pageCommunity/us'
 import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
@@ -29,7 +29,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 // pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
   return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
@@ -43,7 +43,7 @@ export default async function CommunityRecentActivityPage(props: Props) {
     leaderboardData: undefined,
     publicRecentActivity,
     sumDonationsByUser: undefined,
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
   }
 
   return (

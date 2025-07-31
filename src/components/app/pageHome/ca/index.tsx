@@ -1,6 +1,6 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -59,10 +59,10 @@ export function CaPageHome({
           <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
             data-testid="community-leaderboard-tabs"
-            defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+            defaultValue={CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
               {
-                value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                value: CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                 label: 'Recent activity',
                 content: (
                   <div className="space-y-4">
@@ -76,7 +76,7 @@ export function CaPageHome({
                 ),
               },
               {
-                value: RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES,
+                value: CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES,
                 label: 'Top constituencies',
                 content: (
                   <div className="space-y-4">

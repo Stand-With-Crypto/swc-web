@@ -1,4 +1,4 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { toBool } from '@/utils/shared/toBool'
 
 const maybeIgnorePreGeneration = (num: number) =>
@@ -17,12 +17,12 @@ export const CA_RECENT_ACTIVITY_PAGINATION: PaginationConfig = {
 }
 
 export const CA_COMMUNITY_PAGINATION_DATA: Record<
-  RecentActivityAndLeaderboardTabs,
+  CaRecentActivityAndLeaderboardTabs,
   PaginationConfig
 > = {
-  [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: CA_RECENT_ACTIVITY_PAGINATION,
+  [CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: CA_RECENT_ACTIVITY_PAGINATION,
 
-  [RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES]: {
+  [CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES]: {
     totalPages: 7,
     itemsPerPage: 50,
     totalPregeneratedPages: maybeIgnorePreGeneration(7),

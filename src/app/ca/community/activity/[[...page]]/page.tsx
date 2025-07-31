@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 import { CAGetPageData } from '@/components/app/pageCommunity'
 import { CaPageCommunity, PageLeaderboardInferredProps } from '@/components/app/pageCommunity/ca'
 import { CA_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/ca/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
@@ -39,7 +39,7 @@ export default async function CaCommunityRecentActivityPage(
   const dataProps: PageLeaderboardInferredProps = {
     leaderboardData: undefined,
     publicRecentActivity,
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    tab: CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
   }
 
   return (

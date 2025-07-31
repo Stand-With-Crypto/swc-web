@@ -1,8 +1,8 @@
 'use client'
 
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { UsUserDistrictRank } from '@/components/app/pageReferrals/us/userDistrictRank'
 import { UsYourDistrictRankSuspense } from '@/components/app/pageReferrals/us/yourDistrictRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_REFER,
   SectionNames,

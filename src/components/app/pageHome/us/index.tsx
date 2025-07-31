@@ -5,13 +5,13 @@ import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/us/delayedRecentActivity'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import {
   UsYourDistrictRank,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -65,10 +65,10 @@ export function UsPageHome({
           <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
             data-testid="community-leaderboard-tabs"
-            defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+            defaultValue={UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
               {
-                value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                value: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                 label: 'Recent activity',
                 content: (
                   <>
@@ -86,7 +86,7 @@ export function UsPageHome({
                 ),
               },
               {
-                value: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+                value: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
                 label: 'Top donations',
                 content: (
                   <>
@@ -114,7 +114,7 @@ export function UsPageHome({
                       <Button asChild variant="secondary">
                         <InternalLink
                           href={urls.community({
-                            tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+                            tab: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
                           })}
                         >
                           View all
@@ -125,7 +125,7 @@ export function UsPageHome({
                 ),
               },
               {
-                value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+                value: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
                 label: 'Top districts',
                 content: (
                   <div className="space-y-4">

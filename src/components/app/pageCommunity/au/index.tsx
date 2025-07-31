@@ -1,5 +1,5 @@
 import { AU_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/au/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import {
   AuYourDivisionRank,
@@ -29,26 +29,26 @@ const urls = getIntlUrls(countryCode)
 
 export type PageLeaderboardInferredProps =
   | {
-      tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+      tab: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
       publicRecentActivity: PublicRecentActivity
       leaderboardData: undefined
     }
   | {
-      tab: RecentActivityAndLeaderboardTabs.TOP_DIVISIONS
+      tab: AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS
       publicRecentActivity: undefined
       leaderboardData: DistrictRankingEntryWithRank[]
     }
 
 const TAB_OPTIONS: {
-  value: RecentActivityAndLeaderboardTabs
+  value: AuRecentActivityAndLeaderboardTabs
   label: string
 }[] = [
   {
-    value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    value: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
     label: 'Recent activity',
   },
   {
-    value: RecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
+    value: AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
     label: 'Top divisions',
   },
 ]
@@ -124,7 +124,7 @@ export function AuPageCommunity({
       </div>
 
       <div className="space-y-8 lg:space-y-10">
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY && (
+        {tab === AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY && (
           <RecentActivity>
             {pageNum === 1 ? (
               <RecentActivity.DynamicList
@@ -141,7 +141,7 @@ export function AuPageCommunity({
                 getPageUrl={pageNumber =>
                   urls.community({
                     pageNum: pageNumber,
-                    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                    tab: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                   })
                 }
                 totalPages={totalPages}
@@ -150,7 +150,7 @@ export function AuPageCommunity({
           </RecentActivity>
         )}
 
-        {tab === RecentActivityAndLeaderboardTabs.TOP_DIVISIONS && leaderboardData && (
+        {tab === AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS && leaderboardData && (
           <>
             <AuYourDivisionRankSuspense>
               <UserAddressProvider countryCode={countryCode}>

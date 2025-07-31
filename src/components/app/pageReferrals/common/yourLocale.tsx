@@ -1,5 +1,3 @@
-import { GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
-
 interface LocationNotFoundProps {
   children: React.ReactNode
 }

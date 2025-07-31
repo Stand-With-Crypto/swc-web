@@ -1,6 +1,6 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -60,10 +60,10 @@ export function AuPageHome({
           <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
             data-testid="community-leaderboard-tabs"
-            defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+            defaultValue={AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
               {
-                value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                value: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                 label: 'Recent activity',
                 content: (
                   <div className="space-y-4">
@@ -77,7 +77,7 @@ export function AuPageHome({
                 ),
               },
               {
-                value: RecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
+                value: AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
                 label: 'Top divisions',
                 content: (
                   <div className="space-y-4">

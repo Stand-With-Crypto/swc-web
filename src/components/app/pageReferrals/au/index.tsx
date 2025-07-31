@@ -1,6 +1,5 @@
 import { AU_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/au/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
-import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { AuPageReferralsHeading } from '@/components/app/pageReferrals/au/heading'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { AuUserDivisionRank } from '@/components/app/pageReferrals/au/userDivisionRank'
@@ -8,6 +7,7 @@ import {
   AuYourDivisionRank,
   AuYourDivisionRankSuspense,
 } from '@/components/app/pageReferrals/au/yourDivisionRanking'
+import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
 import {
   ReferralsCounter,
   UserReferralsCount,
@@ -32,7 +32,7 @@ const countryCode = SupportedCountryCodes.AU as const
 export function AuPageReferrals(props: PageReferralsProps) {
   const { page, leaderboardData, stateCode } = props
 
-  const tab = RecentActivityAndLeaderboardTabs.TOP_DIVISIONS
+  const tab = AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS
   const urls = getIntlUrls(countryCode)
   const totalPages = props.totalPages || AU_COMMUNITY_PAGINATION_DATA[tab].totalPages
 

@@ -1,11 +1,11 @@
 import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import {
   UsYourDistrictRank,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { PageLayout } from '@/components/ui/pageLayout'
@@ -24,12 +24,12 @@ const stateNameResolver = getStateNameResolver(countryCode)
 
 export type PageStateSpecificCommunityInferredProps =
   | {
-      tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+      tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
       publicRecentActivity: PublicRecentActivity
       leaderboardData: undefined
     }
   | {
-      tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+      tab: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS
       publicRecentActivity: undefined
       leaderboardData: DistrictRankingEntryWithRank[]
     }
@@ -53,25 +53,25 @@ export function UsStateSpecificCommunityPage({
   return (
     <PageLayout className="space-y-7">
       <PageLayout.Title>
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+        {tab === UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
           ? 'Recent activity'
           : `Top ${stateDisplayName} districts`}
       </PageLayout.Title>
       <PageLayout.Subtitle>
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+        {tab === UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
           ? `See what actions people in ${stateDisplayName} are taking`
           : `See which congressional districts in ${stateDisplayName} have the most advocates.`}
       </PageLayout.Subtitle>
 
       <div className="space-y-8 lg:space-y-10">
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
+        {tab === UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
           pageNum === 1 ? (
             <RecentActivity.DynamicList
               actions={publicRecentActivity}
               countryCode={countryCode}
               pageSize={
                 US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[
-                  RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+                  UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
                 ].itemsPerPage
               }
               stateCode={stateCode}
@@ -88,7 +88,7 @@ export function UsStateSpecificCommunityPage({
             </>
           )
         ) : null}
-        {tab === RecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
+        {tab === UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
           <>
             <UsYourDistrictRankSuspense>
               <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea>

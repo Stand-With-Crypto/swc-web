@@ -10,7 +10,7 @@ import {
 } from '@/components/app/pageCommunity/us'
 import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { UsStateSpecificCommunityPage } from '@/components/app/pageCommunity/us/stateSpecificPage'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import {
@@ -44,7 +44,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 // pre-generate the first few pages for each state.
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
 
   const params = Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).flatMap((stateCode: string) =>
     flatten(
@@ -65,7 +65,7 @@ export default async function CommunityStateSpecificRecentActivityPage(props: Pr
   if (!stateCode || !(stateCode.toUpperCase() in US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)) {
     redirect(
       urls.community({
-        tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+        tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
       }),
       RedirectType.replace,
     )
@@ -80,7 +80,7 @@ export default async function CommunityStateSpecificRecentActivityPage(props: Pr
     leaderboardData: undefined,
     publicRecentActivity,
     sumDonationsByUser: undefined,
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
   }
 
   return (

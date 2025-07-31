@@ -1,11 +1,11 @@
 import { DistrictLeaderboard } from '@/components/app/pageLocalPolicy/common/statePage/districtLeaderboardSection'
 import { Section } from '@/components/app/pageLocalPolicy/common/statePage/section'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import {
   UsYourDistrictRank,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
-import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'

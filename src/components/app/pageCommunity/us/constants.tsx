@@ -1,4 +1,4 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { toBool } from '@/utils/shared/toBool'
 
 const maybeIgnorePreGeneration = (num: number) =>
@@ -17,16 +17,16 @@ export const US_RECENT_ACTIVITY_PAGINATION: PaginationConfig = {
 }
 
 export const US_COMMUNITY_PAGINATION_DATA: Record<
-  RecentActivityAndLeaderboardTabs,
+  UsRecentActivityAndLeaderboardTabs,
   PaginationConfig
 > = {
-  [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: US_RECENT_ACTIVITY_PAGINATION,
-  [RecentActivityAndLeaderboardTabs.LEADERBOARD]: {
+  [UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: US_RECENT_ACTIVITY_PAGINATION,
+  [UsRecentActivityAndLeaderboardTabs.LEADERBOARD]: {
     totalPages: 4,
     itemsPerPage: 100,
     totalPregeneratedPages: maybeIgnorePreGeneration(4),
   },
-  [RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]: {
+  [UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]: {
     totalPages: 9,
     itemsPerPage: 50,
     totalPregeneratedPages: maybeIgnorePreGeneration(9),
@@ -34,12 +34,12 @@ export const US_COMMUNITY_PAGINATION_DATA: Record<
 }
 
 export const US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA: Record<string, PaginationConfig> = {
-  [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: {
+  [UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: {
     totalPages: 10,
     itemsPerPage: 30,
     totalPregeneratedPages: maybeIgnorePreGeneration(2),
   },
-  [RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]: {
+  [UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]: {
     totalPages: 4,
     itemsPerPage: 25,
     totalPregeneratedPages: maybeIgnorePreGeneration(2),

@@ -1,8 +1,9 @@
+import { isNil } from 'lodash-es'
+
 import { GetDistrictRankResponse } from '@/app/api/public/referrals/[countryCode]/[stateCode]/[districtNumber]/route'
 import { LeaderboardRow } from '@/components/app/pageReferrals/common/leaderboard/row'
 import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { isNil } from 'lodash-es'
 
 interface YourLocationRankingProps {
   locationRanking: GetDistrictRankResponse | null

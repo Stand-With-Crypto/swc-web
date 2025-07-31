@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
 import { CA_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/ca/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { CaPageReferrals } from '@/components/app/pageReferrals/ca'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
@@ -17,7 +17,7 @@ export const dynamicParams = true
 const COUNTRY_CODE = SupportedCountryCodes.CA
 
 const TOTAL_PREGENERATED_PAGES =
-  CA_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES].totalPages
+  CA_COMMUNITY_PAGINATION_DATA[CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES].totalPages
 
 type Props = PageProps<{ page: string[] }>
 
@@ -47,7 +47,7 @@ export async function generateStaticParams() {
 export default async function ReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } =
-    CA_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES]
+    CA_COMMUNITY_PAGINATION_DATA[CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES]
   const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {

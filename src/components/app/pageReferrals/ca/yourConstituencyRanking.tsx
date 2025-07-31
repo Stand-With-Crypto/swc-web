@@ -3,14 +3,14 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
+import { DefaultPlacesSelect } from '@/components/app/pageReferrals/common/defaultPlacesSelect'
+import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leaderboard/heading'
 import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
+import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
+import { YourLocationRanking } from '@/components/app/pageReferrals/common/yourLocationRanking'
 import { GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { DefaultPlacesSelect } from '@/components/app/pageReferrals/common/defaultPlacesSelect'
-import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
-import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leaderboard/heading'
-import { YourLocationRanking } from '@/components/app/pageReferrals/common/yourLocationRanking'
 
 function Heading() {
   return (
@@ -25,7 +25,7 @@ function CaDefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
 ) {
   return (
-    <DefaultPlacesSelect title="Your constituency" placeholder="Enter your address" {...props} />
+    <DefaultPlacesSelect placeholder="Enter your address" title="Your constituency" {...props} />
   )
 }
 
@@ -99,10 +99,10 @@ export function CaYourConstituencyRank() {
 
   return (
     <YourLocationRanking
-      locationRanking={electoralZoneRanking}
       countryCode={countryCode}
       heading={<Heading />}
       label={`${getCAProvinceOrTerritoryNameFromCode(provinceCode)} - ${constituency.zoneName}`}
+      locationRanking={electoralZoneRanking}
     />
   )
 }

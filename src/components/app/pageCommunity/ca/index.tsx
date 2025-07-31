@@ -1,5 +1,5 @@
 import { CA_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/ca/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import {
   CaYourConstituencyRank,
@@ -29,26 +29,26 @@ const urls = getIntlUrls(countryCode)
 
 export type PageLeaderboardInferredProps =
   | {
-      tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+      tab: CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
       publicRecentActivity: PublicRecentActivity
       leaderboardData: undefined
     }
   | {
-      tab: RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES
+      tab: CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES
       publicRecentActivity: undefined
       leaderboardData: DistrictRankingEntryWithRank[]
     }
 
 const TAB_OPTIONS: {
-  value: RecentActivityAndLeaderboardTabs
+  value: CaRecentActivityAndLeaderboardTabs
   label: string
 }[] = [
   {
-    value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    value: CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
     label: 'Recent activity',
   },
   {
-    value: RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES,
+    value: CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES,
     label: 'Top constituencies',
   },
 ]
@@ -124,7 +124,7 @@ export function CaPageCommunity({
       </div>
 
       <div className="space-y-8 lg:space-y-10">
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY && (
+        {tab === CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY && (
           <RecentActivity>
             {pageNum === 1 ? (
               <RecentActivity.DynamicList
@@ -141,7 +141,7 @@ export function CaPageCommunity({
                 getPageUrl={pageNumber =>
                   urls.community({
                     pageNum: pageNumber,
-                    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                    tab: CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                   })
                 }
                 totalPages={totalPages}
@@ -149,7 +149,7 @@ export function CaPageCommunity({
             </RecentActivity.Footer>
           </RecentActivity>
         )}
-        {tab === RecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES && (
+        {tab === CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES && (
           <>
             <CaYourConstituencyRankSuspense>
               <UserAddressProvider countryCode={countryCode}>

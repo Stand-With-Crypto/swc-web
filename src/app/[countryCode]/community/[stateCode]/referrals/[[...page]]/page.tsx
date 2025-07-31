@@ -10,7 +10,7 @@ import {
 } from '@/components/app/pageCommunity/us'
 import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { UsStateSpecificCommunityPage } from '@/components/app/pageCommunity/us/stateSpecificPage'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -43,7 +43,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   return Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).flatMap((stateCode: string) =>
     flatten(
       times(totalPregeneratedPages).map(i => ({
@@ -57,7 +57,7 @@ export async function generateStaticParams() {
 export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } =
-    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   const { page, stateCode, countryCode } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
@@ -66,7 +66,7 @@ export default async function CommunityReferralsPage(props: Props) {
   if (!stateCode || !(stateCode.toUpperCase() in US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP)) {
     redirect(
       urls.community({
-        tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+        tab: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
         pageNum,
       }),
       RedirectType.replace,
@@ -90,7 +90,7 @@ export default async function CommunityReferralsPage(props: Props) {
     leaderboardData,
     publicRecentActivity: undefined,
     sumDonationsByUser: undefined,
-    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+    tab: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
   }
 
   const totalPages = Math.ceil(total / itemsPerPage)

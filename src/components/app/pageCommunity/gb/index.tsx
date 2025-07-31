@@ -1,6 +1,6 @@
 import { GB_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/gb/constants'
 import { GBGetPageData } from '@/components/app/pageCommunity/gb/getPageData'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { PageLayout } from '@/components/ui/pageLayout'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -39,7 +39,7 @@ export function GbPageCommunity({
             getPageUrl={pageNumber =>
               urls.community({
                 pageNum: pageNumber,
-                tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
               })
             }
             totalPages={totalPages}

@@ -10,7 +10,7 @@ import {
   UsPageCommunity,
 } from '@/components/app/pageCommunity/us'
 import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -30,14 +30,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
 export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } =
-    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
@@ -57,7 +57,7 @@ export default async function CommunityReferralsPage(props: Props) {
     leaderboardData,
     publicRecentActivity: undefined,
     sumDonationsByUser: undefined,
-    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+    tab: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
   }
 
   return <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={undefined} />

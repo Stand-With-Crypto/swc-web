@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
 import { AU_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/au/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { AuPageReferrals } from '@/components/app/pageReferrals/au'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
@@ -17,7 +17,7 @@ export const dynamicParams = true
 const COUNTRY_CODE = SupportedCountryCodes.AU
 
 const TOTAL_PREGENERATED_PAGES =
-  AU_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DIVISIONS].totalPages
+  AU_COMMUNITY_PAGINATION_DATA[AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS].totalPages
 
 type Props = PageProps<{ page: string[] }>
 
@@ -47,7 +47,7 @@ export async function generateStaticParams() {
 export default async function ReferralsPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } =
-    AU_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DIVISIONS]
+    AU_COMMUNITY_PAGINATION_DATA[AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS]
   const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {

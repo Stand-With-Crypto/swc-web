@@ -10,7 +10,7 @@ import {
   UsPageCommunity,
 } from '@/components/app/pageCommunity/us'
 import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -31,7 +31,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 // pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.LEADERBOARD]
   const results = flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
   return results
 }
@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 export default async function CommunityLeaderboardPage(props: Props) {
   const params = await props.params
   const { itemsPerPage } =
-    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.LEADERBOARD]
   const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
@@ -53,7 +53,7 @@ export default async function CommunityLeaderboardPage(props: Props) {
   })
 
   const dataProps: PageLeaderboardInferredProps = {
-    tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+    tab: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
     sumDonationsByUser,
     publicRecentActivity: undefined,
     leaderboardData: undefined,

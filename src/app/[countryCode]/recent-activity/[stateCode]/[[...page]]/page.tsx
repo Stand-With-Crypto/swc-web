@@ -10,7 +10,7 @@ import {
 } from '@/components/app/pageCommunity/us'
 import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { UsStateSpecificCommunityPage } from '@/components/app/pageCommunity/us/stateSpecificPage'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import {
@@ -38,7 +38,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    US_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
   return Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).flatMap((stateCode: string) =>
     flatten(
       times(totalPregeneratedPages).map(i => ({
@@ -66,7 +66,7 @@ export default async function RecentActivityStateSpecificPage(props: Props) {
     leaderboardData: undefined,
     publicRecentActivity,
     sumDonationsByUser: undefined,
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
   }
 
   return (
