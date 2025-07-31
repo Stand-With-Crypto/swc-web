@@ -27,13 +27,13 @@ interface PageReferralsProps {
   totalPages?: number
 }
 
-const contryCode = SupportedCountryCodes.AU as const
+const countryCode = SupportedCountryCodes.AU as const
 
 export function AuPageReferrals(props: PageReferralsProps) {
   const { page, leaderboardData, stateCode } = props
 
   const tab = RecentActivityAndLeaderboardTabs.TOP_DIVISIONS
-  const urls = getIntlUrls(contryCode)
+  const urls = getIntlUrls(countryCode)
   const totalPages = props.totalPages || AU_COMMUNITY_PAGINATION_DATA[tab].totalPages
 
   return (
@@ -43,7 +43,7 @@ export function AuPageReferrals(props: PageReferralsProps) {
       />
 
       <AuYourDivisionRankSuspense>
-        <UserAddressProvider countryCode={contryCode} filterByAdministrativeArea={!!stateCode}>
+        <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea={!!stateCode}>
           {!stateCode && (
             <>
               <UserReferralUrlWithApi />
