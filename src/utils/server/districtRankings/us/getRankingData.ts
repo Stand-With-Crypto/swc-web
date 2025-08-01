@@ -5,24 +5,15 @@ import { logger } from '@/utils/shared/logger'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodUSStateDistrict } from '@/validation/fields/zodAddress'
+import {
+  AdvocatesCountByDistrictQueryResult,
+  ReferralsCountByDistrictQueryResult,
+} from '@/utils/server/districtRankings/types'
 
 export interface AdvocatesCountResult {
   state: USStateCode
   district: string
   count: number
-}
-
-interface AdvocatesCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  count: number
-}
-
-interface ReferralsCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  refer_actions_count: number
-  referrals: number
 }
 
 function isValidDistrict(state: string, district: string | null): boolean {

@@ -6,24 +6,15 @@ import {
   AUStateCode,
 } from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  AdvocatesCountByDistrictQueryResult,
+  ReferralsCountByDistrictQueryResult,
+} from '@/utils/server/districtRankings/types'
 
 export interface AdvocatesCountResult {
   state: AUStateCode
   district: string
   count: number
-}
-
-interface AdvocatesCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  count: number
-}
-
-interface ReferralsCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  refer_actions_count: number
-  referrals: number
 }
 
 function isValidState(state: string): boolean {

@@ -6,24 +6,15 @@ import {
   CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  AdvocatesCountByDistrictQueryResult,
+  ReferralsCountByDistrictQueryResult,
+} from '@/utils/server/districtRankings/types'
 
 export interface AdvocatesCountResult {
   state: CAProvinceOrTerritoryCode
   district: string
   count: number
-}
-
-interface AdvocatesCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  count: number
-}
-
-interface ReferralsCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  refer_actions_count: number
-  referrals: number
 }
 
 function isValidProvince(state: string): boolean {
