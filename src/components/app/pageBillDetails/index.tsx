@@ -2,6 +2,7 @@ import { orderBy } from 'lodash-es'
 import { FileTextIcon } from 'lucide-react'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { TimelineSection } from '@/components/app/pageBillDetails/timelineSection'
 import { VotesSection } from '@/components/app/pageBillDetails/votesSection'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
@@ -40,6 +41,8 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           />
         </div>
       </section>
+
+      <TimelineSection bill={bill} countryCode={countryCode} />
 
       {bill.analysis && (
         <section className="mb-20 space-y-6 text-center md:mb-28 lg:space-y-10">
