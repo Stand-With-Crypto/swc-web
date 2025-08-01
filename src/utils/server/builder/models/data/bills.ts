@@ -181,6 +181,5 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
       })),
     ],
     relatedUrls: bill.relatedUrls || [],
-    relationships: [],
   }
 }

@@ -1,6 +1,5 @@
 import { array, boolean, nativeEnum, object, string, z } from 'zod'
 
-import { DTSI_BillRelationshipsFragment } from '@/data/dtsi/generated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export enum BILL_CHAMBER_ORIGIN_OPTIONS {
@@ -92,7 +91,6 @@ export interface SWCBill {
     title: string
     url: string
   }[]
-  relationships: DTSI_BillRelationshipsFragment[]
   summary: string
   title: string
   usAdministrativeAreaLevel1?: string
