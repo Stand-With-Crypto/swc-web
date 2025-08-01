@@ -1,7 +1,11 @@
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
-import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
+import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
+import {
+  UsYourDistrictRank,
+  UsYourDistrictRankSuspense,
+} from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
@@ -31,38 +35,38 @@ const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 const urls = getIntlUrls(countryCode)
 
 const TAB_OPTIONS: {
-  value: RecentActivityAndLeaderboardTabs
+  value: UsRecentActivityAndLeaderboardTabs
   label: string
 }[] = [
   {
-    value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+    value: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
     label: 'Recent activity',
   },
   {
-    value: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+    value: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
     label: 'Top donations',
   },
   {
-    value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+    value: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
     label: 'Top districts',
   },
 ]
 
 export type PageLeaderboardInferredProps =
   | {
-      tab: RecentActivityAndLeaderboardTabs.LEADERBOARD
+      tab: UsRecentActivityAndLeaderboardTabs.LEADERBOARD
       sumDonationsByUser: SumDonationsByUser
       publicRecentActivity: undefined
       leaderboardData: undefined
     }
   | {
-      tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+      tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
       sumDonationsByUser: undefined
       publicRecentActivity: PublicRecentActivity
       leaderboardData: undefined
     }
   | {
-      tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+      tab: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS
       sumDonationsByUser: undefined
       publicRecentActivity: undefined
       leaderboardData: DistrictRankingEntryWithRank[]
@@ -81,7 +85,7 @@ export function UsPageCommunity({
   publicRecentActivity,
   sumDonationsByUser,
   tab,
-  totalPages = COMMUNITY_PAGINATION_DATA[tab].totalPages,
+  totalPages = US_COMMUNITY_PAGINATION_DATA[tab].totalPages,
 }: PageLeaderboardProps) {
   return (
     <PageLayout className="space-y-7">
@@ -147,13 +151,13 @@ export function UsPageCommunity({
       </div>
 
       <div className="space-y-8 lg:space-y-10">
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
+        {tab === UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
           pageNum === 1 ? (
             <RecentActivity.DynamicList
               actions={publicRecentActivity}
               countryCode={countryCode}
               pageSize={
-                COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+                US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
                   .itemsPerPage
               }
             />
@@ -169,7 +173,7 @@ export function UsPageCommunity({
             </>
           )
         ) : null}
-        {tab === RecentActivityAndLeaderboardTabs.LEADERBOARD && (
+        {tab === UsRecentActivityAndLeaderboardTabs.LEADERBOARD && (
           <>
             {sumDonationsByUser.map((donor, index) => (
               <SumDonationsByUserRow
@@ -181,10 +185,14 @@ export function UsPageCommunity({
             ))}
           </>
         )}
-        {tab === RecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
+        {tab === UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
           <>
-            <YourDistrictRank />
-            <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
+            <UsYourDistrictRankSuspense>
+              <UserAddressProvider countryCode={countryCode}>
+                <UsYourDistrictRank />
+              </UserAddressProvider>
+            </UsYourDistrictRankSuspense>
+            <USAdvocatesLeaderboard data={leaderboardData} />
           </>
         )}
       </div>

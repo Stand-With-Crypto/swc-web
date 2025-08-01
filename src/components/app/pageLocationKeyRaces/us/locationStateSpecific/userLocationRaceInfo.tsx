@@ -13,8 +13,8 @@ import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { formatGetDTSIPeopleFromAddressNotFoundReason } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
@@ -62,7 +62,7 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
 
 function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDistrictFromAddress({
+  const res = useGetElectoralZoneFromAddress({
     address: address === 'loading' ? null : address?.description,
     placeId: address === 'loading' ? null : address?.place_id,
   })

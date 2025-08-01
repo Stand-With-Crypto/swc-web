@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react'
 
-import { ReferralsCounter } from '@/components/app/pageReferrals/referralsCounter'
+import { ReferralsCounter } from '@/components/app/pageReferrals/common/referralsCounter'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { PageTitle } from '@/components/ui/pageTitleText'

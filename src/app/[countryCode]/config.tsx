@@ -1,7 +1,7 @@
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
 import * as Icons from '@/components/app/navbar/navbarDrawerIcons'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { usExternalUrls } from '@/utils/shared/urls/externalUrls'
@@ -38,7 +38,7 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.MissionIcon />,
         },
         {
-          href: urls.community({ tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY }),
+          href: urls.community({ tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY }),
           text: 'Community',
           icon: <Icons.CommunityIcon />,
         },
@@ -97,7 +97,7 @@ export const footerConfig: FooterProps = {
       text: 'Questionnaire',
     },
     {
-      href: urls.community({ tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY }),
+      href: urls.community({ tab: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY }),
       text: 'Community',
     },
     { href: urls.contentClarity(), text: 'CLARITY resources' },

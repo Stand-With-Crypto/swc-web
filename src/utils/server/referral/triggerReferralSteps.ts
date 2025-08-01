@@ -3,7 +3,6 @@ import * as Sentry from '@sentry/nextjs'
 import { after } from 'next/server'
 
 import { actionCreateUserActionReferral } from '@/actions/actionCreateUserActionReferral'
-import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
 import { createDistrictRankingIncrementer } from '@/utils/server/districtRankings/upsertRankings'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
@@ -74,8 +73,8 @@ export function triggerReferralSteps({
 
         const [incrementDistrictAdvocatesRanking, incrementDistrictReferralsRanking] =
           await Promise.all([
-            createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_ADVOCATES_RANKING),
-            createDistrictRankingIncrementer(REDIS_KEYS.DISTRICT_REFERRALS_RANKING),
+            createDistrictRankingIncrementer(countryCode, 'advocates'),
+            createDistrictRankingIncrementer(countryCode, 'referrals'),
           ])
 
         if (newUser.address) {
