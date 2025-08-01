@@ -43,7 +43,7 @@ async function actionCreateUserActionPollWithoutMiddleware(
 ) {
   logger.info('triggered')
 
-  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({ context: 'unauthenticated' })
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({ context: 'authenticated' })
 
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
@@ -128,8 +128,6 @@ async function actionCreateUserActionPollWithoutMiddleware(
     waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
-
-  await triggerRateLimiterAtMostOnce()
 
   await prismaClient.userAction.create({
     data: {
