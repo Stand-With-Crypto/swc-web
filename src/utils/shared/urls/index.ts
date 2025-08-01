@@ -1,5 +1,6 @@
 import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
 import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
@@ -59,6 +60,7 @@ type RecentActivityAndLeaderboardTabs =
   | UsRecentActivityAndLeaderboardTabs
   | AuRecentActivityAndLeaderboardTabs
   | CaRecentActivityAndLeaderboardTabs
+  | GbRecentActivityAndLeaderboardTabs
 
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -147,6 +149,7 @@ export const getIntlUrls = (
           case UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           case AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           case CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case GbRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
             return '/community/activity'
         }
