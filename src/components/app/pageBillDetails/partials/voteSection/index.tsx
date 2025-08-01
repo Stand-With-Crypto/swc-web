@@ -85,7 +85,7 @@ function VotesSection({ relationships, countryCode }: VotesSectionProps) {
       )}
 
       {shouldReturn(filters.stance, STANDARD_OPTION) && (
-        <div className="mt-10 w-full border border-muted" />
+        <div className="bt-0 mt-10 w-full border border-muted" />
       )}
 
       {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.VOTED_FOR) && (
