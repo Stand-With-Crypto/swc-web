@@ -1,12 +1,20 @@
 'use client'
 
-import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
+import { CSSProperties, useEffect, useMemo, useState } from 'react'
+import {
+  animate,
+  motion,
+  MotionStyle,
+  useMotionValue,
+  useMotionValueEvent,
+  useTransform,
+} from 'motion/react'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import { MAJOR_MILESTONE_CONFIG, TIMELINE_CONFIG } from '@/components/ui/timeline/constants'
 import { MajorMilestone } from '@/components/ui/timeline/majorMilestone'
 import { MinorMilestone } from '@/components/ui/timeline/minorMilestone'
-import { Milestone, TimelinePlotPoint } from '@/components/ui/timeline/types'
+import { TimelinePlotPoint } from '@/components/ui/timeline/types'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -30,11 +38,22 @@ export function Timeline(props: TimelineProps) {
   const isMobile = useIsMobile()
   const hasHydrated = useHasHydrated()
 
-  const { currentMilestone, majorMilestones, minorMilestones } = useMemo(() => {
-    const plotPoints = props.plotPoints.map(point => ({
-      ...point,
-      date: point.date ? (point.date instanceof Date ? point.date : new Date(point.date)) : null,
-    }))
+  const { majorMilestones, minorMilestones, targetPercent } = useMemo(() => {
+    const plotPoints = props.plotPoints
+      .map(point => ({
+        ...point,
+        date: point.date ? (point.date instanceof Date ? point.date : new Date(point.date)) : null,
+      }))
+      .sort((a, b) => {
+        if (!a.date || !b.date) {
+          return 0
+        }
+        return a.date.getTime() - b.date.getTime()
+      })
+      .map((point, index) => ({
+        ...point,
+        id: index,
+      }))
 
     const majorMilestones = plotPoints
       .filter(plotPoint => plotPoint.isMajorMilestone)
@@ -69,9 +88,7 @@ export function Timeline(props: TimelineProps) {
 
         const xPos = maxLength / (siblings.length + 1)
 
-        const index = siblings.findIndex(({ date }) =>
-          date && point.date ? date.getTime() === point.date.getTime() : false,
-        )
+        const index = siblings.findIndex(({ id }) => id === point.id)
 
         return {
           ...point,
@@ -79,20 +96,17 @@ export function Timeline(props: TimelineProps) {
         }
       })
 
-    const lastHighlightedMilestoneDate = plotPoints.findLast(point => point.isHighlighted)?.date
-    const currentMilestone =
-      [...majorMilestones, ...minorMilestones].find(
-        point => point.date === lastHighlightedMilestoneDate,
-      ) || majorMilestones[0]
+    const lastHighlightedMilestone = plotPoints.findLast(point => point.isHighlighted)
+    const milestones = [...majorMilestones, ...minorMilestones]
+    const currentMilestone = lastHighlightedMilestone
+      ? milestones.find(point => point.id === lastHighlightedMilestone.id) || majorMilestones[0]
+      : majorMilestones[0]
+    const targetPercent = currentMilestone.positionPercent
 
-    return { currentMilestone, majorMilestones, minorMilestones }
+    return { majorMilestones, minorMilestones, targetPercent }
   }, [props.plotPoints])
 
-  const { currentPercent, majorMilestonesCount, minorMilestonesCount } = useTimelineAnimation({
-    majorMilestones,
-    minorMilestones,
-    targetPercent: currentMilestone.positionPercent,
-  })
+  const { progress, size } = useTimelineAnimation(targetPercent)
 
   const { backBarStyles, frontBarStyles, wrapperStyles } = useMemo(() => {
     const wrapperStyles: CSSProperties = isMobile
@@ -116,27 +130,25 @@ export function Timeline(props: TimelineProps) {
       ...(isMobile ? { height: '100%' } : { width: '100%' }),
     }
 
-    const frontBarSize = `${currentPercent.toFixed(2)}%`
-
-    const frontBarStyles: CSSProperties = {
+    const frontBarStyles: MotionStyle = {
       ...barStyles,
-      ...(isMobile ? { height: frontBarSize } : { width: frontBarSize }),
+      ...(isMobile ? { height: size } : { width: size }),
     }
 
     return { backBarStyles, frontBarStyles, wrapperStyles }
-  }, [currentPercent, isMobile])
+  }, [isMobile, size])
 
   return hasHydrated ? (
     <div className="relative" style={wrapperStyles}>
       <div className="absolute bg-muted-foreground/50" style={backBarStyles} />
-      <div className="absolute bg-primary-cta" style={frontBarStyles} />
+      <motion.div className="absolute bg-primary-cta" style={frontBarStyles} />
 
       {majorMilestones.map((majorMilestone, index) => {
         return (
           <MajorMilestone
             countryCode={props.countryCode}
             isFirstMilestone={index === 0}
-            isHighlightEnabled={index < majorMilestonesCount}
+            isHighlightEnabled={majorMilestone.positionPercent <= progress}
             isMobile={isMobile}
             key={index}
             milestone={majorMilestone}
@@ -148,7 +160,7 @@ export function Timeline(props: TimelineProps) {
         return (
           <MinorMilestone
             countryCode={props.countryCode}
-            isHighlightEnabled={index < minorMilestonesCount}
+            isHighlightEnabled={minorMilestone.positionPercent <= progress}
             isMobile={isMobile}
             key={index}
             milestone={minorMilestone}
@@ -161,57 +173,26 @@ export function Timeline(props: TimelineProps) {
   )
 }
 
-function useTimelineAnimation({
-  duration = DEFAULT_ANIMATION_DURATION,
-  majorMilestones,
-  minorMilestones,
-  targetPercent,
-}: {
-  duration?: number
-  majorMilestones: Milestone[]
-  minorMilestones: Milestone[]
-  targetPercent: number
-}) {
-  const [currentPercent, setCurrentPercent] = useState(0)
+function useTimelineAnimation(targetPercent: number) {
+  const progress = useMotionValue(0)
+  const [currentProgress, setCurrentProgress] = useState(0)
 
-  const animationFrameRef = useRef<number | null>(null)
-
-  const startTimeRef = useRef(0)
-
-  const majorMilestonesCount = useMemo(
-    () => majorMilestones.filter(milestone => milestone.positionPercent <= currentPercent).length,
-    [currentPercent, majorMilestones],
-  )
-  const minorMilestonesCount = useMemo(
-    () => minorMilestones.filter(milestone => milestone.positionPercent <= currentPercent).length,
-    [currentPercent, minorMilestones],
-  )
+  useMotionValueEvent(progress, 'change', latest => {
+    setCurrentProgress(Number(latest.toFixed(2)))
+  })
 
   useEffect(() => {
-    setCurrentPercent(0)
-
-    startTimeRef.current = performance.now()
-
-    const runAnimationFrame = (currentTime: number) => {
-      const elapsedTime = currentTime - startTimeRef.current
-      const progress = Math.min(elapsedTime / duration, 1)
-      const newPercent = progress * targetPercent
-
-      setCurrentPercent(Math.min(newPercent, targetPercent))
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(runAnimationFrame)
-      }
-    }
-
-    animationFrameRef.current = requestAnimationFrame(runAnimationFrame)
+    const controls = animate(progress, targetPercent, {
+      duration: DEFAULT_ANIMATION_DURATION,
+      ease: 'easeOut',
+    })
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
+      controls.stop()
     }
-  }, [targetPercent, duration])
+  }, [progress, targetPercent])
 
-  return { currentPercent, majorMilestonesCount, minorMilestonesCount }
+  const size = useTransform(progress, value => `${value}%`)
+
+  return { progress: currentProgress, size }
 }

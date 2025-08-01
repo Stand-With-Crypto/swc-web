@@ -9,5 +9,6 @@ export interface TimelinePlotPoint {
 
 export interface Milestone extends TimelinePlotPoint {
   date: Date | null
+  id: number
   positionPercent: number
 }
