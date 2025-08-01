@@ -1,15 +1,15 @@
 import { UserActionType } from '@prisma/client'
 
+import {
+  AdvocatesCountByDistrictQueryResult,
+  ReferralsCountByDistrictQueryResult,
+} from '@/utils/server/districtRankings/types'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
   AUStateCode,
 } from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import {
-  AdvocatesCountByDistrictQueryResult,
-  ReferralsCountByDistrictQueryResult,
-} from '@/utils/server/districtRankings/types'
 
 export interface AdvocatesCountResult {
   state: AUStateCode

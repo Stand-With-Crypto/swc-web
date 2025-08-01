@@ -1,15 +1,15 @@
 import { UserActionType } from '@prisma/client'
 
+import {
+  AdvocatesCountByDistrictQueryResult,
+  ReferralsCountByDistrictQueryResult,
+} from '@/utils/server/districtRankings/types'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import {
-  AdvocatesCountByDistrictQueryResult,
-  ReferralsCountByDistrictQueryResult,
-} from '@/utils/server/districtRankings/types'
 
 export interface AdvocatesCountResult {
   state: CAProvinceOrTerritoryCode
