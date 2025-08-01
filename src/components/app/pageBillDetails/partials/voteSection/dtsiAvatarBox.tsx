@@ -47,7 +47,7 @@ const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
   return (
     <LinkBox
       className={cn(
-        'flex h-[188px] w-full min-w-[160px] flex-col items-center gap-2 rounded-xl bg-gray-100 p-4 text-center transition-all  sm:max-w-[200px]',
+        'flex h-[188px] w-full min-w-[160px] flex-col items-center gap-2 rounded-xl bg-muted p-4 text-center transition-all  sm:max-w-[200px]',
         className,
       )}
     >
@@ -75,9 +75,9 @@ const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
             prefetch={prefetch}
           >
             {dtsiPersonFullName(person)}
-            {!!politicalAffiliationCategoryAbbr && ` (${politicalAffiliationCategoryAbbr})`}
           </InternalLink>
           <p className="text-sm text-fontcolor-muted">
+            {!!politicalAffiliationCategoryAbbr && `(${politicalAffiliationCategoryAbbr}) `}
             {person.primaryRole ? roleNameResolver(person.primaryRole) : '-'}
           </p>
         </div>

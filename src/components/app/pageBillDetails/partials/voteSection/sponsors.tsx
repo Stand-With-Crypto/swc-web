@@ -34,7 +34,7 @@ function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
     <div className="mx-4 flex flex-col gap-2 md:mx-6">
       <div className="flex flex-col gap-2 md:flex-row">
         <div className="mb-10 min-w-[160px] md:mb-0">
-          <strong className="mb-6 block text-xl">Sponsor</strong>
+          <strong className="mb-6 block text-xl font-semibold">Sponsor</strong>
           {sponsors?.map(person => (
             <DTSIAvatarBox
               className="m-auto h-[188px] max-w-40 sm:m-0"
@@ -46,8 +46,10 @@ function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
         </div>
 
         <div className="flex-1">
-          <strong className="mb-6 block text-xl">Cosponsors ({totalItems})</strong>
-          <AvatarGrid>
+          <strong className="mb-6 block text-xl font-semibold">
+            Cosponsors <span className="font-normal">({totalItems})</span>
+          </strong>
+          <AvatarGrid className="sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {list?.map(person => (
               <DTSIAvatarBox countryCode={countryCode} key={person.slug} person={person} />
             ))}
