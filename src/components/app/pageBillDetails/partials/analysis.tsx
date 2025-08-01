@@ -1,4 +1,4 @@
-import { FileTextIcon } from '@radix-ui/react-icons'
+import { FileTextIcon } from 'lucide-react'
 
 import { ExternalLink } from '@/components/ui/link'
 import { StyledHtmlContent } from '@/components/ui/styledHtmlContent'
@@ -29,7 +29,7 @@ function Analysis({ analysis, relatedUrls }: AnalysisProps) {
                 href={relatedUrl.url}
                 key={relatedUrl.url}
               >
-                <FileTextIcon className="size-6" />
+                <FileTextIcon />
                 <span className="flex-1">{relatedUrl.title}</span>
               </ExternalLink>
             ))}
