@@ -8,64 +8,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  DTSI_BillPersonRelationshipType,
-  DTSI_PersonPoliticalAffiliationCategory,
-  DTSI_PersonRoleCategory,
-} from '@/data/dtsi/generated'
 import { cn } from '@/utils/web/cn'
 
-export const STANDARD_OPTION = 'All'
-
-const STANCE_OPTIONS = [
-  STANDARD_OPTION,
-  DTSI_BillPersonRelationshipType.SPONSOR,
-  DTSI_BillPersonRelationshipType.VOTED_FOR,
-  DTSI_BillPersonRelationshipType.VOTED_AGAINST,
-] as const
-type STANCE_OPTION = (typeof STANCE_OPTIONS)[number]
-const STANCE_OPTIONS_DISPLAY_NAME: Record<STANCE_OPTION, string> = {
-  [STANDARD_OPTION]: STANDARD_OPTION,
-  [DTSI_BillPersonRelationshipType.SPONSOR]: 'Sponsor & Co-sponsors',
-  [DTSI_BillPersonRelationshipType.VOTED_FOR]: 'Voted for',
-  [DTSI_BillPersonRelationshipType.VOTED_AGAINST]: 'Voted against',
-}
-
-const ROLE_OPTIONS = [
-  STANDARD_OPTION,
-  DTSI_PersonRoleCategory.SENATE,
-  DTSI_PersonRoleCategory.CONGRESS,
-] as const
-type ROLE_OPTION = (typeof ROLE_OPTIONS)[number]
-const ROLE_OPTIONS_DISPLAY_NAME: Record<ROLE_OPTION, string> = {
-  [STANDARD_OPTION]: STANDARD_OPTION,
-  [DTSI_PersonRoleCategory.SENATE]: 'Senator',
-  [DTSI_PersonRoleCategory.CONGRESS]: 'Congressperson',
-}
-
-const PARTY_OPTIONS = [
-  STANDARD_OPTION,
-  DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-  DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-] as const
-type PARTY_OPTION = (typeof PARTY_OPTIONS)[number]
-const PARTY_OPTIONS_DISPLAY_NAME: Record<PARTY_OPTION, string> = {
-  [STANDARD_OPTION]: STANDARD_OPTION,
-  [DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN]: 'Republican',
-  [DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT]: 'Democratic',
-}
-
-export interface FILTER_KEYS {
-  stance: STANCE_OPTION
-  role: ROLE_OPTION
-  party: PARTY_OPTION
-}
-
-export const getDefaultFilters = (): FILTER_KEYS => ({
-  stance: STANDARD_OPTION,
-  role: STANDARD_OPTION,
-  party: STANDARD_OPTION,
-})
+import {
+  getDefaultFilters,
+  PARTY_OPTIONS_DISPLAY_NAME,
+  ROLE_OPTIONS_DISPLAY_NAME,
+  STANCE_OPTIONS_DISPLAY_NAME,
+} from './constants'
+import type { FILTER_KEYS, PARTY_OPTION, ROLE_OPTION, STANCE_OPTION } from './types'
+import { PARTY_OPTIONS, ROLE_OPTIONS, STANCE_OPTIONS, STANDARD_OPTION } from './types'
 
 interface FiltersProps {
   filtersValue: FILTER_KEYS
@@ -179,3 +131,8 @@ export function Filters(props: FiltersProps) {
     </div>
   )
 }
+
+// Re-export the types and constants for backward compatibility
+export type { FILTER_KEYS } from './types'
+export { getDefaultFilters } from './constants'
+export { STANDARD_OPTION } from './types'

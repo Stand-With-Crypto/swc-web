@@ -2,7 +2,8 @@ import { useMemo } from 'react'
 
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
-import { FILTER_KEYS, Filters } from './filters'
+import { Filters } from './filters'
+import { FILTER_KEYS } from './types'
 
 const getVotes = (list: DTSI_Person[], category: DTSI_PersonPoliticalAffiliationCategory) => {
   return list.filter(person => person.politicalAffiliationCategory === category).length

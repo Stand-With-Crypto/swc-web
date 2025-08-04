@@ -2,17 +2,15 @@
 
 import { useMemo, useState } from 'react'
 
-import {
-  FILTER_KEYS,
-  getDefaultFilters,
-  STANDARD_OPTION,
-} from '@/components/app/pageBillDetails/partials/voteSection/filters'
 import { BillDetails } from '@/data/bills/types'
 import { DTSI_BillPersonRelationshipType, DTSI_Person } from '@/data/dtsi/generated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
+import { getDefaultFilters } from './constants'
 import { Header } from './header'
 import { Sponsors } from './sponsors'
+import { FILTER_KEYS } from './types'
+import { STANDARD_OPTION } from './types'
 import { VotedAgainst } from './votedAgainst'
 import { VotedFor } from './votedFor'
 
