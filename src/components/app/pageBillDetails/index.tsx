@@ -1,77 +1,28 @@
-import { orderBy } from 'lodash-es'
-import { FileTextIcon } from 'lucide-react'
+import { BillDetails } from '@/data/bills/types'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { TimelineSection } from '@/components/app/pageBillDetails/timelineSection'
-import { VotesSection } from '@/components/app/pageBillDetails/votesSection'
-import { FormattedDatetime } from '@/components/ui/formattedDatetime'
-import { ExternalLink } from '@/components/ui/link'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { StyledHtmlContent } from '@/components/ui/styledHtmlContent'
-import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCBill } from '@/utils/shared/zod/getSWCBills'
+import { Analysis } from './partials/analysis'
+import { Header } from './partials/header'
+import { TimelineSection } from './partials/timelineSection'
+import { VotesSection } from './partials/voteSection'
 
 interface PageBillDetailsProps {
-  bill: SWCBill
+  bill: BillDetails
   countryCode: SupportedCountryCodes
 }
 
 export function PageBillDetails(props: PageBillDetailsProps) {
   const { bill, countryCode } = props
 
-  const relationships = orderBy(bill.relationships, x => x.person.firstName)
-
   return (
-    <div className="standard-spacing-from-navbar container mt-10 md:mt-28">
-      <section className="space-y-8 text-center">
-        <div>
-          <PageTitle>{bill.title}</PageTitle>
-          <p className="mb-8 mt-5 font-semibold text-fontcolor-muted">
-            <FormattedDatetime
-              date={new Date(bill.dateIntroduced)}
-              dateStyle="medium"
-              locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
-            />
-          </p>
-          <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
-
-          <StyledHtmlContent
-            className="my-10 [&_*]:text-fontcolor-muted [&_h2]:text-lg [&_h2]:font-normal"
-            html={bill.summary}
-          />
-        </div>
-      </section>
+    <section className="standard-spacing-from-navbar mt-10 md:mt-28">
+      <Header bill={bill} countryCode={countryCode} />
 
       <TimelineSection bill={bill} countryCode={countryCode} />
 
-      {bill.analysis && (
-        <section className="mb-20 space-y-6 text-center md:mb-28 lg:space-y-10">
-          <p className="text-4xl font-bold">Analysis</p>
-          <div className="flex flex-col gap-10 lg:flex-row">
-            <StyledHtmlContent
-              className="w-full space-y-4 text-start text-lg [&_*::marker]:text-fontcolor-muted [&_*]:text-fontcolor-muted"
-              html={bill.analysis}
-            />
-            {bill.relatedUrls.length > 0 && (
-              <div className="flex h-max w-full flex-col gap-6 rounded-3xl border border-muted p-6 lg:w-[478px]">
-                <strong className="text-lg">More Resources</strong>
-                {bill.relatedUrls.map(relatedUrl => (
-                  <ExternalLink
-                    className="flex w-full items-center gap-4 text-start text-primary"
-                    href={relatedUrl.url}
-                    key={relatedUrl.url}
-                  >
-                    <FileTextIcon size={24} />
-                    <span className="flex-1">{relatedUrl.title}</span>
-                  </ExternalLink>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-      )}
+      {bill.analysis && <Analysis analysis={bill.analysis} relatedUrls={bill.relatedUrls} />}
 
-      <VotesSection countryCode={countryCode} votes={relationships} />
-    </div>
+      <VotesSection countryCode={countryCode} relationships={bill.relationships} />
+    </section>
   )
 }
