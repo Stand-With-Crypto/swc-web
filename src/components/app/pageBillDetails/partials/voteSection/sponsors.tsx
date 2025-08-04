@@ -4,9 +4,9 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { useLimitItems } from '@/hooks/useLimitItems'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import AvatarGrid from './avatarGrid'
-import DTSIAvatarBox from './dtsiAvatarBox'
-import ShowAllButton from './showAllButton'
+import { AvatarGrid } from './avatarGrid'
+import { DTSIAvatarBox } from './dtsiAvatarBox'
+import { ShowAllButton } from './showAllButton'
 
 const COSPONSORS_ITEMS_LIMIT = {
   DESKTOP: 5,
@@ -19,7 +19,7 @@ interface SponsorsProps {
   countryCode: SupportedCountryCodes
 }
 
-function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
+export function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
   const isMobile = useIsMobile()
 
   const columnLimit = COSPONSORS_ITEMS_LIMIT[isMobile ? 'MOBILE' : 'DESKTOP']
@@ -62,5 +62,3 @@ function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
     </div>
   )
 }
-
-export default Sponsors

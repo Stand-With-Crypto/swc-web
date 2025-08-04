@@ -8,7 +8,7 @@ const getVotes = (list: DTSI_Person[], category: DTSI_PersonPoliticalAffiliation
   return list.filter(person => person.politicalAffiliationCategory === category).length
 }
 
-function Header({
+export function Header({
   filters,
   setFilters,
   votedAgainst,
@@ -104,5 +104,3 @@ function Header({
     </div>
   )
 }
-
-export default Header

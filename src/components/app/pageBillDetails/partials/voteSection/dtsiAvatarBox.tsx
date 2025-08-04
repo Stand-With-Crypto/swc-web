@@ -36,7 +36,7 @@ interface DTSIAvatarBoxProps extends Omit<DTSIAvatarProps, 'size'> {
 
 const AVATAR_SIZE = 90
 
-const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
+export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
   const { person, countryCode, prefetch = false, className, ...avatarProps } = props
 
   const politicalAffiliationCategoryAbbr =
@@ -85,5 +85,3 @@ const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
     </LinkBox>
   )
 }
-
-export default DTSIAvatarBox

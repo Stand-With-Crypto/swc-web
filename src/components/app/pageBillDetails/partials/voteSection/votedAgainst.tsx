@@ -1,20 +1,20 @@
 import { ThumbsDown } from 'lucide-react'
 
-import ShowAllButton from '@/components/app/pageBillDetails/partials/voteSection/showAllButton'
+import { ShowAllButton } from '@/components/app/pageBillDetails/partials/voteSection/showAllButton'
 import { BillDetails } from '@/data/bills/types'
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { useLimitItems } from '@/hooks/useLimitItems'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import AvatarGrid from './avatarGrid'
-import DTSIAvatarBox from './dtsiAvatarBox'
+import { AvatarGrid } from './avatarGrid'
+import { DTSIAvatarBox } from './dtsiAvatarBox'
 
 interface VotedAgainstProps {
   votedAgainst: BillDetails['relationships']['votedAgainst']
   countryCode: SupportedCountryCodes
 }
 
-function VotedAgainst({ votedAgainst, countryCode }: VotedAgainstProps) {
+export function VotedAgainst({ votedAgainst, countryCode }: VotedAgainstProps) {
   const { list, toggleShouldLimit, hasMore, isShowingAll, totalItems } = useLimitItems<DTSI_Person>(
     {
       items: votedAgainst,
@@ -40,5 +40,3 @@ function VotedAgainst({ votedAgainst, countryCode }: VotedAgainstProps) {
     </div>
   )
 }
-
-export default VotedAgainst

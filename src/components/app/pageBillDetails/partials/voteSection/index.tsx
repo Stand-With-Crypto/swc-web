@@ -11,10 +11,10 @@ import { BillDetails } from '@/data/bills/types'
 import { DTSI_BillPersonRelationshipType, DTSI_Person } from '@/data/dtsi/generated'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import Header from './header'
-import Sponsors from './sponsors'
-import VotedAgainst from './votedAgainst'
-import VotedFor from './votedFor'
+import { Header } from './header'
+import { Sponsors } from './sponsors'
+import { VotedAgainst } from './votedAgainst'
+import { VotedFor } from './votedFor'
 
 interface VotesSectionProps {
   relationships: BillDetails['relationships']
@@ -38,7 +38,7 @@ const shouldReturn = (
   return stance === STANDARD_OPTION || stance === type
 }
 
-function VotesSection({ relationships, countryCode }: VotesSectionProps) {
+export function VotesSection({ relationships, countryCode }: VotesSectionProps) {
   const { sponsors, coSponsors, votedFor, votedAgainst } = relationships
 
   const [filters, setFilters] = useState<FILTER_KEYS>(getDefaultFilters())
@@ -98,5 +98,3 @@ function VotesSection({ relationships, countryCode }: VotesSectionProps) {
     </section>
   )
 }
-
-export default VotesSection

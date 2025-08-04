@@ -5,16 +5,16 @@ import { DTSI_Person } from '@/data/dtsi/generated'
 import { useLimitItems } from '@/hooks/useLimitItems'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import AvatarGrid from './avatarGrid'
-import DTSIAvatarBox from './dtsiAvatarBox'
-import ShowAllButton from './showAllButton'
+import { AvatarGrid } from './avatarGrid'
+import { DTSIAvatarBox } from './dtsiAvatarBox'
+import { ShowAllButton } from './showAllButton'
 
 interface VotedForProps {
   votedFor: BillDetails['relationships']['votedFor']
   countryCode: SupportedCountryCodes
 }
 
-function VotedFor({ votedFor, countryCode }: VotedForProps) {
+export function VotedFor({ votedFor, countryCode }: VotedForProps) {
   const { list, toggleShouldLimit, hasMore, isShowingAll, totalItems } = useLimitItems<DTSI_Person>(
     {
       items: votedFor,
@@ -41,5 +41,3 @@ function VotedFor({ votedFor, countryCode }: VotedForProps) {
     </div>
   )
 }
-
-export default VotedFor

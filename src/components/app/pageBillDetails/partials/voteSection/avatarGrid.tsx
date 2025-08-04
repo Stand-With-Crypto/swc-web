@@ -5,7 +5,7 @@ interface AvatarGridProps {
   className?: string
 }
 
-function AvatarGrid({ children, className }: AvatarGridProps) {
+export function AvatarGrid({ children, className }: AvatarGridProps) {
   return (
     <div
       className={cn(
@@ -17,5 +17,3 @@ function AvatarGrid({ children, className }: AvatarGridProps) {
     </div>
   )
 }
-
-export default AvatarGrid

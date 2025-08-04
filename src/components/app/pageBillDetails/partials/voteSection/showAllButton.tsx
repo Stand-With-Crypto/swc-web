@@ -5,12 +5,10 @@ interface ShowAllButtonProps {
   isShowingAll: boolean
 }
 
-const ShowAllButton = ({ toggleExpanded, isShowingAll }: ShowAllButtonProps) => {
+export const ShowAllButton = ({ toggleExpanded, isShowingAll }: ShowAllButtonProps) => {
   return (
     <Button onClick={toggleExpanded} variant="secondary">
       {isShowingAll ? 'Hide' : 'Show all'}
     </Button>
   )
 }
-
-export default ShowAllButton

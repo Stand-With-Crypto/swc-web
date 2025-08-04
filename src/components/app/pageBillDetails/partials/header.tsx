@@ -10,7 +10,7 @@ interface HeaderProps {
   countryCode: SupportedCountryCodes
 }
 
-function Header({ bill, countryCode }: HeaderProps) {
+export function Header({ bill, countryCode }: HeaderProps) {
   return (
     <header className="container space-y-8 text-center">
       <div>
@@ -32,5 +32,3 @@ function Header({ bill, countryCode }: HeaderProps) {
     </header>
   )
 }
-
-export default Header

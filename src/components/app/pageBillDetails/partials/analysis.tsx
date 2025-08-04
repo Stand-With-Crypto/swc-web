@@ -11,7 +11,7 @@ interface AnalysisProps {
   }[]
 }
 
-function Analysis({ analysis, relatedUrls }: AnalysisProps) {
+export function Analysis({ analysis, relatedUrls }: AnalysisProps) {
   return (
     <section className="container mb-20 space-y-6 text-center md:mb-28 lg:space-y-10">
       <p className="text-4xl font-bold">Analysis</p>
@@ -39,5 +39,3 @@ function Analysis({ analysis, relatedUrls }: AnalysisProps) {
     </section>
   )
 }
-
-export default Analysis

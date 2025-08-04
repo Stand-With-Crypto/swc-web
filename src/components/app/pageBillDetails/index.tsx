@@ -1,9 +1,9 @@
 import { BillDetails } from '@/data/bills/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import Analysis from './partials/analysis'
-import Header from './partials/header'
-import VotesSection from './partials/voteSection'
+import { Analysis } from './partials/analysis'
+import { Header } from './partials/header'
+import { VotesSection } from './partials/voteSection'
 
 interface PageBillDetailsProps {
   bill: BillDetails
