@@ -1,9 +1,10 @@
-import { DEFAULT_TIMELINES, KEY_DATE_CATEGORY_MAP } from './constants'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Timeline, TimelinePlotPoint } from '@/components/ui/timeline'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { BILL_SUCCESSFUL_KEY_DATES, SWCBill } from '@/utils/shared/zod/getSWCBills'
+
+import { DEFAULT_TIMELINES, KEY_DATE_CATEGORY_MAP } from './constants'
 
 type BillTimelineFields = Pick<
   SWCBill,

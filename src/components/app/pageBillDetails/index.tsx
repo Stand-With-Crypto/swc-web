@@ -1,10 +1,10 @@
 import { BillDetails } from '@/data/bills/types'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { Analysis } from './partials/analysis'
 import { Header } from './partials/header'
-import { VotesSection } from './partials/voteSection'
 import { TimelineSection } from './partials/timelineSection'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { VotesSection } from './partials/voteSection'
 
 interface PageBillDetailsProps {
   bill: BillDetails

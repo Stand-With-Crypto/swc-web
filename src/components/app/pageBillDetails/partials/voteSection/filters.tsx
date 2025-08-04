@@ -131,8 +131,3 @@ export function Filters(props: FiltersProps) {
     </div>
   )
 }
-
-// Re-export the types and constants for backward compatibility
-export type { FILTER_KEYS } from './types'
-export { getDefaultFilters } from './constants'
-export { STANDARD_OPTION } from './types'
