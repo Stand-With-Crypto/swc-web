@@ -1,14 +1,14 @@
 import { Button } from '@/components/ui/button'
 
 interface ShowAllButtonProps {
-  toggleShouldLimit: () => void
-  isReturnMore: boolean
+  toggleExpanded: () => void
+  isShowingAll: boolean
 }
 
-const ShowAllButton = ({ toggleShouldLimit, isReturnMore }: ShowAllButtonProps) => {
+const ShowAllButton = ({ toggleExpanded, isShowingAll }: ShowAllButtonProps) => {
   return (
-    <Button onClick={toggleShouldLimit} variant="secondary">
-      {isReturnMore ? 'Show all' : 'Hide'}
+    <Button onClick={toggleExpanded} variant="secondary">
+      {isShowingAll ? 'Hide' : 'Show all'}
     </Button>
   )
 }

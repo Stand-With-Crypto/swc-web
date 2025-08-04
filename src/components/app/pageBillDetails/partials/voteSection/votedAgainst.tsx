@@ -15,11 +15,12 @@ interface VotedAgainstProps {
 }
 
 function VotedAgainst({ votedAgainst, countryCode }: VotedAgainstProps) {
-  const { list, toggleShouldLimit, canReturnMore, isReturnMore, totalItems } =
-    useLimitItems<DTSI_Person>({
+  const { list, toggleShouldLimit, hasMore, isShowingAll, totalItems } = useLimitItems<DTSI_Person>(
+    {
       items: votedAgainst,
-      nItems: 6,
-    })
+      initialLimit: 6,
+    },
+  )
 
   return (
     <div className="mx-4 mt-7 flex flex-col gap-2 md:mx-6">
@@ -35,9 +36,7 @@ function VotedAgainst({ votedAgainst, countryCode }: VotedAgainstProps) {
         ))}
       </AvatarGrid>
 
-      {canReturnMore && (
-        <ShowAllButton isReturnMore={isReturnMore} toggleShouldLimit={toggleShouldLimit} />
-      )}
+      {hasMore && <ShowAllButton isShowingAll={isShowingAll} toggleExpanded={toggleShouldLimit} />}
     </div>
   )
 }

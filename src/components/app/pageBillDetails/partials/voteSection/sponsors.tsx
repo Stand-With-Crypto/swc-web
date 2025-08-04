@@ -24,11 +24,12 @@ function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
 
   const columnLimit = COSPONSORS_ITEMS_LIMIT[isMobile ? 'MOBILE' : 'DESKTOP']
 
-  const { list, toggleShouldLimit, canReturnMore, isReturnMore, totalItems } =
-    useLimitItems<DTSI_Person>({
+  const { list, toggleShouldLimit, hasMore, isShowingAll, totalItems } = useLimitItems<DTSI_Person>(
+    {
       items: coSponsors,
-      nItems: columnLimit,
-    })
+      initialLimit: columnLimit,
+    },
+  )
 
   return (
     <div className="mx-4 flex flex-col gap-2 md:mx-6">
@@ -57,9 +58,7 @@ function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
         </div>
       </div>
 
-      {canReturnMore && (
-        <ShowAllButton isReturnMore={isReturnMore} toggleShouldLimit={toggleShouldLimit} />
-      )}
+      {hasMore && <ShowAllButton isShowingAll={isShowingAll} toggleExpanded={toggleShouldLimit} />}
     </div>
   )
 }
