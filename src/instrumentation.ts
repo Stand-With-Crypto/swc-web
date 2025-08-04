@@ -7,6 +7,7 @@ import { toBool } from '@/utils/shared/toBool'
 const SENTRY_SUPPRESSED_INNGEST_FUNCTIONS = [
   'script.backfill-address-electoral-zone-processor',
   'script.backfill-address-fields-with-google-places-processor',
+  'script.backfill-intl-users.processor',
 ]
 
 function suppressSentryErrorOrReturnEvent(

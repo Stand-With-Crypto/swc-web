@@ -5,6 +5,8 @@ import { BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema } from '@/i
 import { ProcessAddressFieldsWithGooglePlacesProcessorEventSchema } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import type { BackfillCountryCodesEventSchema } from '@/inngest/functions/backfillCountryCodes'
 import type { BackfillFailedNftInngestSchema } from '@/inngest/functions/backfillFailedNFTCronJob'
+import type { BackfillIntlUsersCoordinatorSchema } from '@/inngest/functions/backfillIntlUsers'
+import type { BackfillIntlUsersProcessorSchema } from '@/inngest/functions/backfillIntlUsers/logic'
 import type { BackfillNftInngestSchema } from '@/inngest/functions/backfillNFT'
 import type { BackfillNftInngestCronJobSchema } from '@/inngest/functions/backfillNFTCronJob'
 import type { BackfillSessionIdInngestSchema } from '@/inngest/functions/backfillSessionId'
@@ -78,5 +80,7 @@ type EventTypes =
   | BackfillSWCCivicAddressFieldsProcessorEventSchema
   | BackfillAddressFieldsWithGooglePlacesCoordinatorEventSchema
   | ProcessAddressFieldsWithGooglePlacesProcessorEventSchema
+  | BackfillIntlUsersCoordinatorSchema
+  | BackfillIntlUsersProcessorSchema
 
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
