@@ -1,12 +1,12 @@
 import { GB_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/gb/constants'
-import { GBGetPageData } from '@/components/app/pageCommunity/gb/getPageData'
+import { getGbPageData } from '@/components/app/pageCommunity/gb/getPageData'
 import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { PageLayout } from '@/components/ui/pageLayout'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-type GbPageLeaderboardProps = Awaited<ReturnType<typeof GBGetPageData>>
+type GbPageLeaderboardProps = Awaited<ReturnType<typeof getGbPageData>>
 
 const countryCode = SupportedCountryCodes.GB
 const urls = getIntlUrls(countryCode)

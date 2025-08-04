@@ -2,7 +2,7 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { USGetPageData } from '@/components/app/pageCommunity/getPageData'
+import { getUsPageData } from '@/components/app/pageCommunity/getPageData'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
@@ -57,7 +57,7 @@ export default async function RecentActivityStateSpecificPage(props: Props) {
     notFound()
   }
 
-  const { offset, pageNum, publicRecentActivity, totalPages } = await USGetPageData({
+  const { offset, pageNum, publicRecentActivity, totalPages } = await getUsPageData({
     ...params,
     state: stateCode,
   })

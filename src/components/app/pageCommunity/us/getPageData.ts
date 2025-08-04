@@ -9,7 +9,7 @@ const MAX_PAGES = 10
 
 const countryCode = SupportedCountryCodes.US
 
-export async function USGetPageData({ page, state }: { page: string[]; state?: string }) {
+export async function getUsPageData({ page, state }: { page: string[]; state?: string }) {
   const { itemsPerPage } = US_RECENT_ACTIVITY_PAGINATION
 
   const pageNum = validatePageNum(page ?? [])

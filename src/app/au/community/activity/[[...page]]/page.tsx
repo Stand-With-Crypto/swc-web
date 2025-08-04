@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 import { AuPageCommunity, PageLeaderboardInferredProps } from '@/components/app/pageCommunity/au'
 import { AU_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/au/constants'
-import { AUGetPageData } from '@/components/app/pageCommunity/getPageData'
+import { getAuPageData } from '@/components/app/pageCommunity/getPageData'
 import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
@@ -32,7 +32,7 @@ export default async function AuCommunityRecentActivityPage(
   props: AuCommunityRecentActivityPageProps,
 ) {
   const params = await props.params
-  const { publicRecentActivity, pageNum, offset, totalPages } = await AUGetPageData({
+  const { publicRecentActivity, pageNum, offset, totalPages } = await getAuPageData({
     page: params.page,
   })
 

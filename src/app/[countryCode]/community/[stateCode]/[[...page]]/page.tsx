@@ -2,7 +2,7 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { redirect, RedirectType } from 'next/navigation'
 
-import { USGetPageData } from '@/components/app/pageCommunity/getPageData'
+import { getUsPageData } from '@/components/app/pageCommunity/getPageData'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
@@ -71,7 +71,7 @@ export default async function CommunityStateSpecificRecentActivityPage(props: Pr
     )
   }
 
-  const { publicRecentActivity, pageNum, offset, totalPages } = await USGetPageData({
+  const { publicRecentActivity, pageNum, offset, totalPages } = await getUsPageData({
     ...params,
     state: stateCode,
   })

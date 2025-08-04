@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { USGetPageData } from '@/components/app/pageCommunity/getPageData'
+import { getUsPageData } from '@/components/app/pageCommunity/getPageData'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
 
 export default async function CommunityRecentActivityPage(props: Props) {
   const params = await props.params
-  const { publicRecentActivity, pageNum, offset, totalPages } = await USGetPageData({
+  const { publicRecentActivity, pageNum, offset, totalPages } = await getUsPageData({
     ...params,
   })
 

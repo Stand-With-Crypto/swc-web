@@ -1,4 +1,4 @@
-export { AUGetPageData } from './au/getPageData'
-export { CAGetPageData } from './ca/getPageData'
-export { GBGetPageData } from './gb/getPageData'
-export { USGetPageData } from './us/getPageData'
+export { getAuPageData } from './au/getPageData'
+export { getCaPageData } from './ca/getPageData'
+export { getGbPageData } from './gb/getPageData'
+export { getUsPageData } from './us/getPageData'

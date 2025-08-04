@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 import { GbPageCommunity } from '@/components/app/pageCommunity/gb'
 import { GB_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/gb/constants'
-import { GBGetPageData } from '@/components/app/pageCommunity/getPageData'
+import { getGbPageData } from '@/components/app/pageCommunity/getPageData'
 import { PageProps } from '@/types'
 import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -31,7 +31,7 @@ export default async function GbCommunityRecentActivityPage(
   props: GbCommunityRecentActivityPageProps,
 ) {
   const params = await props.params
-  const pageData = await GBGetPageData({
+  const pageData = await getGbPageData({
     page: params.page,
   })
 

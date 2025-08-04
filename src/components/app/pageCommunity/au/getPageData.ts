@@ -9,7 +9,7 @@ const MAX_PAGES = 10
 
 const countryCode = SupportedCountryCodes.AU
 
-export async function AUGetPageData({ page, state }: { page: string[]; state?: string }) {
+export async function getAuPageData({ page, state }: { page: string[]; state?: string }) {
   const { itemsPerPage } = AU_RECENT_ACTIVITY_PAGINATION
 
   const pageNum = validatePageNum(page ?? [])

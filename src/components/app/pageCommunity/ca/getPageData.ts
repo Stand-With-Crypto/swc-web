@@ -9,7 +9,7 @@ const MAX_PAGES = 10
 
 const countryCode = SupportedCountryCodes.CA
 
-export async function CAGetPageData({ page, state }: { page: string[]; state?: string }) {
+export async function getCaPageData({ page, state }: { page: string[]; state?: string }) {
   const { itemsPerPage } = CA_RECENT_ACTIVITY_PAGINATION
 
   const pageNum = validatePageNum(page ?? [])

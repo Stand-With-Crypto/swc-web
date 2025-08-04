@@ -9,7 +9,7 @@ const MAX_PAGES = 10
 
 const countryCode = SupportedCountryCodes.GB
 
-export async function GBGetPageData({ page, state }: { page: string[]; state?: string }) {
+export async function getGbPageData({ page, state }: { page: string[]; state?: string }) {
   const { itemsPerPage } = GB_RECENT_ACTIVITY_PAGINATION
 
   const pageNum = validatePageNum(page ?? [])
