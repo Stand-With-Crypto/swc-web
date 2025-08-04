@@ -1,7 +1,7 @@
 import {
   DEFAULT_TIMELINES,
   KEY_DATE_CATEGORY_MAP,
-} from '@/components/app/pageBillDetails/timelineSection/constants'
+} from '@/components/app/pageBillDetails/partials/timelineSection/constants'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Timeline, TimelinePlotPoint } from '@/components/ui/timeline'
@@ -46,7 +46,7 @@ export async function TimelineSection({ bill, countryCode }: TimeSectionProps) {
   const keyDates = insertMissingTimelineDates(bill)
 
   return (
-    <div className="flex flex-col gap-6 rounded-3xl bg-[#F2F5F9] p-6 font-sans">
+    <div className="container mb-20 flex flex-col gap-6 rounded-3xl bg-[#F2F5F9] p-6 font-sans sm:mb-28">
       <header className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-xl font-bold">Current Status</h3>
