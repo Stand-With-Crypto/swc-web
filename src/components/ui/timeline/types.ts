@@ -1,6 +1,7 @@
 export interface TimelinePlotPoint {
   date: Date | string | null
   description: string
+  id: number | string
   isHighlighted?: boolean
   isMajorMilestone?: boolean
   success: boolean
@@ -9,6 +10,5 @@ export interface TimelinePlotPoint {
 
 export interface Milestone extends TimelinePlotPoint {
   date: Date | null
-  id: number
   positionPercent: number
 }

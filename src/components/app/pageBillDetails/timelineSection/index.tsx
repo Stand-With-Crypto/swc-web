@@ -27,9 +27,17 @@ function insertMissingTimelineDates(data: BillTimelineFields): TimelinePlotPoint
 
   const missingKeyDates = DEFAULT_TIMELINES[data.chamberOrigin]
     .filter(({ category }) => KEY_DATE_CATEGORY_MAP[category]?.(billKeyDates))
-    .map(keyDate => ({ ...keyDate, date: null, isHighlighted: false, success: true }))
+    .map(keyDate => ({
+      ...keyDate,
+      date: null,
+      isHighlighted: false,
+      success: true,
+    }))
 
-  return [...billKeyDates, ...missingKeyDates]
+  return [...billKeyDates, ...missingKeyDates].map((keyDate, index) => ({
+    ...keyDate,
+    id: index,
+  }))
 }
 
 export async function TimelineSection({ bill, countryCode }: TimeSectionProps) {

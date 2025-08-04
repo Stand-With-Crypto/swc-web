@@ -1,27 +1,18 @@
 'use client'
 
-import { CSSProperties, useEffect, useMemo, useState } from 'react'
-import {
-  animate,
-  motion,
-  MotionStyle,
-  useMotionValue,
-  useMotionValueEvent,
-  useTransform,
-} from 'motion/react'
+import { useMemo } from 'react'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import { MAJOR_MILESTONE_CONFIG, TIMELINE_CONFIG } from '@/components/ui/timeline/constants'
 import { MajorMilestone } from '@/components/ui/timeline/majorMilestone'
 import { MinorMilestone } from '@/components/ui/timeline/minorMilestone'
+import { Progress, useProgressAnimation } from '@/components/ui/timeline/progress'
 import { TimelinePlotPoint } from '@/components/ui/timeline/types'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const {
-  BAR_THICKNESS,
-  DEFAULT_ANIMATION_DURATION,
   TIMELINE_HEIGHT_DESKTOP,
   TIMELINE_HEIGHT_MOBILE,
   TIMELINE_SPACING_DESKTOP,
@@ -50,10 +41,6 @@ export function Timeline(props: TimelineProps) {
         }
         return a.date.getTime() - b.date.getTime()
       })
-      .map((point, index) => ({
-        ...point,
-        id: index,
-      }))
 
     const majorMilestones = plotPoints
       .filter(plotPoint => plotPoint.isMajorMilestone)
@@ -106,49 +93,34 @@ export function Timeline(props: TimelineProps) {
     return { majorMilestones, minorMilestones, targetPercent }
   }, [props.plotPoints])
 
-  const { progress, size } = useTimelineAnimation(targetPercent)
+  const animation = useProgressAnimation(targetPercent)
 
-  const { backBarStyles, frontBarStyles, wrapperStyles } = useMemo(() => {
-    const wrapperStyles: CSSProperties = isMobile
-      ? { height: TIMELINE_HEIGHT_MOBILE, margin: `${TIMELINE_SPACING_MOBILE}px 0`, width: '100%' }
-      : {
-          height: TIMELINE_HEIGHT_DESKTOP,
-          margin: '0 auto',
-          width: `calc(100% - ${TIMELINE_SPACING_DESKTOP * 2}px)`,
-        }
-
-    const barStyles: CSSProperties = isMobile
-      ? { left: HIGHLIGHTED_POINT_SIZE - 1, top: 0, width: BAR_THICKNESS }
-      : {
-          left: 0,
-          top: HIGHLIGHTED_POINT_SIZE - 1,
-          height: BAR_THICKNESS,
-        }
-
-    const backBarStyles: CSSProperties = {
-      ...barStyles,
-      ...(isMobile ? { height: '100%' } : { width: '100%' }),
-    }
-
-    const frontBarStyles: MotionStyle = {
-      ...barStyles,
-      ...(isMobile ? { height: size } : { width: size }),
-    }
-
-    return { backBarStyles, frontBarStyles, wrapperStyles }
-  }, [isMobile, size])
+  const wrapperStyles = useMemo(
+    () =>
+      isMobile
+        ? {
+            height: TIMELINE_HEIGHT_MOBILE,
+            margin: `${TIMELINE_SPACING_MOBILE}px 0`,
+            width: '100%',
+          }
+        : {
+            height: TIMELINE_HEIGHT_DESKTOP,
+            margin: '0 auto',
+            width: `calc(100% - ${TIMELINE_SPACING_DESKTOP * 2}px)`,
+          },
+    [isMobile],
+  )
 
   return hasHydrated ? (
     <div className="relative" style={wrapperStyles}>
-      <div className="absolute bg-muted-foreground/50" style={backBarStyles} />
-      <motion.div className="absolute bg-primary-cta" style={frontBarStyles} />
+      <Progress animation={animation} spacing={HIGHLIGHTED_POINT_SIZE} value={targetPercent} />
 
       {majorMilestones.map((majorMilestone, index) => {
         return (
           <MajorMilestone
             countryCode={props.countryCode}
             isFirstMilestone={index === 0}
-            isHighlightEnabled={majorMilestone.positionPercent <= progress}
+            isHighlightEnabled={majorMilestone.positionPercent <= animation.progress}
             isMobile={isMobile}
             key={index}
             milestone={majorMilestone}
@@ -160,7 +132,7 @@ export function Timeline(props: TimelineProps) {
         return (
           <MinorMilestone
             countryCode={props.countryCode}
-            isHighlightEnabled={minorMilestone.positionPercent <= progress}
+            isHighlightEnabled={minorMilestone.positionPercent <= animation.progress}
             isMobile={isMobile}
             key={index}
             milestone={minorMilestone}
@@ -171,28 +143,4 @@ export function Timeline(props: TimelineProps) {
   ) : (
     <Skeleton className="h-[160px] w-full bg-slate-200" />
   )
-}
-
-function useTimelineAnimation(targetPercent: number) {
-  const progress = useMotionValue(0)
-  const [currentProgress, setCurrentProgress] = useState(0)
-
-  useMotionValueEvent(progress, 'change', latest => {
-    setCurrentProgress(Number(latest.toFixed(2)))
-  })
-
-  useEffect(() => {
-    const controls = animate(progress, targetPercent, {
-      duration: DEFAULT_ANIMATION_DURATION,
-      ease: 'easeOut',
-    })
-
-    return () => {
-      controls.stop()
-    }
-  }, [progress, targetPercent])
-
-  const size = useTransform(progress, value => `${value}%`)
-
-  return { progress: currentProgress, size }
 }
