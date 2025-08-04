@@ -17,26 +17,28 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
+type DTSIAvatarBoxPerson = DTSIAvatarProps['person'] &
+  Pick<
+    DTSI_Person,
+    | 'slug'
+    | 'politicalAffiliationCategory'
+    | 'computedStanceScore'
+    | 'manuallyOverriddenStanceScore'
+    | 'computedSumStanceScoreWeight'
+  > & {
+    primaryRole: Maybe<DTSIPersonRoleCategoryDisplayNameProps>
+  }
+
 interface DTSIAvatarBoxProps extends Omit<DTSIAvatarProps, 'size'> {
   countryCode: SupportedCountryCodes
-  person: DTSIAvatarProps['person'] &
-    Pick<
-      DTSI_Person,
-      | 'slug'
-      | 'politicalAffiliationCategory'
-      | 'computedStanceScore'
-      | 'manuallyOverriddenStanceScore'
-      | 'computedSumStanceScoreWeight'
-    > & {
-      primaryRole: Maybe<DTSIPersonRoleCategoryDisplayNameProps>
-    }
+  person: DTSIAvatarBoxPerson
   prefetch?: boolean
   className?: string
 }
 
 const AVATAR_SIZE = 90
 
-export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
+export function DTSIAvatarBox(props: DTSIAvatarBoxProps) {
   const { person, countryCode, prefetch = false, className, ...avatarProps } = props
 
   const politicalAffiliationCategoryAbbr =
