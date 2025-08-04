@@ -1,7 +1,4 @@
-import {
-  DEFAULT_TIMELINES,
-  KEY_DATE_CATEGORY_MAP,
-} from '@/components/app/pageBillDetails/partials/timelineSection/constants'
+import { DEFAULT_TIMELINES, KEY_DATE_CATEGORY_MAP } from './constants'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Timeline, TimelinePlotPoint } from '@/components/ui/timeline'
