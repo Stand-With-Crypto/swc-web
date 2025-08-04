@@ -24,6 +24,7 @@ const fragmentDTSIBillPerson = /* GraphQL */ `
     primaryRole {
       roleCategory
       primaryCountryCode
+      status
     }
   }
 `
