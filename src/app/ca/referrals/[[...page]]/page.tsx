@@ -1,4 +1,3 @@
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
@@ -8,6 +7,7 @@ import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca
 import { CaPageReferrals } from '@/components/app/pageReferrals/ca'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -41,7 +41,7 @@ const validatePageNum = ([pageParam]: (string | undefined)[]) => {
 }
 
 export async function generateStaticParams() {
-  return flatten(times(TOTAL_PREGENERATED_PAGES).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return generatePaginationStaticParams(TOTAL_PREGENERATED_PAGES)
 }
 
 export default async function ReferralsPage(props: Props) {

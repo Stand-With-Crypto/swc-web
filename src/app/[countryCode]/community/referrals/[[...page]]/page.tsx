@@ -1,4 +1,3 @@
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -13,6 +12,7 @@ import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/
 import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 60 // 1 minute
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
     US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return generatePaginationStaticParams(totalPregeneratedPages)
 }
 
 export default async function CommunityReferralsPage(props: Props) {

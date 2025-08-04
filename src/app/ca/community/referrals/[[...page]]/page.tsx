@@ -1,5 +1,4 @@
 import React from 'react'
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -12,6 +11,7 @@ import { validatePageNum } from '@/components/app/pageCommunity/common/pageValid
 import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -31,7 +31,7 @@ export async function generateMetadata(_: CaCommunityRecentActivityPageProps): P
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } = CA_RECENT_ACTIVITY_PAGINATION
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return generatePaginationStaticParams(totalPregeneratedPages)
 }
 
 export default async function CaCommunityRecentActivityPage(

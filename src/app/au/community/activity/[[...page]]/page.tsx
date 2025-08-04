@@ -1,5 +1,4 @@
 import React from 'react'
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { AuPageCommunity, PageLeaderboardInferredProps } from '@/components/app/pageCommunity/au'
@@ -7,6 +6,7 @@ import { AU_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/au
 import { AUGetPageData } from '@/components/app/pageCommunity/getPageData'
 import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 30 // 30 seconds
@@ -25,7 +25,7 @@ export async function generateMetadata(_: AuCommunityRecentActivityPageProps): P
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } = AU_RECENT_ACTIVITY_PAGINATION
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return generatePaginationStaticParams(totalPregeneratedPages)
 }
 
 export default async function AuCommunityRecentActivityPage(

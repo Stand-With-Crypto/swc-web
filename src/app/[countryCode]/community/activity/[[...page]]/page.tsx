@@ -1,4 +1,3 @@
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { USGetPageData } from '@/components/app/pageCommunity/getPageData'
@@ -11,6 +10,7 @@ import {
 import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
 import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 30 // 30 seconds
@@ -30,7 +30,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
     US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return generatePaginationStaticParams(totalPregeneratedPages)
 }
 
 export default async function CommunityRecentActivityPage(props: Props) {
