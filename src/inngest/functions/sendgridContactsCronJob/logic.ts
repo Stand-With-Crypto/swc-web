@@ -51,6 +51,10 @@ interface User {
   userSessions: {
     id: string
   }[]
+  acquisitionSource: string | null
+  acquisitionMedium: string | null
+  acquisitionCampaign: string | null
+  acquisitionReferer: string | null
 }
 
 interface BatchParams {
@@ -103,6 +107,10 @@ function convertUserToContact(user: User): SendgridContact {
           : user.datetimeCreated,
       user_actions_count: user.userActions.length,
       session_id: user.userSessions?.[0]?.id || '',
+      aquisition_source: user.acquisitionSource || '',
+      aquisition_medium: user.acquisitionMedium || '',
+      aquisition_campaign: user.acquisitionCampaign || '',
+      aquisition_referer: user.acquisitionReferer || '',
       ...completedUsersActionsCustomFields,
     },
   }
@@ -147,6 +155,10 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
             userSessions: {
               select: { id: true },
             },
+            acquisitionSource: true,
+            acquisitionMedium: true,
+            acquisitionCampaign: true,
+            acquisitionReferer: true,
           },
           skip: batchParams.skip,
           take: batchParams.take,
@@ -164,7 +176,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
 
         const validContacts = users
           .filter(user => Boolean(user.primaryUserEmailAddress?.emailAddress))
-          .map(user => convertUserToContact(user))
+          .map(convertUserToContact)
 
         if (validContacts.length === 0) {
           logger.info(`No valid contacts found`)
