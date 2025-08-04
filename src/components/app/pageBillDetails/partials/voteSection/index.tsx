@@ -77,9 +77,7 @@ export function VotesSection({ relationships, countryCode }: VotesSectionProps) 
 
       {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.SPONSOR) && (
         <Sponsors
-          coSponsors={[
-            filteredVotes.filteredVotedAgainst[filteredVotes.filteredVotedAgainst.length - 3],
-          ]}
+          coSponsors={filteredVotes.filteredCoSponsors}
           countryCode={countryCode}
           sponsors={filteredVotes.filteredSponsors}
         />
