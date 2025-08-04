@@ -5,9 +5,9 @@ import { queryDTSIAllBills } from '@/data/dtsi/queries/queryDTSIAllBills'
 import { getBillsFromBuilderIO } from '@/utils/server/builder/models/data/bills'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export async function getAllBills(countryCode: SupportedCountryCodes) {
+export async function getAllBills(countryCode: SupportedCountryCodes, stateCode?: string) {
   const [billsFromBuilderIO, billsFromDTSI] = await Promise.allSettled([
-    getBillsFromBuilderIO({ countryCode }),
+    getBillsFromBuilderIO({ countryCode, stateCode }),
     queryDTSIAllBills(),
   ])
 
