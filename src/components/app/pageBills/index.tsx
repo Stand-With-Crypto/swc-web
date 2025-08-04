@@ -16,7 +16,7 @@ interface PageBillsProps {
 }
 
 export function PageBills({ bills, countryCode, description, title }: PageBillsProps) {
-  const hasWrapper = title && description
+  const hasHeader = Boolean(title && description)
 
   const [keyBills, otherBills] = partition(bills, bill => bill.isKeyBill)
   const sortedKeyBills = sortBy(keyBills, bill => bill.dateIntroduced, 'desc')
@@ -27,8 +27,8 @@ export function PageBills({ bills, countryCode, description, title }: PageBillsP
   ].filter(({ results }) => results.length > 0)
 
   return (
-    <div className={cn('container space-y-16', { 'standard-spacing-from-navbar': hasWrapper })}>
-      {hasWrapper && (
+    <div className={cn('container space-y-16', { 'standard-spacing-from-navbar': hasHeader })}>
+      {hasHeader && (
         <section className="space-y-7 text-center">
           <PageTitle>{title}</PageTitle>
           <PageSubTitle>{description}</PageSubTitle>
