@@ -58,7 +58,7 @@ export function Progress({
   }, [isMobile, size, spacing, thickness])
 
   return (
-    <div className="relative">
+    <div className="relative h-full w-full">
       <div className="absolute bg-muted-foreground/50" style={backBarStyles} />
       <motion.div className="absolute bg-primary-cta" style={frontBarStyles} />
     </div>
