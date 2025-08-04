@@ -43,12 +43,14 @@ export function VotesSection({ relationships, countryCode }: VotesSectionProps) 
   const filteredVotes = useMemo(() => {
     const { stance } = filters
 
-    const filteredSponsors = shouldReturn(stance, DTSI_BillPersonRelationshipType.SPONSOR)
-      ? filterHelper(sponsors, filters)
-      : []
-    const filteredCoSponsors = shouldReturn(stance, DTSI_BillPersonRelationshipType.SPONSOR)
-      ? filterHelper(coSponsors, filters)
-      : []
+    let filteredSponsors: DTSI_Person[] = []
+    let filteredCoSponsors: DTSI_Person[] = []
+
+    if (shouldReturn(stance, DTSI_BillPersonRelationshipType.SPONSOR)) {
+      filteredSponsors = filterHelper(sponsors, filters)
+      filteredCoSponsors = filterHelper(coSponsors, filters)
+    }
+
     const filteredVotedFor = shouldReturn(stance, DTSI_BillPersonRelationshipType.VOTED_FOR)
       ? filterHelper(votedFor, filters)
       : []
@@ -75,7 +77,9 @@ export function VotesSection({ relationships, countryCode }: VotesSectionProps) 
 
       {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.SPONSOR) && (
         <Sponsors
-          coSponsors={filteredVotes.filteredCoSponsors}
+          coSponsors={[
+            filteredVotes.filteredVotedAgainst[filteredVotes.filteredVotedAgainst.length - 3],
+          ]}
           countryCode={countryCode}
           sponsors={filteredVotes.filteredSponsors}
         />
