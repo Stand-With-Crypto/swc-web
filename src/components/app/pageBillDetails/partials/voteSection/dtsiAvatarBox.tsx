@@ -49,7 +49,7 @@ export function DTSIAvatarBox(props: DTSIAvatarBoxProps) {
   return (
     <LinkBox
       className={cn(
-        'flex h-[188px] w-full min-w-[160px] flex-col items-center gap-2 rounded-xl bg-muted p-4 text-center transition-all hover:bg-slate-300 sm:max-w-[200px]',
+        'flex h-[188px] w-full min-w-40 flex-col items-center gap-2 rounded-xl bg-muted p-4 text-center transition-all hover:bg-slate-300 sm:max-w-[200px]',
         className,
       )}
     >
