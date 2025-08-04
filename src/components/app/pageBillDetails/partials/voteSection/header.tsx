@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
 import { Filters } from './filters'
-import { FILTER_KEYS } from './types'
+import { FilterKeys } from './types'
 
 const getVotes = (list: DTSI_Person[], category: DTSI_PersonPoliticalAffiliationCategory) => {
   return list.filter(person => person.politicalAffiliationCategory === category).length
@@ -15,8 +15,8 @@ export function Header({
   votedAgainst,
   votedFor,
 }: {
-  filters: FILTER_KEYS
-  setFilters: React.Dispatch<React.SetStateAction<FILTER_KEYS>>
+  filters: FilterKeys
+  setFilters: React.Dispatch<React.SetStateAction<FilterKeys>>
   votedAgainst: DTSI_Person[]
   votedFor: DTSI_Person[]
 }) {

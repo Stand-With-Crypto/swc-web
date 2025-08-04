@@ -9,7 +9,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getDefaultFilters } from './constants'
 import { Header } from './header'
 import { Sponsors } from './sponsors'
-import { FILTER_KEYS, STANDARD_OPTION } from './types'
+import { FilterKeys, StandardOption } from './types'
 import { VotedAgainst } from './votedAgainst'
 import { VotedFor } from './votedFor'
 
@@ -18,27 +18,27 @@ interface VotesSectionProps {
   countryCode: SupportedCountryCodes
 }
 
-const filterHelper = (list: DTSI_Person[], filters: FILTER_KEYS) => {
+const filterHelper = (list: DTSI_Person[], filters: FilterKeys) => {
   const { role, party } = filters
   return list.filter(item => {
     return (
-      (role === STANDARD_OPTION || item.primaryRole?.roleCategory === role) &&
-      (party === STANDARD_OPTION || item.politicalAffiliationCategory === party)
+      (role === StandardOption || item.primaryRole?.roleCategory === role) &&
+      (party === StandardOption || item.politicalAffiliationCategory === party)
     )
   })
 }
 
 const shouldReturn = (
-  stance: FILTER_KEYS['stance'],
-  type: DTSI_BillPersonRelationshipType | typeof STANDARD_OPTION,
+  stance: FilterKeys['stance'],
+  type: DTSI_BillPersonRelationshipType | typeof StandardOption,
 ) => {
-  return stance === STANDARD_OPTION || stance === type
+  return stance === StandardOption || stance === type
 }
 
 export function VotesSection({ relationships, countryCode }: VotesSectionProps) {
   const { sponsors, coSponsors, votedFor, votedAgainst } = relationships
 
-  const [filters, setFilters] = useState<FILTER_KEYS>(getDefaultFilters())
+  const [filters, setFilters] = useState<FilterKeys>(getDefaultFilters())
 
   const filteredVotes = useMemo(() => {
     const { stance } = filters
@@ -65,7 +65,7 @@ export function VotesSection({ relationships, countryCode }: VotesSectionProps) 
   }, [sponsors, coSponsors, votedFor, votedAgainst, filters])
 
   return (
-    <section className="mx-auto max-w-[1055px] rounded-3xl border border-muted pb-6 text-center sm:text-start">
+    <section className="container mx-auto rounded-3xl border border-muted px-0 pb-6 text-center sm:px-4 sm:text-start">
       <Header
         filters={filters}
         setFilters={setFilters}
@@ -81,7 +81,7 @@ export function VotesSection({ relationships, countryCode }: VotesSectionProps) 
         />
       )}
 
-      {shouldReturn(filters.stance, STANDARD_OPTION) && (
+      {shouldReturn(filters.stance, StandardOption) && (
         <div className="bt-0 mt-10 w-full border border-muted" />
       )}
 

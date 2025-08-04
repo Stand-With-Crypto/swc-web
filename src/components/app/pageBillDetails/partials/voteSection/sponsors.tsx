@@ -34,11 +34,11 @@ export function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
   return (
     <div className="mx-4 flex flex-col gap-2 md:mx-6">
       <div className="flex flex-col gap-2 md:flex-row">
-        <div className="mb-10 min-w-[160px] md:mb-0">
+        <div className="mb-10 min-w-40 md:mb-0">
           <strong className="mb-6 block text-xl font-semibold">Sponsor</strong>
           {sponsors?.map(person => (
             <DTSIAvatarBox
-              className="m-auto h-[188px] max-w-40 sm:m-0"
+              className="m-auto max-w-40 sm:m-0"
               countryCode={countryCode}
               key={person.slug}
               person={person}

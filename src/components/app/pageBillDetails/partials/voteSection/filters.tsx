@@ -12,16 +12,16 @@ import { cn } from '@/utils/web/cn'
 
 import {
   getDefaultFilters,
-  PARTY_OPTIONS_DISPLAY_NAME,
-  ROLE_OPTIONS_DISPLAY_NAME,
-  STANCE_OPTIONS_DISPLAY_NAME,
+  PartyOptionsDisplayName,
+  RoleOptionsDisplayName,
+  StanceOptionsDisplayName,
 } from './constants'
-import type { FILTER_KEYS, PARTY_OPTION, ROLE_OPTION, STANCE_OPTION } from './types'
-import { PARTY_OPTIONS, ROLE_OPTIONS, STANCE_OPTIONS, STANDARD_OPTION } from './types'
+import type { FilterKeys, PartyOption, RoleOption, StanceOption } from './types'
+import { PartyOptions, RoleOptions, StanceOptions, StandardOption } from './types'
 
 interface FiltersProps {
-  filtersValue: FILTER_KEYS
-  onChange: React.Dispatch<React.SetStateAction<FILTER_KEYS>>
+  filtersValue: FilterKeys
+  onChange: React.Dispatch<React.SetStateAction<FilterKeys>>
   className?: string
 }
 
@@ -29,7 +29,7 @@ export function Filters(props: FiltersProps) {
   const { filtersValue, onChange, className } = props
 
   const handleChange = useCallback(
-    (value: Partial<FILTER_KEYS>) => {
+    (value: Partial<FilterKeys>) => {
       onChange(prev => ({
         ...prev,
         ...value,
@@ -47,13 +47,13 @@ export function Filters(props: FiltersProps) {
     >
       <div className="flex flex-1 gap-2">
         <Select
-          onValueChange={(stance: STANCE_OPTION) => handleChange({ stance })}
+          onValueChange={(stance: StanceOption) => handleChange({ stance })}
           value={filtersValue.stance}
         >
           <SelectTrigger data-testid="stance-filter-trigger">
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance</span>
             <span className="mr-auto">
-              <SelectValue placeholder={STANDARD_OPTION} />
+              <SelectValue placeholder={StandardOption} />
             </span>
           </SelectTrigger>
           <SelectContent
@@ -64,22 +64,22 @@ export function Filters(props: FiltersProps) {
               }
             }}
           >
-            {STANCE_OPTIONS.map(stance => (
+            {StanceOptions.map(stance => (
               <SelectItem key={stance} onClick={event => event.stopPropagation()} value={stance}>
-                {STANCE_OPTIONS_DISPLAY_NAME[stance]}
+                {StanceOptionsDisplayName[stance]}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         <Select
-          onValueChange={(role: ROLE_OPTION) => handleChange({ role })}
+          onValueChange={(role: RoleOption) => handleChange({ role })}
           value={filtersValue.role}
         >
           <SelectTrigger data-testid="role-filter-trigger">
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
             <span className="mr-auto">
-              <SelectValue placeholder={STANDARD_OPTION} />
+              <SelectValue placeholder={StandardOption} />
             </span>
           </SelectTrigger>
           <SelectContent
@@ -90,22 +90,22 @@ export function Filters(props: FiltersProps) {
               }
             }}
           >
-            {ROLE_OPTIONS.map(role => (
+            {RoleOptions.map(role => (
               <SelectItem key={role} onClick={event => event.stopPropagation()} value={role}>
-                {ROLE_OPTIONS_DISPLAY_NAME[role]}
+                {RoleOptionsDisplayName[role]}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         <Select
-          onValueChange={(party: PARTY_OPTION) => handleChange({ party })}
+          onValueChange={(party: PartyOption) => handleChange({ party })}
           value={filtersValue.party}
         >
           <SelectTrigger data-testid="party-filter-trigger">
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
             <span className="mr-auto">
-              <SelectValue placeholder={STANDARD_OPTION} />
+              <SelectValue placeholder={StandardOption} />
             </span>
           </SelectTrigger>
           <SelectContent
@@ -116,9 +116,9 @@ export function Filters(props: FiltersProps) {
               }
             }}
           >
-            {PARTY_OPTIONS.map(party => (
+            {PartyOptions.map(party => (
               <SelectItem key={party} onClick={event => event.stopPropagation()} value={party}>
-                {PARTY_OPTIONS_DISPLAY_NAME[party]}
+                {PartyOptionsDisplayName[party]}
               </SelectItem>
             ))}
           </SelectContent>
