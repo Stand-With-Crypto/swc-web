@@ -62,20 +62,23 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
 
 function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
+
+  const isAddressLoading = address === 'loading'
+
   const res = useGetElectoralZoneFromAddress({
-    address: address === 'loading' ? null : address?.description,
-    placeId: address === 'loading' ? null : address?.place_id,
+    address: isAddressLoading ? null : address?.description,
+    placeId: isAddressLoading ? null : address?.place_id,
   })
   const shouldShowSubtitle = !address || !res.data
 
-  if (!address || address === 'loading' || !res.data) {
+  if (!address || isAddressLoading || !res.data) {
     return (
       <ContentContainer shouldShowSubtitle={shouldShowSubtitle} stateName={stateName}>
         <DefaultPlacesSelect
-          loading={address === 'loading' || res.isLoading}
+          loading={isAddressLoading || res.isLoading}
           onChange={setAddress}
           stateCode={stateCode}
-          value={address === 'loading' ? null : address}
+          value={isAddressLoading ? null : address}
         />
       </ContentContainer>
     )
