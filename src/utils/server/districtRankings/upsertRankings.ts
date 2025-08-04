@@ -185,6 +185,7 @@ export type DistrictRankingEntryWithRank = DistrictRankingEntry & { rank: number
 export interface LeaderboardPaginationData {
   items: DistrictRankingEntryWithRank[]
   total: number
+  totalPages: number
 }
 
 export function getAdvocatesRankingRedisKey(
@@ -228,6 +229,7 @@ export async function getDistrictsLeaderboardData(
   return {
     items,
     total,
+    totalPages: Math.ceil(total / limit),
   }
 }
 
@@ -262,6 +264,7 @@ export async function getDistrictsLeaderboardDataByState(
       ? filteredItems.slice(pagination.offset, pagination.offset + pagination.limit)
       : filteredItems,
     total: filteredItems.length,
+    totalPages: Math.ceil(filteredItems.length / (pagination?.limit ?? 10)),
   }
 }
 

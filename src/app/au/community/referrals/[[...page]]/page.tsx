@@ -56,15 +56,13 @@ export default async function AuCommunityRecentActivityPage(
     countryCode: SupportedCountryCodes.AU,
   }
 
-  const { items: leaderboardData, total } = await getDistrictsLeaderboardData(commonParams)
+  const { items: leaderboardData, totalPages } = await getDistrictsLeaderboardData(commonParams)
 
   const dataProps: PageLeaderboardInferredProps = {
     leaderboardData,
     publicRecentActivity: undefined,
     tab: AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
   }
-
-  const totalPages = Math.ceil(total / itemsPerPage)
 
   return (
     <AuPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={totalPages} />

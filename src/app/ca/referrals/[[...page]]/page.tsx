@@ -62,9 +62,7 @@ export default async function ReferralsPage(props: Props) {
     countryCode,
   }
 
-  const { items: leaderboardData, total } = await getDistrictsLeaderboardData(commonParams)
-
-  const totalPages = Math.ceil(total / itemsPerPage)
+  const { items: leaderboardData, totalPages } = await getDistrictsLeaderboardData(commonParams)
 
   return (
     <CaPageReferrals leaderboardData={leaderboardData} page={pageNum} totalPages={totalPages} />
