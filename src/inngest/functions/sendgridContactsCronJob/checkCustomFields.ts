@@ -42,6 +42,10 @@ export async function checkCustomFields() {
     signup_date: 'Date',
     user_actions_count: 'Number',
     session_id: 'Text',
+    aquisition_source: 'Text',
+    aquisition_medium: 'Text',
+    aquisition_campaign: 'Text',
+    aquisition_referer: 'Text',
     ...(Object.fromEntries(
       Object.values(UserActionType).map(actionType => [
         getSendgridUserActionCustomFieldName(actionType),
