@@ -2,10 +2,10 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsPageReferrals } from '@/components/app/pageReferrals/us'
 import { PageProps } from '@/types'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -19,7 +19,7 @@ export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 export const dynamicParams = true
 
-type Props = PageProps<{ page: string[]; stateCode: string }>
+type Props = PageProps<{ page: string[]; stateCode: string; countryCode: SupportedCountryCodes }>
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { stateCode } = await props.params
@@ -35,7 +35,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   return Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).flatMap((stateCode: string) =>
     flatten(
       times(totalPregeneratedPages).map(i => ({
@@ -51,7 +51,7 @@ export default async function ReferralsStateSpecificPage(props: Props) {
   const { countryCode, page, stateCode } = params
 
   const { itemsPerPage } =
-    STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+    US_STATE_SPECIFIC_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
 
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
@@ -70,6 +70,7 @@ export default async function ReferralsStateSpecificPage(props: Props) {
   }
 
   const { items: leaderboardData, total } = await getDistrictsLeaderboardDataByState(
+    countryCode,
     stateCode.toUpperCase(),
     commonParams,
   )
@@ -77,8 +78,7 @@ export default async function ReferralsStateSpecificPage(props: Props) {
   const totalPages = Math.ceil(total / itemsPerPage)
 
   return (
-    <PageReferrals
-      countryCode={countryCode as SupportedCountryCodes}
+    <UsPageReferrals
       leaderboardData={leaderboardData}
       page={pageNum}
       stateCode={stateCode}

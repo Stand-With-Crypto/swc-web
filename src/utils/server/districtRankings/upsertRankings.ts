@@ -2,20 +2,20 @@
 
 import { chunk } from 'lodash-es'
 
+import { StateCode } from '@/utils/server/districtRankings/types'
 import { redis, redisWithCache } from '@/utils/server/redis'
 import { getLogger } from '@/utils/shared/logger'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
-
-import { CURRENT_DISTRICT_RANKING, REDIS_KEYS } from './constants'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface DistrictRankingEntry {
-  state: USStateCode
+  state: StateCode
   district: string
   count: number
 }
 
-export type MemberKey = `${USStateCode}:${string}`
+export type MemberKey = `${StateCode}:${string}`
 type RedisEntryData = Omit<DistrictRankingEntry, 'count'>
 
 const getLog = (redisKey: string) => getLogger(redisKey)
@@ -60,11 +60,17 @@ export const getMemberKey = (data: RedisEntryData): MemberKey => `${data.state}:
 const parseMemberKey = (key: MemberKey): RedisEntryData => {
   const parts = key.split(':')
   const [state, district] = parts
-  return { state: state as USStateCode, district }
+  return { state: state as StateCode, district }
 }
 
-async function maybeInitializeCacheKey(redisKey: string) {
+async function maybeInitializeUSCacheKey(countryCode: SupportedCountryCodes) {
+  if (countryCode !== SupportedCountryCodes.US) {
+    return
+  }
+
+  const redisKey = getAdvocatesRankingRedisKey(countryCode)
   const log = getLog(redisKey)
+
   const existingCount = await redisWithCache.zcard(redisKey)
 
   if (existingCount > 0) {
@@ -88,11 +94,15 @@ async function maybeInitializeCacheKey(redisKey: string) {
   log.info('Cache key initialized')
 }
 
+export type CountType = 'advocates' | 'referrals'
+
 export async function createDistrictRankingUpserter(
-  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS],
+  countryCode: SupportedCountryCodes,
+  countType?: CountType,
 ) {
+  const redisKey = getAdvocatesRankingRedisKey(countryCode, countType)
   const log = getLog(redisKey)
-  await maybeInitializeCacheKey(redisKey)
+  await maybeInitializeUSCacheKey(countryCode)
 
   return async (entry: DistrictRankingEntry) => {
     if (!isValidDistrictEntry(entry)) {
@@ -127,8 +137,10 @@ export async function createDistrictRankingUpserter(
 }
 
 export async function createDistrictRankingIncrementer(
-  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS],
+  countryCode: SupportedCountryCodes,
+  countType: CountType,
 ) {
+  const redisKey = getAdvocatesRankingRedisKey(countryCode, countType)
   const log = getLog(redisKey)
   return async (entry: DistrictRankingEntry) => {
     if (!isValidDistrictEntry(entry)) {
@@ -173,16 +185,30 @@ export type DistrictRankingEntryWithRank = DistrictRankingEntry & { rank: number
 export interface LeaderboardPaginationData {
   items: DistrictRankingEntryWithRank[]
   total: number
+  totalPages: number
+}
+
+export function getAdvocatesRankingRedisKey(
+  countryCode: SupportedCountryCodes,
+  countType: CountType = 'advocates',
+) {
+  if (countryCode === SupportedCountryCodes.US) {
+    return `district:ranking:${countType}`
+  }
+
+  return `district:ranking:${countType}:${countryCode}`
 }
 
 export async function getDistrictsLeaderboardData(
   options: {
-    redisKey?: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS]
     limit?: number
     offset?: number
+    countryCode?: SupportedCountryCodes
   } = {},
 ): Promise<LeaderboardPaginationData> {
-  const { redisKey = CURRENT_DISTRICT_RANKING, limit = 10, offset = 0 } = options
+  const { limit = 10, offset = 0, countryCode = SupportedCountryCodes.US } = options
+
+  const redisKey = getAdvocatesRankingRedisKey(countryCode)
 
   const [rawResults, total] = await Promise.all([
     redisWithCache.zrange(redisKey, offset, offset + limit - 1, {
@@ -203,17 +229,21 @@ export async function getDistrictsLeaderboardData(
   return {
     items,
     total,
+    totalPages: Math.ceil(total / limit),
   }
 }
 
 export async function getDistrictsLeaderboardDataByState(
+  countryCode: SupportedCountryCodes,
   stateCode: string,
   pagination?: {
     limit: number
     offset: number
   },
 ): Promise<LeaderboardPaginationData> {
-  const rawResults = await redisWithCache.zrange(CURRENT_DISTRICT_RANKING, 0, -1, {
+  const redisKey = getAdvocatesRankingRedisKey(countryCode)
+
+  const rawResults = await redisWithCache.zrange(redisKey, 0, -1, {
     rev: true,
     withScores: true,
   })
@@ -234,11 +264,15 @@ export async function getDistrictsLeaderboardDataByState(
       ? filteredItems.slice(pagination.offset, pagination.offset + pagination.limit)
       : filteredItems,
     total: filteredItems.length,
+    totalPages: Math.ceil(filteredItems.length / (pagination?.limit ?? 10)),
   }
 }
 
-export async function getDistrictRankByState(member: RedisEntryData) {
-  const { items } = await getDistrictsLeaderboardDataByState(member.state)
+export async function getDistrictRankByState(
+  countryCode: SupportedCountryCodes,
+  member: RedisEntryData,
+) {
+  const { items } = await getDistrictsLeaderboardDataByState(countryCode, member.state)
 
   const result = items.find(
     item => item.state === member.state && item.district === member.district,
@@ -250,10 +284,9 @@ export async function getDistrictRankByState(member: RedisEntryData) {
   }
 }
 
-export async function getDistrictRank(
-  redisKey: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS] = CURRENT_DISTRICT_RANKING,
-  member: RedisEntryData,
-) {
+export async function getDistrictRank(countryCode: SupportedCountryCodes, member: RedisEntryData) {
+  const redisKey = getAdvocatesRankingRedisKey(countryCode)
+
   const [rankResponse, scoreResponse] = await Promise.all([
     redisWithCache.zrevrank(redisKey, getMemberKey(member)),
     redisWithCache.zscore(redisKey, getMemberKey(member)),
@@ -268,12 +301,14 @@ export async function getDistrictRank(
 }
 
 export async function getMultipleDistrictRankings({
-  redisKey = CURRENT_DISTRICT_RANKING,
+  countryCode,
   members,
 }: {
-  redisKey?: (typeof REDIS_KEYS)[keyof typeof REDIS_KEYS]
+  countryCode: SupportedCountryCodes
   members: MemberKey[]
 }) {
+  const redisKey = getAdvocatesRankingRedisKey(countryCode)
+
   if (members.length === 0) {
     return []
   }

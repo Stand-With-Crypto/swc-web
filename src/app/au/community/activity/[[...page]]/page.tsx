@@ -1,15 +1,13 @@
 import React from 'react'
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { getPageData } from '@/components/app/pageCommunity'
-import { AuPageCommunity } from '@/components/app/pageCommunity/au'
-import { RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/common/constants'
+import { AuPageCommunity, PageLeaderboardInferredProps } from '@/components/app/pageCommunity/au'
+import { AU_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/au/constants'
+import { getAuPageData } from '@/components/app/pageCommunity/getPageData'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const countryCode = SupportedCountryCodes.AU
 
 export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
@@ -26,18 +24,25 @@ export async function generateMetadata(_: AuCommunityRecentActivityPageProps): P
 }
 
 export async function generateStaticParams() {
-  const { totalPregeneratedPages } = RECENT_ACTIVITY_PAGINATION
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  const { totalPregeneratedPages } = AU_RECENT_ACTIVITY_PAGINATION
+  return generatePaginationStaticParams(totalPregeneratedPages)
 }
 
 export default async function AuCommunityRecentActivityPage(
   props: AuCommunityRecentActivityPageProps,
 ) {
   const params = await props.params
-  const pageData = await getPageData({
+  const { publicRecentActivity, pageNum, offset, totalPages } = await getAuPageData({
     page: params.page,
-    countryCode,
   })
 
-  return <AuPageCommunity {...pageData} />
+  const dataProps: PageLeaderboardInferredProps = {
+    leaderboardData: undefined,
+    publicRecentActivity,
+    tab: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+  }
+
+  return (
+    <AuPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={totalPages} />
+  )
 }

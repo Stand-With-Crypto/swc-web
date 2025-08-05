@@ -5,7 +5,7 @@ import { TabsContent } from '@radix-ui/react-tabs'
 import { useInView } from 'motion/react'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -39,7 +39,7 @@ export function DelayedRecentActivityWithMap({
   const isMobile = useIsMobile()
 
   return isMobile || !advocatesMapPageData ? (
-    <TabsContent ref={ref} value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
+    <TabsContent ref={ref} value={UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
       <RecentActivity.List
         actions={{
           data: visibleActions,
