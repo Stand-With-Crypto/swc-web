@@ -39,15 +39,20 @@ export function AuPageHome({
       </section>
 
       <HomePageSection>
-        <HomePageSection.Title>
-          People in <span className="text-primary-cta">Australia</span> believe in crypto
-        </HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          See how the community is taking a stand to safeguard the future of crypto in Australia.
+        <HomePageSection.Title>Our community</HomePageSection.Title>
+        <HomePageSection.Subtitle className="md:hidden">
+          See how our community is taking a stand to safeguard the future of crypto in Australia.
         </HomePageSection.Subtitle>
 
         <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
+          <div className="space-y-4">
+            <RecentActivity.List actions={recentActivity} />
+            <RecentActivity.Footer>
+              <Button asChild variant="secondary">
+                <InternalLink href={urls.community()}>View all</InternalLink>
+              </Button>
+            </RecentActivity.Footer>
+          </div>
         </RecentActivity>
       </HomePageSection>
 
