@@ -1,25 +1,26 @@
 'use client'
 
+import { notFound } from 'next/navigation'
+
 import { getCampaignUserActionCTAs } from '@/components/app/pageSimpleCampaign/ctas'
 import { useActions } from '@/components/app/pageSimpleCampaign/hooks/useActions'
 import { SimpleCampaignName } from '@/components/app/pageSimpleCampaign/types'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/components/userActionGridCTA'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { notFound } from 'next/navigation'
 
 interface SimpleCampaignGridProps {
   countryCode: SupportedCountryCodes
-  campaign: SimpleCampaignName
+  campaignName: SimpleCampaignName
 }
 
-export function SimpleCampaignGrid({ countryCode, campaign }: SimpleCampaignGridProps) {
-  const actionsSettings = getCampaignUserActionCTAs({ countryCode, campaign })
+export function SimpleCampaignGrid({ countryCode, campaignName }: SimpleCampaignGridProps) {
+  const actionsSettings = getCampaignUserActionCTAs({ countryCode, campaignName })
+
+  const { actions, performedUserActions } = useActions({ actions: actionsSettings })
 
   if (!actionsSettings) {
     return notFound()
   }
-
-  const { actions, performedUserActions } = useActions({ actions: actionsSettings })
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">

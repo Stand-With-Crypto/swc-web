@@ -7,14 +7,14 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 interface PageSimpleCampaignProps {
   title: string
   subtitle: string
-  campaign: SimpleCampaignName
+  campaignName: SimpleCampaignName
   countryCode: SupportedCountryCodes
 }
 
 export function PageSimpleCampaign({
   title,
   subtitle,
-  campaign,
+  campaignName,
   countryCode,
 }: PageSimpleCampaignProps) {
   return (
@@ -24,7 +24,7 @@ export function PageSimpleCampaign({
         <PageSubTitle size="lg">{subtitle}</PageSubTitle>
       </div>
 
-      <SimpleCampaignGrid countryCode={countryCode} campaign={campaign} />
+      <SimpleCampaignGrid campaignName={campaignName} countryCode={countryCode} />
     </div>
   )
 }

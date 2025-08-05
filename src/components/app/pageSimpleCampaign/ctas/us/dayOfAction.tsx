@@ -1,5 +1,7 @@
 import { UserActionType } from '@prisma/client'
 
+import { getDefaultReferCTA } from '@/components/app/pageSimpleCampaign/ctas/commons/refer'
+import { getDefaultTweetCTA } from '@/components/app/pageSimpleCampaign/ctas/commons/tweet'
 import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -8,8 +10,6 @@ import {
   USUserActionReferCampaignName,
   USUserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { getDefaultTweetCTA } from '@/components/app/pageSimpleCampaign/ctas/commons/tweet'
-import { getDefaultReferCTA } from '@/components/app/pageSimpleCampaign/ctas/commons/refer'
 
 const countryCode = SupportedCountryCodes.US
 

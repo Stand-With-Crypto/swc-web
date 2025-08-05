@@ -23,7 +23,6 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VIEW_KEY_PAGE,
   UserActionType.LINKEDIN,
   UserActionType.CLAIM_NFT,
-  UserActionType.DAY_OF_ACTION,
 ] as const
 
 export type USActiveClientUserActionWithCampaignType =
@@ -178,5 +177,4 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.POLL]: USUserActionPollCampaignName.CRYPTO_NEWS,
   [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName.DEFAULT,
   [UserActionType.LINKEDIN]: USUserActionLinkedinCampaignName.DEFAULT,
-  [UserActionType.DAY_OF_ACTION]: USUserActionDayOfActionCampaignName.DEFAULT,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>

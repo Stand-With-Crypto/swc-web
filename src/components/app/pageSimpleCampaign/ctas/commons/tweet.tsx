@@ -1,9 +1,9 @@
+import { UserActionType } from '@prisma/client'
+
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { UserActionCampaignNames } from '@/utils/shared/userActionCampaigns'
-import { USUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { UserActionType } from '@prisma/client'
 
 interface GetDefaultTweetCTAParams {
   countryCode: SupportedCountryCodes

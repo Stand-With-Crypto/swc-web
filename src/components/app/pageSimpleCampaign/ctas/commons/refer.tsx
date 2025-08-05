@@ -1,9 +1,10 @@
+import { UserActionType } from '@prisma/client'
+
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionCTA } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { UserActionCampaignNames } from '@/utils/shared/userActionCampaigns'
-import { UserActionType } from '@prisma/client'
 
 interface GetDefaultReferCTAParams {
   countryCode: SupportedCountryCodes

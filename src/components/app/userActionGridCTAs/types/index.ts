@@ -27,7 +27,7 @@ export interface UserActionGridCTACampaign {
   WrapperComponent: null | ((args: { children: React.ReactNode }) => React.ReactNode)
 }
 
-export type UserActionCTA = {
+export interface UserActionCTA {
   title: string
   description: string
   /**

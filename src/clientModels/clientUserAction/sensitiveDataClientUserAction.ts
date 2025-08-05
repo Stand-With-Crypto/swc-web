@@ -160,10 +160,6 @@ interface SensitiveDataClientUserActionClaimNft {
   actionType: typeof UserActionType.CLAIM_NFT
 }
 
-interface SensitiveDataClientUserActionDayOfAction {
-  actionType: typeof UserActionType.DAY_OF_ACTION
-}
-
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -192,7 +188,6 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionPoll
       | SensitiveDataClientUserActionViewKeyPage
       | SensitiveDataClientUserActionClaimNft
-      | SensitiveDataClientUserActionDayOfAction
     )
 >
 
@@ -386,9 +381,6 @@ export const getSensitiveDataClientUserAction = ({
     },
     [UserActionType.CLAIM_NFT]: () => {
       return getClientModel({ ...sharedProps, actionType: UserActionType.CLAIM_NFT })
-    },
-    [UserActionType.DAY_OF_ACTION]: () => {
-      return getClientModel({ ...sharedProps, actionType: UserActionType.DAY_OF_ACTION })
     },
   }
 

@@ -33,7 +33,6 @@ import {
   USActiveClientUserActionWithCampaignType,
   USUserActionCallCampaignName,
   USUserActionClaimNftCampaignName,
-  USUserActionDayOfActionCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
   USUserActionLinkedinCampaignName,
@@ -122,9 +121,6 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.CLAIM_NFT]: {
     [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.GENIUS_ACT_2025,
-  },
-  [UserActionType.DAY_OF_ACTION]: {
-    [USUserActionDayOfActionCampaignName.DEFAULT]: null,
   },
 }
 

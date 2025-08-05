@@ -12,12 +12,12 @@ const CAMPAIGNS_BY_COUNTRY_CODE_MAP: Partial<
 
 export function getCampaignUserActionCTAs({
   countryCode,
-  campaign,
+  campaignName,
 }: {
   countryCode: SupportedCountryCodes
-  campaign: SimpleCampaignName
+  campaignName: SimpleCampaignName
 }) {
-  const campaignCTAs = CAMPAIGNS_BY_COUNTRY_CODE_MAP[countryCode]?.[campaign]
+  const campaignCTAs = CAMPAIGNS_BY_COUNTRY_CODE_MAP[countryCode]?.[campaignName]
 
   if (!campaignCTAs) {
     return gracefullyError({
@@ -29,7 +29,7 @@ export function getCampaignUserActionCTAs({
           domain: 'simplePageCampaignCTAs',
         },
         extra: {
-          campaign,
+          campaignName,
           countryCode,
         },
       },
