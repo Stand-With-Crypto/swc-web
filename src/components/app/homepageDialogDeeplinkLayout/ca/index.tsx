@@ -10,7 +10,6 @@ import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { getFounders } from '@/utils/server/builder/models/data/founders'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
-import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.CA
@@ -20,24 +19,17 @@ export async function CAHomepageDialogDeeplinkLayout({
   size = 'md',
   className,
 }: HomepageDialogDeeplinkLayoutProps) {
-  const [
-    topLevelMetrics,
-    recentActivity,
-    partners,
-    founders,
-    dtsiHomepagePoliticians,
-    leaderboardData,
-  ] = await Promise.all([
-    getHomepageTopLevelMetrics(),
-    getPublicRecentActivity({
-      limit: 10,
-      countryCode,
-    }),
-    getPartners({ countryCode }),
-    getFounders({ countryCode }),
-    queryDTSIHomepagePeople({ countryCode }),
-    getDistrictsLeaderboardData({ limit: 10, countryCode }),
-  ])
+  const [topLevelMetrics, recentActivity, partners, founders, dtsiHomepagePoliticians] =
+    await Promise.all([
+      getHomepageTopLevelMetrics(),
+      getPublicRecentActivity({
+        limit: 10,
+        countryCode,
+      }),
+      getPartners({ countryCode }),
+      getFounders({ countryCode }),
+      queryDTSIHomepagePeople({ countryCode }),
+    ])
 
   return (
     <>
@@ -48,7 +40,6 @@ export async function CAHomepageDialogDeeplinkLayout({
       <CaPageHome
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
         founders={founders}
-        leaderboardData={leaderboardData.items}
         partners={partners}
         recentActivity={recentActivity}
         topLevelMetrics={topLevelMetrics}

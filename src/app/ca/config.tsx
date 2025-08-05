@@ -38,11 +38,6 @@ export const navbarConfig: NavbarProps = {
       text: 'Resources',
       children: [
         {
-          href: urls.referrals(),
-          text: 'Referrals',
-          icon: <Icons.ReferralsIcon />,
-        },
-        {
           href: urls.community(),
           text: 'Community',
           icon: <Icons.CommunityIcon />,

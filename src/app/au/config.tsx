@@ -29,10 +29,6 @@ export const navbarConfig: NavbarProps = {
       href: urls.manifesto(),
       text: 'Manifesto',
     },
-    {
-      href: urls.referrals(),
-      text: 'Referrals',
-    },
   ],
 }
 
