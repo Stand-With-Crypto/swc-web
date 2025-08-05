@@ -129,7 +129,13 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
         const users = await prismaClient.user.findMany({
           where: {
             countryCode,
-            primaryUserEmailAddress: { isVerified: true },
+            OR: [
+              { primaryUserEmailAddress: { isVerified: true } },
+              {
+                primaryUserEmailAddress: { emailAddress: { not: '' } },
+                acquisitionSource: { notIn: ['', 'INTL_BACKFILL_CSV'] },
+              },
+            ],
           },
           select: {
             id: true,
