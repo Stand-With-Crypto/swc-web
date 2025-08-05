@@ -282,6 +282,7 @@ enum UserActionType {
   VOTING_DAY
   VOTING_INFORMATION_RESEARCHED
   CLAIM_NFT
+  DAY_OF_ACTION
 }
 
 model UserAction {
