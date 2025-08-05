@@ -187,7 +187,7 @@ async function processCountry(config: {
           { primaryUserEmailAddress: { isVerified: true } },
           {
             primaryUserEmailAddress: { emailAddress: { not: '' } },
-            acquisitionSource: { not: '' },
+            acquisitionSource: { notIn: ['', 'INTL_BACKFILL_CSV'] },
           },
         ],
       },
