@@ -27,36 +27,35 @@ export interface UserActionGridCTACampaign {
   WrapperComponent: null | ((args: { children: React.ReactNode }) => React.ReactNode)
 }
 
-export type UserActionGridCTA = Record<
-  string,
-  {
-    title: string
-    description: string
-    /**
-     * This is optional and should be used when we want to have a smaller description on mobile to prevent increase in height on CTA. If it is not set, we use the description itself.
-     */
-    mobileCTADescription?: string
-    /**
-     * This is used as the description for the campaigns modal.
-     */
-    campaignsModalDescription: string
-    /**
-     * This property enables the CTA to function as a link, even if there are multiple campaigns. In short, it bypasses the check on the number of campaigns to determine whether to use the first campaign's WrapperComponent or to open the campaigns dialog.
-     */
-    link?: (args: { children: React.ReactNode }) => React.ReactNode
-    /**
-     * The image path for the CTA.
-     */
-    image: string
-    /**
-     * A list of campaigns linked to this CTA.
-     *
-     * - If there is only one campaign, clicking the CTA will trigger the WrapperComponent for that campaign.
-     * - If there are multiple campaigns, a dialog will display all the campaigns in the order they appear in the array, with inactive campaigns shown at the end. Clicking on a campaign will trigger the WrapperComponent for that selected campaign.
-     */
-    campaigns: Array<UserActionGridCTACampaign>
-  }
->
+export type UserActionCTA = {
+  title: string
+  description: string
+  /**
+   * This is optional and should be used when we want to have a smaller description on mobile to prevent increase in height on CTA. If it is not set, we use the description itself.
+   */
+  mobileCTADescription?: string
+  /**
+   * This is used as the description for the campaigns modal.
+   */
+  campaignsModalDescription: string
+  /**
+   * This property enables the CTA to function as a link, even if there are multiple campaigns. In short, it bypasses the check on the number of campaigns to determine whether to use the first campaign's WrapperComponent or to open the campaigns dialog.
+   */
+  link?: (args: { children: React.ReactNode }) => React.ReactNode
+  /**
+   * The image path for the CTA.
+   */
+  image: string
+  /**
+   * A list of campaigns linked to this CTA.
+   *
+   * - If there is only one campaign, clicking the CTA will trigger the WrapperComponent for that campaign.
+   * - If there are multiple campaigns, a dialog will display all the campaigns in the order they appear in the array, with inactive campaigns shown at the end. Clicking on a campaign will trigger the WrapperComponent for that selected campaign.
+   */
+  campaigns: Array<UserActionGridCTACampaign>
+}
+
+export type UserActionGridCTA = Record<string, UserActionCTA>
 
 export interface UserActionCardProps {
   title: string

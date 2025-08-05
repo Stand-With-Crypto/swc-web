@@ -23,6 +23,7 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VIEW_KEY_PAGE,
   UserActionType.LINKEDIN,
   UserActionType.CLAIM_NFT,
+  UserActionType.DAY_OF_ACTION,
 ] as const
 
 export type USActiveClientUserActionWithCampaignType =
@@ -45,6 +46,7 @@ export enum USUserActionEmailCampaignName {
   CLARITY_ACT_HOUSE_JUN_13_2025 = 'CLARITY_ACT_HOUSE_JUN_13_2025',
   CLARITY_GENIUS_ACTS_JUL_17_2025 = 'CLARITY_GENIUS_ACTS_JUL_17_2025',
   CLARITY_ACT_SENATE_JUL_17_2025 = 'CLARITY_ACT_SENATE_JUL_17_2025',
+  DAY_OF_ACTION_AUG_14_2025 = 'DAY_OF_ACTION_AUG_14_2025',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
@@ -111,6 +113,10 @@ export enum USUserActionClaimNftCampaignName {
   GENIUS_ACT_2025 = 'GENIUS_ACT_2025',
 }
 
+export enum USUserActionDayOfActionCampaignName {
+  DEFAULT = 'DEFAULT',
+}
+
 export type USUserActionCampaignName =
   | USUserActionEmailCampaignName
   | USUserActionCallCampaignName
@@ -172,4 +178,5 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.POLL]: USUserActionPollCampaignName.CRYPTO_NEWS,
   [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName.DEFAULT,
   [UserActionType.LINKEDIN]: USUserActionLinkedinCampaignName.DEFAULT,
+  [UserActionType.DAY_OF_ACTION]: USUserActionDayOfActionCampaignName.DEFAULT,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>
