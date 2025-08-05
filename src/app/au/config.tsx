@@ -4,6 +4,7 @@ import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { auExternalUrls, getIntlUrls } from '@/utils/shared/urls'
+import * as Icons from '@/components/app/navbar/navbarDrawerIcons'
 
 const countryCode = SupportedCountryCodes.AU
 
@@ -28,6 +29,21 @@ export const navbarConfig: NavbarProps = {
     {
       href: urls.manifesto(),
       text: 'Manifesto',
+    },
+    {
+      text: 'Resources',
+      children: [
+        {
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: <Icons.ReferralsIcon />,
+        },
+        {
+          href: urls.community(),
+          text: 'Community',
+          icon: <Icons.CommunityIcon />,
+        },
+      ],
     },
   ],
 }
