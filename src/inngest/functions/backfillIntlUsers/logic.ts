@@ -149,57 +149,63 @@ async function createUserWithCountryCode(
 
   let newUser: User | undefined
   if (persist) {
-    newUser = await prismaClient.$transaction(async tx => {
-      const user = await tx.user.create({
-        data: {
-          firstName: userData.firstName || undefined,
-          lastName: userData.lastName || undefined,
-          informationVisibility: UserInformationVisibility.ANONYMOUS,
-          hasOptedInToEmails: Boolean(emailAddress),
-          hasOptedInToMembership: false,
-          smsStatus: SMSStatus.NOT_OPTED_IN,
-          dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-          userSessions: { create: { id: generateUserSessionId() } },
-          countryCode,
-          referralId: generateReferralId(),
-          acquisitionReferer: '',
-          acquisitionSource: userData.acquisitionSource,
-          acquisitionMedium: userData.acquisitionMedium,
-          acquisitionCampaign: userData.acquisitionCampaign,
-        },
-      })
+    newUser = await prismaClient.$transaction(
+      async tx => {
+        const user = await tx.user.create({
+          data: {
+            firstName: userData.firstName || undefined,
+            lastName: userData.lastName || undefined,
+            informationVisibility: UserInformationVisibility.ANONYMOUS,
+            hasOptedInToEmails: Boolean(emailAddress),
+            hasOptedInToMembership: false,
+            smsStatus: SMSStatus.NOT_OPTED_IN,
+            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            userSessions: { create: { id: generateUserSessionId() } },
+            countryCode,
+            referralId: generateReferralId(),
+            acquisitionReferer: '',
+            acquisitionSource: userData.acquisitionSource,
+            acquisitionMedium: userData.acquisitionMedium,
+            acquisitionCampaign: userData.acquisitionCampaign,
+          },
+        })
 
-      const emailRecord = await tx.userEmailAddress.create({
-        data: {
-          emailAddress,
-          isVerified: false,
-          source: UserEmailAddressSource.USER_ENTERED,
-          dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-          userId: user.id,
-        },
-      })
+        const emailRecord = await tx.userEmailAddress.create({
+          data: {
+            emailAddress,
+            isVerified: false,
+            source: UserEmailAddressSource.USER_ENTERED,
+            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            userId: user.id,
+          },
+        })
 
-      await tx.user.update({
-        where: { id: user.id },
-        data: { primaryUserEmailAddressId: emailRecord.id },
-      })
+        await tx.user.update({
+          where: { id: user.id },
+          data: { primaryUserEmailAddressId: emailRecord.id },
+        })
 
-      await tx.userAction.create({
-        data: {
-          user: { connect: { id: user.id } },
-          actionType: UserActionType.OPT_IN,
-          campaignName: getActionDefaultCampaignName(UserActionType.OPT_IN, countryCode),
-          countryCode,
-          userActionOptIn: {
-            create: {
-              optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+        await tx.userAction.create({
+          data: {
+            user: { connect: { id: user.id } },
+            actionType: UserActionType.OPT_IN,
+            campaignName: getActionDefaultCampaignName(UserActionType.OPT_IN, countryCode),
+            countryCode,
+            userActionOptIn: {
+              create: {
+                optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+              },
             },
           },
-        },
-      })
+        })
 
-      return user
-    })
+        return user
+      },
+      {
+        timeout: 15000,
+        maxWait: 15000,
+      },
+    )
   }
 
   logger.info(`Created new user: ${emailAddress}`)

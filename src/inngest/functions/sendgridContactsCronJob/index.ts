@@ -183,7 +183,13 @@ async function processCountry(config: {
     return prismaClient.user.count({
       where: {
         countryCode,
-        primaryUserEmailAddress: { isVerified: true },
+        OR: [
+          { primaryUserEmailAddress: { isVerified: true } },
+          {
+            primaryUserEmailAddress: { emailAddress: { not: '' } },
+            acquisitionSource: { notIn: ['', 'INTL_BACKFILL_CSV'] },
+          },
+        ],
       },
     })
   })
