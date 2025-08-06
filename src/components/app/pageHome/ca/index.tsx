@@ -60,7 +60,7 @@ export function CaPageHome({
             data-testid="community-leaderboard-tabs"
             defaultValue={CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
-              {
+              recentActivity && {
                 value: CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                 label: 'Recent activity',
                 content: (
@@ -105,7 +105,7 @@ export function CaPageHome({
                   </div>
                 ),
               },
-            ]}
+            ].filter(Boolean)}
           />
         </RecentActivity>
       </HomePageSection>
