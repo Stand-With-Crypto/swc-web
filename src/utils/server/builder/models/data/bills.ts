@@ -10,6 +10,7 @@ import {
   BILL_CHAMBER_ORIGIN_OPTIONS,
   BILL_KEY_DATE_CATEGORY_OPTIONS,
   SWCBill,
+  SWCBillCTAButton,
   SWCBillFromBuilderIO,
   zodBillSchemaValidation,
 } from '@/utils/shared/zod/getSWCBills'
@@ -180,6 +181,8 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
       bill.gbAdministrativeAreaLevel1 ||
       bill.usAdministrativeAreaLevel1,
     countryCode: bill.countryCode.toUpperCase() as SupportedCountryCodes,
+    ctaButton:
+      bill.ctaButton.label && bill.ctaButton.url ? (bill.ctaButton as SWCBillCTAButton) : undefined,
     isKeyBill: bill.isKeyBill ?? false,
     keyDates: [
       {

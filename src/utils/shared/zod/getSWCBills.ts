@@ -36,7 +36,7 @@ export const BILL_SUCCESSFUL_KEY_DATES: BILL_KEY_DATE_CATEGORY_OPTIONS[] = [
 
 export const zodBillSchemaValidation = object({
   data: object({
-    analysis: string(),
+    analysis: string().optional(),
     auAdministrativeAreaLevel1: string().min(2).max(3).optional(),
     billNumber: string(),
     caAdministrativeAreaLevel1: string().min(2).max(3).optional(),
@@ -45,11 +45,11 @@ export const zodBillSchemaValidation = object({
     ctaButton: object({
       label: string(),
       url: string().url(),
-    }).optional(),
+    }).partial(),
     dateIntroduced: string(),
     dtsiSlug: string().optional(),
     gbAdministrativeAreaLevel1: string().min(2).max(3).optional(),
-    isKeyBill: boolean(),
+    isKeyBill: boolean().optional(),
     keyDates: array(
       object({
         date: string(),
@@ -65,7 +65,7 @@ export const zodBillSchemaValidation = object({
         title: string(),
         url: string().url(),
       }),
-    ),
+    ).optional(),
     summary: string(),
     timelineDescription: string().optional(),
     title: string(),
@@ -83,19 +83,21 @@ export interface SWCBillKeyDate {
   title: string
 }
 
+export interface SWCBillCTAButton {
+  label: string
+  url: string
+}
+
 export interface SWCBill {
   administrativeAreaLevel1?: string
-  analysis: string
+  analysis?: string
   auAdministrativeAreaLevel1?: string
   billNumber: string
   caAdministrativeAreaLevel1?: string
   chamberOrigin: BILL_CHAMBER_ORIGIN_OPTIONS
   computedStanceScore?: number | null
   countryCode: SupportedCountryCodes
-  ctaButton?: {
-    url: string
-    label: string
-  }
+  ctaButton?: SWCBillCTAButton
   dateIntroduced: string
   dtsiSlug?: string
   gbAdministrativeAreaLevel1?: string
