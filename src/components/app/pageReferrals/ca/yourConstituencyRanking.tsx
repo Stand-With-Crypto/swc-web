@@ -22,7 +22,7 @@ function Heading() {
 }
 
 function CaDefaultPlacesSelect(
-  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
+  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading' | 'disabled'>,
 ) {
   return (
     <DefaultPlacesSelect placeholder="Enter your address" title="Your constituency" {...props} />
@@ -52,6 +52,7 @@ export function CaYourConstituencyRank() {
     electoralZone: constituency,
     electoralZoneRanking,
     administrativeArea: provinceCode,
+    isAddressFromProfile,
   } = useUserAddress()
 
   if (isLoading) {
@@ -76,7 +77,11 @@ export function CaYourConstituencyRank() {
   if (!isAddressInCanada) {
     return (
       <YourLocale>
-        <CaDefaultPlacesSelect onChange={setAddress} value={isLoading ? null : address} />
+        <CaDefaultPlacesSelect
+          disabled={isAddressFromProfile}
+          onChange={setAddress}
+          value={isLoading ? null : address}
+        />
         <YourLocale.Label>
           Looks like your address is not from Canada, so it can't be used to filter
         </YourLocale.Label>

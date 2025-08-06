@@ -22,7 +22,7 @@ function Heading() {
 }
 
 function UsDefaultPlacesSelect(
-  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
+  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading' | 'disabled'>,
 ) {
   return <DefaultPlacesSelect placeholder="Enter your address" title="Your district" {...props} />
 }
@@ -48,6 +48,7 @@ export function UsYourDistrictRank() {
     electoralZone: district,
     electoralZoneRanking: districtRanking,
     administrativeArea: stateCode,
+    isAddressFromProfile,
   } = useUserAddress()
 
   if (isLoading) {
@@ -72,7 +73,11 @@ export function UsYourDistrictRank() {
   if (!isAddressInUS) {
     return (
       <YourLocale>
-        <UsDefaultPlacesSelect onChange={setAddress} value={isLoading ? null : address} />
+        <UsDefaultPlacesSelect
+          disabled={isAddressFromProfile}
+          onChange={setAddress}
+          value={isLoading ? null : address}
+        />
         <YourLocale.Label>
           Looks like your address is not from the United States, so it can't be used to filter
         </YourLocale.Label>

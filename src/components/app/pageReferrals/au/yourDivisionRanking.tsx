@@ -22,7 +22,7 @@ function Heading() {
 }
 
 function AuDefaultPlacesSelect(
-  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
+  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading' | 'disabled'>,
 ) {
   return <DefaultPlacesSelect placeholder="Enter your address" title="Your division" {...props} />
 }
@@ -48,6 +48,7 @@ export function AuYourDivisionRank() {
     electoralZone: division,
     electoralZoneRanking: divisionRanking,
     administrativeArea: stateCode,
+    isAddressFromProfile,
   } = useUserAddress()
 
   if (isLoading) {
@@ -72,7 +73,11 @@ export function AuYourDivisionRank() {
   if (!isAddressInAustralia) {
     return (
       <YourLocale>
-        <AuDefaultPlacesSelect onChange={setAddress} value={isLoading ? null : address} />
+        <AuDefaultPlacesSelect
+          disabled={isAddressFromProfile}
+          onChange={setAddress}
+          value={isLoading ? null : address}
+        />
         <YourLocale.Label>
           Looks like your address is not from Australia, so it can't be used to filter
         </YourLocale.Label>
