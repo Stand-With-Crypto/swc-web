@@ -19,7 +19,6 @@ import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
-import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -36,7 +35,7 @@ export function AuPageHome({
   founders,
   dtsiHomepagePoliticians,
   leaderboardData,
-}: HomePageProps & { leaderboardData: DistrictRankingEntryWithRank[] }) {
+}: HomePageProps) {
   return (
     <>
       <AuHero />
