@@ -1,5 +1,13 @@
 import { number, object, string, ZodIssueCode } from 'zod'
 
+import {
+  AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  AUStateCode,
+} from '@/utils/shared/stateMappings/auStateUtils'
+import {
+  CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+  CAProvinceOrTerritoryCode,
+} from '@/utils/shared/stateMappings/caProvinceUtils'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
@@ -24,7 +32,7 @@ export const zodAddress = object({
   longitude: number().optional().nullable(),
 })
 
-export const zodStateDistrict = object({
+export const zodUSStateDistrict = object({
   state: string().refine(
     (val): val is USStateCode => val in US_STATE_CODE_TO_DISPLAY_NAME_MAP,
     'Invalid state code',
@@ -52,4 +60,21 @@ export const zodStateDistrict = object({
     })
     return
   }
+})
+
+export const zodAUStateDistrict = object({
+  state: string().refine(
+    (val): val is AUStateCode => val in AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
+    'Invalid state code',
+  ),
+  district: string(),
+})
+
+export const zodCAProvinceDistrict = object({
+  state: string().refine(
+    (val): val is CAProvinceOrTerritoryCode =>
+      val in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+    'Invalid province/territory code',
+  ),
+  district: string(),
 })

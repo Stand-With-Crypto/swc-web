@@ -5,9 +5,13 @@ import { HomePageSection } from '@/components/app/pageHome/common/homePageSectio
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { DistrictsLeaderboard } from '@/components/app/pageReferrals/districtsLeaderboard'
-import { YourDistrictRank } from '@/components/app/pageReferrals/yourDistrictRank'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
+import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
+import {
+  UsYourDistrictRank,
+  UsYourDistrictRankSuspense,
+} from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
@@ -61,10 +65,10 @@ export function UsPageHome({
           <ResponsiveTabsOrSelect
             analytics={'Homepage Our Community Tabs'}
             data-testid="community-leaderboard-tabs"
-            defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+            defaultValue={UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
               {
-                value: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                value: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                 label: 'Recent activity',
                 content: (
                   <>
@@ -82,7 +86,7 @@ export function UsPageHome({
                 ),
               },
               {
-                value: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+                value: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
                 label: 'Top donations',
                 content: (
                   <>
@@ -110,7 +114,7 @@ export function UsPageHome({
                       <Button asChild variant="secondary">
                         <InternalLink
                           href={urls.community({
-                            tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+                            tab: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
                           })}
                         >
                           View all
@@ -121,15 +125,20 @@ export function UsPageHome({
                 ),
               },
               {
-                value: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
-                label: 'Top Districts',
+                value: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+                label: 'Top districts',
                 content: (
                   <div className="space-y-4">
                     <HomePageSection.Subtitle className="hidden md:block">
                       See which district has the most number of advocates.
                     </HomePageSection.Subtitle>
-                    <YourDistrictRank />
-                    <DistrictsLeaderboard countryCode={countryCode} data={leaderboardData} />
+
+                    <UsYourDistrictRankSuspense>
+                      <UserAddressProvider countryCode={countryCode}>
+                        <UsYourDistrictRank />
+                      </UserAddressProvider>
+                    </UsYourDistrictRankSuspense>
+                    <USAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper
                         authenticatedContent={

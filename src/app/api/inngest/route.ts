@@ -5,6 +5,8 @@ import { backfillAddressFieldsWithGooglePlacesCoordinator } from '@/inngest/func
 import { backfillAddressFieldsWithGooglePlacesProcessor } from '@/inngest/functions/backfillAddressFieldsWithGooglePlaces/logic'
 import { backfillCountryCodesInngest } from '@/inngest/functions/backfillCountryCodes'
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
+import { backfillIntlUsersCoordinator } from '@/inngest/functions/backfillIntlUsers'
+import { backfillIntlUsersProcessor } from '@/inngest/functions/backfillIntlUsers/logic'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
@@ -93,5 +95,7 @@ export const { GET, POST, PUT } = serve({
     backfillSWCCivicAddressFieldsProcessor,
     backfillAddressFieldsWithGooglePlacesCoordinator,
     backfillAddressFieldsWithGooglePlacesProcessor,
+    backfillIntlUsersCoordinator,
+    backfillIntlUsersProcessor,
   ],
 })

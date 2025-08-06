@@ -25,7 +25,7 @@ export function GbPageHome({
   countUsers,
   advocatePerStateDataProps,
   dtsiHomepagePoliticians,
-}: HomePageProps) {
+}: Omit<HomePageProps, 'leaderboardData'>) {
   return (
     <>
       <GbHero />

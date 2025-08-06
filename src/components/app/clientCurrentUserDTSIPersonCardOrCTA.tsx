@@ -75,18 +75,21 @@ function SuspenseClientCurrentUserDTSIPersonCardOrCTA(
   const { countryCode } = props
 
   const { setAddress, address } = useMutableCurrentUserAddress()
+
+  const isAddressLoading = address === 'loading'
+
   const res = useGetDTSIPeopleFromAddress({
     filterFn: filterDTSIPeopleByPoliticalCategory(props),
-    address: address === 'loading' ? null : address?.description,
-    placeId: address === 'loading' ? null : address?.place_id,
+    address: isAddressLoading ? null : address?.description,
+    placeId: isAddressLoading ? null : address?.place_id,
   })
 
-  if (!address || address === 'loading') {
+  if (!address || isAddressLoading) {
     return (
       <DefaultPlacesSelect
-        loading={address === 'loading'}
+        loading={isAddressLoading}
         onChange={setAddress}
-        value={address === 'loading' ? null : address}
+        value={isAddressLoading ? null : address}
       />
     )
   }

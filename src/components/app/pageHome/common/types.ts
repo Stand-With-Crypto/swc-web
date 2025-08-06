@@ -5,6 +5,7 @@ import {
   GetHomepageTopLevelMetricsResponse,
 } from '@/data/pageSpecific/getHomepageData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SWCFounder } from '@/utils/shared/zod/getSWCFounders'
 import { SWCPartners } from '@/utils/shared/zod/getSWCPartners'
 
@@ -15,4 +16,5 @@ export interface HomePageProps extends Partial<Awaited<ReturnType<typeof getHome
   partners: SWCPartners | null
   dtsiHomepagePoliticians: DTSI_HomepagePeopleQuery
   advocatePerStateDataProps?: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  leaderboardData: DistrictRankingEntryWithRank[]
 }
