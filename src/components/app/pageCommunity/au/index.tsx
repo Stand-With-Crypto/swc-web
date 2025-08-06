@@ -47,6 +47,10 @@ const TAB_OPTIONS: {
     value: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
     label: 'Recent activity',
   },
+  {
+    value: AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS,
+    label: 'Top divisions',
+  },
 ]
 
 type AuPageLeaderboardProps = PageLeaderboardInferredProps & {

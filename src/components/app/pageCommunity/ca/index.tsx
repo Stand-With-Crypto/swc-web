@@ -47,6 +47,10 @@ const TAB_OPTIONS: {
     value: CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
     label: 'Recent activity',
   },
+  {
+    value: CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES,
+    label: 'Top constituencies',
+  },
 ]
 
 type CaPageCommunityProps = PageLeaderboardInferredProps & {
