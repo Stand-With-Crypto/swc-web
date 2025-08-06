@@ -43,6 +43,7 @@ interface UserAddressContextType {
   electoralZone: ElectoralZone | null
   electoralZoneRanking: GetDistrictRankResponse | null
   administrativeArea: StateCode | null
+  isAddressFromProfile: boolean
 }
 
 const UserAddressContext = createContext<UserAddressContextType | undefined>(undefined)
@@ -53,14 +54,14 @@ export const UserAddressProvider = ({
   filterByAdministrativeArea = false,
 }: {
   children: ReactNode
-  countryCode: string
+  countryCode: SupportedCountryCodes
   filterByAdministrativeArea?: boolean
 }) => {
   const profileResponse = useApiResponseForUserFullProfileInfo()
   const { setAddress: setMutableAddress, address: mutableAddress } = useMutableCurrentUserAddress()
-  const [isAddressInCountry, setIsAddressInCountry] = useState<boolean>(false)
   const [addressDetails, setAddressDetails] = useState<z.infer<typeof zodAddress> | null>(null)
   const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript()
+  const [isAddressDetailsLoading, setIsAddressDetailsLoading] = useState(false)
 
   const isAddressLoading =
     profileResponse.isLoading || mutableAddress === 'loading' || !isGoogleMapsLoaded
@@ -73,9 +74,15 @@ export const UserAddressProvider = ({
         place_id: profileResponse.data.user.address.googlePlaceId,
       }
     }
+
     if (mutableAddress) return mutableAddress
     return null
   }, [isAddressLoading, mutableAddress, profileResponse.data?.user?.address])
+
+  const isAddressFromProfile = useMemo(() => {
+    if (!address) return false
+    return address.place_id === profileResponse.data?.user?.address?.googlePlaceId
+  }, [address, profileResponse.data?.user?.address?.googlePlaceId])
 
   const electoralZoneResponse = useGetElectoralZoneFromAddress({
     address: address?.description,
@@ -90,6 +97,11 @@ export const UserAddressProvider = ({
     return electoralZoneResponse.data
   }, [electoralZoneResponse.data])
 
+  const isAddressInCountry = useMemo(() => {
+    if (!electoralZone) return false
+    return electoralZone.countryCode.toLowerCase() === countryCode.toLowerCase()
+  }, [electoralZone, countryCode])
+
   const administrativeArea = useMemo<StateCode | null>(() => {
     if (electoralZone?.administrativeArea) return electoralZone.administrativeArea as StateCode
 
@@ -102,23 +114,24 @@ export const UserAddressProvider = ({
   }, [addressDetails, electoralZone?.administrativeArea, isAddressLoading])
 
   const electoralZoneRankingResponse = useGetElectoralZoneRank({
-    countryCode: countryCode as SupportedCountryCodes,
-    stateCode: administrativeArea,
-    electoralZone: electoralZone?.zoneName?.toString() ?? null,
+    countryCode,
+    stateCode: isAddressInCountry ? administrativeArea : null,
+    electoralZone: isAddressInCountry ? (electoralZone?.zoneName?.toString() ?? null) : null,
     filteredByState: filterByAdministrativeArea,
   })
 
   const electoralZoneRanking = electoralZoneRankingResponse.data ?? null
 
   const loadAddressDetails = useCallback(async () => {
-    if (!address || !isGoogleMapsLoaded) return
+    if (!address || !isGoogleMapsLoaded || !isAddressInCountry) return
+
+    setIsAddressDetailsLoading(true)
 
     const addressDetailsResponse = await convertGooglePlaceAutoPredictionToAddressSchema(address)
     setAddressDetails(addressDetailsResponse)
-    setIsAddressInCountry(
-      addressDetailsResponse.countryCode.toLowerCase() === countryCode.toLowerCase(),
-    )
-  }, [address, isGoogleMapsLoaded, countryCode])
+
+    setIsAddressDetailsLoading(false)
+  }, [address, isGoogleMapsLoaded, isAddressInCountry])
 
   useEffect(() => {
     void loadAddressDetails()
@@ -133,7 +146,7 @@ export const UserAddressProvider = ({
 
   const isElectoralZoneLoading =
     electoralZoneRankingResponse.isLoading || electoralZoneResponse.isLoading
-  const isLoading = isAddressLoading || isElectoralZoneLoading
+  const isLoading = isAddressLoading || isElectoralZoneLoading || isAddressDetailsLoading
 
   return (
     <UserAddressContext.Provider
@@ -149,6 +162,7 @@ export const UserAddressProvider = ({
         electoralZone,
         electoralZoneRanking,
         administrativeArea,
+        isAddressFromProfile,
       }}
     >
       {children}

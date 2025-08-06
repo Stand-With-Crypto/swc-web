@@ -32,7 +32,7 @@ export function UserLocationRanking({
     }
 
     if (!electoralZoneRanking?.rank || !electoralZone) {
-      return <p>{notFoundText}</p>
+      return <p className="text-3xl font-bold">{notFoundText}</p>
     }
 
     return (
