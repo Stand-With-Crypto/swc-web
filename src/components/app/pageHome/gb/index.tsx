@@ -23,7 +23,7 @@ export function GbPageHome({
   partners,
   founders,
   dtsiHomepagePoliticians,
-}: HomePageProps) {
+}: Omit<HomePageProps, 'leaderboardData'>) {
   return (
     <>
       <GbHero />

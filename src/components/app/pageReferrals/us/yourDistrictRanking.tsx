@@ -3,7 +3,10 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
-import { DefaultPlacesSelect } from '@/components/app/pageReferrals/common/defaultPlacesSelect'
+import {
+  DefaultPlacesSelect,
+  DefaultPlacesSelectProps,
+} from '@/components/app/pageReferrals/common/defaultPlacesSelect'
 import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leaderboard/heading'
 import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
 import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
@@ -21,9 +24,7 @@ function Heading() {
   )
 }
 
-function UsDefaultPlacesSelect(
-  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
-) {
+function UsDefaultPlacesSelect(props: Omit<DefaultPlacesSelectProps, 'title' | 'placeholder'>) {
   return <DefaultPlacesSelect placeholder="Enter your address" title="Your district" {...props} />
 }
 
@@ -48,6 +49,7 @@ export function UsYourDistrictRank() {
     electoralZone: district,
     electoralZoneRanking: districtRanking,
     administrativeArea: stateCode,
+    isAddressFromProfile,
   } = useUserAddress()
 
   if (isLoading) {
@@ -72,7 +74,11 @@ export function UsYourDistrictRank() {
   if (!isAddressInUS) {
     return (
       <YourLocale>
-        <UsDefaultPlacesSelect onChange={setAddress} value={isLoading ? null : address} />
+        <UsDefaultPlacesSelect
+          disabled={isAddressFromProfile}
+          onChange={setAddress}
+          value={isLoading ? null : address}
+        />
         <YourLocale.Label>
           Looks like your address is not from the United States, so it can't be used to filter
         </YourLocale.Label>

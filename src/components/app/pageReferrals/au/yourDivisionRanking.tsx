@@ -3,7 +3,10 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
-import { DefaultPlacesSelect } from '@/components/app/pageReferrals/common/defaultPlacesSelect'
+import {
+  DefaultPlacesSelect,
+  DefaultPlacesSelectProps,
+} from '@/components/app/pageReferrals/common/defaultPlacesSelect'
 import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leaderboard/heading'
 import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
 import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
@@ -21,9 +24,7 @@ function Heading() {
   )
 }
 
-function AuDefaultPlacesSelect(
-  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
-) {
+function AuDefaultPlacesSelect(props: Omit<DefaultPlacesSelectProps, 'title' | 'placeholder'>) {
   return <DefaultPlacesSelect placeholder="Enter your address" title="Your division" {...props} />
 }
 
@@ -48,6 +49,7 @@ export function AuYourDivisionRank() {
     electoralZone: division,
     electoralZoneRanking: divisionRanking,
     administrativeArea: stateCode,
+    isAddressFromProfile,
   } = useUserAddress()
 
   if (isLoading) {
@@ -72,7 +74,11 @@ export function AuYourDivisionRank() {
   if (!isAddressInAustralia) {
     return (
       <YourLocale>
-        <AuDefaultPlacesSelect onChange={setAddress} value={isLoading ? null : address} />
+        <AuDefaultPlacesSelect
+          disabled={isAddressFromProfile}
+          onChange={setAddress}
+          value={isLoading ? null : address}
+        />
         <YourLocale.Label>
           Looks like your address is not from Australia, so it can't be used to filter
         </YourLocale.Label>

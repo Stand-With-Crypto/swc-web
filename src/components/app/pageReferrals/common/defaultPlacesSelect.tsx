@@ -2,16 +2,15 @@ import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leader
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { Skeleton } from '@/components/ui/skeleton'
 
-interface DefaultPlacesSelectProps {
+export type DefaultPlacesSelectProps = Pick<
+  GooglePlacesSelectProps,
+  'onChange' | 'value' | 'loading' | 'disabled'
+> & {
   title: string
   placeholder: string
 }
 
-export function DefaultPlacesSelect({
-  title,
-  placeholder,
-  ...props
-}: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'> & DefaultPlacesSelectProps) {
+export function DefaultPlacesSelect({ title, placeholder, ...props }: DefaultPlacesSelectProps) {
   return (
     <div className="w-full space-y-3">
       <LeaderboardHeading.Title>{title}</LeaderboardHeading.Title>
