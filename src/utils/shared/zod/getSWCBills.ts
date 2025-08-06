@@ -36,7 +36,7 @@ export const BILL_SUCCESSFUL_KEY_DATES: BILL_KEY_DATE_CATEGORY_OPTIONS[] = [
 
 export const zodBillSchemaValidation = object({
   data: object({
-    analysis: string(),
+    analysis: string().optional(),
     auAdministrativeAreaLevel1: string().min(2).max(3).optional(),
     billNumber: string(),
     caAdministrativeAreaLevel1: string().min(2).max(3).optional(),
@@ -49,7 +49,7 @@ export const zodBillSchemaValidation = object({
     dateIntroduced: string(),
     dtsiSlug: string().optional(),
     gbAdministrativeAreaLevel1: string().min(2).max(3).optional(),
-    isKeyBill: boolean(),
+    isKeyBill: boolean().optional(),
     keyDates: array(
       object({
         date: string(),
@@ -90,7 +90,7 @@ export interface SWCBillCTAButton {
 
 export interface SWCBill {
   administrativeAreaLevel1?: string
-  analysis: string
+  analysis?: string
   auAdministrativeAreaLevel1?: string
   billNumber: string
   caAdministrativeAreaLevel1?: string
