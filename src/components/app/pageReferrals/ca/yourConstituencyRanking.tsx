@@ -3,7 +3,10 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
-import { DefaultPlacesSelect } from '@/components/app/pageReferrals/common/defaultPlacesSelect'
+import {
+  DefaultPlacesSelect,
+  DefaultPlacesSelectProps,
+} from '@/components/app/pageReferrals/common/defaultPlacesSelect'
 import { LeaderboardHeading } from '@/components/app/pageReferrals/common/leaderboard/heading'
 import { useUserAddress } from '@/components/app/pageReferrals/common/userAddress.context'
 import { YourLocale } from '@/components/app/pageReferrals/common/yourLocale'
@@ -21,9 +24,7 @@ function Heading() {
   )
 }
 
-function CaDefaultPlacesSelect(
-  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading' | 'disabled'>,
-) {
+function CaDefaultPlacesSelect(props: Omit<DefaultPlacesSelectProps, 'title' | 'placeholder'>) {
   return (
     <DefaultPlacesSelect placeholder="Enter your address" title="Your constituency" {...props} />
   )
