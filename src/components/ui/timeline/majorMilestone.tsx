@@ -23,6 +23,12 @@ interface MajorMilestoneProps {
   milestone: Milestone
 }
 
+enum MajorMilestoneStatus {
+  NOT_ENABLED_OR_FAILED = 'NOT_ENABLED_OR_FAILED',
+  NOT_HIGHLIGHTED = 'NOT_HIGHLIGHTED',
+  SUCCESSFUL = 'SUCCESSFUL',
+}
+
 const ICON_PROPS: IconProps = {
   color: 'white',
   size: 24,
@@ -89,12 +95,12 @@ export function MajorMilestone({
     const { isHighlighted, status } = milestone
 
     if (!isHighlighted) {
-      return 'NOT_HIGHLIGHTED'
+      return MajorMilestoneStatus.NOT_HIGHLIGHTED
     }
     if (isEnabled && status !== TimelinePlotPointStatus.FAILED) {
-      return 'SUCCESSFUL'
+      return MajorMilestoneStatus.SUCCESSFUL
     }
-    return 'NOT_ENABLED_OR_FAILED'
+    return MajorMilestoneStatus.NOT_ENABLED_OR_FAILED
   }, [isEnabled, milestone])
 
   return (
@@ -104,9 +110,10 @@ export function MajorMilestone({
           'absolute flex items-center justify-center rounded-full transition-all',
           milestone.isHighlighted && (isEnabled ? 'scale-100' : 'scale-75'),
           {
-            'bg-primary-cta': status === 'SUCCESSFUL',
-            'bg-muted-foreground': status === 'NOT_ENABLED_OR_FAILED',
-            'border-2 border-muted-foreground/50 bg-gray-100': status === 'NOT_HIGHLIGHTED',
+            'bg-primary-cta': status === MajorMilestoneStatus.SUCCESSFUL,
+            'bg-muted-foreground': status === MajorMilestoneStatus.NOT_ENABLED_OR_FAILED,
+            'border-2 border-muted-foreground/50 bg-gray-100':
+              status === MajorMilestoneStatus.NOT_HIGHLIGHTED,
           },
         )}
         style={pointStyles}
