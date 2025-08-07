@@ -118,8 +118,7 @@ export function Timeline(props: TimelineProps) {
       {majorMilestones.map((majorMilestone, index) => (
         <MajorMilestone
           countryCode={props.countryCode}
-          isFirstMilestone={index === 0}
-          isHighlightEnabled={Math.floor(majorMilestone.positionPercent) <= animation.progress}
+          isEnabled={Math.floor(majorMilestone.positionPercent) <= animation.progress}
           isMobile={isMobile}
           key={index}
           milestone={majorMilestone}
@@ -129,7 +128,7 @@ export function Timeline(props: TimelineProps) {
       {minorMilestones.map((minorMilestone, index) => (
         <MinorMilestone
           countryCode={props.countryCode}
-          isHighlightEnabled={Math.floor(minorMilestone.positionPercent) <= animation.progress}
+          isEnabled={Math.floor(minorMilestone.positionPercent) <= animation.progress}
           isMobile={isMobile}
           key={index}
           milestone={minorMilestone}

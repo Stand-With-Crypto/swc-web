@@ -1,8 +1,8 @@
-import { CSSProperties, useMemo } from 'react'
+import { CSSProperties, Fragment, useMemo } from 'react'
 import { Check, LucideProps as IconProps, ScrollTextIcon, XIcon } from 'lucide-react'
 
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
-import { MAJOR_MILESTONE_CONFIG } from '@/components/ui/timeline/constants'
+import { MAJOR_MILESTONE_CONFIG, TimelinePlotPointStatus } from '@/components/ui/timeline/constants'
 import { Milestone } from '@/components/ui/timeline/types'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
@@ -18,28 +18,33 @@ const {
 
 interface MajorMilestoneProps {
   countryCode: SupportedCountryCodes
-  isFirstMilestone: boolean
-  isHighlightEnabled?: boolean
+  isEnabled?: boolean
   isMobile: boolean
   milestone: Milestone
 }
 
 const ICON_PROPS: IconProps = {
-  className: 'mt-0.5',
   color: 'white',
   size: 24,
 }
 
+const milestoneIconMap: Record<
+  TimelinePlotPointStatus,
+  { className?: string; Icon: React.FC<IconProps> }
+> = {
+  [TimelinePlotPointStatus.FAILED]: { Icon: XIcon, className: 'mt-0' },
+  [TimelinePlotPointStatus.INTRODUCED]: { Icon: ScrollTextIcon, className: 'mt-px' },
+  [TimelinePlotPointStatus.PASSED]: { Icon: Check, className: 'mt-0.5' },
+  [TimelinePlotPointStatus.PENDING]: { Icon: Fragment },
+}
+
 export function MajorMilestone({
   countryCode,
-  isFirstMilestone,
-  isHighlightEnabled = true,
+  isEnabled = true,
   isMobile,
   milestone,
 }: MajorMilestoneProps) {
-  const StatusIcon = milestone.success ? Check : XIcon
-
-  const Icon = isFirstMilestone ? ScrollTextIcon : StatusIcon
+  const { Icon, className: iconClassName } = milestoneIconMap[milestone.status]
 
   const { pointStyles, titleWrapperStyle } = useMemo(() => {
     const notHighlightedPointSpacing =
@@ -80,18 +85,34 @@ export function MajorMilestone({
     return { pointStyles, titleWrapperStyle }
   }, [isMobile, milestone.isHighlighted, milestone.positionPercent])
 
+  const { isNotEnabledOrHasFailed, isNotHighlighted, isSuccessful } = useMemo(() => {
+    const { isHighlighted, status } = milestone
+
+    const isSuccessful = isHighlighted && isEnabled && status !== TimelinePlotPointStatus.FAILED
+    const isNotEnabledOrHasFailed =
+      isHighlighted && (!isEnabled || status === TimelinePlotPointStatus.FAILED)
+    const isNotHighlighted = !milestone.isHighlighted
+
+    return { isNotEnabledOrHasFailed, isNotHighlighted, isSuccessful }
+  }, [isEnabled, milestone])
+
   return (
     <>
       <div
-        className={cn('absolute flex items-center justify-center rounded-full transition-colors', {
-          'bg-primary-cta': milestone.isHighlighted && isHighlightEnabled,
-          'bg-muted-foreground': milestone.isHighlighted && !isHighlightEnabled,
-          'border-2 border-muted-foreground bg-gray-100': !milestone.isHighlighted,
-          'bg-destructive': milestone.isHighlighted && isHighlightEnabled && !milestone.success,
-        })}
+        className={cn(
+          'absolute flex items-center justify-center rounded-full transition-all',
+          milestone.isHighlighted && (isEnabled ? 'scale-100' : 'scale-75'),
+          {
+            'bg-primary-cta': isSuccessful,
+            'bg-muted-foreground': isNotEnabledOrHasFailed,
+            'border-2 border-muted-foreground/50 bg-gray-100': isNotHighlighted,
+          },
+        )}
         style={pointStyles}
       >
-        {milestone.isHighlighted && <Icon {...ICON_PROPS} />}
+        {milestone.isHighlighted && (
+          <Icon {...ICON_PROPS} className={cn(ICON_PROPS.className, iconClassName)} />
+        )}
       </div>
       <div className="absolute flex flex-col gap-1 font-sans md:gap-2" style={titleWrapperStyle}>
         <span

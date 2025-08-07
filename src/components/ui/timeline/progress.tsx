@@ -13,7 +13,7 @@ import {
 import { useIsMobile } from '@/hooks/useIsMobile'
 
 const DEFAULT_BAR_THICKNESS = 2
-const DEFAULT_PROGRESS_ANIMATION_DURATION = 1.5
+const DEFAULT_PROGRESS_ANIMATION_DURATION = 2
 
 export interface ProgressProps {
   animation?: ProgressAnimation
@@ -78,7 +78,7 @@ export function useProgressAnimation(
 
   useEffect(() => {
     const controls = animate(progress, targetPercent, {
-      duration,
+      duration: (duration * targetPercent) / 100,
       ease: 'easeOut',
     })
 
