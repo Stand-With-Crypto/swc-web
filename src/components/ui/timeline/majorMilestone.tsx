@@ -85,15 +85,16 @@ export function MajorMilestone({
     return { pointStyles, titleWrapperStyle }
   }, [isMobile, milestone.isHighlighted, milestone.positionPercent])
 
-  const { isNotEnabledOrHasFailed, isNotHighlighted, isSuccessful } = useMemo(() => {
+  const status = useMemo(() => {
     const { isHighlighted, status } = milestone
 
-    const isSuccessful = isHighlighted && isEnabled && status !== TimelinePlotPointStatus.FAILED
-    const isNotEnabledOrHasFailed =
-      isHighlighted && (!isEnabled || status === TimelinePlotPointStatus.FAILED)
-    const isNotHighlighted = !milestone.isHighlighted
-
-    return { isNotEnabledOrHasFailed, isNotHighlighted, isSuccessful }
+    if (!isHighlighted) {
+      return 'NOT_HIGHLIGHTED'
+    }
+    if (isEnabled && status !== TimelinePlotPointStatus.FAILED) {
+      return 'SUCCESSFUL'
+    }
+    return 'NOT_ENABLED_OR_FAILED'
   }, [isEnabled, milestone])
 
   return (
@@ -103,9 +104,9 @@ export function MajorMilestone({
           'absolute flex items-center justify-center rounded-full transition-all',
           milestone.isHighlighted && (isEnabled ? 'scale-100' : 'scale-75'),
           {
-            'bg-primary-cta': isSuccessful,
-            'bg-muted-foreground': isNotEnabledOrHasFailed,
-            'border-2 border-muted-foreground/50 bg-gray-100': isNotHighlighted,
+            'bg-primary-cta': status === 'SUCCESSFUL',
+            'bg-muted-foreground': status === 'NOT_ENABLED_OR_FAILED',
+            'border-2 border-muted-foreground/50 bg-gray-100': status === 'NOT_HIGHLIGHTED',
           },
         )}
         style={pointStyles}
