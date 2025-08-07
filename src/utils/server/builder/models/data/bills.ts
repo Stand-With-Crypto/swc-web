@@ -7,8 +7,8 @@ import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
-  BILL_CHAMBER_ORIGIN_OPTIONS,
-  BILL_KEY_DATE_CATEGORY_OPTIONS,
+  BillChamberOrigin,
+  BillKeyDateCategory,
   SWCBill,
   SWCBillCTAButton,
   SWCBillFromBuilderIO,
@@ -187,9 +187,9 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
     keyDates: [
       {
         category:
-          bill.chamberOrigin === BILL_CHAMBER_ORIGIN_OPTIONS.LOWER_CHAMBER
-            ? BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_LOWER_CHAMBER
-            : BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_UPPER_CHAMBER,
+          bill.chamberOrigin === BillChamberOrigin.LOWER_CHAMBER
+            ? BillKeyDateCategory.BILL_INTRODUCED_LOWER_CHAMBER
+            : BillKeyDateCategory.BILL_INTRODUCED_UPPER_CHAMBER,
         date: bill.dateIntroduced,
         description: 'Bill Introduced',
         isMajorMilestone: true,
