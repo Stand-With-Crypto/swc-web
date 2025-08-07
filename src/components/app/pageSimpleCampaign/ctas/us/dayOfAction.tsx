@@ -27,10 +27,22 @@ export const US_DAY_OF_ACTION_CTAS: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
+        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
         isCampaignActive: true,
         title: 'Email Your Senator',
         description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
+        isCampaignActive: true,
+        title: 'Email your policymaker',
+        description: 'Crypto Day of Action',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,

@@ -1,5 +1,6 @@
 import {
   getFullNameSignOff,
+  getRepIntro,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
@@ -9,7 +10,7 @@ import type { CampaignMetadata } from './types'
 
 const CAMPAIGN_NAME = USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025
 
-export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
+export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
 
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
@@ -17,24 +18,26 @@ function getEmailBodyText(props?: GetTextProps & { address?: string }) {
     lastName: props?.lastName,
   })
 
-  return `On behalf of more than 52 million American crypto owners and counting—I urge you to support the Digital Asset Market Structure Clarity (CLARITY) Act in the Senate. The CLARITY Act, which passed the House with overwhelming bipartisan support, would establish a clear, common-sense regulatory framework for digital assets—one that protects consumers, fosters innovation, and ensures the U.S. remains a global economic leader.
+  const representativeName = getRepIntro({ dtsiLastName: props?.dtsiLastName })
 
-For too long, innovators in the crypto industry have had to navigate a patchwork of outdated regulations never intended for blockchain technology. This lack of clarity hasn’t just stifled innovation—it’s hindered broader U.S. economic growth. Since 2018, the U.S. share of global blockchain developers has dropped by approximately 14%, falling to just 26% in 2023. Regulatory uncertainty has pushed developers overseas, discouraged businesses from embracing blockchain, and limited opportunities for financial inclusion. Most critically, it has left consumers vulnerable to fraud  instability and systemic risk in the digital asset markets.
+  return `${representativeName}
 
-Critics argue that crypto doesn’t play by the rules—but how can it, when no clear rules exist? It’s time to fix that—not just to support entrepreneurs and innovators, but to protect and empower American consumers.
+August 14 is the Crypto Day of Action—a day when Americans across the country are coming together to call for clear, common-sense crypto policy that will make America the crypto capital of the world.
 
-The CLARITY Act provides this fix. It outlines responsibilities between federal agencies, establishes a clear registration process for crypto businesses, and safeguards key consumer rights like self-custody and the freedom to transact. This bill is a meaningful step toward ensuring digital asset innovation happens here—under U.S. law and guided by American values. 
+More than 52 million Americans own crypto, and millions more understand its power to unlock economic opportunity, expand financial access, and strengthen America’s competitiveness on the global stage. Crypto is already reshaping how Americans build, save, and connect—but the lack of a regulatory framework and “clear rules of the road” is stifling our ability to leverage crypto to its full potential and fuel responsible innovation here at home.
 
-Members of Congress from both parties have shown a commitment to establishing the clear rules of the road needed to unlock the crypto industry’s potential. I ask that you help maintain this momentum by supporting market structure legislation. 
+Without urgent action from our elected leaders, the U.S. risks falling behind. Developers are already moving overseas. Consumers remain vulnerable. And our ability to lead in the next wave of digital innovation is slipping away. While Congress has made important progress by advancing the bipartisan GENIUS Act, what’s missing is a comprehensive market structure bill. The CLARITY Act, which passed the House with bipartisan support earlier this summer, is both a step in the right direction and proof that crypto policy isn’t a partisan fight—it’s a national priority. We need the Senate to join the House by prioritizing market structure legislation. 
 
-Thank you for helping to advance responsible American innovation.${fullNameSignOff}`
+Crypto isn’t going away and voters who care about crypto are organizing across party lines in every state to call for thoughtful, forward-looking policy that protects consumers, supports innovation, and preserves American leadership. When Congress reconvenes this fall, I urge you to help ensure the U.S. doesn’t pass up this opportunity to lead the next chapter of the global economy. 
+
+Thank you for listening to the U.S. crypto community on this week’s Crypto Day of Action. I hope to see you standing with us.${fullNameSignOff}`
 }
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: 'Email Your Senator',
-  dialogSubtitle: 'Support the CLARITY Act in the Senate',
-  politicianCategory: 'senate',
-  subject: 'I SUPPORT CLARITY',
+  dialogTitle: 'Email your policymaker',
+  dialogSubtitle: 'Crypto day of action',
+  politicianCategory: 'house',
+  subject: 'Crypto Day of Action',
   getEmailBodyText,
 }
