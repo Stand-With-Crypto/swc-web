@@ -4,7 +4,6 @@ import * as React from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
-import { Button } from '@/components/ui/button'
 import { PageLayout } from '@/components/ui/pageLayout'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -15,7 +14,7 @@ import {
 } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 
-import { EmailActionCheckbox, ViewKeyPageActionCheckbox } from './actionCheckbox'
+import { ActionCheckbox, EmailActionCheckbox, ViewKeyPageActionCheckbox } from './actionCheckbox'
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
@@ -138,7 +137,15 @@ export function PageDayOfAction() {
         </PageLayout.Title>
 
         <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
-          <Button disabled={!hasCompletedAllActions}>Claim your NFT</Button>
+          <ActionCheckbox
+            description="Claim your NFT to commemorate your participation in the Crypto Day of Action."
+            disabled={!hasCompletedAllActions}
+            isCompleted={hasCompletedAction({
+              actionType: UserActionType.CLAIM_NFT,
+              campaignName: NFTSlug.GENIUS_ACT_2025,
+            })}
+            title="Claim your NFT"
+          />
         </UserActionFormClaimNFTDialog>
       </section>
     </PageLayout>

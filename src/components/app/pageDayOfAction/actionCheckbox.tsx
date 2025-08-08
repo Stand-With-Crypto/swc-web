@@ -40,6 +40,7 @@ export function ActionCheckbox({
     <button
       className={cn(
         'h-full w-full cursor-pointer rounded-3xl border border-muted shadow-md transition-shadow hover:shadow-lg',
+        props.disabled && 'pointer-events-none opacity-75',
       )}
       {...props}
     >
