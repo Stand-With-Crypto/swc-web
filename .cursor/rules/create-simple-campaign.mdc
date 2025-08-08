@@ -1,0 +1,37 @@
+---
+description: Creates a simple campaign page
+globs:
+alwaysApply: false
+---
+
+# Creating a Simple Campaign Page
+
+A **simple campaign page** is a page with a title, description, and some calls to action (**CTAs**) for a user to complete.
+
+---
+
+## Requirements
+
+This are the keypoints you need to know before getting started:
+
+1. The campain title and subtitle.
+2. The campaign actions.
+3. The campaign date.
+4. The path for the new page.
+5. The contries the campaign must target.
+
+## How to Create a Simple Campaign Page
+
+1. Navigate to `src/components/app/pageSimpleCampaign/ctas`. In the folder with the country's slug, create a new file named after your campaign in **camelCase**.
+
+2. Write the CTAs file based on the `UserActionGridCTA` interface, located at `src/components/app/userActionGridCTAs/types/index.ts`. You can use `src/components/app/pageSimpleCampaign/ctas/us/dayOfAction.tsx` as an example. Look in the `commons` folder (`src/components/app/pageSimpleCampaign/ctas/commons`) and use the existing CTAs there whenever possible. **Avoid copying and pasting existing common CTAs without a good reason.**
+
+3. If any of the actions requires to create a new email campaign, follow the steps of `.cursor/rules/create-new-email-action-campaign.mdc`.
+
+4. Add the campaign name and date (for example, `DAY_OF_ACTION_AUG_14_2025`) to the `SimpleCampaignName` enum in `src/components/app/pageSimpleCampaign/types.ts`.
+
+5. Add the campaign to the country-specific index file (e.g. `src/components/app/pageSimpleCampaign/ctas/us/index.tsx`). The key must be the `SimpleCampaignName` you just added, and the value should be the campaign you created in step 2.
+
+6. Create the page itself. Following the Next.js app router structure, import `PageSimpleCampaign` (`src/components/app/pageSimpleCampaign/index.tsx`) and pass the `title`, `subtitle`, `campaign name`, and `country code` for each of the required countries.
+
+7. You're all set. Run `npm run audit` to validate if nothing is broken.

@@ -112,6 +112,10 @@ export enum USUserActionClaimNftCampaignName {
   GENIUS_ACT_2025 = 'GENIUS_ACT_2025',
 }
 
+export enum USUserActionDayOfActionCampaignName {
+  DEFAULT = 'DEFAULT',
+}
+
 export type USUserActionCampaignName =
   | USUserActionEmailCampaignName
   | USUserActionCallCampaignName

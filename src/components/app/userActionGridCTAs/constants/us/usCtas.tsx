@@ -225,6 +225,18 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
         }),
       },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
+        isCampaignActive: true,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
+        }),
+      },
     ],
   },
   [UserActionType.TWEET]: {
