@@ -24,7 +24,8 @@ interface MajorMilestoneProps {
 }
 
 enum MajorMilestoneStatus {
-  NOT_ENABLED_OR_FAILED = 'NOT_ENABLED_OR_FAILED',
+  DISABLED = 'DISABLED',
+  FAILED = 'FAILED',
   NOT_HIGHLIGHTED = 'NOT_HIGHLIGHTED',
   SUCCESSFUL = 'SUCCESSFUL',
 }
@@ -42,6 +43,13 @@ const milestoneIconMap: Record<
   [TimelinePlotPointStatus.INTRODUCED]: { Icon: ScrollTextIcon, className: 'mt-px' },
   [TimelinePlotPointStatus.PASSED]: { Icon: Check, className: 'mt-0.5' },
   [TimelinePlotPointStatus.PENDING]: { Icon: Fragment },
+}
+
+const MILESTONE_STATUS_STYLE_MAP: Record<MajorMilestoneStatus, string> = {
+  [MajorMilestoneStatus.DISABLED]: 'bg-muted-foreground scale-75',
+  [MajorMilestoneStatus.FAILED]: 'bg-muted-foreground scale-100',
+  [MajorMilestoneStatus.NOT_HIGHLIGHTED]: 'border-2 border-muted-foreground/50 bg-gray-100',
+  [MajorMilestoneStatus.SUCCESSFUL]: 'bg-primary-cta scale-100',
 }
 
 export function MajorMilestone({
@@ -97,10 +105,13 @@ export function MajorMilestone({
     if (!isHighlighted) {
       return MajorMilestoneStatus.NOT_HIGHLIGHTED
     }
-    if (isEnabled && status !== TimelinePlotPointStatus.FAILED) {
-      return MajorMilestoneStatus.SUCCESSFUL
+    if (!isEnabled) {
+      return MajorMilestoneStatus.DISABLED
     }
-    return MajorMilestoneStatus.NOT_ENABLED_OR_FAILED
+    if (status === TimelinePlotPointStatus.FAILED) {
+      return MajorMilestoneStatus.FAILED
+    }
+    return MajorMilestoneStatus.SUCCESSFUL
   }, [isEnabled, milestone])
 
   return (
@@ -108,13 +119,7 @@ export function MajorMilestone({
       <div
         className={cn(
           'absolute flex items-center justify-center rounded-full transition-all',
-          milestone.isHighlighted && (isEnabled ? 'scale-100' : 'scale-75'),
-          {
-            'bg-primary-cta': status === MajorMilestoneStatus.SUCCESSFUL,
-            'bg-muted-foreground': status === MajorMilestoneStatus.NOT_ENABLED_OR_FAILED,
-            'border-2 border-muted-foreground/50 bg-gray-100':
-              status === MajorMilestoneStatus.NOT_HIGHLIGHTED,
-          },
+          MILESTONE_STATUS_STYLE_MAP[status],
         )}
         style={pointStyles}
       >
