@@ -41,7 +41,7 @@ export const US_DAY_OF_ACTION_CTAS: UserActionGridCTA = {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
         isCampaignActive: true,
-        title: 'Email your policymaker',
+        title: 'Email your Rep',
         description: 'Crypto Day of Action',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
