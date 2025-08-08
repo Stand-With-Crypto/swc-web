@@ -1,8 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Timeline, TimelinePlotPoint } from '@/components/ui/timeline'
+import { TimelinePlotPointStatus } from '@/components/ui/timeline/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { BILL_SUCCESSFUL_KEY_DATES, SWCBill } from '@/utils/shared/zod/getSWCBills'
+import {
+  BILL_SUCCESSFUL_KEY_DATES,
+  BillKeyDateCategory,
+  SWCBill,
+} from '@/utils/shared/zod/getSWCBills'
 
 import { DEFAULT_TIMELINES, KEY_DATE_CATEGORY_MAP } from './constants'
 
@@ -17,11 +22,21 @@ interface TimeSectionProps {
 }
 
 function insertMissingTimelineDates(data: BillTimelineFields): TimelinePlotPoint[] {
-  const billKeyDates = data.keyDates.map(keyDate => ({
-    ...keyDate,
-    isHighlighted: true,
-    success: BILL_SUCCESSFUL_KEY_DATES.includes(keyDate.category),
-  }))
+  const billKeyDates = data.keyDates.map(keyDate => {
+    const isBillIntroduction = [
+      BillKeyDateCategory.BILL_INTRODUCED_LOWER_CHAMBER,
+      BillKeyDateCategory.BILL_INTRODUCED_UPPER_CHAMBER,
+    ].includes(keyDate.category)
+    const billFinalStatus = BILL_SUCCESSFUL_KEY_DATES.includes(keyDate.category)
+      ? TimelinePlotPointStatus.PASSED
+      : TimelinePlotPointStatus.FAILED
+
+    return {
+      ...keyDate,
+      isHighlighted: true,
+      status: isBillIntroduction ? TimelinePlotPointStatus.INTRODUCED : billFinalStatus,
+    }
+  })
 
   const missingKeyDates = DEFAULT_TIMELINES[data.chamberOrigin]
     .filter(({ category }) => KEY_DATE_CATEGORY_MAP[category]?.(billKeyDates))
@@ -29,7 +44,7 @@ function insertMissingTimelineDates(data: BillTimelineFields): TimelinePlotPoint
       ...keyDate,
       date: null,
       isHighlighted: false,
-      success: true,
+      status: TimelinePlotPointStatus.PENDING,
     }))
 
   return [...billKeyDates, ...missingKeyDates].map((keyDate, index) => ({

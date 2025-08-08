@@ -14,14 +14,14 @@ const { POINT_FIXED_SPACING, POINT_SIZE } = MINOR_MILESTONE_CONFIG
 
 interface MinorMilestoneProps {
   countryCode: SupportedCountryCodes
-  isHighlightEnabled?: boolean
+  isEnabled?: boolean
   isMobile: boolean
   milestone: Milestone
 }
 
 export function MinorMilestone({
   countryCode,
-  isHighlightEnabled,
+  isEnabled = true,
   isMobile,
   milestone,
 }: MinorMilestoneProps) {
@@ -46,8 +46,9 @@ export function MinorMilestone({
   const trigger = (
     <div
       className={cn(
-        'absolute cursor-pointer rounded-full border-4 border-gray-100 transition-colors',
-        isHighlightEnabled ? 'bg-primary-cta hover:border-purple-300' : 'bg-muted-foreground',
+        'absolute cursor-pointer rounded-full border-4 border-gray-100 transition-all',
+        isEnabled ? 'bg-primary-cta hover:border-purple-300' : 'bg-muted-foreground',
+        milestone.isHighlighted && (isEnabled ? 'scale-100' : 'scale-90'),
       )}
       style={styles}
     />
@@ -107,10 +108,15 @@ function MinorMilestoneWrapper({
   return (
     <TooltipProvider>
       <Tooltip onOpenChange={setIsTooltipOrDialogOpen} open={isTooltipOrDialogOpen}>
-        <TooltipTrigger asChild onClick={() => setIsTooltipOrDialogOpen(true)}>
+        <TooltipTrigger asChild onClick={event => event.preventDefault()}>
           {trigger}
         </TooltipTrigger>
-        <TooltipContent className="bg-white p-4" side="top" sideOffset={16}>
+        <TooltipContent
+          className="bg-white p-4"
+          onPointerDownOutside={event => event.preventDefault()}
+          side="top"
+          sideOffset={16}
+        >
           {content}
         </TooltipContent>
       </Tooltip>

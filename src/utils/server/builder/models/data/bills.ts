@@ -7,8 +7,8 @@ import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
-  BILL_CHAMBER_ORIGIN_OPTIONS,
-  BILL_KEY_DATE_CATEGORY_OPTIONS,
+  BillChamberOrigin,
+  BillKeyDateCategory,
   SWCBill,
   SWCBillCTAButton,
   SWCBillFromBuilderIO,
@@ -101,10 +101,10 @@ function getAllBillsWithOffset({
   const filterByCountryCode = { countryCode: countryCode.toUpperCase() }
 
   const stateFilterKeys = [
-    'usAdministrativeAreaLevel1',
+    'auAdministrativeAreaLevel1',
     'caAdministrativeAreaLevel1',
     'gbAdministrativeAreaLevel1',
-    'auAdministrativeAreaLevel1',
+    'usAdministrativeAreaLevel1',
   ]
   const stateFilter = stateFilterKeys.map(key => ({
     ...filterByCountryCode,
@@ -173,6 +173,11 @@ export async function getBillsFromBuilderIO({
 }
 
 function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
+  const billIntroductionCategoryMap: Record<BillChamberOrigin, BillKeyDateCategory> = {
+    [BillChamberOrigin.LOWER_CHAMBER]: BillKeyDateCategory.BILL_INTRODUCED_LOWER_CHAMBER,
+    [BillChamberOrigin.UPPER_CHAMBER]: BillKeyDateCategory.BILL_INTRODUCED_UPPER_CHAMBER,
+  }
+
   return {
     ...bill,
     administrativeAreaLevel1:
@@ -186,10 +191,7 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
     isKeyBill: bill.isKeyBill ?? false,
     keyDates: [
       {
-        category:
-          bill.chamberOrigin === BILL_CHAMBER_ORIGIN_OPTIONS.LOWER_CHAMBER
-            ? BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_LOWER_CHAMBER
-            : BILL_KEY_DATE_CATEGORY_OPTIONS.BILL_INTRODUCED_UPPER_CHAMBER,
+        category: billIntroductionCategoryMap[bill.chamberOrigin],
         date: bill.dateIntroduced,
         description: 'Bill Introduced',
         isMajorMilestone: true,

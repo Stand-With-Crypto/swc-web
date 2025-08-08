@@ -18,3 +18,10 @@ export const MINOR_MILESTONE_CONFIG = {
   POINT_FIXED_SPACING: 30,
   POINT_SIZE: 20,
 }
+
+export enum TimelinePlotPointStatus {
+  FAILED = 'FAILED',
+  INTRODUCED = 'INTRODUCED',
+  PASSED = 'PASSED',
+  PENDING = 'PENDING',
+}

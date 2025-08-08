@@ -115,26 +115,33 @@ export function Timeline(props: TimelineProps) {
     <div className="relative" style={wrapperStyles}>
       <Progress animation={animation} spacing={HIGHLIGHTED_POINT_SIZE} value={targetPercent} />
 
-      {majorMilestones.map((majorMilestone, index) => (
-        <MajorMilestone
-          countryCode={props.countryCode}
-          isFirstMilestone={index === 0}
-          isHighlightEnabled={Math.floor(majorMilestone.positionPercent) <= animation.progress}
-          isMobile={isMobile}
-          key={index}
-          milestone={majorMilestone}
-        />
-      ))}
+      {majorMilestones.map((majorMilestone, index) => {
+        const isEnabled = Math.floor(majorMilestone.positionPercent) <= animation.progress
 
-      {minorMilestones.map((minorMilestone, index) => (
-        <MinorMilestone
-          countryCode={props.countryCode}
-          isHighlightEnabled={Math.floor(minorMilestone.positionPercent) <= animation.progress}
-          isMobile={isMobile}
-          key={index}
-          milestone={minorMilestone}
-        />
-      ))}
+        return (
+          <MajorMilestone
+            countryCode={props.countryCode}
+            isEnabled={isEnabled}
+            isMobile={isMobile}
+            key={index}
+            milestone={majorMilestone}
+          />
+        )
+      })}
+
+      {minorMilestones.map((minorMilestone, index) => {
+        const isEnabled = Math.floor(minorMilestone.positionPercent) <= animation.progress
+
+        return (
+          <MinorMilestone
+            countryCode={props.countryCode}
+            isEnabled={isEnabled}
+            isMobile={isMobile}
+            key={index}
+            milestone={minorMilestone}
+          />
+        )
+      })}
     </div>
   ) : (
     <Skeleton className="h-[160px] w-full bg-slate-200" />
