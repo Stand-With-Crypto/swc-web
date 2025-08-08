@@ -93,14 +93,7 @@ export function Filters(props: FiltersProps) {
             <SelectValue placeholder="All" />
           </span>
         </SelectTrigger>
-        <SelectContent
-          ref={ref => {
-            if (!ref) return
-            ref.ontouchend = e => {
-              e.preventDefault()
-            }
-          }}
-        >
+        <SelectContent>
           {STANCE_OPTIONS.map(stance => (
             <SelectItem key={stance} onClick={event => event.stopPropagation()} value={stance}>
               {STANCE_OPTIONS_DISPLAY_NAME[stance]}
@@ -119,14 +112,7 @@ export function Filters(props: FiltersProps) {
             <SelectValue placeholder="All" />
           </span>
         </SelectTrigger>
-        <SelectContent
-          ref={ref => {
-            if (!ref) return
-            ref.ontouchend = e => {
-              e.preventDefault()
-            }
-          }}
-        >
+        <SelectContent>
           {ROLE_OPTIONS.map(role => (
             <SelectItem key={role} onClick={event => event.stopPropagation()} value={role}>
               {ROLE_OPTIONS_DISPLAY_NAME[role]}
@@ -145,14 +131,7 @@ export function Filters(props: FiltersProps) {
             <SelectValue placeholder="All" />
           </span>
         </SelectTrigger>
-        <SelectContent
-          ref={ref => {
-            if (!ref) return
-            ref.ontouchend = e => {
-              e.preventDefault()
-            }
-          }}
-        >
+        <SelectContent>
           {PARTY_OPTIONS.map(party => (
             <SelectItem key={party} onClick={event => event.stopPropagation()} value={party}>
               {PARTY_OPTIONS_DISPLAY_NAME[party]}
