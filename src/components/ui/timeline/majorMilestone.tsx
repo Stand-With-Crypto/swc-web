@@ -23,6 +23,13 @@ interface MajorMilestoneProps {
   milestone: Milestone
 }
 
+enum MajorMilestoneStatus {
+  DISABLED = 'DISABLED',
+  FAILED = 'FAILED',
+  NOT_HIGHLIGHTED = 'NOT_HIGHLIGHTED',
+  SUCCESSFUL = 'SUCCESSFUL',
+}
+
 const ICON_PROPS: IconProps = {
   color: 'white',
   size: 24,
@@ -36,6 +43,13 @@ const milestoneIconMap: Record<
   [TimelinePlotPointStatus.INTRODUCED]: { Icon: ScrollTextIcon, className: 'mt-px' },
   [TimelinePlotPointStatus.PASSED]: { Icon: Check, className: 'mt-0.5' },
   [TimelinePlotPointStatus.PENDING]: { Icon: Fragment },
+}
+
+const MILESTONE_STATUS_STYLE_MAP: Record<MajorMilestoneStatus, string> = {
+  [MajorMilestoneStatus.DISABLED]: 'bg-muted-foreground scale-75',
+  [MajorMilestoneStatus.FAILED]: 'bg-muted-foreground scale-100',
+  [MajorMilestoneStatus.NOT_HIGHLIGHTED]: 'border-2 border-muted-foreground/50 bg-gray-100',
+  [MajorMilestoneStatus.SUCCESSFUL]: 'bg-primary-cta scale-100',
 }
 
 export function MajorMilestone({
@@ -85,15 +99,19 @@ export function MajorMilestone({
     return { pointStyles, titleWrapperStyle }
   }, [isMobile, milestone.isHighlighted, milestone.positionPercent])
 
-  const { isNotEnabledOrHasFailed, isNotHighlighted, isSuccessful } = useMemo(() => {
+  const status = useMemo(() => {
     const { isHighlighted, status } = milestone
 
-    const isSuccessful = isHighlighted && isEnabled && status !== TimelinePlotPointStatus.FAILED
-    const isNotEnabledOrHasFailed =
-      isHighlighted && (!isEnabled || status === TimelinePlotPointStatus.FAILED)
-    const isNotHighlighted = !milestone.isHighlighted
-
-    return { isNotEnabledOrHasFailed, isNotHighlighted, isSuccessful }
+    if (!isHighlighted) {
+      return MajorMilestoneStatus.NOT_HIGHLIGHTED
+    }
+    if (!isEnabled) {
+      return MajorMilestoneStatus.DISABLED
+    }
+    if (status === TimelinePlotPointStatus.FAILED) {
+      return MajorMilestoneStatus.FAILED
+    }
+    return MajorMilestoneStatus.SUCCESSFUL
   }, [isEnabled, milestone])
 
   return (
@@ -101,12 +119,7 @@ export function MajorMilestone({
       <div
         className={cn(
           'absolute flex items-center justify-center rounded-full transition-all',
-          milestone.isHighlighted && (isEnabled ? 'scale-100' : 'scale-75'),
-          {
-            'bg-primary-cta': isSuccessful,
-            'bg-muted-foreground': isNotEnabledOrHasFailed,
-            'border-2 border-muted-foreground/50 bg-gray-100': isNotHighlighted,
-          },
+          MILESTONE_STATUS_STYLE_MAP[status],
         )}
         style={pointStyles}
       >
