@@ -37,6 +37,8 @@ const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
     require('./20250717-clarity-genius-acts').campaignMetadata,
   [USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025]:
     require('./2025071702-clarity-senate-act').campaignMetadata,
+  [USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025]: require('./20250814-day-of-action')
+    .campaignMetadata,
 }
 
 export function getUSEmailActionCampaignMetadata(campaignName: USUserActionEmailCampaignName) {
