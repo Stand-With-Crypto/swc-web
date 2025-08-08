@@ -59,8 +59,8 @@ export const UserAddressProvider = ({
 }) => {
   const profileResponse = useApiResponseForUserFullProfileInfo()
   const { setAddress: setMutableAddress, address: mutableAddress } = useMutableCurrentUserAddress()
-  const [addressDetails, setAddressDetails] = useState<z.infer<typeof zodAddress> | null>(null)
   const { isLoaded: isGoogleMapsLoaded } = useGoogleMapsScript()
+  const [addressDetails, setAddressDetails] = useState<z.infer<typeof zodAddress> | null>(null)
   const [isAddressDetailsLoading, setIsAddressDetailsLoading] = useState(false)
 
   const isAddressLoading =
@@ -90,9 +90,13 @@ export const UserAddressProvider = ({
   })
 
   const electoralZone = useMemo(() => {
-    if (!electoralZoneResponse.data) return null
-    if ('notFoundReason' in electoralZoneResponse.data) return null
-    if (!electoralZoneResponse.data.zoneName) return null
+    if (
+      !electoralZoneResponse.data ||
+      'notFoundReason' in electoralZoneResponse.data ||
+      !electoralZoneResponse.data.zoneName
+    ) {
+      return null
+    }
 
     return electoralZoneResponse.data
   }, [electoralZoneResponse.data])
