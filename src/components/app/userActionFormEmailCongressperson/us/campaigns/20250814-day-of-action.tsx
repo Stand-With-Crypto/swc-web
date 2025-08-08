@@ -38,6 +38,6 @@ export const campaignMetadata: CampaignMetadata = {
   dialogTitle: 'Email your policymaker',
   dialogSubtitle: 'Crypto day of action',
   politicianCategory: 'house',
-  subject: 'Crypto Day of Action',
+  subject: 'I Stand With Crypto',
   getEmailBodyText,
 }
