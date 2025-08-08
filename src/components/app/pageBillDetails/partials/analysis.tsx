@@ -13,7 +13,7 @@ interface AnalysisProps {
 
 export function Analysis({ analysis, relatedUrls }: AnalysisProps) {
   return (
-    <section className="container mb-20 space-y-6 text-center md:mb-28 lg:space-y-10">
+    <section className="container mb-20 space-y-6 text-center font-sans md:mb-28 lg:space-y-10">
       <p className="text-4xl font-bold">Analysis</p>
       <div className="flex flex-col gap-10 lg:flex-row">
         <StyledHtmlContent

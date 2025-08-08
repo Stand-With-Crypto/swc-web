@@ -62,7 +62,7 @@ export function Header({
   }, [votedFor, votedAgainst])
 
   return (
-    <div className="mb-10 w-full overflow-hidden">
+    <div className="sticky left-0 top-16 z-20 mb-10 w-full overflow-hidden rounded-t-3xl bg-white md:static">
       <div className="flex flex-col flex-wrap items-center justify-center gap-6 p-5 sm:flex-row sm:justify-between sm:p-9">
         <strong className="flex-shrink-0 text-3xl">Votes</strong>
 

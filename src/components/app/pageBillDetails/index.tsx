@@ -22,7 +22,11 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
       {bill.analysis && <Analysis analysis={bill.analysis} relatedUrls={bill.relatedUrls} />}
 
-      <VotesSection countryCode={countryCode} relationships={bill.relationships} />
+      <VotesSection
+        countryCode={countryCode}
+        relationships={bill.relationships}
+        stanceScore={bill.computedStanceScore}
+      />
     </section>
   )
 }

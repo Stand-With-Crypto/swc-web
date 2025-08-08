@@ -14,8 +14,9 @@ import { VotedAgainst } from './votedAgainst'
 import { VotedFor } from './votedFor'
 
 interface VotesSectionProps {
-  relationships: BillDetails['relationships']
   countryCode: SupportedCountryCodes
+  relationships: BillDetails['relationships']
+  stanceScore: number | null | undefined
 }
 
 const filterHelper = (list: DTSI_Person[], filters: FilterKeys) => {
@@ -35,8 +36,8 @@ const shouldReturn = (
   return stance === StandardOption || stance === type
 }
 
-export function VotesSection({ relationships, countryCode }: VotesSectionProps) {
-  const { sponsors, coSponsors, votedFor, votedAgainst } = relationships
+export function VotesSection({ countryCode, relationships, stanceScore }: VotesSectionProps) {
+  const { coSponsors, sponsors, votedAgainst, votedFor } = relationships
 
   const [filters, setFilters] = useState<FilterKeys>(getDefaultFilters())
 
@@ -67,7 +68,7 @@ export function VotesSection({ relationships, countryCode }: VotesSectionProps) 
   }, [sponsors, coSponsors, votedFor, votedAgainst, filters])
 
   return (
-    <section className="container mx-auto rounded-3xl border border-muted px-0 pb-6 text-center sm:px-4 sm:text-start">
+    <section className="container mx-auto rounded-3xl border border-muted px-0 pb-6 text-center font-sans sm:text-start">
       <Header
         filters={filters}
         setFilters={setFilters}
@@ -75,25 +76,35 @@ export function VotesSection({ relationships, countryCode }: VotesSectionProps) 
         votedFor={votedFor}
       />
 
-      {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.SPONSOR) && (
-        <Sponsors
-          coSponsors={filteredVotes.filteredCoSponsors}
-          countryCode={countryCode}
-          sponsors={filteredVotes.filteredSponsors}
-        />
-      )}
+      <div className="relative z-10">
+        {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.SPONSOR) && (
+          <Sponsors
+            coSponsors={filteredVotes.filteredCoSponsors}
+            countryCode={countryCode}
+            sponsors={filteredVotes.filteredSponsors}
+          />
+        )}
 
-      {shouldReturn(filters.stance, StandardOption) && (
-        <div className="bt-0 mt-10 w-full border border-muted" />
-      )}
+        {shouldReturn(filters.stance, StandardOption) && (
+          <div className="bt-0 mt-10 w-full border border-muted" />
+        )}
 
-      {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.VOTED_FOR) && (
-        <VotedFor countryCode={countryCode} votedFor={filteredVotes.filteredVotedFor} />
-      )}
+        {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.VOTED_FOR) && (
+          <VotedFor
+            countryCode={countryCode}
+            stanceScore={stanceScore}
+            votedFor={filteredVotes.filteredVotedFor}
+          />
+        )}
 
-      {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.VOTED_AGAINST) && (
-        <VotedAgainst countryCode={countryCode} votedAgainst={filteredVotes.filteredVotedAgainst} />
-      )}
+        {shouldReturn(filters.stance, DTSI_BillPersonRelationshipType.VOTED_AGAINST) && (
+          <VotedAgainst
+            countryCode={countryCode}
+            stanceScore={stanceScore}
+            votedAgainst={filteredVotes.filteredVotedAgainst}
+          />
+        )}
+      </div>
     </section>
   )
 }

@@ -41,7 +41,7 @@ export function Filters(props: FiltersProps) {
   return (
     <div
       className={cn(
-        'flex w-full flex-1 justify-between gap-2 overflow-x-auto bg-muted p-4',
+        'flex w-full flex-1 items-center justify-between gap-2 overflow-x-auto bg-muted p-4',
         className,
       )}
     >
@@ -50,7 +50,10 @@ export function Filters(props: FiltersProps) {
           onValueChange={(stance: StanceOption) => handleChange({ stance })}
           value={filtersValue.stance}
         >
-          <SelectTrigger data-testid="stance-filter-trigger">
+          <SelectTrigger
+            className="w-[180px] flex-shrink-0 md:flex-1"
+            data-testid="stance-filter-trigger"
+          >
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance</span>
             <span className="mr-auto">
               <SelectValue placeholder={StandardOption} />
@@ -76,7 +79,10 @@ export function Filters(props: FiltersProps) {
           onValueChange={(role: RoleOption) => handleChange({ role })}
           value={filtersValue.role}
         >
-          <SelectTrigger data-testid="role-filter-trigger">
+          <SelectTrigger
+            className="w-[180px] flex-shrink-0 md:flex-1"
+            data-testid="role-filter-trigger"
+          >
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
             <span className="mr-auto">
               <SelectValue placeholder={StandardOption} />
@@ -102,7 +108,10 @@ export function Filters(props: FiltersProps) {
           onValueChange={(party: PartyOption) => handleChange({ party })}
           value={filtersValue.party}
         >
-          <SelectTrigger data-testid="party-filter-trigger">
+          <SelectTrigger
+            className="w-[180px] flex-shrink-0 md:flex-1"
+            data-testid="party-filter-trigger"
+          >
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
             <span className="mr-auto">
               <SelectValue placeholder={StandardOption} />
