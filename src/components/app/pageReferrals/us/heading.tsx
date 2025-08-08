@@ -12,7 +12,7 @@ export function UsPageReferralsHeading({ stateName }: UsPageReferralsHeadingProp
           ? `See which districts in ${stateName} have the most advocates.`
           : 'See which districts have the most number of Stand With Crypto advocates.'
       }
-      leaderboardTitle="District Leaderboard"
+      leaderboardTitle="Stand With Crypto Advocates by District Leaderboard"
       stateName={stateName}
     />
   )
