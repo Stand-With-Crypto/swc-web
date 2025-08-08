@@ -36,9 +36,9 @@ const ACTION_CONFIG_BY_CAMPAIGN_NAME: Record<string, ActionConfig> = {
     actionType: UserActionType.VIEW_KEY_PAGE,
     campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE,
   },
-  [USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025]: {
+  [USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025]: {
     actionType: UserActionType.EMAIL,
-    campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
+    campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
   },
 }
 
@@ -94,11 +94,11 @@ export function PageDayOfAction() {
             title="Tuning in to the Crypto Day of Action livestream"
           />
           <EmailActionCheckbox
-            campaignName={USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025}
+            campaignName={USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025}
             description="Send an email to your members of Congress and let them know why common-sense pro-crypto policies are important"
             isCompleted={hasCompletedAction(
               ACTION_CONFIG_BY_CAMPAIGN_NAME[
-                USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025
+                USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025
               ],
             )}
             title="Emailing your member of Congress"
