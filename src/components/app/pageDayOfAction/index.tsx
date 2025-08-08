@@ -18,7 +18,12 @@ import { ActionCheckbox, EmailActionCheckbox, ViewKeyPageActionCheckbox } from '
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
-const ACTION_CONFIG_BY_CAMPAIGN_NAME = {
+interface ActionConfig {
+  actionType: UserActionType
+  campaignName: string
+}
+
+const ACTION_CONFIG_BY_CAMPAIGN_NAME: Record<string, ActionConfig> = {
   [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM]: {
     actionType: UserActionType.VIEW_KEY_PAGE,
     campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM,
@@ -35,11 +40,6 @@ const ACTION_CONFIG_BY_CAMPAIGN_NAME = {
     actionType: UserActionType.EMAIL,
     campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
   },
-}
-
-interface ActionConfig {
-  actionType: UserActionType
-  campaignName: string
 }
 
 export function PageDayOfAction() {
@@ -62,7 +62,7 @@ export function PageDayOfAction() {
   }, [hasCompletedAction])
 
   return (
-    <PageLayout className="flex flex-col items-center gap-16">
+    <PageLayout className="flex flex-col items-center gap-8">
       <section className="text-center">
         <small className="text-sm text-gray-500">Stand With Crypto Presents</small>
         <PageLayout.Title>Crypto Day of Action</PageLayout.Title>
@@ -84,7 +84,7 @@ export function PageDayOfAction() {
         <div className="flex w-full flex-col gap-8">
           <ViewKeyPageActionCheckbox
             campaignName={USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM}
-            description="Stand With Crypto, alongside partners from across the country, are hosting a livestream on X and YouTube throughout the day."
+            description="Stand With Crypto, alongside partners from across the country, are hosting a livestream on X throughout the day."
             isCompleted={hasCompletedAction(
               ACTION_CONFIG_BY_CAMPAIGN_NAME[
                 USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM
@@ -112,14 +112,33 @@ export function PageDayOfAction() {
               ],
             )}
             path={createTweetLink({
-              message:
-                'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. #CryptoDayofAction',
+              message: `I’m taking action with @standwithcrypto to protect the future of digital innovation.\n\nEmail your reps. Call their offices. Post with #CryptoDayofAction 🛡️.\n\nIt’s our future. Let’s make sure Washington hears us.`,
             })}
             title="Spreading the word"
           />
           <ViewKeyPageActionCheckbox
             campaignName={USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE}
-            description="Add a Crypto Day of Action banner to your profile and a shield emoji 🛡️ in your bio."
+            description={
+              <>
+                Add a Crypto Day of Action banner to your profile and a shield emoji 🛡️ in your bio.
+                Download it{' '}
+                {/* This needs to be a span because it's wrapped under a button and that causes an hydration error if we do an external link instead */}
+                <span
+                  className="inline text-primary-cta underline"
+                  onClick={e => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    window.open(
+                      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/day-of-action-banners.zip',
+                    )
+                  }}
+                  role="link"
+                >
+                  here
+                </span>
+                .
+              </>
+            }
             isCompleted={hasCompletedAction(
               ACTION_CONFIG_BY_CAMPAIGN_NAME[
                 USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE
@@ -131,7 +150,7 @@ export function PageDayOfAction() {
         </div>
       </section>
 
-      <section className="flex w-full max-w-3xl flex-col items-center gap-2">
+      <section className="flex w-full max-w-3xl flex-col items-center">
         <PageLayout.Title as="h2" size="sm">
           And then...
         </PageLayout.Title>

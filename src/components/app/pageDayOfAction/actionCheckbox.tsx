@@ -22,7 +22,7 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 
 export interface ActionCheckboxProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string
-  description: string
+  description: React.ReactNode
   isCompleted: boolean
   isLoading?: boolean
 }
