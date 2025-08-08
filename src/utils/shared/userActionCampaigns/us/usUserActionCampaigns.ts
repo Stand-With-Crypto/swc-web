@@ -103,6 +103,9 @@ export enum USUserActionReferCampaignName {
 }
 export enum USUserActionViewKeyPageCampaignName {
   DEFAULT = 'DEFAULT',
+  DAY_OF_ACTION_LIVESTREAM = 'DAY_OF_ACTION_LIVESTREAM',
+  DAY_OF_ACTION_SHARE_ON_X = 'DAY_OF_ACTION_SHARE_ON_X',
+  DAY_OF_ACTION_UPDATE_X_PROFILE = 'DAY_OF_ACTION_UPDATE_X_PROFILE',
 }
 export enum USUserActionLinkedinCampaignName {
   DEFAULT = 'DEFAULT',
