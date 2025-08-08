@@ -37,6 +37,28 @@ export function viewKeyPageRecentActivityRow({
     [USUserActionViewKeyPageCampaignName.DEFAULT]: {
       children: <RecentActivityRowMainText>Someone viewed a key page</RecentActivityRowMainText>,
     },
+    [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM]: {
+      children: (
+        <RecentActivityRowMainText>
+          Someone tuned in to the Day of Action live stream
+        </RecentActivityRowMainText>
+      ),
+    },
+    [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_SHARE_ON_X]: {
+      children: (
+        <RecentActivityRowMainText>
+          Someone shared on X they participated in the Day of Action
+        </RecentActivityRowMainText>
+      ),
+    },
+    [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE]: {
+      children: (
+        <RecentActivityRowMainText>
+          Someone updated their X profile for the Day of Action
+        </RecentActivityRowMainText>
+      ),
+    },
+
     [CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION]: {
       children: <RecentActivityRowMainText>Someone emailed their MP</RecentActivityRowMainText>,
       onFocusContent: () => (
