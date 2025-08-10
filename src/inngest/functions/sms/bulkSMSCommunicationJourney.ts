@@ -207,6 +207,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                 includePendingDoubleOptIn,
                 skip,
                 userWhereInput: customWhere,
+                countryCode,
               }),
           )
 
@@ -404,6 +405,7 @@ export interface GetPhoneNumberOptions {
   skip: number
   userWhereInput?: Prisma.UserGroupByArgs['where']
   campaignName?: string
+  countryCode: SupportedCountryCodes
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
@@ -414,6 +416,7 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
         ...mergeWhereParams(
           { ...options.userWhereInput },
           {
+            countryCode: options.countryCode,
             UserCommunicationJourney: {
               every: {
                 OR: [
