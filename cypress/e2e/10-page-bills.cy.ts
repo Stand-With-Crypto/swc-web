@@ -9,7 +9,8 @@ it('page - bills interactions', () => {
 
   cy.location('pathname').should('include', '/bills/')
   cy.contains('Analysis').should('be.visible')
-  cy.contains('Votes').should('be.visible')
+
+  cy.contains('Votes').scrollIntoView().should('be.visible')
   cy.contains('Sponsor').should('be.visible')
   cy.contains('Cosponsors').should('be.visible')
   cy.contains('Voted For').should('be.visible')
