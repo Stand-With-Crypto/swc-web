@@ -1,59 +1,64 @@
 'use client'
 
 import * as React from 'react'
-import { UserActionType } from '@prisma/client'
 
-import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
+// import { UserActionType } from '@prisma/client'
+// import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
 import { PageLayout } from '@/components/ui/pageLayout'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-import { NFTSlug } from '@/utils/shared/nft'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+
+// import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+// import { NFTSlug } from '@/utils/shared/nft'
+// import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+// import {
+//   USUserActionEmailCampaignName,
+//   USUserActionViewKeyPageCampaignName,
+// } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+// import { createTweetLink } from '@/utils/web/createTweetLink'
 import {
-  USUserActionEmailCampaignName,
-  USUserActionViewKeyPageCampaignName,
-} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
-import { createTweetLink } from '@/utils/web/createTweetLink'
+  // ActionCheckbox,
+  // EmailActionCheckbox,
+  ReadOnlyActionCheckbox,
+  // ViewKeyPageActionCheckbox,
+} from './actionCheckbox'
 
-import { ActionCheckbox, EmailActionCheckbox, ViewKeyPageActionCheckbox } from './actionCheckbox'
+// const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
-const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+// interface ActionConfig {
+//   actionType: UserActionType
+//   campaignName: string
+// }
 
-interface ActionConfig {
-  actionType: UserActionType
-  campaignName: string
-}
-
-const ACTION_CONFIG_BY_CAMPAIGN_NAME: Record<string, ActionConfig> = {
-  [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM]: {
-    actionType: UserActionType.VIEW_KEY_PAGE,
-    campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM,
-  },
-  [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_SHARE_ON_X]: {
-    actionType: UserActionType.VIEW_KEY_PAGE,
-    campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_SHARE_ON_X,
-  },
-  [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE]: {
-    actionType: UserActionType.VIEW_KEY_PAGE,
-    campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE,
-  },
-  [USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025]: {
-    actionType: UserActionType.EMAIL,
-    campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
-  },
-}
+// const ACTION_CONFIG_BY_CAMPAIGN_NAME: Record<string, ActionConfig> = {
+//   [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM]: {
+//     actionType: UserActionType.VIEW_KEY_PAGE,
+//     campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM,
+//   },
+//   [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_SHARE_ON_X]: {
+//     actionType: UserActionType.VIEW_KEY_PAGE,
+//     campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_SHARE_ON_X,
+//   },
+//   [USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE]: {
+//     actionType: UserActionType.VIEW_KEY_PAGE,
+//     campaignName: USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE,
+//   },
+//   [USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025]: {
+//     actionType: UserActionType.EMAIL,
+//     campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
+//   },
+// }
 
 export function PageDayOfAction() {
-  const { data } = useApiResponseForUserPerformedUserActionTypes()
-  const performedUserActionTypes = React.useMemo(() => data?.performedUserActionTypes ?? [], [data])
+  // const { data } = useApiResponseForUserPerformedUserActionTypes()
+  // const performedUserActionTypes = React.useMemo(() => data?.performedUserActionTypes ?? [], [data])
 
-  const hasCompletedAction = React.useCallback(
-    ({ actionType, campaignName }: ActionConfig) => {
-      return performedUserActionTypes.some(
-        x => x.actionType === actionType && x.campaignName === campaignName,
-      )
-    },
-    [performedUserActionTypes],
-  )
+  // const hasCompletedAction = React.useCallback(
+  //   ({ actionType, campaignName }: ActionConfig) => {
+  //     return performedUserActionTypes.some(
+  //       x => x.actionType === actionType && x.campaignName === campaignName,
+  //     )
+  //   },
+  //   [performedUserActionTypes],
+  // )
 
   return (
     <PageLayout className="flex flex-col items-center gap-8">
@@ -76,7 +81,7 @@ export function PageDayOfAction() {
         </PageLayout.Title>
 
         <div className="flex w-full flex-col gap-8">
-          <ViewKeyPageActionCheckbox
+          {/* <ViewKeyPageActionCheckbox
             campaignName={USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM}
             description="Stand With Crypto, alongside partners from across the country, are hosting a livestream on X throughout the day."
             isCompleted={hasCompletedAction(
@@ -86,8 +91,13 @@ export function PageDayOfAction() {
             )}
             path="https://x.com/StandWithCrypto/status/1814000000000000000"
             title="Tuning in to the Crypto Day of Action livestream"
+          /> */}
+          <ReadOnlyActionCheckbox
+            description="Stand With Crypto, alongside partners from across the country, are hosting a livestream on X throughout the day."
+            title="Tuning in to the Crypto Day of Action livestream"
           />
-          <EmailActionCheckbox
+
+          {/* <EmailActionCheckbox
             campaignName={USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025}
             description="Send an email to your members of Congress and let them know why common-sense pro-crypto policies are important"
             isCompleted={hasCompletedAction(
@@ -96,8 +106,13 @@ export function PageDayOfAction() {
               ],
             )}
             title="Emailing your member of Congress"
+          /> */}
+          <ReadOnlyActionCheckbox
+            description="Send an email to your members of Congress and let them know why common-sense pro-crypto policies are important"
+            title="Emailing your member of Congress"
           />
-          <ViewKeyPageActionCheckbox
+
+          {/* <ViewKeyPageActionCheckbox
             campaignName={USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_SHARE_ON_X}
             description="Ask your social network to participate in the Crypto Day of Action throughout the day. Don't forget to use #CryptoDayofAction to help spread the word."
             isCompleted={hasCompletedAction(
@@ -109,14 +124,18 @@ export function PageDayOfAction() {
               message: `I’m taking action with @standwithcrypto to protect the future of digital innovation.\n\nEmail your reps. Call their offices. Post with #CryptoDayofAction 🛡️.\n\nIt’s our future. Let’s make sure Washington hears us.`,
             })}
             title="Spreading the word"
+          /> */}
+          <ReadOnlyActionCheckbox
+            description="Ask your social network to participate in the Crypto Day of Action throughout the day. Don't forget to use #CryptoDayofAction to help spread the word."
+            title="Spreading the word"
           />
-          <ViewKeyPageActionCheckbox
+
+          {/* <ViewKeyPageActionCheckbox
             campaignName={USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE}
             description={
               <>
                 Add a Crypto Day of Action banner to your profile and a shield emoji 🛡️ in your bio.
                 Download it{' '}
-                {/* This needs to be a span because it's wrapped under a button and that causes an hydration error if we do an external link instead */}
                 <span
                   className="inline text-primary-cta underline"
                   onClick={e => {
@@ -140,6 +159,10 @@ export function PageDayOfAction() {
             )}
             path="https://x.com/settings/profile"
             title="Updating your profile"
+          /> */}
+          <ReadOnlyActionCheckbox
+            description="Add a Crypto Day of Action banner to your profile and a shield emoji 🛡️ in your bio."
+            title="Updating your profile"
           />
         </div>
       </section>
@@ -149,7 +172,7 @@ export function PageDayOfAction() {
           And then...
         </PageLayout.Title>
 
-        <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
+        {/* <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
           <ActionCheckbox
             description="Claim your NFT to commemorate your participation in the Crypto Day of Action."
             isCompleted={hasCompletedAction({
@@ -158,7 +181,11 @@ export function PageDayOfAction() {
             })}
             title="Claim your NFT"
           />
-        </UserActionFormClaimNFTDialog>
+        </UserActionFormClaimNFTDialog> */}
+        <ReadOnlyActionCheckbox
+          description="Claim your NFT to commemorate your participation in the Crypto Day of Action."
+          title="Claim your NFT"
+        />
       </section>
     </PageLayout>
   )
