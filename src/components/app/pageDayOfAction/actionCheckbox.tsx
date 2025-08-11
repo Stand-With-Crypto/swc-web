@@ -1,6 +1,5 @@
 import React from 'react'
 import { UserActionType } from '@prisma/client'
-import { Loader2Icon } from 'lucide-react'
 import { useSWRConfig } from 'swr'
 
 import { actionCreateUserActionViewKeyPage } from '@/actions/actionCreateUserActionViewKeyPage'
@@ -8,6 +7,7 @@ import { GetUserPerformedUserActionTypesResponse } from '@/app/api/[countryCode]
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { ExternalLink } from '@/components/ui/link'
+import { LoadingSpinner } from '@/components/ui/loadingSpinner'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
@@ -47,7 +47,7 @@ export function ActionCheckbox({
       <div className="flex h-auto w-full items-center gap-4 p-6">
         <div className="h-8 w-8">
           {isLoading ? (
-            <Loader2Icon className="h-8 w-8 animate-spin" />
+            <LoadingSpinner />
           ) : (
             <CheckIcon
               completed={isCompleted}
@@ -120,9 +120,9 @@ export function ViewKeyPageActionCheckbox({
               apiUrls.userPerformedUserActionTypes({ countryCode }),
               currentData => {
                 return currentData?.performedUserActionTypes.some(
-                  x =>
-                    x.actionType === UserActionType.VIEW_KEY_PAGE &&
-                    x.campaignName === campaignName,
+                  performedUserAction =>
+                    performedUserAction.actionType === UserActionType.VIEW_KEY_PAGE &&
+                    performedUserAction.campaignName === campaignName,
                 )
                   ? currentData
                   : {
