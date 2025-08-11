@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from 'react'
+import { createContext, Suspense, useContext } from 'react'
 import { isNil, noop } from 'lodash-es'
 
 import { GetDistrictRankResponse } from '@/app/api/public/referrals/[countryCode]/[stateCode]/[districtNumber]/route'
@@ -23,7 +23,7 @@ interface YourLocationRankingProps {
   label: string
 }
 
-export function YourLocationRanking(props: YourLocationRankingProps) {
+export function YourLocationRankingDisplay(props: YourLocationRankingProps) {
   const { locationRanking, countryCode, heading, label } = props
 
   const count = locationRanking?.score
@@ -58,111 +58,153 @@ export interface YourLocationRankingConfig {
   getStateName: (stateCode: string) => string
 }
 
-export function createYourLocationRanking(config: YourLocationRankingConfig) {
-  function Heading() {
-    return (
-      <LeaderboardHeading>
-        <LeaderboardHeading.Title>{config.title}</LeaderboardHeading.Title>
-        <LeaderboardHeading.Subtitle>Advocates</LeaderboardHeading.Subtitle>
-      </LeaderboardHeading>
-    )
+const YourDistrictRankingContext = createContext<YourLocationRankingConfig>(
+  {} as YourLocationRankingConfig,
+)
+
+export function YourLocationRanking({
+  children,
+  value,
+}: {
+  children: React.ReactNode
+  value: YourLocationRankingConfig
+}) {
+  return (
+    <YourDistrictRankingContext.Provider value={value}>
+      {children}
+    </YourDistrictRankingContext.Provider>
+  )
+}
+
+export function useYourDistrictRanking() {
+  const context = useContext(YourDistrictRankingContext)
+  if (context === undefined) {
+    throw new Error('useYourDistrictRanking must be used within a YourDistrictRankingProvider')
+  }
+  return context
+}
+
+export function YourDistrictRankingHeader() {
+  const config = useYourDistrictRanking()
+
+  return (
+    <LeaderboardHeading>
+      <LeaderboardHeading.Title>{config.title}</LeaderboardHeading.Title>
+      <LeaderboardHeading.Subtitle>Advocates</LeaderboardHeading.Subtitle>
+    </LeaderboardHeading>
+  )
+}
+
+export function YourDistrictRankingLabel() {
+  const config = useYourDistrictRanking()
+  const { electoralZone, administrativeArea: stateCode } = useUserAddress()
+
+  if (!electoralZone || !stateCode) {
+    return null
   }
 
-  function DefaultPlacesSelectWrapper(
-    props: Omit<DefaultPlacesSelectProps, 'title' | 'placeholder'>,
-  ) {
-    return <DefaultPlacesSelect placeholder={config.placeholder} title={config.title} {...props} />
-  }
+  return (
+    <LeaderboardRow.Label>
+      {config.formatLabel(config.getStateName(stateCode), electoralZone.zoneName)}
+    </LeaderboardRow.Label>
+  )
+}
 
-  function LocationNotFound(
-    props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
-  ) {
+function LocationNotFound(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>) {
+  const config = useYourDistrictRanking()
+
+  return (
+    <YourLocale>
+      <YourDistrictRankingDefaultPlacesSelectWrapper {...props} />
+      <YourLocale.Label>{config.notFoundMessage}</YourLocale.Label>
+    </YourLocale>
+  )
+}
+
+export function YourDistrictRankingDefaultPlacesSelectWrapper(
+  props: Omit<DefaultPlacesSelectProps, 'title' | 'placeholder'>,
+) {
+  const config = useYourDistrictRanking()
+  return <DefaultPlacesSelect placeholder={config.placeholder} title={config.title} {...props} />
+}
+
+export function YourLocationRank() {
+  const config = useYourDistrictRanking()
+  const {
+    address,
+    setMutableAddress: setAddress,
+    mutableAddress,
+    isAddressInCountry,
+    isLoading,
+    electoralZone,
+    electoralZoneRanking,
+    administrativeArea: stateCode,
+    isAddressFromProfile,
+  } = useUserAddress()
+
+  if (isLoading) {
     return (
       <YourLocale>
-        <DefaultPlacesSelectWrapper {...props} />
-        <YourLocale.Label>{config.notFoundMessage}</YourLocale.Label>
+        <YourDistrictRankingHeader />
+        <DefaultPlacesSelect.Loading />
       </YourLocale>
     )
   }
 
-  function YourLocationRank() {
-    const {
-      address,
-      setMutableAddress: setAddress,
-      mutableAddress,
-      isAddressInCountry,
-      isLoading,
-      electoralZone,
-      electoralZoneRanking,
-      administrativeArea: stateCode,
-      isAddressFromProfile,
-    } = useUserAddress()
-
-    if (isLoading) {
-      return (
-        <YourLocale>
-          <Heading />
-          <DefaultPlacesSelect.Loading />
-        </YourLocale>
-      )
-    }
-
-    if (!address) {
-      return (
-        <DefaultPlacesSelectWrapper
-          loading={isLoading}
-          onChange={setAddress}
-          value={mutableAddress === 'loading' ? null : mutableAddress}
-        />
-      )
-    }
-
-    if (!isAddressInCountry) {
-      return (
-        <YourLocale>
-          <DefaultPlacesSelectWrapper
-            disabled={isAddressFromProfile}
-            onChange={setAddress}
-            value={isLoading ? null : address}
-          />
-          <YourLocale.Label>{config.notFromCountryMessage}</YourLocale.Label>
-        </YourLocale>
-      )
-    }
-
-    if (!electoralZone || !stateCode || !electoralZone?.zoneName) {
-      return <LocationNotFound onChange={setAddress} value={address} />
-    }
-
-    if (!electoralZoneRanking) {
-      return (
-        <LocationNotFound
-          onChange={setAddress}
-          value={mutableAddress === 'loading' ? null : address}
-        />
-      )
-    }
-
+  if (!address) {
     return (
-      <YourLocationRanking
-        countryCode={config.countryCode}
-        heading={<Heading />}
-        label={config.formatLabel(config.getStateName(stateCode), electoralZone.zoneName)}
-        locationRanking={electoralZoneRanking}
+      <YourDistrictRankingDefaultPlacesSelectWrapper
+        loading={isLoading}
+        onChange={setAddress}
+        value={mutableAddress === 'loading' ? null : mutableAddress}
       />
     )
   }
 
-  function YourLocationRankSuspense({ children }: { children: React.ReactNode }) {
+  if (!isAddressInCountry) {
     return (
-      <Suspense fallback={<DefaultPlacesSelectWrapper loading onChange={noop} value={null} />}>
-        {children}
-      </Suspense>
+      <YourLocale>
+        <YourDistrictRankingDefaultPlacesSelectWrapper
+          disabled={isAddressFromProfile}
+          onChange={setAddress}
+          value={isLoading ? null : address}
+        />
+        <YourLocale.Label>{config.notFromCountryMessage}</YourLocale.Label>
+      </YourLocale>
     )
   }
 
-  return {
-    YourLocationRank,
-    YourLocationRankSuspense,
+  if (!electoralZone || !stateCode || !electoralZone?.zoneName) {
+    return <LocationNotFound onChange={setAddress} value={address} />
   }
+
+  if (!electoralZoneRanking) {
+    return (
+      <LocationNotFound
+        onChange={setAddress}
+        value={mutableAddress === 'loading' ? null : address}
+      />
+    )
+  }
+
+  return (
+    <YourLocationRankingDisplay
+      countryCode={config.countryCode}
+      heading={<YourDistrictRankingHeader />}
+      label={config.formatLabel(config.getStateName(stateCode), electoralZone.zoneName)}
+      locationRanking={electoralZoneRanking}
+    />
+  )
+}
+
+export function YourLocationRankSuspense({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense
+      fallback={
+        <YourDistrictRankingDefaultPlacesSelectWrapper loading onChange={noop} value={null} />
+      }
+    >
+      {children}
+    </Suspense>
+  )
 }

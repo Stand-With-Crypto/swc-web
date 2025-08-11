@@ -1,8 +1,10 @@
 'use client'
 
 import {
-  createYourLocationRanking,
+  YourLocationRank,
+  YourLocationRanking,
   YourLocationRankingConfig,
+  YourLocationRankSuspense,
 } from '@/components/app/pageReferrals/common/yourLocationRanking'
 import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -17,9 +19,14 @@ const config: YourLocationRankingConfig = {
   getStateName: getAUStateNameFromStateCode,
 }
 
-const { YourLocationRank, YourLocationRankSuspense } = createYourLocationRanking(config)
+export function AuYourDivisionRankingWrapper({ children }: { children: React.ReactNode }) {
+  return <YourLocationRanking value={config}>{children}</YourLocationRanking>
+}
 
-export {
-  YourLocationRank as AuYourDivisionRank,
-  YourLocationRankSuspense as AuYourDivisionRankSuspense,
+export function AuYourDivisionRank() {
+  return <YourLocationRank />
+}
+
+export function AuYourDivisionRankSuspense({ children }: { children: React.ReactNode }) {
+  return <YourLocationRankSuspense>{children}</YourLocationRankSuspense>
 }

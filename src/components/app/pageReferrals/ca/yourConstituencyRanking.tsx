@@ -1,8 +1,10 @@
 'use client'
 
 import {
-  createYourLocationRanking,
+  YourLocationRank,
+  YourLocationRanking,
   YourLocationRankingConfig,
+  YourLocationRankSuspense,
 } from '@/components/app/pageReferrals/common/yourLocationRanking'
 import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -17,9 +19,14 @@ const config: YourLocationRankingConfig = {
   getStateName: getCAProvinceOrTerritoryNameFromCode,
 }
 
-const { YourLocationRank, YourLocationRankSuspense } = createYourLocationRanking(config)
+export function CaYourConstituencyRankingWrapper({ children }: { children: React.ReactNode }) {
+  return <YourLocationRanking value={config}>{children}</YourLocationRanking>
+}
 
-export {
-  YourLocationRank as CaYourConstituencyRank,
-  YourLocationRankSuspense as CaYourConstituencyRankSuspense,
+export function CaYourConstituencyRank() {
+  return <YourLocationRank />
+}
+
+export function CaYourConstituencyRankSuspense({ children }: { children: React.ReactNode }) {
+  return <YourLocationRankSuspense>{children}</YourLocationRankSuspense>
 }

@@ -10,6 +10,7 @@ import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import {
   AuYourDivisionRank,
+  AuYourDivisionRankingWrapper,
   AuYourDivisionRankSuspense,
 } from '@/components/app/pageReferrals/au/yourDivisionRanking'
 import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
@@ -84,11 +85,13 @@ export function AuPageHome({
                       See which division has the most number of advocates.
                     </HomePageSection.Subtitle>
 
-                    <AuYourDivisionRankSuspense>
-                      <UserAddressProvider countryCode={countryCode}>
-                        <AuYourDivisionRank />
-                      </UserAddressProvider>
-                    </AuYourDivisionRankSuspense>
+                    <AuYourDivisionRankingWrapper>
+                      <AuYourDivisionRankSuspense>
+                        <UserAddressProvider countryCode={countryCode}>
+                          <AuYourDivisionRank />
+                        </UserAddressProvider>
+                      </AuYourDivisionRankSuspense>
+                    </AuYourDivisionRankingWrapper>
                     <AuAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper
