@@ -4,6 +4,7 @@ import { UserAddressProvider } from '@/components/app/pageReferrals/common/userA
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import {
   UsYourDistrictRank,
+  UsYourDistrictRankingWrapper,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -187,11 +188,13 @@ export function UsPageCommunity({
         )}
         {tab === UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS && (
           <>
-            <UsYourDistrictRankSuspense>
-              <UserAddressProvider countryCode={countryCode}>
-                <UsYourDistrictRank />
-              </UserAddressProvider>
-            </UsYourDistrictRankSuspense>
+            <UsYourDistrictRankingWrapper>
+              <UsYourDistrictRankSuspense>
+                <UserAddressProvider countryCode={countryCode}>
+                  <UsYourDistrictRank />
+                </UserAddressProvider>
+              </UsYourDistrictRankSuspense>
+            </UsYourDistrictRankingWrapper>
             <USAdvocatesLeaderboard data={leaderboardData} />
           </>
         )}

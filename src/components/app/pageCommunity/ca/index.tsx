@@ -3,6 +3,7 @@ import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import {
   CaYourConstituencyRank,
+  CaYourConstituencyRankingWrapper,
   CaYourConstituencyRankSuspense,
 } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
 import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
@@ -151,11 +152,13 @@ export function CaPageCommunity({
         )}
         {tab === CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES && (
           <>
-            <CaYourConstituencyRankSuspense>
-              <UserAddressProvider countryCode={countryCode}>
-                <CaYourConstituencyRank />
-              </UserAddressProvider>
-            </CaYourConstituencyRankSuspense>
+            <CaYourConstituencyRankingWrapper>
+              <CaYourConstituencyRankSuspense>
+                <UserAddressProvider countryCode={countryCode}>
+                  <CaYourConstituencyRank />
+                </UserAddressProvider>
+              </CaYourConstituencyRankSuspense>
+            </CaYourConstituencyRankingWrapper>
             <CaAdvocatesLeaderboard data={leaderboardData} />
             {totalPages > 1 && (
               <div className="flex justify-center">

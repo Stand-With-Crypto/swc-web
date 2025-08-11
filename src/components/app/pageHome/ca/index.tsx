@@ -10,6 +10,7 @@ import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import {
   CaYourConstituencyRank,
+  CaYourConstituencyRankingWrapper,
   CaYourConstituencyRankSuspense,
 } from '@/components/app/pageReferrals/ca/yourConstituencyRanking'
 import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
@@ -82,11 +83,13 @@ export function CaPageHome({
                     <HomePageSection.Subtitle className="hidden md:block">
                       See which constituency has the most number of advocates.
                     </HomePageSection.Subtitle>
-                    <CaYourConstituencyRankSuspense>
-                      <UserAddressProvider countryCode={countryCode}>
-                        <CaYourConstituencyRank />
-                      </UserAddressProvider>
-                    </CaYourConstituencyRankSuspense>
+                    <CaYourConstituencyRankingWrapper>
+                      <CaYourConstituencyRankSuspense>
+                        <UserAddressProvider countryCode={countryCode}>
+                          <CaYourConstituencyRank />
+                        </UserAddressProvider>
+                      </CaYourConstituencyRankSuspense>
+                    </CaYourConstituencyRankingWrapper>
                     <CaAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper

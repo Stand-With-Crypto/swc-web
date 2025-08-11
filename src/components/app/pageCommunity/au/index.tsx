@@ -3,6 +3,7 @@ import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import {
   AuYourDivisionRank,
+  AuYourDivisionRankingWrapper,
   AuYourDivisionRankSuspense,
 } from '@/components/app/pageReferrals/au/yourDivisionRanking'
 import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
@@ -152,11 +153,13 @@ export function AuPageCommunity({
 
         {tab === AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS && leaderboardData && (
           <>
-            <AuYourDivisionRankSuspense>
-              <UserAddressProvider countryCode={countryCode}>
-                <AuYourDivisionRank />
-              </UserAddressProvider>
-            </AuYourDivisionRankSuspense>
+            <AuYourDivisionRankingWrapper>
+              <AuYourDivisionRankSuspense>
+                <UserAddressProvider countryCode={countryCode}>
+                  <AuYourDivisionRank />
+                </UserAddressProvider>
+              </AuYourDivisionRankSuspense>
+            </AuYourDivisionRankingWrapper>
             <AuAdvocatesLeaderboard data={leaderboardData} />
             {totalPages > 1 && (
               <div className="flex justify-center">

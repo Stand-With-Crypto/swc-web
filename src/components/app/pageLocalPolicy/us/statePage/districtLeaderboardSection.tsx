@@ -4,6 +4,7 @@ import { UserAddressProvider } from '@/components/app/pageReferrals/common/userA
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import {
   UsYourDistrictRank,
+  UsYourDistrictRankingWrapper,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { getDistrictsLeaderboardDataByState } from '@/utils/server/districtRankings/upsertRankings'
@@ -43,11 +44,13 @@ export async function UsDistrictLeaderboardSection({
         </Section.SubTitle>
 
         <DistrictLeaderboard>
-          <UsYourDistrictRankSuspense>
-            <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea>
-              <UsYourDistrictRank />
-            </UserAddressProvider>
-          </UsYourDistrictRankSuspense>
+          <UsYourDistrictRankingWrapper>
+            <UsYourDistrictRankSuspense>
+              <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea>
+                <UsYourDistrictRank />
+              </UserAddressProvider>
+            </UsYourDistrictRankSuspense>
+          </UsYourDistrictRankingWrapper>
           <USAdvocatesLeaderboard data={leaderboardData} />
 
           {total > ITEMS_PER_PAGE && (
