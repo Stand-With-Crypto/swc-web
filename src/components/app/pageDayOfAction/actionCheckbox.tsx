@@ -102,7 +102,7 @@ export function ViewKeyPageActionCheckbox({
           'Campaign Name': campaignName,
           'User Action Type': UserActionType.VIEW_KEY_PAGE,
           countryCode: countryCode,
-          path: path,
+          path,
         },
         payload: {
           campaignName,

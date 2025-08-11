@@ -55,12 +55,6 @@ export function PageDayOfAction() {
     [performedUserActionTypes],
   )
 
-  const hasCompletedAllActions = React.useMemo(() => {
-    return Object.values(ACTION_CONFIG_BY_CAMPAIGN_NAME).every(actionConfig =>
-      hasCompletedAction(actionConfig),
-    )
-  }, [hasCompletedAction])
-
   return (
     <PageLayout className="flex flex-col items-center gap-8">
       <section className="text-center">
@@ -158,7 +152,6 @@ export function PageDayOfAction() {
         <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
           <ActionCheckbox
             description="Claim your NFT to commemorate your participation in the Crypto Day of Action."
-            disabled={!hasCompletedAllActions}
             isCompleted={hasCompletedAction({
               actionType: UserActionType.CLAIM_NFT,
               campaignName: NFTSlug.GENIUS_ACT_2025,
