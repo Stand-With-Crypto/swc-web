@@ -67,11 +67,12 @@ export function PageDayOfAction() {
         <PageLayout.Title>Crypto Day of Action</PageLayout.Title>
         <PageLayout.Subtitle>
           Thursday, August 14 will mark two years of Stand With Crypto advocates uniting to advance
-          pro-crypto legislation that will make the crypto capital of the world. To commemorate this
-          anniversary, the progress we've secured, and the work ahead, crypto advocates from across
-          the country are uniting to participate in a Crypto Day of Action. Together, we are making
-          sure crypto voters' voices are being heard and encouraging lawmakers in Washington, D.C.
-          to prioritize common-sense policies that will allow crypto to thrive long into the future.
+          pro-crypto legislation that will make the United States into the Crypto Capital of the
+          World. To commemorate this anniversary, the progress we’ve secured, and the work ahead,
+          crypto advocates from across the country are uniting to participate in a Crypto Day of
+          Action. Together, we are making sure crypto voters’ voices are being heard and encouraging
+          lawmakers in Washington, D.C. to prioritize common-sense policies that will allow crypto
+          to thrive long into the future.
         </PageLayout.Subtitle>
       </section>
 
