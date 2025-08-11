@@ -36,7 +36,7 @@ export function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
       <div className="flex flex-col gap-2 md:flex-row">
         <div className="mb-10 min-w-40 md:mb-0">
           <strong className="mb-6 block text-xl font-semibold">Sponsor</strong>
-          {sponsors.length > 0 ? (
+          {sponsors.length ? (
             sponsors.map(person => (
               <DTSIAvatarBox
                 className="m-auto max-w-40 sm:m-0"
@@ -55,7 +55,7 @@ export function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
             Cosponsors <span className="font-normal">({totalItems})</span>
           </strong>
 
-          {list.length > 0 ? (
+          {list.length ? (
             <AvatarGrid className="sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
               {list.map(person => (
                 <DTSIAvatarBox countryCode={countryCode} key={person.slug} person={person} />

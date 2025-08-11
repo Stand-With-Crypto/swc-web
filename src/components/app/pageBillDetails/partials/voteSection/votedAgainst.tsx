@@ -45,7 +45,7 @@ export function VotedAgainst({ countryCode, votedAgainst, ...props }: VotedAgain
         Voted Against <span className="font-normal">({totalItems})</span>
       </strong>
 
-      {list.length > 0 ? (
+      {list.length ? (
         <AvatarGrid>
           {list.map(person => (
             <DTSIAvatarBox countryCode={countryCode} key={person.slug} person={person} />

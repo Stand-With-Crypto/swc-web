@@ -51,7 +51,7 @@ export function Filters(props: FiltersProps) {
           value={filtersValue.stance}
         >
           <SelectTrigger
-            className="w-[180px] flex-shrink-0 md:flex-1"
+            className="w-44 flex-shrink-0 md:flex-1"
             data-testid="stance-filter-trigger"
           >
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance</span>
@@ -79,10 +79,7 @@ export function Filters(props: FiltersProps) {
           onValueChange={(role: RoleOption) => handleChange({ role })}
           value={filtersValue.role}
         >
-          <SelectTrigger
-            className="w-[180px] flex-shrink-0 md:flex-1"
-            data-testid="role-filter-trigger"
-          >
+          <SelectTrigger className="w-44 flex-shrink-0 md:flex-1" data-testid="role-filter-trigger">
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
             <span className="mr-auto">
               <SelectValue placeholder={StandardOption} />
@@ -109,7 +106,7 @@ export function Filters(props: FiltersProps) {
           value={filtersValue.party}
         >
           <SelectTrigger
-            className="w-[180px] flex-shrink-0 md:flex-1"
+            className="w-44 flex-shrink-0 md:flex-1"
             data-testid="party-filter-trigger"
           >
             <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
