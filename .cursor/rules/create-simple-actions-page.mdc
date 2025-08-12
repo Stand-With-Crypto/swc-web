@@ -1,12 +1,12 @@
 ---
-description: Creates a simple campaign page
+description: Creates a simple actions page
 globs:
 alwaysApply: false
 ---
 
-# Creating a Simple Campaign Page
+# Creating a Simple Actions Page
 
-A **simple campaign page** is a page with a title, description, and some calls to action (**CTAs**) for a user to complete.
+A **simple actions page** is a page with a title, description, and some calls to action (**CTAs**) for a user to complete.
 
 ---
 

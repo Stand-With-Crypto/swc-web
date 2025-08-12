@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
-import { PageSimpleCampaign } from '@/components/app/pageSimpleCampaign'
-import { SimpleCampaignName } from '@/components/app/pageSimpleCampaign/types'
+import { PageSimpleActions } from '@/components/app/pageSimpleCampaign'
+import { SimpleActionsCampaignName } from '@/components/app/pageSimpleCampaign/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -21,8 +21,8 @@ const countryCode = SupportedCountryCodes.US as const
 
 export default function DayOfActionPageRoot() {
   return (
-    <PageSimpleCampaign
-      campaignName={SimpleCampaignName.DAY_OF_ACTION_AUG_14_2025}
+    <PageSimpleActions
+      campaignName={SimpleActionsCampaignName.DAY_OF_ACTION_AUG_14_2025}
       countryCode={countryCode}
       subtitle="Thursday, August 14 will mark two years of Stand With Crypto advocates uniting to advance pro-crypto legislation that will make the United States into the Crypto Capital of the World. To commemorate this anniversary, the progress we’ve secured, and the work ahead, crypto advocates from across the country are uniting to participate in a Crypto Day of Action. Together, we are making sure crypto voters’ voices are being heard and encouraging lawmakers in Washington, D.C. to prioritize common-sense policies that will allow crypto to thrive long into the future."
       subtitleSize="md"
