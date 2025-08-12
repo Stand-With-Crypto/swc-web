@@ -43,6 +43,11 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.MissionIcon />,
         },
         {
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: <Icons.ReferralsIcon />,
+        },
+        {
           href: urls.community(),
           text: 'Community',
           icon: <Icons.CommunityIcon />,

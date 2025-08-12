@@ -13,6 +13,7 @@ import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
+import { GB_REGIONS, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 
 export const zodAddress = object({
   googlePlaceId: string().optional(),
@@ -76,5 +77,10 @@ export const zodCAProvinceDistrict = object({
       val in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
     'Invalid province/territory code',
   ),
+  district: string(),
+})
+
+export const zodGbRegionConstituency = object({
+  state: string().refine((val): val is GBRegion => GB_REGIONS.includes(val), 'Invalid state code'),
   district: string(),
 })

@@ -5,6 +5,23 @@ export const GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP = {
   WLS: 'Wales',
 } as const
 
+export const GB_REGIONS: string[] = [
+  'Wales',
+  'Northern Ireland',
+  'London',
+  'Scotland',
+  'East of England',
+  'North East England',
+  'South West England',
+  'North West England',
+  'East Midlands England',
+  'South East England',
+  'West Midlands England',
+  'Yorkshire and The Humber',
+]
+
+export type GBRegion = (typeof GB_REGIONS)[number]
+
 export type GBCountryCode = keyof typeof GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP
 
 export const getGBCountryNameFromCode = (code: string) => {

@@ -20,6 +20,7 @@ import {
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { GB_REGIONS } from '@/utils/shared/stateMappings/gbCountryUtils'
 
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_FUNCTION_ID = 'script.update-districts-rankings'
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_SCHEDULE = '0 */1 * * *' // every 1 hour
@@ -34,7 +35,7 @@ const COUNTRY_CODE_TO_STATES_CODES_MAP: Record<SupportedCountryCodes, string[]> 
   [SupportedCountryCodes.CA]: Object.keys(
     CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   ) as CAProvinceOrTerritoryCode[],
-  [SupportedCountryCodes.GB]: [],
+  [SupportedCountryCodes.GB]: GB_REGIONS,
   [SupportedCountryCodes.AU]: Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP) as AUStateCode[],
 }
 
@@ -42,6 +43,7 @@ const COUNTRIES_TO_UPDATE_RANKINGS_FOR = [
   SupportedCountryCodes.US,
   SupportedCountryCodes.CA,
   SupportedCountryCodes.AU,
+  SupportedCountryCodes.GB,
 ]
 
 interface ExecutionResult {
