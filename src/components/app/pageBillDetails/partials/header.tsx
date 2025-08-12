@@ -12,10 +12,10 @@ interface HeaderProps {
 
 export function Header({ bill, countryCode }: HeaderProps) {
   return (
-    <header className="container space-y-8 text-center">
+    <header className="container space-y-8 text-center font-sans">
       <div>
         <PageTitle>{bill.title}</PageTitle>
-        <p className="mb-8 mt-5 font-semibold text-fontcolor-muted">
+        <p className="mb-8 mt-5 font-bold text-fontcolor-muted">
           <FormattedDatetime
             date={new Date(bill.dateIntroduced)}
             dateStyle="medium"
@@ -25,7 +25,7 @@ export function Header({ bill, countryCode }: HeaderProps) {
         <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
 
         <StyledHtmlContent
-          className="my-10 [&_*]:text-fontcolor-muted [&_h2]:text-lg [&_h2]:font-normal"
+          className="my-10 font-medium [&_*]:text-fontcolor-muted [&_h2]:text-lg [&_h2]:font-medium"
           html={bill.summary}
         />
       </div>

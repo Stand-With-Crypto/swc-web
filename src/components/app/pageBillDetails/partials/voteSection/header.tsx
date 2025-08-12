@@ -73,7 +73,7 @@ export function Header({
           </div>
 
           <div className="flex flex-col items-center gap-2 text-xl">
-            <span className="text-sm">Total</span>
+            <span className="text-sm font-medium">Total</span>
 
             <div className="flex flex-col gap-2 rounded-lg bg-muted px-3 py-2 text-center">
               <strong>{totalVotesFor}</strong>
@@ -82,7 +82,7 @@ export function Header({
           </div>
 
           <div className="flex flex-col items-center gap-2 text-xl">
-            <span className="text-sm">(D)</span>
+            <span className="text-sm font-medium">(D)</span>
 
             <div className="flex flex-col gap-2 rounded-lg px-3 py-2 text-center text-blue-400">
               <strong>{totalVotesForDemocrat}</strong>
@@ -91,7 +91,7 @@ export function Header({
           </div>
 
           <div className="flex flex-col items-center gap-2 text-xl">
-            <span className="text-sm">(R)</span>
+            <span className="text-sm font-medium">(R)</span>
 
             <div className="flex flex-col gap-2 rounded-lg px-3 py-2 text-center text-red-700">
               <strong>{totalVotesForRepublican}</strong>

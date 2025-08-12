@@ -55,11 +55,12 @@ export function DTSIAvatarBox(props: DTSIAvatarBoxProps) {
     >
       <motion.div
         animate={{ opacity: 1, y: 0 }}
+        className="flex flex-col gap-2"
         initial={{ opacity: 0.33 }}
         key={person.slug}
         transition={{ duration: 0.75 }}
       >
-        <div className="relative mx-auto w-fit">
+        <div className="relative mx-auto w-fit" style={{ height: AVATAR_SIZE }}>
           <DTSIAvatar
             className="rounded-full"
             person={person}
@@ -71,14 +72,14 @@ export function DTSIAvatarBox(props: DTSIAvatarBoxProps) {
 
         <div className="text-sm">
           <InternalLink
-            className={cn(linkBoxLinkClassName, 'cursor-pointer text-sm font-semibold')}
+            className={cn(linkBoxLinkClassName, 'cursor-pointer text-sm font-bold')}
             data-link-box-subject
             href={getIntlUrls(countryCode).politicianDetails(person.slug)}
             prefetch={prefetch}
           >
             {dtsiPersonFullName(person)}
           </InternalLink>
-          <p className="text-sm text-fontcolor-muted">
+          <p className="text-sm font-medium text-fontcolor-muted">
             {!!politicalAffiliationCategoryAbbr && `(${politicalAffiliationCategoryAbbr}) `}
             {person.primaryRole ? roleNameResolver(person.primaryRole) : '-'}
           </p>

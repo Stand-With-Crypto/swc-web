@@ -136,7 +136,7 @@ export function MajorMilestone({
           {milestone.title}
         </span>
         {milestone.date && milestone.isHighlighted && (
-          <p className="text-left text-xs text-muted-foreground md:text-center">
+          <p className="text-left text-xs font-medium text-muted-foreground md:text-center">
             <FormattedDatetime
               date={milestone.date}
               dateStyle="medium"

@@ -17,7 +17,7 @@ export function Analysis({ analysis, relatedUrls }: AnalysisProps) {
       <p className="text-4xl font-bold">Analysis</p>
       <div className="flex flex-col gap-10 lg:flex-row">
         <StyledHtmlContent
-          className="w-full space-y-4 text-start text-lg [&_*::marker]:text-fontcolor-muted [&_*]:text-fontcolor-muted"
+          className="w-full space-y-4 text-start text-lg font-medium [&_*::marker]:text-fontcolor-muted [&_*]:text-fontcolor-muted"
           html={analysis}
         />
         {relatedUrls.length > 0 && (
@@ -30,7 +30,7 @@ export function Analysis({ analysis, relatedUrls }: AnalysisProps) {
                 key={relatedUrl.url}
               >
                 <FileTextIcon />
-                <span className="flex-1">{relatedUrl.title}</span>
+                <span className="flex-1 font-medium">{relatedUrl.title}</span>
               </ExternalLink>
             ))}
           </div>

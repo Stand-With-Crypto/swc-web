@@ -57,7 +57,7 @@ export function MinorMilestone({
   const content = (
     <div className="max-w-xs space-y-1 font-sans">
       <h3 className="text-base font-bold text-foreground">{milestone.title}</h3>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs font-medium text-muted-foreground">
         {milestone.date && (
           <span className="text-black">
             <FormattedDatetime
