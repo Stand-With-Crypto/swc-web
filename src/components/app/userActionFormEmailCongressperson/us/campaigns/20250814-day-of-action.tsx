@@ -10,7 +10,7 @@ import type { CampaignMetadata } from './types'
 
 const CAMPAIGN_NAME = USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025
 
-export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
+export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
@@ -37,7 +37,7 @@ export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
   dialogTitle: 'Email your policymaker',
   dialogSubtitle: 'Crypto day of action',
-  politicianCategory: 'house',
+  politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
   subject: 'I Stand With Crypto',
   getEmailBodyText,
 }

@@ -493,7 +493,11 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
-          <UserActionFormClaimNFTDialog countryCode={countryCode} nftSlug={NFTSlug.GENIUS_ACT_2025}>
+          <UserActionFormClaimNFTDialog
+            campaignName={USUserActionClaimNftCampaignName.GENIUS_ACT_2025}
+            countryCode={countryCode}
+            nftSlug={NFTSlug.GENIUS_ACT_2025}
+          >
             {children}
           </UserActionFormClaimNFTDialog>
         ),
