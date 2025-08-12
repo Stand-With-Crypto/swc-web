@@ -1,6 +1,5 @@
 import { GB_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/gb/constants'
 import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
-import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import { PageReferralsWrapper } from '@/components/app/pageReferrals/common'
 import {
   ReferralsCounter,

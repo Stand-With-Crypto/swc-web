@@ -5,8 +5,8 @@ import {
   ReferralsCountByDistrictQueryResult,
 } from '@/utils/server/districtRankings/types'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { GB_REGIONS, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface AdvocatesCountResult {
   state: string

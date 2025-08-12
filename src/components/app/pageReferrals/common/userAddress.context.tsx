@@ -107,8 +107,9 @@ export const UserAddressProvider = ({
   }, [electoralZone, countryCode])
 
   const administrativeArea = useMemo<AdministrativeArea | null>(() => {
-    if (electoralZone?.administrativeArea)
+    if (electoralZone?.administrativeArea) {
       return electoralZone.administrativeArea as AdministrativeArea
+    }
 
     //when the administrativeArea is null, we use Google Maps as a fallback
     if (!isAddressLoading && addressDetails?.administrativeAreaLevel1) {

@@ -8,12 +8,12 @@ import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GB_REGIONS, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
-import { GB_REGIONS, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 
 export const zodAddress = object({
   googlePlaceId: string().optional(),
