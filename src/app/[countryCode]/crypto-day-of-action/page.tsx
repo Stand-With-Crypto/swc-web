@@ -24,8 +24,9 @@ export default function DayOfActionPageRoot() {
     <PageSimpleCampaign
       campaignName={SimpleCampaignName.DAY_OF_ACTION_AUG_14_2025}
       countryCode={countryCode}
-      subtitle={description}
-      title={title}
+      subtitle="Thursday, August 14 will mark two years of Stand With Crypto advocates uniting to advance pro-crypto legislation that will make the United States into the Crypto Capital of the World. To commemorate this anniversary, the progress we’ve secured, and the work ahead, crypto advocates from across the country are uniting to participate in a Crypto Day of Action. Together, we are making sure crypto voters’ voices are being heard and encouraging lawmakers in Washington, D.C. to prioritize common-sense policies that will allow crypto to thrive long into the future."
+      title="Crypto Day of Action"
+      subtitleSize="md"
     />
   )
 }

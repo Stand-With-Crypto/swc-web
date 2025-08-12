@@ -9,6 +9,8 @@ interface PageSimpleCampaignProps {
   subtitle: string
   campaignName: SimpleCampaignName
   countryCode: SupportedCountryCodes
+  titleSize?: 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'xxs'
+  subtitleSize?: 'lg' | 'md' | 'sm' | 'xl' | '2xl'
 }
 
 export function PageSimpleCampaign({
@@ -16,12 +18,14 @@ export function PageSimpleCampaign({
   subtitle,
   campaignName,
   countryCode,
+  subtitleSize = 'lg',
+  titleSize = 'xl',
 }: PageSimpleCampaignProps) {
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
       <div className="space-y-4">
-        <PageTitle size="xl">{title}</PageTitle>
-        <PageSubTitle size="lg">{subtitle}</PageSubTitle>
+        <PageTitle size={titleSize}>{title}</PageTitle>
+        <PageSubTitle size={subtitleSize}>{subtitle}</PageSubTitle>
       </div>
 
       <SimpleCampaignGrid campaignName={campaignName} countryCode={countryCode} />
