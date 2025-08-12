@@ -45,6 +45,7 @@ export enum USUserActionEmailCampaignName {
   CLARITY_ACT_HOUSE_JUN_13_2025 = 'CLARITY_ACT_HOUSE_JUN_13_2025',
   CLARITY_GENIUS_ACTS_JUL_17_2025 = 'CLARITY_GENIUS_ACTS_JUL_17_2025',
   CLARITY_ACT_SENATE_JUL_17_2025 = 'CLARITY_ACT_SENATE_JUL_17_2025',
+  DAY_OF_ACTION_AUG_14_2025 = 'DAY_OF_ACTION_AUG_14_2025',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
@@ -103,6 +104,9 @@ export enum USUserActionReferCampaignName {
 }
 export enum USUserActionViewKeyPageCampaignName {
   DEFAULT = 'DEFAULT',
+  DAY_OF_ACTION_LIVESTREAM = 'DAY_OF_ACTION_LIVESTREAM',
+  DAY_OF_ACTION_SHARE_ON_X = 'DAY_OF_ACTION_SHARE_ON_X',
+  DAY_OF_ACTION_UPDATE_X_PROFILE = 'DAY_OF_ACTION_UPDATE_X_PROFILE',
 }
 export enum USUserActionLinkedinCampaignName {
   DEFAULT = 'DEFAULT',

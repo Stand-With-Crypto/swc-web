@@ -29,6 +29,10 @@ export const SENDGRID_CUSTOM_FIELDS = [
   'signup_date',
   'user_actions_count',
   'session_id',
+  'aquisition_source',
+  'aquisition_medium',
+  'aquisition_campaign',
+  'aquisition_referer',
   ...Object.values(UserActionType).map(getSendgridUserActionCustomFieldName),
 ] as const
 export type SendgridCustomField = (typeof SENDGRID_CUSTOM_FIELDS)[number]

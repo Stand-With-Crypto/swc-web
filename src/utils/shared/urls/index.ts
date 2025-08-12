@@ -1,4 +1,7 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
@@ -52,6 +55,12 @@ const COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS: Record<
     district: 'constituency',
   },
 }
+
+type RecentActivityAndLeaderboardTabs =
+  | UsRecentActivityAndLeaderboardTabs
+  | AuRecentActivityAndLeaderboardTabs
+  | CaRecentActivityAndLeaderboardTabs
+  | GbRecentActivityAndLeaderboardTabs
 
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -130,14 +139,19 @@ export const getIntlUrls = (
     },
     community: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const getTabPrefix = (
-        tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+        tab: RecentActivityAndLeaderboardTabs = UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
       ) => {
         switch (tab) {
-          case RecentActivityAndLeaderboardTabs.LEADERBOARD:
+          case UsRecentActivityAndLeaderboardTabs.LEADERBOARD:
             return '/community/leaderboard'
-          case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS:
+          case CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES:
             return '/community/referrals'
-          case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case GbRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
             return '/community/activity'
         }
@@ -151,18 +165,18 @@ export const getIntlUrls = (
     communityStateSpecific: (params: {
       pageNum?: number
       tab:
-        | RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
-        | RecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+        | UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+        | UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS
       stateCode: string
     }) => {
       const statePrefix = `/community/${params.stateCode.toLowerCase()}`
       const getTabPrefix = (
-        tab: RecentActivityAndLeaderboardTabs = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+        tab: UsRecentActivityAndLeaderboardTabs = UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
       ) => {
         switch (tab) {
-          case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
             return `${statePrefix}/referrals`
-          case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
             return statePrefix
         }
@@ -286,15 +300,18 @@ export const apiUrls = {
     `/api/${countryCode}/identified-user/polls-votes-from-user`,
   pollsResultsData: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/public/polls`,
-  districtRanking: ({
+  electoralZoneRanking: ({
+    countryCode,
     stateCode,
-    districtNumber,
+    electoralZone,
     filteredByState,
   }: {
+    countryCode: SupportedCountryCodes
     stateCode: string
-    districtNumber: string
+    electoralZone: string
     filteredByState?: boolean
-  }) => `/api/public/referrals/${stateCode}/${districtNumber}${filteredByState ? '/by-state' : ''}`,
+  }) =>
+    `/api/public/referrals/${countryCode}/${stateCode}/${electoralZone}${filteredByState ? '/by-state' : ''}`,
   dtsiRacesByCongressionalDistrict: ({
     administrativeArea,
     district,
