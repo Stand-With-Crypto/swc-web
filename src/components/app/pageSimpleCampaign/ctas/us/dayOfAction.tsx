@@ -20,23 +20,11 @@ export const US_DAY_OF_ACTION_CTAS: UserActionGridCTA = {
   }),
   [UserActionType.EMAIL]: {
     title: 'Email your policymaker',
-    description: 'Pass crucial crypto legislation',
+    description: 'Crypto Day of Action',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
     campaigns: [
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
-        isCampaignActive: true,
-        title: 'Email Your Senator',
-        description: 'Support Crucial Crypto Legislation',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
-        }),
-      },
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,

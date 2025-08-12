@@ -7,7 +7,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const dynamic = 'error'
 
-const title = 'Crypto day of action'
+const title = 'Crypto Day of Action'
 const description = 'Your actions will make a big difference.'
 
 export const metadata: Metadata = {
