@@ -12,7 +12,7 @@ export const DAY_OF_ACTION_2025_08_14_PARTNERS: SWCPartners = [
   {
     data: {
       image:
-        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/bitcoin0-magazine.png',
+        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/bitcoin-magazine.png',
       imageAlt: 'Bitcoin Magazine',
       imageLink: 'https://bitcoinmagazine.com',
     },
@@ -28,7 +28,7 @@ export const DAY_OF_ACTION_2025_08_14_PARTNERS: SWCPartners = [
   {
     data: {
       image:
-        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/blockchain-com.png',
+        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/blockchain-com.svg',
       imageAlt: 'Blockchain.com',
       imageLink: 'https://blockchain.com',
     },
