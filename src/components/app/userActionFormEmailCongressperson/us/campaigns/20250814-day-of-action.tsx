@@ -31,7 +31,7 @@ Thank you for listening to the U.S. crypto community on this week’s Crypto Day
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
   dialogTitle: 'Email your policymaker',
-  dialogSubtitle: 'Crypto day of action',
+  dialogSubtitle: 'Crypto Day of Action',
   politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
   subject: 'I Stand With Crypto',
   getEmailBodyText,
