@@ -36,7 +36,7 @@ export const DAY_OF_ACTION_2025_08_14_PARTNERS: SWCPartners = [
   {
     data: {
       image:
-        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/bpi.avif',
+        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/bpi.png',
       imageAlt: 'BPI',
       imageLink: 'https://bpi.com',
     },
@@ -79,6 +79,14 @@ export const DAY_OF_ACTION_2025_08_14_PARTNERS: SWCPartners = [
         'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/supportcrypto-org.png',
       imageAlt: 'SupportCrypto.org',
       imageLink: 'https://supportcrypto.org',
+    },
+  },
+  {
+    data: {
+      image:
+        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/cia.png',
+      imageAlt: 'Crypto in America',
+      imageLink: 'https://www.cryptoinamerica.com/',
     },
   },
 ]
