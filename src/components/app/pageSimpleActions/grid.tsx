@@ -4,13 +4,13 @@ import { notFound } from 'next/navigation'
 
 import { getCampaignUserActionCTAs } from '@/components/app/pageSimpleActions/ctas'
 import { useActions } from '@/components/app/pageSimpleActions/hooks/useActions'
-import { SimpleActionsCampaignName } from '@/components/app/pageSimpleActions/types'
+import { SimpleActionsGroupName } from '@/components/app/pageSimpleActions/types'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/components/userActionGridCTA'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface SimpleActionsGridProps {
   countryCode: SupportedCountryCodes
-  campaignName: SimpleActionsCampaignName
+  campaignName: SimpleActionsGroupName
 }
 
 export function SimpleActionsGrid({ countryCode, campaignName }: SimpleActionsGridProps) {
