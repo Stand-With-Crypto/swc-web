@@ -2,7 +2,7 @@
 
 import { notFound } from 'next/navigation'
 
-import { getCampaignUserActionCTAs } from '@/components/app/pageSimpleActions/ctas'
+import { getUserActionsCTAs } from '@/components/app/pageSimpleActions/ctas'
 import { useActions } from '@/components/app/pageSimpleActions/hooks/useActions'
 import { SimpleActionsGroupName } from '@/components/app/pageSimpleActions/types'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/components/userActionGridCTA'
@@ -10,11 +10,11 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface SimpleActionsGridProps {
   countryCode: SupportedCountryCodes
-  campaignName: SimpleActionsGroupName
+  actionsGroupName: SimpleActionsGroupName
 }
 
-export function SimpleActionsGrid({ countryCode, campaignName }: SimpleActionsGridProps) {
-  const actionsSettings = getCampaignUserActionCTAs({ countryCode, campaignName })
+export function SimpleActionsGrid({ countryCode, actionsGroupName }: SimpleActionsGridProps) {
+  const actionsSettings = getUserActionsCTAs({ countryCode, actionsGroupName })
 
   const { actions, performedUserActions } = useActions({ actions: actionsSettings })
 

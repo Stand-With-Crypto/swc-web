@@ -7,7 +7,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 interface PageSimpleActionsProps {
   title: string
   subtitle: string
-  campaignName: SimpleActionsGroupName
+  actionsGroupName: SimpleActionsGroupName
   countryCode: SupportedCountryCodes
   titleSize?: 'lg' | 'md' | 'sm' | 'xl' | 'xs' | 'xxs'
   subtitleSize?: 'lg' | 'md' | 'sm' | 'xl' | '2xl'
@@ -16,7 +16,7 @@ interface PageSimpleActionsProps {
 export function PageSimpleActions({
   title,
   subtitle,
-  campaignName,
+  actionsGroupName,
   countryCode,
   subtitleSize = 'lg',
   titleSize = 'xl',
@@ -28,7 +28,7 @@ export function PageSimpleActions({
         <PageSubTitle size={subtitleSize}>{subtitle}</PageSubTitle>
       </div>
 
-      <SimpleActionsGrid campaignName={campaignName} countryCode={countryCode} />
+      <SimpleActionsGrid actionsGroupName={actionsGroupName} countryCode={countryCode} />
     </div>
   )
 }

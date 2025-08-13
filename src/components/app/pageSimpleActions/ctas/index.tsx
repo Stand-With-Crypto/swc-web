@@ -10,16 +10,16 @@ const CAMPAIGNS_BY_COUNTRY_CODE_MAP: Partial<
   [SupportedCountryCodes.US]: US_SIMPLE_PAGE_CAMPAIGN_CTAS,
 }
 
-export function getCampaignUserActionCTAs({
+export function getUserActionsCTAs({
   countryCode,
-  campaignName,
+  actionsGroupName,
 }: {
   countryCode: SupportedCountryCodes
-  campaignName: SimpleActionsGroupName
+  actionsGroupName: SimpleActionsGroupName
 }) {
-  const campaignCTAs = CAMPAIGNS_BY_COUNTRY_CODE_MAP[countryCode]?.[campaignName]
+  const actionsCTAs = CAMPAIGNS_BY_COUNTRY_CODE_MAP[countryCode]?.[actionsGroupName]
 
-  if (!campaignCTAs) {
+  if (!actionsCTAs) {
     return gracefullyError({
       msg: `Campaign config not found for ${countryCode}`,
       fallback: null,
@@ -29,12 +29,12 @@ export function getCampaignUserActionCTAs({
           domain: 'simplePageCampaignCTAs',
         },
         extra: {
-          campaignName,
+          actionsGroupName,
           countryCode,
         },
       },
     })
   }
 
-  return campaignCTAs
+  return actionsCTAs
 }
