@@ -21,7 +21,7 @@ export function Analysis({ analysis, relatedUrls }: AnalysisProps) {
           html={analysis}
         />
         {relatedUrls.length > 0 && (
-          <div className="flex h-max w-full max-w-72 flex-col gap-6 rounded-3xl border border-muted p-6">
+          <div className="flex h-max w-full flex-col gap-6 rounded-3xl border border-muted p-6 lg:max-w-72">
             <strong className="text-lg">More Resources</strong>
             {relatedUrls.map(relatedUrl => (
               <ExternalLink
