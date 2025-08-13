@@ -89,4 +89,12 @@ export const DAY_OF_ACTION_2025_08_14_PARTNERS: SWCPartners = [
       imageLink: 'https://www.cryptoinamerica.com/',
     },
   },
+  {
+    data: {
+      image:
+        'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/day-of-action/partners/bitcoinlaws.png',
+      imageAlt: 'Bitcoin Laws',
+      imageLink: 'https://bitcoinlaws.io',
+    },
+  },
 ]
