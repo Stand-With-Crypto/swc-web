@@ -1,5 +1,5 @@
-import { SimpleActionsGrid } from '@/components/app/pageSimpleCampaign/grid'
-import { SimpleActionsCampaignName } from '@/components/app/pageSimpleCampaign/types'
+import { SimpleActionsGrid } from '@/components/app/pageSimpleActions/grid'
+import { SimpleActionsCampaignName } from '@/components/app/pageSimpleActions/types'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

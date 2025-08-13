@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
-import { PageSimpleActions } from '@/components/app/pageSimpleCampaign'
-import { SimpleActionsCampaignName } from '@/components/app/pageSimpleCampaign/types'
+import { PageSimpleActions } from '@/components/app/pageSimpleActions'
+import { SimpleActionsCampaignName } from '@/components/app/pageSimpleActions/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 

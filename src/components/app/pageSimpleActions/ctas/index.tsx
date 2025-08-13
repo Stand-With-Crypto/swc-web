@@ -1,5 +1,5 @@
-import { US_SIMPLE_PAGE_CAMPAIGN_CTAS } from '@/components/app/pageSimpleCampaign/ctas/us'
-import { SimpleActionsCampaignName } from '@/components/app/pageSimpleCampaign/types'
+import { US_SIMPLE_PAGE_CAMPAIGN_CTAS } from '@/components/app/pageSimpleActions/ctas/us'
+import { SimpleActionsCampaignName } from '@/components/app/pageSimpleActions/types'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
