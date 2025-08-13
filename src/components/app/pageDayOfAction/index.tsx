@@ -121,8 +121,9 @@ export function PageDayOfAction() {
             campaignName={USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_UPDATE_X_PROFILE}
             description={
               <>
-                Add a Crypto Day of Action banner to your profile and a shield emoji 🛡️ in your bio.
-                Download it{' '}
+                Add a Crypto Day of Action banner and a shield emoji 🛡️ to your profile.
+                <br />
+                Download banner images{' '}
                 <span
                   className="inline text-primary-cta underline"
                   onClick={e => {
