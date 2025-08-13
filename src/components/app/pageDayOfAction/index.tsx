@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { UserActionType } from '@prisma/client'
 
+import { PartnerGrid } from '@/components/app/pagePartners/partnerGrid'
 import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
 import { PageLayout } from '@/components/ui/pageLayout'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
@@ -16,6 +17,7 @@ import {
 import { createTweetLink } from '@/utils/web/createTweetLink'
 
 import { ActionCheckbox, EmailActionCheckbox, ViewKeyPageActionCheckbox } from './actionCheckbox'
+import { DAY_OF_ACTION_2025_08_14_PARTNERS } from './partners'
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
@@ -167,6 +169,14 @@ export function PageDayOfAction() {
             title="Claim your NFT"
           />
         </UserActionFormClaimNFTDialog>
+      </section>
+
+      <section className="mt-8 flex w-full max-w-3xl flex-col items-center">
+        <PageLayout.Title as="h2" size="md">
+          Partners
+        </PageLayout.Title>
+
+        <PartnerGrid partners={DAY_OF_ACTION_2025_08_14_PARTNERS} />
       </section>
     </PageLayout>
   )
