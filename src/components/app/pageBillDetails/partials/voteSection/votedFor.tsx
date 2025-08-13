@@ -39,7 +39,7 @@ export function VotedFor({ countryCode, stanceScore, votedFor }: VotedForProps) 
         <div className={cn('rounded-full p-2', convertDTSIStanceScoreToBgColorClass(stanceScore))}>
           <ThumbsUp />
         </div>
-        Voted For <span className="font-normal">({totalItems})</span>
+        Voted For <span className="font-medium">({totalItems})</span>
       </strong>
 
       {list.length ? (

@@ -52,7 +52,7 @@ export function Sponsors({ coSponsors, sponsors, countryCode }: SponsorsProps) {
 
         <div className="flex-1">
           <strong className="mb-6 block text-xl font-semibold">
-            Cosponsors <span className="font-normal">({totalItems})</span>
+            Cosponsors <span className="font-medium">({totalItems})</span>
           </strong>
 
           {list.length ? (

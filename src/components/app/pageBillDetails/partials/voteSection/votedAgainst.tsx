@@ -42,7 +42,7 @@ export function VotedAgainst({ countryCode, votedAgainst, ...props }: VotedAgain
         <div className={cn('rounded-full p-2', convertDTSIStanceScoreToBgColorClass(stanceScore))}>
           <ThumbsDown />
         </div>
-        Voted Against <span className="font-normal">({totalItems})</span>
+        Voted Against <span className="font-medium">({totalItems})</span>
       </strong>
 
       {list.length ? (

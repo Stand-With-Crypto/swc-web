@@ -56,8 +56,8 @@ export function MinorMilestone({
 
   const content = (
     <div className="max-w-xs space-y-1 font-sans">
-      <h3 className="text-base font-bold text-foreground">{milestone.title}</h3>
-      <p className="text-xs text-muted-foreground">
+      <h3 className="text-base font-bold leading-5 text-foreground">{milestone.title}</h3>
+      <p className="text-xs font-medium text-muted-foreground">
         {milestone.date && (
           <span className="text-black">
             <FormattedDatetime
@@ -97,7 +97,7 @@ function MinorMilestoneWrapper({
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent
           a11yTitle="Bill key date details"
-          className="max-h-32 w-full max-w-72 rounded-md px-4 !pt-10"
+          className="max-h-40 w-full max-w-72 rounded-md px-4 !pt-10"
         >
           {content}
         </DialogContent>
@@ -107,7 +107,11 @@ function MinorMilestoneWrapper({
 
   return (
     <TooltipProvider>
-      <Tooltip onOpenChange={setIsTooltipOrDialogOpen} open={isTooltipOrDialogOpen}>
+      <Tooltip
+        delayDuration={300}
+        onOpenChange={setIsTooltipOrDialogOpen}
+        open={isTooltipOrDialogOpen}
+      >
         <TooltipTrigger asChild onClick={event => event.preventDefault()}>
           {trigger}
         </TooltipTrigger>
