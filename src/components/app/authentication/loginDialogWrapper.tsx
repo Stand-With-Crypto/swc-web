@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import dynamic from 'next/dynamic'
 import useSWR from 'swr'
@@ -259,12 +259,8 @@ function useInitialEmail() {
 }
 
 function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
-  const { data: userData } = useApiResponseForUserFullProfileInfo({
-    revalidateOnFocus: false,
-  })
+  const { data: userData } = useApiResponseForUserFullProfileInfo()
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
-
-  console.log({ userData, ensData, isLoadingEnsData })
 
   const user = React.useMemo(() => {
     if (!userData?.user || isLoadingEnsData) {
@@ -274,13 +270,13 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
     return appendENSHookDataToUser(userData.user, ensData)
   }, [ensData, isLoadingEnsData, userData])
 
-  const loadingRender = <Skeleton className="h-80 w-full bg-blue-500" />
+  const loadingRender = <Skeleton className="h-80 w-full" />
   if (!user) {
     return loadingRender
   }
 
   return (
-    <React.Suspense fallback={<Skeleton className="h-80 w-full bg-red-500" />}>
+    <React.Suspense fallback={<Skeleton className="h-80 w-full" />}>
       <LazyUpdateUserProfileForm
         onSuccess={onSuccess}
         skipSections={[UserProfileFormSections.InformationVisibility]}
