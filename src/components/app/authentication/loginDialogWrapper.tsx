@@ -276,7 +276,7 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
   }
 
   return (
-    <React.Suspense fallback={<Skeleton className="h-80 w-full" />}>
+    <React.Suspense fallback={loadingRender}>
       <LazyUpdateUserProfileForm
         onSuccess={onSuccess}
         skipSections={[UserProfileFormSections.InformationVisibility]}
