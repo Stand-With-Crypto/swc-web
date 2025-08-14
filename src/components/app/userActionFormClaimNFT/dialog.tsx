@@ -9,6 +9,7 @@ import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dial
 import { useDialog } from '@/hooks/useDialog'
 import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { USUserActionClaimNftCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const UserActionFormClaimNFT = dynamic(() =>
   import('@/components/app/userActionFormClaimNFT').then(mod => mod.UserActionFormClaimNFT),
@@ -19,11 +20,13 @@ export function UserActionFormClaimNFTDialog({
   defaultOpen = false,
   countryCode,
   nftSlug,
+  campaignName,
 }: {
   children: React.ReactNode
   defaultOpen?: boolean
   countryCode: SupportedCountryCodes
   nftSlug: NFTSlug
+  campaignName?: USUserActionClaimNftCampaignName
 }) {
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
@@ -34,6 +37,7 @@ export function UserActionFormClaimNFTDialog({
     <UserActionFormDialog {...dialogProps} countryCode={countryCode} trigger={children}>
       <Suspense fallback={<UserActionFormClaimNFTSkeleton nftSlug={nftSlug} />}>
         <UserActionFormClaimNFT
+          campaignName={campaignName}
           countryCode={countryCode}
           nftSlug={nftSlug}
           onFinished={() => dialogProps.onOpenChange(false)}

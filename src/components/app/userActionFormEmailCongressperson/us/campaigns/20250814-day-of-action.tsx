@@ -1,6 +1,5 @@
 import {
   getFullNameSignOff,
-  getRepIntro,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
@@ -18,11 +17,7 @@ function getEmailBodyText(props?: GetTextProps & { address?: string }) {
     lastName: props?.lastName,
   })
 
-  const representativeName = getRepIntro({ dtsiLastName: props?.dtsiLastName })
-
-  return `${representativeName}
-
-August 14 is the Crypto Day of Action—a day when Americans across the country are coming together to call for clear, common-sense crypto policy that will make America the crypto capital of the world.
+  return `August 14 is the Crypto Day of Action—a day when Americans across the country are coming together to call for clear, common-sense crypto policy that will make America the crypto capital of the world.
 
 More than 52 million Americans own crypto, and millions more understand its power to unlock economic opportunity, expand financial access, and strengthen America’s competitiveness on the global stage. Crypto is already reshaping how Americans build, save, and connect—but the lack of a regulatory framework and “clear rules of the road” is stifling our ability to leverage crypto to its full potential and fuel responsible innovation here at home.
 
@@ -37,7 +32,7 @@ export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
   dialogTitle: 'Email your policymaker',
   dialogSubtitle: 'Crypto Day of Action',
-  politicianCategory: 'senate-and-house',
+  politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
   subject: 'I Stand With Crypto',
   getEmailBodyText,
 }

@@ -113,6 +113,7 @@ export enum USUserActionLinkedinCampaignName {
 }
 export enum USUserActionClaimNftCampaignName {
   GENIUS_ACT_2025 = 'GENIUS_ACT_2025',
+  DAY_OF_ACTION_2025_08_14 = 'DAY_OF_ACTION_2025_08_14',
 }
 
 export type USUserActionCampaignName =
