@@ -432,15 +432,15 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
-        source: '/s/action-day-1/:sessionId*',
+        source: '/s/day-of-action-1/:sessionId*',
         destination:
-          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-action-day-1&sessionId=:sessionId*',
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-day-of-action-1&sessionId=:sessionId*',
         permanent: true,
       },
       {
-        source: '/s/action-day-2/:sessionId*',
+        source: '/s/day-of-action-2/:sessionId*',
         destination:
-          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-action-day-2&sessionId=:sessionId*',
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-day-of-action-2&sessionId=:sessionId*',
         permanent: true,
       },
       {
