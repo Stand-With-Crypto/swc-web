@@ -112,7 +112,7 @@ export function PageDayOfAction() {
               ],
             )}
             path={createTweetLink({
-              message: `I’m taking action with @standwithcrypto to protect the future of digital innovation.\n\nEmail your reps. Call their offices. Post with #CryptoDayofAction 🛡️.\n\nIt’s our future. Let’s make sure Washington hears us.`,
+              message: `I’m taking action with @standwithcrypto to protect the future of digital innovation.\n\nEmail your members of Congress. Join the livestream. Post with #CryptoDayofAction 🛡️.\n\nJoin us at: https://www.standwithcrypto.org/cryptodayofaction`,
             })}
             title="Spreading the word"
           />
