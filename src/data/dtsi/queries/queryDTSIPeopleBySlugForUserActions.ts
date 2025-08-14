@@ -19,6 +19,7 @@ export const queryDTSIPeopleBySlugForUserActions = async (slugs: string[]) => {
   const data = await fetchDTSI<DTSI_PeopleBySlugQuery, DTSI_PeopleBySlugQueryVariables>(query, {
     slugs,
   })
+
   if (slugs.length !== data.people.length) {
     Sentry.withScope(scope => {
       scope.setExtras({
@@ -34,6 +35,8 @@ export const queryDTSIPeopleBySlugForUserActions = async (slugs: string[]) => {
         'warning',
       )
     })
+
+    return null
   }
 
   return data
