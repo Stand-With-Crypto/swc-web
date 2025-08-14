@@ -105,7 +105,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
     description:
       'Thursday, August 14th – SWC’s 2nd Anniversary – is the first-ever Crypto Day of Action, an all-day virtual event aimed at bringing together crypto advocates from across the country to make sure lawmakers in Washington, D.C. hear the millions of crypto voters’ voices calling for common-sense policies that will make America the crypto capital of the world.',
     image: {
-      url: 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/nft/DOA-NFT.png',
+      url: '/nfts/DOA-NFT.png',
       width: 160,
       height: 160,
       alt: 'Crypto Day of Action nft',
