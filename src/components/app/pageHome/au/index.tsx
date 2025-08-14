@@ -62,7 +62,7 @@ export function AuPageHome({
             data-testid="community-leaderboard-tabs"
             defaultValue={AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
-              {
+              recentActivity && {
                 value: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                 label: 'Recent activity',
                 content: (
@@ -110,7 +110,7 @@ export function AuPageHome({
                   </div>
                 ),
               },
-            ]}
+            ].filter(Boolean)}
           />
         </RecentActivity>
       </HomePageSection>
