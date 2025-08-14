@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useRef } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import dynamic from 'next/dynamic'
 import useSWR from 'swr'
@@ -263,9 +263,16 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
     revalidateOnFocus: false,
   })
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
+  const hasLoadedENSData = useRef(false)
+
+  React.useEffect(() => {
+    if (!isLoadingEnsData) {
+      hasLoadedENSData.current = true
+    }
+  }, [isLoadingEnsData])
 
   const user = React.useMemo(() => {
-    if (!userData?.user || isLoadingEnsData) {
+    if (!userData?.user || (isLoadingEnsData && !hasLoadedENSData.current)) {
       return null
     }
 
@@ -274,14 +281,14 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
 
   console.log({ userData, ensData, isLoadingEnsData })
 
-  const loadingRender = <Skeleton className="h-80 w-full" />
+  const loadingRender = <Skeleton className="h-80 w-full bg-blue-500" />
   if (!user) {
     console.log('Vai mostrar o skeleton', { userData, ensData, isLoadingEnsData })
     return loadingRender
   }
 
   return (
-    <React.Suspense fallback={loadingRender}>
+    <React.Suspense fallback={<Skeleton className="h-80 w-full bg-red-500" />}>
       <LazyUpdateUserProfileForm
         onSuccess={onSuccess}
         skipSections={[UserProfileFormSections.InformationVisibility]}
