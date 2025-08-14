@@ -432,6 +432,18 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/action-day-1/:sessionId*',
+        destination:
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-action-day-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/action-day-2/:sessionId*',
+        destination:
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-action-day-2&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/ca/s/house-rising',
         destination:
           '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
