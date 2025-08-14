@@ -20,6 +20,8 @@ interface PollItemProps {
   shouldShowOtherField?: boolean
 }
 
+const FIELD_MAX_LENGTH = 191
+
 export function PollItem({
   value,
   displayName,
@@ -90,6 +92,7 @@ export function PollItem({
               className="hidden"
               {...register('answers')}
               disabled={isDisabled}
+              maxLength={FIELD_MAX_LENGTH}
               type="radio"
               value={value}
             />
