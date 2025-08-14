@@ -31,5 +31,7 @@ export function useENS() {
   const { user } = useThirdwebAuthUser()
   const address = user?.address
 
-  return useSWR(address, getData)
+  return useSWR(address, getData, {
+    revalidateOnFocus: false,
+  })
 }
