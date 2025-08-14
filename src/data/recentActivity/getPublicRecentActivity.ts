@@ -95,14 +95,9 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
     }
   })
 
-  const dtsiPeopleQuery = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs))
-
-  if (!dtsiPeopleQuery) {
-    return {
-      count: 0,
-      data: [],
-    }
-  }
+  const dtsiPeople = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(
+    x => x.people,
+  )
 
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
     compact(data.map(({ user }) => user.primaryUserCryptoAddress?.cryptoAddress)),
@@ -110,7 +105,7 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
   return {
     count,
     data: data.map(({ user, ...record }) => ({
-      ...getClientUserAction({ record, dtsiPeople: dtsiPeopleQuery.people }),
+      ...getClientUserAction({ record, dtsiPeople }),
       user: {
         ...getClientUserWithENSData(
           user,

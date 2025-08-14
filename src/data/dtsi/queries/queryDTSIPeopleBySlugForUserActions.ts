@@ -35,8 +35,6 @@ export const queryDTSIPeopleBySlugForUserActions = async (slugs: string[]) => {
         'warning',
       )
     })
-
-    return null
   }
 
   return data
