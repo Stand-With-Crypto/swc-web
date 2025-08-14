@@ -259,7 +259,9 @@ function useInitialEmail() {
 }
 
 function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
-  const { data: userData } = useApiResponseForUserFullProfileInfo()
+  const { data: userData } = useApiResponseForUserFullProfileInfo({
+    revalidateOnFocus: false,
+  })
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
 
   const user = React.useMemo(() => {
@@ -270,8 +272,11 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
     return appendENSHookDataToUser(userData.user, ensData)
   }, [ensData, isLoadingEnsData, userData])
 
+  console.log({ userData, ensData, isLoadingEnsData })
+
   const loadingRender = <Skeleton className="h-80 w-full" />
   if (!user) {
+    console.log('Vai mostrar o skeleton', { userData, ensData, isLoadingEnsData })
     return loadingRender
   }
 

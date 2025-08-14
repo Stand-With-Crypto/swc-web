@@ -28,10 +28,16 @@ async function getData(address?: string) {
 }
 
 export function useENS() {
-  const { user } = useThirdwebAuthUser()
-  const address = user?.address
+  // const { user } = useThirdwebAuthUser()
+  // const address = user?.address
+  const address = '0x4e44496c0866ca8e908349eb03a43937a94ef661'
 
   return useSWR(address, getData, {
     revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    revalidateOnMount: false,
+    revalidateIfStale: false,
+    revalidateOnError: false,
+    revalidateIfHidden: false,
   })
 }

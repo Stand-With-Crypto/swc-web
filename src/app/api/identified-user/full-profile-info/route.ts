@@ -11,6 +11,7 @@ import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMidd
 export const dynamic = 'force-dynamic'
 
 async function apiResponseForUserFullProfileInfo() {
+  console.log('rota')
   const { user } = await getMaybeUserAndMethodOfMatchWithMaybeSession({
     prisma: {
       include: {
