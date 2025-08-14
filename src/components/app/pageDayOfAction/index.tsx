@@ -82,13 +82,13 @@ export function PageDayOfAction() {
         <div className="flex w-full flex-col gap-8">
           <ViewKeyPageActionCheckbox
             campaignName={USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM}
-            description="Stand With Crypto, alongside partners from across the country, are hosting a livestream on YT throughout the day."
+            description="Stand With Crypto, alongside partners from across the country, are hosting a livestream on X throughout the day."
             isCompleted={hasCompletedAction(
               ACTION_CONFIG_BY_CAMPAIGN_NAME[
                 USUserActionViewKeyPageCampaignName.DAY_OF_ACTION_LIVESTREAM
               ],
             )}
-            path="https://www.youtube.com/watch?v=l77TjpWRp10"
+            path="https://x.com/standwithcrypto/status/1955970196939923521"
             title="Tuning in to the Crypto Day of Action livestream"
           />
 
