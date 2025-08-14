@@ -263,28 +263,24 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
     revalidateOnFocus: false,
   })
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
-  // const hasLoadedENSData = useRef(false)
+  const hasLoadedENSData = useRef(false)
 
-  // React.useEffect(() => {
-  //   if (!isLoadingEnsData) {
-  //     hasLoadedENSData.current = true
-  //   }
-  // }, [isLoadingEnsData])
+  React.useEffect(() => {
+    if (!isLoadingEnsData) {
+      hasLoadedENSData.current = true
+    }
+  }, [isLoadingEnsData])
 
   const user = React.useMemo(() => {
-    if (!userData?.user || isLoadingEnsData) {
-      // if (!userData?.user || (isLoadingEnsData && !hasLoadedENSData.current)) {
+    if (!userData?.user || (isLoadingEnsData && !hasLoadedENSData.current)) {
       return null
     }
 
     return appendENSHookDataToUser(userData.user, ensData)
   }, [ensData, isLoadingEnsData, userData])
 
-  console.log({ userData, ensData, isLoadingEnsData })
-
   const loadingRender = <Skeleton className="h-80 w-full bg-blue-500" />
   if (!user) {
-    console.log('Vai mostrar o skeleton', { userData, ensData, isLoadingEnsData })
     return loadingRender
   }
 
