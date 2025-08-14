@@ -263,16 +263,17 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
     revalidateOnFocus: false,
   })
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
-  const hasLoadedENSData = useRef(false)
+  // const hasLoadedENSData = useRef(false)
 
-  React.useEffect(() => {
-    if (!isLoadingEnsData) {
-      hasLoadedENSData.current = true
-    }
-  }, [isLoadingEnsData])
+  // React.useEffect(() => {
+  //   if (!isLoadingEnsData) {
+  //     hasLoadedENSData.current = true
+  //   }
+  // }, [isLoadingEnsData])
 
   const user = React.useMemo(() => {
-    if (!userData?.user || (isLoadingEnsData && !hasLoadedENSData.current)) {
+    if (!userData?.user || isLoadingEnsData) {
+      // if (!userData?.user || (isLoadingEnsData && !hasLoadedENSData.current)) {
       return null
     }
 
