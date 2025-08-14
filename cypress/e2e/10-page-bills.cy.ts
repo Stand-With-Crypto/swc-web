@@ -8,8 +8,11 @@ it('page - bills interactions', () => {
   cy.get('@billCard').should('be.visible').click()
 
   cy.location('pathname').should('include', '/bills/')
-  cy.contains('Sponsors').should('be.visible')
-  cy.contains('Co-Sponsors').should('be.visible')
-  cy.contains('Voted for').should('be.visible')
-  cy.contains('Voted against').should('be.visible')
+  cy.contains('Analysis').should('be.visible')
+
+  cy.contains('Votes').scrollIntoView().should('be.visible')
+  cy.contains('Sponsor').should('be.visible')
+  cy.contains('Cosponsors').should('be.visible')
+  cy.contains('Voted For').should('be.visible')
+  cy.contains('Voted Against').should('be.visible')
 })

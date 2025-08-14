@@ -8,10 +8,10 @@ import {
   DTSIStanceDetailsStanceProp,
   StanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
+import { InfoCard } from '@/components/ui/infoCard'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { cn } from '@/utils/web/cn'
 
 function StanceTypeContent({ stance: passedStance, isStanceHidden, ...props }: StanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
@@ -23,15 +23,20 @@ function StanceTypeContent({ stance: passedStance, isStanceHidden, ...props }: S
     return <DTSIStanceDetailsQuote isStanceHidden={isStanceHidden} {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
+    const bill = stance.billRelationship?.bill
+
     return (
       <DTSIBillCard
-        bill={stance.billRelationship?.bill}
+        bill={{
+          ...bill,
+          billNumberOrDTSISlug: bill.slug,
+        }}
         className="p-0 sm:p-0"
         description={`This bill is ${convertDTSIStanceScoreToCryptoSupportLanguage(stance.billRelationship.bill.computedStanceScore).toLowerCase()}.`}
         {...props}
       >
         <CryptoSupportHighlight
-          className="flex-shrink-0 rounded-full py-2"
+          className="flex-shrink-0 rounded-full"
           stanceScore={!isStanceHidden ? stance.computedStanceScore : null}
           text={dtsiPersonBillRelationshipTypeAsVerb(stance?.billRelationship?.relationshipType)}
         />
@@ -46,11 +51,11 @@ export function DTSIStanceDetails({ className, isStanceHidden, ...props }: Stanc
   const stanceScore = stance.computedStanceScore
 
   return (
-    <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
+    <InfoCard as="article" className={className}>
       <StanceTypeContent isStanceHidden={isStanceHidden} {...props} />
       {!isStanceHidden && stance.stanceType !== DTSI_PersonStanceType.BILL_RELATIONSHIP && (
-        <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
+        <CryptoSupportHighlight className="mt-7 rounded-full py-2" stanceScore={stanceScore} />
       )}
-    </article>
+    </InfoCard>
   )
 }

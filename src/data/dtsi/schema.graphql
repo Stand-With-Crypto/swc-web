@@ -11,16 +11,19 @@ type Bill {
   formattedSlug: String!
   govTrackUrl: String!
   id: ID!
+  latestVote: BillVote
   pdfUrl: String!
   receivedPersonRoleGroup: PersonRoleGroup!
   receivedPersonRoleGroupId: String!
-  relationships(personSlugIn: [String!]): [BillPersonRelationship!]!
+  relationships(personSlugIn: [String!]): [BillPersonRelationship!]! @deprecated(reason: "Use sponsorshipRelationships and votes instead")
   shortTitle: String!
   slug: String!
+  sponsorshipRelationships: [BillPersonRelationship!]!
   stanceScoreWeight: Int
   status: BillStatus!
   summary: String!
   title: String!
+  votes: [BillVote!]!
 }
 
 type BillAnalysis {
@@ -48,6 +51,7 @@ enum BillAnalysisVerificationStatus {
 type BillPersonRelationship {
   bill: Bill!
   billId: String!
+  billVotePersonPosition: BillVotePersonPosition
   dateRelationOccurred: DateTime!
   datetimeCreated: DateTime!
   datetimeUpdated: DateTime!
@@ -69,6 +73,51 @@ enum BillPersonRelationshipType {
 enum BillStatus {
   ENACTED
   SPONSORED
+}
+
+type BillVote {
+  bill: Bill!
+  category: BillVoteCategory!
+  datetimeOccurred: DateTime!
+  displayName: String!
+  id: ID!
+  personPositions: [BillVotePersonPosition!]!
+  question: String!
+  result: String!
+  resultType: BillVoteResult!
+  roleCall: String!
+  significanceDescription: String!
+  voteType: BillVoteType!
+}
+
+enum BillVoteCategory {
+  HOUSE
+  SENATE
+}
+
+type BillVotePersonPosition {
+  billVote: BillVote!
+  id: ID!
+  person: Person!
+  positionType: BillVotePersonPositionType!
+}
+
+enum BillVotePersonPositionType {
+  NO
+  NOT_VOTING
+  YES
+}
+
+enum BillVoteResult {
+  FAILED
+  PASSED
+}
+
+enum BillVoteType {
+  EXECUTIVE_OR_EXTERNAL_ACTION
+  FINAL_PASSAGE
+  LEGISLATIVE_ACTION
+  PROCEDURAL_ACTION
 }
 
 """Valid Chambers Of Congress"""
@@ -366,12 +415,13 @@ enum PersonStanceVerificationStatus {
 
 type PublicUser {
   displayName: String!
-  id: ID!
   importanceScore: Int!
+  organizationId: String
   profilePictureUrl: String!
   profilePictureUrlDimensions: Json
   profilePictureUrlUnoptimized: String!
   twitterUsername: String
+  userId: ID!
 }
 
 type Query {

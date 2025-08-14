@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/common/utils'
 import { UsLocalPolicyStatePage } from '@/components/app/pageLocalPolicy/us/statePage'
 import { getAdvocatesCountByState } from '@/data/aggregations/getAdvocatesCountByState'
+import { getAllBills } from '@/data/bills/getAllBills'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import {
@@ -50,15 +51,18 @@ export default async function LocalPolicyStatePageRoot({
     notFound()
   }
 
-  const data = await queryDTSIHomepagePeople({ countryCode, stateCode })
+  const [dtsiPeopleData, initialTotalAdvocates, billsData] = await Promise.all([
+    queryDTSIHomepagePeople({ countryCode, stateCode }),
+    getAdvocatesCountByState(stateCode),
+    getAllBills(countryCode, stateCode),
+  ])
 
-  const highestScores = sortDTSIPersonDataTable(data.highestScores)
-  const lowestScores = sortDTSIPersonDataTable(data.lowestScores)
-
-  const initialTotalAdvocates = await getAdvocatesCountByState(stateCode)
+  const highestScores = sortDTSIPersonDataTable(dtsiPeopleData.highestScores)
+  const lowestScores = sortDTSIPersonDataTable(dtsiPeopleData.lowestScores)
 
   return (
     <UsLocalPolicyStatePage
+      billsData={billsData}
       initialTotalAdvocates={initialTotalAdvocates}
       politiciansData={{
         highestScores,
