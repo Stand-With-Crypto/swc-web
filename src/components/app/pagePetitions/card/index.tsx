@@ -76,16 +76,16 @@ export function PetitionCard({
 
       <div className="flex flex-col">
         <div className="flex flex-col gap-4 p-6 max-lg:gap-3 max-lg:p-4">
-          <h3 className="line-clamp-2 text-[20px] font-bold leading-tight text-foreground max-lg:text-base">
+          <h3 className="line-clamp-2 text-xl font-bold leading-tight text-foreground max-lg:text-base">
             {title}
           </h3>
           <p className="text-md line-clamp-3 text-muted-foreground max-lg:line-clamp-2 max-lg:text-sm">
             {description}
           </p>
         </div>
-        <div className="mt-auto border-muted p-6 text-[20px] font-medium text-foreground max-lg:p-4 max-lg:text-base lg:border-t">
+        <p className="mt-auto border-muted p-6 text-xl font-medium text-foreground max-lg:p-4 max-lg:text-base lg:border-t">
           <FormattedNumber amount={signaturesCount} locale={locale} /> signatures
-        </div>
+        </p>
       </div>
     </Link>
   )
