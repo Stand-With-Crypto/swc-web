@@ -18,6 +18,10 @@ interface PetitionCardProps {
   className?: string
 }
 
+const DESKTOP_IMAGE_SIZE = 166
+const MOBILE_IMAGE_SIZE = 64
+const FALLBACK_IMAGE_PATH = '/activityFeedIcons/petition.svg'
+
 export function PetitionCard({
   title,
   description,
@@ -55,16 +59,16 @@ export function PetitionCard({
             <NextImage
               alt="Petition"
               className="hidden lg:block"
-              height={166}
-              src="/activityFeedIcons/petition.svg"
-              width={166}
+              height={DESKTOP_IMAGE_SIZE}
+              src={FALLBACK_IMAGE_PATH}
+              width={DESKTOP_IMAGE_SIZE}
             />
             <NextImage
               alt="Petition"
-              className="h-16 w-16 lg:hidden"
-              height={64}
-              src="/activityFeedIcons/petition.svg"
-              width={64}
+              className="lg:hidden"
+              height={MOBILE_IMAGE_SIZE}
+              src={FALLBACK_IMAGE_PATH}
+              width={MOBILE_IMAGE_SIZE}
             />
           </div>
         )}
