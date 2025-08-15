@@ -95,7 +95,7 @@ export function CircularProgress({
 
       <div className="absolute flex flex-col items-center justify-center text-center">
         <span className="text-3xl font-bold text-foreground md:text-4xl">{value}</span>
-        <span className="text-sm text-muted-foreground md:text-base">{label}</span>
+        <span className="text-sm font-medium text-muted-foreground md:text-base">{label}</span>
       </div>
     </div>
   )

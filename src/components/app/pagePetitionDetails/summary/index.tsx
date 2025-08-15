@@ -42,12 +42,8 @@ export function SignaturesSummary({
 
       <div className="flex flex-col items-center gap-2 lg:gap-4">
         <CircularProgress
-          color="#6100FF"
-          gapDegrees={60}
           label="Signature Goal"
           percentage={percentage}
-          size={200}
-          strokeWidth={20}
           value={formattedGoalString}
         />
         <p className="text-center font-medium text-muted-foreground">{label}</p>
