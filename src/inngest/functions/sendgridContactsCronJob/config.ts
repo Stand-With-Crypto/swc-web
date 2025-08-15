@@ -4,7 +4,7 @@ export const SENDGRID_CONTACTS_API_LIMIT = 30000
 export const SENDGRID_CONTACTS_API_LIMIT_BYTES = 3900000 // Approx 3.72MiB, server limit is 4MiB (4,194,304 bytes)
 export const SENDGRID_API_RATE_LIMIT = 5
 export const SENDGRID_API_RATE_LIMIT_COOLDOWN = 60000 // 1 minute
-export const DB_READ_LIMIT = 40000
+export const DB_READ_LIMIT = 30000
 
 /**
  * Skipping US
