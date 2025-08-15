@@ -9,7 +9,7 @@ import { GB_REGIONS, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtil
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface AdvocatesCountResult {
-  state: string
+  state: GBRegion
   district: string
   count: number
 }
