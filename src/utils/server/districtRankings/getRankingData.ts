@@ -7,23 +7,29 @@ import {
   getCAReferralsCountByDistrict,
 } from '@/utils/server/districtRankings/ca/getRankingData'
 import {
+  getGBAdvocatesCountByConstituency,
+  getGBReferralsCountByConstituency,
+} from '@/utils/server/districtRankings/gb/getRankingData'
+import {
   getUSAdvocatesCountByDistrict,
   getUSReferralsCountByDistrict,
 } from '@/utils/server/districtRankings/us/getRankingData'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface AdvocatesCountResult {
-  state: USStateCode | CAProvinceOrTerritoryCode | AUStateCode
+  // string because GB regions are string on the database
+  state: USStateCode | CAProvinceOrTerritoryCode | AUStateCode | GBRegion
   district: string
   count: number
 }
 
 interface StateCode {
   [SupportedCountryCodes.US]: USStateCode
-  [SupportedCountryCodes.GB]: string // TODO: Implement
+  [SupportedCountryCodes.GB]: GBRegion
   [SupportedCountryCodes.CA]: CAProvinceOrTerritoryCode
   [SupportedCountryCodes.AU]: AUStateCode
 }
@@ -36,9 +42,7 @@ const GET_ADVOCATES_BY_COUNTRY_CODE_MAP: {
   [K in SupportedCountryCodes]: GetAdvocatesFunction<K>
 } = {
   [SupportedCountryCodes.US]: getUSAdvocatesCountByDistrict,
-  [SupportedCountryCodes.GB]: async () => {
-    throw new Error('Not implemented')
-  },
+  [SupportedCountryCodes.GB]: getGBAdvocatesCountByConstituency,
   [SupportedCountryCodes.CA]: getCAAdvocatesCountByDistrict,
   [SupportedCountryCodes.AU]: getAUAdvocatesCountByDistrict,
 }
@@ -47,9 +51,7 @@ const GET_REFERRALS_BY_COUNTRY_CODE_MAP: {
   [K in SupportedCountryCodes]: GetAdvocatesFunction<K>
 } = {
   [SupportedCountryCodes.US]: getUSReferralsCountByDistrict,
-  [SupportedCountryCodes.GB]: async () => {
-    throw new Error('Not implemented')
-  },
+  [SupportedCountryCodes.GB]: getGBReferralsCountByConstituency,
   [SupportedCountryCodes.CA]: getCAReferralsCountByDistrict,
   [SupportedCountryCodes.AU]: getAUReferralsCountByDistrict,
 }
