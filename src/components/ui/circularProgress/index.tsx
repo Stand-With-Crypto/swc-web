@@ -65,7 +65,7 @@ export function CircularProgress({
         width={size}
       >
         <circle
-          className="text-gray-200"
+          className="text-background"
           cx={size / 2}
           cy={size / 2}
           fill="transparent"
@@ -94,8 +94,8 @@ export function CircularProgress({
       </svg>
 
       <div className="absolute flex flex-col items-center justify-center text-center">
-        <span className="text-3xl font-bold text-gray-800 md:text-4xl">{value}</span>
-        <span className="text-sm text-gray-500 md:text-base">{label}</span>
+        <span className="text-3xl font-bold text-foreground md:text-4xl">{value}</span>
+        <span className="text-sm text-muted-foreground md:text-base">{label}</span>
       </div>
     </div>
   )
