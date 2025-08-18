@@ -9,6 +9,7 @@ import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocal
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { cn } from '@/utils/web/cn'
 import { fontClassName } from '@/utils/web/fonts'
 
 export interface PageLayoutProps {
@@ -31,7 +32,7 @@ export function PageLayout({
     <html lang={COUNTRY_CODE_TO_LOCALE[countryCode]} translate="no">
       {COUNTRIES_WITH_GTM.includes(countryCode) && <GoogleTagManager />}
       <LayoutScript countryCode={countryCode} />
-      <body className={fontClassName}>
+      <body className={cn(fontClassName, 'font-sans')}>
         <OverrideGlobalLocalStorage />
         <NextTopLoader
           color="hsl(var(--primary-cta))"
