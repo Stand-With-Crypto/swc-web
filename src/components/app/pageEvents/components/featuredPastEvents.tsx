@@ -1,21 +1,38 @@
+'use client'
+
 import { ArrowRight } from 'lucide-react'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useTranslation } from '@/hooks/useLanguage'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
+
+const translations = {
+  [SupportedLocale.EN_US]: {
+    title: 'Featured past events',
+    viewDetails: 'View details',
+  },
+  [SupportedLocale.FR_CA]: {
+    title: 'Événements passés en vedette',
+    viewDetails: 'Voir les détails',
+  },
+}
 
 interface FeaturedPastEventsProps {
   events: SWCEvents
 }
 
 export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
+  const t = useTranslation(translations)
+
   return (
     <section className="grid w-full gap-4">
       <PageTitle as="h3" className="mb-2">
-        Featured past events
+        {t.title}
       </PageTitle>
 
       <div
@@ -54,6 +71,8 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
 }
 
 function EventOverlay({ eventName }: { eventName: string }) {
+  const t = useTranslation(translations)
+
   return (
     <div className="absolute inset-0 flex items-center justify-center rounded-lg opacity-100 transition-opacity duration-300 ease-in-out group-hover:opacity-100 lg:opacity-0">
       <div className="absolute inset-0 bg-black/80 opacity-75" />
@@ -61,7 +80,7 @@ function EventOverlay({ eventName }: { eventName: string }) {
       <div className="relative z-10 flex h-full w-full cursor-pointer flex-col justify-between p-4 text-left text-white">
         <strong className="font-sans text-xl">{eventName}</strong>
         <p className="flex items-center gap-1 self-end text-sm">
-          View details <ArrowRight size={16} />
+          {t.viewDetails} <ArrowRight size={16} />
         </p>
       </div>
     </div>

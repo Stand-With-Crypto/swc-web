@@ -5,6 +5,7 @@ import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featuredPastEvents'
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
+import { LanguageSwitcher } from '@/components/ui/languageSwitcher'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
@@ -41,6 +42,11 @@ export function EventsPage({ events, isDeepLink, showMap = true, countryCode }: 
         isDeepLink && 'h-screen',
       )}
     >
+      {/* Language Switcher */}
+      <div className="self-end">
+        <LanguageSwitcher />
+      </div>
+
       <EventsIntro />
 
       {promotedEvents && promotedEvents.length > 0 && (
