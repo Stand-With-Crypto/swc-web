@@ -5,6 +5,21 @@ export const GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP = {
   WLS: 'Wales',
 } as const
 
+export enum GB_NUTS_1_AREA_NAMES {
+  Wales = 'Wales',
+  NorthernIreland = 'Northern Ireland',
+  London = 'London',
+  Scotland = 'Scotland',
+  EastOfEngland = 'East of England',
+  NorthEastEngland = 'North East England',
+  SouthWestEngland = 'South West England',
+  NorthWestEngland = 'North West England',
+  EastMidlandsEngland = 'East Midlands England',
+  SouthEastEngland = 'South East England',
+  WestMidlandsEngland = 'West Midlands England',
+  YorkshireAndTheHumber = 'Yorkshire and The Humber',
+}
+
 export type GBCountryCode = keyof typeof GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP
 
 export const getGBCountryNameFromCode = (code: string) => {

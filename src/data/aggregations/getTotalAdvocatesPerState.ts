@@ -1,7 +1,6 @@
 import 'server-only'
 
 import { prismaClient } from '@/utils/server/prismaClient'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
@@ -24,17 +23,10 @@ const fetchAllFromPrismaByState = async (stateCode: USStateCode) => {
 }
 
 const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerStateQuery) => {
-  const multiplier =
-    NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? 1
-      : Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000
-
-  return totalAdvocatesPerState
-    .map(({ state, totalAdvocates }) => ({
-      state,
-      totalAdvocates: parseInt(totalAdvocates.toString(), 10) * multiplier,
-    }))
-    .filter(({ state }) => state.length <= 2)
+  return totalAdvocatesPerState.map(({ state, totalAdvocates }) => ({
+    state,
+    totalAdvocates: parseInt(totalAdvocates.toString(), 10),
+  }))
 }
 
 export const getTotalAdvocatesByState = async (stateCode: USStateCode) => {
