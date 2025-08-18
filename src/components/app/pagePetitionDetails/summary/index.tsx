@@ -27,7 +27,6 @@ export function SignaturesSummary({
   isSigned,
 }: SignaturesSummaryProps) {
   const percentage = Math.min((signatures / goal) * 100, 100)
-  const formattedSignatures = <FormattedNumber amount={signatures} locale={locale} />
   const formattedGoalString = compactNumber(goal, locale)
 
   const hasReachedGoal = signatures >= goal
@@ -37,7 +36,9 @@ export function SignaturesSummary({
       {/* this is just to fit the size of the card when the goal is reached */}
       <div className={cn({ '-mb-2': hasReachedGoal })}>
         {hasReachedGoal && <p className="text-center font-medium text-foreground">Goal reached!</p>}
-        <h2 className="text-3xl font-bold text-foreground">{formattedSignatures} Signed</h2>
+        <h2 className="text-3xl font-bold text-foreground">
+          <FormattedNumber amount={signatures} locale={locale} /> Signed
+        </h2>
       </div>
 
       <div className="flex flex-col items-center gap-2 lg:gap-4">
