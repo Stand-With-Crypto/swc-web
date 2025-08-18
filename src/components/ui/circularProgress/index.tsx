@@ -13,6 +13,8 @@ interface CircularProgressProps {
   animateOnMount?: boolean
 }
 
+const FULL_CIRCLE_DEGREES = 360
+
 export function CircularProgress({
   value,
   label,
@@ -24,12 +26,13 @@ export function CircularProgress({
   animationDuration = 1,
   animateOnMount = true,
 }: CircularProgressProps) {
+  const center = useMemo(() => size / 2, [size])
   const radius = useMemo(() => (size - strokeWidth) / 2, [size, strokeWidth])
   const circumference = useMemo(() => 2 * Math.PI * radius, [radius])
 
-  const arcDegrees = 360 - gapDegrees
+  const arcDegrees = FULL_CIRCLE_DEGREES - gapDegrees
   const arcCircumference = useMemo(
-    () => (circumference * arcDegrees) / 360,
+    () => (circumference * arcDegrees) / FULL_CIRCLE_DEGREES,
     [circumference, arcDegrees],
   )
 
@@ -66,8 +69,8 @@ export function CircularProgress({
       >
         <circle
           className="text-background"
-          cx={size / 2}
-          cy={size / 2}
+          cx={center}
+          cy={center}
           fill="transparent"
           r={radius}
           stroke="currentColor"
@@ -79,8 +82,8 @@ export function CircularProgress({
         />
 
         <motion.circle
-          cx={size / 2}
-          cy={size / 2}
+          cx={center}
+          cy={center}
           fill="transparent"
           r={radius}
           stroke={color}
