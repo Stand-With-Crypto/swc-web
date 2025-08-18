@@ -126,7 +126,7 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/NUTS_Level_1_2018_United_Kingdom_2022_simplified.json',
     projection: 'geoMercator',
     projectionConfig: {
-      center: [-3.5, 56.0],
+      center: [-3.9, 56.0],
       scale: 1600,
     },
     markerOffset: 0.5,
