@@ -44,7 +44,7 @@ export function DelayedRecentActivityWithMap({
   const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
 
   return isMobile || !advocatesMapPageData || !mapConfig ? (
-    <TabsContent ref={ref} value={UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
+    <div>
       <RecentActivity.List
         actions={{
           data: visibleActions,
@@ -61,7 +61,7 @@ export function DelayedRecentActivityWithMap({
           <InternalLink href={urls.community()}>View all</InternalLink>
         </Button>
       </RecentActivity.Footer>
-    </TabsContent>
+    </div>
   ) : (
     <ErrorBoundary
       extras={{
