@@ -5,11 +5,9 @@ import { useInView } from 'motion/react'
 
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { TabsContent } from '@/components/ui/tabs'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
@@ -44,7 +42,7 @@ export function DelayedRecentActivityWithMap({
   const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
 
   return isMobile || !advocatesMapPageData || !mapConfig ? (
-    <TabsContent ref={ref} value={UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
+    <div>
       <RecentActivity.List
         actions={{
           data: visibleActions,
@@ -61,7 +59,7 @@ export function DelayedRecentActivityWithMap({
           <InternalLink href={urls.community()}>View all</InternalLink>
         </Button>
       </RecentActivity.Footer>
-    </TabsContent>
+    </div>
   ) : (
     <ErrorBoundary
       extras={{
