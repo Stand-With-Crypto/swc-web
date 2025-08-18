@@ -11,6 +11,7 @@ import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leader
 import { UsUserDistrictRank } from '@/components/app/pageReferrals/us/userDistrictRank'
 import {
   UsYourDistrictRank,
+  UsYourDistrictRankingWrapper,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { UserReferralUrlWithApi } from '@/components/app/pageUserProfile/common/userReferralUrl'
@@ -41,21 +42,23 @@ export function UsPageReferrals(props: PageReferralsProps) {
       <UsPageReferralsHeading
         stateName={stateCode ? getUSStateNameFromStateCode(stateCode) : undefined}
       />
-      <UsYourDistrictRankSuspense>
-        <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea={!!stateCode}>
-          {!stateCode && (
-            <>
-              <UserReferralUrlWithApi />
-              <ReferralsCounter>
-                <UserReferralsCount />
-                <UsUserDistrictRank />
-              </ReferralsCounter>
-            </>
-          )}
+      <UsYourDistrictRankingWrapper>
+        <UsYourDistrictRankSuspense>
+          <UserAddressProvider countryCode={countryCode} filterByAdministrativeArea={!!stateCode}>
+            {!stateCode && (
+              <>
+                <UserReferralUrlWithApi />
+                <ReferralsCounter>
+                  <UserReferralsCount />
+                  <UsUserDistrictRank />
+                </ReferralsCounter>
+              </>
+            )}
 
-          <UsYourDistrictRank />
-        </UserAddressProvider>
-      </UsYourDistrictRankSuspense>
+            <UsYourDistrictRank />
+          </UserAddressProvider>
+        </UsYourDistrictRankSuspense>
+      </UsYourDistrictRankingWrapper>
       <USAdvocatesLeaderboard data={leaderboardData} />
       <div className="flex justify-center">
         <PaginationLinks

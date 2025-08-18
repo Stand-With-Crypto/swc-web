@@ -15,7 +15,7 @@ export function DefaultPlacesSelect({ title, placeholder, ...props }: DefaultPla
     <div className="w-full space-y-3">
       <LeaderboardHeading.Title>{title}</LeaderboardHeading.Title>
       <GooglePlacesSelect
-        className="rounded-full bg-gray-100 text-gray-600"
+        className="h-12 rounded-full bg-gray-100 text-gray-600"
         placeholder={placeholder}
         {...props}
       />

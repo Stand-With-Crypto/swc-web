@@ -22,6 +22,10 @@ interface SendgridImportResponse {
 interface Options {
   listIds: string[]
   customFieldsMap: Record<SendgridField, string | null>
+  logger?: {
+    info: (message: string, ...args: any[]) => void
+    error: (message: string, ...args: any[]) => void
+  }
 }
 
 async function getCSVHeaders(customFieldsMap: Record<SendgridField, string | null>) {
@@ -83,35 +87,54 @@ function formatContactsForCSV(contacts: SendgridContact[]) {
 }
 
 export async function uploadSendgridContactsCSV(contacts: SendgridContact[], options: Options) {
-  const { listIds, customFieldsMap } = options
+  const { listIds, customFieldsMap, logger } = options
+
+  logger?.info(`[uploadSendgridContactsCSV] Starting upload for ${contacts.length} contacts`)
 
   try {
+    logger?.info(`[uploadSendgridContactsCSV] Step 1: Getting CSV headers`)
     const { csvSheetHeaders, sendgridApiMappings } = await getCSVHeaders(customFieldsMap)
+
+    logger?.info(`[uploadSendgridContactsCSV] Step 2: Formatting contacts for CSV`)
     const formattedContacts = formatContactsForCSV(contacts)
+
+    logger?.info(`[uploadSendgridContactsCSV] Step 3: Converting to CSV`)
     const worksheet = XLSX.utils.json_to_sheet(formattedContacts, {
       header: csvSheetHeaders,
     })
     const csvContent = XLSX.utils.sheet_to_csv(worksheet)
 
+    logger?.info(`[uploadSendgridContactsCSV] Step 4: Getting upload URL from SendGrid`)
     const { upload_uri, upload_headers, job_id } = await getUploadUrl(
       sendgridApiMappings,
       listIds || [],
     )
+
+    logger?.info(`[uploadSendgridContactsCSV] Step 5: Uploading CSV to SendGrid`)
     const uploadResponse = await fetchReq(upload_uri, {
       method: 'PUT',
       body: csvContent,
       headers: upload_headers.map(h => [h.header, h.value] as [string, string]),
     })
+
     if (!uploadResponse.ok) {
-      throw new Error(`CSV upload failed: ${uploadResponse.statusText}`)
+      const responseText = await uploadResponse.text().catch(() => 'Unable to read response text')
+      logger?.error(`[uploadSendgridContactsCSV] Upload failed with response: ${responseText}`)
+      throw new Error(
+        `CSV upload failed: ${uploadResponse.status} ${uploadResponse.statusText} - ${responseText}`,
+      )
     }
 
+    logger?.info(`[uploadSendgridContactsCSV] Upload successful!`)
     return {
       success: true,
       job_id,
       count: formattedContacts.length,
     }
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    logger?.error(`[uploadSendgridContactsCSV] Error occurred: ${errorMessage}`)
+
     Sentry.captureException(error, {
       tags: {
         domain: 'SendgridMarketing',
@@ -119,11 +142,14 @@ export async function uploadSendgridContactsCSV(contacts: SendgridContact[], opt
       extra: {
         contacts: contacts.slice(0, 3),
         options,
+        contactsCount: contacts.length,
       },
     })
 
     if (isSendgridError(error)) {
-      throw new Error(JSON.stringify(error.response.body, null, 2))
+      const sendgridErrorDetails = JSON.stringify(error.response.body, null, 2)
+      logger?.error(`[uploadSendgridContactsCSV] SendGrid API error: ${sendgridErrorDetails}`)
+      throw new Error(`SendGrid API error: ${sendgridErrorDetails}`)
     }
 
     throw error

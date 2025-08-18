@@ -2,11 +2,13 @@
 import { Copy } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import { useSession } from '@/hooks/useSession'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -63,6 +65,12 @@ export function UserReferralUrlWithApi() {
   const { data, isLoading } = useApiResponseForUserFullProfileInfo()
   const countryCode = useCountryCode()
   const hasHydrated = useHasHydrated()
+
+  const { isLoggedIn, isLoading: isSessionLoading } = useSession()
+
+  if (hasHydrated && isLoggedIn && (isLoading || isSessionLoading)) {
+    return <Skeleton className="h-[76px] w-full" />
+  }
 
   if (!data?.user || isLoading || !hasHydrated) {
     return null

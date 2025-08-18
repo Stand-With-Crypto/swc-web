@@ -225,6 +225,7 @@ export const getIntlUrls = (
     localPolicy: (stateCode?: string) =>
       `${countryPrefix}/local-policy${stateCode ? `/${stateCode.toLowerCase()}` : ''}`,
     resubscribeSuccess: () => `${countryPrefix}/email/resubscribe-success`,
+    dayOfActionLP: () => `${countryPrefix}/cryptodayofaction`,
   }
 }
 

@@ -10,6 +10,7 @@ import { UserAddressProvider } from '@/components/app/pageReferrals/common/userA
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
 import {
   UsYourDistrictRank,
+  UsYourDistrictRankingWrapper,
   UsYourDistrictRankSuspense,
 } from '@/components/app/pageReferrals/us/yourDistrictRanking'
 import { RecentActivity } from '@/components/app/recentActivity'
@@ -133,11 +134,13 @@ export function UsPageHome({
                       See which district has the most number of advocates.
                     </HomePageSection.Subtitle>
 
-                    <UsYourDistrictRankSuspense>
-                      <UserAddressProvider countryCode={countryCode}>
-                        <UsYourDistrictRank />
-                      </UserAddressProvider>
-                    </UsYourDistrictRankSuspense>
+                    <UsYourDistrictRankingWrapper>
+                      <UsYourDistrictRankSuspense>
+                        <UserAddressProvider countryCode={countryCode}>
+                          <UsYourDistrictRank />
+                        </UserAddressProvider>
+                      </UsYourDistrictRankSuspense>
+                    </UsYourDistrictRankingWrapper>
                     <USAdvocatesLeaderboard data={leaderboardData} />
                     <div className="mx-auto flex w-fit justify-center gap-2">
                       <LoginDialogWrapper
