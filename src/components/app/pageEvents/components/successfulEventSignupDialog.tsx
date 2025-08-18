@@ -21,7 +21,7 @@ export function SuccessfulEventNotificationsSignup({
       />
 
       <h3 className="mt-6 font-sans text-xl font-bold">You signed up for updates!</h3>
-      <p className="text-center font-mono text-base text-muted-foreground">
+      <p className="text-center text-base text-muted-foreground">
         We’ll send you text updates on this event. RSVP to the event below.
       </p>
 

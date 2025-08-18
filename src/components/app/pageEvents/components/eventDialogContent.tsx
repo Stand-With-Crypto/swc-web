@@ -135,16 +135,16 @@ function EventInformation({
           <h3 className="text-center font-sans text-xl font-bold">
             <Balancer>{event.name}</Balancer>
           </h3>
-          <div className="text-center font-mono text-base text-muted-foreground">
+          <div className="text-center text-base text-muted-foreground">
             <Balancer
               className="[&_*]:pb-2 [&_a]:font-medium [&_a]:text-primary-cta [&_strong]:font-semibold [&_strong]:text-foreground"
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(event.formattedDescription) }}
             />
           </div>
-          <p className="mt-9 flex items-center gap-2 font-mono text-sm">
+          <p className="mt-9 flex items-center gap-2 text-sm">
             <Clock size={16} /> {formattedEventDate}
           </p>
-          <p className="mb-9 mt-5 flex items-center gap-2 font-mono text-sm">
+          <p className="mb-9 mt-5 flex items-center gap-2 text-sm">
             <Pin size={16} /> {event.formattedAddress}
           </p>
 

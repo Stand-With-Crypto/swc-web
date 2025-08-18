@@ -270,7 +270,7 @@ function InfoTooltip({
       }}
     >
       {actionInfo}
-      <span className="font-mono text-sm font-normal">Click state to view</span>
+      <span className="text-sm font-normal">Click state to view</span>
     </div>
   )
 }
