@@ -53,6 +53,14 @@ export const tailwindConfig: TailwindConfig = {
           secondary: '#667085',
           muted: '#94a3b8',
         },
+        'purple-dark': {
+          DEFAULT: '#13003B',
+          foreground: '#f8fafc',
+        },
+        'purple-light': {
+          DEFAULT: '#E2D0FF',
+          foreground: '#020817',
+        },
       },
       borderRadius: {
         xl: '16px',
