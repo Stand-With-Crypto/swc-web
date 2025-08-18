@@ -283,7 +283,8 @@ export const apiUrls = {
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,
-  totalAdvocatesPerState: () => '/api/public/advocates-map/total-advocates-per-state',
+  totalAdvocatesPerState: (countryCode: SupportedCountryCodes) =>
+    `/api/public/advocates-map/${countryCode}/total-advocates-per-state`,
   advocatesCountByState: (stateCode: string) => `/api/public/state-advocates/${stateCode}`,
   smsStatusCallback: ({
     campaignName,
