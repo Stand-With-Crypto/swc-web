@@ -95,7 +95,7 @@ export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {
     'Yorkshire and The Humber': [-1.9, 54.35],
     Wales: [-4.26, 52.69],
     'Northern Ireland': [-7.2, 55],
-    London: [-0.1278, 52.0],
+    London: [0.2, 51.9],
     Scotland: [-4.5, 56.8],
   },
 }
@@ -211,19 +211,13 @@ export const ADVOCATES_ACTIONS_BY_COUNTRY_CODE: Partial<
       labelMobile: 'joined',
       labelActionTooltip: () => 'joined SWC',
     },
-    // TODO: Uncomment this and remove VIEW_KEY_PAGE when we remove newmode
+    // TODO: Uncomment this when we add email action to UK
     // EMAIL: {
     //   icon: EmailIcon,
     //   label: 'Email sent to MP',
     //   labelMobile: 'emailed',
     //   labelActionTooltip: () => 'emailed their rep',
     // },
-    VIEW_KEY_PAGE: {
-      icon: EmailIcon,
-      label: 'Email sent to MP',
-      labelMobile: 'emailed',
-      labelActionTooltip: () => 'emailed their rep',
-    },
     TWEET: {
       icon: FollowOnXIcon,
       label: 'Followed SWC on X',
