@@ -6,7 +6,18 @@ import { EventsMap } from '@/components/app/pageEvents/components/eventsMap'
 import { UpcomingEventsList } from '@/components/app/pageEvents/components/upcomingEvents'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { useTranslation } from '@/hooks/useLanguage'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+
+const translations = {
+  [SupportedLocale.EN_US]: {
+    title: 'All upcoming events',
+  },
+  [SupportedLocale.FR_CA]: {
+    title: 'Tous les événements à venir',
+  },
+}
 
 interface AllUpcomingEventsProps {
   events: SWCEvents
@@ -15,6 +26,7 @@ interface AllUpcomingEventsProps {
 
 export function AllUpcomingEvents({ events, showMap = true }: AllUpcomingEventsProps) {
   const isMobile = useIsMobile()
+  const t = useTranslation(translations)
 
   const [displayOption, setDisplayOption] = useState<'map' | 'list'>(
     isMobile || !showMap ? 'list' : 'map',
@@ -28,7 +40,7 @@ export function AllUpcomingEvents({ events, showMap = true }: AllUpcomingEventsP
 
   return (
     <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
-      <PageTitle as="h3">All upcoming events</PageTitle>
+      <PageTitle as="h3">{t.title}</PageTitle>
       {!isMobile && showMap && (
         <div className="flex items-center justify-center gap-4 rounded-lg bg-backgroundAlternate px-4 py-3">
           <button onClick={() => setDisplayOption('map')}>

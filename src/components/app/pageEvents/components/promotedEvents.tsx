@@ -10,9 +10,22 @@ import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEv
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { useTranslation } from '@/hooks/useLanguage'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+
+const translations = {
+  [SupportedLocale.EN_US]: {
+    seeWhatHappened: 'See what happened',
+    rsvp: 'RSVP',
+  },
+  [SupportedLocale.FR_CA]: {
+    seeWhatHappened: "Voir ce qui s'est passé",
+    rsvp: 'RSVP',
+  },
+}
 
 interface PromotedEventsProps {
   events: SWCEvents
@@ -20,6 +33,8 @@ interface PromotedEventsProps {
 }
 
 export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
+  const t = useTranslation(translations)
+
   const handleRSVPButtonClick = (event: SWCEvent) => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
@@ -70,7 +85,7 @@ export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
                   event={event.data}
                   trigger={
                     <Button asChild className="mt-2 w-full sm:w-fit lg:mt-4" variant="secondary">
-                      <span>See what happened</span>
+                      <span>{t.seeWhatHappened}</span>
                     </Button>
                   }
                   triggerClassName="w-full sm:w-fit"
@@ -82,7 +97,7 @@ export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
                   type="button"
                   variant="secondary"
                 >
-                  RSVP
+                  {t.rsvp}
                 </Button>
               )}
             </div>

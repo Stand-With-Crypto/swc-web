@@ -1,79 +1,55 @@
 'use client'
 
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { Suspense } from 'react'
 
-import { EventCard } from '@/components/app/pageEvents/components/eventCard'
-import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
-import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { getGBCountryCodeFromName } from '@/utils/shared/stateMappings/gbCountryUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useTranslation } from '@/hooks/useLanguage'
+import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
-import {
-  convertGooglePlaceAutoPredictionToAddressSchema,
-  GooglePlaceAutocompletePrediction,
-} from '@/utils/web/googlePlaceUtils'
+
+const translations = {
+  [SupportedLocale.EN_US]: {
+    title: 'Events near you',
+    noEventsMessage: 'No events found in your area.',
+    loadingMessage: 'Finding events near you...',
+  },
+  [SupportedLocale.FR_CA]: {
+    title: 'Événements près de chez vous',
+    noEventsMessage: 'Aucun événement trouvé dans votre région.',
+    loadingMessage: "Recherche d'événements près de chez vous...",
+  },
+}
 
 interface EventsNearYouProps {
   events: SWCEvents
 }
 
 export function EventsNearYou(props: EventsNearYouProps) {
+  const t = useTranslation(translations)
+
   return (
-    <Suspense fallback={null}>
-      <SuspenseEventsNearYou {...props} />
-    </Suspense>
+    <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
+      <PageTitle as="h3">{t.title}</PageTitle>
+      <Suspense fallback={<Skeleton className="h-32 w-full" />}>
+        <SuspenseEventsNearYou {...props} />
+      </Suspense>
+    </section>
   )
 }
 
 function SuspenseEventsNearYou({ events }: EventsNearYouProps) {
-  const { setAddress, address } = useMutableCurrentUserAddress()
-  const [userState, setUserState] = useState<string>()
+  const profileReq = useApiResponseForUserFullProfileInfo()
+  const t = useTranslation(translations)
 
-  const onChangeAddress = useCallback(
-    async (prediction: GooglePlaceAutocompletePrediction | null) => {
-      if (!prediction) {
-        setAddress(null)
-        return
-      }
+  const userState = profileReq.data?.user?.userLocationDetails?.administrativeAreaLevel1
 
-      const details = await convertGooglePlaceAutoPredictionToAddressSchema(prediction)
+  if (profileReq.isLoading) {
+    return <div className="text-center text-muted-foreground">{t.loadingMessage}</div>
+  }
 
-      // Google Places API returns the full country name for the UK, so we need to convert it to the country code
-      if (details.countryCode.toLowerCase() === SupportedCountryCodes.GB) {
-        return setUserState(getGBCountryCodeFromName(details.administrativeAreaLevel1))
-      }
-
-      setUserState(details.administrativeAreaLevel1)
-    },
-    [setAddress],
-  )
-
-  useEffect(() => {
-    if (address === 'loading') return
-
-    void onChangeAddress(address)
-  }, [address, onChangeAddress])
-
-  return (
-    <section className="grid w-full items-center gap-4 lg:gap-6">
-      <PageTitle as="h3">Events near you</PageTitle>
-
-      <div className="mx-auto w-full max-w-[562px]">
-        <GooglePlacesSelect
-          className="bg-backgroundAlternate"
-          loading={address === 'loading'}
-          onChange={setAddress}
-          placeholder="Enter your address"
-          value={address !== 'loading' ? address : null}
-        />
-      </div>
-
-      {address ? <FilteredEventsNearUser events={events} userState={userState} /> : null}
-    </section>
-  )
+  return <FilteredEventsNearUser events={events} userState={userState} />
 }
 
 function FilteredEventsNearUser({
@@ -83,21 +59,26 @@ function FilteredEventsNearUser({
   events: SWCEvents
   userState: string | undefined
 }) {
-  const filteredEventsNearUser = useMemo(() => {
-    return events.filter(event => event.data.state === userState)
-  }, [events, userState])
+  const t = useTranslation(translations)
 
-  const hasEvents = filteredEventsNearUser.length > 0
+  const nearbyEvents = events.filter(event => {
+    if (!userState || !event.data.state) return false
+    return event.data.state.toLowerCase() === userState.toLowerCase()
+  })
+
+  if (nearbyEvents.length === 0) {
+    return <div className="text-center text-muted-foreground">{t.noEventsMessage}</div>
+  }
 
   return (
-    <div className="flex w-full flex-col items-center gap-4">
-      {hasEvents ? (
-        filteredEventsNearUser.map(event => (
-          <EventCard event={event.data} key={getUniqueEventKey(event.data)} />
-        ))
-      ) : (
-        <NoEventsCTA initialText="There are no events happening near you at the moment. " />
-      )}
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {nearbyEvents.slice(0, 6).map((event, index) => (
+        <div className="rounded-lg border p-4" key={`${event.data.slug}-${index}`}>
+          <h4 className="font-semibold">{event.data.name}</h4>
+          <p className="text-sm text-muted-foreground">{event.data.date}</p>
+          {event.data.formattedAddress && <p className="text-sm">{event.data.formattedAddress}</p>}
+        </div>
+      ))}
     </div>
   )
 }

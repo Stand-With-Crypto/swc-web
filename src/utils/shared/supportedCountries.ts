@@ -22,6 +22,14 @@ export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLoca
   [SupportedCountryCodes.AU]: SupportedLocale.EN_US,
 }
 
+// Multiple locales per country for hybrid approach
+export const COUNTRY_CODE_TO_SUPPORTED_LOCALES: Record<SupportedCountryCodes, SupportedLocale[]> = {
+  [SupportedCountryCodes.US]: [SupportedLocale.EN_US],
+  [SupportedCountryCodes.GB]: [SupportedLocale.EN_US],
+  [SupportedCountryCodes.CA]: [SupportedLocale.EN_US, SupportedLocale.FR_CA],
+  [SupportedCountryCodes.AU]: [SupportedLocale.EN_US],
+}
+
 // Two lowercase letters (e.g., "us", "gb")
 export const COUNTRY_CODE_REGEX_PATTERN = new RegExp(
   `^(${Object.values(SupportedCountryCodes).join('|')})$`,
