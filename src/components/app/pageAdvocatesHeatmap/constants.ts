@@ -115,7 +115,7 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json',
     projection: 'geoAlbersUsa',
     projectionConfig: {
-      scale: 1000,
+      scale: 1100,
     },
     markerOffset: 1.2,
     markerSize: 40,

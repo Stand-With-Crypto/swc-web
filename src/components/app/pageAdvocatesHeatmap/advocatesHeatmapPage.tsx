@@ -31,13 +31,11 @@ export function AdvocatesHeatmapPage({
 
   return (
     <div
-      className={cn('mx-auto w-full max-w-screen-xl', {
-        'h-screen overflow-hidden': isEmbedded,
+      className={cn('mx-auto flex w-full max-w-screen-xl flex-col justify-center', {
+        'min-h-screen overflow-hidden': isEmbedded,
       })}
     >
-      <section
-        className={'standard-spacing-from-navbar flex h-full flex-col justify-center space-y-9'}
-      >
+      <section className={'standard-spacing-from-navbar flex flex-col justify-center space-y-9'}>
         {title && description ? (
           <div className="flex w-full flex-col items-center justify-center gap-24">
             <div className={`flex flex-col gap-4 ${isEmbedded ? 'text-white' : 'text-black'})`}>
