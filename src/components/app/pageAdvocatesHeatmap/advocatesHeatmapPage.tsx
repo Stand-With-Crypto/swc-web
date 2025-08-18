@@ -7,6 +7,7 @@ import { PageAdvocatesHeatmapProps } from '@/components/app/pageAdvocatesHeatmap
 import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { cn } from '@/utils/web/cn'
 
 export function AdvocatesHeatmapPage({
   title,
@@ -30,16 +31,12 @@ export function AdvocatesHeatmapPage({
 
   return (
     <div
-      className={
-        isEmbedded ? 'mx-auto h-screen w-full max-w-screen-xl' : 'mx-auto w-full max-w-screen-xl'
-      }
+      className={cn('mx-auto w-full max-w-screen-xl', {
+        'h-screen overflow-hidden': isEmbedded,
+      })}
     >
       <section
-        className={
-          isEmbedded
-            ? 'flex h-screen flex-col justify-center'
-            : 'standard-spacing-from-navbar flex-col justify-center space-y-9'
-        }
+        className={'standard-spacing-from-navbar flex h-full flex-col justify-center space-y-9'}
       >
         {title && description ? (
           <div className="flex w-full flex-col items-center justify-center gap-24">
