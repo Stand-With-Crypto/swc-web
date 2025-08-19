@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach, afterEach } from '@jest/globals'
+import { afterEach,beforeEach, describe, expect, it } from '@jest/globals'
 
 import { formatTimeAgo } from './formatTimeAgo'
 
