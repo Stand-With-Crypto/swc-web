@@ -27,15 +27,13 @@ const fetchFromPrisma = async (config: RecentActivityByDateRangeConfig) => {
     },
   }
 
-  const limit = 1000
-
   const [data, count] = await Promise.all([
     prismaClient.userAction
       .findMany({
         orderBy: {
           datetimeCreated: 'desc',
         },
-        take: limit,
+        take: 1000,
         skip: config.offset,
         include: {
           user: {
@@ -76,7 +74,7 @@ const fetchFromPrisma = async (config: RecentActivityByDateRangeConfig) => {
           ({ user: { internalStatus } }) => internalStatus === UserInternalStatus.VISIBLE,
         ),
       ),
-    prismaClient.userAction.count({ where, take: limit }),
+    prismaClient.userAction.count({ where }),
   ])
 
   return { count, data }
