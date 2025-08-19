@@ -6,7 +6,7 @@ import { DTSI_PeopleBySlugQuery, DTSI_PeopleBySlugQueryVariables } from '@/data/
 
 const query = /* GraphQL */ `
   query PeopleBySlug($slugs: [String!]!) {
-    people(limit: 100, offset: 0, slugIn: $slugs) {
+    people(limit: 1000, offset: 0, slugIn: $slugs) {
       ...PersonCard
     }
   }
