@@ -4,7 +4,8 @@ import React from 'react'
 import { Edit3 } from 'lucide-react'
 
 import * as BadgesAutomaticCarousel from '@/components/ui/badgesAutomaticCarousel'
-import { formatTimeAgo } from '@/utils/shared/formatTimeAgo'
+import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 interface LastSignature {
@@ -16,6 +17,7 @@ interface SignatoriesCarouselProps {
   autoplayDelay?: number
   className?: string
   lastSignatures: LastSignature[]
+  countryCode: SupportedCountryCodes
 }
 
 const MIN_SIGNATURES_TO_RENDER_LIST = 3
@@ -24,6 +26,7 @@ export function SignatoriesCarousel({
   autoplayDelay = 3000,
   className,
   lastSignatures,
+  countryCode,
 }: SignatoriesCarouselProps) {
   const shouldRenderList = lastSignatures.length > MIN_SIGNATURES_TO_RENDER_LIST
 
@@ -45,7 +48,11 @@ export function SignatoriesCarousel({
                     Member from {signature.locale} signed
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    {formatTimeAgo(signature.datetimeSigned)}
+                    <FormattedRelativeDatetime
+                      countryCode={countryCode}
+                      date={new Date(signature.datetimeSigned)}
+                      timeFormatStyle="narrow"
+                    />
                   </span>
                 </BadgesAutomaticCarousel.Item>
               )
