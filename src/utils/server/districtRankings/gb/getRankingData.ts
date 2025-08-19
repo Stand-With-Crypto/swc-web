@@ -18,6 +18,18 @@ function isValidConstituency(constituency: string): boolean {
   return GB_REGIONS.includes(constituency)
 }
 
+function isValidAdvocatesResult(
+  result: AdvocatesCountByDistrictQueryResult,
+): result is AdvocatesCountByDistrictQueryResult & { district: string } {
+  return isValidConstituency(result.state) && result.district !== null
+}
+
+function isValidReferralsResult(
+  result: ReferralsCountByDistrictQueryResult,
+): result is ReferralsCountByDistrictQueryResult & { district: string } {
+  return isValidConstituency(result.state) && result.district !== null
+}
+
 export async function getGBAdvocatesCountByConstituency(
   region: GBRegion,
 ): Promise<AdvocatesCountResult[]> {
@@ -38,13 +50,11 @@ export async function getGBAdvocatesCountByConstituency(
     HAVING COUNT(DISTINCT u.id) > 0
   `
 
-  return results
-    .filter(result => isValidConstituency(result.state))
-    .map(({ state, district, count }) => ({
-      state: state as GBRegion,
-      district: district!,
-      count: Number(count),
-    }))
+  return results.filter(isValidAdvocatesResult).map(({ state, district, count }) => ({
+    state: state as GBRegion,
+    district,
+    count: Number(count),
+  }))
 }
 
 export async function getGBReferralsCountByConstituency(
@@ -69,11 +79,9 @@ export async function getGBReferralsCountByConstituency(
     HAVING SUM(uar.referrals_count) > 0
   `
 
-  return results
-    .filter(result => isValidConstituency(result.state))
-    .map(result => ({
-      state: result.state as GBRegion,
-      district: result.district!,
-      count: Number(result.referrals),
-    }))
+  return results.filter(isValidReferralsResult).map(result => ({
+    state: result.state as GBRegion,
+    district: result.district,
+    count: Number(result.referrals),
+  }))
 }

@@ -42,7 +42,7 @@ const COUNTRY_CODE_TO_STATES_CODES_MAP: StateCodesByCountry = {
   [SupportedCountryCodes.CA]: Object.keys(
     CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   ) as CAProvinceOrTerritoryCode[],
-  [SupportedCountryCodes.GB]: [...GB_REGIONS] as GBRegion[],
+  [SupportedCountryCodes.GB]: [...GB_REGIONS],
   [SupportedCountryCodes.AU]: Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP) as AUStateCode[],
 }
 
