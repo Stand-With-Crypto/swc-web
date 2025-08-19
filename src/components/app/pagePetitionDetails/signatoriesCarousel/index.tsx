@@ -18,12 +18,14 @@ interface SignatoriesCarouselProps {
   lastSignatures: LastSignature[]
 }
 
+const MIN_SIGNATURES_TO_RENDER_LIST = 3
+
 export function SignatoriesCarousel({
   autoplayDelay = 3000,
   className,
   lastSignatures,
 }: SignatoriesCarouselProps) {
-  const shouldRenderList = lastSignatures.length > 3
+  const shouldRenderList = lastSignatures.length > MIN_SIGNATURES_TO_RENDER_LIST
 
   return (
     <div className={cn('w-full', className)}>
