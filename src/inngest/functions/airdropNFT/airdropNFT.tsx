@@ -158,59 +158,59 @@ export const airdropNFTWithInngest = inngest.createFunction(
           return null
         }
 
-        const emailPayload: SendMailPayload = {
-          to: user.primaryUserEmailAddress.emailAddress,
-          subject: NFTArrivedEmailTemplate.subjectLine,
-          html: await render(
-            <NFTArrivedEmailTemplate
-              actionNFT={actionType as EmailEnabledActionNFTs}
-              completedActionTypes={user.userActions
-                .filter(action =>
-                  Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
-                    action.actionType,
-                  ),
-                )
-                .map(action => action.actionType as EmailActiveActions)}
-              countryCode={countryCode}
-              hiddenActions={[actionType as string]}
-              session={
-                userSession
-                  ? {
-                      userId: userSession.userId,
-                      sessionId: userSession.id,
-                    }
-                  : null
-              }
-            />,
-          ),
-          customArgs: {
-            userId: user.id,
-            actionType: actionType as EmailEnabledActionNFTs,
-            campaign: NFTArrivedEmailTemplate.campaign,
-          },
-        }
+        // const emailPayload: SendMailPayload = {
+        //   to: user.primaryUserEmailAddress.emailAddress,
+        //   subject: NFTArrivedEmailTemplate.subjectLine,
+        //   html: await render(
+        //     <NFTArrivedEmailTemplate
+        //       actionNFT={actionType as EmailEnabledActionNFTs}
+        //       completedActionTypes={user.userActions
+        //         .filter(action =>
+        //           Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
+        //             action.actionType,
+        //           ),
+        //         )
+        //         .map(action => action.actionType as EmailActiveActions)}
+        //       countryCode={countryCode}
+        //       hiddenActions={[actionType as string]}
+        //       session={
+        //         userSession
+        //           ? {
+        //               userId: userSession.userId,
+        //               sessionId: userSession.id,
+        //             }
+        //           : null
+        //       }
+        //     />,
+        //   ),
+        //   customArgs: {
+        //     userId: user.id,
+        //     actionType: actionType as EmailEnabledActionNFTs,
+        //     campaign: NFTArrivedEmailTemplate.campaign,
+        //   },
+        // }
 
-        const messageId = await sendMail({
-          countryCode,
-          payload: emailPayload,
-        }).catch(err => {
-          Sentry.captureException(err, {
-            extra: {
-              userId: user.id,
-              emailTo: user.primaryUserEmailAddress!.emailAddress,
-            },
-            tags: {
-              domain: 'airdropNFT',
-            },
-            fingerprint: ['airdropNFT', 'sendMail'],
-          })
-          return null
-        })
+        // const messageId = await sendMail({
+        //   countryCode,
+        //   payload: emailPayload,
+        // }).catch(err => {
+        //   Sentry.captureException(err, {
+        //     extra: {
+        //       userId: user.id,
+        //       emailTo: user.primaryUserEmailAddress!.emailAddress,
+        //     },
+        //     tags: {
+        //       domain: 'airdropNFT',
+        //     },
+        //     fingerprint: ['airdropNFT', 'sendMail'],
+        //   })
+        //   return null
+        // })
 
         await analytics.flush()
 
         return {
-          messageId,
+          messageId: 'skipped-message-id',
         }
       })
     }

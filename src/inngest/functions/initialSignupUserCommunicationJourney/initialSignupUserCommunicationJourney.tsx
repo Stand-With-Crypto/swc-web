@@ -16,6 +16,7 @@ import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXRemi
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { logger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
@@ -261,63 +262,66 @@ async function sendInitialSignUpEmail({
   userCommunicationJourneyId: string
   step: InitialSignUpEmailStep
 } & Pick<InitialSignupUserCommunicationDataSchema, 'userId' | 'sessionId'>) {
-  const user = await getUser(userId)
+  logger.info('Skipping initial signup email sends')
+  return null
 
-  if (!user.primaryUserEmailAddress) {
-    return null
-  }
+  // const user = await getUser(userId)
 
-  const countryCode = user.countryCode as SupportedCountryCodes
-  const Template = TEMPLATE_BY_STEP[step](countryCode)
+  // if (!user.primaryUserEmailAddress) {
+  //   return null
+  // }
 
-  if (!Template) {
-    return null
-  }
+  // const countryCode = user.countryCode as SupportedCountryCodes
+  // const Template = TEMPLATE_BY_STEP[step](countryCode)
 
-  const messageId = await sendMail({
-    countryCode,
-    payload: {
-      to: user.primaryUserEmailAddress.emailAddress,
-      subject: Template.subjectLine,
-      html: await render(
-        <Template
-          completedActionTypes={user.userActions
-            .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
-            .map(action => `${action.actionType}` as EmailActiveActions)}
-          countryCode={countryCode}
-          session={
-            sessionId
-              ? {
-                  userId: user.id,
-                  sessionId,
-                }
-              : null
-          }
-        />,
-      ),
-      customArgs: {
-        userId: user.id,
-        campaign: Template.campaign,
-      },
-    },
-  }).catch(err => {
-    Sentry.captureException(err, {
-      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress, step },
-      tags: {
-        domain: 'initialSignupUserCommunicationJourney',
-      },
-      fingerprint: ['initialSignupUserCommunicationJourney', 'sendMail', step],
-    })
-    throw err
-  })
+  // if (!Template) {
+  //   return null
+  // }
 
-  return prismaClient.userCommunication.create({
-    data: {
-      userCommunicationJourneyId,
-      messageId,
-      communicationType: CommunicationType.EMAIL,
-    },
-  })
+  // const messageId = await sendMail({
+  //   countryCode,
+  //   payload: {
+  //     to: user.primaryUserEmailAddress.emailAddress,
+  //     subject: Template.subjectLine,
+  //     html: await render(
+  //       <Template
+  //         completedActionTypes={user.userActions
+  //           .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
+  //           .map(action => `${action.actionType}` as EmailActiveActions)}
+  //         countryCode={countryCode}
+  //         session={
+  //           sessionId
+  //             ? {
+  //                 userId: user.id,
+  //                 sessionId,
+  //               }
+  //             : null
+  //         }
+  //       />,
+  //     ),
+  //     customArgs: {
+  //       userId: user.id,
+  //       campaign: Template.campaign,
+  //     },
+  //   },
+  // }).catch(err => {
+  //   Sentry.captureException(err, {
+  //     extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress, step },
+  //     tags: {
+  //       domain: 'initialSignupUserCommunicationJourney',
+  //     },
+  //     fingerprint: ['initialSignupUserCommunicationJourney', 'sendMail', step],
+  //   })
+  //   throw err
+  // })
+
+  // return prismaClient.userCommunication.create({
+  //   data: {
+  //     userCommunicationJourneyId,
+  //     messageId,
+  //     communicationType: CommunicationType.EMAIL,
+  //   },
+  // })
 }
 
 function hasUserCompletedProfile(
