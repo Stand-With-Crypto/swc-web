@@ -1,15 +1,15 @@
-import { CommunicationType, UserActionType, UserCommunicationJourneyType } from '@prisma/client'
-import { render } from '@react-email/components'
-import * as Sentry from '@sentry/nextjs'
+import { UserActionType, UserCommunicationJourneyType } from '@prisma/client'
+// import { render } from '@react-email/components'
+// import * as Sentry from '@sentry/nextjs'
 import { isBefore, subMinutes } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 import { z } from 'zod'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { sendMail } from '@/utils/server/email'
+// import { sendMail } from '@/utils/server/email'
 import BecomeMemberReminderEmail from '@/utils/server/email/templates/becomeMemberReminder'
-import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
+// import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
 import ContactYourRepresentativeReminderEmail from '@/utils/server/email/templates/contactYourRepresentativeReminder'
 import FinishSettingUpProfileReminderEmail from '@/utils/server/email/templates/finishSettingUpProfileReminder'
 import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXReminder'
@@ -17,7 +17,7 @@ import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+// import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'
@@ -234,13 +234,13 @@ async function hasUserCompletedAction(userId: string, actionType: UserActionType
   return !!action
 }
 
-const ACTIVE_ACTIONS = [
-  UserActionType.CALL,
-  UserActionType.EMAIL,
-  UserActionType.DONATION,
-  UserActionType.NFT_MINT,
-  UserActionType.VOTER_REGISTRATION,
-]
+// const ACTIVE_ACTIONS = [
+//   UserActionType.CALL,
+//   UserActionType.EMAIL,
+//   UserActionType.DONATION,
+//   UserActionType.NFT_MINT,
+//   UserActionType.VOTER_REGISTRATION,
+// ]
 
 const TEMPLATE_BY_STEP = {
   welcome: InitialSignUpEmail,

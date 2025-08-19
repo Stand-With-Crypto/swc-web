@@ -1,17 +1,17 @@
 import { NFTCurrency, NFTMintStatus } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
-import { render } from '@react-email/components'
-import * as Sentry from '@sentry/nextjs'
+// import { render } from '@react-email/components'
+// import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
 import { onFailureAirdropNFT } from '@/inngest/functions/airdropNFT/onFailureAirdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { sendMail, SendMailPayload } from '@/utils/server/email'
+// import { sendMail, SendMailPayload } from '@/utils/server/email'
 import {
-  EmailActiveActions,
-  EmailEnabledActionNFTs,
+  // EmailActiveActions,
+  // EmailEnabledActionNFTs,
   getEmailActiveActionFromNFTSlug,
-  getEmailActiveActionsByCountry,
+  // getEmailActiveActionsByCountry,
 } from '@/utils/server/email/templates/common/constants'
 import NFTArrivedEmail from '@/utils/server/email/templates/nftArrived'
 import {
@@ -152,7 +152,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
         if (!user.primaryUserEmailAddress?.emailAddress || !actionType) {
           return null
         }
-        const userSession = user.userSessions?.[0]
+        // const userSession = user.userSessions?.[0]
         const NFTArrivedEmailTemplate = NFTArrivedEmail(countryCode)
         if (!NFTArrivedEmailTemplate) {
           return null

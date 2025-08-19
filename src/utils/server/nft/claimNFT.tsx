@@ -7,19 +7,19 @@ import {
   UserCryptoAddress,
 } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
-import { render } from '@react-email/components'
+// import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { sendMail } from '@/utils/server/email'
-import {
-  EmailActiveActions,
-  EmailEnabledActionNFTs,
-  getEmailActiveActionsByCountry,
-  getEmailEnabledActionNFTsByCountry,
-} from '@/utils/server/email/templates/common/constants'
-import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
+// import { sendMail } from '@/utils/server/email'
+// import {
+//   EmailActiveActions,
+//   EmailEnabledActionNFTs,
+//   getEmailActiveActionsByCountry,
+//   getEmailEnabledActionNFTsByCountry,
+// } from '@/utils/server/email/templates/common/constants'
+// import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -119,10 +119,10 @@ export const ACTION_NFT_SLUG: Record<
   [UserActionType.LINKEDIN]: {
     [USUserActionLinkedinCampaignName.DEFAULT]: null,
   },
-  // [UserActionType.CLAIM_NFT]: {
-  //   [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.GENIUS_ACT_2025,
-  //   [USUserActionClaimNftCampaignName.DAY_OF_ACTION_2025_08_14]: NFTSlug.DAY_OF_ACTION_2025_08_14,
-  // },
+  [UserActionType.CLAIM_NFT]: {
+    [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.GENIUS_ACT_2025,
+    [USUserActionClaimNftCampaignName.DAY_OF_ACTION_2025_08_14]: NFTSlug.DAY_OF_ACTION_2025_08_14,
+  },
 }
 
 const logger = getLogger('claimNft')
@@ -275,30 +275,30 @@ async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
   logger.info('Skipping NFT on the way email sends')
   return null
 
-  const user = await prismaClient.user.findFirstOrThrow({
-    where: { id: userAction.userId },
-    include: {
-      primaryUserEmailAddress: true,
-      userActions: true,
-      userSessions: true,
-    },
-  })
+  // const user = await prismaClient.user.findFirstOrThrow({
+  //   where: { id: userAction.userId },
+  //   include: {
+  //     primaryUserEmailAddress: true,
+  //     userActions: true,
+  //     userSessions: true,
+  //   },
+  // })
 
-  const countryCode = user.countryCode as SupportedCountryCodes
+  // const countryCode = user.countryCode as SupportedCountryCodes
 
-  if (
-    !user.primaryUserEmailAddress?.emailAddress ||
-    !Object.values(getEmailEnabledActionNFTsByCountry(countryCode)).includes(userAction.actionType)
-  ) {
-    return null
-  }
+  // if (
+  //   !user.primaryUserEmailAddress?.emailAddress ||
+  //   !Object.values(getEmailEnabledActionNFTsByCountry(countryCode)).includes(userAction.actionType)
+  // ) {
+  //   return null
+  // }
 
-  const userSession = user.userSessions?.[0]
+  // const userSession = user.userSessions?.[0]
 
-  const NFTOnTheWayEmailTemplate = NFTOnTheWayEmail(countryCode)
-  if (!NFTOnTheWayEmail) {
-    return null
-  }
+  // const NFTOnTheWayEmailTemplate = NFTOnTheWayEmail(countryCode)
+  // if (!NFTOnTheWayEmail) {
+  //   return null
+  // }
 
   // const messageId = await sendMail({
   //   countryCode,

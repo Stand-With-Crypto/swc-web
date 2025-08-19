@@ -1,16 +1,16 @@
-import * as React from 'react'
-import { render } from '@react-email/components'
-import * as Sentry from '@sentry/nextjs'
+// import * as React from 'react'
+// import { render } from '@react-email/components'
+// import * as Sentry from '@sentry/nextjs'
 
-import { sendMail, SendMailPayload } from '@/utils/server/email'
-import {
-  EmailActiveActions,
-  getEmailActiveActionsByCountry,
-} from '@/utils/server/email/templates/common/constants'
-import { getReferralCompletedEmail } from '@/utils/server/email/templates/referralCompleted'
-import { prismaClient } from '@/utils/server/prismaClient'
+// import { sendMail, SendMailPayload } from '@/utils/server/email'
+// import {
+//   EmailActiveActions,
+//   getEmailActiveActionsByCountry,
+// } from '@/utils/server/email/templates/common/constants'
+// import { getReferralCompletedEmail } from '@/utils/server/email/templates/referralCompleted'
+// import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+// import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('sendReferralCompletedEmail')
 
