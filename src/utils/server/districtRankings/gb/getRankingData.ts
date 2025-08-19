@@ -5,7 +5,7 @@ import {
   ReferralsCountByDistrictQueryResult,
 } from '@/utils/server/districtRankings/types'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { GB_REGIONS, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { GB_NUTS_1_AREA_NAMES, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface AdvocatesCountResult {
@@ -15,7 +15,7 @@ export interface AdvocatesCountResult {
 }
 
 function isValidConstituency(constituency: string): boolean {
-  return GB_REGIONS.includes(constituency)
+  return GB_NUTS_1_AREA_NAMES.includes(constituency)
 }
 
 function isValidAdvocatesResult(

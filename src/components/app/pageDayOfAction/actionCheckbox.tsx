@@ -150,15 +150,3 @@ export function ViewKeyPageActionCheckbox({
     </ExternalLink>
   )
 }
-
-export function ReadOnlyActionCheckbox({
-  title,
-  description,
-}: Pick<ActionCheckboxProps, 'title' | 'description'>) {
-  return (
-    <div className="w-full rounded-3xl bg-secondary px-4 py-6">
-      <h3 className="mb-2 text-base font-bold text-foreground">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-    </div>
-  )
-}

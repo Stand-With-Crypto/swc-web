@@ -20,6 +20,8 @@ interface PollItemProps {
   shouldShowOtherField?: boolean
 }
 
+const FIELD_MAX_LENGTH = 191
+
 export function PollItem({
   value,
   displayName,
@@ -113,6 +115,7 @@ export function PollItem({
                 <Input
                   className="w-full rounded-lg border px-4 py-2 focus:border-gray-400 focus:outline-none"
                   disabled={isOtherFieldDisabled}
+                  maxLength={FIELD_MAX_LENGTH}
                   placeholder="Please specify"
                   type="text"
                   {...field}

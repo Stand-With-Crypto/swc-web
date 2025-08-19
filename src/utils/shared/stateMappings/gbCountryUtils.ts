@@ -5,7 +5,7 @@ export const GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP = {
   WLS: 'Wales',
 } as const
 
-export const GB_REGIONS = [
+export const GB_NUTS_1_AREA_NAMES = [
   'Wales',
   'Northern Ireland',
   'London',
@@ -20,7 +20,7 @@ export const GB_REGIONS = [
   'Yorkshire and The Humber',
 ] as const
 
-export type GBRegion = (typeof GB_REGIONS)[number]
+export type GBRegion = (typeof GB_NUTS_1_AREA_NAMES)[number]
 
 export type GBCountryCode = keyof typeof GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP
 

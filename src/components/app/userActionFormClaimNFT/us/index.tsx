@@ -22,6 +22,7 @@ export function USUserActionFormClaimNFT({
   nftSlug,
   onFinished,
   trackMount,
+  campaignName = USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
 }: Omit<UserActionFormClaimNFTProps, 'countryCode'>) {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormClaimNFTSectionNames),
@@ -41,10 +42,10 @@ export function USUserActionFormClaimNFT({
     const result = await triggerServerActionForForm(
       {
         formName: 'User Action Form Claim NFT',
-        payload: { campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025 },
+        payload: { campaignName },
         onError: toastGenericError,
         analyticsProps: {
-          'Campaign Name': USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
+          'Campaign Name': campaignName,
           'User Action Type': UserActionType.CLAIM_NFT,
         },
       },

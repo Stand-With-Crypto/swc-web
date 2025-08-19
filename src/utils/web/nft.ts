@@ -100,4 +100,15 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'A vintage postage stamp design featuring the U.S. Capitol, labeled "GENIUS ACT July 2025" with a "Passed in the USA" badge in the corner',
     },
   },
+  [NFTSlug.DAY_OF_ACTION_2025_08_14]: {
+    name: 'Crypto Day of Action',
+    description:
+      'Thursday, August 14th – SWC’s 2nd Anniversary – is the first-ever Crypto Day of Action, an all-day virtual event aimed at bringing together crypto advocates from across the country to make sure lawmakers in Washington, D.C. hear the millions of crypto voters’ voices calling for common-sense policies that will make America the crypto capital of the world.',
+    image: {
+      url: '/nfts/DOA-NFT.png',
+      width: 160,
+      height: 160,
+      alt: 'Crypto Day of Action nft',
+    },
+  },
 }

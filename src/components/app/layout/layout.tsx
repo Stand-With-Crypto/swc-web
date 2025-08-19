@@ -18,7 +18,7 @@ export interface PageLayoutProps {
   globalBanner: React.ReactNode
 }
 
-const COUNTRIES_WITH_GTM = [SupportedCountryCodes.US]
+const COUNTRIES_WITH_GTM: SupportedCountryCodes[] = []
 
 export function PageLayout({
   children,

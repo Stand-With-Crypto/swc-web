@@ -214,6 +214,7 @@ export const syncSendgridContactsProcessor = inngest.createFunction(
               uploadSendgridContactsCSV(validContacts, {
                 listIds: [contactListId],
                 customFieldsMap,
+                logger,
               }),
             {
               minTimeout: MIN_TIMEOUT,
