@@ -53,7 +53,7 @@ export const UserActionCard = forwardRef<
         ref={ref}
         {...rest}
       >
-        <div className="bg-purple-dark flex h-full w-full items-center justify-center rounded-br-3xl rounded-tr-3xl px-5 py-9 max-lg:order-2 lg:h-auto lg:min-h-48 lg:max-w-full lg:rounded-br-none lg:rounded-tl-3xl">
+        <div className="flex h-full w-full items-center justify-center rounded-br-3xl rounded-tr-3xl bg-purple-dark px-5 py-9 max-lg:order-2 lg:h-auto lg:min-h-48 lg:max-w-full lg:rounded-br-none lg:rounded-tl-3xl">
           <NextImage
             alt={title}
             className="hidden lg:block"
