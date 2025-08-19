@@ -14,7 +14,7 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('sendReferralCompletedEmail')
 
-export async function sendReferralCompletedEmail(referralId: string) {
+export async function sendReferralCompletedEmail(_referralId: string) {
   logger.info('Skipping referral completed email sends')
   return null
 

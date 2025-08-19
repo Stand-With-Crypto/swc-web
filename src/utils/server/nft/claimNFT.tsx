@@ -271,7 +271,7 @@ export async function claimNFTAndSendEmailNotification({
   })
 }
 
-async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
+async function sendNFTOnTheWayEmail(_userAction: UserActionToClaim) {
   logger.info('Skipping NFT on the way email sends')
   return null
 

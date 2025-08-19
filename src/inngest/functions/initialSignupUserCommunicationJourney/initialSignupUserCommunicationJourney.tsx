@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { UserActionType, UserCommunicationJourneyType } from '@prisma/client'
 // import { render } from '@react-email/components'
 // import * as Sentry from '@sentry/nextjs'
