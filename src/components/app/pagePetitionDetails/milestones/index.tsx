@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 
 import { compactNumber } from '@/utils/shared/compactNumber'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
@@ -27,7 +27,7 @@ export function PetitionMilestones({
   currentSignatures = 0,
   locale = SupportedLocale.EN_US,
 }: PetitionMilestonesProps) {
-  const generateAutomaticMilestones = useCallback(() => {
+  const generateAutomaticMilestones = useCallback((): Milestone[] => {
     if (!shouldGenerateAutomaticMilestones) {
       return []
     }
@@ -39,12 +39,17 @@ export function PetitionMilestones({
       return {
         label: `${compactNumber(targetSignatures, locale)} signatures`,
         isComplete,
-      } as Milestone
+      }
     })
   }, [goal, shouldGenerateAutomaticMilestones, currentSignatures, locale])
 
   const automaticMilestones = generateAutomaticMilestones()
-  const allMilestones = [...automaticMilestones, ...additionalMilestones]
+
+  const allMilestones = useMemo(
+    // Reverse the milestones to show the latest on top and the earliest/simplest at the bottom
+    () => [...automaticMilestones, ...additionalMilestones].reverse(),
+    [automaticMilestones, additionalMilestones],
+  )
 
   if (allMilestones.length === 0) {
     return null
@@ -54,8 +59,7 @@ export function PetitionMilestones({
     <div className="space-y-4">
       <h3 className="text-3xl font-bold text-foreground">Petition Milestones</h3>
       <div className="space-y-2">
-        {/* Reverse the milestones to show the latest on top and the earliest/simplest at the bottom */}
-        {allMilestones.reverse().map((milestone, index) => (
+        {allMilestones.map((milestone, index) => (
           <MilestoneItem
             isComplete={milestone.isComplete}
             key={`${milestone.label}-${index}`}
