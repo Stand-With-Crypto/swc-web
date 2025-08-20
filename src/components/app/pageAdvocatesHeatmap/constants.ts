@@ -10,12 +10,12 @@ import {
   IconProps,
   JoinIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
-import { GB_NUTS_1_AREA_NAMES } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type USStateCoords = Partial<Record<USStateCode, [number, number]>>
-type GBStateCoords = Partial<Record<GB_NUTS_1_AREA_NAMES, [number, number]>>
+type GBStateCoords = Partial<Record<GBRegion, [number, number]>>
 
 interface RegionCoords {
   [SupportedCountryCodes.US]: USStateCoords
@@ -27,7 +27,7 @@ interface RegionCoords {
 export type AreaCoordinates = USStateCoords | GBStateCoords
 export type AreaCoordinatesKey = keyof USStateCoords | keyof GBStateCoords
 
-export const AREAS_WITH_SINGLE_MARKER: AreaCoordinatesKey[] = [GB_NUTS_1_AREA_NAMES.London]
+export const AREAS_WITH_SINGLE_MARKER: AreaCoordinatesKey[] = ['London']
 
 // Coordinates format: [longitude, latitude]
 export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {

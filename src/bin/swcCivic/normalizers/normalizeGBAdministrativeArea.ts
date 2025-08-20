@@ -1,8 +1,6 @@
-import { GB_NUTS_1_AREA_NAMES } from '@/utils/shared/stateMappings/gbCountryUtils'
+import { GB_NUTS_1_AREA_NAMES, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 
-export function normalizeGBAdministrativeArea(
-  administrativeArea?: string,
-): GB_NUTS_1_AREA_NAMES | undefined {
+export function normalizeGBAdministrativeArea(administrativeArea?: string): GBRegion | undefined {
   if (!administrativeArea) {
     return
   }
@@ -11,12 +9,12 @@ export function normalizeGBAdministrativeArea(
 
   normalizedAdministrativeArea = normalizedAdministrativeArea.replace('(England)', 'England')
 
-  if (!(normalizedAdministrativeArea in GB_NUTS_1_AREA_NAMES)) {
+  if (!GB_NUTS_1_AREA_NAMES.includes(normalizedAdministrativeArea)) {
     console.error(
-      `Unknown GB administrative area: ${normalizedAdministrativeArea}. Please add it to the GB_NUTS_1_AREA_NAMES enum.`,
+      `Unknown GB administrative area: ${normalizedAdministrativeArea}. Please add it to the GB_NUTS_1_AREA_NAMES array.`,
     )
     return
   }
 
-  return normalizedAdministrativeArea as GB_NUTS_1_AREA_NAMES
+  return normalizedAdministrativeArea as GBRegion
 }
