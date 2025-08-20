@@ -54,7 +54,7 @@ export const dtsiBillDetailsQueryString = /* GraphQL */ `
         relationshipType
       }
 
-      latestVote {
+      latestVotes {
         personPositions {
           person {
             ...BillPerson

@@ -11,7 +11,7 @@ export type BillFromDTSI = Pick<
   | 'status'
   | 'summary'
   | 'title'
-  | 'latestVote'
+  | 'latestVotes'
   | 'sponsorshipRelationships'
 > & { analysis: { richTextCommentary: unknown }[] }
 

@@ -12,6 +12,7 @@ type Bill {
   govTrackUrl: String!
   id: ID!
   latestVote: BillVote
+  latestVotes: [BillVote!]!
   pdfUrl: String!
   receivedPersonRoleGroup: PersonRoleGroup!
   receivedPersonRoleGroupId: String!

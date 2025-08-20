@@ -48,9 +48,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         >
           {billTitle}
         </InternalLink>
-        <p className="w-full max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap text-fontcolor-muted">
-          {description}
-        </p>
+        <p className="w-full text-fontcolor-muted">{description}</p>
       </div>
 
       {children}

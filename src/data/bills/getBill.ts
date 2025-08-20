@@ -26,8 +26,9 @@ const groupBillStancesByPerson = (bill: BillFromDTSI) => {
       coSponsors.push(relationship.person)
     }
   }
-
-  for (const personPosition of bill?.latestVote?.personPositions || []) {
+  // latestVotes returns the latest vote across different categories (e.g. House, Senate, etc.). We want to display all these as one bucket so we flatten
+  const flattenedPositionsAcrossVotes = bill?.latestVotes?.flatMap(vote => vote.personPositions)
+  for (const personPosition of flattenedPositionsAcrossVotes) {
     if (personPosition.positionType === DTSI_BillVotePersonPositionType.YES) {
       votedFor.push(personPosition.person)
     } else {
