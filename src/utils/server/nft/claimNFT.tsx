@@ -7,19 +7,19 @@ import {
   UserCryptoAddress,
 } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
-import { render } from '@react-email/components'
+// import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { sendMail } from '@/utils/server/email'
-import {
-  EmailActiveActions,
-  EmailEnabledActionNFTs,
-  getEmailActiveActionsByCountry,
-  getEmailEnabledActionNFTsByCountry,
-} from '@/utils/server/email/templates/common/constants'
-import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
+// import { sendMail } from '@/utils/server/email'
+// import {
+//   EmailActiveActions,
+//   EmailEnabledActionNFTs,
+//   getEmailActiveActionsByCountry,
+//   getEmailEnabledActionNFTsByCountry,
+// } from '@/utils/server/email/templates/common/constants'
+// import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
@@ -121,6 +121,7 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.CLAIM_NFT]: {
     [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.GENIUS_ACT_2025,
+    [USUserActionClaimNftCampaignName.DAY_OF_ACTION_2025_08_14]: NFTSlug.DAY_OF_ACTION_2025_08_14,
   },
 }
 
@@ -270,76 +271,79 @@ export async function claimNFTAndSendEmailNotification({
   })
 }
 
-async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
-  const user = await prismaClient.user.findFirstOrThrow({
-    where: { id: userAction.userId },
-    include: {
-      primaryUserEmailAddress: true,
-      userActions: true,
-      userSessions: true,
-    },
-  })
+async function sendNFTOnTheWayEmail(_userAction: UserActionToClaim) {
+  logger.info('Skipping NFT on the way email sends')
+  return null
 
-  const countryCode = user.countryCode as SupportedCountryCodes
+  // const user = await prismaClient.user.findFirstOrThrow({
+  //   where: { id: userAction.userId },
+  //   include: {
+  //     primaryUserEmailAddress: true,
+  //     userActions: true,
+  //     userSessions: true,
+  //   },
+  // })
 
-  if (
-    !user.primaryUserEmailAddress?.emailAddress ||
-    !Object.values(getEmailEnabledActionNFTsByCountry(countryCode)).includes(userAction.actionType)
-  ) {
-    return null
-  }
+  // const countryCode = user.countryCode as SupportedCountryCodes
 
-  const userSession = user.userSessions?.[0]
+  // if (
+  //   !user.primaryUserEmailAddress?.emailAddress ||
+  //   !Object.values(getEmailEnabledActionNFTsByCountry(countryCode)).includes(userAction.actionType)
+  // ) {
+  //   return null
+  // }
 
-  const NFTOnTheWayEmailTemplate = NFTOnTheWayEmail(countryCode)
-  if (!NFTOnTheWayEmail) {
-    return null
-  }
+  // const userSession = user.userSessions?.[0]
 
-  const messageId = await sendMail({
-    countryCode,
-    payload: {
-      to: user.primaryUserEmailAddress.emailAddress,
-      subject: NFTOnTheWayEmailTemplate.subjectLine,
-      html: await render(
-        <NFTOnTheWayEmailTemplate
-          actionNFT={userAction.actionType as EmailEnabledActionNFTs}
-          completedActionTypes={user.userActions
-            .filter(action =>
-              Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
-                action.actionType,
-              ),
-            )
-            .map(action => action.actionType as EmailActiveActions)}
-          countryCode={countryCode}
-          hiddenActions={[userAction.actionType]}
-          session={
-            userSession
-              ? {
-                  userId: userSession.userId,
-                  sessionId: userSession.id,
-                }
-              : null
-          }
-        />,
-      ),
-      customArgs: {
-        userId: user.id,
-        userActionId: userAction.id,
-        actionType: userAction.actionType,
-        campaign: NFTOnTheWayEmailTemplate.campaign,
-      },
-    },
-  }).catch(err => {
-    Sentry.captureException(err, {
-      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
-      tags: {
-        domain: 'claimNFT',
-      },
-      fingerprint: ['claimNFT', 'sendMail'],
-    })
-    throw err
-  })
+  // const NFTOnTheWayEmailTemplate = NFTOnTheWayEmail(countryCode)
+  // if (!NFTOnTheWayEmail) {
+  //   return null
+  // }
 
-  logger.info(`Sent nft on the way email with messageId: ${String(messageId)}`)
+  // const messageId = await sendMail({
+  //   countryCode,
+  //   payload: {
+  //     to: user.primaryUserEmailAddress.emailAddress,
+  //     subject: NFTOnTheWayEmailTemplate.subjectLine,
+  //     html: await render(
+  //       <NFTOnTheWayEmailTemplate
+  //         actionNFT={userAction.actionType as EmailEnabledActionNFTs}
+  //         completedActionTypes={user.userActions
+  //           .filter(action =>
+  //             Object.values(getEmailActiveActionsByCountry(countryCode)).includes(
+  //               action.actionType,
+  //             ),
+  //           )
+  //           .map(action => action.actionType as EmailActiveActions)}
+  //         countryCode={countryCode}
+  //         hiddenActions={[userAction.actionType]}
+  //         session={
+  //           userSession
+  //             ? {
+  //                 userId: userSession.userId,
+  //                 sessionId: userSession.id,
+  //               }
+  //             : null
+  //         }
+  //       />,
+  //     ),
+  //     customArgs: {
+  //       userId: user.id,
+  //       userActionId: userAction.id,
+  //       actionType: userAction.actionType,
+  //       campaign: NFTOnTheWayEmailTemplate.campaign,
+  //     },
+  //   },
+  // }).catch(err => {
+  //   Sentry.captureException(err, {
+  //     extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+  //     tags: {
+  //       domain: 'claimNFT',
+  //     },
+  //     fingerprint: ['claimNFT', 'sendMail'],
+  //   })
+  //   throw err
+  // })
+
+  // logger.info(`Sent nft on the way email with messageId: ${String(messageId)}`)
 }

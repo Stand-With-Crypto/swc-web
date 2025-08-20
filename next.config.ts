@@ -432,6 +432,18 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/day-of-action-1/:sessionId*',
+        destination:
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-day-of-action-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/day-of-action-2/:sessionId*',
+        destination:
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-day-of-action-2&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/ca/s/house-rising',
         destination:
           '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
@@ -799,6 +811,14 @@ const nextConfig: NextConfig = {
         // These rewrites are checked after headers/redirects
         // and before all files including _next/public files which
         // allows overriding page files
+        {
+          source: '/embedded/map',
+          destination: '/embedded/us/map',
+        },
+        {
+          source: '/embedded/uk/map',
+          destination: '/embedded/gb/map',
+        },
         {
           source: '/:locale/(mission|manifesto)',
           destination: '/:locale/about',
