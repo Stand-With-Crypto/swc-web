@@ -41,8 +41,12 @@ function PoliticianHeader({
   const roleNameResolver = getRoleNameResolver(countryCode)
 
   return (
-    <div className="flex flex-col items-center sm:flex-row">
-      <ProfileAvatar className="box-mb-6 sm:mb-0 sm:mr-7" person={person} size={200} />
+    <div className="flex flex-col items-center sm:flex-row sm:items-start">
+      <ProfileAvatar
+        className="box-mb-6 flex-shrink-0 sm:mb-0 sm:mr-7"
+        person={person}
+        size={200}
+      />
 
       <div className="flex flex-col sm:items-start">
         <PageTitle className="mb-3 mt-4 text-center sm:mt-0 sm:text-left" size="lg">
