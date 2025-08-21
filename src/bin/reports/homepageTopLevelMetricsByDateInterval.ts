@@ -3,7 +3,10 @@ import { getCountPolicymakerContacts } from '@/data/aggregations/getCountPolicym
 import { getCountUsers } from '@/data/aggregations/getCountUsers'
 
 /**
- * Please, remember to set the environment variable NEXT_PUBLIC_ENVIRONMENT to "production"
+ * Please, remember to run this script with the environment variable NEXT_PUBLIC_ENVIRONMENT set to "production"
+ * otherwise the data will be mocked
+ *
+ * NEXT_PUBLIC_ENVIRONMENT=production npm run ts ./src/bin/reports/homepageTopLevelMetricsByDateInterval.ts
  */
 async function homepageTopLevelMetricsByDateInterval() {
   const startDate = new Date('2025-08-14T00:00:00Z')
