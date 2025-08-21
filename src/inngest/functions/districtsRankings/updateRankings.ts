@@ -17,6 +17,7 @@ import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GB_NUTS_1_AREA_NAMES, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -29,12 +30,19 @@ export interface UpdateDistrictsRankingsCronJobSchema {
   name: typeof UPDATE_DISTRICT_RANKINGS_INNGEST_EVENT_NAME
 }
 
-const COUNTRY_CODE_TO_STATES_CODES_MAP: Record<SupportedCountryCodes, string[]> = {
+interface StateCodesByCountry {
+  [SupportedCountryCodes.US]: USStateCode[]
+  [SupportedCountryCodes.CA]: CAProvinceOrTerritoryCode[]
+  [SupportedCountryCodes.GB]: GBRegion[]
+  [SupportedCountryCodes.AU]: AUStateCode[]
+}
+
+const COUNTRY_CODE_TO_STATES_CODES_MAP: StateCodesByCountry = {
   [SupportedCountryCodes.US]: Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[],
   [SupportedCountryCodes.CA]: Object.keys(
     CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   ) as CAProvinceOrTerritoryCode[],
-  [SupportedCountryCodes.GB]: [],
+  [SupportedCountryCodes.GB]: [...GB_NUTS_1_AREA_NAMES],
   [SupportedCountryCodes.AU]: Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP) as AUStateCode[],
 }
 
@@ -42,6 +50,7 @@ const COUNTRIES_TO_UPDATE_RANKINGS_FOR = [
   SupportedCountryCodes.US,
   SupportedCountryCodes.CA,
   SupportedCountryCodes.AU,
+  SupportedCountryCodes.GB,
 ]
 
 interface ExecutionResult {

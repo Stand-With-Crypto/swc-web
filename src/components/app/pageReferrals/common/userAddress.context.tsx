@@ -17,7 +17,7 @@ import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
 import { useGetElectoralZoneRank } from '@/hooks/useGetElectoralZoneRank'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
-import { StateCode } from '@/utils/server/districtRankings/types'
+import { AdministrativeArea } from '@/utils/server/districtRankings/types'
 import { ElectoralZone } from '@/utils/server/swcCivic/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
@@ -42,7 +42,7 @@ interface UserAddressContextType {
   isLoading: boolean
   electoralZone: ElectoralZone | null
   electoralZoneRanking: GetDistrictRankResponse | null
-  administrativeArea: StateCode | null
+  administrativeArea: AdministrativeArea | null
   isAddressFromProfile: boolean
 }
 
@@ -106,12 +106,14 @@ export const UserAddressProvider = ({
     return electoralZone.countryCode.toLowerCase() === countryCode.toLowerCase()
   }, [electoralZone, countryCode])
 
-  const administrativeArea = useMemo<StateCode | null>(() => {
-    if (electoralZone?.administrativeArea) return electoralZone.administrativeArea as StateCode
+  const administrativeArea = useMemo<AdministrativeArea | null>(() => {
+    if (electoralZone?.administrativeArea) {
+      return electoralZone.administrativeArea as AdministrativeArea
+    }
 
     //when the administrativeArea is null, we use Google Maps as a fallback
     if (!isAddressLoading && addressDetails?.administrativeAreaLevel1) {
-      return addressDetails.administrativeAreaLevel1 as StateCode
+      return addressDetails.administrativeAreaLevel1 as AdministrativeArea
     }
 
     return null

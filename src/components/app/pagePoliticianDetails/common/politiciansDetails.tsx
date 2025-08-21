@@ -1,16 +1,12 @@
 import React, { ReactNode } from 'react'
-import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
-import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
+import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 import { Button } from '@/components/ui/button'
-import { MaybeNextImg, NextImage } from '@/components/ui/image'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
+import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
-import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import { ProfileAvatar } from '@/components/ui/profileAvatar'
 import {
   getDTSIPersonRoleLocation,
   getFormattedDTSIPersonRoleDateRange,
@@ -20,13 +16,12 @@ import {
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
-  getDTSIPersonProfilePictureUrlDimensions,
-  shouldPersonHaveStanceScoresHidden,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-const POLITICIAN_IMAGE_SIZE_PX = 230
+import StatementSection from './partials/statementSection'
+import VoteSection from './partials/voteSection'
 
 export function PagePoliticianDetails({ children }: { children: ReactNode }) {
   return <div className="standard-spacing-from-navbar container max-w-3xl">{children}</div>
@@ -36,44 +31,27 @@ function PoliticianHeader({
   person,
   countryCode,
   showRoleLocation = true,
+  showDonateButton = true,
 }: {
-  person: DTSIPersonDetails
+  person: PoliticianDetails
   countryCode: SupportedCountryCodes
   showRoleLocation?: boolean
+  showDonateButton?: boolean
 }) {
   const roleNameResolver = getRoleNameResolver(countryCode)
 
   return (
-    <>
-      {person.profilePictureUrl ? (
-        <div
-          className="mx-auto mb-6 overflow-hidden rounded-xl"
-          style={{ maxWidth: POLITICIAN_IMAGE_SIZE_PX }}
-        >
-          <MaybeNextImg
-            alt={`profile picture of ${dtsiPersonFullName(person)}`}
-            sizes={`${POLITICIAN_IMAGE_SIZE_PX}px`}
-            {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
-            className="w-full"
-            src={person.profilePictureUrl}
-          />
-        </div>
-      ) : (
-        <div className="mx-auto mb-6 max-w-[100px]">
-          <InitialsAvatar
-            firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
-            lastInitial={person.lastName.slice(0, 1)}
-            size={100}
-          />
-        </div>
-      )}
-      <PageTitle className="mb-3" size="lg">
-        {dtsiPersonFullName(person)}
-      </PageTitle>
-      <PageSubTitle className="mb-3">
+    <div className="flex flex-col items-center sm:flex-row">
+      <ProfileAvatar className="box-mb-6 sm:mb-0 sm:mr-7" person={person} size={200} />
+
+      <div className="flex flex-col sm:items-start">
+        <PageTitle className="mb-3 mt-4 text-center sm:mt-0 sm:text-left" size="lg">
+          {dtsiPersonFullName(person)}
+        </PageTitle>
+
         {person.primaryRole && (
-          <>
-            <PageSubTitle>
+          <div>
+            <p className="mb-5 text-center text-xl font-normal text-black/80 sm:text-left">
               {person.politicalAffiliationCategory && (
                 <>
                   {dtsiPersonPoliticalAffiliationCategoryDisplayName(
@@ -84,21 +62,22 @@ function PoliticianHeader({
               )}
               {roleNameResolver(person.primaryRole)}
               {showRoleLocation && getDTSIPersonRoleLocation(person.primaryRole) && (
-                <span className="font-normal text-gray-500">
+                <span className="font-normal">
                   {' '}
                   from {getDTSIPersonRoleLocation(person.primaryRole)}
                 </span>
               )}
-            </PageSubTitle>
+            </p>
+
             {getHasDTSIPersonRoleEnded(person.primaryRole) && (
-              <div className="text-gray-500">
-                {getFormattedDTSIPersonRoleDateRange(person.primaryRole)}
-              </div>
+              <div>{getFormattedDTSIPersonRoleDateRange(person.primaryRole)}</div>
             )}
-          </>
+
+            <PoliticianLinks person={person} showDonateButton={showDonateButton} />
+          </div>
         )}
-      </PageSubTitle>
-    </>
+      </div>
+    </div>
   )
 }
 
@@ -108,33 +87,35 @@ function PoliticianLinks({
   person,
   showDonateButton = true,
 }: {
-  person: DTSIPersonDetails
+  person: PoliticianDetails
   showDonateButton?: boolean
 }) {
   return (
-    <div className="flex items-center justify-center gap-3">
+    <div className="flex items-center justify-center gap-3 sm:justify-start">
       {showDonateButton && person.donationUrl && (
-        <Button asChild>
+        <Button asChild className="px-8 text-base">
           <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
         </Button>
       )}
+
       {Boolean(person.officialUrl) && (
-        <Button asChild className="h-11 w-11 rounded-full p-3" variant="secondary">
+        <Button asChild className="h-12 w-12 rounded-full p-3" variant="secondary">
           <ExternalLink href={person.officialUrl}>
-            <Globe className="h-6 w-6" />
+            <Globe className="h-7 w-7" />
             <span className="sr-only">{person.officialUrl}</span>
           </ExternalLink>
         </Button>
       )}
+
       {person.twitterAccounts.slice(0, 1).map(account => (
         <Button
           asChild
-          className="h-11 w-11 rounded-full p-[14px]"
+          className="h-12 w-12 rounded-full p-[14px]"
           key={account.id}
           variant="secondary"
         >
           <ExternalLink href={dtsiTwitterAccountUrl(account)}>
-            <NextImage alt="x.com logo" height={20} src={'/misc/xDotComLogo.svg'} width={20} />
+            <NextImage alt="x.com logo" height={22} src={'/misc/xDotComLogo.svg'} width={22} />
             <span className="sr-only">{dtsiTwitterAccountUrl(account)}</span>
           </ExternalLink>
         </Button>
@@ -149,33 +130,13 @@ function PoliticianStances({
   person,
   countryCode,
 }: {
-  person: DTSIPersonDetails
+  person: PoliticianDetails
   countryCode: SupportedCountryCodes
 }) {
-  const stances = orderBy(person.stances, [
-    x => (x.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP ? 0 : 1),
-    x => -1 * new Date(x.dateStanceMade).getTime(),
-  ])
-
   return (
     <section>
-      <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="md">
-        Notable statements
-      </PageTitle>
-      <div className="space-y-14 md:space-y-16">
-        {!stances.length && (
-          <div className="flex items-center justify-center">No recent statements.</div>
-        )}
-        {stances.map(stance => (
-          <DTSIStanceDetails
-            countryCode={countryCode}
-            isStanceHidden={shouldPersonHaveStanceScoresHidden(person)}
-            key={stance.id}
-            person={person}
-            stance={stance}
-          />
-        ))}
-      </div>
+      <VoteSection countryCode={countryCode} person={person} />
+      <StatementSection countryCode={countryCode} person={person} />
     </section>
   )
 }

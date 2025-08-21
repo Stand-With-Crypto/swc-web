@@ -8,6 +8,7 @@ import {
   CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
   CAProvinceOrTerritoryCode,
 } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GB_NUTS_1_AREA_NAMES, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
@@ -75,6 +76,14 @@ export const zodCAProvinceDistrict = object({
     (val): val is CAProvinceOrTerritoryCode =>
       val in CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
     'Invalid province/territory code',
+  ),
+  district: string(),
+})
+
+export const zodGbRegionConstituency = object({
+  state: string().refine(
+    (val): val is GBRegion => GB_NUTS_1_AREA_NAMES.includes(val),
+    'Invalid state code',
   ),
   district: string(),
 })

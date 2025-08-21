@@ -1,13 +1,13 @@
-import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import { PoliticianDetails } from '@/components/app/pagePoliticianDetails/common/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
-export function getPoliticianDetailsPageDescription(person: DTSIPersonDetails) {
+export function getPoliticianDetailsPageDescription(person: PoliticianDetails) {
   const fullName = dtsiPersonFullName(person)
-  if (!person.stances.length) {
+  if (!person.stancesCount) {
     return `${fullName} has not made any recent comments about Bitcoin, Ethereum, and cryptocurrency innovation.`
   }
   const indication = (() => {
