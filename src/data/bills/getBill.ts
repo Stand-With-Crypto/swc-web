@@ -62,7 +62,14 @@ export async function getBill(
 
   const billData = mergeBillFromBuilderIOAndDTSI(billFromBuilderIO, billFromDTSI) as BillDetails
 
-  const groupedStances = groupBillStancesByPerson(billFromDTSI!)
+  const groupedStances = billFromDTSI
+    ? groupBillStancesByPerson(billFromDTSI)
+    : {
+        sponsors: [],
+        coSponsors: [],
+        votedFor: [],
+        votedAgainst: [],
+      }
 
   billData.relationships = groupedStances
 
