@@ -4,6 +4,7 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData, getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { getFounders } from '@/utils/server/builder/models/data/founders'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
@@ -19,6 +20,7 @@ export default async function GbHomePage() {
     partners,
     founders,
     dtsiHomepagePoliticians,
+    leaderboardData,
   ] = await Promise.all([
     getHomepageData({
       recentActivityLimit: 30,
@@ -29,6 +31,7 @@ export default async function GbHomePage() {
     getPartners({ countryCode }),
     getFounders({ countryCode }),
     queryDTSIHomepagePeople({ countryCode }),
+    getDistrictsLeaderboardData({ limit: 10, countryCode }),
   ])
 
   return (
@@ -36,6 +39,7 @@ export default async function GbHomePage() {
       advocatePerStateDataProps={advocatePerStateDataProps}
       dtsiHomepagePoliticians={dtsiHomepagePoliticians}
       founders={founders}
+      leaderboardData={leaderboardData.items}
       partners={partners}
       topLevelMetrics={topLevelMetrics}
       {...asyncProps}
