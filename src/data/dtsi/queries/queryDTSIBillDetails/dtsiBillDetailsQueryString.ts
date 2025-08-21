@@ -7,33 +7,24 @@ const fragmentDTSIBillAnalysis = /* GraphQL */ `
   }
 `
 
-const fragmentDTSIBillRelationships = /* GraphQL */ `
-  fragment BillRelationships on BillPersonRelationship {
+const fragmentDTSIBillPerson = /* GraphQL */ `
+  fragment BillPerson on Person {
     id
-    relationshipType
-    person {
-      id
-      firstName
-      firstNickname
-      lastName
-      nameSuffix
-      primaryRole {
-        status
-        roleCategory
-        title
-        primaryState
-        dateStart
-        dateEnd
-        group {
-          id
-          category
-          groupInstance
-        }
-      }
-      profilePictureUrl
-      profilePictureUrlDimensions
-      politicalAffiliationCategory
-      slug
+    firstName
+    firstNickname
+    lastName
+    nameSuffix
+    slug
+    profilePictureUrl
+    profilePictureUrlDimensions
+    politicalAffiliationCategory
+    computedStanceScore
+    manuallyOverriddenStanceScore
+    computedSumStanceScoreWeight
+    primaryRole {
+      roleCategory
+      primaryCountryCode
+      status
     }
   }
 `
@@ -52,15 +43,27 @@ export const dtsiBillDetailsQueryString = /* GraphQL */ `
       congressDotGovUrl
       dateIntroduced
       datetimeCreated
-
       analysis {
         ...BillAnalysis
       }
-      relationships {
-        ...BillRelationships
+
+      sponsorshipRelationships {
+        person {
+          ...BillPerson
+        }
+        relationshipType
+      }
+
+      latestVotes {
+        personPositions {
+          person {
+            ...BillPerson
+          }
+          positionType
+        }
       }
     }
   }
   ${fragmentDTSIBillAnalysis}
-  ${fragmentDTSIBillRelationships}
+  ${fragmentDTSIBillPerson}
 `
