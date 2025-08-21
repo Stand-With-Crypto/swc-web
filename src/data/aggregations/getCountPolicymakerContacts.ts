@@ -1,15 +1,23 @@
 import 'server-only'
 
-import { UserActionType } from '@prisma/client'
+import { Prisma, UserActionType } from '@prisma/client'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-export const getCountPolicymakerContacts = async () => {
+export const getCountPolicymakerContacts = async ({
+  customEmailCountWhere,
+  customCallCountWhere,
+}: {
+  customEmailCountWhere?: Prisma.UserActionEmailRecipientWhereInput
+  customCallCountWhere?: Prisma.UserActionWhereInput
+} = {}) => {
   const [countUserActionEmailRecipients, countUserActionCalls] = await Promise.all([
-    prismaClient.userActionEmailRecipient.count(),
+    prismaClient.userActionEmailRecipient.count({
+      where: customEmailCountWhere,
+    }),
     prismaClient.userAction.count({
-      where: { actionType: UserActionType.CALL },
+      where: { ...customCallCountWhere, actionType: UserActionType.CALL },
     }),
   ])
   /*

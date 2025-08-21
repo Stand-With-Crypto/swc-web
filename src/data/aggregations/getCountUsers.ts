@@ -1,10 +1,14 @@
 import 'server-only'
 
+import { Prisma } from '@prisma/client'
+
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-export const getCountUsers = async () => {
-  const count = await prismaClient.user.count()
+export const getCountUsers = async (customWhere?: Prisma.UserWhereInput) => {
+  const count = await prismaClient.user.count({
+    where: customWhere,
+  })
   if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
     return { count }
   }
