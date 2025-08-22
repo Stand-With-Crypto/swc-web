@@ -49,7 +49,7 @@ export function NavBarGlobalBanner({
   }
 
   return (
-    <div className="flex h-12 w-full items-center justify-center bg-primary-cta">
+    <div className="z-10 flex h-12 w-full items-center justify-center bg-primary-cta">
       <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
         <div className="container flex justify-between">
           <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center max-[400px]:text-xs sm:text-base">

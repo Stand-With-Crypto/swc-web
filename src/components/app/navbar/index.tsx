@@ -79,7 +79,7 @@ export function Navbar({
   return (
     <>
       {hasEnvironmentBar && (
-        <div className="flex h-10 items-center bg-yellow-300 text-center">
+        <div className="z-10 flex h-10 items-center bg-yellow-300 text-center">
           <div className="container flex justify-between">
             <p className="flex-shrink-0 font-bold">
               {capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment

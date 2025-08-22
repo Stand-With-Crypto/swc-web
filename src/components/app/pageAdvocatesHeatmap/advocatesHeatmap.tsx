@@ -79,9 +79,7 @@ export function AdvocatesHeatmap({
       <div
         className={cn(
           'flex h-full flex-col items-start py-6',
-          isEmbedded
-            ? 'px-2'
-            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
+          isEmbedded ? 'px-2' : `rounded-[40px] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
         )}
       >
         <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
@@ -107,9 +105,7 @@ export function AdvocatesHeatmap({
       <div
         className={cn(
           'flex w-full flex-col items-start gap-4',
-          isEmbedded
-            ? 'md:flex-row'
-            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
+          isEmbedded ? 'md:flex-row' : `md:flex-column rounded-[40px] px-12`,
         )}
       >
         {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
@@ -162,8 +158,8 @@ const MapComponent = ({
   const [actionInfo, setActionInfo] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
-  const currentFill = isEmbedded ? '#171717' : '#F4EEFF'
-  const currentStroke = isEmbedded ? '#3A3B3D' : '#DAC5FF'
+  const currentFill = isEmbedded ? '#171717' : 'hsl(var(--purple-light))'
+  const currentStroke = isEmbedded ? '#3A3B3D' : 'hsl(var(--purple-dark))'
   const currentHoverAndPressedFill = isEmbedded ? '#6100FF' : '#DDC9FF'
 
   const handleActionMouseOver = useCallback(

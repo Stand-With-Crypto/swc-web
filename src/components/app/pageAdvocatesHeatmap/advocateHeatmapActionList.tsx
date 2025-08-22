@@ -10,10 +10,10 @@ export function AdvocateHeatmapActionList({ isEmbedded }: { isEmbedded?: boolean
   return (
     <div
       className={cn(
-        'flex  flex-row justify-around gap-3  md:justify-between',
+        'flex flex-row justify-around gap-3 md:justify-between',
         isEmbedded
-          ? 'w-full md:w-[auto] md:flex-col'
-          : 'w-full items-center rounded-[24px] bg-[#FBF8FF] px-10 py-8',
+          ? 'w-full text-white md:w-[auto] md:flex-col'
+          : 'w-full items-center rounded-[24px] bg-purple-light px-10 py-8 text-purple-dark',
       )}
     >
       {!isEmbedded && <strong>Key</strong>}
@@ -22,14 +22,13 @@ export function AdvocateHeatmapActionList({ isEmbedded }: { isEmbedded?: boolean
 
         return (
           <div
-            className={cn(
-              'flex flex-col items-center gap-3 font-sans text-base md:flex-row',
-              isEmbedded ? 'text-white' : 'text-black',
-            )}
+            className={cn('flex flex-col items-center gap-3 font-sans text-base md:flex-row')}
             key={key}
           >
             <ActionIcon className="w-8 md:w-10" />
-            <span className="text-xs">{isMobile ? action.labelMobile : action.label}</span>
+            <strong className="text-sm lg:text-base">
+              {isMobile ? action.labelMobile : action.label}
+            </strong>
           </div>
         )
       })}

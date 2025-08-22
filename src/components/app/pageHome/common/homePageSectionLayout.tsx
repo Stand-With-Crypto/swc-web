@@ -11,16 +11,18 @@ export function HomePageSection({
   container?: boolean
   className?: string
 }) {
-  return (
-    <section className={cn(container && 'container', 'mt-32 md:mt-36', className)}>
-      {children}
-    </section>
-  )
+  return <section className={cn(container && 'container', 'mt-32', className)}>{children}</section>
 }
 
-export function HomePageSectionTitle({ children }: { children: React.ReactNode }) {
+export function HomePageSectionTitle({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
   return (
-    <PageTitle as="h3" className="mb-6 !text-[32px]">
+    <PageTitle as="h3" className={cn('mb-6 !text-5xl', className)}>
       {children}
     </PageTitle>
   )
@@ -41,3 +43,15 @@ export function HomePageSectionSubtitle({
   )
 }
 HomePageSection.Subtitle = HomePageSectionSubtitle
+
+export function HomePageCommunity({ children }: { children: React.ReactNode }) {
+  return (
+    <HomePageSection
+      className="mt-0 bg-purple-dark pb-36 pt-24 [&_h4]:text-white/60"
+      container={false}
+    >
+      {children}
+    </HomePageSection>
+  )
+}
+HomePageSection.Community = HomePageCommunity

@@ -31,7 +31,7 @@ export function HomepagePoliticiansSection({
   }
 
   return (
-    <HomePageSection className="space-y-6" container={false}>
+    <HomePageSection className="mt-32 space-y-6" container={false}>
       <div className="container">
         <HomePageSection.Title>{title}</HomePageSection.Title>
         <HomePageSection.Subtitle>{subtitle}</HomePageSection.Subtitle>

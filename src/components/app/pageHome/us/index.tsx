@@ -53,116 +53,118 @@ export function UsPageHome({
     <>
       <UsHero />
 
-      <section className="container">
+      <HomePageSection className="mt-0 pb-28">
         <TopLevelMetrics {...{ sumDonations, countryCode, countUsers, countPolicymakerContacts }} />
-      </section>
-
-      <HomePageSection>
-        <HomePageSection.Title>Our community</HomePageSection.Title>
-        <HomePageSection.Subtitle className="md:hidden">
-          See how our community is taking a stand to safeguard the future of crypto in America.
-        </HomePageSection.Subtitle>
-        <RecentActivity>
-          <ResponsiveTabsOrSelect
-            analytics={'Homepage Our Community Tabs'}
-            data-testid="community-leaderboard-tabs"
-            defaultValue={UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
-            options={[
-              {
-                value: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-                label: 'Recent activity',
-                content: (
-                  <>
-                    <HomePageSection.Subtitle className="hidden md:block">
-                      See the most recent actions our community has taken to safeguard the future of
-                      crypto in America.
-                    </HomePageSection.Subtitle>
-                    <DelayedRecentActivityWithMap
-                      actions={actions}
-                      advocatesMapPageData={advocatePerStateDataProps}
-                      countUsers={countUsers.count}
-                      countryCode={countryCode}
-                    />
-                  </>
-                ),
-              },
-              {
-                value: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
-                label: 'Top donations',
-                content: (
-                  <>
-                    <HomePageSection.Subtitle>
-                      Donations to{' '}
-                      <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
-                        Fairshake
-                      </ExternalLink>
-                      , a pro-crypto Super PAC, are not included on the leaderboard.
-                    </HomePageSection.Subtitle>
-                    <div className="space-y-8 lg:space-y-10">
-                      {sumDonationsByUser.map((donor, index) => (
-                        <SumDonationsByUserRow
-                          countryCode={countryCode}
-                          index={index}
-                          key={index}
-                          sumDonations={donor}
-                        />
-                      ))}
-                    </div>
-                    <div className="mt-7 space-x-4 text-center">
-                      <Button asChild>
-                        <InternalLink href={urls.donate()}>Donate</InternalLink>
-                      </Button>
-                      <Button asChild variant="secondary">
-                        <InternalLink
-                          href={urls.community({
-                            tab: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
-                          })}
-                        >
-                          View all
-                        </InternalLink>
-                      </Button>
-                    </div>
-                  </>
-                ),
-              },
-              {
-                value: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
-                label: 'Top districts',
-                content: (
-                  <div className="space-y-4">
-                    <HomePageSection.Subtitle className="hidden md:block">
-                      See which district has the most number of advocates.
-                    </HomePageSection.Subtitle>
-
-                    <UsYourDistrictRankingWrapper>
-                      <UsYourDistrictRankSuspense>
-                        <UserAddressProvider countryCode={countryCode}>
-                          <UsYourDistrictRank />
-                        </UserAddressProvider>
-                      </UsYourDistrictRankSuspense>
-                    </UsYourDistrictRankingWrapper>
-                    <USAdvocatesLeaderboard data={leaderboardData} />
-                    <div className="mx-auto flex w-fit justify-center gap-2">
-                      <LoginDialogWrapper
-                        authenticatedContent={
-                          <UserActionFormReferDialog countryCode={countryCode}>
-                            <Button className="w-full">Refer</Button>
-                          </UserActionFormReferDialog>
-                        }
-                      >
-                        <Button className="w-full">Join</Button>
-                      </LoginDialogWrapper>
-                      <Button asChild variant="secondary">
-                        <InternalLink href={urls.referrals()}>View all</InternalLink>
-                      </Button>
-                    </div>
-                  </div>
-                ),
-              },
-            ]}
-          />
-        </RecentActivity>
       </HomePageSection>
+
+      <HomePageSection.Community>
+        <div className="container">
+          <HomePageSection.Title className="text-white">Our community</HomePageSection.Title>
+          <HomePageSection.Subtitle className="md:hidden">
+            See how our community is taking a stand to safeguard the future of crypto in America.
+          </HomePageSection.Subtitle>
+          <RecentActivity>
+            <ResponsiveTabsOrSelect
+              analytics={'Homepage Our Community Tabs'}
+              data-testid="community-leaderboard-tabs"
+              defaultValue={UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+              options={[
+                {
+                  value: UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                  label: 'Recent activity',
+                  content: (
+                    <>
+                      <HomePageSection.Subtitle className="hidden md:block">
+                        See the most recent actions our community has taken to safeguard the future
+                        of crypto in America.
+                      </HomePageSection.Subtitle>
+                      <DelayedRecentActivityWithMap
+                        actions={actions}
+                        advocatesMapPageData={advocatePerStateDataProps}
+                        countUsers={countUsers.count}
+                        countryCode={countryCode}
+                      />
+                    </>
+                  ),
+                },
+                {
+                  value: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
+                  label: 'Top donations',
+                  content: (
+                    <>
+                      <HomePageSection.Subtitle>
+                        Donations to{' '}
+                        <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
+                          Fairshake
+                        </ExternalLink>
+                        , a pro-crypto Super PAC, are not included on the leaderboard.
+                      </HomePageSection.Subtitle>
+                      <div className="space-y-8 lg:space-y-10">
+                        {sumDonationsByUser.map((donor, index) => (
+                          <SumDonationsByUserRow
+                            countryCode={countryCode}
+                            index={index}
+                            key={index}
+                            sumDonations={donor}
+                          />
+                        ))}
+                      </div>
+                      <div className="mt-7 space-x-4 text-center">
+                        <Button asChild>
+                          <InternalLink href={urls.donate()}>Donate</InternalLink>
+                        </Button>
+                        <Button asChild variant="secondary">
+                          <InternalLink
+                            href={urls.community({
+                              tab: UsRecentActivityAndLeaderboardTabs.LEADERBOARD,
+                            })}
+                          >
+                            View all
+                          </InternalLink>
+                        </Button>
+                      </div>
+                    </>
+                  ),
+                },
+                {
+                  value: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+                  label: 'Top districts',
+                  content: (
+                    <div className="space-y-4">
+                      <HomePageSection.Subtitle className="hidden md:block">
+                        See which district has the most number of advocates.
+                      </HomePageSection.Subtitle>
+
+                      <UsYourDistrictRankingWrapper>
+                        <UsYourDistrictRankSuspense>
+                          <UserAddressProvider countryCode={countryCode}>
+                            <UsYourDistrictRank />
+                          </UserAddressProvider>
+                        </UsYourDistrictRankSuspense>
+                      </UsYourDistrictRankingWrapper>
+                      <USAdvocatesLeaderboard data={leaderboardData} />
+                      <div className="mx-auto flex w-fit justify-center gap-2">
+                        <LoginDialogWrapper
+                          authenticatedContent={
+                            <UserActionFormReferDialog countryCode={countryCode}>
+                              <Button className="w-full">Refer</Button>
+                            </UserActionFormReferDialog>
+                          }
+                        >
+                          <Button className="w-full">Join</Button>
+                        </LoginDialogWrapper>
+                        <Button asChild variant="secondary">
+                          <InternalLink href={urls.referrals()}>View all</InternalLink>
+                        </Button>
+                      </div>
+                    </div>
+                  ),
+                },
+              ]}
+            />
+          </RecentActivity>
+        </div>
+      </HomePageSection.Community>
 
       <HomePageSection>
         <HomePageSection.Title>Our partners</HomePageSection.Title>
