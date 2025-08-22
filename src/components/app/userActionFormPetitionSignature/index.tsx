@@ -6,8 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { z } from 'zod'
 
-import { UserActionFormPetitionSignatureSkeleton } from '@/components/app/userActionFormPetitionSignature/skeleton'
-import { usePetitionData } from '@/components/app/userActionFormPetitionSignature/usePetitionData'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -21,6 +19,7 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
+import { PetitionData } from '@/types/petition'
 import { cn } from '@/utils/web/cn'
 
 const signatureFormSchema = z.object({
@@ -31,11 +30,6 @@ const signatureFormSchema = z.object({
 })
 
 type SignatureFormData = z.infer<typeof signatureFormSchema>
-
-export interface UserActionFormPetitionSignatureProps {
-  onSuccess?: () => void
-  petitionSlug?: string
-}
 
 interface PetitionHeaderProps {
   title: string
@@ -139,11 +133,15 @@ export function SubmitSection({ children, className }: SubmitSectionProps) {
   )
 }
 
+interface UserActionFormPetitionSignatureProps {
+  onSuccess?: () => void
+  petitionData: PetitionData
+}
+
 export function UserActionFormPetitionSignature({
   onSuccess,
-  petitionSlug = 'crypto-innovation-act',
+  petitionData,
 }: UserActionFormPetitionSignatureProps) {
-  const { data: petitionData, isLoading } = usePetitionData()
   const form = useForm<SignatureFormData>({
     resolver: zodResolver(signatureFormSchema),
     defaultValues: {
@@ -154,18 +152,14 @@ export function UserActionFormPetitionSignature({
     },
   })
 
-  if (isLoading || !petitionData) {
-    return <UserActionFormPetitionSignatureSkeleton />
-  }
-
-  const { title, description, goal, signatures } = petitionData
+  const { title, description, countSignaturesGoal, signaturesCount } = petitionData
 
   const onSubmit = (data: SignatureFormData) => {
     console.log('Petition signed with data:', data)
     onSuccess?.()
   }
 
-  const progressPercentage = Math.min((signatures / goal) * 100, 100)
+  const progressPercentage = Math.min((signaturesCount / countSignaturesGoal) * 100, 100)
 
   return (
     <Form {...form}>
@@ -173,12 +167,12 @@ export function UserActionFormPetitionSignature({
         className="flex h-full flex-col space-y-0 pb-28 max-md:justify-between"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <PetitionHeader description={description} petitionSlug={petitionSlug} title={title} />
+        <PetitionHeader description={description} petitionSlug={petitionData.slug} title={title} />
 
         <PetitionProgress
-          goal={goal}
+          goal={countSignaturesGoal}
           progressPercentage={progressPercentage}
-          signatures={signatures}
+          signatures={signaturesCount}
         />
 
         <FormContainer>
