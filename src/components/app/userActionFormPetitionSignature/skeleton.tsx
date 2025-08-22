@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import {
   FormContainer,
   PetitionHeader,
@@ -50,14 +48,7 @@ export function UserActionFormPetitionSignatureSkeleton() {
       </FormContainer>
 
       <div>
-        <PrivacyNotice>
-          By submitting, I understand that Stand With Crypto and its vendors may collect and use my
-          personal information subject to the{' '}
-          <Link className="underline" href="/privacy" target="_blank">
-            SWC Privacy Policy
-          </Link>
-          .
-        </PrivacyNotice>
+        <PrivacyNotice />
 
         <SubmitSection>
           <Button className="h-12 w-full md:w-[75%]" disabled size="default" type="submit">

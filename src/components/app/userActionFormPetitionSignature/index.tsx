@@ -103,14 +103,18 @@ export function FormContainer({ children, className }: FormContainerProps) {
 }
 
 interface PrivacyNoticeProps {
-  children: React.ReactNode
   className?: string
 }
 
-export function PrivacyNotice({ children, className }: PrivacyNoticeProps) {
+export function PrivacyNotice({ className }: PrivacyNoticeProps) {
   return (
     <div className={cn('px-6 py-4 text-sm text-muted-foreground md:px-12', className)}>
-      {children}
+      By submitting, I understand that Stand With Crypto and its vendors may collect and use my
+      personal information subject to the{' '}
+      <Link className="underline" href="/privacy" target="_blank">
+        SWC Privacy Policy
+      </Link>
+      .
     </div>
   )
 }
@@ -236,14 +240,7 @@ export function UserActionFormPetitionSignature({
         </FormContainer>
 
         <div>
-          <PrivacyNotice>
-            By submitting, I understand that Stand With Crypto and its vendors may collect and use
-            my personal information subject to the{' '}
-            <Link className="underline" href="/privacy" target="_blank">
-              SWC Privacy Policy
-            </Link>
-            .
-          </PrivacyNotice>
+          <PrivacyNotice />
 
           <SubmitSection>
             <Button
