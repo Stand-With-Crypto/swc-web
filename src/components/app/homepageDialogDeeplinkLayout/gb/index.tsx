@@ -10,6 +10,7 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData, getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { getFounders } from '@/utils/server/builder/models/data/founders'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.GB
@@ -31,6 +32,7 @@ export async function GBHomepageDialogDeeplinkLayout({
     partners,
     founders,
     dtsiHomepagePoliticians,
+    leaderboardData,
   ] = await Promise.all([
     getHomepageData({
       recentActivityLimit: 30,
@@ -41,6 +43,7 @@ export async function GBHomepageDialogDeeplinkLayout({
     getPartners({ countryCode }),
     getFounders({ countryCode }),
     queryDTSIHomepagePeople({ countryCode }),
+    getDistrictsLeaderboardData({ limit: 10, countryCode }),
   ])
 
   return (
@@ -57,6 +60,7 @@ export async function GBHomepageDialogDeeplinkLayout({
         advocatePerStateDataProps={advocatePerStateDataProps}
         dtsiHomepagePoliticians={dtsiHomepagePoliticians}
         founders={founders}
+        leaderboardData={leaderboardData.items}
         partners={partners}
         topLevelMetrics={topLevelMetrics}
         {...asyncProps}
