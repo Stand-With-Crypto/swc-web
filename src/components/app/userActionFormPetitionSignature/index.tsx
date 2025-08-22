@@ -40,7 +40,7 @@ interface PetitionHeaderProps {
   className?: string
 }
 
-const DEFAULT_INNER_WIDTH = 'mx-auto md:w-[75%] md:min-w-[540px]'
+const DEFAULT_INNER_WIDTH = 'max-md:px-6 mx-auto md:w-[75%] md:min-w-[540px]'
 
 export function PetitionHeader({
   title,
@@ -53,8 +53,8 @@ export function PetitionHeader({
   const progressPercentage = Math.min((signaturesCount / goal) * 100, 100)
   return (
     <div className={cn('mx-auto w-full', className)}>
-      <div className={DEFAULT_INNER_WIDTH}>
-        <div className="space-y-4 px-6 py-6 pt-12">
+      <div className={cn(DEFAULT_INNER_WIDTH)}>
+        <div className="space-y-4 py-6 pt-12">
           <PageTitle size="md">{title}</PageTitle>
           <PageSubTitle size="sm">{description}</PageSubTitle>
           <div className="text-center">
@@ -68,7 +68,7 @@ export function PetitionHeader({
           </div>
         </div>
 
-        <div className="space-y-2 px-6 pb-6">
+        <div className="space-y-2 pb-6">
           <Progress className="h-4" value={progressPercentage} />
           <div className="flex justify-between text-sm text-muted-foreground">
             <span>{signaturesCount.toLocaleString()} Signatures</span>
@@ -143,7 +143,7 @@ export function SubmitSection({ children, className }: SubmitSectionProps) {
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 flex flex-col items-center justify-center gap-4 border-t bg-background px-6 py-8 pt-4 md:pt-6',
+        'fixed bottom-0 left-0 right-0 flex flex-col items-center justify-center gap-4 border-t bg-background py-8 pt-4 md:pt-6',
         className,
       )}
       style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
