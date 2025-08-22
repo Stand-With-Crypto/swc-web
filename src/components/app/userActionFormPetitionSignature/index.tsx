@@ -35,29 +35,44 @@ interface PetitionHeaderProps {
   title: string
   description: string
   petitionSlug?: string
+  signaturesCount: number
+  goal: number
   className?: string
 }
+
+const DEFAULT_INNER_WIDTH = 'mx-auto md:w-[75%] md:min-w-[540px]'
 
 export function PetitionHeader({
   title,
   description,
   petitionSlug,
+  signaturesCount,
+  goal,
   className,
 }: PetitionHeaderProps) {
+  const progressPercentage = Math.min((signaturesCount / goal) * 100, 100)
   return (
     <div className={cn('mx-auto w-full', className)}>
-      <div className="mx-auto md:w-[80%] md:min-w-[520px]">
-        <div className="space-y-4 px-6 py-6 pt-12 md:px-12">
-          <PageTitle size="lg">{title}</PageTitle>
-          <PageSubTitle size="md">{description}</PageSubTitle>
+      <div className={DEFAULT_INNER_WIDTH}>
+        <div className="space-y-4 px-6 py-6 pt-12">
+          <PageTitle size="md">{title}</PageTitle>
+          <PageSubTitle size="sm">{description}</PageSubTitle>
           <div className="text-center">
             {petitionSlug ? (
               <Link className="underline" href={`/petitions/${petitionSlug}`}>
-                View details
+                View petition
               </Link>
             ) : (
-              <span className="underline">View details</span>
+              <span className="underline">View petition</span>
             )}
+          </div>
+        </div>
+
+        <div className="space-y-2 px-6 pb-6">
+          <Progress className="h-4" value={progressPercentage} />
+          <div className="flex justify-between text-sm text-muted-foreground">
+            <span>{signaturesCount.toLocaleString()} Signatures</span>
+            <span>{goal.toLocaleString()} Goal</span>
           </div>
         </div>
       </div>
@@ -66,14 +81,14 @@ export function PetitionHeader({
 }
 
 interface PetitionProgressProps {
-  signatures: number
+  signaturesCount: number
   goal: number
   progressPercentage: number
   className?: string
 }
 
 export function PetitionProgress({
-  signatures,
+  signaturesCount,
   goal,
   progressPercentage,
   className,
@@ -83,7 +98,7 @@ export function PetitionProgress({
       <div className="space-y-2 px-6 md:px-12">
         <Progress className="h-4" value={progressPercentage} />
         <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{signatures.toLocaleString()} Signatures</span>
+          <span>{signaturesCount.toLocaleString()} Signatures</span>
           <span>{goal.toLocaleString()} Goal</span>
         </div>
       </div>
@@ -108,7 +123,7 @@ interface PrivacyNoticeProps {
 
 export function PrivacyNotice({ className }: PrivacyNoticeProps) {
   return (
-    <div className={cn('px-6 py-4 text-sm text-muted-foreground md:px-12', className)}>
+    <div className={cn('text-center text-xs text-muted-foreground', className)}>
       By submitting, I understand that Stand With Crypto and its vendors may collect and use my
       personal information subject to the{' '}
       <Link className="underline" href="/privacy" target="_blank">
@@ -128,11 +143,12 @@ export function SubmitSection({ children, className }: SubmitSectionProps) {
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 flex items-center justify-center gap-4 border-t bg-background px-6 py-8 md:px-12',
+        'fixed bottom-0 left-0 right-0 flex flex-col items-center justify-center gap-4 border-t bg-background px-6 py-8 pt-4 md:pt-6',
         className,
       )}
+      style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
     >
-      {children}
+      <div className={cn(DEFAULT_INNER_WIDTH, 'space-y-4')}>{children}</div>
     </div>
   )
 }
@@ -163,20 +179,18 @@ export function UserActionFormPetitionSignature({
     onSuccess?.()
   }
 
-  const progressPercentage = Math.min((signaturesCount / countSignaturesGoal) * 100, 100)
-
   return (
     <Form {...form}>
       <form
-        className="flex h-full flex-col space-y-0 pb-28 max-md:justify-between"
+        className="flex h-full flex-col space-y-0 pb-40 max-md:justify-between"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <PetitionHeader description={description} petitionSlug={petitionData.slug} title={title} />
-
-        <PetitionProgress
+        <PetitionHeader
+          description={description}
           goal={countSignaturesGoal}
-          progressPercentage={progressPercentage}
-          signatures={signaturesCount}
+          petitionSlug={petitionData.slug}
+          signaturesCount={signaturesCount}
+          title={title}
         />
 
         <FormContainer>
@@ -240,11 +254,10 @@ export function UserActionFormPetitionSignature({
         </FormContainer>
 
         <div>
-          <PrivacyNotice />
-
           <SubmitSection>
+            <PrivacyNotice />
             <Button
-              className="h-12 w-full md:w-[75%]"
+              className="h-12 w-full"
               disabled={form.formState.isSubmitting}
               size="default"
               type="submit"

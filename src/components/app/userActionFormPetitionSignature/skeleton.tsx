@@ -1,7 +1,6 @@
 import {
   FormContainer,
   PetitionHeader,
-  PetitionProgress,
   PrivacyNotice,
   SubmitSection,
 } from '@/components/app/userActionFormPetitionSignature'
@@ -12,16 +11,16 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 
 export function UserActionFormPetitionSignatureSkeleton() {
   return (
-    <div className="flex h-full flex-col space-y-0 max-md:justify-between">
+    <div className="flex h-full flex-col space-y-0 pb-40 max-md:justify-between">
       <LoadingOverlay />
 
       <PetitionHeader
         description="Please wait while we load the petition details."
+        goal={100000}
         petitionSlug={undefined}
+        signaturesCount={33000}
         title="Loading petition..."
       />
-
-      <PetitionProgress goal={100000} progressPercentage={33} signatures={0} />
 
       <FormContainer>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -48,10 +47,9 @@ export function UserActionFormPetitionSignatureSkeleton() {
       </FormContainer>
 
       <div>
-        <PrivacyNotice />
-
         <SubmitSection>
-          <Button className="h-12 w-full md:w-[75%]" disabled size="default" type="submit">
+          <PrivacyNotice />
+          <Button className="h-12 w-full" disabled size="default" type="submit">
             Sign
           </Button>
         </SubmitSection>

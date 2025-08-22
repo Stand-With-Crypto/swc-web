@@ -5,9 +5,9 @@ import { PetitionData } from '@/types/petition'
 export async function getPetitionData(petitionSlug?: string): Promise<PetitionData> {
   // TODO: Replace with actual API call or database query
 
-  // Simulate network delay in development
+  // Simulate network delay in development to see loading state
   if (process.env.NODE_ENV === 'development') {
-    await new Promise(resolve => setTimeout(resolve, 100))
+    await new Promise(resolve => setTimeout(resolve, 2500)) // 2.5 seconds to see skeleton
   }
 
   // Mock petition data - replace with actual data fetching logic
