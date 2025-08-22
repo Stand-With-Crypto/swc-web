@@ -3,9 +3,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
 import { z } from 'zod'
 
+import { PrivacyNotice } from '@/components/app/userActionFormPetitionSignature/privacyNotice'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -16,11 +16,11 @@ import {
   FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { Progress } from '@/components/ui/progress'
 import { PetitionData } from '@/types/petition'
-import { cn } from '@/utils/web/cn'
+
+import { FormContainer } from './container'
+import { Footer } from './footer'
+import { PetitionHeader } from './header'
 
 const signatureFormSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -30,128 +30,6 @@ const signatureFormSchema = z.object({
 })
 
 type SignatureFormData = z.infer<typeof signatureFormSchema>
-
-interface PetitionHeaderProps {
-  title: string
-  description: string
-  petitionSlug?: string
-  signaturesCount: number
-  goal: number
-  className?: string
-}
-
-const DEFAULT_INNER_WIDTH = 'max-md:px-6 mx-auto md:w-[75%] md:min-w-[540px]'
-
-export function PetitionHeader({
-  title,
-  description,
-  petitionSlug,
-  signaturesCount,
-  goal,
-  className,
-}: PetitionHeaderProps) {
-  const progressPercentage = Math.min((signaturesCount / goal) * 100, 100)
-  return (
-    <div className={cn('mx-auto w-full', className)}>
-      <div className={cn(DEFAULT_INNER_WIDTH)}>
-        <div className="space-y-4 py-6 pt-12">
-          <PageTitle size="md">{title}</PageTitle>
-          <PageSubTitle size="sm">{description}</PageSubTitle>
-          <div className="text-center">
-            {petitionSlug ? (
-              <Link className="underline" href={`/petitions/${petitionSlug}`}>
-                View petition
-              </Link>
-            ) : (
-              <span className="underline">View petition</span>
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-2 pb-6">
-          <Progress className="h-4" value={progressPercentage} />
-          <div className="flex justify-between text-sm text-muted-foreground">
-            <span>{signaturesCount.toLocaleString()} Signatures</span>
-            <span>{goal.toLocaleString()} Goal</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-interface PetitionProgressProps {
-  signaturesCount: number
-  goal: number
-  progressPercentage: number
-  className?: string
-}
-
-export function PetitionProgress({
-  signaturesCount,
-  goal,
-  progressPercentage,
-  className,
-}: PetitionProgressProps) {
-  return (
-    <div className={cn('mx-auto !w-full md:w-[80%] md:min-w-[520px]', className)}>
-      <div className="space-y-2 px-6 md:px-12">
-        <Progress className="h-4" value={progressPercentage} />
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{signaturesCount.toLocaleString()} Signatures</span>
-          <span>{goal.toLocaleString()} Goal</span>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-interface FormContainerProps {
-  children: React.ReactNode
-  className?: string
-}
-
-export function FormContainer({ children, className }: FormContainerProps) {
-  return (
-    <div className={cn('space-y-4 px-6 py-8 md:space-y-8 md:px-12', className)}>{children}</div>
-  )
-}
-
-interface PrivacyNoticeProps {
-  className?: string
-}
-
-export function PrivacyNotice({ className }: PrivacyNoticeProps) {
-  return (
-    <div className={cn('text-center text-xs text-muted-foreground', className)}>
-      By submitting, I understand that Stand With Crypto and its vendors may collect and use my
-      personal information subject to the{' '}
-      <Link className="underline" href="/privacy" target="_blank">
-        SWC Privacy Policy
-      </Link>
-      .
-    </div>
-  )
-}
-
-interface SubmitSectionProps {
-  children: React.ReactNode
-  className?: string
-}
-
-export function SubmitSection({ children, className }: SubmitSectionProps) {
-  return (
-    <div
-      className={cn(
-        'fixed bottom-0 left-0 right-0 flex flex-col items-center justify-center gap-4 border-t bg-background py-8 pt-4 md:pt-6',
-        className,
-      )}
-      style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
-    >
-      <div className={cn(DEFAULT_INNER_WIDTH, 'space-y-4')}>{children}</div>
-    </div>
-  )
-}
 
 interface UserActionFormPetitionSignatureProps {
   onSuccess?: () => void
@@ -254,17 +132,17 @@ export function UserActionFormPetitionSignature({
         </FormContainer>
 
         <div>
-          <SubmitSection>
+          <Footer>
             <PrivacyNotice />
             <Button
               className="h-12 w-full"
-              disabled={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting || !form.formState.isValid}
               size="default"
               type="submit"
             >
               Sign
             </Button>
-          </SubmitSection>
+          </Footer>
         </div>
       </form>
     </Form>

@@ -1,9 +1,7 @@
-import {
-  FormContainer,
-  PetitionHeader,
-  PrivacyNotice,
-  SubmitSection,
-} from '@/components/app/userActionFormPetitionSignature'
+import { FormContainer } from '@/components/app/userActionFormPetitionSignature/container'
+import { Footer } from '@/components/app/userActionFormPetitionSignature/footer'
+import { PetitionHeader } from '@/components/app/userActionFormPetitionSignature/header'
+import { PrivacyNotice } from '@/components/app/userActionFormPetitionSignature/privacyNotice'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -47,12 +45,12 @@ export function UserActionFormPetitionSignatureSkeleton() {
       </FormContainer>
 
       <div>
-        <SubmitSection>
+        <Footer>
           <PrivacyNotice />
           <Button className="h-12 w-full" disabled size="default" type="submit">
             Sign
           </Button>
-        </SubmitSection>
+        </Footer>
       </div>
     </div>
   )
