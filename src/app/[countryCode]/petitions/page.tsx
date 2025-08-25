@@ -27,4 +27,3 @@ export default async function PetitionsPage(props: PageProps) {
     />
   )
 }
-
