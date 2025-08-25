@@ -114,7 +114,7 @@ function NewsListItem({
           </strong>
           <p className="mt-2 max-w-prose text-sm text-muted-foreground">{description}</p>
         </div>
-        <p className="text-center font-mono text-sm text-muted-foreground">
+        <p className="text-center text-sm text-muted-foreground">
           {format(dateHeading, 'MM/dd/yy')}
         </p>
       </article>

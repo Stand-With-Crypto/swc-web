@@ -48,6 +48,9 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   },
 })
 
+const DEFAULT_NUMERIC_ODOMETER_SIZE = 50
+const DEFAULT_NUMERIC_ODOMETER_MAX_HEIGHT = 40
+
 export function TopLevelMetrics({
   countryCode,
   disableTooltips = false,
@@ -110,11 +113,15 @@ export function TopLevelMetrics({
   }, [formatCurrency, values, countryCode])
 
   const globalDonationsRender = (
-    <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
+    <AnimatedNumericOdometer
+      maxHeight={DEFAULT_NUMERIC_ODOMETER_MAX_HEIGHT}
+      size={DEFAULT_NUMERIC_ODOMETER_SIZE}
+      value={formatted.sumDonations.amountUsd}
+    />
   )
 
   return (
-    <div className="flex flex-col gap-3 text-center md:flex-row md:gap-0">
+    <div className="flex flex-col gap-3 text-center lg:flex-row lg:gap-0">
       {[
         {
           label: useGlobalLabels ? 'Global donations' : 'Donated by crypto advocates',
@@ -124,9 +131,8 @@ export function TopLevelMetrics({
             <TooltipProvider delayDuration={0}>
               <Tooltip onOpenChange={setIsDonatedTooltipOpen} open={isDonatedTooltipOpen}>
                 <TooltipTrigger
-                  className="mx-auto flex gap-1"
+                  className="mx-auto flex"
                   onClick={() => setIsDonatedTooltipOpen(true)}
-                  style={{ height: 35 }}
                 >
                   {globalDonationsRender}
                   <sup>
@@ -146,23 +152,33 @@ export function TopLevelMetrics({
         },
         {
           label: useGlobalLabels ? 'Global advocates' : 'Crypto advocates',
-          value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
+          value: (
+            <AnimatedNumericOdometer
+              maxHeight={DEFAULT_NUMERIC_ODOMETER_MAX_HEIGHT}
+              size={DEFAULT_NUMERIC_ODOMETER_SIZE}
+              value={formatted.countUsers.count}
+            />
+          ),
         },
         {
           label: useGlobalLabels ? 'Global policymaker contacts' : 'Policymaker contacts',
           value: (
-            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
+            <AnimatedNumericOdometer
+              maxHeight={DEFAULT_NUMERIC_ODOMETER_MAX_HEIGHT}
+              size={DEFAULT_NUMERIC_ODOMETER_SIZE}
+              value={formatted.countPolicymakerContacts.count}
+            />
           ),
         },
       ].map(({ label, value }, index) => (
         <div
           className={cn(
-            'w-full flex-shrink-0 rounded-3xl bg-secondary p-6 md:w-1/3',
+            'w-full flex-shrink-0 rounded-3xl bg-secondary p-6 lg:w-1/3',
             index === 0
-              ? 'md:rounded-none md:rounded-l-3xl'
+              ? 'lg:rounded-none lg:rounded-l-3xl'
               : index === 2
-                ? 'md:rounded-none md:rounded-r-3xl'
-                : 'md:rounded-none',
+                ? 'lg:rounded-none lg:rounded-r-3xl'
+                : 'lg:rounded-none',
           )}
           key={label}
         >

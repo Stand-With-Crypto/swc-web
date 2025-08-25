@@ -13,6 +13,7 @@ export const subTitleVariantsConfig = {
     lg: twNoop('text-lg md:text-xl'),
     xl: twNoop('text-xl md:text-2xl'),
     '2xl': twNoop('text-2xl md:text-3xl'),
+    '3xl': twNoop('text-5xl md:text-6xl'),
   },
 }
 

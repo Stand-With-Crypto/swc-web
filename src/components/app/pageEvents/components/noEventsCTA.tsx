@@ -29,7 +29,7 @@ export function NoEventsCTA({
         <Spinner />
       ) : (
         <>
-          <p className="text-center font-mono text-sm text-muted-foreground">
+          <p className="text-center text-sm text-muted-foreground">
             <Balancer>
               {initialText}
               {user ? (

@@ -38,9 +38,7 @@ export function DefenseFundSection({
         <PageSubTitle className={cn('font-medium text-foreground', headingClassName)} size="lg">
           {heading}
         </PageSubTitle>
-        {subtext && (
-          <p className="text-center font-mono text-base text-muted-foreground">{subtext}</p>
-        )}
+        {subtext && <p className="text-center text-base text-muted-foreground">{subtext}</p>}
       </div>
       {children && (
         <div className={cn('mt-6 flex items-center justify-center', childrenWrapperClassName)}>

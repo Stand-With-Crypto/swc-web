@@ -173,7 +173,7 @@ export function UsPageHome({
         </HomePageSection.Subtitle>
         <div className="flex flex-col items-center gap-6">
           <PartnerGrid partners={partners} />
-          <Button asChild variant="secondary">
+          <Button asChild size="lg" variant="secondary">
             <InternalLink href={urls.partners()}>View all</InternalLink>
           </Button>
         </div>

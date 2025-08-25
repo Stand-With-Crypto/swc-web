@@ -45,7 +45,7 @@ export function StateEventsDialogContent({ state, events, countryCode }: StateEv
       />
 
       <h3 className="font-sans text-xl font-bold">Events in {state.name}</h3>
-      <p className="font-mono text-base text-muted-foreground">
+      <p className="text-base text-muted-foreground">
         There {pluralize({ singular: 'is', plural: 'are', count: orderedResult?.length ?? 0 })}{' '}
         {orderedResult?.length ?? 0} Stand With Crypto{' '}
         {pluralize({ singular: 'event', count: orderedResult?.length ?? 0 })} in {state.name}.

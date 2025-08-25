@@ -46,7 +46,7 @@ export function Footer({
   return (
     <div className="mt-36">
       {footerBanner}
-      <footer className="bg-black py-24 text-muted antialiased">
+      <footer className="bg-purple-dark py-24 text-muted antialiased">
         <div className="container">
           <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
             <div className="max-w-2xl space-y-8">
