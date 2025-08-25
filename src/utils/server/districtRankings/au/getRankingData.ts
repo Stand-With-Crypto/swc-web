@@ -21,6 +21,18 @@ function isValidState(state: string): boolean {
   return Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(state)
 }
 
+function isValidAdvocatesResult(
+  result: AdvocatesCountByDistrictQueryResult,
+): result is AdvocatesCountByDistrictQueryResult & { district: string } {
+  return isValidState(result.state) && result.district !== null
+}
+
+function isValidReferralsResult(
+  result: ReferralsCountByDistrictQueryResult,
+): result is ReferralsCountByDistrictQueryResult & { district: string } {
+  return isValidState(result.state) && result.district !== null
+}
+
 export async function getAUAdvocatesCountByDistrict(
   stateCode: AUStateCode,
 ): Promise<AdvocatesCountResult[]> {
@@ -41,13 +53,11 @@ export async function getAUAdvocatesCountByDistrict(
     HAVING COUNT(DISTINCT u.id) > 0
   `
 
-  return results
-    .filter(result => isValidState(result.state))
-    .map(({ state, district, count }) => ({
-      state: state as AUStateCode,
-      district: district!,
-      count: Number(count),
-    }))
+  return results.filter(isValidAdvocatesResult).map(({ state, district, count }) => ({
+    state: state as AUStateCode,
+    district,
+    count: Number(count),
+  }))
 }
 
 export async function getAUReferralsCountByDistrict(
@@ -72,11 +82,9 @@ export async function getAUReferralsCountByDistrict(
     HAVING SUM(uar.referrals_count) > 0
   `
 
-  return results
-    .filter(result => isValidState(result.state))
-    .map(result => ({
-      state: result.state as AUStateCode,
-      district: result.district!,
-      count: Number(result.referrals),
-    }))
+  return results.filter(isValidReferralsResult).map(result => ({
+    state: result.state as AUStateCode,
+    district: result.district,
+    count: Number(result.referrals),
+  }))
 }

@@ -3,6 +3,7 @@
 import { FC, MouseEvent, useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 import { useMedia, useOrientation } from 'react-use'
+import { Settings } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 
 import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionList'
@@ -11,8 +12,16 @@ import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmap
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  AREA_COORDS_BY_COUNTRY_CODE,
+  AreaCoordinates,
+  AreaCoordinatesKey,
+  type MapProjectionConfig,
+} from '@/components/app/pageAdvocatesHeatmap/constants'
+import { MapDebugger } from '@/components/app/pageAdvocatesHeatmap/debugger'
+import { useMockedAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/debugger/useMockedAdvocateMap'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
+import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -20,6 +29,7 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getUSStateCodeFromStateName } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
@@ -30,7 +40,10 @@ interface RenderMapProps {
   countUsers: number
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   isEmbedded?: boolean
+  mapConfig: MapProjectionConfig
 }
+
+const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 export function AdvocatesHeatmap({
   countryCode,
@@ -38,11 +51,29 @@ export function AdvocatesHeatmap({
   countUsers,
   advocatesMapPageData,
   isEmbedded,
+  mapConfig,
 }: RenderMapProps) {
+  const [mockedCoordinates, setMockedCoordinates] = useState<AreaCoordinates>({
+    ...AREA_COORDS_BY_COUNTRY_CODE[countryCode],
+  })
+  const [mockedSelectedAreas, setMockedSelectedAreas] = useState<AreaCoordinatesKey[]>(
+    Object.keys(mockedCoordinates) as AreaCoordinatesKey[],
+  )
+  const [mockedActionsLimit, setMockedActionsLimit] = useState(20)
+
+  const [isMockMode, setIsMockMode] = useState(false)
+  const [isEditorOpen, setIsEditorOpen] = useState(false)
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
-  const markers = useAdvocateMap(actions)
+
+  const mockedMarkers = useMockedAdvocateMap({
+    mapConfig,
+    coordinates: mockedCoordinates,
+    selectedAreas: mockedSelectedAreas,
+    actionsLimit: mockedActionsLimit,
+  })
+  const markers = useAdvocateMap({ actions, mapConfig })
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
 
@@ -50,20 +81,32 @@ export function AdvocatesHeatmap({
 
   const getTotalAdvocatesPerState = useCallback(
     (stateName: string) => {
-      const stateCode = getUSStateCodeFromStateName(stateName)
-      return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+      if (countryCode === SupportedCountryCodes.US) {
+        const stateCode = getUSStateCodeFromStateName(stateName)
+        return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+      }
+      if (countryCode === SupportedCountryCodes.GB) {
+        return totalAdvocatesPerState.find(
+          total => total.state.toUpperCase() === stateName.toUpperCase(),
+        )?.totalAdvocates
+      }
     },
-    [totalAdvocatesPerState],
+    [countryCode, totalAdvocatesPerState],
   )
 
   const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
-  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
-    const { clientX, clientY } = event
-    setMousePosition({ x: clientX, y: clientY })
-    setHoveredStateName(geo.properties.name)
-  }, [])
+  const handleStateMouseHover = useCallback(
+    (geo: any, event: MouseEvent<SVGPathElement>) => {
+      const stateName = geo.properties[mapConfig.geoPropertyStateNameKey]
+
+      const { clientX, clientY } = event
+      setMousePosition({ x: clientX, y: clientY })
+      setHoveredStateName(stateName)
+    },
+    [mapConfig],
+  )
 
   const handleStateMouseOut = useCallback(() => {
     setHoveredStateName(null)
@@ -103,23 +146,39 @@ export function AdvocatesHeatmap({
   }
 
   return (
-    <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
+    <div className={cn('flex flex-col items-start', isEmbedded ? '' : 'gap-8')}>
       <div
         className={cn(
           'flex w-full flex-col items-start gap-4',
           isEmbedded
             ? 'md:flex-row'
-            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
+            : `md:flex-column rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-10'}`,
         )}
       >
-        {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
-        <MapComponent
-          countryCode={countryCode}
-          handleStateMouseHover={handleStateMouseHover}
-          handleStateMouseOut={handleStateMouseOut}
-          isEmbedded={isEmbedded}
-          markers={markers}
-        />
+        {isEmbedded && (
+          <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
+        )}
+        <div className="relative w-full">
+          {!isProd && (
+            <Button
+              className="absolute right-2 top-2 z-10 bg-yellow-500 text-black hover:bg-yellow-600"
+              onClick={() => setIsEditorOpen(true)}
+              size="sm"
+              variant="default"
+            >
+              <Settings className="mr-2 h-4 w-4" />
+              Debugger
+            </Button>
+          )}
+          <MapComponent
+            countryCode={countryCode}
+            handleStateMouseHover={handleStateMouseHover}
+            handleStateMouseOut={handleStateMouseOut}
+            isEmbedded={isEmbedded}
+            mapConfig={mapConfig}
+            markers={isMockMode ? mockedMarkers : markers}
+          />
+        </div>
         <TotalAdvocatesPerStateTooltip
           countryCode={countryCode}
           getTotalAdvocatesPerState={getTotalAdvocatesPerState}
@@ -139,9 +198,24 @@ export function AdvocatesHeatmap({
             countryCode={countryCode}
           />
         ) : (
-          <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
+          <AdvocateHeatmapActionList countryCode={countryCode} isEmbedded={isEmbedded} />
         )}
       </div>
+
+      {!isProd && (
+        <MapDebugger
+          actionsLimit={mockedActionsLimit}
+          coordinates={mockedCoordinates}
+          isMockMode={isMockMode}
+          isOpen={isEditorOpen}
+          onActionsLimitChange={setMockedActionsLimit}
+          onAreasChange={setMockedSelectedAreas}
+          onClose={() => setIsEditorOpen(false)}
+          onMockModeChange={setIsMockMode}
+          onSaveCoordinates={setMockedCoordinates}
+          selectedAreas={mockedSelectedAreas}
+        />
+      )}
     </div>
   )
 }
@@ -152,12 +226,14 @@ const MapComponent = ({
   handleStateMouseOut,
   countryCode,
   isEmbedded,
+  mapConfig,
 }: {
   markers: MapMarker[]
   handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
   handleStateMouseOut: () => void
   countryCode: SupportedCountryCodes
   isEmbedded?: boolean
+  mapConfig: MapProjectionConfig
 }) => {
   const [actionInfo, setActionInfo] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
@@ -191,11 +267,12 @@ const MapComponent = ({
   return (
     <>
       <ComposableMap
-        projection="geoAlbersUsa"
+        projection={mapConfig.projection}
+        projectionConfig={mapConfig.projectionConfig}
         style={{ width: '100%', height: '100%' }}
         viewBox="-20 40 850 550"
       >
-        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+        <Geographies geography={mapConfig.projectionUrl}>
           {({ geographies }) => (
             <>
               {geographies.map(geo => (
@@ -249,6 +326,7 @@ const MapComponent = ({
                       handleActionMouseLeave={handleActionMouseLeave}
                       handleActionMouseOver={handleActionMouseOver}
                       key={markerKey}
+                      size={mapConfig.markerSize}
                     />
                   )
                 })}

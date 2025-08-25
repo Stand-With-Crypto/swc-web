@@ -4,7 +4,7 @@ import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { AnimatePresence, motion } from 'motion/react'
 
-import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 import {
   StateEventsDialog,
   StateEventsDialogProps,
@@ -15,6 +15,7 @@ import {
   getUSStateCodeFromStateName,
   getUSStateNameFromStateCode,
 } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
@@ -26,7 +27,13 @@ interface MapMarker {
   eventState: string
 }
 
-export function EventsMap({ events }: { events: SWCEvents }) {
+export function EventsMap({
+  events,
+  countryCode,
+}: {
+  events: SWCEvents
+  countryCode: SupportedCountryCodes
+}) {
   const [tooltipMessage, setTooltipMessage] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
   const [stateDialogProps, setStateDialogProps] = useState<
@@ -104,10 +111,20 @@ export function EventsMap({ events }: { events: SWCEvents }) {
     setTooltipMessage(null)
   }, [])
 
+  const mapConfig = MAP_PROJECTION_CONFIG[countryCode]
+
+  if (!mapConfig) {
+    return null
+  }
+
   return (
     <>
-      <ComposableMap projection="geoAlbersUsa" viewBox="-20 40 850 550">
-        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+      <ComposableMap
+        projection={mapConfig.projection}
+        projectionConfig={mapConfig.projectionConfig}
+        viewBox="-20 40 850 550"
+      >
+        <Geographies geography={mapConfig.projectionUrl}>
           {({ geographies }) => (
             <>
               {geographies.map(geo => {

@@ -2,6 +2,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import { Metadata, Viewport } from 'next'
 
+import { TopLevelEmbeddedClientLogic } from '@/app/embedded/[countryCode]/topLevelEmbeddedClientLogic'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { PageProps } from '@/types'
@@ -39,14 +40,21 @@ export const viewport: Viewport = {
   themeColor: { media: '(prefers-color-scheme: dark)', color: '#000000' },
 }
 
-export default function Layout({ children }: PageProps & { children: React.ReactNode }) {
+export default async function Layout({
+  children,
+  params,
+}: PageProps & { children: React.ReactNode }) {
+  const { countryCode } = await params
+
   return (
     <html lang={SupportedLocale.EN_US} translate="no">
       <body className={cn(fontClassName, 'bg-black')}>
         <OverrideGlobalLocalStorage />
-        <FullHeight.Container>
-          <FullHeight.Content>{children}</FullHeight.Content>
-        </FullHeight.Container>
+        <TopLevelEmbeddedClientLogic countryCode={countryCode}>
+          <FullHeight.Container>
+            <FullHeight.Content>{children}</FullHeight.Content>
+          </FullHeight.Container>
+        </TopLevelEmbeddedClientLogic>
         <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>

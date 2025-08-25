@@ -12,12 +12,10 @@ import { cn } from '@/utils/web/cn'
 export interface EventsPageProps {
   events: SWCEvents | null
   isDeepLink?: boolean
-  /** Default to true */
-  showMap?: boolean
   countryCode: SupportedCountryCodes
 }
 
-export function EventsPage({ events, isDeepLink, showMap = true, countryCode }: EventsPageProps) {
+export function EventsPage({ events, isDeepLink, countryCode }: EventsPageProps) {
   const futureEvents = events?.filter(event =>
     isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
   )
@@ -50,7 +48,11 @@ export function EventsPage({ events, isDeepLink, showMap = true, countryCode }: 
       <EventsNearYou events={futureEvents ?? []} />
 
       {futureEvents && futureEvents.length > 0 && (
-        <AllUpcomingEvents events={futureEvents} showMap={showMap} />
+        <AllUpcomingEvents
+          countryCode={countryCode}
+          events={futureEvents}
+          showMap={countryCode === SupportedCountryCodes.US}
+        />
       )}
 
       {featuredPastEvents && featuredPastEvents.length > 0 && (

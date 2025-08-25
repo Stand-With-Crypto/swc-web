@@ -1,11 +1,24 @@
 'use client'
 
-import { ADVOCATES_ACTIONS } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { ADVOCATES_ACTIONS_BY_COUNTRY_CODE } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
-export function AdvocateHeatmapActionList({ isEmbedded }: { isEmbedded?: boolean }) {
+export function AdvocateHeatmapActionList({
+  isEmbedded,
+  countryCode,
+}: {
+  isEmbedded?: boolean
+  countryCode: SupportedCountryCodes
+}) {
   const isMobile = useIsMobile()
+
+  const actions = ADVOCATES_ACTIONS_BY_COUNTRY_CODE[countryCode]
+
+  if (!actions) {
+    return null
+  }
 
   return (
     <div
@@ -17,7 +30,7 @@ export function AdvocateHeatmapActionList({ isEmbedded }: { isEmbedded?: boolean
       )}
     >
       {!isEmbedded && <strong>Key</strong>}
-      {Object.entries(ADVOCATES_ACTIONS).map(([key, action]) => {
+      {Object.entries(actions).map(([key, action]) => {
         const ActionIcon = action.icon
 
         return (

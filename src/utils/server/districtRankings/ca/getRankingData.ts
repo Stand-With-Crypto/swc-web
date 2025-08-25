@@ -21,6 +21,18 @@ function isValidProvince(state: string): boolean {
   return Object.keys(CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP).includes(state)
 }
 
+function isValidAdvocatesResult(
+  result: AdvocatesCountByDistrictQueryResult,
+): result is AdvocatesCountByDistrictQueryResult & { district: string } {
+  return isValidProvince(result.state) && result.district !== null
+}
+
+function isValidReferralsResult(
+  result: ReferralsCountByDistrictQueryResult,
+): result is ReferralsCountByDistrictQueryResult & { district: string } {
+  return isValidProvince(result.state) && result.district !== null
+}
+
 export async function getCAAdvocatesCountByDistrict(
   stateCode: CAProvinceOrTerritoryCode,
 ): Promise<AdvocatesCountResult[]> {
@@ -41,13 +53,11 @@ export async function getCAAdvocatesCountByDistrict(
     HAVING COUNT(DISTINCT u.id) > 0
   `
 
-  return results
-    .filter(result => isValidProvince(result.state))
-    .map(({ state, district, count }) => ({
-      state: state as CAProvinceOrTerritoryCode,
-      district: district!,
-      count: Number(count),
-    }))
+  return results.filter(isValidAdvocatesResult).map(({ state, district, count }) => ({
+    state: state as CAProvinceOrTerritoryCode,
+    district,
+    count: Number(count),
+  }))
 }
 
 export async function getCAReferralsCountByDistrict(
@@ -72,11 +82,9 @@ export async function getCAReferralsCountByDistrict(
     HAVING SUM(uar.referrals_count) > 0
   `
 
-  return results
-    .filter(result => isValidProvince(result.state))
-    .map(result => ({
-      state: result.state as CAProvinceOrTerritoryCode,
-      district: result.district!,
-      count: Number(result.referrals),
-    }))
+  return results.filter(isValidReferralsResult).map(result => ({
+    state: result.state as CAProvinceOrTerritoryCode,
+    district: result.district,
+    count: Number(result.referrals),
+  }))
 }

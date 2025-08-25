@@ -1,8 +1,9 @@
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 
-export type StateCode = USStateCode | CAProvinceOrTerritoryCode | AUStateCode
+export type AdministrativeArea = USStateCode | CAProvinceOrTerritoryCode | AUStateCode | GBRegion
 
 export interface AdvocatesCountByDistrictQueryResult {
   state: string
