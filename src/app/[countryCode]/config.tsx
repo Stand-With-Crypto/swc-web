@@ -53,6 +53,11 @@ export const navbarConfig: NavbarProps = {
           icon: <Icons.BillsIcon />,
         },
         {
+          href: urls.petitions(),
+          text: 'Petitions',
+          icon: <Icons.BillsIcon />,
+        },
+        {
           href: urls.creatorDefenseFund(),
           text: 'Creator Defense Fund',
           icon: <Icons.CreatorDefenseIcon />,
