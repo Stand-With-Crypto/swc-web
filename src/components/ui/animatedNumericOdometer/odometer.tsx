@@ -10,6 +10,7 @@ import { useNumeralArray } from './useNumericalArray'
 export interface AnimatedNumericOdometerProps {
   value: string
   size: number
+  maxHeight?: number
   className?: string
   numberSpanClassName?: string
 }
@@ -18,6 +19,7 @@ export function AnimatedNumericOdometer({
   value,
   size,
   className,
+  maxHeight,
   numberSpanClassName,
 }: AnimatedNumericOdometerProps) {
   const spanArray = useRef<(HTMLSpanElement | null)[]>([])
@@ -37,15 +39,17 @@ export function AnimatedNumericOdometer({
     }
   }, [numeralArray])
 
+  const odometerStyles = useMemo(
+    () => ({
+      fontFeatureSettings: `'tnum', 'lnum'`,
+      height: maxHeight ?? size,
+      fontSize: size * 0.8,
+    }),
+    [maxHeight, size],
+  )
+
   return (
-    <h1
-      className={cn(styles.odometer, className)}
-      style={{
-        fontFeatureSettings: `'tnum', 'lnum'`,
-        height: size,
-        fontSize: size * 0.8,
-      }}
-    >
+    <h1 className={cn(styles.odometer, className)} style={odometerStyles}>
       {numeralArray.map((numeralGroup, numeralGroupIndex) => {
         /**
          * numeralGroup can be a single string characther like "$" or "," OR a number like "2" or "395" or "081".
@@ -71,7 +75,7 @@ export function AnimatedNumericOdometer({
                 transform: `translateY(-${(Number(digit) + 1) * 100}%)`,
               }}
             >
-              <span>&ndash;</span>
+              <span></span>
 
               {/**
                * here we create a an array up until the digit number, eg. [0, 1, 2, 3, 4, 5, 6, 7, 8].
