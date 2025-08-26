@@ -55,40 +55,42 @@ export function PagePetitionDetails({
       </section>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-6">
-        <div className="space-y-8 lg:col-span-4">
-          <section
-            className={cn('relative w-full overflow-hidden rounded-3xl', 'h-64 lg:h-[440px]')}
-          >
-            {petition.image ? (
-              <NextImage
-                alt={petition.title}
-                className="h-full w-full object-cover"
-                fill
-                src={petition.image}
-              />
-            ) : (
-              <div className="bg-circular-gradient flex h-full w-full items-center justify-center px-5 py-9">
+        <div className="space-y-10 lg:col-span-4">
+          <div className="w-full space-y-2">
+            <section
+              className={cn('relative w-full overflow-hidden rounded-3xl', 'h-64 lg:h-[440px]')}
+            >
+              {petition.image ? (
                 <NextImage
-                  alt="Petition"
-                  height={PETITION_ICON_SIZE}
-                  src={FALLBACK_PETITION_ICON_PATH}
-                  width={PETITION_ICON_SIZE}
+                  alt={petition.title}
+                  className="h-full w-full object-cover"
+                  fill
+                  src={petition.image}
                 />
-              </div>
-            )}
-          </section>
+              ) : (
+                <div className="bg-circular-gradient flex h-full w-full items-center justify-center px-5 py-9">
+                  <NextImage
+                    alt="Petition"
+                    height={PETITION_ICON_SIZE}
+                    src={FALLBACK_PETITION_ICON_PATH}
+                    width={PETITION_ICON_SIZE}
+                  />
+                </div>
+              )}
+            </section>
 
-          {/* Mobile: Summary after image */}
-          <div className="sticky top-20 z-10 lg:hidden">
-            <SignaturesSummary
-              className="border bg-muted/90 shadow-sm backdrop-blur-md"
-              goal={petition.countSignaturesGoal}
-              isClosed={isClosed}
-              isSigned={isSigned}
-              locale={locale}
-              onSign={noop}
-              signatures={petition.signaturesCount}
-            />
+            {/* Mobile: Summary after image */}
+            <div className="sticky top-20 z-10 lg:hidden">
+              <SignaturesSummary
+                className="border bg-muted/90 shadow-sm backdrop-blur-md"
+                goal={petition.countSignaturesGoal}
+                isClosed={isClosed}
+                isSigned={isSigned}
+                locale={locale}
+                onSign={noop}
+                signatures={petition.signaturesCount}
+              />
+            </div>
           </div>
 
           <section>
@@ -98,7 +100,7 @@ export function PagePetitionDetails({
 
           <section className="space-y-4">
             <h2 className="text-3xl font-bold">Info</h2>
-            <StyledHtmlContent html={petition.content} />
+            <StyledHtmlContent className="[&_*]:text-fontcolor-muted" html={petition.content} />
           </section>
 
           <section>
