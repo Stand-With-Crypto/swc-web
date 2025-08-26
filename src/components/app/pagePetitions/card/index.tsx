@@ -1,91 +1,120 @@
 'use client'
 
 import { useState } from 'react'
+import { GoalIcon } from 'lucide-react'
 import Link from 'next/link'
 
+import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
+import { pluralize } from '@/utils/shared/pluralize'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 
 interface PetitionCardProps {
   title: string
-  description: string
   signaturesCount: number
   href: string
   imgSrc?: string
   locale?: SupportedLocale
   className?: string
+  isSigned?: boolean
+  variant?: 'current' | 'past'
+  isGoalReached?: boolean
 }
 
-const DESKTOP_IMAGE_SIZE = 166
-const MOBILE_IMAGE_SIZE = 64
+const IMAGE_SIZE = 150 // in pixels (150x150)
 const FALLBACK_IMAGE_PATH = '/activityFeedIcons/petition.svg'
 
 export function PetitionCard({
   title,
-  description,
   signaturesCount,
   imgSrc,
   href,
   locale = SupportedLocale.EN_US,
   className,
+  variant = 'current',
+  isSigned = false,
+  isGoalReached = false,
 }: PetitionCardProps) {
   const [imageError, setImageError] = useState(false)
   const showImage = imgSrc && !imageError
 
+  const isPast = variant === 'past'
+  const isCurrent = variant === 'current'
+
   return (
     <Link
       className={cn(
-        'block cursor-pointer rounded-3xl bg-white shadow-md transition-shadow hover:shadow-xl',
-        'w-full border-t border-gray-100',
-        'grid max-lg:grid-cols-[1fr_128px]',
+        'block cursor-pointer overflow-hidden rounded-3xl bg-white shadow-md transition-shadow hover:shadow-xl',
+        'grid w-full border-t border-gray-100',
         'lg:grid-rows-[224px_1fr]',
+        isPast ? 'max-lg:grid-cols-[1fr_128px]' : 'max-lg:grid-rows-[224px_1fr]',
         className,
       )}
       href={href}
     >
-      <div className="relative max-lg:order-2 lg:h-auto">
+      <div
+        className={cn('relative lg:h-auto', {
+          'max-lg:order-2': isPast,
+        })}
+      >
         {showImage ? (
           <NextImage
             alt={title}
-            className="h-full w-full object-cover max-lg:rounded-br-3xl max-lg:rounded-tr-3xl lg:rounded-tl-3xl lg:rounded-tr-3xl"
+            className="h-full w-full object-cover"
             fill
             onError={() => setImageError(true)}
             src={imgSrc}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9 max-lg:rounded-br-3xl max-lg:rounded-tr-3xl lg:rounded-tl-3xl lg:rounded-tr-3xl">
+          <div className="bg-circular-gradient flex h-full w-full items-center justify-center px-5 py-9">
             <NextImage
               alt="Petition"
-              className="hidden lg:block"
-              height={DESKTOP_IMAGE_SIZE}
+              height={IMAGE_SIZE}
               src={FALLBACK_IMAGE_PATH}
-              width={DESKTOP_IMAGE_SIZE}
-            />
-            <NextImage
-              alt="Petition"
-              className="lg:hidden"
-              height={MOBILE_IMAGE_SIZE}
-              src={FALLBACK_IMAGE_PATH}
-              width={MOBILE_IMAGE_SIZE}
+              width={IMAGE_SIZE}
             />
           </div>
         )}
       </div>
 
       <div className="flex flex-col">
-        <div className="flex flex-col gap-4 p-6 max-lg:gap-3 max-lg:p-4">
-          <h3 className="line-clamp-2 text-xl font-bold leading-tight text-foreground max-lg:text-base">
+        <div
+          className={cn('flex flex-col gap-4 p-4 max-lg:gap-3 lg:p-6', {
+            'p-6': isCurrent,
+          })}
+        >
+          <h3 className="line-clamp-4 min-h-[72px] text-xl font-bold leading-tight text-foreground max-lg:text-base lg:line-clamp-3">
             {title}
           </h3>
-          <p className="text-md line-clamp-3 text-muted-foreground max-lg:line-clamp-2 max-lg:text-sm">
-            {description}
-          </p>
         </div>
-        <p className="mt-auto border-muted p-6 text-xl font-medium text-foreground max-lg:p-4 max-lg:text-base lg:border-t">
-          <FormattedNumber amount={signaturesCount} locale={locale} /> signatures
-        </p>
+        <div
+          className={cn(
+            'text-md mt-auto flex justify-between border-muted p-4 font-medium text-foreground lg:border-t lg:p-6',
+            { 'border-t p-6': isCurrent },
+          )}
+        >
+          <p className="flex items-center lg:h-8">
+            {isGoalReached ? (
+              <span className="flex items-center gap-2">
+                <GoalIcon />
+                Goal reached!
+              </span>
+            ) : (
+              <>
+                <FormattedNumber amount={signaturesCount} locale={locale} />{' '}
+                {pluralize({ count: signaturesCount, singular: 'signature', plural: 'signatures' })}
+              </>
+            )}
+          </p>
+          {isSigned && (
+            <p className="flex items-center gap-2">
+              Signed
+              <CheckIcon completed />
+            </p>
+          )}
+        </div>
       </div>
     </Link>
   )
