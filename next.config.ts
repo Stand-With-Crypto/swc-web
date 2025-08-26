@@ -1,6 +1,7 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
+import { RetryChunkLoadPlugin } from 'webpack-retry-chunk-load-plugin'
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -247,6 +248,17 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.builder.io',
       },
     ],
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.plugins.push(
+        new RetryChunkLoadPlugin({
+          maxRetries: 3,
+          retryDelay: 1000,
+        }),
+      )
+    }
+    return config
   },
   async headers() {
     return [
