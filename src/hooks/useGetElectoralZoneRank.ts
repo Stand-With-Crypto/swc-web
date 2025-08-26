@@ -1,14 +1,14 @@
 import useSWR, { SWRConfiguration } from 'swr'
 
 import { GetDistrictRankResponse } from '@/app/api/public/referrals/[countryCode]/[stateCode]/[districtNumber]/route'
-import { StateCode } from '@/utils/server/districtRankings/types'
+import { AdministrativeArea } from '@/utils/server/districtRankings/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 
 interface useGetElectoralZoneRankProps {
   countryCode: SupportedCountryCodes
-  stateCode: StateCode | null
+  stateCode: AdministrativeArea | null
   electoralZone: string | null
   filteredByState?: boolean
   config?: SWRConfiguration<GetDistrictRankResponse>

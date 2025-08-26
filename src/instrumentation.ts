@@ -68,6 +68,24 @@ export function register() {
         return suppressSentryErrorOrReturnEvent(event, hint, dsn)
       },
     })
+
+    // Capture unhandled promise rejections
+    process.on('unhandledRejection', (reason, promise) => {
+      Sentry.withScope(scope => {
+        scope.setTags({ domain: 'unhandledRejection' })
+        scope.setExtras({ promise: promise.toString(), timestamp: new Date().toISOString() })
+        Sentry.captureException(reason)
+      })
+    })
+
+    // Capture uncaught exceptions
+    process.on('uncaughtException', error => {
+      Sentry.withScope(scope => {
+        scope.setTags({ domain: 'uncaughtException' })
+        scope.setExtras({ timestamp: new Date().toISOString() })
+        Sentry.captureException(error)
+      })
+    })
   }
 
   // This configures the initialization of Sentry for edge features (middleware, edge routes, and so on).
@@ -90,4 +108,55 @@ export function register() {
   }
 }
 
-export const onRequestError = Sentry.captureRequestError
+// Global error handler for all API routes and server components
+export async function onRequestError(
+  error: unknown,
+  request: {
+    path: string
+    method: string
+    headers: Record<string, string | string[]>
+    url?: string
+  },
+  context: {
+    routerKind: 'Pages Router' | 'App Router'
+    routePath: string
+    routeType: 'route' | 'page' | 'middleware' | 'instrumentation'
+  },
+) {
+  // Check if this is an internal server error that should be logged
+  if (isInternalServerError(error)) {
+    // Capture error with rich context using Sentry's withScope
+    Sentry.withScope(scope => {
+      scope.setTags({
+        domain: 'globalErrorHandler',
+        method: request.method,
+        routerKind: context.routerKind,
+        routeType: context.routeType,
+        routePath: context.routePath,
+      })
+
+      scope.setExtras({
+        url: request.url || request.path,
+        method: request.method,
+        headers: request.headers,
+        routerKind: context.routerKind,
+        routePath: context.routePath,
+        routeType: context.routeType,
+        timestamp: new Date().toISOString(),
+        userAgent: request.headers['user-agent'],
+      })
+
+      Sentry.captureRequestError(error, request, context)
+    })
+  }
+}
+
+function isInternalServerError(error: unknown): boolean {
+  const err = error as any
+
+  if (err.name === 'ZodError' || err.code === 'VALIDATION_ERROR' || err?.status < 500) {
+    return false
+  }
+
+  return true
+}

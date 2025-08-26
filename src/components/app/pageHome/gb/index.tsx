@@ -1,14 +1,27 @@
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/common/delayedRecentActivity'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
+import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
+import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
+import { GbAdvocatesLeaderboard } from '@/components/app/pageReferrals/gb/leaderboard'
+import {
+  GbYourConstituencyRank,
+  GbYourConstituencyRankingWrapper,
+  GbYourConstituencyRankSuspense,
+} from '@/components/app/pageReferrals/gb/yourConstituencyRanking'
 import { RecentActivity } from '@/components/app/recentActivity'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { ResponsiveTabsOrSelect } from '@/components/ui/responsiveTabsOrSelect'
+import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -19,11 +32,16 @@ const urls = getIntlUrls(countryCode)
 
 export function GbPageHome({
   topLevelMetrics,
-  recentActivity,
   partners,
   founders,
+  actions,
+  countUsers,
+  advocatePerStateDataProps,
   dtsiHomepagePoliticians,
-}: Omit<HomePageProps, 'leaderboardData'>) {
+  leaderboardData,
+}: HomePageProps & {
+  leaderboardData: DistrictRankingEntryWithRank[]
+}) {
   return (
     <>
       <GbHero />
@@ -38,20 +56,74 @@ export function GbPageHome({
       </section>
 
       <HomePageSection>
-        <HomePageSection.Title>
-          <span className="text-primary-cta">Brits</span> believe in crypto
-        </HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          See how the community is taking a stand to safeguard the future of crypto in the UK.
+        <HomePageSection.Title>Our community</HomePageSection.Title>
+        <HomePageSection.Subtitle className="md:hidden">
+          See how our community is taking a stand to safeguard the future of crypto in the UK.
         </HomePageSection.Subtitle>
 
         <RecentActivity>
-          <RecentActivity.List actions={recentActivity} />
-          <RecentActivity.Footer>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.community()}>View all</InternalLink>
-            </Button>
-          </RecentActivity.Footer>
+          <ResponsiveTabsOrSelect
+            analytics={'Homepage Our Community Tabs'}
+            data-testid="community-leaderboard-tabs"
+            defaultValue={GbRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+            options={[
+              {
+                value: GbRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+                label: 'Recent activity',
+                content: (
+                  <>
+                    <HomePageSection.Subtitle className="hidden md:block">
+                      See how our community is taking a stand to safeguard the future of crypto in
+                      the UK.
+                    </HomePageSection.Subtitle>
+                    {countUsers && actions && (
+                      <DelayedRecentActivityWithMap
+                        actions={actions}
+                        advocatesMapPageData={advocatePerStateDataProps}
+                        countUsers={countUsers.count}
+                        countryCode={countryCode}
+                        showDonateButton={false}
+                      />
+                    )}
+                  </>
+                ),
+              },
+              {
+                value: GbRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES,
+                label: 'Top constituencies',
+                content: (
+                  <div className="space-y-4">
+                    <HomePageSection.Subtitle className="hidden md:block">
+                      See which constituency has the most number of advocates.
+                    </HomePageSection.Subtitle>
+
+                    <GbYourConstituencyRankingWrapper>
+                      <GbYourConstituencyRankSuspense>
+                        <UserAddressProvider countryCode={countryCode}>
+                          <GbYourConstituencyRank />
+                        </UserAddressProvider>
+                      </GbYourConstituencyRankSuspense>
+                    </GbYourConstituencyRankingWrapper>
+                    <GbAdvocatesLeaderboard data={leaderboardData} />
+                    <div className="mx-auto flex w-fit justify-center gap-2">
+                      <LoginDialogWrapper
+                        authenticatedContent={
+                          <UserActionFormReferDialog countryCode={countryCode}>
+                            <Button className="w-full">Refer</Button>
+                          </UserActionFormReferDialog>
+                        }
+                      >
+                        <Button className="w-full">Join</Button>
+                      </LoginDialogWrapper>
+                      <Button asChild variant="secondary">
+                        <InternalLink href={urls.referrals()}>View all</InternalLink>
+                      </Button>
+                    </div>
+                  </div>
+                ),
+              },
+            ]}
+          />
         </RecentActivity>
       </HomePageSection>
 

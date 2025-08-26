@@ -22,6 +22,7 @@ export type ClientUser = ClientModel<
     lastName: string | null
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
     userLocationDetails: {
+      swcCivicAdministrativeArea?: string | null
       administrativeAreaLevel1: string
       countryCode: string
     } | null
@@ -79,6 +80,7 @@ const getClientUserAddressInfo = (address: Address | null) => {
   }
 
   return {
+    swcCivicAdministrativeArea: address.swcCivicAdministrativeArea,
     administrativeAreaLevel1: address.administrativeAreaLevel1,
     countryCode: address.countryCode,
   }

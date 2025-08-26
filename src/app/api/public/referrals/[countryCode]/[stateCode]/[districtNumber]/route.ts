@@ -8,6 +8,7 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   zodAUStateDistrict,
   zodCAProvinceDistrict,
+  zodGbRegionConstituency,
   zodUSStateDistrict,
 } from '@/validation/fields/zodAddress'
 
@@ -18,7 +19,7 @@ const ZOD_SCHEMA_BY_COUNTRY_CODE_MAP: Record<SupportedCountryCodes, ZodTypeAny> 
   [SupportedCountryCodes.US]: zodUSStateDistrict,
   [SupportedCountryCodes.AU]: zodAUStateDistrict,
   [SupportedCountryCodes.CA]: zodCAProvinceDistrict,
-  [SupportedCountryCodes.GB]: undefined as unknown as ZodTypeAny, // TODO: implement GB schema
+  [SupportedCountryCodes.GB]: zodGbRegionConstituency,
 }
 
 export async function GET(

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Metadata } from 'next'
 
-import { GbPageCommunity } from '@/components/app/pageCommunity/gb'
+import { GbPageCommunity, PageLeaderboardInferredProps } from '@/components/app/pageCommunity/gb'
 import { GB_RECENT_ACTIVITY_PAGINATION } from '@/components/app/pageCommunity/gb/constants'
 import { getGbPageData } from '@/components/app/pageCommunity/getPageData'
+import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -31,9 +32,17 @@ export default async function GbCommunityRecentActivityPage(
   props: GbCommunityRecentActivityPageProps,
 ) {
   const params = await props.params
-  const pageData = await getGbPageData({
+  const { offset, pageNum, publicRecentActivity, totalPages } = await getGbPageData({
     page: params.page,
   })
 
-  return <GbPageCommunity {...pageData} />
+  const dataProps: PageLeaderboardInferredProps = {
+    leaderboardData: undefined,
+    publicRecentActivity,
+    tab: GbRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+  }
+
+  return (
+    <GbPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={totalPages} />
+  )
 }

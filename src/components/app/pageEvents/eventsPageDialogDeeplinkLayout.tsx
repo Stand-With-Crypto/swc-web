@@ -24,7 +24,6 @@ export async function EventsPageDialogDeeplinkLayout({
   children,
   countryCode,
   events,
-  showMap,
 }: EventsPageDialogDeeplinkLayout) {
   const urls = getIntlUrls(countryCode)
 
@@ -47,7 +46,7 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage countryCode={countryCode} events={events} isDeepLink showMap={showMap} />
+      <EventsPage countryCode={countryCode} events={events} isDeepLink />
     </>
   )
 }
