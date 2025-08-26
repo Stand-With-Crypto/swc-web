@@ -14,8 +14,8 @@ export async function queryPetitionBySlug(petitionSlug: string): Promise<Petitio
   return petition || null
 }
 
-// Mock function to get recent signatories for the carousel
-export async function queryPetitionRecentSignatures(petitionSlug: string): Promise<
+// Mock function to get recent signatories for the carousel (will be replaced with actual API call)
+export async function queryPetitionRecentSignatures(_petitionSlug: string): Promise<
   Array<{
     locale: string
     datetimeSigned: string
