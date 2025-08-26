@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { GoalIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
@@ -96,7 +97,10 @@ export function PetitionCard({
         >
           <p className="flex items-center lg:h-8">
             {isGoalReached ? (
-              'Goal reached!'
+              <p className="flex items-center gap-2">
+                <GoalIcon />
+                Goal reached!
+              </p>
             ) : (
               <>
                 <FormattedNumber amount={signaturesCount} locale={locale} />{' '}
