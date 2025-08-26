@@ -2,7 +2,7 @@
 
 import { chunk } from 'lodash-es'
 
-import { StateCode } from '@/utils/server/districtRankings/types'
+import { AdministrativeArea } from '@/utils/server/districtRankings/types'
 import { redis, redisWithCache } from '@/utils/server/redis'
 import { getLogger } from '@/utils/shared/logger'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
@@ -10,12 +10,12 @@ import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface DistrictRankingEntry {
-  state: StateCode
+  state: AdministrativeArea
   district: string
   count: number
 }
 
-export type MemberKey = `${StateCode}:${string}`
+export type MemberKey = `${AdministrativeArea}:${string}`
 type RedisEntryData = Omit<DistrictRankingEntry, 'count'>
 
 const getLog = (redisKey: string) => getLogger(redisKey)
@@ -60,7 +60,7 @@ export const getMemberKey = (data: RedisEntryData): MemberKey => `${data.state}:
 const parseMemberKey = (key: MemberKey): RedisEntryData => {
   const parts = key.split(':')
   const [state, district] = parts
-  return { state: state as StateCode, district }
+  return { state: state as AdministrativeArea, district }
 }
 
 async function maybeInitializeUSCacheKey(countryCode: SupportedCountryCodes) {
