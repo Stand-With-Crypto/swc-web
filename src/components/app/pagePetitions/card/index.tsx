@@ -104,10 +104,8 @@ export function PetitionCard({
           </p>
           {isSigned && (
             <p className="flex items-center gap-2">
-              <>
-                Signed
-                <CheckIcon completed />
-              </>
+              Signed
+              <CheckIcon completed />
             </p>
           )}
         </div>
