@@ -101,6 +101,10 @@
     @apply mt-10;
   }
 
+  .bg-circular-gradient {
+    background: radial-gradient(74.32% 74.32% at 50% 50%, #f0e8ff 8.5%, #6b28ff 89%);
+  }
+
   @keyframes slideDown {
     from {
       height: 0;

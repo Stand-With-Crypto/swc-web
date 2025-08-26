@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
+import { pluralize } from '@/utils/shared/pluralize'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 
@@ -66,7 +67,7 @@ export function PetitionCard({
             src={imgSrc}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9">
+          <div className="bg-circular-gradient flex h-full w-full items-center justify-center px-5 py-9">
             <NextImage
               alt="Petition"
               height={IMAGE_SIZE}
@@ -98,7 +99,8 @@ export function PetitionCard({
               'Goal reached!'
             ) : (
               <>
-                <FormattedNumber amount={signaturesCount} locale={locale} /> signatures
+                <FormattedNumber amount={signaturesCount} locale={locale} />{' '}
+                {pluralize({ count: signaturesCount, singular: 'signature', plural: 'signatures' })}
               </>
             )}
           </p>
