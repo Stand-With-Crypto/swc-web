@@ -3,7 +3,7 @@ import { animate, motion, useMotionValue, useTransform } from 'motion/react'
 
 interface CircularProgressProps {
   percentage: number
-  value: string
+  title?: string
   label?: string
   size?: number
   gapDegrees?: number
@@ -16,7 +16,7 @@ interface CircularProgressProps {
 const FULL_CIRCLE_DEGREES = 360
 
 export function CircularProgress({
-  value,
+  title,
   label,
   size = 200,
   strokeWidth = 20,
@@ -55,6 +55,11 @@ export function CircularProgress({
   }, [percentage, animationDuration, animateOnMount, motionPercentage])
 
   const rotation = useMemo(() => gapDegrees / 2 - 270, [gapDegrees])
+
+  const shouldHideLabel = useMemo(() => {
+    if (title === undefined && label === undefined) return true
+    return false
+  }, [title, label])
 
   return (
     <div
@@ -96,10 +101,12 @@ export function CircularProgress({
         />
       </svg>
 
-      <div className="absolute flex flex-col items-center justify-center text-center">
-        <span className="text-3xl font-bold text-foreground md:text-4xl">{value}</span>
-        <span className="text-sm font-medium text-muted-foreground md:text-base">{label}</span>
-      </div>
+      {!shouldHideLabel && (
+        <div className="absolute flex flex-col items-center justify-center text-center">
+          <span className="text-3xl font-bold text-foreground md:text-4xl">{title}</span>
+          <span className="text-sm font-medium text-muted-foreground md:text-base">{label}</span>
+        </div>
+      )}
     </div>
   )
 }

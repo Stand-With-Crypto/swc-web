@@ -20,7 +20,7 @@ export async function queryAllPetitions(): Promise<PetitionData[]> {
       countSignaturesGoal: 25000,
       signaturesCount: 23053,
       enableAutomaticMilestones: true,
-      image: null,
+      image: '/homepageHero.png',
       milestones: [
         {
           title: 'Reached 20,000 signatures',
@@ -52,19 +52,19 @@ export async function queryAllPetitions(): Promise<PetitionData[]> {
       datetimeFinished: null, // Current petition
     },
     {
-      slug: 'crypto-innovation-support',
-      title: 'Support Cryptocurrency Innovation',
+      slug: 'market-reform-petition',
+      title: 'Sign the Market Reform Petition',
       countryCode: 'US',
       description:
-        'Join thousands of advocates calling for sensible cryptocurrency regulations that foster innovation.',
+        'Join us in advocating for comprehensive market reform that protects consumers and promotes innovation in the financial sector.',
       content: `
-        <h2>Support Innovation</h2>
-        <p>Help us advocate for regulations that protect consumers while encouraging technological advancement...</p>
+        <h2>Why This Matters</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
       `,
-      countSignaturesGoal: 15000,
-      signaturesCount: 10,
+      countSignaturesGoal: 100000,
+      signaturesCount: 0,
       enableAutomaticMilestones: true,
-      image: null,
+      image: null, // Will use fallback image
       milestones: [],
       datetimeFinished: null, // Current petition
     },

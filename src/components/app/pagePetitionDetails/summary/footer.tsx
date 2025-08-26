@@ -1,3 +1,5 @@
+import { Edit3Icon } from 'lucide-react'
+
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { Button } from '@/components/ui/button'
 
@@ -26,7 +28,8 @@ export function PetitionSummaryFooter({ isClosed, isSigned, onSign }: PetitionSu
   }
 
   return (
-    <Button className="w-full" onClick={onSign} variant="primary-cta">
+    <Button className="w-max gap-2 px-6 lg:w-full" onClick={onSign} variant="primary-cta">
+      <Edit3Icon size={16} />
       Sign
     </Button>
   )

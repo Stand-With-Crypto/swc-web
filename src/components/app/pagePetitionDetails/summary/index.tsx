@@ -11,10 +11,11 @@ interface SignaturesSummaryProps {
   signatures: number
   goal: number
   locale: SupportedLocale
-  label: string
+  label?: string
   onSign?: () => void
   isClosed?: boolean
   isSigned?: boolean
+  className?: string
 }
 
 export function SignaturesSummary({
@@ -25,6 +26,7 @@ export function SignaturesSummary({
   onSign,
   isClosed,
   isSigned,
+  className,
 }: SignaturesSummaryProps) {
   const percentage = Math.min((signatures / goal) * 100, 100)
   const formattedGoalString = compactNumber(goal, locale)
@@ -32,25 +34,45 @@ export function SignaturesSummary({
   const hasReachedGoal = signatures >= goal
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-6 rounded-3xl bg-gray-100 px-14 py-10">
-      {/* this is just to fit the size of the card when the goal is reached */}
-      <div className={cn({ '-mb-2': hasReachedGoal })}>
-        {hasReachedGoal && <p className="text-center font-medium text-foreground">Goal reached!</p>}
-        <h2 className="text-3xl font-bold text-foreground">
-          <FormattedNumber amount={signatures} locale={locale} /> Signed
-        </h2>
+    <div className={cn('w-full rounded-3xl bg-gray-100', className)}>
+      {/* Desktop */}
+      <div className="flex w-full flex-col items-center justify-center gap-6 px-14 py-10 max-lg:hidden">
+        <div className={cn({ 'lg:-mb-2': hasReachedGoal })}>
+          {hasReachedGoal && (
+            <p className="text-center font-medium text-foreground">Goal reached!</p>
+          )}
+          <h2 className="text-3xl font-bold text-foreground">
+            <FormattedNumber amount={signatures} locale={locale} /> Signed
+          </h2>
+        </div>
+
+        <div className="flex flex-col items-center gap-2 lg:gap-4">
+          <CircularProgress
+            label="Signature Goal"
+            percentage={percentage}
+            title={formattedGoalString}
+          />
+          {label && <p className="text-center font-medium text-muted-foreground">{label}</p>}
+        </div>
+
+        <PetitionSummaryFooter isClosed={isClosed} isSigned={isSigned} onSign={onSign} />
       </div>
 
-      <div className="flex flex-col items-center gap-2 lg:gap-4">
-        <CircularProgress
-          label="Signature Goal"
-          percentage={percentage}
-          value={formattedGoalString}
-        />
-        <p className="text-center font-medium text-muted-foreground">{label}</p>
+      {/* Mobile */}
+      <div className="flex items-center justify-between gap-3 p-4 lg:hidden">
+        <div className="flex items-center gap-3">
+          <CircularProgress percentage={percentage} size={40} strokeWidth={8} />
+          <div className="flex flex-col">
+            <p className="text-lg font-bold">
+              <FormattedNumber amount={signatures} locale={locale} /> Signed
+            </p>
+            <p className="text-sm font-medium text-muted-foreground">
+              {compactNumber(goal, locale)} Signature goal
+            </p>
+          </div>
+        </div>
+        <PetitionSummaryFooter isClosed={isClosed} isSigned={isSigned} onSign={onSign} />
       </div>
-
-      <PetitionSummaryFooter isClosed={isClosed} isSigned={isSigned} onSign={onSign} />
     </div>
   )
 }

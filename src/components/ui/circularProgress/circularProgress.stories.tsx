@@ -10,7 +10,7 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {
-    value: '75%',
+    title: '75%',
     percentage: 50,
     label: 'Progress',
   },
@@ -43,7 +43,7 @@ export const Default: Story = {
 
 export const Complete: Story = {
   args: {
-    value: '100%',
+    title: '100%',
     percentage: 100,
     label: 'Complete',
     color: '#10B981',
@@ -52,7 +52,7 @@ export const Complete: Story = {
 
 export const Empty: Story = {
   args: {
-    value: '0%',
+    title: '0%',
     percentage: 0,
     label: 'Empty',
     color: '#EF4444',
@@ -61,7 +61,7 @@ export const Empty: Story = {
 
 export const CustomValue: Story = {
   args: {
-    value: 'A+',
+    title: 'A+',
     percentage: 95,
     label: 'Grade',
     color: '#10B981',
@@ -70,7 +70,7 @@ export const CustomValue: Story = {
 
 export const Small: Story = {
   args: {
-    value: '85%',
+    title: '85%',
     percentage: 85,
     size: 120,
     strokeWidth: 12,
@@ -79,7 +79,7 @@ export const Small: Story = {
 
 export const Large: Story = {
   args: {
-    value: '65%',
+    title: '65%',
     percentage: 65,
     size: 250,
     strokeWidth: 25,
