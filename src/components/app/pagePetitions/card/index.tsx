@@ -97,10 +97,10 @@ export function PetitionCard({
         >
           <p className="flex items-center lg:h-8">
             {isGoalReached ? (
-              <p className="flex items-center gap-2">
+              <span className="flex items-center gap-2">
                 <GoalIcon />
                 Goal reached!
-              </p>
+              </span>
             ) : (
               <>
                 <FormattedNumber amount={signaturesCount} locale={locale} />{' '}
