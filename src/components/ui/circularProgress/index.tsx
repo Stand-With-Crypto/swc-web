@@ -3,21 +3,18 @@ import { animate, motion, useMotionValue, useTransform } from 'motion/react'
 
 interface CircularProgressProps {
   percentage: number
-  title?: string
-  label?: string
   size?: number
   gapDegrees?: number
   strokeWidth?: number
   color?: string
   animationDuration?: number
   animateOnMount?: boolean
+  children?: React.ReactNode
 }
 
 const FULL_CIRCLE_DEGREES = 360
 
 export function CircularProgress({
-  title,
-  label,
   size = 200,
   strokeWidth = 20,
   percentage = 0,
@@ -25,6 +22,7 @@ export function CircularProgress({
   gapDegrees = 60,
   animationDuration = 1,
   animateOnMount = true,
+  children,
 }: CircularProgressProps) {
   const center = useMemo(() => size / 2, [size])
   const radius = useMemo(() => (size - strokeWidth) / 2, [size, strokeWidth])
@@ -55,11 +53,6 @@ export function CircularProgress({
   }, [percentage, animationDuration, animateOnMount, motionPercentage])
 
   const rotation = useMemo(() => gapDegrees / 2 - 270, [gapDegrees])
-
-  const shouldHideLabel = useMemo(() => {
-    if (title === undefined && label === undefined) return true
-    return false
-  }, [title, label])
 
   return (
     <div
@@ -101,10 +94,9 @@ export function CircularProgress({
         />
       </svg>
 
-      {!shouldHideLabel && (
+      {children && (
         <div className="absolute flex flex-col items-center justify-center text-center">
-          <span className="text-3xl font-bold text-foreground md:text-4xl">{title}</span>
-          <span className="text-sm font-medium text-muted-foreground md:text-base">{label}</span>
+          {children}
         </div>
       )}
     </div>

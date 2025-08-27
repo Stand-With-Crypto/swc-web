@@ -4,8 +4,8 @@ import { Suspense, useEffect, useState } from 'react'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { UserActionFormPetitionSignature } from '@/components/app/userActionFormPetitionSignature'
-import { getPetitionData } from '@/components/app/userActionFormPetitionSignature/getPetitionData'
 import { UserActionFormPetitionSignatureSkeleton } from '@/components/app/userActionFormPetitionSignature/skeleton'
+import { queryPetitionBySlug } from '@/data/petitions/queryPetitionBySlug'
 import { useDialog } from '@/hooks/useDialog'
 import { PetitionData } from '@/types/petition'
 import { cn } from '@/utils/web/cn'
@@ -20,7 +20,9 @@ function UserActionFormPetitionSignatureDialogContent({
   const [petitionData, setPetitionData] = useState<PetitionData | null>(null)
 
   useEffect(() => {
-    void getPetitionData(petitionSlug).then(setPetitionData)
+    if (petitionSlug) {
+      void queryPetitionBySlug(petitionSlug).then(setPetitionData)
+    }
   }, [petitionSlug])
 
   if (!petitionData) {

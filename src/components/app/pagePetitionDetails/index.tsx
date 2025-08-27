@@ -88,6 +88,7 @@ export function PagePetitionDetails({
               isSigned={isSigned}
               locale={locale}
               onSign={noop}
+              petitionSlug={petition.slug}
               signatures={petition.signaturesCount}
             />
           </div>
@@ -128,6 +129,7 @@ export function PagePetitionDetails({
               isSigned={isSigned}
               locale={locale}
               onSign={noop}
+              petitionSlug={petition.slug}
               signatures={petition.signaturesCount}
             />
           </div>
