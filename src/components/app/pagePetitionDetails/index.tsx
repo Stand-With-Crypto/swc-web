@@ -57,7 +57,7 @@ export function PagePetitionDetails({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-6">
         <div className="space-y-10 lg:col-span-4">
           <section
-            className={cn('relative w-full overflow-hidden rounded-3xl', 'h-64 lg:h-[440px]')}
+            className={cn('relative w-full overflow-hidden rounded-3xl', 'h-48 lg:h-[440px]')}
           >
             {petition.image ? (
               <NextImage
@@ -70,6 +70,7 @@ export function PagePetitionDetails({
               <div className="bg-circular-gradient flex h-full w-full items-center justify-center px-5 py-9">
                 <NextImage
                   alt="Petition"
+                  className="h-32 w-32 lg:h-64 lg:w-64"
                   height={PETITION_ICON_SIZE}
                   src={FALLBACK_PETITION_ICON_PATH}
                   width={PETITION_ICON_SIZE}
