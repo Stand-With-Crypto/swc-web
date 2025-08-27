@@ -40,7 +40,7 @@ export function PetitionSummaryFooter({
       <Button className="w-max gap-2 px-6 lg:w-full" onClick={onSign} variant="primary-cta">
         <Edit3Icon size={16} />
         <span>
-          Sign <span className="hidden lg:inline">petition</span>
+          Sign<span className="hidden lg:inline"> petition</span>
         </span>
       </Button>
     </UserActionFormPetitionSignatureDialog>

@@ -37,7 +37,7 @@ export function SignaturesSummary({
   const hasReachedGoal = signatures >= goal
 
   return (
-    <div className={cn('flex w-full items-center rounded-3xl bg-gray-100', className)}>
+    <div className={cn('flex w-full items-center rounded-3xl bg-muted', className)}>
       {/* Desktop */}
       <div className="flex w-full flex-col items-center justify-center gap-6 px-14 py-10 max-lg:hidden">
         <div className={cn({ 'lg:-mb-2': hasReachedGoal })}>
