@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { apiUrls } from '@/utils/shared/urls'
+import { apiUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
@@ -27,8 +27,7 @@ export async function GET(_: Request, { params }: RequestContext) {
   }
 
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    const response = await fetchReq(`${baseUrl}${apiUrls.petitions({ countryCode })}`)
+    const response = await fetchReq(`${INTERNAL_BASE_URL}${apiUrls.petitions({ countryCode })}`)
 
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to fetch petitions' }, { status: response.status })

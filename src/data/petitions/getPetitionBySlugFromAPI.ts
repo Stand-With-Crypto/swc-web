@@ -1,6 +1,6 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { apiUrls } from '@/utils/shared/urls'
+import { apiUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 export async function getPetitionBySlugFromAPI(
@@ -8,9 +8,8 @@ export async function getPetitionBySlugFromAPI(
   slug: string,
 ): Promise<SWCPetition | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
     const response = await fetchReq(
-      `${baseUrl}${apiUrls.petitionBySlug({ countryCode, petitionSlug: slug })}`,
+      `${INTERNAL_BASE_URL}${apiUrls.petitionBySlug({ countryCode, petitionSlug: slug })}`,
     )
 
     if (!response.ok) {
