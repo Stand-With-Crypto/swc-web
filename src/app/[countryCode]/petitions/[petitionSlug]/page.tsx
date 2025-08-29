@@ -21,7 +21,6 @@ export async function generateStaticParams() {
 
   const params = []
 
-  // Generate params for each petition across all supported country codes
   for (const petition of allPetitions) {
     params.push({
       countryCode: SupportedCountryCodes.US,
