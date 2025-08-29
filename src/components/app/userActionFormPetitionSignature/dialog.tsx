@@ -1,31 +1,27 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense } from 'react'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { UserActionFormPetitionSignature } from '@/components/app/userActionFormPetitionSignature'
 import { UserActionFormPetitionSignatureSkeleton } from '@/components/app/userActionFormPetitionSignature/skeleton'
-import { queryPetitionBySlug } from '@/data/petitions/queryPetitionBySlug'
+import { useApiPetitionBySlug } from '@/hooks/useApiPetitionBySlug'
 import { useDialog } from '@/hooks/useDialog'
-import { PetitionData } from '@/types/petition'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 function UserActionFormPetitionSignatureDialogContent({
   petitionSlug,
+  countryCode,
   onClose,
 }: {
   petitionSlug?: string
+  countryCode: SupportedCountryCodes
   onClose: () => void
 }) {
-  const [petitionData, setPetitionData] = useState<PetitionData | null>(null)
+  const { data: petitionData, isLoading } = useApiPetitionBySlug(countryCode, petitionSlug)
 
-  useEffect(() => {
-    if (petitionSlug) {
-      void queryPetitionBySlug(petitionSlug).then(setPetitionData)
-    }
-  }, [petitionSlug])
-
-  if (!petitionData) {
+  if (isLoading || !petitionData) {
     return <UserActionFormPetitionSignatureSkeleton />
   }
 
@@ -37,11 +33,13 @@ export function UserActionFormPetitionSignatureDialog({
   defaultOpen = false,
   className,
   petitionSlug,
+  countryCode,
 }: {
   children: React.ReactNode
   defaultOpen?: boolean
   className?: string
   petitionSlug?: string
+  countryCode: SupportedCountryCodes
 }) {
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
@@ -52,6 +50,7 @@ export function UserActionFormPetitionSignatureDialog({
     <UserActionFormDialog {...dialogProps} className={cn('!p-0', className)} trigger={children}>
       <Suspense fallback={<UserActionFormPetitionSignatureSkeleton />}>
         <UserActionFormPetitionSignatureDialogContent
+          countryCode={countryCode}
           onClose={() => dialogProps.onOpenChange(false)}
           petitionSlug={petitionSlug}
         />

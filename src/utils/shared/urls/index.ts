@@ -323,6 +323,15 @@ export const apiUrls = {
     administrativeArea: string
     district: number
   }) => `/api/public/dtsi/races/usa/${administrativeArea}/${district}`,
+  petitions: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/${countryCode}/public/petitions`,
+  petitionBySlug: ({
+    countryCode,
+    petitionSlug,
+  }: {
+    countryCode: SupportedCountryCodes
+    petitionSlug: string
+  }) => `/api/${countryCode}/public/petitions/${petitionSlug}`,
 }
 
 export * from './externalUrls'

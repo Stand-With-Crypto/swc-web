@@ -1,19 +1,3 @@
-import { PetitionData } from '@/types/petition'
-
-import { queryAllPetitions } from './queryAllPetitions'
-
-// TODO: Replace with actual API call and database query
-export async function queryPetitionBySlug(petitionSlug: string): Promise<PetitionData | null> {
-  // Simulate network delay to mimic real API call
-  await new Promise(resolve => setTimeout(resolve, 300))
-
-  // Get all petitions and find the one with matching slug
-  const allPetitions = await queryAllPetitions()
-  const petition = allPetitions.find(p => p.slug === petitionSlug)
-
-  return petition || null
-}
-
 // Mock function to get recent signatories for the carousel (will be replaced with actual API call)
 export async function queryPetitionRecentSignatures(_petitionSlug: string): Promise<
   Array<{

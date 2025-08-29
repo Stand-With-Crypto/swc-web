@@ -1,0 +1,54 @@
+import { NextResponse } from 'next/server'
+
+import { fetchReq } from '@/utils/shared/fetchReq'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { apiUrls } from '@/utils/shared/urls'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
+import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
+
+interface RequestContext {
+  params: Promise<{
+    countryCode: SupportedCountryCodes
+    petitionSlug: string
+  }>
+}
+
+interface PetitionsListResponse {
+  data: SWCPetition[]
+}
+
+export async function GET(_: Request, { params }: RequestContext) {
+  const { countryCode, petitionSlug } = await params
+
+  const validatedCountryCode = zodSupportedCountryCode.safeParse(countryCode)
+
+  if (!validatedCountryCode.success) {
+    return NextResponse.json({ error: 'Invalid country code' }, { status: 400 })
+  }
+
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+    const response = await fetchReq(`${baseUrl}${apiUrls.petitions({ countryCode })}`)
+
+    console.log('======= response', response)
+
+    if (!response.ok) {
+      return NextResponse.json({ error: 'Failed to fetch petitions' }, { status: response.status })
+    }
+
+    const petitionsData = (await response.json()) as PetitionsListResponse
+
+    // it is better to do a find here, because the route we are consuming is static,
+    // so we don't need to query builder.io for the petition and do the counts on database again
+    const petition = petitionsData.data.find(p => p.slug === petitionSlug)
+
+    if (!petition) {
+      return NextResponse.json({ error: 'Petition not found' }, { status: 404 })
+    }
+
+    return NextResponse.json({ data: petition })
+  } catch (error) {
+    console.error('Error fetching petition by slug:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
