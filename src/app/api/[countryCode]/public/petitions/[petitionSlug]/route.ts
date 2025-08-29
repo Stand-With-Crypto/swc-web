@@ -30,8 +30,6 @@ export async function GET(_: Request, { params }: RequestContext) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
     const response = await fetchReq(`${baseUrl}${apiUrls.petitions({ countryCode })}`)
 
-    console.log('======= response', response)
-
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to fetch petitions' }, { status: response.status })
     }
