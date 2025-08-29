@@ -54,8 +54,6 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       : { event: BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME }),
   },
   async ({ step, logger }) => {
-    // Initialize variables.
-    // The initialization of variables using `step.run` might seem silly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
     const currentTime = new Date().getTime()
 
     const maxBackfillCount =
