@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 import { SignaturesSummary } from '.'
@@ -33,12 +34,14 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
+    countryCode: SupportedCountryCodes.US,
     onSign: () => alert('Signing petition...'),
   },
 }
 
 export const GoalReached: Story = {
   args: {
+    countryCode: SupportedCountryCodes.US,
     signatures: 125430,
     goal: 100000,
     label: 'Amazing! We have exceeded our goal. Thank you to everyone who signed this petition.',
@@ -48,6 +51,7 @@ export const GoalReached: Story = {
 
 export const LargeNumbers: Story = {
   args: {
+    countryCode: SupportedCountryCodes.US,
     signatures: 2750000,
     goal: 5500000,
     label:
@@ -58,6 +62,7 @@ export const LargeNumbers: Story = {
 
 export const Closed: Story = {
   args: {
+    countryCode: SupportedCountryCodes.US,
     signatures: 67543,
     goal: 100000,
     isClosed: true,
@@ -68,6 +73,7 @@ export const Closed: Story = {
 
 export const Mobile: Story = {
   args: {
+    countryCode: SupportedCountryCodes.US,
     signatures: 42000,
     goal: 100000,
     label: 'Help us reach our goal! Every signature counts.',

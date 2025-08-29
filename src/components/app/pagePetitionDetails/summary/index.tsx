@@ -73,7 +73,7 @@ export function SignaturesSummary({
       <div className="flex w-full items-center justify-between gap-3 p-4 lg:hidden">
         <div className="flex items-center gap-3">
           {hasReachedGoal ? (
-            <div className="animate-bubble flex h-10 w-10 items-center justify-center rounded-full bg-primary-cta delay-200">
+            <div className="flex h-10 w-10 animate-bubble items-center justify-center rounded-full bg-primary-cta delay-200">
               <GoalIcon className="text-white" size={24} />
             </div>
           ) : (
