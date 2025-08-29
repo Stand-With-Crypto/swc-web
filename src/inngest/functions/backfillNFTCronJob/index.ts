@@ -44,7 +44,7 @@ export interface BackfillNftInngestCronJobSchema {
 export const backfillNFTInngestCronJob = inngest.createFunction(
   {
     id: BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID,
-    retries: 0,
+    retries: 1,
     concurrency: 1,
     onFailure: onScriptFailure,
   },
@@ -56,9 +56,8 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
   async ({ step, logger }) => {
     // Initialize variables.
     // The initialization of variables using `step.run` might seem silly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
-    const currentTime = await step.run('script.initialize-constant-variables', async () => {
-      return new Date().getTime()
-    })
+    const currentTime = new Date().getTime()
+
     const maxBackfillCount =
       (BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME /
         BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL) *
@@ -66,15 +65,17 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
     let batchNum = 1
     let stopMessage = ''
 
+    const whereUserActionToBackfill = {
+      datetimeCreated: { gte: GO_LIVE_DATE },
+      nftMint: null,
+      actionType: { in: actionsWithNFT },
+      user: { primaryUserCryptoAddress: { isNot: null } },
+    }
+
     // Fetch the user action batches that need to be backfilled.
     const userActionBatches = await step.run('script.get-user-actions', async () => {
       const userActions = await prismaClient.userAction.findMany({
-        where: {
-          datetimeCreated: { gte: GO_LIVE_DATE },
-          nftMint: null,
-          actionType: { in: actionsWithNFT },
-          user: { primaryUserCryptoAddress: { isNot: null } },
-        },
+        where: whereUserActionToBackfill,
         take: maxBackfillCount,
         include: {
           user: {
@@ -172,24 +173,14 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
     // Fetch the remaining user actions that are in the backlog.
     const userActionsRemaining = await step.run('script.get-user-actions-remaining', async () => {
       return await prismaClient.userAction.count({
-        where: {
-          datetimeCreated: { gte: GO_LIVE_DATE },
-          nftMint: null,
-          actionType: { in: actionsWithNFT },
-          user: { primaryUserCryptoAddress: { isNot: null } },
-        },
+        where: whereUserActionToBackfill,
       })
     })
 
     // Trigger alert if we have user actions missing NFTs whose creation time is greater than `MISSING_NFT_DAYS_ALERT_THRESHOLD`.
     await step.run('script.trigger-alert', async () => {
       const userAction = await prismaClient.userAction.findFirst({
-        where: {
-          datetimeCreated: { gte: GO_LIVE_DATE },
-          nftMint: null,
-          actionType: { in: actionsWithNFT },
-          user: { primaryUserCryptoAddress: { isNot: null } },
-        },
+        where: whereUserActionToBackfill,
         orderBy: { datetimeCreated: 'asc' }, // Fetch the oldest user action.
       })
       if (!userAction) {
