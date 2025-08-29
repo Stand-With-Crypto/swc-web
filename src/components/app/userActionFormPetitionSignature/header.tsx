@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/utils/web/cn'
@@ -9,7 +8,6 @@ import { DEFAULT_INNER_WIDTH_CLASS_NAME } from './constants'
 
 interface PetitionHeaderProps {
   title: string
-  description: string
   petitionSlug?: string
   signaturesCount: number
   goal: number
@@ -18,7 +16,6 @@ interface PetitionHeaderProps {
 
 export function PetitionHeader({
   title,
-  description,
   petitionSlug,
   signaturesCount,
   goal,
@@ -31,7 +28,6 @@ export function PetitionHeader({
       <div className={cn(DEFAULT_INNER_WIDTH_CLASS_NAME)}>
         <div className="space-y-4 py-6">
           <PageTitle size="md">{title}</PageTitle>
-          <PageSubTitle size="sm">{description}</PageSubTitle>
           <div className="text-center">
             {petitionSlug ? (
               <Link className="underline" href={`/petitions/${petitionSlug}`}>

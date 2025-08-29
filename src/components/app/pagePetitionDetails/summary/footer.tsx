@@ -3,12 +3,14 @@ import { Edit3Icon } from 'lucide-react'
 import { UserActionFormPetitionSignatureDialog } from '@/components/app/userActionFormPetitionSignature/dialog'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { Button } from '@/components/ui/button'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 interface PetitionSummaryFooterProps {
   isClosed?: boolean
   isSigned?: boolean
   onSign?: () => void
   petitionSlug?: string
+  countryCode: SupportedCountryCodes
 }
 
 export function PetitionSummaryFooter({
@@ -16,6 +18,7 @@ export function PetitionSummaryFooter({
   isSigned,
   onSign,
   petitionSlug,
+  countryCode,
 }: PetitionSummaryFooterProps) {
   if (isClosed) {
     return (
@@ -36,7 +39,7 @@ export function PetitionSummaryFooter({
   }
 
   return (
-    <UserActionFormPetitionSignatureDialog petitionSlug={petitionSlug}>
+    <UserActionFormPetitionSignatureDialog countryCode={countryCode} petitionSlug={petitionSlug}>
       <Button className="w-max gap-2 px-6 lg:w-full" onClick={onSign} variant="primary-cta">
         <Edit3Icon size={16} />
         <span>

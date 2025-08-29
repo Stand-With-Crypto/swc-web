@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import { PagePetitions } from '@/components/app/pagePetitions'
-import { queryAllPetitions } from '@/data/petitions/queryAllPetitions'
+import { getAllPetitionsFromAPI } from '@/data/petitions/getAllPetitionsFromAPI'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
@@ -16,11 +16,12 @@ export const metadata: Metadata = {
 }
 
 export default async function PetitionsPage(props: PageProps) {
-  const results = await queryAllPetitions()
+  const { countryCode } = await props.params
+  const results = await getAllPetitionsFromAPI(countryCode)
 
   return (
     <PagePetitions
-      countryCode={(await props.params).countryCode}
+      countryCode={countryCode}
       description={description}
       petitions={results}
       title={title}

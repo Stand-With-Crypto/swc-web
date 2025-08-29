@@ -13,7 +13,6 @@ export function UserActionFormPetitionSignatureSkeleton() {
       <LoadingOverlay />
 
       <PetitionHeader
-        description="Please wait while we load the petition details."
         goal={100000}
         petitionSlug={undefined}
         signaturesCount={33000}
