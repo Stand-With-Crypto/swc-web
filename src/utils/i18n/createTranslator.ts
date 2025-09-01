@@ -5,14 +5,14 @@ export interface Translator {
   t: (key: string, context?: InterpolationContext) => string
   hasTranslation: (key: string) => boolean
   getAvailableKeys: () => string[]
-  getLocale: () => SupportedLanguage
-  getComponentName: () => string
+  getLanguage: () => SupportedLanguage
+  getContextName: () => string
 }
 
 export function createTranslator(
   i18nMessages: I18nMessages,
   language: SupportedLanguage,
-  componentName: string = 'unknown',
+  contextName: string = 'unknown',
 ): Translator {
   const messages = i18nMessages[language] || i18nMessages.en || {}
 
@@ -22,7 +22,7 @@ export function createTranslator(
 
       if (value === undefined) {
         console.warn(
-          `Missing translation for key "${key}" in component "${componentName}" for locale "${language}"`,
+          `Missing translation for key "${key}" in context "${contextName}" for language "${language}"`,
         )
         return key
       }
@@ -38,12 +38,12 @@ export function createTranslator(
       return Object.keys(messages)
     },
 
-    getLocale: (): SupportedLanguage => {
+    getLanguage: (): SupportedLanguage => {
       return language
     },
 
-    getComponentName: (): string => {
-      return componentName
+    getContextName: (): string => {
+      return contextName
     },
   }
 }
