@@ -8,7 +8,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 const PETITIONS_GRID_CLASSNAMES =
-  'grid grid-cols-1 gap-4 md:grid-cols-2 lg:flex lg:grid-cols-3 lg:items-center lg:justify-center lg:gap-8'
+  'grid grid-cols-1 gap-4 lg:flex lg:grid-cols-3 lg:items-center lg:justify-center lg:gap-8'
 
 interface PagePetitionsProps {
   title: string
@@ -39,6 +39,7 @@ export function PagePetitions(props: PagePetitionsProps) {
         <div className={PETITIONS_GRID_CLASSNAMES}>
           {currentPetitions.map(petition => (
             <PetitionCard
+              className="lg:w-1/3"
               href={urls.petitionDetails(petition.slug)}
               imgSrc={petition.image || undefined}
               isGoalReached={petition.countSignaturesGoal <= petition.signaturesCount}
