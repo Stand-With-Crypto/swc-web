@@ -1,16 +1,18 @@
 'use client'
 
 import { useMemo } from 'react'
+import { usePathname } from 'next/navigation'
+
+import { extractLanguageFromPath } from '@/utils/i18n/language-utils'
 
 import { createTranslator } from './createTranslator'
-import type { I18nMessages, SupportedLanguage } from './types'
+import type { I18nMessages } from './types'
 
 /**
  * Hook to use translations in client components
  *
  * @param i18nMessages - Object with the component translations
- * @param language - Current language
- * @param componentName - Component name (optional, will be inferred automatically)
+ * @param contextName - Component name (optional)
  * @returns Object translator with t() method to translate
  *
  * @example
@@ -21,21 +23,28 @@ import type { I18nMessages, SupportedLanguage } from './types'
  *   fr: { 'welcome': 'Bienvenue {name}!' }
  * }
  *
- * function MyComponent({ language }: { language: SupportedLanguage }) {
- *   const { t } = useTranslation(i18nMessages, language)
+ * function MyComponent() {
+ *   const { t } = useTranslation(i18nMessages)
  *
  *   return <h1>{t('welcome', { name: 'João' })}</h1>
  * }
  * ```
  */
-export function useTranslation(
-  i18nMessages: I18nMessages,
-  locale: SupportedLanguage,
-  contextName: string = 'unknown',
-) {
+export function useTranslation(i18nMessages: I18nMessages, contextName: string = 'unknown') {
+  const pathname = usePathname()
+
+  const language = useMemo(() => {
+    const routeLanguage = pathname ? extractLanguageFromPath(pathname) : null
+    if (routeLanguage) {
+      return routeLanguage
+    }
+
+    return 'en'
+  }, [pathname])
+
   const translator = useMemo(() => {
-    return createTranslator(i18nMessages, locale, contextName)
-  }, [i18nMessages, locale, contextName])
+    return createTranslator(i18nMessages, language, contextName)
+  }, [i18nMessages, language, contextName])
 
   return {
     t: translator.t.bind(translator),
