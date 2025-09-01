@@ -43,8 +43,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   return generateMetadataDetails({
-    title: petition.title,
-    description: petition.content.substring(0, 160), // Use content excerpt as description
+    title: 'Sign this petition',
+    description: petition.title,
   })
 }
 
