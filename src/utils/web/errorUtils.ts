@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 import { getServerTranslation } from '@/utils/i18n/getServerTranslation'
 
 export const i18nMessages = {
@@ -28,5 +30,17 @@ export const formatErrorStatus = async (status: number) => {
       return t('error.status.401')
     default:
       return t('error.generic.description')
+  }
+}
+
+export function getTranslatedGenericError() {
+  const language = Cookies.get('swc-page-language')?.toLowerCase()
+  const genericErrorTitle =
+    i18nMessages[language as keyof typeof i18nMessages]['error.generic.title'] ?? ''
+  const genericErrorDescription =
+    i18nMessages[language as keyof typeof i18nMessages]['error.generic.description'] ?? ''
+  return {
+    genericErrorTitle,
+    genericErrorDescription,
   }
 }
