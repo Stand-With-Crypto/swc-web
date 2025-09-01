@@ -50,7 +50,7 @@ export async function triggerServerActionForForm<
 ) {
   trackFormSubmitted(formName, analyticsProps)
 
-  const response = await fn(payload).catch(error => {
+  const response = await fn(payload).catch(async error => {
     if (!isError(error)) {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error })
@@ -60,7 +60,7 @@ export async function triggerServerActionForForm<
         extra: { analyticsProps, error, formName, payload },
       })
     } else if (error instanceof FetchReqError) {
-      const formattedErrorStatus = formatErrorStatus(error.response.status)
+      const formattedErrorStatus = await formatErrorStatus(error.response.status)
       trackFormSubmitErrored(formName, { 'Error Type': error.response.status, ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
       Sentry.captureException(error, {
