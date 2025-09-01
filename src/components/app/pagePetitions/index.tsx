@@ -3,14 +3,17 @@ import { partition } from 'lodash-es'
 import { PetitionCard } from '@/components/app/pagePetitions/card'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { PetitionData } from '@/types/petition'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
+
+const PETITIONS_GRID_CLASSNAMES =
+  'grid grid-cols-1 gap-4 lg:flex lg:grid-cols-3 lg:items-center lg:justify-center lg:gap-8'
 
 interface PagePetitionsProps {
   title: string
   description: string
-  petitions: PetitionData[]
+  petitions: SWCPetition[]
   countryCode: SupportedCountryCodes
 }
 
@@ -33,9 +36,10 @@ export function PagePetitions(props: PagePetitionsProps) {
 
       <section>
         <h2 className="mb-6 text-center text-3xl font-bold">Current Petitions</h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className={PETITIONS_GRID_CLASSNAMES}>
           {currentPetitions.map(petition => (
             <PetitionCard
+              className="lg:w-1/3"
               href={urls.petitionDetails(petition.slug)}
               imgSrc={petition.image || undefined}
               isGoalReached={petition.countSignaturesGoal <= petition.signaturesCount}
@@ -52,9 +56,10 @@ export function PagePetitions(props: PagePetitionsProps) {
 
       <section>
         <h2 className="mb-6 text-center text-3xl font-bold">Past Petitions</h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className={PETITIONS_GRID_CLASSNAMES}>
           {pastPetitions.map(petition => (
             <PetitionCard
+              className="lg:w-1/3"
               href={urls.petitionDetails(petition.slug)}
               imgSrc={petition.image || undefined}
               key={petition.slug}

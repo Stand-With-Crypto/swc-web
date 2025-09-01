@@ -2,11 +2,9 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PagePetitionDetails } from '@/components/app/pagePetitionDetails'
-import { queryAllPetitions } from '@/data/petitions/queryAllPetitions'
-import {
-  queryPetitionBySlug,
-  queryPetitionRecentSignatures,
-} from '@/data/petitions/queryPetitionBySlug'
+import { getAllPetitionsFromAPI } from '@/data/petitions/getAllPetitionsFromAPI'
+import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFromAPI'
+import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -14,19 +12,20 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
+const countryCode = SupportedCountryCodes.US
+
 type Props = PageProps<{
   petitionSlug: string
 }>
 
 export async function generateStaticParams() {
-  const allPetitions = await queryAllPetitions()
+  const allPetitions = await getAllPetitionsFromAPI(countryCode)
 
   const params = []
 
-  // Generate params for each petition across all supported country codes
   for (const petition of allPetitions) {
     params.push({
-      countryCode: SupportedCountryCodes.US,
+      countryCode,
       petitionSlug: petition.slug,
     })
   }
@@ -36,7 +35,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const petition = await queryPetitionBySlug(params.petitionSlug)
+  const petition = await getPetitionBySlugFromAPI(params.countryCode, params.petitionSlug)
 
   if (!petition) {
     return generateMetadataDetails({
@@ -46,18 +45,17 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   return generateMetadataDetails({
-    title: petition.title,
-    description: petition.description,
+    title: 'Sign this petition',
+    description: petition.title,
   })
 }
 
 export default async function PetitionDetailsPage(props: Props) {
   const params = await props.params
   const petitionSlug = params.petitionSlug
-  const countryCode = params.countryCode
 
   const [petition, recentSignatures] = await Promise.all([
-    queryPetitionBySlug(petitionSlug),
+    getPetitionBySlugFromAPI(countryCode, petitionSlug),
     queryPetitionRecentSignatures(petitionSlug),
   ])
 

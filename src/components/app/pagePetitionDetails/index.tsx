@@ -10,12 +10,12 @@ import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { StyledHtmlContent } from '@/components/ui/styledHtmlContent'
-import { PetitionData } from '@/types/petition'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { cn } from '@/utils/web/cn'
 
 interface PagePetitionDetailsProps {
-  petition: PetitionData
+  petition: SWCPetition
   countryCode: SupportedCountryCodes
   recentSignatures: Array<{
     locale: string
@@ -36,7 +36,6 @@ export function PagePetitionDetails({
 }: PagePetitionDetailsProps) {
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
   const isClosed = !!petition.datetimeFinished
-  const _hasReachedGoal = petition.signaturesCount >= petition.countSignaturesGoal
 
   // Generate petition closing date text
   const closingDateText = petition.datetimeFinished
@@ -44,14 +43,16 @@ export function PagePetitionDetails({
         month: 'short',
         day: 'numeric',
         year: 'numeric',
-      }).format(petition.datetimeFinished)}`
-    : `Petition closes Sep 29, 2025` // Mock closing date from the visual reference
+      }).format(new Date(petition.datetimeFinished))}`
+    : null
 
   return (
     <div className="standard-spacing-from-navbar container mx-auto max-w-6xl">
       <section className="mb-16 space-y-6 text-center lg:text-left">
         <PageTitle className="text-4xl font-bold lg:text-5xl">{petition.title}</PageTitle>
-        <PageSubTitle className="text-lg text-muted-foreground">{closingDateText}</PageSubTitle>
+        {petition.datetimeFinished && (
+          <PageSubTitle className="text-lg text-muted-foreground">{closingDateText}</PageSubTitle>
+        )}
       </section>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-6">
@@ -84,6 +85,7 @@ export function PagePetitionDetails({
             {/* The bang on margin-top is because of the space-y on the parent component */}
             <SignaturesSummary
               className="border bg-muted/90 shadow-sm backdrop-blur-md"
+              countryCode={countryCode}
               goal={petition.countSignaturesGoal}
               isClosed={isClosed}
               isSigned={isSigned}
@@ -115,7 +117,7 @@ export function PagePetitionDetails({
               currentSignatures={petition.signaturesCount}
               goal={petition.countSignaturesGoal}
               locale={locale}
-              shouldGenerateAutomaticMilestones={petition.enableAutomaticMilestones}
+              shouldGenerateAutomaticMilestones={!!petition.enableAutomaticMilestones}
             />
           </section>
         </div>
@@ -125,6 +127,7 @@ export function PagePetitionDetails({
           <div className="sticky top-24">
             <SignaturesSummary
               className={TOP_SECTION_HEIGHT_CLASS_NAME}
+              countryCode={countryCode}
               goal={petition.countSignaturesGoal}
               isClosed={isClosed}
               isSigned={isSigned}

@@ -16,7 +16,7 @@ import {
   FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { PetitionData } from '@/types/petition'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 import { FormContainer } from './container'
 import { Footer } from './footer'
@@ -33,7 +33,7 @@ type SignatureFormData = z.infer<typeof signatureFormSchema>
 
 interface UserActionFormPetitionSignatureProps {
   onSuccess?: () => void
-  petitionData: PetitionData
+  petitionData: SWCPetition
 }
 
 export function UserActionFormPetitionSignature({
@@ -50,7 +50,7 @@ export function UserActionFormPetitionSignature({
     },
   })
 
-  const { title, description, countSignaturesGoal, signaturesCount } = petitionData
+  const { title, countSignaturesGoal, signaturesCount } = petitionData
 
   const onSubmit = (data: SignatureFormData) => {
     console.log('Petition signed with data:', data)
@@ -64,7 +64,6 @@ export function UserActionFormPetitionSignature({
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <PetitionHeader
-          description={description}
           goal={countSignaturesGoal}
           petitionSlug={petitionData.slug}
           signaturesCount={signaturesCount}

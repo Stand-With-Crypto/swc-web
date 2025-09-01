@@ -5,12 +5,14 @@ import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/summ
 import { CircularProgress } from '@/components/ui/circularProgress'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { compactNumber } from '@/utils/shared/compactNumber'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 
 interface SignaturesSummaryProps {
   signatures: number
   goal: number
+  countryCode: SupportedCountryCodes
   locale: SupportedLocale
   label?: string
   onSign?: () => void
@@ -23,6 +25,7 @@ interface SignaturesSummaryProps {
 export function SignaturesSummary({
   signatures,
   goal,
+  countryCode,
   locale,
   label,
   onSign,
@@ -58,6 +61,7 @@ export function SignaturesSummary({
         </div>
 
         <PetitionSummaryFooter
+          countryCode={countryCode}
           isClosed={isClosed}
           isSigned={isSigned}
           onSign={onSign}
@@ -69,7 +73,7 @@ export function SignaturesSummary({
       <div className="flex w-full items-center justify-between gap-3 p-4 lg:hidden">
         <div className="flex items-center gap-3">
           {hasReachedGoal ? (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-cta">
+            <div className="flex h-10 w-10 animate-bubble items-center justify-center rounded-full bg-primary-cta delay-200">
               <GoalIcon className="text-white" size={24} />
             </div>
           ) : (
@@ -85,6 +89,7 @@ export function SignaturesSummary({
           </div>
         </div>
         <PetitionSummaryFooter
+          countryCode={countryCode}
           isClosed={isClosed}
           isSigned={isSigned}
           onSign={onSign}
