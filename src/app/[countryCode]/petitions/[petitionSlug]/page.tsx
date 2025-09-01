@@ -12,18 +12,20 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
+const countryCode = SupportedCountryCodes.US
+
 type Props = PageProps<{
   petitionSlug: string
 }>
 
 export async function generateStaticParams() {
-  const allPetitions = await getAllPetitionsFromAPI(SupportedCountryCodes.US)
+  const allPetitions = await getAllPetitionsFromAPI(countryCode)
 
   const params = []
 
   for (const petition of allPetitions) {
     params.push({
-      countryCode: SupportedCountryCodes.US,
+      countryCode,
       petitionSlug: petition.slug,
     })
   }
@@ -51,7 +53,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function PetitionDetailsPage(props: Props) {
   const params = await props.params
   const petitionSlug = params.petitionSlug
-  const countryCode = params.countryCode
 
   const [petition, recentSignatures] = await Promise.all([
     getPetitionBySlugFromAPI(countryCode, petitionSlug),
