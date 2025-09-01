@@ -6,6 +6,9 @@ import { apiUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
+export const revalidate = 60 // 60 seconds
+export const dynamic = 'error'
+
 interface RequestContext {
   params: Promise<{
     countryCode: SupportedCountryCodes
