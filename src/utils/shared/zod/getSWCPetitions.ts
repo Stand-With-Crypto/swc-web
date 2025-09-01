@@ -1,21 +1,21 @@
 import { array, boolean, date, number, object, string, z } from 'zod'
 
 export const zodPetitionMilestoneSchema = object({
-  title: string().min(1),
+  title: string().nonempty(),
   datetimeCompleted: date(),
 })
 
 export const zodPetitionSchemaValidation = object({
   data: object({
-    slug: string().min(1),
-    title: string().min(1),
+    slug: string().nonempty(),
+    title: string().nonempty(),
     countryCode: string().length(2),
-    content: string().min(1),
+    content: string().nonempty(),
     countSignaturesGoal: number().positive(),
     enableAutomaticMilestones: boolean().optional(),
-    image: string().url().nullable().optional(),
+    image: string().url().nullish(),
     milestones: array(zodPetitionMilestoneSchema).optional(),
-    datetimeFinished: string().nullable().optional(),
+    datetimeFinished: string().nullish(),
   }),
 })
 
