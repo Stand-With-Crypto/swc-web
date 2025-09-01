@@ -33,7 +33,7 @@ export function extractLanguageFromPath(pathname: string): SupportedLanguage | n
   return null
 }
 
-export async function getServerLocale(): Promise<SupportedLanguage> {
+export async function getServerLanguage(): Promise<SupportedLanguage> {
   try {
     const headersList = await headers()
 
