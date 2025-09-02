@@ -48,6 +48,7 @@ model Address {
 
   userActionEmails                      UserActionEmail[]
   userActionCalls                       UserActionCall[]
+  userActionPetitions                   UserActionPetition[]
   users                                 User[]
   userActionVotingInformationResearched UserActionVotingInformationResearched[]
   userActionRefers                      UserActionRefer[]
@@ -273,6 +274,7 @@ enum UserActionType {
   POLL
   REFER
   RSVP_EVENT
+  SIGN_PETITION
   TWEET
   TWEET_AT_PERSON
   VIEW_KEY_PAGE
@@ -311,6 +313,7 @@ model UserAction {
   userActionCall                        UserActionCall?
   userActionDonation                    UserActionDonation?
   userActionOptIn                       UserActionOptIn?
+  userActionPetition                    UserActionPetition?
   userActionVoterRegistration           UserActionVoterRegistration?
   userActionVoterAttestation            UserActionVoterAttestation?
   userActionTweetAtPerson               UserActionTweetAtPerson?
@@ -405,6 +408,20 @@ model UserActionCall {
 
   @@index([addressId])
   @@map("user_action_call")
+}
+
+model UserActionPetition {
+  id             String     @id @default(uuid())
+  userAction     UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
+  email          String     @map("email")
+  firstName      String     @map("first_name")
+  lastName       String     @map("last_name")
+  addressId      String     @map("address_id")
+  address        Address    @relation(fields: [addressId], references: [id])
+  datetimeSigned DateTime   @default(now()) @map("datetime_signed")
+
+  @@index([addressId])
+  @@map("user_action_petition")
 }
 
 enum DonationOrganization {

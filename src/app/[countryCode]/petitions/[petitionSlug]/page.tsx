@@ -7,6 +7,7 @@ import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFrom
 import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
@@ -56,7 +57,14 @@ export default async function PetitionDetailsPage(props: Props) {
 
   const [petition, recentSignatures] = await Promise.all([
     getPetitionBySlugFromAPI(countryCode, petitionSlug),
-    queryPetitionRecentSignatures(petitionSlug),
+    queryPetitionRecentSignatures({
+      petitionSlug,
+      countryCode,
+      formatLocaleName: entry =>
+        US_STATE_CODE_TO_DISPLAY_NAME_MAP[
+          entry as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+        ] || entry,
+    }),
   ])
 
   if (!petition) {

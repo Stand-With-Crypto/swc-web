@@ -6,6 +6,7 @@ import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dial
 import { UserActionFormPetitionSignature } from '@/components/app/userActionFormPetitionSignature'
 import { UserActionFormPetitionSignatureSkeleton } from '@/components/app/userActionFormPetitionSignature/skeleton'
 import { useApiPetitionBySlug } from '@/hooks/useApiPetitionBySlug'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
@@ -19,13 +20,29 @@ function UserActionFormPetitionSignatureDialogContent({
   countryCode: SupportedCountryCodes
   onClose: () => void
 }) {
-  const { data: petitionData, isLoading } = useApiPetitionBySlug(countryCode, petitionSlug)
+  const { data: petitionData, isLoading: isLoadingPetition } = useApiPetitionBySlug(
+    countryCode,
+    petitionSlug,
+  )
+  const { data: userData, isLoading: isLoadingUser } = useApiResponseForUserFullProfileInfo()
+
+  const isLoading = isLoadingPetition || isLoadingUser
 
   if (isLoading || !petitionData) {
     return <UserActionFormPetitionSignatureSkeleton />
   }
 
-  return <UserActionFormPetitionSignature onSuccess={onClose} petitionData={petitionData} />
+  if (!userData?.user) {
+    return null
+  }
+
+  return (
+    <UserActionFormPetitionSignature
+      onSuccess={onClose}
+      petitionData={petitionData}
+      user={userData.user}
+    />
+  )
 }
 
 export function UserActionFormPetitionSignatureDialog({

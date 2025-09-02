@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { UserActionType } from '@prisma/client'
 import { GoalIcon } from 'lucide-react'
 
 import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/summary/footer'
 import { CircularProgress } from '@/components/ui/circularProgress'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { compactNumber } from '@/utils/shared/compactNumber'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
@@ -30,12 +32,20 @@ export function SignaturesSummary({
   label,
   onSign,
   isClosed,
-  isSigned,
   className,
   petitionSlug,
 }: SignaturesSummaryProps) {
   const percentage = Math.min((signatures / goal) * 100, 100)
   const formattedGoalString = compactNumber(goal, locale)
+  const { data: userData } = useApiResponseForUserFullProfileInfo()
+
+  const isSigned = useMemo(() => {
+    return userData?.user?.userActions?.some(
+      userAction =>
+        userAction.actionType === UserActionType.SIGN_PETITION &&
+        userAction.campaignName === petitionSlug,
+    )
+  }, [userData, petitionSlug])
 
   const hasReachedGoal = signatures >= goal
 

@@ -26,7 +26,7 @@ interface PagePetitionDetailsProps {
 
 const TOP_SECTION_HEIGHT_CLASS_NAME = 'h-[440px]'
 const PETITION_ICON_SIZE = 280
-const FALLBACK_PETITION_ICON_PATH = '/activityFeedIcons/petition.svg'
+const FALLBACK_PETITION_ICON_PATH = '/actionTypeIcons/petition.svg'
 
 export function PagePetitionDetails({
   petition,
