@@ -51,33 +51,33 @@ export function ErrorDemoButton() {
     <div className="space-y-4">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <button
-          onClick={() => handleError('generic')}
-          disabled={isLoading === 'generic'}
           className={primaryButtonClass}
+          disabled={isLoading === 'generic'}
+          onClick={() => handleError('generic')}
         >
           {isLoading === 'generic' ? 'Loading...' : 'Generic Error'}
         </button>
 
         <button
-          onClick={() => handleError('401')}
-          disabled={isLoading === '401'}
           className={secondaryButtonClass}
+          disabled={isLoading === '401'}
+          onClick={() => handleError('401')}
         >
           {isLoading === '401' ? 'Loading...' : '401 Unauthorized'}
         </button>
 
         <button
-          onClick={() => handleError('500')}
-          disabled={isLoading === '500'}
           className={tertiaryButtonClass}
+          disabled={isLoading === '500'}
+          onClick={() => handleError('500')}
         >
           {isLoading === '500' ? 'Loading...' : '500 Server Error'}
         </button>
 
         <button
-          onClick={() => handleError('client')}
-          disabled={isLoading === 'client'}
           className={clientButtonClass}
+          disabled={isLoading === 'client'}
+          onClick={() => handleError('client')}
         >
           Client Toast Error
         </button>
