@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie'
 
-import { getServerTranslation } from '@/utils/i18n/getServerTranslation'
+import { I18nMessages } from '@/utils/i18n/types'
 
-export const i18nMessages = {
+export const i18nMessages: I18nMessages = {
   en: {
     'error.generic.title': 'Uh oh! Something went wrong.',
     'error.generic.description':
@@ -22,25 +22,29 @@ export const i18nMessages = {
   },
 }
 
-export const formatErrorStatus = async (status: number) => {
-  const { t } = await getServerTranslation(i18nMessages)
-
+export const formatErrorStatus = (status: number): string => {
+  const { genericErrorStatus401, genericErrorDescription } = getTranslatedGenericError()
   switch (status) {
     case 401:
-      return t('error.status.401')
+      return String(genericErrorStatus401)
     default:
-      return t('error.generic.description')
+      return String(genericErrorDescription)
   }
 }
 
 export function getTranslatedGenericError() {
-  const language = Cookies.get('swc-page-language')?.toLowerCase()
+  const language = Cookies.get('swc-page-language')?.toLowerCase() ?? 'en'
+
   const genericErrorTitle =
     i18nMessages[language as keyof typeof i18nMessages]['error.generic.title'] ?? ''
   const genericErrorDescription =
     i18nMessages[language as keyof typeof i18nMessages]['error.generic.description'] ?? ''
+  const genericErrorStatus401 =
+    i18nMessages[language as keyof typeof i18nMessages]['error.status.401'] ?? ''
+
   return {
-    genericErrorTitle,
-    genericErrorDescription,
+    genericErrorTitle: String(genericErrorTitle),
+    genericErrorDescription: String(genericErrorDescription),
+    genericErrorStatus401: String(genericErrorStatus401),
   }
 }
