@@ -16,6 +16,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockCreateUserActionPetitionInput } from '@/mocks/models/mockUserActionPetition'
 import { mockCreateUserActionPollAnswerInput } from '@/mocks/models/mockUserActionPollAnswer'
 import { mockCreateUserActionReferInput } from '@/mocks/models/mockUserActionRefer'
 import { mockCreateUserActionRsvpEventInput } from '@/mocks/models/mockUserActionRsvpEvent'
@@ -691,6 +692,23 @@ async function seed() {
   )
   const userActionPollAnswer = await prismaClient.userActionPollAnswer.findMany()
   logEntity({ userActionPollAnswer })
+
+  /*
+  userActionPetition
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.SIGN_PETITION].map(action => ({
+      ...mockCreateUserActionPetitionInput(),
+      id: action.id,
+      addressId: faker.helpers.arrayElement(address).id,
+    })),
+    data =>
+      prismaClient.userActionPetition.createMany({
+        data,
+      }),
+  )
+  const userActionPetition = await prismaClient.userActionPetition.findMany()
+  logEntity({ userActionPetition })
 }
 
 void runBin(seed)
