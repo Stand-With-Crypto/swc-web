@@ -22,6 +22,11 @@ export function obfuscateURLCountryCode(request: NextRequest): NextResponse {
 
   const createUrl = (path: string): URL => new URL(`${path}${searchParams}`, request.url)
 
+  // TEMP: Allow /eu paths for POC without rewriting
+  if (pathname.startsWith('/eu')) {
+    return NextResponse.next()
+  }
+
   // If path doesn't start with any country code, rewrite to include default country code
   if (!maybeCountryCode) {
     const newPath = `/${DEFAULT_SUPPORTED_COUNTRY_CODE}${pathname}`
