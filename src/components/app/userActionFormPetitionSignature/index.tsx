@@ -23,7 +23,11 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
-import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
+import {
+  GENERIC_FORM_ERROR_KEY,
+  trackFormSubmissionSyncErrors,
+  triggerServerActionForForm,
+} from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import {
@@ -114,7 +118,7 @@ export function UserActionFormPetitionSignature({
             },
             payload: { ...values, address },
             onError: (_, error) => {
-              form.setError('FORM_ERROR' as any, {
+              form.setError(GENERIC_FORM_ERROR_KEY, {
                 message: error.message,
               })
               toastGenericError()

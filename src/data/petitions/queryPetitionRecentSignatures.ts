@@ -43,9 +43,9 @@ export async function queryPetitionRecentSignatures({
     .map(signature =>
       signature.userActionPetition
         ? {
-            datetimeSigned: signature.userActionPetition?.datetimeSigned.toISOString(),
+            datetimeSigned: signature.userActionPetition.datetimeSigned.toISOString(),
             locale: formatLocaleName(
-              signature.userActionPetition?.address?.administrativeAreaLevel1 || '',
+              signature.userActionPetition.address?.administrativeAreaLevel1 || '',
             ),
           }
         : null,
