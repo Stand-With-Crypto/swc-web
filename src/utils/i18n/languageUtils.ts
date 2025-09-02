@@ -1,5 +1,3 @@
-import { headers } from 'next/headers'
-
 import type { SupportedLanguage } from './types'
 
 export function isValidLanguage(value: string): value is SupportedLanguage {
@@ -31,27 +29,6 @@ export function extractLanguageFromPath(pathname: string): SupportedLanguage | n
   }
 
   return null
-}
-
-export async function getServerLanguage(): Promise<SupportedLanguage> {
-  try {
-    const headersList = await headers()
-
-    const pathname =
-      headersList.get('x-pathname') ||
-      headersList.get('x-invoke-path') ||
-      headersList.get('referer')?.replace(/^https?:\/\/[^/]+/, '') ||
-      ''
-
-    const routeLanguage = extractLanguageFromPath(pathname)
-    if (routeLanguage) {
-      return routeLanguage
-    }
-    return 'en'
-  } catch (error) {
-    console.warn('Failed to determine server language:', error)
-    return 'en'
-  }
 }
 
 /**

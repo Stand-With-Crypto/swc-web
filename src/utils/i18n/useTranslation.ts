@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 
-import { extractLanguageFromPath } from '@/utils/i18n/language-utils'
+import { extractLanguageFromPath } from '@/utils/i18n/languageUtils'
 
 import { createTranslator } from './createTranslator'
 import type { I18nMessages } from './types'
