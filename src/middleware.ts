@@ -4,6 +4,7 @@ import { internationalRedirectHandler } from '@/utils/edge/internationalRedirect
 import { obfuscateURLCountryCode } from '@/utils/edge/obfuscateURLCountryCode'
 import { setResponseCookie } from '@/utils/edge/setResponseCookie'
 import { setSessionCookiesFromRequest } from '@/utils/edge/setSessionCookies'
+import { extractLanguageFromPath } from '@/utils/i18n/languageUtils'
 import { isKnownBotUserAgent } from '@/utils/shared/botUserAgent'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import {
@@ -30,6 +31,13 @@ export function middleware(request: NextRequest) {
       maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
     })
   }
+
+  //temp save language to cookies for POC
+  setResponseCookie({
+    response,
+    cookieName: 'swc-page-language',
+    cookieValue: extractLanguageFromPath(request.nextUrl.pathname) ?? 'en',
+  })
 
   // Set the custom header on the response for downstream logic
   const userAgent = request.headers.get('user-agent')
