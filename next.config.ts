@@ -283,6 +283,16 @@ const nextConfig: NextConfig = {
         source: '/pledge',
       },
       {
+        source: '/cryptodayofaction',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/crypto-day-of-action',
+        destination: '/',
+        permanent: true,
+      },
+      {
         permanent: false,
         destination: '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=fit21-2024-05-text',
         source: '/text',
