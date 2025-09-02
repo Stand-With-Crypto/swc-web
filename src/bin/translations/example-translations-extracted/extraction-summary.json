@@ -1,0 +1,27 @@
+{
+  "extractedFiles": 2,
+  "totalKeys": 18,
+  "missingTranslations": [],
+  "files": [
+    {
+      "file": "utils/web/errorUtils.ts",
+      "component": "utils/web/errorUtils",
+      "languages": [
+        "en",
+        "de",
+        "fr"
+      ],
+      "keyCount": 3
+    },
+    {
+      "file": "app/eu/[language]/messages.ts",
+      "component": "app/eu/[language]/messages",
+      "languages": [
+        "en",
+        "de",
+        "fr"
+      ],
+      "keyCount": 15
+    }
+  ]
+}

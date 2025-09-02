@@ -1,0 +1,42 @@
+{
+  "utils/web/errorUtils": {
+    "error.generic.title": "Oh nein! Etwas ist schief gelaufen.",
+    "error.generic.description": "Es gab ein Problem mit Ihrer Anfrage. Wir untersuchen es gerade.",
+    "error.status.401": "Bitte melden Sie sich zuerst an"
+  },
+  "app/eu/[language]/messages": {
+    "welcome": "Willkommen {name}!",
+    "user.profile": "Benutzer {username} ist {age} Jahre alt",
+    "stats.users": "Wir haben {count:number} aktive Benutzer",
+    "stats.revenue": "Gesamtumsatz: {amount:currency:currency=EUR}",
+    "stats.growth": "Wachstumsrate: {rate:percent}",
+    "last.login": "Letzte Anmeldung: {date:date:dateStyle=full}",
+    "meeting.time": "Besprechung um {time:time:timeStyle=short}",
+    "relative.time": "Gepostet {date:relative}",
+    "company.name": "Unternehmen: {company:uppercase}",
+    "description": "Beschreibung: {text:capitalize}",
+    "code": "Code: {code:lowercase}",
+    "items.count": {
+      "zero": "Keine Artikel verfügbar",
+      "one": "{count} Artikel in Ihrem Warenkorb",
+      "other": "{count} Artikel in Ihrem Warenkorb"
+    },
+    "notifications": {
+      "zero": "Keine neuen Benachrichtigungen",
+      "one": "Sie haben {count} neue Benachrichtigung",
+      "other": "Sie haben {count} neue Benachrichtigungen"
+    },
+    "user.status": {
+      "online": "Benutzer ist derzeit online",
+      "offline": "Benutzer ist offline",
+      "away": "Benutzer ist abwesend",
+      "default": "Benutzerstatus unbekannt"
+    },
+    "subscription.type": {
+      "free": "Kostenloser Plan - Begrenzte Funktionen",
+      "premium": "Premium-Plan - Alle Funktionen freigeschaltet",
+      "enterprise": "Enterprise-Plan - Maßgeschneiderte Lösungen",
+      "default": "Unbekannter Abonnement-Typ"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "utils/web/errorUtils": {
+    "error.generic.title": "Oh là là ! Quelque chose a mal tourné.",
+    "error.generic.description": "Il y a eu un problème avec votre demande. Nous enquêtons maintenant.",
+    "error.status.401": "Veuillez vous connecter d'abord"
+  },
+  "app/eu/[language]/messages": {
+    "welcome": "Bienvenue {name}!",
+    "user.profile": "L'utilisateur {username} a {age} ans",
+    "stats.users": "Nous avons {count:number} utilisateurs actifs",
+    "stats.revenue": "Chiffre d'affaires total: {amount:currency:currency=EUR}",
+    "stats.growth": "Taux de croissance: {rate:percent}",
+    "last.login": "Dernière connexion: {date:date:dateStyle=full}",
+    "meeting.time": "Réunion à {time:time:timeStyle=short}",
+    "relative.time": "Publié {date:relative}",
+    "company.name": "Entreprise: {company:uppercase}",
+    "description": "Description: {text:capitalize}",
+    "code": "Code: {code:lowercase}",
+    "items.count": {
+      "zero": "Aucun article disponible",
+      "one": "{count} article dans votre panier",
+      "other": "{count} articles dans votre panier"
+    },
+    "notifications": {
+      "zero": "Aucune nouvelle notification",
+      "one": "Vous avez {count} nouvelle notification",
+      "other": "Vous avez {count} nouvelles notifications"
+    },
+    "user.status": {
+      "online": "L'utilisateur est actuellement en ligne",
+      "offline": "L'utilisateur est hors ligne",
+      "away": "L'utilisateur est absent",
+      "default": "Statut utilisateur inconnu"
+    },
+    "subscription.type": {
+      "free": "Plan gratuit - Fonctionnalités limitées",
+      "premium": "Plan premium - Toutes les fonctionnalités débloquées",
+      "enterprise": "Plan entreprise - Solutions personnalisées",
+      "default": "Type d'abonnement inconnu"
+    }
+  }
+}
