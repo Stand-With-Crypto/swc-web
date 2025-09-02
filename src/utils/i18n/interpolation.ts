@@ -102,11 +102,24 @@ function formatValue(
 
     case 'time': {
       const timeValue = value instanceof Date ? value : new Date(value)
-      return new Intl.DateTimeFormat(language, {
-        hour: '2-digit',
-        minute: '2-digit',
-        ...options,
-      }).format(timeValue)
+      const timeOptions: Intl.DateTimeFormatOptions = {}
+
+      if (options.timeStyle) {
+        timeOptions.timeStyle = options.timeStyle as 'short' | 'medium' | 'long' | 'full'
+      } else {
+        timeOptions.hour = '2-digit'
+        timeOptions.minute = '2-digit'
+      }
+
+      Object.keys(options).forEach(key => {
+        if (key !== 'timeStyle' && key !== 'dateStyle') {
+          timeOptions[key as keyof Intl.DateTimeFormatOptions] = options[key]
+        } else if (key === 'dateStyle') {
+          timeOptions.dateStyle = options[key] as 'short' | 'medium' | 'long' | 'full'
+        }
+      })
+
+      return new Intl.DateTimeFormat(language, timeOptions).format(timeValue)
     }
     case 'relative': {
       const relativeValue = value instanceof Date ? value : new Date(value)
@@ -171,7 +184,13 @@ function interpolateString(
       optionsString.split(',').forEach((option: string) => {
         const [key, val] = option.split('=')
         if (key && val) {
-          options[key.trim()] = val.trim()
+          const trimmedKey = key.trim()
+          const trimmedVal = val.trim()
+          if (trimmedKey === 'timeStyle' || trimmedKey === 'dateStyle') {
+            options[trimmedKey] = trimmedVal
+          } else {
+            options[trimmedKey] = trimmedVal
+          }
         }
       })
     }
