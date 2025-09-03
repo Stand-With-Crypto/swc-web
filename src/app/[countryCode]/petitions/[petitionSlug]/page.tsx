@@ -8,12 +8,12 @@ import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRec
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
-const countryCode = SupportedCountryCodes.US
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 type Props = PageProps<{
   petitionSlug: string

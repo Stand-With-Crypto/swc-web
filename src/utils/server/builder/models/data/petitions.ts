@@ -11,7 +11,7 @@ import {
   zodPetitionSchemaValidation,
 } from '@/utils/shared/zod/getSWCPetitions'
 
-const logger = getLogger(`builderIOEvents`)
+const logger = getLogger(`builderIOPetitions`)
 
 const isProduction = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
@@ -65,7 +65,7 @@ export async function getAllPetitionsFromBuilderIO({
     logger.error('error getting all petitions:' + error)
     Sentry.captureException(error, {
       level: 'error',
-      tags: { domain: 'getAllPetitions' },
+      tags: { domain: 'builder.io' },
     })
     return []
   }
