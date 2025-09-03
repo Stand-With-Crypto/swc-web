@@ -16,17 +16,6 @@ interface PetitionSummaryFooterProps {
   onPetitionSigned?: () => void
 }
 
-function PetitionSummaryFooterButton({ disabled }: { disabled?: boolean }) {
-  return (
-    <Button className="w-max gap-2 px-6 lg:w-full" disabled={disabled} variant="primary-cta">
-      <Edit3Icon size={16} />
-      <span>
-        Sign<span className="hidden lg:inline"> petition</span>
-      </span>
-    </Button>
-  )
-}
-
 export function PetitionSummaryFooter({
   isClosed,
   isSigned,
@@ -65,11 +54,21 @@ export function PetitionSummaryFooter({
           onSuccess={handleDialogSuccess}
           petitionSlug={petitionSlug}
         >
-          <PetitionSummaryFooterButton disabled={isLoading} />
+          <Button className="w-max gap-2 px-6 lg:w-full" disabled={isLoading} variant="primary-cta">
+            <Edit3Icon size={16} />
+            <span>
+              Sign<span className="hidden lg:inline"> petition</span>
+            </span>
+          </Button>
         </UserActionFormPetitionSignatureDialog>
       }
     >
-      <PetitionSummaryFooterButton disabled={isLoading} />
+      <Button className="w-max gap-2 px-6 lg:w-full" disabled={isLoading} variant="primary-cta">
+        <Edit3Icon size={16} />
+        <span>
+          Sign<span className="hidden lg:inline"> petition</span>
+        </span>
+      </Button>
     </LoginDialogWrapper>
   )
 }
