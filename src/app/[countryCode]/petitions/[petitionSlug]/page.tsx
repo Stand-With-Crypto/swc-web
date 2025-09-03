@@ -74,7 +74,6 @@ export default async function PetitionDetailsPage(props: Props) {
   return (
     <PagePetitionDetails
       countryCode={countryCode}
-      isSigned={false}
       petition={petition}
       recentSignatures={recentSignatures}
     />

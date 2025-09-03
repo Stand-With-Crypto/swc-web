@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useCallback } from 'react'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { UserActionFormPetitionSignature } from '@/components/app/userActionFormPetitionSignature'
@@ -51,24 +51,31 @@ export function UserActionFormPetitionSignatureDialog({
   className,
   petitionSlug,
   countryCode,
+  onSuccess,
 }: {
   children: React.ReactNode
   defaultOpen?: boolean
   className?: string
   petitionSlug?: string
   countryCode: SupportedCountryCodes
+  onSuccess?: () => void
 }) {
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
     analytics: 'User Action Form Petition Signature',
   })
 
+  const handleClose = useCallback(() => {
+    dialogProps.onOpenChange(false)
+    onSuccess?.()
+  }, [dialogProps, onSuccess])
+
   return (
     <UserActionFormDialog {...dialogProps} className={cn('!p-0', className)} trigger={children}>
       <Suspense fallback={<UserActionFormPetitionSignatureSkeleton />}>
         <UserActionFormPetitionSignatureDialogContent
           countryCode={countryCode}
-          onClose={() => dialogProps.onOpenChange(false)}
+          onClose={handleClose}
           petitionSlug={petitionSlug}
         />
       </Suspense>

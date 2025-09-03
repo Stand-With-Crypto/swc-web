@@ -1,7 +1,4 @@
-'use client'
-
 import React from 'react'
-import { noop } from 'lodash-es'
 
 import { PetitionMilestones } from '@/components/app/pagePetitionDetails/milestones'
 import { SignatoriesCarousel } from '@/components/app/pagePetitionDetails/signatoriesCarousel'
@@ -21,7 +18,6 @@ interface PagePetitionDetailsProps {
     locale: string
     datetimeSigned: string
   }>
-  isSigned?: boolean
 }
 
 const TOP_SECTION_HEIGHT_CLASS_NAME = 'h-[440px]'
@@ -32,7 +28,6 @@ export function PagePetitionDetails({
   petition,
   countryCode,
   recentSignatures,
-  isSigned = false,
 }: PagePetitionDetailsProps) {
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
   const isClosed = !!petition.datetimeFinished
@@ -88,9 +83,7 @@ export function PagePetitionDetails({
               countryCode={countryCode}
               goal={petition.countSignaturesGoal}
               isClosed={isClosed}
-              isSigned={isSigned}
               locale={locale}
-              onSign={noop}
               petitionSlug={petition.slug}
               signatures={petition.signaturesCount}
             />
@@ -130,9 +123,7 @@ export function PagePetitionDetails({
               countryCode={countryCode}
               goal={petition.countSignaturesGoal}
               isClosed={isClosed}
-              isSigned={isSigned}
               locale={locale}
-              onSign={noop}
               petitionSlug={petition.slug}
               signatures={petition.signaturesCount}
             />

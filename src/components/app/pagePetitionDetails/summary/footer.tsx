@@ -1,5 +1,7 @@
+import React from 'react'
 import { Edit3Icon } from 'lucide-react'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormPetitionSignatureDialog } from '@/components/app/userActionFormPetitionSignature/dialog'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { Button } from '@/components/ui/button'
@@ -8,17 +10,30 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 interface PetitionSummaryFooterProps {
   isClosed?: boolean
   isSigned?: boolean
-  onSign?: () => void
   petitionSlug?: string
   countryCode: SupportedCountryCodes
+  isLoading?: boolean
+  onPetitionSigned?: () => void
+}
+
+function PetitionSummaryFooterButton({ disabled }: { disabled?: boolean }) {
+  return (
+    <Button className="w-max gap-2 px-6 lg:w-full" disabled={disabled} variant="primary-cta">
+      <Edit3Icon size={16} />
+      <span>
+        Sign<span className="hidden lg:inline"> petition</span>
+      </span>
+    </Button>
+  )
 }
 
 export function PetitionSummaryFooter({
   isClosed,
   isSigned,
-  onSign,
   petitionSlug,
   countryCode,
+  isLoading,
+  onPetitionSigned,
 }: PetitionSummaryFooterProps) {
   if (isClosed) {
     return (
@@ -38,14 +53,23 @@ export function PetitionSummaryFooter({
     )
   }
 
+  const handleDialogSuccess = React.useCallback(() => {
+    onPetitionSigned?.()
+  }, [onPetitionSigned])
+
   return (
-    <UserActionFormPetitionSignatureDialog countryCode={countryCode} petitionSlug={petitionSlug}>
-      <Button className="w-max gap-2 px-6 lg:w-full" onClick={onSign} variant="primary-cta">
-        <Edit3Icon size={16} />
-        <span>
-          Sign<span className="hidden lg:inline"> petition</span>
-        </span>
-      </Button>
-    </UserActionFormPetitionSignatureDialog>
+    <LoginDialogWrapper
+      authenticatedContent={
+        <UserActionFormPetitionSignatureDialog
+          countryCode={countryCode}
+          onSuccess={handleDialogSuccess}
+          petitionSlug={petitionSlug}
+        >
+          <PetitionSummaryFooterButton disabled={isLoading} />
+        </UserActionFormPetitionSignatureDialog>
+      }
+    >
+      <PetitionSummaryFooterButton disabled={isLoading} />
+    </LoginDialogWrapper>
   )
 }

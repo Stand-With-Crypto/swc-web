@@ -1,13 +1,15 @@
-import React, { useMemo } from 'react'
+'use client'
+
+import React, { useCallback, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { GoalIcon } from 'lucide-react'
 
 import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/summary/footer'
+import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { CircularProgress } from '@/components/ui/circularProgress'
-import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { compactNumber } from '@/utils/shared/compactNumber'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 
@@ -17,7 +19,6 @@ interface SignaturesSummaryProps {
   countryCode: SupportedCountryCodes
   locale: SupportedLocale
   label?: string
-  onSign?: () => void
   isClosed?: boolean
   isSigned?: boolean
   className?: string
@@ -30,32 +31,55 @@ export function SignaturesSummary({
   countryCode,
   locale,
   label,
-  onSign,
   isClosed,
   className,
   petitionSlug,
 }: SignaturesSummaryProps) {
-  const percentage = Math.min((signatures / goal) * 100, 100)
-  const formattedGoalString = compactNumber(goal, locale)
-  const { data: userData } = useApiResponseForUserFullProfileInfo()
+  const { data: userData, isLoading: isLoadingUser } = useApiResponseForUserFullProfileInfo()
+  const [isOptimisticSigned, setIsOptimisticSigned] = useState(false)
 
   const isSigned = useMemo(() => {
-    return userData?.user?.userActions?.some(
-      userAction =>
-        userAction.actionType === UserActionType.SIGN_PETITION &&
-        userAction.campaignName === petitionSlug,
+    return (
+      userData?.user?.userActions?.some(
+        userAction =>
+          userAction.actionType === UserActionType.SIGN_PETITION &&
+          userAction.campaignName === petitionSlug,
+      ) || isOptimisticSigned
     )
-  }, [userData, petitionSlug])
+  }, [userData?.user?.userActions, petitionSlug, isOptimisticSigned])
 
-  const hasReachedGoal = signatures >= goal
+  const isLoading = useMemo(() => {
+    return isLoadingUser || !userData?.user?.userActions
+  }, [isLoadingUser, userData?.user?.userActions])
+
+  const optimisticSignatures = isSigned ? signatures + 1 : signatures
+
+  const percentage = Math.min((optimisticSignatures / goal) * 100, 100)
+  const formattedGoalString = compactNumber(goal, locale)
+  const hasReachedGoal = optimisticSignatures >= goal
+
+  const formattedSignatures = new Intl.NumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode]).format(
+    optimisticSignatures,
+  )
+
+  const handlePetitionSigned = useCallback(() => {
+    setIsOptimisticSigned(true)
+  }, [])
 
   return (
     <div className={cn('flex w-full items-center rounded-3xl bg-muted', className)}>
       {/* Desktop */}
       <div className="flex w-full flex-col items-center justify-center gap-6 px-14 py-10 max-lg:hidden">
-        <div className={cn({ 'lg:-mb-2': hasReachedGoal })}>
-          <h2 className="text-3xl font-bold text-foreground">
-            <FormattedNumber amount={signatures} locale={locale} /> Signed
+        <div>
+          <h2 className="flex items-center gap-2 text-3xl font-bold text-foreground">
+            <AnimatedNumericOdometer
+              as="span"
+              className="text-3xl font-bold"
+              numberSpanClassName="flex items-center"
+              size={38}
+              value={formattedSignatures}
+            />
+            <span>Signed</span>
           </h2>
         </div>
 
@@ -73,8 +97,9 @@ export function SignaturesSummary({
         <PetitionSummaryFooter
           countryCode={countryCode}
           isClosed={isClosed}
+          isLoading={isLoading}
           isSigned={isSigned}
-          onSign={onSign}
+          onPetitionSigned={handlePetitionSigned}
           petitionSlug={petitionSlug}
         />
       </div>
@@ -90,8 +115,15 @@ export function SignaturesSummary({
             <CircularProgress percentage={percentage} size={40} strokeWidth={8} />
           )}
           <div className="flex flex-col">
-            <p className="text-lg font-bold">
-              <FormattedNumber amount={signatures} locale={locale} /> Signed
+            <p className="flex items-center gap-1 text-lg font-bold">
+              <AnimatedNumericOdometer
+                as="span"
+                className="text-lg font-bold"
+                numberSpanClassName="flex items-center"
+                size={22}
+                value={formattedSignatures}
+              />
+              <span>Signed</span>
             </p>
             <p className="text-sm font-medium text-muted-foreground">
               {compactNumber(goal, locale)} {hasReachedGoal ? 'Goal reached!' : 'Signature goal'}
@@ -101,8 +133,9 @@ export function SignaturesSummary({
         <PetitionSummaryFooter
           countryCode={countryCode}
           isClosed={isClosed}
+          isLoading={isLoading}
           isSigned={isSigned}
-          onSign={onSign}
+          onPetitionSigned={handlePetitionSigned}
           petitionSlug={petitionSlug}
         />
       </div>
