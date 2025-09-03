@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Edit3Icon } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
@@ -35,6 +35,10 @@ export function PetitionSummaryFooter({
   isLoading,
   onPetitionSigned,
 }: PetitionSummaryFooterProps) {
+  const handleDialogSuccess = useCallback(() => {
+    onPetitionSigned?.()
+  }, [onPetitionSigned])
+
   if (isClosed) {
     return (
       <div className="flex h-11 w-max items-center justify-center rounded-full bg-foreground/10 px-6 font-medium text-muted-foreground lg:w-full">
@@ -52,10 +56,6 @@ export function PetitionSummaryFooter({
       </div>
     )
   }
-
-  const handleDialogSuccess = React.useCallback(() => {
-    onPetitionSigned?.()
-  }, [onPetitionSigned])
 
   return (
     <LoginDialogWrapper
