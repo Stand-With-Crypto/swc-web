@@ -7,7 +7,7 @@ import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFrom
 import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
@@ -60,10 +60,7 @@ export default async function PetitionDetailsPage(props: Props) {
     queryPetitionRecentSignatures({
       petitionSlug,
       countryCode,
-      formatLocaleName: entry =>
-        US_STATE_CODE_TO_DISPLAY_NAME_MAP[
-          entry as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
-        ] || entry,
+      formatLocaleName: getStateNameResolver(countryCode),
     }),
   ])
 
