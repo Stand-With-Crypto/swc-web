@@ -59,7 +59,7 @@ export function UserActionGridCampaignsDialogContent({
       <h3 className="font-sans text-xl font-bold">
         <Balancer>{title}</Balancer>
       </h3>
-      <p className="text-center font-mono text-base text-muted-foreground">
+      <p className="text-center text-base text-muted-foreground">
         <Balancer>{description}</Balancer>
       </p>
 

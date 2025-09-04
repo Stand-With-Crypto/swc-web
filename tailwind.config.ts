@@ -60,6 +60,14 @@ const config: Config = {
           DEFAULT: 'hsl(var(--foreground))',
           muted: 'hsl(var(--muted-foreground))', // gray-400
         },
+        'purple-dark': {
+          DEFAULT: 'hsl(var(--purple-dark))',
+          foreground: 'hsl(var(--purple-dark-foreground))',
+        },
+        'purple-light': {
+          DEFAULT: 'hsl(var(--purple-light))',
+          foreground: 'hsl(var(--purple-light-foreground))',
+        },
         // swc-added variables
       },
       borderRadius: {

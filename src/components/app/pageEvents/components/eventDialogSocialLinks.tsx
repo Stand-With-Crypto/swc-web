@@ -23,7 +23,7 @@ export function EventDialogSocialLinks({
 
   return (
     <div className="mt-6 flex flex-col gap-2">
-      <h5 className="text-center font-mono text-base font-bold">Share</h5>
+      <h5 className="text-center text-base font-bold">Share</h5>
 
       <div className="flex items-center justify-center gap-2">
         <Button

@@ -20,7 +20,7 @@ export function HomePageSection({
 
 export function HomePageSectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <PageTitle as="h3" className="mb-6 !text-[32px]">
+    <PageTitle as="h3" className="mb-4" size="xl">
       {children}
     </PageTitle>
   )
@@ -35,7 +35,7 @@ export function HomePageSectionSubtitle({
   className?: string
 }) {
   return (
-    <PageSubTitle as="h4" className={cn('mb-10', className)}>
+    <PageSubTitle as="h4" className={cn('mb-10', className)} size="xl">
       {children}
     </PageSubTitle>
   )

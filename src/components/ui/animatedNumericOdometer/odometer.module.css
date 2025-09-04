@@ -11,7 +11,7 @@
 
 .odometer,
 .odometer span {
-  @apply font-mono;
+  @apply font-sans;
 }
 
 .odometer > span {

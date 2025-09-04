@@ -59,7 +59,7 @@ export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
                 {event.data.name}
               </PageSubTitle>
               <div
-                className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left [&_a]:font-medium [&_a]:text-primary-cta [&_strong]:font-semibold [&_strong]:text-foreground"
+                className="line-clamp-3 text-center text-base text-muted-foreground lg:text-left [&_a]:font-medium [&_a]:text-primary-cta [&_strong]:font-semibold [&_strong]:text-foreground"
                 dangerouslySetInnerHTML={{
                   __html: sanitizeHtml(event.data.formattedDescription),
                 }}

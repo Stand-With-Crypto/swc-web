@@ -116,7 +116,7 @@ export function UserActionsDebugTable({ userActions, isLoading }: UserActionsDeb
               sortedActions.map(action => (
                 <TableRow key={action.id}>
                   <TableCell>
-                    <div className="font-mono text-sm">{action.id}</div>
+                    <div className="text-sm">{action.id}</div>
                   </TableCell>
                   <TableCell>
                     <Button
@@ -131,10 +131,10 @@ export function UserActionsDebugTable({ userActions, isLoading }: UserActionsDeb
                     <div className="max-w-[200px] truncate">{action.campaignName}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-mono text-sm uppercase">{action.countryCode}</div>
+                    <div className="text-sm uppercase">{action.countryCode}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="font-mono text-sm">
+                    <div className="text-sm">
                       {new Date(action.datetimeCreated).toLocaleDateString()}{' '}
                       {new Date(action.datetimeCreated).toLocaleTimeString()}
                     </div>

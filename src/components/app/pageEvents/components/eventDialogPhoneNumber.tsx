@@ -10,7 +10,7 @@ export function EventDialogPhoneNumber(props: Omit<SMSOptInFormProps, 'children'
   return (
     <div className="flex flex-col items-center gap-4 pb-4">
       <h3 className="mt-6 font-sans text-xl font-bold">Get updates on events</h3>
-      <p className="text-center font-mono text-base text-muted-foreground">
+      <p className="text-center text-base text-muted-foreground">
         We’ll send you text updates on this event and other similar events in your area.
       </p>
 

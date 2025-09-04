@@ -68,7 +68,7 @@ Politicians.GroupContent = PoliticiansGroupContent
 function PoliticiansButton({ href, children }: PoliticiansButtonProps) {
   return (
     <div className="container space-x-4 text-center">
-      <Button asChild variant="secondary">
+      <Button asChild size="lg" variant="secondary">
         <InternalLink href={href}>{children}</InternalLink>
       </Button>
     </div>
