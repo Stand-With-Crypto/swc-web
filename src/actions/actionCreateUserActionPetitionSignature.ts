@@ -291,24 +291,21 @@ async function createPetitionSignatureAction({
     addressData,
   })
 
-  // Update user's address after creating the petition signature
-  const updatedUser = userAction.userActionPetition?.addressId
-    ? await prismaClient.user.update({
-        where: { id: user.id },
-        data: {
-          address: {
-            connect: {
-              id: userAction.userActionPetition.addressId,
-            },
-          },
+  const updatedUser = await prismaClient.user.update({
+    where: { id: user.id },
+    data: {
+      address: {
+        connect: {
+          id: userAction.userActionPetition!.addressId,
         },
-        include: {
-          primaryUserCryptoAddress: true,
-          userEmailAddresses: true,
-          address: true,
-        },
-      })
-    : user
+      },
+    },
+    include: {
+      primaryUserCryptoAddress: true,
+      userEmailAddresses: true,
+      address: true,
+    },
+  })
 
   analytics.trackUserActionCreated({
     actionType: UserActionType.SIGN_PETITION,
