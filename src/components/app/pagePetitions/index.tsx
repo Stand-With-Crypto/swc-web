@@ -4,7 +4,6 @@ import { PetitionCard } from '@/components/app/pagePetitions/card'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 const PETITIONS_GRID_CLASSNAMES =
@@ -19,7 +18,6 @@ interface PagePetitionsProps {
 
 export function PagePetitions(props: PagePetitionsProps) {
   const { title, description, petitions, countryCode } = props
-  const urls = getIntlUrls(countryCode)
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
 
   const [currentPetitions, pastPetitions] = partition(
@@ -40,13 +38,13 @@ export function PagePetitions(props: PagePetitionsProps) {
           {currentPetitions.map(petition => (
             <PetitionCard
               className="lg:w-1/3"
-              href={urls.petitionDetails(petition.slug)}
+              countryCode={countryCode}
               imgSrc={petition.image || undefined}
               isGoalReached={petition.countSignaturesGoal <= petition.signaturesCount}
-              isSigned
               key={petition.slug}
               locale={locale}
               signaturesCount={petition.signaturesCount}
+              slug={petition.slug}
               title={petition.title}
               variant="current"
             />
@@ -60,11 +58,12 @@ export function PagePetitions(props: PagePetitionsProps) {
           {pastPetitions.map(petition => (
             <PetitionCard
               className="lg:w-1/3"
-              href={urls.petitionDetails(petition.slug)}
+              countryCode={countryCode}
               imgSrc={petition.image || undefined}
               key={petition.slug}
               locale={locale}
               signaturesCount={petition.signaturesCount}
+              slug={petition.slug}
               title={petition.title}
               variant="past"
             />

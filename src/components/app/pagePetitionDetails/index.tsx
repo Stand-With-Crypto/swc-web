@@ -1,7 +1,4 @@
-'use client'
-
 import React from 'react'
-import { noop } from 'lodash-es'
 
 import { PetitionMilestones } from '@/components/app/pagePetitionDetails/milestones'
 import { SignatoriesCarousel } from '@/components/app/pagePetitionDetails/signatoriesCarousel'
@@ -21,18 +18,14 @@ interface PagePetitionDetailsProps {
     locale: string
     datetimeSigned: string
   }>
-  isSigned?: boolean
 }
 
-const TOP_SECTION_HEIGHT_CLASS_NAME = 'h-[440px]'
 const PETITION_ICON_SIZE = 280
-const FALLBACK_PETITION_ICON_PATH = '/activityFeedIcons/petition.svg'
 
 export function PagePetitionDetails({
   petition,
   countryCode,
   recentSignatures,
-  isSigned = false,
 }: PagePetitionDetailsProps) {
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
   const isClosed = !!petition.datetimeFinished
@@ -73,7 +66,7 @@ export function PagePetitionDetails({
                   alt="Petition"
                   className="h-32 w-32 lg:h-64 lg:w-64"
                   height={PETITION_ICON_SIZE}
-                  src={FALLBACK_PETITION_ICON_PATH}
+                  src="/actionTypeIcons/petition.svg"
                   width={PETITION_ICON_SIZE}
                 />
               </div>
@@ -88,9 +81,7 @@ export function PagePetitionDetails({
               countryCode={countryCode}
               goal={petition.countSignaturesGoal}
               isClosed={isClosed}
-              isSigned={isSigned}
               locale={locale}
-              onSign={noop}
               petitionSlug={petition.slug}
               signatures={petition.signaturesCount}
             />
@@ -126,13 +117,11 @@ export function PagePetitionDetails({
         <div className="hidden lg:col-span-2 lg:block">
           <div className="sticky top-24">
             <SignaturesSummary
-              className={TOP_SECTION_HEIGHT_CLASS_NAME}
+              className="h-[440px]"
               countryCode={countryCode}
               goal={petition.countSignaturesGoal}
               isClosed={isClosed}
-              isSigned={isSigned}
               locale={locale}
-              onSign={noop}
               petitionSlug={petition.slug}
               signatures={petition.signaturesCount}
             />

@@ -7,12 +7,13 @@ import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFrom
 import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
-const countryCode = SupportedCountryCodes.US
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 type Props = PageProps<{
   petitionSlug: string
@@ -56,7 +57,11 @@ export default async function PetitionDetailsPage(props: Props) {
 
   const [petition, recentSignatures] = await Promise.all([
     getPetitionBySlugFromAPI(countryCode, petitionSlug),
-    queryPetitionRecentSignatures(petitionSlug),
+    queryPetitionRecentSignatures({
+      petitionSlug,
+      countryCode,
+      formatLocaleName: getStateNameResolver(countryCode),
+    }),
   ])
 
   if (!petition) {
@@ -66,7 +71,6 @@ export default async function PetitionDetailsPage(props: Props) {
   return (
     <PagePetitionDetails
       countryCode={countryCode}
-      isSigned={false}
       petition={petition}
       recentSignatures={recentSignatures}
     />

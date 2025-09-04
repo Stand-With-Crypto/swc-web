@@ -31,16 +31,15 @@ export function UserActionFormPetitionSignatureSkeleton() {
           </FormItemSkeleton>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <FormItemSkeleton>
-            <label>Email</label>
-            <Input placeholder="Your email address" />
-          </FormItemSkeleton>
-          <FormItemSkeleton>
-            <label>Zip code</label>
-            <Input placeholder="000000" />
-          </FormItemSkeleton>
-        </div>
+        <FormItemSkeleton>
+          <label>Email</label>
+          <Input placeholder="Your email address" />
+        </FormItemSkeleton>
+
+        <FormItemSkeleton>
+          <label>Address</label>
+          <Input placeholder="Your full address" />
+        </FormItemSkeleton>
       </FormContainer>
 
       <div>

@@ -1,44 +1,59 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { UserActionType } from '@prisma/client'
 import { GoalIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { pluralize } from '@/utils/shared/pluralize'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface PetitionCardProps {
   title: string
   signaturesCount: number
-  href: string
+  slug: string
+  countryCode: SupportedCountryCodes
   imgSrc?: string
   locale?: SupportedLocale
   className?: string
-  isSigned?: boolean
   variant?: 'current' | 'past'
   isGoalReached?: boolean
 }
 
 const IMAGE_SIZE = 150 // in pixels (150x150)
-const FALLBACK_IMAGE_PATH = '/activityFeedIcons/petition.svg'
+const FALLBACK_IMAGE_PATH = '/actionTypeIcons/petition.svg'
 
 export function PetitionCard({
   title,
   signaturesCount,
   imgSrc,
-  href,
+  slug,
+  countryCode,
   locale = SupportedLocale.EN_US,
   className,
   variant = 'current',
-  isSigned = false,
   isGoalReached = false,
 }: PetitionCardProps) {
   const [imageError, setImageError] = useState(false)
   const showImage = imgSrc && !imageError
+
+  const urls = getIntlUrls(countryCode)
+
+  const { data: userData } = useApiResponseForUserFullProfileInfo()
+
+  const isSigned = useMemo(() => {
+    return userData?.user?.userActions?.some(
+      userAction =>
+        userAction.actionType === UserActionType.SIGN_PETITION && userAction.campaignName === slug,
+    )
+  }, [userData, slug])
 
   const isPast = variant === 'past'
   const isCurrent = variant === 'current'
@@ -52,7 +67,7 @@ export function PetitionCard({
         isPast ? 'max-lg:grid-cols-[1fr_128px]' : 'max-lg:grid-rows-[224px_1fr]',
         className,
       )}
-      href={href}
+      href={urls.petitionDetails(slug)}
     >
       <div
         className={cn('relative lg:h-auto', {

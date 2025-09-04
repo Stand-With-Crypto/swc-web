@@ -37,7 +37,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     countryCode,
-    onSign: () => alert('Signing petition...'),
   },
 }
 
@@ -47,7 +46,6 @@ export const GoalReached: Story = {
     signatures: 125430,
     goal: 100000,
     label: 'Amazing! We have exceeded our goal. Thank you to everyone who signed this petition.',
-    onSign: () => alert('Sharing petition...'),
   },
 }
 
@@ -58,7 +56,6 @@ export const LargeNumbers: Story = {
     goal: 5500000,
     label:
       'This petition has gained massive support! The goal will be displayed in compact format (5M).',
-    onSign: () => alert('Large scale petition signing!'),
   },
 }
 
@@ -69,7 +66,6 @@ export const Closed: Story = {
     goal: 100000,
     isClosed: true,
     label: 'This petition has been closed. Thank you to everyone who participated.',
-    onSign: undefined,
   },
 }
 
@@ -79,7 +75,6 @@ export const Mobile: Story = {
     signatures: 42000,
     goal: 100000,
     label: 'Help us reach our goal! Every signature counts.',
-    onSign: () => alert('Mobile petition signing!'),
   },
   parameters: {
     viewport: {

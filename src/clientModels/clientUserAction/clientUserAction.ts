@@ -7,6 +7,7 @@ import {
   UserActionEmail,
   UserActionEmailRecipient,
   UserActionOptIn,
+  UserActionPetition,
   UserActionPoll,
   UserActionPollAnswer,
   UserActionRefer,
@@ -46,6 +47,11 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
+  userActionPetition:
+    | (UserActionPetition & {
+        address: Address
+      })
+    | null
   userActionVoterRegistration: UserActionVoterRegistration | null
   userActionTweetAtPerson: UserActionTweetAtPerson | null
   userActionVoterAttestation: UserActionVoterAttestation | null
@@ -137,6 +143,11 @@ type ClientUserActionPollAnswer = Pick<
 type ClientUserActionRefer = Pick<UserActionRefer, 'referralsCount'> & {
   actionType: typeof UserActionType.REFER
 }
+interface ClientUserActionPetition {
+  actionType: typeof UserActionType.SIGN_PETITION
+  datetimeSigned: string
+  administrativeAreaLevel1: string | null
+}
 interface ClientUserActionPoll {
   actionType: typeof UserActionType.POLL
   userActionPollAnswers: ClientUserActionPollAnswer[]
@@ -164,6 +175,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionCall
       | ClientUserActionDonation
       | ClientUserActionNFTMint
+      | ClientUserActionPetition
       | ClientUserActionVoterRegistration
       | ClientUserActionLiveEvent
       | ClientUserActionTweetAtPerson
@@ -345,6 +357,16 @@ export const getClientUserAction = ({
         actionType: UserActionType.REFER,
       }
       return getClientModel({ ...sharedProps, ...referFields })
+    },
+    [UserActionType.SIGN_PETITION]: () => {
+      const { address, datetimeSigned } = getRelatedModel(record, 'userActionPetition')
+
+      const petitionFields: ClientUserActionPetition = {
+        actionType: UserActionType.SIGN_PETITION,
+        datetimeSigned: datetimeSigned.toISOString(),
+        administrativeAreaLevel1: address?.administrativeAreaLevel1 || null,
+      }
+      return getClientModel({ ...sharedProps, ...petitionFields })
     },
     [UserActionType.POLL]: () => {
       const { userActionPollAnswers } = getRelatedModel(record, 'userActionPoll')

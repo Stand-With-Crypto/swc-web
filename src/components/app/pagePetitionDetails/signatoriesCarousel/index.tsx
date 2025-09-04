@@ -20,7 +20,7 @@ interface SignatoriesCarouselProps {
   countryCode: SupportedCountryCodes
 }
 
-const MIN_SIGNATURES_TO_RENDER_LIST = 3
+const MIN_SIGNATURES_TO_RENDER_LIST = 1
 
 export function SignatoriesCarousel({
   autoplayDelay = 3000,
@@ -28,7 +28,7 @@ export function SignatoriesCarousel({
   lastSignatures,
   countryCode,
 }: SignatoriesCarouselProps) {
-  const shouldRenderList = lastSignatures.length > MIN_SIGNATURES_TO_RENDER_LIST
+  const shouldRenderList = lastSignatures.length >= MIN_SIGNATURES_TO_RENDER_LIST
 
   return (
     <div className={cn('w-full', className)}>
