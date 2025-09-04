@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
+import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import {
@@ -55,8 +56,6 @@ export function UserActionFormPetitionSignature({
   petitionData,
   user,
 }: UserActionFormPetitionSignatureProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
   const hasAlreadySigned = useMemo(() => {
     return user?.userActions?.some(
       userAction =>
@@ -83,63 +82,58 @@ export function UserActionFormPetitionSignature({
 
   const { title, countSignaturesGoal, signaturesCount } = petitionData
 
-  const onSubmit = useCallback(
+  const [onSubmit, isSubmitting] = useLoadingCallback(
     async (values: UserActionPetitionSignatureValues) => {
-      if (isSubmitting || !values.address || hasAlreadySigned) return
-      setIsSubmitting(true)
+      if (!values.address || hasAlreadySigned) return
 
-      try {
-        const address = await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(
-          e => {
-            Sentry.captureException(e)
-            catchUnexpectedServerErrorAndTriggerToast(e)
-            return null
+      const address = await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(
+        e => {
+          Sentry.captureException(e)
+          catchUnexpectedServerErrorAndTriggerToast(e)
+          return null
+        },
+      )
+
+      if (!address) {
+        form.setError('address', {
+          message: 'Invalid address',
+        })
+        return
+      }
+
+      const result = await triggerServerActionForForm(
+        {
+          form,
+          formName: ANALYTICS_NAME_USER_ACTION_FORM_PETITION_SIGNATURE,
+          analyticsProps: {
+            ...(address ? convertAddressToAnalyticsProperties(address) : {}),
+            'Campaign Name': values.campaignName,
+            'User Action Type': 'SIGN_PETITION',
+            'Petition Slug': petitionData.slug,
           },
-        )
-
-        if (!address) {
-          form.setError('address', {
-            message: 'Invalid address',
-          })
-          return
-        }
-
-        const result = await triggerServerActionForForm(
-          {
-            form,
-            formName: ANALYTICS_NAME_USER_ACTION_FORM_PETITION_SIGNATURE,
-            analyticsProps: {
-              ...(address ? convertAddressToAnalyticsProperties(address) : {}),
-              'Campaign Name': values.campaignName,
-              'User Action Type': 'SIGN_PETITION',
-              'Petition Slug': petitionData.slug,
-            },
-            payload: { ...values, address },
-            onError: (_, error) => {
-              form.setError(GENERIC_FORM_ERROR_KEY, {
-                message: error.message,
-              })
-              toastGenericError()
-            },
+          payload: { ...values, address },
+          onError: (_, error) => {
+            form.setError(GENERIC_FORM_ERROR_KEY, {
+              message: error.message,
+            })
+            toastGenericError()
           },
-          payload =>
-            actionCreateUserActionPetitionSignature(payload).then(async actionResultPromise => {
-              const actionResult = await actionResultPromise
-              if (actionResult && 'user' in actionResult && actionResult.user) {
-                identifyUserOnClient(actionResult.user)
-              }
-              return actionResult
-            }),
-        )
+        },
+        payload =>
+          actionCreateUserActionPetitionSignature(payload).then(async actionResultPromise => {
+            const actionResult = await actionResultPromise
+            if (actionResult && 'user' in actionResult && actionResult.user) {
+              identifyUserOnClient(actionResult.user)
+            }
+            return actionResult
+          }),
+      )
 
-        if (result.status === 'success') {
-          onSuccess?.()
-        }
-      } finally {
-        setIsSubmitting(false)
+      if (result.status === 'success') {
+        onSuccess?.()
       }
     },
-    [form, isSubmitting, onSuccess, petitionData.slug, hasAlreadySigned],
+    [form, onSuccess, petitionData.slug, hasAlreadySigned],
   )
 
   const addressField = useWatch({ control: form.control, name: 'address' })
