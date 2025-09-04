@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { Edit3Icon } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
@@ -28,16 +28,14 @@ export function PetitionSummaryFooter({
     onPetitionSigned?.()
   }, [onPetitionSigned])
 
-  const renderSignButton = useMemo(() => {
-    return (
-      <Button className="w-max gap-2 px-6 lg:w-full" disabled={isLoading} variant="primary-cta">
-        <Edit3Icon size={16} />
-        <span>
-          Sign<span className="hidden lg:inline"> petition</span>
-        </span>
-      </Button>
-    )
-  }, [isLoading])
+  const renderSignButton = (
+    <Button className="w-max gap-2 px-6 lg:w-full" disabled={isLoading} variant="primary-cta">
+      <Edit3Icon size={16} />
+      <span>
+        Sign<span className="hidden lg:inline"> petition</span>
+      </span>
+    </Button>
+  )
 
   if (isClosed) {
     return (
