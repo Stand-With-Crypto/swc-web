@@ -171,7 +171,7 @@ interface SensitiveDataClientUserActionPetition {
   email: string
   firstName: string
   lastName: string
-  address: ClientAddress
+  address: ClientAddress | null
   datetimeSigned: string
 }
 
@@ -398,26 +398,12 @@ export const getSensitiveDataClientUserAction = ({
         'userActionPetition',
       )
 
-      if (!address) {
-        throw new Error(
-          `getSensitiveDataClientUserAction: address missing for petition ${record.id}`,
-        )
-      }
-
-      const clientAddress = getClientAddress(address)
-
-      if (!clientAddress) {
-        throw new Error(
-          `getSensitiveDataClientUserAction: address missing googlePlaceId for petition ${record.id}`,
-        )
-      }
-
       const petitionFields: SensitiveDataClientUserActionPetition = {
         actionType: UserActionType.SIGN_PETITION,
         email,
         firstName,
         lastName,
-        address: clientAddress,
+        address: address ? getClientAddress(address) : null,
         datetimeSigned: datetimeSigned.toISOString(),
       }
       return getClientModel({ ...sharedProps, ...petitionFields })

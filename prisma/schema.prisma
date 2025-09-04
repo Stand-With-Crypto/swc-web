@@ -413,7 +413,7 @@ model UserActionCall {
 model UserActionPetition {
   id             String     @id @default(uuid())
   userAction     UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
-  email          String     @map("email")
+  email          String
   firstName      String     @map("first_name")
   lastName       String     @map("last_name")
   addressId      String     @map("address_id")

@@ -5,7 +5,6 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { useRouter } from 'next/navigation'
 
 import { actionCreateUserActionPetitionSignature } from '@/actions/actionCreateUserActionPetitionSignature'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
@@ -56,7 +55,6 @@ export function UserActionFormPetitionSignature({
   petitionData,
   user,
 }: UserActionFormPetitionSignatureProps) {
-  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const hasAlreadySigned = useMemo(() => {
@@ -135,14 +133,13 @@ export function UserActionFormPetitionSignature({
         )
 
         if (result.status === 'success') {
-          router.refresh()
           onSuccess?.()
         }
       } finally {
         setIsSubmitting(false)
       }
     },
-    [form, isSubmitting, onSuccess, petitionData.slug, router, hasAlreadySigned],
+    [form, isSubmitting, onSuccess, petitionData.slug, hasAlreadySigned],
   )
 
   const addressField = useWatch({ control: form.control, name: 'address' })

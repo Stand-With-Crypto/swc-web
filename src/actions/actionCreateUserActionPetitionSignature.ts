@@ -27,17 +27,7 @@ import {
   zodUserActionFormPetitionSignatureAction,
 } from '@/validation/forms/zodUserActionFormPetitionSignature'
 
-const PETITION_SIGNATURE_LOGGER_NAME = 'actionCreateUserActionPetitionSignature'
-const ANALYTICS_CREATION_METHOD = 'On Site'
-const ANALYTICS_IGNORED_REASON = 'Too Many Recent'
-
-const USER_RELATIONS_INCLUDE = {
-  primaryUserCryptoAddress: true,
-  userEmailAddresses: true,
-  address: true,
-} as const
-
-const logger = getLogger(PETITION_SIGNATURE_LOGGER_NAME)
+const logger = getLogger('actionCreateUserActionPetitionSignature')
 
 interface ActionContext {
   sessionId: string
@@ -57,6 +47,61 @@ type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null
   userEmailAddresses: UserEmailAddress[]
   address: Address | null
+}
+
+type UserMatch = NonNullable<Awaited<ReturnType<typeof getAuthenticatedUser>>>['userMatch']
+
+async function _actionCreateUserActionPetitionSignature(
+  input: Input,
+): Promise<PetitionActionResult> {
+  logger.info('Petition signature action triggered')
+
+  const context = await setupActionContext()
+  const validationResult = zodUserActionFormPetitionSignatureAction.safeParse(input)
+
+  if (!validationResult.success) {
+    return handleValidationError(validationResult.error)
+  }
+
+  logger.info('Input validation successful')
+
+  const authResult = await getAuthenticatedUser()
+
+  if (!authResult) {
+    return {
+      user: null,
+      errors: { root: ['User must be authenticated to sign petition'] },
+    }
+  }
+
+  const { user, userMatch } = authResult
+  const addressData = validationResult.data.address
+
+  const { analytics, peopleAnalytics, flushAnalytics } = setupAnalytics(user.id, context.localUser)
+
+  const isDuplicate = await checkForDuplicatePetition(user, validationResult.data.campaignName)
+
+  if (isDuplicate) {
+    return await handleDuplicatePetitionSignature({
+      user,
+      campaignName: validationResult.data.campaignName,
+      addressData,
+      analytics,
+      flushAnalytics,
+    })
+  }
+
+  await context.triggerRateLimiterAtMostOnce()
+  return await createPetitionSignatureAction({
+    input: validationResult.data,
+    user,
+    userMatch,
+    addressData,
+    context,
+    analytics,
+    peopleAnalytics,
+    flushAnalytics,
+  })
 }
 
 async function setupActionContext(): Promise<ActionContext> {
@@ -88,7 +133,13 @@ function handleValidationError(error: ZodError): PetitionActionResult {
 
 async function getAuthenticatedUser() {
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    prisma: { include: USER_RELATIONS_INCLUDE },
+    prisma: {
+      include: {
+        primaryUserCryptoAddress: true,
+        userEmailAddresses: true,
+        address: true,
+      },
+    },
   })
 
   if (!userMatch.user) {
@@ -132,14 +183,21 @@ function setupAnalytics(userId: string, localUser: ServerLocalUser | null) {
   return { analytics, peopleAnalytics, flushAnalytics }
 }
 
-async function createPetitionUserAction(
-  input: Input,
-  user: UserWithRelations,
-  userMatch: any,
-  sessionId: string,
-  countryCode: string,
-  addressData: AddressData,
-) {
+async function createPetitionUserAction({
+  input,
+  user,
+  userMatch,
+  sessionId,
+  countryCode,
+  addressData,
+}: {
+  input: Input
+  user: UserWithRelations
+  userMatch: UserMatch
+  sessionId: string
+  countryCode: string
+  addressData: AddressData
+}) {
   return await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
@@ -177,78 +235,24 @@ export const actionCreateUserActionPetitionSignature = withServerActionMiddlewar
   ),
 )
 
-async function _actionCreateUserActionPetitionSignature(
-  input: Input,
-): Promise<PetitionActionResult> {
-  logger.info('Petition signature action triggered')
-
-  const context = await setupActionContext()
-  const validationResult = zodUserActionFormPetitionSignatureAction.safeParse(input)
-
-  if (!validationResult.success) {
-    return handleValidationError(validationResult.error)
-  }
-
-  logger.info('Input validation successful')
-
-  const authResult = await getAuthenticatedUser()
-
-  if (!authResult) {
-    return {
-      user: null,
-      errors: { root: ['User must be authenticated to sign petition'] },
-    }
-  }
-
-  const { user, userMatch } = authResult
-  const addressData = validationResult.data.address
-
-  if (!addressData) {
-    return {
-      user: null,
-      errors: { address: ['Address is required'] },
-    }
-  }
-
-  const { analytics, peopleAnalytics, flushAnalytics } = setupAnalytics(user.id, context.localUser)
-
-  const isDuplicate = await checkForDuplicatePetition(user, validationResult.data.campaignName)
-
-  if (isDuplicate) {
-    return await handleDuplicatePetitionSignature(
-      user,
-      validationResult.data.campaignName,
-      addressData,
-      analytics,
-      flushAnalytics,
-    )
-  }
-
-  await context.triggerRateLimiterAtMostOnce()
-  return await createPetitionSignatureAction(
-    validationResult.data,
-    user,
-    userMatch,
-    addressData,
-    context,
-    analytics,
-    peopleAnalytics,
-    flushAnalytics,
-  )
-}
-
-async function handleDuplicatePetitionSignature(
-  user: UserWithRelations,
-  campaignName: string,
-  addressData: AddressData,
-  analytics: ReturnType<typeof getServerAnalytics>,
-  flushAnalytics: () => Promise<any[]>,
-): Promise<PetitionActionResult> {
+async function handleDuplicatePetitionSignature({
+  user,
+  campaignName,
+  addressData,
+  analytics,
+  flushAnalytics,
+}: {
+  user: UserWithRelations
+  campaignName: string
+  addressData: AddressData
+  analytics: ReturnType<typeof getServerAnalytics>
+  flushAnalytics: () => Promise<any[]>
+}): Promise<PetitionActionResult> {
   analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.SIGN_PETITION,
     campaignName,
-    reason: ANALYTICS_IGNORED_REASON,
-    creationMethod: ANALYTICS_CREATION_METHOD,
+    reason: 'Already Exists',
+    creationMethod: 'On Site',
     userState: 'Existing',
     ...convertAddressToAnalyticsProperties(addressData),
   })
@@ -257,26 +261,35 @@ async function handleDuplicatePetitionSignature(
   return { user: getClientUser(user) }
 }
 
-async function createPetitionSignatureAction(
-  input: Input,
-  user: UserWithRelations,
-  userMatch: any,
-  addressData: AddressData,
-  context: ActionContext,
-  analytics: ReturnType<typeof getServerAnalytics>,
-  peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>,
-  flushAnalytics: () => Promise<any[]>,
-): Promise<PetitionActionResult> {
+async function createPetitionSignatureAction({
+  input,
+  user,
+  userMatch,
+  addressData,
+  context,
+  analytics,
+  peopleAnalytics,
+  flushAnalytics,
+}: {
+  input: Input
+  user: UserWithRelations
+  userMatch: UserMatch
+  addressData: AddressData
+  context: ActionContext
+  analytics: ReturnType<typeof getServerAnalytics>
+  peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
+  flushAnalytics: () => Promise<any[]>
+}): Promise<PetitionActionResult> {
   logger.info('Creating petition signature user action')
 
-  const userAction = await createPetitionUserAction(
+  const userAction = await createPetitionUserAction({
     input,
     user,
     userMatch,
-    context.sessionId,
-    context.countryCode,
+    sessionId: context.sessionId,
+    countryCode: context.countryCode,
     addressData,
-  )
+  })
 
   // Update user's address after creating the petition signature
   const updatedUser = userAction.userActionPetition?.addressId
@@ -300,7 +313,7 @@ async function createPetitionSignatureAction(
   analytics.trackUserActionCreated({
     actionType: UserActionType.SIGN_PETITION,
     campaignName: input.campaignName,
-    creationMethod: ANALYTICS_CREATION_METHOD,
+    creationMethod: 'On Site',
     userState: 'Existing',
     ...convertAddressToAnalyticsProperties(addressData),
   })

@@ -14,11 +14,11 @@ import { cn } from '@/utils/web/cn'
 function UserActionFormPetitionSignatureDialogContent({
   petitionSlug,
   countryCode,
-  onClose,
+  onSuccess,
 }: {
   petitionSlug?: string
   countryCode: SupportedCountryCodes
-  onClose: () => void
+  onSuccess: () => void
 }) {
   const { data: petitionData, isLoading: isLoadingPetition } = useApiPetitionBySlug(
     countryCode,
@@ -38,7 +38,7 @@ function UserActionFormPetitionSignatureDialogContent({
 
   return (
     <UserActionFormPetitionSignature
-      onSuccess={onClose}
+      onSuccess={onSuccess}
       petitionData={petitionData}
       user={userData.user}
     />
@@ -65,7 +65,7 @@ export function UserActionFormPetitionSignatureDialog({
     analytics: 'User Action Form Petition Signature',
   })
 
-  const handleClose = useCallback(() => {
+  const handleSuccess = useCallback(() => {
     dialogProps.onOpenChange(false)
     onSuccess?.()
   }, [dialogProps, onSuccess])
@@ -75,7 +75,7 @@ export function UserActionFormPetitionSignatureDialog({
       <Suspense fallback={<UserActionFormPetitionSignatureSkeleton />}>
         <UserActionFormPetitionSignatureDialogContent
           countryCode={countryCode}
-          onClose={handleClose}
+          onSuccess={handleSuccess}
           petitionSlug={petitionSlug}
         />
       </Suspense>

@@ -17,9 +17,18 @@ export const zodUserActionFormPetitionSignature = base.extend({
 })
 
 // For server action (uses converted Address)
-export const zodUserActionFormPetitionSignatureAction = base.extend({
-  address: zodAddress.nullable(),
-})
+export const zodUserActionFormPetitionSignatureAction = base
+  .extend({
+    address: zodAddress.nullable(),
+  })
+  .refine(data => data.address !== null, {
+    message: 'Address could not be found',
+    path: ['address'],
+  })
+  .transform(data => ({
+    ...data,
+    address: data.address!, // Safe to assert non-null after refinement
+  }))
 
 export type UserActionPetitionSignatureValues = z.infer<typeof zodUserActionFormPetitionSignature> &
   GenericErrorFormValues
