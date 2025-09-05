@@ -10,7 +10,7 @@ import {
 
 import type { CampaignMetadata } from './types'
 
-const CAMPAIGN_NAME = GBUserActionEmailCampaignName.STABLECOINS
+const CAMPAIGN_NAME = GBUserActionEmailCampaignName.STABLECOINS_PETITION_SEP_09_2025
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'mp'
 
@@ -26,7 +26,7 @@ function getEmailBodyText(props?: GetTextProps & { address?: string }) {
 
   return `Dear Member of Parliament,
 
-As your constituent, I am writing to let you know that I have signed a petition calling on the UK Government to ‘Stop retail CBDCs and deliver a Blockchain Action Plan with Stablecoins at its Core’.
+As your constituent, I am writing to let you know that I have signed a petition calling on the UK Government to “deliver an Action Plan for blockchain adoption with stablecoin strategy at its core”.
 
 Successive Governments have pledged to make the UK a global centre of digital asset innovation, but this ambition is yet to be turned into a reality. The time is now. Jurisdictions around the world are accelerating strategies to capture digital asset innovation and the economic benefits associated with this, and the UK must not sit on the sidelines.
 
@@ -36,15 +36,16 @@ To deliver on its tokenisation strategy, the US has already ruled out CBDCs and 
 
 As my elected representative, I urge you to:
 
-	• Write to Emma Reynolds, the City Minister, calling for the Government to:
-		a)   Set out a Blockchain Action Plan with a stablecoin strategy.
-		b)   Drive a pro-innovation stablecoin and tokenisation regime, e.g. permit interest-bearing stablecoins and preserve their role as wholesale settlement asset.
-		c)   Explore Govt use cases for blockchain
-		d)   Appoint a blockchain and crypto Tsar
+Write to Emma Reynolds, the City Minister, calling for the Government to:
+a)   Set out a Blockchain Action Plan with a stablecoin strategy.
+b)   Drive a pro-innovation stablecoin and tokenisation regime, e.g. permit interest-bearing stablecoins and preserve their role as wholesale settlement asset.
+c)   Explore Govt use cases for blockchain
+d)   Appoint a blockchain and crypto Tsar
 
-	• Table a Parliamentary Question to press the Government to deliver a Blockchain Action Plan, centred on fostering stablecoin adoption.
+Table a Parliamentary Question to press the Government to deliver a Blockchain Action Plan, centred on fostering stablecoin adoption.
 
-Thank you for taking the time to consider these requests and I look forward to hearing from you in due course.${fullNameSignOff}`
+Thank you for taking the time to consider these requests and I look forward to hearing from you in due course.
+${fullNameSignOff}`
 }
 
 export const campaignMetadata: CampaignMetadata = {
