@@ -1,0 +1,62 @@
+---
+description: Commit message conventions
+globs: 
+alwaysApply: false
+---
+The commit message should be structured as follows:
+
+```
+<type>(<optional scope>): <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+## Types
+
+| Commit Type | Description                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| `feat`      | A new feature                                                                                               |
+| `fix`       | A bug Fix                                                                                                   |
+| `docs`      | Documentation only changes                                                                                  |
+| `style`     | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)      |
+| `refactor`  | A code change that neither fixes a bug nor adds a feature                                                   |
+| `perf`      | A code change that improves performance                                                                     |
+| `test`      | Adding missing tests or correcting existing tests                                                           |
+| `build`     | Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)         |
+| `ci`        | Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) |
+| `chore`     | Other changes that don't modify src or test files                                                           |
+| `revert`    | Reverts a previous commit                                                                                   |
+
+## Examples
+### Commit message with description and breaking change footer
+```
+feat: allow provided config object to extend other configs
+```
+
+### Commit message with multi-paragraph body and multiple footers
+```
+fix: prevent racing of requests
+
+Introduce a request id and a reference to latest request. Dismiss
+incoming responses other than from latest request.
+
+Remove timeouts which were used to mitigate the racing issue but are
+obsolete now.
+
+Reviewed-by: Z
+Refs: #123
+```
+
+### Commit message with scope
+```
+feat(lang): add Polish language
+```
+
+### Commit message with no body
+```
+docs: correct spelling of CHANGELOG
+```
+
+

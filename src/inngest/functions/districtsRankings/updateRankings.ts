@@ -1,6 +1,7 @@
+import pRetry from 'p-retry'
+
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { REDIS_KEYS } from '@/utils/server/districtRankings/constants'
 import {
   getAdvocatesCountByDistrict,
   getReferralsCountByDistrict,
@@ -8,8 +9,18 @@ import {
 import { syncReferralsWithoutAddress } from '@/utils/server/districtRankings/syncReferralsWithoutAddress'
 import { createDistrictRankingUpserter } from '@/utils/server/districtRankings/upsertRankings'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import {
+  AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  AUStateCode,
+} from '@/utils/shared/stateMappings/auStateUtils'
+import {
+  CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+  CAProvinceOrTerritoryCode,
+} from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GB_NUTS_1_AREA_NAMES, GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/stateMappings/usStateDistrictUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_FUNCTION_ID = 'script.update-districts-rankings'
 const UPDATE_DISTRICT_RANKINGS_CRON_JOB_SCHEDULE = '0 */1 * * *' // every 1 hour
@@ -17,6 +28,36 @@ const UPDATE_DISTRICT_RANKINGS_INNGEST_EVENT_NAME = 'script/update-districts-ran
 
 export interface UpdateDistrictsRankingsCronJobSchema {
   name: typeof UPDATE_DISTRICT_RANKINGS_INNGEST_EVENT_NAME
+}
+
+interface StateCodesByCountry {
+  [SupportedCountryCodes.US]: USStateCode[]
+  [SupportedCountryCodes.CA]: CAProvinceOrTerritoryCode[]
+  [SupportedCountryCodes.GB]: GBRegion[]
+  [SupportedCountryCodes.AU]: AUStateCode[]
+}
+
+const COUNTRY_CODE_TO_STATES_CODES_MAP: StateCodesByCountry = {
+  [SupportedCountryCodes.US]: Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[],
+  [SupportedCountryCodes.CA]: Object.keys(
+    CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
+  ) as CAProvinceOrTerritoryCode[],
+  [SupportedCountryCodes.GB]: [...GB_NUTS_1_AREA_NAMES],
+  [SupportedCountryCodes.AU]: Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP) as AUStateCode[],
+}
+
+const COUNTRIES_TO_UPDATE_RANKINGS_FOR = [
+  SupportedCountryCodes.US,
+  SupportedCountryCodes.CA,
+  SupportedCountryCodes.AU,
+  SupportedCountryCodes.GB,
+]
+
+interface ExecutionResult {
+  advocatesCountsByDistrictEntries: number
+  advocatesRankingResults: number
+  referralsCountByDistrictEntries: number
+  referralsRankingResults: number
 }
 
 export const updateDistrictsRankings = inngest.createFunction(
@@ -30,79 +71,106 @@ export const updateDistrictsRankings = inngest.createFunction(
       : { event: UPDATE_DISTRICT_RANKINGS_INNGEST_EVENT_NAME }),
   },
   async ({ step, logger }) => {
+    const initialExecutionResults: ExecutionResult = {
+      advocatesCountsByDistrictEntries: 0,
+      advocatesRankingResults: 0,
+      referralsCountByDistrictEntries: 0,
+      referralsRankingResults: 0,
+    }
+
+    const executionResults: Record<SupportedCountryCodes, ExecutionResult> = {
+      [SupportedCountryCodes.US]: initialExecutionResults,
+      [SupportedCountryCodes.CA]: initialExecutionResults,
+      [SupportedCountryCodes.GB]: initialExecutionResults,
+      [SupportedCountryCodes.AU]: initialExecutionResults,
+    }
+
     await step.run('Sync Referrals Without Address', async () => {
       logger.info("Syncing referrals without address to their users' current addresses")
       return await syncReferralsWithoutAddress()
     })
 
-    const stateCodes = Object.keys(US_STATE_CODE_TO_DISTRICT_COUNT_MAP) as USStateCode[]
+    for (const countryCode of COUNTRIES_TO_UPDATE_RANKINGS_FOR) {
+      const stateCodes = COUNTRY_CODE_TO_STATES_CODES_MAP[countryCode]
 
-    const advocatesCountsByDistrictEntries = await step.run(
-      'Get Advocates Count by District',
-      async () => {
-        logger.info('Getting Advocates Count by District')
-        const promises = stateCodes.map(getAdvocatesCountByDistrict)
-        const results = await Promise.all(promises)
-        return results.flat()
-      },
-    )
+      const advocatesCountsByDistrictEntries = await step.run(
+        `[${countryCode.toUpperCase()}] Get Advocates Count by District`,
+        async () => {
+          logger.info(`[${countryCode.toUpperCase()}] Getting Advocates Count by District`)
 
-    const referralsCountByDistrictEntries = await step.run(
-      'Get Referrals Count by District',
-      async () => {
-        logger.info('Getting Referrals Count by District')
-        const promises = stateCodes.map(getReferralsCountByDistrict)
-        const results = await Promise.all(promises)
-        return results.flat()
-      },
-    )
-    const [advocatesRankingResults, referralsRankingResults] = await Promise.all([
-      step.run('Update Districts Advocates Rankings', async () => {
-        const upsertDistrictAdvocatesRanking = await createDistrictRankingUpserter(
-          REDIS_KEYS.DISTRICT_ADVOCATES_RANKING,
-        )
-        const results = await Promise.all(
-          advocatesCountsByDistrictEntries.map(entry => upsertDistrictAdvocatesRanking(entry)),
-        )
+          const promises = stateCodes.map(stateCode =>
+            pRetry(async () => await getAdvocatesCountByDistrict(countryCode, stateCode)),
+          )
 
-        const successfulResults = results.filter(result => result.success)
-        const failedResults = results.filter(result => !result.success)
+          const settledResults = await Promise.allSettled(promises)
+          const successfulResults = settledResults.filter(result => result.status === 'fulfilled')
+          return successfulResults.map(result => result.value).flat()
+        },
+      )
 
-        return {
-          totalEntries: results.length,
-          successfulEntries: successfulResults.map(result => result.entry),
-          successful: successfulResults.length,
-          failedEntries: failedResults.map(result => result.entry),
-          failed: failedResults.length,
-        }
-      }),
+      const referralsCountByDistrictEntries = await step.run(
+        `[${countryCode.toUpperCase()}] Get Referrals Count by District`,
+        async () => {
+          logger.info(`[${countryCode.toUpperCase()}] Getting Referrals Count by District`)
+          const promises = stateCodes.map(stateCode =>
+            pRetry(async () => await getReferralsCountByDistrict(countryCode, stateCode)),
+          )
+          const settledResults = await Promise.allSettled(promises)
+          const successfulResults = settledResults.filter(result => result.status === 'fulfilled')
+          return successfulResults.map(result => result.value).flat()
+        },
+      )
 
-      step.run('Update Districts Referrals Ranking', async () => {
-        const upsertDistrictReferralsRanking = await createDistrictRankingUpserter(
-          REDIS_KEYS.DISTRICT_REFERRALS_RANKING,
-        )
-        const results = await Promise.all(
-          referralsCountByDistrictEntries.map(entry => upsertDistrictReferralsRanking(entry)),
-        )
+      const [advocatesRankingResults, referralsRankingResults] = await Promise.all([
+        step.run(`[${countryCode.toUpperCase()}] Update Districts Advocates Rankings`, async () => {
+          const upsertDistrictAdvocatesRanking = await createDistrictRankingUpserter(countryCode)
+          const results = await Promise.all(
+            advocatesCountsByDistrictEntries.map(entry => upsertDistrictAdvocatesRanking(entry)),
+          )
 
-        const successfulResults = results.filter(result => result.success)
-        const failedResults = results.filter(result => !result.success)
+          const successfulResults = results.filter(result => result.success)
+          const failedResults = results.filter(result => !result.success)
 
-        return {
-          totalEntries: results.length,
-          successfulEntries: successfulResults.map(result => result.entry),
-          successful: successfulResults.length,
-          failedEntries: failedResults.map(result => result.entry),
-          failed: failedResults.length,
-        }
-      }),
-    ])
+          return {
+            totalEntries: results.length,
+            successfulEntries: successfulResults.map(result => result.entry),
+            successful: successfulResults.length,
+            failedEntries: failedResults.map(result => result.entry),
+            failed: failedResults.length,
+          }
+        }),
 
-    return {
-      advocatesCountsByDistrictEntries: advocatesCountsByDistrictEntries.length,
-      advocatesRankingResults,
-      referralsCountByDistrictEntries: referralsCountByDistrictEntries.length,
-      referralsRankingResults,
+        step.run(`[${countryCode.toUpperCase()}] Update Districts Referrals Ranking`, async () => {
+          const upsertDistrictReferralsRanking = await createDistrictRankingUpserter(
+            countryCode,
+            'referrals',
+          )
+
+          const results = await Promise.all(
+            referralsCountByDistrictEntries.map(entry => upsertDistrictReferralsRanking(entry)),
+          )
+
+          const successfulResults = results.filter(result => result.success)
+          const failedResults = results.filter(result => !result.success)
+
+          return {
+            totalEntries: results.length,
+            successfulEntries: successfulResults.map(result => result.entry),
+            successful: successfulResults.length,
+            failedEntries: failedResults.map(result => result.entry),
+            failed: failedResults.length,
+          }
+        }),
+      ])
+
+      executionResults[countryCode] = {
+        advocatesCountsByDistrictEntries: advocatesCountsByDistrictEntries.length,
+        advocatesRankingResults: advocatesRankingResults.totalEntries,
+        referralsCountByDistrictEntries: referralsCountByDistrictEntries.length,
+        referralsRankingResults: referralsRankingResults.totalEntries,
+      }
     }
+
+    return executionResults
   },
 )

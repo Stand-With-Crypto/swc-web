@@ -1,4 +1,7 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
@@ -52,6 +55,12 @@ const COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS: Record<
     district: 'constituency',
   },
 }
+
+type RecentActivityAndLeaderboardTabs =
+  | UsRecentActivityAndLeaderboardTabs
+  | AuRecentActivityAndLeaderboardTabs
+  | CaRecentActivityAndLeaderboardTabs
+  | GbRecentActivityAndLeaderboardTabs
 
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -111,45 +120,72 @@ export const getIntlUrls = (
     termsOfService: () => `${countryPrefix}/terms-of-service`,
     privacyPolicy: () => `${countryPrefix}/privacy`,
     about: () => `${countryPrefix}/about`,
+    privacyCollectionStatement: () => `${countryPrefix}/privacy-collection-statement`,
     // Uses Next.js rewrite function to render the same page as /about
     manifesto: () => `${countryPrefix}/manifesto`,
     resources: () => `${countryPrefix}/resources`,
     bills: () => `${countryPrefix}/bills`,
+    billsStateSpecific: (stateCode: string) =>
+      `${countryPrefix}/bills/state/${stateCode.toLowerCase()}`,
     billDetails: (billSlug: string) => `${countryPrefix}/bills/${billSlug}`,
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
-    recentActivity: (params: Partial<{ pageNumber: number; stateCode: string }> = {}) => {
+    recentActivity: (params: { stateCode: string; pageNumber?: number }) => {
       const pageNumber = params.pageNumber || 1
       const shouldSuppressPageNumber = pageNumber === 1
       const suffix = shouldSuppressPageNumber ? '' : `/${pageNumber}`
-
-      return `/recent-activity${suffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
+      return `${countryPrefix}/recent-activity/${params.stateCode.toLowerCase()}${suffix}`
     },
-    leaderboard: (params?: {
-      pageNum?: number
-      stateCode?: string
-      tab: RecentActivityAndLeaderboardTabs
-    }) => {
-      const getTabPrefix = (tab = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY) => {
+    community: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
+      const getTabPrefix = (
+        tab: RecentActivityAndLeaderboardTabs = UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+      ) => {
         switch (tab) {
-          case RecentActivityAndLeaderboardTabs.LEADERBOARD:
+          case UsRecentActivityAndLeaderboardTabs.LEADERBOARD:
             return '/community/leaderboard'
-          case RecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+          case AuRecentActivityAndLeaderboardTabs.TOP_DIVISIONS:
+          case CaRecentActivityAndLeaderboardTabs.TOP_CONSTITUENCIES:
             return '/community/referrals'
-          case RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case CaRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          case GbRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
           default:
-            return '/community'
+            return '/community/activity'
         }
       }
       const tabPrefix = getTabPrefix(params?.tab)
-      if (!params) {
-        return `${countryPrefix}${tabPrefix}`
+      const pageNum = params?.pageNum ?? 1
+      const shouldSuppressPageNum = pageNum === 1
+      const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}`
+    },
+    communityStateSpecific: (params: {
+      pageNum?: number
+      tab:
+        | UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+        | UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS
+      stateCode: string
+    }) => {
+      const statePrefix = `/community/${params.stateCode.toLowerCase()}`
+      const getTabPrefix = (
+        tab: UsRecentActivityAndLeaderboardTabs = UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+      ) => {
+        switch (tab) {
+          case UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS:
+            return `${statePrefix}/referrals`
+          case UsRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY:
+          default:
+            return statePrefix
+        }
       }
+      const tabPrefix = getTabPrefix(params.tab)
       const pageNum = params.pageNum ?? 1
       const shouldSuppressPageNum = pageNum === 1
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
-      return `${countryPrefix}${tabPrefix}${tabSuffix}${params.stateCode ? `?state=${params.stateCode.toLowerCase()}` : ''}`
+      return `${countryPrefix}${tabPrefix}${tabSuffix}`
     },
     partners: () => `${countryPrefix}/partners`,
     politiciansHomepage: ({
@@ -165,7 +201,6 @@ export const getIntlUrls = (
     updateProfile: () => `${countryPrefix}/profile?hasOpenUpdateUserProfileForm=true`,
     internalHomepage: () => '/internal',
     becomeMember: () => `${countryPrefix}/action/become-member`,
-    community: () => `${countryPrefix}/community`,
     events: () => `${countryPrefix}/events`,
     eventDeepLink: (state: string, eventSlug: string) =>
       `${countryPrefix}/events/${state}/${eventSlug}`,
@@ -174,11 +209,14 @@ export const getIntlUrls = (
     press: () => `${countryPrefix}/press`,
     emailDeeplink: () => `${countryPrefix}/action/email`,
     polls: () => `${countryPrefix}/polls`,
-    referrals: ({ pageNum, stateCode }: Partial<{ pageNum: number; stateCode: string }> = {}) => {
+    referrals: (params: Partial<{ pageNum: number; stateCode: string }> = {}) => {
+      const { pageNum, stateCode } = params
       const shouldSuppressPageNum = (pageNum ?? 1) === 1
       const pageSuffix = shouldSuppressPageNum ? '' : `/${pageNum ?? 1}`
-      const stateSuffix = stateCode ? `?state=${stateCode.toLowerCase()}` : ''
-      return `${countryPrefix}/referrals${pageSuffix}${stateSuffix}`
+      if (stateCode) {
+        return `${countryPrefix}/referrals/state/${stateCode.toLowerCase()}${pageSuffix}`
+      }
+      return `${countryPrefix}/referrals${pageSuffix}`
     },
     newmodeElectionAction: () => `${countryPrefix}/content/election`,
     newmodeDebankingAction: () => `${countryPrefix}/content/debanking`,
@@ -188,6 +226,8 @@ export const getIntlUrls = (
     ...RACES_ROUTES,
     localPolicy: (stateCode?: string) =>
       `${countryPrefix}/local-policy${stateCode ? `/${stateCode.toLowerCase()}` : ''}`,
+    resubscribeSuccess: () => `${countryPrefix}/email/resubscribe-success`,
+    dayOfActionLP: () => `${countryPrefix}/cryptodayofaction`,
   }
 }
 
@@ -207,8 +247,24 @@ export const apiUrls = {
 
     return `/api/public/dtsi/by-geography/${countryCode}/${electoralZone}`
   },
-  swcCivicElectoralZoneFromAddress: (address: string) =>
-    `/api/public/swc-civic/electoral-zone?address=${encodeURIComponent(address.trim())}`,
+  swcCivicElectoralZoneByAddress: ({ address, placeId }: { address: string; placeId?: string }) => {
+    const searchParams = new URLSearchParams()
+    searchParams.set('address', address.trim())
+    if (placeId) searchParams.set('placeId', placeId)
+    return `/api/public/swc-civic/electoral-zone/by-address?${searchParams.toString()}`
+  },
+  swcCivicElectoralZoneByGeolocation: ({
+    latitude,
+    longitude,
+  }: {
+    latitude: number
+    longitude: number
+  }) => {
+    const searchParams = new URLSearchParams()
+    searchParams.set('latitude', latitude.toString())
+    searchParams.set('longitude', longitude.toString())
+    return `/api/public/swc-civic/electoral-zone/by-geolocation?${searchParams.toString()}`
+  },
   totalDonations: () => '/api/public/total-donations',
   userPerformedUserActionTypes: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/identified-user/performed-user-action-types`,
@@ -229,7 +285,8 @@ export const apiUrls = {
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,
-  totalAdvocatesPerState: () => '/api/public/advocates-map/total-advocates-per-state',
+  totalAdvocatesPerState: (countryCode: SupportedCountryCodes) =>
+    `/api/public/advocates-map/${countryCode}/total-advocates-per-state`,
   advocatesCountByState: (stateCode: string) => `/api/public/state-advocates/${stateCode}`,
   smsStatusCallback: ({
     campaignName,
@@ -245,23 +302,25 @@ export const apiUrls = {
     `/api/${countryCode}/identified-user/polls-votes-from-user`,
   pollsResultsData: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
     `/api/${countryCode}/public/polls`,
-  districtRanking: ({
+  electoralZoneRanking: ({
+    countryCode,
     stateCode,
-    districtNumber,
+    electoralZone,
     filteredByState,
   }: {
+    countryCode: SupportedCountryCodes
     stateCode: string
-    districtNumber: string
+    electoralZone: string
     filteredByState?: boolean
   }) =>
-    `/api/public/referrals/${stateCode}/${districtNumber}${filteredByState ? '?filteredByState=true' : ''}`,
+    `/api/public/referrals/${countryCode}/${stateCode}/${electoralZone}${filteredByState ? '/by-state' : ''}`,
   dtsiRacesByCongressionalDistrict: ({
-    stateCode,
+    administrativeArea,
     district,
   }: {
-    stateCode: string
+    administrativeArea: string
     district: number
-  }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
+  }) => `/api/public/dtsi/races/usa/${administrativeArea}/${district}`,
 }
 
 export * from './externalUrls'

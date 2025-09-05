@@ -90,4 +90,25 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'I voted nft',
     },
   },
+  [NFTSlug.GENIUS_ACT_2025]: {
+    name: 'The GENIUS Act: Passed in the USA',
+    description: `This collectible commemorates the GENIUS Act, the first crypto law in U.S. history, which regulates stablecoins and marks a step toward modernizing the financial system. It honors the Stand With Crypto advocates whose votes, calls, and emails made clear that the Crypto Voter matters`,
+    image: {
+      url: '/nfts/Genius_NFT_2.png',
+      width: 160,
+      height: 160,
+      alt: 'A vintage postage stamp design featuring the U.S. Capitol, labeled "GENIUS ACT July 2025" with a "Passed in the USA" badge in the corner',
+    },
+  },
+  [NFTSlug.DAY_OF_ACTION_2025_08_14]: {
+    name: 'Crypto Day of Action',
+    description:
+      'Thursday, August 14th – SWC’s 2nd Anniversary – is the first-ever Crypto Day of Action, an all-day virtual event aimed at bringing together crypto advocates from across the country to make sure lawmakers in Washington, D.C. hear the millions of crypto voters’ voices calling for common-sense policies that will make America the crypto capital of the world.',
+    image: {
+      url: '/nfts/DOA-NFT.png',
+      width: 160,
+      height: 160,
+      alt: 'Crypto Day of Action nft',
+    },
+  },
 }

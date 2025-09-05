@@ -16,7 +16,7 @@ export function CaHero() {
           It’s time to support crypto in <span className="text-primary-cta">Canada</span>
         </Hero.Title>
         <Hero.Subtitle>
-          4 million Canadians own crypto. And yet, crypto’s future in Canada remains uncertain. This
+          5 million Canadians own crypto. And yet, crypto’s future in Canada remains uncertain. This
           is our chance to shape the future of crypto policy and ensure Canada remains a global
           leader.
         </Hero.Subtitle>

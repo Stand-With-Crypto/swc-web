@@ -1,9 +1,11 @@
 import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
-import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
+import { builderSDKClient, DEFAULT_CACHE_IN_SECONDS } from '@/utils/server/builder'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
 import { getLogger } from '@/utils/shared/logger'
+import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPartners, zodPartnerSchemaValidation } from '@/utils/shared/zod/getSWCPartners'
@@ -19,7 +21,7 @@ async function getAllPartnersWithOffset({
   offset: number
   countryCode: SupportedCountryCodes
 }) {
-  return await pRetry(
+  const retryPromise = pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.PARTNERS, {
         query: {
@@ -31,16 +33,22 @@ async function getAllPartnersWithOffset({
           },
         },
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
-        cacheSeconds: 60,
+        cacheSeconds: DEFAULT_CACHE_IN_SECONDS,
         limit: LIMIT,
         fields: 'data',
         offset,
       }),
     {
-      retries: 3,
-      minTimeout: 10000,
+      retries: 2,
+      minTimeout: 5000,
     },
   )
+
+  const timeout = SECONDS_DURATION['10_SECONDS'] * 1000
+
+  const result = await resolveWithTimeout(retryPromise, timeout)
+
+  return result
 }
 
 export async function getPartners({ countryCode }: { countryCode: SupportedCountryCodes }) {

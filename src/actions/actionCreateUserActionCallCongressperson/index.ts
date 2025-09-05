@@ -22,12 +22,13 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+  ElectoralZoneNotFoundReason,
+  maybeGetElectoralZoneFromAddress,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -128,25 +129,35 @@ async function _actionCreateUserActionCallCongressperson(
   }
 
   try {
-    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
-      validatedInput.data.address,
-    )
-    if ('notFoundReason' in usCongressionalDistrict) {
-      logCongressionalDistrictNotFound({
-        notFoundReason: usCongressionalDistrict.notFoundReason,
+    const electoralZone = await maybeGetElectoralZoneFromAddress({
+      address: {
+        ...validatedInput.data.address,
+        googlePlaceId: validatedInput.data.address.googlePlaceId || null,
+        latitude: validatedInput.data.address.latitude || null,
+        longitude: validatedInput.data.address.longitude || null,
+      },
+    })
+    if ('notFoundReason' in electoralZone || !electoralZone) {
+      logElectoralZoneNotFound({
         address: validatedInput.data.address.formattedDescription,
+        placeId: validatedInput.data.address.googlePlaceId,
+        countryCode,
+        notFoundReason:
+          electoralZone.notFoundReason ?? ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
         domain: 'actionCreateUserActionCallCongressperson',
       })
-    }
-    if ('districtNumber' in usCongressionalDistrict) {
-      validatedInput.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    } else {
+      validatedInput.data.address.electoralZone = electoralZone.zoneName
+      if (electoralZone.administrativeArea) {
+        validatedInput.data.address.swcCivicAdministrativeArea = electoralZone.administrativeArea
+      }
     }
   } catch (error) {
-    logger.error('error getting `usCongressionalDistrict`:' + error)
+    logger.error('error getting `electoralZone`:' + error)
     Sentry.captureException(error, {
+      fingerprint: ['error getting electoralZone'],
       tags: {
         domain: 'actionCreateUserActionCallCongressperson',
-        message: 'error getting usCongressionalDistrict',
       },
     })
   }

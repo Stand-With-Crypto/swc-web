@@ -9,7 +9,8 @@ import {
 import { prismaClient } from '@/utils/server/prismaClient'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
-import { zodStateDistrict } from '@/validation/fields/zodAddress'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { zodUSStateDistrict } from '@/validation/fields/zodAddress'
 
 export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
   const users = await prismaClient.user.findMany({
@@ -41,9 +42,9 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
 
       const getDistrictRank = () => {
         const stateCode = user.address?.administrativeAreaLevel1
-        const districtNumber = user.address?.usCongressionalDistrict
+        const districtNumber = user.address?.electoralZone
 
-        const parseResult = zodStateDistrict.safeParse({
+        const parseResult = zodUSStateDistrict.safeParse({
           state: stateCode,
           district: districtNumber,
         })
@@ -65,7 +66,7 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
           sessionId: user.userSessions?.[0]?.id,
           address: {
             district: {
-              name: user.address?.usCongressionalDistrict ?? undefined,
+              name: user.address?.electoralZone ?? undefined,
               rank: getDistrictRank(),
             },
             state: {
@@ -87,9 +88,9 @@ async function getDistrictRankMap(users: Array<User & { address: Address | null 
     users
       .map(user => {
         const stateCode = user.address?.administrativeAreaLevel1
-        const districtNumber = user.address?.usCongressionalDistrict
+        const districtNumber = user.address?.electoralZone
 
-        const parseResult = zodStateDistrict.safeParse({
+        const parseResult = zodUSStateDistrict.safeParse({
           state: stateCode,
           district: districtNumber,
         })
@@ -107,6 +108,7 @@ async function getDistrictRankMap(users: Array<User & { address: Address | null 
   )
 
   const districtRankings = await getMultipleDistrictRankings({
+    countryCode: SupportedCountryCodes.US,
     members: uniqueUserDistricts,
   })
 

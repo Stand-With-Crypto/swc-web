@@ -13,6 +13,18 @@ import {
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
 
+/**
+ * Checks if an image format is supported by ImageResponse/Satori
+ * Supported formats: PNG, JPEG, SVG
+ * Unsupported formats: WebP, GIF, etc.
+ */
+function isImageFormatSupportedByImageResponse(url: string): boolean {
+  const supportedExtensions = ['.png', '.jpg', '.jpeg', '.svg']
+  const lowercaseUrl = url.toLowerCase()
+
+  return supportedExtensions.some(ext => lowercaseUrl.includes(ext))
+}
+
 export async function generateOgImage({ params }: { params: { dtsiSlug: string } }) {
   const person = await getPoliticianDetailsData(params.dtsiSlug)
 
@@ -39,6 +51,11 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
       OPEN_GRAPH_IMAGE_DIMENSIONS,
     )
   }
+
+  const profilePictureSrc = isImageFormatSupportedByImageResponse(person.profilePictureUrl)
+    ? person.profilePictureUrl
+    : null
+
   const shouldHideStanceScores = shouldPersonHaveStanceScoresHidden(person)
   const letterGrade = convertDTSIPersonStanceScoreToLetterGrade(person) ?? '?'
   let letterImage
@@ -93,7 +110,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
         </div>
         <div />
         <div tw="w-full flex flex-col text-center justify-center items-center">
-          {person.profilePictureUrl ? (
+          {profilePictureSrc ? (
             <div
               style={{
                 display: 'flex',
@@ -101,7 +118,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
             >
               <img
                 alt={dtsiPersonFullName(person)}
-                src={person.profilePictureUrl}
+                src={profilePictureSrc}
                 style={{
                   borderRadius: '50%',
                   overflow: 'hidden',

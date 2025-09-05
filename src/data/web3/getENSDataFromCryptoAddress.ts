@@ -24,7 +24,7 @@ async function _getENSDataMapFromCryptoAddresses(
         return null
       }),
     ),
-    SECONDS_DURATION['30_SECONDS'] * 1000,
+    SECONDS_DURATION['10_SECONDS'] * 1000,
   )
 
   const addressesWithENS = nameResult
@@ -40,7 +40,7 @@ async function _getENSDataMapFromCryptoAddresses(
         name: address.ensName!,
       }),
     ),
-    SECONDS_DURATION['30_SECONDS'] * 1000,
+    SECONDS_DURATION['10_SECONDS'] * 1000,
   )
 
   return addressesWithENS.reduce(

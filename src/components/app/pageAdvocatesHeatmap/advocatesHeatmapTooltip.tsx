@@ -37,9 +37,7 @@ export function TotalAdvocatesPerStateTooltip({
 
   if (!mousePosition || !hoveredStateName) return null
 
-  const totalAdvocatesPerState = getTotalAdvocatesPerState(hoveredStateName)
-
-  if (!totalAdvocatesPerState) return null
+  const totalAdvocatesPerState = getTotalAdvocatesPerState(hoveredStateName) ?? 0
 
   const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale: COUNTRY_CODE_TO_LOCALE[countryCode] })} advocates in ${hoveredStateName}`
 

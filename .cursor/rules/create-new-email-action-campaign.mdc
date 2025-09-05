@@ -1,6 +1,7 @@
 ---
 description: Create a new email action campaign
 globs: 
+alwaysApply: false
 ---
 # Creating new email action campaigns
 
@@ -42,10 +43,6 @@ globs:
     const CAMPAIGN_NAME = USUserActionEmailCampaignName.DEFAULT
 
     export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
-
-    export const DIALOG_TITLE = 'Email Your Member of Congress'
-
-    export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
 
     function getEmailBodyText(props?: GetTextProps & { address?: string }) {
     const fullNameSignOff = getFullNameSignOff({

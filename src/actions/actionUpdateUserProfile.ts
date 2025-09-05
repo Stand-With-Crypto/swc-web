@@ -31,10 +31,11 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
+import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
 import {
-  logCongressionalDistrictNotFound,
-  maybeGetCongressionalDistrictFromAddress,
-} from '@/utils/shared/getCongressionalDistrictFromAddress'
+  ElectoralZoneNotFoundReason,
+  maybeGetElectoralZoneFromAddress,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
@@ -52,9 +53,9 @@ export const actionUpdateUserProfile = withServerActionMiddleware(
 
 const logger = getLogger(`actionUpdateUserProfile`)
 
-async function actionUpdateUserProfileWithoutMiddleware(
-  data: z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>,
-) {
+type Input = z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>
+
+async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
   const authUser = await appRouterGetAuthUser()
 
   if (!authUser) {
@@ -70,31 +71,35 @@ async function actionUpdateUserProfileWithoutMiddleware(
     }
   }
 
-  const isUSAddress = validatedFields.data.address?.countryCode?.toUpperCase() === 'US'
-  try {
-    if (isUSAddress && validatedFields.data.address) {
-      const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
-        validatedFields.data.address,
-      )
-      if ('notFoundReason' in usCongressionalDistrict) {
-        logCongressionalDistrictNotFound({
+  if (validatedFields.data.address) {
+    try {
+      const electoralZone = await maybeGetElectoralZoneFromAddress({
+        address: validatedFields.data.address,
+      })
+      if ('notFoundReason' in electoralZone || !electoralZone) {
+        logElectoralZoneNotFound({
           address: validatedFields.data.address.formattedDescription,
-          notFoundReason: usCongressionalDistrict.notFoundReason,
+          placeId: validatedFields.data.address.googlePlaceId,
+          countryCode: validatedFields.data.address.countryCode,
+          notFoundReason:
+            electoralZone.notFoundReason ?? ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND,
           domain: 'actionUpdateUserProfile',
         })
+      } else {
+        validatedFields.data.address.electoralZone = electoralZone.zoneName
+        if (electoralZone.administrativeArea) {
+          validatedFields.data.address.swcCivicAdministrativeArea = electoralZone.administrativeArea
+        }
       }
-      if ('districtNumber' in usCongressionalDistrict) {
-        validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
-      }
+    } catch (error) {
+      logger.error('error getting `electoralZone`:' + error)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'actionUpdateUserProfile',
+          message: 'error getting electoralZone',
+        },
+      })
     }
-  } catch (error) {
-    logger.error('error getting `usCongressionalDistrict`:' + error)
-    Sentry.captureException(error, {
-      tags: {
-        domain: 'actionUpdateUserProfile',
-        message: 'error getting usCongressionalDistrict',
-      },
-    })
   }
 
   await throwIfRateLimited({ context: 'authenticated' })
@@ -117,7 +122,7 @@ async function actionUpdateUserProfileWithoutMiddleware(
           googlePlaceId: validatedFields.data.address.googlePlaceId,
         },
         create: validatedFields.data.address,
-        update: {},
+        update: validatedFields.data.address,
       })
     : null
 

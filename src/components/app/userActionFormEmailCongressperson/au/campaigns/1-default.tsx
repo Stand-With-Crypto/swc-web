@@ -16,10 +16,6 @@ const CAMPAIGN_NAME = AUUserActionEmailCampaignName.DEFAULT
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
 
-export const DIALOG_TITLE = 'Email Your Senator'
-
-export const DIALOG_SUBTITLE = 'Support Crucial Crypto Legislation'
-
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
     firstName: props?.firstName,

@@ -1,8 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { ADVOCATES_ACTIONS, STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  AdvocateHeatmapAction,
+  ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
+  AREA_COORDS_BY_COUNTRY_CODE,
+  AREAS_WITH_SINGLE_MARKER,
+  MapProjectionConfig,
+} from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { useCountryCode } from '@/hooks/useCountryCode'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface MapMarker {
   id: string
@@ -10,37 +18,60 @@ export interface MapMarker {
   coordinates: [number, number]
   actionType: UserActionType
   datetimeCreated: string
-  iconType: (typeof ADVOCATES_ACTIONS)[keyof typeof ADVOCATES_ACTIONS]
+  iconType: AdvocateHeatmapAction
   amountUsd?: number
 }
 
-const createMarkersFromActions = (recentActivity: PublicRecentActivity['data']): MapMarker[] => {
+const createMarkersFromActions = (
+  recentActivity: PublicRecentActivity['data'],
+  countryCode: SupportedCountryCodes,
+  mapMarkerOffset = 1,
+): MapMarker[] => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
+
+  const stateCoords = AREA_COORDS_BY_COUNTRY_CODE[countryCode]
+
+  if (!stateCoords) {
+    return markers
+  }
+
+  const actions = ADVOCATES_ACTIONS_BY_COUNTRY_CODE[countryCode]
+
+  if (!actions) {
+    return markers
+  }
 
   recentActivity.forEach(item => {
     const userLocation = item.user.userLocationDetails
 
-    if (userLocation && userLocation.administrativeAreaLevel1) {
-      const state = userLocation.administrativeAreaLevel1
+    const { administrativeAreaLevel1, swcCivicAdministrativeArea } = userLocation ?? {}
 
-      const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
+    if (userLocation && (administrativeAreaLevel1 || swcCivicAdministrativeArea)) {
+      const administrativeArea = (swcCivicAdministrativeArea ??
+        administrativeAreaLevel1) as keyof typeof stateCoords
+
+      if (!administrativeArea || !stateCoords[administrativeArea]) return
+
+      const coordinates = stateCoords[administrativeArea]
 
       if (coordinates) {
         let offsetX = 0
         let offsetY = 0
 
-        if (stateCount[state]) {
-          offsetX = stateCount[state] % 2 === 0 ? 1.2 : -1.2
-          offsetY = stateCount[state] % 2 === 0 ? -1.2 : 1.2
+        if (
+          stateCount[administrativeArea] &&
+          !AREAS_WITH_SINGLE_MARKER.includes(administrativeArea)
+        ) {
+          offsetX = stateCount[administrativeArea] % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
+          offsetY = stateCount[administrativeArea] % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
 
-          stateCount[state] += 1
+          stateCount[administrativeArea] += 1
         } else {
-          stateCount[state] = 1
+          stateCount[administrativeArea] = 1
         }
 
-        const currentIconActionType =
-          ADVOCATES_ACTIONS[item.actionType as keyof typeof ADVOCATES_ACTIONS]
+        const currentIconActionType = actions[item.actionType]
 
         if (!currentIconActionType) {
           return
@@ -48,7 +79,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity['data']):
 
         markers.push({
           id: item.id,
-          name: state,
+          name: administrativeArea,
           coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
           actionType: item.actionType,
           datetimeCreated: item.datetimeCreated,
@@ -59,7 +90,8 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity['data']):
     }
   })
 
-  return markers
+  // Using reverse to make the markers appear in the order they were created
+  return markers.reverse()
 }
 
 const markersAreSame = (arr1: MapMarker[], arr2: MapMarker[]): boolean => {
@@ -73,11 +105,21 @@ const INITIAL_MARKERS = 5
 const MAX_MARKERS = 20
 const ADVOCATE_MAP_INTERVAL = 2000
 
-export function useAdvocateMap(actions: PublicRecentActivity) {
+export function useAdvocateMap({
+  actions,
+  mapConfig,
+}: {
+  actions: PublicRecentActivity
+  mapConfig: MapProjectionConfig
+}) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
   const [totalMarkers, setTotalMarkers] = useState<number>(INITIAL_MARKERS - 1)
+  const countryCode = useCountryCode()
 
-  const markers = useMemo(() => createMarkersFromActions(actions.data), [actions])
+  const markers = useMemo(
+    () => createMarkersFromActions(actions.data, countryCode, mapConfig.markerOffset),
+    [actions, countryCode, mapConfig],
+  )
 
   useEffect(() => {
     const intervalId = setInterval(() => {

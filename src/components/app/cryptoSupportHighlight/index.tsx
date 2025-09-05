@@ -20,7 +20,7 @@ export function CryptoSupportHighlight({
   return (
     <div
       className={cn(
-        'flex w-full justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-background sm:w-fit',
+        'flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 text-lg font-bold text-background sm:w-fit',
         convertDTSIStanceScoreToTextColorClass(stanceScore),
         convertDTSIStanceScoreToBgColorClass(stanceScore),
         className,

@@ -6,7 +6,6 @@ import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/u
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
-import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -50,15 +49,17 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.EMAIL]: {
     title: 'Email your MP',
-    description: 'Support Innovation and Growth',
+    description:
+      'Make your voice heard on important crypto policy issues by emailing your representatives.',
     mobileCTADescription: 'Support Innovation and Growth',
-    campaignsModalDescription: 'Support Innovation and Growth',
+    campaignsModalDescription:
+      'Make your voice heard on important crypto policy issues by emailing your representatives.',
     image: '/ca/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
         campaignName: CAUserActionEmailCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
-        isCampaignActive: false,
+        isCampaignActive: true,
         title: 'Email your MP',
         description: 'Support Innovation and Growth',
         canBeTriggeredMultipleTimes: true,
@@ -70,7 +71,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.VIEW_KEY_PAGE]: {
-    title: 'Email your Member of Parliament',
+    title: 'Email your member of Parliament',
     description:
       'Make your voice heard on important crypto policy issues by emailing your representatives.',
     campaignsModalDescription:
@@ -84,7 +85,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_Q2_2025_ELECTION,
         isCampaignActive: false,
-        title: 'Email your Member of Parliament',
+        title: 'Email your member of Parliament',
         description: 'Tell your MP to support responsible crypto policy — send an email now!',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: null,
@@ -101,23 +102,16 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.VIEW_KEY_PAGE,
         campaignName: CAUserActionViewKeyPageCampaignName.CA_MOMENTUM_AHEAD_HOUSE_RISING,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your MP',
         description: 'Support Innovation and Growth',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: ({ children }) => (
-          <UserActionViewKeyPageDialog
-            countryCode={countryCode}
-            url={urls.newmodeMomentumAheadHouseRisingAction()}
-          >
-            {children}
-          </UserActionViewKeyPageDialog>
-        ),
+        WrapperComponent: null,
       },
     ],
   },
   [UserActionType.VIEW_KEY_RACES]: {
-    title: 'View Key Races in Canada',
+    title: 'View key races in Canada',
     description:
       'View the key races occurring across Canada that will impact the future of crypto.',
     campaignsModalDescription:
@@ -128,7 +122,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.VIEW_KEY_RACES,
         campaignName: CAUserActionViewKeyRacesCampaignName.H1_2025,
         isCampaignActive: false,
-        title: 'View Key Races in Canada',
+        title: 'View key races in Canada',
         description:
           'Viewed the key races occurring across Canada that would impact the future of crypto in early 2025.',
         canBeTriggeredMultipleTimes: true,
@@ -160,7 +154,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.REFER]: {
-    title: 'Refer a Friend',
+    title: 'Refer a friend',
     description: 'Get your friend to signup for Stand With Crypto and verify their account.',
     mobileCTADescription:
       'Get your friend to signup for Stand With Crypto and verify their account.',
@@ -171,7 +165,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.REFER,
         campaignName: CAUserActionReferCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Refer a Friend',
+        title: 'Refer a friend',
         description: 'You have referred friends to join Stand With Crypto.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
@@ -194,12 +188,97 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
+    link: ({ children }) => (
+      <Link className="w-full" href={urls.polls()}>
+        {children}
+      </Link>
+    ),
     campaigns: [
       {
         actionType: UserActionType.POLL,
-        campaignName: CAUserActionPollCampaignName.CRYPTO_NEWS,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_INTEREST,
         isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_COMP,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_CAREERS,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_GOV1,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_GOV2,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_USECASE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_POLICYPRIO,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_CASTABLE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CA_PRECISION_AUG25_TASKFORCE,
+        isCampaignActive: true,
+        title: 'Take the poll',
+        description: 'Take the poll and see the results.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: null,
+      },
+      {
+        actionType: UserActionType.POLL,
+        campaignName: CAUserActionPollCampaignName.CRYPTO_NEWS,
+        isCampaignActive: false,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
@@ -208,7 +287,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.POLL,
         campaignName: CAUserActionPollCampaignName.DIGITAL_ASSETS,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,
@@ -217,7 +296,7 @@ export const CA_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.POLL,
         campaignName: CAUserActionPollCampaignName.ENCOURAGE,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Take the poll',
         description: 'Take the poll and see the results.',
         canBeTriggeredMultipleTimes: true,

@@ -23,6 +23,10 @@ export const navbarConfig: NavbarProps = {
       text: 'Politician scores',
     },
     {
+      href: urls.events(),
+      text: 'Events',
+    },
+    {
       href: urls.polls(),
       text: 'Polls',
     },
@@ -33,6 +37,11 @@ export const navbarConfig: NavbarProps = {
     {
       text: 'Resources',
       children: [
+        {
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: <Icons.ReferralsIcon />,
+        },
         {
           href: urls.community(),
           text: 'Community',
@@ -63,6 +72,7 @@ export const footerConfig: FooterProps = {
     </div>
   ),
   links: [
+    { href: urls.termsOfService(), text: 'Terms of service' },
     {
       href: urls.privacyPolicy(),
       text: 'Privacy',

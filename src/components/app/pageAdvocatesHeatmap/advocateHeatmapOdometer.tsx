@@ -51,7 +51,9 @@ export function AdvocateHeatmapOdometer({
         size={isMobile ? 46 : 76}
         value={formatted.countUsers.count}
       />
-      <div className="text-end font-sans text-lg text-muted-foreground md:text-xl">Advocates</div>
+      <div className="text-end font-sans text-lg text-muted-foreground md:text-xl">
+        Global Advocates
+      </div>
     </div>
   )
 }

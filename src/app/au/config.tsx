@@ -2,6 +2,7 @@
 
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
+import * as Icons from '@/components/app/navbar/navbarDrawerIcons'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { auExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
@@ -29,6 +30,21 @@ export const navbarConfig: NavbarProps = {
       href: urls.manifesto(),
       text: 'Manifesto',
     },
+    {
+      text: 'Resources',
+      children: [
+        {
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: <Icons.ReferralsIcon />,
+        },
+        {
+          href: urls.community(),
+          text: 'Community',
+          icon: <Icons.CommunityIcon />,
+        },
+      ],
+    },
   ],
 }
 
@@ -49,9 +65,14 @@ export const footerConfig: FooterProps = {
     </div>
   ),
   links: [
+    { href: urls.termsOfService(), text: 'Terms of service' },
     {
       href: urls.privacyPolicy(),
       text: 'Privacy',
+    },
+    {
+      href: urls.privacyCollectionStatement(),
+      text: 'Privacy Collection Statement',
     },
   ],
   socialLinks: [

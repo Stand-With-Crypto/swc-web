@@ -25,8 +25,8 @@ export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTA
       className={cn(
         ctas.length < 3
           ? 'flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'
-          : 'grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:justify-items-center',
-        'gap-[18px]',
+          : 'grid grid-cols-1 lg:grid-cols-3 lg:justify-items-center',
+        'gap-6',
       )}
     >
       {ctas.map(cta => {

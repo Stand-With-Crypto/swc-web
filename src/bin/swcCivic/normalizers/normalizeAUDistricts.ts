@@ -5,7 +5,11 @@ const manuallyNormalizedAustraliaDistrictsOverrides: Record<string, string> = {
   [`O'connor`]: `O'Connor`,
 }
 
-export function normalizeAUDistrictName(name: string) {
+export function normalizeAUDistrictName(name?: string) {
+  if (!name) {
+    return
+  }
+
   if (manuallyNormalizedAustraliaDistrictsOverrides[name]) {
     return manuallyNormalizedAustraliaDistrictsOverrides[name]
   }

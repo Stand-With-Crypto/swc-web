@@ -175,6 +175,7 @@ export const getDTSIClientPersonDataTableColumns = ({
             {row.original.politicalAffiliationCategory
               ? dtsiPersonPoliticalAffiliationCategoryDisplayName(
                   row.original.politicalAffiliationCategory,
+                  countryCode,
                 )
               : '-'}
           </>

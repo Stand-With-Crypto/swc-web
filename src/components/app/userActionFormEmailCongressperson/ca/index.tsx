@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import { actionCreateUserActionEmailCongresspersonIntl } from '@/actions/actionCreateUserActionEmailCongresspersonIntl'
-import { getCAEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
   SectionNames,
@@ -32,7 +31,6 @@ import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 import {
   filterDTSIPeopleByCAPoliticalCategory,
   getCAPoliticianCategoryDisplayName,
-  YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/ca'
 import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -50,20 +48,14 @@ import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/z
 
 const countryCode = SupportedCountryCodes.CA
 
-const DEFAULT_POLITICIAN_CATEGORY = getCAEmailActionCampaignMetadata(
-  CAUserActionEmailCampaignName.DEFAULT,
-).politicianCategory
-
 interface CAUserActionFormEmailCongresspersonProps
   extends UserActionFormEmailCongresspersonPropsBase {
   campaignName: CAUserActionEmailCampaignName
-  politicianCategory?: YourPoliticianCategory
 }
 export function CAUserActionFormEmailCongressperson({
   user,
   initialValues,
   campaignName,
-  politicianCategory = DEFAULT_POLITICIAN_CATEGORY,
   onCancel,
 }: CAUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
@@ -156,7 +148,7 @@ export function CAUserActionFormEmailCongressperson({
   const addressField = form.watch('address')
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
     address: addressField?.description,
-    filterFn: filterDTSIPeopleByCAPoliticalCategory(politicianCategory),
+    filterFn: filterDTSIPeopleByCAPoliticalCategory(campaignMetadata.politicianCategory),
   })
 
   const scriptStatus = useGoogleMapsScript()
@@ -199,7 +191,9 @@ export function CAUserActionFormEmailCongressperson({
             />
             <EmailCongressperson.PersonalInformationFields />
             <EmailCongressperson.Representatives
-              categoryDisplayName={getCAPoliticianCategoryDisplayName(politicianCategory)}
+              categoryDisplayName={getCAPoliticianCategoryDisplayName(
+                campaignMetadata.politicianCategory,
+              )}
               countryCode={countryCode}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />

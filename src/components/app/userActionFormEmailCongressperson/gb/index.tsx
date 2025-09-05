@@ -19,7 +19,6 @@ import {
   UserActionFormEmailCongresspersonPropsBase,
 } from '@/components/app/userActionFormEmailCongressperson/common/types'
 import { useEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/common/useEmailActionCampaignMetadata'
-import { getGBEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/gb/campaigns'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections } from '@/hooks/useSections'
@@ -29,7 +28,6 @@ import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaign
 import {
   filterDTSIPeopleByGBPoliticalCategory,
   getGBPoliticianCategoryDisplayName,
-  YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/gb'
 import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -43,20 +41,14 @@ import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/z
 
 const countryCode = SupportedCountryCodes.GB
 
-const DEFAULT_POLITICIAN_CATEGORY = getGBEmailActionCampaignMetadata(
-  GBUserActionEmailCampaignName.DEFAULT,
-).politicianCategory
-
 interface GBUserActionFormEmailCongresspersonProps
   extends UserActionFormEmailCongresspersonPropsBase {
   campaignName: GBUserActionEmailCampaignName
-  politicianCategory?: YourPoliticianCategory
 }
 export function GBUserActionFormEmailCongressperson({
   user,
   initialValues,
   campaignName,
-  politicianCategory = DEFAULT_POLITICIAN_CATEGORY,
   onCancel,
 }: GBUserActionFormEmailCongresspersonProps) {
   const router = useRouter()
@@ -149,7 +141,7 @@ export function GBUserActionFormEmailCongressperson({
   const addressField = form.watch('address')
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
     address: addressField?.description,
-    filterFn: filterDTSIPeopleByGBPoliticalCategory(politicianCategory),
+    filterFn: filterDTSIPeopleByGBPoliticalCategory(campaignMetadata.politicianCategory),
   })
 
   switch (sectionProps.currentSection) {
@@ -163,7 +155,9 @@ export function GBUserActionFormEmailCongressperson({
             />
             <EmailCongressperson.PersonalInformationFields />
             <EmailCongressperson.Representatives
-              categoryDisplayName={getGBPoliticianCategoryDisplayName(politicianCategory)}
+              categoryDisplayName={getGBPoliticianCategoryDisplayName(
+                campaignMetadata.politicianCategory,
+              )}
               countryCode={countryCode}
               dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
             />

@@ -15,5 +15,6 @@ export const SECONDS_DURATION = {
   MINUTE: 60,
   '2_MINUTES': 120,
   '30_SECONDS': 30,
+  '10_SECONDS': 10,
   SECOND: 1,
 }

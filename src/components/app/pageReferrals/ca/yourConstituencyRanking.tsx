@@ -1,0 +1,32 @@
+'use client'
+
+import {
+  YourLocationRank,
+  YourLocationRanking,
+  YourLocationRankingConfig,
+  YourLocationRankSuspense,
+} from '@/components/app/pageReferrals/common/yourLocationRanking'
+import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const config: YourLocationRankingConfig = {
+  countryCode: SupportedCountryCodes.CA,
+  placeholder: 'Enter your address',
+  title: 'Your constituency',
+  notFoundMessage: 'Constituency not found, please try a different address.',
+  notFromCountryMessage: `Looks like your address is not from Canada, so it can't be used to filter`,
+  formatLabel: (stateName: string, zoneName: string) => `${stateName} - ${zoneName}`,
+  getStateName: getCAProvinceOrTerritoryNameFromCode,
+}
+
+export function CaYourConstituencyRankingWrapper({ children }: { children: React.ReactNode }) {
+  return <YourLocationRanking value={config}>{children}</YourLocationRanking>
+}
+
+export function CaYourConstituencyRank() {
+  return <YourLocationRank />
+}
+
+export function CaYourConstituencyRankSuspense({ children }: { children: React.ReactNode }) {
+  return <YourLocationRankSuspense>{children}</YourLocationRankSuspense>
+}

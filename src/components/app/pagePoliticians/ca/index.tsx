@@ -5,9 +5,11 @@ import { PagePoliticiansLayout } from '@/components/app/pagePoliticians/common/l
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/ca'
 
 export const PAGE_POLITICIANS_TITLE = 'Find out where politicians stand on crypto'
 export const PAGE_POLITICIANS_DESCRIPTION = `Crypto drives Canada innovation. Find out how political leaders have addressed crypto issues.`
+const POLITICIAN_CATEGORY: YourPoliticianCategory = 'house-of-commons'
 
 const countryCode = SupportedCountryCodes.CA
 
@@ -17,7 +19,10 @@ export function CaPagePoliticians({ politicians }: { politicians: DTSIPersonData
       <PagePoliticiansLayout.IntroductionSection>
         <PageTitle>{PAGE_POLITICIANS_TITLE}</PageTitle>
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
-        <ClientCurrentUserDTSIPersonCardOrCTA countryCode={countryCode} />
+        <ClientCurrentUserDTSIPersonCardOrCTA
+          category={POLITICIAN_CATEGORY}
+          countryCode={countryCode}
+        />
       </PagePoliticiansLayout.IntroductionSection>
       <PagePoliticiansLayout.PoliticiansTableSection>
         <CaDTSIClientPersonDataTable initialData={politicians} />

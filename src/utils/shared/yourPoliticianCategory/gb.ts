@@ -37,20 +37,14 @@ export function getYourPoliticianCategoryShortDisplayName(
 }
 
 export function filterDTSIPeopleByGBPoliticalCategory(category: YourPoliticianCategory) {
-  return (
-    dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
-  ): DTSIPeopleByElectoralZoneQueryResult => {
+  return (dtsiPerson: DTSIPeopleByElectoralZoneQueryResult[number]): boolean => {
     switch (category) {
       case 'mp':
-        return dtsiPeople.filter(
-          person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.HOUSE_OF_COMMONS,
-        )
+        return dtsiPerson.primaryRole?.roleCategory === DTSI_PersonRoleCategory.HOUSE_OF_COMMONS
       case 'lord':
-        return dtsiPeople.filter(
-          person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.HOUSE_OF_LORDS,
-        )
+        return dtsiPerson.primaryRole?.roleCategory === DTSI_PersonRoleCategory.HOUSE_OF_LORDS
       default:
-        return dtsiPeople
+        return true
     }
   }
 }

@@ -1,8 +1,6 @@
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
 import { validatePageNum } from '@/components/app/pageCommunity/common/pageValidator'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
@@ -10,15 +8,15 @@ import {
   PageLeaderboardInferredProps,
   UsPageCommunity,
 } from '@/components/app/pageCommunity/us'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
-import {
-  getDistrictsLeaderboardData,
-  getDistrictsLeaderboardDataByState,
-} from '@/utils/server/districtRankings/upsertRankings'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 60 // 1 minute
+export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -32,13 +30,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+  return generatePaginationStaticParams(totalPregeneratedPages)
 }
 
 export default async function CommunityReferralsPage(props: Props) {
   const params = await props.params
-  const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+  const { itemsPerPage } =
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
   const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
@@ -47,34 +46,19 @@ export default async function CommunityReferralsPage(props: Props) {
 
   const offset = (pageNum - 1) * itemsPerPage
 
-  const searchParams = await props.searchParams
-  const state = searchParams?.state as string | undefined
-
   const commonParams = {
     limit: itemsPerPage,
     offset,
   }
 
-  const { items: leaderboardData, total } = state
-    ? await getDistrictsLeaderboardDataByState(state.toUpperCase(), commonParams)
-    : await getDistrictsLeaderboardData(commonParams)
+  const { items: leaderboardData } = await getDistrictsLeaderboardData(commonParams)
 
   const dataProps: PageLeaderboardInferredProps = {
     leaderboardData,
     publicRecentActivity: undefined,
     sumDonationsByUser: undefined,
-    tab: RecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
+    tab: UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS,
   }
 
-  const totalPages = state ? Math.ceil(total / itemsPerPage) : undefined
-
-  return (
-    <UsPageCommunity
-      {...dataProps}
-      offset={offset}
-      pageNum={pageNum}
-      stateCode={state}
-      totalPages={totalPages}
-    />
-  )
+  return <UsPageCommunity {...dataProps} offset={offset} pageNum={pageNum} totalPages={undefined} />
 }

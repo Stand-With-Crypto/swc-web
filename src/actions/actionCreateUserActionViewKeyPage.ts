@@ -26,7 +26,7 @@ const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
 const createActionViewKeyPageInputValidationSchema = object({
   campaignName: string(),
   countryCode: zodSupportedCountryCode,
-  path: string(),
+  path: string().transform(path => path.trim().slice(0, 100)),
 })
 
 export type CreateActionViewKeyPageInput = z.infer<

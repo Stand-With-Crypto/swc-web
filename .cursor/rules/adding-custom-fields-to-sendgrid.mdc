@@ -1,0 +1,67 @@
+---
+description: "Adding new custom fields to Sendgrid"
+globs:
+alwaysApply: false
+---
+
+# Adding new custom fields to Sendgrid
+
+This guide outlines the process for adding new custom fields to Sendgrid from within this codebase. The process involves defining the field name and type in the code, after which a cron job will automatically create the field in Sendgrid.
+
+## 1. Define the Custom Field Name
+
+All Sendgrid custom field names must be defined in the `SENDGRID_CUSTOM_FIELDS` array, located in [`@/utils/server/sendgrid/marketing/constants.ts`](mdc:src/utils/server/sendgrid/marketing/constants.ts).
+
+To add a new field, simply add a new string literal to this array.
+
+Example:
+```typescript
+export const SENDGRID_CUSTOM_FIELDS = [
+  'signup_date',
+  'user_actions_count',
+  'session_id',
+  'aquisition_source',
+  'aquisition_medium',
+  'aquisition_campaign',
+  'aquisition_referer',
+  'my_new_custom_field', // Add your new field here
+  ...Object.values(UserActionType).map(getSendgridUserActionCustomFieldName),
+] as const
+```
+
+Note: Fields for User Actions are automatically added to the `SENDGRID_CUSTOM_FIELDS` array by the `getSendgridUserActionCustomFieldName` function, located in [`@/utils/server/sendgrid/marketing/constants.ts`](mdc:src/utils/server/sendgrid/marketing/constants.ts).
+
+## 2. Define the Custom Field Type
+
+Next, you must specify the type for your new custom field. This is done in the `fieldTypes` object within the `checkCustomFields` function, located in the file [`@/inngest/functions/sendgridContactsCronJob/checkCustomFields.ts`](mdc:src/inngest/functions/sendgridContactsCronJob/checkCustomFields.ts).
+
+The supported field types are `Text`, `Number`, and `Date`.
+
+You will need to add a new entry to the `fieldTypes` object, where the key is your new custom field name and the value is its type.
+
+Example:
+```typescript
+const fieldTypes: Record<SendgridCustomField, FieldType> = {
+  signup_date: 'Date',
+  user_actions_count: 'Number',
+  session_id: 'Text',
+  my_new_custom_field: 'Text', // Add your new field and its type here
+  // ... other fields
+}
+```
+
+Note: Typescript will not allow typos or incorrect field names to be used in the `fieldTypes` object.
+
+## 3. Automatic Creation in Sendgrid
+
+Once you have defined the field name and type, a cron job (`sendgridContactsCronJob`) will automatically create the custom field in Sendgrid for you. The `checkCustomFields` function handles this process by:
+
+1.  Fetching all existing field definitions from Sendgrid.
+2.  Comparing them against the fields defined in `SENDGRID_CUSTOM_FIELDS`.
+3.  Creating any fields that are defined in the code but do not yet exist in Sendgrid.
+
+There is no need to manually create the fields in the Sendgrid UI.
+
+## 4. Using the Custom Field
+
+The `formatContactCustomFields` function in [`@/utils/server/sendgrid/marketing/formatContact.ts`](mdc:src/utils/server/sendgrid/marketing/formatContact.ts) will automatically map your field to the correct Sendgrid ID.

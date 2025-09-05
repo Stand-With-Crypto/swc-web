@@ -13,9 +13,9 @@ import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
-import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
+import { formatGetDTSIPeopleFromAddressNotFoundReason } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useGetElectoralZoneFromAddress } from '@/hooks/useGetElectoralZoneFromAddress'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
-import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import {
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
   USStateCode,
@@ -62,19 +62,23 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
 
 function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDistrictFromAddress(address === 'loading' ? null : address?.description, {
-    stateCode,
+
+  const isAddressLoading = address === 'loading'
+
+  const res = useGetElectoralZoneFromAddress({
+    address: isAddressLoading ? null : address?.description,
+    placeId: isAddressLoading ? null : address?.place_id,
   })
   const shouldShowSubtitle = !address || !res.data
 
-  if (!address || address === 'loading' || !res.data) {
+  if (!address || isAddressLoading || !res.data) {
     return (
       <ContentContainer shouldShowSubtitle={shouldShowSubtitle} stateName={stateName}>
         <DefaultPlacesSelect
-          loading={address === 'loading' || res.isLoading}
+          loading={isAddressLoading || res.isLoading}
           onChange={setAddress}
           stateCode={stateCode}
-          value={address === 'loading' ? null : address}
+          value={isAddressLoading ? null : address}
         />
       </ContentContainer>
     )
@@ -83,7 +87,7 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
     return (
       <ContentContainer shouldShowSubtitle={shouldShowSubtitle} stateName={stateName}>
         <div className="container text-center text-fontcolor-muted">
-          {formatGetCongressionalDistrictFromAddressNotFoundReason(res.data)}{' '}
+          {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
           <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
             Enter new address.
           </button>
@@ -91,9 +95,17 @@ function SuspenseUserLocationRaceInfo({ groups, stateCode, stateName }: UserLoca
       </ContentContainer>
     )
   }
-  const { districtNumber } = res.data
+  const { zoneName } = res.data
+  const districtNumber = parseInt(zoneName, 10)
 
   const group = groups.congresspeople[districtNumber]
+  if (!group) {
+    return (
+      <ContentContainer shouldShowSubtitle={false} stateName={stateName}>
+        <div className="container text-center text-fontcolor-muted">District not found</div>
+      </ContentContainer>
+    )
+  }
   const { recommended, others } = findRecommendedCandidate(group.people)
   const urls = getIntlUrls(countryCode)
 
@@ -154,7 +166,7 @@ function ContentContainer({
       subtitle={
         shouldShowSubtitle ? (
           <>
-            Do you live in {stateName}? Enter your address and we’ll redirect you to races in your
+            Do you live in {stateName}? Enter your address and we'll redirect you to races in your
             district.
           </>
         ) : null

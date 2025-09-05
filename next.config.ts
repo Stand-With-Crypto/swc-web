@@ -1,6 +1,7 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
+import { RetryChunkLoadPlugin } from 'webpack-retry-chunk-load-plugin'
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -36,6 +37,7 @@ const contentSecurityPolicy = {
         */
         "'unsafe-inline'",
     isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
+    'https://snap.licdn.com/li.lms-analytics/insight.min.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
@@ -257,6 +259,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.plugins.push(
+        new RetryChunkLoadPlugin({
+          maxRetries: 3,
+          retryDelay: 1000,
+        }),
+      )
+    }
+    return config
+  },
   async headers() {
     return [
       {
@@ -278,6 +291,16 @@ const nextConfig: NextConfig = {
         permanent: true,
         destination: '/action/pledge',
         source: '/pledge',
+      },
+      {
+        source: '/cryptodayofaction',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/crypto-day-of-action',
+        destination: '/',
+        permanent: true,
       },
       {
         permanent: false,
@@ -317,16 +340,6 @@ const nextConfig: NextConfig = {
       {
         source: '/uk/:path*',
         destination: '/gb/:path*',
-        permanent: false,
-      },
-      {
-        source: '/gb/politicians',
-        destination: '/gb',
-        permanent: false,
-      },
-      {
-        source: '/gb/politicians/person/:slug',
-        destination: '/gb',
         permanent: false,
       },
       {
@@ -451,6 +464,18 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/day-of-action-1/:sessionId*',
+        destination:
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-day-of-action-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/day-of-action-2/:sessionId*',
+        destination:
+          '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-day-of-action-2&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/ca/s/house-rising',
         destination:
           '/ca/content/houserising?utm_source=swc&utm_medium=sms&utm_campaign=house-rising-1',
@@ -460,6 +485,18 @@ const nextConfig: NextConfig = {
         source: '/s/founders-push/:sessionId*',
         destination:
           '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=founders-push-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/clarity-genius/:sessionId*',
+        destination:
+          '/action/email/clarity_genius_acts_jul_17_2025?utm_source=swc&utm_medium=sms&utm_campaign=sms-clarity-genius-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
+        source: '/s/clarity/:sessionId*',
+        destination:
+          '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=clarity-1&sessionId=:sessionId*',
         permanent: true,
       },
       {
@@ -518,6 +555,18 @@ const nextConfig: NextConfig = {
         source: '/c/clarity-house',
         destination:
           '/action/email/clarity_act_house_jun_13_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-clarity-house',
+        permanent: false,
+      },
+      {
+        source: '/mp-welcome',
+        destination:
+          '/action/email/welcome_mp_back_to_parliament_2025?utm_source=swc&utm_medium=marketing&utm_campaign=2025-au-mp-welcome',
+        permanent: false,
+      },
+      {
+        source: '/action/email/welcome_mp_back_to_parliament_2025',
+        destination:
+          '/au/action/email/welcome_mp_back_to_parliament_2025?utm_source=coinbase&utm_medium=partner&utm_campaign=au-mp-welcome-jul-2025',
         permanent: false,
       },
       // The usage of the next redirect is documented in the SWC Voter Turnout Plan document
@@ -794,6 +843,14 @@ const nextConfig: NextConfig = {
         // These rewrites are checked after headers/redirects
         // and before all files including _next/public files which
         // allows overriding page files
+        {
+          source: '/embedded/map',
+          destination: '/embedded/us/map',
+        },
+        {
+          source: '/embedded/uk/map',
+          destination: '/embedded/gb/map',
+        },
         {
           source: '/:locale/(mission|manifesto)',
           destination: '/:locale/about',

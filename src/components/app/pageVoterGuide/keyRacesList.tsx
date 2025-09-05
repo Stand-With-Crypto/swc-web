@@ -26,7 +26,8 @@ export function KeyRacesList(props: KeyRacesListProps) {
 
   const countryCode = useCountryCode()
 
-  const { congressional, presidential, senate, stateCode, districtNumber } = races || {}
+  const { congressional, presidential, senate, administrativeArea, zoneName } = races || {}
+  const electoralZone = zoneName
 
   const dtsiPersonHeroCardSectionProps: Pick<
     DTSIPersonHeroCardSectionProps,
@@ -72,7 +73,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
                   {...dtsiPersonHeroCardSectionProps}
                   countryCode={countryCode}
                   people={senate}
-                  title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
+                  title={`U.S. Senate Race${administrativeArea ? ` (${administrativeArea})` : ''}`}
                 />
               </RaceSectionWrapper>
             </>
@@ -87,7 +88,7 @@ export function KeyRacesList(props: KeyRacesListProps) {
                   {...dtsiPersonHeroCardSectionProps}
                   countryCode={countryCode}
                   people={congressional}
-                  title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
+                  title={`Congressional District${electoralZone ? ` ${electoralZone}` : ''}`}
                 />
               </RaceSectionWrapper>
             </>

@@ -45,6 +45,7 @@ export const getZodVerifiedSWCPartnersUserActionOptInSchema = (
 
 type Input = z.infer<ReturnType<typeof getZodVerifiedSWCPartnersUserActionOptInSchema>> & {
   partner: VerifiedSWCPartner
+  hasValidPhoneNumber: boolean
 }
 
 export async function verifiedSWCPartnersUserActionOptIn(
@@ -64,5 +65,6 @@ export async function verifiedSWCPartnersUserActionOptIn(
     hasOptedInToMembership: input.hasOptedInToMembership,
     partner: input.partner,
     countryCode: input.countryCode,
+    hasValidPhoneNumber: input.hasValidPhoneNumber,
   })
 }

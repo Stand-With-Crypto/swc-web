@@ -15,13 +15,11 @@ import {
 } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
-import { InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { generateThirdwebLoginPayload } from '@/utils/server/thirdweb/getThirdwebLoginPayload'
 import { isLoggedIn } from '@/utils/server/thirdweb/isLoggedIn'
 import { login } from '@/utils/server/thirdweb/onLogin'
@@ -52,13 +50,17 @@ export function ThirdwebLoginContent({
   onLoginCallback,
   ...props
 }: ThirdwebLoginContentProps) {
-  const urls = useIntlUrls()
   const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const swrConfig = useSWRConfig()
   const countryCode = useCountryCode()
 
-  const { title, subtitle, footerContent, iconSrc } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
+  const {
+    title,
+    subtitle,
+    footerContent: FooterContent,
+    iconSrc,
+  } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
 
   const handleLogin = useCallback(async () => {
     if (onLoginCallback) {
@@ -121,16 +123,8 @@ export function ThirdwebLoginContent({
           </div>
         </div>
 
-        <DialogFooterCTA className="mt-auto px-6 pb-2">
-          <p className="text-center text-xs text-muted-foreground">
-            <span className="text-[10px]">
-              {footerContent} To learn more, visit the{' '}
-              <InternalLink href={urls.privacyPolicy()} target="_blank">
-                Stand With Crypto Privacy Policy
-              </InternalLink>
-              .
-            </span>
-          </p>
+        <DialogFooterCTA className="mt-auto px-6 pb-2 text-center">
+          <FooterContent />
         </DialogFooterCTA>
       </DialogBody>
     </ErrorBoundary>

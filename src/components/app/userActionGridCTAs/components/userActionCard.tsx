@@ -37,7 +37,7 @@ export const UserActionCard = forwardRef<
         return completedCampaigns === 1 ? 'Complete' : 'Not complete'
       }
 
-      return `${completedCampaigns}/${campaignsLength} complete`
+      return `${completedCampaigns}/${campaignsLength} Complete`
     }
 
     const isPrepareToVoteAction = campaigns.some(
@@ -47,7 +47,7 @@ export const UserActionCard = forwardRef<
     return (
       <button
         className={cn(
-          'grid h-full w-full cursor-pointer rounded-3xl transition-shadow hover:shadow-lg max-lg:grid-cols-[1fr_128px] lg:max-w-96 lg:grid-rows-[200px_1fr]',
+          'grid h-full w-full cursor-pointer rounded-3xl shadow-md transition-shadow hover:shadow-xl max-lg:grid-cols-[1fr_128px] lg:max-w-96 lg:grid-rows-[200px_1fr]',
           isReadOnly && 'pointer-events-none cursor-default',
         )}
         ref={ref}
@@ -69,17 +69,20 @@ export const UserActionCard = forwardRef<
             width={80}
           />
         </div>
+        <div className="flex h-auto w-full flex-col items-start justify-between rounded-bl-3xl rounded-tl-3xl border-t border-muted lg:h-full lg:rounded-br-3xl lg:rounded-tl-none lg:border-none">
+          <div className="flex flex-col gap-1 p-4 lg:gap-4 lg:p-6">
+            <strong className="text-left font-sans text-sm font-bold lg:text-2xl lg:leading-none lg:-tracking-[0.24px]">
+              {title}
+            </strong>
+            <p className="hidden text-left text-sm text-muted-foreground lg:block lg:text-base">
+              {description}
+            </p>
+            <p className="text-left text-sm text-muted-foreground lg:hidden lg:text-base">
+              {mobileCTADescription ?? description}
+            </p>
+          </div>
 
-        <div className="flex h-auto w-full flex-col items-start justify-between gap-3 rounded-bl-3xl rounded-tl-3xl bg-muted px-4 py-4 lg:h-full lg:rounded-br-3xl lg:rounded-tl-none lg:p-6">
-          <strong className="text-left font-sans text-sm font-bold lg:text-xl">{title}</strong>
-          <p className="hidden text-left text-sm text-muted-foreground lg:block lg:text-base">
-            {description}
-          </p>
-          <p className="text-left text-sm text-muted-foreground lg:hidden lg:text-base">
-            {mobileCTADescription ?? description}
-          </p>
-
-          <div className="mt-auto flex w-full items-center gap-2 pt-5">
+          <div className="mt-auto flex w-full items-center gap-2 border-t-0 p-4 lg:gap-4 lg:border-t-[1px] lg:border-t-muted lg:p-6">
             <CampaignsCheckmarks
               campaignsLength={campaignsLength}
               completedCampaigns={completedCampaigns}

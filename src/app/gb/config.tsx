@@ -19,8 +19,16 @@ export const navbarConfig: NavbarProps = {
   },
   items: [
     {
+      href: urls.politiciansHomepage(),
+      text: 'Politician scores',
+    },
+    {
       href: urls.press(),
       text: 'Press',
+    },
+    {
+      href: urls.events(),
+      text: 'Events',
     },
     {
       href: urls.polls(),
@@ -33,6 +41,11 @@ export const navbarConfig: NavbarProps = {
           href: urls.manifesto(),
           text: 'Manifesto',
           icon: <Icons.MissionIcon />,
+        },
+        {
+          href: urls.referrals(),
+          text: 'Referrals',
+          icon: <Icons.ReferralsIcon />,
         },
         {
           href: urls.community(),
@@ -65,6 +78,7 @@ export const footerConfig: FooterProps = {
     </div>
   ),
   links: [
+    { href: urls.termsOfService(), text: 'Terms of service' },
     {
       href: urls.privacyPolicy(),
       text: 'Privacy',

@@ -110,7 +110,7 @@ export function KeyRacesForm({
     }
     const payload: CreateActionViewKeyRacesInput = {
       address: addressSchema,
-      usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
+      electoralZone: addressSchema?.electoralZone,
       usaState: addressSchema?.administrativeAreaLevel1,
       campaignName: getActionDefaultCampaignName(UserActionType.VIEW_KEY_RACES, countryCode),
       shouldBypassAuth: true,

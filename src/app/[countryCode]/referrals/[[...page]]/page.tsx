@@ -1,24 +1,22 @@
-import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/common/constants'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
-import { PageReferrals } from '@/components/app/pageReferrals'
+import { US_COMMUNITY_PAGINATION_DATA } from '@/components/app/pageCommunity/us/constants'
+import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
+import { UsPageReferrals } from '@/components/app/pageReferrals/us'
 import { PageProps } from '@/types'
-import {
-  getDistrictsLeaderboardData,
-  getDistrictsLeaderboardDataByState,
-} from '@/utils/server/districtRankings/upsertRankings'
+import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
+import { generatePaginationStaticParams } from '@/utils/server/generatePaginationStaticParams'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const revalidate = 60 // 1 minute
+export const dynamic = 'error'
 export const dynamicParams = true
 
 const TOTAL_PREGENERATED_PAGES =
-  COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS].totalPages
+  US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS].totalPages
 
 type Props = PageProps<{ page: string[] }>
 
@@ -42,13 +40,14 @@ const validatePageNum = ([pageParam]: (string | undefined)[]) => {
 }
 
 export async function generateStaticParams() {
-  return flatten(times(TOTAL_PREGENERATED_PAGES).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return generatePaginationStaticParams(TOTAL_PREGENERATED_PAGES)
 }
 
 export default async function ReferralsPage(props: Props) {
   const params = await props.params
-  const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
-  const { countryCode, page } = params
+  const { itemsPerPage } =
+    US_COMMUNITY_PAGINATION_DATA[UsRecentActivityAndLeaderboardTabs.TOP_DISTRICTS]
+  const { page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
@@ -56,27 +55,13 @@ export default async function ReferralsPage(props: Props) {
 
   const offset = (pageNum - 1) * itemsPerPage
 
-  const searchParams = await props.searchParams
-  const state = searchParams?.state as string | undefined
-
   const commonParams = {
     limit: itemsPerPage,
     offset,
+    countryCode: SupportedCountryCodes.US,
   }
 
-  const { items: leaderboardData, total } = state
-    ? await getDistrictsLeaderboardDataByState(state.toUpperCase(), commonParams)
-    : await getDistrictsLeaderboardData(commonParams)
+  const { items: leaderboardData } = await getDistrictsLeaderboardData(commonParams)
 
-  const totalPages = state ? Math.ceil(total / itemsPerPage) : undefined
-
-  return (
-    <PageReferrals
-      countryCode={countryCode as SupportedCountryCodes}
-      leaderboardData={leaderboardData}
-      page={pageNum}
-      stateCode={state}
-      totalPages={totalPages}
-    />
-  )
+  return <UsPageReferrals leaderboardData={leaderboardData} page={pageNum} />
 }

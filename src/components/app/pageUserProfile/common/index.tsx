@@ -7,7 +7,10 @@ import dynamic from 'next/dynamic'
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC } from '@/components/app/authentication/constants'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
+import { CommunicationsPreferenceForm } from '@/components/app/pageUserProfile/common/communicationsPreferenceForm'
+import { EmailSubscriptionForm } from '@/components/app/pageUserProfile/common/emailSubscriptionForm'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
+import { SMSSubscriptionForm } from '@/components/app/pageUserProfile/common/smsSubscriptionForm'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { Refer } from '@/components/app/userActionFormRefer/common/sections/refer'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
@@ -23,7 +26,6 @@ import { Progress } from '@/components/ui/progress'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
-import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSession } from '@/hooks/useSession'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
@@ -52,9 +54,6 @@ export function PageUserProfile({
   hideUserMetrics = false,
   countryCode,
 }: PageUserProfileProps) {
-  const isMobile = useIsMobile({
-    defaultState: true,
-  })
   const session = useSession()
 
   const successDialogProps = useDialog({
@@ -62,7 +61,6 @@ export function PageUserProfile({
   })
 
   const { data } = useApiResponseForUserFullProfileInfo()
-
   const { userActions: userActionsFromLoadedUserInServerSide } = user
 
   const userActions = filterUserActionsByCountry(
@@ -122,11 +120,9 @@ export function PageUserProfile({
             </div>
           </div>
 
-          {!isMobile && (
-            <div className="flex items-center gap-4">
-              <EditProfileButton onSuccess={onEditProfileSuccess} user={user} />
-            </div>
-          )}
+          <div className="hidden items-center gap-4 md:flex">
+            <EditProfileButton onSuccess={onEditProfileSuccess} user={user} />
+          </div>
         </div>
 
         {!hideUserMetrics && (
@@ -189,11 +185,11 @@ export function PageUserProfile({
           </div>
         )}
       </section>
-      {isMobile && (
-        <div className="flex items-center gap-4">
-          <EditProfileButton onSuccess={onEditProfileSuccess} user={user} />
-        </div>
-      )}
+
+      <div className="flex items-center gap-4 md:hidden">
+        <EditProfileButton onSuccess={onEditProfileSuccess} user={user} />
+      </div>
+
       <section>
         <PageTitle className="mb-4" size="md">
           Your advocacy progress
@@ -208,6 +204,7 @@ export function PageUserProfile({
 
         <UserActionGridCTAs />
       </section>
+
       <section>
         <a className="mt-[-72px] h-0 pt-[72px]" id="nfts" />
         <PageTitle className="mb-4" size="md">
@@ -220,6 +217,7 @@ export function PageUserProfile({
           <NFTDisplay userActions={userActions} />
         </div>
       </section>
+
       <section>
         <Refer>
           <PageTitle size="md">Invite a friend to join Stand With Crypto</PageTitle>
@@ -228,6 +226,19 @@ export function PageUserProfile({
           </PageSubTitle>
           <Refer.ReferralCode />
         </Refer>
+      </section>
+
+      <section>
+        <PageTitle className="mb-4" size="md">
+          Communication Preferences
+        </PageTitle>
+        <PageSubTitle className="mb-5">
+          Choose how you'd like to stay informed about our campaigns and important news.
+        </PageSubTitle>
+        <CommunicationsPreferenceForm>
+          <EmailSubscriptionForm user={user} />
+          <SMSSubscriptionForm countryCode={countryCode} user={user} />
+        </CommunicationsPreferenceForm>
       </section>
     </div>
   )

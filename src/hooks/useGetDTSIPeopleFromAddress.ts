@@ -3,7 +3,10 @@ import useSWR from 'swr'
 import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getElectoralZoneFromAddress } from '@/utils/shared/getElectoralZoneFromAddress'
+import {
+  ElectoralZoneNotFoundReason,
+  getElectoralZoneFromAddressOrPlaceId,
+} from '@/utils/shared/getElectoralZoneFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
@@ -13,19 +16,27 @@ export type UseGetDTSIPeopleFromPlaceIdResponse = Awaited<
 >
 
 export type DTSIPeopleFromAddressFilter = (
-  dtsiPeople: DTSIPeopleByElectoralZoneQueryResult,
-) => DTSIPeopleByElectoralZoneQueryResult
+  dtsiPerson: DTSIPeopleByElectoralZoneQueryResult[number],
+) => boolean
+
+enum DTSIPeopleFromAddressNotFoundReason {
+  INVALID_COUNTRY_CODE = 'INVALID_COUNTRY_CODE',
+  MISSING_FROM_DTSI = 'MISSING_FROM_DTSI',
+  UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
+}
 
 export async function getDTSIPeopleFromAddress({
   address,
   filterFn,
   countryCode,
+  placeId,
 }: {
   address: string
+  placeId?: string
   filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
 }) {
-  const electoralZone = await getElectoralZoneFromAddress(address)
+  const electoralZone = await getElectoralZoneFromAddressOrPlaceId({ address, placeId })
 
   if ('notFoundReason' in electoralZone) {
     return electoralZone
@@ -33,14 +44,14 @@ export async function getDTSIPeopleFromAddress({
 
   if (countryCode !== electoralZone.countryCode) {
     return {
-      notFoundReason: 'INVALID_COUNTRY_CODE' as const,
+      notFoundReason: DTSIPeopleFromAddressNotFoundReason.INVALID_COUNTRY_CODE,
     }
   }
 
   const data = await fetchReq(
     apiUrls.dtsiPeopleByElectoralZone({
       electoralZone: electoralZone.zoneName,
-      stateCode: electoralZone.stateCode,
+      stateCode: electoralZone.administrativeArea,
       countryCode,
     }),
   )
@@ -48,14 +59,19 @@ export async function getDTSIPeopleFromAddress({
     .then(data => data as DTSIPeopleByElectoralZoneQueryResult)
     .catch(e => {
       catchUnexpectedServerErrorAndTriggerToast(e)
-      return { notFoundReason: 'UNEXPECTED_ERROR' as const }
+      return { notFoundReason: DTSIPeopleFromAddressNotFoundReason.UNEXPECTED_ERROR }
     })
+
+  if ('notFoundReason' in data) {
+    return data
+  }
+
   const dtsiPeople = data as DTSIPeopleByElectoralZoneQueryResult
 
-  const filteredData = filterFn(dtsiPeople)
+  const filteredData = dtsiPeople.filter(filterFn)
 
   if (!filteredData.length) {
-    return { notFoundReason: 'MISSING_FROM_DTSI' as const }
+    return { notFoundReason: DTSIPeopleFromAddressNotFoundReason.MISSING_FROM_DTSI }
   }
 
   return { ...electoralZone, dtsiPeople: filteredData }
@@ -64,23 +80,29 @@ export async function getDTSIPeopleFromAddress({
 export function useGetDTSIPeopleFromAddress({
   address,
   filterFn,
+  placeId,
 }: {
   address?: string | null
+  placeId?: string | null
   filterFn: DTSIPeopleFromAddressFilter
 }) {
   const countryCode = useCountryCode()
 
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, async () => {
-    if (!address) {
-      return
-    }
+  return useSWR(
+    address || placeId ? `useGetDTSIPeopleFromAddress-${address || placeId || ''}` : null,
+    async () => {
+      if (!address && !placeId) {
+        return
+      }
 
-    return getDTSIPeopleFromAddress({
-      address,
-      countryCode,
-      filterFn,
-    })
-  })
+      return getDTSIPeopleFromAddress({
+        address: address || '',
+        placeId: placeId || '',
+        countryCode,
+        filterFn,
+      })
+    },
+  )
 }
 
 export function formatGetDTSIPeopleFromAddressNotFoundReason(
@@ -92,11 +114,11 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
   }
 
   switch (data.notFoundReason) {
-    case 'INVALID_COUNTRY_CODE':
+    case DTSIPeopleFromAddressNotFoundReason.INVALID_COUNTRY_CODE:
       return 'Please enter an address from your selected country'
-    case 'ELECTORAL_ZONE_NOT_FOUND':
-    case 'MISSING_FROM_DTSI':
-    case 'UNEXPECTED_ERROR':
+    case ElectoralZoneNotFoundReason.ELECTORAL_ZONE_NOT_FOUND:
+    case DTSIPeopleFromAddressNotFoundReason.MISSING_FROM_DTSI:
+    case DTSIPeopleFromAddressNotFoundReason.UNEXPECTED_ERROR:
     default:
       return defaultError
   }

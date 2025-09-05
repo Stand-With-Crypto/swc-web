@@ -8,7 +8,6 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
-import { chunk as lodashChunk } from 'lodash-es'
 import pRetry from 'p-retry'
 
 import { inngest } from '@/inngest/inngest'
@@ -16,21 +15,20 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
+import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { generateUserSessionId } from '@/utils/shared/userSessionId'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 import type { UserData } from './index'
 
-export const PROCESS_BATCH_EVENT_NAME = 'script/backfill-intl-users.process-batch'
-export const PROCESS_BATCH_FUNCTION_ID = 'script.backfill-intl-users.process-batch'
-const TRANSACTION_CONNECTION_LIMIT = 50
+export const BACKFILL_INTL_USERS_PROCESSOR_EVENT_NAME = 'script/backfill-intl-users.processor'
+export const BACKFILL_INTL_USERS_PROCESSOR_FUNCTION_ID = 'script.backfill-intl-users.processor'
 
-export interface ProcessBatchSchema {
-  name: typeof PROCESS_BATCH_EVENT_NAME
+export interface BackfillIntlUsersProcessorSchema {
+  name: typeof BACKFILL_INTL_USERS_PROCESSOR_EVENT_NAME
   data: {
-    countryCode: SupportedCountryCodes
+    countryCode: string
     users: Array<UserData>
     batchIndex: number
     totalBatches: number
@@ -49,13 +47,13 @@ const getLog = (persist: boolean) => {
   return getLogger(`backfill-intl-users ${persist ? '' : '[DRY RUN]'}`)
 }
 
-export const processIntlUsersBatch = inngest.createFunction(
+export const backfillIntlUsersProcessor = inngest.createFunction(
   {
-    id: PROCESS_BATCH_FUNCTION_ID,
+    id: BACKFILL_INTL_USERS_PROCESSOR_FUNCTION_ID,
     onFailure: onScriptFailure,
-    concurrency: 1,
+    concurrency: 10,
   },
-  { event: PROCESS_BATCH_EVENT_NAME },
+  { event: BACKFILL_INTL_USERS_PROCESSOR_EVENT_NAME },
   async ({ event, step }) => {
     const { countryCode, users, batchIndex, totalBatches, persist } = event.data
 
@@ -81,30 +79,41 @@ export const processIntlUsersBatch = inngest.createFunction(
         errors: 0,
       }
 
-      const userChunks = lodashChunk(users, TRANSACTION_CONNECTION_LIMIT)
-      for (const chunk of userChunks) {
-        const chunkPromises = chunk.map(user => createUserWithCountryCode(user, persist))
-        const chunkResults = await Promise.allSettled(chunkPromises)
-        for (const result of chunkResults) {
-          if (result.status === 'fulfilled') {
-            const userResult = result.value
-
-            if (userResult.action === 'created') {
-              results.created++
-            } else if (userResult.action === 'updated') {
-              results.updated++
-            } else if (userResult.action === 'skipped') {
-              results.skipped++
-            } else if (userResult.action === 'error') {
-              results.errors++
-              logger.error(`Failed to process user: ${userResult.error || 'Unknown error'}`, {
-                email: userResult.email,
+      const userPromises = users.map(async (user: UserData) =>
+        pRetry(async () => createUserWithCountryCode(user, validCountryCode, persist), {
+          onFailedAttempt: error => {
+            if (error.retriesLeft === 0) {
+              logger.error(`Failed to process user: ${error.message}`, {
+                email: user.email,
+                countryCode: validCountryCode,
               })
             }
-          } else {
+          },
+        }),
+      )
+
+      const userResults = await Promise.allSettled(userPromises)
+
+      for (const result of userResults) {
+        if (result.status === 'fulfilled') {
+          const userResult = result.value
+
+          if (userResult.action === 'created') {
+            results.created++
+          } else if (userResult.action === 'updated') {
+            results.updated++
+          } else if (userResult.action === 'skipped') {
+            results.skipped++
+          } else if (userResult.action === 'error') {
             results.errors++
-            logger.error(`Promise rejected: ${String(result.reason)}`)
+            logger.error(`Failed to process user: ${userResult.error || 'Unknown error'}`, {
+              email: userResult.email,
+              countryCode: validCountryCode,
+            })
           }
+        } else {
+          results.errors++
+          logger.error(`Promise rejected: ${String(result.reason)}`)
         }
       }
 
@@ -121,110 +130,88 @@ export const processIntlUsersBatch = inngest.createFunction(
 
 async function createUserWithCountryCode(
   userData: UserData,
+  countryCode: SupportedCountryCodes,
   persist: boolean,
 ): Promise<UserProcessingResult> {
   const emailAddress = userData.email
   const logger = getLog(persist)
 
-  try {
-    const existingUser = await prismaClient.userEmailAddress.findFirst({
-      where: { emailAddress },
-    })
+  const existingUser = await prismaClient.userEmailAddress.findFirst({
+    where: { emailAddress },
+  })
 
-    if (existingUser) {
-      return {
-        action: 'skipped',
-        email: existingUser.emailAddress,
-      }
-    }
-
-    let newUser: User | undefined
-    if (persist) {
-      newUser = await pRetry(
-        async () => {
-          return await prismaClient.$transaction(
-            async tx => {
-              const user = await tx.user.create({
-                data: {
-                  firstName: userData.firstName,
-                  lastName: userData.lastName,
-                  phoneNumber: userData.phoneNumber,
-                  informationVisibility: UserInformationVisibility.ANONYMOUS,
-                  hasOptedInToEmails: Boolean(emailAddress),
-                  hasOptedInToMembership: false,
-                  smsStatus: SMSStatus.NOT_OPTED_IN,
-                  dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-                  referralId: userData.referralId || generateReferralId(),
-                  userSessions: { create: { id: generateUserSessionId() } },
-                  countryCode: userData.countryCode,
-                  acquisitionReferer: '',
-                  acquisitionSource: 'INTL_BACKFILL_CSV',
-                  acquisitionMedium: 'INTL_BACKFILL_CSV',
-                  acquisitionCampaign: 'INTL_BACKFILL_CSV',
-                },
-              })
-
-              const emailRecord = await tx.userEmailAddress.create({
-                data: {
-                  emailAddress,
-                  isVerified: false,
-                  source: UserEmailAddressSource.USER_ENTERED,
-                  dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-                  userId: user.id,
-                },
-              })
-
-              await tx.user.update({
-                where: { id: user.id },
-                data: { primaryUserEmailAddressId: emailRecord.id },
-              })
-
-              await tx.userAction.create({
-                data: {
-                  user: { connect: { id: user.id } },
-                  actionType: UserActionType.OPT_IN,
-                  campaignName: UserActionOptInCampaignName.DEFAULT,
-                  countryCode: userData.countryCode,
-                  userActionOptIn: {
-                    create: {
-                      optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-                    },
-                  },
-                  dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-                },
-              })
-
-              return user
-            },
-            {
-              maxWait: 15000,
-              timeout: 15000,
-            },
-          )
-        },
-        { retries: 2, minTimeout: 10000 },
-      )
-    }
-
-    if (!newUser) {
-      return {
-        action: 'error',
-        email: emailAddress,
-        error: 'Failed to create user',
-      }
-    }
-
-    logger.info(`Created new user: ${emailAddress}`)
+  if (existingUser) {
     return {
-      action: 'created',
-      userId: newUser?.id,
-      email: emailAddress,
+      action: 'skipped',
+      email: existingUser.emailAddress,
     }
-  } catch (error) {
-    return {
-      action: 'error',
-      email: emailAddress,
-      error: error instanceof Error ? error.message : String(error),
-    }
+  }
+
+  let newUser: User | undefined
+  if (persist) {
+    newUser = await prismaClient.$transaction(
+      async tx => {
+        const user = await tx.user.create({
+          data: {
+            firstName: userData.firstName || undefined,
+            lastName: userData.lastName || undefined,
+            informationVisibility: UserInformationVisibility.ANONYMOUS,
+            hasOptedInToEmails: Boolean(emailAddress),
+            hasOptedInToMembership: false,
+            smsStatus: SMSStatus.NOT_OPTED_IN,
+            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            userSessions: { create: { id: generateUserSessionId() } },
+            countryCode,
+            referralId: generateReferralId(),
+            acquisitionReferer: '',
+            acquisitionSource: userData.acquisitionSource,
+            acquisitionMedium: userData.acquisitionMedium,
+            acquisitionCampaign: userData.acquisitionCampaign,
+          },
+        })
+
+        const emailRecord = await tx.userEmailAddress.create({
+          data: {
+            emailAddress,
+            isVerified: false,
+            source: UserEmailAddressSource.USER_ENTERED,
+            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            userId: user.id,
+          },
+        })
+
+        await tx.user.update({
+          where: { id: user.id },
+          data: { primaryUserEmailAddressId: emailRecord.id },
+        })
+
+        await tx.userAction.create({
+          data: {
+            user: { connect: { id: user.id } },
+            actionType: UserActionType.OPT_IN,
+            campaignName: getActionDefaultCampaignName(UserActionType.OPT_IN, countryCode),
+            countryCode,
+            userActionOptIn: {
+              create: {
+                optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+              },
+            },
+          },
+        })
+
+        return user
+      },
+      {
+        timeout: 15000,
+        maxWait: 15000,
+      },
+    )
+  }
+
+  logger.info(`Created new user: ${emailAddress}`)
+  return {
+    action: 'created',
+    userId: newUser?.id,
+    email: emailAddress,
   }
 }

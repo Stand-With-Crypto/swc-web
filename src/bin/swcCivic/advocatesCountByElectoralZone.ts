@@ -121,14 +121,14 @@ async function getUsAddressesByElectoralZone() {
         }[]
       >`
         SELECT count(address.id) AS advocates,
-              address.us_congressional_district AS usCongressionalDistrict,
+              address.electoral_zone AS usCongressionalDistrict,
               address.administrative_area_level_1 AS administrativeAreaLevel1,
               address.id
         FROM address
         JOIN user ON user.address_id = address.id
         WHERE address.country_code = 'us' AND
-              address.us_congressional_district IS NOT NULL
-        GROUP BY address.us_congressional_district,
+              address.electoral_zone IS NOT NULL
+        GROUP BY address.electoral_zone,
                 address.administrative_area_level_1,
                 address.id
         ORDER BY address.id
@@ -158,7 +158,7 @@ async function getOtherAddressesByElectoralZone() {
         FROM address
         JOIN user ON user.address_id = address.id
         WHERE address.country_code IN ('au', 'ca', 'gb') OR
-              (address.country_code = 'us' AND address.us_congressional_district IS NULL)
+              (address.country_code = 'us' AND address.electoral_zone IS NULL)
         GROUP BY address.google_place_id,
                 address.formatted_description,
                 address.country_code,
@@ -228,11 +228,11 @@ async function getAdvocatesCountByElectoralZone() {
 
   const otherElectoralZones = otherAddressesWithElectoralZone.map(address => {
     const electoralZone = address.electoralZone || ({} as ElectoralZone)
-    const { stateCode, zoneName } = electoralZone
+    const { administrativeArea, zoneName } = electoralZone
 
     return {
       countryCode: address.countryCode,
-      state: stateCode ? getStateCode(address.countryCode, stateCode) : UNKNOWN,
+      state: administrativeArea ? getStateCode(address.countryCode, administrativeArea) : UNKNOWN,
       zone: zoneName || UNKNOWN,
       advocates: address.advocates,
     }

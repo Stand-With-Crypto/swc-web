@@ -59,15 +59,15 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "5601 Wellington Road",
-  "address2": "Apt. 535",
+  "address1": "6017 Bath Road",
+  "address2": "Apt. 459",
   "advocateid": 68251920,
   "campaigns": [
     142628,
   ],
-  "city": "Huntersville",
+  "city": "Genovevaburgh",
   "country": "US",
-  "email": "Cordia12@hotmail.com",
+  "email": "Bradley.Aufderhar@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Haylie",
@@ -77,7 +77,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "ME",
+  "state": "ND",
   "tags": [
     "tag1",
     "tag2",
@@ -87,7 +87,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "79753",
+  "zip5": "97530-7613",
 }
 `)
 })

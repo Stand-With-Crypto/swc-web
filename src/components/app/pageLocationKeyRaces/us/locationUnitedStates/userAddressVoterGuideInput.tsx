@@ -61,19 +61,22 @@ const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
 function SuspenseUserAddressVoterGuideInputSection({ countryCode }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
+
+  const isAddressLoading = address === 'loading'
+
   const res = useGetDTSIPeopleFromAddress({
-    address: address === 'loading' ? null : address?.description,
+    address: isAddressLoading ? null : address?.description,
     filterFn: filterDTSIPeopleByUSPoliticalCategory(POLITICIAN_CATEGORY),
   })
   const shouldShowSubtitle = !address || !res.data
 
-  if (!address || address === 'loading' || !res.data) {
+  if (!address || isAddressLoading || !res.data) {
     return (
       <ContentContainer shouldShowSubtitle={shouldShowSubtitle}>
         <DefaultPlacesSelect
-          loading={address === 'loading' || res.isLoading}
+          loading={isAddressLoading || res.isLoading}
           onChange={setAddress}
-          value={address === 'loading' ? null : address}
+          value={isAddressLoading ? null : address}
         />
       </ContentContainer>
     )

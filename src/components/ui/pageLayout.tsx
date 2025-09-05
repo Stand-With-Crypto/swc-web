@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { PageTitle, PageTitleProps } from '@/components/ui/pageTitleText'
 import { cn } from '@/utils/web/cn'
 
 export function PageLayout({
@@ -11,8 +11,12 @@ export function PageLayout({
   return <div className={cn('standard-spacing-from-navbar container', className)} {...props} />
 }
 
-export function PageLayoutTitle({ children }: { children: React.ReactNode }) {
-  return <PageTitle className="mb-6">{children}</PageTitle>
+export function PageLayoutTitle({ children, ...props }: React.PropsWithChildren<PageTitleProps>) {
+  return (
+    <PageTitle className="mb-6" {...props}>
+      {children}
+    </PageTitle>
+  )
 }
 PageLayout.Title = PageLayoutTitle
 

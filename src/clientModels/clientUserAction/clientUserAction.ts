@@ -117,10 +117,7 @@ interface ClientUserActionRsvpEvent {
   eventSlug: string
   eventState: string
 }
-type ClientUserActionViewKeyRaces = Pick<
-  UserActionViewKeyRaces,
-  'usaState' | 'usCongressionalDistrict'
-> & {
+type ClientUserActionViewKeyRaces = Pick<UserActionViewKeyRaces, 'usaState' | 'electoralZone'> & {
   actionType: typeof UserActionType.VIEW_KEY_RACES
 }
 type ClientUserActionVotingInformationResearched = Pick<
@@ -147,6 +144,9 @@ interface ClientUserActionPoll {
 interface ClientUserActionViewKeyPage {
   actionType: typeof UserActionType.VIEW_KEY_PAGE
   path: string
+}
+interface ClientUserActionClaimNft {
+  actionType: typeof UserActionType.CLAIM_NFT
 }
 
 /*
@@ -175,6 +175,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionRefer
       | ClientUserActionPoll
       | ClientUserActionViewKeyPage
+      | ClientUserActionClaimNft
     )
 >
 
@@ -308,13 +309,10 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...rsvpEventFields })
     },
     [UserActionType.VIEW_KEY_RACES]: () => {
-      const { usaState, usCongressionalDistrict } = getRelatedModel(
-        record,
-        'userActionViewKeyRaces',
-      )
+      const { usaState, electoralZone } = getRelatedModel(record, 'userActionViewKeyRaces')
       const keyRacesFields: ClientUserActionViewKeyRaces = {
         usaState,
-        usCongressionalDistrict,
+        electoralZone,
         actionType: UserActionType.VIEW_KEY_RACES,
       }
       return getClientModel({ ...sharedProps, ...keyRacesFields })
@@ -370,6 +368,9 @@ export const getClientUserAction = ({
     },
     [UserActionType.LINKEDIN]: () => {
       return getClientModel({ ...sharedProps, actionType: UserActionType.LINKEDIN })
+    },
+    [UserActionType.CLAIM_NFT]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.CLAIM_NFT })
     },
   }
 

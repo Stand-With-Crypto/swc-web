@@ -1,108 +1,73 @@
-import { UserActionType } from '@prisma/client'
-
-import { prismaClient } from '@/utils/server/prismaClient'
-import { logger } from '@/utils/shared/logger'
+import {
+  getAUAdvocatesCountByDistrict,
+  getAUReferralsCountByDistrict,
+} from '@/utils/server/districtRankings/au/getRankingData'
+import {
+  getCAAdvocatesCountByDistrict,
+  getCAReferralsCountByDistrict,
+} from '@/utils/server/districtRankings/ca/getRankingData'
+import {
+  getGBAdvocatesCountByConstituency,
+  getGBReferralsCountByConstituency,
+} from '@/utils/server/districtRankings/gb/getRankingData'
+import {
+  getUSAdvocatesCountByDistrict,
+  getUSReferralsCountByDistrict,
+} from '@/utils/server/districtRankings/us/getRankingData'
+import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
+import { GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { zodStateDistrict } from '@/validation/fields/zodAddress'
 
 export interface AdvocatesCountResult {
-  state: USStateCode
+  // string because GB regions are string on the database
+  state: USStateCode | CAProvinceOrTerritoryCode | AUStateCode | GBRegion
   district: string
   count: number
 }
 
-interface AdvocatesCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  count: number
+interface StateCode {
+  [SupportedCountryCodes.US]: USStateCode
+  [SupportedCountryCodes.GB]: GBRegion
+  [SupportedCountryCodes.CA]: CAProvinceOrTerritoryCode
+  [SupportedCountryCodes.AU]: AUStateCode
 }
 
-interface ReferralsCountByDistrictQueryResult {
-  state: string
-  district: string | null
-  refer_actions_count: number
-  referrals: number
+type GetAdvocatesFunction<T extends SupportedCountryCodes> = (
+  stateCode: StateCode[T],
+) => Promise<AdvocatesCountResult[]>
+
+const GET_ADVOCATES_BY_COUNTRY_CODE_MAP: {
+  [K in SupportedCountryCodes]: GetAdvocatesFunction<K>
+} = {
+  [SupportedCountryCodes.US]: getUSAdvocatesCountByDistrict,
+  [SupportedCountryCodes.GB]: getGBAdvocatesCountByConstituency,
+  [SupportedCountryCodes.CA]: getCAAdvocatesCountByDistrict,
+  [SupportedCountryCodes.AU]: getAUAdvocatesCountByDistrict,
 }
 
-function isValidDistrict(state: string, district: string | null): boolean {
-  const zodResult = zodStateDistrict.safeParse({ state, district })
-  if (!zodResult.success) {
-    logger.warn('[District Rankings] Invalid district', {
-      state,
-      district,
-      errors: zodResult.error.errors,
-    })
-    return false
-  }
-
-  return true
+const GET_REFERRALS_BY_COUNTRY_CODE_MAP: {
+  [K in SupportedCountryCodes]: GetAdvocatesFunction<K>
+} = {
+  [SupportedCountryCodes.US]: getUSReferralsCountByDistrict,
+  [SupportedCountryCodes.GB]: getGBReferralsCountByConstituency,
+  [SupportedCountryCodes.CA]: getCAReferralsCountByDistrict,
+  [SupportedCountryCodes.AU]: getAUReferralsCountByDistrict,
 }
 
-export async function getAdvocatesCountByDistrict(
-  stateCode: USStateCode,
+export async function getAdvocatesCountByDistrict<T extends SupportedCountryCodes>(
+  countryCode: T,
+  stateCode: StateCode[T],
 ): Promise<AdvocatesCountResult[]> {
-  const results = await prismaClient.$queryRaw<AdvocatesCountByDistrictQueryResult[]>`
-    SELECT
-      a.administrative_area_level_1 as state,
-      -- Handle NULL district for DC, map it to '1' for consistency
-      CASE
-        WHEN a.administrative_area_level_1 = 'DC' THEN '1'
-        ELSE a.us_congressional_district
-      END as district,
-      COUNT(DISTINCT u.id) as count
-    FROM user_action ua
-    INNER JOIN user u ON ua.user_id = u.id
-    INNER JOIN address a ON u.address_id = a.id
-    WHERE ua.action_type = ${UserActionType.OPT_IN}
-      AND a.country_code = ${SupportedCountryCodes.US}
-      AND a.administrative_area_level_1 = ${stateCode}
-    GROUP BY
-      state,
-      district
-    HAVING COUNT(DISTINCT u.id) > 0
-  `
+  const result = await GET_ADVOCATES_BY_COUNTRY_CODE_MAP[countryCode](stateCode)
 
-  return results
-    .filter(result => isValidDistrict(result.state, result.district))
-    .map(({ state, district, count }) => ({
-      state: state as USStateCode,
-      district: district!,
-      count: Number(count),
-    }))
+  return result
 }
 
-export async function getReferralsCountByDistrict(
-  stateCode: USStateCode,
+export async function getReferralsCountByDistrict<T extends SupportedCountryCodes>(
+  countryCode: T,
+  stateCode: StateCode[T],
 ): Promise<AdvocatesCountResult[]> {
-  const results = await prismaClient.$queryRaw<ReferralsCountByDistrictQueryResult[]>`
-    SELECT
-      a.administrative_area_level_1 as state,
-      -- Handle NULL district for DC, map it to '1' for consistency
-      CASE
-        WHEN a.administrative_area_level_1 = 'DC' THEN '1'
-        ELSE a.us_congressional_district
-      END as district,
-      COUNT(DISTINCT ua.id) as refer_actions_count,
-      SUM(uar.referrals_count) as referrals
-    FROM user_action ua
-    INNER JOIN user_action_refer uar ON ua.id = uar.id
-    INNER JOIN address a ON uar.address_id = a.id
-    WHERE ua.action_type = ${UserActionType.REFER}
-      AND uar.referrals_count > 0
-      AND a.country_code = ${SupportedCountryCodes.US}
-      AND a.administrative_area_level_1 = ${stateCode}
-    GROUP BY
-      state,
-      district
-    HAVING SUM(uar.referrals_count) > 0
-  `
-
-  return results
-    .filter(result => isValidDistrict(result.state, result.district))
-    .map(result => ({
-      state: result.state as USStateCode,
-      district: result.district!,
-      count: Number(result.referrals),
-    }))
+  return GET_REFERRALS_BY_COUNTRY_CODE_MAP[countryCode](stateCode)
 }

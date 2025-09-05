@@ -182,7 +182,7 @@ async function findOrCreateUserActionRefer({
   const {
     id: addressId,
     administrativeAreaLevel1: state,
-    usCongressionalDistrict: district,
+    electoralZone: district,
   } = referrer.address
 
   /**
@@ -228,7 +228,7 @@ async function findOrCreateUserActionRefer({
     action =>
       action.actionType === UserActionType.REFER &&
       action.userActionRefer?.address?.administrativeAreaLevel1 === state &&
-      action.userActionRefer?.address?.usCongressionalDistrict === district &&
+      action.userActionRefer?.address?.electoralZone === district &&
       action.campaignName === campaignName,
   )
 

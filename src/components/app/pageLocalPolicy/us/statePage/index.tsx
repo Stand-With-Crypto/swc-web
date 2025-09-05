@@ -1,5 +1,6 @@
 import { Layout } from '@/components/app/pageLocalPolicy/common/statePage/layout'
 import { LocalPolicyStatePageProps } from '@/components/app/pageLocalPolicy/common/statePage/types'
+import { UsBillsSection } from '@/components/app/pageLocalPolicy/us/statePage/billsSection'
 import { UsDistrictLeaderboardSection } from '@/components/app/pageLocalPolicy/us/statePage/districtLeaderboardSection'
 import { UsHeader } from '@/components/app/pageLocalPolicy/us/statePage/header'
 import { UsPoliticiansSection } from '@/components/app/pageLocalPolicy/us/statePage/politiciansSection'
@@ -13,6 +14,7 @@ const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 const stateNameResolver = getStateNameResolver(countryCode)
 
 export async function UsLocalPolicyStatePage({
+  billsData,
   initialTotalAdvocates,
   politiciansData,
   stateCode,
@@ -33,6 +35,8 @@ export async function UsLocalPolicyStatePage({
         stateCode={stateCode}
         stateName={stateName}
       />
+
+      <UsBillsSection bills={billsData} stateCode={stateCode} stateName={stateName} />
 
       <UsRecentActivitySection stateCode={stateCode} stateName={stateName} />
 

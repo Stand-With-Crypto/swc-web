@@ -22,7 +22,11 @@ const manuallyNormalizedCanadaDistrictsOverrides: Record<string, string> = {
   "Toronto-St. Paul's": 'Toronto-St',
 }
 
-export function normalizeCADistrictName(name: string) {
+export function normalizeCADistrictName(name?: string) {
+  if (!name) {
+    return
+  }
+
   let normalized = ''
 
   normalized = name.replaceAll(/[\u2012\u2013\u2014\u2015]/g, '-')

@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Stand With Crypto - Recent Activity by Date Range API
+  description: Public API endpoint to retrieve recent user activity within a specified date range
+  version: 1.0.0
+  contact:
+    name: Stand With Crypto
+    url: https://standwithcrypto.org
+
+servers:
+  - url: https://standwithcrypto.org
+    description: Production server
+
+paths:
+  /api/public/recent-activity/by-date/{startDate}/{endDate}:
+    get:
+      summary: Get recent activity by date range (default offset)
+      description: |
+        Retrieves public recent activity data within a specified date range with default offset of 0.
+        Returns user actions including emails, calls, donations, NFT mints, and other activities.
+        Data is cached for 60 seconds and limited to US users with visible status.
+      operationId: getRecentActivityByDateRangeDefault
+      parameters:
+        - name: startDate
+          in: path
+          required: true
+          description: Start date in ISO format (YYYY-MM-DD)
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2}$'
+            example: '2024-01-01'
+        - name: endDate
+          in: path
+          required: true
+          description: End date in ISO format (YYYY-MM-DD)
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2}$'
+            example: '2024-01-31'
+      responses:
+        '200':
+          $ref: '#/components/responses/RecentActivityResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/public/recent-activity/by-date/{startDate}/{endDate}/{offset}:
+    get:
+      summary: Get recent activity by date range (with offset)
+      description: |
+        Retrieves public recent activity data within a specified date range with custom offset for pagination.
+        Returns user actions including emails, calls, donations, NFT mints, and other activities.
+        Data is cached for 60 seconds and limited to US users with visible status.
+      operationId: getRecentActivityByDateRangeWithOffset
+      parameters:
+        - name: startDate
+          in: path
+          required: true
+          description: Start date in ISO format (YYYY-MM-DD)
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2}$'
+            example: '2024-01-01'
+        - name: endDate
+          in: path
+          required: true
+          description: End date in ISO format (YYYY-MM-DD)
+          schema:
+            type: string
+            pattern: '^\d{4}-\d{2}-\d{2}$'
+            example: '2024-01-31'
+        - name: offset
+          in: path
+          required: true
+          description: Number of records to skip for pagination (0-1000)
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1000
+            example: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/RecentActivityResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  responses:
+    RecentActivityResponse:
+      description: Successfully retrieved recent activity data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              count:
+                type: integer
+                description: Total number of activities matching the criteria
+                example: 150
+              data:
+                type: array
+                description: Array of user actions with user information
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Unique identifier for the user action
+                    actionType:
+                      type: string
+                      description: Type of action performed
+                      enum:
+                        [
+                          EMAIL,
+                          CALL,
+                          DONATION,
+                          NFT_MINT,
+                          TWEET,
+                          POLL,
+                          VOTER_REGISTRATION,
+                          OPT_IN,
+                          RSVP_EVENT,
+                          VIEW_KEY_RACES,
+                          VOTING_INFORMATION_RESEARCHED,
+                          VOTING_DAY,
+                          REFER,
+                          VIEW_KEY_PAGE,
+                        ]
+                    datetimeCreated:
+                      type: string
+                      format: date-time
+                      description: When the action was created
+                    user:
+                      type: object
+                      description: Information about the user who performed the action
+                      properties:
+                        id:
+                          type: string
+                          description: User identifier
+                        firstName:
+                          type: string
+                          description: User's first name
+                        lastName:
+                          type: string
+                          description: User's last name
+                        ensName:
+                          type: string
+                          nullable: true
+                          description: ENS name if available
+                        ensAvatarUrl:
+                          type: string
+                          nullable: true
+                          description: ENS avatar URL if available
+                    # Additional action-specific fields would be included based on action type
+                    # Examples: userActionEmail, nftMint, userActionCall, userActionDonation, etc.
+
+    BadRequest:
+      description: Invalid parameters provided
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the validation failure
+                example: 'Invalid date format. Expected YYYY-MM-DD'
+
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message
+                example: 'Internal server error'
+
+  schemas: {}
+
+tags:
+  - name: public
+    description: Public endpoints that don't require authentication

@@ -8,4 +8,6 @@ export enum NFTSlug {
   PIZZA_DAY_2024_05_22 = 'PIZZA_DAY_2024_05_22',
   VOTER_ATTESTATION = 'ballot-box-badge',
   I_VOTED = 'NFT_IVoted',
+  GENIUS_ACT_2025 = 'genius-act-2025', // Airdropped to users who completed the CLAIM_NFT action.
+  DAY_OF_ACTION_2025_08_14 = 'day-of-action-2025-08-14', // Airdropped to users who completed the CLAIM_NFT action on the day of action LP.
 }

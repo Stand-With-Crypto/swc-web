@@ -4,19 +4,24 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
 import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
+import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
+  USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
+  USUserActionNftMintCampaignName,
   USUserActionPollCampaignName,
   USUserActionReferCampaignName,
   USUserActionTweetCampaignName,
@@ -52,8 +57,8 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email your House Rep',
-    description: 'Support Market Structure Regulation (CLARITY Act)',
+    title: 'Email your senator',
+    description: 'Pass crucial crypto legislation',
     campaignsModalDescription:
       'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
@@ -61,9 +66,9 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.CLARITY_ACT_HOUSE_JUN_13_2025,
-        isCampaignActive: true,
-        title: 'Email your House Rep',
-        description: 'Support Market Structure Regulation (CLARITY Act)',
+        isCampaignActive: false,
+        title: 'Email Your House Rep',
+        description: 'Pass crucial crypto legislation',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
@@ -194,6 +199,42 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: USUserActionEmailCampaignName.FOUNDERS_PUSH_MAY_14_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
+        isCampaignActive: false,
+        title: 'Email Your House Rep',
+        description: 'Pass Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_GENIUS_ACTS_JUL_17_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
+        isCampaignActive: true,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
+        isCampaignActive: false,
+        title: 'Email Your Senator',
+        description: 'Support Crucial Crypto Legislation',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
         }),
       },
     ],
@@ -358,7 +399,11 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     mobileCTADescription: 'Take the poll and see the results.',
     campaignsModalDescription: 'Take the poll and see the results.',
     image: '/actionTypeIcons/voterAttestation.png',
-    link: ({ children }) => <Link href={urls.polls()}>{children}</Link>,
+    link: ({ children }) => (
+      <Link className="w-full" href={urls.polls()}>
+        {children}
+      </Link>
+    ),
     campaigns: [
       {
         actionType: UserActionType.POLL,
@@ -399,7 +444,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.REFER]: {
-    title: 'Refer a Friend',
+    title: 'Refer a friend',
     description: 'Get your friend to signup for Stand With Crypto and verify their account.',
     mobileCTADescription:
       'Get your friend to signup for Stand With Crypto and verify their account.',
@@ -410,7 +455,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         actionType: UserActionType.REFER,
         campaignName: USUserActionReferCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Refer a Friend',
+        title: 'Refer a friend',
         description: 'You have referred friends to join Stand With Crypto.',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: ({ children }) => (
@@ -423,6 +468,50 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           >
             {children}
           </LoginDialogWrapper>
+        ),
+      },
+    ],
+  },
+  [UserActionType.NFT_MINT]: {
+    title: 'Mint your supporter NFT',
+    description: 'All mint proceeds are donated to the movement.',
+    mobileCTADescription: 'All mint proceeds are donated to the movement.',
+    campaignsModalDescription: 'All mint proceeds are donated to the movement.',
+    image: '/actionTypeIcons/mintNFT.png',
+    campaigns: [
+      {
+        actionType: UserActionType.NFT_MINT,
+        campaignName: USUserActionNftMintCampaignName.DEFAULT,
+        isCampaignActive: true,
+        title: 'Mint your supporter NFT',
+        description: 'All mint proceeds are donated to the movement.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormNFTMintDialog,
+      },
+    ],
+  },
+  [UserActionType.CLAIM_NFT]: {
+    title: 'Claim your commemorative NFT',
+    description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    mobileCTADescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    campaignsModalDescription: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+    image: '/actionTypeIcons/claimNFT.png',
+    campaigns: [
+      {
+        actionType: UserActionType.CLAIM_NFT,
+        campaignName: USUserActionClaimNftCampaignName.GENIUS_ACT_2025,
+        isCampaignActive: false,
+        title: 'Claim your commemorative GENIUS Act NFT',
+        description: 'Claim your NFT to commemorate the passage of the GENIUS Act',
+        canBeTriggeredMultipleTimes: false,
+        WrapperComponent: ({ children }) => (
+          <UserActionFormClaimNFTDialog
+            campaignName={USUserActionClaimNftCampaignName.GENIUS_ACT_2025}
+            countryCode={countryCode}
+            nftSlug={NFTSlug.GENIUS_ACT_2025}
+          >
+            {children}
+          </UserActionFormClaimNFTDialog>
         ),
       },
     ],
