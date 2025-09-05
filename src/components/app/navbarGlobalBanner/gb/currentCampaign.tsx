@@ -6,12 +6,13 @@ export function GbCurrentNavbarGlobalBannerCampaign() {
   return (
     <CampaignWrapper>
       <p>
-        Today is the Crypto Day of Action! Take a moment to make your voice heard{' '}
+        URGENT:{' '}
         <strong>
           <Link href="https://petition.parliament.uk/petitions/730568" target="_blank">
-            HERE
+            Sign Petition
           </Link>
-        </strong>
+        </strong>{' '}
+        to drive Stablecoin Leadership in the UK
       </p>
     </CampaignWrapper>
   )
