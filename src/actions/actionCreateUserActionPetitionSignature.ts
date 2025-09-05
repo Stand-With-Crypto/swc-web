@@ -6,6 +6,7 @@ import { waitUntil } from '@vercel/functions'
 import { z, ZodError } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFromAPI'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -19,7 +20,7 @@ import { withValidations } from '@/utils/server/userActionValidation/withValidat
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import {
@@ -53,8 +54,18 @@ type UserMatch = NonNullable<Awaited<ReturnType<typeof getAuthenticatedUser>>>['
 
 async function _actionCreateUserActionPetitionSignature(
   input: Input,
+  { countryCode }: { countryCode: SupportedCountryCodes },
 ): Promise<PetitionActionResult> {
   logger.info('Petition signature action triggered')
+
+  const petition = await getPetitionBySlugFromAPI(countryCode, input.campaignName)
+
+  if (!petition) {
+    return {
+      user: null,
+      errors: { root: ['Petition not found'] },
+    }
+  }
 
   const context = await setupActionContext()
   const validationResult = zodUserActionFormPetitionSignatureAction.safeParse(input)
@@ -76,6 +87,13 @@ async function _actionCreateUserActionPetitionSignature(
 
   const { user, userMatch } = authResult
   const addressData = validationResult.data.address
+
+  if (addressData.countryCode !== petition.countryCode) {
+    return {
+      user: null,
+      errors: { root: ['Address country code does not match petition country code'] },
+    }
+  }
 
   const { analytics, peopleAnalytics, flushAnalytics } = setupAnalytics(user.id, context.localUser)
 
@@ -230,7 +248,7 @@ async function createPetitionUserAction({
 export const actionCreateUserActionPetitionSignature = withServerActionMiddleware(
   'actionCreateUserActionPetitionSignature',
   withValidations(
-    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
+    [createCountryCodeValidation(Object.values(SupportedCountryCodes))],
     _actionCreateUserActionPetitionSignature,
   ),
 )

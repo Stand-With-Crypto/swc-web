@@ -5,6 +5,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
+import { cn } from '@/utils/web/cn'
 
 const PETITIONS_GRID_CLASSNAMES =
   'grid grid-cols-1 gap-4 lg:flex lg:grid-cols-3 lg:items-center lg:justify-center lg:gap-8'
@@ -33,7 +34,9 @@ export function PagePetitions(props: PagePetitionsProps) {
       </section>
 
       <section>
-        <h2 className="mb-6 text-center text-3xl font-bold">Current Petitions</h2>
+        <h2 className="mb-6 text-center text-3xl font-bold">
+          {currentPetitions.length > 0 ? 'Current Petitions' : 'There are no current petitions'}
+        </h2>
         <div className={PETITIONS_GRID_CLASSNAMES}>
           {currentPetitions.map(petition => (
             <PetitionCard
@@ -52,7 +55,7 @@ export function PagePetitions(props: PagePetitionsProps) {
         </div>
       </section>
 
-      <section>
+      <section className={cn(pastPetitions.length <= 0 && 'hidden')}>
         <h2 className="mb-6 text-center text-3xl font-bold">Past Petitions</h2>
         <div className={PETITIONS_GRID_CLASSNAMES}>
           {pastPetitions.map(petition => (

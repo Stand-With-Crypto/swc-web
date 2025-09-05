@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
-import { GoalIcon } from 'lucide-react'
+import { PartyPopperIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
@@ -113,7 +113,7 @@ export function PetitionCard({
           <p className="flex items-center lg:h-8">
             {isGoalReached ? (
               <span className="flex items-center gap-2">
-                <GoalIcon />
+                <PartyPopperIcon />
                 Goal reached!
               </span>
             ) : (

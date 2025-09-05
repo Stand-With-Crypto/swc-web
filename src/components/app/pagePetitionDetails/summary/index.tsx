@@ -2,7 +2,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
-import { GoalIcon } from 'lucide-react'
+import { PartyPopperIcon } from 'lucide-react'
 
 import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/summary/footer'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
@@ -35,7 +35,7 @@ export function SignaturesSummary({
   className,
   petitionSlug,
 }: SignaturesSummaryProps) {
-  const { data: userData, isLoading: isLoadingUser } = useApiResponseForUserFullProfileInfo()
+  const { data: userData, isLoading } = useApiResponseForUserFullProfileInfo()
   const [isOptimisticSigned, setIsOptimisticSigned] = useState(false)
 
   const isSigned = useMemo(() => {
@@ -47,10 +47,6 @@ export function SignaturesSummary({
       ) || isOptimisticSigned
     )
   }, [userData?.user?.userActions, petitionSlug, isOptimisticSigned])
-
-  const isLoading = useMemo(() => {
-    return isLoadingUser || !userData?.user?.userActions
-  }, [isLoadingUser, userData?.user?.userActions])
 
   const optimisticSignatures = isSigned ? signatures + 1 : signatures
 
@@ -85,7 +81,7 @@ export function SignaturesSummary({
 
         <div className="flex flex-col items-center gap-2 lg:gap-4">
           <CircularProgress percentage={percentage}>
-            {hasReachedGoal && <GoalIcon size={24} />}
+            {hasReachedGoal && <PartyPopperIcon size={24} />}
             <h3 className="text-2xl font-bold">{formattedGoalString}</h3>
             <p className="text-sm font-medium text-muted-foreground">
               {hasReachedGoal ? <span className="font-bold">Goal reached!</span> : 'Signature goal'}
@@ -109,7 +105,7 @@ export function SignaturesSummary({
         <div className="flex items-center gap-3">
           {hasReachedGoal ? (
             <div className="flex h-10 w-10 animate-bubble items-center justify-center rounded-full bg-primary-cta delay-200">
-              <GoalIcon className="text-white" size={24} />
+              <PartyPopperIcon className="text-white" size={24} />
             </div>
           ) : (
             <CircularProgress percentage={percentage} size={40} strokeWidth={8} />
