@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { PetitionMilestones } from '@/components/app/pagePetitionDetails/milestones'
+import { PagePetitionDetailsWithDebugger } from '@/components/app/pagePetitionDetails/pagePetitionDetailsWithDebugger'
 import { SignatoriesCarousel } from '@/components/app/pagePetitionDetails/signatoriesCarousel'
 import { SignaturesSummary } from '@/components/app/pagePetitionDetails/summary'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { StyledHtmlContent } from '@/components/ui/styledHtmlContent'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { cn } from '@/utils/web/cn'
@@ -20,24 +22,67 @@ interface PagePetitionDetailsProps {
   }>
 }
 
+interface PagePetitionDetailsContentProps {
+  petition: SWCPetition
+  countryCode: SupportedCountryCodes
+  recentSignatures: Array<{
+    locale: string
+    datetimeSigned: string
+  }>
+}
+
 const PETITION_ICON_SIZE = 280
+const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 export function PagePetitionDetails({
   petition,
   countryCode,
   recentSignatures,
 }: PagePetitionDetailsProps) {
+  if (isProd) {
+    return (
+      <PagePetitionDetailsContent
+        countryCode={countryCode}
+        petition={petition}
+        recentSignatures={recentSignatures}
+      />
+    )
+  }
+
+  return (
+    <PagePetitionDetailsWithDebugger
+      countryCode={countryCode}
+      petition={petition}
+      recentSignatures={recentSignatures}
+    />
+  )
+}
+
+export function PagePetitionDetailsContent({
+  petition,
+  countryCode,
+  recentSignatures,
+}: PagePetitionDetailsContentProps) {
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
-  const isClosed = !!petition.datetimeFinished
+  const isClosed = petition.datetimeFinished
+    ? new Date(petition.datetimeFinished) < new Date()
+    : false
 
   // Generate petition closing date text
-  const closingDateText = petition.datetimeFinished
-    ? `Petition closed ${new Intl.DateTimeFormat(locale, {
+  const closingDateText = useMemo(() => {
+    if (petition.datetimeFinished) {
+      const formattedDate = new Intl.DateTimeFormat(locale, {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
-      }).format(new Date(petition.datetimeFinished))}`
-    : null
+      }).format(new Date(petition.datetimeFinished))
+
+      if (isClosed) return `Petition closed ${formattedDate}`
+      return `Petition closes on ${formattedDate}`
+    }
+
+    return null
+  }, [petition.datetimeFinished, locale, isClosed])
 
   return (
     <div className="standard-spacing-from-navbar container mx-auto max-w-6xl">
