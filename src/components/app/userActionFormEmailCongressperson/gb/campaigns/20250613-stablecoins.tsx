@@ -36,7 +36,7 @@ To deliver on its tokenisation strategy, the US has already ruled out CBDCs and 
 
 As my elected representative, I urge you to:
 
-Write to Emma Reynolds, the City Minister, calling for the Government to:
+Write to Lucy Rigby MP, the City Minister, calling for the Government to:
 a)   Set out a Blockchain Action Plan with a stablecoin strategy.
 b)   Drive a pro-innovation stablecoin and tokenisation regime, e.g. permit interest-bearing stablecoins and preserve their role as wholesale settlement asset.
 c)   Explore Govt use cases for blockchain
