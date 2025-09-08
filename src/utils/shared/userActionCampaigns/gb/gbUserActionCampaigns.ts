@@ -55,7 +55,7 @@ export enum GBUserActionPollCampaignName {
 
 export enum GBUserActionEmailCampaignName {
   DEFAULT = 'DEFAULT',
-  STABLECOINS = 'STABLECOINS',
+  STABLECOINS_PETITION_SEP_09_2025 = 'STABLECOINS_PETITION_SEP_09_2025',
 }
 
 export type GBUserActionCampaignName =
