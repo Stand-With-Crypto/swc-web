@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
@@ -21,7 +22,19 @@ export function PetitionHeader({
   goal,
   className,
 }: PetitionHeaderProps) {
+  const pathname = usePathname()
   const progressPercentage = Math.min((signaturesCount / goal) * 100, 100)
+
+  const isOnPetitionPage = petitionSlug && pathname?.includes(`/petitions/${petitionSlug}`)
+
+  const handleCloseDialog = () => {
+    const escapeEvent = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      code: 'Escape',
+      bubbles: true,
+    })
+    document.dispatchEvent(escapeEvent)
+  }
 
   return (
     <div className={cn('mx-auto w-full pt-12 max-md:px-6', className)}>
@@ -30,9 +43,19 @@ export function PetitionHeader({
           <PageTitle size="md">{title}</PageTitle>
           <div className="text-center">
             {petitionSlug ? (
-              <Link className="underline" href={`/petitions/${petitionSlug}`}>
-                View petition
-              </Link>
+              isOnPetitionPage ? (
+                <button
+                  className="cursor-pointer text-foreground underline hover:text-foreground/80"
+                  onClick={handleCloseDialog}
+                  type="button"
+                >
+                  View petition
+                </button>
+              ) : (
+                <Link className="underline" href={`/petitions/${petitionSlug}`}>
+                  View petition
+                </Link>
+              )
             ) : (
               <span className="underline">View petition</span>
             )}
