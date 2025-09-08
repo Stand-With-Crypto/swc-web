@@ -11,7 +11,7 @@ const countryCode = SupportedCountryCodes.GB
 
 const campaignMetadataMap: CampaignMetadataMap<GBUserActionViewKeyPageCampaignName> = {
   [GBUserActionViewKeyPageCampaignName.UK_STABLE_COINS_PETITION_JUN_2025]: {
-    url: 'https://www.google.com/',
+    url: 'https://petition.parliament.uk/petitions/730568',
   },
 }
 

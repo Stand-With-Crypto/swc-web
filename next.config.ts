@@ -58,7 +58,13 @@ const contentSecurityPolicy = {
     'https://*.newmode.net/',
     'https://js.stripe.com/', // Required for newmode
   ],
-  'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
+  'img-src': [
+    "'self'",
+    'https: data:',
+    'blob: data:',
+    'https://cnv.event.prod.bidr.io/log/cnv',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
+  ],
   'connect-src': [
     "'self'",
     'ws: wss:',
@@ -246,6 +252,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.builder.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
       },
     ],
   },
