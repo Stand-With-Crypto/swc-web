@@ -42,12 +42,14 @@ const BadgesAutomaticCarousel = React.forwardRef<
       containScroll: 'trimSnaps',
       dragFree: false,
       slidesToScroll: 1,
+      watchDrag: true,
     },
     [
       Autoplay({
         delay: autoplayDelay,
         stopOnInteraction: false,
         stopOnMouseEnter: true,
+        playOnInit: true,
       }),
     ],
   )
