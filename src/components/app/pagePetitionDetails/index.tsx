@@ -127,7 +127,7 @@ export function PagePetitionDetailsContent({
               isClosed={isClosed}
               locale={locale}
               petitionSlug={petition.slug}
-              signatures={110000}
+              signatures={petition.signaturesCount}
             />
             {/* This is to add a gradient to make smoother the scroll effect */}
             <div className="to-red absolute -bottom-10 left-0 right-0 -z-10 h-12 bg-gradient-to-b from-background to-transparent"></div>
