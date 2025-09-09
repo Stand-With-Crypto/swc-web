@@ -24,7 +24,9 @@ export async function UserActionViewKeyPageDeeplinkWrapper<K extends string>({
   minWaitTimeInSeconds,
   searchParams,
 }: UserActionViewKeyPageDeeplinkWrapperProps<K>) {
-  const campaignName = (searchParams?.campaignName || null) as K | null
+  const campaignName = (searchParams?.campaignName ||
+    searchParams?.utm_campaign ||
+    null) as K | null
 
   const campaignMetadata = campaignName
     ? campaignMetadataMap[campaignName.toUpperCase() as K]
