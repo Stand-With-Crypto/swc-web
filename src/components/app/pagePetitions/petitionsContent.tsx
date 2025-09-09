@@ -1,6 +1,11 @@
+'use client'
+
+import { UserActionType } from '@prisma/client'
+
 import { PetitionCard } from '@/components/app/pagePetitions/card'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
@@ -26,20 +31,33 @@ export function PetitionsContent({
   countryCode,
   locale,
 }: PetitionsContentProps) {
-  const renderPetitionCard = (petition: SWCPetition, variant: 'current' | 'past') => (
-    <PetitionCard
-      className="w-80"
-      countryCode={countryCode}
-      imgSrc={petition.image || undefined}
-      isGoalReached={petition.countSignaturesGoal <= petition.signaturesCount}
-      key={petition.slug}
-      locale={locale}
-      signaturesCount={petition.signaturesCount}
-      slug={petition.slug}
-      title={petition.title}
-      variant={variant}
-    />
-  )
+  const { data: userData } = useApiResponseForUserFullProfileInfo()
+
+  const renderPetitionCard = (petition: SWCPetition, variant: 'current' | 'past') => {
+    const isSigned = userData?.user?.userActions?.some(
+      userAction =>
+        userAction.actionType === UserActionType.SIGN_PETITION &&
+        userAction.campaignName === petition.slug,
+    )
+
+    const signaturesCount = isSigned ? petition.signaturesCount + 1 : petition.signaturesCount
+
+    return (
+      <PetitionCard
+        className="lg:w-80"
+        countryCode={countryCode}
+        imgSrc={petition.image || undefined}
+        isGoalReached={petition.countSignaturesGoal <= petition.signaturesCount}
+        isSigned={isSigned}
+        key={petition.slug}
+        locale={locale}
+        signaturesCount={signaturesCount}
+        slug={petition.slug}
+        title={petition.title}
+        variant={variant}
+      />
+    )
+  }
 
   return (
     <div className="standard-spacing-from-navbar container space-y-20">
