@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+import { LoadingSpinner } from '@/components/ui/loadingSpinner'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -242,7 +242,7 @@ export function UserActionFormPetitionSignature({
               type="submit"
             >
               {isSubmitting ? (
-                <LoadingOverlay />
+                <LoadingSpinner />
               ) : (
                 <span>
                   Sign<span className="hidden lg:inline"> petition</span>

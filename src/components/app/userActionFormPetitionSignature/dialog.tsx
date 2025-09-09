@@ -71,7 +71,11 @@ export function UserActionFormPetitionSignatureDialog({
   }, [dialogProps, onSuccess])
 
   return (
-    <UserActionFormDialog {...dialogProps} className={cn('!p-0', className)} trigger={children}>
+    <UserActionFormDialog
+      {...dialogProps}
+      className={cn('!p-0 lg:max-w-[620px]', className)}
+      trigger={children}
+    >
       <Suspense fallback={<UserActionFormPetitionSignatureSkeleton />}>
         <UserActionFormPetitionSignatureDialogContent
           countryCode={countryCode}
