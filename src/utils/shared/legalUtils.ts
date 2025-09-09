@@ -8,9 +8,9 @@ export function getSWCLegalEntityNameByCountryCode(countryCode: SupportedCountry
   return 'SWC International, Ltd.'
 }
 
-export const getPhysicalMailingAddressByCountryCode = (countryCode: SupportedCountryCodes) => {
+export function getPhysicalMailingAddressByCountryCode(countryCode: SupportedCountryCodes) {
   if (countryCode === SupportedCountryCodes.US) {
-    return
+    return undefined
   }
 
   return 'Suite 1, 7th Floor 50 Broadway, London, United Kingdom, SW1H 0DB'
