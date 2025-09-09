@@ -312,6 +312,8 @@ async function createPetitionSignatureAction({
   const updatedUser = await prismaClient.user.update({
     where: { id: user.id },
     data: {
+      firstName: input.firstName,
+      lastName: input.lastName,
       address: {
         connect: {
           id: userAction.userActionPetition!.addressId,
