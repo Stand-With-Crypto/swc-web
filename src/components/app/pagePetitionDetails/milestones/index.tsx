@@ -38,7 +38,7 @@ export function PetitionMilestones({
       const isComplete = optimisticSignatureCount >= targetSignatures
 
       return {
-        label: `${compactNumber(targetSignatures, locale)} signatures`,
+        label: `${compactNumber(targetSignatures, locale)} Signatures`,
         isComplete,
       }
     })
