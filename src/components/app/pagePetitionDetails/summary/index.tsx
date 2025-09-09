@@ -1,32 +1,28 @@
 'use client'
 
-import React, { useCallback, useMemo, useState } from 'react'
-import { UserActionType } from '@prisma/client'
+import React, { useCallback } from 'react'
 import { PartyPopperIcon } from 'lucide-react'
 
+import { useSignature } from '@/components/app/pagePetitionDetails/signatureContext'
 import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/summary/footer'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { CircularProgress } from '@/components/ui/circularProgress'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { compactNumber } from '@/utils/shared/compactNumber'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 
 interface SignaturesSummaryProps {
-  signatures: number
   goal: number
   countryCode: SupportedCountryCodes
   locale: SupportedLocale
   label?: string
   isClosed?: boolean
-  isSigned?: boolean
   className?: string
   petitionSlug?: string
 }
 
 export function SignaturesSummary({
-  signatures,
   goal,
   countryCode,
   locale,
@@ -35,20 +31,8 @@ export function SignaturesSummary({
   className,
   petitionSlug,
 }: SignaturesSummaryProps) {
-  const { data: userData, isLoading } = useApiResponseForUserFullProfileInfo()
-  const [isOptimisticSigned, setIsOptimisticSigned] = useState(false)
-
-  const isSigned = useMemo(() => {
-    return (
-      userData?.user?.userActions?.some(
-        userAction =>
-          userAction.actionType === UserActionType.SIGN_PETITION &&
-          userAction.campaignName === petitionSlug,
-      ) || isOptimisticSigned
-    )
-  }, [userData?.user?.userActions, petitionSlug, isOptimisticSigned])
-
-  const optimisticSignatures = isSigned ? signatures + 1 : signatures
+  const { isSigned, isLoading, setIsOptimisticSigned, optimisticSignatureCount } = useSignature()
+  const optimisticSignatures = optimisticSignatureCount
 
   const percentage = Math.min((optimisticSignatures / goal) * 100, 100)
   const formattedGoalString = compactNumber(goal, locale)
@@ -60,7 +44,7 @@ export function SignaturesSummary({
 
   const handlePetitionSigned = useCallback(() => {
     setIsOptimisticSigned(true)
-  }, [])
+  }, [setIsOptimisticSigned])
 
   return (
     <div className={cn('flex w-full items-center rounded-3xl bg-muted', className)}>

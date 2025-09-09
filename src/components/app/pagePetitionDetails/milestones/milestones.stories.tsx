@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { SignatureProvider } from '@/components/app/pagePetitionDetails/signatureContext'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 import { PetitionMilestones } from '.'
@@ -12,9 +13,11 @@ const meta = {
   },
   decorators: [
     Story => (
-      <div style={{ width: '600px' }}>
-        <Story />
-      </div>
+      <SignatureProvider actualSignatureCount={15000} petitionSlug="test-petition">
+        <div style={{ width: '600px' }}>
+          <Story />
+        </div>
+      </SignatureProvider>
     ),
   ],
   tags: ['autodocs'],
@@ -22,17 +25,12 @@ const meta = {
     goal: 100000,
     shouldGenerateAutomaticMilestones: true,
     additionalMilestones: [],
-    currentSignatures: 15000,
     locale: SupportedLocale.EN_US,
   },
   argTypes: {
     goal: {
       control: { type: 'number', min: 1000, max: 10000000, step: 1000 },
       description: 'Total signature goal for the petition',
-    },
-    currentSignatures: {
-      control: { type: 'number', min: 0 },
-      description: 'Current number of signatures',
     },
     shouldGenerateAutomaticMilestones: {
       control: 'boolean',
@@ -55,13 +53,21 @@ export const Default: Story = {
 
 export const WithProgressAndMilestones: Story = {
   args: {
-    currentSignatures: 35000,
     goal: 100000,
     additionalMilestones: [
       { label: 'Media coverage milestone', isComplete: true },
       { label: 'Celebrity endorsement', isComplete: false },
     ],
   },
+  decorators: [
+    Story => (
+      <SignatureProvider actualSignatureCount={35000} petitionSlug="test-petition">
+        <div style={{ width: '600px' }}>
+          <Story />
+        </div>
+      </SignatureProvider>
+    ),
+  ],
 }
 
 export const OnlyCustomMilestones: Story = {
