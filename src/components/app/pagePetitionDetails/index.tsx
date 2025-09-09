@@ -133,10 +133,12 @@ export function PagePetitionDetailsContent({
             <div className="to-red absolute -bottom-10 left-0 right-0 -z-10 h-12 bg-gradient-to-b from-background to-transparent"></div>
           </div>
 
-          <section>
-            <h3 className="mb-4 text-xl font-semibold">Recent signers</h3>
-            <SignatoriesCarousel countryCode={countryCode} lastSignatures={recentSignatures} />
-          </section>
+          {isClosed && recentSignatures.length === 0 ? null : (
+            <section>
+              <h3 className="mb-4 text-xl font-semibold">Recent signers</h3>
+              <SignatoriesCarousel countryCode={countryCode} lastSignatures={recentSignatures} />
+            </section>
+          )}
 
           <section className="space-y-4">
             <h2 className="text-3xl font-bold">Info</h2>
@@ -169,7 +171,7 @@ export function PagePetitionDetailsContent({
               isClosed={isClosed}
               locale={locale}
               petitionSlug={petition.slug}
-              signatures={109999}
+              signatures={petition.signaturesCount}
             />
           </div>
         </div>
