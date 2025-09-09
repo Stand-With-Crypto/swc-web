@@ -84,13 +84,15 @@ HeaderSection.SocialMedia = function HeaderSectionSocialMedia({
 export function FooterSection({
   children,
   shieldSrc,
-  swchHref,
+  swcHref,
   sendingEntity,
+  physicalMailingAddress,
 }: {
   children: React.ReactNode
   shieldSrc: string
-  swchHref: string
+  swcHref: string
   sendingEntity: string
+  physicalMailingAddress: string
 }) {
   return (
     <>
@@ -100,14 +102,18 @@ export function FooterSection({
 
         <Row>
           <Column>
-            <Text className="mb-1 text-base">This email was sent by {sendingEntity}</Text>
-            <Button color="muted" href={swchHref} noPadding variant="ghost">
+            <Text className="text-base">This email was sent by {sendingEntity}</Text>
+            <Text className="text-fontcolor-secondary !-mt-2 text-xs">
+              {physicalMailingAddress}
+            </Text>
+
+            <Button color="muted" href={swcHref} noPadding variant="ghost">
               www.standwithcrypto.org
             </Button>
           </Column>
 
           <Column align="right">
-            <Text className="text-fontcolor-secondary mb-1 text-base">Follow us on socials</Text>
+            <Text className="text-fontcolor-secondary text-base">Follow us on socials</Text>
             <Row align="right" className="float-end w-[72px]">
               {children}
             </Row>

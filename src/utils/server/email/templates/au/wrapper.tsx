@@ -1,7 +1,10 @@
 import { Column, Img } from '@react-email/components'
 
 import { AU_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/au/constants'
-import { getEmailSendingEntityByCountryCode } from '@/utils/server/email/templates/common/constants'
+import {
+  getEmailPhysicalMailingAddressByCountryCode,
+  getEmailSendingEntityByCountryCode,
+} from '@/utils/server/email/templates/common/constants'
 import {
   FooterSection,
   HeaderSection,
@@ -46,9 +49,10 @@ export function AUWrapper({
       {children}
 
       <FooterSection
+        physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/au/email/misc/shield.svg', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/au', hrefSearchParams)}
+        swcHref={buildTemplateInternalUrl('/au', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="X/Twitter logo"

@@ -1,7 +1,10 @@
 import { Column, Img } from '@react-email/components'
 
 import { CA_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/ca/constants'
-import { getEmailSendingEntityByCountryCode } from '@/utils/server/email/templates/common/constants'
+import {
+  getEmailPhysicalMailingAddressByCountryCode,
+  getEmailSendingEntityByCountryCode,
+} from '@/utils/server/email/templates/common/constants'
 import {
   FooterSection,
   HeaderSection,
@@ -46,9 +49,10 @@ export function CAWrapper({
       {children}
 
       <FooterSection
+        physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/ca/email/misc/shield.svg', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/ca', hrefSearchParams)}
+        swcHref={buildTemplateInternalUrl('/ca', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="X/Twitter logo"

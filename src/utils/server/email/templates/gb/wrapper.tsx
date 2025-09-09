@@ -1,6 +1,9 @@
 import { Column, Img } from '@react-email/components'
 
-import { getEmailSendingEntityByCountryCode } from '@/utils/server/email/templates/common/constants'
+import {
+  getEmailPhysicalMailingAddressByCountryCode,
+  getEmailSendingEntityByCountryCode,
+} from '@/utils/server/email/templates/common/constants'
 import {
   FooterSection,
   HeaderSection,
@@ -46,9 +49,10 @@ export function GBWrapper({
       {children}
 
       <FooterSection
+        physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/gb/email/misc/shield.svg', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}
+        swcHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="X/Twitter logo"

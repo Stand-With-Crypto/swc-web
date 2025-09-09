@@ -1,6 +1,9 @@
 import { Column, Img } from '@react-email/components'
 
-import { getEmailSendingEntityByCountryCode } from '@/utils/server/email/templates/common/constants'
+import {
+  getEmailPhysicalMailingAddressByCountryCode,
+  getEmailSendingEntityByCountryCode,
+} from '@/utils/server/email/templates/common/constants'
 import {
   FooterSection,
   HeaderSection,
@@ -46,9 +49,10 @@ export function USWrapper({
       {children}
 
       <FooterSection
+        physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/', hrefSearchParams)}
+        swcHref={buildTemplateInternalUrl('/', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="Instagram logo"
