@@ -93,7 +93,7 @@ export function FooterSection({
   shieldSrc: string
   swcHref: string
   sendingEntity: string
-  physicalMailingAddress: string
+  physicalMailingAddress: string | undefined
   privacyPolicyHref: string
 }) {
   return (
@@ -106,9 +106,11 @@ export function FooterSection({
         <Row className="hidden md:table">
           <Column>
             <Text className="text-base">This email was sent by {sendingEntity}</Text>
-            <Text className="text-fontcolor-secondary !-mt-2 text-xs">
-              {physicalMailingAddress}
-            </Text>
+            {physicalMailingAddress && (
+              <Text className="text-fontcolor-secondary !-mt-2 text-xs">
+                {physicalMailingAddress}
+              </Text>
+            )}
 
             <Button color="muted" href={swcHref} noPadding variant="ghost">
               www.standwithcrypto.org

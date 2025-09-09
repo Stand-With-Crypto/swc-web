@@ -148,8 +148,7 @@ export const getEmailSendingEntityByCountryCode = (countryCode: SupportedCountry
 
 export const getEmailPhysicalMailingAddressByCountryCode = (countryCode: SupportedCountryCodes) => {
   if (countryCode === SupportedCountryCodes.US) {
-    // TODO: lucas.bernardi change this to the actual physical mailing address
-    return 'TBD'
+    return
   }
 
   return 'Suite 1, 7th Floor 50 Broadway, London, United Kingdom, SW1H 0DB'
