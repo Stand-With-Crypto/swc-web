@@ -50,6 +50,7 @@ export function GBWrapper({
 
       <FooterSection
         physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
+        privacyPolicyHref={buildTemplateInternalUrl('/gb/privacy', hrefSearchParams)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/gb/email/misc/shield.svg', hrefSearchParams)}
         swcHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}

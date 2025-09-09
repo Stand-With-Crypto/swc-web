@@ -87,12 +87,14 @@ export function FooterSection({
   swcHref,
   sendingEntity,
   physicalMailingAddress,
+  privacyPolicyHref,
 }: {
   children: React.ReactNode
   shieldSrc: string
   swcHref: string
   sendingEntity: string
   physicalMailingAddress: string
+  privacyPolicyHref: string
 }) {
   return (
     <>
@@ -100,7 +102,8 @@ export function FooterSection({
       <Section className="mt-10">
         <Img alt="Stand With Crypto shield" height="40" src={shieldSrc} width="40" />
 
-        <Row>
+        {/* Desktop */}
+        <Row className="hidden md:table">
           <Column>
             <Text className="text-base">This email was sent by {sendingEntity}</Text>
             <Text className="text-fontcolor-secondary !-mt-2 text-xs">
@@ -109,6 +112,10 @@ export function FooterSection({
 
             <Button color="muted" href={swcHref} noPadding variant="ghost">
               www.standwithcrypto.org
+            </Button>
+            <span className="text-base text-muted-foreground">{' | '}</span>
+            <Button color="muted" href={privacyPolicyHref} noPadding variant="ghost">
+              Privacy Policy
             </Button>
           </Column>
 
@@ -119,6 +126,30 @@ export function FooterSection({
             </Row>
           </Column>
         </Row>
+
+        {/* Mobile */}
+        <Section className="table md:hidden">
+          <Text className="text-base">This email was sent by {sendingEntity}</Text>
+          <Text className="text-fontcolor-secondary !-mt-2 text-xs">{physicalMailingAddress}</Text>
+
+          <Row>
+            <Button color="muted" href={swcHref} noPadding variant="ghost">
+              www.standwithcrypto.org
+            </Button>
+          </Row>
+          <Row>
+            <Button color="muted" href={privacyPolicyHref} noPadding variant="ghost">
+              Privacy Policy
+            </Button>
+          </Row>
+
+          <Text className="text-fontcolor-secondary mt-4 text-center text-base">
+            Follow us on socials
+          </Text>
+          <Row align="center" className="mx-auto w-[72px]">
+            {children}
+          </Row>
+        </Section>
       </Section>
     </>
   )

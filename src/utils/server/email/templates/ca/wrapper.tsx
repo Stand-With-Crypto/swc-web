@@ -50,6 +50,7 @@ export function CAWrapper({
 
       <FooterSection
         physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
+        privacyPolicyHref={buildTemplateInternalUrl('/ca/privacy', hrefSearchParams)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/ca/email/misc/shield.svg', hrefSearchParams)}
         swcHref={buildTemplateInternalUrl('/ca', hrefSearchParams)}

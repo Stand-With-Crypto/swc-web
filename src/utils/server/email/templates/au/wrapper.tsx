@@ -50,6 +50,7 @@ export function AUWrapper({
 
       <FooterSection
         physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
+        privacyPolicyHref={buildTemplateInternalUrl('/au/privacy', hrefSearchParams)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/au/email/misc/shield.svg', hrefSearchParams)}
         swcHref={buildTemplateInternalUrl('/au', hrefSearchParams)}

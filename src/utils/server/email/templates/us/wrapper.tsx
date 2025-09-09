@@ -50,6 +50,7 @@ export function USWrapper({
 
       <FooterSection
         physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
+        privacyPolicyHref={buildTemplateInternalUrl('/privacy', hrefSearchParams)}
         sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
         swcHref={buildTemplateInternalUrl('/', hrefSearchParams)}
