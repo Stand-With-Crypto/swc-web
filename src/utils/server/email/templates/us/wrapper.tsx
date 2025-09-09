@@ -1,5 +1,6 @@
 import { Column, Img } from '@react-email/components'
 
+import { getEmailSendingEntityByCountryCode } from '@/utils/server/email/templates/common/constants'
 import {
   FooterSection,
   HeaderSection,
@@ -8,6 +9,9 @@ import {
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { US_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.US
 
 export function USWrapper({
   children,
@@ -42,6 +46,7 @@ export function USWrapper({
       {children}
 
       <FooterSection
+        sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
         swchHref={buildTemplateInternalUrl('/', hrefSearchParams)}
       >

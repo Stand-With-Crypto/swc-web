@@ -85,20 +85,22 @@ export function FooterSection({
   children,
   shieldSrc,
   swchHref,
+  sendingEntity,
 }: {
   children: React.ReactNode
   shieldSrc: string
   swchHref: string
+  sendingEntity: string
 }) {
   return (
     <>
       <Hr className="mt-10" />
       <Section className="mt-10">
-        <Img alt="Stand With Crypto" height="40" src={shieldSrc} width="40" />
+        <Img alt="Stand With Crypto shield" height="40" src={shieldSrc} width="40" />
 
         <Row>
           <Column>
-            <Text className="mb-1 text-base">Stand With Crypto</Text>
+            <Text className="mb-1 text-base">This email was sent by {sendingEntity}</Text>
             <Button color="muted" href={swchHref} noPadding variant="ghost">
               www.standwithcrypto.org
             </Button>

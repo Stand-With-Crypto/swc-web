@@ -137,3 +137,11 @@ export const getEmailActiveActionFromNFTSlug = (
       })
   }
 }
+
+export const getEmailSendingEntityByCountryCode = (countryCode: SupportedCountryCodes) => {
+  if (countryCode === SupportedCountryCodes.US) {
+    return 'Stand With Crypto Alliance, Inc.'
+  }
+
+  return 'SWC International, Ltd.'
+}

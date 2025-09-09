@@ -1,6 +1,7 @@
 import { Column, Img } from '@react-email/components'
 
 import { AU_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/au/constants'
+import { getEmailSendingEntityByCountryCode } from '@/utils/server/email/templates/common/constants'
 import {
   FooterSection,
   HeaderSection,
@@ -8,6 +9,9 @@ import {
   WrapperProps,
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.AU
 
 export function AUWrapper({
   children,
@@ -42,6 +46,7 @@ export function AUWrapper({
       {children}
 
       <FooterSection
+        sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/au/email/misc/shield.svg', hrefSearchParams)}
         swchHref={buildTemplateInternalUrl('/au', hrefSearchParams)}
       >

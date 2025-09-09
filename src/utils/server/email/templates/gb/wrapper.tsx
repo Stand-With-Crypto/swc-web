@@ -1,5 +1,6 @@
 import { Column, Img } from '@react-email/components'
 
+import { getEmailSendingEntityByCountryCode } from '@/utils/server/email/templates/common/constants'
 import {
   FooterSection,
   HeaderSection,
@@ -8,6 +9,9 @@ import {
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { GB_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/gb/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.GB
 
 export function GBWrapper({
   children,
@@ -42,6 +46,7 @@ export function GBWrapper({
       {children}
 
       <FooterSection
+        sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/gb/email/misc/shield.svg', hrefSearchParams)}
         swchHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}
       >
