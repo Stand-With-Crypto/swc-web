@@ -1,14 +1,12 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import { UserActionType } from '@prisma/client'
+import { useState } from 'react'
 import { PartyPopperIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { pluralize } from '@/utils/shared/pluralize'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
@@ -25,6 +23,7 @@ interface PetitionCardProps {
   className?: string
   variant?: 'current' | 'past'
   isGoalReached?: boolean
+  isSigned?: boolean
 }
 
 const IMAGE_SIZE = 150 // in pixels (150x150)
@@ -40,20 +39,12 @@ export function PetitionCard({
   className,
   variant = 'current',
   isGoalReached = false,
+  isSigned = false,
 }: PetitionCardProps) {
   const [imageError, setImageError] = useState(false)
   const showImage = imgSrc && !imageError
 
   const urls = getIntlUrls(countryCode)
-
-  const { data: userData } = useApiResponseForUserFullProfileInfo()
-
-  const isSigned = useMemo(() => {
-    return userData?.user?.userActions?.some(
-      userAction =>
-        userAction.actionType === UserActionType.SIGN_PETITION && userAction.campaignName === slug,
-    )
-  }, [userData, slug])
 
   const isPast = variant === 'past'
   const isCurrent = variant === 'current'
