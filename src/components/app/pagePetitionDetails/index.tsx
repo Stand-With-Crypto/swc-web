@@ -119,17 +119,18 @@ export function PagePetitionDetailsContent({
           </section>
 
           {/* Mobile: Summary after image */}
-          <div className="sticky top-20 z-10 !mt-2 lg:hidden">
+          <div className="sticky top-[70px] z-10 !mt-2 bg-background pb-0 pt-2 lg:hidden">
             {/* The bang on margin-top is because of the space-y on the parent component */}
             <SignaturesSummary
-              className="border bg-muted/90 shadow-sm backdrop-blur-md"
               countryCode={countryCode}
               goal={petition.countSignaturesGoal}
               isClosed={isClosed}
               locale={locale}
               petitionSlug={petition.slug}
-              signatures={petition.signaturesCount}
+              signatures={110000}
             />
+            {/* This is to add a gradient to make smoother the scroll effect */}
+            <div className="to-red absolute -bottom-10 left-0 right-0 -z-10 h-12 bg-gradient-to-b from-background to-transparent"></div>
           </div>
 
           <section>
@@ -168,7 +169,7 @@ export function PagePetitionDetailsContent({
               isClosed={isClosed}
               locale={locale}
               petitionSlug={petition.slug}
-              signatures={petition.signaturesCount}
+              signatures={109999}
             />
           </div>
         </div>
