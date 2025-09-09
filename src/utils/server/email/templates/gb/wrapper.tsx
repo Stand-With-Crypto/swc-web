@@ -1,10 +1,6 @@
 import { Column, Img } from '@react-email/components'
 
 import {
-  getEmailPhysicalMailingAddressByCountryCode,
-  getEmailSendingEntityByCountryCode,
-} from '@/utils/server/email/templates/common/constants'
-import {
   FooterSection,
   HeaderSection,
   Wrapper,
@@ -12,6 +8,10 @@ import {
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { GB_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/gb/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import {
+  getPhysicalMailingAddressByCountryCode,
+  getSWCLegalEntityNameByCountryCode,
+} from '@/utils/shared/legalUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.GB
@@ -49,9 +49,9 @@ export function GBWrapper({
       {children}
 
       <FooterSection
-        physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
+        physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
         privacyPolicyHref={buildTemplateInternalUrl('/gb/privacy', hrefSearchParams)}
-        sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
+        sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/gb/email/misc/shield.svg', hrefSearchParams)}
         swcHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}
       >

@@ -1,10 +1,6 @@
 import { Column, Img } from '@react-email/components'
 
 import {
-  getEmailPhysicalMailingAddressByCountryCode,
-  getEmailSendingEntityByCountryCode,
-} from '@/utils/server/email/templates/common/constants'
-import {
   FooterSection,
   HeaderSection,
   Wrapper,
@@ -12,6 +8,10 @@ import {
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { US_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import {
+  getPhysicalMailingAddressByCountryCode,
+  getSWCLegalEntityNameByCountryCode,
+} from '@/utils/shared/legalUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.US
@@ -49,9 +49,9 @@ export function USWrapper({
       {children}
 
       <FooterSection
-        physicalMailingAddress={getEmailPhysicalMailingAddressByCountryCode(countryCode)}
+        physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
         privacyPolicyHref={buildTemplateInternalUrl('/privacy', hrefSearchParams)}
-        sendingEntity={getEmailSendingEntityByCountryCode(countryCode)}
+        sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
         swcHref={buildTemplateInternalUrl('/', hrefSearchParams)}
       >
