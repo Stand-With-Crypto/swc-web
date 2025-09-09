@@ -132,7 +132,11 @@ export function FooterSection({
         {/* Mobile */}
         <Section className="table md:hidden">
           <Text className="text-base">This email was sent by {sendingEntity}</Text>
-          <Text className="text-fontcolor-secondary !-mt-2 text-xs">{physicalMailingAddress}</Text>
+          {physicalMailingAddress && (
+            <Text className="text-fontcolor-secondary !-mt-2 text-xs">
+              {physicalMailingAddress}
+            </Text>
+          )}
 
           <Row>
             <Button color="muted" href={swcHref} noPadding variant="ghost">
