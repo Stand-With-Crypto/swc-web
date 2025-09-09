@@ -40,7 +40,7 @@ const BadgesAutomaticCarousel = React.forwardRef<
       loop: true,
       align: 'start',
       containScroll: 'trimSnaps',
-      dragFree: false,
+      dragFree: true,
       slidesToScroll: 1,
       watchDrag: true,
     },
