@@ -340,7 +340,13 @@ async function seed() {
         campaignName:
           actionType === UserActionType.POLL
             ? faker.helpers.arrayElement(Object.values(USUserActionPollCampaignName))
-            : US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
+            : actionType === UserActionType.SIGN_PETITION
+              ? faker.helpers.arrayElement([
+                  'clarity-act-now',
+                  'reform-crypto-tax',
+                  'digital-asset-safe-harbor',
+                ])
+              : US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
       }
     }),
     data =>

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { SignatureProvider } from '@/components/app/pagePetitionDetails/signatureContext'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
@@ -15,20 +16,23 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {
-    signatures: 58209,
     goal: 100000,
     locale: SupportedLocale.EN_US,
     label:
       'Congress must bring the petition to the floor for discussion if 100k signatures have been made.',
   },
   argTypes: {
-    signatures: {
-      control: { type: 'number', min: 0 },
-    },
     goal: {
       control: { type: 'number', min: 1 },
     },
   },
+  decorators: [
+    Story => (
+      <SignatureProvider actualSignatureCount={58209} petitionSlug="test-petition">
+        <Story />
+      </SignatureProvider>
+    ),
+  ],
 } satisfies Meta<typeof SignaturesSummary>
 
 export default meta
@@ -43,39 +47,63 @@ export const Default: Story = {
 export const GoalReached: Story = {
   args: {
     countryCode,
-    signatures: 125430,
     goal: 100000,
     label: 'Amazing! We have exceeded our goal. Thank you to everyone who signed this petition.',
   },
+  decorators: [
+    Story => (
+      <SignatureProvider actualSignatureCount={125430} petitionSlug="test-petition">
+        <Story />
+      </SignatureProvider>
+    ),
+  ],
 }
 
 export const LargeNumbers: Story = {
   args: {
     countryCode,
-    signatures: 2750000,
     goal: 5500000,
     label:
       'This petition has gained massive support! The goal will be displayed in compact format (5M).',
   },
+  decorators: [
+    Story => (
+      <SignatureProvider actualSignatureCount={2750000} petitionSlug="test-petition">
+        <Story />
+      </SignatureProvider>
+    ),
+  ],
 }
 
 export const Closed: Story = {
   args: {
     countryCode,
-    signatures: 67543,
     goal: 100000,
     isClosed: true,
     label: 'This petition has been closed. Thank you to everyone who participated.',
   },
+  decorators: [
+    Story => (
+      <SignatureProvider actualSignatureCount={67543} petitionSlug="test-petition">
+        <Story />
+      </SignatureProvider>
+    ),
+  ],
 }
 
 export const Mobile: Story = {
   args: {
     countryCode,
-    signatures: 42000,
     goal: 100000,
     label: 'Help us reach our goal! Every signature counts.',
   },
+  decorators: [
+    Story => (
+      <SignatureProvider actualSignatureCount={42000} petitionSlug="test-petition">
+        <Story />
+      </SignatureProvider>
+    ),
+  ],
   parameters: {
     viewport: {
       defaultViewport: 'mobile1',

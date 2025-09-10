@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 
+import { useSignature } from '@/components/app/pagePetitionDetails/signatureContext'
 import { compactNumber } from '@/utils/shared/compactNumber'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
@@ -14,7 +15,6 @@ interface PetitionMilestonesProps {
   goal: number
   shouldGenerateAutomaticMilestones: boolean
   additionalMilestones: Milestone[]
-  currentSignatures?: number
   locale?: SupportedLocale
 }
 
@@ -24,9 +24,10 @@ export function PetitionMilestones({
   goal,
   shouldGenerateAutomaticMilestones,
   additionalMilestones,
-  currentSignatures = 0,
   locale = SupportedLocale.EN_US,
 }: PetitionMilestonesProps) {
+  const { optimisticSignatureCount } = useSignature()
+
   const generateAutomaticMilestones = useCallback((): Milestone[] => {
     if (!shouldGenerateAutomaticMilestones) {
       return []
@@ -34,14 +35,14 @@ export function PetitionMilestones({
 
     return AUTOMATIC_MILESTONES_THRESHOLDS.map(percentage => {
       const targetSignatures = Math.ceil((goal * percentage) / 100)
-      const isComplete = currentSignatures >= targetSignatures
+      const isComplete = optimisticSignatureCount >= targetSignatures
 
       return {
-        label: `${compactNumber(targetSignatures, locale)} signatures`,
+        label: `${compactNumber(targetSignatures, locale)} Signatures`,
         isComplete,
       }
     })
-  }, [goal, shouldGenerateAutomaticMilestones, currentSignatures, locale])
+  }, [goal, shouldGenerateAutomaticMilestones, optimisticSignatureCount, locale])
 
   const automaticMilestones = generateAutomaticMilestones()
 

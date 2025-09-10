@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -20,8 +20,11 @@ import {
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
+import { LoadingSpinner } from '@/components/ui/loadingSpinner'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
+import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import {
   GENERIC_FORM_ERROR_KEY,
@@ -101,6 +104,20 @@ export function UserActionFormPetitionSignature({
         return
       }
 
+      const addressCountryCode = address.countryCode?.toLowerCase()
+      const petitionCountryCode = petitionData.countryCode?.toLowerCase()
+
+      if (addressCountryCode !== petitionCountryCode) {
+        const expectedCountryName =
+          COUNTRY_CODE_TO_DISPLAY_NAME[petitionCountryCode as SupportedCountryCodes] ||
+          petitionCountryCode?.toUpperCase()
+
+        form.setError('address', {
+          message: `This petition is only available to residents of ${expectedCountryName}. Please enter an address in ${expectedCountryName}.`,
+        })
+        return
+      }
+
       const result = await triggerServerActionForForm(
         {
           form,
@@ -133,23 +150,15 @@ export function UserActionFormPetitionSignature({
         onSuccess?.()
       }
     },
-    [form, onSuccess, petitionData.slug, hasAlreadySigned],
+    [form, onSuccess, petitionData.slug, petitionData.countryCode, hasAlreadySigned],
   )
 
   const addressField = useWatch({ control: form.control, name: 'address' })
 
-  const getButtonText = useCallback(() => {
-    if (hasAlreadySigned) {
-      return 'Already signed'
-    }
-
-    return isSubmitting ? 'Signing...' : 'Sign'
-  }, [hasAlreadySigned, isSubmitting])
-
   return (
     <Form {...form}>
       <form
-        className="flex h-full flex-col space-y-0 pb-40 max-md:justify-between"
+        className="flex h-full flex-col space-y-0 pb-40"
         onSubmit={form.handleSubmit(
           onSubmit,
           trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_PETITION_SIGNATURE),
@@ -213,11 +222,7 @@ export function UserActionFormPetitionSignature({
               <FormItem>
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <GooglePlacesSelect
-                    {...field}
-                    placeholder="Your full address"
-                    shouldLimitUSAddresses
-                  />
+                  <GooglePlacesSelect {...field} placeholder="Your full address" />
                 </FormControl>
                 <FormErrorMessage />
               </FormItem>
@@ -236,7 +241,13 @@ export function UserActionFormPetitionSignature({
               size="default"
               type="submit"
             >
-              {getButtonText()}
+              {isSubmitting ? (
+                <LoadingSpinner />
+              ) : (
+                <span>
+                  Sign<span className="hidden lg:inline"> petition</span>
+                </span>
+              )}
             </Button>
           </Footer>
         </div>
