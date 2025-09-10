@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation'
 
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { cn } from '@/utils/web/cn'
 
 import { DEFAULT_INNER_WIDTH_CLASS_NAME } from './constants'
@@ -23,6 +24,8 @@ export function PetitionHeader({
   className,
 }: PetitionHeaderProps) {
   const pathname = usePathname()
+  const urls = useIntlUrls()
+
   const progressPercentage = Math.min((signaturesCount / goal) * 100, 100)
 
   const isOnPetitionPage = petitionSlug && pathname?.includes(`/petitions/${petitionSlug}`)
@@ -52,7 +55,7 @@ export function PetitionHeader({
                   View petition
                 </button>
               ) : (
-                <Link className="underline" href={`/petitions/${petitionSlug}`}>
+                <Link className="underline" href={urls.petitionDetails(petitionSlug)}>
                   View petition
                 </Link>
               )
