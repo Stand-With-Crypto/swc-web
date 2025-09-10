@@ -20,7 +20,10 @@ import { withValidations } from '@/utils/server/userActionValidation/withValidat
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import {
@@ -248,7 +251,7 @@ async function createPetitionUserAction({
 export const actionCreateUserActionPetitionSignature = withServerActionMiddleware(
   'actionCreateUserActionPetitionSignature',
   withValidations(
-    [createCountryCodeValidation(Object.values(SupportedCountryCodes))],
+    [createCountryCodeValidation([...ORDERED_SUPPORTED_COUNTRIES])],
     _actionCreateUserActionPetitionSignature,
   ),
 )
