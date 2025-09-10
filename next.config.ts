@@ -309,6 +309,11 @@ const nextConfig: NextConfig = {
       },
       {
         permanent: true,
+        source: '/action/email/clarity_act_house_jun_13_2025',
+        destination: '/action/email/clarity_act_senate_jul_17_2025',
+      },
+      {
+        permanent: true,
         destination: '/community',
         source: '/leaderboard',
       },
