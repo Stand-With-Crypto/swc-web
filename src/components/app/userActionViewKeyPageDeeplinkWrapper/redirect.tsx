@@ -49,7 +49,17 @@ export function UserActionViewKeyPageDeeplinkRedirect({
       }
 
       if (status === 'ready') {
-        router.replace(campaignMetadata.url)
+        // Check if the URL is external (has protocol or starts with //)
+        const isExternalUrl =
+          /^https?:\/\//.test(campaignMetadata.url) || campaignMetadata.url.startsWith('//')
+
+        if (isExternalUrl) {
+          // Use window.location.href for external URLs to avoid RSC payload errors
+          window.location.href = campaignMetadata.url
+        } else {
+          // Use router.replace for internal URLs
+          router.replace(campaignMetadata.url)
+        }
       }
     }
 
