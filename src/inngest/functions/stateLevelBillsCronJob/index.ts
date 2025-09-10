@@ -1,0 +1,311 @@
+import {
+  QUORUM_API_ITEMS_PER_PAGE,
+  STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE,
+} from '@/inngest/functions/stateLevelBillsCronJob/config'
+import { CRYPTO_RELATED_KEYWORDS_REGEX } from '@/inngest/functions/stateLevelBillsCronJob/constants'
+import {
+  createBillEntryInBuilderIO,
+  fetchBuilderIOBills,
+  fetchQuorumBills,
+  fetchQuorumBillSummaries,
+  parseQuorumBillToBuilderIOPayload,
+  updateBillEntryInBuilderIO,
+} from '@/inngest/functions/stateLevelBillsCronJob/logic'
+import {
+  CreateBillEntryPayload,
+  UpdateBillEntryPayload,
+} from '@/inngest/functions/stateLevelBillsCronJob/types'
+import { inngest } from '@/inngest/inngest'
+import { onScriptFailure } from '@/inngest/onScriptFailure'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
+import { BillSource } from '@/utils/shared/zod/getSWCBills'
+
+export const STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_EVENT_NAME =
+  'script/state-level-bills-sourcing-automation'
+export const STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_FUNCTION_ID =
+  'script.state-level-bills-sourcing-automation'
+
+const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
+
+export const stateLevelBillsSourcingAutomation = inngest.createFunction(
+  {
+    id: STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_FUNCTION_ID,
+    onFailure: onScriptFailure,
+  },
+  {
+    ...((NEXT_PUBLIC_ENVIRONMENT === 'production'
+      ? { cron: STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE }
+      : { event: STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_EVENT_NAME }) as any),
+  },
+  async ({ step, logger }) => {
+    const billsFromQuorumPromise = step.run('retrieve-bills-data-from-quorum', async () => {
+      logger.info('Starting to fetch bills from Quorum API...')
+
+      const bills = []
+
+      let hasMoreData = true
+
+      let pageIndex = 0
+
+      while (hasMoreData) {
+        logger.info(`Fetching page ${pageIndex + 1}...`)
+
+        const paginationParams = {
+          limit: QUORUM_API_ITEMS_PER_PAGE,
+          offset: pageIndex * QUORUM_API_ITEMS_PER_PAGE,
+        }
+
+        const results = await fetchQuorumBills(paginationParams)
+
+        logger.info(`Fetched ${results.objects.length} bills from Quorum API.`)
+
+        bills.push(...results.objects)
+
+        pageIndex++
+
+        if (results.objects.length < QUORUM_API_ITEMS_PER_PAGE || results.meta.next === null) {
+          hasMoreData = false
+        }
+      }
+
+      logger.info(`Completed fetching bills from Quorum API. Total bills fetched: ${bills.length}.`)
+
+      return bills
+    })
+
+    const billsFromBuilderIOPromise = step.run('retrieve-bills-data-from-builder-io', async () => {
+      logger.info('Starting to fetch existing bills from Builder.io...')
+
+      const billsFromBuilderIO = await fetchBuilderIOBills(countryCode)
+
+      logger.info(
+        `Completed fetching bills from Builder.io. Total bills fetched: ${billsFromBuilderIO.length}.`,
+      )
+
+      return billsFromBuilderIO
+    })
+
+    const [billsFromQuorum, billsFromBuilderIO] = await Promise.all([
+      billsFromQuorumPromise,
+      billsFromBuilderIOPromise,
+    ])
+
+    const validBillsFromQuorum = await step.run('validate-bills-data-from-quorum', async () => {
+      logger.info('Starting to validate Quorum bills...')
+
+      const validBillsFromQuorum = billsFromQuorum.filter(bill => {
+        return CRYPTO_RELATED_KEYWORDS_REGEX.test(bill.title)
+      })
+
+      logger.info(`Completed validation. Total valid Quorum bills: ${validBillsFromQuorum.length}.`)
+
+      return validBillsFromQuorum
+    })
+
+    const quorumBillSummaries = await step.run(
+      'retrieve-bill-summaries-data-from-quorum',
+      async () => {
+        logger.info('Starting to fetch bill summaries from Quorum API...')
+
+        const billSummaries = []
+
+        let hasMoreData = true
+
+        let pageIndex = 0
+
+        while (hasMoreData) {
+          logger.info(`Fetching page ${pageIndex + 1}...`)
+
+          const paginationParams = {
+            limit: QUORUM_API_ITEMS_PER_PAGE,
+            offset: pageIndex * QUORUM_API_ITEMS_PER_PAGE,
+          }
+
+          const results = await fetchQuorumBillSummaries(validBillsFromQuorum, paginationParams)
+
+          logger.info(`Fetched ${results.objects.length} bill summaries from Quorum API.`)
+
+          billSummaries.push(...results.objects)
+
+          pageIndex++
+
+          if (results.objects.length < QUORUM_API_ITEMS_PER_PAGE || results.meta.next === null) {
+            hasMoreData = false
+          }
+        }
+
+        logger.info(
+          `Completed fetching bill summaries from Quorum API. Total bill summaries fetched: ${billSummaries.length}.`,
+        )
+
+        return billSummaries
+      },
+    )
+
+    const validBillsFromQuorumWithSummary = await step.run(
+      'merge-quorum-bills-with-summaries',
+      async () => {
+        logger.info('Starting to merge bills information with their corresponding summaries...')
+
+        const validBillsFromQuorumWithSummary = validBillsFromQuorum.map(bill => ({
+          ...bill,
+          summaries: quorumBillSummaries.filter(
+            summary => summary.bill.split('/').at(-2) === String(bill.id),
+          ),
+        }))
+
+        logger.info('Completed merge.')
+
+        return validBillsFromQuorumWithSummary
+      },
+    )
+
+    const _parsedBillsFromQuorum = await step.run('parse-bills-data-from-quorum', async () => {
+      logger.info('Starting to parse valid Quorum bills...')
+
+      const parsedBillsFromQuorum = validBillsFromQuorumWithSummary.map(
+        parseQuorumBillToBuilderIOPayload,
+      )
+
+      logger.info(`Completed parsing. Total parsed Quorum bills: ${parsedBillsFromQuorum.length}.`)
+
+      return parsedBillsFromQuorum
+    })
+
+    // TODO: remove
+    const parsedBillsFromQuorum = _parsedBillsFromQuorum.slice(0, 12)
+
+    const [billsToCreate, billsToUpdate] = await step.run('analyze-bills-data', async () => {
+      const quorumBillsInBuilderIO = billsFromBuilderIO.filter(
+        bill => bill.data.source === BillSource.QUORUM && bill.data.externalId,
+      )
+      const existingQuorumIdsInBuilderIO = new Set(
+        quorumBillsInBuilderIO.map(bill => bill.data.externalId as string),
+      )
+
+      logger.info(
+        `Found ${billsFromBuilderIO.length} bills in Builder.io, with ${existingQuorumIdsInBuilderIO.size} unique Quorum IDs.`,
+      )
+
+      const billsToCreate = parsedBillsFromQuorum.filter(
+        quorumBill => !existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId!),
+      ) as CreateBillEntryPayload[]
+
+      const billsToUpdate = parsedBillsFromQuorum
+        .map(quorumBill => ({
+          ...quorumBill,
+          builderIO: quorumBillsInBuilderIO.find(
+            ({ data }) => data.externalId === quorumBill.data.externalId,
+          ),
+        }))
+        .filter(quorumBill => {
+          return (
+            existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId!) &&
+            quorumBill.builderIO &&
+            quorumBill.builderIO.data.isAutomaticUpdatesEnabled !== false &&
+            quorumBill.builderIO.data.mostRecentActionDate !== quorumBill.data.mostRecentActionDate
+          )
+        })
+        .map(quorumBill => ({
+          id: quorumBill.builderIO!.id,
+          data: quorumBill,
+        })) as { id: string; data: UpdateBillEntryPayload }[]
+
+      logger.info(`Found ${billsToCreate.length} new bills to add to Builder.io.`)
+      logger.info(`Found ${billsToUpdate.length} existing bills to update in Builder.io.`)
+
+      return [billsToCreate, billsToUpdate] as const
+    })
+
+    const createdBillsPromise = step.run('create-new-bill-entries-in-builder-io', async () => {
+      logger.info('Starting to create new bill entries in Builder.io...')
+
+      const promises = billsToCreate.map(async bill => {
+        try {
+          const result = await createBillEntryInBuilderIO(bill)
+          logger.info(`Created new bill entry in Builder.io: ${result.id}.`)
+        } catch (error) {
+          logger.error(
+            `Error creating bill entry in Builder.io: ${error instanceof Error ? error.message : String(error)}.`,
+          )
+        }
+      })
+
+      const result = await Promise.allSettled(promises)
+
+      const createdBills = result.filter(({ status }) => status === 'fulfilled')
+
+      logger.info(`Created ${createdBills.length} new bill entries in Builder.io.`)
+
+      return createdBills
+    })
+
+    const updatedBillsPromise = step.run('update-existing-bill-entries-in-builder-io', async () => {
+      logger.info('Starting to update existing bill entries in Builder.io...')
+
+      const promises = billsToUpdate.map(async bill => {
+        try {
+          const result = await updateBillEntryInBuilderIO(bill.id, bill.data)
+          logger.info(`Updated existing bill entry in Builder.io: ${result.id}.`)
+        } catch (error) {
+          logger.error(
+            `Error updating bill entry in Builder.io: ${error instanceof Error ? error.message : String(error)}.`,
+          )
+        }
+      })
+
+      const result = await Promise.allSettled(promises)
+
+      const updatedBills = result.filter(({ status }) => status === 'fulfilled')
+
+      logger.info(`Updated ${updatedBills.length} existing bill entries in Builder.io.`)
+
+      return updatedBills
+    })
+
+    const [createdBills, updatedBills] = await Promise.all([
+      createdBillsPromise,
+      updatedBillsPromise,
+    ])
+
+    logger.info('State-level bills sourcing automation completed successfully.')
+
+    const billsToCreateOrUpdateCount = billsToCreate.length + billsToUpdate.length
+    const successRate = billsToCreateOrUpdateCount
+      ? ((createdBills.length + updatedBills.length) * 100) / billsToCreateOrUpdateCount
+      : 100
+
+    return {
+      builderIO: {
+        created: createdBills.length,
+        current: billsFromBuilderIO.length + createdBills.length,
+        previous: billsFromBuilderIO.length,
+        skipped: validBillsFromQuorum.length - billsToCreate.length - billsToUpdate.length,
+        updated: updatedBills.length,
+      },
+      cleanup: {
+        ai: validBillsFromQuorum.length - validBillsFromQuorum.length,
+        regex: billsFromQuorum.length - validBillsFromQuorum.length,
+      },
+      errors: {
+        create: billsToCreate.length - createdBills.length,
+        update: billsToUpdate.length - updatedBills.length,
+      },
+      matches: {
+        new: billsToCreate.length,
+        previous: validBillsFromQuorum.length - billsToCreate.length,
+        total: validBillsFromQuorum.length,
+      },
+      quorum: {
+        invalid: billsFromQuorum.length - validBillsFromQuorum.length,
+        total: billsFromQuorum.length,
+        valid: validBillsFromQuorum.length,
+      },
+      rates: {
+        error: parseFloat((100 - successRate).toFixed(2)),
+        success: parseFloat(successRate.toFixed(2)),
+      },
+    }
+  },
+)
