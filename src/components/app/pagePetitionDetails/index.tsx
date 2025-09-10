@@ -33,16 +33,16 @@ interface PagePetitionDetailsContentProps {
 }
 
 const PETITION_ICON_SIZE = 280
-const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
+const isStaging = NEXT_PUBLIC_ENVIRONMENT !== 'production'
 
 export function PagePetitionDetails({
   petition,
   countryCode,
   recentSignatures,
 }: PagePetitionDetailsProps) {
-  if (isProd) {
+  if (isStaging) {
     return (
-      <PagePetitionDetailsContent
+      <PagePetitionDetailsWithDebugger
         countryCode={countryCode}
         petition={petition}
         recentSignatures={recentSignatures}
@@ -51,7 +51,7 @@ export function PagePetitionDetails({
   }
 
   return (
-    <PagePetitionDetailsWithDebugger
+    <PagePetitionDetailsContent
       countryCode={countryCode}
       petition={petition}
       recentSignatures={recentSignatures}

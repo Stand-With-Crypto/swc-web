@@ -17,15 +17,15 @@ export const metadata: Metadata = {
   ...generateMetadataDetails({ title, description }),
 }
 
-const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
+const isStaging = NEXT_PUBLIC_ENVIRONMENT !== 'production'
 
 export default async function PetitionsPage(props: PageProps) {
   const { countryCode } = await props.params
   const results = await getAllPetitionsFromAPI(countryCode)
 
-  if (isProd) {
+  if (isStaging) {
     return (
-      <PagePetitions
+      <PagePetitionsWithDebugger
         countryCode={countryCode}
         description={description}
         petitions={results}
@@ -35,7 +35,7 @@ export default async function PetitionsPage(props: PageProps) {
   }
 
   return (
-    <PagePetitionsWithDebugger
+    <PagePetitions
       countryCode={countryCode}
       description={description}
       petitions={results}
