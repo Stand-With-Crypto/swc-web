@@ -22,6 +22,7 @@ const USFollowOnXReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.US,
   ...keepUpTheFightSectionProps
 }: FollowOnXReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -31,7 +32,11 @@ const USFollowOnXReminderEmail = ({
   }
 
   return (
-    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -71,7 +76,7 @@ const USFollowOnXReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.US}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </USWrapper>

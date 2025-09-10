@@ -28,6 +28,7 @@ const AUNFTArrivedEmail = ({
   // This default value is so react email dev server works properly
   // The required type ensures this is not called without it
   actionNFT = 'CALL',
+  countryCode = SupportedCountryCodes.AU,
   ...keepUpTheFightSectionProps
 }: AUNFTArrivedEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -39,7 +40,11 @@ const AUNFTArrivedEmail = ({
   const nftImage = AU_NFT_IMAGES_BY_ACTION[actionNFT]
 
   return (
-    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         {nftImage && (
           <Img
@@ -79,7 +84,7 @@ const AUNFTArrivedEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.AU}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </AUWrapper>

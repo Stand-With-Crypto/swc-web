@@ -16,10 +16,12 @@ import {
 
 import { tailwindConfig } from '@/utils/server/email/templates/common/tailwind-config'
 import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface WrapperProps {
   previewText?: string
   hrefSearchParams?: Record<string, unknown>
+  countryCode: SupportedCountryCodes
 }
 
 export function Wrapper({ previewText, children }: React.PropsWithChildren<WrapperProps>) {

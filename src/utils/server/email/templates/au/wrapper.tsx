@@ -12,17 +12,15 @@ import {
   getPhysicalMailingAddressByCountryCode,
   getSWCLegalEntityNameByCountryCode,
 } from '@/utils/shared/legalUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-const countryCode = SupportedCountryCodes.AU
 
 export function AUWrapper({
   children,
   hrefSearchParams = {},
+  countryCode,
   ...props
 }: React.PropsWithChildren<WrapperProps>) {
   return (
-    <Wrapper {...props}>
+    <Wrapper {...props} countryCode={countryCode}>
       <HeaderSection>
         <Column>
           <HeaderSection.Logo href={buildTemplateInternalUrl('/au', hrefSearchParams)}>

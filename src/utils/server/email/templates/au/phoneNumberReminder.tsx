@@ -19,6 +19,7 @@ const AUPhoneNumberReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.AU,
   ...keepUpTheFightSectionProps
 }: PhoneNumberReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -28,7 +29,11 @@ const AUPhoneNumberReminderEmail = ({
   }
 
   return (
-    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -78,7 +83,7 @@ const AUPhoneNumberReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.AU}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </AUWrapper>
