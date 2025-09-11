@@ -47,6 +47,11 @@ async function apiResponseForUserFullProfileInfo() {
               },
             },
             userActionViewKeyPage: true,
+            userActionPetition: {
+              include: {
+                address: true,
+              },
+            },
           },
         },
       },
