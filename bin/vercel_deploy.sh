@@ -32,7 +32,7 @@ export NODE_OPTIONS="${NODE_OPTIONS} -r ./bin/trace-https"
 # Run build with enhanced logging and memory monitoring
 echo "🔍 Starting traced build process..."
 echo "📊 Build environment: $NEXT_PUBLIC_ENVIRONMENT"
-echo "🧠 Node memory limit: $(node -e "console.log(Math.round(require('v8').getHeapStatistics().heap_size_limit / 1024 / 1024))")"MB"
+echo "🧠 Node memory limit: $(node -e 'console.log(Math.round(require("v8").getHeapStatistics().heap_size_limit / 1024 / 1024))')MB"
 echo "⏰ Build start: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
 # Use /usr/bin/time to get detailed memory and performance stats
