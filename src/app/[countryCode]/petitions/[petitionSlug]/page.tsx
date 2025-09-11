@@ -2,11 +2,11 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PagePetitionDetails } from '@/components/app/pagePetitionDetails'
-import { getAllPetitionsFromAPI } from '@/data/petitions/getAllPetitionsFromAPI'
-import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFromAPI'
 import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { PageProps } from '@/types'
+import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getPetitionBySlug } from '@/utils/server/petitions/getPetitionBySlug'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
@@ -20,7 +20,7 @@ type Props = PageProps<{
 }>
 
 export async function generateStaticParams() {
-  const allPetitions = await getAllPetitionsFromAPI(countryCode)
+  const allPetitions = await getAllPetitionsFromBuilderIO({ countryCode })
 
   const params = []
 
@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const petition = await getPetitionBySlugFromAPI(params.countryCode, params.petitionSlug)
+  const petition = await getPetitionBySlug(params.countryCode, params.petitionSlug)
 
   if (!petition) {
     return generateMetadataDetails({
@@ -56,7 +56,7 @@ export default async function PetitionDetailsPage(props: Props) {
   const petitionSlug = params.petitionSlug
 
   const [petition, recentSignatures] = await Promise.all([
-    getPetitionBySlugFromAPI(countryCode, petitionSlug),
+    getPetitionBySlug(countryCode, petitionSlug),
     queryPetitionRecentSignatures({
       petitionSlug,
       countryCode,

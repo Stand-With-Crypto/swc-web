@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { getPetitionsSignaturesCount } from '@/data/petitions/getPetitionsSignaturesCount'
-import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
+import { getAllPetitions } from '@/utils/server/petitions/getAllPetitions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
@@ -23,23 +22,7 @@ export async function GET(_: Request, { params }: RequestContext) {
     return NextResponse.json({ error: 'Invalid country code' }, { status: 400 })
   }
 
-  const petitions = await getAllPetitionsFromBuilderIO({
-    countryCode: validatedCountryCode.data,
-  })
+  const petitions = await getAllPetitions(validatedCountryCode.data)
 
-  if (!petitions) {
-    return NextResponse.json({ error: 'Petitions not found' }, { status: 404 })
-  }
-
-  const petitionsSignaturesCountBySlug = await getPetitionsSignaturesCount({
-    countryCode,
-    petitionsSlugs: petitions.map(petition => petition.slug),
-  })
-
-  const petitionsWithSignatures = petitions.map(petition => ({
-    ...petition,
-    signaturesCount: petitionsSignaturesCountBySlug[petition.slug] || 0,
-  }))
-
-  return NextResponse.json({ data: petitionsWithSignatures })
+  return NextResponse.json({ data: petitions })
 }

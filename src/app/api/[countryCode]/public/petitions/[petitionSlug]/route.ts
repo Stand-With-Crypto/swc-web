@@ -1,23 +1,43 @@
 import { NextResponse } from 'next/server'
 
-import { fetchReq } from '@/utils/shared/fetchReq'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { apiUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
-import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
+import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
+import { getAllPetitions } from '@/utils/server/petitions/getAllPetitions'
+import {
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const revalidate = 60 // 60 seconds
 export const dynamic = 'error'
+
+export async function generateStaticParams() {
+  const allParams: Array<{ countryCode: string; petitionSlug: string }> = []
+
+  for (const countryCode of ORDERED_SUPPORTED_COUNTRIES) {
+    try {
+      const petitions = await getAllPetitionsFromBuilderIO({ countryCode })
+      if (petitions) {
+        for (const petition of petitions) {
+          allParams.push({
+            countryCode,
+            petitionSlug: petition.slug,
+          })
+        }
+      }
+    } catch (error) {
+      console.error(`Error generating static params for ${countryCode}:`, error)
+    }
+  }
+
+  return allParams
+}
 
 interface RequestContext {
   params: Promise<{
     countryCode: SupportedCountryCodes
     petitionSlug: string
   }>
-}
-
-interface PetitionsListResponse {
-  data: SWCPetition[]
 }
 
 export async function GET(_: Request, { params }: RequestContext) {
@@ -30,17 +50,13 @@ export async function GET(_: Request, { params }: RequestContext) {
   }
 
   try {
-    const response = await fetchReq(`${INTERNAL_BASE_URL}${apiUrls.petitions({ countryCode })}`)
+    const petitions = await getAllPetitions(validatedCountryCode.data)
 
-    if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch petitions' }, { status: response.status })
+    if (!petitions) {
+      return NextResponse.json({ error: 'Error fetching petitions' }, { status: 404 })
     }
 
-    const petitionsData = (await response.json()) as PetitionsListResponse
-
-    // it is better to do a find here, because the route we are consuming is static,
-    // so we don't need to query builder.io for the petition and do the counts on database again
-    const petition = petitionsData.data.find(p => p.slug === petitionSlug)
+    const petition = petitions.find(p => p.slug === petitionSlug)
 
     if (!petition) {
       return NextResponse.json({ error: 'Petition not found' }, { status: 404 })
