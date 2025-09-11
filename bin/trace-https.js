@@ -169,76 +169,9 @@ if (originalFetch) {
   }
 }
 
-// Try to intercept axios if it gets loaded
-const originalRequire = require
-require = function (id) {
-  const module = originalRequire.apply(this, arguments)
+// Note: Axios interception is complex in ES modules
+// The fetch and native HTTP interception should catch most requests
+// If needed, axios can be intercepted at the application level
 
-  // Intercept axios when it's loaded
-  if (id === 'axios' || (module && module.default && typeof module.default.get === 'function')) {
-    const axios = module.default || module
-
-    if (axios.interceptors && !axios._swcTraced) {
-      console.log('🔍 Intercepting axios requests...')
-
-      axios.interceptors.request.use(config => {
-        const startTime = performance.now()
-        const startMemory = logMemory()
-        const { domain, path } = parseUrl(config.url)
-
-        console.log(`\n🌐 [AXIOS] ${domain}${path}`)
-        console.log(`   📊 Memory before: ${startMemory.heapUsed}MB heap, ${startMemory.rss}MB RSS`)
-        console.log(`   ⏱️  Start: ${new Date().toISOString()}`)
-
-        config._swcStartTime = startTime
-        config._swcStartMemory = startMemory
-        return config
-      })
-
-      axios.interceptors.response.use(
-        response => {
-          if (response.config._swcStartTime) {
-            const duration = Math.round(performance.now() - response.config._swcStartTime)
-            const endMemory = logMemory()
-            const memoryDelta = endMemory.heapUsed - response.config._swcStartMemory.heapUsed
-
-            console.log(`   ✅ Response: ${response.status} (${duration}ms)`)
-            console.log(`   📈 Memory after: ${endMemory.heapUsed}MB heap (+${memoryDelta}MB)`)
-
-            const responseSize = JSON.stringify(response.data).length
-            const sizeMB = Math.round((responseSize / 1024 / 1024) * 100) / 100
-
-            console.log(`   📦 Response size: ${responseSize.toLocaleString()} bytes (${sizeMB}MB)`)
-            console.log(`   🧠 Total memory impact: +${memoryDelta}MB`)
-            console.log(`   🏁 Complete: ${duration}ms total`)
-
-            if (memoryDelta > 50) {
-              console.log(`   ⚠️  WARNING: Large memory increase (+${memoryDelta}MB)`)
-            }
-            if (responseSize > 10 * 1024 * 1024) {
-              console.log(`   ⚠️  WARNING: Large response (${sizeMB}MB)`)
-            }
-
-            console.log(`   ---`)
-          }
-          return response
-        },
-        error => {
-          if (error.config && error.config._swcStartTime) {
-            const duration = Math.round(performance.now() - error.config._swcStartTime)
-            console.log(`   ❌ Error after ${duration}ms: ${error.message}`)
-            console.log(`   ---`)
-          }
-          throw error
-        },
-      )
-
-      axios._swcTraced = true
-    }
-  }
-
-  return module
-}
-
-console.log('🔍 HTTP/HTTPS/Fetch/Axios request tracing enabled for build process')
+console.log('🔍 HTTP/HTTPS/Fetch request tracing enabled for build process')
 console.log(`📊 Initial memory: ${logMemory().heapUsed}MB heap, ${logMemory().rss}MB RSS\n`)
