@@ -1,0 +1,42 @@
+{
+  "utils/web/errorUtils": {
+    "error.generic.title": "Uh oh! Something went wrong.",
+    "error.generic.description": "There was a problem with your request. We're investigating it now.",
+    "error.status.401": "Please login first"
+  },
+  "app/eu/[language]/messages": {
+    "welcome": "Welcome {name}!",
+    "user.profile": "User {username} has {age} years old",
+    "stats.users": "We have {count:number} active users",
+    "stats.revenue": "Total revenue: {amount:currency:currency=USD}",
+    "stats.growth": "Growth rate: {rate:percent}",
+    "last.login": "Last login: {date:date:dateStyle=full}",
+    "meeting.time": "Meeting at {time:time:timeStyle=short}",
+    "relative.time": "Posted {date:relative}",
+    "company.name": "Company: {company:uppercase}",
+    "description": "Description: {text:capitalize}",
+    "code": "Code: {code:lowercase}",
+    "items.count": {
+      "zero": "No items available",
+      "one": "{count} item in your cart",
+      "other": "{count} items in your cart"
+    },
+    "notifications": {
+      "zero": "No new notifications",
+      "one": "You have {count} new notification",
+      "other": "You have {count} new notifications"
+    },
+    "user.status": {
+      "online": "User is currently online",
+      "offline": "User is offline",
+      "away": "User is away",
+      "default": "User status unknown"
+    },
+    "subscription.type": {
+      "free": "Free plan - Limited features",
+      "premium": "Premium plan - All features unlocked",
+      "enterprise": "Enterprise plan - Custom solutions",
+      "default": "Unknown subscription type"
+    }
+  }
+}
