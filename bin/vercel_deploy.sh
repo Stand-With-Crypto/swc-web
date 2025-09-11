@@ -35,9 +35,12 @@ echo "📊 Build environment: $NEXT_PUBLIC_ENVIRONMENT"
 echo "🧠 Node memory limit: $(node -e 'console.log(Math.round(require("v8").getHeapStatistics().heap_size_limit / 1024 / 1024))')MB"
 echo "⏰ Build start: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
-# Use /usr/bin/time to get detailed memory and performance stats
-echo "📈 Running build with detailed system metrics..."
-/usr/bin/time -l npm run build
+# Use time command to get performance stats
+echo "📈 Running build with system metrics..."
+
+# Use shell builtin time which is available everywhere
+echo "📊 Using shell time command..."
+time npm run build
 
 wait
 echo "⏰ Build end: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
