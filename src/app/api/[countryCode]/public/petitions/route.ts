@@ -13,6 +13,20 @@ interface RequestContext {
   }>
 }
 
+/**
+ * API Route for fetching all petitions
+ *
+ * WARNING: Do NOT use this route during static page generation (getStaticProps, generateStaticParams, etc.)
+ * Using API routes during build time creates a dependency on the previous deployment's data,
+ * which can cause build failures if the API payload structure changes between deployments.
+ *
+ * Use cases:
+ * - Client-side data fetching
+ * - When route caching is beneficial
+ * - Runtime data fetching
+ *
+ * For static page generation, use getAllPetitions() function directly instead.
+ */
 export async function GET(_: Request, { params }: RequestContext) {
   const { countryCode } = await params
 
