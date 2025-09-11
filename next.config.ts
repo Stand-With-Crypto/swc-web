@@ -840,6 +840,24 @@ const nextConfig: NextConfig = {
         destination: '/au/action/sign-up?utm_source=billboard',
         permanent: true,
       },
+      // UK stablecoins petition redirect
+      {
+        source: '/gb/action/view-key-page',
+        destination: '/gb/action/view-key-page/stablecoins-petition',
+        permanent: true,
+        has: [
+          {
+            type: 'query',
+            key: 'campaignName',
+            value: 'uk_stable_coins_petition_jun_2025',
+          },
+          {
+            type: 'query',
+            key: 'utm_campaign',
+            value: 'uk_stable_coins_petition_jun_2025',
+          },
+        ],
+      },
     ]
   },
   async rewrites() {
