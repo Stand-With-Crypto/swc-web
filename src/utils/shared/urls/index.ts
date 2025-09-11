@@ -128,6 +128,8 @@ export const getIntlUrls = (
     billsStateSpecific: (stateCode: string) =>
       `${countryPrefix}/bills/state/${stateCode.toLowerCase()}`,
     billDetails: (billSlug: string) => `${countryPrefix}/bills/${billSlug}`,
+    petitions: () => `${countryPrefix}/petitions`,
+    petitionDetails: (petitionSlug: string) => `${countryPrefix}/petitions/${petitionSlug}`,
     contribute: () => `${countryPrefix}/contribute`,
     questionnaire: () => `${countryPrefix}/questionnaire`,
     donate: () => `${countryPrefix}/donate`,
@@ -321,6 +323,15 @@ export const apiUrls = {
     administrativeArea: string
     district: number
   }) => `/api/public/dtsi/races/usa/${administrativeArea}/${district}`,
+  petitions: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
+    `/api/${countryCode}/public/petitions`,
+  petitionBySlug: ({
+    countryCode,
+    petitionSlug,
+  }: {
+    countryCode: SupportedCountryCodes
+    petitionSlug: string
+  }) => `/api/${countryCode}/public/petitions/${petitionSlug}`,
 }
 
 export * from './externalUrls'

@@ -70,6 +70,11 @@ export async function getAuthenticatedData() {
         },
       },
       userActionViewKeyPage: true,
+      userActionPetition: {
+        include: {
+          address: true,
+        },
+      },
     },
   })
 

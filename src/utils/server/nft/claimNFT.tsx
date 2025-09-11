@@ -41,6 +41,7 @@ import {
   USUserActionPollCampaignName,
   USUserActionReferCampaignName,
   USUserActionRsvpEventCampaignName,
+  USUserActionSignPetitionCampaignName,
   USUserActionTweetAtPersonCampaignName,
   USUserActionTweetCampaignName,
   USUserActionViewKeyPageCampaignName,
@@ -122,6 +123,9 @@ export const ACTION_NFT_SLUG: Record<
   [UserActionType.CLAIM_NFT]: {
     [USUserActionClaimNftCampaignName.GENIUS_ACT_2025]: NFTSlug.GENIUS_ACT_2025,
     [USUserActionClaimNftCampaignName.DAY_OF_ACTION_2025_08_14]: NFTSlug.DAY_OF_ACTION_2025_08_14,
+  },
+  [UserActionType.SIGN_PETITION]: {
+    [USUserActionSignPetitionCampaignName.DEFAULT]: null,
   },
 }
 
