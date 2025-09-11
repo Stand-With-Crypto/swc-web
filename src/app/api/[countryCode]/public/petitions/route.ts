@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { getPetitionsSignaturesCount } from '@/data/petitions/getPetitionsSignaturesCount'
-import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
+import { getAllPetitions } from '@/utils/server/petitions/getAllPetitions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
@@ -14,6 +13,20 @@ interface RequestContext {
   }>
 }
 
+/**
+ * API Route for fetching all petitions
+ *
+ * WARNING: Do NOT use this route during static page generation (getStaticProps, generateStaticParams, etc.)
+ * Using API routes during build time creates a dependency on the previous deployment's data,
+ * which can cause build failures if the API payload structure changes between deployments.
+ *
+ * Use cases:
+ * - Client-side data fetching
+ * - When route caching is beneficial
+ * - Runtime data fetching
+ *
+ * For static page generation, use getAllPetitions() function directly instead.
+ */
 export async function GET(_: Request, { params }: RequestContext) {
   const { countryCode } = await params
 
@@ -23,23 +36,7 @@ export async function GET(_: Request, { params }: RequestContext) {
     return NextResponse.json({ error: 'Invalid country code' }, { status: 400 })
   }
 
-  const petitions = await getAllPetitionsFromBuilderIO({
-    countryCode: validatedCountryCode.data,
-  })
+  const petitions = await getAllPetitions(validatedCountryCode.data)
 
-  if (!petitions) {
-    return NextResponse.json({ error: 'Petitions not found' }, { status: 404 })
-  }
-
-  const petitionsSignaturesCountBySlug = await getPetitionsSignaturesCount({
-    countryCode,
-    petitionsSlugs: petitions.map(petition => petition.slug),
-  })
-
-  const petitionsWithSignatures = petitions.map(petition => ({
-    ...petition,
-    signaturesCount: petitionsSignaturesCountBySlug[petition.slug] || 0,
-  }))
-
-  return NextResponse.json({ data: petitionsWithSignatures })
+  return NextResponse.json({ data: petitions })
 }
