@@ -268,7 +268,7 @@ const nextConfig: NextConfig = {
         }),
       )
     }
-    return config
+    return { ...config, cache: false }
   },
   async headers() {
     return [
