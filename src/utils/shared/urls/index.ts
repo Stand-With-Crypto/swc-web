@@ -24,6 +24,8 @@ function getBaseUrl() {
       return 'https://www.standwithcrypto.org'
     case 'preview':
       return `https://${process.env.VERCEL_URL!}`
+    case 'testing':
+      return 'https://testing.standwithcrypto.org'
     default:
       return 'http://localhost:3000'
   }
