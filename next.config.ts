@@ -232,6 +232,7 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 const nextConfig: NextConfig = {
   experimental: {
     turbo: {},
+    // webpackBuildWorker: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -268,7 +269,7 @@ const nextConfig: NextConfig = {
         }),
       )
     }
-    return config
+    return { ...config, cache: false }
   },
   async headers() {
     return [
@@ -923,6 +924,11 @@ const userSentryOptions = {
 
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
+
+  sourcemaps: {
+    // TODO: lucas.bernardi - change this to true
+    disable: false,
+  },
 
   // Enables automatic instrumentation of Vercel Cron Monitors.
   // See the following for more information:
