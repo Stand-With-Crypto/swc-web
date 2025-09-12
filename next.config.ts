@@ -926,7 +926,8 @@ const userSentryOptions = {
   disableLogger: true,
 
   sourcemaps: {
-    disable: true,
+    // TODO: lucas.bernardi - change this to true
+    disable: false,
   },
 
   // Enables automatic instrumentation of Vercel Cron Monitors.
