@@ -234,6 +234,7 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 const nextConfig: NextConfig = {
   experimental: {
     turbo: {},
+    webpackBuildWorker: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
