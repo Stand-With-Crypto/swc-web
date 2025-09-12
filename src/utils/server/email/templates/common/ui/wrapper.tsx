@@ -16,10 +16,12 @@ import {
 
 import { tailwindConfig } from '@/utils/server/email/templates/common/tailwind-config'
 import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface WrapperProps {
   previewText?: string
   hrefSearchParams?: Record<string, unknown>
+  countryCode: SupportedCountryCodes
 }
 
 export function Wrapper({ previewText, children }: React.PropsWithChildren<WrapperProps>) {
@@ -84,33 +86,78 @@ HeaderSection.SocialMedia = function HeaderSectionSocialMedia({
 export function FooterSection({
   children,
   shieldSrc,
-  swchHref,
+  swcHref,
+  sendingEntity,
+  physicalMailingAddress,
+  privacyPolicyHref,
 }: {
   children: React.ReactNode
   shieldSrc: string
-  swchHref: string
+  swcHref: string
+  sendingEntity: string
+  physicalMailingAddress: string | undefined
+  privacyPolicyHref: string
 }) {
   return (
     <>
       <Hr className="mt-10" />
       <Section className="mt-10">
-        <Img alt="Stand With Crypto" height="40" src={shieldSrc} width="40" />
+        <Img alt="Stand With Crypto shield" height="40" src={shieldSrc} width="40" />
 
-        <Row>
+        {/* Desktop */}
+        <Row className="hidden md:table">
           <Column>
-            <Text className="mb-1 text-base">Stand With Crypto</Text>
-            <Button color="muted" href={swchHref} noPadding variant="ghost">
+            <Text className="text-base">This email was sent by {sendingEntity}</Text>
+            {physicalMailingAddress && (
+              <Text className="text-fontcolor-secondary !-mt-2 text-xs">
+                {physicalMailingAddress}
+              </Text>
+            )}
+
+            <Button color="muted" href={swcHref} noPadding variant="ghost">
               www.standwithcrypto.org
+            </Button>
+            <span className="text-base text-muted-foreground">{' | '}</span>
+            <Button color="muted" href={privacyPolicyHref} noPadding variant="ghost">
+              Privacy Policy
             </Button>
           </Column>
 
           <Column align="right">
-            <Text className="text-fontcolor-secondary mb-1 text-base">Follow us on socials</Text>
+            <Text className="text-fontcolor-secondary text-base">Follow us on socials</Text>
             <Row align="right" className="float-end w-[72px]">
               {children}
             </Row>
           </Column>
         </Row>
+
+        {/* Mobile */}
+        <Section className="table md:hidden">
+          <Text className="text-base">This email was sent by {sendingEntity}</Text>
+          {physicalMailingAddress && (
+            <Text className="text-fontcolor-secondary !-mt-2 text-xs">
+              {physicalMailingAddress}
+            </Text>
+          )}
+
+          <Row>
+            <Button color="muted" href={swcHref} noPadding variant="ghost">
+              www.standwithcrypto.org
+            </Button>
+          </Row>
+          <Row>
+            <Button color="muted" href={privacyPolicyHref} noPadding variant="ghost">
+              Privacy Policy
+            </Button>
+          </Row>
+
+          <Text className="text-fontcolor-secondary mt-4 text-center text-base">
+            Follow us on socials
+          </Text>
+          <Row align="center" className="mx-auto w-[72px]">
+            {children}
+          </Row>
+        </Section>
       </Section>
     </>
   )

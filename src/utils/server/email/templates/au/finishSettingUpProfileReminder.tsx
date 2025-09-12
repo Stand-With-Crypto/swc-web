@@ -19,6 +19,7 @@ const AUFinishSettingUpProfileReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.AU,
   ...keepUpTheFightSectionProps
 }: FinishSettingUpProfileReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -28,7 +29,11 @@ const AUFinishSettingUpProfileReminderEmail = ({
   }
 
   return (
-    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -68,7 +73,7 @@ const AUFinishSettingUpProfileReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.AU}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </AUWrapper>

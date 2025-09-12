@@ -239,7 +239,9 @@ async function _actionCreateUserActionEmailCongresspersonIntl(input: Input) {
     return { user: getClientUser(user) }
   }
 
-  const html = await render(<EmailToRepresentative body={validatedFields.data.contactMessage} />)
+  const html = await render(
+    <EmailToRepresentative body={validatedFields.data.contactMessage} countryCode={countryCode} />,
+  )
   await Promise.all(
     quorumPoliticianEmails.map(email =>
       sendMail({

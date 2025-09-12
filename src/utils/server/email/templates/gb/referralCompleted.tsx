@@ -26,6 +26,7 @@ export default function GBReferralCompletedEmail({
   session = {},
   hrefSearchParams = {},
   name,
+  countryCode = SupportedCountryCodes.GB,
   ...keepUpTheFightSectionProps
 }: GBReferralCompletedEmailProps) {
   const hydratedHrefSearchParams = {
@@ -37,7 +38,11 @@ export default function GBReferralCompletedEmail({
   const referActionHref = buildTemplateInternalUrl('/gb/action/refer', hydratedHrefSearchParams)
 
   return (
-    <GBWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <GBWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -71,7 +76,7 @@ export default function GBReferralCompletedEmail({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.GB}
+        countryCode={countryCode}
         hiddenActions={['REFER']}
         hrefSearchParams={hydratedHrefSearchParams}
       />

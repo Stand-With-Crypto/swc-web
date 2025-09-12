@@ -28,6 +28,7 @@ const GBNFTArrivedEmail = ({
   // This default value is so react email dev server works properly
   // The required type ensures this is not called without it
   actionNFT = 'OPT_IN',
+  countryCode = SupportedCountryCodes.GB,
   ...keepUpTheFightSectionProps
 }: GBNFTArrivedEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -39,7 +40,11 @@ const GBNFTArrivedEmail = ({
   const nftImage = GB_NFT_IMAGES_BY_ACTION[actionNFT]
 
   return (
-    <GBWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <GBWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         {nftImage && (
           <Img
@@ -79,7 +84,7 @@ const GBNFTArrivedEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.GB}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </GBWrapper>

@@ -28,6 +28,7 @@ const CANFTArrivedEmail = ({
   // This default value is so react email dev server works properly
   // The required type ensures this is not called without it
   actionNFT = 'OPT_IN',
+  countryCode = SupportedCountryCodes.CA,
   ...keepUpTheFightSectionProps
 }: CANFTArrivedEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -39,7 +40,11 @@ const CANFTArrivedEmail = ({
   const nftImage = CA_NFT_IMAGES_BY_ACTION[actionNFT]
 
   return (
-    <CAWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <CAWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         {nftImage && (
           <Img
@@ -79,7 +84,7 @@ const CANFTArrivedEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.CA}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </CAWrapper>

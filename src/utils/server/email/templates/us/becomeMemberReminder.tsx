@@ -18,6 +18,7 @@ const USBecomeMemberReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.US,
   ...keepUpTheFightSectionProps
 }: BecomeMemberReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const USBecomeMemberReminderEmail = ({
   }
 
   return (
-    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -79,7 +84,7 @@ const USBecomeMemberReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.US}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </USWrapper>

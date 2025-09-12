@@ -18,6 +18,7 @@ const USReactivationReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.US,
   ...keepUpTheFightSectionProps
 }: ReactivationReminderProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const USReactivationReminderEmail = ({
   }
 
   return (
-    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -69,7 +74,7 @@ const USReactivationReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.US}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </USWrapper>

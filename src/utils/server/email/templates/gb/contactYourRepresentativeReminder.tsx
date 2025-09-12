@@ -18,6 +18,7 @@ const GBContactYourRepresentativeReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.GB,
   ...keepUpTheFightSectionProps
 }: ContactYourRepresentativeReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const GBContactYourRepresentativeReminderEmail = ({
   }
 
   return (
-    <GBWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <GBWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -56,7 +61,7 @@ const GBContactYourRepresentativeReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.GB}
+        countryCode={countryCode}
         hiddenActions={['EMAIL', 'CALL']}
         hrefSearchParams={hydratedHrefSearchParams}
       />

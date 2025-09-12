@@ -8,14 +8,19 @@ import {
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { US_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/us/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import {
+  getPhysicalMailingAddressByCountryCode,
+  getSWCLegalEntityNameByCountryCode,
+} from '@/utils/shared/legalUtils'
 
 export function USWrapper({
   children,
   hrefSearchParams = {},
+  countryCode,
   ...props
 }: React.PropsWithChildren<WrapperProps>) {
   return (
-    <Wrapper {...props}>
+    <Wrapper {...props} countryCode={countryCode}>
       <HeaderSection>
         <Column>
           <HeaderSection.Logo href={buildTemplateInternalUrl('/', hrefSearchParams)}>
@@ -42,8 +47,11 @@ export function USWrapper({
       {children}
 
       <FooterSection
+        physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
+        privacyPolicyHref={buildTemplateInternalUrl('/privacy', hrefSearchParams)}
+        sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/', hrefSearchParams)}
+        swcHref={buildTemplateInternalUrl('/', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="Instagram logo"

@@ -18,6 +18,7 @@ const CAInitialSignUpEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.CA,
   ...keepUpTheFightSectionProps
 }: InitialSignUpEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const CAInitialSignUpEmail = ({
   }
 
   return (
-    <CAWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <CAWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -58,7 +63,7 @@ const CAInitialSignUpEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.CA}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </CAWrapper>

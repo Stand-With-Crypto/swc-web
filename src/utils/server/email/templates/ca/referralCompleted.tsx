@@ -26,6 +26,7 @@ export default function CAReferralCompletedEmail({
   session = {},
   hrefSearchParams = {},
   name,
+  countryCode = SupportedCountryCodes.CA,
   ...keepUpTheFightSectionProps
 }: CAReferralCompletedEmailProps) {
   const hydratedHrefSearchParams = {
@@ -37,7 +38,11 @@ export default function CAReferralCompletedEmail({
   const referActionHref = buildTemplateInternalUrl('/ca/action/refer', hydratedHrefSearchParams)
 
   return (
-    <CAWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <CAWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -71,7 +76,7 @@ export default function CAReferralCompletedEmail({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.CA}
+        countryCode={countryCode}
         hiddenActions={['REFER']}
         hrefSearchParams={hydratedHrefSearchParams}
       />

@@ -25,6 +25,7 @@ export default function USReferralCompletedEmail({
   session = {},
   hrefSearchParams = {},
   name,
+  countryCode = SupportedCountryCodes.US,
   ...keepUpTheFightSectionProps
 }: USReferralCompletedEmailProps) {
   const hydratedHrefSearchParams = {
@@ -36,7 +37,11 @@ export default function USReferralCompletedEmail({
   const referActionHref = buildTemplateInternalUrl('/action/refer', hydratedHrefSearchParams)
 
   return (
-    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -70,7 +75,7 @@ export default function USReferralCompletedEmail({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.US}
+        countryCode={countryCode}
         hiddenActions={['REFER']}
         hrefSearchParams={hydratedHrefSearchParams}
       />

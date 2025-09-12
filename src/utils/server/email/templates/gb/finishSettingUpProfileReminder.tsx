@@ -6,6 +6,7 @@ import { Heading } from '@/utils/server/email/templates/common/ui/heading'
 import { KeepUpTheFightSectionProps } from '@/utils/server/email/templates/common/ui/keepUpTheFightSection'
 import { GBEmailTemplateProps } from '@/utils/server/email/templates/gb/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { GBWrapper } from './wrapper'
 
@@ -15,6 +16,7 @@ const GBFinishSettingUpProfileReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.GB,
 }: FinishSettingUpProfileReminderEmailProps) => {
   const hydratedHrefSearchParams = {
     utm_campaign: GBFinishSettingUpProfileReminderEmail.campaign,
@@ -23,7 +25,11 @@ const GBFinishSettingUpProfileReminderEmail = ({
   }
 
   return (
-    <GBWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <GBWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"

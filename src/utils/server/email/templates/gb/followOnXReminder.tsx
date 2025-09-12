@@ -22,6 +22,7 @@ const GBFollowOnXReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.GB,
   ...keepUpTheFightSectionProps
 }: FollowOnXReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -31,7 +32,11 @@ const GBFollowOnXReminderEmail = ({
   }
 
   return (
-    <GBWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <GBWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -83,7 +88,7 @@ const GBFollowOnXReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.GB}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </GBWrapper>
