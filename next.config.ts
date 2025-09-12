@@ -7,6 +7,8 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const isSentrySourcemapsDisabled = process.env.SENTRY_SOURCEMAPS_DISABLED === 'true'
+
 const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
 const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
@@ -923,6 +925,10 @@ const userSentryOptions = {
 
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
+
+  sourcemaps: {
+    disable: isSentrySourcemapsDisabled,
+  },
 
   // Enables automatic instrumentation of Vercel Cron Monitors.
   // See the following for more information:
