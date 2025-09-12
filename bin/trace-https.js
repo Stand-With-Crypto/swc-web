@@ -12,6 +12,10 @@ if (typeof globalThis.fetch !== 'undefined') {
 // Track memory usage (simplified)
 const getMemoryMB = () => Math.round(process.memoryUsage().heapUsed / 1024 / 1024)
 
+// Generate unique request IDs
+let requestCounter = 0
+const getRequestId = () => ++requestCounter
+
 // Extract domain and path for cleaner logging
 const parseUrl = urlOrOptions => {
   if (typeof urlOrOptions === 'string') {
@@ -38,8 +42,9 @@ function wrap(mod, protocol) {
     const startTime = performance.now()
     const startMemory = getMemoryMB()
     const { domain, path } = parseUrl(args[0])
+    const requestId = getRequestId()
 
-    console.log(`🌐 [${protocol}] ${domain}${path}`)
+    console.log(`🌐 [${protocol}:${requestId}] ${domain}${path}`)
 
     const req = orig.apply(this, args)
 
@@ -47,17 +52,17 @@ function wrap(mod, protocol) {
       const duration = Math.round(performance.now() - startTime)
       const memoryDelta = getMemoryMB() - startMemory
 
-      console.log(`   ${res.statusCode} | ${duration}ms | +${memoryDelta}MB`)
+      console.log(`✅ [${requestId}] ${res.statusCode} | ${duration}ms | +${memoryDelta}MB`)
 
       // Only warn for significant issues
       if (memoryDelta > 50) {
-        console.log(`   ⚠️  Large memory increase: +${memoryDelta}MB`)
+        console.log(`⚠️ [${requestId}] Large memory increase: +${memoryDelta}MB`)
       }
     })
 
     req.on('error', error => {
       const duration = Math.round(performance.now() - startTime)
-      console.log(`   ❌ ${duration}ms | ${error.message}`)
+      console.log(`❌ [${requestId}] ${duration}ms | ${error.message}`)
     })
 
     return req
@@ -72,6 +77,7 @@ if (originalFetch) {
   globalThis.fetch = async function (url, options = {}) {
     const startTime = performance.now()
     const startMemory = getMemoryMB()
+    const requestId = getRequestId()
 
     let urlString = url
     if (typeof url === 'object' && url.url) {
@@ -81,24 +87,24 @@ if (originalFetch) {
     }
 
     const { domain, path } = parseUrl(urlString)
-    console.log(`🌐 [FETCH] ${domain}${path}`)
+    console.log(`🌐 [FETCH:${requestId}] ${domain}${path}`)
 
     try {
       const response = await originalFetch(url, options)
       const duration = Math.round(performance.now() - startTime)
       const memoryDelta = getMemoryMB() - startMemory
 
-      console.log(`   ${response.status} | ${duration}ms | +${memoryDelta}MB`)
+      console.log(`✅ [${requestId}] ${response.status} | ${duration}ms | +${memoryDelta}MB`)
 
       // Only warn for significant issues
       if (memoryDelta > 50) {
-        console.log(`   ⚠️  Large memory increase: +${memoryDelta}MB`)
+        console.log(`⚠️ [${requestId}] Large memory increase: +${memoryDelta}MB`)
       }
 
       return response
     } catch (error) {
       const duration = Math.round(performance.now() - startTime)
-      console.log(`   ❌ ${duration}ms | ${error.message}`)
+      console.log(`❌ [${requestId}] ${duration}ms | ${error.message}`)
       throw error
     }
   }

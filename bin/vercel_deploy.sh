@@ -54,7 +54,7 @@ echo "   $(get_system_memory)"
 
 npm run db:generate
 npm run codegen
-npm run build
+npm run build -- --experimental-debug-memory-usage
 
 echo ""
 echo "📊 FINAL MEMORY STATE:"
