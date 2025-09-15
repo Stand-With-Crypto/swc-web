@@ -5,6 +5,8 @@ import { CampaignMetadata as AUCampaignMetadata } from '@/components/app/userAct
 import { getCAEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns'
 import { CampaignMetadata as CACampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/ca/campaigns/types'
 import { EmailActionCampaignNames } from '@/components/app/userActionFormEmailCongressperson/common/types'
+import { getEUEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/eu/campaigns'
+import { CampaignMetadata as EUCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/eu/campaigns/types'
 import { getGBEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/gb/campaigns'
 import { CampaignMetadata as GBCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/gb/campaigns/types'
 import { getUSEmailActionCampaignMetadata } from '@/components/app/userActionFormEmailCongressperson/us/campaigns'
@@ -13,6 +15,7 @@ import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { CAUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { EUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/eu/euUserActionCampaigns'
 import { GBUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
@@ -26,6 +29,7 @@ interface CampaignMetadataMap {
   [SupportedCountryCodes.AU]: AUCampaignMetadata
   [SupportedCountryCodes.CA]: CACampaignMetadata
   [SupportedCountryCodes.GB]: GBCampaignMetadata
+  [SupportedCountryCodes.EU]: EUCampaignMetadata
 }
 type CampaignMetadata<TCountryCode extends SupportedCountryCodes> =
   CampaignMetadataMap[TCountryCode]
@@ -44,6 +48,8 @@ export function useEmailActionCampaignMetadata<TCountryCode extends SupportedCou
         return getCAEmailActionCampaignMetadata(campaignName as CAUserActionEmailCampaignName)
       case SupportedCountryCodes.GB:
         return getGBEmailActionCampaignMetadata(campaignName as GBUserActionEmailCampaignName)
+      case SupportedCountryCodes.EU:
+        return getEUEmailActionCampaignMetadata(campaignName as EUUserActionEmailCampaignName)
       default:
         return gracefullyError({
           msg: `useEmailActionCampaignMetadata received invalid country code`,

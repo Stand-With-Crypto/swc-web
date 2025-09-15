@@ -71,6 +71,7 @@ function normalizeQuestionnaire(
     [SupportedCountryCodes.AU]: questionnaire.questionnaireAu,
     [SupportedCountryCodes.CA]: questionnaire.questionnaireCa,
     [SupportedCountryCodes.GB]: questionnaire.questionnaireGb,
+    [SupportedCountryCodes.EU]: questionnaire.questionnaireEu,
   }
 
   return {

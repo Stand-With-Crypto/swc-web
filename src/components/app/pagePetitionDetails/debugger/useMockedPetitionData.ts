@@ -192,6 +192,13 @@ const MOCK_CITIES_BY_COUNTRY: Record<SupportedCountryCodes, string[]> = {
     'Bathurst, NSW',
     'Albany, WA',
   ],
+  [SupportedCountryCodes.EU]: [
+    'Berlin, DE',
+    'Hamburg, DE',
+    'Munich, DE',
+    'Cologne, DE',
+    'Frankfurt, DE',
+  ],
 }
 
 export interface MockRecentSignatory {

@@ -5,6 +5,8 @@ const SMS_SUPPORTED_COUNTRIES: Record<SupportedCountryCodes, boolean> = {
   [SupportedCountryCodes.GB]: true,
   [SupportedCountryCodes.CA]: true,
   [SupportedCountryCodes.AU]: true,
+  // TODO(EU): Update when EU-specific SMS handling is needed
+  [SupportedCountryCodes.EU]: false,
 }
 
 export const isSmsSupportedInCountry = (countryCode: SupportedCountryCodes | string) => {
@@ -16,6 +18,7 @@ const COUNTRY_REQUIRES_OPT_IN_CONFIRMATION: Record<SupportedCountryCodes, boolea
   [SupportedCountryCodes.GB]: true,
   [SupportedCountryCodes.CA]: true,
   [SupportedCountryCodes.AU]: true,
+  [SupportedCountryCodes.EU]: true,
 }
 
 export const requiresOptInConfirmation = (countryCode: SupportedCountryCodes | string) => {

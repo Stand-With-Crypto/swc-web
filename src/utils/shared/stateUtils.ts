@@ -23,6 +23,7 @@ const GET_STATE_NAME_BY_COUNTRY_CODE_MAP: Record<SupportedCountryCodes, (code: s
     [SupportedCountryCodes.CA]: getCAProvinceOrTerritoryNameFromCode,
     [SupportedCountryCodes.GB]: getGBCountryNameFromCode,
     [SupportedCountryCodes.US]: getUSStateNameFromStateCode,
+    [SupportedCountryCodes.EU]: (code: string) => code, // TODO(EU): Update when EU-specific country name resolution is needed
   }
 
 export function getStateNameResolver(countryCode: SupportedCountryCodes) {
@@ -34,6 +35,7 @@ const TERRITORY_DIVISION_BY_COUNTRY_CODE: Record<SupportedCountryCodes, string> 
   [SupportedCountryCodes.CA]: 'Province',
   [SupportedCountryCodes.GB]: 'Country',
   [SupportedCountryCodes.US]: 'State',
+  [SupportedCountryCodes.EU]: 'Country',
 }
 
 export function getTerritoryDivisionByCountryCode(countryCode: SupportedCountryCodes) {
@@ -45,6 +47,7 @@ const ELECTORAL_ZONE_DESCRIPTOR_BY_COUNTRY_CODE: Record<SupportedCountryCodes, s
   [SupportedCountryCodes.GB]: 'constituency',
   [SupportedCountryCodes.CA]: 'constituency',
   [SupportedCountryCodes.AU]: 'constituency',
+  [SupportedCountryCodes.EU]: 'constituency',
 }
 
 export function getElectoralZoneDescriptorByCountryCode(countryCode: SupportedCountryCodes) {
@@ -59,6 +62,7 @@ const IS_VALID_STATE_CODE_BY_COUNTRY_CODE: Record<
   [SupportedCountryCodes.GB]: isValidGBCountryCode,
   [SupportedCountryCodes.CA]: isValidCAProvinceOrTerritoryCode,
   [SupportedCountryCodes.AU]: isValidAUStateCode,
+  [SupportedCountryCodes.EU]: () => false, // TODO(EU): Update when EU-specific state code validation is needed
 }
 
 export function isValidStateCodeByCountryCode(countryCode: SupportedCountryCodes, code: string) {

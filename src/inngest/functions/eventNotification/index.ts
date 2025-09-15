@@ -13,6 +13,7 @@ const countryCodeToTimezoneMap: Record<SupportedCountryCodes, string> = {
   [SupportedCountryCodes.GB]: 'Europe/London',
   [SupportedCountryCodes.CA]: 'America/Toronto',
   [SupportedCountryCodes.AU]: 'Australia/Sydney',
+  [SupportedCountryCodes.EU]: 'Europe/London',
 }
 
 export const globalSendEventNotifications = ORDERED_SUPPORTED_COUNTRIES.map(countryCode => {

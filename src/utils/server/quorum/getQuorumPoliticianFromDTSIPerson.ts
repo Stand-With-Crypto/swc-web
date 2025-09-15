@@ -118,4 +118,5 @@ const MANUAL_MATCHES: Record<SupportedCountryCodes, Record<string, string>> = {
   [SupportedCountryCodes.CA]: {},
   [SupportedCountryCodes.AU]: {},
   [SupportedCountryCodes.GB]: {},
+  [SupportedCountryCodes.EU]: {},
 }

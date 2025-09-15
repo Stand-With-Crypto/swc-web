@@ -39,12 +39,18 @@ const SENDGRID_SENDER_GB = requiredOutsideLocalEnv(
   'SENDGRID_SENDER_GB',
   'Sendgrid Email Sends',
 )
+const SENDGRID_SENDER_EU = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER_EU,
+  'SENDGRID_SENDER_EU',
+  'Sendgrid Email Sends',
+)
 
 const COUNTRY_CODE_TO_SENDGRID_SENDER: Record<SupportedCountryCodes, string | undefined> = {
   [SupportedCountryCodes.US]: SENDGRID_SENDER_US,
   [SupportedCountryCodes.GB]: SENDGRID_SENDER_GB,
   [SupportedCountryCodes.CA]: SENDGRID_SENDER_CA,
   [SupportedCountryCodes.AU]: SENDGRID_SENDER_AU,
+  [SupportedCountryCodes.EU]: SENDGRID_SENDER_EU,
 }
 
 if (SENDGRID_API_KEY) {

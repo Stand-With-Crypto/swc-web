@@ -40,6 +40,12 @@ const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: Record<
     emoji: '🇺🇸',
     countryCode: SupportedCountryCodes.US,
   },
+  [SupportedCountryCodes.EU]: {
+    label: 'European Union',
+    url: getIntlUrls(SupportedCountryCodes.EU).home(),
+    emoji: '🇪🇺',
+    countryCode: SupportedCountryCodes.EU,
+  },
 }
 
 export function RedirectBannerContent({ countryCode }: { countryCode: SupportedCountryCodes }) {

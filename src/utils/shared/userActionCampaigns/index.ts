@@ -14,6 +14,12 @@ import {
   CAUserActionCampaigns,
 } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import {
+  EU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  EU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  EUActiveClientUserActionWithCampaignType,
+  EUUserActionCampaigns,
+} from '@/utils/shared/userActionCampaigns/eu/euUserActionCampaigns'
+import {
   GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   GBActiveClientUserActionWithCampaignType,
@@ -32,6 +38,7 @@ export interface CountryActiveClientUserActionWithCampaignType {
   [SupportedCountryCodes.GB]: GBActiveClientUserActionWithCampaignType
   [SupportedCountryCodes.CA]: CAActiveClientUserActionWithCampaignType
   [SupportedCountryCodes.AU]: AUActiveClientUserActionWithCampaignType
+  [SupportedCountryCodes.EU]: EUActiveClientUserActionWithCampaignType
 }
 
 export type ActiveClientUserActionWithCampaignType =
@@ -44,6 +51,7 @@ export const COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN: {
   [SupportedCountryCodes.GB]: GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   [SupportedCountryCodes.CA]: CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   [SupportedCountryCodes.AU]: AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.EU]: EU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
 }
 
 export interface CountryUserActionCampaigns {
@@ -51,6 +59,7 @@ export interface CountryUserActionCampaigns {
   [SupportedCountryCodes.GB]: GBUserActionCampaigns
   [SupportedCountryCodes.CA]: CAUserActionCampaigns
   [SupportedCountryCodes.AU]: AUUserActionCampaigns
+  [SupportedCountryCodes.EU]: EUUserActionCampaigns
 }
 
 export type UserActionCampaignNames =
@@ -58,6 +67,7 @@ export type UserActionCampaignNames =
   | GBUserActionCampaigns[keyof GBUserActionCampaigns]
   | CAUserActionCampaigns[keyof CAUserActionCampaigns]
   | AUUserActionCampaigns[keyof AUUserActionCampaigns]
+  | EUUserActionCampaigns[keyof EUUserActionCampaigns]
 
 export type UserActionCampaign = CountryUserActionCampaigns[SupportedCountryCodes]
 
@@ -68,6 +78,7 @@ export const COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP: {
   [SupportedCountryCodes.GB]: GB_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   [SupportedCountryCodes.CA]: CA_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   [SupportedCountryCodes.AU]: AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  [SupportedCountryCodes.EU]: EU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
 }
 
 export function isActionSupportedForCountry<

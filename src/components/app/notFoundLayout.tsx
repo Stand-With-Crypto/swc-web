@@ -12,6 +12,7 @@ import * as usConfig from '@/app/[countryCode]/config'
 import { TopLevelClientLogic } from '@/app/[countryCode]/topLevelClientLogic'
 import * as auConfig from '@/app/au/config'
 import * as caConfig from '@/app/ca/config'
+import * as euConfig from '@/app/eu/config'
 import * as gbConfig from '@/app/gb/config'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
@@ -30,6 +31,7 @@ const PAGE_LAYOUT_CONFIG_BY_COUNTRY_CODE: Record<SupportedCountryCodes, typeof u
   [SupportedCountryCodes.AU]: auConfig,
   [SupportedCountryCodes.GB]: gbConfig,
   [SupportedCountryCodes.CA]: caConfig,
+  [SupportedCountryCodes.EU]: euConfig,
 }
 
 export function NotFoundLayout({ children }: { children: React.ReactNode }) {

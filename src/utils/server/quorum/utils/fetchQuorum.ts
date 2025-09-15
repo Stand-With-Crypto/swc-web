@@ -22,6 +22,8 @@ const COUNTRY_CODE_TO_QUORUM_MOST_RECENT_REGION: Record<SupportedCountryCodes, s
   [SupportedCountryCodes.CA]: '201',
   [SupportedCountryCodes.GB]: '204',
   [SupportedCountryCodes.AU]: '200',
+  // TODO(EU): Add EU quorum most recent region
+  [SupportedCountryCodes.EU]: '',
 }
 
 // filters for legislators/parliamentarians

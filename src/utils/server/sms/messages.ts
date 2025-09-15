@@ -37,11 +37,19 @@ const AU_SMS_MESSAGES: SMSMessages = {
   bulkWelcomeMessage: `Thank you for being a Stand With Crypto advocate. Message & data rates may apply. Message frequency varies. Reply HELP for help or STOP to opt out.`,
 }
 
+// TODO(EU): Validate and fix these messages when applicable
+const EU_SMS_MESSAGES: SMSMessages = {
+  welcomeMessage: `Thanks for subscribing to Stand With Crypto! You can expect news, opportunities to engage, and critical updates on crypto policy. Browse our resources and research where your elected officials stand on crypto at ${fullUrl(`/${SupportedCountryCodes.EU}`)}\n\nMessage & data rates may apply. Message frequency varies. Reply HELP for help or STOP to opt out.`,
+  helpMessage: `Reply STOP to unsubscribe. Contact Stand With Crypto Support at eu@swcinternational.org`,
+  bulkWelcomeMessage: `Thank you for being a Stand With Crypto advocate. Message & data rates may apply. Message frequency varies. Reply HELP for help or STOP to opt out.`,
+}
+
 const SMS_MESSAGES: Record<SupportedCountryCodes, SMSMessages> = {
   [SupportedCountryCodes.US]: US_SMS_MESSAGES,
   [SupportedCountryCodes.GB]: GB_SMS_MESSAGES,
   [SupportedCountryCodes.CA]: CA_SMS_MESSAGES,
   [SupportedCountryCodes.AU]: AU_SMS_MESSAGES,
+  [SupportedCountryCodes.EU]: EU_SMS_MESSAGES,
 }
 
 export const getSMSMessages = (countryCode: SupportedCountryCodes) => {

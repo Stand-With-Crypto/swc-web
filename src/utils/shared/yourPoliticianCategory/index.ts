@@ -10,6 +10,11 @@ import {
   YourPoliticianCategory as CAYourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory/ca'
 import {
+  filterDTSIPeopleByEUPoliticalCategory,
+  getEUPoliticianCategoryDisplayName,
+  YourPoliticianCategory as EUYourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory/eu'
+import {
   filterDTSIPeopleByGBPoliticalCategory,
   getGBPoliticianCategoryDisplayName,
   YourPoliticianCategory as GBYourPoliticianCategory,
@@ -26,6 +31,7 @@ interface Props {
     | USYourPoliticianCategory
     | AUYourPoliticianCategory
     | CAYourPoliticianCategory
+    | EUYourPoliticianCategory
     | GBYourPoliticianCategory
 }
 export function getYourPoliticianCategoryDisplayName(props: Props) {
@@ -38,6 +44,8 @@ export function getYourPoliticianCategoryDisplayName(props: Props) {
       return getAUPoliticianCategoryDisplayName(category as AUYourPoliticianCategory)
     case SupportedCountryCodes.CA:
       return getCAPoliticianCategoryDisplayName(category as CAYourPoliticianCategory)
+    case SupportedCountryCodes.EU:
+      return getEUPoliticianCategoryDisplayName(category as EUYourPoliticianCategory)
     case SupportedCountryCodes.GB:
       return getGBPoliticianCategoryDisplayName(category as GBYourPoliticianCategory)
   }
@@ -54,6 +62,9 @@ export function filterDTSIPeopleByPoliticalCategory(args: Props) {
     }
     case SupportedCountryCodes.CA: {
       return filterDTSIPeopleByCAPoliticalCategory(category as CAYourPoliticianCategory)
+    }
+    case SupportedCountryCodes.EU: {
+      return filterDTSIPeopleByEUPoliticalCategory(category as EUYourPoliticianCategory)
     }
     case SupportedCountryCodes.GB: {
       return filterDTSIPeopleByGBPoliticalCategory(category as GBYourPoliticianCategory)

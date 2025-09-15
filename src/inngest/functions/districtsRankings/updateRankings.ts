@@ -35,6 +35,8 @@ interface StateCodesByCountry {
   [SupportedCountryCodes.CA]: CAProvinceOrTerritoryCode[]
   [SupportedCountryCodes.GB]: GBRegion[]
   [SupportedCountryCodes.AU]: AUStateCode[]
+  // TODO(EU): Add EU country codes when applicable
+  [SupportedCountryCodes.EU]: string[]
 }
 
 const COUNTRY_CODE_TO_STATES_CODES_MAP: StateCodesByCountry = {
@@ -44,6 +46,7 @@ const COUNTRY_CODE_TO_STATES_CODES_MAP: StateCodesByCountry = {
   ) as CAProvinceOrTerritoryCode[],
   [SupportedCountryCodes.GB]: [...GB_NUTS_1_AREA_NAMES],
   [SupportedCountryCodes.AU]: Object.keys(AU_STATE_CODE_TO_DISPLAY_NAME_MAP) as AUStateCode[],
+  [SupportedCountryCodes.EU]: [],
 }
 
 const COUNTRIES_TO_UPDATE_RANKINGS_FOR = [
@@ -83,6 +86,7 @@ export const updateDistrictsRankings = inngest.createFunction(
       [SupportedCountryCodes.CA]: initialExecutionResults,
       [SupportedCountryCodes.GB]: initialExecutionResults,
       [SupportedCountryCodes.AU]: initialExecutionResults,
+      [SupportedCountryCodes.EU]: initialExecutionResults,
     }
 
     await step.run('Sync Referrals Without Address', async () => {

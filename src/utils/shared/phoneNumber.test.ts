@@ -47,6 +47,16 @@ const TEST_PHONE_NUMBERS: Record<SupportedCountryCodes, string[]> = {
     '421345678',
     '61421345678',
   ],
+  [SupportedCountryCodes.EU]: [
+    '+44 117 2345678',
+    '+44 117 234 5678',
+    '(117) 234 5678',
+    '44 117 234-5678',
+    '44 (117) 234 5678',
+    '+44117 2345678',
+    '1172345678',
+    '441172345678',
+  ],
 }
 
 const EXPECTED_PHONE_NUMBERS: Record<SupportedCountryCodes, string[]> = {
@@ -54,6 +64,7 @@ const EXPECTED_PHONE_NUMBERS: Record<SupportedCountryCodes, string[]> = {
   [SupportedCountryCodes.CA]: ['+12228883333'],
   [SupportedCountryCodes.GB]: ['+441172345678'],
   [SupportedCountryCodes.AU]: ['+61421345678'],
+  [SupportedCountryCodes.EU]: ['+441172345678'],
 }
 
 const NOT_SUPPORTED_PHONE_NUMBERS = ['+55 11 99999-9999', '+5511999999999', '+55(11)999999999']

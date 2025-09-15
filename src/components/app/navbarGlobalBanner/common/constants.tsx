@@ -11,4 +11,6 @@ export const GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE: Record<SupportedCountryCodes,
   [SupportedCountryCodes.AU]: <AuNavbarGlobalBanner />,
   [SupportedCountryCodes.GB]: <GbNavbarGlobalBanner />,
   [SupportedCountryCodes.CA]: <CaNavbarGlobalBanner />,
+  // TODO(EU): Add EU navbar global banner
+  [SupportedCountryCodes.EU]: null,
 }
