@@ -13,7 +13,7 @@ import type { CampaignMetadata } from './types'
 
 const CAMPAIGN_NAME = USUserActionEmailCampaignName.USDC_REWARDS_SEP_18_2025
 
-export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
+export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
 
 function getEmailBodyText(props?: GetTextProps & { address?: string }) {
   const fullNameSignOff = getFullNameSignOff({
@@ -36,7 +36,7 @@ I am your constituent and I am asking you to reject efforts by the banks to ban 
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
-  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName('senate')}`,
+  dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
   dialogSubtitle: 'Tell them to protect YOUR rewards',
   politicianCategory: 'senate',
   subject: "Protect My Rewards - Don't Legislate Away Consumer Choice",
