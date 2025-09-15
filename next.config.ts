@@ -7,7 +7,7 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const isSentrySourcemapsDisabled = process.env.SENTRY_SOURCEMAPS_DISABLED === 'true'
+const isSentrySourcemapsDisabled = process.env.DISABLE_SENTRY_SOURCEMAPS === 'true'
 
 const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
 const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
