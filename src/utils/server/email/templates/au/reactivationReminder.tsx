@@ -18,6 +18,7 @@ const AUReactivationReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.AU,
   ...keepUpTheFightSectionProps
 }: ReactivationReminderProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const AUReactivationReminderEmail = ({
   }
 
   return (
-    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -67,7 +72,7 @@ const AUReactivationReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.AU}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </AUWrapper>

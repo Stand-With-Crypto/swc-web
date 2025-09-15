@@ -8,14 +8,19 @@ import {
   WrapperProps,
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import {
+  getPhysicalMailingAddressByCountryCode,
+  getSWCLegalEntityNameByCountryCode,
+} from '@/utils/shared/legalUtils'
 
 export function AUWrapper({
   children,
   hrefSearchParams = {},
+  countryCode,
   ...props
 }: React.PropsWithChildren<WrapperProps>) {
   return (
-    <Wrapper {...props}>
+    <Wrapper {...props} countryCode={countryCode}>
       <HeaderSection>
         <Column>
           <HeaderSection.Logo href={buildTemplateInternalUrl('/au', hrefSearchParams)}>
@@ -42,8 +47,11 @@ export function AUWrapper({
       {children}
 
       <FooterSection
+        physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
+        privacyPolicyHref={buildTemplateInternalUrl('/au/privacy', hrefSearchParams)}
+        sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/au/email/misc/shield.svg', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/au', hrefSearchParams)}
+        swcHref={buildTemplateInternalUrl('/au', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="X/Twitter logo"

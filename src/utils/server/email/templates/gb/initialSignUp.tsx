@@ -18,6 +18,7 @@ const GBInitialSignUpEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.GB,
   ...keepUpTheFightSectionProps
 }: InitialSignUpEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const GBInitialSignUpEmail = ({
   }
 
   return (
-    <GBWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <GBWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -58,7 +63,7 @@ const GBInitialSignUpEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.GB}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </GBWrapper>
