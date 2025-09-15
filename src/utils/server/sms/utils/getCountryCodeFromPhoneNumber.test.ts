@@ -6,7 +6,10 @@ import {
   SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE,
   SUPPORTED_PHONE_NUMBER_COUNTRY_CODES,
 } from '@/utils/shared/phoneNumber'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
+import {
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 
 describe('getCountryCodeFromPhoneNumber', () => {
   it.each(ORDERED_SUPPORTED_COUNTRIES)(
@@ -15,7 +18,13 @@ describe('getCountryCodeFromPhoneNumber', () => {
       const phoneNumber = fakerFields.phoneNumber(
         SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE[countryCode],
       )
-      expect(getCountryCodeFromPhoneNumber(phoneNumber)).toBe(countryCode)
+
+      //TODO(EU): remove this when EU-specific phone handling is done
+      // EU phone numbers are mapped to GB, so we expect GB to be returned for EU
+      const expectedCountryCode =
+        countryCode === SupportedCountryCodes.EU ? SupportedCountryCodes.GB : countryCode
+
+      expect(getCountryCodeFromPhoneNumber(phoneNumber)).toBe(expectedCountryCode)
     },
   )
 
@@ -26,7 +35,12 @@ describe('getCountryCodeFromPhoneNumber', () => {
         .phoneNumber(SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE[countryCode])
         .replace(SUPPORTED_PHONE_NUMBER_COUNTRY_CODES[countryCode], '')
 
-      expect(getCountryCodeFromPhoneNumber(phoneNumber, countryCode)).toBe(countryCode)
+      //TODO(EU): remove this when EU-specific phone handling is done
+      // EU phone numbers are mapped to GB, so we expect GB to be returned for EU
+      const expectedCountryCode =
+        countryCode === SupportedCountryCodes.EU ? SupportedCountryCodes.GB : countryCode
+
+      expect(getCountryCodeFromPhoneNumber(phoneNumber, countryCode)).toBe(expectedCountryCode)
     },
   )
 })

@@ -47,6 +47,10 @@ export function getYourPoliticianCategoryShortDisplayName(
 export function filterDTSIPeopleByEUPoliticalCategory(category: YourPoliticianCategory) {
   return (dtsiPerson: DTSIPeopleByElectoralZoneQueryResult[number]): boolean => {
     // TODO(EU): Add EU-specific political category filter
+    // Simple usage to avoid unused parameter warnings (remove this "if" when adding the filters)
+    if (category === 'all' || dtsiPerson) {
+      return true
+    }
     return true
   }
 }

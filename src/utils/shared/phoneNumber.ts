@@ -17,7 +17,7 @@ export const SUPPORTED_COUNTRY_CODES_TO_LIBPHONENUMBER_CODE: Record<
   [SupportedCountryCodes.GB]: 'GB',
   [SupportedCountryCodes.AU]: 'AU',
   // TODO(EU): Update when EU-specific phone handling is needed
-  [SupportedCountryCodes.EU]: 'DE',
+  [SupportedCountryCodes.EU]: 'GB',
 }
 
 export const SUPPORTED_PHONE_NUMBER_COUNTRY_CODES: Record<SupportedCountryCodes, string> = {
@@ -26,7 +26,7 @@ export const SUPPORTED_PHONE_NUMBER_COUNTRY_CODES: Record<SupportedCountryCodes,
   [SupportedCountryCodes.GB]: '+44',
   [SupportedCountryCodes.AU]: '+61',
   // TODO(EU): Update when EU-specific phone handling is needed
-  [SupportedCountryCodes.EU]: '+999',
+  [SupportedCountryCodes.EU]: '+44',
 }
 
 // https://stackoverflow.com/a/43687969
