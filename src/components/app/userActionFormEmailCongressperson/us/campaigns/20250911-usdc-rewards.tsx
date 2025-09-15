@@ -1,5 +1,4 @@
 import {
-  getConstituentIntroduction,
   getFullNameSignOff,
   getRepIntro,
   GetTextProps,
