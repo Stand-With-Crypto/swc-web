@@ -21,7 +21,6 @@ function getEmailBodyText(props?: GetTextProps & { address?: string }) {
     firstName: props?.firstName,
     lastName: props?.lastName,
   })
-  const maybeDistrictIntro = getConstituentIntroduction(props?.location)
 
   return `${getRepIntro({ dtsiLastName: props?.dtsiLastName })}
   
