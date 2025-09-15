@@ -14,14 +14,12 @@ export type CampaignMetadataMap<K extends string> = Partial<Record<K, CampaignMe
 interface UserActionViewKeyPageDeeplinkWrapperProps<K extends string> {
   campaignMetadataMap: CampaignMetadataMap<K>
   countryCode: SupportedCountryCodes
-  minWaitTimeInSeconds?: number
   searchParams: SearchParams | undefined
 }
 
 export async function UserActionViewKeyPageDeeplinkWrapper<K extends string>({
   campaignMetadataMap,
   countryCode,
-  minWaitTimeInSeconds,
   searchParams,
 }: UserActionViewKeyPageDeeplinkWrapperProps<K>) {
   const campaignName = (searchParams?.campaignName ||
@@ -41,7 +39,6 @@ export async function UserActionViewKeyPageDeeplinkWrapper<K extends string>({
       campaignMetadata={campaignMetadata}
       campaignName={campaignName}
       countryCode={countryCode}
-      minWaitTimeInSeconds={minWaitTimeInSeconds}
     />
   )
 }

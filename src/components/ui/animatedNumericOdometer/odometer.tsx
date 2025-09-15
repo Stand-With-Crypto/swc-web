@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef } from 'react'
+import type { ElementType } from 'react'
 
 import { cn } from '@/utils/web/cn'
 
@@ -12,6 +13,7 @@ export interface AnimatedNumericOdometerProps {
   size: number
   className?: string
   numberSpanClassName?: string
+  as?: ElementType
 }
 
 export function AnimatedNumericOdometer({
@@ -19,6 +21,7 @@ export function AnimatedNumericOdometer({
   size,
   className,
   numberSpanClassName,
+  as: Component = 'p',
 }: AnimatedNumericOdometerProps) {
   const spanArray = useRef<(HTMLSpanElement | null)[]>([])
 
@@ -38,7 +41,7 @@ export function AnimatedNumericOdometer({
   }, [numeralArray])
 
   return (
-    <h1
+    <Component
       className={cn(styles.odometer, className)}
       style={{
         fontFeatureSettings: `'tnum', 'lnum'`,
@@ -86,6 +89,6 @@ export function AnimatedNumericOdometer({
           )
         })
       })}
-    </h1>
+    </Component>
   )
 }

@@ -7,6 +7,7 @@ import {
   UserActionEmail,
   UserActionEmailRecipient,
   UserActionOptIn,
+  UserActionPetition,
   UserActionPoll,
   UserActionPollAnswer,
   UserActionRefer,
@@ -42,6 +43,11 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
+  userActionPetition:
+    | (UserActionPetition & {
+        address: Address
+      })
+    | null
   userActionVoterRegistration: UserActionVoterRegistration | null
   userActionTweetAtPerson: UserActionTweetAtPerson | null
   userActionRsvpEvent: UserActionRsvpEvent | null
@@ -160,6 +166,15 @@ interface SensitiveDataClientUserActionClaimNft {
   actionType: typeof UserActionType.CLAIM_NFT
 }
 
+interface SensitiveDataClientUserActionPetition {
+  actionType: typeof UserActionType.SIGN_PETITION
+  email: string
+  firstName: string
+  lastName: string
+  address: ClientAddress | null
+  datetimeSigned: string
+}
+
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -188,6 +203,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionPoll
       | SensitiveDataClientUserActionViewKeyPage
       | SensitiveDataClientUserActionClaimNft
+      | SensitiveDataClientUserActionPetition
     )
 >
 
@@ -375,6 +391,22 @@ export const getSensitiveDataClientUserAction = ({
         path,
       }
       return getClientModel({ ...sharedProps, ...viewKeyPageFields })
+    },
+    [UserActionType.SIGN_PETITION]: () => {
+      const { email, firstName, lastName, address, datetimeSigned } = getRelatedModel(
+        record,
+        'userActionPetition',
+      )
+
+      const petitionFields: SensitiveDataClientUserActionPetition = {
+        actionType: UserActionType.SIGN_PETITION,
+        email,
+        firstName,
+        lastName,
+        address: address ? getClientAddress(address) : null,
+        datetimeSigned: datetimeSigned.toISOString(),
+      }
+      return getClientModel({ ...sharedProps, ...petitionFields })
     },
     [UserActionType.LINKEDIN]: () => {
       return getClientModel({ ...sharedProps, actionType: UserActionType.LINKEDIN })

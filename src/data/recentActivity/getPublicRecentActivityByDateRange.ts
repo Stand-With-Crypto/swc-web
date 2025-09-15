@@ -66,6 +66,11 @@ const fetchFromPrisma = async (config: RecentActivityByDateRangeConfig) => {
             },
           },
           userActionViewKeyPage: true,
+          userActionPetition: {
+            include: {
+              address: true,
+            },
+          },
         },
         where,
       })
