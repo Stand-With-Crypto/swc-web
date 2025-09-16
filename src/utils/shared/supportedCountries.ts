@@ -22,6 +22,7 @@ export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLoca
   [SupportedCountryCodes.GB]: SupportedLocale.EN_US,
   [SupportedCountryCodes.CA]: SupportedLocale.EN_US,
   [SupportedCountryCodes.AU]: SupportedLocale.EN_US,
+  //TODO(EU): This need to be dynamic based on the EU country
   [SupportedCountryCodes.EU]: SupportedLocale.EN_US,
 }
 
