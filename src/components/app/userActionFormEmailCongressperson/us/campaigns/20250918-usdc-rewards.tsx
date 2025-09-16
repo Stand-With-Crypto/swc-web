@@ -25,7 +25,7 @@ export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
   dialogTitle: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
   dialogSubtitle: 'Tell them to protect YOUR rewards',
-  politicianCategory: 'senate',
+  politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
   subject: "Protect My Rewards - Don't Legislate Away Consumer Choice",
   getEmailBodyText,
 }
