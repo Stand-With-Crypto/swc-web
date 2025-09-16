@@ -4,6 +4,7 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 
+//TODO(EU): Enable translated strings here
 export const EU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto EU',

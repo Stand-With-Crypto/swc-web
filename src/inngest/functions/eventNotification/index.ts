@@ -13,6 +13,7 @@ const countryCodeToTimezoneMap: Record<SupportedCountryCodes, string> = {
   [SupportedCountryCodes.GB]: 'Europe/London',
   [SupportedCountryCodes.CA]: 'America/Toronto',
   [SupportedCountryCodes.AU]: 'Australia/Sydney',
+  //TODO(EU): Validate which timezone is best for EU
   [SupportedCountryCodes.EU]: 'Europe/London',
 }
 

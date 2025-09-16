@@ -2,6 +2,8 @@ import { DTSIPeopleByElectoralZoneQueryResult } from '@/data/dtsi/queries/queryD
 
 export type YourPoliticianCategory = 'mep' | 'commissioner' | 'all'
 
+//TODO(EU): Enable translated strings in all the functions below
+
 export const YOUR_POLITICIAN_CATEGORY_OPTIONS: readonly YourPoliticianCategory[] = [
   'mep',
   'commissioner',
