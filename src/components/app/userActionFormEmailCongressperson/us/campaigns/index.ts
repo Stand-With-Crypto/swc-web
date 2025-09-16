@@ -40,7 +40,7 @@ const EMAIL_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
   [USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025]: require('./20250814-day-of-action')
     .campaignMetadata,
   [USUserActionEmailCampaignName.USDC_REWARDS_SEP_18_2025]:
-    require('./20250911-usdc-rewards').campaignMetadata,
+    require('./20250918-usdc-rewards').campaignMetadata,
 }
 
 export function getUSEmailActionCampaignMetadata(campaignName: USUserActionEmailCampaignName) {
