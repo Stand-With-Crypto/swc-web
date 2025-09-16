@@ -10,6 +10,10 @@ interface EmailViaCapitolCanaryRequest {
   advocateid: number
   campaignid: number
   emailSubject: string
+  /**
+   * DO NOT include an introduction or signature (e.g., Dear Legislator, or Sincerely, John Doe).
+   * These will be added automatically.
+   */
   emailMessage: string
 
   // Hardcoded type to email.
