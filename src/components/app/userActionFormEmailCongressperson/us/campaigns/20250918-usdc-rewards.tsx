@@ -14,6 +14,7 @@ function getEmailBodyText() {
   return `Thank you for all the progress that Congress has made in providing rules of the road for digital assets, allowing for responsible innovation and growth while also protecting consumers. First, with huge bipartisan support, the GENIUS Act was signed into law. And the House recently advanced CLARITY, digital asset market structure legislation that also has strong bipartisan support.
 
 But now, the big banks are asking Congress to reverse law by bailing them out, not because they want to protect consumers, but because they want to stifle competition.
+
 You and your colleagues already litigated this issue when Congress passed GENIUS. Lawmakers chose to protect rewards because you know they are for consumers. A ban on rewards would stop consumers from earning value on fully backed digital dollars, even as banks lobbied to protect their credit card rewards as recently as last year.
 
 Rewards programs mean more innovation and better financial products for everyday Americans. They’re transparent, automated, and give consumers a fairer return on their money. Banks want a bailout, not competition, but consumers deserve choice.
