@@ -24,6 +24,7 @@ export const zodQuestionnaireSchemaValidation = z.object({
   questionnaireAu: z.array(zodQuestionnaireAnswerSchema),
   questionnaireCa: z.array(zodQuestionnaireAnswerSchema),
   questionnaireGb: z.array(zodQuestionnaireAnswerSchema),
+  questionnaireEu: z.array(zodQuestionnaireAnswerSchema),
 })
 
 export type SWCQuestionnaireEntry = Zod.infer<typeof zodQuestionnaireSchemaValidation>

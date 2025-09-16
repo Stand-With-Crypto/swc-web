@@ -5,6 +5,7 @@ export enum SupportedCountryCodes {
   GB = 'gb',
   CA = 'ca',
   AU = 'au',
+  EU = 'eu',
 }
 
 export const DEFAULT_SUPPORTED_COUNTRY_CODE = SupportedCountryCodes.US
@@ -13,6 +14,7 @@ export const ORDERED_SUPPORTED_COUNTRIES: readonly SupportedCountryCodes[] = [
   SupportedCountryCodes.GB,
   SupportedCountryCodes.CA,
   SupportedCountryCodes.AU,
+  SupportedCountryCodes.EU,
 ]
 
 export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLocale> = {
@@ -20,6 +22,8 @@ export const COUNTRY_CODE_TO_LOCALE: Record<SupportedCountryCodes, SupportedLoca
   [SupportedCountryCodes.GB]: SupportedLocale.EN_US,
   [SupportedCountryCodes.CA]: SupportedLocale.EN_US,
   [SupportedCountryCodes.AU]: SupportedLocale.EN_US,
+  //TODO(EU): This need to be dynamic based on the EU country
+  [SupportedCountryCodes.EU]: SupportedLocale.EN_US,
 }
 
 // Two lowercase letters (e.g., "us", "gb")

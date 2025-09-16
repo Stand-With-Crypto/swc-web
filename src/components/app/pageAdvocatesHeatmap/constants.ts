@@ -22,6 +22,7 @@ interface RegionCoords {
   [SupportedCountryCodes.GB]: GBStateCoords
   [SupportedCountryCodes.CA]: never
   [SupportedCountryCodes.AU]: never
+  [SupportedCountryCodes.EU]: never
 }
 
 export type AreaCoordinates = USStateCoords | GBStateCoords

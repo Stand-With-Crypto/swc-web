@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { NextRequest, NextResponse } from 'next/server'
-import { ZodTypeAny } from 'zod'
+import { any as zodAny, ZodTypeAny } from 'zod'
 
 import { getDistrictRank } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -20,6 +20,8 @@ const ZOD_SCHEMA_BY_COUNTRY_CODE_MAP: Record<SupportedCountryCodes, ZodTypeAny> 
   [SupportedCountryCodes.AU]: zodAUStateDistrict,
   [SupportedCountryCodes.CA]: zodCAProvinceDistrict,
   [SupportedCountryCodes.GB]: zodGbRegionConstituency,
+  // TODO(EU): Add EU schema if applies
+  [SupportedCountryCodes.EU]: zodAny(),
 }
 
 export async function GET(

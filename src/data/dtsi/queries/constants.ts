@@ -42,6 +42,10 @@ export const PERSON_ROLE_GROUPINGS_FOR_ALL_PEOPLE_QUERY: Record<
     DTSI_PersonGrouping.NEXT_CA_SENATE,
     DTSI_PersonGrouping.RUNNING_FOR_CA_SENATE,
   ],
+  [SupportedCountryCodes.EU]: [
+    // TODO(EU): Add EU-specific person groupings when they become available in DTSI
+    // For now, using an empty array as placeholder
+  ],
 }
 
 export const PERSON_ROLE_GROUPINGS_FOR_STATE_SPECIFIC_QUERY: Record<
@@ -64,6 +68,10 @@ export const PERSON_ROLE_GROUPINGS_FOR_STATE_SPECIFIC_QUERY: Record<
     DTSI_PersonGrouping.RUNNING_FOR_CA_SENATE,
     DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS,
   ],
+  [SupportedCountryCodes.EU]: [
+    // TODO(EU): Add EU-specific state-specific person groupings when they become available in DTSI
+    // For now, using an empty array as placeholder
+  ],
 }
 
 export const PERSON_ROLE_GROUPINGS_FOR_SENATE_SPECIFIC_QUERY: Record<
@@ -74,6 +82,9 @@ export const PERSON_ROLE_GROUPINGS_FOR_SENATE_SPECIFIC_QUERY: Record<
   [SupportedCountryCodes.AU]: [DTSI_PersonGrouping.RUNNING_FOR_AU_SENATE],
   [SupportedCountryCodes.GB]: [DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_LORDS],
   [SupportedCountryCodes.CA]: [DTSI_PersonGrouping.RUNNING_FOR_CA_SENATE],
+  [SupportedCountryCodes.EU]: [
+    // TODO(EU): Add EU-specific senate-like groupings when they become available in DTSI
+  ],
 }
 
 export const PERSON_ROLE_GROUPINGS_FOR_HOUSE_SPECIFIC_QUERY: Record<
@@ -84,6 +95,9 @@ export const PERSON_ROLE_GROUPINGS_FOR_HOUSE_SPECIFIC_QUERY: Record<
   [SupportedCountryCodes.AU]: [DTSI_PersonGrouping.RUNNING_FOR_AU_HOUSE_OF_REPS],
   [SupportedCountryCodes.GB]: [DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_COMMONS],
   [SupportedCountryCodes.CA]: [DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS],
+  [SupportedCountryCodes.EU]: [
+    // TODO(EU): Add EU-specific house-like groupings when they become available in DTSI
+  ],
 }
 
 export const PERSON_ROLE_GROUPINGS_FOR_DISTRICT_SPECIFIC_QUERY: Record<
@@ -94,6 +108,9 @@ export const PERSON_ROLE_GROUPINGS_FOR_DISTRICT_SPECIFIC_QUERY: Record<
   [SupportedCountryCodes.AU]: [DTSI_PersonGrouping.RUNNING_FOR_AU_HOUSE_OF_REPS],
   [SupportedCountryCodes.GB]: [DTSI_PersonGrouping.RUNNING_FOR_UK_HOUSE_OF_COMMONS],
   [SupportedCountryCodes.CA]: [DTSI_PersonGrouping.RUNNING_FOR_CA_HOUSE_OF_COMMONS],
+  [SupportedCountryCodes.EU]: [
+    // TODO(EU): Add EU-specific district-like groupings when they become available in DTSI
+  ],
 }
 
 export const PERSON_ROLE_GROUPINGS_FOR_CURRENT_PEOPLE_BY_CONGRESS_DISTRICT_QUERY: Record<
@@ -118,5 +135,8 @@ export const PERSON_ROLE_GROUPINGS_FOR_CURRENT_PEOPLE_BY_CONGRESS_DISTRICT_QUERY
   [SupportedCountryCodes.CA]: [
     DTSI_PersonGrouping.CURRENT_CA_HOUSE_OF_COMMONS,
     DTSI_PersonGrouping.CURRENT_CA_SENATE,
+  ],
+  [SupportedCountryCodes.EU]: [
+    // TODO(EU): Add EU-specific current people by congress district groupings when they become available in DTSI
   ],
 }

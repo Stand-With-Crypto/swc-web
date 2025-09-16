@@ -43,4 +43,11 @@ export const COUNTRY_SPECIFIC_LOGIN_CONTENT: Record<
     footerContent: AUFooterContent,
     iconSrc: '/au/logo/shield.svg',
   },
+  // TODO(EU): Add footer content
+  [SupportedCountryCodes.EU]: {
+    title: DEFAULT_TITLE,
+    subtitle: 'Join the Stand With Crypto movement to make your voice heard in the European Union',
+    footerContent: () => <></>,
+    iconSrc: '',
+  },
 }

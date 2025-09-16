@@ -14,6 +14,7 @@ const COUNTRY_VOTER_GUIDE_CTAS: Record<SupportedCountryCodes, VoterGuideStep[]> 
   [SupportedCountryCodes.CA]: CA_VOTER_GUIDE_CTAS,
   [SupportedCountryCodes.GB]: GB_VOTER_GUIDE_CTAS,
   [SupportedCountryCodes.AU]: AU_VOTER_GUIDE_CTAS,
+  [SupportedCountryCodes.EU]: [], // TODO(EU): Add EU voter guide CTAs if applicable
 }
 
 export function getVoterGuideCTAsByCountry(countryCode: SupportedCountryCodes) {

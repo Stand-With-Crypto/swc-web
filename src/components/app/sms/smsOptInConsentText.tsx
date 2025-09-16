@@ -10,6 +10,8 @@ const SMS_OPT_IN_CONSENT: Record<SupportedCountryCodes, string> = {
     'I authorize SWC International Ltd and its service providers to contact me at this number via text (SMS) for cryptocurrency advocacy purposes. Message and data rates may apply. To opt-out at any time reply "STOP".',
   [SupportedCountryCodes.AU]:
     'I authorize SWC International Ltd and its service providers to contact me at this number via text (SMS) for cryptocurrency advocacy purposes. Message and data rates may apply. To opt-out at any time reply "STOP".',
+  [SupportedCountryCodes.EU]:
+    'I authorize SWC International Ltd and its service providers to contact me at this number via text (SMS) for cryptocurrency advocacy purposes. Message and data rates may apply. To opt-out at any time reply "STOP".',
 }
 
 export function SMSOptInConsentText({

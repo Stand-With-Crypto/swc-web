@@ -160,6 +160,7 @@ enum SupportedCountryCodes {
   GB = 'gb',
   CA = 'ca',
   AU = 'au',
+  EU = 'eu',
 }
 
 const COUNTRY_CODE_REGEX_PATTERN = new RegExp(

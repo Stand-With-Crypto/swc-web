@@ -7,6 +7,10 @@ import {
   getCAReferralsCountByDistrict,
 } from '@/utils/server/districtRankings/ca/getRankingData'
 import {
+  getEUAdvocatesCountByDistrict,
+  getEUReferralsCountByDistrict,
+} from '@/utils/server/districtRankings/eu/getRankingData'
+import {
   getGBAdvocatesCountByConstituency,
   getGBReferralsCountByConstituency,
 } from '@/utils/server/districtRankings/gb/getRankingData'
@@ -32,6 +36,8 @@ interface StateCode {
   [SupportedCountryCodes.GB]: GBRegion
   [SupportedCountryCodes.CA]: CAProvinceOrTerritoryCode
   [SupportedCountryCodes.AU]: AUStateCode
+  // TODO(EU): Add EU country codes when applicable
+  [SupportedCountryCodes.EU]: string
 }
 
 type GetAdvocatesFunction<T extends SupportedCountryCodes> = (
@@ -45,6 +51,7 @@ const GET_ADVOCATES_BY_COUNTRY_CODE_MAP: {
   [SupportedCountryCodes.GB]: getGBAdvocatesCountByConstituency,
   [SupportedCountryCodes.CA]: getCAAdvocatesCountByDistrict,
   [SupportedCountryCodes.AU]: getAUAdvocatesCountByDistrict,
+  [SupportedCountryCodes.EU]: getEUAdvocatesCountByDistrict,
 }
 
 const GET_REFERRALS_BY_COUNTRY_CODE_MAP: {
@@ -54,6 +61,7 @@ const GET_REFERRALS_BY_COUNTRY_CODE_MAP: {
   [SupportedCountryCodes.GB]: getGBReferralsCountByConstituency,
   [SupportedCountryCodes.CA]: getCAReferralsCountByDistrict,
   [SupportedCountryCodes.AU]: getAUReferralsCountByDistrict,
+  [SupportedCountryCodes.EU]: getEUReferralsCountByDistrict,
 }
 
 export async function getAdvocatesCountByDistrict<T extends SupportedCountryCodes>(

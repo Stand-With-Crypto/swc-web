@@ -192,6 +192,82 @@ const MOCK_CITIES_BY_COUNTRY: Record<SupportedCountryCodes, string[]> = {
     'Bathurst, NSW',
     'Albany, WA',
   ],
+  [SupportedCountryCodes.EU]: [
+    // Germany
+    'Berlin, DE',
+    'Munich, DE',
+    // France
+    'Paris, FR',
+    'Lyon, FR',
+    // Italy
+    'Rome, IT',
+    'Milan, IT',
+    // Spain
+    'Madrid, ES',
+    'Barcelona, ES',
+    // Netherlands
+    'Amsterdam, NL',
+    'Rotterdam, NL',
+    // Poland
+    'Warsaw, PL',
+    'Krakow, PL',
+    // Belgium
+    'Brussels, BE',
+    'Antwerp, BE',
+    // Austria
+    'Vienna, AT',
+    'Graz, AT',
+    // Portugal
+    'Lisbon, PT',
+    'Porto, PT',
+    // Czech Republic
+    'Prague, CZ',
+    'Brno, CZ',
+    // Hungary
+    'Budapest, HU',
+    'Debrecen, HU',
+    // Romania
+    'Bucharest, RO',
+    'Cluj-Napoca, RO',
+    // Sweden
+    'Stockholm, SE',
+    'Gothenburg, SE',
+    // Denmark
+    'Copenhagen, DK',
+    'Aarhus, DK',
+    // Finland
+    'Helsinki, FI',
+    'Tampere, FI',
+    // Ireland
+    'Dublin, IE',
+    'Cork, IE',
+    // Greece
+    'Athens, GR',
+    'Thessaloniki, GR',
+    // Croatia
+    'Zagreb, HR',
+    'Split, HR',
+    // Slovenia
+    'Ljubljana, SI',
+    // Slovakia
+    'Bratislava, SK',
+    // Bulgaria
+    'Sofia, BG',
+    'Plovdiv, BG',
+    // Lithuania
+    'Vilnius, LT',
+    'Kaunas, LT',
+    // Latvia
+    'Riga, LV',
+    // Estonia
+    'Tallinn, EE',
+    // Luxembourg
+    'Luxembourg City, LU',
+    // Malta
+    'Valletta, MT',
+    // Cyprus
+    'Nicosia, CY',
+  ],
 }
 
 export interface MockRecentSignatory {

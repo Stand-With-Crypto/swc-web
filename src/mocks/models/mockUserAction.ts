@@ -17,6 +17,7 @@ const activeActionTypesByCountry: Record<SupportedCountryCodes, readonly UserAct
   [SupportedCountryCodes.CA]: [UserActionType.OPT_IN, UserActionType.TWEET],
   [SupportedCountryCodes.GB]: [UserActionType.OPT_IN, UserActionType.TWEET],
   [SupportedCountryCodes.AU]: [UserActionType.OPT_IN, UserActionType.TWEET],
+  [SupportedCountryCodes.EU]: [UserActionType.OPT_IN, UserActionType.TWEET],
 }
 
 export function mockCreateUserActionInput({

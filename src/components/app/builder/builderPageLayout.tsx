@@ -14,6 +14,7 @@ const navbarConfigsByCountry: Record<SupportedCountryCodes, Promise<NavbarProps>
   [DEFAULT_SUPPORTED_COUNTRY_CODE]: import('@/app/[countryCode]/config').then(
     module => module.navbarConfig,
   ),
+  [SupportedCountryCodes.EU]: import('@/app/eu/config').then(module => module.navbarConfig),
 }
 
 const footerConfigsByCountry: Record<SupportedCountryCodes, Promise<FooterProps>> = {
@@ -23,6 +24,7 @@ const footerConfigsByCountry: Record<SupportedCountryCodes, Promise<FooterProps>
   [DEFAULT_SUPPORTED_COUNTRY_CODE]: import('@/app/[countryCode]/config').then(
     module => module.footerConfig,
   ),
+  [SupportedCountryCodes.EU]: import('@/app/eu/config').then(module => module.footerConfig),
 }
 
 const getNavbarConfig = (countryCode: SupportedCountryCodes) => navbarConfigsByCountry[countryCode]

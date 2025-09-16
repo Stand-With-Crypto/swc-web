@@ -51,6 +51,13 @@ const COUNTRY_CODE_TO_ZOD_STATE_MAP: Record<
       required_error: 'Please enter a valid AU state',
     },
   },
+  [SupportedCountryCodes.EU]: {
+    // TODO(EU): Add countries map if applies
+    stateMap: {},
+    zodOptions: {
+      required_error: 'Please enter a valid EU country',
+    },
+  },
 }
 
 type ZodStateReturn<T extends SupportedCountryCodes> = T extends SupportedCountryCodes.US

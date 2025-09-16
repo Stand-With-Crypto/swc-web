@@ -1,5 +1,6 @@
 import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
 import { CaRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/ca/recentActivityAndLeaderboardTabs'
+import { EuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/eu/recentActivityAndLeaderboardTabs'
 import { GbRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/gb/recentActivityAndLeaderboardTabs'
 import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -56,6 +57,10 @@ const COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS: Record<
     state: 'province',
     district: 'constituency',
   },
+  [SupportedCountryCodes.EU]: {
+    state: 'country',
+    district: 'constituency',
+  },
 }
 
 type RecentActivityAndLeaderboardTabs =
@@ -63,7 +68,7 @@ type RecentActivityAndLeaderboardTabs =
   | AuRecentActivityAndLeaderboardTabs
   | CaRecentActivityAndLeaderboardTabs
   | GbRecentActivityAndLeaderboardTabs
-
+  | EuRecentActivityAndLeaderboardTabs
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `/${countryCode}`

@@ -58,3 +58,11 @@ export const caExternalUrls = {
   emailFeedback: () => 'info@swcinternational.org',
   quorumPrivacyPolicy: () => 'https://www.quorum.us/privacy-policy/',
 }
+
+// TODO(EU): Add EU external URLs
+export const euExternalUrls = {
+  twitter: () => 'https://x.com/StandWCrypto_EU',
+  linkedin: () => 'https://www.linkedin.com/company/stand-with-crypto-eu',
+  emailFeedback: () => 'info@swcinternational.org',
+  quorumPrivacyPolicy: () => 'https://www.quorum.us/privacy-policy/',
+}

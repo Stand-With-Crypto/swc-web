@@ -18,6 +18,7 @@ const PEOPLE_OUTSIDE_FILTERS_TO_INCLUDE: Record<SupportedCountryCodes, string[]>
   [SupportedCountryCodes.CA]: [],
   [SupportedCountryCodes.GB]: [],
   [SupportedCountryCodes.AU]: [],
+  [SupportedCountryCodes.EU]: [],
 }
 
 const query = /* GraphQL */ `
