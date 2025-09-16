@@ -1,6 +1,5 @@
 import {
   getFullNameSignOff,
-  getRepIntro,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
@@ -21,8 +20,8 @@ function getEmailBodyText(props?: GetTextProps) {
     lastName: props?.lastName,
   })
 
-  return `${getRepIntro({ dtsiLastName: props?.dtsiLastName })}
-  
+  return `Dear Senator
+
 Thank you for all the progress that Congress has made in providing rules of the road for digital assets, allowing for responsible innovation and growth while also protecting consumers. First, with huge bipartisan support, the GENIUS Act was signed into law. And the House recently advanced CLARITY, digital asset market structure legislation that also has strong bipartisan support. 
 
 But now, the big banks are asking Congress to reverse law by bailing them out, not because they want to protect consumers, but because they want to stifle competition. 
