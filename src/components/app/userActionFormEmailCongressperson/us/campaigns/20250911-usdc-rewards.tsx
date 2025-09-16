@@ -15,7 +15,7 @@ const CAMPAIGN_NAME = USUserActionEmailCampaignName.USDC_REWARDS_SEP_18_2025
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
 
-function getEmailBodyText(props?: GetTextProps & { address?: string }) {
+function getEmailBodyText(props?: GetTextProps) {
   const fullNameSignOff = getFullNameSignOff({
     firstName: props?.firstName,
     lastName: props?.lastName,
