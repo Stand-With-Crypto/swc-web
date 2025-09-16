@@ -1,7 +1,3 @@
-import {
-  getFullNameSignOff,
-  GetTextProps,
-} from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/us'
 
@@ -11,12 +7,7 @@ const CAMPAIGN_NAME = USUserActionEmailCampaignName.CLARITY_ACT_SENATE_JUL_17_20
 
 export const EMAIL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
 
-function getEmailBodyText(props?: GetTextProps & { address?: string }) {
-  const fullNameSignOff = getFullNameSignOff({
-    firstName: props?.firstName,
-    lastName: props?.lastName,
-  })
-
+function getEmailBodyText() {
   return `On behalf of more than 52 million American crypto owners and counting—I urge you to support the Digital Asset Market Structure Clarity (CLARITY) Act in the Senate. The CLARITY Act, which passed the House with overwhelming bipartisan support, would establish a clear, common-sense regulatory framework for digital assets—one that protects consumers, fosters innovation, and ensures the U.S. remains a global economic leader.
 
 For too long, innovators in the crypto industry have had to navigate a patchwork of outdated regulations never intended for blockchain technology. This lack of clarity hasn’t just stifled innovation—it’s hindered broader U.S. economic growth. Since 2018, the U.S. share of global blockchain developers has dropped by approximately 14%, falling to just 26% in 2023. Regulatory uncertainty has pushed developers overseas, discouraged businesses from embracing blockchain, and limited opportunities for financial inclusion. Most critically, it has left consumers vulnerable to fraud  instability and systemic risk in the digital asset markets.
@@ -27,14 +18,14 @@ The CLARITY Act provides this fix. It outlines responsibilities between federal 
 
 Members of Congress from both parties have shown a commitment to establishing the clear rules of the road needed to unlock the crypto industry’s potential. I ask that you help maintain this momentum by supporting market structure legislation. 
 
-Thank you for helping to advance responsible American innovation.${fullNameSignOff}`
+Thank you for helping to advance responsible American innovation.`
 }
 
 export const campaignMetadata: CampaignMetadata = {
   campaignName: CAMPAIGN_NAME,
   dialogTitle: 'Email Your Senator',
   dialogSubtitle: 'Support the CLARITY Act in the Senate',
-  politicianCategory: 'senate',
+  politicianCategory: EMAIL_FLOW_POLITICIANS_CATEGORY,
   subject: 'I SUPPORT CLARITY',
   getEmailBodyText,
 }
