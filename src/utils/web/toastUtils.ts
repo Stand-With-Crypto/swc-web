@@ -3,11 +3,7 @@ import { isError } from 'lodash-es'
 import { toast } from 'sonner'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
-import {
-  formatErrorStatus,
-  GENERIC_ERROR_DESCRIPTION,
-  GENERIC_ERROR_TITLE,
-} from '@/utils/web/errorUtils'
+import { formatErrorStatus, getTranslatedGenericError } from '@/utils/web/errorUtils'
 
 export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
   if (!isError(error)) {
@@ -23,7 +19,7 @@ export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
   }
   if (error instanceof FetchReqError) {
     const formattedErrorStatus = formatErrorStatus(error.response.status)
-    toast.error(GENERIC_ERROR_TITLE, {
+    toast.error(getTranslatedGenericError().genericErrorTitle, {
       description: formattedErrorStatus,
       duration: 5000,
     })
@@ -33,8 +29,10 @@ export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
 }
 
 export const toastGenericError = () => {
-  toast.error(GENERIC_ERROR_TITLE, {
-    description: GENERIC_ERROR_DESCRIPTION,
+  const { genericErrorTitle, genericErrorDescription } = getTranslatedGenericError()
+
+  toast.error(genericErrorTitle, {
+    description: genericErrorDescription,
     duration: 5000,
   })
 }
