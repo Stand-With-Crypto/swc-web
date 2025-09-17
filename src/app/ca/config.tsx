@@ -10,83 +10,87 @@ const countryCode = SupportedCountryCodes.CA
 
 const urls = getIntlUrls(countryCode)
 
-export const navbarConfig: NavbarProps = {
-  countryCode,
-  logo: {
-    src: '/ca/logo/shield-text.svg',
-    width: 120,
-    height: 40,
-  },
-  items: [
-    {
-      href: urls.politiciansHomepage(),
-      text: 'Politician scores',
+export function getNavbarConfig(): NavbarProps {
+  return {
+    countryCode,
+    logo: {
+      src: '/ca/logo/shield-text.svg',
+      width: 120,
+      height: 40,
     },
-    {
-      href: urls.events(),
-      text: 'Events',
-    },
-    {
-      href: urls.polls(),
-      text: 'Polls',
-    },
-    {
-      href: urls.manifesto(),
-      text: 'Manifesto',
-    },
-    {
-      text: 'Resources',
-      children: [
-        {
-          href: urls.referrals(),
-          text: 'Referrals',
-          icon: <Icons.ReferralsIcon />,
-        },
-        {
-          href: urls.community(),
-          text: 'Community',
-          icon: <Icons.CommunityIcon />,
-        },
-        {
-          href: urls.partners(),
-          text: 'Partners',
-          icon: <Icons.PartnersIcon />,
-        },
-      ],
-    },
-  ],
+    items: [
+      {
+        href: urls.politiciansHomepage(),
+        text: 'Politician scores',
+      },
+      {
+        href: urls.events(),
+        text: 'Events',
+      },
+      {
+        href: urls.polls(),
+        text: 'Polls',
+      },
+      {
+        href: urls.manifesto(),
+        text: 'Manifesto',
+      },
+      {
+        text: 'Resources',
+        children: [
+          {
+            href: urls.referrals(),
+            text: 'Referrals',
+            icon: <Icons.ReferralsIcon />,
+          },
+          {
+            href: urls.community(),
+            text: 'Community',
+            icon: <Icons.CommunityIcon />,
+          },
+          {
+            href: urls.partners(),
+            text: 'Partners',
+            icon: <Icons.PartnersIcon />,
+          },
+        ],
+      },
+    ],
+  }
 }
 
-export const footerConfig: FooterProps = {
-  countryCode,
-  title: 'Join the movement for the future of crypto',
-  subtitle: 'Protect the future of crypto in Canada. #standwithcrypto',
-  footerBanner: (
-    <div className="pointer-events-none min-w-full select-none">
-      <img
-        alt="Footer Banner"
-        className="mx-auto w-full max-w-[1920px]"
-        src="/ca/footer-banner.svg"
-      />
-      <img alt="Footer Banner Divider" className="w-full" src="/ca/footer-banner-divider.png" />
-    </div>
-  ),
-  links: [
-    { href: urls.termsOfService(), text: 'Terms of service' },
-    {
-      href: urls.privacyPolicy(),
-      text: 'Privacy',
-    },
-  ],
-  socialLinks: [
-    {
-      href: caExternalUrls.twitter(),
-      text: 'Twitter / X',
-    },
-    {
-      href: caExternalUrls.linkedin(),
-      text: 'LinkedIn',
-    },
-  ],
-  sendFeedbackLink: caExternalUrls.emailFeedback(),
+export function getFooterConfig(): FooterProps {
+  return {
+    countryCode,
+    title: 'Join the movement for the future of crypto',
+    subtitle: 'Protect the future of crypto in Canada. #standwithcrypto',
+    footerBanner: (
+      <div className="pointer-events-none min-w-full select-none">
+        <img
+          alt="Footer Banner"
+          className="mx-auto w-full max-w-[1920px]"
+          src="/ca/footer-banner.svg"
+        />
+        <img alt="Footer Banner Divider" className="w-full" src="/ca/footer-banner-divider.png" />
+      </div>
+    ),
+    links: [
+      { href: urls.termsOfService(), text: 'Terms of service' },
+      {
+        href: urls.privacyPolicy(),
+        text: 'Privacy',
+      },
+    ],
+    socialLinks: [
+      {
+        href: caExternalUrls.twitter(),
+        text: 'Twitter / X',
+      },
+      {
+        href: caExternalUrls.linkedin(),
+        text: 'LinkedIn',
+      },
+    ],
+    sendFeedbackLink: caExternalUrls.emailFeedback(),
+  }
 }

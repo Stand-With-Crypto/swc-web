@@ -26,13 +26,13 @@ import {
 } from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
-const PAGE_LAYOUT_CONFIG_BY_COUNTRY_CODE: Record<SupportedCountryCodes, typeof usConfig> = {
+const PAGE_LAYOUT_CONFIG_BY_COUNTRY_CODE = {
   [SupportedCountryCodes.US]: usConfig,
   [SupportedCountryCodes.AU]: auConfig,
   [SupportedCountryCodes.GB]: gbConfig,
   [SupportedCountryCodes.CA]: caConfig,
   [SupportedCountryCodes.EU]: euConfig,
-}
+} as const
 
 export function NotFoundLayout({ children }: { children: React.ReactNode }) {
   // This is necessary because we're not under a country specific layout and we don't have other way to get the country code
@@ -48,6 +48,18 @@ export function NotFoundLayout({ children }: { children: React.ReactNode }) {
 
   const pageLayoutConfig = PAGE_LAYOUT_CONFIG_BY_COUNTRY_CODE[countryCode]
 
+  let navbarConfig, footerConfig
+  if (countryCode === SupportedCountryCodes.EU) {
+    navbarConfig = (pageLayoutConfig as typeof euConfig).getNavbarConfig()
+    footerConfig = (pageLayoutConfig as typeof euConfig).getFooterConfig()
+  } else if (countryCode === SupportedCountryCodes.AU) {
+    navbarConfig = (pageLayoutConfig as typeof auConfig).getNavbarConfig()
+    footerConfig = (pageLayoutConfig as typeof auConfig).getFooterConfig()
+  } else {
+    navbarConfig = (pageLayoutConfig as typeof usConfig).getNavbarConfig()
+    footerConfig = (pageLayoutConfig as typeof usConfig).getFooterConfig()
+  }
+
   return (
     <html lang="en" translate="no">
       <body className={fontClassName}>
@@ -59,9 +71,9 @@ export function NotFoundLayout({ children }: { children: React.ReactNode }) {
         <TopLevelClientLogic countryCode={countryCode}>
           <FullHeight.Container>
             {GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE[countryCode]}
-            <Navbar {...pageLayoutConfig.navbarConfig} />
+            <Navbar {...navbarConfig} />
             <FullHeight.Content>{children}</FullHeight.Content>
-            <Footer {...pageLayoutConfig.footerConfig} />
+            <Footer {...footerConfig} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
