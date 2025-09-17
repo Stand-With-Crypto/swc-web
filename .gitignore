@@ -64,3 +64,5 @@ cypress/downloads
 yarn.lock
 
 /data
+
+src/bin/translations/translations-extracted
