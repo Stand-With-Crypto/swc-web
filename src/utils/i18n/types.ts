@@ -1,31 +1,47 @@
+// Define our own types since FormatJS doesn't export these directly from the main package
+export type PrimitiveType = string | number | boolean | null | undefined | Date
+
+// Simple MessageFormatElement type for our use case
+export interface MessageFormatElement {
+  type: string
+  value?: string | number
+  [key: string]: any
+}
+
 export type SupportedLanguage = 'en' | 'de' | 'fr'
 
-export interface InterpolationValues {
-  [key: string]: string | number | boolean
+// FormatJS-compatible types
+export interface MessageDescriptor {
+  id: string
+  defaultMessage?: string
+  description?: string
 }
 
-export interface PluralOptions {
-  zero?: string
-  one?: string
-  other: string
-}
+// MessageValues type that's compatible with FormatJS - keep it simple for now
+export type MessageValues = Record<string, PrimitiveType>
 
-export interface ConditionalOptions {
-  [condition: string]: string
-}
+// FormatJS XML element function type (for future rich text support)
+export type FormatXMLElementFn<T = React.ReactNode, R = React.ReactElement> = (chunks: T[]) => R
 
-export type TranslationValue = string | PluralOptions | ConditionalOptions
+// Message is a string in ICU format (we don't use pre-compiled arrays in our implementation)
+export type TranslationMessage = string
 
 export interface ComponentMessages {
-  [key: string]: TranslationValue
-}
-
-export interface LanguageMessages {
-  [componentKey: string]: ComponentMessages
+  [key: string]: TranslationMessage
 }
 
 export type I18nMessages = {
   [K in SupportedLanguage]: ComponentMessages
+}
+
+// Legacy type for backward compatibility
+export interface LanguageMessages {
+  [componentKey: string]: ComponentMessages
+}
+
+// Legacy types for backward compatibility during migration
+export interface InterpolationValues {
+  [key: string]: string | number | boolean
 }
 
 export interface PluralContext {

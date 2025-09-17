@@ -6,48 +6,34 @@ export const i18nMessages: I18nMessages = {
     welcome: 'Welcome {name}!',
     'user.profile': 'User {username} has {age} years old',
 
-    // Number formatting
-    'stats.users': 'We have {count:number} active users',
-    'stats.revenue': 'Total revenue: {amount:currency:currency=USD}',
-    'stats.growth': 'Growth rate: {rate:percent}',
+    // Number formatting - FormatJS syntax
+    'stats.users': 'We have {count, number} active users',
+    'stats.revenue': 'Total revenue: {amount, number, ::currency/USD}',
+    'stats.growth': 'Growth rate: {rate, number, ::percent}',
 
-    // Date and time formatting
-    'last.login': 'Last login: {date:date:dateStyle=full}',
-    'meeting.time': 'Meeting at {time:time:timeStyle=short}',
-    'relative.time': 'Posted {date:relative}',
+    // Date and time formatting - simple placeholders, dates pre-formatted in components
+    'last.login': 'Last login: {date}',
+    'meeting.time': 'Meeting at {time}',
+    'relative.time': 'Posted {date}',
 
-    // Text transformations
-    'company.name': 'Company: {company:uppercase}',
-    description: 'Description: {text:capitalize}',
-    code: 'Code: {code:lowercase}',
+    // Text transformations - using custom functions (will need special handling)
+    'company.name': 'Company: {company}', // Note: FormatJS doesn't have built-in text transforms
+    description: 'Description: {text}',
+    code: 'Code: {code}',
 
-    // Plural forms
-    'items.count': {
-      zero: 'No items available',
-      one: '{count} item in your cart',
-      other: '{count} items in your cart',
-    },
+    // Plural forms - ICU plural syntax
+    'items.count':
+      '{count, plural, =0 {No items available} one {# item in your cart} other {# items in your cart}}',
 
-    notifications: {
-      zero: 'No new notifications',
-      one: 'You have {count} new notification',
-      other: 'You have {count} new notifications',
-    },
+    notifications:
+      '{count, plural, =0 {No new notifications} one {You have # new notification} other {You have # new notifications}}',
 
-    // Conditional translations
-    'user.status': {
-      online: 'User is currently online',
-      offline: 'User is offline',
-      away: 'User is away',
-      default: 'User status unknown',
-    },
+    // Conditional translations - ICU select syntax
+    'user.status':
+      '{status, select, online {User is currently online} offline {User is offline} away {User is away} other {User status unknown}}',
 
-    'subscription.type': {
-      free: 'Free plan - Limited features',
-      premium: 'Premium plan - All features unlocked',
-      enterprise: 'Enterprise plan - Custom solutions',
-      default: 'Unknown subscription type',
-    },
+    'subscription.type':
+      '{type, select, free {Free plan - Limited features} premium {Premium plan - All features unlocked} enterprise {Enterprise plan - Custom solutions} other {Unknown subscription type}}',
   },
 
   de: {
@@ -56,47 +42,33 @@ export const i18nMessages: I18nMessages = {
     'user.profile': 'Benutzer {username} ist {age} Jahre alt',
 
     // Number formatting
-    'stats.users': 'Wir haben {count:number} aktive Benutzer',
-    'stats.revenue': 'Gesamtumsatz: {amount:currency:currency=EUR}',
-    'stats.growth': 'Wachstumsrate: {rate:percent}',
+    'stats.users': 'Wir haben {count, number} aktive Benutzer',
+    'stats.revenue': 'Gesamtumsatz: {amount, number, ::currency/EUR}',
+    'stats.growth': 'Wachstumsrate: {rate, number, ::percent}',
 
     // Date and time formatting
-    'last.login': 'Letzte Anmeldung: {date:date:dateStyle=full}',
-    'meeting.time': 'Besprechung um {time:time:timeStyle=short}',
-    'relative.time': 'Gepostet {date:relative}',
+    'last.login': 'Letzte Anmeldung: {date}',
+    'meeting.time': 'Besprechung um {time}',
+    'relative.time': 'Gepostet {date}',
 
     // Text transformations
-    'company.name': 'Unternehmen: {company:uppercase}',
-    description: 'Beschreibung: {text:capitalize}',
-    code: 'Code: {code:lowercase}',
+    'company.name': 'Unternehmen: {company}',
+    description: 'Beschreibung: {text}',
+    code: 'Code: {code}',
 
     // Plural forms
-    'items.count': {
-      zero: 'Keine Artikel verfügbar',
-      one: '{count} Artikel in Ihrem Warenkorb',
-      other: '{count} Artikel in Ihrem Warenkorb',
-    },
+    'items.count':
+      '{count, plural, =0 {Keine Artikel verfügbar} one {# Artikel in Ihrem Warenkorb} other {# Artikel in Ihrem Warenkorb}}',
 
-    notifications: {
-      zero: 'Keine neuen Benachrichtigungen',
-      one: 'Sie haben {count} neue Benachrichtigung',
-      other: 'Sie haben {count} neue Benachrichtigungen',
-    },
+    notifications:
+      '{count, plural, =0 {Keine neuen Benachrichtigungen} one {Sie haben # neue Benachrichtigung} other {Sie haben # neue Benachrichtigungen}}',
 
     // Conditional translations
-    'user.status': {
-      online: 'Benutzer ist derzeit online',
-      offline: 'Benutzer ist offline',
-      away: 'Benutzer ist abwesend',
-      default: 'Benutzerstatus unbekannt',
-    },
+    'user.status':
+      '{status, select, online {Benutzer ist derzeit online} offline {Benutzer ist offline} away {Benutzer ist abwesend} other {Benutzerstatus unbekannt}}',
 
-    'subscription.type': {
-      free: 'Kostenloser Plan - Begrenzte Funktionen',
-      premium: 'Premium-Plan - Alle Funktionen freigeschaltet',
-      enterprise: 'Enterprise-Plan - Maßgeschneiderte Lösungen',
-      default: 'Unbekannter Abonnement-Typ',
-    },
+    'subscription.type':
+      '{type, select, free {Kostenloser Plan - Begrenzte Funktionen} premium {Premium-Plan - Alle Funktionen freigeschaltet} enterprise {Enterprise-Plan - Maßgeschneiderte Lösungen} other {Unbekannter Abonnement-Typ}}',
   },
 
   fr: {
@@ -105,46 +77,32 @@ export const i18nMessages: I18nMessages = {
     'user.profile': "L'utilisateur {username} a {age} ans",
 
     // Number formatting
-    'stats.users': 'Nous avons {count:number} utilisateurs actifs',
-    'stats.revenue': "Chiffre d'affaires total: {amount:currency:currency=EUR}",
-    'stats.growth': 'Taux de croissance: {rate:percent}',
+    'stats.users': 'Nous avons {count, number} utilisateurs actifs',
+    'stats.revenue': "Chiffre d'affaires total: {amount, number, ::currency/EUR}",
+    'stats.growth': 'Taux de croissance: {rate, number, ::percent}',
 
     // Date and time formatting
-    'last.login': 'Dernière connexion: {date:date:dateStyle=full}',
-    'meeting.time': 'Réunion à {time:time:timeStyle=short}',
-    'relative.time': 'Publié {date:relative}',
+    'last.login': 'Dernière connexion: {date}',
+    'meeting.time': 'Réunion à {time}',
+    'relative.time': 'Publié {date}',
 
     // Text transformations
-    'company.name': 'Entreprise: {company:uppercase}',
-    description: 'Description: {text:capitalize}',
-    code: 'Code: {code:lowercase}',
+    'company.name': 'Entreprise: {company}',
+    description: 'Description: {text}',
+    code: 'Code: {code}',
 
     // Plural forms
-    'items.count': {
-      zero: 'Aucun article disponible',
-      one: '{count} article dans votre panier',
-      other: '{count} articles dans votre panier',
-    },
+    'items.count':
+      '{count, plural, =0 {Aucun article disponible} one {# article dans votre panier} other {# articles dans votre panier}}',
 
-    notifications: {
-      zero: 'Aucune nouvelle notification',
-      one: 'Vous avez {count} nouvelle notification',
-      other: 'Vous avez {count} nouvelles notifications',
-    },
+    notifications:
+      '{count, plural, =0 {Aucune nouvelle notification} one {Vous avez # nouvelle notification} other {Vous avez # nouvelles notifications}}',
 
     // Conditional translations
-    'user.status': {
-      online: "L'utilisateur est actuellement en ligne",
-      offline: "L'utilisateur est hors ligne",
-      away: "L'utilisateur est absent",
-      default: 'Statut utilisateur inconnu',
-    },
+    'user.status':
+      "{status, select, online {L'utilisateur est actuellement en ligne} offline {L'utilisateur est hors ligne} away {L'utilisateur est absent} other {Statut utilisateur inconnu}}",
 
-    'subscription.type': {
-      free: 'Plan gratuit - Fonctionnalités limitées',
-      premium: 'Plan premium - Toutes les fonctionnalités débloquées',
-      enterprise: 'Plan entreprise - Solutions personnalisées',
-      default: "Type d'abonnement inconnu",
-    },
+    'subscription.type':
+      "{type, select, free {Plan gratuit - Fonctionnalités limitées} premium {Plan premium - Toutes les fonctionnalités débloquées} enterprise {Plan entreprise - Solutions personnalisées} other {Type d'abonnement inconnu}}",
   },
 }

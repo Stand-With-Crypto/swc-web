@@ -1,5 +1,6 @@
+import { formatDateForLocale, formatTimeForLocale } from '@/utils/i18n/dateFormatting'
 import { getServerTranslation } from '@/utils/i18n/getServerTranslation'
-import { createPluralContext } from '@/utils/i18n/interpolation'
+import type { SupportedLanguage } from '@/utils/i18n/types'
 
 import { ErrorDemoButton } from './errorDemoButton'
 import { InterpolationDemoClient } from './InterpolationDemoClient'
@@ -87,15 +88,25 @@ export default async function Page({ params }: PageProps) {
             <div className="space-y-2">
               <p className="text-gray-700">
                 <strong>Last Login:</strong>{' '}
-                {t('last.login', { date: sampleData.lastLogin.toISOString() })}
+                {t('last.login', {
+                  date: formatDateForLocale(sampleData.lastLogin, language as SupportedLanguage),
+                })}
               </p>
               <p className="text-gray-700">
                 <strong>Meeting:</strong>{' '}
-                {t('meeting.time', { time: sampleData.meetingTime.toISOString() })}
+                {t('meeting.time', {
+                  time: formatTimeForLocale(sampleData.meetingTime, language as SupportedLanguage),
+                })}
               </p>
               <p className="text-gray-700">
                 <strong>Relative:</strong>{' '}
-                {t('relative.time', { date: sampleData.postDate.toISOString() })}
+                {t('relative.time', {
+                  date: formatDateForLocale(
+                    sampleData.postDate,
+                    language as SupportedLanguage,
+                    'short',
+                  ),
+                })}
               </p>
             </div>
           </section>
@@ -121,18 +132,17 @@ export default async function Page({ params }: PageProps) {
             <h2 className="mb-4 text-xl font-semibold text-gray-800">Pluralization</h2>
             <div className="space-y-2">
               <p className="text-gray-700">
-                <strong>Cart (0):</strong> {t('items.count', createPluralContext(0))}
+                <strong>Cart (0):</strong> {t('items.count', { count: 0 })}
               </p>
               <p className="text-gray-700">
-                <strong>Cart (1):</strong> {t('items.count', createPluralContext(1))}
+                <strong>Cart (1):</strong> {t('items.count', { count: 1 })}
               </p>
               <p className="text-gray-700">
-                <strong>Cart (3):</strong>{' '}
-                {t('items.count', createPluralContext(sampleData.cartItems))}
+                <strong>Cart (3):</strong> {t('items.count', { count: sampleData.cartItems })}
               </p>
               <p className="text-gray-700">
                 <strong>Notifications:</strong>{' '}
-                {t('notifications', createPluralContext(sampleData.notificationCount))}
+                {t('notifications', { count: sampleData.notificationCount })}
               </p>
             </div>
           </section>
@@ -142,18 +152,17 @@ export default async function Page({ params }: PageProps) {
             <h2 className="mb-4 text-xl font-semibold text-gray-800">Conditional Translations</h2>
             <div className="space-y-2">
               <p className="text-gray-700">
-                <strong>User Status:</strong>{' '}
-                {t('user.status', { condition: sampleData.userStatus })}
+                <strong>User Status:</strong> {t('user.status', { status: sampleData.userStatus })}
               </p>
               <p className="text-gray-700">
-                <strong>Offline Status:</strong> {t('user.status', { condition: 'offline' })}
+                <strong>Offline Status:</strong> {t('user.status', { status: 'offline' })}
               </p>
               <p className="text-gray-700">
                 <strong>Subscription:</strong>{' '}
-                {t('subscription.type', { condition: sampleData.subscriptionType })}
+                {t('subscription.type', { type: sampleData.subscriptionType })}
               </p>
               <p className="text-gray-700">
-                <strong>Free Plan:</strong> {t('subscription.type', { condition: 'free' })}
+                <strong>Free Plan:</strong> {t('subscription.type', { type: 'free' })}
               </p>
             </div>
           </section>

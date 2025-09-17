@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 
-import { createPluralContext } from '@/utils/i18n/interpolation'
-import type { I18nMessages } from '@/utils/i18n/types'
+import { formatDateForLocale, formatTimeForLocale } from '@/utils/i18n/dateFormatting'
+import type { I18nMessages, SupportedLanguage } from '@/utils/i18n/types'
 import { useTranslation } from '@/utils/i18n/useTranslation'
 
 interface InterpolationDemoClientProps {
@@ -143,15 +143,25 @@ export function InterpolationDemoClient({ i18nMessages }: InterpolationDemoClien
           <div className="space-y-2">
             <p className="text-gray-700">
               <strong>Last Login:</strong>{' '}
-              {t('last.login', { date: sampleData.lastLogin.toISOString() })}
+              {t('last.login', {
+                date: formatDateForLocale(sampleData.lastLogin, language as SupportedLanguage),
+              })}
             </p>
             <p className="text-gray-700">
               <strong>Meeting:</strong>{' '}
-              {t('meeting.time', { time: sampleData.meetingTime.toISOString() })}
+              {t('meeting.time', {
+                time: formatTimeForLocale(sampleData.meetingTime, language as SupportedLanguage),
+              })}
             </p>
             <p className="text-gray-700">
               <strong>Relative:</strong>{' '}
-              {t('relative.time', { date: sampleData.postDate.toISOString() })}
+              {t('relative.time', {
+                date: formatDateForLocale(
+                  sampleData.postDate,
+                  language as SupportedLanguage,
+                  'short',
+                ),
+              })}
             </p>
           </div>
         </section>
@@ -181,26 +191,26 @@ export function InterpolationDemoClient({ i18nMessages }: InterpolationDemoClien
           </h2>
           <div className="space-y-2">
             <p className="text-gray-700">
-              <strong>Cart Items:</strong> {t('items.count', createPluralContext(itemCount))}
+              <strong>Cart Items:</strong> {t('items.count', { count: itemCount })}
             </p>
             <p className="text-gray-700">
               <strong>Notifications:</strong>{' '}
-              {t('notifications', createPluralContext(sampleData.notificationCount))}
+              {t('notifications', { count: sampleData.notificationCount })}
             </p>
             <div className="mt-4 rounded bg-gray-50 p-3">
               <p className="mb-2 text-sm text-gray-600">Try different values:</p>
               <div className="space-y-1 text-sm">
                 <p>
-                  <strong>0:</strong> {t('items.count', createPluralContext(0))}
+                  <strong>0:</strong> {t('items.count', { count: 0 })}
                 </p>
                 <p>
-                  <strong>1:</strong> {t('items.count', createPluralContext(1))}
+                  <strong>1:</strong> {t('items.count', { count: 1 })}
                 </p>
                 <p>
-                  <strong>5:</strong> {t('items.count', createPluralContext(5))}
+                  <strong>5:</strong> {t('items.count', { count: 5 })}
                 </p>
                 <p>
-                  <strong>21:</strong> {t('items.count', createPluralContext(21))}
+                  <strong>21:</strong> {t('items.count', { count: 21 })}
                 </p>
               </div>
             </div>
@@ -214,23 +224,22 @@ export function InterpolationDemoClient({ i18nMessages }: InterpolationDemoClien
           </h2>
           <div className="space-y-2">
             <p className="text-gray-700">
-              <strong>User Status:</strong> {t('user.status', { condition: userStatus })}
+              <strong>User Status:</strong> {t('user.status', { status: userStatus })}
             </p>
             <p className="text-gray-700">
-              <strong>Subscription:</strong>{' '}
-              {t('subscription.type', { condition: subscriptionType })}
+              <strong>Subscription:</strong> {t('subscription.type', { type: subscriptionType })}
             </p>
             <div className="mt-4 rounded bg-gray-50 p-3">
               <p className="mb-2 text-sm text-gray-600">All status options:</p>
               <div className="space-y-1 text-sm">
                 <p>
-                  <strong>Online:</strong> {t('user.status', { condition: 'online' })}
+                  <strong>Online:</strong> {t('user.status', { status: 'online' })}
                 </p>
                 <p>
-                  <strong>Offline:</strong> {t('user.status', { condition: 'offline' })}
+                  <strong>Offline:</strong> {t('user.status', { status: 'offline' })}
                 </p>
                 <p>
-                  <strong>Away:</strong> {t('user.status', { condition: 'away' })}
+                  <strong>Away:</strong> {t('user.status', { status: 'away' })}
                 </p>
               </div>
             </div>

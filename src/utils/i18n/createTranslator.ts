@@ -1,8 +1,8 @@
 import { interpolate } from './interpolation'
-import type { I18nMessages, InterpolationContext, SupportedLanguage } from './types'
+import type { I18nMessages, InterpolationContext, MessageValues, SupportedLanguage } from './types'
 
 export interface Translator {
-  t: (key: string, context?: InterpolationContext) => string
+  t: (key: string, values?: MessageValues | InterpolationContext) => string
   hasTranslation: (key: string) => boolean
   getAvailableKeys: () => string[]
   getLanguage: () => SupportedLanguage
@@ -17,7 +17,7 @@ export function createTranslator(
   const messages = i18nMessages[language] || i18nMessages.en || {}
 
   return {
-    t: (key: string, context?: InterpolationContext): string => {
+    t: (key: string, values?: MessageValues | InterpolationContext): string => {
       const value = messages[key]
 
       if (value === undefined) {
@@ -27,7 +27,7 @@ export function createTranslator(
         return key
       }
 
-      return interpolate(value, context, language)
+      return interpolate(value, values, language)
     },
 
     hasTranslation: (key: string): boolean => {
