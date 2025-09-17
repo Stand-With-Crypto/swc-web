@@ -1,5 +1,7 @@
 import { SWCBillFromBuilderIO } from '@/utils/shared/zod/getSWCBills'
 
+export type BuilderIOBillPublishedState = 'archived' | 'draft' | 'published'
+
 interface QuorumApiResponseMeta {
   limit: number
   model: string

@@ -1,5 +1,6 @@
 import {
-  QUORUM_API_ITEMS_PER_PAGE,
+  MAX_BILLS_TO_PROCESS,
+  QUORUM_API_BILLS_PER_PAGE,
   STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE,
 } from '@/inngest/functions/stateLevelBillsCronJob/config'
 import { CRYPTO_RELATED_KEYWORDS_REGEX } from '@/inngest/functions/stateLevelBillsCronJob/constants'
@@ -52,8 +53,8 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         logger.info(`Fetching page ${pageIndex + 1}...`)
 
         const paginationParams = {
-          limit: QUORUM_API_ITEMS_PER_PAGE,
-          offset: pageIndex * QUORUM_API_ITEMS_PER_PAGE,
+          limit: QUORUM_API_BILLS_PER_PAGE,
+          offset: pageIndex * QUORUM_API_BILLS_PER_PAGE,
         }
 
         const results = await fetchQuorumBills(paginationParams)
@@ -64,7 +65,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
 
         pageIndex++
 
-        if (results.objects.length < QUORUM_API_ITEMS_PER_PAGE || results.meta.next === null) {
+        if (results.objects.length < QUORUM_API_BILLS_PER_PAGE || results.meta.next === null) {
           hasMoreData = false
         }
       }
@@ -113,8 +114,8 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
           logger.info(`Fetching page ${pageIndex + 1}...`)
 
           const paginationParams = {
-            limit: QUORUM_API_ITEMS_PER_PAGE,
-            offset: pageIndex * QUORUM_API_ITEMS_PER_PAGE,
+            limit: QUORUM_API_BILLS_PER_PAGE,
+            offset: pageIndex * QUORUM_API_BILLS_PER_PAGE,
           }
 
           const results = await fetchQuorumBillSummaries(validBillsFromQuorum, paginationParams)
@@ -125,7 +126,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
 
           pageIndex++
 
-          if (results.objects.length < QUORUM_API_ITEMS_PER_PAGE || results.meta.next === null) {
+          if (results.objects.length < QUORUM_API_BILLS_PER_PAGE || results.meta.next === null) {
             hasMoreData = false
           }
         }
@@ -156,7 +157,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       },
     )
 
-    const _parsedBillsFromQuorum = await step.run('parse-bills-data-from-quorum', async () => {
+    const allParsedBillsFromQuorum = await step.run('parse-bills-data-from-quorum', async () => {
       logger.info('Starting to parse valid Quorum bills...')
 
       const parsedBillsFromQuorum = validBillsFromQuorumWithSummary.map(
@@ -168,8 +169,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       return parsedBillsFromQuorum
     })
 
-    // TODO: remove
-    const parsedBillsFromQuorum = _parsedBillsFromQuorum.slice(0, 12)
+    const parsedBillsFromQuorum = allParsedBillsFromQuorum.slice(0, MAX_BILLS_TO_PROCESS)
 
     const [billsToCreate, billsToUpdate] = await step.run('analyze-bills-data', async () => {
       const quorumBillsInBuilderIO = billsFromBuilderIO.filter(

@@ -1,7 +1,7 @@
 import {
   CRYPTO_RELATED_KEYWORDS,
   // QUORUM_API_SORT_KEY,
-  QUORUM_API_STARTING_YEAR,
+  QUORUM_API_BILL_STARTING_YEAR,
 } from '@/inngest/functions/stateLevelBillsCronJob/config'
 import { BillKeyDateCategory } from '@/utils/shared/zod/getSWCBills'
 
@@ -29,8 +29,8 @@ export const QUORUM_API_FILTER_QUERY_PARAMS = {
     for_supported_regions: QUORUM_API_US_REGIONS_LIST.join(','),
   }),
   for_years: Array.from(
-    { length: new Date().getFullYear() - QUORUM_API_STARTING_YEAR + 1 },
-    (_, index) => QUORUM_API_STARTING_YEAR + index,
+    { length: new Date().getFullYear() - QUORUM_API_BILL_STARTING_YEAR + 1 },
+    (_, index) => QUORUM_API_BILL_STARTING_YEAR + index,
   ).join(','),
   // order_by: QUORUM_API_SORT_KEY,
   title_search: CRYPTO_RELATED_KEYWORDS.join('+OR+'),

@@ -3,9 +3,9 @@ import path from 'node:path'
 import {
   BUILDER_IO_BILL_PREFIX,
   BUILDER_IO_BILL_PUBLISHED_STATE,
-  BUILDER_IO_ITEMS_PER_PAGE,
   QUORUM_API_BILL_ENDPOINT,
   QUORUM_API_BILL_SUMMARY_ENDPOINT,
+  QUORUM_API_BILLS_PER_PAGE,
 } from '@/inngest/functions/stateLevelBillsCronJob/config'
 import {
   BUILDER_IO_WRITE_API_ENDPOINT,
@@ -109,7 +109,7 @@ export async function fetchBuilderIOBills(countryCode: SupportedCountryCodes) {
   try {
     const entries = await getNextEntries()
 
-    while (entries.length === BUILDER_IO_ITEMS_PER_PAGE + offset) {
+    while (entries.length === QUORUM_API_BILLS_PER_PAGE + offset) {
       offset += entries.length
       const nextEntries = await getNextEntries()
       entries.push(...nextEntries)
