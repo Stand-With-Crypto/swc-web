@@ -109,3 +109,11 @@ export function generateCountryCodeLayoutMetadata(countryCode: SupportedCountryC
     ...generateTopLevelMetadataDetails(countryCode),
   } satisfies Metadata
 }
+
+export const generateCountryCodeLayoutMetadataWithLanguage = (
+  countryCode: SupportedCountryCodes,
+  language: string,
+) => {
+  //TODO(EU): Add language to the metadata + i18n on this function
+  return generateCountryCodeLayoutMetadata(countryCode)
+}
