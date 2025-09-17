@@ -1,5 +1,5 @@
-import { ComponentMessages, LanguageMessages } from "@/utils/shared/i18n/types"
-import { SupportedEULanguages } from "@/utils/shared/supportedLocales"
+import { ComponentMessages, LanguageMessages } from '@/utils/shared/i18n/types'
+import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
 
 export interface ExtractedTranslation {
   componentName: string

@@ -46,7 +46,11 @@ export function analyzeMissingTranslations(
     missingKeys: string[]
   }> = []
 
-  const languages: SupportedEULanguages[] = [SupportedEULanguages.EN, SupportedEULanguages.DE, SupportedEULanguages.FR]
+  const languages: SupportedEULanguages[] = [
+    SupportedEULanguages.EN,
+    SupportedEULanguages.DE,
+    SupportedEULanguages.FR,
+  ]
 
   for (const file of extractedFiles) {
     // Get all keys from all languages
