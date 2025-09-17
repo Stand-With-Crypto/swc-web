@@ -5,6 +5,7 @@ import { useToggle } from 'react-use'
 import Cookies from 'js-cookie'
 import { ChevronDownIcon } from 'lucide-react'
 import Image from 'next/image'
+import { useParams } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -20,11 +21,13 @@ import {
   SupportedCountryCodes,
   USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
+import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface Option {
   label: string
   value: SupportedCountryCodes
+  language?: SupportedEULanguages
 }
 
 const options: Option[] = [
@@ -44,13 +47,39 @@ const options: Option[] = [
     label: 'Canada',
     value: SupportedCountryCodes.CA,
   },
+  {
+    label: 'EU (English)',
+    value: SupportedCountryCodes.EU,
+    language: SupportedEULanguages.EN,
+  },
+  {
+    label: 'EU (French)',
+    value: SupportedCountryCodes.EU,
+    language: SupportedEULanguages.FR,
+  },
+  {
+    label: 'EU (German)',
+    value: SupportedCountryCodes.EU,
+    language: SupportedEULanguages.DE,
+  },
 ].sort((a, b) => a.label.localeCompare(b.label))
 
 export function NavbarCountrySelect() {
   const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
+  const params = useParams<{ language: SupportedEULanguages }>()
 
-  const currentOption = options.find(option => option.value === countryCode)
+  const currentOption = options.find(option => {
+    if (params?.language) {
+      console.log('params', params)
+      console.log('option', option)
+      return option.value === countryCode && option.language === params.language
+    }
+
+    return option.value === countryCode
+  })
+
+  console.log('currentOption', currentOption)
 
   useEffectOnce(() => {
     Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, countryCode)
@@ -80,15 +109,21 @@ export function NavbarCountrySelect() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[calc(100vw-48px)] rounded-3xl min-[1096px]:w-auto">
         {options.map(option => {
+          const isDisabled = params?.language
+            ? option.value === currentOption.value && option.language === params.language
+            : option.value === currentOption.value
+
           return (
             <DropdownMenuItem
               asChild
               className="cursor-pointer data-[disabled]:font-bold data-[disabled]:text-primary-cta data-[disabled]:opacity-100"
-              disabled={option.value === currentOption.value}
-              key={option.value}
+              disabled={isDisabled}
+              key={`${option.value}${option.language ?? ''}`}
               onClick={() => {
                 Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, option.value)
-                window.location.href = getIntlUrls(option.value).home()
+                window.location.href = getIntlUrls(option.value, {
+                  language: option.language,
+                }).home()
               }}
             >
               <div className="flex items-center gap-2">
