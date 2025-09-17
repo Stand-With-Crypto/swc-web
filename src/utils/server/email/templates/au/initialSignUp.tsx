@@ -18,6 +18,7 @@ const AUInitialSignUpEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.AU,
   ...keepUpTheFightSectionProps
 }: InitialSignUpEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const AUInitialSignUpEmail = ({
   }
 
   return (
-    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -59,7 +64,7 @@ const AUInitialSignUpEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.AU}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </AUWrapper>

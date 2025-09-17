@@ -364,6 +364,16 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: <MainText>Someone {inStateOrEmpty} claimed an NFT</MainText>,
         }
       }
+      case UserActionType.SIGN_PETITION: {
+        return {
+          onFocusContent: () => (
+            <Button asChild>
+              <Link href={urls.petitions()}>Sign petitions</Link>
+            </Button>
+          ),
+          children: <MainText>Someone {inStateOrEmpty} signed a petition</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore
