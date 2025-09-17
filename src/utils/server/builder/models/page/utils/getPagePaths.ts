@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 
 interface GetPagePathsInput {
   pageModelName: BuilderPageModelIdentifiers
@@ -27,6 +28,7 @@ export async function getPagePaths({
       sort: {
         createdDate: -1,
       },
+      locale: DEFAULT_LOCALE,
       fields: 'data,createdDate',
       cachebust: true,
     })

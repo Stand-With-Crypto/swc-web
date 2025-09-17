@@ -8,6 +8,7 @@ import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import { SWCPartners, zodPartnerSchemaValidation } from '@/utils/shared/zod/getSWCPartners'
 
 const logger = getLogger(`builderIOPartners`)
@@ -32,6 +33,7 @@ async function getAllPartnersWithOffset({
             },
           },
         },
+        locale: DEFAULT_LOCALE,
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: DEFAULT_CACHE_IN_SECONDS,
         limit: LIMIT,
