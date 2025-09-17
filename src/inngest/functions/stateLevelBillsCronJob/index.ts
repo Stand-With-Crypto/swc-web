@@ -39,7 +39,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       : { event: STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_EVENT_NAME }) as any),
   },
   async ({ step, logger }) => {
-    const billsFromQuorumPromise = step.run('retrieve-bills-data-from-quorum', async () => {
+    const billsFromQuorum = await step.run('retrieve-bills-data-from-quorum', async () => {
       logger.info('Starting to fetch bills from Quorum API...')
 
       const bills = []
@@ -74,7 +74,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       return bills
     })
 
-    const billsFromBuilderIOPromise = step.run('retrieve-bills-data-from-builder-io', async () => {
+    const billsFromBuilderIO = await step.run('retrieve-bills-data-from-builder-io', async () => {
       logger.info('Starting to fetch existing bills from Builder.io...')
 
       const billsFromBuilderIO = await fetchBuilderIOBills(countryCode)
@@ -85,11 +85,6 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
 
       return billsFromBuilderIO
     })
-
-    const [billsFromQuorum, billsFromBuilderIO] = await Promise.all([
-      billsFromQuorumPromise,
-      billsFromBuilderIOPromise,
-    ])
 
     const validBillsFromQuorum = await step.run('validate-bills-data-from-quorum', async () => {
       logger.info('Starting to validate Quorum bills...')
@@ -218,7 +213,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       return [billsToCreate, billsToUpdate] as const
     })
 
-    const createdBillsPromise = step.run('create-new-bill-entries-in-builder-io', async () => {
+    const createdBills = await step.run('create-new-bill-entries-in-builder-io', async () => {
       logger.info('Starting to create new bill entries in Builder.io...')
 
       const promises = billsToCreate.map(async bill => {
@@ -241,7 +236,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       return createdBills
     })
 
-    const updatedBillsPromise = step.run('update-existing-bill-entries-in-builder-io', async () => {
+    const updatedBills = await step.run('update-existing-bill-entries-in-builder-io', async () => {
       logger.info('Starting to update existing bill entries in Builder.io...')
 
       const promises = billsToUpdate.map(async bill => {
@@ -263,11 +258,6 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
 
       return updatedBills
     })
-
-    const [createdBills, updatedBills] = await Promise.all([
-      createdBillsPromise,
-      updatedBillsPromise,
-    ])
 
     logger.info('State-level bills sourcing automation completed successfully.')
 

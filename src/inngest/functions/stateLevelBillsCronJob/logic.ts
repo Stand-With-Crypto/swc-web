@@ -27,7 +27,10 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBillFromBuilderIO } from '@/utils/shared/zod/getSWCBills'
 
-export type PaginationParams = { limit: number; offset: number }
+export interface PaginationParams {
+  limit: number
+  offset: number
+}
 
 export async function fetchQuorumBills(paginationParams: PaginationParams) {
   if (!QUORUM_API_ENDPOINT) {
@@ -42,7 +45,7 @@ export async function fetchQuorumBills(paginationParams: PaginationParams) {
     ...QUORUM_API_AUTH_QUERY_PARAMS,
   })
     .filter(([_, value]) => Boolean(value))
-    .map(([key, value]) => `${key}=${value}`)
+    .map(([key, value]) => `${key}=${value!}`)
     .join('&')
 
   const requestUrl = `${path.join(QUORUM_API_ENDPOINT, QUORUM_API_BILL_ENDPOINT)}?${searchParams}`
@@ -72,7 +75,7 @@ export async function fetchQuorumBillSummaries(
     ...QUORUM_API_AUTH_QUERY_PARAMS,
   })
     .filter(([_, value]) => Boolean(value))
-    .map(([key, value]) => `${key}=${value}`)
+    .map(([key, value]) => `${key}=${value!}`)
     .join('&')
 
   const requestUrl = `${path.join(QUORUM_API_ENDPOINT, QUORUM_API_BILL_SUMMARY_ENDPOINT)}?${searchParams}`
