@@ -71,15 +71,11 @@ export function NavbarCountrySelect() {
 
   const currentOption = options.find(option => {
     if (params?.language) {
-      console.log('params', params)
-      console.log('option', option)
       return option.value === countryCode && option.language === params.language
     }
 
     return option.value === countryCode
   })
-
-  console.log('currentOption', currentOption)
 
   useEffectOnce(() => {
     Cookies.set(USER_SELECTED_COUNTRY_COOKIE_NAME, countryCode)
