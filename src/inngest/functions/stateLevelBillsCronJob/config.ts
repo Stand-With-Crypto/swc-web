@@ -43,5 +43,6 @@ export const BUILDER_IO_BILL_PREFIX = '[quorum]'
 export const BUILDER_IO_BILL_PUBLISHED_STATE: BuilderIOBillPublishedState = 'draft'
 
 export const MAX_BILLS_TO_PROCESS = 4
+export const MAX_MINOR_MILESTONES_ALLOWED = 5
 
 export const STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE = '0 8 * * 1-5'

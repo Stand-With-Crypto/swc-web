@@ -1,3 +1,4 @@
+import { MAX_MINOR_MILESTONES_ALLOWED } from '@/inngest/functions/stateLevelBillsCronJob/config'
 import {
   BILL_MAJOR_MILESTONE_TITLE_MAP,
   QUORUM_BILL_REGION_MAP,
@@ -50,23 +51,32 @@ export const resolveFields: ResolveFieldsMap = {
   isKeyBill: () => false,
 
   keyDates: bill =>
-    (bill.major_actions || []).map(action => {
-      const category =
-        QUORUM_BILL_STATUS_TO_CATEGORY_MAP[
-          action.status as keyof typeof QUORUM_BILL_STATUS_TO_CATEGORY_MAP
-        ] || BillKeyDateCategory.OTHER
-      const isMajorMilestone = category !== BillKeyDateCategory.OTHER
-      const title =
-        QUORUM_BILL_STATUSES[action.status as keyof typeof QUORUM_BILL_STATUSES] || 'Action'
+    (bill.major_actions || [])
+      .map(action => {
+        const category =
+          QUORUM_BILL_STATUS_TO_CATEGORY_MAP[
+            action.status as keyof typeof QUORUM_BILL_STATUS_TO_CATEGORY_MAP
+          ] || BillKeyDateCategory.OTHER
+        const isMajorMilestone = category !== BillKeyDateCategory.OTHER
+        const title =
+          QUORUM_BILL_STATUSES[action.status as keyof typeof QUORUM_BILL_STATUSES] || 'Action'
 
-      return {
-        category,
-        date: action.acted_at,
-        description: action.text,
-        isMajorMilestone,
-        title: isMajorMilestone ? BILL_MAJOR_MILESTONE_TITLE_MAP[category] || title : title,
-      }
-    }),
+        return {
+          category,
+          date: action.acted_at,
+          description: action.text,
+          isMajorMilestone,
+          title: isMajorMilestone ? BILL_MAJOR_MILESTONE_TITLE_MAP[category] || title : title,
+        }
+      })
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      .filter((_, index, keyDates) => {
+        const parentMajorMilestoneIndex = keyDates
+          .slice(0, index)
+          .findLastIndex(({ isMajorMilestone }) => isMajorMilestone)
+
+        return index - parentMajorMilestoneIndex <= MAX_MINOR_MILESTONES_ALLOWED
+      }),
 
   mostRecentActionDate: bill => bill.most_recent_action_date,
 
