@@ -32,7 +32,8 @@
     "test": "jest",
     "ts": "TZ=UTC dotenv -- tsx --tsconfig ./tsconfig.bin.json",
     "ts:ci": "TZ=UTC tsx --tsconfig ./tsconfig.bin.json",
-    "typecheck": "tsc --noEmit --incremental"
+    "typecheck": "tsc --noEmit --incremental",
+    "translations:extract": "npm run ts src/bin/translations/extractTranslations.ts"
   },
   "prisma": {
     "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
