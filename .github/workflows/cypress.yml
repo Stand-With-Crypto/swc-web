@@ -106,6 +106,7 @@ jobs:
       SWC_CIVIC_DATABASE_URL: postgres://postgres:postgres@localhost:5432/swc_civic
       SEED_SIZE: SM
       IS_DEVELOPING_OFFLINE: true
+      NEXT_PUBLIC_SPEED_INSIGHTS_SAMPLE_RATE: 0
 
     steps:
       - name: Checkout

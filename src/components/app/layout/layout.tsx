@@ -8,6 +8,7 @@ import { LayoutScript } from '@/components/app/layout/layoutScripts'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
+import { NEXT_PUBLIC_SPEED_INSIGHTS_SAMPLE_RATE } from '@/utils/shared/speedInsights'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { fontClassName } from '@/utils/web/fonts'
 
@@ -48,7 +49,7 @@ export function PageLayout({
         </TopLevelClientLogic>
         <Toaster />
         <CookieConsent countryCode={countryCode} />
-        <SpeedInsights debug={false} sampleRate={0.04} />
+        <SpeedInsights debug={false} sampleRate={NEXT_PUBLIC_SPEED_INSIGHTS_SAMPLE_RATE} />
       </body>
     </html>
   )
