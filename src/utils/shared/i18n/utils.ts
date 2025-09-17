@@ -4,7 +4,7 @@ import {
 } from '@/utils/shared/supportedLocales'
 
 export function isValidLanguage(value: string): value is SupportedEULanguages {
-  return ORDERED_SUPPORTED_EU_LANGUAGES.includes(value)
+  return ORDERED_SUPPORTED_EU_LANGUAGES.includes(value as SupportedEULanguages)
 }
 
 /**
