@@ -56,7 +56,7 @@ export function getFooterConfig(): FooterProps {
     title: 'Join the Movement',
     subtitle:
       'Join to show your support, collect advocacy NFTs, and protect the future of crypto. #standwithcrypto',
-    legalText: "Authorised by J. O'Loghlen, Coinbase Australia Pty Ltd., Sydney.",
+    legalText: 'Authorised by J. O’Loghlen, Coinbase Australia Pty Ltd., Sydney.',
     footerBanner: (
       <div className="pointer-events-none min-w-full select-none">
         <img
