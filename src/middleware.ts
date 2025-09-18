@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 
+import { getUpdatedLanguageFromPath } from '@/utils/edge/getUpdatedLanguageFromPath'
 import { internationalRedirectHandler } from '@/utils/edge/internationalRedirectHandler'
 import { obfuscateURLCountryCode } from '@/utils/edge/obfuscateURLCountryCode'
 import { setResponseCookie } from '@/utils/edge/setResponseCookie'
@@ -7,9 +8,14 @@ import { setSessionCookiesFromRequest } from '@/utils/edge/setSessionCookies'
 import { isKnownBotUserAgent } from '@/utils/shared/botUserAgent'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import {
+  SWC_PAGE_LANGUAGE_COOKIE_NAME,
+} from '@/utils/shared/supportedLocales'
+import {
   USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
   USER_ACCESS_LOCATION_COOKIE_NAME,
 } from '@/utils/shared/userAccessLocation'
+
+
 
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
 export function middleware(request: NextRequest) {
@@ -17,8 +23,13 @@ export function middleware(request: NextRequest) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
 
-  const { response = obfuscateURLCountryCode(request), userAccessLocationCookie } =
-    internationalRedirectHandler(request)
+  const {
+    response = obfuscateURLCountryCode(request),
+    userAccessLocationCookie,
+    languageCookie,
+  } = internationalRedirectHandler(request)
+
+
 
   setSessionCookiesFromRequest(request, response)
 
@@ -27,6 +38,16 @@ export function middleware(request: NextRequest) {
       response,
       cookieName: USER_ACCESS_LOCATION_COOKIE_NAME,
       cookieValue: userAccessLocationCookie,
+      maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
+    })
+  }
+
+  const updatedLanguageCookie = getUpdatedLanguageFromPath(request) || languageCookie
+  if (updatedLanguageCookie) {
+    setResponseCookie({
+      response,
+      cookieName: SWC_PAGE_LANGUAGE_COOKIE_NAME,
+      cookieValue: updatedLanguageCookie,
       maxAge: USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
     })
   }
