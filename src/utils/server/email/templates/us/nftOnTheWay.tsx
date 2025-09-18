@@ -27,6 +27,7 @@ const USNFTOnTheWayEmail = ({
   // This default value is so react email dev server works properly
   // The required type ensures this is not called without it
   actionNFT = 'CALL',
+  countryCode = SupportedCountryCodes.US,
   ...keepUpTheFightSectionProps
 }: USNFTOnTheWayEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -38,7 +39,11 @@ const USNFTOnTheWayEmail = ({
   const nftImage = US_NFT_IMAGES_BY_ACTION[actionNFT]
 
   return (
-    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           alt={nftImage.alt}
@@ -67,7 +72,7 @@ const USNFTOnTheWayEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.US}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </USWrapper>

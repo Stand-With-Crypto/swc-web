@@ -1,24 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { UserActionType, UserCommunicationJourneyType } from '@prisma/client'
-// import { render } from '@react-email/components'
-// import * as Sentry from '@sentry/nextjs'
+import { CommunicationType, UserActionType, UserCommunicationJourneyType } from '@prisma/client'
+import { render } from '@react-email/components'
+import * as Sentry from '@sentry/nextjs'
 import { isBefore, subMinutes } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 import { z } from 'zod'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-// import { sendMail } from '@/utils/server/email'
-import BecomeMemberReminderEmail from '@/utils/server/email/templates/becomeMemberReminder'
-// import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
+import { sendMail } from '@/utils/server/email'
+import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
 import ContactYourRepresentativeReminderEmail from '@/utils/server/email/templates/contactYourRepresentativeReminder'
 import FinishSettingUpProfileReminderEmail from '@/utils/server/email/templates/finishSettingUpProfileReminder'
 import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXReminder'
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { logger } from '@/utils/shared/logger'
-// import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'
@@ -122,19 +120,6 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       await step.sleep('wait-for-phone-number-reminder-follow-up', followUpTimeout)
     }
 
-    const user = await getUser(payload.userId)
-    if (!user.hasOptedInToMembership) {
-      await step.run('send-membership-reminder', async () =>
-        sendInitialSignUpEmail({
-          userId: payload.userId,
-          sessionId: payload.sessionId,
-          userCommunicationJourneyId: userCommunicationJourney.id,
-          step: 'membership-reminder',
-        }),
-      )
-      await step.sleep('wait-for-membership-reminder-follow-up', followUpTimeout)
-    }
-
     const hasFollowedOnX = await hasUserCompletedAction(payload.userId, UserActionType.TWEET)
     if (!hasFollowedOnX) {
       await step.run('send-follow-on-x-reminder', async () =>
@@ -235,24 +220,23 @@ async function hasUserCompletedAction(userId: string, actionType: UserActionType
   return !!action
 }
 
-// const ACTIVE_ACTIONS = [
-//   UserActionType.CALL,
-//   UserActionType.EMAIL,
-//   UserActionType.DONATION,
-//   UserActionType.NFT_MINT,
-//   UserActionType.VOTER_REGISTRATION,
-// ]
+const ACTIVE_ACTIONS = [
+  UserActionType.CALL,
+  UserActionType.EMAIL,
+  UserActionType.DONATION,
+  UserActionType.NFT_MINT,
+  UserActionType.VOTER_REGISTRATION,
+]
 
-const TEMPLATE_BY_STEP = {
+const TEMPLATE_GETTER_BY_STEP = {
   welcome: InitialSignUpEmail,
   'update-profile-reminder': FinishSettingUpProfileReminderEmail,
   'phone-number-reminder': PhoneNumberReminderEmail,
-  'membership-reminder': BecomeMemberReminderEmail,
   'follow-on-x-reminder': FollowOnXReminderEmail,
   'contact-your-rep-reminder': ContactYourRepresentativeReminderEmail,
 }
 
-type InitialSignUpEmailStep = keyof typeof TEMPLATE_BY_STEP
+type InitialSignUpEmailStep = keyof typeof TEMPLATE_GETTER_BY_STEP
 
 async function sendInitialSignUpEmail({
   userId,
@@ -263,66 +247,64 @@ async function sendInitialSignUpEmail({
   userCommunicationJourneyId: string
   step: InitialSignUpEmailStep
 } & Pick<InitialSignupUserCommunicationDataSchema, 'userId' | 'sessionId'>) {
-  logger.info('Skipping initial signup email sends')
-  return null
+  const user = await getUser(userId)
 
-  // const user = await getUser(userId)
+  if (!user.primaryUserEmailAddress) {
+    return null
+  }
 
-  // if (!user.primaryUserEmailAddress) {
-  //   return null
-  // }
+  const countryCode = user.countryCode as SupportedCountryCodes
+  const getTemplateByCountryCode = TEMPLATE_GETTER_BY_STEP[step]
+  const Template = getTemplateByCountryCode(countryCode)
 
-  // const countryCode = user.countryCode as SupportedCountryCodes
-  // const Template = TEMPLATE_BY_STEP[step](countryCode)
+  if (!Template) {
+    return null
+  }
 
-  // if (!Template) {
-  //   return null
-  // }
+  const messageId = await sendMail({
+    countryCode,
+    payload: {
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: Template.subjectLine,
+      html: await render(
+        <Template
+          completedActionTypes={user.userActions
+            .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
+            .map(action => `${action.actionType}` as EmailActiveActions)}
+          countryCode={countryCode}
+          session={
+            sessionId
+              ? {
+                  userId: user.id,
+                  sessionId,
+                }
+              : null
+          }
+        />,
+      ),
+      customArgs: {
+        userId: user.id,
+        campaign: Template.campaign,
+      },
+    },
+  }).catch(err => {
+    Sentry.captureException(err, {
+      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress, step },
+      tags: {
+        domain: 'initialSignupUserCommunicationJourney',
+      },
+      fingerprint: ['initialSignupUserCommunicationJourney', 'sendMail', step],
+    })
+    throw err
+  })
 
-  // const messageId = await sendMail({
-  //   countryCode,
-  //   payload: {
-  //     to: user.primaryUserEmailAddress.emailAddress,
-  //     subject: Template.subjectLine,
-  //     html: await render(
-  //       <Template
-  //         completedActionTypes={user.userActions
-  //           .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
-  //           .map(action => `${action.actionType}` as EmailActiveActions)}
-  //         countryCode={countryCode}
-  //         session={
-  //           sessionId
-  //             ? {
-  //                 userId: user.id,
-  //                 sessionId,
-  //               }
-  //             : null
-  //         }
-  //       />,
-  //     ),
-  //     customArgs: {
-  //       userId: user.id,
-  //       campaign: Template.campaign,
-  //     },
-  //   },
-  // }).catch(err => {
-  //   Sentry.captureException(err, {
-  //     extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress, step },
-  //     tags: {
-  //       domain: 'initialSignupUserCommunicationJourney',
-  //     },
-  //     fingerprint: ['initialSignupUserCommunicationJourney', 'sendMail', step],
-  //   })
-  //   throw err
-  // })
-
-  // return prismaClient.userCommunication.create({
-  //   data: {
-  //     userCommunicationJourneyId,
-  //     messageId,
-  //     communicationType: CommunicationType.EMAIL,
-  //   },
-  // })
+  return prismaClient.userCommunication.create({
+    data: {
+      userCommunicationJourneyId,
+      messageId,
+      communicationType: CommunicationType.EMAIL,
+    },
+  })
 }
 
 function hasUserCompletedProfile(

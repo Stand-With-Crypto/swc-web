@@ -6,6 +6,7 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/zod/getSWCEvents'
 
 const logger = getLogger(`builderIOEvents`)
@@ -32,6 +33,7 @@ export async function getEvent({
             },
             ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
           },
+          locale: DEFAULT_LOCALE,
           includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
           cacheSeconds: 60,
         }),
@@ -77,6 +79,7 @@ async function getAllEventsWithOffset({
             countryCode: countryCode.toUpperCase(),
           },
         },
+        locale: DEFAULT_LOCALE,
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
         limit: LIMIT,

@@ -22,6 +22,7 @@ const USRegisterToVoteReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.US,
   ...keepUpTheFightSectionProps
 }: RegisterToVoteReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -31,7 +32,11 @@ const USRegisterToVoteReminderEmail = ({
   }
 
   return (
-    <USWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <USWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -80,7 +85,7 @@ const USRegisterToVoteReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.US}
+        countryCode={countryCode}
         hiddenActions={['VOTER_REGISTRATION']}
         hrefSearchParams={hydratedHrefSearchParams}
       />

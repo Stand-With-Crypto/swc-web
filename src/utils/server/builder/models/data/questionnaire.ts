@@ -5,6 +5,7 @@ import { builderSDKClient } from '@/utils/server/builder'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
 import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import {
   QUESTION_ANSWER_OPTIONS,
   SWCQuestionnaireAnswers,
@@ -31,6 +32,7 @@ export async function getQuestionnaire({
               countryCode: countryCode.toUpperCase(),
             },
           },
+          locale: DEFAULT_LOCALE,
           fields: 'data',
         }),
       { retries: 3, minTimeout: 5000 },
