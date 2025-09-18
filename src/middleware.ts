@@ -7,15 +7,11 @@ import { setResponseCookie } from '@/utils/edge/setResponseCookie'
 import { setSessionCookiesFromRequest } from '@/utils/edge/setSessionCookies'
 import { isKnownBotUserAgent } from '@/utils/shared/botUserAgent'
 import { isCypress } from '@/utils/shared/executionEnvironment'
-import {
-  SWC_PAGE_LANGUAGE_COOKIE_NAME,
-} from '@/utils/shared/supportedLocales'
+import { SWC_PAGE_LANGUAGE_COOKIE_NAME } from '@/utils/shared/supportedLocales'
 import {
   USER_ACCESS_LOCATION_COOKIE_MAX_AGE,
   USER_ACCESS_LOCATION_COOKIE_NAME,
 } from '@/utils/shared/userAccessLocation'
-
-
 
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
 export function middleware(request: NextRequest) {
@@ -28,8 +24,6 @@ export function middleware(request: NextRequest) {
     userAccessLocationCookie,
     languageCookie,
   } = internationalRedirectHandler(request)
-
-
 
   setSessionCookiesFromRequest(request, response)
 
