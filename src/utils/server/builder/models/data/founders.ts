@@ -6,6 +6,7 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import { SWCFounder, zodFoundersSchemaValidation } from '@/utils/shared/zod/getSWCFounders'
 
 const logger = getLogger(`builderIOFounders`)
@@ -22,6 +23,7 @@ async function getAllFounders({ countryCode }: { countryCode: SupportedCountryCo
             },
           },
         },
+        locale: DEFAULT_LOCALE,
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         fields: 'data',
       }),

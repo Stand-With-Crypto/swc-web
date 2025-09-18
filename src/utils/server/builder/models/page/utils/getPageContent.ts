@@ -4,6 +4,7 @@ import pRetry from 'p-retry'
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 
 export async function getPageContent(
   pageModelName: BuilderPageModelIdentifiers,
@@ -24,6 +25,7 @@ export async function getPageContent(
     // Set cachebust to true to get the latest content.
     // This should only be used to generate static pages.
     cachebust: true,
+    locale: DEFAULT_LOCALE,
   }
 
   const content = await pRetry(
