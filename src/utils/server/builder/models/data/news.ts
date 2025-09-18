@@ -11,6 +11,7 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 
 interface InternalNews {
   id: string
@@ -83,6 +84,7 @@ async function getAllNewsWithOffset(
         sort: {
           'data.publicationDate': -1,
         },
+        locale: DEFAULT_LOCALE,
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
         fields: 'data,createdDate,id',

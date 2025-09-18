@@ -8,14 +8,19 @@ import {
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { GB_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/gb/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import {
+  getPhysicalMailingAddressByCountryCode,
+  getSWCLegalEntityNameByCountryCode,
+} from '@/utils/shared/legalUtils'
 
 export function GBWrapper({
   children,
   hrefSearchParams = {},
+  countryCode,
   ...props
 }: React.PropsWithChildren<WrapperProps>) {
   return (
-    <Wrapper {...props}>
+    <Wrapper {...props} countryCode={countryCode}>
       <HeaderSection>
         <Column>
           <HeaderSection.Logo href={buildTemplateInternalUrl('/gb', hrefSearchParams)}>
@@ -42,8 +47,11 @@ export function GBWrapper({
       {children}
 
       <FooterSection
+        physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
+        privacyPolicyHref={buildTemplateInternalUrl('/gb/privacy', hrefSearchParams)}
+        sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}
         shieldSrc={buildTemplateInternalUrl('/gb/email/misc/shield.svg', hrefSearchParams)}
-        swchHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}
+        swcHref={buildTemplateInternalUrl('/gb', hrefSearchParams)}
       >
         <FooterSection.SocialMedia
           alt="X/Twitter logo"

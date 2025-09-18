@@ -18,6 +18,7 @@ const CAReactivationReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.CA,
   ...keepUpTheFightSectionProps
 }: ReactivationReminderProps) => {
   const hydratedHrefSearchParams = {
@@ -27,7 +28,11 @@ const CAReactivationReminderEmail = ({
   }
 
   return (
-    <CAWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <CAWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -67,7 +72,7 @@ const CAReactivationReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.CA}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </CAWrapper>

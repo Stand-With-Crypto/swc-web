@@ -19,6 +19,7 @@ const CAPhoneNumberReminderEmail = ({
   previewText,
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.CA,
   ...keepUpTheFightSectionProps
 }: PhoneNumberReminderEmailProps) => {
   const hydratedHrefSearchParams = {
@@ -28,7 +29,11 @@ const CAPhoneNumberReminderEmail = ({
   }
 
   return (
-    <CAWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <CAWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -78,7 +83,7 @@ const CAPhoneNumberReminderEmail = ({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.CA}
+        countryCode={countryCode}
         hrefSearchParams={hydratedHrefSearchParams}
       />
     </CAWrapper>
