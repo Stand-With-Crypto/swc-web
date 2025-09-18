@@ -9,7 +9,7 @@ import { PageProps } from '@/types'
 import { generateCountryCodeLayoutMetadata } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-import { footerConfig, navbarConfig } from './config'
+import { getFooterConfig, getNavbarConfig } from './config'
 
 export { viewport } from '@/utils/server/metadataUtils'
 
@@ -31,6 +31,9 @@ export default async function Layout({
   if (countryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE) {
     notFound()
   }
+
+  const navbarConfig = getNavbarConfig()
+  const footerConfig = getFooterConfig()
 
   return (
     <PageLayout

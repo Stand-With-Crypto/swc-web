@@ -1,8 +1,8 @@
 import { headers } from 'next/headers'
 
-import { extractLanguageFromPath } from '@/utils/i18n/languageUtils'
 import { createTranslator } from '@/utils/shared/i18n/createTranslator'
 import { I18nMessages } from '@/utils/shared/i18n/types'
+import { extractLanguageFromPath } from '@/utils/shared/i18n/utils'
 import {
   DEFAULT_EU_LANGUAGE,
   ORDERED_SUPPORTED_EU_LANGUAGES,

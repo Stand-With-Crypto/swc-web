@@ -7,13 +7,16 @@ import { GbNavbarGlobalBanner } from '@/components/app/navbarGlobalBanner/gb'
 import { generateCountryCodeLayoutMetadata } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-import { footerConfig, navbarConfig } from './config'
+import { getFooterConfig, getNavbarConfig } from './config'
 
 const countryCode = SupportedCountryCodes.GB
 
 export const metadata: Metadata = generateCountryCodeLayoutMetadata(countryCode)
 
 export default async function GbLayout({ children }: React.PropsWithChildren) {
+  const navbarConfig = getNavbarConfig()
+  const footerConfig = getFooterConfig()
+
   return (
     <PageLayout
       countryCode={countryCode}

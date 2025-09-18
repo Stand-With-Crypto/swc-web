@@ -12,6 +12,7 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
 
 export type LocationStateCode =
   | USStateCode
@@ -77,13 +78,17 @@ export const getIntlUrls = (
   countryCode: SupportedCountryCodes,
   {
     actualPaths,
+    language,
   }: {
     // when triggering vercel logic like revalidatePath, we need the actual paths, not the paths that get rewritten in our middleware (for example, all /en paths get rewritten to /)
     actualPaths?: true
+    language?: SupportedEULanguages
   } = {},
 ) => {
   const countryPrefix =
-    countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !actualPaths ? '' : `/${countryCode}`
+    countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !actualPaths
+      ? ''
+      : `/${countryCode}${language ? `/${language}` : ''}`
 
   const racesRoutesSegments = COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS[countryCode]
   const RACES_ROUTES = {
