@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { COOKIE_CONSENT_COOKIE_NAME } from '@/utils/shared/cookieConsent'
+import { EU_COUNTRY_CODES } from '@/utils/shared/euCountryMapping'
 import { LOCAL_USER_CURRENT_SESSION_KEY, LOCAL_USER_PERSISTED_KEY } from '@/utils/shared/localUser'
 import {
   ORDERED_SUPPORTED_COUNTRIES,
@@ -24,7 +25,7 @@ import {
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 // Adding 'br' to the list to allow for easy non supported country code testing.
-const USER_ACCESS_LOCATION_OPTIONS = [...ORDERED_SUPPORTED_COUNTRIES, 'br']
+const USER_ACCESS_LOCATION_OPTIONS = [...ORDERED_SUPPORTED_COUNTRIES, 'br', ...EU_COUNTRY_CODES]
 
 export function UserAccessLocationBypass() {
   const [userAccessLocation, setUserAccessLocation] = useState('')

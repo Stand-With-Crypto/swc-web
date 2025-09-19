@@ -2,266 +2,388 @@
  * @jest-environment node
  */
 
-import { describe, expect, it } from '@jest/globals'
+import { beforeEach, describe, expect, it, jest } from '@jest/globals'
 import { NextRequest } from 'next/server'
 
-import { getUserAccessLocation } from '@/utils/edge/getUserAccessLocation'
-import * as supportedCountries from '@/utils/shared/supportedCountries'
-import { USER_SELECTED_COUNTRY_COOKIE_NAME } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import {
+  SupportedEULanguages,
+  SWC_PAGE_LANGUAGE_COOKIE_NAME,
+} from '@/utils/shared/supportedLocales'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 import { internationalRedirectHandler } from './internationalRedirectHandler'
 
-jest.mock('@/utils/edge/getUserAccessLocation')
-jest.mock('@/utils/shared/supportedCountries', () => ({
-  ...jest.requireActual('@/utils/shared/supportedCountries'),
-  COUNTRY_CODE_REGEX_PATTERN: {
-    test: jest.fn(),
-  },
+jest.mock('@vercel/functions', () => ({
+  geolocation: jest.fn(() => ({ country: 'us' })),
 }))
 
-const mockGetUserAccessLocation = getUserAccessLocation as jest.MockedFunction<
-  typeof getUserAccessLocation
->
+jest.mock('@/utils/shared/executionEnvironment', () => ({
+  isCypress: false,
+  isBrowser: false,
+  isStorybook: false,
+  isJest: true,
+  IS_DEVELOPING_OFFLINE: undefined,
+}))
 
-const createMockRequest = (
-  path: string,
-  options?: {
-    userAccessLocationCookie?: string
-    userSelectedCountryCookie?: string
-  },
-) => {
-  const url = new URL(path, 'http://localhost')
-  const headers = new Headers()
+function createRequest(url: string, cookies: Record<string, string> = {}): NextRequest {
+  const request = new NextRequest(url)
 
-  const cookies = []
+  Object.entries(cookies).forEach(([name, value]) => {
+    request.cookies.set(name, value)
+  })
 
-  if (options?.userAccessLocationCookie) {
-    cookies.push(`${USER_ACCESS_LOCATION_COOKIE_NAME}=${options.userAccessLocationCookie}`)
-  }
-
-  if (options?.userSelectedCountryCookie) {
-    cookies.push(`${USER_SELECTED_COUNTRY_COOKIE_NAME}=${options.userSelectedCountryCookie}`)
-  }
-
-  if (cookies.length > 0) {
-    headers.set('cookie', cookies.join('; '))
-  }
-
-  return new NextRequest(url, { headers })
+  return request
 }
 
-describe('internationalRedirectHandler - Country Cookie', () => {
+function extractRedirectLocation(response: any): string | null {
+  return response.headers.get('location')
+}
+
+describe('International Redirect Handler', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    delete process.env.BYPASS_INTERNATIONAL_REDIRECT
   })
 
-  // --------------- COUNTRY COOKIE ---------------
+  describe('EU Redirects with Language Support', () => {
+    it('should redirect German user to /eu/de', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de',
+      })
 
-  it('should set the country cookie when cookie is not set', () => {
-    const request = createMockRequest('/')
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response, userAccessLocationCookie } = internationalRedirectHandler(request)
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
 
-    expect(response).toBeUndefined()
-    expect(userAccessLocationCookie).toEqual('gb')
-  })
-
-  it('should not update the country cookie when cookie already exists', () => {
-    const request = createMockRequest('/', {
-      userAccessLocationCookie: 'us',
-    })
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response, userAccessLocationCookie } = internationalRedirectHandler(request)
-
-    expect(response).toBeUndefined()
-    expect(userAccessLocationCookie).toBeNull()
-  })
-})
-
-describe('internationalRedirectHandler - International Redirect', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-    jest.spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test').mockReset()
-  })
-
-  afterEach(() => {
-    jest.restoreAllMocks()
-  })
-
-  it('should not redirect when request is not on homepage', () => {
-    const request = createMockRequest('/events')
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response } = internationalRedirectHandler(request)
-
-    expect(response).toBeUndefined()
-  })
-
-  it('should not redirect when country cookie is already set', () => {
-    const request = createMockRequest('/', {
-      userAccessLocationCookie: 'gb',
-    })
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response } = internationalRedirectHandler(request)
-
-    expect(response).toBeUndefined()
-  })
-
-  it('should not redirect when homepage is from the same country as geo location country code', () => {
-    const request = createMockRequest('/gb', {
-      userAccessLocationCookie: 'gb',
-    })
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response } = internationalRedirectHandler(request)
-
-    expect(response).toBeUndefined()
-  })
-
-  it('should not redirect when all conditions are met, but geo location country code is not supported', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode !== 'cn')
-
-    const request = createMockRequest('/')
-    mockGetUserAccessLocation.mockReturnValue('CN')
-    const { response } = internationalRedirectHandler(request)
-
-    expect(response).toBeUndefined()
-  })
-
-  it('should redirect when all conditions are met and user access location cookie is not set', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode === 'gb')
-
-    const request = createMockRequest('/')
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response } = internationalRedirectHandler(request)
-
-    expect(response).toBeDefined()
-    expect(response?.status).toBe(307)
-    expect(response?.headers.get('location')).toBe('http://localhost/gb')
-  })
-
-  it('should not redirect when user selected country cookie is not set', () => {
-    const request = createMockRequest('/')
-    const { response } = internationalRedirectHandler(request)
-
-    expect(response).toBeUndefined()
-  })
-
-  it('should not redirect when user selected country cookie is set to US', () => {
-    const request = createMockRequest('/', {
-      userSelectedCountryCookie: 'us',
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/de')
+      expect(userAccessLocationCookie).toBe('de')
+      expect(languageCookie).toBe('de')
     })
 
-    const { response } = internationalRedirectHandler(request)
+    it('should redirect French user to /eu/fr', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'fr',
+      })
 
-    expect(response).toBeUndefined()
-  })
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
 
-  it('should not redirect when request is not on US homepage', () => {
-    const request = createMockRequest('/events', {
-      userSelectedCountryCookie: 'au',
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/fr')
+      expect(userAccessLocationCookie).toBe('fr')
+      expect(languageCookie).toBe('fr')
     })
-    const { response } = internationalRedirectHandler(request)
 
-    expect(response).toBeUndefined()
-  })
+    it('should redirect Italian user to /eu/en (default)', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'it',
+      })
 
-  it('should not redirect if selected country cookie is not supported', () => {
-    const request = createMockRequest('/', {
-      userSelectedCountryCookie: 'br',
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/en')
+      expect(userAccessLocationCookie).toBe('it')
+      expect(languageCookie).toBe('en')
     })
-    const { response } = internationalRedirectHandler(request)
 
-    expect(response).toBeUndefined()
-  })
+    it('should redirect Austrian user to /eu/de (German-speaking)', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'at',
+      })
 
-  it('should redirect when user selected country is GB and request is on US homepage', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode === 'gb')
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
 
-    const request = createMockRequest('/', {
-      userSelectedCountryCookie: 'gb',
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/de')
+      expect(userAccessLocationCookie).toBe('at')
+      expect(languageCookie).toBe('de')
     })
-    const { response } = internationalRedirectHandler(request)
 
-    expect(response).toBeDefined()
-    expect(response?.status).toBe(307)
-    expect(response?.headers.get('location')).toBe('http://localhost/gb')
-  })
+    it('should respect existing language cookie for EU users', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'it', // Italian user (defaults to EN)
+        [SWC_PAGE_LANGUAGE_COOKIE_NAME]: SupportedEULanguages.DE, // But prefers German
+      })
 
-  it('should redirect when user selected country is AU and request is on US homepage', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode === 'au')
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
 
-    const request = createMockRequest('/', {
-      userSelectedCountryCookie: 'au',
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/de')
+      expect(userAccessLocationCookie).toBe('it')
+      expect(languageCookie).toBe('de')
     })
-    const { response } = internationalRedirectHandler(request)
 
-    expect(response).toBeDefined()
-    expect(response?.status).toBe(307)
-    expect(response?.headers.get('location')).toBe('http://localhost/au')
-  })
+    it('should preserve query parameters in EU redirects', () => {
+      const request = createRequest('https://standwithcrypto.org/?utm_source=test&page=1', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de',
+      })
 
-  it('should redirect when user selected country is CA and request is on US homepage', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode === 'ca')
+      const { response } = internationalRedirectHandler(request)
 
-    const request = createMockRequest('/', {
-      userSelectedCountryCookie: 'ca',
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe(
+        'https://standwithcrypto.org/eu/de?utm_source=test&page=1',
+      )
     })
-    const { response } = internationalRedirectHandler(request)
 
-    expect(response).toBeDefined()
-    expect(response?.status).toBe(307)
-    expect(response?.headers.get('location')).toBe('http://localhost/ca')
+    it('should preserve hash fragments in EU redirects', () => {
+      const request = createRequest('https://standwithcrypto.org/#section1', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'fr',
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/fr#section1')
+    })
   })
 
-  it('should keep all query params when redirecting', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode === 'gb')
+  describe('User Selected Country Preferences', () => {
+    it('should redirect to user-selected EU with language preference', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'us',
+        USER_SELECTED_COUNTRY: SupportedCountryCodes.EU,
+        [SWC_PAGE_LANGUAGE_COOKIE_NAME]: SupportedEULanguages.FR,
+      })
 
-    const request = createMockRequest('/?test=1&test2=2')
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response } = internationalRedirectHandler(request)
+      const { response } = internationalRedirectHandler(request)
 
-    expect(response).toBeDefined()
-    expect(response?.status).toBe(307)
-    expect(response?.headers.get('location')).toBe('http://localhost/gb?test=1&test2=2')
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/fr')
+    })
+
+    it('should redirect to user-selected EU with default language when no preference', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'us',
+        USER_SELECTED_COUNTRY: SupportedCountryCodes.EU,
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/eu/en')
+    })
+
+    it('should redirect to user-selected GB', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'us',
+        USER_SELECTED_COUNTRY: SupportedCountryCodes.GB,
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/gb')
+    })
+
+    it('should redirect to user-selected CA', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'us',
+        USER_SELECTED_COUNTRY: SupportedCountryCodes.CA,
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/ca')
+    })
+
+    it('should redirect to user-selected AU', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'us',
+        USER_SELECTED_COUNTRY: SupportedCountryCodes.AU,
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/au')
+    })
   })
 
-  it('should keep hash when redirecting', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode === 'gb')
+  describe('Existing Functionality Preservation', () => {
+    it('should redirect GB user to /gb (no language)', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'gb',
+      })
 
-    const request = createMockRequest('/#section')
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response } = internationalRedirectHandler(request)
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
 
-    expect(response).toBeDefined()
-    expect(response?.status).toBe(307)
-    expect(response?.headers.get('location')).toBe('http://localhost/gb#section')
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/gb')
+      expect(userAccessLocationCookie).toBe('gb')
+      // Should not set language cookie for non-EU countries
+      expect(languageCookie).toBeNull()
+    })
+
+    it('should redirect CA user to /ca (no language)', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'ca',
+      })
+
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/ca')
+      expect(userAccessLocationCookie).toBe('ca')
+      expect(languageCookie).toBeNull()
+    })
+
+    it('should redirect AU user to /au (no language)', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'au',
+      })
+
+      const { response, userAccessLocationCookie, languageCookie } =
+        internationalRedirectHandler(request)
+
+      expect(response?.status).toBe(307)
+      expect(extractRedirectLocation(response)).toBe('https://standwithcrypto.org/au')
+      expect(userAccessLocationCookie).toBe('au')
+      expect(languageCookie).toBeNull()
+    })
+
+    it('should not redirect US users (default behavior)', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'us',
+      })
+
+      const { response, userAccessLocationCookie } = internationalRedirectHandler(request)
+
+      // Should not redirect (pass through)
+      expect(response).toBeUndefined()
+      expect(userAccessLocationCookie).toBe('us')
+    })
   })
 
-  it('should keep both query params and hash when redirecting', () => {
-    jest
-      .spyOn(supportedCountries.COUNTRY_CODE_REGEX_PATTERN, 'test')
-      .mockImplementation((countryCode: string) => countryCode === 'gb')
+  describe('Non-Homepage Paths', () => {
+    it('should not redirect EU users on non-homepage paths', () => {
+      const request = createRequest('https://standwithcrypto.org/politicians', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de',
+      })
 
-    const request = createMockRequest('/?test=1&test2=2#section')
-    mockGetUserAccessLocation.mockReturnValue('GB')
-    const { response } = internationalRedirectHandler(request)
+      const { response, userAccessLocationCookie } = internationalRedirectHandler(request)
 
-    expect(response).toBeDefined()
-    expect(response?.status).toBe(307)
-    expect(response?.headers.get('location')).toBe('http://localhost/gb?test=1&test2=2#section')
+      expect(response).toBeUndefined()
+      expect(userAccessLocationCookie).toBe('de')
+    })
+
+    it('should not redirect EU language paths', () => {
+      const request = createRequest('https://standwithcrypto.org/eu/de/politicians', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de',
+      })
+
+      const { response, userAccessLocationCookie } = internationalRedirectHandler(request)
+
+      expect(response).toBeUndefined()
+      expect(userAccessLocationCookie).toBe('de')
+    })
+
+    it('should not redirect existing country paths', () => {
+      const request = createRequest('https://standwithcrypto.org/gb/politicians', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de',
+      })
+
+      const { response, userAccessLocationCookie } = internationalRedirectHandler(request)
+
+      expect(response).toBeUndefined()
+      expect(userAccessLocationCookie).toBe('de')
+    })
+  })
+
+  describe('Cookie Management', () => {
+    it('should set user access location and language cookies for EU users', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de',
+      })
+
+      const { userAccessLocationCookie, languageCookie } = internationalRedirectHandler(request)
+
+      expect(userAccessLocationCookie).toBe('de')
+      expect(languageCookie).toBe('de')
+    })
+
+    it('should not redirect when user already has location cookie', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de', // German user
+        [USER_ACCESS_LOCATION_COOKIE_NAME]: 'us', // But already visited from US
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      // Should not redirect due to existing location cookie
+      expect(response).toBeUndefined()
+    })
+
+    it('should set country cookie when not previously set', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'gb',
+      })
+
+      const { userAccessLocationCookie } = internationalRedirectHandler(request)
+
+      expect(userAccessLocationCookie).toBe('gb')
+    })
+
+    it('should not update country cookie when already exists', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        [USER_ACCESS_LOCATION_COOKIE_NAME]: 'us',
+      })
+
+      const { userAccessLocationCookie } = internationalRedirectHandler(request)
+
+      expect(userAccessLocationCookie).toBeNull()
+    })
+  })
+
+  describe('Edge Cases', () => {
+    it('should handle invalid country codes gracefully', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'xx', // Invalid country
+      })
+
+      expect(() => internationalRedirectHandler(request)).not.toThrow()
+
+      const { response } = internationalRedirectHandler(request)
+      expect(response).toBeUndefined()
+    })
+
+    it('should handle missing location gracefully', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: '', // Empty location
+      })
+
+      expect(() => internationalRedirectHandler(request)).not.toThrow()
+    })
+
+    it('should handle bypass environment variable', () => {
+      process.env.BYPASS_INTERNATIONAL_REDIRECT = 'true'
+
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'de',
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      expect(response).toBeUndefined()
+
+      delete process.env.BYPASS_INTERNATIONAL_REDIRECT
+    })
+
+    it('should handle unsupported country codes', () => {
+      const request = createRequest('https://standwithcrypto.org/', {
+        OVERRIDE_USER_ACCESS_LOCATION: 'br', // Brazil - not supported
+      })
+
+      const { response } = internationalRedirectHandler(request)
+
+      expect(response).toBeUndefined()
+    })
   })
 })
