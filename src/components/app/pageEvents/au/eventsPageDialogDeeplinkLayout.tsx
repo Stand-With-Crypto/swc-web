@@ -4,7 +4,7 @@ import React, { cloneElement, JSX } from 'react'
 import { isAfter, parseISO, subDays } from 'date-fns'
 import { X } from 'lucide-react'
 
-import { EventsPage, EventsPageProps } from '@/components/app/pageEvents'
+import { AUEventsPage, AUEventsPageProps } from '@/components/app/pageEvents/au'
 import {
   dialogCloseStyles,
   dialogContentStyles,
@@ -15,17 +15,17 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-interface EventsPageDialogDeeplinkLayout extends Omit<EventsPageProps, 'isDeepLink'> {
+interface EventsPageDialogDeeplinkLayout extends Omit<AUEventsPageProps, 'isDeepLink'> {
   children: JSX.Element
-  countryCode: SupportedCountryCodes
 }
+
+const countryCode = SupportedCountryCodes.AU
 
 export async function EventsPageDialogDeeplinkLayout({
   children,
-  countryCode,
   events,
 }: EventsPageDialogDeeplinkLayout) {
-  const urls = getIntlUrls(countryCode)
+  const urls = getIntlUrls(SupportedCountryCodes.AU)
 
   const filteredFutureEvents = events?.filter(event =>
     isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
@@ -46,7 +46,7 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage countryCode={countryCode} events={events} isDeepLink />
+      <AUEventsPage events={events} isDeepLink />
     </>
   )
 }

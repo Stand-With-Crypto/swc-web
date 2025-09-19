@@ -1,0 +1,53 @@
+import 'server-only'
+
+import React, { cloneElement, JSX } from 'react'
+import { isAfter, parseISO, subDays } from 'date-fns'
+import { X } from 'lucide-react'
+
+import { EUEventsPage, EUEventsPageProps } from '@/components/app/pageEvents/eu'
+import {
+  dialogCloseStyles,
+  dialogContentStyles,
+  dialogOverlayStyles,
+} from '@/components/ui/dialog/styles'
+import { InternalLink } from '@/components/ui/link'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
+
+interface EventsPageDialogDeeplinkLayout extends Omit<EUEventsPageProps, 'isDeepLink'> {
+  children: JSX.Element
+}
+
+const countryCode = SupportedCountryCodes.EU
+
+export async function EventsPageDialogDeeplinkLayout({
+  children,
+  events,
+  language,
+}: EventsPageDialogDeeplinkLayout) {
+  const urls = getIntlUrls(SupportedCountryCodes.EU)
+
+  const filteredFutureEvents = events?.filter(event =>
+    isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
+  )
+
+  return (
+    <>
+      <InternalLink
+        className={cn(dialogOverlayStyles, 'cursor-default')}
+        href={urls.events()}
+        replace
+      />
+      <div className={cn(dialogContentStyles, 'min-h-[200px]')}>
+        {cloneElement(children, { events: filteredFutureEvents })}
+        <InternalLink className={dialogCloseStyles} href={urls.events()} replace>
+          <X size={20} />
+          <span className="sr-only">Close</span>
+        </InternalLink>
+      </div>
+
+      <EUEventsPage events={events} isDeepLink language={language} />
+    </>
+  )
+}

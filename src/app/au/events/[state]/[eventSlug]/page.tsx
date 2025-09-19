@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import sanitizeHtml from 'sanitize-html'
 
+import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/au/eventsPageDialogDeeplinkLayout'
 import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
-import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { getEvent, getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -58,7 +58,7 @@ export default async function EventDetailsPageRoot(props: Props) {
   const events = await getEvents({ countryCode })
 
   return (
-    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
+    <EventsPageDialogDeeplinkLayout events={events}>
       <EventDialogContent countryCode={countryCode} event={event.data} />
     </EventsPageDialogDeeplinkLayout>
   )

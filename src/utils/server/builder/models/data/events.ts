@@ -3,10 +3,11 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
+import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
+import { DEFAULT_LOCALE, SupportedEULanguages } from '@/utils/shared/supportedLocales'
 import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/zod/getSWCEvents'
 
 const logger = getLogger(`builderIOEvents`)
@@ -65,10 +66,14 @@ const LIMIT = 100
 async function getAllEventsWithOffset({
   offset,
   countryCode,
+  language,
 }: {
   offset: number
   countryCode: SupportedCountryCodes
+  language?: SupportedEULanguages
 }) {
+  const locale = language ? getLocaleForLanguage(language) : DEFAULT_LOCALE
+
   return await pRetry(
     () =>
       builderSDKClient.getAll(BuilderDataModelIdentifiers.EVENTS, {
@@ -79,7 +84,7 @@ async function getAllEventsWithOffset({
             countryCode: countryCode.toUpperCase(),
           },
         },
-        locale: DEFAULT_LOCALE,
+        locale,
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
         limit: LIMIT,
@@ -92,15 +97,21 @@ async function getAllEventsWithOffset({
   )
 }
 
-export async function getEvents({ countryCode }: { countryCode: SupportedCountryCodes }) {
+export async function getEvents({
+  countryCode,
+  language,
+}: {
+  countryCode: SupportedCountryCodes
+  language?: SupportedEULanguages
+}) {
   try {
     let offset = 0
 
-    const entries = await getAllEventsWithOffset({ offset, countryCode })
+    const entries = await getAllEventsWithOffset({ offset, countryCode, language })
 
     while (entries.length === LIMIT + offset) {
       offset += entries.length
-      entries.push(...(await getAllEventsWithOffset({ offset, countryCode })))
+      entries.push(...(await getAllEventsWithOffset({ offset, countryCode, language })))
     }
 
     const filteredIncompleteEvents = entries
