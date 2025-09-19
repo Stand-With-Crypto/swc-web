@@ -2,8 +2,8 @@
 
 import { ReactNode, Suspense } from 'react'
 
-import { LazyEventDialogContent } from '@/components/app/pageEvents/components/eventDialogContentLazyload'
-import { EventDialogContentSkeleton } from '@/components/app/pageEvents/components/eventDialogContentSkeleton'
+import { LazyEventDialogContent } from '@/components/app/pageEvents/common/eventDialogContentLazyload'
+import { EventDialogContentSkeleton } from '@/components/app/pageEvents/common/eventDialogContentSkeleton'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useDialog } from '@/hooks/useDialog'

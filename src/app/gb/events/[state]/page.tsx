@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
+import { StateEventsDialogContent } from '@/components/app/pageEvents/common/stateEventsDialogContent'
 import { GbEventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/gb/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builder/models/data/events'

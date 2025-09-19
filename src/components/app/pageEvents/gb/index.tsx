@@ -1,14 +1,16 @@
 import { isAfter, isBefore, parseISO, subDays } from 'date-fns'
 
+import { AllUpcomingEvents } from '@/components/app/pageEvents/common/allUpcomingEvents'
+import { EventsIntro } from '@/components/app/pageEvents/common/eventsIntro'
+import { EventsNearYou } from '@/components/app/pageEvents/common/eventsNearYou'
 import { EventsPageSection } from '@/components/app/pageEvents/common/eventsPageSectionLayout'
+import { FeaturedPastEvents } from '@/components/app/pageEvents/common/featuredPastEvents'
+import { PromotedEvents } from '@/components/app/pageEvents/common/promotedEvents'
 import { EventsPageProps } from '@/components/app/pageEvents/common/types'
-import { AllUpcomingEvents } from '@/components/app/pageEvents/components/allUpcomingEvents'
-import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
-import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
-import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featuredPastEvents'
-import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
+import { EventsPageWrapper } from '@/components/app/pageEvents/common/wrapper'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { cn } from '@/utils/web/cn'
 
 const countryCode = SupportedCountryCodes.GB
 
@@ -30,14 +32,15 @@ export function GbPageEvents({ events, isDeepLink }: EventsPageProps) {
   })
 
   return (
-    <div
-      className={cn(
-        'standard-spacing-from-navbar container flex w-full flex-col items-center gap-10 px-6 sm:gap-20 lg:gap-[6.25rem]',
-        isDeepLink && 'h-screen',
-      )}
-    >
-      <EventsIntro />
-
+    <EventsPageWrapper isDeepLink={isDeepLink}>
+      <EventsIntro>
+        <PageTitle>Events</PageTitle>
+        <PageSubTitle>
+          Stand With Crypto Alliance is dedicated to engaging and empowering the crypto community
+          both online and at real-world events. Crypto is a major force in our economy, our
+          politics, and our culture – but we need to keep up the momentum.
+        </PageSubTitle>
+      </EventsIntro>
       {promotedEvents && promotedEvents.length > 0 && (
         <EventsPageSection>
           <PromotedEvents countryCode={countryCode} events={promotedEvents} />
@@ -63,6 +66,6 @@ export function GbPageEvents({ events, isDeepLink }: EventsPageProps) {
           <FeaturedPastEvents events={featuredPastEvents} />
         </EventsPageSection>
       )}
-    </div>
+    </EventsPageWrapper>
   )
 }

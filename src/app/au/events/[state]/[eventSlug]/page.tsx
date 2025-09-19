@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import sanitizeHtml from 'sanitize-html'
 
 import { AuEventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/au/eventsPageDialogDeeplinkLayout'
-import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
+import { EventDialogContent } from '@/components/app/pageEvents/common/eventDialogContent'
 import { PageProps } from '@/types'
 import { getEvent, getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'

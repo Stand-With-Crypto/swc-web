@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { AuEventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/au/eventsPageDialogDeeplinkLayout'
-import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
+import { StateEventsDialogContent } from '@/components/app/pageEvents/common/stateEventsDialogContent'
 import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'

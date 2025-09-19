@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import sanitizeHtml from 'sanitize-html'
 
-import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
+import { EventDialogContent } from '@/components/app/pageEvents/common/eventDialogContent'
 import { GbEventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/gb/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { getEvent, getEvents } from '@/utils/server/builder/models/data/events'
