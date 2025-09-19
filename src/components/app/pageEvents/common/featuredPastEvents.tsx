@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 
-import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
+import { EventDialog } from '@/components/app/pageEvents/common/eventDialog'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'

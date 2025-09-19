@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { EventsPage } from '@/components/app/pageEvents'
+import { AuPageEvents } from '@/components/app/pageEvents/au'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -23,5 +23,5 @@ const countryCode = SupportedCountryCodes.AU
 export default async function EventsPageRoot() {
   const events = await getEvents({ countryCode })
 
-  return <EventsPage countryCode={countryCode} events={events} />
+  return <AuPageEvents events={events} />
 }

@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
-import { EventsMap } from '@/components/app/pageEvents/components/eventsMap'
-import { UpcomingEventsList } from '@/components/app/pageEvents/components/upcomingEvents'
+import { EventsMap } from '@/components/app/pageEvents/common/eventsMap'
+import { UpcomingEventsList } from '@/components/app/pageEvents/common/upcomingEvents'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

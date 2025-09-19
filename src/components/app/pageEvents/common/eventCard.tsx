@@ -2,7 +2,7 @@
 
 import { format } from 'date-fns'
 
-import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
+import { EventDialog } from '@/components/app/pageEvents/common/eventDialog'
 import { StateShield } from '@/components/ui/stateShield'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
