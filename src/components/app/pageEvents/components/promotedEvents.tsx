@@ -1,10 +1,9 @@
 'use client'
 
+import { ReactNode } from 'react'
 import { UserActionType } from '@prisma/client'
-import { isBefore, startOfDay } from 'date-fns'
 import sanitizeHtml from 'sanitize-html'
 
-import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { handleCreateRsvpAction } from '@/components/app/pageEvents/utils/createRsvpAction'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { Button } from '@/components/ui/button'
@@ -12,15 +11,22 @@ import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
-import { SWCEvent, SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
 
-interface PromotedEventsProps {
-  events: SWCEvents
-  countryCode: SupportedCountryCodes
+export function Root({ children }: { children: ReactNode }) {
+  return <section className="flex flex-col items-center gap-8">{children}</section>
 }
 
-export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
-  const handleRSVPButtonClick = (event: SWCEvent) => {
+export function RsvpButton({
+  children,
+  event,
+  countryCode,
+}: {
+  children: ReactNode
+  event: SWCEvent
+  countryCode: SupportedCountryCodes
+}) {
+  const handleRSVPButtonClick = () => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
       event,
@@ -31,64 +37,53 @@ export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
   }
 
   return (
-    <section className="flex flex-col items-center gap-8">
-      {events.map(event => {
-        const eventDate = event.data?.time
-          ? new Date(`${event.data.date}T${event.data.time}`)
-          : new Date(event.data.date)
+    <Button
+      className="mt-2 w-full sm:w-fit lg:mt-4"
+      onClick={handleRSVPButtonClick}
+      type="button"
+      variant="secondary"
+    >
+      {children}
+    </Button>
+  )
+}
 
-        const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))
+export function Event({
+  event,
+  action,
+}: {
+  event: SWCEvent
+  countryCode: SupportedCountryCodes
+  action: ReactNode
+}) {
+  return (
+    <div
+      className="flex flex-col items-center gap-4 lg:flex-row lg:gap-6"
+      key={getUniqueEventKey(event)}
+    >
+      <div className="relative h-[182px] min-w-[271px]">
+        <NextImage
+          alt={event.name}
+          className="rounded-3xl object-cover object-center"
+          fill
+          sizes="(max-width: 640px) 100vw, 271px"
+          src={event.image}
+        />
+      </div>
 
-        return (
-          <div
-            className="flex flex-col items-center gap-4 lg:flex-row lg:gap-6"
-            key={getUniqueEventKey(event.data)}
-          >
-            <div className="relative h-[182px] min-w-[271px]">
-              <NextImage
-                alt={event.data.name}
-                className="rounded-3xl object-cover object-center"
-                fill
-                sizes="(max-width: 640px) 100vw, 271px"
-                src={event.data.image}
-              />
-            </div>
+      <div className="grid justify-items-center gap-2 lg:justify-items-start">
+        <PageSubTitle as="h3" className="text-bold font-sans text-base text-foreground">
+          {event.name}
+        </PageSubTitle>
+        <div
+          className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left [&_a]:font-medium [&_a]:text-primary-cta [&_strong]:font-semibold [&_strong]:text-foreground"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeHtml(event.formattedDescription),
+          }}
+        />
 
-            <div className="grid justify-items-center gap-2 lg:justify-items-start">
-              <PageSubTitle as="h3" className="text-bold font-sans text-base text-foreground">
-                {event.data.name}
-              </PageSubTitle>
-              <div
-                className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left [&_a]:font-medium [&_a]:text-primary-cta [&_strong]:font-semibold [&_strong]:text-foreground"
-                dangerouslySetInnerHTML={{
-                  __html: sanitizeHtml(event.data.formattedDescription),
-                }}
-              />
-
-              {isPastEvent ? (
-                <EventDialog
-                  event={event.data}
-                  trigger={
-                    <Button asChild className="mt-2 w-full sm:w-fit lg:mt-4" variant="secondary">
-                      <span>See what happened</span>
-                    </Button>
-                  }
-                  triggerClassName="w-full sm:w-fit"
-                />
-              ) : (
-                <Button
-                  className="mt-2 w-full sm:w-fit lg:mt-4"
-                  onClick={() => handleRSVPButtonClick(event.data)}
-                  type="button"
-                  variant="secondary"
-                >
-                  RSVP
-                </Button>
-              )}
-            </div>
-          </div>
-        )
-      })}
-    </section>
+        {action}
+      </div>
+    </div>
   )
 }
