@@ -3,7 +3,6 @@ import { isAfter, isBefore, parseISO, subDays } from 'date-fns'
 import { AllUpcomingEvents } from '@/components/app/pageEvents/common/allUpcomingEvents'
 import { EventsIntro } from '@/components/app/pageEvents/common/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/common/eventsNearYou'
-import { EventsPageSection } from '@/components/app/pageEvents/common/eventsPageSectionLayout'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/common/featuredPastEvents'
 import { PromotedEvents } from '@/components/app/pageEvents/common/promotedEvents'
 import { EventsPageProps } from '@/components/app/pageEvents/common/types'
@@ -42,29 +41,17 @@ export function GbPageEvents({ events, isDeepLink }: EventsPageProps) {
         </PageSubTitle>
       </EventsIntro>
       {promotedEvents && promotedEvents.length > 0 && (
-        <EventsPageSection>
-          <PromotedEvents countryCode={countryCode} events={promotedEvents} />
-        </EventsPageSection>
+        <PromotedEvents countryCode={countryCode} events={promotedEvents} />
       )}
 
-      <EventsPageSection>
-        <EventsNearYou events={futureEvents ?? []} />
-      </EventsPageSection>
+      <EventsNearYou events={futureEvents ?? []} />
 
       {futureEvents && futureEvents.length > 0 && (
-        <EventsPageSection>
-          <AllUpcomingEvents countryCode={countryCode} events={futureEvents} showMap={false} />
-        </EventsPageSection>
+        <AllUpcomingEvents countryCode={countryCode} events={futureEvents} showMap={false} />
       )}
 
       {featuredPastEvents && featuredPastEvents.length > 0 && (
-        <EventsPageSection>
-          <EventsPageSection.Title>Featured Past Events</EventsPageSection.Title>
-          <EventsPageSection.Subtitle>
-            Highlights from our recent Stand With Crypto events across the UK.
-          </EventsPageSection.Subtitle>
-          <FeaturedPastEvents events={featuredPastEvents} />
-        </EventsPageSection>
+        <FeaturedPastEvents events={featuredPastEvents} />
       )}
     </EventsPageWrapper>
   )
