@@ -18,7 +18,6 @@ import { cn } from '@/utils/web/cn'
 
 interface CaEventsPageDialogDeeplinkLayout extends Omit<EventsPageProps, 'isDeepLink'> {
   children: JSX.Element
-  countryCode: SupportedCountryCodes
 }
 
 const countryCode = SupportedCountryCodes.CA
@@ -48,7 +47,7 @@ export async function CaEventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <CaPageEvents countryCode={countryCode} events={events} isDeepLink />
+      <CaPageEvents events={events} isDeepLink />
     </>
   )
 }

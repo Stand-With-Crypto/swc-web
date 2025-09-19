@@ -23,5 +23,5 @@ const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 export default async function EventsPageRoot() {
   const events = await getEvents({ countryCode })
 
-  return <UsPageEvents countryCode={countryCode} events={events} />
+  return <UsPageEvents events={events} />
 }

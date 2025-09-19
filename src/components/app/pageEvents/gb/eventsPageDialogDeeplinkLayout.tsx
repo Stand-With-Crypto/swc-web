@@ -18,7 +18,6 @@ import { cn } from '@/utils/web/cn'
 
 interface GbEventsPageDialogDeeplinkLayout extends Omit<EventsPageProps, 'isDeepLink'> {
   children: JSX.Element
-  countryCode: SupportedCountryCodes
 }
 
 const countryCode = SupportedCountryCodes.GB
@@ -48,7 +47,7 @@ export async function GbEventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <GbPageEvents countryCode={countryCode} events={events} isDeepLink />
+      <GbPageEvents events={events} isDeepLink />
     </>
   )
 }

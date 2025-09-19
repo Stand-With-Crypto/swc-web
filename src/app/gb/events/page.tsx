@@ -23,5 +23,5 @@ const countryCode = SupportedCountryCodes.GB
 export default async function EventsPageRoot() {
   const events = await getEvents({ countryCode })
 
-  return <GbPageEvents countryCode={countryCode} events={events} />
+  return <GbPageEvents events={events} />
 }
