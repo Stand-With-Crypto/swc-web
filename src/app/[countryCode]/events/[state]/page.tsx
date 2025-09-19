@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
-import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
+import { UsEventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/us/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -44,7 +44,7 @@ export default async function StateEventsPageRoot(props: Props) {
   const events = await getEvents({ countryCode })
 
   return (
-    <EventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
+    <UsEventsPageDialogDeeplinkLayout countryCode={countryCode} events={events}>
       <StateEventsDialogContent
         countryCode={countryCode}
         state={{
@@ -52,6 +52,6 @@ export default async function StateEventsPageRoot(props: Props) {
           name: getUSStateNameFromStateCode(stateCode),
         }}
       />
-    </EventsPageDialogDeeplinkLayout>
+    </UsEventsPageDialogDeeplinkLayout>
   )
 }

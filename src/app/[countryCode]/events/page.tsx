@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { EventsPage } from '@/components/app/pageEvents'
+import { UsPageEvents } from '@/components/app/pageEvents/us'
 import { getEvents } from '@/utils/server/builder/models/data/events'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
@@ -23,5 +23,5 @@ const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 export default async function EventsPageRoot() {
   const events = await getEvents({ countryCode })
 
-  return <EventsPage countryCode={countryCode} events={events} />
+  return <UsPageEvents countryCode={countryCode} events={events} />
 }

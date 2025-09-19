@@ -10,10 +10,9 @@ import { PromotedEvents } from '@/components/app/pageEvents/components/promotedE
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
-// Re-export types for backward compatibility
-export type { EventsPageProps }
+const countryCode = SupportedCountryCodes.GB
 
-export function EventsPage({ events, isDeepLink, countryCode }: EventsPageProps) {
+export function GbPageEvents({ events, isDeepLink }: EventsPageProps) {
   const futureEvents = events?.filter(event =>
     isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
   )
@@ -51,16 +50,16 @@ export function EventsPage({ events, isDeepLink, countryCode }: EventsPageProps)
 
       {futureEvents && futureEvents.length > 0 && (
         <EventsPageSection>
-          <AllUpcomingEvents
-            countryCode={countryCode}
-            events={futureEvents}
-            showMap={countryCode === SupportedCountryCodes.US}
-          />
+          <AllUpcomingEvents countryCode={countryCode} events={futureEvents} showMap={false} />
         </EventsPageSection>
       )}
 
       {featuredPastEvents && featuredPastEvents.length > 0 && (
         <EventsPageSection>
+          <EventsPageSection.Title>Featured Past Events</EventsPageSection.Title>
+          <EventsPageSection.Subtitle>
+            Highlights from our recent Stand With Crypto events across the UK.
+          </EventsPageSection.Subtitle>
           <FeaturedPastEvents events={featuredPastEvents} />
         </EventsPageSection>
       )}
