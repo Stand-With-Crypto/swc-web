@@ -10,6 +10,7 @@ import { cn } from '@/utils/web/cn'
 
 const urls = getIntlUrls(SupportedCountryCodes.EU)
 
+// TODO(EU): Translate this content
 export function EUCookieConsentBanner({
   onAcceptSpecificCookies,
   onAcceptAll,

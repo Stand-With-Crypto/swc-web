@@ -104,7 +104,7 @@ function shouldRedirectToCountrySpecificHomepage({
   // If the user has selected a country other than US in a previous visit, we want to redirect them
   const isSelectedCountryCodeSupported = maybeUserSelectedCountryCookie
     ? COUNTRY_CODE_REGEX_PATTERN.test(maybeUserSelectedCountryCookie) &&
-      maybeUserSelectedCountryCookie !== DEFAULT_SUPPORTED_COUNTRY_CODE
+    maybeUserSelectedCountryCookie !== DEFAULT_SUPPORTED_COUNTRY_CODE
     : false
 
   if (isSelectedCountryCodeSupported) {
@@ -121,7 +121,6 @@ function shouldRedirectToCountrySpecificHomepage({
     return { redirect: false, redirectCountryCode: null, targetLanguage: null }
   }
 
-  // Check if user is from EU country
   if (isEUCountry(userAccessLocation)) {
     const targetLanguage =
       maybeExistingLanguageCookie ||

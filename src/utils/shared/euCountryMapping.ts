@@ -38,19 +38,12 @@ export const EU_COUNTRY_TO_PRIMARY_LANGUAGE: Record<string, SupportedEULanguages
   se: SupportedEULanguages.EN, // Sweden
 }
 
-// List of all EU country codes
 export const EU_COUNTRY_CODES = Object.keys(EU_COUNTRY_TO_PRIMARY_LANGUAGE)
 
-/**
- * Checks if a country code belongs to an EU country
- */
 export function isEUCountry(countryCode: string): boolean {
   return EU_COUNTRY_CODES.includes(countryCode.toLowerCase())
 }
 
-/**
- * Gets the primary language for an EU country
- */
 export function getEUCountryPrimaryLanguage(countryCode: string): SupportedEULanguages | null {
   return EU_COUNTRY_TO_PRIMARY_LANGUAGE[countryCode.toLowerCase()] || null
 }
