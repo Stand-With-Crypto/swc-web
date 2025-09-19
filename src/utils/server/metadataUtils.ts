@@ -92,10 +92,11 @@ export function generateCountryCodeLayoutMetadata(countryCode: SupportedCountryC
   const countryCodePrefix =
     countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `${countryCode.toUpperCase()} `
 
-  const title = `${NEXT_PUBLIC_ENVIRONMENT === 'production'
+  const title = `${
+    NEXT_PUBLIC_ENVIRONMENT === 'production'
       ? ''
       : `${capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Env - `
-    }${countryCodePrefix}Stand With Crypto`
+  }${countryCodePrefix}Stand With Crypto`
   const description = `Stand With Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.`
   const ogImage = getOpenGraphImageUrl({ title: description })
 
