@@ -48,6 +48,7 @@ export function UsPageEvents({ events, isDeepLink }: EventsPageProps) {
       <EventsNearYou events={futureEvents ?? []} />
 
       {futureEvents && futureEvents.length > 0 && (
+        // US is the only country that shows the map, because implementing it in other countries was not done yet
         <AllUpcomingEvents countryCode={countryCode} events={futureEvents} showMap />
       )}
 
