@@ -2,11 +2,11 @@ import { generateObject } from 'ai'
 import pRetry from 'p-retry'
 import z from 'zod'
 
-import { SWCBillFromBuilderIO } from '@/utils/shared/zod/getSWCBills'
 import {
   AI_ANALYSIS_BATCH_LENGTH,
   AI_ANALYSIS_MAX_RETRIES,
 } from '@/inngest/functions/stateLevelBillsCronJob/config'
+import { SWCBillFromBuilderIO } from '@/utils/shared/zod/getSWCBills'
 
 type Bill = Required<Pick<SWCBillFromBuilderIO, 'externalId' | 'summary' | 'title'>>
 
@@ -70,9 +70,7 @@ export async function analyzeCryptoRelatedBillsWithRetry(bills: Bill[]) {
       })
 
       data.push(...scores.bills)
-    } catch (error) {
-      data.push(...[])
-    }
+    } catch {}
 
     offset += AI_ANALYSIS_BATCH_LENGTH
 
