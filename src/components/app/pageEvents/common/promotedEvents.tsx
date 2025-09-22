@@ -4,7 +4,7 @@ import { UserActionType } from '@prisma/client'
 import { isBefore, startOfDay } from 'date-fns'
 import sanitizeHtml from 'sanitize-html'
 
-import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
+import { EventDialog } from '@/components/app/pageEvents/common/eventDialog'
 import { handleCreateRsvpAction } from '@/components/app/pageEvents/utils/createRsvpAction'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { Button } from '@/components/ui/button'

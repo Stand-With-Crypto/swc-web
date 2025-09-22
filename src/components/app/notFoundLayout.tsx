@@ -20,6 +20,7 @@ import { Navbar } from '@/components/app/navbar'
 import { GLOBAL_NAVBAR_BANNER_BY_COUNTRY_CODE } from '@/components/app/navbarGlobalBanner/common/constants'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
+import { NEXT_PUBLIC_SPEED_INSIGHTS_SAMPLE_RATE } from '@/utils/shared/speedInsights'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
@@ -78,7 +79,7 @@ export function NotFoundLayout({ children }: { children: React.ReactNode }) {
         </TopLevelClientLogic>
         <Toaster />
         <CookieConsent countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} />
-        <SpeedInsights debug={false} sampleRate={0.04} />
+        <SpeedInsights debug={false} sampleRate={NEXT_PUBLIC_SPEED_INSIGHTS_SAMPLE_RATE} />
       </body>
     </html>
   )
