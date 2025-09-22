@@ -24,14 +24,15 @@ PageUnsubscribeLayout.ContentSection = function ContentSection({
   return <section className="space-y-8">{children}</section>
 }
 
-PageUnsubscribeLayout.Heading = function Heading() {
+PageUnsubscribeLayout.Heading = function Heading({ entityName }: { entityName: string }) {
   return (
     <>
       <PageTitle size="md">Unsubscribed Successfully</PageTitle>
       <PageSubTitle className="max-w-2xl">
         We're sorry to see you go.
         <br />
-        Please <span className="text-primary-cta">resubscribe</span> if you've changed your mind.
+        Please <span className="text-primary-cta">resubscribe</span> to {entityName} if you've
+        changed your mind.
       </PageSubTitle>
     </>
   )

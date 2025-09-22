@@ -46,6 +46,11 @@ export async function GET() {
                 },
               },
               userActionViewKeyPage: true,
+              userActionPetition: {
+                include: {
+                  address: true,
+                },
+              },
             },
             orderBy: {
               datetimeCreated: 'desc',

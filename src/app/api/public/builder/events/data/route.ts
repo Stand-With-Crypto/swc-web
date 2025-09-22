@@ -13,6 +13,13 @@ const MODEL_PATHS_TO_REVALIDATE: Record<string, string[]> = {
   a1f6d65d3d8549b0aa114e5efa071202: ['/events', '/events/[state]', '/events/[state]/[eventSlug]'],
   '1c62e069933343108086da2a8ee3d227': ['/partners'],
   c981a32a6786439693a4ea2eeefde8b2: ['/press'],
+  c0f982797c4942259e868d0f44d86c6e: [
+    '/petitions',
+    '/petitions/[petitionSlug]',
+    '/api/[countryCode]/public/petitions',
+    '/api/[countryCode]/public/petitions/[petitionSlug]',
+  ],
+  '0d6b1d36627746ea933483402efa71e1': ['/bills', '/bills/[billSlug]'],
 }
 
 export const POST = withBuilderIoAuthMiddleware(async (request: NextRequest) => {

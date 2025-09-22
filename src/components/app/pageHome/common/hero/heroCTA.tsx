@@ -5,7 +5,7 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { SMSOptInCTA } from '@/components/app/sms/smsOptInCTA'
 import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
@@ -75,17 +75,31 @@ export function HeroCTA({
       )
     }
 
+    if (countryCode === SupportedCountryCodes.GB) {
+      return (
+        <Button asChild size="lg" variant="primary-cta">
+          <ExternalLink href="https://petition.parliament.uk/petitions/730568">
+            Sign the Petition
+          </ExternalLink>
+        </Button>
+      )
+    }
+
+    if (hasCompleteUserProfile(user)) {
+      return (
+        <Button asChild size="lg" variant="primary-cta">
+          <InternalLink href={urls.profile()}>View Profile</InternalLink>
+        </Button>
+      )
+    }
+
     return (
       <Button asChild size="lg" variant="primary-cta">
-        {hasCompleteUserProfile(user) ? (
-          <InternalLink href={urls.profile()}>View Profile</InternalLink>
-        ) : (
-          <InternalLink
-            href={`${urls.profile()}?${OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY}=true`}
-          >
-            Finish your profile
-          </InternalLink>
-        )}
+        <InternalLink
+          href={`${urls.profile()}?${OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY}=true`}
+        >
+          Finish your profile
+        </InternalLink>
       </Button>
     )
   }

@@ -7,6 +7,8 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const isSentrySourcemapsDisabled = process.env.DISABLE_SENTRY_SOURCEMAPS === 'true'
+
 const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
 const isProd = process.env.NEXT_PUBLIC_ENVIRONMENT === 'production'
 
@@ -58,7 +60,13 @@ const contentSecurityPolicy = {
     'https://*.newmode.net/',
     'https://js.stripe.com/', // Required for newmode
   ],
-  'img-src': ["'self'", 'https: data:', 'blob: data:', 'https://cnv.event.prod.bidr.io/log/cnv'],
+  'img-src': [
+    "'self'",
+    'https: data:',
+    'blob: data:',
+    'https://cnv.event.prod.bidr.io/log/cnv',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
+  ],
   'connect-src': [
     "'self'",
     'ws: wss:',
@@ -226,6 +234,7 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 const nextConfig: NextConfig = {
   experimental: {
     turbo: {},
+    webpackBuildWorker: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -246,6 +255,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.builder.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
       },
     ],
   },
@@ -283,9 +296,24 @@ const nextConfig: NextConfig = {
         source: '/pledge',
       },
       {
+        source: '/cryptodayofaction',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/crypto-day-of-action',
+        destination: '/',
+        permanent: true,
+      },
+      {
         permanent: false,
         destination: '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=fit21-2024-05-text',
         source: '/text',
+      },
+      {
+        permanent: true,
+        source: '/action/email/clarity_act_house_jun_13_2025',
+        destination: '/action/email/clarity_act_senate_jul_17_2025',
       },
       {
         permanent: true,
@@ -815,6 +843,24 @@ const nextConfig: NextConfig = {
         destination: '/au/action/sign-up?utm_source=billboard',
         permanent: true,
       },
+      // UK stablecoins petition redirect
+      {
+        source: '/gb/action/view-key-page',
+        destination: '/gb/action/view-key-page/stablecoins-petition',
+        permanent: true,
+        has: [
+          {
+            type: 'query',
+            key: 'campaignName',
+            value: 'uk_stable_coins_petition_jun_2025',
+          },
+          {
+            type: 'query',
+            key: 'utm_campaign',
+            value: 'uk_stable_coins_petition_jun_2025',
+          },
+        ],
+      },
     ]
   },
   async rewrites() {
@@ -880,6 +926,10 @@ const userSentryOptions = {
 
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
+
+  sourcemaps: {
+    disable: isSentrySourcemapsDisabled,
+  },
 
   // Enables automatic instrumentation of Vercel Cron Monitors.
   // See the following for more information:

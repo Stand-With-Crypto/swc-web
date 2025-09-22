@@ -6,6 +6,7 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import {
   BillChamberOrigin,
   BillKeyDateCategory,
@@ -43,6 +44,7 @@ async function getBillFromBuilderIO(filters: BillFilters): Promise<SWCBill | nul
             },
             ...(isProduction && { published: 'published' }),
           },
+          locale: DEFAULT_LOCALE,
           includeUnpublished: !isProduction,
           cacheSeconds: 60,
         }),
@@ -123,6 +125,7 @@ export function getAllBillsWithOffset({
           ...(isProduction && { published: 'published' }),
           data: stateCode ? filterByStateCode : filterByCountryCode,
         },
+        locale: DEFAULT_LOCALE,
         includeUnpublished: !isProduction,
         cacheSeconds: 60,
         limit: LIMIT,

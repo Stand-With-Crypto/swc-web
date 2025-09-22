@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
@@ -44,7 +45,7 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.EMAIL]: {
-    title: 'Email your member of Parliament',
+    title: 'Email Your MP',
     description: 'Make stablecoin leadership a strategic priority',
     mobileCTADescription: 'Make stablecoin leadership a strategic priority',
     campaignsModalDescription: 'Make stablecoin leadership a strategic priority',
@@ -52,12 +53,15 @@ export const GB_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
-        campaignName: GBUserActionEmailCampaignName.STABLECOINS,
-        isCampaignActive: false,
-        title: 'Email your member of Parliament',
+        campaignName: GBUserActionEmailCampaignName.STABLECOINS_PETITION_SEP_09_2025,
+        isCampaignActive: true,
+        title: 'Email Your MP',
         description: 'Make stablecoin leadership a strategic priority',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: null,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode: SupportedCountryCodes.GB,
+          campaignName: GBUserActionEmailCampaignName.STABLECOINS_PETITION_SEP_09_2025,
+        }),
       },
     ],
   },

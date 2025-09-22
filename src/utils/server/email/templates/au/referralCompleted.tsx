@@ -25,6 +25,7 @@ export default function AUReferralCompletedEmail({
   previewText = "One small step for you, one giant leap for crypto advocacy. Let's keep the momentum going!",
   session = {},
   hrefSearchParams = {},
+  countryCode = SupportedCountryCodes.AU,
   name,
   ...keepUpTheFightSectionProps
 }: AUReferralCompletedEmailProps) {
@@ -37,7 +38,11 @@ export default function AUReferralCompletedEmail({
   const referActionHref = buildTemplateInternalUrl('/au/action/refer', hydratedHrefSearchParams)
 
   return (
-    <AUWrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
+    <AUWrapper
+      countryCode={countryCode}
+      hrefSearchParams={hydratedHrefSearchParams}
+      previewText={previewText}
+    >
       <Section>
         <Img
           className="mb-6 w-full max-w-full"
@@ -71,7 +76,7 @@ export default function AUReferralCompletedEmail({
 
       <KeepUpTheFightSection
         {...keepUpTheFightSectionProps}
-        countryCode={SupportedCountryCodes.AU}
+        countryCode={countryCode}
         hiddenActions={['REFER']}
         hrefSearchParams={hydratedHrefSearchParams}
       />

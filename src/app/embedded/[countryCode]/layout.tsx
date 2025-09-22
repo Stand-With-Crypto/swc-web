@@ -13,6 +13,7 @@ import {
   viewport as defaultViewport,
 } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { NEXT_PUBLIC_SPEED_INSIGHTS_SAMPLE_RATE } from '@/utils/shared/speedInsights'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
@@ -55,7 +56,7 @@ export default async function Layout({
             <FullHeight.Content>{children}</FullHeight.Content>
           </FullHeight.Container>
         </TopLevelEmbeddedClientLogic>
-        <SpeedInsights debug={false} sampleRate={0.04} />
+        <SpeedInsights debug={false} sampleRate={NEXT_PUBLIC_SPEED_INSIGHTS_SAMPLE_RATE} />
       </body>
     </html>
   )
