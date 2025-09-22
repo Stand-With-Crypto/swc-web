@@ -2,8 +2,8 @@
 
 import { format, isAfter } from 'date-fns'
 
-import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
-import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
+import { EventDialog } from '@/components/app/pageEvents/common/eventDialog'
+import { NoEventsCTA } from '@/components/app/pageEvents/common/noEventsCTA'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { StateShield } from '@/components/ui/stateShield'
