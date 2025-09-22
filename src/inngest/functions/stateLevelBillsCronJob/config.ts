@@ -42,7 +42,14 @@ export const QUORUM_API_BILL_SUMMARY_ENDPOINT = 'newbillsummary'
 export const BUILDER_IO_BILL_PREFIX = '[quorum]'
 export const BUILDER_IO_BILL_PUBLISHED_STATE: BuilderIOBillPublishedState = 'draft'
 
-export const MAX_BILLS_TO_PROCESS = 4
+export const MAX_BILLS_TO_PROCESS = 0 // no limit
 export const MAX_MINOR_MILESTONES_ALLOWED = 5
 
 export const STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE = '0 8 * * 1-5'
+
+export const SEARCH_OFFSET_REDIS_KEY = 'bill-automation-last-analyzed'
+export const SEARCH_OFFSET_REDIS_TTL = 2 * 24 * 60 * 60 // 2 days (min: 1 day, max: 3 days)
+
+export const AI_ANALYSIS_MAX_RETRIES = 3
+
+export const AI_ANALYSIS_BATCH_LENGTH = 10

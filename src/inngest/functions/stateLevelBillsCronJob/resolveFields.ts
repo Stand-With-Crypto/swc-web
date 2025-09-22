@@ -96,7 +96,7 @@ export const resolveFields: ResolveFieldsMap = {
     return `<p>${summary.content.replace(/\\n/gm, '<br />') || ''}</p>`
   },
 
-  timelineDescription: () => '',
+  timelineDescription: bill => bill.major_actions?.[0]?.text || '',
 
   title: bill => bill.title,
 

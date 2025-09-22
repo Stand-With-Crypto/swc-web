@@ -1,6 +1,9 @@
+import { analyzeCryptoRelatedBillsWithRetry } from '@/inngest/functions/stateLevelBillsCronJob/ai'
 import {
   MAX_BILLS_TO_PROCESS,
   QUORUM_API_BILLS_PER_PAGE,
+  SEARCH_OFFSET_REDIS_KEY,
+  SEARCH_OFFSET_REDIS_TTL,
   STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE,
 } from '@/inngest/functions/stateLevelBillsCronJob/config'
 import { CRYPTO_RELATED_KEYWORDS_REGEX } from '@/inngest/functions/stateLevelBillsCronJob/constants'
@@ -18,6 +21,7 @@ import {
 } from '@/inngest/functions/stateLevelBillsCronJob/types'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
+import { redis } from '@/utils/server/redis'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { BillSource } from '@/utils/shared/zod/getSWCBills'
@@ -69,6 +73,8 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
           hasMoreData = false
         }
       }
+
+      await redis.set(SEARCH_OFFSET_REDIS_KEY, bills.at(-1)?.id, { ex: SEARCH_OFFSET_REDIS_TTL })
 
       logger.info(`Completed fetching bills from Quorum API. Total bills fetched: ${bills.length}.`)
 
@@ -160,18 +166,22 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
     const allParsedBillsFromQuorum = await step.run('parse-bills-data-from-quorum', async () => {
       logger.info('Starting to parse valid Quorum bills...')
 
-      const parsedBillsFromQuorum = validBillsFromQuorumWithSummary.map(
+      const allParsedBillsFromQuorum = validBillsFromQuorumWithSummary.map(
         parseQuorumBillToBuilderIOPayload,
       )
 
-      logger.info(`Completed parsing. Total parsed Quorum bills: ${parsedBillsFromQuorum.length}.`)
+      logger.info(
+        `Completed parsing. Total parsed Quorum bills: ${allParsedBillsFromQuorum.length}.`,
+      )
 
-      return parsedBillsFromQuorum
+      return allParsedBillsFromQuorum
     })
 
-    const parsedBillsFromQuorum = allParsedBillsFromQuorum.slice(0, MAX_BILLS_TO_PROCESS)
+    const parsedBillsFromQuorum = MAX_BILLS_TO_PROCESS
+      ? allParsedBillsFromQuorum.slice(0, MAX_BILLS_TO_PROCESS)
+      : allParsedBillsFromQuorum
 
-    const [billsToCreate, billsToUpdate] = await step.run('analyze-bills-data', async () => {
+    const [billsToAnalyze, billsToUpdate] = await step.run('analyze-bills-data', async () => {
       const quorumBillsInBuilderIO = billsFromBuilderIO.filter(
         bill => bill.data.source === BillSource.QUORUM && bill.data.externalId,
       )
@@ -183,7 +193,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         `Found ${billsFromBuilderIO.length} bills in Builder.io, with ${existingQuorumIdsInBuilderIO.size} unique Quorum IDs.`,
       )
 
-      const billsToCreate = parsedBillsFromQuorum.filter(
+      const billsToAnalyze = parsedBillsFromQuorum.filter(
         quorumBill => !existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId!),
       ) as CreateBillEntryPayload[]
 
@@ -207,10 +217,38 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
           data: quorumBill,
         })) as { id: string; data: UpdateBillEntryPayload }[]
 
-      logger.info(`Found ${billsToCreate.length} new bills to add to Builder.io.`)
+      logger.info(`Found ${billsToAnalyze.length} new bills to add to Builder.io.`)
       logger.info(`Found ${billsToUpdate.length} existing bills to update in Builder.io.`)
 
-      return [billsToCreate, billsToUpdate] as const
+      return [billsToAnalyze, billsToUpdate] as const
+    })
+
+    const { aiScores, billsToCreate } = await step.run('analyze-bills-data-with-ai', async () => {
+      logger.info('Starting to analyze valid Quorum bills using AI...')
+
+      const offsetId = (await redis.get(SEARCH_OFFSET_REDIS_KEY)) as string
+      const offsetIndex = billsToAnalyze.findIndex(bill => bill.data.externalId === offsetId)
+      const filteredBillsToAnalyze =
+        offsetIndex === -1 ? billsToAnalyze : billsToAnalyze.slice(offsetIndex + 1)
+
+      const aiScores = await analyzeCryptoRelatedBillsWithRetry(
+        filteredBillsToAnalyze.map(bill => ({
+          externalId: bill.data.externalId as string,
+          summary: bill.data.summary,
+          title: bill.data.title,
+        })),
+      )
+
+      logger.info(`Completed analyzing. Total analyzed Quorum bills: ${aiScores.length}.`)
+
+      return {
+        aiScores,
+        billsToCreate: aiScores
+          .filter(score => score.score >= 80)
+          .map(score =>
+            filteredBillsToAnalyze.find(bill => bill.data.externalId === score.id),
+          ) as CreateBillEntryPayload[],
+      }
     })
 
     const createdBills = await step.run('create-new-bill-entries-in-builder-io', async () => {
@@ -267,15 +305,15 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       : 100
 
     return {
+      aiScores,
       builderIO: {
         created: createdBills.length,
         current: billsFromBuilderIO.length + createdBills.length,
         previous: billsFromBuilderIO.length,
-        skipped: validBillsFromQuorum.length - billsToCreate.length - billsToUpdate.length,
         updated: updatedBills.length,
       },
       cleanup: {
-        ai: validBillsFromQuorum.length - validBillsFromQuorum.length,
+        ai: billsToAnalyze.length - billsToCreate.length,
         regex: billsFromQuorum.length - validBillsFromQuorum.length,
       },
       errors: {
@@ -284,13 +322,17 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       },
       matches: {
         new: billsToCreate.length,
-        previous: validBillsFromQuorum.length - billsToCreate.length,
-        total: validBillsFromQuorum.length,
+        previous: validBillsFromQuorum.length - billsToAnalyze.length,
+        total: billsToCreate.length + validBillsFromQuorum.length - billsToAnalyze.length,
       },
       quorum: {
-        invalid: billsFromQuorum.length - validBillsFromQuorum.length,
+        invalid:
+          billsFromQuorum.length -
+          validBillsFromQuorum.length +
+          billsToAnalyze.length -
+          billsToCreate.length,
         total: billsFromQuorum.length,
-        valid: validBillsFromQuorum.length,
+        valid: validBillsFromQuorum.length - billsToAnalyze.length + billsToCreate.length,
       },
       rates: {
         error: parseFloat((100 - successRate).toFixed(2)),
