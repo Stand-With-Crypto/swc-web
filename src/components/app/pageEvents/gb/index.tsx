@@ -1,5 +1,3 @@
-import { isAfter, isBefore, parseISO, subDays } from 'date-fns'
-
 import { AllUpcomingEvents } from '@/components/app/pageEvents/common/allUpcomingEvents'
 import { EventsIntro } from '@/components/app/pageEvents/common/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/common/eventsNearYou'
@@ -7,6 +5,9 @@ import { FeaturedPastEvents } from '@/components/app/pageEvents/common/featuredP
 import { PromotedEvents } from '@/components/app/pageEvents/common/promotedEvents'
 import { EventsPageProps } from '@/components/app/pageEvents/common/types'
 import { EventsPageWrapper } from '@/components/app/pageEvents/common/wrapper'
+import { getFeaturedPastEvents } from '@/components/app/pageEvents/utils/getFeaturedPastEvents'
+import { getFutureEvents } from '@/components/app/pageEvents/utils/getFutureEvents'
+import { getPromotedEvents } from '@/components/app/pageEvents/utils/getPromotedEvents'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -14,21 +15,9 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 const countryCode = SupportedCountryCodes.GB
 
 export function GbPageEvents({ events, isDeepLink }: EventsPageProps) {
-  const futureEvents = events?.filter(event =>
-    isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
-  )
-
-  const promotedEvents = futureEvents
-    ?.filter(event => !!event.data.promotedPositioning)
-    .sort((a, b) => a.data.promotedPositioning! - b.data.promotedPositioning!)
-
-  const featuredPastEvents = events?.filter(event => {
-    const eventDate = event.data?.time
-      ? new Date(`${event.data.date}T${event.data.time}`)
-      : new Date(event.data.date)
-
-    return isBefore(eventDate, new Date())
-  })
+  const futureEvents = getFutureEvents(events)
+  const promotedEvents = getPromotedEvents(futureEvents)
+  const featuredPastEvents = getFeaturedPastEvents(events)
 
   return (
     <EventsPageWrapper isDeepLink={isDeepLink}>
