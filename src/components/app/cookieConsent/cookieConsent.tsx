@@ -5,6 +5,7 @@ import { useIsPreviewing } from '@builder.io/react'
 import dynamic from 'next/dynamic'
 
 import { CookieConsentAction } from '@/components/app/cookieConsent/common/types'
+import { EUCookieConsentBanner } from '@/components/app/cookieConsent/eu/banner'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
@@ -88,6 +89,14 @@ export function CookieConsent({
     case SupportedCountryCodes.AU:
       return (
         <AUCookieConsentBanner
+          onAcceptAll={handleActionThenClose(acceptAllCookies)}
+          onAcceptSpecificCookies={handleActionThenClose(acceptSpecificCookies)}
+          onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
+        />
+      )
+    case SupportedCountryCodes.EU:
+      return (
+        <EUCookieConsentBanner
           onAcceptAll={handleActionThenClose(acceptAllCookies)}
           onAcceptSpecificCookies={handleActionThenClose(acceptSpecificCookies)}
           onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
