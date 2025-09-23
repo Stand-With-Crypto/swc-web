@@ -1,5 +1,3 @@
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
 export enum SupportedLocale {
   EN_US = 'en-US',
   DE_DE = 'de-DE',
@@ -28,11 +26,3 @@ export const LANGUAGE_TO_LOCALE_MAP: Record<SupportedLanguages, string> = {
 }
 
 export const SWC_PAGE_LANGUAGE_COOKIE_NAME = 'swc-page-language'
-
-export interface SupportedLanguagesByCountryCode {
-  [SupportedCountryCodes.US]: [SupportedLanguages.EN]
-  [SupportedCountryCodes.AU]: [SupportedLanguages.EN]
-  [SupportedCountryCodes.CA]: [SupportedLanguages.EN]
-  [SupportedCountryCodes.GB]: [SupportedLanguages.EN]
-  [SupportedCountryCodes.EU]: [SupportedLanguages.FR, SupportedLanguages.DE, SupportedLanguages.EN]
-}
