@@ -3,16 +3,14 @@
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { euExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = SupportedCountryCodes.EU
 
 //TODO(EU): Add EU navbar items
 //TODO(EU): Add internationalization here
-export function getNavbarConfig({
-  language,
-}: { language?: SupportedEULanguages } = {}): NavbarProps {
+export function getNavbarConfig({ language }: { language?: SupportedLanguages } = {}): NavbarProps {
   const urls = getIntlUrls(countryCode, { language })
 
   return {
@@ -49,9 +47,7 @@ export function getNavbarConfig({
 
 //TODO(EU): Add actual EU footer items
 //TODO(EU): Add internationalization here
-export function getFooterConfig({
-  language,
-}: { language?: SupportedEULanguages } = {}): FooterProps {
+export function getFooterConfig({ language }: { language?: SupportedLanguages } = {}): FooterProps {
   const urls = getIntlUrls(countryCode, { language })
 
   return {

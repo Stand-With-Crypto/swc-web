@@ -2,8 +2,8 @@ import { createIntl } from '@formatjs/intl'
 
 import {
   DEFAULT_EU_LANGUAGE,
-  EU_LANGUAGE_TO_LOCALE_MAP,
-  SupportedEULanguages,
+  LANGUAGE_TO_LOCALE_MAP,
+  SupportedLanguages,
 } from '@/utils/shared/supportedLocales'
 
 /**
@@ -11,11 +11,10 @@ import {
  */
 export function formatDateForLocale(
   date: Date,
-  language: SupportedEULanguages,
+  language: SupportedLanguages,
   style: 'full' | 'short' = 'full',
 ): string {
-  const locale =
-    EU_LANGUAGE_TO_LOCALE_MAP[language] || EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+  const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
   const intl = createIntl({ locale, messages: {} })
 
   return style === 'full'
@@ -26,9 +25,8 @@ export function formatDateForLocale(
 /**
  * Format a time with the correct locale
  */
-export function formatTimeForLocale(date: Date, language: SupportedEULanguages): string {
-  const locale =
-    EU_LANGUAGE_TO_LOCALE_MAP[language] || EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+export function formatTimeForLocale(date: Date, language: SupportedLanguages): string {
+  const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
   const intl = createIntl({ locale, messages: {} })
 
   return intl.formatTime(date, { timeStyle: 'short' })
@@ -39,7 +37,7 @@ export function formatTimeForLocale(date: Date, language: SupportedEULanguages):
  */
 export function formatNumberForLocale(
   number: number,
-  language: SupportedEULanguages,
+  language: SupportedLanguages,
   options?: {
     style?: 'decimal' | 'currency' | 'percent' | 'unit'
     currency?: string
@@ -48,8 +46,7 @@ export function formatNumberForLocale(
     useGrouping?: boolean
   },
 ): string {
-  const locale =
-    EU_LANGUAGE_TO_LOCALE_MAP[language] || EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+  const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
   const intl = createIntl({ locale, messages: {} })
 
   return intl.formatNumber(number, options)
@@ -60,11 +57,10 @@ export function formatNumberForLocale(
  */
 export function formatCurrencyForLocale(
   amount: number,
-  language: SupportedEULanguages,
+  language: SupportedLanguages,
   currency: string = 'USD',
 ): string {
-  const locale =
-    EU_LANGUAGE_TO_LOCALE_MAP[language] || EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+  const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
   const intl = createIntl({ locale, messages: {} })
 
   return intl.formatNumber(amount, {
@@ -79,10 +75,9 @@ export function formatCurrencyForLocale(
 export function formatRelativeTimeForLocale(
   value: number,
   unit: Intl.RelativeTimeFormatUnit,
-  language: SupportedEULanguages,
+  language: SupportedLanguages,
 ): string {
-  const locale =
-    EU_LANGUAGE_TO_LOCALE_MAP[language] || EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+  const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
   const intl = createIntl({ locale, messages: {} })
 
   return intl.formatRelativeTime(value, unit)
@@ -91,6 +86,6 @@ export function formatRelativeTimeForLocale(
 /**
  * Get the locale string for a given language
  */
-export function getLocaleForLanguage(language: SupportedEULanguages): string {
-  return EU_LANGUAGE_TO_LOCALE_MAP[language] || EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+export function getLocaleForLanguage(language: SupportedLanguages): string {
+  return LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
 }

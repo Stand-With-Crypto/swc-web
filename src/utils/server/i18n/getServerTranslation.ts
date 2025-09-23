@@ -4,9 +4,13 @@ import { createTranslator } from '@/utils/shared/i18n/createTranslator'
 import { I18nMessages } from '@/utils/shared/i18n/types'
 import { extractLanguageFromPath } from '@/utils/shared/i18n/utils'
 import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
+import {
   DEFAULT_EU_LANGUAGE,
   ORDERED_SUPPORTED_EU_LANGUAGES,
-  SupportedEULanguages,
+  SupportedLanguages,
   SWC_PAGE_LANGUAGE_COOKIE_NAME,
 } from '@/utils/shared/supportedLocales'
 
@@ -35,11 +39,12 @@ import {
 export async function getServerTranslation(
   i18nMessages: I18nMessages,
   contextName: string = 'unknown',
-  language?: SupportedEULanguages,
+  countryCode: SupportedCountryCodes = DEFAULT_SUPPORTED_COUNTRY_CODE,
+  language?: SupportedLanguages,
 ) {
   // Use provided language or fallback to auto-detection
   const finalLanguage = language || (await getServerLanguage())
-  const translator = createTranslator(i18nMessages, finalLanguage, contextName)
+  const translator = createTranslator(i18nMessages, finalLanguage, countryCode, contextName)
 
   return {
     t: translator.t.bind(translator),
@@ -50,7 +55,7 @@ export async function getServerTranslation(
   }
 }
 
-export async function getServerLanguage(): Promise<SupportedEULanguages> {
+export async function getServerLanguage(): Promise<SupportedLanguages> {
   try {
     const headersList = await headers()
 
@@ -76,7 +81,7 @@ export async function getServerLanguage(): Promise<SupportedEULanguages> {
       .get('cookie')
       ?.match(new RegExp(`${SWC_PAGE_LANGUAGE_COOKIE_NAME}=([^;]+)`))?.[1]
     if (cookieLanguage && ORDERED_SUPPORTED_EU_LANGUAGES.includes(cookieLanguage)) {
-      return cookieLanguage as SupportedEULanguages
+      return cookieLanguage as SupportedLanguages
     }
 
     return DEFAULT_EU_LANGUAGE

@@ -1,15 +1,16 @@
-import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguagesByCountryCode } from '@/utils/shared/supportedLocales'
 
 export interface ComponentMessages {
   [key: string]: string
 }
 
-export interface LanguageMessages {
-  [componentKey: string]: ComponentMessages
+export type I18nCountryMessages<T extends SupportedCountryCodes> = {
+  [K in SupportedLanguagesByCountryCode[T][number]]: ComponentMessages
 }
 
 export type I18nMessages = {
-  [K in SupportedEULanguages]: ComponentMessages
+  [K in SupportedCountryCodes]?: I18nCountryMessages<K>
 }
 
 // Define our own types since FormatJS doesn't export these directly from the main package

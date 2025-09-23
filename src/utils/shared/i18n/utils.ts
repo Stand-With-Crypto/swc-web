@@ -1,10 +1,7 @@
-import {
-  ORDERED_SUPPORTED_EU_LANGUAGES,
-  SupportedEULanguages,
-} from '@/utils/shared/supportedLocales'
+import { ORDERED_SUPPORTED_EU_LANGUAGES, SupportedLanguages } from '@/utils/shared/supportedLocales'
 
-export function isValidLanguage(value: string): value is SupportedEULanguages {
-  return ORDERED_SUPPORTED_EU_LANGUAGES.includes(value as SupportedEULanguages)
+export function isValidLanguage(value: string): value is SupportedLanguages {
+  return ORDERED_SUPPORTED_EU_LANGUAGES.includes(value as SupportedLanguages)
 }
 
 /**
@@ -20,7 +17,7 @@ export function isValidLanguage(value: string): value is SupportedEULanguages {
  * extractLanguageFromPath('/other/path') // null
  * extractLanguageFromPath('/eu') // null (no specific language)
  */
-export function extractLanguageFromPath(pathname: string): SupportedEULanguages | null {
+export function extractLanguageFromPath(pathname: string): SupportedLanguages | null {
   if (!pathname) return null
 
   // Regex to capture the /eu/[language] pattern

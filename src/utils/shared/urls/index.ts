@@ -12,7 +12,7 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export type LocationStateCode =
   | USStateCode
@@ -82,7 +82,7 @@ export const getIntlUrls = (
   }: {
     // when triggering vercel logic like revalidatePath, we need the actual paths, not the paths that get rewritten in our middleware (for example, all /en paths get rewritten to /)
     actualPaths?: true
-    language?: SupportedEULanguages
+    language?: SupportedLanguages
   } = {},
 ) => {
   const countryPrefix =

@@ -3,23 +3,22 @@ import { createIntl, createIntlCache, IntlShape } from '@formatjs/intl'
 
 import {
   DEFAULT_EU_LANGUAGE,
-  EU_LANGUAGE_TO_LOCALE_MAP,
-  SupportedEULanguages,
+  LANGUAGE_TO_LOCALE_MAP,
+  SupportedLanguages,
 } from '@/utils/shared/supportedLocales'
 
 import type { InterpolationContext, MessageValues } from './types'
 
 const intlCache = createIntlCache()
-const intlInstances: Map<SupportedEULanguages, IntlShape> = new Map()
+const intlInstances: Map<SupportedLanguages, IntlShape> = new Map()
 
-function getIntlInstance(language: SupportedEULanguages): IntlShape {
-  const locale =
-    EU_LANGUAGE_TO_LOCALE_MAP[language] || EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+function getIntlInstance(language: SupportedLanguages): IntlShape {
+  const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
   const intl = createIntl(
     {
       locale,
       messages: {}, // We'll pass messages directly to formatMessage
-      defaultLocale: EU_LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE],
+      defaultLocale: LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE],
       // Suppress missing translation warnings since we're using dynamic messages
       onError: err => {
         // Only log non-missing-translation errors
@@ -41,7 +40,7 @@ function getIntlInstance(language: SupportedEULanguages): IntlShape {
 export function interpolate(
   value: string,
   context: InterpolationContext | MessageValues = {},
-  language: SupportedEULanguages = DEFAULT_EU_LANGUAGE,
+  language: SupportedLanguages = DEFAULT_EU_LANGUAGE,
 ): string {
   const intl = getIntlInstance(language)
 

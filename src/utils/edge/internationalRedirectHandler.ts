@@ -10,7 +10,7 @@ import {
 } from '@/utils/shared/supportedCountries'
 import {
   DEFAULT_EU_LANGUAGE,
-  SupportedEULanguages,
+  SupportedLanguages,
   SWC_PAGE_LANGUAGE_COOKIE_NAME,
 } from '@/utils/shared/supportedLocales'
 import {
@@ -36,7 +36,7 @@ export function internationalRedirectHandler(request: NextRequest): {
     .get(USER_SELECTED_COUNTRY_COOKIE_NAME)
     ?.value?.toLowerCase()
   const maybeExistingLanguageCookie = request.cookies.get(SWC_PAGE_LANGUAGE_COOKIE_NAME)?.value as
-    | SupportedEULanguages
+    | SupportedLanguages
     | undefined
 
   const { redirect, redirectCountryCode, targetLanguage } = shouldRedirectToCountrySpecificHomepage(
@@ -89,7 +89,7 @@ function shouldRedirectToCountrySpecificHomepage({
   userAccessLocation: string
   maybeExistingUserAccessLocationCookie?: string
   maybeUserSelectedCountryCookie?: string
-  maybeExistingLanguageCookie?: SupportedEULanguages
+  maybeExistingLanguageCookie?: SupportedLanguages
 }) {
   // On local development, we want to bypass the international redirect if the BYPASS_INTERNATIONAL_REDIRECT environment variable is set to true
   if (process.env.BYPASS_INTERNATIONAL_REDIRECT === 'true') {
@@ -109,7 +109,7 @@ function shouldRedirectToCountrySpecificHomepage({
 
   if (isSelectedCountryCodeSupported) {
     // For EU redirects, determine the target language
-    let targetLanguage: SupportedEULanguages | null = null
+    let targetLanguage: SupportedLanguages | null = null
     if (maybeUserSelectedCountryCookie === SupportedCountryCodes.EU) {
       targetLanguage = maybeExistingLanguageCookie || DEFAULT_EU_LANGUAGE
     }
@@ -142,7 +142,7 @@ function shouldRedirectToCountrySpecificHomepage({
 function createRedirectResponse(
   request: NextRequest,
   redirectCountryCode: string,
-  targetLanguage?: SupportedEULanguages | null,
+  targetLanguage?: SupportedLanguages | null,
 ): NextResponse {
   const currentUrl = new URL(request.url)
 

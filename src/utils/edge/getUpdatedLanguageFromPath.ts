@@ -1,11 +1,8 @@
 import { NextRequest } from 'next/server'
 
-import {
-  SupportedEULanguages,
-  SWC_PAGE_LANGUAGE_COOKIE_NAME,
-} from '@/utils/shared/supportedLocales'
+import { SupportedLanguages, SWC_PAGE_LANGUAGE_COOKIE_NAME } from '@/utils/shared/supportedLocales'
 
-export function getUpdatedLanguageFromPath(request: NextRequest): SupportedEULanguages | null {
+export function getUpdatedLanguageFromPath(request: NextRequest): SupportedLanguages | null {
   const pathname = request.nextUrl.pathname
   const currentLanguageCookie = request.cookies.get(SWC_PAGE_LANGUAGE_COOKIE_NAME)?.value
 
@@ -16,9 +13,9 @@ export function getUpdatedLanguageFromPath(request: NextRequest): SupportedEULan
     return null
   }
 
-  const pathLanguage = euLanguageMatch[1] as SupportedEULanguages
+  const pathLanguage = euLanguageMatch[1] as SupportedLanguages
 
-  if (!Object.values(SupportedEULanguages).includes(pathLanguage)) {
+  if (!Object.values(SupportedLanguages).includes(pathLanguage)) {
     return null
   }
 

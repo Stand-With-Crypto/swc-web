@@ -1,6 +1,6 @@
 import * as glob from 'glob'
 
-import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 /**
  * Find all files with translations
@@ -37,19 +37,19 @@ export function analyzeMissingTranslations(
   }>,
 ): Array<{
   component: string
-  language: SupportedEULanguages
+  language: SupportedLanguages
   missingKeys: string[]
 }> {
   const missingTranslations: Array<{
     component: string
-    language: SupportedEULanguages
+    language: SupportedLanguages
     missingKeys: string[]
   }> = []
 
-  const languages: SupportedEULanguages[] = [
-    SupportedEULanguages.EN,
-    SupportedEULanguages.DE,
-    SupportedEULanguages.FR,
+  const languages: SupportedLanguages[] = [
+    SupportedLanguages.EN,
+    SupportedLanguages.DE,
+    SupportedLanguages.FR,
   ]
 
   for (const file of extractedFiles) {
