@@ -1,9 +1,14 @@
 import { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 
+import { extractCountryCodeFromPathname } from '@/utils/server/extractCountryCodeFromPathname'
 import { createTranslator } from '@/utils/shared/i18n/createTranslator'
 import { I18nMessages } from '@/utils/shared/i18n/types'
 import { extractLanguageFromPath } from '@/utils/shared/i18n/utils'
+import {
+  DEFAULT_SUPPORTED_COUNTRY_CODE,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { DEFAULT_EU_LANGUAGE } from '@/utils/shared/supportedLocales'
 
 /**
@@ -40,9 +45,14 @@ export function useTranslation(i18nMessages: I18nMessages, contextName: string =
     return DEFAULT_EU_LANGUAGE
   }, [pathname])
 
+  const countryCode = useMemo(() => {
+    const routeCountryCode = pathname ? extractCountryCodeFromPathname(pathname) : null
+    return (routeCountryCode as SupportedCountryCodes) ?? DEFAULT_SUPPORTED_COUNTRY_CODE
+  }, [pathname])
+
   const translator = useMemo(() => {
-    return createTranslator(i18nMessages, language, contextName)
-  }, [i18nMessages, language, contextName])
+    return createTranslator(i18nMessages, language, countryCode, contextName)
+  }, [i18nMessages, language, countryCode, contextName])
 
   return {
     t: translator.t.bind(translator),

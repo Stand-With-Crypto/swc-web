@@ -1,22 +1,34 @@
 import { interpolate } from '@/utils/shared/i18n/interpolation'
-import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
-import type { I18nMessages, InterpolationContext, MessageValues } from './types'
+import type {
+  I18nCountryMessages,
+  I18nMessages,
+  InterpolationContext,
+  MessageValues,
+} from './types'
 
 export interface Translator {
   t: (key: string, values?: MessageValues | InterpolationContext) => string
   hasTranslation: (key: string) => boolean
   getAvailableKeys: () => string[]
-  getLanguage: () => SupportedEULanguages
+  getLanguage: () => SupportedLanguages
   getContextName: () => string
 }
 
-export function createTranslator(
+export function createTranslator<T extends SupportedCountryCodes>(
   i18nMessages: I18nMessages,
-  language: SupportedEULanguages,
+  language: SupportedLanguages,
+  countryCode: T,
   contextName: string = 'unknown',
 ): Translator {
-  const messages = i18nMessages[language] || i18nMessages.en || {}
+  const countryMessages =
+    countryCode in i18nMessages ? (i18nMessages[countryCode] as I18nCountryMessages<T>) : {}
+  const messages =
+    (language in countryMessages
+      ? countryMessages[language as keyof typeof countryMessages]
+      : i18nMessages.us?.en) || {}
 
   return {
     t: (key: string, values?: MessageValues | InterpolationContext): string => {
@@ -40,7 +52,7 @@ export function createTranslator(
       return Object.keys(messages)
     },
 
-    getLanguage: (): SupportedEULanguages => {
+    getLanguage: (): SupportedLanguages => {
       return language
     },
 

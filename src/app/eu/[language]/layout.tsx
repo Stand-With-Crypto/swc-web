@@ -6,7 +6,7 @@ import { Navbar } from '@/components/app/navbar'
 import { EuNavbarGlobalBanner } from '@/components/app/navbarGlobalBanner/eu'
 import { generateCountryCodeLayoutMetadataWithLanguage } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const countryCode = SupportedCountryCodes.EU
 
@@ -17,7 +17,7 @@ export const generateMetadata = ({ params: { language } }: { params: { language:
 export default async function EuLayout({
   children,
   params,
-}: React.PropsWithChildren & { params: { language: SupportedEULanguages } }) {
+}: React.PropsWithChildren & { params: { language: SupportedLanguages } }) {
   const { language } = await params
 
   const navbarConfig = getNavbarConfig({ language })

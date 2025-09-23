@@ -21,13 +21,13 @@ import {
   SupportedCountryCodes,
   USER_SELECTED_COUNTRY_COOKIE_NAME,
 } from '@/utils/shared/supportedCountries'
-import { SupportedEULanguages } from '@/utils/shared/supportedLocales'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface Option {
   label: string
   value: SupportedCountryCodes
-  language?: SupportedEULanguages
+  language?: SupportedLanguages
 }
 
 const options: Option[] = [
@@ -50,24 +50,24 @@ const options: Option[] = [
   {
     label: 'EU (English)',
     value: SupportedCountryCodes.EU,
-    language: SupportedEULanguages.EN,
+    language: SupportedLanguages.EN,
   },
   {
     label: 'EU (French)',
     value: SupportedCountryCodes.EU,
-    language: SupportedEULanguages.FR,
+    language: SupportedLanguages.FR,
   },
   {
     label: 'EU (German)',
     value: SupportedCountryCodes.EU,
-    language: SupportedEULanguages.DE,
+    language: SupportedLanguages.DE,
   },
 ].sort((a, b) => a.label.localeCompare(b.label))
 
 export function NavbarCountrySelect() {
   const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
-  const params = useParams<{ language: SupportedEULanguages }>()
+  const params = useParams<{ language: SupportedLanguages }>()
 
   const currentOption = options.find(option => {
     if (params?.language) {

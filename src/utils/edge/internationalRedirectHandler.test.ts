@@ -6,10 +6,7 @@ import { beforeEach, describe, expect, it, jest } from '@jest/globals'
 import { NextRequest } from 'next/server'
 
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import {
-  SupportedEULanguages,
-  SWC_PAGE_LANGUAGE_COOKIE_NAME,
-} from '@/utils/shared/supportedLocales'
+import { SupportedLanguages, SWC_PAGE_LANGUAGE_COOKIE_NAME } from '@/utils/shared/supportedLocales'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 
 import { internationalRedirectHandler } from './internationalRedirectHandler'
@@ -105,7 +102,7 @@ describe('International Redirect Handler', () => {
     it('should respect existing language cookie for EU users', () => {
       const request = createRequest('https://standwithcrypto.org/', {
         OVERRIDE_USER_ACCESS_LOCATION: 'it', // Italian user (defaults to EN)
-        [SWC_PAGE_LANGUAGE_COOKIE_NAME]: SupportedEULanguages.DE, // But prefers German
+        [SWC_PAGE_LANGUAGE_COOKIE_NAME]: SupportedLanguages.DE, // But prefers German
       })
 
       const { response, userAccessLocationCookie, languageCookie } =
@@ -147,7 +144,7 @@ describe('International Redirect Handler', () => {
       const request = createRequest('https://standwithcrypto.org/', {
         OVERRIDE_USER_ACCESS_LOCATION: 'us',
         USER_SELECTED_COUNTRY: SupportedCountryCodes.EU,
-        [SWC_PAGE_LANGUAGE_COOKIE_NAME]: SupportedEULanguages.FR,
+        [SWC_PAGE_LANGUAGE_COOKIE_NAME]: SupportedLanguages.FR,
       })
 
       const { response } = internationalRedirectHandler(request)
