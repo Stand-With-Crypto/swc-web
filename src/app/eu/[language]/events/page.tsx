@@ -19,6 +19,14 @@ export const metadata: Metadata = {
   }),
 }
 
+export async function generateStaticParams() {
+  return [
+    { language: SupportedLanguages.EN },
+    { language: SupportedLanguages.DE },
+    { language: SupportedLanguages.FR },
+  ]
+}
+
 const countryCode = SupportedCountryCodes.EU
 
 export default async function EventsPageRoot(props: { params: { language: SupportedLanguages } }) {
