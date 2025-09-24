@@ -19,7 +19,7 @@ type GooglePlacesResponse = Required<
 
 function isGoogleMapsReady() {
   return pRetry(
-    async () => {
+    () => {
       if (typeof google !== 'undefined' && google.maps) {
         return true
       } else {
