@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { isError } from 'lodash-es'
+import pRetry from 'p-retry'
 import { getDetails } from 'use-places-autocomplete'
 
 import { formatGooglePlacesResultToAddress } from '@/utils/shared/formatGooglePlacesResultToAddress'
@@ -16,7 +17,25 @@ type GooglePlacesResponse = Required<
   Pick<google.maps.places.PlaceResult, 'address_components' | 'geometry'>
 >
 
+function isGoogleMapsReady() {
+  return pRetry(
+    () => {
+      if (google?.maps?.places?.PlacesService) {
+        return true
+      } else {
+        throw new Error('Google Maps API not ready')
+      }
+    },
+    {
+      retries: 10,
+      maxTimeout: 1000,
+    },
+  )
+}
+
 async function fetchAddressComponents(placeId: string) {
+  await isGoogleMapsReady()
+
   return getDetails({
     placeId,
     fields: ['address_components', 'geometry'],
