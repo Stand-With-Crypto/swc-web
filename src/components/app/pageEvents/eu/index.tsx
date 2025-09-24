@@ -11,14 +11,14 @@ import { getPromotedEvents } from '@/components/app/pageEvents/utils/getPromoted
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { getServerTranslation } from '@/utils/server/i18n/getServerTranslation'
-import { I18nMessages } from '@/utils/shared/i18n/types'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const countryCode = SupportedCountryCodes.EU
 
-const i18nMessages: I18nMessages = {
-  eu: {
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
     en: {
       title: 'Events',
       subtitle:
@@ -35,7 +35,7 @@ const i18nMessages: I18nMessages = {
         'La Stand With Crypto Alliance est dédiée à engager et à faire progresser la communauté crypto à la fois en ligne et lors de réalisations physiques. Le crypto est une force majeure dans notre économie, notre politique et notre culture – mais nous devons maintenir la dynamique.',
     },
   },
-}
+})
 
 export async function EuPageEvents({
   events,
