@@ -20,7 +20,7 @@ type GooglePlacesResponse = Required<
 function isGoogleMapsReady() {
   return pRetry(
     () => {
-      if (google?.maps) {
+      if (google?.maps?.places?.PlacesService) {
         return true
       } else {
         throw new Error('Google Maps API not ready')
