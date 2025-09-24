@@ -10,7 +10,7 @@ import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEv
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { I18nMessages } from '@/utils/shared/i18n/types'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -23,18 +23,14 @@ interface PromotedEventsProps {
   language?: SupportedLanguages
 }
 
-const defaultEnglishMessages = {
-  en: {
-    rsvp: 'RSVP',
-    seeWhatHappened: 'See what happened',
-  },
-}
-
-const i18nMessages: I18nMessages = {
-  eu: {
-    ...defaultEnglishMessages,
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      rsvp: 'RSVP',
+      seeWhatHappened: 'See what happened',
+    },
     fr: {
-      rsvp: 'RVSP',
+      rsvp: 'RSVP',
       seeWhatHappened: "Voir ce qui s'est passé",
     },
     de: {
@@ -42,11 +38,7 @@ const i18nMessages: I18nMessages = {
       seeWhatHappened: 'Was ist passiert',
     },
   },
-  us: defaultEnglishMessages,
-  ca: defaultEnglishMessages,
-  gb: defaultEnglishMessages,
-  au: defaultEnglishMessages,
-}
+})
 
 export function PromotedEvents({ events, countryCode }: PromotedEventsProps) {
   const { t } = useTranslation(i18nMessages, 'events')
