@@ -10,7 +10,9 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const countryCode = SupportedCountryCodes.EU
 
-export const generateMetadata = ({ params: { language } }: { params: { language: string } }) => {
+export const generateMetadata = async (props: { params: { language: string } }) => {
+  const { language } = await props.params
+
   return generateCountryCodeLayoutMetadataWithLanguage(countryCode, language)
 }
 

@@ -33,6 +33,45 @@ export function formatTimeForLocale(date: Date, language: SupportedLanguages): s
 }
 
 /**
+ * Format a date and time with the correct locale
+ */
+export function formatDateTimeForLocale(
+  date: Date,
+  language: SupportedLanguages,
+  options?: {
+    includeTime?: boolean
+    weekday?: 'long' | 'short' | 'narrow'
+    month?: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow'
+    day?: 'numeric' | '2-digit'
+    hour?: 'numeric' | '2-digit'
+    minute?: 'numeric' | '2-digit'
+    hour12?: boolean
+  },
+): string {
+  const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
+  const intl = createIntl({ locale, messages: {} })
+
+  const defaultOptions = options?.includeTime
+    ? {
+        weekday: 'long' as const,
+        month: 'numeric' as const,
+        day: 'numeric' as const,
+        hour: 'numeric' as const,
+        minute: '2-digit' as const,
+        hour12: true,
+      }
+    : {
+        weekday: 'long' as const,
+        month: 'numeric' as const,
+        day: 'numeric' as const,
+      }
+
+  const formatOptions = { ...defaultOptions, ...options }
+
+  return intl.formatDate(date, formatOptions)
+}
+
+/**
  * Format a number with the correct locale
  */
 export function formatNumberForLocale(
