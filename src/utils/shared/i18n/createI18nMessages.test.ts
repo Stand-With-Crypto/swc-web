@@ -93,7 +93,7 @@ describe('createI18nMessages', () => {
         },
       }
 
-      const result = createI18nMessages({ messagesOverrides })
+      const result = createI18nMessages({ defaultMessages: {}, messagesOverrides })
 
       expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
         welcome: 'Welcome to USA',
@@ -114,7 +114,7 @@ describe('createI18nMessages', () => {
         // Missing other countries
       }
 
-      const result = createI18nMessages({ messagesOverrides })
+      const result = createI18nMessages({ defaultMessages: {}, messagesOverrides })
 
       expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
         welcome: 'Welcome to USA',
@@ -136,9 +136,7 @@ describe('createI18nMessages', () => {
           [SupportedLanguages.EN]: { hello: 'Hi there!', welcome: 'Welcome!' },
         },
         [SupportedCountryCodes.EU]: {
-          [SupportedLanguages.EN]: {},
           [SupportedLanguages.DE]: { hello: 'Guten Tag!' },
-          [SupportedLanguages.FR]: {},
         },
       }
 
@@ -220,7 +218,7 @@ describe('createI18nMessages', () => {
         },
       }
 
-      const result = createI18nMessages({ messagesOverrides })
+      const result = createI18nMessages({ defaultMessages: {}, messagesOverrides })
 
       expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
         test: 'value',

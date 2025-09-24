@@ -1,11 +1,9 @@
 import { getSupportedLanguagesForCountry } from '@/utils/shared/i18n/getSupportedLanguagesByCountry'
+import { I18nCountryMessages, I18nMessages } from '@/utils/shared/i18n/types'
 import {
-  ComponentMessages,
-  I18nCountryMessages,
-  I18nMessages,
-  PartialI18nMessages,
-} from '@/utils/shared/i18n/types'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
+  ORDERED_SUPPORTED_COUNTRIES,
+  SupportedCountryCodes,
+} from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 /**
@@ -46,12 +44,23 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
  * // Result: { us: { en: { welcome: 'Welcome to the US' } }, eu: { fr: { welcome: 'Bienvenue aux États-Unis' }, en: { welcome: 'Welcome' }, de: { welcome: 'Welcome' } } }
  * ```
  */
-export function createI18nMessages({
-  defaultMessages = {},
+export function createI18nMessages<
+  TLanguageMessages extends Record<string, string>,
+  TMessages extends Partial<Record<SupportedLanguages, TLanguageMessages>>,
+  TRequired extends keyof TMessages[keyof TMessages] = never,
+>({
+  defaultMessages = {} as TMessages,
   messagesOverrides = {},
 }: {
-  defaultMessages?: Partial<Record<SupportedLanguages, ComponentMessages>>
-  messagesOverrides?: PartialI18nMessages
+  defaultMessages?: TMessages
+  messagesOverrides?: Partial<
+    Record<
+      SupportedCountryCodes,
+      Partial<{
+        [L in keyof TMessages]: Partial<Pick<TMessages[L], TRequired>> & Partial<TMessages[L]>
+      }>
+    >
+  >
 } = {}): I18nMessages {
   const i18nMessages: I18nMessages = {}
 
@@ -66,7 +75,7 @@ export function createI18nMessages({
         countryMessagesOverrides?.[language as keyof typeof countryMessagesOverrides]
 
       messagesFromCountry[language] = {
-        ...defaultMessages[language],
+        ...defaultMessages?.[language],
         ...languageMessagesOverrides,
       }
     }
