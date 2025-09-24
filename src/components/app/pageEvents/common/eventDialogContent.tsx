@@ -156,7 +156,6 @@ function EventInformation({
     weekday: 'long',
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true,
   })
 
   const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))

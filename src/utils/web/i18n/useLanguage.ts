@@ -5,5 +5,12 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export function useLanguage() {
   const pathname = usePathname()
-  return extractLanguageFromPath(pathname ?? '') as SupportedLanguages
+
+  const languageFromPath = extractLanguageFromPath(pathname ?? '') as SupportedLanguages
+
+  if (languageFromPath) {
+    return languageFromPath
+  }
+
+  return SupportedLanguages.EN
 }
