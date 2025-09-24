@@ -75,12 +75,21 @@ export function HeroCTA({
       )
     }
 
+    // TODO: this became an upsell surface, let's make it an actual abstraction on the Hero component
     if (countryCode === SupportedCountryCodes.GB) {
       return (
         <Button asChild size="lg" variant="primary-cta">
           <ExternalLink href="https://petition.parliament.uk/petitions/730568">
             Sign the Petition
           </ExternalLink>
+        </Button>
+      )
+    }
+
+    if (countryCode === SupportedCountryCodes.AU) {
+      return (
+        <Button asChild size="lg" variant="primary-cta">
+          <InternalLink href={urls.pitchFest()}>Sign Up for Pitch Fest</InternalLink>
         </Button>
       )
     }
