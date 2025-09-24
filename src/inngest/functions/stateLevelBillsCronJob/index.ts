@@ -1,5 +1,6 @@
 import { analyzeCryptoRelatedBillsWithRetry } from '@/inngest/functions/stateLevelBillsCronJob/ai'
 import {
+  AI_ANALYSIS_MIN_SCORE,
   MAX_BILLS_TO_PROCESS,
   QUORUM_API_BILLS_PER_PAGE,
   SEARCH_OFFSET_REDIS_KEY,
@@ -74,7 +75,11 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         }
       }
 
-      await redis.set(SEARCH_OFFSET_REDIS_KEY, bills.at(-1)?.id, { ex: SEARCH_OFFSET_REDIS_TTL })
+      const lastBill = bills.at(-1)
+
+      if (lastBill) {
+        await redis.set(SEARCH_OFFSET_REDIS_KEY, lastBill.id, { ex: SEARCH_OFFSET_REDIS_TTL })
+      }
 
       logger.info(`Completed fetching bills from Quorum API. Total bills fetched: ${bills.length}.`)
 
@@ -194,10 +199,14 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       )
 
       const billsToAnalyze = parsedBillsFromQuorum
-        .filter(quorumBill => !existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId!))
+        .filter(
+          quorumBill => !existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId as string),
+        )
         .map(quorumBill => ({
           ...quorumBill,
-          index: billsFromQuorum.findIndex(bill => String(bill.id) === quorumBill.data.externalId),
+          originalIndex: billsFromQuorum.findIndex(
+            ({ id }) => String(id) === quorumBill.data.externalId,
+          ),
         }))
 
       const billsToUpdate = parsedBillsFromQuorum
@@ -209,7 +218,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         }))
         .filter(quorumBill => {
           return (
-            existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId!) &&
+            existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId as string) &&
             quorumBill.builderIO &&
             quorumBill.builderIO.data.isAutomaticUpdatesEnabled !== false &&
             quorumBill.builderIO.data.mostRecentActionDate !== quorumBill.data.mostRecentActionDate
@@ -220,7 +229,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
           data: quorumBill,
         })) as { id: string; data: UpdateBillEntryPayload }[]
 
-      logger.info(`Found ${billsToAnalyze.length} new bills to add to Builder.io.`)
+      logger.info(`Found ${billsToAnalyze.length} new bills to analyze using AI.`)
       logger.info(`Found ${billsToUpdate.length} existing bills to update in Builder.io.`)
 
       return [billsToAnalyze, billsToUpdate] as const
@@ -232,14 +241,14 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       const offsetId = await redis.get<number | undefined>(SEARCH_OFFSET_REDIS_KEY)
       const offsetIndex =
         typeof offsetId === 'number'
-          ? parsedBillsFromQuorum.findIndex(bill => bill.data.externalId! === String(offsetId))
+          ? parsedBillsFromQuorum.findIndex(bill => bill.data.externalId === String(offsetId))
           : -1
       const filteredBillsToAnalyze =
         offsetIndex === -1
           ? billsToAnalyze
-          : billsToAnalyze.filter(bill => bill.index > offsetIndex)
+          : billsToAnalyze.filter(bill => bill.originalIndex > offsetIndex)
       const filteredBillsToAnalyzeWithoutIndex = filteredBillsToAnalyze.map(
-        ({ index: _, ...data }) => data,
+        ({ originalIndex: _, ...data }) => data,
       ) as CreateBillEntryPayload[]
 
       const aiScores = await analyzeCryptoRelatedBillsWithRetry(
@@ -256,11 +265,10 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       return {
         aiScores,
         billsToCreate: aiScores
-          .filter(score => score.score >= 80)
+          .filter(score => score.score >= AI_ANALYSIS_MIN_SCORE)
           .map(score =>
             filteredBillsToAnalyzeWithoutIndex.find(bill => bill.data.externalId === score.id),
           ) as CreateBillEntryPayload[],
-        info: { offsetId, offsetIndex, filteredBillsToAnalyze, filteredBillsToAnalyzeWithoutIndex },
       }
     })
 

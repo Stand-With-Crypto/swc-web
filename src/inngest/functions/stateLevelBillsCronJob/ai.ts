@@ -6,8 +6,10 @@ import z from 'zod'
 import {
   AI_ANALYSIS_BATCH_DELAY_IN_SECONDS,
   AI_ANALYSIS_BATCH_LENGTH,
+  AI_ANALYSIS_MAX_OUTPUT_TOKENS,
   AI_ANALYSIS_MAX_RETRIES,
   AI_ANALYSIS_MIN_TIMEOUT,
+  AI_ANALYSIS_TEMPERATURE,
 } from '@/inngest/functions/stateLevelBillsCronJob/config'
 import { sleep } from '@/utils/shared/sleep'
 import { SWCBillFromBuilderIO } from '@/utils/shared/zod/getSWCBills'
@@ -23,36 +25,40 @@ const cryptoRelatedBillAnalysisSchema = z.object({
     .array(),
 })
 
+type CryptoRelatedBillAnalysisSchemaType = z.infer<typeof cryptoRelatedBillAnalysisSchema>
+
 async function analyzeCryptoRelatedBills(bills: Bill[]) {
   const result = await generateObject({
-    maxOutputTokens: 300,
+    maxOutputTokens: AI_ANALYSIS_MAX_OUTPUT_TOKENS,
     model: 'gemini-2.5-flash',
     prompt: [
       {
         role: 'system',
         content: `You are a highly skilled legal and technical analyst specializing in cryptocurrency and blockchain technology. Your task is to carefully analyze a list of bills and determine the relevance of each to crypto usage, regulation, or technology.
-          
-        For each bill in the provided list, you must provide a single numerical score from 0 to 100. A score of 0 means there is no relation, while a score of 100 means the bill is entirely focused on crypto. Your analysis must be meticulous and consider subtle technical and legal language.
-          
-        Your response MUST be an object containing only one field called "bills" which will contain an array of objects, where each object has the "id" of the analyzed bill and a "score" corresponding to the crypto relevance of the bills. Do NOT include any other text or explanation, only the requested object. Your response MUST NOT include any other information besides the JSON object. Avoid adding additional texts or explanations.`,
+        
+        For each bill, assign a single numerical score from 0 to 100, where 0 means no relation and 100 means the bill is entirely focused on crypto.
+        
+        Your analysis must be meticulous, considering subtle technical and legal language.
+
+        Output a single JSON object. The object MUST contain one field, "bills", which is an array of objects. Each object in the array MUST have two fields: the "id" of the analyzed bill and a "score" corresponding to its crypto relevance. Do NOT include any other text or explanation.`,
       },
       {
         role: 'user',
-        content: `Analyze the following list of bills and provide a cryptocurrency relevance score for each. The score should be a number from 0 to 100.
-  
-          List of bills:
+        content: `Analyze the following bills and provide a cryptocurrency relevance score from 0 to 100 for each.
+        
+        Bills:
           ${bills
             .map(
               (bill, index) =>
-                `${index}: id: ${bill.externalId}, title: "${bill.title}", summary: "${bill.summary}"`,
+                `${index}: id: "${bill.externalId}", title: "${bill.title}", summary: "${bill.summary}"`,
             )
             .join('\n')}
   
-          For each bill, provide a JSON object with the bills list and their corresponding calculated scores. Do NOT include any other text or explanation, only the requested object. Your response MUST NOT include any other information besides the JSON object. Avoid adding additional texts or explanations.`,
+        Your response MUST be a single JSON object. This object should contain one field, bills, which is an array of objects. Each object in the array MUST have the bill's id and its calculated score. Do NOT include any other text or explanation.`,
       },
     ],
     schema: cryptoRelatedBillAnalysisSchema,
-    temperature: 0.1,
+    temperature: AI_ANALYSIS_TEMPERATURE,
   })
 
   return result.object
@@ -61,7 +67,7 @@ async function analyzeCryptoRelatedBills(bills: Bill[]) {
 export async function analyzeCryptoRelatedBillsWithRetry(bills: Bill[], logger: Logger) {
   let offset = 0
 
-  const data: z.infer<typeof cryptoRelatedBillAnalysisSchema>['bills'] = []
+  const data: CryptoRelatedBillAnalysisSchemaType['bills'] = []
 
   while (offset < bills.length) {
     const batch = bills.slice(offset, offset + AI_ANALYSIS_BATCH_LENGTH)
@@ -77,7 +83,6 @@ export async function analyzeCryptoRelatedBillsWithRetry(bills: Bill[], logger: 
       logger.error(
         `Failed to analyze bills data.\nids: ${batch.map(bill => bill.externalId).join(', ')}.\nerror: ${error instanceof Error ? error.message : String(error)}`,
       )
-      throw error
     }
 
     offset += AI_ANALYSIS_BATCH_LENGTH
