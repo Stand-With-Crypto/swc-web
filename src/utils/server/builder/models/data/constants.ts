@@ -1,6 +1,6 @@
 export enum BuilderDataModelIdentifiers {
   BILLS = 'bills',
-  EVENTS = 'i-18-n-events-poc',
+  EVENTS = 'events',
   FOUNDERS = 'founders',
   NEWS = 'news',
   PARTNERS = 'partners',
