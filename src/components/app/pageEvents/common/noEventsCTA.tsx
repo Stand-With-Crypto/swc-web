@@ -41,7 +41,7 @@ const i18nMessages = createI18nMessages({
         'Tragen Sie Ihre Telefonnummer ein und wir halten Sie über Ereignisse in Ihrer Region auf dem Laufenden.',
       keepYouUpdated: 'Wir halten Sie über Ereignisse in Ihrer Region auf dem Laufenden.',
       pleaseCheckBackLater:
-        'Bitte prüfen Sie später für Updates, da neue Ereignisse bald hinzugefügt werden.',
+        'Bitte schauen Sie später nach Updates, da neue Ereignisse bald hinzugefügt werden.',
     },
   },
 })

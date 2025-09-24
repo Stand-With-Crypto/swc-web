@@ -56,12 +56,12 @@ const i18nMessages = createI18nMessages({
       success:
         "Merci pour votre intérêt ! Nous vous enverrons un rappel plus proche de l'événement.",
       getUpdates: 'Obtenir les mises à jour',
-      rsvp: 'RVSP',
+      rsvp: 'RSVP',
       logInToGetUpdates: 'Se connecter pour obtenir les mises à jour',
     },
     de: {
       success:
-        'Danke für Ihr Interesse! Wir werden Ihnen einen Erinnerungsklausel näher zu dem Ereignis senden.',
+        'Danke für Ihr Interesse! Wir werden Ihnen eine Erinnerung näher zum Ereignis senden.',
       getUpdates: 'Aktualisierungen abrufen',
       rsvp: 'Anmeldung',
       logInToGetUpdates: 'Anmelden für Updates',

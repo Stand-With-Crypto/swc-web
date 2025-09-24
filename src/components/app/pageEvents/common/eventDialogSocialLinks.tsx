@@ -23,7 +23,7 @@ const i18nMessages = createI18nMessages({
       share: 'Partager',
       emailSubject: 'Événement de Stand with Crypto',
       emailBody:
-        'Je ai trouvé un événement que je suis intéressé de Stand with Crypto et je voulais le partager avec vous. Stand With Crypto est une organisation pro-crypto dédiée à l’activation et à la mobilisation de la communauté crypto. Trouvez plus d’informations sur l’événement ici: {eventDeeplink}',
+        "J'ai trouvé un événement qui m'intéresse de la part de Stand with Crypto et je voulais le partager avec vous. Stand With Crypto est une organisation pro-crypto dédiée à l'activation et à la mobilisation de la communauté crypto. Trouvez plus d'informations sur l'événement ici: {eventDeeplink}",
       twitterText:
         'Je suis intéressé par un événement de @StandWithCrypto! Il est temps de faire entendre nos voix et de protéger le futur du crypto en Amérique. Trouvez plus d’informations sur l’événement ici:',
     },
@@ -31,7 +31,7 @@ const i18nMessages = createI18nMessages({
       share: 'Teilen',
       emailSubject: 'Ereignis von Stand with Crypto',
       emailBody:
-        'Ich habe ein Ereignis gefunden, das ich interessiert, von Stand with Crypto und wollte es mit Ihnen teilen. Stand With Crypto ist eine pro-Crypto-Organisation, die sich der Aktivierung und Mobilisation der Crypto-Community widmet. Finden Sie weitere Informationen zum Ereignis hier: {eventDeeplink}',
+        'Ich habe ein Ereignis von Stand with Crypto gefunden, das mich interessiert, und wollte es mit Ihnen teilen. Stand With Crypto ist eine pro-Krypto-Organisation, die sich der Aktivierung und Mobilisierung der Krypto-Community widmet. Weitere Informationen zum Ereignis finden Sie hier: {eventDeeplink}',
       twitterText:
         'Ich bin interessiert an einem Ereignis von @StandWithCrypto! Es ist Zeit, unsere Stimmen zu hören und die Zukunft des Crypto in Amerika zu schützen. Finden Sie weitere Informationen zum Ereignis hier:',
     },
