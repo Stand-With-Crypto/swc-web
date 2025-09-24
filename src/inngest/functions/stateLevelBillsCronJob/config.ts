@@ -50,6 +50,7 @@ export const STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE = '0 8 * * 1-5'
 export const SEARCH_OFFSET_REDIS_KEY = 'bill-automation-last-analyzed'
 export const SEARCH_OFFSET_REDIS_TTL = 2 * 24 * 60 * 60 // 2 days (min: 1 day, max: 3 days)
 
-export const AI_ANALYSIS_MAX_RETRIES = 3
-
+export const AI_ANALYSIS_BATCH_DELAY_IN_SECONDS = 60
 export const AI_ANALYSIS_BATCH_LENGTH = 10
+export const AI_ANALYSIS_MAX_RETRIES = 3
+export const AI_ANALYSIS_MIN_TIMEOUT = 3_000

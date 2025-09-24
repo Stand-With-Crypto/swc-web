@@ -193,9 +193,12 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         `Found ${billsFromBuilderIO.length} bills in Builder.io, with ${existingQuorumIdsInBuilderIO.size} unique Quorum IDs.`,
       )
 
-      const billsToAnalyze = parsedBillsFromQuorum.filter(
-        quorumBill => !existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId!),
-      ) as CreateBillEntryPayload[]
+      const billsToAnalyze = parsedBillsFromQuorum
+        .filter(quorumBill => !existingQuorumIdsInBuilderIO.has(quorumBill.data.externalId!))
+        .map(quorumBill => ({
+          ...quorumBill,
+          index: billsFromQuorum.findIndex(bill => String(bill.id) === quorumBill.data.externalId),
+        }))
 
       const billsToUpdate = parsedBillsFromQuorum
         .map(quorumBill => ({
@@ -226,17 +229,26 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
     const { aiScores, billsToCreate } = await step.run('analyze-bills-data-with-ai', async () => {
       logger.info('Starting to analyze valid Quorum bills using AI...')
 
-      const offsetId = (await redis.get(SEARCH_OFFSET_REDIS_KEY)) as string
-      const offsetIndex = billsToAnalyze.findIndex(bill => bill.data.externalId === offsetId)
+      const offsetId = await redis.get<number | undefined>(SEARCH_OFFSET_REDIS_KEY)
+      const offsetIndex =
+        typeof offsetId === 'number'
+          ? parsedBillsFromQuorum.findIndex(bill => bill.data.externalId! === String(offsetId))
+          : -1
       const filteredBillsToAnalyze =
-        offsetIndex === -1 ? billsToAnalyze : billsToAnalyze.slice(offsetIndex + 1)
+        offsetIndex === -1
+          ? billsToAnalyze
+          : billsToAnalyze.filter(bill => bill.index > offsetIndex)
+      const filteredBillsToAnalyzeWithoutIndex = filteredBillsToAnalyze.map(
+        ({ index: _, ...data }) => data,
+      ) as CreateBillEntryPayload[]
 
       const aiScores = await analyzeCryptoRelatedBillsWithRetry(
-        filteredBillsToAnalyze.map(bill => ({
+        filteredBillsToAnalyzeWithoutIndex.map(bill => ({
           externalId: bill.data.externalId as string,
           summary: bill.data.summary,
           title: bill.data.title,
         })),
+        logger,
       )
 
       logger.info(`Completed analyzing. Total analyzed Quorum bills: ${aiScores.length}.`)
@@ -246,8 +258,9 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         billsToCreate: aiScores
           .filter(score => score.score >= 80)
           .map(score =>
-            filteredBillsToAnalyze.find(bill => bill.data.externalId === score.id),
+            filteredBillsToAnalyzeWithoutIndex.find(bill => bill.data.externalId === score.id),
           ) as CreateBillEntryPayload[],
+        info: { offsetId, offsetIndex, filteredBillsToAnalyze, filteredBillsToAnalyzeWithoutIndex },
       }
     })
 
