@@ -1,6 +1,6 @@
 import { array, boolean, nativeEnum, number, object, string, z } from 'zod'
 
-enum EVENT_TYPE_OPTIONS {
+export enum EVENT_TYPE_OPTIONS {
   'official' = 'official',
   'partner' = 'partner',
 }
