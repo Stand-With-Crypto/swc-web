@@ -51,7 +51,9 @@ export function formatDateTimeForLocale(
   const locale = LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
   const intl = createIntl({ locale, messages: {} })
 
-  const defaultOptions = options?.includeTime
+  const { includeTime, ...intlOptions } = options || {}
+
+  const defaultOptions = includeTime
     ? {
         weekday: 'long' as const,
         month: 'numeric' as const,
@@ -66,7 +68,7 @@ export function formatDateTimeForLocale(
         day: 'numeric' as const,
       }
 
-  const formatOptions = { ...defaultOptions, ...options }
+  const formatOptions = { ...defaultOptions, ...intlOptions }
 
   return intl.formatDate(date, formatOptions)
 }
