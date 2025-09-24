@@ -20,13 +20,11 @@ type GooglePlacesResponse = Required<
 function isGoogleMapsReady() {
   return pRetry(
     async () => {
-      return new Promise((resolve, reject) => {
-        if (typeof google !== 'undefined' && google.maps) {
-          resolve(true)
-        } else {
-          reject(new Error('Google Maps API not ready'))
-        }
-      })
+      if (typeof google !== 'undefined' && google.maps) {
+        return true
+      } else {
+        throw new Error('Google Maps API not ready')
+      }
     },
     {
       retries: 10,
