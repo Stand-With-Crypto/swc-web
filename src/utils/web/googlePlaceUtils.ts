@@ -18,11 +18,18 @@ type GooglePlacesResponse = Required<
 >
 
 function isGoogleMapsReady() {
+  console.log('----------------- isGoogleMapsReady')
   return pRetry(
     () => {
-      if (google?.maps) {
+      if (
+        google.maps &&
+        google.maps.places &&
+        typeof google.maps.places.PlacesService === 'function'
+      ) {
+        console.log('----------------- isGoogleMapsReady true')
         return true
       } else {
+        console.log('----------------- isGoogleMapsReady false')
         throw new Error('Google Maps API not ready')
       }
     },
