@@ -1,13 +1,3 @@
-import { analyzeCryptoRelatedBillsWithRetry } from '@/inngest/functions/stateLevelBillsCronJob/ai'
-import {
-  AI_ANALYSIS_MIN_SCORE,
-  MAX_BILLS_TO_PROCESS,
-  QUORUM_API_BILLS_PER_PAGE,
-  SEARCH_OFFSET_REDIS_KEY,
-  SEARCH_OFFSET_REDIS_TTL,
-  STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE,
-} from '@/inngest/functions/stateLevelBillsCronJob/config'
-import { CRYPTO_RELATED_KEYWORDS_REGEX } from '@/inngest/functions/stateLevelBillsCronJob/constants'
 import {
   createBillEntryInBuilderIO,
   fetchBuilderIOBills,
@@ -16,10 +6,20 @@ import {
   parseQuorumBillToBuilderIOPayload,
   updateBillEntryInBuilderIO,
 } from '@/inngest/functions/stateLevelBillsCronJob/logic'
+import { analyzeCryptoRelatedBillsWithRetry } from '@/inngest/functions/stateLevelBillsCronJob/utils/ai'
+import {
+  AI_ANALYSIS_MIN_SCORE,
+  MAX_BILLS_TO_PROCESS,
+  QUORUM_API_BILLS_PER_PAGE,
+  SEARCH_OFFSET_REDIS_KEY,
+  SEARCH_OFFSET_REDIS_TTL,
+  STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE,
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/config'
+import { CRYPTO_RELATED_KEYWORDS_REGEX } from '@/inngest/functions/stateLevelBillsCronJob/utils/constants'
 import {
   CreateBillEntryPayload,
   UpdateBillEntryPayload,
-} from '@/inngest/functions/stateLevelBillsCronJob/types'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/types'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { redis } from '@/utils/server/redis'

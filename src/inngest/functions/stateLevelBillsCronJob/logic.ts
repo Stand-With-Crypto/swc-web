@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import path from 'node:path'
 
 import {
@@ -6,14 +7,14 @@ import {
   QUORUM_API_BILL_ENDPOINT,
   QUORUM_API_BILL_SUMMARY_ENDPOINT,
   QUORUM_API_BILLS_PER_PAGE,
-} from '@/inngest/functions/stateLevelBillsCronJob/config'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/config'
 import {
   BUILDER_IO_WRITE_API_ENDPOINT,
   QUORUM_API_AUTH_QUERY_PARAMS,
   QUORUM_API_ENDPOINT,
   QUORUM_API_FILTER_QUERY_PARAMS,
-} from '@/inngest/functions/stateLevelBillsCronJob/constants'
-import { resolveFields } from '@/inngest/functions/stateLevelBillsCronJob/resolveFields'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/constants'
+import { resolveFields } from '@/inngest/functions/stateLevelBillsCronJob/utils/resolveFields'
 import {
   CreateBillEntryPayload,
   QuorumBillApiObject,
@@ -21,11 +22,18 @@ import {
   QuorumBillSummaryApiObject,
   QuorumBillSummaryApiResponse,
   UpdateBillEntryPayload,
-} from '@/inngest/functions/stateLevelBillsCronJob/types'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/types'
 import { getAllBillsWithOffset } from '@/utils/server/builder/models/data/bills'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCBillFromBuilderIO } from '@/utils/shared/zod/getSWCBills'
+
+export const BUILDER_IO_PRIVATE_KEY = requiredOutsideLocalEnv(
+  process.env.BUILDER_IO_PRIVATE_KEY,
+  'BUILDER_IO_PRIVATE_KEY',
+  'State-level bills CRON Job',
+)!
 
 export interface PaginationParams {
   limit: number
@@ -33,10 +41,6 @@ export interface PaginationParams {
 }
 
 export async function fetchQuorumBills(paginationParams: PaginationParams) {
-  if (!QUORUM_API_ENDPOINT) {
-    throw new Error('No QUORUM_API_ENDPOINT defined')
-  }
-
   const searchParams = Object.entries({
     limit: String(paginationParams.limit),
     offset: String(paginationParams.offset),
@@ -45,7 +49,7 @@ export async function fetchQuorumBills(paginationParams: PaginationParams) {
     ...QUORUM_API_AUTH_QUERY_PARAMS,
   })
     .filter(([_, value]) => Boolean(value))
-    .map(([key, value]) => `${key}=${value!}`)
+    .map(([key, value]) => `${key}=${value}`)
     .join('&')
 
   const requestUrl = `${path.join(QUORUM_API_ENDPOINT, QUORUM_API_BILL_ENDPOINT)}?${searchParams}`
@@ -59,10 +63,6 @@ export async function fetchQuorumBillSummaries(
   bills: QuorumBillApiObject[],
   paginationParams: PaginationParams,
 ) {
-  if (!QUORUM_API_ENDPOINT) {
-    throw new Error('No QUORUM_API_ENDPOINT defined')
-  }
-
   const searchParams = Object.entries({
     limit: String(paginationParams.limit),
     offset: String(paginationParams.offset),
@@ -88,14 +88,31 @@ export async function fetchQuorumBillSummaries(
 export function parseQuorumBillToBuilderIOPayload(
   bill: QuorumBillApiObject & { summaries: QuorumBillSummaryApiObject[] },
 ) {
-  return {
-    data: Object.fromEntries(
-      Object.keys(resolveFields).map(key => [
-        key,
-        resolveFields[key as keyof typeof resolveFields](bill),
-      ]),
-    ) as SWCBillFromBuilderIO,
-    name: `${BUILDER_IO_BILL_PREFIX ? `${BUILDER_IO_BILL_PREFIX} ` : ''}${bill.title}`,
+  try {
+    const response = {
+      data: Object.fromEntries(
+        Object.keys(resolveFields).map(key => [
+          key,
+          resolveFields[key as keyof typeof resolveFields](bill),
+        ]),
+      ) as SWCBillFromBuilderIO,
+      name: `${BUILDER_IO_BILL_PREFIX ? `${BUILDER_IO_BILL_PREFIX} ` : ''}${bill.title}`,
+    }
+
+    return response
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    Sentry.captureException(errorMessage, {
+      extra: {
+        bill,
+        error,
+      },
+      level: 'error',
+      tags: {
+        domain: 'StateLevelBillsCronJob',
+      },
+    })
+    throw error
   }
 }
 
@@ -117,20 +134,23 @@ export async function fetchBuilderIOBills(countryCode: SupportedCountryCodes) {
 
     return entries
   } catch (error) {
-    throw new Error(
-      `Error fetching bills from Builder.io: ${error instanceof Error ? error.message : String(error)}`,
-    )
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    Sentry.captureException(errorMessage, {
+      extra: {
+        countryCode,
+        error,
+        offset,
+      },
+      level: 'error',
+      tags: {
+        domain: 'StateLevelBillsCronJob',
+      },
+    })
+    throw new Error(`Error fetching bills from Builder.io: ${errorMessage}`)
   }
 }
 
 export async function createBillEntryInBuilderIO(bill: CreateBillEntryPayload) {
-  if (!BUILDER_IO_WRITE_API_ENDPOINT) {
-    throw new Error('No BUILDER_IO_WRITE_API_ENDPOINT defined')
-  }
-  if (!process.env.BUILDER_IO_PRIVATE_KEY) {
-    throw new Error('No BUILDER_IO_PRIVATE_KEY defined')
-  }
-
   const body = JSON.stringify({
     ...bill,
     published: BUILDER_IO_BILL_PUBLISHED_STATE,
@@ -142,7 +162,7 @@ export async function createBillEntryInBuilderIO(bill: CreateBillEntryPayload) {
       {
         body,
         headers: {
-          Authorization: `Bearer ${process.env.BUILDER_IO_PRIVATE_KEY}`,
+          Authorization: `Bearer ${BUILDER_IO_PRIVATE_KEY}`,
           'Content-Type': 'application/json',
         },
         method: 'POST',
@@ -157,20 +177,22 @@ export async function createBillEntryInBuilderIO(bill: CreateBillEntryPayload) {
 
     return data as Promise<{ id: string }>
   } catch (error) {
-    throw new Error(
-      `Failed to create bill entry in Builder.io: ${error instanceof Error ? error.message : String(error)}.`,
-    )
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    Sentry.captureException(errorMessage, {
+      extra: {
+        bill,
+        error,
+      },
+      level: 'error',
+      tags: {
+        domain: 'StateLevelBillsCronJob',
+      },
+    })
+    throw new Error(`Failed to create bill entry in Builder.io: ${errorMessage}.`)
   }
 }
 
 export async function updateBillEntryInBuilderIO(id: string, bill: UpdateBillEntryPayload) {
-  if (!BUILDER_IO_WRITE_API_ENDPOINT) {
-    throw new Error('No BUILDER_IO_WRITE_API_ENDPOINT defined')
-  }
-  if (!process.env.BUILDER_IO_PRIVATE_KEY) {
-    throw new Error('No BUILDER_IO_PRIVATE_KEY defined')
-  }
-
   const payload: Required<UpdateBillEntryPayload['data']> = {
     keyDates: bill.data.keyDates || [],
     summary: bill.data.summary,
@@ -188,7 +210,7 @@ export async function updateBillEntryInBuilderIO(id: string, bill: UpdateBillEnt
       {
         body,
         headers: {
-          Authorization: `Bearer ${process.env.BUILDER_IO_PRIVATE_KEY}`,
+          Authorization: `Bearer ${BUILDER_IO_PRIVATE_KEY}`,
           'Content-Type': 'application/json',
         },
         method: 'PATCH',
@@ -203,8 +225,19 @@ export async function updateBillEntryInBuilderIO(id: string, bill: UpdateBillEnt
 
     return data as Promise<{ id: string }>
   } catch (error) {
-    throw new Error(
-      `Failed to update bill entry in Builder.io: ${error instanceof Error ? error.message : String(error)}.`,
-    )
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    Sentry.captureException(errorMessage, {
+      extra: {
+        bill,
+        error,
+        id,
+        payload,
+      },
+      level: 'error',
+      tags: {
+        domain: 'StateLevelBillsCronJob',
+      },
+    })
+    throw new Error(`Failed to update bill entry in Builder.io: ${errorMessage}.`)
   }
 }

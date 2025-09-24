@@ -1,4 +1,4 @@
-import { MAX_MINOR_MILESTONES_ALLOWED } from '@/inngest/functions/stateLevelBillsCronJob/config'
+import { MAX_MINOR_MILESTONES_ALLOWED } from '@/inngest/functions/stateLevelBillsCronJob/utils/config'
 import {
   BILL_MAJOR_MILESTONE_TITLE_MAP,
   QUORUM_BILL_REGION_MAP,
@@ -6,8 +6,8 @@ import {
   QUORUM_BILL_STATUSES,
   QUORUM_HOUSE_BILL_TYPES,
   QUORUM_SENATE_BILL_TYPES,
-} from '@/inngest/functions/stateLevelBillsCronJob/constants'
-import { ResolveFieldsMap } from '@/inngest/functions/stateLevelBillsCronJob/types'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/constants'
+import { ResolveFieldsMap } from '@/inngest/functions/stateLevelBillsCronJob/utils/types'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { BillChamberOrigin, BillKeyDateCategory, BillSource } from '@/utils/shared/zod/getSWCBills'
@@ -105,7 +105,7 @@ export const resolveFields: ResolveFieldsMap = {
       return undefined // Federal bill
     }
 
-    const nonStateNameExpressions = [
+    const stateNameExclusions = [
       'Assembly',
       'Council of the',
       'Court',
@@ -117,8 +117,8 @@ export const resolveFields: ResolveFieldsMap = {
     ]
 
     const regionName = QUORUM_BILL_REGION_MAP[bill.region as keyof typeof QUORUM_BILL_REGION_MAP]
-    const stateName = nonStateNameExpressions.reduce(
-      (name, expression) => name.replace(expression, '').trim(),
+    const stateName = stateNameExclusions.reduce(
+      (name, phrase) => name.replace(phrase, '').trim(),
       regionName,
     )
     const state = Object.entries(US_STATE_CODE_TO_DISPLAY_NAME_MAP).find(

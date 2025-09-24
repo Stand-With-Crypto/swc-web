@@ -210,6 +210,6 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
     ],
     relatedUrls: bill.relatedUrls || [],
     source: bill.source || BillSource.BUILDER_IO,
-    title: bill.source === BillSource.QUORUM ? `[quorum] ${bill.title}` : bill.title,
+    title: bill.title,
   }
 }

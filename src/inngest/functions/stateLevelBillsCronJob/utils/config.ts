@@ -1,7 +1,7 @@
 import {
   BuilderIOBillPublishedState,
   QuorumBillApiSortKey,
-} from '@/inngest/functions/stateLevelBillsCronJob/types'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/types'
 
 export const BUILDER_IO_BILLS_PER_PAGE = 100
 
@@ -46,7 +46,7 @@ export const MAX_BILLS_TO_PROCESS = 0 // no limit
 
 export const MAX_MINOR_MILESTONES_ALLOWED = 5
 
-export const STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE = '0 8 * * 1-5'
+export const STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE = '0 8 * * 1-5' // every workday at 8 AM EST
 
 export const SEARCH_OFFSET_REDIS_KEY = 'bill-automation-last-analyzed'
 export const SEARCH_OFFSET_REDIS_TTL = 2 * 24 * 60 * 60 // 2 days

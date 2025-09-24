@@ -2,7 +2,8 @@ import {
   CRYPTO_RELATED_KEYWORDS,
   // QUORUM_API_SORT_KEY,
   QUORUM_API_BILL_STARTING_YEAR,
-} from '@/inngest/functions/stateLevelBillsCronJob/config'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/config'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { BillKeyDateCategory } from '@/utils/shared/zod/getSWCBills'
 
 export const CRYPTO_RELATED_KEYWORDS_REGEX = new RegExp(
@@ -10,14 +11,34 @@ export const CRYPTO_RELATED_KEYWORDS_REGEX = new RegExp(
   'i',
 )
 
+const QUORUM_API_KEY = requiredOutsideLocalEnv(
+  process.env.QUORUM_API_KEY,
+  'QUORUM_API_KEY',
+  'State-level bills CRON Job',
+)!
+
+const QUORUM_USERNAME = requiredOutsideLocalEnv(
+  process.env.QUORUM_USERNAME,
+  'QUORUM_USERNAME',
+  'State-level bills CRON Job',
+)!
+
 export const QUORUM_API_AUTH_QUERY_PARAMS = {
-  api_key: process.env.QUORUM_API_KEY,
-  username: process.env.QUORUM_USERNAME,
+  api_key: QUORUM_API_KEY,
+  username: QUORUM_USERNAME,
 }
 
-export const QUORUM_API_ENDPOINT = process.env.QUORUM_API_ENDPOINT
+export const QUORUM_API_ENDPOINT = requiredOutsideLocalEnv(
+  process.env.QUORUM_API_ENDPOINT,
+  'QUORUM_API_ENDPOINT',
+  'State-level bills CRON Job',
+)!
 
-export const BUILDER_IO_WRITE_API_ENDPOINT = process.env.BUILDER_IO_WRITE_API_ENDPOINT
+export const BUILDER_IO_WRITE_API_ENDPOINT = requiredOutsideLocalEnv(
+  process.env.BUILDER_IO_WRITE_API_ENDPOINT,
+  'BUILDER_IO_WRITE_API_ENDPOINT',
+  'State-level bills CRON Job',
+)!
 
 const QUORUM_API_US_REGIONS_LIST: number[] = Array.from({ length: 104 }, (_, index) =>
   index >= 40 ? index + 2 : index + 1,

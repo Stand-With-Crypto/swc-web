@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { generateObject } from 'ai'
 import { Logger } from 'inngest/middleware/logger'
 import pRetry from 'p-retry'
@@ -10,7 +11,7 @@ import {
   AI_ANALYSIS_MAX_RETRIES,
   AI_ANALYSIS_MIN_TIMEOUT,
   AI_ANALYSIS_TEMPERATURE,
-} from '@/inngest/functions/stateLevelBillsCronJob/config'
+} from '@/inngest/functions/stateLevelBillsCronJob/utils/config'
 import { sleep } from '@/utils/shared/sleep'
 import { SWCBillFromBuilderIO } from '@/utils/shared/zod/getSWCBills'
 
@@ -80,8 +81,19 @@ export async function analyzeCryptoRelatedBillsWithRetry(bills: Bill[], logger: 
 
       data.push(...scores.bills)
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      Sentry.captureException(errorMessage, {
+        extra: {
+          error,
+          offset,
+        },
+        level: 'error',
+        tags: {
+          domain: 'StateLevelBillsCronJob',
+        },
+      })
       logger.error(
-        `Failed to analyze bills data.\nids: ${batch.map(bill => bill.externalId).join(', ')}.\nerror: ${error instanceof Error ? error.message : String(error)}`,
+        `Failed to analyze bills data.\nids: ${batch.map(bill => bill.externalId).join(', ')}.\nerror: ${errorMessage}`,
       )
     }
 
