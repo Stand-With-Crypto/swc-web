@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SignatureProvider } from '@/components/app/pagePetitionDetails/signatureContext'
+import { SignatureProvider } from '@/components/app/pagePetitionDetails/common/signatureContext'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 import { PetitionMilestones } from '.'

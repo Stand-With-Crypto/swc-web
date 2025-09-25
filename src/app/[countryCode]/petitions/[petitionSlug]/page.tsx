@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { PagePetitionDetails } from '@/components/app/pagePetitionDetails'
+import { PagePetitionDetails } from '@/components/app/pagePetitionDetails/us'
 import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { PageProps } from '@/types'
 import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'

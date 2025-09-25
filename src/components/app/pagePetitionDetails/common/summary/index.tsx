@@ -3,8 +3,8 @@
 import React, { useCallback } from 'react'
 import { PartyPopperIcon } from 'lucide-react'
 
-import { useSignature } from '@/components/app/pagePetitionDetails/signatureContext'
-import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/summary/footer'
+import { useSignature } from '@/components/app/pagePetitionDetails/common/signatureContext'
+import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/common/summary/footer'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { CircularProgress } from '@/components/ui/circularProgress'
 import { compactNumber } from '@/utils/shared/compactNumber'

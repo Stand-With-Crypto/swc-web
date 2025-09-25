@@ -13,6 +13,7 @@ import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { cn } from '@/utils/web/cn'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
 
 interface PetitionCardProps {
   petition: SWCPetition
@@ -36,8 +37,9 @@ export function PetitionCard({
 }: PetitionCardProps) {
   const [imageError, setImageError] = useState(false)
   const showImage = petition.image && !imageError
+  const language = useLanguage()
 
-  const urls = getIntlUrls(countryCode)
+  const urls = getIntlUrls(countryCode, { language })
 
   const isPast = variant === 'past'
   const isCurrent = variant === 'current'

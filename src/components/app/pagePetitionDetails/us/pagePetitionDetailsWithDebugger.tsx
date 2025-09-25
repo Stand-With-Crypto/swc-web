@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import { Settings } from 'lucide-react'
 
-import { PetitionDebugger } from '@/components/app/pagePetitionDetails/debugger'
-import { useMockedPetitionData } from '@/components/app/pagePetitionDetails/debugger/useMockedPetitionData'
-import { PagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/index'
+import { PetitionDebugger } from '@/components/app/pagePetitionDetails/common/debugger'
+import { useMockedPetitionData } from '@/components/app/pagePetitionDetails/common/debugger/useMockedPetitionData'
+import { PagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/us/index'
 import { Button } from '@/components/ui/button'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

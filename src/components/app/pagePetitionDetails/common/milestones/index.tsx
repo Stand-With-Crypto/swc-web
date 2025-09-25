@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 
-import { useSignature } from '@/components/app/pagePetitionDetails/signatureContext'
+import { useSignature } from '@/components/app/pagePetitionDetails/common/signatureContext'
 import { compactNumber } from '@/utils/shared/compactNumber'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 

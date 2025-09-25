@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react'
 import { Edit3 } from 'lucide-react'
 
-import { useSignature } from '@/components/app/pagePetitionDetails/signatureContext'
+import { useSignature } from '@/components/app/pagePetitionDetails/common/signatureContext'
 import * as BadgesAutomaticCarousel from '@/components/ui/badgesAutomaticCarousel'
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
