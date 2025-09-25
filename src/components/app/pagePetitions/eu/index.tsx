@@ -1,6 +1,6 @@
 import { partition } from 'lodash-es'
 
-import { PetitionsContent } from '@/components/app/pagePetitions/petitionsContent'
+import { EuPetitionsContent } from '@/components/app/pagePetitions/eu/petitionsContent'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
@@ -11,7 +11,7 @@ interface PagePetitionsProps {
   countryCode: SupportedCountryCodes
 }
 
-export function PagePetitions(props: PagePetitionsProps) {
+export function EuPagePetitions(props: PagePetitionsProps) {
   const { title, description, petitions, countryCode } = props
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
 
@@ -21,7 +21,7 @@ export function PagePetitions(props: PagePetitionsProps) {
   )
 
   return (
-    <PetitionsContent
+    <EuPetitionsContent
       countryCode={countryCode}
       currentPetitions={currentPetitions}
       description={description}

@@ -3,10 +3,11 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
+import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
+import { DEFAULT_LOCALE, SupportedLanguages } from '@/utils/shared/supportedLocales'
 import {
   SWCPetitionFromBuilderIO,
   zodPetitionSchemaValidation,
@@ -21,10 +22,14 @@ const LIMIT = 100
 export async function getAllPetitionsFromBuilderIO({
   countryCode,
   offset = 0,
+  language = SupportedLanguages.EN,
 }: {
   countryCode: SupportedCountryCodes
   offset?: number
+  language?: SupportedLanguages
 }): Promise<SWCPetitionFromBuilderIO[]> {
+  const locale = getLocaleForLanguage(language)
+
   try {
     const entries = await pRetry(
       () =>
@@ -35,7 +40,7 @@ export async function getAllPetitionsFromBuilderIO({
             },
             ...(isProduction && { published: 'published' }),
           },
-          locale: DEFAULT_LOCALE,
+          locale,
           includeUnpublished: !isProduction,
           cacheSeconds: 60,
           limit: LIMIT,

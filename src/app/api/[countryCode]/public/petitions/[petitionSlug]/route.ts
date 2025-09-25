@@ -64,7 +64,7 @@ export async function GET(_: Request, { params }: RequestContext) {
   }
 
   try {
-    const petitions = await getAllPetitions(validatedCountryCode.data)
+    const petitions = await getAllPetitions({ countryCode: validatedCountryCode.data })
 
     if (!petitions) {
       return NextResponse.json({ error: 'Error fetching petitions' }, { status: 404 })

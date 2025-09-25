@@ -36,7 +36,7 @@ export async function GET(_: Request, { params }: RequestContext) {
     return NextResponse.json({ error: 'Invalid country code' }, { status: 400 })
   }
 
-  const petitions = await getAllPetitions(validatedCountryCode.data)
+  const petitions = await getAllPetitions({ countryCode: validatedCountryCode.data })
 
   return NextResponse.json({ data: petitions })
 }

@@ -5,7 +5,7 @@ import { partition } from 'lodash-es'
 import { Settings } from 'lucide-react'
 
 import { PetitionsDebugger } from '@/components/app/pagePetitions/debugger'
-import { PetitionsContent } from '@/components/app/pagePetitions/petitionsContent'
+import { EuPetitionsContent } from '@/components/app/pagePetitions/eu/petitionsContent'
 import { Button } from '@/components/ui/button'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -20,26 +20,22 @@ interface PagePetitionsWithDebuggerProps {
 
 const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
-export function PagePetitionsWithDebugger({
+export function EuPagePetitionsWithDebugger({
   title,
   description,
   petitions,
   countryCode,
 }: PagePetitionsWithDebuggerProps) {
-  // Debugger state
   const [mockedPetitions, setMockedPetitions] = useState<SWCPetition[]>(
     petitions.map(p => ({ ...p })),
   )
   const [isMockMode, setIsMockMode] = useState(false)
   const [isDebuggerOpen, setIsDebuggerOpen] = useState(false)
 
-  // Use mocked petitions when in mock mode, otherwise use original petitions
   const currentPetitions = isMockMode ? mockedPetitions : petitions.map(p => ({ ...p }))
 
-  // Get locale
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
 
-  // Partition petitions into current and past
   const [currentPetitionsList, pastPetitionsList] = partition(currentPetitions, petition => {
     return !petition.datetimeFinished
   })
@@ -60,7 +56,7 @@ export function PagePetitionsWithDebugger({
       )}
 
       {/* Main Content */}
-      <PetitionsContent
+      <EuPetitionsContent
         countryCode={countryCode}
         currentPetitions={currentPetitionsList}
         description={description}

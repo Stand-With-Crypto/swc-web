@@ -11,18 +11,15 @@ import { pluralize } from '@/utils/shared/pluralize'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { cn } from '@/utils/web/cn'
 
 interface PetitionCardProps {
-  title: string
-  signaturesCount: number
-  slug: string
+  petition: SWCPetition
   countryCode: SupportedCountryCodes
-  imgSrc?: string
   locale?: SupportedLocale
   className?: string
   variant?: 'current' | 'past'
-  isGoalReached?: boolean
   isSigned?: boolean
 }
 
@@ -30,48 +27,47 @@ const IMAGE_SIZE = 150 // in pixels (150x150)
 const FALLBACK_IMAGE_PATH = '/actionTypeIcons/petition.svg'
 
 export function PetitionCard({
-  title,
-  signaturesCount,
-  imgSrc,
-  slug,
+  petition,
   countryCode,
   locale = SupportedLocale.EN_US,
   className,
   variant = 'current',
-  isGoalReached = false,
   isSigned = false,
 }: PetitionCardProps) {
   const [imageError, setImageError] = useState(false)
-  const showImage = imgSrc && !imageError
+  const showImage = petition.image && !imageError
 
   const urls = getIntlUrls(countryCode)
 
   const isPast = variant === 'past'
   const isCurrent = variant === 'current'
 
+  const isGoalReached = petition.countSignaturesGoal <= petition.signaturesCount
+  const signaturesCount = isSigned ? petition.signaturesCount + 1 : petition.signaturesCount
+
   return (
     <Link
       className={cn(
         'block cursor-pointer overflow-hidden rounded-3xl bg-white shadow-md transition-shadow hover:shadow-xl',
-        'grid w-full border-t border-gray-100',
+        'grid w-full border-t border-gray-100 lg:w-80',
         'lg:grid-rows-[224px_1fr]',
         isPast ? 'max-lg:grid-cols-[1fr_128px]' : 'max-lg:grid-rows-[224px_1fr]',
         className,
       )}
-      href={urls.petitionDetails(slug)}
+      href={urls.petitionDetails(petition.slug)}
     >
       <div
         className={cn('relative lg:h-auto', {
           'max-lg:order-2': isPast,
         })}
       >
-        {showImage ? (
+        {showImage && petition.image ? (
           <NextImage
-            alt={title}
+            alt={petition.title}
             className="h-full w-full object-cover"
             fill
             onError={() => setImageError(true)}
-            src={imgSrc}
+            src={petition.image}
           />
         ) : (
           <div className="bg-circular-gradient flex h-full w-full items-center justify-center px-5 py-9">
@@ -92,7 +88,7 @@ export function PetitionCard({
           })}
         >
           <h3 className="line-clamp-4 min-h-[72px] text-xl font-bold leading-tight text-foreground max-lg:text-base lg:line-clamp-3">
-            {title}
+            {petition.title}
           </h3>
         </div>
         <div
