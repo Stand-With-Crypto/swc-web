@@ -5,11 +5,12 @@ import { Settings } from 'lucide-react'
 
 import { PetitionDebugger } from '@/components/app/pagePetitionDetails/common/debugger'
 import { useMockedPetitionData } from '@/components/app/pagePetitionDetails/common/debugger/useMockedPetitionData'
-import { UsPagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/us/index'
 import { Button } from '@/components/ui/button'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { EuPagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/eu/content'
 
 interface PagePetitionDetailsWithDebuggerProps {
   petition: SWCPetition
@@ -18,14 +19,16 @@ interface PagePetitionDetailsWithDebuggerProps {
     locale: string
     datetimeSigned: string
   }>
+  language: SupportedLanguages
 }
 
 const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
-export function UsPagePetitionDetailsWithDebugger({
+export function EuPagePetitionDetailsWithDebugger({
   petition,
   countryCode,
   recentSignatures,
+  language,
 }: PagePetitionDetailsWithDebuggerProps) {
   // Debugger state
   const [mockedPetition, setMockedPetition] = useState<SWCPetition>(petition)
@@ -64,10 +67,11 @@ export function UsPagePetitionDetailsWithDebugger({
       )}
 
       {/* Main Content */}
-      <UsPagePetitionDetailsContent
+      <EuPagePetitionDetailsContent
         countryCode={countryCode}
         petition={currentPetition}
         recentSignatures={currentRecentSignatures}
+        language={language}
       />
 
       {/* Petition Debugger */}

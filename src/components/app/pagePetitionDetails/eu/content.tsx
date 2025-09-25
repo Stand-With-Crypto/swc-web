@@ -1,70 +1,58 @@
-import React, { useMemo } from 'react'
+'use client'
 
-import * as PetitionDetailsBody from '@/components/app/pagePetitionDetails/common/body'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
+import { useMemo } from 'react'
+import { SignatureProvider } from '@/components/app/pagePetitionDetails/common/signatureContext'
+import { PetitionDetailsWrapper } from '@/components/app/pagePetitionDetails/common/wrapper'
 import * as PetitionDetailsHeader from '@/components/app/pagePetitionDetails/common/header'
+import * as PetitionDetailsBody from '@/components/app/pagePetitionDetails/common/body'
 import { PetitionDetailsImageBanner } from '@/components/app/pagePetitionDetails/common/imageBanner'
 import { PetitionDetailsInfo } from '@/components/app/pagePetitionDetails/common/info'
 import { PetitionMilestones } from '@/components/app/pagePetitionDetails/common/milestones'
 import { SignatoriesCarouselSection } from '@/components/app/pagePetitionDetails/common/signatoriesCarousel/section'
-import { SignatureProvider } from '@/components/app/pagePetitionDetails/common/signatureContext'
 import { SignaturesSummary } from '@/components/app/pagePetitionDetails/common/summary'
-import { PetitionMobileGradient } from '@/components/app/pagePetitionDetails/common/summary/mobileGradient'
 import { PetitionMobileSummaryWrapper } from '@/components/app/pagePetitionDetails/common/summary/mobileWrapper'
-import { PetitionDetailsWrapper } from '@/components/app/pagePetitionDetails/common/wrapper'
-import { UsPagePetitionDetailsWithDebugger } from '@/components/app/pagePetitionDetails/us/pagePetitionDetailsWithDebugger'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
-
-interface PagePetitionDetailsProps {
-  petition: SWCPetition
-  countryCode: SupportedCountryCodes
-  recentSignatures: Array<{
-    locale: string
-    datetimeSigned: string
-  }>
-}
+import { PetitionMobileGradient } from '@/components/app/pagePetitionDetails/common/summary/mobileGradient'
 
 interface PagePetitionDetailsContentProps {
   petition: SWCPetition
   countryCode: SupportedCountryCodes
+  language: SupportedLanguages
   recentSignatures: Array<{
     locale: string
     datetimeSigned: string
   }>
 }
 
-const isStaging = NEXT_PUBLIC_ENVIRONMENT !== 'production'
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      petitionClosed: 'Petition closed {date}',
+      petitionClosesOn: 'Petition closes on {date}',
+    },
+    de: {
+      petitionClosed: 'Petition geschlossen {date}',
+      petitionClosesOn: 'Petition schließt am {date}',
+    },
+    fr: {
+      petitionClosed: 'Pétition close {date}',
+      petitionClosesOn: 'Pétition closes on {date}',
+    },
+  },
+})
 
-export function UsPagePetitionDetails({
-  petition,
-  countryCode,
-  recentSignatures,
-}: PagePetitionDetailsProps) {
-  if (isStaging) {
-    return (
-      <UsPagePetitionDetailsWithDebugger
-        countryCode={countryCode}
-        petition={petition}
-        recentSignatures={recentSignatures}
-      />
-    )
-  }
-
-  return (
-    <UsPagePetitionDetailsContent
-      countryCode={countryCode}
-      petition={petition}
-      recentSignatures={recentSignatures}
-    />
-  )
-}
-
-export function UsPagePetitionDetailsContent({
+export function EuPagePetitionDetailsContent({
   petition,
   countryCode,
   recentSignatures,
 }: PagePetitionDetailsContentProps) {
+  const { t } = useTranslation(i18nMessages, 'EuPagePetitionDetailsContent')
+
   const locale = COUNTRY_CODE_TO_LOCALE[countryCode]
   const isClosed = petition.datetimeFinished
     ? new Date(petition.datetimeFinished) < new Date()
@@ -78,8 +66,8 @@ export function UsPagePetitionDetailsContent({
         year: 'numeric',
       }).format(new Date(petition.datetimeFinished))
 
-      if (isClosed) return `Petition closed ${formattedDate}`
-      return `Petition closes on ${formattedDate}`
+      if (isClosed) return t('petitionClosed', { date: formattedDate })
+      return t('petitionClosesOn', { date: formattedDate })
     }
 
     return null

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useCallback, useMemo } from 'react'
 
 import { useSignature } from '@/components/app/pagePetitionDetails/common/signatureContext'
@@ -5,6 +7,10 @@ import { compactNumber } from '@/utils/shared/compactNumber'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 
 import { MilestoneItem } from './item'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
+import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 
 interface Milestone {
   label: string
@@ -20,12 +26,34 @@ interface PetitionMilestonesProps {
 
 const AUTOMATIC_MILESTONES_THRESHOLDS = [10, 25, 50, 100]
 
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      petitionMilestones: 'Petition Milestones',
+      signatures: 'Signatures',
+    },
+    de: {
+      petitionMilestones: 'Petitionsmeilensteine',
+      signatures: 'Unterschriften',
+    },
+    fr: {
+      petitionMilestones: 'Étapes clés de la pétition',
+      signatures: 'Signatures',
+    },
+  },
+})
+
 export function PetitionMilestones({
   goal,
   shouldGenerateAutomaticMilestones,
   additionalMilestones,
-  locale = SupportedLocale.EN_US,
+  locale: overrideLocale = SupportedLocale.EN_US,
 }: PetitionMilestonesProps) {
+  const { t } = useTranslation(i18nMessages, 'PetitionMilestones')
+  const language = useLanguage()
+
+  const locale = overrideLocale || getLocaleForLanguage(language)
+
   const { optimisticSignatureCount } = useSignature()
 
   const generateAutomaticMilestones = useCallback((): Milestone[] => {
@@ -38,7 +66,7 @@ export function PetitionMilestones({
       const isComplete = optimisticSignatureCount >= targetSignatures
 
       return {
-        label: `${compactNumber(targetSignatures, locale)} Signatures`,
+        label: `${compactNumber(targetSignatures, locale)} ${t('signatures')}`,
         isComplete,
       }
     })
@@ -58,7 +86,7 @@ export function PetitionMilestones({
 
   return (
     <div className="space-y-4">
-      <h3 className="text-3xl font-bold text-foreground">Petition Milestones</h3>
+      <h3 className="text-3xl font-bold text-foreground">{t('petitionMilestones')}</h3>
       <div className="space-y-2">
         {allMilestones.map((milestone, index) => (
           <MilestoneItem

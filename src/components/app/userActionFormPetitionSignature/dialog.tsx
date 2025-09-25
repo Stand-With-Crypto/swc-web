@@ -24,6 +24,7 @@ function UserActionFormPetitionSignatureDialogContent({
     countryCode,
     petitionSlug,
   )
+
   const { data: userData, isLoading: isLoadingUser } = useApiResponseForUserFullProfileInfo()
 
   const isLoading = isLoadingPetition || isLoadingUser
@@ -75,6 +76,7 @@ export function UserActionFormPetitionSignatureDialog({
       {...dialogProps}
       className={cn('!p-0 lg:max-w-[620px]', className)}
       trigger={children}
+      countryCode={countryCode}
     >
       <Suspense fallback={<UserActionFormPetitionSignatureSkeleton />}>
         <UserActionFormPetitionSignatureDialogContent

@@ -8,6 +8,8 @@ import * as BadgesAutomaticCarousel from '@/components/ui/badgesAutomaticCarouse
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 type LastSignature =
   | {
@@ -29,12 +31,32 @@ interface SignatoriesCarouselProps {
 
 const MIN_SIGNATURES_TO_RENDER_LIST = 1
 
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      youSigned: 'You signed',
+      beTheFirstToSign: 'Be the first to sign',
+      memberFromSigned: 'Member from {locale} signed',
+    },
+    de: {
+      youSigned: 'Sie haben unterschrieben',
+      beTheFirstToSign: 'Unterschreiben Sie als Erste/r!',
+      memberFromSigned: 'Mitglied aus {locale} hat unterschrieben',
+    },
+    fr: {
+      youSigned: 'Vous avez signé',
+      beTheFirstToSign: 'Soyez la première personne à signer',
+      memberFromSigned: 'Un membre de {locale} a signé',
+    },
+  },
+})
 export function SignatoriesCarousel({
   autoplayDelay = 2000,
   className,
   lastSignatures,
   countryCode,
 }: SignatoriesCarouselProps) {
+  const { t } = useTranslation(i18nMessages, 'SignatoriesCarousel')
   const { petitionUserAction, isOptimisticSigned } = useSignature()
 
   const allSignatures = useMemo(() => {
@@ -75,8 +97,8 @@ export function SignatoriesCarousel({
                 <span className="flex items-center gap-2 text-xs text-primary-cta">
                   <Edit3 className="h-4 w-4" />
                   {signature.isUserSignature
-                    ? 'You signed'
-                    : `Member from ${signature.locale} signed`}
+                    ? t('youSigned')
+                    : t('memberFromSigned', { locale: signature.locale })}
                 </span>
                 <span className="text-xs text-muted-foreground">
                   <FormattedRelativeDatetime
@@ -91,7 +113,7 @@ export function SignatoriesCarousel({
             <BadgesAutomaticCarousel.Item variant="muted">
               <span className="flex items-center gap-2 text-xs text-primary-cta">
                 <Edit3 className="h-4 w-4" />
-                Be the first to sign
+                {t('beTheFirstToSign')}
               </span>
             </BadgesAutomaticCarousel.Item>
           )}

@@ -11,6 +11,8 @@ import { compactNumber } from '@/utils/shared/compactNumber'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface SignaturesSummaryProps {
   goal: number
@@ -19,8 +21,28 @@ interface SignaturesSummaryProps {
   label?: string
   isClosed?: boolean
   className?: string
-  petitionSlug?: string
+  petitionSlug: string
 }
+
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      signed: 'Signed',
+      goalReached: 'Goal reached!',
+      signatureGoal: 'Signature goal',
+    },
+    de: {
+      signed: 'Unterschrieben',
+      goalReached: 'Ziel erreicht!',
+      signatureGoal: 'Unterschriftenziel',
+    },
+    fr: {
+      signed: 'Signé',
+      goalReached: 'Objectif atteint!',
+      signatureGoal: 'Objectif de signatures',
+    },
+  },
+})
 
 export function SignaturesSummary({
   goal,
@@ -31,9 +53,9 @@ export function SignaturesSummary({
   className,
   petitionSlug,
 }: SignaturesSummaryProps) {
+  const { t } = useTranslation(i18nMessages, 'SignaturesSummary')
   const { isSigned, isLoading, setIsOptimisticSigned, optimisticSignatureCount } = useSignature()
   const optimisticSignatures = optimisticSignatureCount
-
   const percentage = Math.min((optimisticSignatures / goal) * 100, 100)
   const formattedGoalString = compactNumber(goal, locale)
   const hasReachedGoal = optimisticSignatures >= goal
@@ -59,7 +81,7 @@ export function SignaturesSummary({
               size={38}
               value={formattedSignatures}
             />
-            <span>Signed</span>
+            <span>{t('signed')}</span>
           </h2>
         </div>
 
@@ -68,7 +90,11 @@ export function SignaturesSummary({
             {hasReachedGoal && <PartyPopperIcon size={24} />}
             <h3 className="text-2xl font-bold">{formattedGoalString}</h3>
             <p className="text-sm font-medium text-muted-foreground">
-              {hasReachedGoal ? <span className="font-bold">Goal reached!</span> : 'Signature goal'}
+              {hasReachedGoal ? (
+                <span className="font-bold">{t('goalReached')}</span>
+              ) : (
+                t('signatureGoal')
+              )}
             </p>
           </CircularProgress>
           {label && <p className="text-center font-medium text-muted-foreground">{label}</p>}
@@ -85,7 +111,7 @@ export function SignaturesSummary({
       </div>
 
       {/* Mobile */}
-      <div className="flex w-full items-center justify-between gap-3 p-4 lg:hidden">
+      <div className="flex w-full flex-col gap-3 p-4 lg:hidden">
         <div className="flex items-center gap-3">
           {hasReachedGoal ? (
             <div className="flex h-10 w-10 animate-bubble items-center justify-center rounded-full bg-primary-cta delay-200">
@@ -103,10 +129,10 @@ export function SignaturesSummary({
                 size={22}
                 value={formattedSignatures}
               />
-              <span>Signed</span>
+              <span>{t('signed')}</span>
             </p>
             <p className="text-sm font-medium text-muted-foreground">
-              {compactNumber(goal, locale)} {hasReachedGoal ? 'Goal reached!' : 'Signature goal'}
+              {compactNumber(goal, locale)} {hasReachedGoal ? t('goalReached') : t('signatureGoal')}
             </p>
           </div>
         </div>

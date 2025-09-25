@@ -1,40 +1,69 @@
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { ComponentMessages, I18nMessages } from '@/utils/shared/i18n/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 //It's made that way to keep the extraction script working
-const i18nMessages: I18nMessages = {
-  us: {
+const i18nMessages: I18nMessages = createI18nMessages({
+  defaultMessages: {
     en: {
       territoryDivision: 'State',
-    },
-  },
-  ca: {
-    en: {
-      territoryDivision: 'Province',
-    },
-  },
-  au: {
-    en: {
-      territoryDivision: 'State',
-    },
-  },
-  gb: {
-    en: {
-      territoryDivision: 'Country',
-    },
-  },
-  eu: {
-    en: {
-      territoryDivision: 'Country',
+      US: 'United States',
+      CA: 'Canada',
+      GB: 'United Kingdom',
+      AU: 'Australia',
+      EU: 'European Union',
     },
     fr: {
-      territoryDivision: 'Pays',
+      territoryDivision: 'État',
+      US: 'États-Unis',
+      CA: 'Canada',
+      GB: 'Royaume-Uni',
+      AU: 'Australie',
+      EU: 'Union européenne',
     },
     de: {
-      territoryDivision: 'Land',
+      territoryDivision: 'Staat',
+      US: 'Vereinigte Staaten',
+      CA: 'Kanada',
+      GB: 'Vereinigtes Königreich',
+      AU: 'Australien',
+      EU: 'Europäische Union',
     },
   },
-}
+  messagesOverrides: {
+    us: {
+      en: {
+        territoryDivision: 'State',
+      },
+    },
+    ca: {
+      en: {
+        territoryDivision: 'Province',
+      },
+    },
+    au: {
+      en: {
+        territoryDivision: 'State',
+      },
+    },
+    gb: {
+      en: {
+        territoryDivision: 'Country',
+      },
+    },
+    eu: {
+      en: {
+        territoryDivision: 'Country',
+      },
+      fr: {
+        territoryDivision: 'Pays',
+      },
+      de: {
+        territoryDivision: 'Land',
+      },
+    },
+  },
+})
 
 export const i18nCommonMessages = i18nMessages
 

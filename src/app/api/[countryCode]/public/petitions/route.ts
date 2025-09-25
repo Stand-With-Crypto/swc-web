@@ -36,6 +36,8 @@ export async function GET(_: Request, { params }: RequestContext) {
     return NextResponse.json({ error: 'Invalid country code' }, { status: 400 })
   }
 
+  console.log('Chamou aqui')
+
   const petitions = await getAllPetitions({ countryCode: validatedCountryCode.data })
 
   return NextResponse.json({ data: petitions })

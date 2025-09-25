@@ -22,9 +22,7 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { LoadingSpinner } from '@/components/ui/loadingSpinner'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
-import { COUNTRY_CODE_TO_DISPLAY_NAME } from '@/utils/shared/intl/displayNames'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import {
   GENERIC_FORM_ERROR_KEY,
@@ -45,6 +43,9 @@ import {
 import { FormContainer } from './container'
 import { Footer } from './footer'
 import { PetitionHeader } from './header'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
+import { withI18nCommons } from '@/utils/shared/i18n/commons'
 
 const ANALYTICS_NAME_USER_ACTION_FORM_PETITION_SIGNATURE = 'User Action Form Petition Signature'
 
@@ -54,11 +55,64 @@ interface UserActionFormPetitionSignatureProps {
   user: GetUserFullProfileInfoResponse['user']
 }
 
+const i18nMessages = withI18nCommons(
+  createI18nMessages({
+    defaultMessages: {
+      en: {
+        signPetition: 'Sign petition',
+        sign: 'Sign',
+        firstName: 'First Name',
+        firstNamePlaceholder: 'Your first name',
+        lastName: 'Last name',
+        lastNamePlaceholder: 'Your last name',
+        email: 'Email',
+        emailPlaceholder: 'Your email address',
+        address: 'Address',
+        addressPlaceholder: 'Your full address',
+        petitionUnavailableForCountry:
+          'This petition is only available to residents of {countryName}.',
+      },
+      de: {
+        signPetition: 'Petition unterschreiben',
+        sign: 'Unterschreiben',
+        firstName: 'Vorname',
+        firstNamePlaceholder: 'Ihr Vorname',
+        lastName: 'Nachname',
+        lastNamePlaceholder: 'Ihr Nachname',
+        email: 'E-Mail',
+        emailPlaceholder: 'Ihre E-Mail-Adresse',
+        address: 'Adresse',
+        addressPlaceholder: 'Ihre vollständige Adresse',
+        petitionUnavailableForCountry:
+          'Diese Petition steht nur Einwohnern von {countryName} zur Verfügung.',
+      },
+      fr: {
+        signPetition: 'Signer la pétition',
+        sign: 'Signer',
+        firstName: 'Prénom',
+        firstNamePlaceholder: 'Votre prénom',
+        lastName: 'Nom',
+        lastNamePlaceholder: 'Votre nom',
+        email: 'E-mail',
+        emailPlaceholder: 'Votre adresse e-mail',
+        address: 'Adresse',
+        addressPlaceholder: 'Votre adresse complète',
+        petitionUnavailableForCountry:
+          "Cette pétition n'est disponible que pour les résidents de {countryName}.",
+      },
+    },
+  }),
+)
+
+export const formPetitionSignatureI18nMessages = i18nMessages
+
 export function UserActionFormPetitionSignature({
   onSuccess,
   petitionData,
   user,
 }: UserActionFormPetitionSignatureProps) {
+  const { t } = useTranslation(i18nMessages, 'UserActionFormPetitionSignature')
+
   const hasAlreadySigned = useMemo(() => {
     return user?.userActions?.some(
       userAction =>
@@ -108,12 +162,10 @@ export function UserActionFormPetitionSignature({
       const petitionCountryCode = petitionData.countryCode?.toLowerCase()
 
       if (addressCountryCode !== petitionCountryCode) {
-        const expectedCountryName =
-          COUNTRY_CODE_TO_DISPLAY_NAME[petitionCountryCode as SupportedCountryCodes] ||
-          petitionCountryCode?.toUpperCase()
+        const countryName = t(petitionCountryCode?.toUpperCase())
 
         form.setError('address', {
-          message: `This petition is only available to residents of ${expectedCountryName}. Please enter an address in ${expectedCountryName}.`,
+          message: t('petitionUnavailableForCountry', { countryName }),
         })
         return
       }
@@ -178,9 +230,9 @@ export function UserActionFormPetitionSignature({
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>{t('firstName')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your first name" {...field} />
+                    <Input placeholder={t('firstNamePlaceholder')} {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -191,9 +243,9 @@ export function UserActionFormPetitionSignature({
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Last name</FormLabel>
+                  <FormLabel>{t('lastName')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your last name" {...field} />
+                    <Input placeholder={t('lastNamePlaceholder')} {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -206,9 +258,9 @@ export function UserActionFormPetitionSignature({
             name="emailAddress"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('email')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your email address" {...field} />
+                  <Input placeholder={t('emailPlaceholder')} {...field} />
                 </FormControl>
                 <FormErrorMessage />
               </FormItem>
@@ -220,9 +272,9 @@ export function UserActionFormPetitionSignature({
             name="address"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Address</FormLabel>
+                <FormLabel>{t('address')}</FormLabel>
                 <FormControl>
-                  <GooglePlacesSelect {...field} placeholder="Your full address" />
+                  <GooglePlacesSelect {...field} placeholder={t('addressPlaceholder')} />
                 </FormControl>
                 <FormErrorMessage />
               </FormItem>
@@ -244,9 +296,10 @@ export function UserActionFormPetitionSignature({
               {isSubmitting ? (
                 <LoadingSpinner />
               ) : (
-                <span>
-                  Sign<span className="hidden lg:inline"> petition</span>
-                </span>
+                <>
+                  <span className="hidden lg:inline">{t('signPetition')}</span>
+                  <span className="block lg:hidden">{t('sign')}</span>
+                </>
               )}
             </Button>
           </Footer>

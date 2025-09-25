@@ -1,3 +1,121 @@
-export default function PetitionDetailsPage() {
-  return <div>PetitionDetailsPage</div>
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
+import { EuPagePetitionDetails } from '@/components/app/pagePetitionDetails/eu'
+import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
+import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getPetitionBySlug } from '@/utils/server/petitions/getPetitionBySlug'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { getServerTranslation } from '@/utils/server/i18n/getServerTranslation'
+
+export const revalidate = 60 // 1 minute
+export const dynamic = 'error'
+
+const countryCode = SupportedCountryCodes.EU
+
+type Props = {
+  params: {
+    petitionSlug: string
+    language: SupportedLanguages
+  }
+}
+
+export async function generateStaticParams(props: Props) {
+  const { language } = await props.params
+
+  const allPetitions = await getAllPetitionsFromBuilderIO({ countryCode, language })
+
+  const params = []
+
+  for (const petition of allPetitions) {
+    params.push({
+      countryCode,
+      petitionSlug: petition.slug,
+      language,
+    })
+  }
+
+  return params
+}
+
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      title: 'Sign this petition',
+      description: 'The requested petition could not be found.',
+      signThisPetition: 'Sign this petition',
+    },
+    de: {
+      title: 'Unterzeichnen Sie diese Petition',
+      description: 'Die angeforderte Petition konnte nicht gefunden werden.',
+      signThisPetition: 'Unterzeichnen Sie diese Petition',
+    },
+    fr: {
+      title: 'Signez cette pétition',
+      description: "La pétition demandée n'a pas pu être trouvée.",
+      signThisPetition: 'Signez cette pétition',
+    },
+  },
+})
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params
+  const { language } = params
+
+  const { t } = await getServerTranslation(
+    i18nMessages,
+    'PetitionDetailsPageGenerateMetadata',
+    countryCode,
+    language,
+  )
+
+  const petition = await getPetitionBySlug({
+    countryCode,
+    slug: params.petitionSlug,
+    language,
+  })
+
+  if (!petition) {
+    return generateMetadataDetails({
+      title: t('title'),
+      description: t('description'),
+    })
+  }
+
+  return generateMetadataDetails({
+    title: t('signThisPetition'),
+    description: petition.title,
+  })
+}
+
+export default async function PetitionDetailsPage(props: Props) {
+  const params = await props.params
+  const petitionSlug = params.petitionSlug
+  const { language } = params
+
+  const [petition, recentSignatures] = await Promise.all([
+    getPetitionBySlug({ countryCode, slug: petitionSlug, language }),
+    queryPetitionRecentSignatures({
+      petitionSlug,
+      countryCode,
+      formatLocaleName: getStateNameResolver(countryCode),
+    }),
+  ])
+
+  if (!petition) {
+    notFound()
+  }
+
+  return (
+    <EuPagePetitionDetails
+      countryCode={countryCode}
+      petition={petition}
+      recentSignatures={recentSignatures}
+      language={language}
+    />
+  )
 }
