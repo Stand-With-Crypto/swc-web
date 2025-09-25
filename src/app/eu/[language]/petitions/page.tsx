@@ -1,4 +1,3 @@
-import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { EuPagePetitions } from '@/components/app/pagePetitions/eu'
@@ -13,13 +12,6 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
-
-const title = 'Petitions'
-const description = 'Sign these petitions to help shape the future of crypto regulation'
-
-export const metadata: Metadata = {
-  ...generateMetadataDetails({ title, description }),
-}
 
 const isStaging = NEXT_PUBLIC_ENVIRONMENT !== 'production'
 
@@ -42,6 +34,19 @@ const i18nMessages = createI18nMessages({
     },
   },
 })
+
+export const generateMetadata = async (props: { params: { language: SupportedLanguages } }) => {
+  const { language } = await props.params
+
+  const { t } = await getServerTranslation(
+    i18nMessages,
+    'PetitionsPageGenerateMetadata',
+    countryCode,
+    language,
+  )
+
+  return generateMetadataDetails({ title: t('title'), description: t('description') })
+}
 
 export default async function PetitionsPage(props: { params: { language: SupportedLanguages } }) {
   const params = await props.params
