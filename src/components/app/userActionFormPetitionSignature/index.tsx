@@ -46,6 +46,8 @@ import { PetitionHeader } from './header'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { withI18nCommons } from '@/utils/shared/i18n/commons'
+import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const ANALYTICS_NAME_USER_ACTION_FORM_PETITION_SIGNATURE = 'User Action Form Petition Signature'
 
@@ -71,6 +73,7 @@ const i18nMessages = withI18nCommons(
         addressPlaceholder: 'Your full address',
         petitionUnavailableForCountry:
           'This petition is only available to residents of {countryName}.',
+        invalidAddress: 'Invalid address',
       },
       de: {
         signPetition: 'Petition unterschreiben',
@@ -85,6 +88,7 @@ const i18nMessages = withI18nCommons(
         addressPlaceholder: 'Ihre vollständige Adresse',
         petitionUnavailableForCountry:
           'Diese Petition steht nur Einwohnern von {countryName} zur Verfügung.',
+        invalidAddress: 'Ungültige Adresse',
       },
       fr: {
         signPetition: 'Signer la pétition',
@@ -99,6 +103,7 @@ const i18nMessages = withI18nCommons(
         addressPlaceholder: 'Votre adresse complète',
         petitionUnavailableForCountry:
           "Cette pétition n'est disponible que pour les résidents de {countryName}.",
+        invalidAddress: 'Adresse invalide',
       },
     },
   }),
@@ -153,16 +158,17 @@ export function UserActionFormPetitionSignature({
 
       if (!address) {
         form.setError('address', {
-          message: 'Invalid address',
+          message: t('invalidAddress'),
         })
         return
       }
 
-      const addressCountryCode = address.countryCode?.toLowerCase()
-      const petitionCountryCode = petitionData.countryCode?.toLowerCase()
+      const validateCountryCode = getPetitionCountryCodeValidator(
+        petitionData.countryCode.toLowerCase() as SupportedCountryCodes,
+      )
 
-      if (addressCountryCode !== petitionCountryCode) {
-        const countryName = t(petitionCountryCode?.toUpperCase())
+      if (!validateCountryCode(address.countryCode)) {
+        const countryName = t(petitionData.countryCode.toUpperCase())
 
         form.setError('address', {
           message: t('petitionUnavailableForCountry', { countryName }),

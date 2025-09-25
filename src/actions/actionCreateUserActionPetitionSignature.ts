@@ -30,6 +30,7 @@ import {
   type UserActionPetitionSignatureActionValues as Input,
   zodUserActionFormPetitionSignatureAction,
 } from '@/validation/forms/zodUserActionFormPetitionSignature'
+import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
 
 const logger = getLogger('actionCreateUserActionPetitionSignature')
 
@@ -91,7 +92,13 @@ async function _actionCreateUserActionPetitionSignature(
   const { user, userMatch } = authResult
   const addressData = validationResult.data.address
 
-  if (addressData.countryCode !== petition.countryCode) {
+  const validateCountryCode = getPetitionCountryCodeValidator(
+    petition.countryCode.toLowerCase() as SupportedCountryCodes,
+  )
+
+  if (!validateCountryCode(addressData.countryCode)) {
+    logger.error('Address country code does not match petition country code')
+
     return {
       user: null,
       errors: { root: ['Address country code does not match petition country code'] },
