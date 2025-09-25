@@ -14,14 +14,38 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useCountryCode } from '@/hooks/useCountryCode'
-import { getStateNameResolver, getTerritoryDivisionByCountryCode } from '@/utils/shared/stateUtils'
+import { withI18nCommons } from '@/utils/shared/i18n/commons'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface UpcomingEventsProps {
   events: SWCEvents
 }
 
+const i18nMessages = withI18nCommons(
+  createI18nMessages({
+    defaultMessages: {
+      en: {
+        all: 'All',
+        loadMore: 'Load more',
+      },
+      fr: {
+        all: 'Tous',
+        loadMore: 'Charger plus',
+      },
+      de: {
+        all: 'Alle',
+        loadMore: 'Mehr laden',
+      },
+    },
+  }),
+)
+
 export function UpcomingEventsList({ events }: UpcomingEventsProps) {
+  const { t } = useTranslation(i18nMessages, 'upcomingEvents')
+
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
   const countryCode = useCountryCode()
@@ -61,10 +85,10 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
       name: `${stateNameResolver(state)} (${stateWithEvents[state]})`,
     }))
 
-    options.unshift({ key: 'All', name: 'All' })
+    options.unshift({ key: 'All', name: t('all') })
 
     return options
-  }, [events, stateNameResolver])
+  }, [events, stateNameResolver, t])
 
   return (
     <>
@@ -77,10 +101,10 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
       >
         <SelectTrigger className="max-w-[345px]">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">
-            {getTerritoryDivisionByCountryCode(countryCode)}
+            {t('territoryDivision')}
           </span>
           <span className="mr-auto">
-            <SelectValue placeholder="All" />
+            <SelectValue placeholder={t('all')} />
           </span>
         </SelectTrigger>
         <SelectContent>
@@ -100,7 +124,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
 
       {eventsToShow < filteredEvents.length && (
         <Button onClick={() => setEventsToShow(eventsToShow + 5)} size="lg" variant="secondary">
-          Load more
+          {t('loadMore')}
         </Button>
       )}
     </>

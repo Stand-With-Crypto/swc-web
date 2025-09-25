@@ -6,8 +6,10 @@ import { EventsMap } from '@/components/app/pageEvents/common/eventsMap'
 import { UpcomingEventsList } from '@/components/app/pageEvents/common/upcomingEvents'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface AllUpcomingEventsProps {
   events: SWCEvents
@@ -15,7 +17,23 @@ interface AllUpcomingEventsProps {
   countryCode: SupportedCountryCodes
 }
 
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      title: 'All upcoming events',
+    },
+    fr: {
+      title: 'Tous les événements à venir',
+    },
+    de: {
+      title: 'Alle kommenden Veranstaltungen',
+    },
+  },
+})
+
 export function AllUpcomingEvents({ events, showMap = true, countryCode }: AllUpcomingEventsProps) {
+  const { t } = useTranslation(i18nMessages, 'allUpcomingEvents')
+
   const isMobile = useIsMobile()
 
   const [displayOption, setDisplayOption] = useState<'map' | 'list'>(
@@ -30,7 +48,7 @@ export function AllUpcomingEvents({ events, showMap = true, countryCode }: AllUp
 
   return (
     <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
-      <PageTitle as="h3">All upcoming events</PageTitle>
+      <PageTitle as="h3">{t('title')}</PageTitle>
       {!isMobile && showMap && (
         <div className="flex items-center justify-center gap-4 rounded-lg bg-backgroundAlternate px-4 py-3">
           <button onClick={() => setDisplayOption('map')}>

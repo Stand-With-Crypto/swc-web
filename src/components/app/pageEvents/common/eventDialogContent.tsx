@@ -2,7 +2,7 @@
 
 import Balancer from 'react-wrap-balancer'
 import { UserActionType } from '@prisma/client'
-import { format, isBefore, startOfDay } from 'date-fns'
+import { isBefore, startOfDay } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
 import sanitizeHtml from 'sanitize-html'
 import { toast } from 'sonner'
@@ -23,11 +23,15 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { formatDateTimeForLocale } from '@/utils/shared/i18n/interpolationUtils'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
 import { SWCEvent } from '@/utils/shared/zod/getSWCEvents'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 enum SectionNames {
   EVENT_INFO = 'Event Information',
@@ -40,8 +44,34 @@ interface EventDialogContentProps {
   countryCode: SupportedCountryCodes
 }
 
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      success: 'Thank you for your interest! We will send you a reminder closer to the event.',
+      getUpdates: 'Get updates',
+      rsvp: 'RSVP',
+      logInToGetUpdates: 'Log in to get updates',
+    },
+    fr: {
+      success:
+        "Merci pour votre intérêt ! Nous vous enverrons un rappel plus proche de l'événement.",
+      getUpdates: 'Obtenir les mises à jour',
+      rsvp: 'RSVP',
+      logInToGetUpdates: 'Se connecter pour obtenir les mises à jour',
+    },
+    de: {
+      success:
+        'Danke für Ihr Interesse! Wir werden Ihnen eine Erinnerung näher zum Ereignis senden.',
+      getUpdates: 'Aktualisierungen abrufen',
+      rsvp: 'Anmeldung',
+      logInToGetUpdates: 'Anmelden für Updates',
+    },
+  },
+})
+
 export function EventDialogContent({ event, countryCode }: EventDialogContentProps) {
   usePreventOverscroll()
+  const { t } = useTranslation(i18nMessages, 'eventDialogContent')
   const { data: userFullProfileInfoResponse } = useApiResponseForUserFullProfileInfo()
   const { user } = userFullProfileInfoResponse ?? { user: null }
   const hasOptedInToSMS = userHasOptedInToSMS(user)
@@ -62,7 +92,7 @@ export function EventDialogContent({ event, countryCode }: EventDialogContentPro
       campaignName: getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode),
     })
 
-    toast.success('Thank you for your interest! We will send you a reminder closer to the event.')
+    toast.success(t('success'))
     sectionProps.goToSection(SectionNames.NOTIFICATION_ACTIVATED)
   }
 
@@ -114,12 +144,20 @@ function EventInformation({
   handleGetUpdatesButtonClick: () => Promise<void>
   handleRSVPButtonClick: () => void
 }) {
+  const language = useLanguage()
   const countryCode = useCountryCode()
+  const { t } = useTranslation(i18nMessages, 'eventDialogContent')
 
   const eventDate = event?.time
     ? new Date(`${event.date}T${event.time}`)
     : new Date(`${event.date}T00:00`)
-  const formattedEventDate = format(eventDate, event?.time ? 'EEEE M/d, h:mm a' : 'EEEE M/d')
+
+  const formattedEventDate = formatDateTimeForLocale(eventDate, language, {
+    weekday: 'long',
+    hour: 'numeric',
+    minute: '2-digit',
+  })
+
   const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))
 
   return (
@@ -185,12 +223,12 @@ function EventInformation({
                   onClick={handleGetUpdatesButtonClick}
                   variant="secondary"
                 >
-                  Get updates
+                  {t('getUpdates')}
                 </Button>
               }
             >
               <Button className="w-full md:w-1/2" variant="secondary">
-                Log in to get updates
+                {t('logInToGetUpdates')}
               </Button>
             </LoginDialogWrapper>
           )}
@@ -200,7 +238,7 @@ function EventInformation({
             disabled={isCreatingRsvpEventAction}
             onClick={handleRSVPButtonClick}
           >
-            RSVP
+            {t('rsvp')}
           </Button>
         </div>
       )}

@@ -40,7 +40,7 @@ export function CaPageEvents({ events, isDeepLink }: EventsPageProps) {
       )}
 
       {featuredPastEvents && featuredPastEvents.length > 0 && (
-        <FeaturedPastEvents events={featuredPastEvents} />
+        <FeaturedPastEvents countryCode={countryCode} events={featuredPastEvents} />
       )}
     </EventsPageWrapper>
   )

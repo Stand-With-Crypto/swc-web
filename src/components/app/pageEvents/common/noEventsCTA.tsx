@@ -9,8 +9,42 @@ import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
+
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      joinSWC: 'Join Stand With Crypto and we’ll keep you updated on any events in your area.',
+      signIn: 'Sign in',
+      enterYourNumber: 'Enter your number and we’ll keep you updated on any events in your area.',
+      keepYouUpdated: 'We’ll keep you updated on any events in your area.',
+      pleaseCheckBackLater: 'Please check back later for updates, as new events may be added soon.',
+    },
+    fr: {
+      joinSWC:
+        'Entrez votre numéro de téléphone et nous vous enverrons des mises à jour sur les événements dans votre région.',
+      signIn: 'Se connecter',
+      enterYourNumber:
+        'Entrez votre numéro de téléphone et nous vous enverrons des mises à jour sur les événements dans votre région.',
+      keepYouUpdated: 'Nous vous enverrons des mises à jour sur les événements dans votre région.',
+      pleaseCheckBackLater:
+        'Veuillez vérifier plus tard pour les mises à jour, car de nouveaux événements peuvent être ajoutés.',
+    },
+    de: {
+      joinSWC:
+        'Tragen Sie Ihre Telefonnummer ein und wir halten Sie über Ereignisse in Ihrer Region auf dem Laufenden.',
+      signIn: 'Anmelden',
+      enterYourNumber:
+        'Tragen Sie Ihre Telefonnummer ein und wir halten Sie über Ereignisse in Ihrer Region auf dem Laufenden.',
+      keepYouUpdated: 'Wir halten Sie über Ereignisse in Ihrer Region auf dem Laufenden.',
+      pleaseCheckBackLater:
+        'Bitte schauen Sie später nach Updates, da neue Ereignisse bald hinzugefügt werden.',
+    },
+  },
+})
 
 export function NoEventsCTA({
   initialText,
@@ -19,6 +53,8 @@ export function NoEventsCTA({
   initialText?: string
   className?: string
 }) {
+  const { t } = useTranslation(i18nMessages, 'noEventsCTA')
+
   const { data, isLoading, mutate } = useApiResponseForUserFullProfileInfo()
   const countryCode = useCountryCode()
   const user = data?.user
@@ -32,11 +68,7 @@ export function NoEventsCTA({
           <p className="text-center font-mono text-sm text-muted-foreground">
             <Balancer>
               {initialText}
-              {user ? (
-                <CTATextBySMSStatus smsStatus={user.smsStatus} />
-              ) : (
-                'Join Stand With Crypto and we’ll keep you updated on any events in your area.'
-              )}
+              {user ? <CTATextBySMSStatus smsStatus={user.smsStatus} /> : t('joinSWC')}
             </Balancer>
           </p>
           {user ? (
@@ -72,7 +104,7 @@ export function NoEventsCTA({
             </>
           ) : (
             <LoginDialogWrapper>
-              <Button variant="secondary">Sign in</Button>
+              <Button variant="secondary">{t('signIn')}</Button>
             </LoginDialogWrapper>
           )}
         </>
@@ -83,10 +115,11 @@ export function NoEventsCTA({
 
 function CTATextBySMSStatus({ smsStatus }: { smsStatus: SMSStatus }) {
   const countryCode = useCountryCode()
+  const { t } = useTranslation(i18nMessages, 'CTATextBySMSStatus')
 
   if (isSmsSupportedInCountry(countryCode)) {
     if (smsStatus === SMSStatus.NOT_OPTED_IN) {
-      return `Enter your number and we’ll keep you updated on any events in your area.`
+      return t('enterYourNumber')
     }
 
     if (
@@ -96,9 +129,9 @@ function CTATextBySMSStatus({ smsStatus }: { smsStatus: SMSStatus }) {
         SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
       ].includes(smsStatus)
     ) {
-      return `We’ll keep you updated on any events in your area.`
+      return t('keepYouUpdated')
     }
   }
 
-  return 'Please check back later for updates, as new events may be added soon.'
+  return t('pleaseCheckBackLater')
 }

@@ -4,18 +4,52 @@ import { EventDialog } from '@/components/app/pageEvents/common/eventDialog'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { getServerTranslation } from '@/utils/server/i18n/getServerTranslation'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { SWCEvents } from '@/utils/shared/zod/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
 interface FeaturedPastEventsProps {
   events: SWCEvents
+  countryCode: SupportedCountryCodes
+  language?: SupportedLanguages
 }
 
-export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      title: 'Featured past events',
+      viewDetails: 'View details',
+    },
+    fr: {
+      title: 'Événements passés en vedette',
+      viewDetails: 'Voir les détails',
+    },
+    de: {
+      title: 'Hervorgehobene vergangene Veranstaltungen',
+      viewDetails: 'Details anzeigen',
+    },
+  },
+})
+
+export async function FeaturedPastEvents({
+  events,
+  countryCode,
+  language = SupportedLanguages.EN,
+}: FeaturedPastEventsProps) {
+  const { t } = await getServerTranslation(
+    i18nMessages,
+    'featuredPastEvents',
+    countryCode,
+    language,
+  )
+
   return (
     <section className="grid w-full gap-4">
       <PageTitle as="h3" className="mb-2">
-        Featured past events
+        {t('title')}
       </PageTitle>
 
       <div
@@ -43,7 +77,11 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
                     src={event.data.image}
                   />
                 </div>
-                <EventOverlay eventName={event.data.name} />
+                <EventOverlay
+                  countryCode={countryCode}
+                  eventName={event.data.name}
+                  language={language}
+                />
               </div>
             }
           />
@@ -53,7 +91,22 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
   )
 }
 
-function EventOverlay({ eventName }: { eventName: string }) {
+async function EventOverlay({
+  eventName,
+  countryCode,
+  language,
+}: {
+  eventName: string
+  countryCode: SupportedCountryCodes
+  language: SupportedLanguages
+}) {
+  const { t } = await getServerTranslation(
+    i18nMessages,
+    'featuredPastEventsEventOverlay',
+    countryCode,
+    language,
+  )
+
   return (
     <div className="absolute inset-0 flex items-center justify-center rounded-lg opacity-100 transition-opacity duration-300 ease-in-out group-hover:opacity-100 lg:opacity-0">
       <div className="absolute inset-0 bg-black/80 opacity-75" />
@@ -61,7 +114,7 @@ function EventOverlay({ eventName }: { eventName: string }) {
       <div className="relative z-10 flex h-full w-full cursor-pointer flex-col justify-between p-4 text-left text-white">
         <strong className="font-sans text-xl">{eventName}</strong>
         <p className="flex items-center gap-1 self-end text-sm">
-          View details <ArrowRight size={16} />
+          {t('viewDetails')} <ArrowRight size={16} />
         </p>
       </div>
     </div>
