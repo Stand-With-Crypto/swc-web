@@ -2,6 +2,7 @@ import 'server-only'
 
 import { SMSStatus, User, UserCommunicationJourneyType } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
+import { addHours } from 'date-fns'
 
 import { ENQUEUE_SMS_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/enqueueMessages'
 import { inngest } from '@/inngest/inngest'
@@ -26,10 +27,12 @@ export async function optInUser({
   phoneNumber,
   user,
   countryCode,
+  delaySMSMessageInHours = 0,
 }: {
   phoneNumber: string
   user: User
   countryCode: SupportedCountryCodes
+  delaySMSMessageInHours?: number
 }): Promise<SMSStatus> {
   const smsMessages = getSMSMessages(countryCode)
 
@@ -83,6 +86,9 @@ export async function optInUser({
           },
         ],
       },
+      ...(delaySMSMessageInHours > 0
+        ? { ts: addHours(new Date(), delaySMSMessageInHours).getTime() }
+        : {}),
     })
   }
 
