@@ -39,15 +39,23 @@ describe('withCommons', () => {
       const result = withI18nCommons(inputMessages)
 
       // Should have both common and input messages
-      expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
-        territoryDivision: 'State', // from commons
-        welcomeMessage: 'Welcome to the US', // from input
-      })
+      const usEnResult = result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]
+      expect(usEnResult).toBeDefined()
+      expect(usEnResult?.territoryDivision).toBeDefined() // from commons
+      expect(usEnResult?.welcomeMessage).toBe('Welcome to the US') // from input
 
-      expect(result[SupportedCountryCodes.EU]?.[SupportedLanguages.FR]).toEqual({
-        territoryDivision: 'Pays', // from commons
-        welcomeMessage: 'Bienvenue en Europe', // from input
-      })
+      const euFrResult = result[SupportedCountryCodes.EU]?.[SupportedLanguages.FR]
+      expect(euFrResult).toBeDefined()
+      expect(euFrResult?.territoryDivision).toBeDefined() // from commons
+      expect(euFrResult?.welcomeMessage).toBe('Bienvenue en Europe') // from input
+
+      // Verify that common messages are preserved from the original commons
+      const commonMessages = i18nCommonMessages[SupportedCountryCodes.US]?.[SupportedLanguages.EN]
+      expect(usEnResult?.territoryDivision).toBe(commonMessages?.territoryDivision)
+
+      const commonEuFrMessages =
+        i18nCommonMessages[SupportedCountryCodes.EU]?.[SupportedLanguages.FR]
+      expect(euFrResult?.territoryDivision).toBe(commonEuFrMessages?.territoryDivision)
     })
   })
 
@@ -56,7 +64,7 @@ describe('withCommons', () => {
       const inputMessages: I18nMessages = {
         [SupportedCountryCodes.US]: {
           [SupportedLanguages.EN]: {
-            territoryDivision: 'Region', // Override the common 'State'
+            territoryDivision: 'Region', // Override the common value
             customMessage: 'Custom message',
           },
         },
@@ -64,10 +72,16 @@ describe('withCommons', () => {
 
       const result = withI18nCommons(inputMessages)
 
-      expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
-        territoryDivision: 'Region', // overridden by input
-        customMessage: 'Custom message', // from input
-      })
+      const usEnResult = result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]
+      expect(usEnResult).toBeDefined()
+
+      // Verify that input message overrides common message
+      expect(usEnResult?.territoryDivision).toBe('Region') // overridden by input
+      expect(usEnResult?.customMessage).toBe('Custom message') // from input
+
+      // Verify that the override actually happened by checking it differs from commons
+      const commonMessages = i18nCommonMessages[SupportedCountryCodes.US]?.[SupportedLanguages.EN]
+      expect(usEnResult?.territoryDivision).not.toBe(commonMessages?.territoryDivision)
     })
   })
 })
