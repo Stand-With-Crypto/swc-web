@@ -8,7 +8,7 @@ import { getAllPetitions } from '@/utils/server/petitions/getAllPetitions'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { ORDERED_SUPPORTED_EU_LANGUAGES, SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
@@ -34,6 +34,10 @@ const i18nMessages = createI18nMessages({
     },
   },
 })
+
+export async function generateStaticParams() {
+  return ORDERED_SUPPORTED_EU_LANGUAGES.map(language => ({ language }))
+}
 
 export const generateMetadata = async (props: { params: { language: SupportedLanguages } }) => {
   const { language } = await props.params
