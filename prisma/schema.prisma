@@ -588,6 +588,8 @@ model UserCommunicationJourney {
   campaignName       String?                      @map("campaign_name")
 
   @@index([userId])
+  @@index([datetimeCreated])
+  @@index([campaignName])
   @@map("user_communication_journey")
 }
 
@@ -615,6 +617,8 @@ model UserCommunication {
   @@index([messageId])
   @@index([status])
   @@index([userCommunicationJourneyId])
+  @@index([datetimeCreated])
+  @@index([datetimeUpdated])
   @@map("user_communication")
 }
 
