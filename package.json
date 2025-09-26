@@ -33,7 +33,9 @@
     "ts": "TZ=UTC dotenv -- tsx --tsconfig ./tsconfig.bin.json",
     "ts:ci": "TZ=UTC tsx --tsconfig ./tsconfig.bin.json",
     "typecheck": "tsc --noEmit --incremental",
-    "translations:extract": "npm run ts src/bin/translations/extractTranslations.ts"
+    "translations:extract": "npm run ts src/bin/translations/extractTranslations.ts",
+    "bundle:analyze": "ANALYZE=true npm run build",
+    "bundle:compare": "node scripts/bundle-size-comment.js"
   },
   "prisma": {
     "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
