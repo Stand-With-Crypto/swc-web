@@ -237,18 +237,6 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
           campaignName: USUserActionEmailCampaignName.DAY_OF_ACTION_AUG_14_2025,
         }),
       },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: USUserActionEmailCampaignName.USDC_REWARDS_SEP_18_2025,
-        isCampaignActive: true,
-        title: 'Email Your Senator',
-        description: 'Tell them to protect YOUR rewards',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: USUserActionEmailCampaignName.USDC_REWARDS_SEP_18_2025,
-        }),
-      },
     ],
   },
   [UserActionType.TWEET]: {
