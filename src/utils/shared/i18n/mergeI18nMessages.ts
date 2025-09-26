@@ -17,18 +17,18 @@ import { I18nMessages } from './types'
  *
  * @example
  * ```typescript
- * const defaultMessages: I18nMessages = {
+ * const targetMessages: I18nMessages = {
  *   us: { en: { hello: 'Hello', goodbye: 'Goodbye' } },
  *   eu: { en: { hello: 'Hello' }, fr: { hello: 'Bonjour' } }
  * };
  *
- * const overrides: I18nMessages = {
+ * const sourceMessages: I18nMessages = {
  *   us: { en: { hello: 'Hi there!', welcome: 'Welcome' } }, // Different shape
  *   ca: { en: { hello: 'Hello Canada' } }, // New country
  *   eu: { de: { hello: 'Hallo' } } // New language for existing country
  * };
  *
- * const result = mergeI18nMessages(defaultMessages, overrides);
+ * export const i18nMessages = mergeI18nMessages(targetMessages, sourceMessages);
  * // Result: {
  * //   us: { en: { hello: 'Hi there!', goodbye: 'Goodbye', welcome: 'Welcome' } },
  * //   eu: { en: { hello: 'Hello' }, fr: { hello: 'Bonjour' }, de: { hello: 'Hallo' } },
