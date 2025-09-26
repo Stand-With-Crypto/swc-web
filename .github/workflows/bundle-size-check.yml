@@ -1,0 +1,120 @@
+name: Bundle Size Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'src/**'
+      - 'next.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tailwind.config.ts'
+      - 'webpack.config.js'
+
+jobs:
+  bundle-size-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup environment for build
+        run: |
+          echo "NEXT_PUBLIC_ENVIRONMENT=production" >> $GITHUB_ENV
+          echo "DISABLE_SENTRY_SOURCEMAPS=true" >> $GITHUB_ENV
+          echo "ANALYZE=true" >> $GITHUB_ENV
+
+      - name: Generate Prisma client
+        run: npm run db:generate
+
+      - name: Run codegen
+        run: npm run codegen
+
+      - name: Extract component translations (PR)
+        run: npm run translations:extract || echo "No translations to extract"
+
+      - name: Build PR branch
+        run: |
+          echo "📦 Building PR branch..."
+          npm run build
+          mkdir -p bundle-analysis
+          cp bundle-reports/webpack-stats.json bundle-analysis/pr-stats.json || echo "No webpack stats generated"
+
+          # Capture Next.js build output
+          npm run build 2>&1 | grep -E "(Route|First Load JS|└|├)" > bundle-analysis/pr-build.txt || true
+
+      - name: Checkout main branch
+        run: |
+          git fetch origin main
+          git checkout origin/main
+
+      - name: Install dependencies (main)
+        run: npm ci
+
+      - name: Generate Prisma client (main)
+        run: npm run db:generate
+
+      - name: Run codegen (main)
+        run: npm run codegen
+
+      - name: Extract component translations (main)
+        run: npm run translations:extract || echo "No translations to extract"
+
+      - name: Build main branch
+        run: |
+          echo "📦 Building main branch..."
+          npm run build
+          cp bundle-reports/webpack-stats.json bundle-analysis/main-stats.json || echo "No webpack stats generated"
+
+          # Capture Next.js build output
+          npm run build 2>&1 | grep -E "(Route|First Load JS|└|├)" > bundle-analysis/main-build.txt || true
+
+      - name: Compare bundle sizes
+        id: compare
+        run: |
+          echo "📊 Comparing bundle sizes..."
+          node scripts/bundle-size-comment.js > bundle-analysis/comment.md
+
+          # Set output for comment
+          {
+            echo 'comment<<EOF'
+            cat bundle-analysis/comment.md
+            echo EOF
+          } >> $GITHUB_OUTPUT
+
+      - name: Find existing comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: '📦 Bundle Size Report'
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{ steps.compare.outputs.comment }}
+          edit-mode: replace
+
+      - name: Upload bundle analysis artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bundle-analysis-${{ github.event.pull_request.number }}
+          path: bundle-analysis/
+          retention-days: 30
