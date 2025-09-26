@@ -1,3 +1,5 @@
+'server-only'
+
 import { headers } from 'next/headers'
 
 import { createTranslator } from '@/utils/shared/i18n/createTranslator'

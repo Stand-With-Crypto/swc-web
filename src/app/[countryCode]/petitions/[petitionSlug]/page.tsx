@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { PagePetitionDetails } from '@/components/app/pagePetitionDetails'
+import { UsPagePetitionDetails } from '@/components/app/pagePetitionDetails/us'
 import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { PageProps } from '@/types'
 import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
@@ -36,7 +36,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const petition = await getPetitionBySlug(params.countryCode, params.petitionSlug)
+  const petition = await getPetitionBySlug({
+    countryCode: params.countryCode,
+    slug: params.petitionSlug,
+  })
 
   if (!petition) {
     return generateMetadataDetails({
@@ -56,7 +59,7 @@ export default async function PetitionDetailsPage(props: Props) {
   const petitionSlug = params.petitionSlug
 
   const [petition, recentSignatures] = await Promise.all([
-    getPetitionBySlug(countryCode, petitionSlug),
+    getPetitionBySlug({ countryCode, slug: petitionSlug }),
     queryPetitionRecentSignatures({
       petitionSlug,
       countryCode,
@@ -69,7 +72,7 @@ export default async function PetitionDetailsPage(props: Props) {
   }
 
   return (
-    <PagePetitionDetails
+    <UsPagePetitionDetails
       countryCode={countryCode}
       petition={petition}
       recentSignatures={recentSignatures}

@@ -3,6 +3,7 @@
 import { getPetitionsSignaturesCount } from '@/data/petitions/getPetitionsSignaturesCount'
 import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 /**
@@ -14,11 +15,16 @@ import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
  *
  * Do NOT use the API route equivalent during build time.
  */
-export async function getAllPetitions(
-  countryCode: SupportedCountryCodes,
-): Promise<SWCPetition[] | null> {
+export async function getAllPetitions({
+  countryCode,
+  language,
+}: {
+  countryCode: SupportedCountryCodes
+  language?: SupportedLanguages
+}): Promise<SWCPetition[] | null> {
   const petitions = await getAllPetitionsFromBuilderIO({
     countryCode,
+    language,
   })
 
   if (!petitions) {

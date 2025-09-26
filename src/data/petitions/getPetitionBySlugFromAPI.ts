@@ -1,15 +1,17 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { apiUrls, INTERNAL_BASE_URL } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 export async function getPetitionBySlugFromAPI(
   countryCode: SupportedCountryCodes,
   slug: string,
+  language = SupportedLanguages.EN,
 ): Promise<SWCPetition | null> {
   try {
     const response = await fetchReq(
-      `${INTERNAL_BASE_URL}${apiUrls.petitionBySlug({ countryCode, petitionSlug: slug })}`,
+      `${INTERNAL_BASE_URL}${apiUrls.petitionBySlug({ countryCode, petitionSlug: slug, language })}`,
     )
 
     if (!response.ok) {

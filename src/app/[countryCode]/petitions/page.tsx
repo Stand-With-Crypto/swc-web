@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { PagePetitions } from '@/components/app/pagePetitions'
-import { PagePetitionsWithDebugger } from '@/components/app/pagePetitions/pagePetitionsWithDebugger'
+import { UsPagePetitions } from '@/components/app/pagePetitions/us'
+import { UsPagePetitionsWithDebugger } from '@/components/app/pagePetitions/us/pagePetitionsWithDebugger'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { getAllPetitions } from '@/utils/server/petitions/getAllPetitions'
@@ -22,7 +22,7 @@ const isStaging = NEXT_PUBLIC_ENVIRONMENT !== 'production'
 
 export default async function PetitionsPage(props: PageProps) {
   const { countryCode } = await props.params
-  const petitions = await getAllPetitions(countryCode)
+  const petitions = await getAllPetitions({ countryCode })
 
   if (!petitions) {
     return notFound()
@@ -30,7 +30,7 @@ export default async function PetitionsPage(props: PageProps) {
 
   if (isStaging) {
     return (
-      <PagePetitionsWithDebugger
+      <UsPagePetitionsWithDebugger
         countryCode={countryCode}
         description={description}
         petitions={petitions}
@@ -40,7 +40,7 @@ export default async function PetitionsPage(props: PageProps) {
   }
 
   return (
-    <PagePetitions
+    <UsPagePetitions
       countryCode={countryCode}
       description={description}
       petitions={petitions}

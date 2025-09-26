@@ -3,6 +3,7 @@
 import { getPetitionSignatureCount } from '@/data/petitions/getPetitionSignatureCount'
 import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 /**
  * Server function for fetching a single petition by slug with signature count
@@ -16,10 +17,19 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
  * Note: Uses getAllPetitionsFromBuilderIO() with cache for better performance
  * rather than filtering by slug directly.
  */
-export async function getPetitionBySlug(countryCode: SupportedCountryCodes, slug: string) {
+export async function getPetitionBySlug({
+  countryCode,
+  slug,
+  language = SupportedLanguages.EN,
+}: {
+  countryCode: SupportedCountryCodes
+  slug: string
+  language?: SupportedLanguages
+}) {
   // Listing the petitions from builder.io is more performant than filtering by slug because we use the cache
   const petitions = await getAllPetitionsFromBuilderIO({
     countryCode,
+    language,
   })
 
   const petition = petitions?.find(p => p.slug === slug)
