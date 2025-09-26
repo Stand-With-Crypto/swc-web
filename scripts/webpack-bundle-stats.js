@@ -82,9 +82,9 @@ class BundleStatsPlugin {
       console.log(`📊 Bundle stats written to: ${this.options.outputPath}`)
       console.log(`📦 Total bundle size: ${(analysis.totalSize / 1024 / 1024).toFixed(2)} MB`)
 
-      if (analysis.i18nAnalysis.totalSize > 0) {
+      if (analysis.bundleAnalysis?.byCategory?.i18n?.totalSize > 0) {
         console.log(
-          `🌍 i18n bundle size: ${(analysis.i18nAnalysis.totalSize / 1024).toFixed(1)} KB`,
+          `🌍 i18n bundle size: ${(analysis.bundleAnalysis.byCategory.i18n.totalSize / 1024).toFixed(1)} KB`,
         )
       }
     })
