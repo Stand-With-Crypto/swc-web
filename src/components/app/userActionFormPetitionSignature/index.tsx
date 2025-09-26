@@ -25,6 +25,7 @@ import { LoadingSpinner } from '@/components/ui/loadingSpinner'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { withI18nCommons } from '@/utils/shared/i18n/commons'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { mergeI18nMessages } from '@/utils/shared/i18n/mergeI18nMessages'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
@@ -41,8 +42,9 @@ import {
   toastGenericError,
 } from '@/utils/web/toastUtils'
 import {
+  createUserActionFormPetitionSignature,
+  userActionFormPetitionSignatureI18nMessages,
   type UserActionPetitionSignatureValues,
-  zodUserActionFormPetitionSignature,
 } from '@/validation/forms/zodUserActionFormPetitionSignature'
 
 import { FormContainer } from './container'
@@ -116,7 +118,10 @@ export function UserActionFormPetitionSignature({
   petitionData,
   user,
 }: UserActionFormPetitionSignatureProps) {
-  const { t } = useTranslation(i18nMessages, 'UserActionFormPetitionSignature')
+  const { t } = useTranslation(
+    mergeI18nMessages(i18nMessages, userActionFormPetitionSignatureI18nMessages),
+    'UserActionFormPetitionSignature',
+  )
 
   const hasAlreadySigned = useMemo(() => {
     return user?.userActions?.some(
@@ -127,7 +132,7 @@ export function UserActionFormPetitionSignature({
   }, [user, petitionData.slug])
 
   const form = useForm<UserActionPetitionSignatureValues>({
-    resolver: zodResolver(zodUserActionFormPetitionSignature),
+    resolver: zodResolver(createUserActionFormPetitionSignature(t)),
     defaultValues: {
       firstName: user?.firstName || '',
       lastName: user?.lastName || '',
