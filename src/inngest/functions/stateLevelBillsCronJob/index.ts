@@ -32,6 +32,11 @@ export const STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_EVENT_NAME =
 export const STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_FUNCTION_ID =
   'script.state-level-bills-sourcing-automation'
 
+export interface StateLevelBillsSourcingAutomationInngestEventSchema {
+  name: typeof STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_EVENT_NAME
+  data: Record<string, never>
+}
+
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
 
 export const stateLevelBillsSourcingAutomation = inngest.createFunction(
@@ -39,11 +44,9 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
     id: STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_FUNCTION_ID,
     onFailure: onScriptFailure,
   },
-  {
-    ...((NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? { cron: STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE }
-      : { event: STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_EVENT_NAME }) as any),
-  },
+  NEXT_PUBLIC_ENVIRONMENT === 'production'
+    ? { cron: STATE_LEVEL_BILLS_CRON_JOB_SCHEDULE }
+    : { event: STATE_LEVEL_BILLS_SOURCING_AUTOMATION_INNGEST_EVENT_NAME },
   async ({ step, logger }) => {
     const billsFromQuorum = await step.run('retrieve-bills-data-from-quorum', async () => {
       logger.info('Starting to fetch bills from Quorum API...')
@@ -73,12 +76,6 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         if (results.objects.length < QUORUM_API_BILLS_PER_PAGE || results.meta.next === null) {
           hasMoreData = false
         }
-      }
-
-      const lastBill = bills.at(-1)
-
-      if (lastBill) {
-        await redis.set(SEARCH_OFFSET_REDIS_KEY, lastBill.id, { ex: SEARCH_OFFSET_REDIS_TTL })
       }
 
       logger.info(`Completed fetching bills from Quorum API. Total bills fetched: ${bills.length}.`)
@@ -316,6 +313,24 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       logger.info(`Updated ${updatedBills.length} existing bill entries in Builder.io.`)
 
       return updatedBills
+    })
+
+    await step.run('update-redis-with-last-analyzed-bill-id', async () => {
+      if (billsToAnalyze.length === 0) {
+        logger.info('No bills were analyzed, skipping Redis update.')
+        return
+      }
+
+      const lastBill = billsToAnalyze.at(-1) as CreateBillEntryPayload | undefined
+
+      if (lastBill) {
+        await redis.set(SEARCH_OFFSET_REDIS_KEY, lastBill.data.externalId as string, {
+          ex: SEARCH_OFFSET_REDIS_TTL,
+        })
+        logger.info(
+          `Updated Redis with the last analyzed bill ID: ${lastBill.data.externalId as string}.`,
+        )
+      }
     })
 
     logger.info('State-level bills sourcing automation completed successfully.')
