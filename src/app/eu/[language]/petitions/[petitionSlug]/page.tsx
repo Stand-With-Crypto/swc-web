@@ -33,7 +33,6 @@ export async function generateStaticParams(props: Props) {
 
   for (const petition of allPetitions) {
     params.push({
-      countryCode,
       petitionSlug: petition.slug,
       language,
     })
