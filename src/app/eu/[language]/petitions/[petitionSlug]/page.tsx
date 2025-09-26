@@ -10,7 +10,7 @@ import { getPetitionBySlug } from '@/utils/server/petitions/getPetitionBySlug'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { ORDERED_SUPPORTED_EU_LANGUAGES, SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
@@ -24,18 +24,18 @@ interface Props {
   }
 }
 
-export async function generateStaticParams(props: Props) {
-  const { language } = await props.params
-
-  const allPetitions = await getAllPetitionsFromBuilderIO({ countryCode, language })
+export async function generateStaticParams() {
+  const allPetitions = await getAllPetitionsFromBuilderIO({ countryCode })
 
   const params = []
 
   for (const petition of allPetitions) {
-    params.push({
-      petitionSlug: petition.slug,
-      language,
-    })
+    for (const language of ORDERED_SUPPORTED_EU_LANGUAGES) {
+      params.push({
+        petitionSlug: petition.slug,
+        language,
+      })
+    }
   }
 
   return params
