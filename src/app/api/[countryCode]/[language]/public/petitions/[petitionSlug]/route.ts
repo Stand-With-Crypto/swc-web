@@ -6,6 +6,7 @@ import {
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 export const revalidate = 60 // 60 seconds
@@ -37,6 +38,7 @@ interface RequestContext {
   params: Promise<{
     countryCode: SupportedCountryCodes
     petitionSlug: string
+    language: SupportedLanguages
   }>
 }
 
@@ -55,7 +57,7 @@ interface RequestContext {
  * For static page generation, use getPetitionBySlug() function directly instead.
  */
 export async function GET(_: Request, { params }: RequestContext) {
-  const { countryCode, petitionSlug } = await params
+  const { countryCode, petitionSlug, language } = await params
 
   const validatedCountryCode = zodSupportedCountryCode.safeParse(countryCode)
 
@@ -64,7 +66,7 @@ export async function GET(_: Request, { params }: RequestContext) {
   }
 
   try {
-    const petitions = await getAllPetitions({ countryCode: validatedCountryCode.data })
+    const petitions = await getAllPetitions({ countryCode: validatedCountryCode.data, language })
 
     if (!petitions) {
       return NextResponse.json({ error: 'Error fetching petitions' }, { status: 404 })

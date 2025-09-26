@@ -5,12 +5,12 @@ import { Settings } from 'lucide-react'
 
 import { PetitionDebugger } from '@/components/app/pagePetitionDetails/common/debugger'
 import { useMockedPetitionData } from '@/components/app/pagePetitionDetails/common/debugger/useMockedPetitionData'
+import { EuPagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/eu/content'
 import { Button } from '@/components/ui/button'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
-import { EuPagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/eu/content'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 interface PagePetitionDetailsWithDebuggerProps {
   petition: SWCPetition
@@ -69,9 +69,9 @@ export function EuPagePetitionDetailsWithDebugger({
       {/* Main Content */}
       <EuPagePetitionDetailsContent
         countryCode={countryCode}
+        language={language}
         petition={currentPetition}
         recentSignatures={currentRecentSignatures}
-        language={language}
       />
 
       {/* Petition Debugger */}

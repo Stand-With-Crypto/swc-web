@@ -1,23 +1,23 @@
 'use client'
 
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { COUNTRY_CODE_TO_LOCALE } from '@/utils/shared/supportedCountries'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
-import { SupportedLanguages } from '@/utils/shared/supportedLocales'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { useMemo } from 'react'
-import { SignatureProvider } from '@/components/app/pagePetitionDetails/common/signatureContext'
-import { PetitionDetailsWrapper } from '@/components/app/pagePetitionDetails/common/wrapper'
-import * as PetitionDetailsHeader from '@/components/app/pagePetitionDetails/common/header'
+
 import * as PetitionDetailsBody from '@/components/app/pagePetitionDetails/common/body'
+import * as PetitionDetailsHeader from '@/components/app/pagePetitionDetails/common/header'
 import { PetitionDetailsImageBanner } from '@/components/app/pagePetitionDetails/common/imageBanner'
 import { PetitionDetailsInfo } from '@/components/app/pagePetitionDetails/common/info'
 import { PetitionMilestones } from '@/components/app/pagePetitionDetails/common/milestones'
 import { SignatoriesCarouselSection } from '@/components/app/pagePetitionDetails/common/signatoriesCarousel/section'
+import { SignatureProvider } from '@/components/app/pagePetitionDetails/common/signatureContext'
 import { SignaturesSummary } from '@/components/app/pagePetitionDetails/common/summary'
-import { PetitionMobileSummaryWrapper } from '@/components/app/pagePetitionDetails/common/summary/mobileWrapper'
 import { PetitionMobileGradient } from '@/components/app/pagePetitionDetails/common/summary/mobileGradient'
+import { PetitionMobileSummaryWrapper } from '@/components/app/pagePetitionDetails/common/summary/mobileWrapper'
+import { PetitionDetailsWrapper } from '@/components/app/pagePetitionDetails/common/wrapper'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface PagePetitionDetailsContentProps {
   petition: SWCPetition
@@ -71,7 +71,7 @@ export function EuPagePetitionDetailsContent({
     }
 
     return null
-  }, [petition.datetimeFinished, locale, isClosed])
+  }, [petition.datetimeFinished, locale, isClosed, t])
 
   return (
     <SignatureProvider actualSignatureCount={petition.signaturesCount} petitionSlug={petition.slug}>

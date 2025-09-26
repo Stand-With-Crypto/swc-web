@@ -4,13 +4,13 @@ import React, { useCallback, useMemo } from 'react'
 
 import { useSignature } from '@/components/app/pagePetitionDetails/common/signatureContext'
 import { compactNumber } from '@/utils/shared/compactNumber'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 import { MilestoneItem } from './item'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
-import { useLanguage } from '@/utils/web/i18n/useLanguage'
-import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 
 interface Milestone {
   label: string
@@ -70,7 +70,7 @@ export function PetitionMilestones({
         isComplete,
       }
     })
-  }, [goal, shouldGenerateAutomaticMilestones, optimisticSignatureCount, locale])
+  }, [goal, shouldGenerateAutomaticMilestones, optimisticSignatureCount, locale, t])
 
   const automaticMilestones = generateAutomaticMilestones()
 

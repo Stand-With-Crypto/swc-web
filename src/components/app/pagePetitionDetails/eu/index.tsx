@@ -1,11 +1,11 @@
 import React from 'react'
 
+import { EuPagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/eu/content'
 import { EuPagePetitionDetailsWithDebugger } from '@/components/app/pagePetitionDetails/eu/pagePetitionDetailsWithDebugger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
-import { EuPagePetitionDetailsContent } from '@/components/app/pagePetitionDetails/eu/content'
+import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 
 interface PagePetitionDetailsProps {
   petition: SWCPetition
@@ -29,9 +29,9 @@ export function EuPagePetitionDetails({
     return (
       <EuPagePetitionDetailsWithDebugger
         countryCode={countryCode}
+        language={language}
         petition={petition}
         recentSignatures={recentSignatures}
-        language={language}
       />
     )
   }
@@ -39,9 +39,9 @@ export function EuPagePetitionDetails({
   return (
     <EuPagePetitionDetailsContent
       countryCode={countryCode}
+      language={language}
       petition={petition}
       recentSignatures={recentSignatures}
-      language={language}
     />
   )
 }

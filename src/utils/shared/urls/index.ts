@@ -335,15 +335,15 @@ export const apiUrls = {
     administrativeArea: string
     district: number
   }) => `/api/public/dtsi/races/usa/${administrativeArea}/${district}`,
-  petitions: ({ countryCode }: { countryCode: SupportedCountryCodes }) =>
-    `/api/${countryCode}/public/petitions`,
   petitionBySlug: ({
     countryCode,
     petitionSlug,
+    language,
   }: {
     countryCode: SupportedCountryCodes
     petitionSlug: string
-  }) => `/api/${countryCode}/public/petitions/${petitionSlug}`,
+    language: SupportedLanguages
+  }) => `/api/${countryCode}/${language}/public/petitions/${petitionSlug}`,
 }
 
 export * from './externalUrls'

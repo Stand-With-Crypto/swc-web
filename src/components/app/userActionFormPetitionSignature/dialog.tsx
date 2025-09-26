@@ -10,6 +10,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
 
 function UserActionFormPetitionSignatureDialogContent({
   petitionSlug,
@@ -20,10 +21,13 @@ function UserActionFormPetitionSignatureDialogContent({
   countryCode: SupportedCountryCodes
   onSuccess: () => void
 }) {
-  const { data: petitionData, isLoading: isLoadingPetition } = useApiPetitionBySlug(
+  const language = useLanguage()
+
+  const { data: petitionData, isLoading: isLoadingPetition } = useApiPetitionBySlug({
+    language,
     countryCode,
     petitionSlug,
-  )
+  })
 
   const { data: userData, isLoading: isLoadingUser } = useApiResponseForUserFullProfileInfo()
 
@@ -75,8 +79,8 @@ export function UserActionFormPetitionSignatureDialog({
     <UserActionFormDialog
       {...dialogProps}
       className={cn('!p-0 lg:max-w-[620px]', className)}
-      trigger={children}
       countryCode={countryCode}
+      trigger={children}
     >
       <Suspense fallback={<UserActionFormPetitionSignatureSkeleton />}>
         <UserActionFormPetitionSignatureDialogContent

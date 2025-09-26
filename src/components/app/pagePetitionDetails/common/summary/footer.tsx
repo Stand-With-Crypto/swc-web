@@ -5,8 +5,8 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { UserActionFormPetitionSignatureDialog } from '@/components/app/userActionFormPetitionSignature/dialog'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { Button } from '@/components/ui/button'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface PetitionSummaryFooterProps {

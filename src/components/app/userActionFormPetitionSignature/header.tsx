@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 import { DEFAULT_INNER_WIDTH_CLASS_NAME } from './constants'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface PetitionHeaderProps {
   title: string

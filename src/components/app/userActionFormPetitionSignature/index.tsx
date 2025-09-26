@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/nextjs'
 import { actionCreateUserActionPetitionSignature } from '@/actions/actionCreateUserActionPetitionSignature'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { PrivacyNotice } from '@/components/app/userActionFormPetitionSignature/privacyNotice'
+import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -22,7 +23,10 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { LoadingSpinner } from '@/components/ui/loadingSpinner'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
+import { withI18nCommons } from '@/utils/shared/i18n/commons'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import {
   GENERIC_FORM_ERROR_KEY,
@@ -30,6 +34,7 @@ import {
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import {
   catchUnexpectedServerErrorAndTriggerToast,
@@ -43,11 +48,6 @@ import {
 import { FormContainer } from './container'
 import { Footer } from './footer'
 import { PetitionHeader } from './header'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
-import { withI18nCommons } from '@/utils/shared/i18n/commons'
-import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const ANALYTICS_NAME_USER_ACTION_FORM_PETITION_SIGNATURE = 'User Action Form Petition Signature'
 
@@ -208,7 +208,7 @@ export function UserActionFormPetitionSignature({
         onSuccess?.()
       }
     },
-    [form, onSuccess, petitionData.slug, petitionData.countryCode, hasAlreadySigned],
+    [form, onSuccess, petitionData.slug, petitionData.countryCode, hasAlreadySigned, t],
   )
 
   const addressField = useWatch({ control: form.control, name: 'address' })

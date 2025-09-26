@@ -1,7 +1,7 @@
+import { describe, expect, it } from '@jest/globals'
+
 import { mergeI18nMessages } from './mergeI18nMessages'
 import { I18nMessages } from './types'
-
-import { describe, expect, it } from '@jest/globals'
 
 describe('mergeI18nMessages', () => {
   describe('edge cases', () => {

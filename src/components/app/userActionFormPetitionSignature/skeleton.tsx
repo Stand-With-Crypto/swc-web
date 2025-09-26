@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { mergeI18nMessages } from '@/utils/shared/i18n/mergeI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 const i18nMessages = createI18nMessages({
   defaultMessages: {

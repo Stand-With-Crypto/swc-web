@@ -4,20 +4,20 @@ import { notFound } from 'next/navigation'
 import { EuPagePetitionDetails } from '@/components/app/pagePetitionDetails/eu'
 import { queryPetitionRecentSignatures } from '@/data/petitions/queryPetitionRecentSignatures'
 import { getAllPetitionsFromBuilderIO } from '@/utils/server/builder/models/data/petitions'
+import { getServerTranslation } from '@/utils/server/i18n/getServerTranslation'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { getPetitionBySlug } from '@/utils/server/petitions/getPetitionBySlug'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { getStateNameResolver } from '@/utils/shared/stateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { getServerTranslation } from '@/utils/server/i18n/getServerTranslation'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
 const countryCode = SupportedCountryCodes.EU
 
-type Props = {
+interface Props {
   params: {
     petitionSlug: string
     language: SupportedLanguages
@@ -113,9 +113,9 @@ export default async function PetitionDetailsPage(props: Props) {
   return (
     <EuPagePetitionDetails
       countryCode={countryCode}
+      language={language}
       petition={petition}
       recentSignatures={recentSignatures}
-      language={language}
     />
   )
 }

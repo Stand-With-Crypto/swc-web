@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { pluralize } from '@/utils/shared/pluralize'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
@@ -14,6 +15,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPetition } from '@/utils/shared/zod/getSWCPetitions'
 import { cn } from '@/utils/web/cn'
 import { useLanguage } from '@/utils/web/i18n/useLanguage'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface PetitionCardProps {
   petition: SWCPetition
@@ -27,6 +29,32 @@ interface PetitionCardProps {
 const IMAGE_SIZE = 150 // in pixels (150x150)
 const FALLBACK_IMAGE_PATH = '/actionTypeIcons/petition.svg'
 
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      petition: 'Petition',
+      signature: 'signature',
+      signatures: 'signatures',
+      signed: 'Signed',
+      goalReached: 'Goal reached!',
+    },
+    de: {
+      petition: 'Petition',
+      signature: 'Unterschrift',
+      signatures: 'Unterschriften',
+      signed: 'Unterschrieben',
+      goalReached: 'Ziel erreicht!',
+    },
+    fr: {
+      petition: 'Pétition',
+      signature: 'signature',
+      signatures: 'signatures',
+      signed: 'Signé',
+      goalReached: 'Objectif atteint !',
+    },
+  },
+})
+
 export function PetitionCard({
   petition,
   countryCode,
@@ -35,6 +63,7 @@ export function PetitionCard({
   variant = 'current',
   isSigned = false,
 }: PetitionCardProps) {
+  const { t } = useTranslation(i18nMessages, 'PetitionCard')
   const [imageError, setImageError] = useState(false)
   const showImage = petition.image && !imageError
   const language = useLanguage()
@@ -74,7 +103,7 @@ export function PetitionCard({
         ) : (
           <div className="bg-circular-gradient flex h-full w-full items-center justify-center px-5 py-9">
             <NextImage
-              alt="Petition"
+              alt={t('petition')}
               height={IMAGE_SIZE}
               src={FALLBACK_IMAGE_PATH}
               width={IMAGE_SIZE}
@@ -103,18 +132,22 @@ export function PetitionCard({
             {isGoalReached ? (
               <span className="flex items-center gap-2">
                 <PartyPopperIcon />
-                Goal reached!
+                {t('goalReached')}
               </span>
             ) : (
               <>
                 <FormattedNumber amount={signaturesCount} locale={locale} />{' '}
-                {pluralize({ count: signaturesCount, singular: 'signature', plural: 'signatures' })}
+                {pluralize({
+                  count: signaturesCount,
+                  singular: t('signature'),
+                  plural: t('signatures'),
+                })}
               </>
             )}
           </p>
           {isSigned && (
             <p className="flex items-center gap-2">
-              Signed
+              {t('signed')}
               <CheckIcon completed />
             </p>
           )}

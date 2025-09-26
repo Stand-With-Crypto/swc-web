@@ -1,10 +1,9 @@
 'use client'
 
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
-
 import { SignatoriesCarousel } from '@/components/app/pagePetitionDetails/common/signatoriesCarousel'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface SignatoriesCarouselSectionProps {
   countryCode: SupportedCountryCodes

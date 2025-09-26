@@ -6,9 +6,9 @@ import { Edit3 } from 'lucide-react'
 import { useSignature } from '@/components/app/pagePetitionDetails/common/signatureContext'
 import * as BadgesAutomaticCarousel from '@/components/ui/badgesAutomaticCarousel'
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 type LastSignature =

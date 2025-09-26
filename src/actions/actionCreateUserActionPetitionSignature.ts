@@ -6,6 +6,7 @@ import { waitUntil } from '@vercel/functions'
 import { z, ZodError } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
 import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFromAPI'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
@@ -30,7 +31,6 @@ import {
   type UserActionPetitionSignatureActionValues as Input,
   zodUserActionFormPetitionSignatureAction,
 } from '@/validation/forms/zodUserActionFormPetitionSignature'
-import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
 
 const logger = getLogger('actionCreateUserActionPetitionSignature')
 

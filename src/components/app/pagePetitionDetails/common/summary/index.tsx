@@ -8,10 +8,10 @@ import { PetitionSummaryFooter } from '@/components/app/pagePetitionDetails/comm
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { CircularProgress } from '@/components/ui/circularProgress'
 import { compactNumber } from '@/utils/shared/compactNumber'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLocale } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface SignaturesSummaryProps {
