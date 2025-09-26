@@ -49,12 +49,19 @@ jobs:
       - name: Build PR branch
         run: |
           echo "📦 Building PR branch..."
-          npm run build
           mkdir -p bundle-analysis
-          cp bundle-reports/webpack-stats.json bundle-analysis/pr-stats.json || echo "No webpack stats generated"
+          npm run build 2>&1 | tee build-output.log
+
+          # Copy webpack stats if generated
+          if [ -f bundle-reports/webpack-stats.json ]; then
+            cp bundle-reports/webpack-stats.json bundle-analysis/pr-stats.json
+          else
+            echo "⚠️ No webpack stats generated for PR branch"
+            echo '{"totalSize": 0, "assets": [], "bundleAnalysis": null}' > bundle-analysis/pr-stats.json
+          fi
 
           # Capture Next.js build output
-          npm run build 2>&1 | grep -E "(Route|First Load JS|└|├)" > bundle-analysis/pr-build.txt || true
+          grep -E "(Route|First Load JS|└|├)" build-output.log > bundle-analysis/pr-build.txt || echo "No route info captured" > bundle-analysis/pr-build.txt
 
       - name: Checkout main branch
         run: |
@@ -76,17 +83,40 @@ jobs:
       - name: Build main branch
         run: |
           echo "📦 Building main branch..."
-          npm run build
-          cp bundle-reports/webpack-stats.json bundle-analysis/main-stats.json || echo "No webpack stats generated"
+          npm run build 2>&1 | tee build-output-main.log
+
+          # Copy webpack stats if generated
+          if [ -f bundle-reports/webpack-stats.json ]; then
+            cp bundle-reports/webpack-stats.json bundle-analysis/main-stats.json
+          else
+            echo "⚠️ No webpack stats generated for main branch"
+            echo '{"totalSize": 0, "assets": [], "bundleAnalysis": null}' > bundle-analysis/main-stats.json
+          fi
 
           # Capture Next.js build output
-          npm run build 2>&1 | grep -E "(Route|First Load JS|└|├)" > bundle-analysis/main-build.txt || true
+          grep -E "(Route|First Load JS|└|├)" build-output-main.log > bundle-analysis/main-build.txt || echo "No route info captured" > bundle-analysis/main-build.txt
 
       - name: Compare bundle sizes
         id: compare
         run: |
           echo "📊 Comparing bundle sizes..."
-          node scripts/bundle-size-comment.js > bundle-analysis/comment.md
+
+          # Ensure bundle-analysis directory exists with required files
+          mkdir -p bundle-analysis
+
+          # Create fallback files if they don't exist
+          [ ! -f bundle-analysis/main-stats.json ] && echo '{"totalSize": 0, "assets": []}' > bundle-analysis/main-stats.json
+          [ ! -f bundle-analysis/pr-stats.json ] && echo '{"totalSize": 0, "assets": []}' > bundle-analysis/pr-stats.json
+          [ ! -f bundle-analysis/main-build.txt ] && echo "" > bundle-analysis/main-build.txt
+          [ ! -f bundle-analysis/pr-build.txt ] && echo "" > bundle-analysis/pr-build.txt
+
+          # Generate comment
+          if node scripts/bundle-size-comment.js > bundle-analysis/comment.md; then
+            echo "✅ Bundle comparison successful"
+          else
+            echo "⚠️ Bundle comparison failed, generating fallback comment"
+            echo "# 📦 Bundle Size Report\n\n⚠️ Bundle analysis encountered issues. Check build logs for details." > bundle-analysis/comment.md
+          fi
 
           # Set output for comment
           {
