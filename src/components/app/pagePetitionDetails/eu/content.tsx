@@ -36,12 +36,12 @@ const i18nMessages = createI18nMessages({
       petitionClosesOn: 'Petition closes on {date}',
     },
     de: {
-      petitionClosed: 'Petition geschlossen {date}',
+      petitionClosed: 'Petition geschlossen am {date}',
       petitionClosesOn: 'Petition schließt am {date}',
     },
     fr: {
-      petitionClosed: 'Pétition close {date}',
-      petitionClosesOn: 'Pétition closes on {date}',
+      petitionClosed: 'Pétition clôturée le {date}',
+      petitionClosesOn: 'La pétition se termine le {date}',
     },
   },
 })
