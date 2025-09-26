@@ -31,7 +31,7 @@ export const GET = async (req: Request) => {
     })
     latitude = result.latitude
     longitude = result.longitude
-    countryCode = result.countryCode?.toLowerCase()
+    countryCode = result.countryCode?.toLowerCase() || ''
   } catch (e) {
     Sentry.captureException(e, {
       extra: { address, placeId },
