@@ -41,18 +41,8 @@ jobs:
           echo "NEXT_PUBLIC_ENVIRONMENT=production" >> $GITHUB_ENV
           echo "DISABLE_SENTRY_SOURCEMAPS=true" >> $GITHUB_ENV
           echo "ANALYZE=true" >> $GITHUB_ENV
-          echo "DATABASE_URL=mysql://root:root@localhost:3306/swc-web" >> $GITHUB_ENV
-          echo "SWC_CIVIC_DATABASE_URL=postgres://postgres:postgres@localhost:5432/swc_civic" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_THIRDWEB_CLIENT_ID=dummy_client_id" >> $GITHUB_ENV
           echo "THIRD_WEB_CLIENT_SECRET=dummy_secret" >> $GITHUB_ENV
-          echo "THIRDWEB_AUTH_PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN=dummy_token" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN=localhost:3000" >> $GITHUB_ENV
-          echo "SUPPRESS_SENTRY_ERRORS_ON_LOCAL=true" >> $GITHUB_ENV
-          echo "DISABLE_ERD=true" >> $GITHUB_ENV
-          echo "MINIMIZE_PAGE_PRE_GENERATION=true" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_BYPASS_GEO_GATE=true" >> $GITHUB_ENV
-          echo "BYPASS_INTERNATIONAL_REDIRECT=true" >> $GITHUB_ENV
 
       - name: Generate Prisma client
         run: npm run db:generate
