@@ -2,6 +2,7 @@ import bundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
 import { RetryChunkLoadPlugin } from 'webpack-retry-chunk-load-plugin'
+const BundleStatsPlugin = require('./scripts/webpack-bundle-stats.js')
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -270,6 +271,11 @@ const nextConfig: NextConfig = {
           retryDelay: 1000,
         }),
       )
+
+      // Add bundle stats plugin when analyzing
+      if (process.env.ANALYZE === 'true') {
+        config.plugins.push(new BundleStatsPlugin())
+      }
     }
     return config
   },
