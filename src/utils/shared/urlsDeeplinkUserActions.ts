@@ -143,6 +143,9 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
     [USUserActionEmailCampaignName.GENIUS_ACT_MAY_13_2025]: ({ countryCode }) => {
       return `${getIntlPrefix(countryCode)}/action/email`
     },
+    [USUserActionEmailCampaignName.USDC_REWARDS_SEP_18_2025]: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/email`
+    },
   },
   [UserActionType.POLL]: {
     [USUserActionPollCampaignName.CRYPTO_NEWS]: ({ countryCode }) => {
