@@ -44,7 +44,7 @@ interface EventDialogContentProps {
   countryCode: SupportedCountryCodes
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       success: 'Thank you for your interest! We will send you a reminder closer to the event.',

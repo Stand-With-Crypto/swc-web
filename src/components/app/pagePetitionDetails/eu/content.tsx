@@ -29,7 +29,7 @@ interface PagePetitionDetailsContentProps {
   }>
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       petitionClosed: 'Petition closed {date}',

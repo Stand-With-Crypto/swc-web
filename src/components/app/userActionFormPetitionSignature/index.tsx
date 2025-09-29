@@ -59,7 +59,7 @@ interface UserActionFormPetitionSignatureProps {
   user: GetUserFullProfileInfoResponse['user']
 }
 
-const i18nMessages = withI18nCommons(
+export const i18nMessages = withI18nCommons(
   createI18nMessages({
     defaultMessages: {
       en: {

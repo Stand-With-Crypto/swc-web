@@ -17,7 +17,7 @@ interface EventDialogProps {
   triggerClassName?: string
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       a11yTitle: 'State {state} Events',

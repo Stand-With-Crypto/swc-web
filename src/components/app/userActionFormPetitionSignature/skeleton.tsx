@@ -11,7 +11,7 @@ import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { mergeI18nMessages } from '@/utils/shared/i18n/mergeI18nMessages'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       loadingPetition: 'Loading petition...',

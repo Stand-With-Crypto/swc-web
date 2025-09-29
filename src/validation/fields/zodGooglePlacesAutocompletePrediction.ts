@@ -26,7 +26,7 @@ export const createZodGooglePlacesAutocompletePredictionWithI18n = (t: Translato
     },
   )
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       pleaseSelectAValidAddress: 'Please select a valid address',

@@ -49,7 +49,7 @@ export type UserActionPetitionSignatureActionValues = z.infer<
   ReturnType<typeof createUserActionFormPetitionSignatureAction>
 >
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       firstNameRequired: 'First name is required',

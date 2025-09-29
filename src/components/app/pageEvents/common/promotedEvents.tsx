@@ -23,7 +23,7 @@ interface PromotedEventsProps {
   language?: SupportedLanguages
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       rsvp: 'RSVP',

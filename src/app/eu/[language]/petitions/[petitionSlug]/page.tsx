@@ -41,7 +41,7 @@ export async function generateStaticParams() {
   return params
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       title: 'Sign this petition',

@@ -31,7 +31,7 @@ interface SignatoriesCarouselProps {
 
 const MIN_SIGNATURES_TO_RENDER_LIST = 1
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       youSigned: 'You signed',

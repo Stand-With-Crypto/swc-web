@@ -18,7 +18,7 @@ interface PetitionSummaryFooterProps {
   onPetitionSigned?: () => void
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       signPetition: 'Sign petition',

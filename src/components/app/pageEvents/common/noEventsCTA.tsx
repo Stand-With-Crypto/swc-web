@@ -14,7 +14,7 @@ import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountrie
 import { cn } from '@/utils/web/cn'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       joinSWC: 'Join Stand With Crypto and we’ll keep you updated on any events in your area.',

@@ -9,7 +9,7 @@ import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { fullUrl, getIntlUrls } from '@/utils/shared/urls'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       share: 'Share',

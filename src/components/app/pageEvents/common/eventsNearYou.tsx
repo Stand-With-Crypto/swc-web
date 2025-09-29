@@ -22,7 +22,7 @@ interface EventsNearYouProps {
   events: SWCEvents
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       title: 'Events near you',
