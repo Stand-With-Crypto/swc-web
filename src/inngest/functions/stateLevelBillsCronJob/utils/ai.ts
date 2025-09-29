@@ -81,20 +81,17 @@ export async function analyzeCryptoRelatedBillsWithRetry(bills: Bill[], logger: 
 
       data.push(...scores.bills)
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error)
-      Sentry.captureException(errorMessage, {
+      const batchIds = batch.map(bill => bill.externalId)
+      const sentryErrorId = Sentry.captureException(error, {
         extra: {
-          error,
+          batchIds,
           offset,
         },
-        level: 'error',
         tags: {
           domain: 'StateLevelBillsCronJob',
         },
       })
-      logger.error(
-        `Failed to analyze bills data.\nids: ${batch.map(bill => bill.externalId).join(', ')}.\nerror: ${errorMessage}`,
-      )
+      logger.error(`Failed to analyze bills data. Sentry error id: ${sentryErrorId}.`)
     }
 
     offset += AI_ANALYSIS_BATCH_LENGTH

@@ -60,12 +60,10 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
       while (hasMoreData) {
         logger.info(`Fetching page ${pageIndex + 1}...`)
 
-        const paginationParams = {
+        const results = await fetchQuorumBills({
           limit: QUORUM_API_BILLS_PER_PAGE,
           offset: pageIndex * QUORUM_API_BILLS_PER_PAGE,
-        }
-
-        const results = await fetchQuorumBills(paginationParams)
+        })
 
         logger.info(`Fetched ${results.objects.length} bills from Quorum API.`)
 
@@ -86,7 +84,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
     const billsFromBuilderIO = await step.run('retrieve-bills-data-from-builder-io', async () => {
       logger.info('Starting to fetch existing bills from Builder.io...')
 
-      const billsFromBuilderIO = await fetchBuilderIOBills(countryCode)
+      const billsFromBuilderIO = await fetchBuilderIOBills(countryCode, logger)
 
       logger.info(
         `Completed fetching bills from Builder.io. Total bills fetched: ${billsFromBuilderIO.length}.`,
@@ -121,12 +119,11 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
         while (hasMoreData) {
           logger.info(`Fetching page ${pageIndex + 1}...`)
 
-          const paginationParams = {
+          const results = await fetchQuorumBillSummaries({
+            bills: validBillsFromQuorum,
             limit: QUORUM_API_BILLS_PER_PAGE,
             offset: pageIndex * QUORUM_API_BILLS_PER_PAGE,
-          }
-
-          const results = await fetchQuorumBillSummaries(validBillsFromQuorum, paginationParams)
+          })
 
           logger.info(`Fetched ${results.objects.length} bill summaries from Quorum API.`)
 
@@ -168,8 +165,8 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
     const allParsedBillsFromQuorum = await step.run('parse-bills-data-from-quorum', async () => {
       logger.info('Starting to parse valid Quorum bills...')
 
-      const allParsedBillsFromQuorum = validBillsFromQuorumWithSummary.map(
-        parseQuorumBillToBuilderIOPayload,
+      const allParsedBillsFromQuorum = validBillsFromQuorumWithSummary.map(quorumBill =>
+        parseQuorumBillToBuilderIOPayload(quorumBill, logger),
       )
 
       logger.info(
@@ -272,16 +269,7 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
     const createdBills = await step.run('create-new-bill-entries-in-builder-io', async () => {
       logger.info('Starting to create new bill entries in Builder.io...')
 
-      const promises = billsToCreate.map(async bill => {
-        try {
-          const result = await createBillEntryInBuilderIO(bill)
-          logger.info(`Created new bill entry in Builder.io: ${result.id}.`)
-        } catch (error) {
-          logger.error(
-            `Error creating bill entry in Builder.io: ${error instanceof Error ? error.message : String(error)}.`,
-          )
-        }
-      })
+      const promises = billsToCreate.map(bill => createBillEntryInBuilderIO(bill, logger))
 
       const result = await Promise.allSettled(promises)
 
@@ -295,16 +283,9 @@ export const stateLevelBillsSourcingAutomation = inngest.createFunction(
     const updatedBills = await step.run('update-existing-bill-entries-in-builder-io', async () => {
       logger.info('Starting to update existing bill entries in Builder.io...')
 
-      const promises = billsToUpdate.map(async bill => {
-        try {
-          const result = await updateBillEntryInBuilderIO(bill.id, bill.data)
-          logger.info(`Updated existing bill entry in Builder.io: ${result.id}.`)
-        } catch (error) {
-          logger.error(
-            `Error updating bill entry in Builder.io: ${error instanceof Error ? error.message : String(error)}.`,
-          )
-        }
-      })
+      const promises = billsToUpdate.map(bill =>
+        updateBillEntryInBuilderIO(bill.id, bill.data, logger),
+      )
 
       const result = await Promise.allSettled(promises)
 

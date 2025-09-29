@@ -17,15 +17,15 @@ const QUORUM_API_KEY = requiredOutsideLocalEnv(
   'State-level bills CRON Job',
 )!
 
-const QUORUM_USERNAME = requiredOutsideLocalEnv(
-  process.env.QUORUM_USERNAME,
-  'QUORUM_USERNAME',
+const QUORUM_API_USERNAME = requiredOutsideLocalEnv(
+  process.env.QUORUM_API_USERNAME,
+  'QUORUM_API_USERNAME',
   'State-level bills CRON Job',
 )!
 
 export const QUORUM_API_AUTH_QUERY_PARAMS = {
   api_key: QUORUM_API_KEY,
-  username: QUORUM_USERNAME,
+  username: QUORUM_API_USERNAME,
 }
 
 export const QUORUM_API_ENDPOINT = requiredOutsideLocalEnv(

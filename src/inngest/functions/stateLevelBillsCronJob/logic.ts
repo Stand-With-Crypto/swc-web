@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import { Logger } from 'inngest/middleware/logger'
 import path from 'node:path'
 
 import {
@@ -59,13 +60,14 @@ export async function fetchQuorumBills(paginationParams: PaginationParams) {
   return response.json() as Promise<QuorumBillApiResponse>
 }
 
-export async function fetchQuorumBillSummaries(
-  bills: QuorumBillApiObject[],
-  paginationParams: PaginationParams,
-) {
+export async function fetchQuorumBillSummaries({
+  bills,
+  limit,
+  offset,
+}: PaginationParams & { bills: QuorumBillApiObject[] }) {
   const searchParams = Object.entries({
-    limit: String(paginationParams.limit),
-    offset: String(paginationParams.offset),
+    limit: String(limit),
+    offset: String(offset),
 
     bill__in: bills
       .map(bill => String(bill.id))
@@ -87,6 +89,7 @@ export async function fetchQuorumBillSummaries(
 
 export function parseQuorumBillToBuilderIOPayload(
   bill: QuorumBillApiObject & { summaries: QuorumBillSummaryApiObject[] },
+  logger: Logger,
 ) {
   try {
     const response = {
@@ -101,22 +104,21 @@ export function parseQuorumBillToBuilderIOPayload(
 
     return response
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error)
-    Sentry.captureException(errorMessage, {
+    const sentryErrorId = Sentry.captureException(error, {
       extra: {
         bill,
-        error,
       },
-      level: 'error',
       tags: {
         domain: 'StateLevelBillsCronJob',
       },
     })
-    throw error
+    logger.error(
+      `Error parsing Quorum bills to Builder.io format. Sentry error id: ${sentryErrorId}.`,
+    )
   }
 }
 
-export async function fetchBuilderIOBills(countryCode: SupportedCountryCodes) {
+export async function fetchBuilderIOBills(countryCode: SupportedCountryCodes, logger: Logger) {
   let offset = 0
 
   function getNextEntries() {
@@ -134,23 +136,21 @@ export async function fetchBuilderIOBills(countryCode: SupportedCountryCodes) {
 
     return entries
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error)
-    Sentry.captureException(errorMessage, {
+    const sentryErrorId = Sentry.captureException(error, {
       extra: {
         countryCode,
-        error,
         offset,
       },
-      level: 'error',
       tags: {
         domain: 'StateLevelBillsCronJob',
       },
     })
-    throw new Error(`Error fetching bills from Builder.io: ${errorMessage}`)
+    logger.error(`Error fetching bills from Builder.io. Sentry error id: ${sentryErrorId}.`)
+    return []
   }
 }
 
-export async function createBillEntryInBuilderIO(bill: CreateBillEntryPayload) {
+export async function createBillEntryInBuilderIO(bill: CreateBillEntryPayload, logger: Logger) {
   const body = JSON.stringify({
     ...bill,
     published: BUILDER_IO_BILL_PUBLISHED_STATE,
@@ -177,22 +177,23 @@ export async function createBillEntryInBuilderIO(bill: CreateBillEntryPayload) {
 
     return data as Promise<{ id: string }>
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error)
-    Sentry.captureException(errorMessage, {
+    const sentryErrorId = Sentry.captureException(error, {
       extra: {
         bill,
-        error,
       },
-      level: 'error',
       tags: {
         domain: 'StateLevelBillsCronJob',
       },
     })
-    throw new Error(`Failed to create bill entry in Builder.io: ${errorMessage}.`)
+    logger.error(`Failed to create bill entry in Builder.io. Sentry error id: ${sentryErrorId}.`)
   }
 }
 
-export async function updateBillEntryInBuilderIO(id: string, bill: UpdateBillEntryPayload) {
+export async function updateBillEntryInBuilderIO(
+  id: string,
+  bill: UpdateBillEntryPayload,
+  logger: Logger,
+) {
   const payload: Required<UpdateBillEntryPayload['data']> = {
     keyDates: bill.data.keyDates || [],
     summary: bill.data.summary,
@@ -225,19 +226,16 @@ export async function updateBillEntryInBuilderIO(id: string, bill: UpdateBillEnt
 
     return data as Promise<{ id: string }>
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error)
-    Sentry.captureException(errorMessage, {
+    const sentryErrorId = Sentry.captureException(error, {
       extra: {
         bill,
-        error,
         id,
         payload,
       },
-      level: 'error',
       tags: {
         domain: 'StateLevelBillsCronJob',
       },
     })
-    throw new Error(`Failed to update bill entry in Builder.io: ${errorMessage}.`)
+    logger.error(`Failed to update bill entry in Builder.io. Sentry error id: ${sentryErrorId}.`)
   }
 }
