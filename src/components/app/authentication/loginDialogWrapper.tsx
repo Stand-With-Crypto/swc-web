@@ -21,9 +21,11 @@ import { useENS } from '@/hooks/useENS'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 import { ThirdwebLoginContent, ThirdwebLoginContentProps } from './thirdwebLoginContent'
 
@@ -58,6 +60,23 @@ enum LoginSections {
   LOGIN = 'login',
   FINISH_PROFILE = 'finishProfile',
 }
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      signIn: 'Sign In',
+      finishProfile: 'Finish Profile',
+    },
+    de: {
+      signIn: 'Anmelden',
+      finishProfile: 'Profil vervollständigen',
+    },
+    fr: {
+      signIn: 'Se connecter',
+      finishProfile: 'Terminer le profil',
+    },
+  },
+})
 
 export function LoginDialogWrapper({
   children,
@@ -159,6 +178,7 @@ function UnauthenticatedSection({
   onLoginSuccess,
   ...props
 }: UnauthenticatedSectionProps) {
+  const { t } = useTranslation(i18nMessages, 'UnauthenticatedLoginDialogWrapper')
   const { mutate } = useApiResponseForUserFullProfileInfo()
 
   const setDialogOpen = React.useCallback(
@@ -202,7 +222,7 @@ function UnauthenticatedSection({
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        a11yTitle={currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
+        a11yTitle={currentSection === LoginSections.LOGIN ? t('signIn') : t('finishProfile')}
         className="max-w-l w-full px-0 md:px-0"
       >
         {currentSection === LoginSections.LOGIN ? (

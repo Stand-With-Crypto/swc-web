@@ -2,19 +2,41 @@
 
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
+import { getSimpleTranslation } from '@/utils/server/i18n/getSimpleTranslation'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { euExternalUrls, getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = SupportedCountryCodes.EU
 
-//TODO(EU): Add EU navbar items
-//TODO(EU): Add internationalization here
-export function getNavbarConfig({ language }: { language?: SupportedLanguages } = {}): NavbarProps {
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      manifesto: 'Manifesto',
+      petitions: 'Petitions',
+    },
+    de: {
+      manifesto: 'Manifesto',
+      petitions: 'Petitionen',
+    },
+    fr: {
+      manifesto: 'Manifesto',
+      petitions: 'Pétitions',
+    },
+  },
+})
+
+export function getNavbarConfig({
+  language = SupportedLanguages.EN,
+}: { language?: SupportedLanguages } = {}): NavbarProps {
   const urls = getIntlUrls(countryCode, { language })
+
+  const { t } = getSimpleTranslation(i18nMessages, language, countryCode)
 
   return {
     countryCode,
+    language,
     logo: {
       src: '/logo/shield.svg',
       width: 40,
@@ -23,23 +45,11 @@ export function getNavbarConfig({ language }: { language?: SupportedLanguages } 
     items: [
       {
         href: urls.manifesto(),
-        text: 'Manifesto',
+        text: t('manifesto'),
       },
       {
         href: urls.petitions(),
-        text: 'Petitions',
-      },
-      {
-        href: urls.partners(),
-        text: 'Partners',
-      },
-      {
-        href: urls.press(),
-        text: 'Press',
-      },
-      {
-        href: urls.events(),
-        text: 'Events',
+        text: t('petitions'),
       },
     ],
   }

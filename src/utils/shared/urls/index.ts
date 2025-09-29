@@ -88,7 +88,9 @@ export const getIntlUrls = (
   const countryPrefix =
     countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE && !actualPaths
       ? ''
-      : `/${countryCode}${language ? `/${language}` : ''}`
+      : countryCode === SupportedCountryCodes.EU
+        ? `/${countryCode}${language ? `/${language}` : ''}`
+        : `/${countryCode}`
 
   const racesRoutesSegments = COUNTRY_CODE_TO_RACES_ROUTES_SEGMENTS[countryCode]
   const RACES_ROUTES = {

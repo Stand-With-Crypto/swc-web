@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dropdownMenu'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
@@ -23,6 +24,7 @@ import {
 } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface Option {
   label: string
@@ -53,18 +55,34 @@ const options: Option[] = [
     language: SupportedLanguages.EN,
   },
   {
-    label: 'EU (French)',
+    label: 'EU (Français)',
     value: SupportedCountryCodes.EU,
     language: SupportedLanguages.FR,
   },
   {
-    label: 'EU (German)',
+    label: 'EU (Deutsch)',
     value: SupportedCountryCodes.EU,
     language: SupportedLanguages.DE,
   },
 ].sort((a, b) => a.label.localeCompare(b.label))
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      flagAlt: '{countryCode} flag',
+    },
+    de: {
+      flagAlt: '{countryCode} Flagge',
+    },
+    fr: {
+      flagAlt: 'Drapeau {countryCode}',
+    },
+  },
+})
+
 export function NavbarCountrySelect() {
+  const { t } = useTranslation(i18nMessages, 'NavbarCountrySelect')
+
   const [isOpen, toggleIsOpen] = useToggle(false)
   const countryCode = useCountryCode()
   const params = useParams<{ language: SupportedLanguages }>()
@@ -93,7 +111,10 @@ export function NavbarCountrySelect() {
           size="sm"
           variant="primary-cta-outline"
         >
-          <FlagIcon countryCode={currentOption.value} />
+          <FlagIcon
+            alt={t('flagAlt', { countryCode: currentOption.value })}
+            countryCode={currentOption.value}
+          />
 
           <span>{currentOption.label}</span>
           <ChevronDownIcon
@@ -123,7 +144,10 @@ export function NavbarCountrySelect() {
               }}
             >
               <div className="flex items-center gap-2">
-                <FlagIcon countryCode={option.value} />
+                <FlagIcon
+                  alt={t('flagAlt', { countryCode: option.value })}
+                  countryCode={option.value}
+                />
                 <span>{option.label}</span>
               </div>
             </DropdownMenuItem>
@@ -134,12 +158,12 @@ export function NavbarCountrySelect() {
   )
 }
 
-function FlagIcon({ countryCode }: { countryCode: SupportedCountryCodes }) {
+function FlagIcon({ countryCode, alt }: { countryCode: SupportedCountryCodes; alt: string }) {
   const prefix = countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `/${countryCode}`
   return (
     <div className="w-8">
       <Image
-        alt={`${countryCode} flag`}
+        alt={alt}
         height={16}
         priority
         quality={100}
