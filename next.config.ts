@@ -472,6 +472,12 @@ const nextConfig: NextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/s/no-bailouts/:sessionId*',
+        destination:
+          '/action/email/usdc_rewards_sep_18_2025?utm_source=swc&utm_medium=sms&utm_campaign=20250929-no-more-bailouts-1&sessionId=:sessionId*',
+        permanent: true,
+      },
+      {
         source: '/s/day-of-action-1/:sessionId*',
         destination:
           '/cryptodayofaction?utm_source=swc&utm_medium=sms&utm_campaign=2025-day-of-action-1&sessionId=:sessionId*',
