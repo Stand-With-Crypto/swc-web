@@ -24,7 +24,7 @@ interface SignaturesSummaryProps {
   petitionSlug: string
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       signed: 'Signed',

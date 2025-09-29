@@ -6,7 +6,7 @@ import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       justNow: 'Just now',

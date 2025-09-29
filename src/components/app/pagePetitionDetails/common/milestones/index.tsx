@@ -26,7 +26,7 @@ interface PetitionMilestonesProps {
 
 const AUTOMATIC_MILESTONES_THRESHOLDS = [10, 25, 50, 100]
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       petitionMilestones: 'Petition Milestones',

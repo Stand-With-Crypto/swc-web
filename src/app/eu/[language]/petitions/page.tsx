@@ -17,7 +17,7 @@ const isStaging = NEXT_PUBLIC_ENVIRONMENT !== 'production'
 
 const countryCode = SupportedCountryCodes.EU
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       title: 'Petitions',

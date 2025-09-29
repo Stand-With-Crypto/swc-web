@@ -17,7 +17,7 @@ interface AllUpcomingEventsProps {
   countryCode: SupportedCountryCodes
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       title: 'All upcoming events',

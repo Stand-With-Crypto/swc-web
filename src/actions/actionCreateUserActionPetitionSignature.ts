@@ -62,7 +62,7 @@ type UserWithRelations = User & {
 
 type UserMatch = NonNullable<Awaited<ReturnType<typeof getAuthenticatedUser>>>['userMatch']
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       petitionNotFound: 'Petition not found',

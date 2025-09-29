@@ -17,7 +17,7 @@ interface FeaturedPastEventsProps {
   language?: SupportedLanguages
 }
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       title: 'Featured past events',

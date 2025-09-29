@@ -29,7 +29,7 @@ interface PetitionCardProps {
 const IMAGE_SIZE = 150 // in pixels (150x150)
 const FALLBACK_IMAGE_PATH = '/actionTypeIcons/petition.svg'
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       petition: 'Petition',

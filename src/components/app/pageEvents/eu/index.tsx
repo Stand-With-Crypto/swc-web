@@ -17,7 +17,7 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const countryCode = SupportedCountryCodes.EU
 
-const i18nMessages = createI18nMessages({
+export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       title: 'Events',
