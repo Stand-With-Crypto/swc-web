@@ -159,6 +159,7 @@ model User {
   @@index([phoneNumber])
   @@index([smsStatus])
   @@index([referralId])
+  @@index([countryCode])
   @@map("user")
 }
 
@@ -335,6 +336,7 @@ model UserAction {
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([userEmailAddressId])
+  @@index([countryCode])
   @@map("user_action")
 }
 

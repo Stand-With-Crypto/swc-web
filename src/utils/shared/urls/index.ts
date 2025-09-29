@@ -242,6 +242,8 @@ export const getIntlUrls = (
       `${countryPrefix}/local-policy${stateCode ? `/${stateCode.toLowerCase()}` : ''}`,
     resubscribeSuccess: () => `${countryPrefix}/email/resubscribe-success`,
     dayOfActionLP: () => `${countryPrefix}/cryptodayofaction`,
+    pitchFest: () => `${countryPrefix}/content/pitchfest`,
+    usdcRewardsSep2025: () => `${countryPrefix}/action/email/usdc_rewards_sep_18_2025`,
   }
 }
 
