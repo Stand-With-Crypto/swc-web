@@ -6,9 +6,11 @@ import { waitUntil } from '@vercel/functions'
 import { z, ZodError } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
 import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFromAPI'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
+import { getServerLanguage, getServerTranslation } from '@/utils/server/i18n/getServerTranslation'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -17,6 +19,8 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { mergeI18nMessages } from '@/utils/shared/i18n/mergeI18nMessages'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -24,11 +28,13 @@ import {
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import {
+  createUserActionFormPetitionSignatureAction,
+  userActionFormPetitionSignatureI18nMessages,
   type UserActionPetitionSignatureActionValues as Input,
-  zodUserActionFormPetitionSignatureAction,
 } from '@/validation/forms/zodUserActionFormPetitionSignature'
 
 const logger = getLogger('actionCreateUserActionPetitionSignature')
@@ -37,6 +43,7 @@ interface ActionContext {
   sessionId: string
   countryCode: string
   localUser: ServerLocalUser | null
+  language: SupportedLanguages
   triggerRateLimiterAtMostOnce: () => Promise<void>
 }
 
@@ -55,23 +62,53 @@ type UserWithRelations = User & {
 
 type UserMatch = NonNullable<Awaited<ReturnType<typeof getAuthenticatedUser>>>['userMatch']
 
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      petitionNotFound: 'Petition not found',
+      userNotAuthenticated: 'User must be authenticated to sign petition',
+      wrongCountryCode: 'Address country code does not match petition country code',
+    },
+    de: {
+      petitionNotFound: 'Petition nicht gefunden',
+      userNotAuthenticated:
+        'Der Benutzer muss authentifiziert sein, um eine Petition zu unterzeichnen',
+      wrongCountryCode: 'Die Adressen-Ländercode stimmt nicht mit dem Petition-Ländercode überein',
+    },
+    fr: {
+      petitionNotFound: 'Pétition non trouvée',
+      userNotAuthenticated: "L'utilisateur doit être authentifié pour signer la pétition",
+      wrongCountryCode:
+        "Le code du pays de l'adresse ne correspond pas au code du pays de la pétition",
+    },
+  },
+})
+
 async function _actionCreateUserActionPetitionSignature(
   input: Input,
   { countryCode }: { countryCode: SupportedCountryCodes },
 ): Promise<PetitionActionResult> {
   logger.info('Petition signature action triggered')
 
+  const context = await setupActionContext()
+
+  const { t } = await getServerTranslation(
+    mergeI18nMessages(i18nMessages, userActionFormPetitionSignatureI18nMessages),
+    'actionCreateUserActionPetitionSignature',
+    countryCode,
+    context.language,
+  )
+
   const petition = await getPetitionBySlugFromAPI(countryCode, input.campaignName)
 
   if (!petition) {
     return {
       user: null,
-      errors: { root: ['Petition not found'] },
+      errors: { root: [t('petitionNotFound')] },
     }
   }
 
-  const context = await setupActionContext()
-  const validationResult = zodUserActionFormPetitionSignatureAction.safeParse(input)
+  const validationResult = createUserActionFormPetitionSignatureAction(t).safeParse(input)
 
   if (!validationResult.success) {
     return handleValidationError(validationResult.error)
@@ -84,17 +121,23 @@ async function _actionCreateUserActionPetitionSignature(
   if (!authResult) {
     return {
       user: null,
-      errors: { root: ['User must be authenticated to sign petition'] },
+      errors: { root: [t('userNotAuthenticated')] },
     }
   }
 
   const { user, userMatch } = authResult
   const addressData = validationResult.data.address
 
-  if (addressData.countryCode !== petition.countryCode) {
+  const validateCountryCode = getPetitionCountryCodeValidator(
+    petition.countryCode.toLowerCase() as SupportedCountryCodes,
+  )
+
+  if (!validateCountryCode(addressData.countryCode)) {
+    logger.error('Address country code does not match petition country code')
+
     return {
       user: null,
-      errors: { root: ['Address country code does not match petition country code'] },
+      errors: { root: [t('wrongCountryCode')] },
     }
   }
 
@@ -128,12 +171,13 @@ async function _actionCreateUserActionPetitionSignature(
 async function setupActionContext(): Promise<ActionContext> {
   const sessionId = await getUserSessionId()
   const countryCode = await getUserAccessLocationCookie()
+  const language = await getServerLanguage()
   const localUser = await parseLocalUserFromCookies()
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'authenticated',
   })
 
-  return { sessionId, countryCode, localUser, triggerRateLimiterAtMostOnce }
+  return { sessionId, countryCode, localUser, triggerRateLimiterAtMostOnce, language }
 }
 
 function handleValidationError(error: ZodError): PetitionActionResult {
