@@ -15,6 +15,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useSessionControl } from '@/hooks/useSession'
 import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import {
   getFullSensitiveDataUserDisplayName,
@@ -25,9 +27,41 @@ interface NavbarLoggedInSessionPopoverContentProps {
   onClose: () => void
 }
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      viewProfile: 'View profile',
+      unlockRewards: 'Unlock rewards, track activities, and access exclusive membership tiers.',
+      failedCopyToClipboard: 'Failed to copy to clipboard, try again later.',
+      logOut: 'Log out',
+      copiedToClipboard: 'Copied to clipboard',
+    },
+    de: {
+      viewProfile: 'Profil ansehen',
+      unlockRewards:
+        'Belohnungen freischalten, Aktivitäten verfolgen und exklusive Mitgliedschaften zugänglich machen.',
+      failedCopyToClipboard:
+        'Fehler beim Kopieren in die Zwischenablage, versuchen Sie es später erneut.',
+      logOut: 'Abmelden',
+      copiedToClipboard: 'In die Zwischenablage kopiert',
+    },
+    fr: {
+      viewProfile: 'Voir le profil',
+      unlockRewards:
+        'Débloquez les récompenses, suivez les activités et accédez aux niveaux de membre exclusifs.',
+      failedCopyToClipboard:
+        'Échec de la copie dans le presse-papiers, veuillez réessayer plus tard.',
+      logOut: 'Se déconnecter',
+      copiedToClipboard: 'Copié dans le presse-papiers',
+    },
+  },
+})
+
 export function NavbarLoggedInPopoverContent({
   onClose,
 }: NavbarLoggedInSessionPopoverContentProps) {
+  const { t } = useTranslation(i18nMessages, 'NavbarLoggedInPopoverContent')
+
   const urls = useIntlUrls()
   const { logout } = useSessionControl()
 
@@ -47,12 +81,10 @@ export function NavbarLoggedInPopoverContent({
         <div className="space-y-1">
           <Button asChild className="w-full">
             <InternalLink href={urls.profile()} onClick={onClose}>
-              View profile
+              {t('viewProfile')}
             </InternalLink>
           </Button>
-          <p className="text-sm text-muted-foreground">
-            Unlock rewards, track activities, and access exclusive membership tiers.
-          </p>
+          <p className="text-sm text-muted-foreground">{t('unlockRewards')}</p>
         </div>
       </div>
 
@@ -63,7 +95,7 @@ export function NavbarLoggedInPopoverContent({
           onClose()
         }}
       >
-        Log out
+        {t('logOut')}
       </button>
     </div>
   )
@@ -74,12 +106,14 @@ function UserHeading(props: {
     primaryUserCryptoAddress: ClientUserCryptoAddressWithENSData | null
   }
 }) {
+  const { t } = useTranslation(i18nMessages, 'UserHeadingNavbarLoggedInPopoverContent')
+
   const user = props.user!
   const [{ error, value }, copyToClipboard] = useCopyToClipboard()
 
   const handleClipboardError = React.useCallback(() => {
-    toast.error('Failed to copy to clipboard, try again later.')
-  }, [])
+    toast.error(t('failedCopyToClipboard'))
+  }, [t])
 
   React.useEffect(() => {
     if (error) {
@@ -87,9 +121,9 @@ function UserHeading(props: {
       handleClipboardError()
     }
     if (value) {
-      toast.success('Copied to clipboard')
+      toast.success(t('copiedToClipboard'))
     }
-  }, [error, value, handleClipboardError])
+  }, [error, value, handleClipboardError, t])
   const shouldDisplayCryptoAddress = !user.hasEmbeddedWallet
   const handleCopyNameToClipboard = React.useCallback(() => {
     const dataToWrite = getFullSensitiveDataUserDisplayName(user)

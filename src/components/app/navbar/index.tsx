@@ -1,6 +1,6 @@
 'use client'
 
-import { JSX, useCallback, useState } from 'react'
+import { JSX, ReactNode, useCallback, useState } from 'react'
 import { useIsPreviewing } from '@builder.io/react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
@@ -19,10 +19,13 @@ import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 import { NavbarCountrySelect } from './navbarCountrySelect'
 
@@ -44,6 +47,7 @@ export type NavbarItem =
 
 export interface NavbarProps {
   countryCode: SupportedCountryCodes
+  language?: SupportedLanguages
   items: NavbarItem[]
   showDonateButton?: boolean
   logo?: {
@@ -53,8 +57,29 @@ export interface NavbarProps {
   }
 }
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      standWithCryptoLogo: 'Stand With Crypto Logo',
+      openNavigationMenu: 'Open Navigation Menu',
+      signIn: 'Sign In',
+    },
+    de: {
+      standWithCryptoLogo: 'Stand With Crypto Logo',
+      openNavigationMenu: 'Navigation öffnen',
+      signIn: 'Anmelden',
+    },
+    fr: {
+      standWithCryptoLogo: 'Logo Stand With Crypto',
+      openNavigationMenu: 'Ouvrir le menu de navigation',
+      signIn: 'Se connecter',
+    },
+  },
+})
+
 export function Navbar({
   countryCode,
+  language = SupportedLanguages.EN,
   items,
   logo = {
     src: '/logo/shield.svg',
@@ -62,9 +87,13 @@ export function Navbar({
     height: 40,
   },
 }: NavbarProps) {
+  const { t } = useTranslation(i18nMessages, 'Navbar')
+
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const isPreviewing = useIsPreviewing()
-  const urls = getIntlUrls(countryCode)
+  const urls = getIntlUrls(countryCode, {
+    language,
+  })
   const [hoveredMenuIndex, setHoveredMenuIndex] = useState<number | null>(null)
   const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 
@@ -100,7 +129,7 @@ export function Navbar({
       >
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
-            <NextImage alt="Stand With Crypto Logo" priority {...logo} />
+            <NextImage alt={t('standWithCryptoLogo')} priority {...logo} />
           </InternalLink>
           <div className="flex gap-4">
             <div className="flex h-fit gap-4 rounded-full bg-secondary">
@@ -193,14 +222,16 @@ export function Navbar({
             </div>
             <div className="hidden gap-4 min-[1092px]:flex">
               <NavbarCountrySelect />
-              <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
+              <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating}>
+                {t('signIn')}
+              </LoginButton>
             </div>
           </div>
         </div>
         <Drawer {...dialogProps} direction="top" shouldScaleBackground>
           <DrawerTrigger asChild data-testid="drawer-trigger">
             <button className="p-3 min-[1096px]:hidden">
-              <span className="sr-only">Open navigation menu</span>
+              <span className="sr-only">{t('openNavigationMenu')}</span>
               <Menu />
             </button>
           </DrawerTrigger>
@@ -208,7 +239,7 @@ export function Navbar({
             <div className="h-screen overflow-y-auto pb-6 text-left">
               <div className="flex justify-between p-6">
                 <InternalLink className="flex-shrink-0" href={urls.home()}>
-                  <NextImage alt="Stand With Crypto Logo" priority {...logo} />
+                  <NextImage alt={t('standWithCryptoLogo')} priority {...logo} />
                 </InternalLink>
                 <DrawerClose asChild>
                   <Button className="px-0" variant="ghost">
@@ -283,7 +314,9 @@ export function Navbar({
               })}
 
               <div className="mt-4 px-6">
-                <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating} />
+                <LoginButton maybeCloseAfterNavigating={maybeCloseAfterNavigating}>
+                  {t('signIn')}
+                </LoginButton>
               </div>
 
               <div className="mt-4 px-6">
@@ -297,7 +330,13 @@ export function Navbar({
   )
 }
 
-const LoginButton = ({ maybeCloseAfterNavigating }: { maybeCloseAfterNavigating: () => void }) => (
+const LoginButton = ({
+  maybeCloseAfterNavigating,
+  children,
+}: {
+  maybeCloseAfterNavigating: () => void
+  children: ReactNode
+}) => (
   <LoginDialogWrapper
     authenticatedContent={
       <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
@@ -307,7 +346,7 @@ const LoginButton = ({ maybeCloseAfterNavigating }: { maybeCloseAfterNavigating:
       className="w-full text-base font-bold leading-4 md:font-normal min-[1096px]:w-auto"
       variant="primary-cta"
     >
-      Sign In
+      {children}
     </Button>
   </LoginDialogWrapper>
 )

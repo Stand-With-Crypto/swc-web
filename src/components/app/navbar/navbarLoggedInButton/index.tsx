@@ -8,11 +8,35 @@ import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { useDialog } from '@/hooks/useDialog'
 import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
 import { LOGOUT_ACTION_EVENT } from '@/utils/shared/eventListeners'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      profile: 'Profile',
+      loggingOut: 'Logging out...',
+      signIn: 'Sign In',
+    },
+    de: {
+      profile: 'Profil',
+      loggingOut: 'Abmelden...',
+      signIn: 'Anmelden',
+    },
+    fr: {
+      profile: 'Profil',
+      loggingOut: 'Déconnexion...',
+      signIn: 'Se connecter',
+    },
+  },
+})
+
 export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: boolean) => void }) {
+  const { t } = useTranslation(i18nMessages, 'NavbarLoggedInButton')
+
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
   const dialogProps = useDialog({ analytics: 'Navbar Logged In Button' })
   const [isLoggingOut, setIsLoggingOut] = useState(false)
@@ -25,11 +49,11 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
     const hasUserProvidedInfo =
       userWithMaybeEnsData.firstName || userWithMaybeEnsData.primaryUserEmailAddress?.emailAddress
     if (!hasUserProvidedInfo) {
-      return 'Profile'
+      return t('profile')
     }
 
     return getSensitiveDataUserDisplayName(userWithMaybeEnsData)
-  }, [userWithMaybeEnsData])
+  }, [userWithMaybeEnsData, t])
 
   const handleLogoutEvent = useCallback(() => {
     setIsLoggingOut(oldState => !oldState)
@@ -53,7 +77,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
       <PopoverTrigger asChild disabled={isLoggingOut}>
         {isLoggingOut ? (
           <Button className={buttonWidthClassName} disabled>
-            Logging out...
+            {t('loggingOut')}
           </Button>
         ) : displayName ? (
           <Button className={buttonWidthClassName} data-testid="login-button">
@@ -61,7 +85,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
           </Button>
         ) : (
           <Button className={buttonWidthClassName} data-testid="login-button">
-            Sign In
+            {t('signIn')}
           </Button>
         )}
       </PopoverTrigger>
