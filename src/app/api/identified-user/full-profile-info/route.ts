@@ -2,7 +2,7 @@ import 'server-only'
 
 import { NextResponse } from 'next/server'
 
-import { getClientAddress } from '@/clientModels/clientAddress'
+import { getSensitiveClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -61,7 +61,7 @@ async function apiResponseForUserFullProfileInfo() {
   return {
     user: user && {
       ...getSensitiveDataClientUser(user),
-      address: user.address && getClientAddress(user.address),
+      address: user.address && getSensitiveClientAddress(user.address),
       userActions: user.userActions.map(record => getSensitiveDataClientUserAction({ record })),
     },
   }

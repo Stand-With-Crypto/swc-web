@@ -25,6 +25,8 @@ export interface FormFields {
   address: {
     description: string
     place_id: string
+    latitude?: number
+    longitude?: number
   }
   email: string
   firstName: string

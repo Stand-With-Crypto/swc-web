@@ -68,6 +68,8 @@ export function AUUserActionFormEmailCongressperson({
     ? {
         description: user.address.formattedDescription,
         place_id: user.address.googlePlaceId,
+        latitude: user.address.latitude,
+        longitude: user.address.longitude,
       }
     : undefined
 
