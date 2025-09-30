@@ -8,42 +8,61 @@ import { Button } from '@/components/ui/button'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
-function getCountryCTA(countryCode: SupportedCountryCodes) {
-  switch (countryCode) {
-    case SupportedCountryCodes.US:
-      return 'Join the fight'
-    case SupportedCountryCodes.AU:
-      return 'Join the Movement'
-    case SupportedCountryCodes.CA:
-      return 'Join the Movement'
-    case SupportedCountryCodes.GB:
-      return 'Join the Movement'
-    default:
-      return 'Join the fight'
-  }
-}
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      joinTheMovement: 'Join the Movement',
+      signThePetition: 'Sign the Petition',
+      signUpForPitchFest: 'Sign Up for Pitch Fest',
+      viewProfile: 'View Profile',
+      finishProfile: 'Finish your profile',
+    },
+    de: {
+      joinTheMovement: 'Schließe dich der Bewegung an',
+      signThePetition: 'Petition unterschreiben',
+      signUpForPitchFest: 'Pitch Fest anmelden',
+      viewProfile: 'Profil ansehen',
+      finishProfile: 'Profil vervollständigen',
+    },
+    fr: {
+      joinTheMovement: 'Rejoignez le mouvement',
+      signThePetition: 'Signer la pétition',
+      signUpForPitchFest: "S'inscrire pour Pitch Fest",
+      viewProfile: 'Voir le profil',
+      finishProfile: 'Terminer le profil',
+    },
+  },
+  messagesOverrides: {
+    us: {
+      en: {
+        joinTheMovement: 'Join the fight',
+      },
+    },
+  },
+})
 
 export function HeroCTA({
   countryCode,
-  ctaText = getCountryCTA(countryCode),
   darkMode = false,
 }: {
   countryCode: SupportedCountryCodes
-  ctaText?: string
   darkMode?: boolean
 }) {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
+  const { t } = useTranslation(i18nMessages, 'FooterHeroCTA')
 
   const user = profileReq.data?.user
 
   const unauthenticatedContent = (
     <Button size="lg" variant="primary-cta">
-      {ctaText}
+      {t('joinTheMovement')}
     </Button>
   )
 
@@ -80,7 +99,7 @@ export function HeroCTA({
       return (
         <Button asChild size="lg" variant="primary-cta">
           <ExternalLink href="https://petition.parliament.uk/petitions/730568">
-            Sign the Petition
+            {t('signThePetition')}
           </ExternalLink>
         </Button>
       )
@@ -89,7 +108,7 @@ export function HeroCTA({
     if (countryCode === SupportedCountryCodes.AU) {
       return (
         <Button asChild size="lg" variant="primary-cta">
-          <InternalLink href={urls.pitchFest()}>Sign Up for Pitch Fest</InternalLink>
+          <InternalLink href={urls.pitchFest()}>{t('signUpForPitchFest')}</InternalLink>
         </Button>
       )
     }
@@ -97,7 +116,7 @@ export function HeroCTA({
     if (hasCompleteUserProfile(user)) {
       return (
         <Button asChild size="lg" variant="primary-cta">
-          <InternalLink href={urls.profile()}>View Profile</InternalLink>
+          <InternalLink href={urls.profile()}>{t('viewProfile')}</InternalLink>
         </Button>
       )
     }
@@ -107,7 +126,7 @@ export function HeroCTA({
         <InternalLink
           href={`${urls.profile()}?${OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY}=true`}
         >
-          Finish your profile
+          {t('finishProfile')}
         </InternalLink>
       </Button>
     )

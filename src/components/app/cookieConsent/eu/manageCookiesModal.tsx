@@ -3,10 +3,11 @@ import React from 'react'
 import { ManageCookiesModal } from '@/components/app/cookieConsent/common/manageCookiesModal'
 import {
   EU_DEFAULT_VALUES,
-  EU_FIELDS_CONFIG,
+  getEuFieldsConfig,
 } from '@/components/app/cookieConsent/eu/cookiePreferencesForm'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
 
 interface EUManageCookiesModalProps {
   children: React.ReactNode
@@ -14,11 +15,13 @@ interface EUManageCookiesModalProps {
 }
 
 export function EUManageCookiesModal({ children, onSubmit }: EUManageCookiesModalProps) {
+  const language = useLanguage()
+
   return (
     <ManageCookiesModal
       countryCode={SupportedCountryCodes.EU}
       defaultValues={EU_DEFAULT_VALUES}
-      fieldsConfig={EU_FIELDS_CONFIG}
+      fieldsConfig={getEuFieldsConfig(language)}
       onSubmit={onSubmit}
     >
       <div>{children}</div>

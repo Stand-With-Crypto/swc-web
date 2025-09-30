@@ -4,11 +4,33 @@ import { ReactNode } from 'react'
 import { X } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface CookieConsentBannerProps {
   children: ReactNode
 }
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      acceptAll: 'Accept all',
+      rejectAll: 'Reject all',
+      manageCookies: 'Manage cookies',
+    },
+    de: {
+      acceptAll: 'Alle akzeptieren',
+      rejectAll: 'Alle ablehnen',
+      manageCookies: 'Cookies verwalten',
+    },
+    fr: {
+      acceptAll: 'Tout accepter',
+      rejectAll: 'Tout refuser',
+      manageCookies: 'Gérer les cookies',
+    },
+  },
+})
 
 export function CookieConsentBanner({ children }: CookieConsentBannerProps) {
   return (
@@ -42,9 +64,11 @@ const Content = ({ children, onRejectAll }: { children: ReactNode; onRejectAll: 
 CookieConsentBanner.Content = Content
 
 const ManageCookiesButton = ({ children }: { children?: ReactNode }) => {
+  const { t } = useTranslation(i18nMessages, 'CookieConsentBanner')
+
   return (
     <Button className="px-0 py-4" variant="link">
-      {children || 'Manage cookies'}
+      {children || t('manageCookies')}
     </Button>
   )
 }
@@ -60,12 +84,14 @@ const Footer = ({
   onRejectAll: () => void
   onAcceptAll: () => void
 }) => {
+  const { t } = useTranslation(i18nMessages, 'CookieConsentBanner')
+
   return (
     <div className={cn('mb-2 flex items-center justify-between gap-4 md:mb-0 md:justify-end')}>
       <div className="flex gap-4">
         {children}
         <Button className="px-0 py-4" onClick={onRejectAll} variant="link">
-          Reject all
+          {t('rejectAll')}
         </Button>
       </div>
       <Button
@@ -73,7 +99,7 @@ const Footer = ({
         onClick={onAcceptAll}
         variant="link"
       >
-        Accept all
+        {t('acceptAll')}
       </Button>
       <button className="hidden md:block" onClick={onRejectAll}>
         <div className="rounded-full bg-gray-300 p-1 text-white transition-all hover:bg-gray-400">
