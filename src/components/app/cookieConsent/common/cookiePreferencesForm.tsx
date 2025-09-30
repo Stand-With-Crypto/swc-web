@@ -41,14 +41,14 @@ export const i18nMessages = createI18nMessages({
       manageCookies: 'Cookies verwalten:',
       helperText:
         'Diese Cookies sind für die Website erforderlich und können in unseren Systemen nicht abgeschaltet werden. Sie werden normalerweise nur gesetzt, wenn Sie eine Anfrage für Dienste stellen, wie z.B. die Einstellung Ihrer Datenschutzeinstellungen, das Anmelden oder das Ausfüllen von Formularen. Diese Cookies beinhalten auch Cookies, auf die wir für die Betrugsprävention vertrauen. Sie können Ihren Browser so einstellen, dass Sie über diese Cookies informiert werden oder diese blockieren, aber einige Teile der Website funktionieren dann nicht mehr.',
-      strictlyNecessaryCookies: 'Strictly necessary Cookies',
+      strictlyNecessaryCookies: 'Unbedingt erforderliche Cookies',
       save: 'Speichern',
     },
     fr: {
       manageCookies: 'Gérer les cookies:',
       helperText:
         'Ces cookies sont nécessaires pour que le site fonctionne et ne peuvent pas être désactivés dans nos systèmes. Ils sont généralement définis en réponse à des actions effectuées par vous, qui représentent une demande de services, comme la configuration de vos préférences de confidentialité, la connexion ou le remplissage de formulaires. Ces cookies incluent également les cookies sur lesquels nous pouvons compter pour la prévention du fraude. Vous pouvez configurer votre navigateur pour bloquer ou vous informer sur ces cookies, mais certaines parties du site ne fonctionneront pas alors.',
-      strictlyNecessaryCookies: 'Strictly necessary Cookies',
+      strictlyNecessaryCookies: 'Cookies strictement nécessaires',
       save: 'Enregistrer',
     },
   },
