@@ -72,12 +72,6 @@ export function USUserActionFormEmailCongressperson({
       }
     : undefined
 
-  console.log({
-    'user?.address': user?.address,
-    userAddress,
-    initialValues,
-  })
-
   const form = useForm<EmailActionFormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: {
