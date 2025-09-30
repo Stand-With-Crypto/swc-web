@@ -139,6 +139,8 @@ export function USUserActionFormEmailCongressperson({
   const addressField = form.watch('address')
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
     address: addressField?.description,
+    latitude: addressField?.latitude,
+    longitude: addressField?.longitude,
     filterFn: filterDTSIPeopleByUSPoliticalCategory(campaignMetadata.politicianCategory),
   })
 
