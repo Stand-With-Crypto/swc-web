@@ -25,6 +25,8 @@ import type { CapitolCanaryUpsertAdvocateInngestSchema } from '@/inngest/functio
 import type { CleanupNftMintsEventSchema } from '@/inngest/functions/cleanupNFTMints'
 import type { CleanupPostalCodesInngestEventSchema } from '@/inngest/functions/cleanupPostalCodes'
 import { UpdateDistrictsRankingsCronJobSchema } from '@/inngest/functions/districtsRankings/updateRankings'
+import type { ImportUsersByCSVCoordinatorSchema } from '@/inngest/functions/importlUsersByCSV'
+import { ImportUsersByCSVProcessorSchema } from '@/inngest/functions/importlUsersByCSV/logic'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
 import { SyncSendgridContactsCoordinatorSchema } from '@/inngest/functions/sendgridContactsCronJob'
@@ -82,5 +84,6 @@ type EventTypes =
   | ProcessAddressFieldsWithGooglePlacesProcessorEventSchema
   | BackfillIntlUsersCoordinatorSchema
   | BackfillIntlUsersProcessorSchema
-
+  | ImportUsersByCSVCoordinatorSchema
+  | ImportUsersByCSVProcessorSchema
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
