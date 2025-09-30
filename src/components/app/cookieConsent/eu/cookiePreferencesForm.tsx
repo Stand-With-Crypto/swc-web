@@ -1,4 +1,3 @@
-import { CookiePreferencesFieldConfig } from '@/components/app/cookieConsent/common/cookiePreferencesForm'
 import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
 import { CookieConsentPermissions, OptionalCookieConsentTypes } from '@/utils/shared/cookieConsent'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'

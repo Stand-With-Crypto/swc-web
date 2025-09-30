@@ -23,10 +23,10 @@ import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface ManageCookiesModalProps {
