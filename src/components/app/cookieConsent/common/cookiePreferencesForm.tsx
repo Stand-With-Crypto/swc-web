@@ -71,7 +71,7 @@ export function CookiePreferencesForm({
       <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
         <h3 className="font-semibold">{t('manageCookies')}</h3>
 
-        <div className="grid grid-cols-1 gap-3 text-sm md:grid-cols-[repeat(2,minmax(max-content,1fr))] md:gap-5 md:text-base">
+        <div className="grid grid-cols-1 gap-3 text-sm">
           <CheckboxField
             checked
             disabled
