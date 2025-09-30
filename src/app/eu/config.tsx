@@ -15,14 +15,29 @@ export const i18nMessages = createI18nMessages({
     en: {
       manifesto: 'Manifesto',
       petitions: 'Petitions',
+      footerTitle: 'Join the Movement',
+      footerSubtitle:
+        'Join to show your support and protect the future of crypto in Europe. #standwithcrypto',
+      termsOfService: 'Terms of service',
+      privacyPolicy: 'Privacy',
     },
     de: {
       manifesto: 'Manifesto',
       petitions: 'Petitionen',
+      footerTitle: 'Schließe dich der Bewegung an',
+      footerSubtitle:
+        'Schließe dich an, um deine Unterstützung zu zeigen und die Zukunft von Krypto in Europa zu schützen. #standwithcrypto',
+      termsOfService: 'Nutzungsbedingungen',
+      privacyPolicy: 'Datenschutz',
     },
     fr: {
       manifesto: 'Manifesto',
       petitions: 'Pétitions',
+      footerTitle: 'Rejoignez le mouvement',
+      footerSubtitle:
+        "Rejoignez-nous pour montrer votre soutien et protéger l'avenir de la crypto en Europe. #standwithcrypto",
+      termsOfService: "Conditions d'utilisation",
+      privacyPolicy: 'Confidentialité',
     },
   },
 })
@@ -55,19 +70,21 @@ export function getNavbarConfig({
   }
 }
 
-//TODO(EU): Add actual EU footer items
-//TODO(EU): Add internationalization here
-export function getFooterConfig({ language }: { language?: SupportedLanguages } = {}): FooterProps {
+export function getFooterConfig({
+  language = SupportedLanguages.EN,
+}: { language?: SupportedLanguages } = {}): FooterProps {
   const urls = getIntlUrls(countryCode, { language })
+
+  const { t } = getStaticTranslation(i18nMessages, language, countryCode)
 
   return {
     countryCode,
-    title: 'Join the Movement',
-    subtitle:
-      'Join to show your support and protect the future of crypto in Europe. #standwithcrypto',
+    language,
+    title: t('footerTitle'),
+    subtitle: t('footerSubtitle'),
     links: [
-      { href: urls.termsOfService(), text: 'Terms of service' },
-      { href: urls.privacyPolicy(), text: 'Privacy' },
+      { href: urls.termsOfService(), text: t('termsOfService') },
+      { href: urls.privacyPolicy(), text: t('privacyPolicy') },
     ],
     socialLinks: [
       {

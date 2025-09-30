@@ -5,7 +5,10 @@ import { CookieConsentFooterButton } from '@/components/app/cookieConsent/common
 import { HeroCTA } from '@/components/app/pageHome/common/hero/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { DEFAULT_PAGE_TITLE_SIZE, PageTitle } from '@/components/ui/pageTitleText'
+import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { cn } from '@/utils/web/cn'
 
 const SendFeedbackButton = lazy(() =>
@@ -31,7 +34,22 @@ export interface FooterProps {
   sendFeedbackLink?: string
   legalText?: string
   footerBanner?: React.ReactNode
+  language?: SupportedLanguages
 }
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      rightsReserved: 'Stand With Crypto ©️ All rights reserved',
+    },
+    de: {
+      rightsReserved: 'Stand With Crypto ©️ Alle Rechte vorbehalten',
+    },
+    fr: {
+      rightsReserved: 'Stand With Crypto ©️ Tous droits réservés',
+    },
+  },
+})
 
 export function Footer({
   title,
@@ -42,7 +60,10 @@ export function Footer({
   footerBanner,
   countryCode,
   legalText,
+  language = SupportedLanguages.EN,
 }: FooterProps) {
+  const { t } = getStaticTranslation(i18nMessages, language, countryCode)
+
   return (
     <div className="mt-36">
       {footerBanner}
@@ -82,7 +103,7 @@ export function Footer({
           {legalText && <div className="mt-4 text-sm text-muted">{legalText}</div>}
 
           <div className="mt-4 text-sm text-muted">
-            Stand With Crypto ©️ All rights reserved {getYear(new Date())}
+            {t('rightsReserved')} {getYear(new Date())}
           </div>
         </div>
       </footer>
