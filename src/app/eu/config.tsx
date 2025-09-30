@@ -2,7 +2,7 @@
 
 import { FooterProps } from '@/components/app/footer'
 import { NavbarProps } from '@/components/app/navbar'
-import { getSimpleTranslation } from '@/utils/server/i18n/getSimpleTranslation'
+import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
@@ -32,7 +32,7 @@ export function getNavbarConfig({
 }: { language?: SupportedLanguages } = {}): NavbarProps {
   const urls = getIntlUrls(countryCode, { language })
 
-  const { t } = getSimpleTranslation(i18nMessages, language, countryCode)
+  const { t } = getStaticTranslation(i18nMessages, language, countryCode)
 
   return {
     countryCode,

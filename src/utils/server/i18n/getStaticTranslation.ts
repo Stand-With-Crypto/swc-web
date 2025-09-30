@@ -11,7 +11,7 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
  *
  * @example
  * ```ts
- * const { t } = getSimpleTranslation(messages, 'en', 'US')
+ * const { t } = getStaticTranslation(messages, 'en', 'US')
  * const welcomeText = t('welcome')
  * ```
  *
@@ -19,12 +19,12 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
  * ```ts
  * // In a utility function where headers aren't available
  * function generateEmailContent(language: SupportedLanguages, countryCode: SupportedCountryCodes) {
- *   const { t } = getSimpleTranslation(emailMessages, language, countryCode)
+ *   const { t } = getStaticTranslation(emailMessages, language, countryCode)
  *   return t('email.subject')
  * }
  * ```
  */
-export function getSimpleTranslation(
+export function getStaticTranslation(
   i18nMessages: I18nMessages,
   language: SupportedLanguages,
   countryCode: SupportedCountryCodes,
