@@ -93,7 +93,6 @@ const eventPayloadSchema = z.object({
   acquisitionSource: z.string().optional(),
   acquisitionMedium: z.string().optional(),
   acquisitionCampaign: z.string().optional(),
-  persist: z.boolean().optional().default(false),
 })
 
 export interface ImportUsersByCSVCoordinatorSchema {
@@ -113,14 +112,8 @@ export const importUsersByCSVCoordinator = inngest.createFunction(
       throw new NonRetriableError(`Invalid event payload: ${payloadValidation.error.message}`)
     }
 
-    const {
-      countryCode,
-      csvData,
-      persist,
-      acquisitionSource,
-      acquisitionMedium,
-      acquisitionCampaign,
-    } = payloadValidation.data
+    const { countryCode, csvData, acquisitionSource, acquisitionMedium, acquisitionCampaign } =
+      payloadValidation.data
 
     const { batches, totalUsers, validUsers, invalidUsers } = await step.run(
       'parse-csv',
@@ -223,7 +216,6 @@ export const importUsersByCSVCoordinator = inngest.createFunction(
           users: batch,
           batchIndex: batchIndex + 1,
           totalBatches: batches.length,
-          persist,
         },
       })
     }
