@@ -21,6 +21,7 @@ import { generateUserSessionId } from '@/utils/shared/userSessionId'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
 import type { UserData } from './index'
+import { handleExternalUserActionOptIn } from '@/utils/server/externalOptIn/handleExternalUserActionOptIn'
 
 export const IMPORT_USERS_BY_CSV_PROCESSOR_EVENT_NAME = 'script/import-users-by-csv.processor'
 export const IMPORT_USERS_BY_CSV_PROCESSOR_FUNCTION_ID = 'script.import-users-by-csv.processor'
@@ -28,7 +29,7 @@ export const IMPORT_USERS_BY_CSV_PROCESSOR_FUNCTION_ID = 'script.import-users-by
 export interface ImportUsersByCSVProcessorSchema {
   name: typeof IMPORT_USERS_BY_CSV_PROCESSOR_EVENT_NAME
   data: {
-    countryCode: string
+    countryCode: SupportedCountryCodes
     users: Array<UserData>
     batchIndex: number
     totalBatches: number
@@ -80,16 +81,7 @@ export const importUsersByCSVProcessor = inngest.createFunction(
       }
 
       const userPromises = users.map(async (user: UserData) =>
-        pRetry(async () => createUserWithCountryCode(user, validCountryCode, persist), {
-          onFailedAttempt: error => {
-            if (error.retriesLeft === 0) {
-              logger.error(`Failed to process user: ${error.message}`, {
-                email: user.email,
-                countryCode: validCountryCode,
-              })
-            }
-          },
-        }),
+        pRetry(async () => handleExternalUserActionOptIn({ ...user, countryCode }),
       )
 
       const userResults = await Promise.allSettled(userPromises)
