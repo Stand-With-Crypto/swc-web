@@ -67,6 +67,8 @@ export function USUserActionFormEmailCongressperson({
     ? {
         description: user.address.formattedDescription,
         place_id: user.address.googlePlaceId,
+        latitude: user.address.latitude,
+        longitude: user.address.longitude,
       }
     : undefined
 
@@ -137,6 +139,8 @@ export function USUserActionFormEmailCongressperson({
   const addressField = form.watch('address')
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
     address: addressField?.description,
+    latitude: addressField?.latitude,
+    longitude: addressField?.longitude,
     filterFn: filterDTSIPeopleByUSPoliticalCategory(campaignMetadata.politicianCategory),
   })
 

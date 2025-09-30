@@ -5,7 +5,7 @@ import { useCountryCode } from '@/hooks/useCountryCode'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
   ElectoralZoneNotFoundReason,
-  getElectoralZoneFromAddressOrPlaceId,
+  maybeGetElectoralZoneFromAddress,
 } from '@/utils/shared/getElectoralZoneFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
@@ -30,13 +30,24 @@ export async function getDTSIPeopleFromAddress({
   filterFn,
   countryCode,
   placeId,
+  latitude,
+  longitude,
 }: {
   address: string
-  placeId?: string
   filterFn: DTSIPeopleFromAddressFilter
   countryCode: SupportedCountryCodes
+  placeId?: string
+  latitude?: number | null
+  longitude?: number | null
 }) {
-  const electoralZone = await getElectoralZoneFromAddressOrPlaceId({ address, placeId })
+  const electoralZone = await maybeGetElectoralZoneFromAddress({
+    address: {
+      formattedDescription: address,
+      latitude,
+      longitude,
+      googlePlaceId: placeId,
+    },
+  })
 
   if ('notFoundReason' in electoralZone) {
     return electoralZone
@@ -78,26 +89,29 @@ export async function getDTSIPeopleFromAddress({
 }
 
 export function useGetDTSIPeopleFromAddress({
-  address,
   filterFn,
-  placeId,
+  ...addressFields
 }: {
   address?: string | null
   placeId?: string | null
+  latitude?: number | null
+  longitude?: number | null
   filterFn: DTSIPeopleFromAddressFilter
 }) {
   const countryCode = useCountryCode()
 
+  const hasAnyFindableAddressField =
+    addressFields.address ||
+    addressFields.placeId ||
+    (addressFields.latitude && addressFields.longitude)
   return useSWR(
-    address || placeId ? `useGetDTSIPeopleFromAddress-${address || placeId || ''}` : null,
-    async () => {
-      if (!address && !placeId) {
-        return
-      }
-
+    hasAnyFindableAddressField ? ['useGetDTSIPeopleFromAddress', addressFields] : null,
+    async ([_, fields]) => {
       return getDTSIPeopleFromAddress({
-        address: address || '',
-        placeId: placeId || '',
+        address: fields.address || '',
+        placeId: fields.placeId || '',
+        latitude: fields.latitude,
+        longitude: fields.longitude,
         countryCode,
         filterFn,
       })
