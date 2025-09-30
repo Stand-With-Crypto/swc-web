@@ -22,7 +22,7 @@ import {
   UserActionVotingInformationResearched,
 } from '@prisma/client'
 
-import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
+import { ClientAddress, getSensitiveClientAddress } from '@/clientModels/clientAddress'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -280,7 +280,7 @@ export const getSensitiveDataClientUserAction = ({
         senderEmail,
         firstName,
         lastName,
-        address: address ? getClientAddress(address) : null,
+        address: address ? getSensitiveClientAddress(address) : null,
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
         })),
@@ -349,7 +349,7 @@ export const getSensitiveDataClientUserAction = ({
       )
       const votingInformationResearchedFields: SensitiveDataClientUserActionVotingInformationResearched =
         {
-          address: address ? getClientAddress(address) : null,
+          address: address ? getSensitiveClientAddress(address) : null,
           addressId,
           shouldReceiveNotifications,
           actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
@@ -403,7 +403,7 @@ export const getSensitiveDataClientUserAction = ({
         email,
         firstName,
         lastName,
-        address: address ? getClientAddress(address) : null,
+        address: address ? getSensitiveClientAddress(address) : null,
         datetimeSigned: datetimeSigned.toISOString(),
       }
       return getClientModel({ ...sharedProps, ...petitionFields })

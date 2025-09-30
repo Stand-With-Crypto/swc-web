@@ -1,4 +1,4 @@
-import { array, custom, nativeEnum, object, string, union } from 'zod'
+import { array, custom, nativeEnum, number, object, string, union } from 'zod'
 
 import { DTSIPersonByElectoralZone } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { AUUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
@@ -38,7 +38,10 @@ const base = object({
 }).merge(zodFirstAndLastNames)
 
 export const zodUserActionFormEmailCongresspersonFields = base.extend({
-  address: zodGooglePlacesAutocompletePrediction,
+  address: zodGooglePlacesAutocompletePrediction.extend({
+    latitude: number().nullable().optional(),
+    longitude: number().nullable().optional(),
+  }),
 })
 
 export const zodUserActionFormEmailCongresspersonAction = base.extend({
