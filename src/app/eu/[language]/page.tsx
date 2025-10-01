@@ -2,9 +2,15 @@ import { EuPageHome } from '@/components/app/pageHome/eu'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { ORDERED_SUPPORTED_EU_LANGUAGES, SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const countryCode = SupportedCountryCodes.EU
+
+export const dynamic = 'error'
+
+export async function generateStaticParams() {
+  return ORDERED_SUPPORTED_EU_LANGUAGES.map(language => ({ language }))
+}
 
 export default async function EuHomePage(props: { params: { language: SupportedLanguages } }) {
   const { language } = await props.params
