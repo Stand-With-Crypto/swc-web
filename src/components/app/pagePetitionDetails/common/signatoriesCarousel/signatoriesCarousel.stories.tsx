@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
 import { SignatoriesCarousel } from '.'
 
 const meta = {
@@ -50,7 +48,6 @@ const sampleSignatures = [
 
 export const Default: Story = {
   args: {
-    countryCode: SupportedCountryCodes.US,
     lastSignatures: sampleSignatures,
   },
 }
@@ -65,7 +62,6 @@ export const RecentSigners: Story = {
     </div>
   ),
   args: {
-    countryCode: SupportedCountryCodes.US,
     lastSignatures: sampleSignatures,
     autoplayDelay: 2500,
   },
@@ -73,7 +69,6 @@ export const RecentSigners: Story = {
 
 export const FewSignatures: Story = {
   args: {
-    countryCode: SupportedCountryCodes.US,
     lastSignatures: [
       {
         locale: 'CA',
@@ -90,6 +85,5 @@ export const FewSignatures: Story = {
 export const EmptyState: Story = {
   args: {
     lastSignatures: [],
-    countryCode: SupportedCountryCodes.US,
   },
 }
