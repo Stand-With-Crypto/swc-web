@@ -27,6 +27,8 @@ import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostal
 import { cleanupDatadogSyntheticTestsWithInngest } from '@/inngest/functions/datadog/cleanup'
 import { updateDistrictsRankings } from '@/inngest/functions/districtsRankings/updateRankings'
 import { globalSendEventNotifications } from '@/inngest/functions/eventNotification'
+import { importUsersByCSVCoordinator } from '@/inngest/functions/importUsersByCSV'
+import { importUsersByCSVProcessor } from '@/inngest/functions/importUsersByCSV/logic'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { syncSendgridContactsCoordinator } from '@/inngest/functions/sendgridContactsCronJob'
@@ -97,5 +99,7 @@ export const { GET, POST, PUT } = serve({
     backfillAddressFieldsWithGooglePlacesProcessor,
     backfillIntlUsersCoordinator,
     backfillIntlUsersProcessor,
+    importUsersByCSVCoordinator,
+    importUsersByCSVProcessor,
   ],
 })
