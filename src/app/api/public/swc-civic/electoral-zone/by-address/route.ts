@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { NextResponse } from 'next/server'
 
 import { updateAddressLocationByPlaceId } from '@/utils/server/db/address/updateAddressLatLonByPlaceId'
@@ -31,7 +32,7 @@ export const GET = async (req: Request) => {
     longitude = result.longitude
 
     if (result.googlePlaceId && latitude && longitude) {
-      await updateAddressLocationByPlaceId(result.googlePlaceId, { latitude, longitude })
+      waitUntil(updateAddressLocationByPlaceId(result.googlePlaceId, { latitude, longitude }))
     }
   } catch (e) {
     Sentry.captureException(e, {
