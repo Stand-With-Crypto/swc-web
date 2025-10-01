@@ -10,8 +10,10 @@ import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import {
   BillChamberOrigin,
   BillKeyDateCategory,
+  BillSource,
   SWCBill,
   SWCBillCTAButton,
+  SWCBillEntryFromBuilderIO,
   SWCBillFromBuilderIO,
   zodBillSchemaValidation,
 } from '@/utils/shared/zod/getSWCBills'
@@ -91,7 +93,7 @@ export function getBillFromBuilderIOByDTSISlug(
 
 const LIMIT = 100
 
-function getAllBillsWithOffset({
+export function getAllBillsWithOffset({
   countryCode,
   offset,
   stateCode,
@@ -133,7 +135,7 @@ function getAllBillsWithOffset({
       retries: 3,
       minTimeout: 10000,
     },
-  ) as Promise<SWCBillFromBuilderIO[]>
+  ) as Promise<SWCBillEntryFromBuilderIO[]>
 }
 
 export async function getBillsFromBuilderIO({
@@ -158,7 +160,7 @@ export async function getBillsFromBuilderIO({
         const validEntry = zodBillSchemaValidation.safeParse(entry)
         return validEntry.success ? validEntry.data : null
       })
-      .filter(Boolean) as { data: SWCBillFromBuilderIO }[]
+      .filter(Boolean)
 
     if (filteredIncompleteBills.length === 0) {
       return []
@@ -191,6 +193,7 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
     countryCode: bill.countryCode.toUpperCase() as SupportedCountryCodes,
     ctaButton:
       bill.ctaButton.label && bill.ctaButton.url ? (bill.ctaButton as SWCBillCTAButton) : undefined,
+    isAutomaticUpdatesEnabled: bill.isAutomaticUpdatesEnabled ?? true,
     isKeyBill: bill.isKeyBill ?? false,
     keyDates: [
       {
@@ -206,5 +209,7 @@ function parseBillEntryFromBuilderIO(bill: SWCBillFromBuilderIO): SWCBill {
       })),
     ],
     relatedUrls: bill.relatedUrls || [],
+    source: bill.source || BillSource.BUILDER_IO,
+    title: bill.title,
   }
 }

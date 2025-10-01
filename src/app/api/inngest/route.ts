@@ -39,6 +39,7 @@ import {
   bulkSMSCommunicationJourney,
   enqueueSMS,
 } from '@/inngest/functions/sms'
+import { stateLevelBillsSourcingAutomation } from '@/inngest/functions/stateLevelBillsCronJob'
 import { updateMetricsCacheInngestCronJob } from '@/inngest/functions/updateMeyticsCacheCronJob'
 import { deleteUserActions } from '@/inngest/functions/user/deleteUserActions'
 import {
@@ -97,5 +98,6 @@ export const { GET, POST, PUT } = serve({
     backfillAddressFieldsWithGooglePlacesProcessor,
     backfillIntlUsersCoordinator,
     backfillIntlUsersProcessor,
+    stateLevelBillsSourcingAutomation,
   ],
 })

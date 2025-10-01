@@ -34,6 +34,12 @@ export const BILL_SUCCESSFUL_KEY_DATES: BillKeyDateCategory[] = [
   BillKeyDateCategory.PRESIDENT_SIGNED,
 ]
 
+export enum BillSource {
+  BUILDER_IO = 'Builder.io',
+  DTSI = 'DTSI',
+  QUORUM = 'Quorum',
+}
+
 export const zodBillSchemaValidation = object({
   data: object({
     analysis: string().optional(),
@@ -48,7 +54,9 @@ export const zodBillSchemaValidation = object({
     }).partial(),
     dateIntroduced: string(),
     dtsiSlug: string().optional(),
+    externalId: string().optional(),
     gbAdministrativeAreaLevel1: string().min(2).max(3).optional(),
+    isAutomaticUpdatesEnabled: boolean().optional(),
     isKeyBill: boolean().optional(),
     keyDates: array(
       object({
@@ -59,6 +67,7 @@ export const zodBillSchemaValidation = object({
         category: nativeEnum(BillKeyDateCategory),
       }),
     ).optional(),
+    mostRecentActionDate: string().optional(),
     officialBillUrl: string().url(),
     relatedUrls: array(
       object({
@@ -66,14 +75,18 @@ export const zodBillSchemaValidation = object({
         url: string().url(),
       }),
     ).optional(),
+    source: nativeEnum(BillSource).optional(),
     summary: string(),
     timelineDescription: string().optional(),
     title: string(),
     usAdministrativeAreaLevel1: string().min(2).max(3).optional(),
   }),
+  id: string(),
 })
 
-export type SWCBillFromBuilderIO = z.infer<typeof zodBillSchemaValidation>['data']
+export type SWCBillEntryFromBuilderIO = z.infer<typeof zodBillSchemaValidation>
+
+export type SWCBillFromBuilderIO = SWCBillEntryFromBuilderIO['data']
 
 export interface SWCBillKeyDate {
   category: BillKeyDateCategory
@@ -100,14 +113,18 @@ export interface SWCBill {
   ctaButton?: SWCBillCTAButton
   dateIntroduced: string
   dtsiSlug?: string
+  externalId?: string
   gbAdministrativeAreaLevel1?: string
+  isAutomaticUpdatesEnabled?: boolean
   isKeyBill: boolean
   keyDates: SWCBillKeyDate[]
+  mostRecentActionDate?: string
   officialBillUrl: string
   relatedUrls: {
     title: string
     url: string
   }[]
+  source?: BillSource
   summary: string
   timelineDescription?: string
   title: string
