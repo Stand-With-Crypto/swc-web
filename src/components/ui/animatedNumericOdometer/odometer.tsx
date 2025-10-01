@@ -52,9 +52,13 @@ export function AnimatedNumericOdometer({
       {numeralArray.map((numeralGroup, numeralGroupIndex) => {
         /**
          * numeralGroup can be a single string characther like "$" or "," OR a number like "2" or "395" or "081".
+         * Javascript transforms irregular whitespace into 0, so it is not NaN, but a number "0" when formatting
+         * the odometer value, causing absolutely wrong results. Some languages use this to separate numbers,
+         * as french for example.
          */
-        if (Number.isNaN(Number(numeralGroup))) {
-          return <span key={numeralGroupIndex}>{numeralGroup}</span>
+        if (numeralGroup === ' ' || Number.isNaN(Number(numeralGroup))) {
+          // the spacing of 1 character is too small, so we add 2 characters to make it bigger
+          return <span key={numeralGroupIndex}>{numeralGroup === ' ' ? '  ' : numeralGroup}</span>
         }
 
         /**

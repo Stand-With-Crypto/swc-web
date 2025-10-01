@@ -19,7 +19,7 @@ export const ORDERED_SUPPORTED_EU_LANGUAGES: readonly SupportedLanguages[] = [
 ]
 export const DEFAULT_EU_LANGUAGE = SupportedLanguages.EN
 
-export const LANGUAGE_TO_LOCALE_MAP: Record<SupportedLanguages, string> = {
+export const LANGUAGE_TO_LOCALE_MAP: Record<SupportedLanguages, SupportedLocale> = {
   [SupportedLanguages.EN]: SupportedLocale.EN_US,
   [SupportedLanguages.DE]: SupportedLocale.DE_DE,
   [SupportedLanguages.FR]: SupportedLocale.FR_FR,

@@ -101,10 +101,7 @@ export function EuPagePetitionDetailsContent({
             </PetitionMobileSummaryWrapper>
 
             {isClosed && recentSignatures.length === 0 ? null : (
-              <SignatoriesCarouselSection
-                countryCode={countryCode}
-                recentSignatures={recentSignatures}
-              />
+              <SignatoriesCarouselSection recentSignatures={recentSignatures} />
             )}
 
             <PetitionDetailsInfo content={petition.content} />

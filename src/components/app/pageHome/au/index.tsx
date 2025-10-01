@@ -42,12 +42,7 @@ export function AuPageHome({
       <AuHero />
 
       <section className="container">
-        <TopLevelMetrics
-          countryCode={countryCode}
-          {...topLevelMetrics}
-          disableTooltips
-          useGlobalLabels
-        />
+        <TopLevelMetrics {...topLevelMetrics} disableTooltips useGlobalLabels />
       </section>
 
       <HomePageSection>

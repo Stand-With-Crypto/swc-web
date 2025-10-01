@@ -7,7 +7,6 @@ import { useSignature } from '@/components/app/pagePetitionDetails/common/signat
 import * as BadgesAutomaticCarousel from '@/components/ui/badgesAutomaticCarousel'
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
@@ -26,7 +25,6 @@ interface SignatoriesCarouselProps {
   autoplayDelay?: number
   className?: string
   lastSignatures: LastSignature[]
-  countryCode: SupportedCountryCodes
 }
 
 const MIN_SIGNATURES_TO_RENDER_LIST = 1
@@ -54,7 +52,6 @@ export function SignatoriesCarousel({
   autoplayDelay = 2000,
   className,
   lastSignatures,
-  countryCode,
 }: SignatoriesCarouselProps) {
   const { t } = useTranslation(i18nMessages, 'SignatoriesCarousel')
   const { petitionUserAction, isOptimisticSigned } = useSignature()
@@ -102,7 +99,6 @@ export function SignatoriesCarousel({
                 </span>
                 <span className="text-xs text-muted-foreground">
                   <FormattedRelativeDatetime
-                    countryCode={countryCode}
                     date={new Date(signature.datetimeSigned)}
                     timeFormatStyle="narrow"
                   />

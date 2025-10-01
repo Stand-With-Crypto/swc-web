@@ -4,6 +4,7 @@ import {
   DEFAULT_EU_LANGUAGE,
   LANGUAGE_TO_LOCALE_MAP,
   SupportedLanguages,
+  SupportedLocale,
 } from '@/utils/shared/supportedLocales'
 
 /**
@@ -127,6 +128,6 @@ export function formatRelativeTimeForLocale(
 /**
  * Get the locale string for a given language
  */
-export function getLocaleForLanguage(language: SupportedLanguages): string {
+export function getLocaleForLanguage(language: SupportedLanguages): SupportedLocale {
   return LANGUAGE_TO_LOCALE_MAP[language] || LANGUAGE_TO_LOCALE_MAP[DEFAULT_EU_LANGUAGE]
 }

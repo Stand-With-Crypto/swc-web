@@ -3,7 +3,7 @@
 import { differenceInMinutes } from 'date-fns'
 
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 export const i18nMessages = createI18nMessages({
@@ -22,17 +22,17 @@ export const i18nMessages = createI18nMessages({
 
 export function FormattedRelativeDatetime({
   date,
-  countryCode,
   timeFormatStyle = 'short',
 }: {
   date: Date
-  countryCode: SupportedCountryCodes
   timeFormatStyle?: Intl.RelativeTimeFormatStyle
 }) {
-  const { t } = useTranslation(i18nMessages, 'FormattedRelativeDatetime')
+  const { t, language } = useTranslation(i18nMessages, 'FormattedRelativeDatetime')
+
+  const locale = getLocaleForLanguage(language)
 
   const minutesAgo = differenceInMinutes(new Date(), date)
-  const intlRelative = new Intl.RelativeTimeFormat(COUNTRY_CODE_TO_LOCALE[countryCode], {
+  const intlRelative = new Intl.RelativeTimeFormat(locale, {
     style: timeFormatStyle,
   })
   if (minutesAgo < 1) {
