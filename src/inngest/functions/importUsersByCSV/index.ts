@@ -17,7 +17,7 @@ import { importUsersByCSVProcessor } from './logic'
 export const IMPORT_USERS_BY_CSV_COORDINATOR_EVENT_NAME = 'script/import-users-by-csv.coordinator'
 export const IMPORT_USERS_BY_CSV_COORDINATOR_FUNCTION_ID = 'script.import-users-by-csv.coordinator'
 
-const BATCH_SIZE = 250
+const BATCH_SIZE = 150
 const DEFAULT_CAMPAIGN_NAME = 'IMPORT_BY_CSV'
 
 export interface ImportUsersByCSVCoordinatorSchema {
