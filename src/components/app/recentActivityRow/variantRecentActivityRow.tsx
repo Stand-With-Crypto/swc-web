@@ -89,7 +89,7 @@ export const i18nMessages = createI18nMessages({
       // Location helpers
       from: 'from {state}',
       in: 'in {state}',
-      to: 'to {person}',
+      to: 'to',
 
       // Fallback
       helpedCrypto: 'helped crypto',
@@ -142,7 +142,7 @@ export const i18nMessages = createI18nMessages({
       // Location helpers
       from: 'de {state}',
       in: 'en {state}',
-      to: 'à {person}',
+      to: 'à',
 
       // Fallback
       helpedCrypto: 'a aidé la crypto',
@@ -195,7 +195,7 @@ export const i18nMessages = createI18nMessages({
       // Location helpers
       from: 'aus {state}',
       in: 'in {state}',
-      to: 'an {person}',
+      to: 'an',
 
       // Fallback
       helpedCrypto: 'hat Krypto geholfen',
@@ -437,7 +437,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               {action.person && (
                 <>
                   {' '}
-                  {t('to', { person: '' }).replace('{person}', '')}{' '}
+                  {t('to')}{' '}
                   <DTSIPersonName
                     countryCode={countryCode}
                     href={urls.politicianDetails(action.person.slug)}
