@@ -18,74 +18,12 @@ export const IMPORT_USERS_BY_CSV_COORDINATOR_EVENT_NAME = 'script/import-users-b
 export const IMPORT_USERS_BY_CSV_COORDINATOR_FUNCTION_ID = 'script.import-users-by-csv.coordinator'
 
 const BATCH_SIZE = 250
+const DEFAULT_CAMPAIGN_NAME = 'IMPORT_BY_CSV'
 
-const createUserDataSchema = ({
-  acquisitionSource,
-  acquisitionMedium,
-  acquisitionCampaign,
-  countryCode,
-}: {
-  acquisitionSource?: string
-  acquisitionMedium?: string
-  acquisitionCampaign?: string
-  countryCode: SupportedCountryCodes
-}) => {
-  /** Map CSV columns to our expected field names */
-  return z.preprocess(
-    csvData => {
-      if (typeof csvData !== 'object' || csvData === null) return csvData
-
-      const formattedFields: Record<string, string | boolean> = {
-        smsOptIn: false,
-      }
-
-      if ('first_name' in csvData && Boolean(csvData['first_name'])) {
-        formattedFields.firstName = (csvData['first_name'] as string) || ''
-        formattedFields.lastName = ''
-      }
-
-      if ('last_name' in csvData && Boolean(csvData['last_name'])) {
-        formattedFields.lastName = (csvData['last_name'] as string) || ''
-      }
-
-      if ('email' in csvData && Boolean(csvData['email'])) {
-        formattedFields.email = csvData['email'] as string
-      }
-
-      if ('sms_opt_in' in csvData && Boolean(csvData['sms_opt_in'])) {
-        formattedFields.smsOptIn = true
-      }
-
-      if ('phone_number' in csvData && Boolean(csvData['phone_number'])) {
-        formattedFields.phoneNumber = String(csvData['phone_number'])
-      }
-
-      if (acquisitionSource) {
-        formattedFields.acquisitionSource = acquisitionSource
-      }
-      if (acquisitionMedium) {
-        formattedFields.acquisitionMedium = acquisitionMedium
-      }
-      if (acquisitionCampaign) {
-        formattedFields.acquisitionCampaign = acquisitionCampaign
-      }
-
-      return { ...csvData, ...formattedFields }
-    },
-    z.object({
-      email: zodEmailAddress,
-      phoneNumber: zodPhoneNumber(countryCode).optional(),
-      firstName: z.union([zodFirstName.optional(), z.literal('')]),
-      lastName: z.union([zodLastName.optional(), z.literal('')]),
-      smsOptIn: z.boolean().optional().default(false),
-      acquisitionSource: z.string().optional().default('IMPORT_BY_CSV'),
-      acquisitionMedium: z.string().optional().default('IMPORT_BY_CSV'),
-      acquisitionCampaign: z.string().optional().default('IMPORT_BY_CSV'),
-    }),
-  )
+export interface ImportUsersByCSVCoordinatorSchema {
+  name: typeof IMPORT_USERS_BY_CSV_COORDINATOR_EVENT_NAME
+  data: z.infer<typeof eventPayloadSchema>
 }
-
-export type UserData = z.infer<ReturnType<typeof createUserDataSchema>>
 
 const eventPayloadSchema = z.object({
   countryCode: zodSupportedCountryCode,
@@ -93,12 +31,8 @@ const eventPayloadSchema = z.object({
   acquisitionSource: z.string().optional(),
   acquisitionMedium: z.string().optional(),
   acquisitionCampaign: z.string().optional(),
+  persist: z.boolean().optional().default(false),
 })
-
-export interface ImportUsersByCSVCoordinatorSchema {
-  name: typeof IMPORT_USERS_BY_CSV_COORDINATOR_EVENT_NAME
-  data: z.infer<typeof eventPayloadSchema>
-}
 
 export const importUsersByCSVCoordinator = inngest.createFunction(
   {
@@ -112,8 +46,14 @@ export const importUsersByCSVCoordinator = inngest.createFunction(
       throw new NonRetriableError(`Invalid event payload: ${payloadValidation.error.message}`)
     }
 
-    const { countryCode, csvData, acquisitionSource, acquisitionMedium, acquisitionCampaign } =
-      payloadValidation.data
+    const {
+      countryCode,
+      csvData,
+      acquisitionSource,
+      acquisitionMedium,
+      acquisitionCampaign,
+      persist,
+    } = payloadValidation.data
 
     const { batches, totalUsers, validUsers, invalidUsers } = await step.run(
       'parse-csv',
@@ -216,6 +156,7 @@ export const importUsersByCSVCoordinator = inngest.createFunction(
           users: batch,
           batchIndex: batchIndex + 1,
           totalBatches: batches.length,
+          persist,
         },
       })
     }
@@ -230,3 +171,71 @@ export const importUsersByCSVCoordinator = inngest.createFunction(
     }
   },
 )
+
+function createUserDataSchema({
+  acquisitionSource,
+  acquisitionMedium,
+  acquisitionCampaign,
+  countryCode,
+}: {
+  acquisitionSource?: string
+  acquisitionMedium?: string
+  acquisitionCampaign?: string
+  countryCode: SupportedCountryCodes
+}) {
+  /** Map CSV columns to our expected field names */
+  return z.preprocess(
+    csvData => {
+      if (typeof csvData !== 'object' || csvData === null) return csvData
+
+      const formattedFields: Record<string, string | boolean> = {
+        smsOptIn: false,
+      }
+
+      if ('first_name' in csvData && Boolean(csvData['first_name'])) {
+        formattedFields.firstName = (csvData['first_name'] as string) || ''
+        formattedFields.lastName = ''
+      }
+
+      if ('last_name' in csvData && Boolean(csvData['last_name'])) {
+        formattedFields.lastName = (csvData['last_name'] as string) || ''
+      }
+
+      if ('email' in csvData && Boolean(csvData['email'])) {
+        formattedFields.email = csvData['email'] as string
+      }
+
+      if ('sms_opt_in' in csvData && Boolean(csvData['sms_opt_in'])) {
+        formattedFields.smsOptIn = true
+      }
+
+      if ('phone_number' in csvData && Boolean(csvData['phone_number'])) {
+        formattedFields.phoneNumber = String(csvData['phone_number'])
+      }
+
+      if (acquisitionSource) {
+        formattedFields.acquisitionSource = acquisitionSource
+      }
+      if (acquisitionMedium) {
+        formattedFields.acquisitionMedium = acquisitionMedium
+      }
+      if (acquisitionCampaign) {
+        formattedFields.acquisitionCampaign = acquisitionCampaign
+      }
+
+      return { ...csvData, ...formattedFields }
+    },
+    z.object({
+      email: zodEmailAddress,
+      phoneNumber: zodPhoneNumber(countryCode).optional(),
+      firstName: z.union([zodFirstName.optional(), z.literal('')]),
+      lastName: z.union([zodLastName.optional(), z.literal('')]),
+      smsOptIn: z.boolean().optional().default(false),
+      acquisitionSource: z.string().optional().default(DEFAULT_CAMPAIGN_NAME),
+      acquisitionMedium: z.string().optional().default(DEFAULT_CAMPAIGN_NAME),
+      acquisitionCampaign: z.string().optional().default(DEFAULT_CAMPAIGN_NAME),
+    }),
+  )
+}
+
+export type UserData = z.infer<ReturnType<typeof createUserDataSchema>>

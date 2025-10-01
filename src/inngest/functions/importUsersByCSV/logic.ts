@@ -5,7 +5,10 @@ import pRetry from 'p-retry'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { handleExternalUserActionOptIn } from '@/utils/server/externalOptIn/handleExternalUserActionOptIn'
-import { ExternalUserActionOptInResult } from '@/utils/server/externalOptIn/types'
+import {
+  ExternalUserActionOptInResult,
+  Input as ExternalUserActionOptInInput,
+} from '@/utils/server/externalOptIn/types'
 import { getLogger } from '@/utils/shared/logger'
 import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -23,6 +26,7 @@ export interface ImportUsersByCSVProcessorSchema {
     users: Array<UserData>
     batchIndex: number
     totalBatches: number
+    persist: boolean
   }
 }
 
@@ -41,7 +45,7 @@ export const importUsersByCSVProcessor = inngest.createFunction(
   },
   { event: IMPORT_USERS_BY_CSV_PROCESSOR_EVENT_NAME },
   async ({ event, step }) => {
-    const { countryCode, users, batchIndex, totalBatches } = event.data
+    const { countryCode, users, batchIndex, totalBatches, persist } = event.data
 
     const countryCodeValidation = zodSupportedCountryCode.safeParse(countryCode)
     if (!countryCodeValidation.success) {
@@ -66,7 +70,7 @@ export const importUsersByCSVProcessor = inngest.createFunction(
       }
 
       const userPromises = users.map(async (user: UserData) =>
-        pRetry(async () => createUserWithCountryCode(user, validCountryCode), {
+        pRetry(async () => createUserWithCountryCode(user, validCountryCode, persist), {
           onFailedAttempt: error => {
             if (error.retriesLeft === 0) {
               logger.error(`Failed to process user: ${error.message}`, {
@@ -84,19 +88,21 @@ export const importUsersByCSVProcessor = inngest.createFunction(
         if (result.status === 'fulfilled') {
           const userResult = result.value
 
-          if (userResult.action === 'created') {
-            results.created++
-          } else if (userResult.action === 'updated') {
-            results.updated++
-          } else if (userResult.action === 'skipped') {
-            results.skipped++
-          } else if (userResult.action === 'error') {
+          if (userResult.action === 'error') {
             results.errors++
             logger.error(`Failed to process user: ${userResult.error || 'Unknown error'}`, {
               email: userResult.email,
               countryCode: validCountryCode,
             })
+            continue
           }
+
+          if (userResult.action === 'skipped') {
+            results.skipped++
+            continue
+          }
+
+          results.created++
         } else {
           results.errors++
           logger.error(`Promise rejected: ${String(result.reason)}`)
@@ -117,6 +123,7 @@ export const importUsersByCSVProcessor = inngest.createFunction(
 async function createUserWithCountryCode(
   userData: UserData,
   countryCode: SupportedCountryCodes,
+  persist: boolean,
 ): Promise<UserProcessingResult> {
   const emailAddress = userData.email
 
@@ -128,10 +135,12 @@ async function createUserWithCountryCode(
       ? validatePhoneNumber(userData.phoneNumber, countryCode)
       : false
 
-    const input = {
+    const campaignName = userData.acquisitionCampaign
+
+    const data: ExternalUserActionOptInInput = {
       emailAddress: userData.email,
       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-      campaignName: 'csv_import',
+      campaignName,
       isVerifiedEmailAddress: false,
       firstName: userData.firstName || undefined,
       lastName: userData.lastName || undefined,
@@ -142,11 +151,11 @@ async function createUserWithCountryCode(
       countryCode,
       hasValidPhoneNumber,
       acquisitionOverride: {
-        source: userData.acquisitionSource || 'IMPORT_BY_CSV',
-        medium: userData.acquisitionMedium || 'IMPORT_BY_CSV',
+        source: userData.acquisitionSource,
+        medium: userData.acquisitionMedium,
       },
       additionalAnalyticsProperties: {
-        campaign: userData.acquisitionCampaign || 'IMPORT_BY_CSV',
+        campaign: campaignName,
         import_method: 'csv_bulk_import',
       },
     }
@@ -156,13 +165,20 @@ async function createUserWithCountryCode(
       logger.info(`SMS opt-in requested for ${emailAddress}`, {
         phoneNumber: userData.phoneNumber,
         hasValidPhoneNumber,
-        hasOptedInToReceiveSMSFromSWC: input.hasOptedInToReceiveSMSFromSWC,
+        hasOptedInToReceiveSMSFromSWC: data.hasOptedInToReceiveSMSFromSWC,
         smsOptInWillTrigger:
-          input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber && hasValidPhoneNumber,
+          data.hasOptedInToReceiveSMSFromSWC && data.phoneNumber && hasValidPhoneNumber,
       })
     }
 
-    const result = await handleExternalUserActionOptIn(input)
+    if (!persist) {
+      return {
+        action: 'skipped',
+        email: emailAddress,
+      }
+    }
+
+    const result = await handleExternalUserActionOptIn(data)
 
     if (result.result === ExternalUserActionOptInResult.EXISTING_ACTION) {
       logger.info(`User already exists: ${emailAddress}`)
