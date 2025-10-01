@@ -103,14 +103,10 @@ function ActionAdditionalInfo({
   return (
     <>
       <span className="hidden md:inline">
-        <FormattedRelativeDatetime
-          countryCode={countryCode}
-          date={new Date(action.datetimeCreated)}
-        />
+        <FormattedRelativeDatetime date={new Date(action.datetimeCreated)} />
       </span>
       <span className="inline md:hidden">
         <FormattedRelativeDatetime
-          countryCode={countryCode}
           date={new Date(action.datetimeCreated)}
           timeFormatStyle="narrow"
         />

@@ -28,6 +28,7 @@ import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { NFTSlug } from '@/utils/shared/nft'
 import {
   getElectoralZoneDescriptorByCountryCode,
@@ -36,7 +37,171 @@ import {
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { listOfThings } from '@/utils/web/listOfThings'
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      // SWC Display Text
+      standWithCrypto: 'Stand With Crypto',
+      swc: 'SWC',
+
+      // Button labels
+      join: 'Join',
+      callYours: 'Call yours',
+      donate: 'Donate',
+      emailYours: 'Email yours',
+      mintYours: 'Mint yours',
+      follow: 'Follow',
+      claimYours: 'Claim yours',
+      vote: 'Vote',
+      signPetitions: 'Sign petitions',
+      takeAction: 'Take action',
+
+      // Activity messages
+      newMemberJoined: 'New member {fromState} joined',
+      callTo: 'Call to',
+      callToRepresentative: 'Call to Representative',
+      someoneDonated: 'Someone {inState} donated',
+      someoneDonatedTo: 'to',
+      emailSentToCNN: 'Email sent to CNN',
+      emailSentToABC: 'Email sent to ABC',
+      emailTo: 'Email to',
+      emailToRepresentative: 'Email to Representative',
+      donation: 'donation',
+      newFollowerOnX: 'New',
+      followerOnX: 'follower on X {fromState}',
+      someoneCheckedVoterRegistration: 'Someone checked their voter registration {inState}',
+      attendedCryptoEvent: 'Attended an in-person crypto event{location}',
+      bitcoinPizzaDayTweet: 'Bitcoin Pizza Day 🍕 tweet sent',
+      someonePledgedToVote: 'Someone pledged to vote',
+      newSignUpForEvent: 'New sign up for an SWC event{eventLocation}',
+      someoneInvestigatedKeyRaces: 'Someone investigated the key races in their {electoralZone}',
+      voterPlanResearched: 'Voter plan researched {inState}',
+      someoneClaimedIVotedNFT: 'Someone {inState} claimed "I Voted" NFT',
+      someoneReferredFriend: 'Someone {fromState} referred a friend',
+      someoneVotedInPoll: 'Someone voted in a poll',
+      someoneFollowedLinkedIn: 'Someone followed SWC on LinkedIn',
+      someoneClaimedNFT: 'Someone {inState} claimed an NFT',
+      someoneSignedPetition: 'Someone {inState} signed a petition',
+
+      // Location helpers
+      from: 'from {state}',
+      in: 'in {state}',
+      to: 'to {person}',
+
+      // Fallback
+      helpedCrypto: 'helped crypto',
+    },
+    fr: {
+      // SWC Display Text
+      standWithCrypto: 'Stand With Crypto',
+      swc: 'SWC',
+
+      // Button labels
+      join: 'Rejoindre',
+      callYours: 'Appelez le vôtre',
+      donate: 'Faire un don',
+      emailYours: 'Envoyez un email au vôtre',
+      mintYours: 'Frappez le vôtre',
+      follow: 'Suivre',
+      claimYours: 'Réclamez le vôtre',
+      vote: 'Voter',
+      signPetitions: 'Signer des pétitions',
+      takeAction: 'Agir',
+
+      // Activity messages
+      newMemberJoined: 'Nouveau membre {fromState} a rejoint',
+      callTo: 'Appel à',
+      callToRepresentative: 'Appel au représentant',
+      someoneDonated: "Quelqu'un {inState} a donné",
+      someoneDonatedTo: 'à',
+      emailSentToCNN: 'Email envoyé à CNN',
+      emailSentToABC: 'Email envoyé à ABC',
+      emailTo: 'Email à',
+      emailToRepresentative: 'Email au représentant',
+      donation: 'Don de',
+      newFollowerOnX: 'Nouveau',
+      followerOnX: 'follower sur X {fromState}',
+      someoneCheckedVoterRegistration: "Quelqu'un a vérifié son inscription électorale {inState}",
+      attendedCryptoEvent: 'A assisté à un événement crypto en personne{location}',
+      bitcoinPizzaDayTweet: 'Tweet Bitcoin Pizza Day 🍕 envoyé',
+      someonePledgedToVote: "Quelqu'un s'est engagé à voter",
+      newSignUpForEvent: 'Nouvelle inscription pour un événement SWC{eventLocation}',
+      someoneInvestigatedKeyRaces:
+        "Quelqu'un a enquêté sur les courses clés dans leur {electoralZone}",
+      voterPlanResearched: 'Plan de vote recherché {inState}',
+      someoneClaimedIVotedNFT: 'Quelqu\'un {inState} a réclamé le NFT "J\'ai voté"',
+      someoneReferredFriend: "Quelqu'un {fromState} a recommandé un ami",
+      someoneVotedInPoll: "Quelqu'un a voté dans un sondage",
+      someoneFollowedLinkedIn: "Quelqu'un a suivi SWC sur LinkedIn",
+      someoneClaimedNFT: "Quelqu'un {inState} a réclamé un NFT",
+      someoneSignedPetition: "Quelqu'un {inState} a signé une pétition",
+
+      // Location helpers
+      from: 'de {state}',
+      in: 'en {state}',
+      to: 'à {person}',
+
+      // Fallback
+      helpedCrypto: 'a aidé la crypto',
+    },
+    de: {
+      // SWC Display Text
+      standWithCrypto: 'Stand With Crypto',
+      swc: 'SWC',
+
+      // Button labels
+      join: 'Beitreten',
+      callYours: 'Rufen Sie Ihren an',
+      donate: 'Spenden',
+      emailYours: 'E-Mail an Ihren',
+      mintYours: 'Prägen Sie Ihren',
+      follow: 'Folgen',
+      claimYours: 'Beanspruchen Sie Ihren',
+      vote: 'Abstimmen',
+      signPetitions: 'Petitionen unterzeichnen',
+      takeAction: 'Handeln',
+
+      // Activity messages
+      newMemberJoined: 'Neues Mitglied {fromState} ist beigetreten',
+      callTo: 'Anruf an',
+      callToRepresentative: 'Anruf an Vertreter',
+      someoneDonated: 'Jemand {inState} hat gespendet',
+      someoneDonatedTo: 'an',
+      emailSentToCNN: 'E-Mail an CNN gesendet',
+      emailSentToABC: 'E-Mail an ABC gesendet',
+      emailTo: 'E-Mail an',
+      emailToRepresentative: 'E-Mail an Vertreter',
+      donation: 'Spende',
+      newFollowerOnX: 'Neuer',
+      followerOnX: 'Follower auf X {fromState}',
+      someoneCheckedVoterRegistration: 'Jemand hat seine Wählerregistrierung überprüft {inState}',
+      attendedCryptoEvent: 'Hat an einer persönlichen Krypto-Veranstaltung teilgenommen{location}',
+      bitcoinPizzaDayTweet: 'Bitcoin Pizza Day 🍕 Tweet gesendet',
+      someonePledgedToVote: 'Jemand hat sich verpflichtet zu wählen',
+      newSignUpForEvent: 'Neue Anmeldung für eine SWC-Veranstaltung{eventLocation}',
+      someoneInvestigatedKeyRaces:
+        'Jemand hat die Schlüsselrennen in ihrem {electoralZone} untersucht',
+      voterPlanResearched: 'Wählerplan erforscht {inState}',
+      someoneClaimedIVotedNFT: 'Jemand {inState} hat "Ich habe gewählt" NFT beansprucht',
+      someoneReferredFriend: 'Jemand {fromState} hat einen Freund empfohlen',
+      someoneVotedInPoll: 'Jemand hat in einer Umfrage abgestimmt',
+      someoneFollowedLinkedIn: 'Jemand folgt SWC auf LinkedIn',
+      someoneClaimedNFT: 'Jemand {inState} hat ein NFT beansprucht',
+      someoneSignedPetition: 'Jemand {inState} hat eine Petition unterzeichnet',
+
+      // Location helpers
+      from: 'aus {state}',
+      in: 'in {state}',
+      to: 'an {person}',
+
+      // Fallback
+      helpedCrypto: 'hat Krypto geholfen',
+    },
+  },
+})
 
 const DTSIPersonName = ({
   person,
@@ -59,10 +224,10 @@ const DTSIPersonName = ({
   return link
 }
 
-const getSWCDisplayText = () => (
+const getSWCDisplayText = (t: (key: string) => string) => (
   <>
-    <span className="hidden sm:inline"> Stand With Crypto</span>
-    <span className="sm:hidden"> SWC </span>
+    <span className="hidden sm:inline"> {t('standWithCrypto')}</span>
+    <span className="sm:hidden"> {t('swc')} </span>
   </>
 )
 
@@ -76,6 +241,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   countryCode,
 }: RecentActivityRowProps) {
   const urls = useIntlUrls()
+  const { t } = useTranslation(i18nMessages, 'VariantRecentActivityRow')
 
   const stateNameResolver = getStateNameResolver(countryCode)
 
@@ -88,10 +254,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const hasVotedInPoll = hasTakenAction(UserActionType.POLL, data?.performedUserActionTypes)
 
   const fromStateOrEmpty = isStateAvailable
-    ? `from ${userLocationDetails.administrativeAreaLevel1}`
+    ? t('from', { state: userLocationDetails.administrativeAreaLevel1 })
     : ''
   const inStateOrEmpty = isStateAvailable
-    ? `in ${userLocationDetails.administrativeAreaLevel1}`
+    ? t('in', { state: userLocationDetails.administrativeAreaLevel1 })
     : ''
 
   const getActionSpecificProps = (): {
@@ -105,12 +271,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             ? undefined
             : () => (
                 <LoginDialogWrapper>
-                  <Button>Join</Button>
+                  <Button>{t('join')}</Button>
                 </LoginDialogWrapper>
               ),
           children: (
             <MainText>
-              New member {fromStateOrEmpty} joined {getSWCDisplayText()}
+              {t('newMemberJoined', { fromState: fromStateOrEmpty })} {getSWCDisplayText(t)}
             </MainText>
           ),
         }
@@ -119,20 +285,22 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: () => (
             <UserActionFormCallCongresspersonDialog>
-              <Button>Call yours</Button>
+              <Button>{t('callYours')}</Button>
             </UserActionFormCallCongresspersonDialog>
           ),
           children: (
             <MainText>
-              Call to{' '}
               {action.person ? (
-                <DTSIPersonName
-                  countryCode={countryCode}
-                  href={urls.politicianDetails(action.person.slug)}
-                  person={action.person}
-                />
+                <>
+                  {t('callTo')}{' '}
+                  <DTSIPersonName
+                    countryCode={countryCode}
+                    href={urls.politicianDetails(action.person.slug)}
+                    person={action.person}
+                  />
+                </>
               ) : (
-                'Representative'
+                t('callToRepresentative')
               )}
             </MainText>
           ),
@@ -142,19 +310,19 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: () => {
             return (
               <InternalLink className="block" href={getIntlUrls(countryCode).donate()}>
-                <Button>Donate</Button>
+                <Button>{t('donate')}</Button>
               </InternalLink>
             )
           },
           children: (
             <MainText>
-              Someone {inStateOrEmpty} donated{' '}
+              {t('someoneDonated', { inState: inStateOrEmpty })}{' '}
               <FormattedCurrency
                 amount={action.amountUsd}
                 currencyCode={SupportedFiatCurrencyCodes.USD}
                 locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
               />{' '}
-              to {getSWCDisplayText()}
+              {t('someoneDonatedTo')} {getSWCDisplayText(t)}
             </MainText>
           ),
         }
@@ -164,12 +332,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         switch (action.campaignName) {
           case USUserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024:
             return {
-              children: <MainText>Email sent to CNN</MainText>,
+              children: <MainText>{t('emailSentToCNN')}</MainText>,
             }
 
           case USUserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024:
             return {
-              children: <MainText>Email sent to ABC</MainText>,
+              children: <MainText>{t('emailSentToABC')}</MainText>,
             }
 
           default:
@@ -179,14 +347,15 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                   campaignName={action.campaignName as USUserActionEmailCampaignName}
                   countryCode={action.countryCode as SupportedCountryCodes.US}
                 >
-                  <Button>Email yours</Button>
+                  <Button>{t('emailYours')}</Button>
                 </UserActionFormEmailCongresspersonDialog>
               ),
               children: (
                 <MainText>
-                  Email to{' '}
-                  {dtsiRecipients.length
-                    ? listOfThings(
+                  {dtsiRecipients.length ? (
+                    <>
+                      {t('emailTo')}{' '}
+                      {listOfThings(
                         dtsiRecipients.map(actionEmailRecipient => (
                           <React.Fragment key={actionEmailRecipient.id}>
                             <DTSIPersonName
@@ -198,8 +367,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                         )),
                       ).map((content, index) => (
                         <React.Fragment key={index}>{content}</React.Fragment>
-                      ))
-                    : 'Representative'}
+                      ))}
+                    </>
+                  ) : (
+                    t('emailToRepresentative')
+                  )}
                 </MainText>
               ),
             }
@@ -209,7 +381,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         return {
           onFocusContent: () => (
             <UserActionFormNFTMintDialog>
-              <Button>Mint yours</Button>
+              <Button>{t('mintYours')}</Button>
             </UserActionFormNFTMintDialog>
           ),
           children: (
@@ -219,17 +391,18 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                 currencyCode={SupportedFiatCurrencyCodes.USD}
                 locale={COUNTRY_CODE_TO_LOCALE[countryCode]}
               />{' '}
-              donation
+              {t('donation')}
             </MainText>
           ),
         }
       }
       case UserActionType.TWEET: {
         return {
-          onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
+          onFocusContent: () => <UserActionTweetLink>{t('follow')}</UserActionTweetLink>,
           children: (
             <MainText>
-              New {getSWCDisplayText()} follower on X {fromStateOrEmpty}
+              {t('newFollowerOnX')} {getSWCDisplayText(t)}{' '}
+              {t('followerOnX', { fromState: fromStateOrEmpty })}
             </MainText>
           ),
         }
@@ -237,30 +410,34 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VOTER_REGISTRATION: {
         return {
           onFocusContent: () => null,
-          children: <MainText>Someone checked their voter registration {inStateOrEmpty}</MainText>,
+          children: (
+            <MainText>{t('someoneCheckedVoterRegistration', { inState: inStateOrEmpty })}</MainText>
+          ),
         }
       }
       case UserActionType.LIVE_EVENT: {
+        const location = USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName]
+          ? ` ${t('in', { state: USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName] })}`
+          : ''
         return {
           onFocusContent: undefined,
-          children: (
-            <MainText>{`Attended an in-person crypto event ${USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName] ? `in ${USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName]}` : ''}`}</MainText>
-          ),
+          children: <MainText>{t('attendedCryptoEvent', { location })}</MainText>,
         }
       }
       case UserActionType.TWEET_AT_PERSON: {
         return {
           onFocusContent: () => (
             <LoginDialogWrapper>
-              <Button>Join</Button>
+              <Button>{t('join')}</Button>
             </LoginDialogWrapper>
           ),
           children: (
             <MainText>
-              Bitcoin Pizza Day 🍕 tweet sent{' '}
+              {t('bitcoinPizzaDayTweet')}
               {action.person && (
                 <>
-                  {'to '}
+                  {' '}
+                  {t('to', { person: '' }).replace('{person}', '')}{' '}
                   <DTSIPersonName
                     countryCode={countryCode}
                     href={urls.politicianDetails(action.person.slug)}
@@ -275,18 +452,16 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VOTER_ATTESTATION: {
         return {
           onFocusContent: () => null,
-          children: <MainText>Someone pledged to vote</MainText>,
+          children: <MainText>{t('someonePledgedToVote')}</MainText>,
         }
       }
       case UserActionType.RSVP_EVENT: {
+        const eventLocation = action.eventState
+          ? ` ${t('in', { state: stateNameResolver(action.eventState) })}`
+          : ''
         return {
           onFocusContent: undefined,
-          children: (
-            <MainText>
-              New sign up for an SWC event{' '}
-              {action.eventState ? `in ${stateNameResolver(action.eventState)}` : ''}
-            </MainText>
-          ),
+          children: <MainText>{t('newSignUpForEvent', { eventLocation })}</MainText>,
         }
       }
       case UserActionType.VIEW_KEY_RACES: {
@@ -294,8 +469,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: undefined,
           children: (
             <MainText>
-              Someone investigated the key races in their{' '}
-              {getElectoralZoneDescriptorByCountryCode(countryCode)}
+              {t('someoneInvestigatedKeyRaces', {
+                electoralZone: getElectoralZoneDescriptorByCountryCode(countryCode),
+              })}
             </MainText>
           ),
         }
@@ -303,19 +479,23 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VOTING_INFORMATION_RESEARCHED: {
         return {
           onFocusContent: undefined,
-          children: <MainText>Voter plan researched {inStateOrEmpty}</MainText>,
+          children: <MainText>{t('voterPlanResearched', { inState: inStateOrEmpty })}</MainText>,
         }
       }
       case UserActionType.VOTING_DAY: {
         return {
           onFocusContent: () => null,
-          children: <MainText>Someone {inStateOrEmpty} claimed "I Voted" NFT</MainText>,
+          children: (
+            <MainText>{t('someoneClaimedIVotedNFT', { inState: inStateOrEmpty })}</MainText>
+          ),
         }
       }
       case UserActionType.REFER: {
         return {
           onFocusContent: () => null,
-          children: <MainText>Someone {fromStateOrEmpty} referred a friend</MainText>,
+          children: (
+            <MainText>{t('someoneReferredFriend', { fromState: fromStateOrEmpty })}</MainText>
+          ),
         }
       }
       case UserActionType.POLL: {
@@ -324,10 +504,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             ? undefined
             : () => (
                 <Button asChild>
-                  <Link href={urls.polls()}>Vote</Link>
+                  <Link href={urls.polls()}>{t('vote')}</Link>
                 </Button>
               ),
-          children: <MainText>Someone voted in a poll</MainText>,
+          children: <MainText>{t('someoneVotedInPoll')}</MainText>,
         }
       }
       case UserActionType.VIEW_KEY_PAGE: {
@@ -344,10 +524,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             ? undefined
             : () => (
                 <UserActionFormFollowLinkedInDialog countryCode={countryCode}>
-                  <Button>Follow</Button>
+                  <Button>{t('follow')}</Button>
                 </UserActionFormFollowLinkedInDialog>
               ),
-          children: <MainText>Someone followed SWC on LinkedIn</MainText>,
+          children: <MainText>{t('someoneFollowedLinkedIn')}</MainText>,
         }
       }
       case UserActionType.CLAIM_NFT: {
@@ -358,27 +538,27 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                 countryCode={countryCode}
                 nftSlug={action?.nftMint?.nftSlug as NFTSlug}
               >
-                <Button>Claim yours</Button>
+                <Button>{t('claimYours')}</Button>
               </UserActionFormClaimNFTDialog>
             ) : null,
-          children: <MainText>Someone {inStateOrEmpty} claimed an NFT</MainText>,
+          children: <MainText>{t('someoneClaimedNFT', { inState: inStateOrEmpty })}</MainText>,
         }
       }
       case UserActionType.SIGN_PETITION: {
         return {
           onFocusContent: () => (
             <Button asChild>
-              <Link href={urls.petitions()}>Sign petitions</Link>
+              <Link href={urls.petitions()}>{t('signPetitions')}</Link>
             </Button>
           ),
-          children: <MainText>Someone {inStateOrEmpty} signed a petition</MainText>,
+          children: <MainText>{t('someoneSignedPetition', { inState: inStateOrEmpty })}</MainText>,
         }
       }
     }
     return gracefullyError({
       // @ts-ignore
       msg: `Unknown action type in VariantRecentActivityRow for action ${action.id}: ${action.actionType}`,
-      fallback: 'helped crypto',
+      fallback: t('helpedCrypto'),
     })
   }
   return (

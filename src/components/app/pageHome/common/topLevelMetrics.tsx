@@ -8,8 +8,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 interface TopLevelMetricsProps
@@ -17,10 +19,44 @@ interface TopLevelMetricsProps
     Awaited<ReturnType<typeof getHomepageData>>,
     'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
   > {
-  countryCode: SupportedCountryCodes
   disableTooltips?: boolean
   useGlobalLabels?: boolean
 }
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      globalDonations: 'Global donations',
+      globalAdvocates: 'Global advocates',
+      cryptoAdvocates: 'Crypto advocates',
+      donatedByCryptoAdvocates: 'Donated by crypto advocates',
+      globalPolicymakerContacts: 'Global policymaker contacts',
+      policymakerContacts: 'Policymaker contacts',
+      donationTooltip:
+        '{amountToFairshake} donated to Fairshake, a pro-crypto Super PAC, and {amountToSWC} donated to the Stand With Crypto 501(c)(4).',
+    },
+    fr: {
+      globalDonations: 'Dons mondiaux',
+      globalAdvocates: 'Défenseurs mondiaux',
+      cryptoAdvocates: 'Défenseurs crypto',
+      donatedByCryptoAdvocates: 'Donné par les défenseurs crypto',
+      globalPolicymakerContacts: 'Contacts de décideurs mondiaux',
+      policymakerContacts: 'Contacts de décideurs',
+      donationTooltip:
+        '{amountToFairshake} donné à Fairshake, un Super PAC pro-crypto, et {amountToSWC} donné à Stand With Crypto 501(c)(4).',
+    },
+    de: {
+      globalDonations: 'Globale Spenden',
+      globalAdvocates: 'Globale Befürworter',
+      cryptoAdvocates: 'Krypto-Befürworter',
+      donatedByCryptoAdvocates: 'Von Krypto-Befürwortern gespendet',
+      globalPolicymakerContacts: 'Globale Politikkontakte',
+      policymakerContacts: 'Politikkontakte',
+      donationTooltip:
+        '{amountToFairshake} an Fairshake gespendet, ein pro-Krypto Super PAC, und {amountToSWC} an Stand With Crypto 501(c)(4) gespendet.',
+    },
+  },
+})
 
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   initial: Omit<TopLevelMetricsProps, 'countryCode'>,
@@ -49,11 +85,14 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
 })
 
 export function TopLevelMetrics({
-  countryCode,
   disableTooltips = false,
   useGlobalLabels = false,
   ...data
 }: TopLevelMetricsProps) {
+  const { t, language } = useTranslation(i18nMessages, 'topLevelMetrics')
+
+  const locale = getLocaleForLanguage(language)
+
   const [isDonatedTooltipOpen, setIsDonatedTooltipOpen] = useState(false)
   const decreasedInitialValues = useMemo(
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
@@ -69,14 +108,14 @@ export function TopLevelMetrics({
       notation?: Intl.NumberFormatOptions['notation'],
       maximumFractionDigits: number = 0,
     ) => {
-      return intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode], {
+      return intlNumberFormat(locale, {
         style: 'currency',
         currency: SupportedFiatCurrencyCodes.USD,
         maximumFractionDigits,
         notation,
       }).format(value)
     },
-    [countryCode],
+    [locale],
   )
 
   const formatted = useMemo(() => {
@@ -95,19 +134,17 @@ export function TopLevelMetrics({
         ),
       },
       countUsers: {
-        count: intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode]).format(
-          values.countUsers.count,
-        ),
+        count: intlNumberFormat(locale).format(values.countUsers.count),
       },
       countPolicymakerContacts: {
-        count: intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode]).format(
+        count: intlNumberFormat(locale).format(
           values.countPolicymakerContacts.countUserActionEmailRecipients +
             values.countPolicymakerContacts.countUserActionCalls +
             values.countPolicymakerContacts.hardcodedCountSum,
         ),
       },
     }
-  }, [formatCurrency, values, countryCode])
+  }, [formatCurrency, values, locale])
 
   const globalDonationsRender = (
     <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
@@ -117,7 +154,7 @@ export function TopLevelMetrics({
     <div className="flex flex-col gap-3 text-center md:flex-row md:gap-0">
       {[
         {
-          label: useGlobalLabels ? 'Global donations' : 'Donated by crypto advocates',
+          label: useGlobalLabels ? t('globalDonations') : t('donatedByCryptoAdvocates'),
           value: disableTooltips ? (
             globalDonationsRender
           ) : (
@@ -135,9 +172,10 @@ export function TopLevelMetrics({
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs" side="bottom">
                   <p className="text-sm font-normal tracking-normal">
-                    {formatted.sumDonations.compactFairshakeAmountUsd} donated to Fairshake, a
-                    pro-crypto Super PAC, and {formatted.sumDonations.compactSWCAmountUsd} donated
-                    to the Stand With Crypto 501(c)(4).
+                    {t('donationTooltip', {
+                      amountToFairshake: formatted.sumDonations.compactFairshakeAmountUsd,
+                      amountToSWC: formatted.sumDonations.compactSWCAmountUsd,
+                    })}
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -145,11 +183,11 @@ export function TopLevelMetrics({
           ),
         },
         {
-          label: useGlobalLabels ? 'Global advocates' : 'Crypto advocates',
+          label: useGlobalLabels ? t('globalAdvocates') : t('cryptoAdvocates'),
           value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
         },
         {
-          label: useGlobalLabels ? 'Global policymaker contacts' : 'Policymaker contacts',
+          label: useGlobalLabels ? t('globalPolicymakerContacts') : t('policymakerContacts'),
           value: (
             <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),
