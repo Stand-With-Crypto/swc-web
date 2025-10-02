@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import Cookies from 'js-cookie'
 
 import type { UserActionFormSuccessScreenFeedbackProps } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
+import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import {
@@ -10,7 +11,6 @@ import {
 } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
-import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
 
 const isLoggedinWithThirdweb = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 

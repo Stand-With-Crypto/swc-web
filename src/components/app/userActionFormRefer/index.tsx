@@ -3,11 +3,11 @@ import dynamic from 'next/dynamic'
 import { AUUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/au/skeleton'
 import { CAUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/ca/skeleton'
 import { UserActionFormReferProps } from '@/components/app/userActionFormRefer/common/types'
+import { EUUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/eu/skeleton'
 import { GBUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/gb/skeleton'
 import { USUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/us/skeleton'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { EUUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/eu/skeleton'
 
 const AUUserActionFormRefer = dynamic(
   () => import('@/components/app/userActionFormRefer/au').then(mod => mod.AUUserActionFormRefer),

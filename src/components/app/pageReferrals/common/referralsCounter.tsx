@@ -8,8 +8,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
-import { cn } from '@/utils/web/cn'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { cn } from '@/utils/web/cn'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface ReferralsCounterProps {

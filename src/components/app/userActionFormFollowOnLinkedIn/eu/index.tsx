@@ -12,15 +12,15 @@ import { FollowLinkedIn } from '@/components/app/userActionFormFollowOnLinkedIn/
 import { SuccessSection } from '@/components/app/userActionFormFollowOnLinkedIn/common/sections/success'
 import { UserActionFormFollowLinkedInProps } from '@/components/app/userActionFormFollowOnLinkedIn/common/types'
 import { useSections } from '@/hooks/useSections'
-import { openWindow } from '@/utils/shared/openWindow'
-import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { toastGenericError } from '@/utils/web/toastUtils'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
-import { EUUserActionLinkedInCampaignName } from '@/utils/shared/userActionCampaigns/eu/euUserActionCampaigns'
-import { euExternalUrls } from '@/utils/shared/urls'
+import { openWindow } from '@/utils/shared/openWindow'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { euExternalUrls } from '@/utils/shared/urls'
+import { EUUserActionLinkedInCampaignName } from '@/utils/shared/userActionCampaigns/eu/euUserActionCampaigns'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { useLanguage } from '@/utils/web/i18n/useLanguage'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 export const i18nMessages = createI18nMessages({
   defaultMessages: {
@@ -105,7 +105,7 @@ export function EUUserActionFormFollowLinkedIn({ onClose }: UserActionFormFollow
         </FollowLinkedIn>
       )
     case SectionNames.SUCCESS:
-      return <SuccessSection onClose={onClose} countryCode={countryCode} language={language} />
+      return <SuccessSection countryCode={countryCode} language={language} onClose={onClose} />
     default:
       return null
   }

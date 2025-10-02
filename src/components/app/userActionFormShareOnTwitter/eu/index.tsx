@@ -14,12 +14,12 @@ import { UserActionFormShareOnTwitterProps } from '@/components/app/userActionFo
 import { useSections } from '@/hooks/useSections'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { openWindow } from '@/utils/shared/openWindow'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { euExternalUrls } from '@/utils/shared/urls'
 import { EUUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/eu/euUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { toastGenericError } from '@/utils/web/toastUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export const i18nMessages = createI18nMessages({
   defaultMessages: {
@@ -98,7 +98,7 @@ export function EUUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         </ShareOnX>
       )
     case SectionNames.SUCCESS:
-      return <SuccessSection onClose={onClose} countryCode={countryCode} language={language} />
+      return <SuccessSection countryCode={countryCode} language={language} onClose={onClose} />
     default:
       return null
   }

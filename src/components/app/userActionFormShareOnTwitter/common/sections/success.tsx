@@ -1,4 +1,6 @@
 'use client'
+import { UserActionType } from '@prisma/client'
+
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { getUserActionFormSuccessScreenInfo } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
@@ -7,7 +9,6 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
-import { UserActionType } from '@prisma/client'
 
 export function SuccessSection({
   onClose,

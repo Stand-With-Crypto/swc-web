@@ -1,6 +1,8 @@
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
+import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
@@ -13,8 +15,6 @@ import {
   EUUserActionReferCampaignName,
   EUUserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns/eu/euUserActionCampaigns'
-import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
-import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
 
 export const i18nMessages = createI18nMessages({
   defaultMessages: {

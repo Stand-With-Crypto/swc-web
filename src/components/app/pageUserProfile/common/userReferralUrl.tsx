@@ -9,10 +9,10 @@ import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface UserReferralUrlProps {

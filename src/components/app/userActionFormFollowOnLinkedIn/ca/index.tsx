@@ -13,11 +13,11 @@ import { SuccessSection } from '@/components/app/userActionFormFollowOnLinkedIn/
 import { UserActionFormFollowLinkedInProps } from '@/components/app/userActionFormFollowOnLinkedIn/common/types'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { caExternalUrls } from '@/utils/shared/urls'
 import { CAUserActionLinkedInCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const countryCode = SupportedCountryCodes.CA
 
@@ -74,7 +74,7 @@ export function CAUserActionFormFollowLinkedIn({ onClose }: UserActionFormFollow
         </FollowLinkedIn>
       )
     case SectionNames.SUCCESS:
-      return <SuccessSection onClose={onClose} countryCode={countryCode} />
+      return <SuccessSection countryCode={countryCode} onClose={onClose} />
     default:
       return null
   }

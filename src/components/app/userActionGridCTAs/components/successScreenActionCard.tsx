@@ -1,10 +1,10 @@
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { NextImage } from '@/components/ui/image'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 import { CampaignsCheckmarks } from './campaignsCheckmarks'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 export const i18nMessages = createI18nMessages({
   defaultMessages: {

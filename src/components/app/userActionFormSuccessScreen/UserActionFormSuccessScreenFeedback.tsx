@@ -1,15 +1,15 @@
 import { ReactNode } from 'react'
+import { UserActionType } from '@prisma/client'
 
 import { getUserActionFormSuccessScreenInfo } from '@/components/app/userActionFormSuccessScreen/constants'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useTranslation } from '@/utils/web/i18n/useTranslation'
-import { UserActionType } from '@prisma/client'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { useLanguage } from '@/utils/web/i18n/useLanguage'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 export interface UserActionFormSuccessScreenFeedbackProps {
   image?: ReactNode
