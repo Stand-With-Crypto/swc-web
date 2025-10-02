@@ -40,6 +40,16 @@ const GBUserActionFormFollowLinkedIn = dynamic(
   },
 )
 
+const EUUserActionFormFollowLinkedIn = dynamic(
+  () =>
+    import('@/components/app/userActionFormFollowOnLinkedIn/eu').then(
+      mod => mod.EUUserActionFormFollowLinkedIn,
+    ),
+  {
+    loading: () => <UserActionFormFollowLinkedInSkeleton />,
+  },
+)
+
 export function UserActionFormFollowLinkedIn(props: UserActionFormFollowLinkedInProps) {
   const { countryCode } = props
 
@@ -50,6 +60,8 @@ export function UserActionFormFollowLinkedIn(props: UserActionFormFollowLinkedIn
       return <CAUserActionFormFollowLinkedIn {...props} />
     case SupportedCountryCodes.AU:
       return <AUUserActionFormFollowLinkedIn {...props} />
+    case SupportedCountryCodes.EU:
+      return <EUUserActionFormFollowLinkedIn {...props} />
     default:
       return gracefullyError({
         msg: `Country implementation not found for UserActionFormFollowLinkedIn`,

@@ -17,6 +17,9 @@ import { caExternalUrls } from '@/utils/shared/urls'
 import { CAUserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.CA
 
 export function CAUserActionFormShareOnTwitter({ onClose }: UserActionFormShareOnTwitterProps) {
   const searchParams = useSearchParams()
@@ -71,7 +74,7 @@ export function CAUserActionFormShareOnTwitter({ onClose }: UserActionFormShareO
         </ShareOnX>
       )
     case SectionNames.SUCCESS:
-      return <SuccessSection onClose={onClose} />
+      return <SuccessSection onClose={onClose} countryCode={countryCode} />
     default:
       return null
   }

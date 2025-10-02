@@ -50,6 +50,16 @@ const USUserActionFormShareOnTwitter = dynamic(
   },
 )
 
+const EUUserActionFormShareOnTwitter = dynamic(
+  () =>
+    import('@/components/app/userActionFormShareOnTwitter/eu').then(
+      mod => mod.EUUserActionFormShareOnTwitter,
+    ),
+  {
+    loading: () => <UserActionFormShareOnTwitterSkeleton />,
+  },
+)
+
 export function UserActionFormShareOnTwitter(props: UserActionFormShareOnTwitterProps) {
   const { countryCode } = props
 
@@ -62,6 +72,8 @@ export function UserActionFormShareOnTwitter(props: UserActionFormShareOnTwitter
       return <CAUserActionFormShareOnTwitter {...props} />
     case SupportedCountryCodes.AU:
       return <AUUserActionFormShareOnTwitter {...props} />
+    case SupportedCountryCodes.EU:
+      return <EUUserActionFormShareOnTwitter {...props} />
     default:
       return gracefullyError({
         msg: `Country implementation not found for UserActionFormShareOnTwitter`,

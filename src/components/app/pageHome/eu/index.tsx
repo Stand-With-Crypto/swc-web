@@ -2,6 +2,7 @@ import { HomePageSection } from '@/components/app/pageHome/common/homePageSectio
 import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { getServerTranslation } from '@/utils/server/i18n/getServerTranslation'
@@ -22,18 +23,25 @@ export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
       communityTitle: 'Our community',
+      getInvolvedTitle: 'Get involved',
+      getInvolvedSubtitle: 'The future of crypto is in your hands. Here’s how you can help.',
       communitySubtitle:
         'See how our community is taking a stand to safeguard the future of crypto in Australia.',
       viewAll: 'View all',
     },
     de: {
       communityTitle: 'Unsere Community',
+      getInvolvedTitle: 'Machen Sie mit',
+      getInvolvedSubtitle: 'Die Zukunft von Krypto liegt in Ihren Händen. So können Sie helfen.',
       communitySubtitle:
         'Sehen Sie, wie unsere Community sich für die Zukunft von Krypto in der EU stark macht.',
       viewAll: 'Alle anzeigen',
     },
     fr: {
       communityTitle: 'Notre communauté',
+      getInvolvedTitle: 'Participez',
+      getInvolvedSubtitle:
+        "L'avenir de la crypto est entre vos mains. Voici comment vous pouvez aider.",
       communitySubtitle:
         'Voyez comment notre communauté se mobilise pour protéger le futur de la crypto en Europe.',
       viewAll: 'Voir tout',
@@ -73,6 +81,13 @@ export async function EuPageHome(props: EuPageHomeProps) {
           </RecentActivity>
         </HomePageSection>
       )}
+
+      <HomePageSection>
+        <HomePageSection.Title>{t('getInvolvedTitle')}</HomePageSection.Title>
+        <HomePageSection.Subtitle>{t('getInvolvedSubtitle')}</HomePageSection.Subtitle>
+
+        <UserActionGridCTAs />
+      </HomePageSection>
     </>
   )
 }

@@ -17,6 +17,9 @@ import { gbExternalUrls } from '@/utils/shared/urls'
 import { GBUserActionLinkedInCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
+const countryCode = SupportedCountryCodes.GB
 
 export function GBUserActionFormFollowLinkedIn({ onClose }: UserActionFormFollowLinkedInProps) {
   const searchParams = useSearchParams()
@@ -73,7 +76,7 @@ export function GBUserActionFormFollowLinkedIn({ onClose }: UserActionFormFollow
         </FollowLinkedIn>
       )
     case SectionNames.SUCCESS:
-      return <SuccessSection onClose={onClose} />
+      return <SuccessSection onClose={onClose} countryCode={countryCode} />
     default:
       return null
   }

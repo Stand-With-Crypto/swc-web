@@ -19,6 +19,8 @@ import { useSession } from '@/hooks/useSession'
 import { isSmsSupportedInCountry } from '@/utils/shared/sms/smsSupportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface UserActionFormSuccessScreenProps {
   children: React.ReactNode
@@ -26,7 +28,28 @@ interface UserActionFormSuccessScreenProps {
   onLoad?: () => void
 }
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      title: 'Nice work!',
+      description:
+        'This is an important time for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area.',
+    },
+    de: {
+      title: 'Gute Arbeit!',
+      description:
+        'Dies ist eine wichtige Zeit für Krypto. Melden Sie sich für regelmäßige Textnachrichten auf wichtige Gesetze, Wahlen und Ereignisse in Ihrer Region an.',
+    },
+    fr: {
+      title: 'Bon travail!',
+      description:
+        "C'est un moment important pour le crypto. Inscrivez-vous pour des mises à jour textuelles occasionnelles sur les lois importantes, les élections et les événements dans votre région.",
+    },
+  },
+})
+
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
+  const { t } = useTranslation(i18nMessages, 'UserActionFormSuccessScreen')
   const { children, onClose } = props
 
   const countryCode = useCountryCode()
@@ -66,10 +89,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
 
     return (
       <div className="mx-auto flex h-full max-w-lg flex-col items-center gap-6 text-center">
-        <UserActionFormSuccessScreenFeedback
-          description="This is an important time for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area."
-          title="Nice work!"
-        />
+        <UserActionFormSuccessScreenFeedback description={t('description')} title={t('title')} />
 
         <SMSOptInForm
           className="h-full"

@@ -1,12 +1,29 @@
 'use client'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
+import { getUserActionFormSuccessScreenInfo } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { UserActionType } from '@prisma/client'
 
-export function SuccessSection({ onClose }: { onClose: () => void }) {
+export function SuccessSection({
+  onClose,
+  countryCode,
+  language = SupportedLanguages.EN,
+}: {
+  onClose: () => void
+  countryCode: SupportedCountryCodes
+  language?: SupportedLanguages
+}) {
+  const info = getUserActionFormSuccessScreenInfo({
+    actionType: UserActionType.LINKEDIN,
+    countryCode,
+    language: language,
+  })
+
   return (
     <UserActionFormSuccessScreen onClose={onClose}>
-      <UserActionFormSuccessScreenFeedback {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.LINKEDIN} />
+      <UserActionFormSuccessScreenFeedback {...info} />
     </UserActionFormSuccessScreen>
   )
 }
