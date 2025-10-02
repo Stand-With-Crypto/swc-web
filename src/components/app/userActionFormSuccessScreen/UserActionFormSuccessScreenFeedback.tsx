@@ -1,15 +1,12 @@
 import { ReactNode } from 'react'
-import { UserActionType } from '@prisma/client'
 
-import { getUserActionFormSuccessScreenInfo } from '@/components/app/userActionFormSuccessScreen/constants'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useCountryCode } from '@/hooks/useCountryCode'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { useLanguage } from '@/utils/web/i18n/useLanguage'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
+import { i18nMessages as constantsI18nMessages } from './constants'
 
 export interface UserActionFormSuccessScreenFeedbackProps {
   image?: ReactNode
@@ -79,18 +76,14 @@ UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreen
 
 UserActionFormSuccessScreenFeedback.Description =
   function UserActionFormSuccessScreenFeedbackDescription({ children }: { children: ReactNode }) {
-    const countryCode = useCountryCode()
-    const language = useLanguage()
-
-    const info = getUserActionFormSuccessScreenInfo({
-      actionType: UserActionType.LINKEDIN,
-      countryCode,
-      language,
-    })
+    const { t } = useTranslation(
+      constantsI18nMessages,
+      'UserActionFormSuccessScreenFeedbackDescription',
+    )
 
     return (
       <PageSubTitle className="max-w-lg" size="md">
-        {children || info.description}
+        {children || t('withoutNFT')}
       </PageSubTitle>
     )
   }
