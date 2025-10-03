@@ -15,6 +15,28 @@ function formatDTSICategory(role?: Pick<DTSI_PersonRole, 'roleCategory'> | null)
       return 'senator'
     case DTSI_PersonRoleCategory.CONGRESS:
       return 'representative'
+    case DTSI_PersonRoleCategory.GOVERNOR:
+      return 'governor'
+    case DTSI_PersonRoleCategory.ATTORNEY_GENERAL:
+      return 'attorney general'
+    case DTSI_PersonRoleCategory.MAYOR:
+      return 'mayor'
+    case DTSI_PersonRoleCategory.PRESIDENT:
+      return 'president'
+    case DTSI_PersonRoleCategory.VICE_PRESIDENT:
+      return 'vice president'
+    case DTSI_PersonRoleCategory.STATE_CONGRESS:
+      return 'state representative'
+    case DTSI_PersonRoleCategory.STATE_SENATE:
+      return 'state senator'
+    case DTSI_PersonRoleCategory.COMMITTEE_CHAIR:
+      return 'committee chair'
+    case DTSI_PersonRoleCategory.COMMITTEE_MEMBER:
+      return 'committee member'
+    case DTSI_PersonRoleCategory.HOUSE_OF_COMMONS:
+      return 'member of parliament'
+    case DTSI_PersonRoleCategory.HOUSE_OF_LORDS:
+      return 'member of house of lords'
     default:
       return gracefullyError({
         msg: `Unknown role category ${roleCategory!} in formatDTSICategory`,
