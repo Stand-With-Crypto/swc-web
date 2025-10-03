@@ -5,6 +5,7 @@ import { uniqBy } from 'lodash-es'
 import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
 
 interface CTAType {
   title: string
@@ -29,6 +30,7 @@ export function useOrderedCTAs({
   excludeUserActionTypes,
 }: UseOrderedCTAsProps) {
   const countryCode = useCountryCode()
+  const language = useLanguage()
 
   const performedUserActionObj = useMemo(() => {
     return performedUserActionTypes.length
@@ -43,7 +45,7 @@ export function useOrderedCTAs({
       : {}
   }, [performedUserActionTypes])
 
-  const allCTAsForCountry = getUserActionCTAsByCountry(countryCode)
+  const allCTAsForCountry = getUserActionCTAsByCountry(countryCode, language)
 
   const ctas = excludeUserActionTypes
     ? Object.entries(allCTAsForCountry)

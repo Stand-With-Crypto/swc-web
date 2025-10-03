@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { AUUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/au/skeleton'
 import { CAUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/ca/skeleton'
 import { UserActionFormReferProps } from '@/components/app/userActionFormRefer/common/types'
+import { EUUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/eu/skeleton'
 import { GBUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/gb/skeleton'
 import { USUserActionFormReferSkeleton } from '@/components/app/userActionFormRefer/us/skeleton'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
@@ -36,6 +37,13 @@ const USUserActionFormRefer = dynamic(
   },
 )
 
+const EUUserActionFormRefer = dynamic(
+  () => import('@/components/app/userActionFormRefer/eu').then(mod => mod.EUUserActionFormRefer),
+  {
+    loading: () => <EUUserActionFormReferSkeleton />,
+  },
+)
+
 export function getUserActionFormRefer(props: UserActionFormReferProps) {
   const { countryCode } = props
 
@@ -48,6 +56,8 @@ export function getUserActionFormRefer(props: UserActionFormReferProps) {
       return CAUserActionFormRefer
     case SupportedCountryCodes.AU:
       return AUUserActionFormRefer
+    case SupportedCountryCodes.EU:
+      return EUUserActionFormRefer
     default:
       return gracefullyError({
         msg: `Country implementation not found for UserActionFormRefer`,

@@ -8,12 +8,28 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 interface ReferralsCounterProps {
   children: React.ReactNode
   className?: string
 }
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      yourReferrals: 'Your referrals',
+    },
+    de: {
+      yourReferrals: 'Deine Referenzen',
+    },
+    fr: {
+      yourReferrals: 'Vos références',
+    },
+  },
+})
 
 export function ReferralsCounter(props: ReferralsCounterProps) {
   const { children, className } = props
@@ -48,6 +64,8 @@ export function UserCounterWrapper({
 }
 
 export function UserReferralsCount({ className }: { className?: string }) {
+  const { t } = useTranslation(i18nMessages, 'UserReferralsCount')
+
   const userResponse = useApiResponseForUserFullProfileInfo({
     refreshInterval: 1000 * 60 * 1, // 1 minute
   })
@@ -63,7 +81,7 @@ export function UserReferralsCount({ className }: { className?: string }) {
 
   return (
     <UserCounterWrapper className={className}>
-      <p className="font-medium">Your referrals</p>
+      <p className="font-medium">{t('yourReferrals')}</p>
       {userResponse.isLoading ? (
         <Skeleton className="h-12 w-14" />
       ) : (

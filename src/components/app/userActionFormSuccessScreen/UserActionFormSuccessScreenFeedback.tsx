@@ -1,16 +1,36 @@
 import { ReactNode } from 'react'
 
-import { DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
+
+import { i18nMessages as constantsI18nMessages } from './constants'
 
 export interface UserActionFormSuccessScreenFeedbackProps {
   image?: ReactNode
   title?: ReactNode
   description?: ReactNode
 }
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      alt: 'Shield with checkmark',
+      niceWork: 'Nice work!',
+    },
+    de: {
+      alt: 'Schild mit Häkchen',
+      niceWork: 'Gute Arbeit!',
+    },
+    fr: {
+      alt: 'Badge avec coche',
+      niceWork: 'Bon travail!',
+    },
+  },
+})
 
 export function UserActionFormSuccessScreenFeedback(
   props: UserActionFormSuccessScreenFeedbackProps,
@@ -33,14 +53,10 @@ export function UserActionFormSuccessScreenFeedback(
   )
 }
 
-const UserActionFormSuccessScreenDefaultImage = () => (
-  <NextImage
-    alt="Shield with checkmark"
-    height={120}
-    src="/misc/swc-shield-checkmark.svg"
-    width={120}
-  />
-)
+const UserActionFormSuccessScreenDefaultImage = () => {
+  const { t } = useTranslation(i18nMessages, 'UserActionFormSuccessScreenDefaultImage')
+  return <NextImage alt={t('alt')} height={120} src="/misc/swc-shield-checkmark.svg" width={120} />
+}
 
 UserActionFormSuccessScreenFeedback.Image = function UserActionFormSuccessScreenFeedbackImage({
   children,
@@ -55,14 +71,20 @@ UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreen
 }: {
   children: ReactNode
 }) {
-  return <PageTitle size="sm">{children || 'Nice work!'}</PageTitle>
+  const { t } = useTranslation(i18nMessages, 'UserActionFormSuccessScreenFeedbackTitle')
+  return <PageTitle size="sm">{children || t('niceWork')}</PageTitle>
 }
 
 UserActionFormSuccessScreenFeedback.Description =
   function UserActionFormSuccessScreenFeedbackDescription({ children }: { children: ReactNode }) {
+    const { t } = useTranslation(
+      constantsI18nMessages,
+      'UserActionFormSuccessScreenFeedbackDescription',
+    )
+
     return (
       <PageSubTitle className="max-w-lg" size="md">
-        {children || DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO.WITHOUT_NFT}
+        {children || t('withoutNFT')}
       </PageSubTitle>
     )
   }

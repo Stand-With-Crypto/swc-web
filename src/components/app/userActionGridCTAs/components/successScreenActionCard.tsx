@@ -1,8 +1,30 @@
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { NextImage } from '@/components/ui/image'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 import { CampaignsCheckmarks } from './campaignsCheckmarks'
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      complete: 'Complete',
+      lowercaseComplete: 'complete',
+      notComplete: 'Not complete',
+    },
+    fr: {
+      complete: 'Complet',
+      lowercaseComplete: 'complet',
+      notComplete: 'Non complet',
+    },
+    de: {
+      complete: 'Vollständig',
+      lowercaseComplete: 'vollständig',
+      notComplete: 'Nicht vollständig',
+    },
+  },
+})
 
 export function SuccessScreenActionCard({
   title,
@@ -18,6 +40,8 @@ export function SuccessScreenActionCard({
   onClick: _onClick,
   ...rest
 }: Omit<UserActionCardProps, 'WrapperComponent'>) {
+  const { t } = useTranslation(i18nMessages, 'SuccessScreenActionCard')
+
   const isReadOnly = campaigns.every(
     campaign =>
       !campaign.canBeTriggeredMultipleTimes &&
@@ -26,10 +50,10 @@ export function SuccessScreenActionCard({
 
   const getProgressText = () => {
     if (campaignsLength === 1) {
-      return completedCampaigns === 1 ? 'Complete' : 'Not complete'
+      return completedCampaigns === 1 ? t('complete') : t('notComplete')
     }
 
-    return `${completedCampaigns}/${campaignsLength} complete`
+    return `${completedCampaigns}/${campaignsLength} ${t('lowercaseComplete')}`
   }
 
   return (

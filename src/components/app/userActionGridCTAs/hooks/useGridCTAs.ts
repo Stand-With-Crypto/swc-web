@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
 
 interface useGridCTAsProps {
   excludeUserActionTypes?: UserActionType[]
@@ -17,11 +18,13 @@ export function useGridCTAs({
   excludeUserActionTypes,
   performedUserActionTypes,
 }: useGridCTAsProps) {
+  const language = useLanguage()
+
   const pathname = usePathname()
   const countryCode = useCountryCode()
   const isProfilePage = pathname?.includes(getIntlUrls(countryCode).profile())
 
-  const userActionCTAs = getUserActionCTAsByCountry(countryCode)
+  const userActionCTAs = getUserActionCTAsByCountry(countryCode, language)
 
   const performedUserActionObj = performedUserActionTypes.length
     ? performedUserActionTypes.reduce(

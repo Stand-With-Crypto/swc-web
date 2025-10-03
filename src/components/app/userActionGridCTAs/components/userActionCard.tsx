@@ -2,9 +2,28 @@ import { forwardRef } from 'react'
 
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { NextImage } from '@/components/ui/image'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 import { CampaignsCheckmarks } from './campaignsCheckmarks'
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      complete: 'Complete',
+      notComplete: 'Not complete',
+    },
+    fr: {
+      complete: 'Complet',
+      notComplete: 'Non complet',
+    },
+    de: {
+      complete: 'Vollständig',
+      notComplete: 'Nicht vollständig',
+    },
+  },
+})
 
 export const UserActionCard = forwardRef<
   HTMLButtonElement,
@@ -26,6 +45,8 @@ export const UserActionCard = forwardRef<
     },
     ref,
   ) => {
+    const { t } = useTranslation(i18nMessages, 'UserActionCard')
+
     const isReadOnly = campaigns.every(
       campaign =>
         !campaign.canBeTriggeredMultipleTimes &&
@@ -34,10 +55,10 @@ export const UserActionCard = forwardRef<
 
     const getProgressText = () => {
       if (campaignsLength === 1) {
-        return completedCampaigns === 1 ? 'Complete' : 'Not complete'
+        return completedCampaigns === 1 ? t('complete') : t('notComplete')
       }
 
-      return `${completedCampaigns}/${campaignsLength} Complete`
+      return `${completedCampaigns}/${campaignsLength} ${t('complete')}`
     }
 
     const isPrepareToVoteAction = campaigns.some(
