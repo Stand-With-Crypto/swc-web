@@ -6,6 +6,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
+
 import { i18nMessages as constantsI18nMessages } from './constants'
 
 export interface UserActionFormSuccessScreenFeedbackProps {
