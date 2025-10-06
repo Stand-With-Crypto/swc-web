@@ -1,4 +1,5 @@
 import { getSupportedLanguagesForCountry } from '@/utils/shared/i18n/getSupportedLanguagesByCountry'
+import { SupportedLanguagesByCountryCode } from '@/utils/shared/i18n/types'
 import {
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
@@ -34,9 +35,15 @@ function createX<
   overrides,
 }: {
   defaultMessages: TDefaultMessages & UniformShape<TDefaultMessages>
-  overrides?: Partial<I18nMessages<T>>
+  overrides?: Partial<{
+    [Country in SupportedCountryCodes]?: Partial<{
+      [Lang in SupportedLanguagesByCountryCode[Country][number]]?: T extends infer U
+        ? Partial<Record<keyof U, string>>
+        : unknown
+    }>
+  }>
 }): I18nMessages<T> {
-  const x: Record<string, Record<string, Record<string, string>>> = {}
+  const x: I18nMessages<T> = {}
 
   for (const countryCode of ORDERED_SUPPORTED_COUNTRIES) {
     const supportedLanguages = getSupportedLanguagesForCountry(countryCode)
@@ -66,7 +73,7 @@ const x = createX({
   defaultMessages: {
     en: {
       welcome: 'Welcome',
-      test: 'Test',
+      test: 'uuuuu',
     },
     de: {
       welcome: 'Willkommen',
@@ -75,7 +82,14 @@ const x = createX({
     fr: {
       welcome: 'Bienvenue',
       test: 'Test',
-      wrong: 'Wrong', //error on typescript because the other objects don't have this key
+      invalid: 'Invalid',
+    },
+  },
+  overrides: {
+    eu: {
+      en: {
+        wrong: 'ANOTHER TRANSLATION',
+      },
     },
   },
 })
