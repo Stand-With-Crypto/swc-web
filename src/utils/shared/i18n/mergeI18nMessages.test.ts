@@ -69,11 +69,9 @@ describe('mergeI18nMessages', () => {
 
     it('should add new languages for existing countries', () => {
       const target: I18nMessages = {
-        // @ts-expect-error - This is a test
         eu: { en: { hello: 'Hello' } },
       }
       const source: I18nMessages = {
-        // @ts-expect-error - This is a test
         eu: { fr: { hello: 'Bonjour' }, de: { hello: 'Hallo' } },
       }
 

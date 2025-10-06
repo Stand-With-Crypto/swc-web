@@ -7,9 +7,9 @@ import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { createI18nMessages } from './createI18nMessages'
 
 describe('createI18nMessages', () => {
-  describe('with no parameters', () => {
+  describe('with empty defaultMessages', () => {
     it('should return empty messages for all countries and languages', () => {
-      const result = createI18nMessages()
+      const result = createI18nMessages({ defaultMessages: {} })
 
       expect(result).toEqual({
         [SupportedCountryCodes.US]: {
@@ -80,20 +80,21 @@ describe('createI18nMessages', () => {
     })
   })
 
-  describe('with messagesOverrides only', () => {
+  describe('with overrides only', () => {
     it('should apply country-specific messages', () => {
-      const messagesOverrides: PartialI18nMessages = {
-        [SupportedCountryCodes.US]: {
-          [SupportedLanguages.EN]: { welcome: 'Welcome to USA' },
-        },
-        [SupportedCountryCodes.EU]: {
-          [SupportedLanguages.EN]: { welcome: 'Welcome to Europe' },
-          [SupportedLanguages.DE]: { welcome: 'Willkommen in Europa' },
-          [SupportedLanguages.FR]: { welcome: 'Bienvenue en Europe' },
-        },
-      }
-
-      const result = createI18nMessages({ defaultMessages: {}, messagesOverrides })
+      const result = createI18nMessages({
+        defaultMessages: {},
+        messagesOverrides: {
+          [SupportedCountryCodes.US]: {
+            [SupportedLanguages.EN]: { welcome: 'Welcome to USA' },
+          },
+          [SupportedCountryCodes.EU]: {
+            [SupportedLanguages.EN]: { welcome: 'Welcome to Europe' },
+            [SupportedLanguages.DE]: { welcome: 'Willkommen in Europa' },
+            [SupportedLanguages.FR]: { welcome: 'Bienvenue en Europe' },
+          },
+        } as any,
+      })
 
       expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
         welcome: 'Welcome to USA',
@@ -107,14 +108,15 @@ describe('createI18nMessages', () => {
     })
 
     it('should handle partial country messages', () => {
-      const messagesOverrides: PartialI18nMessages = {
-        [SupportedCountryCodes.US]: {
-          [SupportedLanguages.EN]: { welcome: 'Welcome to USA' },
-        },
-        // Missing other countries
-      }
-
-      const result = createI18nMessages({ defaultMessages: {}, messagesOverrides })
+      const result = createI18nMessages({
+        defaultMessages: {},
+        messagesOverrides: {
+          [SupportedCountryCodes.US]: {
+            [SupportedLanguages.EN]: { welcome: 'Welcome to USA' },
+          },
+          // Missing other countries
+        } as any,
+      })
 
       expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
         welcome: 'Welcome to USA',
@@ -124,7 +126,7 @@ describe('createI18nMessages', () => {
     })
   })
 
-  describe('with both defaultMessages and messagesOverrides', () => {
+  describe('with both defaultMessages and overrides', () => {
     it('should merge messages with defaults, with overrides taking precedence', () => {
       const defaultMessages = {
         [SupportedLanguages.EN]: { hello: 'Hello', goodbye: 'Goodbye' },
@@ -212,13 +214,14 @@ describe('createI18nMessages', () => {
 
   describe('edge cases', () => {
     it('should handle missing country messages gracefully', () => {
-      const messagesOverrides: PartialI18nMessages = {
-        [SupportedCountryCodes.US]: {
-          [SupportedLanguages.EN]: { test: 'value' },
-        },
-      }
-
-      const result = createI18nMessages({ defaultMessages: {}, messagesOverrides })
+      const result = createI18nMessages({
+        defaultMessages: {},
+        messagesOverrides: {
+          [SupportedCountryCodes.US]: {
+            [SupportedLanguages.EN]: { test: 'value' },
+          },
+        } as any,
+      })
 
       expect(result[SupportedCountryCodes.US]?.[SupportedLanguages.EN]).toEqual({
         test: 'value',
@@ -227,7 +230,7 @@ describe('createI18nMessages', () => {
     })
 
     it('should maintain structure for all supported countries', () => {
-      const result = createI18nMessages()
+      const result = createI18nMessages({ defaultMessages: {} })
 
       // Verify all expected countries are present
       expect(result).toHaveProperty(SupportedCountryCodes.US)

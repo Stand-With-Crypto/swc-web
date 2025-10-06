@@ -17,36 +17,45 @@ import {
 } from '@/utils/shared/supportedLocales'
 
 /**
- * Function to use translations in server components and server-side functions
+ * Function to use translations in server components and server-side functions with type-safe keys
  *
- * @param i18nMessages - Object with the component translations
+ * @param i18nMessages - Object with the component translations (created with createI18nMessages)
  * @param contextName - Component name (optional)
- * @returns Object translator with t() method to translate
+ * @param countryCode - Country code (optional, defaults to DEFAULT_SUPPORTED_COUNTRY_CODE)
+ * @param language - Language (optional, defaults to auto-detection)
+ * @returns Object translator with type-safe t() method to translate
  *
  * @example
  * ```tsx
- * const i18nMessages = {
- *   en: { 'title': 'Server Component Title' },
- *   de: { 'title': 'Server-Komponente Titel' },
- *   fr: { 'title': 'Titre du Composant Serveur' }
- * }
+ * const i18nMessages = createI18nMessages({
+ *   defaultMessages: {
+ *     en: { 'title': 'Server Component Title' },
+ *     de: { 'title': 'Server-Komponente Titel' },
+ *     fr: { 'title': 'Titre du Composant Serveur' }
+ *   }
+ * })
  *
- * export default function ServerComponent() {
- *   const { t } = getTranslation(i18nMessages)
+ * export default async function ServerComponent() {
+ *   const { t } = await getServerTranslation(i18nMessages)
  *
- *   return <h1>{t('title')}</h1>
+ *   return <h1>{t('title')}</h1> // 'title' is type-safe
  * }
  * ```
  */
-export async function getServerTranslation(
-  i18nMessages: I18nMessages,
+export async function getServerTranslation<T extends Record<string, string>>(
+  i18nMessages: I18nMessages<T>,
   contextName: string = 'unknown',
   countryCode: SupportedCountryCodes = DEFAULT_SUPPORTED_COUNTRY_CODE,
   language?: SupportedLanguages,
 ) {
   // Use provided language or fallback to auto-detection
   const finalLanguage = language || (await getServerLanguage())
-  const translator = createTranslator(i18nMessages, finalLanguage, countryCode, contextName)
+  const translator = createTranslator<T>({
+    messages: i18nMessages,
+    language: finalLanguage,
+    countryCode,
+    contextName,
+  })
 
   return {
     t: translator.t.bind(translator),

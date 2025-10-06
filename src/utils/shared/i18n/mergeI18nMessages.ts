@@ -45,18 +45,18 @@ import { I18nMessages } from './types'
  * - Source values always win in case of conflicts at any nesting level
  * - Maintains type safety with I18nMessages structure (country -> language -> messages)
  */
-export function mergeI18nMessages(
-  target: I18nMessages | undefined,
-  source: I18nMessages | undefined,
-): I18nMessages {
+export function mergeI18nMessages<
+  T extends Record<string, string>,
+  U extends Record<string, string>,
+>(target: I18nMessages<T> | undefined, source: I18nMessages<U> | undefined): I18nMessages<T & U> {
   if (!target && !source) {
     return {}
   }
   if (!target) {
-    return { ...source }
+    return { ...source } as I18nMessages<T & U>
   }
   if (!source) {
-    return { ...target }
+    return { ...target } as I18nMessages<T & U>
   }
 
   return mergeWith({}, target, source, (objValue, srcValue) => {
