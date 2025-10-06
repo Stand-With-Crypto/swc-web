@@ -14,12 +14,17 @@ type I18nMessages<T extends Record<string, string>> = {
 }
 
 // Enforce that all objects in T have identical keys
-type UniformShape<T> =
-  T extends Record<string, infer U>
-    ? U extends Record<string, string>
-      ? { [K in keyof T]: Record<keyof U, string> }
-      : T
-    : T
+type UniformShape<T> = {
+  [K in keyof T]: T[K] extends Record<string, string>
+    ? T[keyof T] extends Record<string, string>
+      ? keyof T[K] extends keyof T[keyof T]
+        ? keyof T[keyof T] extends keyof T[K]
+          ? T[K]
+          : never
+        : never
+      : T[K]
+    : T[K]
+}
 
 function createX<
   const TDefaultMessages extends Partial<Record<SupportedLanguages, Record<string, string>>>,
@@ -70,6 +75,7 @@ const x = createX({
     fr: {
       welcome: 'Bienvenue',
       test: 'Test',
+      wrong: 'Wrong',
     },
   },
 })
