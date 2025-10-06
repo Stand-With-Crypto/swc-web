@@ -75,7 +75,7 @@ const x = createX({
     fr: {
       welcome: 'Bienvenue',
       test: 'Test',
-      wrong: 'Wrong',
+      wrong: 'Wrong', //error on typescript because the other objects don't have this key
     },
   },
 })
