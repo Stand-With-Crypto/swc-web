@@ -150,6 +150,7 @@ model User {
   UserCommunicationJourney UserCommunicationJourney[]
   smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
   countryCode              String                     @map("country_code")
+  language                 String                     @default("en") @db.Char(2)
 
   @@index([addressId])
   @@index([internalStatus])
