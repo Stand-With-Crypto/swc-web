@@ -44,6 +44,7 @@ import {
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { ORDERED_SUPPORTED_EU_LANGUAGES, SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
@@ -137,7 +138,7 @@ export function UpdateUserProfileForm({
     address: GooglePlaceAutocompletePrediction | null
   }) => void
 }) {
-  const { t, language } = useTranslation(i18nMessages)
+  const { t } = useTranslation(i18nMessages)
 
   const countryCode = useCountryCode()
   const router = useRouter()
@@ -182,9 +183,16 @@ export function UpdateUserProfileForm({
     )
     if (result.status === 'success') {
       const newCountryCode = (result.response as { user: ClientUserWithENSData })?.user?.countryCode
+      const addressCountryCode = resolvedAddress?.countryCode.toLowerCase() as SupportedLanguages
 
       if (ORDERED_SUPPORTED_COUNTRIES.includes(newCountryCode) && newCountryCode !== countryCode) {
-        router.push(getIntlUrls(newCountryCode as SupportedCountryCodes, { language }).profile())
+        router.push(
+          getIntlUrls(newCountryCode as SupportedCountryCodes, {
+            language: ORDERED_SUPPORTED_EU_LANGUAGES.includes(addressCountryCode)
+              ? addressCountryCode
+              : SupportedLanguages.EN,
+          }).profile(),
+        )
         return
       }
 
