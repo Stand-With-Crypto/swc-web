@@ -5,7 +5,9 @@ import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/s
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { NFTSlug } from '@/utils/shared/nft'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 interface NFTDisplayProps {
@@ -20,9 +22,25 @@ interface NFTImages {
   key: string
 }
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      mintNftButton: 'Mint Stand With Crypto Supporter NFT',
+    },
+    fr: {
+      mintNftButton: 'Créer un NFT de Supporter Stand With Crypto',
+    },
+    de: {
+      mintNftButton: 'Stand With Crypto Unterstützer-NFT prägen',
+    },
+  },
+})
+
 const ButtonWrapper = UserActionFormNFTMintDialog
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
+  const { t } = useTranslation(i18nMessages, 'nftDisplay')
+
   let optInNftButton = true
 
   const userNfts: NFTImages[] = userActions.reduce(
@@ -89,7 +107,7 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
         <div className="m-4 flex justify-center">
           {ButtonWrapper !== undefined ? (
             <ButtonWrapper>
-              <Button>Mint Stand With Crypto Supporter NFT</Button>
+              <Button>{t('mintNftButton')}</Button>
             </ButtonWrapper>
           ) : null}
         </div>
