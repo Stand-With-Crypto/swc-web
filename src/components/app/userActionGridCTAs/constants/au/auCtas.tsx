@@ -93,13 +93,25 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email your MP',
         description: 'Advocate for crypto reforms',
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: getEmailActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: AUUserActionEmailCampaignName.WELCOME_MP_BACK_TO_PARLIAMENT_2025,
+        }),
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: AUUserActionEmailCampaignName.PROTECT_CRYPTO_INNOVATION_2025,
+        isCampaignActive: true,
+        title: 'Email your MP',
+        description: 'Advocate for crypto reforms',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: getEmailActionWrapperComponentByCampaignName({
+          countryCode,
+          campaignName: AUUserActionEmailCampaignName.PROTECT_CRYPTO_INNOVATION_2025,
         }),
       },
     ],
