@@ -15,6 +15,7 @@ export const i18nMessages = createI18nMessages({
     en: {
       manifesto: 'Manifesto',
       petitions: 'Petitions',
+      community: 'Community',
       footerTitle: 'Join the Movement',
       footerSubtitle:
         'Join to show your support and protect the future of crypto in Europe. #standwithcrypto',
@@ -24,6 +25,7 @@ export const i18nMessages = createI18nMessages({
     de: {
       manifesto: 'Manifesto',
       petitions: 'Petitionen',
+      community: 'Gemeinschaft',
       footerTitle: 'Schließe dich der Bewegung an',
       footerSubtitle:
         'Schließe dich an, um deine Unterstützung zu zeigen und die Zukunft von Krypto in Europa zu schützen. #standwithcrypto',
@@ -33,6 +35,7 @@ export const i18nMessages = createI18nMessages({
     fr: {
       manifesto: 'Manifesto',
       petitions: 'Pétitions',
+      community: 'Communauté',
       footerTitle: 'Rejoignez le mouvement',
       footerSubtitle:
         "Rejoignez-nous pour montrer votre soutien et protéger l'avenir de la crypto en Europe. #standwithcrypto",
@@ -65,6 +68,10 @@ export function getNavbarConfig({
       {
         href: urls.petitions(),
         text: t('petitions'),
+      },
+      {
+        href: urls.community(),
+        text: t('community'),
       },
     ],
   }
