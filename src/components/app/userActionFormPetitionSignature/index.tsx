@@ -173,7 +173,7 @@ export function UserActionFormPetitionSignature({
       )
 
       if (!validateCountryCode(address.countryCode)) {
-        const countryName = t(petitionData.countryCode.toUpperCase())
+        const countryName = t(petitionData.countryCode.toUpperCase() as keyof typeof t)
 
         form.setError('address', {
           message: t('petitionUnavailableForCountry', { countryName }),

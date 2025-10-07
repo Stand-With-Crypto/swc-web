@@ -224,7 +224,7 @@ const DTSIPersonName = ({
   return link
 }
 
-const getSWCDisplayText = (t: (key: string) => string) => (
+const getSWCDisplayText = (t: (key: 'standWithCrypto' | 'swc') => string) => (
   <>
     <span className="hidden sm:inline"> {t('standWithCrypto')}</span>
     <span className="sm:hidden"> {t('swc')} </span>

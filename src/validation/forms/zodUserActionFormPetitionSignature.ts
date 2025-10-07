@@ -1,7 +1,6 @@
 import z, { object, string } from 'zod'
 
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { Translator } from '@/utils/shared/i18n/createTranslator'
 import { mergeI18nMessages } from '@/utils/shared/i18n/mergeI18nMessages'
 import { GenericErrorFormValues } from '@/utils/web/formUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -10,7 +9,16 @@ import {
   zodGooglePlacesAutocompletePredictionI18nMessages,
 } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 
-export const createZodSchemaWithI18n = (t: Translator['t']) => {
+type I18nMessagesKeys =
+  | 'firstNameRequired'
+  | 'lastNameRequired'
+  | 'emailAddressInvalid'
+  | 'campaignNameRequired'
+  | 'addressRequired'
+  | 'addressCouldNotBeFound'
+  | 'pleaseSelectAValidAddress'
+
+export function createZodSchemaWithI18n(t: (key: I18nMessagesKeys) => string) {
   return object({
     firstName: string().min(1, t('firstNameRequired')),
     lastName: string().min(1, t('lastNameRequired')),
@@ -21,14 +29,15 @@ export const createZodSchemaWithI18n = (t: Translator['t']) => {
 }
 
 // For client-side form (uses GooglePlaceAutocompletePrediction)
-export const createUserActionFormPetitionSignature = (t: Translator['t']) =>
-  createZodSchemaWithI18n(t).extend({
+export function createUserActionFormPetitionSignature(t: (key: I18nMessagesKeys) => string) {
+  return createZodSchemaWithI18n(t).extend({
     address: createZodGooglePlacesAutocompletePredictionWithI18n(t).nullable(),
   })
+}
 
 // For server action (uses converted Address)
-export const createUserActionFormPetitionSignatureAction = (t: Translator['t']) =>
-  createZodSchemaWithI18n(t)
+export function createUserActionFormPetitionSignatureAction(t: (key: I18nMessagesKeys) => string) {
+  return createZodSchemaWithI18n(t)
     .extend({
       address: zodAddress.nullable(),
     })
@@ -40,6 +49,7 @@ export const createUserActionFormPetitionSignatureAction = (t: Translator['t']) 
       ...data,
       address: data.address!,
     }))
+}
 
 export type UserActionPetitionSignatureValues = z.infer<
   ReturnType<typeof createUserActionFormPetitionSignature>

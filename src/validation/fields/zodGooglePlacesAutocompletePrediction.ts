@@ -1,7 +1,6 @@
 import { object, string } from 'zod'
 
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
-import { Translator } from '@/utils/shared/i18n/createTranslator'
 
 export const zodGooglePlacesAutocompletePrediction = object(
   {
@@ -14,8 +13,10 @@ export const zodGooglePlacesAutocompletePrediction = object(
   },
 )
 
-export const createZodGooglePlacesAutocompletePredictionWithI18n = (t: Translator['t']) =>
-  object(
+export function createZodGooglePlacesAutocompletePredictionWithI18n(
+  t: (key: 'pleaseSelectAValidAddress') => string,
+) {
+  return object(
     {
       place_id: string(),
       description: string(),
@@ -25,6 +26,7 @@ export const createZodGooglePlacesAutocompletePredictionWithI18n = (t: Translato
       invalid_type_error: t('pleaseSelectAValidAddress'),
     },
   )
+}
 
 export const i18nMessages = createI18nMessages({
   defaultMessages: {

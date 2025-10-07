@@ -13,12 +13,13 @@ export interface SupportedLanguagesByCountryCode {
   [SupportedCountryCodes.EU]: [SupportedLanguages.FR, SupportedLanguages.DE, SupportedLanguages.EN]
 }
 
+// Legacy types - kept for backward compatibility
 export type I18nCountryMessages<T extends SupportedCountryCodes> = {
   [K in SupportedLanguagesByCountryCode[T][number]]: ComponentMessages
 }
 
-export type I18nMessages = {
-  [K in SupportedCountryCodes]?: I18nCountryMessages<K>
+export type I18nMessages<T extends Record<string, string> = ComponentMessages> = {
+  [K in SupportedCountryCodes]?: LanguageMessages<T>
 }
 
 export type PartialI18nCountryMessages<T extends SupportedCountryCodes> = {
@@ -27,6 +28,24 @@ export type PartialI18nCountryMessages<T extends SupportedCountryCodes> = {
 
 export type PartialI18nMessages = {
   [K in SupportedCountryCodes]?: PartialI18nCountryMessages<K>
+}
+
+// New generic types with type-safe keys
+export type LanguageMessages<T extends Record<string, string>> = {
+  [K in SupportedLanguages]?: T
+}
+
+// Enforce that all objects in T have identical keys
+export type UniformShape<T> = {
+  [K in keyof T]: T[K] extends Record<string, string>
+    ? T[keyof T] extends Record<string, string>
+      ? keyof T[K] extends keyof T[keyof T]
+        ? keyof T[keyof T] extends keyof T[K]
+          ? T[K]
+          : never
+        : never
+      : T[K]
+    : T[K]
 }
 
 // Define our own types since FormatJS doesn't export these directly from the main package
