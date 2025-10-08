@@ -6,6 +6,7 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const navbarConfigsByCountry = {
   [SupportedCountryCodes.AU]: import('@/app/au/config').then(module => module.getNavbarConfig),
@@ -36,19 +37,23 @@ export async function BuilderPageLayout({
   countryCode,
   pathname,
   modelName,
+  language = SupportedLanguages.EN,
 }: {
   children: React.ReactNode
   countryCode: SupportedCountryCodes
   pathname: string
   modelName: BuilderPageModelIdentifiers
+  language?: SupportedLanguages
 }) {
-  const pageMetadata = await getPageDetails(modelName, pathname, countryCode)
+  const pageMetadata = await getPageDetails(modelName, pathname, countryCode, language)
 
   const navbarConfigFn = await getNavbarConfig(countryCode)
-  const navbarConfig = navbarConfigFn()
+  const navbarConfig =
+    countryCode === SupportedCountryCodes.EU ? navbarConfigFn({ language }) : navbarConfigFn()
 
   const footerConfigFn = await getFooterConfig(countryCode)
-  const footerConfig = footerConfigFn()
+  const footerConfig =
+    countryCode === SupportedCountryCodes.EU ? footerConfigFn({ language }) : footerConfigFn()
 
   return (
     <>

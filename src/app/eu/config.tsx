@@ -23,7 +23,7 @@ export const i18nMessages = createI18nMessages({
       privacyPolicy: 'Privacy',
     },
     de: {
-      manifesto: 'Manifesto',
+      manifesto: 'Manifest',
       petitions: 'Petitionen',
       community: 'Gemeinschaft',
       footerTitle: 'Schließe dich der Bewegung an',
@@ -33,7 +33,7 @@ export const i18nMessages = createI18nMessages({
       privacyPolicy: 'Datenschutz',
     },
     fr: {
-      manifesto: 'Manifesto',
+      manifesto: 'Manifeste',
       petitions: 'Pétitions',
       community: 'Communauté',
       footerTitle: 'Rejoignez le mouvement',
