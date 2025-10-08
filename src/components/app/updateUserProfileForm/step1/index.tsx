@@ -63,9 +63,8 @@ const FORM_NAME = 'User Profile'
 export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
-      edit: 'Edit',
-      finish: 'Finish',
-      yourProfile: 'Your profile',
+      editProfile: 'Edit your profile',
+      finishProfile: 'Finish your profile',
       subtitle:
         'Completing your profile makes it easier for you to take action, locate your representative and find local events.',
       emailLabel: 'Email',
@@ -83,9 +82,8 @@ export const i18nMessages = createI18nMessages({
       profileUpdated: 'Profile updated',
     },
     fr: {
-      edit: 'Modifier',
-      finish: 'Terminer',
-      yourProfile: 'Votre profil',
+      editProfile: 'Modifier votre profil',
+      finishProfile: 'Terminer votre profil',
       subtitle:
         "Compléter votre profil facilite la prise d'action, la localisation de votre représentant et la recherche d'événements locaux.",
       emailLabel: 'E-mail',
@@ -103,9 +101,8 @@ export const i18nMessages = createI18nMessages({
       profileUpdated: 'Profil mis à jour',
     },
     de: {
-      edit: 'Bearbeiten',
-      finish: 'Fertig',
-      yourProfile: 'Ihr Profil',
+      editProfile: 'Bearbeiten ihr Profil',
+      finishProfile: 'Fertig ihr Profil',
       subtitle:
         'Das Vervollständigen Ihres Profils erleichtert es Ihnen, Maßnahmen zu ergreifen, Ihren Vertreter zu finden und lokale Veranstaltungen zu entdecken.',
       emailLabel: 'E-Mail',
@@ -230,7 +227,7 @@ export function UpdateUserProfileForm({
       >
         <div>
           <PageTitle className="mb-1" size="md">
-            {hasCompleteUserProfile(user) ? t('edit') : t('finish')} {t('yourProfile')}
+            {hasCompleteUserProfile(user) ? t('editProfile') : t('finishProfile')}
           </PageTitle>
           <PageSubTitle className="mb-7" size="md">
             {t('subtitle')}
