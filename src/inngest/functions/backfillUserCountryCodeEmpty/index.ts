@@ -198,7 +198,7 @@ async function getCountryCodeFromGooglePlaceId(googlePlaceId: string, logger: Lo
 
   const addressComponents = data.addressComponents
   const countryCodeFromAddress = addressComponents?.find(x =>
-    x.types.includes('country'),
+    x.types?.includes('country'),
   )?.shortText
 
   const validatedCountryCode = zodSupportedCountryCode.safeParse(
