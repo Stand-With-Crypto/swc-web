@@ -48,10 +48,8 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   [UserActionType.EMAIL]: {
     title: 'Email your member of Parliament',
-    description:
-      'Tell your MP to support Blockchain as a priority for Australia’s Productivity Agenda',
-    campaignsModalDescription:
-      'Tell your MP to support Blockchain as a priority for Australia’s Productivity Agenda',
+    description: 'Tell your MP It’s time to support crypto in Australia',
+    campaignsModalDescription: 'Tell your MP It’s time to support crypto in Australia',
     image: '/au/actionTypeIcons/email.png',
     campaigns: [
       {
