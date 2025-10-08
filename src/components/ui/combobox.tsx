@@ -14,8 +14,10 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { usePreventMobileKeyboardOffset } from '@/hooks/usePreventMobileKeyboardOffset'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
@@ -39,6 +41,29 @@ interface ComboBoxProps<T>
   disablePreventMobileKeyboardOffset?: boolean
 }
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      a11yTitle: 'Search address',
+      placeholder: 'Filter status...',
+      noResults: 'No results found.',
+      enterAddress: 'Enter address to see results',
+    },
+    fr: {
+      a11yTitle: 'Rechercher une adresse',
+      placeholder: 'Filtrer les statuts...',
+      noResults: 'Aucun résultat trouvé.',
+      enterAddress: 'Entrez une adresse pour voir les résultats',
+    },
+    de: {
+      a11yTitle: 'Adresse rechercher',
+      placeholder: 'Filter status...',
+      noResults: 'Keine Ergebnisse gefunden.',
+      enterAddress: 'Adresse eingeben, um Ergebnisse zu sehen',
+    },
+  },
+})
+
 export function Combobox<T>({
   value,
   onChange,
@@ -54,6 +79,7 @@ export function Combobox<T>({
   disablePreventMobileKeyboardOffset = false,
   ...inputProps
 }: ComboBoxProps<T>) {
+  const { t } = useTranslation(i18nMessages, 'Combobox')
   usePreventMobileKeyboardOffset(open && !disablePreventMobileKeyboardOffset)
   const parentRef = React.useRef<HTMLButtonElement>(null)
   const isMobile = useIsMobile({ defaultState: false })
@@ -76,7 +102,7 @@ export function Combobox<T>({
       <Dialog analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
         <DialogTrigger asChild>{formatPopoverTrigger({ value, open })}</DialogTrigger>
         <DialogContent
-          a11yTitle="Search address"
+          a11yTitle={t('a11yTitle')}
           className="min-h-[260px] p-0 pt-10"
           forceAutoFocus
         >
@@ -141,6 +167,7 @@ function StatusList<T>({
   | 'getOptionKey'
   | 'isLoading'
 >) {
+  const { t } = useTranslation(i18nMessages, 'Combobox')
   return (
     <Command shouldFilter={false}>
       <CommandInput
@@ -152,14 +179,14 @@ function StatusList<T>({
           onChangeInputValue('')
         }}
         onValueChange={onChangeInputValue}
-        placeholder="Filter status..."
+        placeholder={t('placeholder')}
         value={inputValue}
         {...inputProps}
       />
       <CommandList>
         {!options.length && (
           <p className={cn('py-6 text-center text-sm', isLoading && 'invisible')}>
-            {inputValue ? 'No results found.' : 'Enter address to see results'}
+            {inputValue ? t('noResults') : t('enterAddress')}
           </p>
         )}
         <CommandGroup>
