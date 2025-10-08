@@ -20,16 +20,19 @@ export const i18nMessages = createI18nMessages({
       profile: 'Profile',
       loggingOut: 'Logging out...',
       signIn: 'Sign In',
+      userProfile: 'User Profile',
     },
     de: {
       profile: 'Profil',
       loggingOut: 'Abmelden...',
       signIn: 'Anmelden',
+      userProfile: 'Benutzerprofil',
     },
     fr: {
       profile: 'Profil',
       loggingOut: 'Déconnexion...',
       signIn: 'Se connecter',
+      userProfile: 'Profil utilisateur',
     },
   },
 })
@@ -89,7 +92,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
           </Button>
         )}
       </PopoverTrigger>
-      <PopoverContent a11yTitle="User Profile" align="end" className="p-0">
+      <PopoverContent a11yTitle={t('userProfile')} align="end" className="p-0">
         <NavbarLoggedInPopoverContent onClose={() => dialogProps.onOpenChange(false)} />
       </PopoverContent>
     </Popover>

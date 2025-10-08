@@ -9,7 +9,9 @@ import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiRes
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useSession } from '@/hooks/useSession'
 import { SWCSuccessDialogContext } from '@/hooks/useSuccessScreenDialogContext'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 const UserActionFormSuccessScreenNextAction = dynamic(
   () =>
@@ -23,8 +25,23 @@ const UserActionFormSuccessScreenNextAction = dynamic(
 
 type UserActionFormJoinSWCSuccessDialogProps = DialogProps
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      joinedStandWithCrypto: 'Joined Stand With Crypto',
+    },
+    fr: {
+      joinedStandWithCrypto: 'Inscrit à Stand With Crypto',
+    },
+    de: {
+      joinedStandWithCrypto: 'Stand With Crypto beigetreten',
+    },
+  },
+})
+
 export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCSuccessDialogProps) {
   const { ...dialogProps } = props
+  const { t } = useTranslation(i18nMessages, 'userActionFormJoinSWCSuccessDialog')
 
   const session = useSession()
   const performedUserActionTypesResponse = useApiResponseForUserPerformedUserActionTypes()
@@ -39,7 +56,7 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
       }}
     >
       <Dialog {...dialogProps}>
-        <DialogContent a11yTitle="Joined Stand With Crypto" className="max-w-3xl">
+        <DialogContent a11yTitle={t('joinedStandWithCrypto')} className="max-w-3xl">
           <div className={cn('flex h-full flex-col gap-8 md:pb-16')}>
             <UserActionFormJoinSWCSuccess countryCode={countryCode} />
 
