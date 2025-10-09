@@ -16,7 +16,7 @@ export function EuParseLanguageClient() {
     if (user && !isLoading) {
       const path = searchParams?.get('path')
 
-      const language = 'fr' // TODO: get language from user
+      const language = user.language
 
       const finalPath = path ? `/${language}/${path}` : language
 
