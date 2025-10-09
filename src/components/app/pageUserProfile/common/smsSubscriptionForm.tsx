@@ -19,34 +19,6 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 
 const FORM_NAME = 'User Communication Preferences'
 
-const i18nMessages = createI18nMessages({
-  defaultMessages: {
-    en: {
-      subscribed: 'Successfully subscribed to our text messages!',
-      unsubscribed: 'Successfully unsubscribed from our text messages!',
-      providePhone: 'Please provide a phone number to subscribe to our text messages.',
-      optOutInfo: 'To opt-out at any time reply "STOP".',
-      smsLabel: 'SMS',
-    },
-    de: {
-      subscribed: 'Erfolgreich für unsere Textnachrichten angemeldet!',
-      unsubscribed: 'Erfolgreich von unseren Textnachrichten abgemeldet!',
-      providePhone:
-        'Bitte geben Sie eine Telefonnummer an, um unsere Textnachrichten zu abonnieren.',
-      optOutInfo: 'Um sich jederzeit abzumelden, antworten Sie "STOP".',
-      smsLabel: 'SMS',
-    },
-    fr: {
-      subscribed: 'Abonnement réussi à nos messages texte !',
-      unsubscribed: 'Désabonnement réussi de nos messages texte !',
-      providePhone:
-        'Veuillez fournir un numéro de téléphone pour vous abonner à nos messages texte.',
-      optOutInfo: 'Pour vous désabonner à tout moment, répondez "STOP".',
-      smsLabel: 'SMS',
-    },
-  },
-})
-
 interface SMSSubscriptionFormProps {
   user: PageUserProfileUser
   countryCode: SupportedCountryCodes
@@ -81,7 +53,6 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
   const { t } = useTranslation(i18nMessages)
 
   const { phoneNumber } = user
-  const { t } = useTranslation(i18nMessages, 'SMSSubscriptionForm')
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -112,17 +83,10 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
 
   const helpText = useMemo(() => {
     if (!phoneNumber) {
-<<<<<<< HEAD
-      return t('providePhone')
-    }
-    if (hasOptedInToSMS) {
-      return t('optOutInfo')
-=======
       return t('providePhoneNumber')
     }
     if (hasOptedInToSMS) {
       return t('optOutText')
->>>>>>> 7aaccbc160dcb6ce26c6627dbba00868fb23a8bf
     }
     return ''
   }, [phoneNumber, hasOptedInToSMS, t])
@@ -136,7 +100,7 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
         disabled={isSMSFieldDisabled}
         helpText={helpText}
         isLoading={isSubmitting}
-        label={t('smsLabel')}
+        label="SMS"
         onCheckedChange={handleSMSOptInChange}
       />
     </CommunicationsPreferenceForm.FormItem>

@@ -1,5 +1,3 @@
-'use client'
-
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import { FormDescription } from '@/components/ui/form'
 import { InternalLink } from '@/components/ui/link'
