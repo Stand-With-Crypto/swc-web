@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { EuParseLanguageClient } from '@/components/app/euParseLanguage/euParseLanguageClient'
 import { EUHomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout/eu'
 import { PageProps } from '@/types'
@@ -12,7 +14,9 @@ export default async function ParseLanguagePage(
 
   return (
     <EUHomepageDialogDeeplinkLayout hidePseudoDialog language={language}>
-      <EuParseLanguageClient />
+      <Suspense fallback={<></>}>
+        <EuParseLanguageClient />
+      </Suspense>
     </EUHomepageDialogDeeplinkLayout>
   )
 }
