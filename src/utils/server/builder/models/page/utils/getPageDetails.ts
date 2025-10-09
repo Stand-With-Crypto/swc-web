@@ -3,8 +3,9 @@ import pRetry from 'p-retry'
 
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
+import { getLocaleForLanguage } from '@/utils/shared/i18n/interpolationUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export interface PageMetadata {
   title: string
@@ -17,7 +18,10 @@ export async function getPageDetails(
   pageModelName: BuilderPageModelIdentifiers,
   pathname: string,
   countryCode: SupportedCountryCodes,
+  language = SupportedLanguages.EN,
 ): Promise<PageMetadata> {
+  const locale = getLocaleForLanguage(language)
+
   const builderOptions = {
     query: {
       data: {
@@ -29,7 +33,7 @@ export async function getPageDetails(
     },
     // Set prerender to false to return JSON instead of HTML
     prerender: false,
-    locale: DEFAULT_LOCALE,
+    locale,
     fields: 'data',
   }
 
