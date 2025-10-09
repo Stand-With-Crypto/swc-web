@@ -44,6 +44,7 @@ export function mockCreateUserInput({
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
     countryCode: faker.helpers.arrayElement(Object.values(ORDERED_SUPPORTED_COUNTRIES)),
+    language: faker.helpers.arrayElement(['de', 'en', 'fr']),
   } satisfies Prisma.UserCreateInput
 }
 
