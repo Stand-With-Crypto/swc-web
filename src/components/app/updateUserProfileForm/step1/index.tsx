@@ -44,6 +44,7 @@ import {
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { ORDERED_SUPPORTED_EU_LANGUAGES, SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
@@ -62,52 +63,61 @@ const FORM_NAME = 'User Profile'
 export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
-      firstName: 'First name',
-      lastName: 'Last name',
-      email: 'Email',
-      phoneNumber: 'Phone number',
-      address: 'Address',
-      submitButton: 'Next',
-      completeYourProfile:
-        ' Completing your profile makes it easier for you to take action, locate your representative and find local events.',
-      editYourProfile: 'Edit your profile',
-      finishYourProfile: 'Finish your profile',
-      membershipAgreement:
+      editProfile: 'Edit your profile',
+      finishProfile: 'Finish your profile',
+      subtitle:
+        'Completing your profile makes it easier for you to take action, locate your representative and find local events.',
+      emailLabel: 'Email',
+      emailPlaceholder: 'Your email',
+      firstNameLabel: 'First name',
+      firstNamePlaceholder: 'First name',
+      lastNameLabel: 'Last name',
+      lastNamePlaceholder: 'Last name',
+      phoneNumberLabel: 'Phone number',
+      phoneNumberPlaceholder: 'Phone number',
+      allianceCheckboxLabel:
         'By checking this box, I agree to become a Stand With Crypto Alliance member.',
-      learnMore: 'Learn More',
+      allianceCheckboxLearnMoreLabel: 'Learn More',
+      next: 'Next',
       profileUpdated: 'Profile updated',
     },
-    de: {
-      firstName: 'Vorname',
-      lastName: 'Nachname',
-      email: 'E-Mail',
-      phoneNumber: 'Telefonnummer',
-      address: 'Adresse',
-      submitButton: 'Weiter',
-      completeYourProfile:
-        'Das Ausfüllen Ihres Profils erleichtert es Ihnen, Maßnahmen zu ergreifen, Ihren Vertreter zu finden und lokale Veranstaltungen zu entdecken.',
-      editYourProfile: 'Bearbeiten Sie Ihr Profil',
-      finishYourProfile: 'Vervollständigen Sie Ihr Profil',
-      membershipAgreement:
-        'Durch Ankreuzen dieses Kästchens erkläre ich mich damit einverstanden, Mitglied der Stand With Crypto Alliance zu werden.',
-      learnMore: 'Mehr erfahren',
-      profileUpdated: 'Profil aktualisiert',
-    },
     fr: {
-      firstName: 'Prénom',
-      lastName: 'Nom de famille',
-      email: 'E-mail',
-      phoneNumber: 'Numéro de téléphone',
-      address: 'Adresse',
-      submitButton: 'Suivant',
-      completeYourProfile:
-        "Compléter votre profil facilite la prise de mesures, la localisation de votre représentant et la recherche d'événements locaux.",
-      editYourProfile: 'Modifier votre profil',
-      finishYourProfile: 'Terminer votre profil',
-      membershipAgreement:
-        "En cochant cette case, j'accepte de devenir membre de la Stand With Crypto Alliance.",
-      learnMore: 'En savoir plus',
+      editProfile: 'Modifier votre profil',
+      finishProfile: 'Terminer votre profil',
+      subtitle:
+        "Compléter votre profil facilite la prise d'action, la localisation de votre représentant et la recherche d'événements locaux.",
+      emailLabel: 'E-mail',
+      emailPlaceholder: 'Votre e-mail',
+      firstNameLabel: 'Prénom',
+      firstNamePlaceholder: 'Prénom',
+      lastNameLabel: 'Nom',
+      lastNamePlaceholder: 'Nom',
+      phoneNumberLabel: 'Numéro de téléphone',
+      phoneNumberPlaceholder: 'Numéro de téléphone',
+      allianceCheckboxLabel:
+        "En cochant cette case, j'accepte de devenir membre de Stand With Crypto Alliance.",
+      allianceCheckboxLearnMoreLabel: 'En savoir plus',
+      next: 'Suivant',
       profileUpdated: 'Profil mis à jour',
+    },
+    de: {
+      editProfile: 'Bearbeiten ihr Profil',
+      finishProfile: 'Fertig ihr Profil',
+      subtitle:
+        'Das Vervollständigen Ihres Profils erleichtert es Ihnen, Maßnahmen zu ergreifen, Ihren Vertreter zu finden und lokale Veranstaltungen zu entdecken.',
+      emailLabel: 'E-Mail',
+      emailPlaceholder: 'Ihre E-Mail',
+      firstNameLabel: 'Vorname',
+      firstNamePlaceholder: 'Vorname',
+      lastNameLabel: 'Nachname',
+      lastNamePlaceholder: 'Nachname',
+      phoneNumberLabel: 'Telefonnummer',
+      phoneNumberPlaceholder: 'Telefonnummer',
+      allianceCheckboxLabel:
+        'Indem ich dieses Kästchen ankreuze, erkläre ich mich damit einverstanden, Mitglied der Stand With Crypto Alliance zu werden.',
+      allianceCheckboxLearnMoreLabel: 'Mehr erfahren',
+      next: 'Weiter',
+      profileUpdated: 'Profil aktualisiert',
     },
   },
 })
@@ -125,6 +135,8 @@ export function UpdateUserProfileForm({
     address: GooglePlaceAutocompletePrediction | null
   }) => void
 }) {
+  const { t } = useTranslation(i18nMessages)
+
   const countryCode = useCountryCode()
   const router = useRouter()
   const defaultValues = useRef({
@@ -139,7 +151,6 @@ export function UpdateUserProfileForm({
       ? { description: user.address.formattedDescription, place_id: user.address.googlePlaceId }
       : null,
   })
-  const { t } = useTranslation(i18nMessages, 'UpdateUserProfileForm')
 
   const form = useForm({
     resolver: zodResolver(
@@ -169,9 +180,16 @@ export function UpdateUserProfileForm({
     )
     if (result.status === 'success') {
       const newCountryCode = (result.response as { user: ClientUserWithENSData })?.user?.countryCode
+      const addressCountryCode = resolvedAddress?.countryCode.toLowerCase() as SupportedLanguages
 
       if (ORDERED_SUPPORTED_COUNTRIES.includes(newCountryCode) && newCountryCode !== countryCode) {
-        router.push(getIntlUrls(newCountryCode as SupportedCountryCodes).profile())
+        router.push(
+          getIntlUrls(newCountryCode as SupportedCountryCodes, {
+            language: ORDERED_SUPPORTED_EU_LANGUAGES.includes(addressCountryCode)
+              ? addressCountryCode
+              : SupportedLanguages.EN,
+          }).profile(),
+        )
         return
       }
 
@@ -209,10 +227,10 @@ export function UpdateUserProfileForm({
       >
         <div>
           <PageTitle className="mb-1" size="md">
-            {hasCompleteUserProfile(user) ? t('editYourProfile') : t('finishYourProfile')}
+            {hasCompleteUserProfile(user) ? t('editProfile') : t('finishProfile')}
           </PageTitle>
           <PageSubTitle className="mb-7" size="md">
-            {t('completeYourProfile')}
+            {t('subtitle')}
           </PageSubTitle>
         </div>
 
@@ -223,9 +241,9 @@ export function UpdateUserProfileForm({
               name="emailAddress"
               render={({ field }) => (
                 <FormItem className="mb-4">
-                  <FormLabel>{t('email')}</FormLabel>
+                  <FormLabel>{t('emailLabel')}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t('email')} {...field} />
+                    <Input placeholder={t('emailPlaceholder')} {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -238,9 +256,9 @@ export function UpdateUserProfileForm({
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('firstName')}</FormLabel>
+                  <FormLabel>{t('firstNameLabel')}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t('firstName')} {...field} />
+                    <Input placeholder={t('firstNamePlaceholder')} {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -251,9 +269,9 @@ export function UpdateUserProfileForm({
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('lastName')}</FormLabel>
+                  <FormLabel>{t('lastNameLabel')}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t('lastName')} {...field} />
+                    <Input placeholder={t('lastNamePlaceholder')} {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -275,11 +293,11 @@ export function UpdateUserProfileForm({
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem className="mb-4">
-                    <FormLabel>{t('phoneNumber')}</FormLabel>
+                    <FormLabel>{t('phoneNumberLabel')}</FormLabel>
                     <FormControl>
                       <Input
                         data-testid="phone-number-input"
-                        placeholder={t('phoneNumber')}
+                        placeholder={t('phoneNumberPlaceholder')}
                         {...field}
                         onChange={e => {
                           field.onChange(e)
@@ -311,9 +329,11 @@ export function UpdateUserProfileForm({
                         />
                       </FormControl>
                       <FormDescription>
-                        {t('membershipAgreement')}{' '}
+                        {t('allianceCheckboxLabel')}{' '}
                         <SWCMembershipDialog>
-                          <button className="text-primary-cta">{t('learnMore')}</button>
+                          <button className="text-primary-cta">
+                            {t('allianceCheckboxLearnMoreLabel')}
+                          </button>
                         </SWCMembershipDialog>
                         .
                       </FormDescription>
@@ -356,7 +376,7 @@ export function UpdateUserProfileForm({
                         )}
                         <FormDescription className="text-left">
                           <SMSOptInConsentText
-                            consentButtonText={'Next'}
+                            consentButtonText={t('next')}
                             countryCode={user.countryCode as SupportedCountryCodes}
                           />
                         </FormDescription>
@@ -373,7 +393,7 @@ export function UpdateUserProfileForm({
             size="lg"
             type="submit"
           >
-            {t('submitButton')}
+            {t('next')}
           </Button>
         </div>
       </form>

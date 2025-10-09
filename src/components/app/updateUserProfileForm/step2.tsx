@@ -36,22 +36,22 @@ const i18nMessages = createI18nMessages({
     en: {
       title: 'How you appear on Stand With Crypto',
       subtitle: 'Choose how you will appear on our public activity feed and leaderboard.',
-      submitButton: 'Submit',
+      submit: 'Submit',
       profileUpdated: 'Profile updated',
-    },
-    de: {
-      title: 'Wie Sie auf Stand With Crypto erscheinen',
-      subtitle:
-        'Wählen Sie aus, wie Sie in unserem öffentlichen Aktivitätsfeed und Rangliste erscheinen.',
-      submitButton: 'Absenden',
-      profileUpdated: 'Profil aktualisiert',
     },
     fr: {
       title: 'Comment vous apparaissez sur Stand With Crypto',
       subtitle:
-        "Choisissez comment vous apparaîtrez dans notre fil d'activité public et notre classement.",
-      submitButton: 'Soumettre',
+        "Choisissez comment vous apparaissez sur notre fil d'activité public et leaderboard.",
+      submit: 'Soumettre',
       profileUpdated: 'Profil mis à jour',
+    },
+    de: {
+      title: 'Wie Sie auf Stand With Crypto erscheinen',
+      subtitle:
+        'Wählen Sie, wie Sie auf unserem öffentlichen Aktivitätsfeed und Leaderboard erscheinen.',
+      submit: 'Absenden',
+      profileUpdated: 'Profil aktualisiert',
     },
   },
 })
@@ -63,8 +63,9 @@ export function UpdateUserInformationVisibilityForm({
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
   onSuccess: () => void
 }) {
+  const { t } = useTranslation(i18nMessages)
+
   const router = useRouter()
-  const { t } = useTranslation(i18nMessages, 'UpdateUserInformationVisibilityForm')
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserInformationVisibility),
     defaultValues: {
@@ -159,7 +160,7 @@ export function UpdateUserInformationVisibilityForm({
               size="lg"
               type="submit"
             >
-              {t('submitButton')}
+              {t('submit')}
             </Button>
           </div>
         </form>

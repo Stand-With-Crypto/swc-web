@@ -6,10 +6,6 @@ import * as Sentry from '@sentry/nextjs'
 
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
-import {
-  DEFAULT_DISCLAIMER,
-  DISCLAIMERS_BY_COUNTRY_CODE,
-} from '@/components/app/updateUserProfileForm/step1/constants'
 import { PrivacyConsentDisclaimer } from '@/components/app/updateUserProfileForm/step1/privacyConsentDisclaimer'
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import {
@@ -23,13 +19,12 @@ import {
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
-import {
-  DEFAULT_SUPPORTED_COUNTRY_CODE,
-  SupportedCountryCodes,
-} from '@/utils/shared/supportedCountries'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
 
@@ -44,12 +39,37 @@ interface AddressFieldProps {
   className?: string
 }
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      address: 'Address',
+      addressPlaceholder: 'Street address',
+      countryCodeDisclaimer:
+        'You are about to change your viewing country based on the address you have chosen',
+    },
+    fr: {
+      address: 'Adresse',
+      addressPlaceholder: 'Adresse postale',
+      countryCodeDisclaimer:
+        "Vous êtes sur le point de changer votre pays de visualisation en fonction de l'adresse que vous avez choisie",
+    },
+    de: {
+      address: 'Adresse',
+      addressPlaceholder: 'Straßenadresse',
+      countryCodeDisclaimer:
+        'Sie sind dabei, Ihr Anzeigeland basierend auf der Adresse zu ändern, die Sie ausgewählt haben',
+    },
+  },
+})
+
 export function AddressField({
   user,
   resolvedAddress,
   setResolvedAddress,
   className,
 }: AddressFieldProps) {
+  const { t } = useTranslation(i18nMessages)
+
   const form = useFormContext()
   const addressValue = useWatch({ control: form.control, name: 'address' })
   const { isLoaded } = useGoogleMapsScript()
@@ -109,12 +129,12 @@ export function AddressField({
         name="address"
         render={({ field }) => (
           <FormItem className={cn(shouldShowCountryCodeDisclaimer && 'mb-4')}>
-            <FormLabel>Address</FormLabel>
+            <FormLabel>{t('address')}</FormLabel>
             <FormControl>
               <GooglePlacesSelect
                 {...field}
                 onChange={field.onChange}
-                placeholder="Street address"
+                placeholder={t('addressPlaceholder')}
                 value={field.value}
               />
             </FormControl>
@@ -128,19 +148,11 @@ export function AddressField({
       >
         <CollapsibleContent className="AnimateCollapsibleContent">
           <FormDescription className="text-center md:text-left">
-            {getCountryCodeDisclaimer(resolvedAddress?.countryCode)}
+            {t('countryCodeDisclaimer')}
           </FormDescription>
         </CollapsibleContent>
       </Collapsible>
       <PrivacyConsentDisclaimer shouldShowConsentDisclaimer={shouldShowConsentDisclaimer} />
     </div>
   )
-}
-
-function getCountryCodeDisclaimer(countryCode?: string) {
-  const parsedCountryCode = zodSupportedCountryCode.safeParse(countryCode)
-
-  return parsedCountryCode.data
-    ? DISCLAIMERS_BY_COUNTRY_CODE[parsedCountryCode.data as SupportedCountryCodes]
-    : DEFAULT_DISCLAIMER
 }

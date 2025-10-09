@@ -52,7 +52,34 @@ interface SMSSubscriptionFormProps {
   countryCode: SupportedCountryCodes
 }
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      subscribed: 'Successfully subscribed to our text messages!',
+      unsubscribed: 'Successfully unsubscribed from our text messages!',
+      providePhoneNumber: 'Please provide a phone number to subscribe to our text messages.',
+      optOutText: 'To opt-out at any time reply "STOP".',
+    },
+    fr: {
+      subscribed: 'Abonnement à nos messages texte réussi !',
+      unsubscribed: 'Désabonnement de nos messages texte réussi !',
+      providePhoneNumber:
+        'Veuillez fournir un numéro de téléphone pour vous abonner à nos messages texte.',
+      optOutText: 'Pour vous désabonner à tout moment, répondez "STOP".',
+    },
+    de: {
+      subscribed: 'Erfolgreich für unsere Textnachrichten angemeldet!',
+      unsubscribed: 'Erfolgreich von unseren Textnachrichten abgemeldet!',
+      providePhoneNumber:
+        'Bitte geben Sie eine Telefonnummer an, um sich für unsere Textnachrichten anzumelden.',
+      optOutText: 'Um sich jederzeit abzumelden, antworten Sie mit "STOP".',
+    },
+  },
+})
+
 export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormProps) {
+  const { t } = useTranslation(i18nMessages)
+
   const { phoneNumber } = user
   const { t } = useTranslation(i18nMessages, 'SMSSubscriptionForm')
 
@@ -85,10 +112,17 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
 
   const helpText = useMemo(() => {
     if (!phoneNumber) {
+<<<<<<< HEAD
       return t('providePhone')
     }
     if (hasOptedInToSMS) {
       return t('optOutInfo')
+=======
+      return t('providePhoneNumber')
+    }
+    if (hasOptedInToSMS) {
+      return t('optOutText')
+>>>>>>> 7aaccbc160dcb6ce26c6627dbba00868fb23a8bf
     }
     return ''
   }, [phoneNumber, hasOptedInToSMS, t])

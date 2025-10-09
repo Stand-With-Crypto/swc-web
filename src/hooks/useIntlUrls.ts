@@ -9,9 +9,11 @@ import { useMemo } from 'react'
 
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
 
 export function useIntlUrls() {
   const countryCode = useCountryCode()
+  const language = useLanguage()
 
-  return useMemo(() => getIntlUrls(countryCode), [countryCode])
+  return useMemo(() => getIntlUrls(countryCode, { language }), [countryCode, language])
 }

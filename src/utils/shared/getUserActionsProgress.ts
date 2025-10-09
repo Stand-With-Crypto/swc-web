@@ -4,6 +4,7 @@ import { flatMap } from 'lodash-es'
 import { getUserActionCTAsByCountry } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
@@ -19,12 +20,14 @@ export interface GetUserActionsProgressArgs {
     campaignName: string
   }[]
   countryCode: SupportedCountryCodes
+  language?: SupportedLanguages
 }
 
 export function getUserActionsProgress({
   userHasEmbeddedWallet,
   performedUserActionTypes,
   countryCode,
+  language,
 }: GetUserActionsProgressArgs) {
   const excludeUserActionTypes = new Set<UserActionType>(
     userHasEmbeddedWallet
@@ -41,7 +44,7 @@ export function getUserActionsProgress({
     {} as Record<string, any>,
   )
 
-  const ctas = getUserActionCTAsByCountry(countryCode)
+  const ctas = getUserActionCTAsByCountry(countryCode, language)
   const allCampaignsCombined: Array<UserActionGridCTACampaign> = flatMap(ctas, cta => {
     return cta.campaigns.filter(campaign => !excludeUserActionTypes.has(campaign.actionType))
   })

@@ -7,8 +7,10 @@ import { Combobox } from '@/components/ui/combobox'
 import { InputWithIcons, InputWithIconsProps } from '@/components/ui/inputWithIcons'
 import { Spinner } from '@/components/ui/spinner'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
@@ -22,6 +24,23 @@ export type GooglePlacesSelectProps = {
    */
   shouldLimitUSAddresses?: boolean
 } & Omit<InputWithIconsProps, 'value' | 'onChange' | 'type'>
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      popoverPlaceholder: 'select a location',
+      placeholder: 'Type your address...',
+    },
+    de: {
+      popoverPlaceholder: 'Standort auswählen',
+      placeholder: 'Geben Sie Ihre Adresse ein...',
+    },
+    fr: {
+      popoverPlaceholder: 'sélectionner un lieu',
+      placeholder: 'Saisissez votre adresse...',
+    },
+  },
+})
 
 export const GooglePlacesSelect = React.forwardRef<
   React.ComponentRef<'input'>,
@@ -38,6 +57,7 @@ export const GooglePlacesSelect = React.forwardRef<
     disabled,
     ...inputProps
   } = props
+  const { t } = useTranslation(i18nMessages)
   const [open, setOpen] = React.useState(false)
   const {
     ready,
@@ -94,10 +114,12 @@ export const GooglePlacesSelect = React.forwardRef<
               />
             ) : undefined
           }
-          placeholder="select a location"
+          placeholder={t('popoverPlaceholder')}
           ref={ref}
           rightIcon={isLoadingSuggestions ? <Spinner /> : undefined}
-          value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
+          value={
+            triggerProps.value?.description || inputProps.placeholder || t('popoverPlaceholder')
+          }
           {...inputProps}
           readOnly
         />
@@ -110,7 +132,7 @@ export const GooglePlacesSelect = React.forwardRef<
       onChangeInputValue={setValue}
       open={open}
       options={placesAutoCompleteResult}
-      placeholder="Type your address..."
+      placeholder={t('placeholder')}
       setOpen={setOpen}
       value={propsValue}
     />
