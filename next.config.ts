@@ -888,6 +888,10 @@ const nextConfig: NextConfig = {
           destination: '/:locale/about',
         },
         {
+          source: '/:locale/:language/(mission|manifesto)',
+          destination: '/:locale/:language/about',
+        },
+        {
           source: '/:locale/races/province/:stateCode',
           destination: '/:locale/races/state/:stateCode',
         },

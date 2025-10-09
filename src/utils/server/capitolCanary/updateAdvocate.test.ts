@@ -59,15 +59,15 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "6017 Bath Road",
-  "address2": "Apt. 459",
+  "address1": "1179 Israel Harbor",
+  "address2": "Suite 943",
   "advocateid": 68251920,
   "campaigns": [
     142628,
   ],
-  "city": "Genovevaburgh",
-  "country": "US",
-  "email": "Bradley.Aufderhar@yahoo.com",
+  "city": "Port Stewart",
+  "country": "AU",
+  "email": "Aisha.Balistreri50@gmail.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Haylie",
@@ -77,7 +77,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "ND",
+  "state": "MO",
   "tags": [
     "tag1",
     "tag2",
@@ -87,7 +87,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "97530-7613",
+  "zip5": "53076-1355",
 }
 `)
 })
