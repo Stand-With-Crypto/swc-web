@@ -10,12 +10,42 @@ import {
 import { CommunicationsPreferenceForm } from '@/components/app/pageUserProfile/common/communicationsPreferenceForm'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/common/getAuthenticatedData'
 import { SMSOptInConsentText } from '@/components/app/sms/smsOptInConsentText'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { userHasOptedInToSMS } from '@/utils/shared/sms/userHasOptedInToSMS'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
 const FORM_NAME = 'User Communication Preferences'
+
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      subscribed: 'Successfully subscribed to our text messages!',
+      unsubscribed: 'Successfully unsubscribed from our text messages!',
+      providePhone: 'Please provide a phone number to subscribe to our text messages.',
+      optOutInfo: 'To opt-out at any time reply "STOP".',
+      smsLabel: 'SMS',
+    },
+    de: {
+      subscribed: 'Erfolgreich für unsere Textnachrichten angemeldet!',
+      unsubscribed: 'Erfolgreich von unseren Textnachrichten abgemeldet!',
+      providePhone:
+        'Bitte geben Sie eine Telefonnummer an, um unsere Textnachrichten zu abonnieren.',
+      optOutInfo: 'Um sich jederzeit abzumelden, antworten Sie "STOP".',
+      smsLabel: 'SMS',
+    },
+    fr: {
+      subscribed: 'Abonnement réussi à nos messages texte !',
+      unsubscribed: 'Désabonnement réussi de nos messages texte !',
+      providePhone:
+        'Veuillez fournir un numéro de téléphone pour vous abonner à nos messages texte.',
+      optOutInfo: 'Pour vous désabonner à tout moment, répondez "STOP".',
+      smsLabel: 'SMS',
+    },
+  },
+})
 
 interface SMSSubscriptionFormProps {
   user: PageUserProfileUser
@@ -24,6 +54,7 @@ interface SMSSubscriptionFormProps {
 
 export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormProps) {
   const { phoneNumber } = user
+  const { t } = useTranslation(i18nMessages, 'SMSSubscriptionForm')
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -46,11 +77,7 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
     )
 
     if (result.status === 'success') {
-      toast.success(
-        optedInToSms
-          ? 'Successfully subscribed to our text messages!'
-          : 'Successfully unsubscribed from our text messages!',
-      )
+      toast.success(optedInToSms ? t('subscribed') : t('unsubscribed'))
     }
 
     setIsSubmitting(false)
@@ -58,13 +85,13 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
 
   const helpText = useMemo(() => {
     if (!phoneNumber) {
-      return 'Please provide a phone number to subscribe to our text messages.'
+      return t('providePhone')
     }
     if (hasOptedInToSMS) {
-      return 'To opt-out at any time reply "STOP".'
+      return t('optOutInfo')
     }
     return ''
-  }, [phoneNumber, hasOptedInToSMS])
+  }, [phoneNumber, hasOptedInToSMS, t])
 
   const isSMSFieldDisabled = !phoneNumber || isSubmitting || hasOptedInToSMS
 
@@ -75,7 +102,7 @@ export function SMSSubscriptionForm({ user, countryCode }: SMSSubscriptionFormPr
         disabled={isSMSFieldDisabled}
         helpText={helpText}
         isLoading={isSubmitting}
-        label="SMS"
+        label={t('smsLabel')}
         onCheckedChange={handleSMSOptInChange}
       />
     </CommunicationsPreferenceForm.FormItem>

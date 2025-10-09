@@ -6,12 +6,13 @@ import { AuthOption } from 'node_modules/thirdweb/dist/types/wallets/types'
 import { Arguments, useSWRConfig } from 'swr'
 import { signLoginPayload } from 'thirdweb/auth'
 import { base } from 'thirdweb/chains'
-import { ConnectEmbed, ConnectEmbedProps, useConnect } from 'thirdweb/react'
+import { ConnectEmbed, ConnectEmbedProps, LocaleId, useConnect } from 'thirdweb/react'
 import { createWallet, createWalletAdapter, generateAccount } from 'thirdweb/wallets'
 
 import {
   ANALYTICS_NAME_LOGIN,
-  COUNTRY_SPECIFIC_LOGIN_CONTENT,
+  getCountrySpecificLoginContent,
+  i18nMessages,
 } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
@@ -26,10 +27,12 @@ import { login } from '@/utils/server/thirdweb/onLogin'
 import { onLogout } from '@/utils/server/thirdweb/onLogout'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { apiUrls } from '@/utils/shared/urls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
+import { useTranslation, UseTranslationReturnType } from '@/utils/web/i18n/useTranslation'
 import { theme } from '@/utils/web/thirdweb/theme'
 
 export interface ThirdwebLoginContentProps extends Omit<ConnectEmbedProps, 'client'> {
@@ -45,6 +48,12 @@ const appMetadata = {
   logoUrl: 'https://www.standwithcrypto.org/logo/shield.svg',
 }
 
+const MAP_EU_LANGUAGE_TO_THIRDWEB_LOCALE: Record<SupportedLanguages, LocaleId> = {
+  [SupportedLanguages.DE]: 'de_DE',
+  [SupportedLanguages.EN]: 'en_US',
+  [SupportedLanguages.FR]: 'fr_FR',
+}
+
 export function ThirdwebLoginContent({
   initialEmailAddress,
   onLoginCallback,
@@ -54,13 +63,19 @@ export function ThirdwebLoginContent({
   const router = useRouter()
   const swrConfig = useSWRConfig()
   const countryCode = useCountryCode()
+  const translation = useTranslation(i18nMessages, 'ThirdwebLoginContent')
+
+  const locale =
+    countryCode === SupportedCountryCodes.EU
+      ? MAP_EU_LANGUAGE_TO_THIRDWEB_LOCALE[translation.language]
+      : 'en_US'
 
   const {
     title,
     subtitle,
     footerContent: FooterContent,
     iconSrc,
-  } = COUNTRY_SPECIFIC_LOGIN_CONTENT[countryCode]
+  } = getCountrySpecificLoginContent(countryCode, translation as UseTranslationReturnType)
 
   const handleLogin = useCallback(async () => {
     if (onLoginCallback) {
@@ -119,7 +134,7 @@ export function ThirdwebLoginContent({
             // this prevents that bug
             style={{ maxWidth: 'calc(100vw - 56px)' }}
           >
-            <ThirdwebLoginEmbedded onLoginCallback={handleLogin} {...props} />
+            <ThirdwebLoginEmbedded locale={locale} onLoginCallback={handleLogin} {...props} />
           </div>
         </div>
 
@@ -203,13 +218,13 @@ function ThirdwebLoginEmbedded(
     <ConnectEmbed
       appMetadata={appMetadata}
       auth={{
-        isLoggedIn: async () => await isLoggedIn(),
         doLogin: async params => {
           await login(params, searchParamsObject)
           await props.onLoginCallback?.()
         },
-        getLoginPayload: async ({ address }) => generateThirdwebLoginPayload(address),
         doLogout: async () => await onLogout(),
+        getLoginPayload: async ({ address }) => generateThirdwebLoginPayload(address),
+        isLoggedIn: async () => await isLoggedIn(),
       }}
       chain={base}
       client={thirdwebClient}

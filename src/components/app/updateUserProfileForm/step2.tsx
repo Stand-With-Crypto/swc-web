@@ -17,17 +17,44 @@ import { Button } from '@/components/ui/button'
 import { Form, FormErrorMessage, FormField, FormGeneralErrorMessage } from '@/components/ui/form'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
   trackFormSubmissionSyncErrors,
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { getUserDisplayName, USER_INFORMATION_VISIBILITY_ORDERED_LIST } from '@/utils/web/userUtils'
 import { zodUpdateUserInformationVisibility } from '@/validation/forms/zodUpdateUserInformationVisibility'
 
 const FORM_NAME = 'User Information Visibility'
 type FormValues = z.infer<typeof zodUpdateUserInformationVisibility> & GenericErrorFormValues
+
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      title: 'How you appear on Stand With Crypto',
+      subtitle: 'Choose how you will appear on our public activity feed and leaderboard.',
+      submitButton: 'Submit',
+      profileUpdated: 'Profile updated',
+    },
+    de: {
+      title: 'Wie Sie auf Stand With Crypto erscheinen',
+      subtitle:
+        'Wählen Sie aus, wie Sie in unserem öffentlichen Aktivitätsfeed und Rangliste erscheinen.',
+      submitButton: 'Absenden',
+      profileUpdated: 'Profil aktualisiert',
+    },
+    fr: {
+      title: 'Comment vous apparaissez sur Stand With Crypto',
+      subtitle:
+        "Choisissez comment vous apparaîtrez dans notre fil d'activité public et notre classement.",
+      submitButton: 'Soumettre',
+      profileUpdated: 'Profil mis à jour',
+    },
+  },
+})
 
 export function UpdateUserInformationVisibilityForm({
   user,
@@ -37,6 +64,7 @@ export function UpdateUserInformationVisibilityForm({
   onSuccess: () => void
 }) {
   const router = useRouter()
+  const { t } = useTranslation(i18nMessages, 'UpdateUserInformationVisibilityForm')
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserInformationVisibility),
     defaultValues: {
@@ -61,10 +89,10 @@ export function UpdateUserInformationVisibilityForm({
     <Form {...form}>
       <div>
         <PageTitle className="mb-1" size="md">
-          How you appear on Stand With Crypto
+          {t('title')}
         </PageTitle>
         <PageSubTitle className="mb-7" size="md">
-          Choose how you will appear on our public activity feed and leaderboard.
+          {t('subtitle')}
         </PageSubTitle>
         <form
           className="space-y-8"
@@ -82,7 +110,7 @@ export function UpdateUserInformationVisibilityForm({
             )
             if (result.status === 'success') {
               router.refresh()
-              toast.success('Profile updated', { duration: 5000 })
+              toast.success(t('profileUpdated'), { duration: 5000 })
               onSuccess()
             }
           }, trackFormSubmissionSyncErrors(FORM_NAME))}
@@ -131,7 +159,7 @@ export function UpdateUserInformationVisibilityForm({
               size="lg"
               type="submit"
             >
-              Submit
+              {t('submitButton')}
             </Button>
           </div>
         </form>

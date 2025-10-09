@@ -29,8 +29,10 @@ import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useSession } from '@/hooks/useSession'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 const UserActionFormJoinSWCSuccessDialog = dynamic(
@@ -42,6 +44,86 @@ const UserActionFormJoinSWCSuccessDialog = dynamic(
     loading: () => <LoadingOverlay />,
   },
 )
+
+const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      joined: 'Joined',
+      actions: 'Actions',
+      donated: 'Donated',
+      nfts: 'NFTs',
+      referrals: 'Referrals',
+      advocacyProgressTitle: 'Your advocacy progress',
+      advocacyProgressSubtitle: "You've completed {completed} out of {total} campaigns.",
+      greatJob: 'Great job!',
+      keepGoing: 'Keep going!',
+      nftsTitle: 'Your NFTs',
+      nftsSubtitle: 'You will receive free NFTs for completing advocacy-related actions.',
+      inviteTitle: 'Invite a friend to join Stand With Crypto',
+      inviteSubtitle:
+        'Send friends your unique referral code to encourage them to sign up and take action.',
+      communicationsTitle: 'Communication Preferences',
+      communicationsSubtitle:
+        "Choose how you'd like to stay informed about our campaigns and important news.",
+      editProfile: 'Edit',
+      editProfileYour: 'your',
+      editProfileText: 'profile',
+      finishProfile: 'Finish',
+      finishProfileYour: 'your',
+      finishProfileText: 'profile',
+    },
+    de: {
+      joined: 'Beigetreten',
+      actions: 'Aktionen',
+      donated: 'Gespendet',
+      nfts: 'NFTs',
+      referrals: 'Empfehlungen',
+      advocacyProgressTitle: 'Ihr Advocacy-Fortschritt',
+      advocacyProgressSubtitle: 'Sie haben {completed} von {total} Kampagnen abgeschlossen.',
+      greatJob: 'Großartige Arbeit!',
+      keepGoing: 'Weiter so!',
+      nftsTitle: 'Ihre NFTs',
+      nftsSubtitle: 'Sie erhalten kostenlose NFTs für das Abschließen von Advocacy-Aktionen.',
+      inviteTitle: 'Laden Sie einen Freund ein, Stand With Crypto beizutreten',
+      inviteSubtitle:
+        'Senden Sie Freunden Ihren eindeutigen Empfehlungscode, um sie zur Anmeldung und Aktion zu ermutigen.',
+      communicationsTitle: 'Kommunikationspräferenzen',
+      communicationsSubtitle:
+        'Wählen Sie aus, wie Sie über unsere Kampagnen und wichtige Neuigkeiten informiert werden möchten.',
+      editProfile: 'Bearbeiten',
+      editProfileYour: 'Ihr',
+      editProfileText: 'Profil',
+      finishProfile: 'Vervollständigen',
+      finishProfileYour: 'Ihr',
+      finishProfileText: 'Profil',
+    },
+    fr: {
+      joined: 'Inscrit',
+      actions: 'Actions',
+      donated: 'Donné',
+      nfts: 'NFTs',
+      referrals: 'Parrainages',
+      advocacyProgressTitle: 'Votre progrès de plaidoyer',
+      advocacyProgressSubtitle: 'Vous avez complété {completed} campagnes sur {total}.',
+      greatJob: 'Excellent travail !',
+      keepGoing: 'Continuez !',
+      nftsTitle: 'Vos NFTs',
+      nftsSubtitle: 'Vous recevrez des NFTs gratuits pour avoir complété des actions de plaidoyer.',
+      inviteTitle: 'Invitez un ami à rejoindre Stand With Crypto',
+      inviteSubtitle:
+        "Envoyez à vos amis votre code de parrainage unique pour les encourager à s'inscrire et à agir.",
+      communicationsTitle: 'Préférences de communication',
+      communicationsSubtitle:
+        'Choisissez comment vous souhaitez être informé de nos campagnes et actualités importantes.',
+      editProfile: 'Modifier',
+      editProfileYour: 'votre',
+      editProfileText: 'profil',
+      finishProfile: 'Terminer',
+      finishProfileYour: 'votre',
+      finishProfileText: 'profil',
+    },
+  },
+})
 
 export interface PageUserProfileProps {
   user: PageUserProfileUser
@@ -55,6 +137,7 @@ export function PageUserProfile({
   countryCode,
 }: PageUserProfileProps) {
   const session = useSession()
+  const { t } = useTranslation(i18nMessages, 'PageUserProfile')
 
   const successDialogProps = useDialog({
     analytics: ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
@@ -110,7 +193,7 @@ export function PageUserProfile({
                 {getSensitiveDataUserDisplayName(user)}
               </div>
               <div className="text-sm text-gray-500">
-                Joined{' '}
+                {t('joined')}{' '}
                 <FormattedDatetime
                   date={new Date(user.datetimeCreated)}
                   dateStyle="medium"
@@ -129,7 +212,7 @@ export function PageUserProfile({
           <div className="grid grid-cols-4 rounded-3xl bg-secondary p-3 text-center sm:p-6">
             {[
               {
-                label: 'Actions',
+                label: t('actions'),
                 value: (
                   <FormattedNumber
                     amount={numActionsCompleted}
@@ -138,7 +221,7 @@ export function PageUserProfile({
                 ),
               },
               {
-                label: 'Donated',
+                label: t('donated'),
                 value: (
                   <FormattedCurrency
                     amount={sumBy(userActions, x => {
@@ -156,7 +239,7 @@ export function PageUserProfile({
                 ),
               },
               {
-                label: 'NFTs',
+                label: t('nfts'),
                 value: (
                   <FormattedNumber
                     amount={userActions.filter(action => action.nftMint).length}
@@ -165,7 +248,7 @@ export function PageUserProfile({
                 ),
               },
               {
-                label: 'Referrals',
+                label: t('referrals'),
                 value: (
                   <FormattedNumber
                     amount={
@@ -192,11 +275,14 @@ export function PageUserProfile({
 
       <section>
         <PageTitle className="mb-4" size="md">
-          Your advocacy progress
+          {t('advocacyProgressTitle')}
         </PageTitle>
         <PageSubTitle className="mb-5">
-          You've completed {numActionsCompleted} out of {numActionsAvailable} campaigns.{' '}
-          {numActionsCompleted === numActionsAvailable ? 'Great job!' : 'Keep going!'}
+          {t('advocacyProgressSubtitle', {
+            completed: numActionsCompleted,
+            total: numActionsAvailable,
+          })}{' '}
+          {numActionsCompleted === numActionsAvailable ? t('greatJob') : t('keepGoing')}
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
           <Progress value={progressValue} />
@@ -208,11 +294,9 @@ export function PageUserProfile({
       <section>
         <a className="mt-[-72px] h-0 pt-[72px]" id="nfts" />
         <PageTitle className="mb-4" size="md">
-          Your NFTs
+          {t('nftsTitle')}
         </PageTitle>
-        <PageSubTitle className="mb-5">
-          You will receive free NFTs for completing advocacy-related actions.
-        </PageSubTitle>
+        <PageSubTitle className="mb-5">{t('nftsSubtitle')}</PageSubTitle>
         <div>
           <NFTDisplay userActions={userActions} />
         </div>
@@ -220,21 +304,17 @@ export function PageUserProfile({
 
       <section>
         <Refer>
-          <PageTitle size="md">Invite a friend to join Stand With Crypto</PageTitle>
-          <PageSubTitle>
-            Send friends your unique referral code to encourage them to sign up and take action.
-          </PageSubTitle>
+          <PageTitle size="md">{t('inviteTitle')}</PageTitle>
+          <PageSubTitle>{t('inviteSubtitle')}</PageSubTitle>
           <Refer.ReferralCode />
         </Refer>
       </section>
 
       <section>
         <PageTitle className="mb-4" size="md">
-          Communication Preferences
+          {t('communicationsTitle')}
         </PageTitle>
-        <PageSubTitle className="mb-5">
-          Choose how you'd like to stay informed about our campaigns and important news.
-        </PageSubTitle>
+        <PageSubTitle className="mb-5">{t('communicationsSubtitle')}</PageSubTitle>
         <CommunicationsPreferenceForm>
           <EmailSubscriptionForm user={user} />
           <SMSSubscriptionForm countryCode={countryCode} user={user} />
@@ -262,6 +342,7 @@ function EditProfileButton({
 }) {
   const session = useSession()
   const hasHydrated = useHasHydrated()
+  const { t } = useTranslation(i18nMessages, 'EditProfileButton')
 
   if (!hasHydrated) {
     return null
@@ -271,14 +352,18 @@ function EditProfileButton({
     <UpdateUserProfileFormDialog onSuccess={onSuccess} user={user}>
       {hasCompleteUserProfile(user) ? (
         <Button className="w-full lg:w-auto" variant="secondary">
-          Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
+          {t('editProfile')}{' '}
+          <span className="mx-1 hidden sm:inline-block">{t('editProfileYour')}</span>{' '}
+          {t('editProfileText')}
         </Button>
       ) : (
         <Button
           className="w-full lg:w-auto"
           variant={session.isLoggedInThirdweb ? 'default' : 'secondary'}
         >
-          Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
+          {t('finishProfile')}{' '}
+          <span className="mx-1 hidden sm:inline-block">{t('finishProfileYour')}</span>{' '}
+          {t('finishProfileText')}
         </Button>
       )}
     </UpdateUserProfileFormDialog>

@@ -65,10 +65,13 @@ export function useTranslation<T extends Record<string, string>>(
   }, [i18nMessages, language, countryCode, contextName])
 
   return {
-    t: translator.t.bind(translator),
-    hasTranslation: translator.hasTranslation.bind(translator),
-    getAvailableKeys: translator.getAvailableKeys.bind(translator),
-    language: translator.getLanguage(),
     componentName: translator.getContextName(),
+    getAvailableKeys: translator.getAvailableKeys.bind(translator),
+    hasTranslation: translator.hasTranslation.bind(translator),
+    language: translator.getLanguage(),
+    t: translator.t.bind(translator),
   }
 }
+
+export type UseTranslationReturnType<T extends Record<string, string> = Record<string, string>> =
+  ReturnType<typeof useTranslation<T>>
