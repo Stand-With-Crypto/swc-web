@@ -60,6 +60,7 @@ import {
   COUNTRY_CODE_REGEX_PATTERN,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import {
   OVERRIDE_USER_ACCESS_LOCATION_COOKIE_NAME,
@@ -381,11 +382,11 @@ export async function onNewLogin(props: NewLoginParams) {
   if (!maybeUser) {
     log(`createUser: creating user`)
     maybeUser = await createUser({
-      localUser,
-      hasSignedInWithEmail,
-      sessionId: await props.getUserSessionId(),
       countryCode,
+      hasSignedInWithEmail,
+      localUser,
       searchParams,
+      sessionId: await props.getUserSessionId(),
     }).catch(error => {
       log(
         `createUser: error creating user\n ${JSON.stringify(
@@ -625,34 +626,37 @@ function findUsersToMerge(
 }
 
 async function createUser({
-  localUser,
-  hasSignedInWithEmail,
-  sessionId,
   countryCode,
+  hasSignedInWithEmail,
+  language,
+  localUser,
   searchParams,
+  sessionId,
 }: {
-  localUser: ServerLocalUser | null
-  hasSignedInWithEmail: boolean
-  sessionId: string | null
   countryCode: string
+  hasSignedInWithEmail: boolean
+  language?: SupportedLanguages
+  localUser: ServerLocalUser | null
   searchParams: Record<string, string>
+  sessionId: string | null
 }) {
   return prismaClient.user.create({
     include: {
       address: true,
       primaryUserEmailAddress: true,
-      userEmailAddresses: true,
       userCryptoAddresses: true,
+      userEmailAddresses: true,
     },
     data: {
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      hasOptedInToEmails: hasSignedInWithEmail,
-      hasOptedInToMembership: false,
-      smsStatus: SMSStatus.NOT_OPTED_IN,
-      referralId: generateReferralId(),
-      userSessions: { create: { id: sessionId ?? undefined } },
       ...mapLocalUserToUserDatabaseFields(localUser, searchParams),
       countryCode,
+      hasOptedInToEmails: hasSignedInWithEmail,
+      hasOptedInToMembership: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      language,
+      referralId: generateReferralId(),
+      smsStatus: SMSStatus.NOT_OPTED_IN,
+      userSessions: { create: { id: sessionId ?? undefined } },
     },
   })
 }
