@@ -21,6 +21,7 @@ const MODEL_PATHS_TO_REVALIDATE: Record<string, string[]> = {
   ],
   '0d6b1d36627746ea933483402efa71e1': ['/bills', '/bills/[billSlug]'],
   '59c2aecf3c5d4339b51f5c305bc43f91': ['/politicians/person/[dtsiSlug]'],
+  '28318427d3294be8935b88dffefc9e3e': ['/polls'],
 }
 
 export const POST = withBuilderIoAuthMiddleware(async (request: NextRequest) => {
