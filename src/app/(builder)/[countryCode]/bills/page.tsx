@@ -9,7 +9,7 @@ import { getPageContent, getPageDetails } from '@/utils/server/builder/models/pa
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
-export const revalidate = 60 // 1 minute
+export const revalidate = 86400 // 1 day
 export const dynamic = 'error'
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE

@@ -9,7 +9,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const dynamic = 'error'
-export const revalidate = 3600 // 1 hour
+export const revalidate = 86400 // 1 day
 
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
 const PATHNAME = '/builder/test'
