@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client'
 
+import { cancelInngestRun } from '@/utils/server/inngest/cancelInngestRun'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 
@@ -158,6 +159,13 @@ export async function mergeUsers({
     return
   }
 
+  const journeysToTransfer = await prismaClient.userCommunicationJourney.findMany({
+    where: {
+      userId: userToDelete.id,
+      inngestRunId: { not: null },
+    },
+  })
+
   await prismaClient.$transaction(
     async client => {
       if (userToDelete.userSessions.length) {
@@ -280,4 +288,14 @@ export async function mergeUsers({
   )
 
   logger.info(`merge of user ${userToDelete.id} into user ${userToKeep.id} complete`)
+
+  for (const journey of journeysToTransfer) {
+    if (journey.inngestRunId) {
+      logger.info(`Cancelling Inngest run ${journey.inngestRunId} for journey ${journey.id}`)
+      await cancelInngestRun(journey.inngestRunId)
+      logger.info(
+        `Successfully cancelled Inngest run ${journey.inngestRunId} for journey ${journey.id}`,
+      )
+    }
+  }
 }

@@ -235,10 +235,12 @@ export async function handleExternalUserActionOptIn(
     })
   })
 
+  const sessionId = await getOrCreateSessionIdForUser(user)
+
   after(async () => {
     await inngest.send({
       name: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-      data: { userId: user.id },
+      data: { userId: user.id, sessionId },
       ...(campaignName === 'idv_success_upsell_swc_rn'
         ? { ts: addHours(new Date(), 5).getTime() }
         : {}),
@@ -249,7 +251,7 @@ export async function handleExternalUserActionOptIn(
   return {
     result: ExternalUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(ExternalUserActionOptInResult),
-    sessionId: await getOrCreateSessionIdForUser(userAction.user),
+    sessionId,
     userId: userAction.user.id,
   }
 }

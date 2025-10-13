@@ -586,6 +586,7 @@ model UserCommunicationJourney {
   datetimeCreated    DateTime                     @default(now()) @map("datetime_created")
   userCommunications UserCommunication[]
   campaignName       String?                      @map("campaign_name")
+  inngestRunId       String?                      @map("inngest_run_id") // Added to track and cancel Inngest jobs during user merges
 
   @@index([userId])
   @@map("user_communication_journey")

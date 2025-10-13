@@ -51,7 +51,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     onFailure: onScriptFailure,
   },
   { event: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME },
-  async ({ event, step }) => {
+  async ({ event, step, runId }) => {
     const payload = await initialSignUpUserCommunicationJourneyPayload
       .parseAsync(event.data)
       .catch(err => {
@@ -72,7 +72,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     const userId = user.id
 
     const userCommunicationJourney = await step.run('create-communication-journey', () =>
-      createCommunicationJourney(userId),
+      createCommunicationJourney(userId, runId),
     )
 
     let done = false
@@ -163,7 +163,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
   },
 )
 
-async function createCommunicationJourney(userId: string) {
+async function createCommunicationJourney(userId: string, inngestRunId: string) {
   const existingCommunicationJourney = await prismaClient.userCommunicationJourney.findFirst({
     where: {
       userId,
@@ -179,6 +179,7 @@ async function createCommunicationJourney(userId: string) {
     data: {
       userId,
       journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+      inngestRunId,
     },
   })
 }
