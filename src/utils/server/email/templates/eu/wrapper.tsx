@@ -8,17 +8,37 @@ import {
 } from '@/utils/server/email/templates/common/ui/wrapper'
 import { EU_SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/eu/constants'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
+import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import {
   getPhysicalMailingAddressByCountryCode,
   getSWCLegalEntityNameByCountryCode,
 } from '@/utils/shared/legalUtils'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      followUsOn: 'Follow us on',
+    },
+    fr: {
+      followUsOn: 'Suivez-nous sur',
+    },
+    de: {
+      followUsOn: 'Folgen Sie uns auf',
+    },
+  },
+})
 
 export function EUWrapper({
   children,
   hrefSearchParams = {},
   countryCode,
+  language = SupportedLanguages.EN,
   ...props
-}: React.PropsWithChildren<WrapperProps>) {
+}: React.PropsWithChildren<WrapperProps & { language: SupportedLanguages }>) {
+  const { t } = getStaticTranslation(i18nMessages, language, countryCode)
+
   return (
     <Wrapper {...props} countryCode={countryCode}>
       <HeaderSection>
@@ -33,7 +53,7 @@ export function EUWrapper({
           </HeaderSection.Logo>
         </Column>
         <Column align="right" style={{ display: 'table-cell' }}>
-          <HeaderSection.SocialMedia href={EU_SOCIAL_MEDIA_URL.twitter} text="Follow us on">
+          <HeaderSection.SocialMedia href={EU_SOCIAL_MEDIA_URL.twitter} text={t('followUsOn')}>
             <Img
               alt="X/Twitter logo"
               height="24"
@@ -47,6 +67,8 @@ export function EUWrapper({
       {children}
 
       <FooterSection
+        countryCode={countryCode}
+        language={language}
         physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
         privacyPolicyHref={buildTemplateInternalUrl('/eu/privacy', hrefSearchParams)}
         sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}

@@ -16,13 +16,36 @@ import {
 
 import { tailwindConfig } from '@/utils/server/email/templates/common/tailwind-config'
 import { Button } from '@/utils/server/email/templates/common/ui/button'
+import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export interface WrapperProps {
   previewText?: string
   hrefSearchParams?: Record<string, unknown>
   countryCode: SupportedCountryCodes
 }
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      sentBy: 'This email was sent by {sendingEntity}',
+      privacyPolicy: 'Privacy Policy',
+      followOnSocials: 'Follow us on socials',
+    },
+    fr: {
+      sentBy: 'Cet e-mail a été envoyé par {sendingEntity}',
+      privacyPolicy: 'Politique de confidentialité',
+      followOnSocials: 'Suivez-nous sur les réseaux sociaux',
+    },
+    de: {
+      sentBy: 'Diese E-Mail wurde gesendet von {sendingEntity}',
+      privacyPolicy: 'Datenschutzrichtlinie',
+      followOnSocials: 'Folgen Sie uns auf Social Media',
+    },
+  },
+})
 
 export function Wrapper({ previewText, children }: React.PropsWithChildren<WrapperProps>) {
   return (
@@ -90,14 +113,20 @@ export function FooterSection({
   sendingEntity,
   physicalMailingAddress,
   privacyPolicyHref,
+  countryCode,
+  language = SupportedLanguages.EN,
 }: {
   children: React.ReactNode
   shieldSrc: string
   swcHref: string
   sendingEntity: string
+  countryCode: SupportedCountryCodes
   physicalMailingAddress: string | undefined
   privacyPolicyHref: string
+  language?: SupportedLanguages
 }) {
+  const { t } = getStaticTranslation(i18nMessages, language, countryCode)
+
   return (
     <>
       <Hr className="mt-10" />
@@ -107,7 +136,7 @@ export function FooterSection({
         {/* Desktop */}
         <Row className="hidden md:table">
           <Column>
-            <Text className="text-base">This email was sent by {sendingEntity}</Text>
+            <Text className="text-base">{t('sentBy', { sendingEntity })}</Text>
             {physicalMailingAddress && (
               <Text className="text-fontcolor-secondary !-mt-2 text-xs">
                 {physicalMailingAddress}
@@ -119,12 +148,12 @@ export function FooterSection({
             </Button>
             <span className="text-base text-muted-foreground">{' | '}</span>
             <Button color="muted" href={privacyPolicyHref} noPadding variant="ghost">
-              Privacy Policy
+              {t('privacyPolicy')}
             </Button>
           </Column>
 
           <Column align="right">
-            <Text className="text-fontcolor-secondary text-base">Follow us on socials</Text>
+            <Text className="text-fontcolor-secondary text-base">{t('followOnSocials')}</Text>
             <Row align="right" className="float-end w-[72px]">
               {children}
             </Row>
@@ -133,7 +162,7 @@ export function FooterSection({
 
         {/* Mobile */}
         <Section className="table md:hidden">
-          <Text className="text-base">This email was sent by {sendingEntity}</Text>
+          <Text className="text-base">{t('sentBy', { sendingEntity })}</Text>
           {physicalMailingAddress && (
             <Text className="text-fontcolor-secondary !-mt-2 text-xs">
               {physicalMailingAddress}
@@ -147,12 +176,12 @@ export function FooterSection({
           </Row>
           <Row>
             <Button color="muted" href={privacyPolicyHref} noPadding variant="ghost">
-              Privacy Policy
+              {t('privacyPolicy')}
             </Button>
           </Row>
 
           <Text className="text-fontcolor-secondary mt-4 text-center text-base">
-            Follow us on socials
+            {t('followOnSocials')}
           </Text>
           <Row align="center" className="mx-auto w-[72px]">
             {children}

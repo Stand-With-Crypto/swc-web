@@ -85,6 +85,7 @@ const EUPhoneNumberReminderEmail = ({
     <EUWrapper
       countryCode={countryCode}
       hrefSearchParams={hydratedHrefSearchParams}
+      language={language}
       previewText={previewText}
     >
       <Section>
@@ -102,7 +103,7 @@ const EUPhoneNumberReminderEmail = ({
           {t('body2')}
           <br />
           <br />
-          {t('body3')}
+          {t('body3')}{' '}
           <Button
             color="primary-cta"
             href={buildTemplateInternalUrl(`/eu/${language}/privacy`, hydratedHrefSearchParams)}

@@ -91,6 +91,7 @@ const EUFollowOnXReminderEmail = ({
     <EUWrapper
       countryCode={countryCode}
       hrefSearchParams={hydratedHrefSearchParams}
+      language={language}
       previewText={previewText}
     >
       <Section>

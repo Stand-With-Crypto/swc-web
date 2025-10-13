@@ -47,6 +47,7 @@ export function AUWrapper({
       {children}
 
       <FooterSection
+        countryCode={countryCode}
         physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
         privacyPolicyHref={buildTemplateInternalUrl('/au/privacy', hrefSearchParams)}
         sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}

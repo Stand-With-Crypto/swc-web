@@ -47,6 +47,7 @@ export function USWrapper({
       {children}
 
       <FooterSection
+        countryCode={countryCode}
         physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
         privacyPolicyHref={buildTemplateInternalUrl('/privacy', hrefSearchParams)}
         sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}

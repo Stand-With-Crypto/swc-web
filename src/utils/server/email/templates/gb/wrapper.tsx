@@ -47,6 +47,7 @@ export function GBWrapper({
       {children}
 
       <FooterSection
+        countryCode={countryCode}
         physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
         privacyPolicyHref={buildTemplateInternalUrl('/gb/privacy', hrefSearchParams)}
         sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}

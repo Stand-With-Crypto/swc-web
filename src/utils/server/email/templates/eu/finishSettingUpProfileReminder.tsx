@@ -72,6 +72,7 @@ const EUFinishSettingUpProfileReminderEmail = ({
     <EUWrapper
       countryCode={countryCode}
       hrefSearchParams={hydratedHrefSearchParams}
+      language={language}
       previewText={previewText}
     >
       <Section>
