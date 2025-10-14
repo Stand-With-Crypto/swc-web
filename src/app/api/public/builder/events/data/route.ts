@@ -49,9 +49,9 @@ export const POST = withBuilderIoAuthMiddleware(async (request: NextRequest) => 
     logger.info(`Revalidating path: ${path}`)
     revalidatePath(path, 'page')
     revalidatePath(`/[countryCode]${path}`, 'page')
-    ORDERED_SUPPORTED_COUNTRIES.forEach(countryCode =>
-      revalidatePath(`/${countryCode}${path}`, 'page'),
-    )
+    ORDERED_SUPPORTED_COUNTRIES.forEach(countryCode => {
+      revalidatePath(`/${countryCode}${path}`, 'page')
+    })
   })
 
   logger.info(`Revalidation completed for modelId: ${modelId} and modelName: ${modelName}`)
