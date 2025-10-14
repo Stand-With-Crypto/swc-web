@@ -68,6 +68,8 @@ export function EventsMap({
     eventsFromStateKeys.forEach(state => {
       const coordinates = EVENT_MAP_STATE_COORDS[state as keyof typeof EVENT_MAP_STATE_COORDS]
 
+      if (!coordinates) return
+
       const marker: MapMarker = {
         id: state,
         name: state,
