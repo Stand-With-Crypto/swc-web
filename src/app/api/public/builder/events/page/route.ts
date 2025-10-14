@@ -30,6 +30,7 @@ export const POST = withBuilderIoAuthMiddleware(async (request: NextRequest) => 
     if (property === 'urlPath') {
       logger.info(`Revalidating path: ${value}`)
       revalidatePath(value)
+      revalidatePath(`/[countryCode]${value}`)
       ORDERED_SUPPORTED_COUNTRIES.forEach(countryCode => revalidatePath(`/${countryCode}${value}`))
     }
   })
