@@ -275,6 +275,7 @@ async function maybeUpsertUser({
     hasOptedInToMembership,
     address,
     hasValidPhoneNumber,
+    language,
   } = input
 
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
@@ -472,6 +473,7 @@ async function maybeUpsertUser({
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       countryCode,
+      language,
       userEmailAddresses: {
         create: {
           emailAddress,

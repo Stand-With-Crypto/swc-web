@@ -8,8 +8,8 @@ import {
 } from '@/data/verifiedSWCPartners/userActionOptIn'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
-import { isEUCountry } from '@/utils/shared/euCountryMapping'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getEUCountryPrimaryLanguage, isEUCountry } from '@/utils/shared/euCountryMapping'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 import { getNumberFormat } from './getNumberFormat'
 
@@ -19,9 +19,13 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const partner = await authenticateAndGetVerifiedSWCPartnerFromHeader()
   const requestBody = (await request.json()) as RequestBody
 
+  const language = isEUCountry(requestBody.countryCode)
+    ? getEUCountryPrimaryLanguage(requestBody.countryCode)
+    : SupportedLanguages.EN
+
   const baseValidationResult = getZodVerifiedSWCPartnersUserActionOptInSchema()
     .omit({ phoneNumber: true })
-    .safeParse(requestBody)
+    .safeParse({ ...requestBody, language })
 
   if (!baseValidationResult.success) {
     Sentry.captureException(baseValidationResult.error, {
@@ -33,11 +37,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     return NextResponse.json({ error: baseValidationResult.error }, { status: 400 })
   }
 
-  const { countryCode: countryCodeFromRequest } = baseValidationResult.data
-
-  const countryCode = isEUCountry(countryCodeFromRequest)
-    ? SupportedCountryCodes.EU
-    : countryCodeFromRequest
+  const { countryCode } = baseValidationResult.data
 
   const phoneNumberValidationResult = getZodVerifiedSWCPartnersUserActionOptInSchema(
     countryCode,
