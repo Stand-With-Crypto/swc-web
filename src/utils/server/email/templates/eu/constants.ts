@@ -32,10 +32,10 @@ export const i18nMessages = createI18nMessages({
     fr: {
       tweetText: 'Tweeter sur crypto',
       tweetButton: 'Tweeter',
-      tweetSubtext: 'Partagez vos thoughts sur crypto avec le monde.',
-      referText: 'Référer un ami',
-      referButton: 'Référer un ami',
-      referSubtext: 'Référer un ami à Stand With Crypto.',
+      tweetSubtext: 'Partagez vos pensées sur crypto avec le monde.',
+      referText: 'Référez un ami',
+      referButton: 'Référez un ami',
+      referSubtext: 'Référez un ami à Stand With Crypto.',
     },
     de: {
       tweetText: 'Tweet über Krypto',

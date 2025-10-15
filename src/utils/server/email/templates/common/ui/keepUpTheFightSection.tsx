@@ -29,7 +29,7 @@ export const i18nMessages = createI18nMessages({
     fr: {
       countryCTA: 'Rejoignez le mouvement',
       dontWaitLabel:
-        'Ne vous attendez pas - agissez maintenant. Voir ci-dessous pour les actions que vous pouvez entreprendre pour aider à maintenir la crypto dans {countryWithPrefix}',
+        "N'attendez pas - agissez maintenant. Voir ci-dessous pour les actions que vous pouvez entreprendre pour aider à maintenir la crypto dans {countryWithPrefix}",
       imgAlt: "icône d'action {actionType}",
     },
     de: {
