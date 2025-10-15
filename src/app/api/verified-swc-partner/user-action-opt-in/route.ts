@@ -8,6 +8,8 @@ import {
 } from '@/data/verifiedSWCPartners/userActionOptIn'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
+import { isEUCountry } from '@/utils/shared/euCountryMapping'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import { getNumberFormat } from './getNumberFormat'
 
@@ -31,7 +33,11 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     return NextResponse.json({ error: baseValidationResult.error }, { status: 400 })
   }
 
-  const { countryCode } = baseValidationResult.data
+  const { countryCode: countryCodeFromRequest } = baseValidationResult.data
+
+  const countryCode = isEUCountry(countryCodeFromRequest)
+    ? SupportedCountryCodes.EU
+    : countryCodeFromRequest
 
   const phoneNumberValidationResult = getZodVerifiedSWCPartnersUserActionOptInSchema(
     countryCode,
