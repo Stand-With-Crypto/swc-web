@@ -8,20 +8,14 @@ const countryCode = SupportedCountryCodes.EU
 
 export const i18nMessages = createI18nMessages({
   defaultMessages: {
-    de: {
-      textBeforePrivacy:
-        'Wenn Sie sich registrieren, erklären Sie sich damit einverstanden, dass Stand With Crypto und seine Verkäufer Ihre persönlichen Informationen sammeln und verwenden können. Um mehr zu erfahren, besuchen Sie unsere',
-      textBetweenLinks: 'und',
-    },
     en: {
-      textBeforePrivacy:
-        'By signing up, you consent to and understand that Stand With Crypto and its vendors may collect and use your Personal Information. To learn more, visit our',
-      textBetweenLinks: 'and the',
+      text: 'By signing up, you consent to and understand that Stand With Crypto and its vendors may collect and use your Personal Information. To learn more, visit the',
     },
     fr: {
-      textBeforePrivacy:
-        'En vous inscrivant, vous consentez à ce que Stand With Crypto et ses vendeurs puissent collecter et utiliser vos informations personnelles. Pour en savoir plus, visitez notre',
-      textBetweenLinks: 'et',
+      text: 'En vous inscrivant, vous consentez et comprenez que Stand With Crypto et ses fournisseurs peuvent collecter et utiliser vos informations personnelles. Pour en savoir plus, consultez la',
+    },
+    de: {
+      text: 'Mit Ihrer Anmeldung stimmen Sie zu und verstehen, dass Stand With Crypto und seine Anbieter Ihre persönlichen Daten erfassen und verwenden können. Um mehr zu erfahren, besuchen Sie die',
     },
   },
 })
@@ -35,9 +29,7 @@ export function EUFooterContent({ language }: EUFooterContentProps) {
 
   return (
     <FooterContent>
-      {t('textBeforePrivacy')}{' '}
-      <FooterContent.PrivacyCollectionStatementLink countryCode={countryCode} />{' '}
-      {t('textBetweenLinks')} <FooterContent.PrivacyPolicyLink countryCode={countryCode} />.
+      {t('text')} <FooterContent.PrivacyPolicyLink countryCode={countryCode} language={language} />.
     </FooterContent>
   )
 }
