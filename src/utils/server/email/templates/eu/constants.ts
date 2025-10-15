@@ -43,7 +43,7 @@ export const i18nMessages = createI18nMessages({
       tweetSubtext: 'Teilen Sie Ihre Gedanken über Krypto mit der Welt.',
       referText: 'Freunde empfehlen',
       referButton: 'Freunde empfehlen',
-      referSubtext: 'Freunde empfehren Stand With Crypto.',
+      referSubtext: 'Freunde empfehlen Stand With Crypto.',
     },
   },
 })
