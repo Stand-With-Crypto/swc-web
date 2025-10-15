@@ -10,6 +10,7 @@ import {
   CAEmailActiveActions,
   CAEmailEnabledActionNFTs,
 } from '@/utils/server/email/templates/ca/constants'
+import { getEuActionsMetadataByType } from '@/utils/server/email/templates/eu/constants'
 import {
   GB_ACTIONS_METADATA_BY_TYPE,
   GB_NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
@@ -25,8 +26,12 @@ import {
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
-export function getEmailActionsMetadataByCountry(countryCode: SupportedCountryCodes) {
+export function getEmailActionsMetadataByCountry(
+  countryCode: SupportedCountryCodes,
+  language: SupportedLanguages = SupportedLanguages.EN,
+) {
   switch (countryCode) {
     case SupportedCountryCodes.US:
       return US_ACTIONS_METADATA_BY_TYPE
@@ -36,6 +41,8 @@ export function getEmailActionsMetadataByCountry(countryCode: SupportedCountryCo
       return CA_ACTIONS_METADATA_BY_TYPE
     case SupportedCountryCodes.GB:
       return GB_ACTIONS_METADATA_BY_TYPE
+    case SupportedCountryCodes.EU:
+      return getEuActionsMetadataByType(language)
     default:
       return gracefullyError({
         msg: `No email actions metadata found for country code`,

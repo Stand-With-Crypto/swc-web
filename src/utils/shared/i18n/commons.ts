@@ -18,6 +18,11 @@ const i18nMessages = createI18nMessages({
       GBDemonym: 'British',
       CADemonym: 'Canadian',
       EUDemonym: 'European',
+      USWithPrefix: 'the United States',
+      CAWithPrefix: 'Canada',
+      GBWithPrefix: 'the United Kingdom',
+      AUWithPrefix: 'Australia',
+      EUWithPrefix: 'the European Union',
     },
     fr: {
       territoryDivision: 'État',
@@ -31,6 +36,11 @@ const i18nMessages = createI18nMessages({
       GBDemonym: 'Brit',
       CADemonym: 'Canadien',
       EUDemonym: 'Europeen',
+      USWithPrefix: 'les États-Unis',
+      CAWithPrefix: 'Canada',
+      GBWithPrefix: 'le Royaume-Uni',
+      AUWithPrefix: 'Australie',
+      EUWithPrefix: "l'Union européenne",
     },
     de: {
       territoryDivision: 'Staat',
@@ -44,6 +54,11 @@ const i18nMessages = createI18nMessages({
       GBDemonym: 'Britisch',
       CADemonym: 'Kanadisch',
       EUDemonym: 'Europäer',
+      USWithPrefix: 'die Vereinigten Staaten',
+      CAWithPrefix: 'Kanada',
+      GBWithPrefix: 'das Vereinigte Königreich',
+      AUWithPrefix: 'Australien',
+      EUWithPrefix: 'die Europäische Union',
     },
   },
   messagesOverrides: {
@@ -101,4 +116,12 @@ export const COUNTRY_CODE_TO_DISPLAY_NAME_KEY = {
   [SupportedCountryCodes.CA]: 'CA',
   [SupportedCountryCodes.AU]: 'AU',
   [SupportedCountryCodes.EU]: 'EU',
+} as const
+
+export const COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX_KEY = {
+  [SupportedCountryCodes.US]: 'USWithPrefix',
+  [SupportedCountryCodes.GB]: 'GBWithPrefix',
+  [SupportedCountryCodes.CA]: 'CAWithPrefix',
+  [SupportedCountryCodes.AU]: 'AUWithPrefix',
+  [SupportedCountryCodes.EU]: 'EUWithPrefix',
 } as const

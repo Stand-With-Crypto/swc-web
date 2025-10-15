@@ -17,6 +17,7 @@ import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'
@@ -261,17 +262,25 @@ async function sendInitialSignUpEmail({
     return null
   }
 
+  const language = (user.language as SupportedLanguages) || SupportedLanguages.EN
+
+  const subjectLine =
+    'getSubjectLine' in Template && typeof Template.getSubjectLine === 'function'
+      ? Template.getSubjectLine(language, countryCode)
+      : Template.subjectLine
+
   const messageId = await sendMail({
     countryCode,
     payload: {
       to: user.primaryUserEmailAddress.emailAddress,
-      subject: Template.subjectLine,
+      subject: subjectLine,
       html: await render(
         <Template
           completedActionTypes={user.userActions
             .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
             .map(action => `${action.actionType}` as EmailActiveActions)}
           countryCode={countryCode}
+          language={language}
           session={
             sessionId
               ? {

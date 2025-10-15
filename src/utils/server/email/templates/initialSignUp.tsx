@@ -1,5 +1,6 @@
 import AUInitialSignUpEmail from '@/utils/server/email/templates/au/initialSignUp'
 import CAInitialSignUpEmail from '@/utils/server/email/templates/ca/initialSignUp'
+import EUInitialSignUpEmail from '@/utils/server/email/templates/eu/initialSignUp'
 import GBInitialSignUpEmail from '@/utils/server/email/templates/gb/initialSignUp'
 import USInitialSignUpEmail from '@/utils/server/email/templates/us/initialSignUp'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
@@ -15,6 +16,8 @@ export function getInitialSignUpEmail(countryCode: SupportedCountryCodes) {
       return AUInitialSignUpEmail
     case SupportedCountryCodes.GB:
       return GBInitialSignUpEmail
+    case SupportedCountryCodes.EU:
+      return EUInitialSignUpEmail
     default:
       return gracefullyError({
         msg: `No InitialSignUpEmail template found for countryCode: ${countryCode as string}`,

@@ -47,6 +47,7 @@ export function CAWrapper({
       {children}
 
       <FooterSection
+        countryCode={countryCode}
         physicalMailingAddress={getPhysicalMailingAddressByCountryCode(countryCode)}
         privacyPolicyHref={buildTemplateInternalUrl('/ca/privacy', hrefSearchParams)}
         sendingEntity={getSWCLegalEntityNameByCountryCode(countryCode)}
