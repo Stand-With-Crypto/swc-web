@@ -32,6 +32,7 @@ import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { apiUrls } from '@/utils/shared/urls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { ErrorBoundary } from '@/utils/web/errorBoundary'
+import { useLanguage } from '@/utils/web/i18n/useLanguage'
 import { useTranslation, UseTranslationReturnType } from '@/utils/web/i18n/useTranslation'
 import { theme } from '@/utils/web/thirdweb/theme'
 
@@ -48,7 +49,7 @@ const appMetadata = {
   logoUrl: 'https://www.standwithcrypto.org/logo/shield.svg',
 }
 
-const MAP_EU_LANGUAGE_TO_THIRDWEB_LOCALE: Record<SupportedLanguages, LocaleId> = {
+const MAP_LANGUAGE_TO_THIRDWEB_LOCALE: Record<SupportedLanguages, LocaleId> = {
   [SupportedLanguages.DE]: 'de_DE',
   [SupportedLanguages.EN]: 'en_US',
   [SupportedLanguages.FR]: 'fr_FR',
@@ -67,7 +68,7 @@ export function ThirdwebLoginContent({
 
   const locale =
     countryCode === SupportedCountryCodes.EU
-      ? MAP_EU_LANGUAGE_TO_THIRDWEB_LOCALE[translation.language]
+      ? MAP_LANGUAGE_TO_THIRDWEB_LOCALE[translation.language]
       : 'en_US'
 
   const {
@@ -156,8 +157,12 @@ function ThirdwebLoginEmbedded(
   const { connect } = useConnect()
   const searchParams = useSearchParams()
   const countryCode = useCountryCode()
+  const language = useLanguage()
 
   const searchParamsObject = searchParams ? Object.fromEntries(searchParams.entries()) : {}
+
+  const locale =
+    countryCode === SupportedCountryCodes.EU ? MAP_LANGUAGE_TO_THIRDWEB_LOCALE[language] : 'en_US'
 
   useEffect(() => {
     if (!session.isLoggedIn && !hasTracked.current) {
@@ -228,7 +233,7 @@ function ThirdwebLoginEmbedded(
       }}
       chain={base}
       client={thirdwebClient}
-      locale="en_US"
+      locale={locale}
       recommendedWallets={recommendedWallets}
       showAllWallets={false}
       showThirdwebBranding={false}
