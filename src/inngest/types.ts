@@ -29,6 +29,7 @@ import type { ImportUsersByCSVCoordinatorSchema } from '@/inngest/functions/impo
 import { ImportUsersByCSVProcessorSchema } from '@/inngest/functions/importUsersByCSV/logic'
 import type { InitialSignupUserCommunicationSchema } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import type { MonitorBaseEthBalancesInngestEventSchema } from '@/inngest/functions/monitorBaseETHBalances'
+import type { ProcessPostgridWebhookEventsSchema } from '@/inngest/functions/postgrid/types'
 import { SyncSendgridContactsCoordinatorSchema } from '@/inngest/functions/sendgridContactsCronJob'
 import { SyncSendgridContactsProcessorSchema } from '@/inngest/functions/sendgridContactsCronJob/logic'
 import type { SetCryptoAddressOfUserInngestEventSchema } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
@@ -86,4 +87,5 @@ type EventTypes =
   | BackfillIntlUsersProcessorSchema
   | ImportUsersByCSVCoordinatorSchema
   | ImportUsersByCSVProcessorSchema
+  | ProcessPostgridWebhookEventsSchema
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()

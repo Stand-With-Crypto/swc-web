@@ -31,6 +31,7 @@ import { importUsersByCSVCoordinator } from '@/inngest/functions/importUsersByCS
 import { importUsersByCSVProcessor } from '@/inngest/functions/importUsersByCSV/logic'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
+import { processPostgridWebhookEvents } from '@/inngest/functions/postgrid/processWebhookEvents'
 import { syncSendgridContactsCoordinator } from '@/inngest/functions/sendgridContactsCronJob'
 import { syncSendgridContactsProcessor } from '@/inngest/functions/sendgridContactsCronJob/logic'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
@@ -101,5 +102,6 @@ export const { GET, POST, PUT } = serve({
     backfillIntlUsersProcessor,
     importUsersByCSVCoordinator,
     importUsersByCSVProcessor,
+    processPostgridWebhookEvents,
   ],
 })
