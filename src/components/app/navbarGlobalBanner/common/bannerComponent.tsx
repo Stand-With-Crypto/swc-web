@@ -12,11 +12,13 @@ import {
   withI18nCommons,
 } from '@/utils/shared/i18n/commons'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { isLanguageSupportedForCountry } from '@/utils/shared/i18n/isLanguageSupportedForCountry'
 import {
   COUNTRY_CODE_REGEX_PATTERN,
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages, SWC_PAGE_LANGUAGE_COOKIE_NAME } from '@/utils/shared/supportedLocales'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
 import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
@@ -58,6 +60,12 @@ export function NavBarGlobalBanner({
   const isUserAccessLocationEqualCurrentPageCountryCode =
     userAccessLocation === currentPageCountryCode
 
+  const userLanguage = Cookies.get(SWC_PAGE_LANGUAGE_COOKIE_NAME)?.toLowerCase()
+  const isUserLanguageSupported = isLanguageSupportedForCountry(
+    userAccessLocation?.toLowerCase() as SupportedCountryCodes,
+    userLanguage?.toLowerCase() as SupportedLanguages,
+  )
+
   if (!hasHydrated) {
     return currentCampaignComponent
   }
@@ -67,7 +75,12 @@ export function NavBarGlobalBanner({
   }
 
   if (userAccessLocation && isUserAccessLocationSupported) {
-    return <RedirectBannerContent countryCode={userAccessLocation as SupportedCountryCodes} />
+    return (
+      <RedirectBannerContent
+        countryCode={userAccessLocation as SupportedCountryCodes}
+        language={isUserLanguageSupported ? (userLanguage as SupportedLanguages) : undefined}
+      />
+    )
   }
 
   return (
