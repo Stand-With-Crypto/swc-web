@@ -10,6 +10,7 @@ import { getAuthenticatedData } from '@/components/app/pageUserProfile/common/ge
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = SupportedCountryCodes.CA
@@ -37,7 +38,11 @@ export default async function CAProfile(props: Props) {
   }
 
   if (user.countryCode !== countryCode) {
-    redirect(getIntlUrls(user.countryCode as SupportedCountryCodes).profile())
+    redirect(
+      getIntlUrls(user.countryCode as SupportedCountryCodes, {
+        language: (user.language as SupportedLanguages) || SupportedLanguages.EN,
+      }).profile(),
+    )
   }
 
   return <PageUserProfile countryCode={countryCode} hideUserMetrics user={user} />

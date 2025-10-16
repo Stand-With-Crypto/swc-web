@@ -13,6 +13,7 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 const countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE
@@ -40,7 +41,11 @@ export default async function Profile(props: Props) {
   }
 
   if (user.countryCode !== countryCode) {
-    redirect(getIntlUrls(user.countryCode as SupportedCountryCodes).profile())
+    redirect(
+      getIntlUrls(user.countryCode as SupportedCountryCodes, {
+        language: (user.language as SupportedLanguages) || SupportedLanguages.EN,
+      }).profile(),
+    )
   }
 
   return <PageUserProfile countryCode={countryCode} user={user} />
