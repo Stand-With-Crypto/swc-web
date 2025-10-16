@@ -114,6 +114,7 @@
     "obscenity": "^0.2.0",
     "p-retry": "^6.2.0",
     "pino-pretty": "^11.2.2",
+    "postgrid-node": "^0.1.0-alpha.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-email": "3.0.6",
