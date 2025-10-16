@@ -56,8 +56,8 @@ export function getNavbarConfig({
     countryCode,
     language,
     logo: {
-      src: '/logo/shield.svg',
-      width: 40,
+      src: '/eu/logo/shield-text.svg',
+      width: 120,
       height: 40,
     },
     items: [
