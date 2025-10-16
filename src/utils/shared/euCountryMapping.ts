@@ -44,6 +44,6 @@ export function isEUCountry(countryCode: string): boolean {
   return EU_COUNTRY_CODES.includes(countryCode.toLowerCase())
 }
 
-export function getEUCountryPrimaryLanguage(countryCode: string): SupportedLanguages | null {
-  return EU_COUNTRY_TO_PRIMARY_LANGUAGE[countryCode.toLowerCase()] || null
+export function getEUCountryPrimaryLanguage(countryCode: string): SupportedLanguages {
+  return EU_COUNTRY_TO_PRIMARY_LANGUAGE[countryCode.toLowerCase()] || SupportedLanguages.EN
 }
