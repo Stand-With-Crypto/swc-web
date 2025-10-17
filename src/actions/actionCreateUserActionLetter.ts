@@ -47,6 +47,8 @@ import { userFullName } from '@/utils/shared/userFullName'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
 import { zodUserActionFormLetterAction } from '@/validation/forms/zodUserActionFormLetter'
 
+const actionType = UserActionType.LETTER
+
 const logger = getLogger(`actionCreateUserActionLetter`)
 
 type UserWithRelations = User & {
@@ -108,7 +110,6 @@ async function _actionCreateUserActionLetter(input: Input) {
   logger.info('fetched/created user')
 
   const campaignName = validatedFields.data.campaignName
-  const actionType = UserActionType.LETTER
 
   // Check for existing action
   let userAction = await prismaClient.userAction.findFirst({
@@ -145,6 +146,7 @@ async function _actionCreateUserActionLetter(input: Input) {
   })
 
   // Build letter HTML content
+  // TODO: Create a function to build the letter
   const getLetterHTML = (politicianName: string) => `
     <html>
       <body>
@@ -377,4 +379,3 @@ async function maybeUpsertUser({
   user.primaryUserEmailAddressId = primaryUserEmailAddressId
   return { user, userState: 'New' }
 }
-
