@@ -171,8 +171,8 @@ async function _actionCreateUserActionLetter(input: Input) {
       // For politician address, we'll use a placeholder or fetch from DTSI if available
       // For now, using the advocate's address as a placeholder (you'll need to integrate with DTSI/Quorum for actual politician addresses)
       const toAddress: PostGridLetterAddress = {
-        firstName: dtsiPerson.firstName || '',
-        lastName: dtsiPerson.lastName || '',
+        firstName: dtsiPerson.firstName || 'Representative',
+        lastName: dtsiPerson.lastName || 'Unknown',
         addressLine1: 'Parliament House',
         city: 'Canberra',
         provinceOrState: 'ACT',
