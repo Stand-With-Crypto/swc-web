@@ -1,11 +1,14 @@
+// PostGrid SDK expects Contact format
 export interface PostGridLetterAddress {
-  firstName: string
-  lastName: string
+  firstName?: string
+  lastName?: string
+  companyName?: string
   addressLine1: string
+  addressLine2?: string
   city: string
   provinceOrState: string
   postalOrZip: string
-  country: string
+  countryCode: string
 }
 
 export interface CreateLetterParams {

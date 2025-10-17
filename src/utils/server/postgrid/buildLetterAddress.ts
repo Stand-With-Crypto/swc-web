@@ -19,7 +19,7 @@ export function buildPostGridAddress(
     city: address.locality,
     provinceOrState: address.administrativeAreaLevel1,
     postalOrZip: address.postalCode,
-    country: address.countryCode.toUpperCase(),
+    countryCode: address.countryCode.toUpperCase(),
   }
 }
 

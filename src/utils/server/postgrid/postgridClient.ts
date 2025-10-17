@@ -8,5 +8,5 @@ const POSTGRID_API_KEY = requiredOutsideLocalEnv(
   'PostGrid Letter Sending',
 )
 
-export const postgridClient = POSTGRID_API_KEY ? new PostGrid(POSTGRID_API_KEY) : null
+export const postgridClient = POSTGRID_API_KEY ? new PostGrid({ apiKey: POSTGRID_API_KEY }) : null
 

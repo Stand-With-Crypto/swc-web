@@ -16,10 +16,26 @@ export async function createLetter(params: CreateLetterParams): Promise<CreateLe
   }
 
   try {
-    const letter = await postgridClient.letter.create(
+    const letter = await postgridClient.letters.create(
       {
-        to: params.to,
-        from: params.from,
+        to: {
+          firstName: params.to.firstName,
+          lastName: params.to.lastName,
+          addressLine1: params.to.addressLine1,
+          city: params.to.city,
+          provinceOrState: params.to.provinceOrState,
+          postalOrZip: params.to.postalOrZip,
+          countryCode: params.to.countryCode,
+        } as any,
+        from: {
+          firstName: params.from.firstName,
+          lastName: params.from.lastName,
+          addressLine1: params.from.addressLine1,
+          city: params.from.city,
+          provinceOrState: params.from.provinceOrState,
+          postalOrZip: params.from.postalOrZip,
+          countryCode: params.from.countryCode,
+        } as any,
         html: params.html,
         description: `SWC Letter - ${params.metadata?.campaignName || 'default'}`,
         ...(params.metadata && { metadata: params.metadata }),
@@ -28,7 +44,7 @@ export async function createLetter(params: CreateLetterParams): Promise<CreateLe
         headers: {
           'Idempotency-Key': params.idempotencyKey,
         },
-      },
+      } as any,
     )
 
     logger.info('Letter created successfully', {

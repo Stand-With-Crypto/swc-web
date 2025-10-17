@@ -22,6 +22,7 @@ import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMeth
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { buildPostGridAddress } from '@/utils/server/postgrid/buildLetterAddress'
 import { createLetter } from '@/utils/server/postgrid/createLetter'
+import { PostGridLetterAddress } from '@/utils/server/postgrid/types'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -169,14 +170,14 @@ async function _actionCreateUserActionLetter(input: Input) {
 
       // For politician address, we'll use a placeholder or fetch from DTSI if available
       // For now, using the advocate's address as a placeholder (you'll need to integrate with DTSI/Quorum for actual politician addresses)
-      const toAddress = {
+      const toAddress: PostGridLetterAddress = {
         firstName: dtsiPerson.firstName || '',
         lastName: dtsiPerson.lastName || '',
         addressLine1: 'Parliament House',
         city: 'Canberra',
         provinceOrState: 'ACT',
         postalOrZip: '2600',
-        country: 'AU',
+        countryCode: 'AU',
       }
 
       const letterResult = await createLetter({
