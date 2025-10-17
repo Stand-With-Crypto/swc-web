@@ -13,6 +13,7 @@ export const AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VIEW_KEY_PAGE,
   UserActionType.POLL,
   UserActionType.EMAIL,
+  UserActionType.LETTER,
 ] as const
 
 export type AUActiveClientUserActionWithCampaignType =
@@ -61,6 +62,10 @@ export enum AUUserActionEmailCampaignName {
   PROTECT_CRYPTO_INNOVATION_2025 = 'PROTECT_CRYPTO_INNOVATION_2025',
 }
 
+export enum AUUserActionLetterCampaignName {
+  DEFAULT = 'DEFAULT',
+}
+
 export type AUUserActionCampaignName =
   | UserActionOptInCampaignName
   | AUUserActionTweetCampaignName
@@ -72,6 +77,7 @@ export type AUUserActionCampaignName =
   | AUUserActionViewKeyPageCampaignName
   | AUUserActionPollCampaignName
   | AUUserActionEmailCampaignName
+  | AUUserActionLetterCampaignName
 
 export interface AUUserActionCampaigns {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName
@@ -84,6 +90,7 @@ export interface AUUserActionCampaigns {
   [UserActionType.VIEW_KEY_PAGE]: AUUserActionViewKeyPageCampaignName
   [UserActionType.POLL]: AUUserActionPollCampaignName
   [UserActionType.EMAIL]: AUUserActionEmailCampaignName
+  [UserActionType.LETTER]: AUUserActionLetterCampaignName
 }
 
 export const AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -97,4 +104,5 @@ export const AU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VIEW_KEY_PAGE]: AUUserActionViewKeyPageCampaignName.AU_Q2_2025_ELECTION,
   [UserActionType.POLL]: AUUserActionPollCampaignName.CRYPTO_NEWS,
   [UserActionType.EMAIL]: AUUserActionEmailCampaignName.DEFAULT,
+  [UserActionType.LETTER]: AUUserActionLetterCampaignName.DEFAULT,
 } satisfies Record<AUActiveClientUserActionWithCampaignType, string>

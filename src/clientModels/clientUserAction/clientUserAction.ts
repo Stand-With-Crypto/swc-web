@@ -6,6 +6,8 @@ import {
   UserActionDonation,
   UserActionEmail,
   UserActionEmailRecipient,
+  UserActionLetter,
+  UserActionLetterRecipient,
   UserActionOptIn,
   UserActionPetition,
   UserActionPoll,
@@ -46,6 +48,11 @@ type ClientUserActionDatabaseQuery = UserAction & {
   nftMint: NFTMint | null
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
+  userActionLetter:
+    | (UserActionLetter & {
+        recipients: UserActionLetterRecipient[]
+      })
+    | null
   userActionOptIn: UserActionOptIn | null
   userActionPetition:
     | (UserActionPetition & {
@@ -78,6 +85,13 @@ type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
 interface ClientUserActionEmail {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
+}
+type ClientUserActionLetterRecipient = Pick<UserActionLetterRecipient, 'id' | 'dtsiSlug'> & {
+  person: DTSIPersonForUserActions | null
+}
+interface ClientUserActionLetter {
+  recipients: ClientUserActionLetterRecipient[]
+  actionType: typeof UserActionType.LETTER
 }
 interface ClientUserActionCall {
   person: DTSIPersonForUserActions | null
@@ -174,6 +188,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionEmail
       | ClientUserActionCall
       | ClientUserActionDonation
+      | ClientUserActionLetter
       | ClientUserActionNFTMint
       | ClientUserActionPetition
       | ClientUserActionVoterRegistration
@@ -267,6 +282,18 @@ export const getClientUserAction = ({
         })),
       }
       return getClientModel({ ...sharedProps, ...emailFields })
+    },
+    [UserActionType.LETTER]: () => {
+      const { recipients } = getRelatedModel(record, 'userActionLetter')
+      const letterFields: ClientUserActionLetter = {
+        actionType: UserActionType.LETTER,
+        recipients: recipients.map(x => ({
+          id: x.id,
+          dtsiSlug: x.dtsiSlug,
+          person: x.dtsiSlug ? peopleBySlug[x.dtsiSlug] : null,
+        })),
+      }
+      return getClientModel({ ...sharedProps, ...letterFields })
     },
     [UserActionType.NFT_MINT]: () => {
       const mintFields: ClientUserActionNFTMint = {
