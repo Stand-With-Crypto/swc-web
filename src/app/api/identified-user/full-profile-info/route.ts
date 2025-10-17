@@ -26,6 +26,11 @@ async function apiResponseForUserFullProfileInfo() {
                 userActionEmailRecipients: true,
               },
             },
+            userActionLetter: {
+              include: {
+                recipients: true,
+              },
+            },
             userActionCall: true,
             nftMint: true,
             userActionOptIn: true,

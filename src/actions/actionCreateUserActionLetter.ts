@@ -10,7 +10,13 @@ import { z } from 'zod'
 
 type Input = z.infer<typeof zodUserActionFormLetterAction>
 
-export async function actionCreateUserActionLetter(_input: Input) {
+export async function actionCreateUserActionLetter(_input: Input): Promise<
+  | { user: ReturnType<typeof getClientUser> }
+  | {
+      errors: Record<string, string[]>
+      errorsMetadata?: Record<string, any>
+    }
+> {
   // Stub implementation - actual implementation in letter/backend branch
   throw new Error('actionCreateUserActionLetter not implemented on this branch')
 }
