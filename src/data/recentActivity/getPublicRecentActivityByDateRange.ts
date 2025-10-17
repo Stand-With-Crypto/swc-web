@@ -44,6 +44,11 @@ const fetchFromPrisma = async (config: RecentActivityByDateRangeConfig) => {
               userActionEmailRecipients: true,
             },
           },
+          userActionLetter: {
+            include: {
+              recipients: true,
+            },
+          },
           nftMint: true,
           userActionCall: true,
           userActionDonation: true,
@@ -98,6 +103,12 @@ export const getPublicRecentActivityByDateRange = async (
       userAction.userActionEmail.userActionEmailRecipients.forEach(userActionEmailRecipient => {
         if (userActionEmailRecipient.dtsiSlug) {
           dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
+        }
+      })
+    } else if (userAction.userActionLetter) {
+      userAction.userActionLetter.recipients.forEach(recipient => {
+        if (recipient.dtsiSlug) {
+          dtsiSlugs.add(recipient.dtsiSlug)
         }
       })
     } else if (userAction.userActionTweetAtPerson?.recipientDtsiSlug) {
