@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { redis } from '@/utils/server/redis'
 import { verifyPostgridWebhookSignature } from '@/utils/server/postgrid/verifyWebhookSignature'
+import { PostGridWebhookEvent } from '@/utils/server/postgrid/types'
 import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('postgridWebhook')
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
     return new NextResponse('Unauthorized', { status: 401 })
   }
 
-  const body = JSON.parse(rawBody)
+  const body = JSON.parse(rawBody) as PostGridWebhookEvent
   logger.info('Received PostGrid webhook event', {
     eventId: body.id,
     eventType: body.type,
