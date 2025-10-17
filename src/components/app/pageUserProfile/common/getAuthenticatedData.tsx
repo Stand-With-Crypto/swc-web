@@ -49,6 +49,11 @@ export async function getAuthenticatedData() {
           userActionEmailRecipients: true,
         },
       },
+      userActionLetter: {
+        include: {
+          recipients: true,
+        },
+      },
       userActionCall: true,
       nftMint: true,
       userActionOptIn: true,
