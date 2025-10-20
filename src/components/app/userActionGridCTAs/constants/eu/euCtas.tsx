@@ -88,7 +88,7 @@ export function getEuUserActionCtasForGridDisplay(
       description: t('optInDescription'),
       mobileCTADescription: t('optInDescription'),
       campaignsModalDescription: t('optInDescription'),
-      image: '/actionTypeIcons/optIn.png',
+      image: '/eu/actionTypeIcons/opt-in.png',
       campaigns: [
         {
           actionType: UserActionType.OPT_IN,
@@ -108,7 +108,7 @@ export function getEuUserActionCtasForGridDisplay(
       description: t('xDescription'),
       mobileCTADescription: t('xMobileCTADescription'),
       campaignsModalDescription: t('xDescription'),
-      image: '/actionTypeIcons/tweet.png',
+      image: '/eu/actionTypeIcons/tweet.png',
       campaigns: [
         {
           actionType: UserActionType.TWEET,
@@ -130,7 +130,7 @@ export function getEuUserActionCtasForGridDisplay(
       description: t('referDescription'),
       mobileCTADescription: t('referMobileCTADescription'),
       campaignsModalDescription: t('referCampaignsModalDescription'),
-      image: '/actionTypeIcons/refer.png',
+      image: '/eu/actionTypeIcons/refer.png',
       campaigns: [
         {
           actionType: UserActionType.REFER,
@@ -158,7 +158,7 @@ export function getEuUserActionCtasForGridDisplay(
       description: t('linkedinDescription'),
       mobileCTADescription: t('linkedinDescription'),
       campaignsModalDescription: t('linkedinDescription'),
-      image: '/au/actionTypeIcons/follow-linkedin.png',
+      image: '/eu/actionTypeIcons/follow-linkedin.png',
       campaigns: [
         {
           actionType: UserActionType.LINKEDIN,
