@@ -217,24 +217,19 @@ async function _actionCreateUserActionLetter(input: Input) {
       userActionLetter: {
         create: {
           recipients: {
-            createMany: {
-              data: recipientResults.map(result => ({
-                dtsiSlug: result.dtsiSlug,
-                postgridLetterId: result.postgridLetterId || null,
-                addressId: address.id,
-              })),
-            },
-          },
-          statusHistory: {
-            createMany: {
-              data: recipientResults.map(result => ({
-                dtsiSlug: result.dtsiSlug,
-                postgridLetterId: result.postgridLetterId || null,
-                status: result.status
-                  ? (result.status.toLowerCase() as UserActionLetterStatus)
-                  : UserActionLetterStatus.READY,
-              })),
-            },
+            create: recipientResults.map(result => ({
+              dtsiSlug: result.dtsiSlug,
+              postgridLetterId: result.postgridLetterId || null,
+              addressId: address.id,
+              statusHistory: {
+                create: {
+                  status: result.status
+                    ? (result.status.toLowerCase() as UserActionLetterStatus)
+                    : UserActionLetterStatus.READY,
+                  postgridLetterId: result.postgridLetterId || null,
+                },
+              },
+            })),
           },
         },
       },
