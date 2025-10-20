@@ -663,12 +663,12 @@ model UserActionLetterRecipient {
 }
 
 model UserActionLetterStatusUpdate {
-  id                           String                    @id @default(uuid())
-  userActionLetterRecipientId  String                    @map("user_action_letter_recipient_id")
-  recipient                    UserActionLetterRecipient @relation(fields: [userActionLetterRecipientId], references: [id], onDelete: Cascade)
-  status                       UserActionLetterStatus
-  postgridLetterId             String?                   @map("postgrid_letter_id")
-  datetimeCreated              DateTime                  @default(now()) @map("datetime_created")
+  id                          String                    @id @default(uuid())
+  userActionLetterRecipientId String                    @map("user_action_letter_recipient_id")
+  recipient                   UserActionLetterRecipient @relation(fields: [userActionLetterRecipientId], references: [id], onDelete: Cascade)
+  status                      UserActionLetterStatus
+  postgridLetterId            String?                   @map("postgrid_letter_id")
+  datetimeCreated             DateTime                  @default(now()) @map("datetime_created")
 
   @@index([userActionLetterRecipientId])
   @@index([postgridLetterId])
