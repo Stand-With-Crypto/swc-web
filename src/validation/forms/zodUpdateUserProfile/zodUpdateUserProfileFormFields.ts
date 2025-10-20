@@ -5,9 +5,13 @@ import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
 
 import { getZodUpdateUserProfileBaseSchema, zodUpdateUserProfileBaseSuperRefine } from './base'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
-export const getZodUpdateUserProfileFormFields = (countryCode: SupportedCountryCodes) =>
-  getZodUpdateUserProfileBaseSchema(countryCode)
+export const getZodUpdateUserProfileFormFields = (
+  countryCode: SupportedCountryCodes,
+  language = SupportedLanguages.EN,
+) =>
+  getZodUpdateUserProfileBaseSchema(countryCode, language)
     .extend({
       firstName: zodOptionalEmptyString(zodFirstName),
       lastName: zodOptionalEmptyString(zodLastName),
@@ -20,6 +24,7 @@ export const getZodUpdateUserProfileFormFields = (countryCode: SupportedCountryC
 
 export const getZodUpdateUserProfileWithRequiredFormFieldsSchema = (
   countryCode: SupportedCountryCodes,
+  language = SupportedLanguages.EN,
 ) =>
   getZodUpdateUserProfileBaseSchema(countryCode)
     .omit({ phoneNumber: true })
@@ -27,6 +32,6 @@ export const getZodUpdateUserProfileWithRequiredFormFieldsSchema = (
       firstName: zodFirstName,
       lastName: zodLastName,
       address: zodGooglePlacesAutocompletePrediction,
-      phoneNumber: zodPhoneNumber(countryCode),
+      phoneNumber: zodPhoneNumber(countryCode, language),
     })
     .superRefine(zodUpdateUserProfileBaseSuperRefine)

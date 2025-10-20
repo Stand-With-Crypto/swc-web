@@ -4,12 +4,16 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
-export const getZodUpdateUserProfileBaseSchema = (countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE) =>
+export const getZodUpdateUserProfileBaseSchema = (
+  countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
+  language = SupportedLanguages.EN,
+) =>
   object({
     isEmbeddedWalletUser: boolean(),
     emailAddress: zodEmailAddress,
-    phoneNumber: zodOptionalEmptyPhoneNumber(countryCode),
+    phoneNumber: zodOptionalEmptyPhoneNumber(countryCode, language),
     optedInToSms: boolean(),
     hasOptedInToMembership: boolean(),
     // This now comes after the form in a separate step
