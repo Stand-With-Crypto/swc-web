@@ -27,6 +27,7 @@ export const getUserDisplayName = (
     | 'id'
     | 'manuallySetInformation'
   > | null,
+  { anonymousLabel } = { anonymousLabel: 'Anonymous' },
 ) => {
   if (user?.manuallySetInformation) {
     return user.manuallySetInformation.displayName
@@ -35,7 +36,7 @@ export const getUserDisplayName = (
     return HARDCODED_USER_DISPLAY_NAME[user.id].displayName
   }
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
-    return 'Anonymous'
+    return anonymousLabel
   }
   if (
     (user?.firstName || user?.lastName) &&
@@ -52,7 +53,7 @@ export const getUserDisplayName = (
       )}...${user.primaryUserCryptoAddress.cryptoAddress.slice(-5)}`
     )
   }
-  return 'Anonymous'
+  return anonymousLabel
 }
 
 export const getUserDisplayNameWithoutENS = (
