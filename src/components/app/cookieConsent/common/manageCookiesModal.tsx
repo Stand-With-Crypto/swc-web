@@ -104,56 +104,58 @@ export function ManageCookiesModal({
     <Container {...dialogProps}>
       <ContainerTrigger asChild>{children}</ContainerTrigger>
       <ContainerContent a11yTitle={t('title')}>
-        <ContainerHeader
-          className={cn('space-y-6 px-0 pb-4', {
-            'px-8': isMobile,
-          })}
-        >
-          <ContainerTitle className="text-left">{t('title')}</ContainerTitle>
-        </ContainerHeader>
-        <div
-          className={cn('space-y-6 px-0 pb-4', {
-            'px-8': isMobile,
-          })}
-        >
-          <p className="text-xs sm:text-sm">
-            {t('remarketingTextStart')}{' '}
-            <a className="text-primary-cta underline" href="mailto:info@standwithcrypto.org">
-              info@standwithcrypto.org
-            </a>{' '}
-            {t('remarketingIfInUsa')}{' '}
-            <a className="text-primary-cta underline" href="mailto:info@swcinternational.org">
-              info@swcinternational.org
-            </a>{' '}
-            {t('remarketingIfOutsideUSA')}
-          </p>
-        </div>
-        <ContainerHeader
-          className={cn('space-y-6 px-0 pb-4', {
-            'px-8': isMobile,
-          })}
-        >
-          <ContainerTitle className="text-left">{t('cookiePreferences')}</ContainerTitle>
-        </ContainerHeader>
-        <div
-          className={cn('space-y-6 px-0 pb-0', {
-            'px-8': isMobile,
-            'pb-8': isMobile,
-          })}
-        >
-          <p className="text-xs sm:text-sm">
-            {t('privacyDisclaimer')}{' '}
-            <InternalLink className="underline" href={urls.privacyPolicy()}>
-              {t('privacyPolicy')}
-            </InternalLink>
-            .
-          </p>
+        <div className="max-h-[85vh] overflow-y-auto lg:max-h-[80vh]">
+          <ContainerHeader
+            className={cn('space-y-6 px-0 pb-4', {
+              'px-8': isMobile,
+            })}
+          >
+            <ContainerTitle className="text-left">{t('title')}</ContainerTitle>
+          </ContainerHeader>
+          <div
+            className={cn('space-y-6 px-0 pb-4', {
+              'px-8': isMobile,
+            })}
+          >
+            <p className="text-xs sm:text-sm">
+              {t('remarketingTextStart')}{' '}
+              <a className="text-primary-cta underline" href="mailto:info@standwithcrypto.org">
+                info@standwithcrypto.org
+              </a>{' '}
+              {t('remarketingIfInUsa')}{' '}
+              <a className="text-primary-cta underline" href="mailto:info@swcinternational.org">
+                info@swcinternational.org
+              </a>{' '}
+              {t('remarketingIfOutsideUSA')}
+            </p>
+          </div>
+          <ContainerHeader
+            className={cn('space-y-6 px-0 pb-4', {
+              'px-8': isMobile,
+            })}
+          >
+            <ContainerTitle className="text-left">{t('cookiePreferences')}</ContainerTitle>
+          </ContainerHeader>
+          <div
+            className={cn('space-y-6 px-0 pb-0', {
+              'px-8': isMobile,
+              'pb-8': isMobile,
+            })}
+          >
+            <p className="text-xs sm:text-sm">
+              {t('privacyDisclaimer')}{' '}
+              <InternalLink className="underline" href={urls.privacyPolicy()}>
+                {t('privacyPolicy')}
+              </InternalLink>
+              .
+            </p>
 
-          <CookiePreferencesForm
-            defaultValues={defaultValues}
-            fieldsConfig={fieldsConfig}
-            onSubmit={handleManageCookiesSubmit}
-          />
+            <CookiePreferencesForm
+              defaultValues={defaultValues}
+              fieldsConfig={fieldsConfig}
+              onSubmit={handleManageCookiesSubmit}
+            />
+          </div>
         </div>
       </ContainerContent>
     </Container>
