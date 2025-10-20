@@ -638,22 +638,22 @@ enum UserActionLetterStatus {
 }
 
 model UserActionLetter {
-  id            String                         @id @default(uuid())
-  userAction    UserAction                     @relation(fields: [id], references: [id], onDelete: Cascade)
-  recipients    UserActionLetterRecipient[]
-  statusHistory UserActionLetterStatusUpdate[]
+  id         String                      @id @default(uuid())
+  userAction UserAction                  @relation(fields: [id], references: [id], onDelete: Cascade)
+  recipients UserActionLetterRecipient[]
 
   @@map("user_action_letter")
 }
 
 model UserActionLetterRecipient {
-  id                 String           @id @default(uuid())
-  userActionLetterId String           @map("user_action_letter_id")
-  userActionLetter   UserActionLetter @relation(fields: [userActionLetterId], references: [id], onDelete: Cascade)
-  dtsiSlug           String           @map("dtsi_slug")
-  postgridLetterId   String?          @unique @map("postgrid_letter_id")
-  address            Address?         @relation(fields: [addressId], references: [id])
-  addressId          String?          @map("address_id")
+  id                 String                         @id @default(uuid())
+  userActionLetterId String                         @map("user_action_letter_id")
+  userActionLetter   UserActionLetter               @relation(fields: [userActionLetterId], references: [id], onDelete: Cascade)
+  dtsiSlug           String                         @map("dtsi_slug")
+  postgridLetterId   String?                        @unique @map("postgrid_letter_id")
+  address            Address?                       @relation(fields: [addressId], references: [id])
+  addressId          String?                        @map("address_id")
+  statusHistory      UserActionLetterStatusUpdate[]
 
   @@unique([userActionLetterId, dtsiSlug])
   @@index([userActionLetterId])
@@ -663,15 +663,14 @@ model UserActionLetterRecipient {
 }
 
 model UserActionLetterStatusUpdate {
-  id                 String                 @id @default(uuid())
-  userActionLetterId String                 @map("user_action_letter_id")
-  userActionLetter   UserActionLetter       @relation(fields: [userActionLetterId], references: [id], onDelete: Cascade)
-  dtsiSlug           String                 @map("dtsi_slug")
-  status             UserActionLetterStatus
-  postgridLetterId   String?                @map("postgrid_letter_id")
-  datetimeCreated    DateTime               @default(now()) @map("datetime_created")
+  id                           String                    @id @default(uuid())
+  userActionLetterRecipientId  String                    @map("user_action_letter_recipient_id")
+  recipient                    UserActionLetterRecipient @relation(fields: [userActionLetterRecipientId], references: [id], onDelete: Cascade)
+  status                       UserActionLetterStatus
+  postgridLetterId             String?                   @map("postgrid_letter_id")
+  datetimeCreated              DateTime                  @default(now()) @map("datetime_created")
 
-  @@index([userActionLetterId, dtsiSlug])
+  @@index([userActionLetterRecipientId])
   @@index([postgridLetterId])
   @@map("user_action_letter_status_update")
 }
