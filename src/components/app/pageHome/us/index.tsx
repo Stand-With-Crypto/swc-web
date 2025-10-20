@@ -164,20 +164,22 @@ export function UsPageHome({
         </RecentActivity>
       </HomePageSection>
 
-      <HomePageSection>
-        <HomePageSection.Title>Our partners</HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          Stand With Crypto is first and foremost the result of{' '}
-          {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
-          We've also partnered with a number of companies to fight alongside us.
-        </HomePageSection.Subtitle>
-        <div className="flex flex-col items-center gap-6">
-          <PartnerGrid partners={partners} />
-          <Button asChild variant="secondary">
-            <InternalLink href={urls.partners()}>View all</InternalLink>
-          </Button>
-        </div>
-      </HomePageSection>
+      {partners && (
+        <HomePageSection>
+          <HomePageSection.Title>Our partners</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            Stand With Crypto is first and foremost the result of{' '}
+            {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
+            We've also partnered with a number of companies to fight alongside us.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <PartnerGrid partners={partners} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
 
       <HomePageSection>
         <HomePageSection.Title>Get involved</HomePageSection.Title>
