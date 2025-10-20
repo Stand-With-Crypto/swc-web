@@ -5,6 +5,8 @@ import { Check } from 'lucide-react'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { Button } from '@/components/ui/button'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
 
 export function FollowLinkedIn({ children }: React.PropsWithChildren) {
   return (
@@ -21,10 +23,26 @@ function Heading({ title, subtitle }: { title: string; subtitle?: string }) {
 }
 FollowLinkedIn.Heading = Heading
 
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      byFollowingSWC: 'By following Stand With Crypto, you are:',
+    },
+    fr: {
+      byFollowingSWC: 'En suivant Stand With Crypto, vous êtes :',
+    },
+    de: {
+      byFollowingSWC: 'Durch das Folgen von Stand With Crypto sind Sie :',
+    },
+  },
+})
+
 function Benefits({ benefits }: { benefits: string[] }) {
+  const { t } = useTranslation(i18nMessages, 'FollowLinkedIn.Benefits')
+
   return (
     <div>
-      <p className="mb-4">By following Stand With Crypto, you are:</p>
+      <p className="mb-4">{t('byFollowingSWC')}</p>
 
       <ul className="space-y-2">
         {benefits.map((info: string) => (
