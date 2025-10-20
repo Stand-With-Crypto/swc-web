@@ -1,7 +1,7 @@
 import { boolean, object, RefinementCtx, string, z } from 'zod'
 
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
+import { getZodEmailAddress, zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
@@ -12,7 +12,7 @@ export const getZodUpdateUserProfileBaseSchema = (
 ) =>
   object({
     isEmbeddedWalletUser: boolean(),
-    emailAddress: zodEmailAddress,
+    emailAddress: getZodEmailAddress(countryCode, language),
     phoneNumber: zodOptionalEmptyPhoneNumber(countryCode, language),
     optedInToSms: boolean(),
     hasOptedInToMembership: boolean(),
