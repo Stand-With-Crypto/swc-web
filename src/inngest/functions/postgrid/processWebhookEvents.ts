@@ -118,7 +118,6 @@ export const processPostgridWebhookEvents = inngest.createFunction(
             // Find the recipient by postgridLetterId
             const recipient = await prismaClient.userActionLetterRecipient.findUnique({
               where: { postgridLetterId: letterId },
-              include: { userActionLetter: true },
             })
 
             if (!recipient) {
@@ -126,11 +125,10 @@ export const processPostgridWebhookEvents = inngest.createFunction(
               continue
             }
 
-            // Create status update record
+            // Create status update record under recipient
             await prismaClient.userActionLetterStatusUpdate.create({
               data: {
-                userActionLetterId: recipient.userActionLetterId,
-                dtsiSlug: dtsiSlug || recipient.dtsiSlug,
+                userActionLetterRecipientId: recipient.id,
                 status,
                 postgridLetterId: letterId,
               },
