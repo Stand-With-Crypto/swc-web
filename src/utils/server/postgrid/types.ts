@@ -1,6 +1,5 @@
 import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-// PostGrid SDK Contact format (requires either firstName+lastName OR companyName)
 export interface PostGridLetterAddress {
   firstName: string
   lastName: string
