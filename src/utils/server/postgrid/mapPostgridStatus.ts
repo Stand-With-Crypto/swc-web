@@ -17,4 +17,3 @@ export function mapPostgridStatus(postgridStatus: string): UserActionLetterStatu
   const normalized = postgridStatus.toLowerCase().trim()
   return POSTGRID_STATUS_TO_LETTER_STATUS[normalized] || UserActionLetterStatus.UNKNOWN
 }
-
