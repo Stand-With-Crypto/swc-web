@@ -115,13 +115,13 @@ export const processPostgridWebhookEvents = inngest.createFunction(
               continue
             }
 
-            // Find the recipient by postgridLetterId
+            // Find the recipient by postgridOrderId
             const recipient = await prismaClient.userActionLetterRecipient.findUnique({
-              where: { postgridLetterId: letterId },
+              where: { postgridOrderId: letterId },
             })
 
             if (!recipient) {
-              logger.warn(`Recipient not found for letter ${letterId}`)
+              logger.warn(`Recipient not found for PostGrid order ${letterId}`)
               continue
             }
 
@@ -130,7 +130,7 @@ export const processPostgridWebhookEvents = inngest.createFunction(
               data: {
                 userActionLetterRecipientId: recipient.id,
                 status,
-                postgridLetterId: letterId,
+                postgridOrderId: letterId,
               },
             })
 
