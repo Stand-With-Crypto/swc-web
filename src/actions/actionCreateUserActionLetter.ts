@@ -216,17 +216,20 @@ async function _actionCreateUserActionLetter(input: Input) {
         : { userSession: { connect: { id: sessionId } } }),
       userActionLetter: {
         create: {
+          firstName: validatedFields.data.firstName,
+          lastName: validatedFields.data.lastName,
+          addressId: address.id,
           recipients: {
             create: recipientResults.map(result => ({
               dtsiSlug: result.dtsiSlug,
-              postgridLetterId: result.postgridLetterId || null,
+              postgridOrderId: result.postgridLetterId || null,
               addressId: address.id,
               statusHistory: {
                 create: {
                   status: result.status
                     ? (result.status.toLowerCase() as UserActionLetterStatus)
                     : UserActionLetterStatus.READY,
-                  postgridLetterId: result.postgridLetterId || null,
+                  postgridOrderId: result.postgridLetterId || null,
                 },
               },
             })),
