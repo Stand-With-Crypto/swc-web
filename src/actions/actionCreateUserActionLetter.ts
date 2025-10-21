@@ -13,7 +13,6 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
@@ -22,7 +21,6 @@ import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMeth
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { buildPostGridAddress } from '@/utils/server/postgrid/buildLetterAddress'
 import { createLetter } from '@/utils/server/postgrid/createLetter'
-import { mapPostgridStatus } from '@/utils/server/postgrid/mapPostgridStatus'
 import { PostGridLetterAddress } from '@/utils/server/postgrid/types'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
@@ -147,44 +145,39 @@ async function _actionCreateUserActionLetter(input: Input) {
     update: validatedFields.data.address,
   })
 
-  // Build letter HTML content
-  // TODO: Create a function to build the letter
-  const getLetterHTML = (politicianName: string) => `
-    <html>
-      <body>
-        <p>${validatedFields.data.letterPreview.replace(/\n/g, '</p><p>')}</p>
-      </body>
-    </html>
-  `
-
   // Call PostGrid for each recipient FIRST
   const recipientResults = await Promise.all(
     validatedFields.data.dtsiPeople.map(async dtsiPerson => {
       const idempotencyKey = `LETTER:${countryCode}:${campaignName}:${user.id}:${dtsiPerson.slug}`
 
-      // Build addresses
+      // Build advocate's address
       const fromAddress = buildPostGridAddress(
         validatedFields.data.firstName,
         validatedFields.data.lastName,
         address,
       )
 
-      // For politician address, we'll use a placeholder or fetch from DTSI if available
-      // For now, using the advocate's address as a placeholder (you'll need to integrate with DTSI/Quorum for actual politician addresses)
+      // Parse politician's office address from DTSI
+      // officeAddress format example: "Parliament House, Canberra, ACT 2600, Australia"
+      const officeAddressParts = (
+        dtsiPerson.officeAddress || 'Parliament House, Canberra, ACT 2600, Australia'
+      )
+        .split(',')
+        .map(s => s.trim())
       const toAddress: PostGridLetterAddress = {
         firstName: dtsiPerson.firstName || 'Representative',
         lastName: dtsiPerson.lastName || 'Unknown',
-        addressLine1: 'Parliament House',
-        city: 'Canberra',
-        provinceOrState: 'ACT',
-        postalOrZip: '2600',
+        addressLine1: officeAddressParts[0] || 'Parliament House',
+        city: officeAddressParts[1] || 'Canberra',
+        provinceOrState: officeAddressParts[2]?.split(' ')[0] || 'ACT',
+        postalOrZip: officeAddressParts[2]?.split(' ')[1] || '2600',
         countryCode: 'AU',
       }
 
       const letterResult = await createLetter({
         to: toAddress,
         from: fromAddress,
-        html: getLetterHTML(`${dtsiPerson.firstName} ${dtsiPerson.lastName}`),
+        templateId: 'template_iUD4isUdA8kz8BpCc3c6F3', // TODO: Add template ID
         idempotencyKey,
         metadata: {
           userId: user.id,
@@ -196,7 +189,9 @@ async function _actionCreateUserActionLetter(input: Input) {
 
       return {
         dtsiSlug: dtsiPerson.slug,
-        postgridLetterId: letterResult.letterId,
+        officeAddress:
+          dtsiPerson.officeAddress || 'Parliament House, Canberra, ACT 2600, Australia',
+        postgridOrderId: letterResult.letterId,
         status: letterResult.status,
         success: letterResult.success,
       }
@@ -219,18 +214,22 @@ async function _actionCreateUserActionLetter(input: Input) {
         create: {
           firstName: validatedFields.data.firstName,
           lastName: validatedFields.data.lastName,
-          addressId: address.id,
-          recipients: {
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
+              create: validatedFields.data.address,
+            },
+          },
+          userActionLetterRecipients: {
             create: recipientResults.map(result => ({
               dtsiSlug: result.dtsiSlug,
-              postgridOrderId: result.postgridLetterId || null,
-              addressId: address.id,
-              statusHistory: {
+              officeAddress: result.officeAddress,
+              postgridOrderId: result.postgridOrderId || null,
+              userActionLetterStatusUpdates: {
                 create: {
                   status: result.status
                     ? (result.status.toLowerCase() as UserActionLetterStatus)
                     : UserActionLetterStatus.READY,
-                  postgridOrderId: result.postgridLetterId || null,
                 },
               },
             })),
@@ -241,7 +240,7 @@ async function _actionCreateUserActionLetter(input: Input) {
     include: {
       userActionLetter: {
         include: {
-          recipients: true,
+          userActionLetterRecipients: true,
         },
       },
     },
