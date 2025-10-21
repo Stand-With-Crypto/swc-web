@@ -20,6 +20,7 @@ import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { buildPostGridAddress } from '@/utils/server/postgrid/buildLetterAddress'
+import { POSTGRID_STATUS_TO_LETTER_STATUS } from '@/utils/server/postgrid/contants'
 import { createLetter } from '@/utils/server/postgrid/createLetter'
 import { PostGridLetterAddress } from '@/utils/server/postgrid/types'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -111,8 +112,7 @@ async function _actionCreateUserActionLetter(input: Input) {
 
   const campaignName = validatedFields.data.campaignName
 
-  // Check for existing action
-  let userAction = await prismaClient.userAction.findFirst({
+  const existingUserAction = await prismaClient.userAction.findFirst({
     where: {
       actionType,
       campaignName,
@@ -123,7 +123,7 @@ async function _actionCreateUserActionLetter(input: Input) {
     },
   })
 
-  if (userAction && process.env.USER_ACTION_BYPASS_SPAM_CHECK !== 'true') {
+  if (existingUserAction && process.env.USER_ACTION_BYPASS_SPAM_CHECK !== 'true') {
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
@@ -174,7 +174,7 @@ async function _actionCreateUserActionLetter(input: Input) {
         countryCode: 'AU',
       }
 
-      const letterResult = await createLetter({
+      const letter = await createLetter({
         to: toAddress,
         from: fromAddress,
         templateId: 'template_iUD4isUdA8kz8BpCc3c6F3', // TODO: Add template ID
@@ -188,18 +188,13 @@ async function _actionCreateUserActionLetter(input: Input) {
       })
 
       return {
-        dtsiSlug: dtsiPerson.slug,
-        officeAddress:
-          dtsiPerson.officeAddress || 'Parliament House, Canberra, ACT 2600, Australia',
-        postgridOrderId: letterResult.letterId,
-        status: letterResult.status,
-        success: letterResult.success,
+        letter,
+        dtsiPerson,
       }
     }),
   )
 
-  // Create all database records in a single transaction
-  userAction = await prismaClient.userAction.create({
+  await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
       actionType,
@@ -222,14 +217,14 @@ async function _actionCreateUserActionLetter(input: Input) {
           },
           userActionLetterRecipients: {
             create: recipientResults.map(result => ({
-              dtsiSlug: result.dtsiSlug,
-              officeAddress: result.officeAddress,
-              postgridOrderId: result.postgridOrderId || null,
+              dtsiSlug: result?.dtsiPerson?.slug,
+              officeAddress: result?.dtsiPerson?.officeAddress,
+              postgridOrderId: result?.letter?.trackingNumber || null,
               userActionLetterStatusUpdates: {
                 create: {
-                  status: result.status
-                    ? (result.status.toLowerCase() as UserActionLetterStatus)
-                    : UserActionLetterStatus.READY,
+                  status: result?.letter?.status
+                    ? POSTGRID_STATUS_TO_LETTER_STATUS[result.letter.status]
+                    : UserActionLetterStatus.UNKNOWN,
                 },
               },
             })),

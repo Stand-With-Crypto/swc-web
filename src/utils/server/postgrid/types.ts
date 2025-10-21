@@ -1,3 +1,5 @@
+import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
 // PostGrid SDK Contact format (requires either firstName+lastName OR companyName)
 export interface PostGridLetterAddress {
   firstName: string
@@ -10,19 +12,19 @@ export interface PostGridLetterAddress {
   countryCode: string
 }
 
+export interface PostGridOrderMetadata {
+  userId: string
+  campaignName: string
+  countryCode: SupportedCountryCodes
+  dtsiSlug: string
+}
+
 export interface CreateLetterParams {
   to: PostGridLetterAddress
   from: PostGridLetterAddress
-  html: string
+  templateId: string
   idempotencyKey: string
-  metadata?: Record<string, string>
-}
-
-export interface CreateLetterResult {
-  success: boolean
-  letterId?: string
-  status?: string
-  error?: string
+  metadata: PostGridOrderMetadata
 }
 
 export interface PostGridWebhookEvent {
@@ -35,4 +37,3 @@ export interface PostGridWebhookEvent {
     [key: string]: any
   }
 }
-
