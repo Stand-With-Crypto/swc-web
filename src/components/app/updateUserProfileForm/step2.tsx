@@ -38,6 +38,7 @@ const i18nMessages = createI18nMessages({
       subtitle: 'Choose how you will appear on our public activity feed and leaderboard.',
       submit: 'Submit',
       profileUpdated: 'Profile updated',
+      anonymous: 'Anonymous',
     },
     fr: {
       title: 'Comment vous apparaissez sur Stand With Crypto',
@@ -45,6 +46,7 @@ const i18nMessages = createI18nMessages({
         "Choisissez comment vous apparaissez sur notre fil d'activité public et leaderboard.",
       submit: 'Soumettre',
       profileUpdated: 'Profil mis à jour',
+      anonymous: 'Anonyme',
     },
     de: {
       title: 'Wie Sie auf Stand With Crypto erscheinen',
@@ -52,6 +54,7 @@ const i18nMessages = createI18nMessages({
         'Wählen Sie, wie Sie auf unserem öffentlichen Aktivitätsfeed und Leaderboard erscheinen.',
       submit: 'Absenden',
       profileUpdated: 'Profil aktualisiert',
+      anonymous: 'Anonym',
     },
   },
 })
@@ -138,7 +141,13 @@ export function UpdateUserInformationVisibilityForm({
                         <div className="flex items-center gap-3">
                           <UserAvatar size={60} user={{ ...user, informationVisibility: option }} />
                           <p className="text-xl font-bold">
-                            {getUserDisplayName({ ...user, informationVisibility: option })}
+                            {getUserDisplayName(
+                              {
+                                ...user,
+                                informationVisibility: option,
+                              },
+                              { anonymousLabel: t('anonymous') },
+                            )}
                           </p>
                         </div>
                         <RadioGroupIndicator className="block rounded-full bg-purple-600 p-1 text-white">

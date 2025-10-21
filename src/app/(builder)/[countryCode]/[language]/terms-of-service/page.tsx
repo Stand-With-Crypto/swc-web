@@ -13,13 +13,20 @@ export const revalidate = 86400 // 1 day
 const PAGE_MODEL = BuilderPageModelIdentifiers.PAGE
 const PATHNAME = '/terms-of-service'
 
-export default async function TermsOfServicePage(props: PageProps) {
-  const { countryCode } = await props.params
+export default async function TermsOfServicePage(
+  props: PageProps<{ language: SupportedLanguages }>,
+) {
+  const { countryCode, language } = await props.params
 
   const content = await getPageContent(PAGE_MODEL, PATHNAME, countryCode)
 
   return (
-    <BuilderPageLayout countryCode={countryCode} modelName={PAGE_MODEL} pathname={PATHNAME}>
+    <BuilderPageLayout
+      countryCode={countryCode}
+      language={language}
+      modelName={PAGE_MODEL}
+      pathname={PATHNAME}
+    >
       <RenderBuilderContent content={content} model={PAGE_MODEL} />
     </BuilderPageLayout>
   )

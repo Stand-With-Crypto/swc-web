@@ -7,15 +7,37 @@ import { RedirectBannerContent } from '@/components/app/navbarGlobalBanner/commo
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
-  COUNTRY_CODE_TO_DISPLAY_NAME,
-  COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX,
-} from '@/utils/shared/intl/displayNames'
+  COUNTRY_CODE_TO_DISPLAY_NAME_KEY,
+  COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX_KEY,
+  withI18nCommons,
+} from '@/utils/shared/i18n/commons'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { isLanguageSupportedForCountry } from '@/utils/shared/i18n/isLanguageSupportedForCountry'
 import {
   COUNTRY_CODE_REGEX_PATTERN,
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages, SWC_PAGE_LANGUAGE_COOKIE_NAME } from '@/utils/shared/supportedLocales'
 import { USER_ACCESS_LOCATION_COOKIE_NAME } from '@/utils/shared/userAccessLocation'
+import { useTranslation } from '@/utils/web/i18n/useTranslation'
+
+export const i18nMessages = createI18nMessages({
+  defaultMessages: {
+    en: {
+      start: 'Actions on Stand With Crypto',
+      middle: 'are only available to users based in',
+    },
+    fr: {
+      start: 'Les actions sur Stand With Crypto',
+      middle: 'ne sont disponibles que pour les utilisateurs basés en',
+    },
+    de: {
+      start: 'Aktionen auf Stand With Crypto',
+      middle: 'sind nur für Nutzer verfügbar, die in',
+    },
+  },
+})
 
 export function NavBarGlobalBanner({
   countryCode: currentPageCountryCode,
@@ -25,6 +47,8 @@ export function NavBarGlobalBanner({
   currentCampaignComponent: ReactNode
 }) {
   const isMobile = useIsMobile()
+  const { t } = useTranslation(withI18nCommons(i18nMessages))
+
   const hasHydrated = useHasHydrated()
 
   const WrapperContainer = isMobile ? 'button' : 'div'
@@ -36,6 +60,12 @@ export function NavBarGlobalBanner({
   const isUserAccessLocationEqualCurrentPageCountryCode =
     userAccessLocation === currentPageCountryCode
 
+  const userLanguage = Cookies.get(SWC_PAGE_LANGUAGE_COOKIE_NAME)?.toLowerCase()
+  const isUserLanguageSupported = isLanguageSupportedForCountry(
+    userAccessLocation?.toLowerCase() as SupportedCountryCodes,
+    userLanguage?.toLowerCase() as SupportedLanguages,
+  )
+
   if (!hasHydrated) {
     return currentCampaignComponent
   }
@@ -45,7 +75,12 @@ export function NavBarGlobalBanner({
   }
 
   if (userAccessLocation && isUserAccessLocationSupported) {
-    return <RedirectBannerContent countryCode={userAccessLocation as SupportedCountryCodes} />
+    return (
+      <RedirectBannerContent
+        countryCode={userAccessLocation as SupportedCountryCodes}
+        language={isUserLanguageSupported ? (userLanguage as SupportedLanguages) : undefined}
+      />
+    )
   }
 
   return (
@@ -54,12 +89,12 @@ export function NavBarGlobalBanner({
         <div className="container flex justify-between">
           <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center max-[400px]:text-xs sm:text-base">
             <p>
-              Actions on Stand With Crypto
+              {t('start')}
               {currentPageCountryCode !== DEFAULT_SUPPORTED_COUNTRY_CODE
-                ? ` ${COUNTRY_CODE_TO_DISPLAY_NAME[currentPageCountryCode]}`
+                ? ` ${t(COUNTRY_CODE_TO_DISPLAY_NAME_KEY[currentPageCountryCode])}`
                 : ''}{' '}
-              are only available to users based in{' '}
-              {COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX[currentPageCountryCode]}.
+              {t('middle')}{' '}
+              {t(COUNTRY_CODE_TO_DISPLAY_NAME_WITH_PREFIX_KEY[currentPageCountryCode])}
             </p>
           </div>
         </div>

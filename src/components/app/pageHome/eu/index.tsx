@@ -64,7 +64,7 @@ export async function EuPageHome(props: EuPageHomeProps) {
         <TopLevelMetrics {...topLevelMetrics} disableTooltips useGlobalLabels />
       </section>
 
-      {recentActivity && (
+      {recentActivity && recentActivity.count > 0 && (
         <HomePageSection>
           <HomePageSection.Title>{t('communityTitle')}</HomePageSection.Title>
           <HomePageSection.Subtitle className="md:hidden">

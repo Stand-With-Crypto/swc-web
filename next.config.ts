@@ -867,6 +867,11 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: '/eu',
+        destination: '/eu/en',
+        permanent: true,
+      },
     ]
   },
   async rewrites() {

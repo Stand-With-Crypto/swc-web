@@ -32,6 +32,7 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import * as smsActions from '@/utils/server/sms/actions'
 import { logElectoralZoneNotFound } from '@/utils/server/swcCivic/utils/logElectoralZoneNotFound'
+import { getEUCountryPrimaryLanguage, isEUCountry } from '@/utils/shared/euCountryMapping'
 import {
   ElectoralZoneNotFoundReason,
   maybeGetElectoralZoneFromAddress,
@@ -177,6 +178,11 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
       .flush(),
   )
 
+  const newLanguage =
+    address && isEUCountry(address.countryCode)
+      ? getEUCountryPrimaryLanguage(address.countryCode)
+      : undefined
+
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,
@@ -184,6 +190,7 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
     data: {
       firstName,
       lastName,
+      ...(newLanguage !== user.language && { language: newLanguage }),
       phoneNumber,
       hasOptedInToMembership,
       hasValidPhoneNumber: true,

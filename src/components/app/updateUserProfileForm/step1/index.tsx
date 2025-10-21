@@ -135,7 +135,7 @@ export function UpdateUserProfileForm({
     address: GooglePlaceAutocompletePrediction | null
   }) => void
 }) {
-  const { t } = useTranslation(i18nMessages)
+  const { t, language } = useTranslation(i18nMessages)
 
   const countryCode = useCountryCode()
   const router = useRouter()
@@ -155,8 +155,8 @@ export function UpdateUserProfileForm({
   const form = useForm({
     resolver: zodResolver(
       shouldFieldsBeRequired
-        ? getZodUpdateUserProfileWithRequiredFormFieldsSchema(countryCode)
-        : getZodUpdateUserProfileFormFields(countryCode),
+        ? getZodUpdateUserProfileWithRequiredFormFieldsSchema(countryCode, language)
+        : getZodUpdateUserProfileFormFields(countryCode, language),
     ),
     defaultValues: defaultValues.current,
   })
