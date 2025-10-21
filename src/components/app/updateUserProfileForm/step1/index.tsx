@@ -152,8 +152,6 @@ export function UpdateUserProfileForm({
       : null,
   })
 
-  console.log({ language, shouldFieldsBeRequired })
-
   const form = useForm({
     resolver: zodResolver(
       shouldFieldsBeRequired
