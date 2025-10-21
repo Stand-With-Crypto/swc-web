@@ -52,6 +52,7 @@ const getDefaultProps = () => {
         username: 'xHandle',
       },
     ],
+    officeAddress: 'White House, Washington, DC 20500, USA',
   }
 
   const props: React.ComponentProps<typeof DTSIPersonHeroCard> = {

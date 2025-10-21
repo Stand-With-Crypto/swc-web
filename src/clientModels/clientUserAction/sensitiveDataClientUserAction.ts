@@ -6,6 +6,8 @@ import {
   UserActionDonation,
   UserActionEmail,
   UserActionEmailRecipient,
+  UserActionLetter,
+  UserActionLetterRecipient,
   UserActionOptIn,
   UserActionPetition,
   UserActionPoll,
@@ -42,6 +44,11 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   nftMint: NFTMint | null
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
+  userActionLetter:
+    | (UserActionLetter & {
+        recipients: UserActionLetterRecipient[]
+      })
+    | null
   userActionOptIn: UserActionOptIn | null
   userActionPetition:
     | (UserActionPetition & {
@@ -77,6 +84,14 @@ type SensitiveDataClientUserActionEmail = Pick<
   address: ClientAddress | null
   userActionEmailRecipients: SensitiveDataClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
+}
+type SensitiveDataClientUserActionLetterRecipient = Pick<
+  UserActionLetterRecipient,
+  'id' | 'dtsiSlug'
+>
+interface SensitiveDataClientUserActionLetter {
+  recipients: SensitiveDataClientUserActionLetterRecipient[]
+  actionType: typeof UserActionType.LETTER
 }
 type SensitiveDataClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
   actionType: typeof UserActionType.CALL
@@ -190,6 +205,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionEmail
       | SensitiveDataClientUserActionCall
       | SensitiveDataClientUserActionDonation
+      | SensitiveDataClientUserActionLetter
       | SensitiveDataClientUserActionNFTMint
       | SensitiveDataClientUserActionVoterRegistration
       | SensitiveDataClientUserActionLiveEvent
@@ -286,6 +302,17 @@ export const getSensitiveDataClientUserAction = ({
         })),
       }
       return getClientModel({ ...sharedProps, ...emailFields })
+    },
+    [UserActionType.LETTER]: () => {
+      const { recipients } = getRelatedModel(record, 'userActionLetter')
+      const letterFields: SensitiveDataClientUserActionLetter = {
+        actionType: UserActionType.LETTER,
+        recipients: recipients.map(x => ({
+          id: x.id,
+          dtsiSlug: x.dtsiSlug,
+        })),
+      }
+      return getClientModel({ ...sharedProps, ...letterFields })
     },
     [UserActionType.NFT_MINT]: () => {
       const mintFields: SensitiveDataClientUserActionNFTMint = {
