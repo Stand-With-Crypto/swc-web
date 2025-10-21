@@ -11,10 +11,12 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { addHours } from 'date-fns'
 import { after } from 'next/server'
 import { z } from 'zod'
 
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
+import { INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import {
   CapitolCanaryCampaignName,
@@ -130,7 +132,14 @@ export async function handleExternalUserActionOptIn(
   }
 
   if (input.hasOptedInToReceiveSMSFromSWC && input.phoneNumber && input.hasValidPhoneNumber) {
-    const optInUserPayload = { phoneNumber: input.phoneNumber, user, countryCode }
+    const optInUserPayload = {
+      phoneNumber: input.phoneNumber,
+      user,
+      countryCode,
+
+      // We want to delay SMS messages for the onboarding US upsell in-app
+      delaySMSMessageInHours: campaignName === 'idv_success_upsell_swc_rn' ? 5 : undefined,
+    }
 
     after(async () => {
       await smsActions.optInUser(optInUserPayload)
@@ -223,6 +232,16 @@ export async function handleExternalUserActionOptIn(
     await inngest.send({
       name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
       data: capitolCanaryPayload,
+    })
+  })
+
+  after(async () => {
+    await inngest.send({
+      name: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: { userId: user.id },
+      ...(campaignName === 'idv_success_upsell_swc_rn'
+        ? { ts: addHours(new Date(), 5).getTime() }
+        : {}),
     })
   })
 

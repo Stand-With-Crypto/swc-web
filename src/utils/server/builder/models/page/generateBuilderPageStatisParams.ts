@@ -1,31 +1,26 @@
+import { PageProps } from '@/types'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { getPagePaths } from '@/utils/server/builder/models/page/utils/getPagePaths'
-import { ORDERED_SUPPORTED_COUNTRIES } from '@/utils/shared/supportedCountries'
+import { toBool } from '@/utils/shared/toBool'
 
 export function generateBuilderPageStaticParams(
   pageModelName: BuilderPageModelIdentifiers,
   pagePrefix: string,
 ) {
-  return async function generateStaticParams() {
-    const pathsByCountryCode = await Promise.all(
-      ORDERED_SUPPORTED_COUNTRIES.map(async countryCode => ({
-        countryCode,
-        paths: await getPagePaths({
-          pageModelName,
-          countryCode,
-        }),
-      })),
-    )
+  return async function generateStaticParams(pageProps: PageProps) {
+    if (toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)) {
+      return []
+    }
 
-    return pathsByCountryCode.flatMap(({ countryCode, paths }) => {
-      return paths.map(path => {
-        return {
-          params: {
-            countryCode,
-            page: path?.replace(pagePrefix, '').split('/'),
-          },
-        }
-      })
+    const { countryCode } = await pageProps.params
+    const paths = await getPagePaths({
+      pageModelName,
+      countryCode,
     })
+
+    return paths.map(path => ({
+      countryCode,
+      page: path?.replace(pagePrefix, '').split('/'),
+    }))
   }
 }

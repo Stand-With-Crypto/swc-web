@@ -6,6 +6,7 @@ import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import { SWCPoll, zodPollSchemaValidation } from '@/utils/shared/zod/getSWCPolls'
 
 const logger = getLogger(`builderIOPolls`)
@@ -28,11 +29,11 @@ async function getAllPollsWithOffset({
           },
           ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
         },
+        locale: DEFAULT_LOCALE,
         includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         cacheSeconds: 60,
         limit: LIMIT,
         offset,
-        cachebust: true,
       }),
     {
       retries: 3,

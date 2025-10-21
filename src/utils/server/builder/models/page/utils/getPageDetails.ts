@@ -4,6 +4,7 @@ import pRetry from 'p-retry'
 import { builderSDKClient } from '@/utils/server/builder/builderSDKClient'
 import { BuilderPageModelIdentifiers } from '@/utils/server/builder/models/page/constants'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 
 export interface PageMetadata {
   title: string
@@ -17,22 +18,24 @@ export async function getPageDetails(
   pathname: string,
   countryCode: SupportedCountryCodes,
 ): Promise<PageMetadata> {
-  const builderOptions = {
-    query: {
-      data: {
-        countryCode: countryCode.toUpperCase(),
-      },
-    },
-    userAttributes: {
-      urlPath: pathname,
-    },
-    // Set prerender to false to return JSON instead of HTML
-    prerender: false,
-    fields: 'data',
-  }
-
   const content = await pRetry(
-    () => builderSDKClient.get(pageModelName, builderOptions).toPromise(),
+    () =>
+      builderSDKClient
+        .get(pageModelName, {
+          query: {
+            data: {
+              countryCode: countryCode.toUpperCase(),
+            },
+          },
+          userAttributes: {
+            urlPath: pathname,
+          },
+          // Set prerender to false to return JSON instead of HTML
+          prerender: false,
+          locale: DEFAULT_LOCALE,
+          fields: 'data.title,data.description,data.hasFooter,data.hasNavbar',
+        })
+        .toPromise(),
     {
       retries: 2,
       minTimeout: 4000,

@@ -8,61 +8,43 @@ import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import { SWCPartners, zodPartnerSchemaValidation } from '@/utils/shared/zod/getSWCPartners'
 
 const logger = getLogger(`builderIOPartners`)
 
-const LIMIT = 100
-
-async function getAllPartnersWithOffset({
-  offset,
-  countryCode,
-}: {
-  offset: number
-  countryCode: SupportedCountryCodes
-}) {
-  const retryPromise = pRetry(
-    () =>
-      builderSDKClient.getAll(BuilderDataModelIdentifiers.PARTNERS, {
-        query: {
-          ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
-          'data.countryCode': {
-            $elemMatch: {
-              $eq: countryCode.toUpperCase(),
-            },
-          },
-        },
-        includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
-        cacheSeconds: DEFAULT_CACHE_IN_SECONDS,
-        limit: LIMIT,
-        fields: 'data',
-        offset,
-      }),
-    {
-      retries: 2,
-      minTimeout: 5000,
-    },
-  )
-
-  const timeout = SECONDS_DURATION['10_SECONDS'] * 1000
-
-  const result = await resolveWithTimeout(retryPromise, timeout)
-
-  return result
-}
+const isProduction = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 export async function getPartners({ countryCode }: { countryCode: SupportedCountryCodes }) {
   try {
-    let offset = 0
+    const timeout = SECONDS_DURATION['10_SECONDS'] * 1000
 
-    const entries = await getAllPartnersWithOffset({ offset, countryCode })
+    const result = await resolveWithTimeout(
+      pRetry(
+        () =>
+          builderSDKClient.getAll(BuilderDataModelIdentifiers.PARTNERS, {
+            query: {
+              ...(isProduction && { published: 'published' }),
+              'data.countryCode': {
+                $elemMatch: {
+                  $eq: countryCode.toUpperCase(),
+                },
+              },
+            },
+            locale: DEFAULT_LOCALE,
+            includeUnpublished: !isProduction,
+            cacheSeconds: DEFAULT_CACHE_IN_SECONDS,
+            fields: 'data',
+          }),
+        {
+          retries: 2,
+          minTimeout: 5000,
+        },
+      ),
+      timeout,
+    )
 
-    while (entries.length === LIMIT + offset) {
-      offset += entries.length
-      entries.push(...(await getAllPartnersWithOffset({ offset, countryCode })))
-    }
-
-    const filteredIncompletePartners = entries
+    const filteredIncompletePartners = result
       .map(entry => {
         const validEntry = zodPartnerSchemaValidation.safeParse(entry)
 

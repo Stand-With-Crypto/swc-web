@@ -2,8 +2,8 @@
 
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 
-import { EventCard } from '@/components/app/pageEvents/components/eventCard'
-import { NoEventsCTA } from '@/components/app/pageEvents/components/noEventsCTA'
+import { EventCard } from '@/components/app/pageEvents/common/eventCard'
+import { NoEventsCTA } from '@/components/app/pageEvents/common/noEventsCTA'
 import { getUniqueEventKey } from '@/components/app/pageEvents/utils/getUniqueEventKey'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageTitle } from '@/components/ui/pageTitleText'

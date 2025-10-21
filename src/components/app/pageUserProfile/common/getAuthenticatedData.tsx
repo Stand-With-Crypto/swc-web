@@ -2,7 +2,7 @@ import 'server-only'
 
 import { UserInformationVisibility } from '@prisma/client'
 
-import { getClientAddress } from '@/clientModels/clientAddress'
+import { getSensitiveClientAddress } from '@/clientModels/clientAddress'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { getSensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
@@ -116,7 +116,7 @@ export async function getAuthenticatedData() {
       ? getClientUserCryptoAddress(currentlyAuthenticatedUserCryptoAddress)
       : null,
 
-    address: address && getClientAddress(address),
+    address: address && getSensitiveClientAddress(address),
     userActions: userActions.map(record => getSensitiveDataClientUserAction({ record })),
     mergeAlerts: [
       ...userMergeAlertUserA.map(

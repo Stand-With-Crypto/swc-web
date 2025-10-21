@@ -8,7 +8,7 @@ import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/con
 import {
   StateEventsDialog,
   StateEventsDialogProps,
-} from '@/components/app/pageEvents/components/stateEventsDialog'
+} from '@/components/app/pageEvents/common/stateEventsDialog'
 import { EVENT_MAP_STATE_COORDS } from '@/components/app/pageEvents/utils/mapCoordinates'
 import { pluralize } from '@/utils/shared/pluralize'
 import {
@@ -67,6 +67,8 @@ export function EventsMap({
 
     eventsFromStateKeys.forEach(state => {
       const coordinates = EVENT_MAP_STATE_COORDS[state as keyof typeof EVENT_MAP_STATE_COORDS]
+
+      if (!coordinates) return
 
       const marker: MapMarker = {
         id: state,

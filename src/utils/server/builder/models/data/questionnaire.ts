@@ -1,10 +1,12 @@
 import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
-import { builderSDKClient } from '@/utils/server/builder'
+import { builderSDKClient, DEFAULT_CACHE_IN_SECONDS } from '@/utils/server/builder'
 import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
 import { getLogger } from '@/utils/shared/logger'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
 import {
   QUESTION_ANSWER_OPTIONS,
   SWCQuestionnaireAnswers,
@@ -31,6 +33,9 @@ export async function getQuestionnaire({
               countryCode: countryCode.toUpperCase(),
             },
           },
+          includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
+          locale: DEFAULT_LOCALE,
+          cacheSeconds: DEFAULT_CACHE_IN_SECONDS,
           fields: 'data',
         }),
       { retries: 3, minTimeout: 5000 },
