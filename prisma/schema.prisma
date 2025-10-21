@@ -52,7 +52,6 @@ model Address {
   users                                 User[]
   userActionVotingInformationResearched UserActionVotingInformationResearched[]
   userActionRefers                      UserActionRefer[]
-  userActionLetterRecipients            UserActionLetterRecipient[]
   userActionLetters                     UserActionLetter[]
 
   @@index([administrativeAreaLevel1, countryCode])
@@ -636,35 +635,35 @@ enum UserActionLetterStatus {
   PROCESSED_FOR_DELIVERY
   COMPLETED
   CANCELLED
+  UNKNOWN
 }
 
 model UserActionLetter {
-  id         String                      @id @default(uuid())
-  userAction UserAction                  @relation(fields: [id], references: [id], onDelete: Cascade)
-  firstName  String                      @map("first_name")
-  lastName   String                      @map("last_name")
-  address    Address                     @relation(fields: [addressId], references: [id])
-  addressId  String                      @map("address_id")
-  recipients UserActionLetterRecipient[]
+  id                         String                      @id @default(uuid())
+  userAction                 UserAction                  @relation(fields: [id], references: [id], onDelete: Cascade)
+  firstName                  String                      @map("first_name")
+  lastName                   String                      @map("last_name")
+  address                    Address                     @relation(fields: [addressId], references: [id])
+  addressId                  String                      @map("address_id")
+  userActionLetterRecipients UserActionLetterRecipient[]
+  datetimeCreated            DateTime                    @default(now()) @map("datetime_created")
 
   @@index([addressId])
   @@map("user_action_letter")
 }
 
 model UserActionLetterRecipient {
-  id                 String                         @id @default(uuid())
-  userActionLetterId String                         @map("user_action_letter_id")
-  userActionLetter   UserActionLetter               @relation(fields: [userActionLetterId], references: [id], onDelete: Cascade)
-  dtsiSlug           String                         @map("dtsi_slug")
-  address            Address                        @relation(fields: [addressId], references: [id])
-  addressId          String                         @map("address_id")
-  postgridOrderId    String?                        @unique @map("postgrid_letter_id")
-  statusHistory      UserActionLetterStatusUpdate[]
+  id                            String                         @id @default(uuid())
+  userActionLetterId            String                         @map("user_action_letter_id")
+  userActionLetter              UserActionLetter               @relation(fields: [userActionLetterId], references: [id], onDelete: Cascade)
+  dtsiSlug                      String                         @map("dtsi_slug")
+  officeAddress                 String                         @map("office_address")
+  postgridOrderId               String?                        @unique @map("postgrid_letter_id")
+  userActionLetterStatusUpdates UserActionLetterStatusUpdate[]
 
   @@unique([userActionLetterId, dtsiSlug])
   @@index([userActionLetterId])
   @@index([dtsiSlug])
-  @@index([addressId])
   @@map("user_action_letter_recipient")
 }
 
@@ -673,10 +672,8 @@ model UserActionLetterStatusUpdate {
   recipient                   UserActionLetterRecipient @relation(fields: [userActionLetterRecipientId], references: [id], onDelete: Cascade)
   userActionLetterRecipientId String                    @map("user_action_letter_recipient_id")
   status                      UserActionLetterStatus
-  postgridOrderId             String?                   @map("postgrid_letter_id")
   datetimeCreated             DateTime                  @default(now()) @map("datetime_created")
 
   @@index([userActionLetterRecipientId])
-  @@index([postgridOrderId])
   @@map("user_action_letter_status_update")
 }
