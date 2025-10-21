@@ -36,4 +36,3 @@ export interface PostGridWebhookEvent {
     [key: string]: any
   }
 }
-
