@@ -1,15 +1,17 @@
-import { array, custom, nativeEnum, object, string, union } from 'zod'
+import { array, custom, nativeEnum, number, object, string } from 'zod'
 
 import { DTSIPersonByElectoralZone } from '@/data/dtsi/queries/queryDTSIPeopleByElectoralZone'
 import { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { withEnhancedDescription } from '@/utils/shared/zod'
-import { GENERIC_ERROR_DESCRIPTION } from '@/utils/web/errorUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstAndLastNames } from '@/validation/fields/zodName'
 import { zodYourPoliticianCategory } from '@/validation/fields/zodYourPoliticianCategory'
+
+const GENERIC_ERROR_DESCRIPTION =
+  'We are unable to identify your representative. Please try again or contact support.'
 
 const base = object({
   emailAddress: zodEmailAddress,
@@ -27,7 +29,10 @@ const base = object({
 }).merge(zodFirstAndLastNames)
 
 export const zodUserActionFormLetterFields = base.extend({
-  address: zodGooglePlacesAutocompletePrediction,
+  address: zodGooglePlacesAutocompletePrediction.extend({
+    latitude: number().nullable().optional(),
+    longitude: number().nullable().optional(),
+  }),
 })
 
 export const zodUserActionFormLetterAction = base.extend({
