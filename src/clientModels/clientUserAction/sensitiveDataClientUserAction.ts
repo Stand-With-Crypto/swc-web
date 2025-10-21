@@ -46,7 +46,7 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionDonation: UserActionDonation | null
   userActionLetter:
     | (UserActionLetter & {
-        recipients: UserActionLetterRecipient[]
+        userActionLetterRecipients: UserActionLetterRecipient[]
       })
     | null
   userActionOptIn: UserActionOptIn | null
@@ -90,7 +90,7 @@ type SensitiveDataClientUserActionLetterRecipient = Pick<
   'id' | 'dtsiSlug'
 >
 interface SensitiveDataClientUserActionLetter {
-  recipients: SensitiveDataClientUserActionLetterRecipient[]
+  userActionLetterRecipients: SensitiveDataClientUserActionLetterRecipient[]
   actionType: typeof UserActionType.LETTER
 }
 type SensitiveDataClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
@@ -304,10 +304,10 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, ...emailFields })
     },
     [UserActionType.LETTER]: () => {
-      const { recipients } = getRelatedModel(record, 'userActionLetter')
+      const { userActionLetterRecipients } = getRelatedModel(record, 'userActionLetter')
       const letterFields: SensitiveDataClientUserActionLetter = {
         actionType: UserActionType.LETTER,
-        recipients: recipients.map(x => ({
+        userActionLetterRecipients: userActionLetterRecipients.map(x => ({
           id: x.id,
           dtsiSlug: x.dtsiSlug,
         })),
