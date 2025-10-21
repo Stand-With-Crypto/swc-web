@@ -43,7 +43,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
           },
           userActionLetter: {
             include: {
-              recipients: true,
+              userActionLetterRecipients: true,
             },
           },
           nftMint: true,
@@ -101,7 +101,7 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
         }
       })
     } else if (userAction.userActionLetter) {
-      userAction.userActionLetter.recipients.forEach(recipient => {
+      userAction.userActionLetter.userActionLetterRecipients.forEach(recipient => {
         if (recipient.dtsiSlug) {
           dtsiSlugs.add(recipient.dtsiSlug)
         }
