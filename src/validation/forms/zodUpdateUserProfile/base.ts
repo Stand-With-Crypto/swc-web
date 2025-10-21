@@ -1,10 +1,10 @@
 import { boolean, object, RefinementCtx, string, z } from 'zod'
 
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { getZodEmailAddress, zodEmailAddress } from '@/validation/fields/zodEmailAddress'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { getZodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
-import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export const getZodUpdateUserProfileBaseSchema = (
   countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,

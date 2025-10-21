@@ -1,10 +1,10 @@
 import { literal, string, union } from 'zod'
 
+import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
+import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { normalizePhoneNumber, validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
-import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 
 export const i18nMessages = createI18nMessages({
   defaultMessages: {

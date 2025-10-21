@@ -1,11 +1,11 @@
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
 
 import { getZodUpdateUserProfileBaseSchema, zodUpdateUserProfileBaseSuperRefine } from './base'
-import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 export const getZodUpdateUserProfileFormFields = (
   countryCode: SupportedCountryCodes,
