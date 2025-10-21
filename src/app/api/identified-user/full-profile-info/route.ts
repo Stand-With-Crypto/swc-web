@@ -28,7 +28,7 @@ async function apiResponseForUserFullProfileInfo() {
             },
             userActionLetter: {
               include: {
-                recipients: true,
+                userActionLetterRecipients: true,
               },
             },
             userActionCall: true,

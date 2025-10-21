@@ -50,7 +50,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionDonation: UserActionDonation | null
   userActionLetter:
     | (UserActionLetter & {
-        recipients: UserActionLetterRecipient[]
+        userActionLetterRecipients: UserActionLetterRecipient[]
       })
     | null
   userActionOptIn: UserActionOptIn | null
@@ -90,7 +90,7 @@ type ClientUserActionLetterRecipient = Pick<UserActionLetterRecipient, 'id' | 'd
   person: DTSIPersonForUserActions | null
 }
 interface ClientUserActionLetter {
-  recipients: ClientUserActionLetterRecipient[]
+  userActionLetterRecipients: ClientUserActionLetterRecipient[]
   actionType: typeof UserActionType.LETTER
 }
 interface ClientUserActionCall {
@@ -284,10 +284,10 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...emailFields })
     },
     [UserActionType.LETTER]: () => {
-      const { recipients } = getRelatedModel(record, 'userActionLetter')
+      const { userActionLetterRecipients } = getRelatedModel(record, 'userActionLetter')
       const letterFields: ClientUserActionLetter = {
         actionType: UserActionType.LETTER,
-        recipients: recipients.map(x => ({
+        userActionLetterRecipients: userActionLetterRecipients.map(x => ({
           id: x.id,
           dtsiSlug: x.dtsiSlug,
           person: x.dtsiSlug ? peopleBySlug[x.dtsiSlug] : null,

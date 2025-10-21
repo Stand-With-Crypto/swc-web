@@ -1,26 +1,29 @@
+import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+
 export interface PostGridLetterAddress {
   firstName: string
   lastName: string
   addressLine1: string
+  addressLine2?: string
   city: string
   provinceOrState: string
   postalOrZip: string
-  country: string
+  countryCode: string
+}
+
+export interface PostGridOrderMetadata {
+  userId: string
+  campaignName: string
+  countryCode: SupportedCountryCodes
+  dtsiSlug: string
 }
 
 export interface CreateLetterParams {
   to: PostGridLetterAddress
   from: PostGridLetterAddress
-  html: string
+  templateId: string
   idempotencyKey: string
-  metadata?: Record<string, string>
-}
-
-export interface CreateLetterResult {
-  success: boolean
-  letterId?: string
-  status?: string
-  error?: string
+  metadata: PostGridOrderMetadata
 }
 
 export interface PostGridWebhookEvent {
@@ -33,4 +36,3 @@ export interface PostGridWebhookEvent {
     [key: string]: any
   }
 }
-
