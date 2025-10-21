@@ -130,7 +130,6 @@ export const processPostgridWebhookEvents = inngest.createFunction(
               data: {
                 userActionLetterRecipientId: recipient.id,
                 status,
-                postgridOrderId: letterId,
               },
             })
 
