@@ -4,6 +4,7 @@ import * as Sentry from '@sentry/nextjs'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { mapPostgridStatus } from '@/utils/server/postgrid/mapPostgridStatus'
 import { redis } from '@/utils/server/redis'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -101,16 +102,9 @@ export const processPostgridWebhookEvents = inngest.createFunction(
 
         for (const [letterId, event] of latestEventByLetterId.entries()) {
           try {
-            const postgridStatus = event.data.status.toLowerCase()
-            const dtsiSlug = event.data.metadata?.dtsiSlug
+            const status = mapPostgridStatus(event.data.status)
 
-            // Validate status is a valid enum value
-            const validStatuses = Object.values(UserActionLetterStatus)
-            const status = validStatuses.includes(postgridStatus as UserActionLetterStatus)
-              ? (postgridStatus as UserActionLetterStatus)
-              : null
-
-            if (!status) {
+            if (status === UserActionLetterStatus.UNKNOWN) {
               logger.warn(`Unknown PostGrid status: ${event.data.status}`, { letterId })
               continue
             }
