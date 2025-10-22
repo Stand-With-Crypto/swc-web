@@ -1,4 +1,4 @@
-import { CapitolCanaryInstance, SMSStatus, User } from '@prisma/client'
+import { CapitolCanaryInstance, Prisma, SMSStatus, User } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
@@ -84,13 +84,24 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
 
       // Update database with new SwC advocate ID.
       await step.run('capitol-canary.upsert-advocate.update-user-with-advocate-id', async () => {
-        await prismaClient.user.update({
-          where: { id: data.user.id },
-          data: {
-            capitolCanaryAdvocateId: createAdvocateStepResponse.advocateid,
-            capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
-          },
-        })
+        try {
+          await prismaClient.user.update({
+            where: { id: data.user.id },
+            data: {
+              capitolCanaryAdvocateId: createAdvocateStepResponse.advocateid,
+              capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
+            },
+          })
+        } catch (error) {
+          if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            // User not found error
+            if (error.code === 'P2025') {
+              throw new NonRetriableError(`No user found for id "${data.user.id}".`)
+            }
+          }
+
+          throw error
+        }
       })
 
       // Call SMS reply Inngest function if the user requested to be opted in to SMS but we do not have their reply yet.

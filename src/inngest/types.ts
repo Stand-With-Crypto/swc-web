@@ -86,4 +86,5 @@ type EventTypes =
   | BackfillIntlUsersProcessorSchema
   | ImportUsersByCSVCoordinatorSchema
   | ImportUsersByCSVProcessorSchema
+
 export const INNGEST_SCHEMAS = new EventSchemas().fromUnion<EventTypes>()
