@@ -1,4 +1,4 @@
-import { CapitolCanaryInstance } from '@prisma/client'
+import { CapitolCanaryInstance, Prisma } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
@@ -151,13 +151,24 @@ export const emailViaCapitolCanaryWithInngest = inngest.createFunction(
       data.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY
     ) {
       await step.run('capitol-canary.email.update-user-with-advocate-id', async () => {
-        await prismaClient.user.update({
-          where: { id: data.user.id },
-          data: {
-            capitolCanaryAdvocateId: emailAdvocateId,
-            capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
-          },
-        })
+        try {
+          await prismaClient.user.update({
+            where: { id: data.user.id },
+            data: {
+              capitolCanaryAdvocateId: emailAdvocateId,
+              capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
+            },
+          })
+        } catch (error) {
+          if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            // User not found error
+            if (error.code === 'P2025') {
+              throw new NonRetriableError(`No user found for id "${data.user.id}".`)
+            }
+          }
+
+          throw error
+        }
       })
     }
 
