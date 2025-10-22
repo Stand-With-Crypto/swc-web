@@ -263,6 +263,17 @@ const nextConfig: NextConfig = {
     ],
   },
   webpack: (config, { isServer }) => {
+    console.log(`🚀 Webpack config initialized (${isServer ? 'server' : 'client'})`)
+    config.plugins.push({
+      apply: (compiler: any) => {
+        compiler.hooks.beforeCompile.tap('LogPlugin', () => {
+          console.log(`🧩 Webpack is starting to compile (${isServer ? 'server' : 'client'})`)
+        })
+        compiler.hooks.done.tap('LogPlugin', (stats: any) => {
+          console.log(`✅ Webpack finished compiling! (${isServer ? 'server' : 'client'})`)
+        })
+      },
+    })
     if (!isServer) {
       config.plugins.push(
         new RetryChunkLoadPlugin({
