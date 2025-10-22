@@ -1,7 +1,5 @@
 import 'server-only'
 
-import { Prisma } from '@prisma/client'
-
 import { prismaClient } from '@/utils/server/prismaClient'
 import { AU_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/auStateUtils'
 import { CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/stateMappings/caProvinceUtils'
@@ -30,31 +28,40 @@ const fetchAllFromPrismaByCountry = async (countryCode: SupportedCountryCodes) =
   switch (countryCode) {
     case SupportedCountryCodes.GB:
       return prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
-    SELECT
-      address.swc_civic_administrative_area AS state,
-      COUNT(user.id) AS totalAdvocates
-    FROM address
-    JOIN user ON user.address_id = address.id
-    WHERE address.swc_civic_administrative_area != ''
-    AND address.country_code = ${countryCode}
-    GROUP BY address.swc_civic_administrative_area;
-  `
+        SELECT
+          address.swc_civic_administrative_area AS state,
+          COUNT(user.id) AS totalAdvocates
+        FROM address
+        JOIN user ON user.address_id = address.id
+        WHERE address.swc_civic_administrative_area != ''
+        AND address.country_code = ${countryCode}
+        GROUP BY address.swc_civic_administrative_area;
+      `
     default:
       return prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
-      SELECT
-        address.administrative_area_level_1 AS state,
-        COUNT(user.id) AS totalAdvocates
-      FROM address
-      JOIN user ON user.address_id = address.id
-      WHERE address.administrative_area_level_1 IN (${Prisma.join(getStatesForCountry(countryCode))})
-      AND address.country_code = ${countryCode}
-      GROUP BY address.administrative_area_level_1;
-    `
+        SELECT
+          address.administrative_area_level_1 AS state,
+          COUNT(user.id) AS totalAdvocates
+        FROM address
+        JOIN user ON user.address_id = address.id
+        WHERE address.country_code = ${countryCode}
+        GROUP BY address.administrative_area_level_1;
+      `
   }
 }
 
-const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerStateQuery) => {
-  return totalAdvocatesPerState.map(({ state, totalAdvocates }) => ({
+const parseTotalAdvocatesPerState = (
+  countryCode: SupportedCountryCodes,
+  totalAdvocatesPerState: TotalAdvocatesPerStateQuery,
+) => {
+  const states = getStatesForCountry(countryCode)
+
+  const filteredTotalAdvocatesPerState =
+    countryCode === SupportedCountryCodes.GB
+      ? totalAdvocatesPerState
+      : totalAdvocatesPerState.filter(({ state }) => states.includes(state))
+
+  return filteredTotalAdvocatesPerState.map(({ state, totalAdvocates }) => ({
     state,
     totalAdvocates: parseInt(totalAdvocates.toString(), 10),
   }))
@@ -62,7 +69,7 @@ const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerSt
 
 export const getTotalAdvocatesPerStateByCountry = async (countryCode: SupportedCountryCodes) => {
   const rawTotalAdvocatesPerState = await fetchAllFromPrismaByCountry(countryCode)
-  const totalAdvocatesPerState = parseTotalAdvocatesPerState(rawTotalAdvocatesPerState)
+  const totalAdvocatesPerState = parseTotalAdvocatesPerState(countryCode, rawTotalAdvocatesPerState)
 
   return totalAdvocatesPerState
 }
