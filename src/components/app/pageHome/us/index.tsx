@@ -4,7 +4,7 @@ import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/common/d
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
-import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
+import * as TopLevelMetrics from '@/components/app/pageHome/common/topLevelMetrics'
 import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
@@ -29,6 +29,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPartners } from '@/utils/shared/zod/getSWCPartners'
 
 import { UsHero } from './hero'
+import { formatCurrency } from '@/utils/shared/formatCurrency'
 
 export function UsPageHome({
   params,
@@ -54,7 +55,50 @@ export function UsPageHome({
       <UsHero />
 
       <section className="container">
-        <TopLevelMetrics {...{ sumDonations, countryCode, countUsers, countPolicymakerContacts }} />
+        <TopLevelMetrics.Root countryCode={countryCode}>
+          <TopLevelMetrics.Main>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/advocacyToolkit/shield.png"
+              imgAlt="Email"
+              label="Global crypto advocates"
+              value={countUsers.total}
+              variant="main"
+            />
+          </TopLevelMetrics.Main>
+          <TopLevelMetrics.Aside>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/optIn.png"
+              imgAlt="Email"
+              label="US advocates"
+              value={countUsers[countryCode] ?? 0}
+              variant="secondary"
+            />
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/email.png"
+              imgAlt="Email"
+              label="US policymaker contacts"
+              value={
+                countPolicymakerContacts.countUserActionCalls +
+                countPolicymakerContacts.countUserActionEmailRecipients +
+                countPolicymakerContacts.hardcodedCountSum
+              }
+              variant="secondary"
+            />
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/donate.png"
+              imgAlt="Advocate donations"
+              isCurrency
+              label="Advocate donations"
+              value={sumDonations.amountUsd}
+              tooltipContent={`${formatCurrency(sumDonations.fairshakeAmountUsd)} donated to Fairshake, a pro-crypto Super PAC, and ${formatCurrency(sumDonations.amountUsd - sumDonations.fairshakeAmountUsd)} donated to the Stand With Crypto 501(c)(4).`}
+              variant="secondary"
+            />
+          </TopLevelMetrics.Aside>
+        </TopLevelMetrics.Root>
       </section>
 
       <HomePageSection>
@@ -80,7 +124,7 @@ export function UsPageHome({
                     <DelayedRecentActivityWithMap
                       actions={actions}
                       advocatesMapPageData={advocatePerStateDataProps}
-                      countUsers={countUsers.count}
+                      countUsers={countUsers.total}
                       countryCode={countryCode}
                     />
                   </>

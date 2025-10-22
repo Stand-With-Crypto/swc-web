@@ -1,6 +1,8 @@
 import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
+import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 
 export const revalidate = 60 // 1 minute
@@ -11,17 +13,22 @@ export default async function MapPage(props: PageProps) {
 
   const countryCode = params.countryCode
 
-  const homeDataProps = await getHomepageData({
-    recentActivityLimit: 20,
-    countryCode,
-  })
+  const [actions, countUsers] = await Promise.all([
+    getPublicRecentActivity({
+      limit: 20,
+      countryCode,
+    }),
+    getCountUsers(),
+  ])
+
   const advocatePerStateDataProps = await getAdvocatesMapData({ countryCode })
 
   return (
     <AdvocatesHeatmapPage
       advocatesMapPageData={advocatePerStateDataProps}
       countryCode={countryCode}
-      homepageData={homeDataProps}
+      actions={actions}
+      countUsers={countUsers}
       isEmbedded={true}
     />
   )

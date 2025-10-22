@@ -80,7 +80,7 @@ export function GbPageHome({
                       <DelayedRecentActivityWithMap
                         actions={actions}
                         advocatesMapPageData={advocatePerStateDataProps}
-                        countUsers={countUsers.count}
+                        countUsers={countUsers.total}
                         countryCode={countryCode}
                         showDonateButton={false}
                       />
