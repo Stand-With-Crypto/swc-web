@@ -271,7 +271,6 @@ const nextConfig: NextConfig = {
         }),
       )
     }
-    config.cache = false
     return config
   },
   async headers() {
