@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { differenceInDays, format, isPast } from 'date-fns'
 
 export const PollLegend = ({
@@ -9,23 +10,23 @@ export const PollLegend = ({
   endDate: string
   isInactivePoll?: boolean
 }) => {
-  const currentEndDate = new Date(endDate)
-  const endsIn = differenceInDays(currentEndDate, new Date())
-  const hasEnded = isPast(currentEndDate)
-  const hasEndedToday = endsIn === 0
-  const dayOrDays = endsIn === 1 ? 'day' : 'days'
+  const [legendText, setLegendText] = useState<string>('')
 
-  if (hasEndedToday) {
-    return (
-      <span className="text-sm text-gray-500">{`${isInactivePoll ? 'Ended' : 'Ends'} today`}</span>
-    )
-  }
+  useEffect(() => {
+    const currentEndDate = new Date(endDate)
+    const endsIn = differenceInDays(currentEndDate, new Date())
+    const hasEnded = isPast(currentEndDate)
+    const hasEndedToday = endsIn === 0
+    const dayOrDays = endsIn === 1 ? 'day' : 'days'
 
-  return (
-    <span className="text-sm text-gray-500">
-      {hasEnded
-        ? `Ended on ${format(currentEndDate, 'MMM d, yyyy')}`
-        : `Ends in ${endsIn} ${dayOrDays}`}
-    </span>
-  )
+    if (hasEndedToday) {
+      setLegendText(`${isInactivePoll ? 'Ended' : 'Ends'} today`)
+    } else if (hasEnded) {
+      setLegendText(`Ended on ${format(currentEndDate, 'MMM d, yyyy')}`)
+    } else {
+      setLegendText(`Ends in ${endsIn} ${dayOrDays}`)
+    }
+  }, [endDate, isInactivePoll])
+
+  return <span className="text-sm text-gray-500">{legendText}</span>
 }
