@@ -274,10 +274,16 @@ export async function mergeUsers({
         },
       })
 
-      await cancelFunctionRuns(
-        'capitol-canary.upsert-advocate',
-        `event.data.user.id == '${userToDelete.id}'`,
-      )
+      await Promise.all([
+        cancelFunctionRuns(
+          'capitol-canary.upsert-advocate',
+          `event.data.user.id == '${userToDelete.id}'`,
+        ),
+        cancelFunctionRuns(
+          'user-communication.initial-signup',
+          `event.data.userId == '${userToDelete.id}'`,
+        ),
+      ])
     },
     {
       maxWait: 5_000,
