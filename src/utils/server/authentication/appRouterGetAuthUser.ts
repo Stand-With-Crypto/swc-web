@@ -1,3 +1,6 @@
+'use server'
+import 'server-only'
+
 import { UserActionType } from '@prisma/client'
 import { cookies } from 'next/headers'
 
@@ -21,6 +24,7 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
   const currentCookies = await cookies()
 
   const sessionId = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
+
   if (!sessionId) {
     return null
   }
@@ -51,6 +55,7 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
   }
 
   const cryptoAddress = user.primaryUserCryptoAddress
+
   return {
     userId: user.id,
     address: cryptoAddress ? parseThirdwebAddress(cryptoAddress.cryptoAddress) : null,

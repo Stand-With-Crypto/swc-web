@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client'
 
+import { cancelFunctionRuns } from '@/utils/server/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 
@@ -272,10 +273,21 @@ export async function mergeUsers({
           userId: userToKeep.id,
         },
       })
+
+      await Promise.all([
+        cancelFunctionRuns(
+          'capitol-canary.upsert-advocate',
+          `event.data.user.id == '${userToDelete.id}'`,
+        ),
+        cancelFunctionRuns(
+          'user-communication.initial-signup',
+          `event.data.userId == '${userToDelete.id}'`,
+        ),
+      ])
     },
     {
-      maxWait: 5000,
-      timeout: 10000,
+      maxWait: 5_000,
+      timeout: 10_000,
     },
   )
 
