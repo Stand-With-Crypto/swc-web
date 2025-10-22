@@ -1,13 +1,12 @@
 import { Metadata } from 'next'
 
 import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
+import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
-import { getUSHomepageData } from '@/data/pageSpecific/us/getHomepageData'
-import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { getCountUsers } from '@/data/aggregations/getCountUsers'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
@@ -35,11 +34,11 @@ export default async function MapPage(props: PageProps) {
 
   return (
     <AdvocatesHeatmapPage
+      actions={actions}
       advocatesMapPageData={advocatePerStateDataProps}
+      countUsers={countUsers}
       countryCode={params.countryCode}
       description={description}
-      actions={actions}
-      countUsers={countUsers}
       title={title}
     />
   )

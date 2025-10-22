@@ -1,7 +1,6 @@
 import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
 import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
-import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 
@@ -25,10 +24,10 @@ export default async function MapPage(props: PageProps) {
 
   return (
     <AdvocatesHeatmapPage
-      advocatesMapPageData={advocatePerStateDataProps}
-      countryCode={countryCode}
       actions={actions}
+      advocatesMapPageData={advocatePerStateDataProps}
       countUsers={countUsers}
+      countryCode={countryCode}
       isEmbedded={true}
     />
   )

@@ -2,11 +2,11 @@ import { notFound } from 'next/navigation'
 
 import { UsPageHome } from '@/components/app/pageHome/us'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getUSHomepageData } from '@/data/pageSpecific/us/getHomepageData'
 import { PageProps } from '@/types'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
-import { getUSHomepageData } from '@/data/pageSpecific/us/getHomepageData'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'

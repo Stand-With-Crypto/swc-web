@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
+import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { getCountUsers } from '@/data/aggregations/getCountUsers'
 
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
@@ -34,11 +34,11 @@ export default async function MapPage() {
 
   return (
     <AdvocatesHeatmapPage
+      actions={actions}
       advocatesMapPageData={advocatePerStateDataProps}
+      countUsers={countUsers}
       countryCode={countryCode}
       description={description}
-      actions={actions}
-      countUsers={countUsers}
       title={title}
     />
   )

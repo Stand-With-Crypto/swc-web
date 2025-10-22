@@ -25,11 +25,11 @@ import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { formatCurrency } from '@/utils/shared/formatCurrency'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPartners } from '@/utils/shared/zod/getSWCPartners'
 
 import { UsHero } from './hero'
-import { formatCurrency } from '@/utils/shared/formatCurrency'
 
 export function UsPageHome({
   params,
@@ -60,7 +60,7 @@ export function UsPageHome({
             <TopLevelMetrics.Card
               countryCode={countryCode}
               img="/advocacyToolkit/shield.png"
-              imgAlt="Email"
+              imgAlt="Global crypto advocates"
               label="Global crypto advocates"
               value={countUsers.total}
               variant="main"
@@ -70,22 +70,20 @@ export function UsPageHome({
             <TopLevelMetrics.Card
               countryCode={countryCode}
               img="/actionTypeIcons/optIn.png"
-              imgAlt="Email"
+              imgAlt="US advocates"
               label="US advocates"
               value={countUsers[countryCode] ?? 0}
-              variant="secondary"
             />
             <TopLevelMetrics.Card
               countryCode={countryCode}
               img="/actionTypeIcons/email.png"
-              imgAlt="Email"
+              imgAlt="US policymaker contacts"
               label="US policymaker contacts"
               value={
                 countPolicymakerContacts.countUserActionCalls +
                 countPolicymakerContacts.countUserActionEmailRecipients +
                 countPolicymakerContacts.hardcodedCountSum
               }
-              variant="secondary"
             />
             <TopLevelMetrics.Card
               countryCode={countryCode}
@@ -93,9 +91,8 @@ export function UsPageHome({
               imgAlt="Advocate donations"
               isCurrency
               label="Advocate donations"
-              value={sumDonations.amountUsd}
               tooltipContent={`${formatCurrency(sumDonations.fairshakeAmountUsd)} donated to Fairshake, a pro-crypto Super PAC, and ${formatCurrency(sumDonations.amountUsd - sumDonations.fairshakeAmountUsd)} donated to the Stand With Crypto 501(c)(4).`}
-              variant="secondary"
+              value={sumDonations.amountUsd}
             />
           </TopLevelMetrics.Aside>
         </TopLevelMetrics.Root>
