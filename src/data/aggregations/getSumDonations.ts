@@ -18,10 +18,13 @@ export const getSumDonations = async () => {
       totalDonationAmountUsd: true,
     },
   })
+
+  const usersDonationsAmountUsd = amountUsd._sum.totalDonationAmountUsd?.toNumber() || 0
+
   return {
-    amountUsd:
-      (amountUsd._sum.totalDonationAmountUsd?.toNumber() || 0) + sum(MANUALLY_TRACKED_DONATIONS),
+    amountUsd: usersDonationsAmountUsd + sum(MANUALLY_TRACKED_DONATIONS),
     fairshakeAmountUsd: FAIRSHAKE_DONATIONS_AMOUNT_USD,
+    usersDonationsAmountUsd,
   }
 }
 

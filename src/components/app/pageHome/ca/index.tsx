@@ -5,7 +5,7 @@ import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarou
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
-import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
+import * as TopLevelMetrics from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { CaAdvocatesLeaderboard } from '@/components/app/pageReferrals/ca/leaderboard'
 import {
@@ -41,7 +41,43 @@ export function CaPageHome({
       <CaHero />
 
       <section className="container">
+<<<<<<< HEAD
         <TopLevelMetrics {...topLevelMetrics} disableTooltips useGlobalLabels />
+=======
+        <TopLevelMetrics.Root countryCode={countryCode}>
+          <TopLevelMetrics.Main>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/advocacyToolkit/shield.png"
+              imgAlt="Global crypto advocates"
+              imgSize={80}
+              label="Global crypto advocates"
+              value={topLevelMetrics.countUsers.total}
+              variant="main"
+            />
+          </TopLevelMetrics.Main>
+          <TopLevelMetrics.Aside>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/ca/3d-shield.png"
+              imgAlt="CA advocates"
+              label="CA advocates"
+              value={topLevelMetrics.countUsers[countryCode] ?? 0}
+            />
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/email.png"
+              imgAlt="Global policymaker contacts"
+              label="Global policymaker contacts"
+              value={
+                topLevelMetrics.countPolicymakerContacts.countUserActionCalls +
+                topLevelMetrics.countPolicymakerContacts.countUserActionEmailRecipients +
+                topLevelMetrics.countPolicymakerContacts.hardcodedCountSum
+              }
+            />
+          </TopLevelMetrics.Aside>
+        </TopLevelMetrics.Root>
+>>>>>>> 9982277282735f87772f8a20f9c0e3ac697c23e4
       </section>
 
       <HomePageSection>

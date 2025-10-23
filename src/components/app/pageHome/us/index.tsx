@@ -4,7 +4,7 @@ import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/common/d
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
-import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
+import * as TopLevelMetrics from '@/components/app/pageHome/common/topLevelMetrics'
 import { UsRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/us/recentActivityAndLeaderboardTabs'
 import { UserAddressProvider } from '@/components/app/pageReferrals/common/userAddress.context'
 import { USAdvocatesLeaderboard } from '@/components/app/pageReferrals/us/leaderboard'
@@ -54,7 +54,46 @@ export function UsPageHome({
       <UsHero />
 
       <section className="container">
-        <TopLevelMetrics {...{ sumDonations, countryCode, countUsers, countPolicymakerContacts }} />
+        <TopLevelMetrics.Root countryCode={countryCode}>
+          <TopLevelMetrics.Main>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/advocacyToolkit/shield.png"
+              imgAlt="Global crypto advocates"
+              label="Global crypto advocates"
+              value={countUsers.total}
+              variant="main"
+            />
+          </TopLevelMetrics.Main>
+          <TopLevelMetrics.Aside>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/optIn.png"
+              imgAlt="US advocates"
+              label="US advocates"
+              value={countUsers[countryCode] ?? 0}
+            />
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/email.png"
+              imgAlt="US policymaker contacts"
+              label="US policymaker contacts"
+              value={
+                countPolicymakerContacts.countUserActionCalls +
+                countPolicymakerContacts.countUserActionEmailRecipients +
+                countPolicymakerContacts.hardcodedCountSum
+              }
+            />
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/donate.png"
+              imgAlt="Advocate donations"
+              isCurrency
+              label="Advocate donations"
+              value={sumDonations.usersDonationsAmountUsd}
+            />
+          </TopLevelMetrics.Aside>
+        </TopLevelMetrics.Root>
       </section>
 
       <HomePageSection>
@@ -80,7 +119,7 @@ export function UsPageHome({
                     <DelayedRecentActivityWithMap
                       actions={actions}
                       advocatesMapPageData={advocatePerStateDataProps}
-                      countUsers={countUsers.count}
+                      countUsers={countUsers.total}
                       countryCode={countryCode}
                     />
                   </>
@@ -164,20 +203,22 @@ export function UsPageHome({
         </RecentActivity>
       </HomePageSection>
 
-      <HomePageSection>
-        <HomePageSection.Title>Our partners</HomePageSection.Title>
-        <HomePageSection.Subtitle>
-          Stand With Crypto is first and foremost the result of{' '}
-          {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
-          We've also partnered with a number of companies to fight alongside us.
-        </HomePageSection.Subtitle>
-        <div className="flex flex-col items-center gap-6">
-          <PartnerGrid partners={partners} />
-          <Button asChild variant="secondary">
-            <InternalLink href={urls.partners()}>View all</InternalLink>
-          </Button>
-        </div>
-      </HomePageSection>
+      {partners && (
+        <HomePageSection>
+          <HomePageSection.Title>Our partners</HomePageSection.Title>
+          <HomePageSection.Subtitle>
+            Stand With Crypto is first and foremost the result of{' '}
+            {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
+            We've also partnered with a number of companies to fight alongside us.
+          </HomePageSection.Subtitle>
+          <div className="flex flex-col items-center gap-6">
+            <PartnerGrid partners={partners} />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </HomePageSection>
+      )}
 
       <HomePageSection>
         <HomePageSection.Title>Get involved</HomePageSection.Title>

@@ -4,6 +4,7 @@ import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 import { isBefore, subMinutes } from 'date-fns'
 import { NonRetriableError } from 'inngest'
+import type { Jsonify } from 'inngest/helpers/jsonify'
 import { z } from 'zod'
 
 import { inngest } from '@/inngest/inngest'
@@ -58,15 +59,28 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
         throw new NonRetriableError(err.message ?? 'Invalid payload')
       })
 
+    const user = await step.run('get-user', async () => {
+      try {
+        return await getUser(payload.userId, payload.sessionId)
+      } catch (error) {
+        Sentry.captureException(error, {
+          extra: { payload },
+          tags: { domain: 'initialSignupUserCommunicationJourney' },
+        })
+        throw new NonRetriableError('User not found')
+      }
+    })
+    const userId = user.id
+
     const userCommunicationJourney = await step.run('create-communication-journey', () =>
-      createCommunicationJourney(payload.userId),
+      createCommunicationJourney(userId),
     )
 
     let done = false
     do {
       await step.sleep('wait-5-mins', `${LATEST_ACTION_DEBOUNCE_TIME_MINUTES} mins`)
       const response = await step.run('check-latest-user-action-date', async () => {
-        const userAction = await getLatestUserAction(payload.userId)
+        const userAction = await getLatestUserAction(userId)
         return {
           isPastDebounceTime:
             !!userAction &&
@@ -83,7 +97,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
 
     await step.run('send-welcome-email', async () =>
       sendInitialSignUpEmail({
-        userId: payload.userId,
+        user,
         sessionId: payload.sessionId,
         userCommunicationJourneyId: userCommunicationJourney.id,
         step: 'welcome',
@@ -95,24 +109,24 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       : STEP_FOLLOW_UP_TIMEOUT_MINUTES
     await step.sleep('wait-for-welcome-follow-up', followUpTimeout)
 
-    let profileStatus = await getProfileStatus(payload.userId)
+    let profileStatus = await getProfileStatus(user)
     if (profileStatus === 'incomplete') {
       await step.run('send-finish-profile-reminder', async () =>
         sendInitialSignUpEmail({
-          userId: payload.userId,
+          user,
           sessionId: payload.sessionId,
           userCommunicationJourneyId: userCommunicationJourney.id,
           step: 'update-profile-reminder',
         }),
       )
       await step.sleep('wait-for-finish-profile-reminder-follow-up', followUpTimeout)
-      profileStatus = await getProfileStatus(payload.userId)
+      profileStatus = await getProfileStatus(user)
     }
 
     if (profileStatus === 'incomplete' || profileStatus === 'partially-complete') {
       await step.run('send-phone-number-reminder', async () =>
         sendInitialSignUpEmail({
-          userId: payload.userId,
+          user,
           sessionId: payload.sessionId,
           userCommunicationJourneyId: userCommunicationJourney.id,
           step: 'phone-number-reminder',
@@ -121,11 +135,11 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       await step.sleep('wait-for-phone-number-reminder-follow-up', followUpTimeout)
     }
 
-    const hasFollowedOnX = await hasUserCompletedAction(payload.userId, UserActionType.TWEET)
+    const hasFollowedOnX = await hasUserCompletedAction(userId, UserActionType.TWEET)
     if (!hasFollowedOnX) {
       await step.run('send-follow-on-x-reminder', async () =>
         sendInitialSignUpEmail({
-          userId: payload.userId,
+          user,
           sessionId: payload.sessionId,
           userCommunicationJourneyId: userCommunicationJourney.id,
           step: 'follow-on-x-reminder',
@@ -135,12 +149,12 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     }
 
     const hasCalledAndEmailed =
-      (await hasUserCompletedAction(payload.userId, UserActionType.CALL)) &&
-      (await hasUserCompletedAction(payload.userId, UserActionType.EMAIL))
+      (await hasUserCompletedAction(userId, UserActionType.CALL)) &&
+      (await hasUserCompletedAction(userId, UserActionType.EMAIL))
     if (!hasCalledAndEmailed) {
       await step.run('send-contact-your-rep-reminder', async () =>
         sendInitialSignUpEmail({
-          userId: payload.userId,
+          user,
           sessionId: payload.sessionId,
           userCommunicationJourneyId: userCommunicationJourney.id,
           step: 'contact-your-rep-reminder',
@@ -181,10 +195,10 @@ async function getLatestUserAction(userId: string) {
   })
 }
 
-async function getUser(userId: string) {
+async function getUser(userId: string, sessionId?: string | null) {
   return prismaClient.user.findFirstOrThrow({
     where: {
-      id: userId,
+      OR: [{ id: userId }, { ...(sessionId && { userSessions: { some: { id: sessionId } } }) }],
     },
     include: {
       primaryUserEmailAddress: true,
@@ -196,9 +210,8 @@ async function getUser(userId: string) {
 }
 
 async function getProfileStatus(
-  userId: string,
+  user: Jsonify<Awaited<ReturnType<typeof getUser>>>,
 ): Promise<'complete' | 'partially-complete' | 'incomplete'> {
-  const user = await getUser(userId)
   if (hasUserCompletedProfile(user, { includingPhoneNumber: true })) {
     return 'complete'
   }
@@ -240,16 +253,15 @@ const TEMPLATE_GETTER_BY_STEP = {
 type InitialSignUpEmailStep = keyof typeof TEMPLATE_GETTER_BY_STEP
 
 async function sendInitialSignUpEmail({
-  userId,
+  user,
   sessionId,
   userCommunicationJourneyId,
   step,
 }: {
+  user: Jsonify<Awaited<ReturnType<typeof getUser>>>
   userCommunicationJourneyId: string
   step: InitialSignUpEmailStep
-} & Pick<InitialSignupUserCommunicationDataSchema, 'userId' | 'sessionId'>) {
-  const user = await getUser(userId)
-
+} & Pick<InitialSignupUserCommunicationDataSchema, 'sessionId'>) {
   if (!user.primaryUserEmailAddress) {
     return null
   }
@@ -317,7 +329,7 @@ async function sendInitialSignUpEmail({
 }
 
 function hasUserCompletedProfile(
-  user: Awaited<ReturnType<typeof getUser>>,
+  user: Jsonify<Awaited<ReturnType<typeof getUser>>>,
   { includingPhoneNumber }: { includingPhoneNumber: boolean },
 ) {
   const hasCompletedBaseProfile = Boolean(

@@ -1,6 +1,8 @@
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { NextResponse } from 'next/server'
 
+import { updateAddressLocationByPlaceId } from '@/utils/server/db/address/updateAddressLatLonByPlaceId'
 import { getAddressFromGooglePlacePrediction } from '@/utils/server/getAddressFromGooglePlacePrediction'
 import { querySWCCivicElectoralZoneFromLatLong } from '@/utils/server/swcCivic/queries/queryElectoralZoneFromLatLong'
 import { getLogger } from '@/utils/shared/logger'
@@ -28,6 +30,10 @@ export const GET = async (req: Request) => {
     })
     latitude = result.latitude
     longitude = result.longitude
+
+    if (result.googlePlaceId && latitude && longitude) {
+      waitUntil(updateAddressLocationByPlaceId(result.googlePlaceId, { latitude, longitude }))
+    }
   } catch (e) {
     Sentry.captureException(e, {
       extra: { address, placeId },

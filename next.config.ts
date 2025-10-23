@@ -271,6 +271,8 @@ const nextConfig: NextConfig = {
         }),
       )
     }
+    // Disable cache to avoid memory issues when building on Vercel
+    config.cache = false
     return config
   },
   async headers() {

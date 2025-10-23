@@ -14,7 +14,10 @@ export const zodEventSchemaValidation = object({
     countryCode: string().length(2),
     isOccuring: boolean(),
     name: string(),
-    state: string().min(2).max(3),
+    state: string()
+      .min(2)
+      .max(3)
+      .transform(val => val.toUpperCase()),
     type: nativeEnum(EVENT_TYPE_OPTIONS),
     isFeatured: boolean(),
     slug: string(),

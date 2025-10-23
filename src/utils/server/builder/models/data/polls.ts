@@ -34,7 +34,6 @@ async function getAllPollsWithOffset({
         cacheSeconds: 60,
         limit: LIMIT,
         offset,
-        cachebust: true,
       }),
     {
       retries: 3,

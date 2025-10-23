@@ -15,7 +15,7 @@ import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { actionUpdateUserCountryCodeWithoutMiddleware } from '@/actions/actionUpdateUserCountryCode'
-import { getClientAddress } from '@/clientModels/clientAddress'
+import { getSensitiveClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
@@ -227,7 +227,7 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
             )
           : null,
       ),
-      address: updatedUser.address && getClientAddress(updatedUser.address),
+      address: updatedUser.address && getSensitiveClientAddress(updatedUser.address),
     },
   }
 }

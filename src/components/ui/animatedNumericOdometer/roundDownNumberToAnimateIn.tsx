@@ -6,6 +6,10 @@
  * To prevent not animating because the actual number is zero, we subtract one from the actual number
  */
 export function roundDownNumberToAnimateIn(value: number, roundTo: number) {
+  if (value <= roundTo) {
+    return 0
+  }
+
   return Math.floor((value - 1) / roundTo) * roundTo
 }
 

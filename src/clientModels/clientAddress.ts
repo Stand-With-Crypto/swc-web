@@ -8,6 +8,15 @@ export type ClientAddress = ClientModel<
   googlePlaceId: string
 }
 
+export type SensitiveClientAddress = ClientModel<
+  Pick<
+    Address,
+    'id' | 'formattedDescription' | 'route' | 'administrativeAreaLevel1' | 'latitude' | 'longitude'
+  > & {
+    googlePlaceId: string
+  }
+>
+
 export const getClientAddress = (record: Address): ClientAddress | null => {
   const { id, googlePlaceId, formattedDescription, route, administrativeAreaLevel1 } = record
   // all addresses should have google places, but we want to gracefully fail if google starts hard-capping us for some reason
@@ -20,5 +29,31 @@ export const getClientAddress = (record: Address): ClientAddress | null => {
     formattedDescription,
     route,
     administrativeAreaLevel1,
+  })
+}
+
+export const getSensitiveClientAddress = (record: Address): SensitiveClientAddress | null => {
+  const {
+    id,
+    googlePlaceId,
+    formattedDescription,
+    route,
+    administrativeAreaLevel1,
+    latitude,
+    longitude,
+  } = record
+
+  if (!googlePlaceId) {
+    return null
+  }
+
+  return getClientModel({
+    id,
+    googlePlaceId,
+    formattedDescription,
+    route,
+    administrativeAreaLevel1,
+    latitude,
+    longitude,
   })
 }
