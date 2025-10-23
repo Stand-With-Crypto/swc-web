@@ -81,7 +81,7 @@ export const i18nMessages = createI18nMessages({
       referCampaignDescription: 'Du hast Freunde empfohlen, Stand With Crypto beizutreten.',
       signPetitionTitle: 'Petition unterschreiben',
       signPetitionDescription:
-        'Vorschlagen Sie eine pro-Innovation-Strategie für Stablecoins in Europa',
+        'Schlagen Sie eine pro-Innovation-Strategie für Stablecoins in Europa vor',
     },
   },
 })
