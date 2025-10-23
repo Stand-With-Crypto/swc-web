@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useSession } from '@/hooks/useSession'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { DEFAULT_EU_LANGUAGE } from '@/utils/shared/supportedLocales'
+import { DEFAULT_EU_LANGUAGE, SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 const REDIRECT_TIMEOUT = 7000
 
@@ -18,7 +18,7 @@ export function EuParseLanguageClient() {
   const path = searchParams?.get('path')
 
   const handleRedirect = useCallback(() => {
-    const language = user?.language || DEFAULT_EU_LANGUAGE
+    const language = (user?.language || DEFAULT_EU_LANGUAGE) as SupportedLanguages
     const finalPath = path ? `${language}/${path}` : language
 
     router.push(`/${SupportedCountryCodes.EU}/${finalPath}?${searchParams?.toString() ?? ''}`)
