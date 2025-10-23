@@ -1,6 +1,6 @@
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 
-// it need to be exported from a different file because we can't export objects from 'use server' files
+// it needs to be exported from a different file because we can't export objects from 'use server' files
 export const i18nMessages = createI18nMessages({
   defaultMessages: {
     en: {
