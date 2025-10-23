@@ -19,6 +19,7 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
     gb: 0,
     ca: 0,
     au: 0,
+    eu: 0,
     total: roundDownNumberByGranularityToAnimateIn(countUsers, 100000),
   },
   sumDonations: {
