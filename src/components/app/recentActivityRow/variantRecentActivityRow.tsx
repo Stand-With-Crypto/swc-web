@@ -27,8 +27,11 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getRoleNameResolver } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { EUCountryCode } from '@/utils/shared/euCountryMapping'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
+import { euCountriesI18nMessages } from '@/utils/shared/i18n/eu/euCountriesTranslations'
+import { mergeI18nMessages } from '@/utils/shared/i18n/mergeI18nMessages'
 import { NFTSlug } from '@/utils/shared/nft'
 import {
   getElectoralZoneDescriptorByCountryCode,
@@ -241,7 +244,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   countryCode,
 }: RecentActivityRowProps) {
   const urls = useIntlUrls()
-  const { t } = useTranslation(i18nMessages, 'VariantRecentActivityRow')
+  const { t } = useTranslation(
+    mergeI18nMessages(i18nMessages, euCountriesI18nMessages),
+    'VariantRecentActivityRow',
+  )
 
   const stateNameResolver = getStateNameResolver(countryCode)
 
@@ -253,12 +259,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const hasJoinedLinkedIn = hasTakenAction(UserActionType.LINKEDIN, data?.performedUserActionTypes)
   const hasVotedInPoll = hasTakenAction(UserActionType.POLL, data?.performedUserActionTypes)
 
-  const fromStateOrEmpty = isStateAvailable
-    ? t('from', { state: userLocationDetails.administrativeAreaLevel1 })
-    : ''
-  const inStateOrEmpty = isStateAvailable
-    ? t('in', { state: userLocationDetails.administrativeAreaLevel1 })
-    : ''
+  const location =
+    countryCode === SupportedCountryCodes.EU
+      ? t(userLocationDetails?.countryCode.toLowerCase() as EUCountryCode)
+      : (userLocationDetails?.administrativeAreaLevel1 ?? '')
+
+  const fromStateOrEmpty = isStateAvailable ? t('from', { state: location }) : ''
+  const inStateOrEmpty = isStateAvailable ? t('in', { state: location }) : ''
 
   const getActionSpecificProps = (): {
     onFocusContent?: React.ComponentType
@@ -416,12 +423,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         }
       }
       case UserActionType.LIVE_EVENT: {
-        const location = USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName]
+        const eventLocation = USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName]
           ? ` ${t('in', { state: USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName] })}`
           : ''
         return {
           onFocusContent: undefined,
-          children: <MainText>{t('attendedCryptoEvent', { location })}</MainText>,
+          children: <MainText>{t('attendedCryptoEvent', { location: eventLocation })}</MainText>,
         }
       }
       case UserActionType.TWEET_AT_PERSON: {
