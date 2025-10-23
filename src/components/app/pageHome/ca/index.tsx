@@ -41,9 +41,6 @@ export function CaPageHome({
       <CaHero />
 
       <section className="container">
-<<<<<<< HEAD
-        <TopLevelMetrics {...topLevelMetrics} disableTooltips useGlobalLabels />
-=======
         <TopLevelMetrics.Root countryCode={countryCode}>
           <TopLevelMetrics.Main>
             <TopLevelMetrics.Card
@@ -77,7 +74,6 @@ export function CaPageHome({
             />
           </TopLevelMetrics.Aside>
         </TopLevelMetrics.Root>
->>>>>>> 9982277282735f87772f8a20f9c0e3ac697c23e4
       </section>
 
       <HomePageSection>
