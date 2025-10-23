@@ -13,7 +13,8 @@ export function AdvocatesHeatmapPage({
   title,
   description,
   countryCode,
-  homepageData,
+  actions,
+  countUsers,
   advocatesMapPageData,
   isEmbedded,
 }: PageAdvocatesHeatmapProps) {
@@ -45,9 +46,9 @@ export function AdvocatesHeatmapPage({
           </div>
         ) : null}
         <AdvocatesHeatmap
-          actions={homepageData.actions}
+          actions={actions}
           advocatesMapPageData={advocatesMapPageData}
-          countUsers={homepageData.countUsers.count}
+          countUsers={countUsers?.total ?? 0}
           countryCode={countryCode}
           isEmbedded={isEmbedded}
           mapConfig={mapConfig}

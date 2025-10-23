@@ -11,9 +11,25 @@ import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/su
 import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
-const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (countUsers: number) => ({
+const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
+  countUsers: number,
+): GetHomepageTopLevelMetricsResponse => ({
   countUsers: {
-    count: roundDownNumberByGranularityToAnimateIn(countUsers, 100000),
+    us: 0,
+    gb: 0,
+    ca: 0,
+    au: 0,
+    total: roundDownNumberByGranularityToAnimateIn(countUsers, 100000),
+  },
+  sumDonations: {
+    usersDonationsAmountUsd: 0,
+    amountUsd: 0,
+    fairshakeAmountUsd: 0,
+  },
+  countPolicymakerContacts: {
+    countUserActionEmailRecipients: 0,
+    countUserActionCalls: 0,
+    hardcodedCountSum: 0,
   },
 })
 
@@ -32,17 +48,18 @@ export function AdvocateHeatmapOdometer({
     [countUsers],
   )
   const values = useApiHomepageTopLevelMetrics({
-    initial: decreasedInitialValues as GetHomepageTopLevelMetricsResponse,
+    initial: decreasedInitialValues,
   }).data
+
   const formatted = useMemo(() => {
     return {
       countUsers: {
         count: intlNumberFormat(COUNTRY_CODE_TO_LOCALE[countryCode]).format(
-          values.countUsers.count,
+          values.countUsers.total,
         ),
       },
     }
-  }, [values, countryCode])
+  }, [values.countUsers.total, countryCode])
 
   return (
     <div className={cn(`flex-shrink-0 bg-secondary px-0 py-2 text-center`, className)}>

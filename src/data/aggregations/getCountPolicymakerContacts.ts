@@ -4,12 +4,37 @@ import { UserActionType } from '@prisma/client'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-export const getCountPolicymakerContacts = async () => {
+/* By sending the countryCode param, the function will return the count filtered by country
+If not, it will return the count for all countries
+Example:
+const count = await getCountPolicymakerContacts({ countryCode: SupportedCountryCodes.US })
+console.log(count) // 100
+
+const count = await getCountPolicymakerContacts()
+console.log(count) // 1000 */
+export const getCountPolicymakerContacts = async ({
+  countryCode,
+}: {
+  countryCode?: SupportedCountryCodes
+} = {}) => {
+  const whereClause = countryCode
+    ? {
+        userActionEmail: {
+          userAction: {
+            countryCode,
+          },
+        },
+      }
+    : {}
+
   const [countUserActionEmailRecipients, countUserActionCalls] = await Promise.all([
-    prismaClient.userActionEmailRecipient.count(),
+    prismaClient.userActionEmailRecipient.count({
+      where: whereClause,
+    }),
     prismaClient.userAction.count({
-      where: { actionType: UserActionType.CALL },
+      where: { ...whereClause, actionType: UserActionType.CALL },
     }),
   ])
   /*
@@ -44,8 +69,8 @@ export const getCountPolicymakerContacts = async () => {
   to look comparable to production so we mock the numbers
   */
   return {
-    countUserActionEmailRecipients: countUserActionEmailRecipients * 1011,
-    countUserActionCalls: countUserActionCalls * 1011,
+    countUserActionEmailRecipients: countUserActionEmailRecipients,
+    countUserActionCalls: countUserActionCalls,
     hardcodedCountSum,
   }
 }

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { UsPageHome } from '@/components/app/pageHome/us'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
-import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { getUSHomepageData } from '@/data/pageSpecific/us/getHomepageData'
 import { PageProps } from '@/types'
 import { getPartners } from '@/utils/server/builder/models/data/partners'
 import { getDistrictsLeaderboardData } from '@/utils/server/districtRankings/upsertRankings'
@@ -17,9 +17,8 @@ export default async function Home(props: PageProps) {
   const { countryCode } = params
 
   const [asyncProps, advocatePerStateDataProps, partners, leaderboardData] = await Promise.all([
-    getHomepageData({
+    getUSHomepageData({
       recentActivityLimit: 30,
-      countryCode,
     }),
     getAdvocatesMapData({ countryCode }),
     getPartners({ countryCode }),

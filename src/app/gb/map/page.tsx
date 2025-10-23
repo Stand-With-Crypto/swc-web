@@ -1,8 +1,9 @@
 import { Metadata } from 'next'
 
 import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
+import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
-import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -22,18 +23,22 @@ export const metadata: Metadata = {
 }
 
 export default async function MapPage() {
-  const homeDataProps = await getHomepageData({
-    recentActivityLimit: 20,
-    countryCode,
-  })
+  const [actions, countUsers] = await Promise.all([
+    getPublicRecentActivity({
+      limit: 20,
+      countryCode,
+    }),
+    getCountUsers(),
+  ])
   const advocatePerStateDataProps = await getAdvocatesMapData({ countryCode })
 
   return (
     <AdvocatesHeatmapPage
+      actions={actions}
       advocatesMapPageData={advocatePerStateDataProps}
+      countUsers={countUsers}
       countryCode={countryCode}
       description={description}
-      homepageData={homeDataProps}
       title={title}
     />
   )
