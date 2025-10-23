@@ -1,10 +1,12 @@
+import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
-import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface PageAdvocatesHeatmapProps {
   countryCode: SupportedCountryCodes
-  homepageData: Awaited<ReturnType<typeof getHomepageData>>
+  countUsers: Awaited<ReturnType<typeof getCountUsers>>
+  actions: Awaited<ReturnType<typeof getPublicRecentActivity>>
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   title?: string
   description?: string

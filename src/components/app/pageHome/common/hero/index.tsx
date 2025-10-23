@@ -9,7 +9,7 @@ export { HeroAnnouncementCard } from './heroAnnouncementCard'
 
 export function Hero({ children }: React.PropsWithChildren) {
   return (
-    <div className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-5 lg:gap-8 lg:gap-y-1">
+    <div className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-5 lg:gap-2 lg:gap-y-1">
       {children}
     </div>
   )
@@ -17,7 +17,7 @@ export function Hero({ children }: React.PropsWithChildren) {
 
 function HeroHeading({ children }: React.PropsWithChildren) {
   return (
-    <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:col-span-3 lg:px-0 lg:pt-0 lg:text-left">
+    <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:col-span-3 lg:px-0 lg:pr-6 lg:pt-0 lg:text-left">
       {children}
     </div>
   )

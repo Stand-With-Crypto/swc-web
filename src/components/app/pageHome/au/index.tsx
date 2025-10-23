@@ -5,7 +5,7 @@ import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarou
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
 import { HomepagePoliticiansSection } from '@/components/app/pageHome/common/politiciansSection'
-import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
+import * as TopLevelMetrics from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { AuAdvocatesLeaderboard } from '@/components/app/pageReferrals/au/leaderboard'
 import {
@@ -42,12 +42,28 @@ export function AuPageHome({
       <AuHero />
 
       <section className="container">
-        <TopLevelMetrics
-          countryCode={countryCode}
-          {...topLevelMetrics}
-          disableTooltips
-          useGlobalLabels
-        />
+        <TopLevelMetrics.Root countryCode={countryCode}>
+          <TopLevelMetrics.Split>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/advocacyToolkit/shield.png"
+              imgAlt="Global crypto advocates"
+              label="Global crypto advocates"
+              value={topLevelMetrics.countUsers.total}
+            />
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/email.png"
+              imgAlt="Global policymaker contacts"
+              label="Global policymaker contacts"
+              value={
+                topLevelMetrics.countPolicymakerContacts.countUserActionCalls +
+                topLevelMetrics.countPolicymakerContacts.countUserActionEmailRecipients +
+                topLevelMetrics.countPolicymakerContacts.hardcodedCountSum
+              }
+            />
+          </TopLevelMetrics.Split>
+        </TopLevelMetrics.Root>
       </section>
 
       <HomePageSection>
