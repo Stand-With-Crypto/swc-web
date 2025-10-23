@@ -25,7 +25,6 @@ import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { DistrictRankingEntryWithRank } from '@/utils/server/districtRankings/upsertRankings'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
-import { formatCurrency } from '@/utils/shared/formatCurrency'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { SWCPartners } from '@/utils/shared/zod/getSWCPartners'
 
@@ -91,8 +90,7 @@ export function UsPageHome({
               imgAlt="Advocate donations"
               isCurrency
               label="Advocate donations"
-              tooltipContent={`${formatCurrency(sumDonations.fairshakeAmountUsd)} donated to Fairshake, a pro-crypto Super PAC, and ${formatCurrency(sumDonations.amountUsd - sumDonations.fairshakeAmountUsd)} donated to the Stand With Crypto 501(c)(4).`}
-              value={sumDonations.amountUsd}
+              value={sumDonations.usersDonationsAmountUsd}
             />
           </TopLevelMetrics.Aside>
         </TopLevelMetrics.Root>

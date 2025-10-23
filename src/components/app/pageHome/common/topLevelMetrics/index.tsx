@@ -19,15 +19,15 @@ function TopLevelMetricsRoot({
 }
 
 function TopLevelMetricsMain({ children }: { children: React.ReactNode }) {
-  return <div className="col-span-3">{children}</div>
+  return <div className="col-span-1 md:col-span-3">{children}</div>
 }
 
 function TopLevelMetricsSplit({ children }: { children: React.ReactNode }) {
-  return <div className="col-span-5 flex w-full gap-2">{children}</div>
+  return <div className="col-span-5 flex w-full flex-col gap-2 md:flex-row">{children}</div>
 }
 
 function TopLevelMetricsAside({ children }: { children: React.ReactNode }) {
-  return <div className="col-span-2 flex flex-col gap-2">{children}</div>
+  return <div className="col-span-1 flex flex-col gap-2 md:col-span-2">{children}</div>
 }
 
 export {
