@@ -10,6 +10,7 @@ export async function getPetitionSignatures() {
     [SupportedCountryCodes.GB]: GBProInnovationPetitionSignatures,
     [SupportedCountryCodes.CA]: 0,
     [SupportedCountryCodes.AU]: 0,
+    [SupportedCountryCodes.EU]: 0,
     total: GBProInnovationPetitionSignatures,
   }
 
