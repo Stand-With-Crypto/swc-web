@@ -261,7 +261,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
 
   const location =
     countryCode === SupportedCountryCodes.EU
-      ? t(userLocationDetails?.countryCode.toLowerCase() as EUCountryCode)
+      ? userLocationDetails?.countryCode
+        ? t(userLocationDetails.countryCode.toLowerCase() as EUCountryCode)
+        : ''
       : (userLocationDetails?.administrativeAreaLevel1 ?? '')
 
   const fromStateOrEmpty = isStateAvailable ? t('from', { state: location }) : ''
