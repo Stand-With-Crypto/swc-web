@@ -12,7 +12,7 @@ export const i18nMessages = createI18nMessages({
       petitionNotFound: 'Petition nicht gefunden',
       userNotAuthenticated:
         'Der Benutzer muss authentifiziert sein, um eine Petition zu unterzeichnen',
-      wrongCountryCode: 'Die Adressen-Ländercode stimmt nicht mit dem Petition-Ländercode überein',
+      wrongCountryCode: 'Der Adressen-Ländercode stimmt nicht mit dem Petitions-Ländercode überein',
     },
     fr: {
       petitionNotFound: 'Pétition non trouvée',
