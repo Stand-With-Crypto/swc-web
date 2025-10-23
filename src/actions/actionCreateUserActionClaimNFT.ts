@@ -15,7 +15,7 @@ import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/ser
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
+import { getThirdwebAuthUser } from '@/utils/server/thirdweb/getThirdwebAuthUser'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { getLogger } from '@/utils/shared/logger'
@@ -59,7 +59,7 @@ async function _actionCreateUserActionClaimNFT(input: CreateActionClaimNFTInput)
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
 
-  const authUser = await appRouterGetThirdwebAuthUser()
+  const authUser = await getThirdwebAuthUser()
   if (!authUser) {
     const error = new Error('Create User Action Claim NFT - Not authenticated')
     Sentry.captureException(error, {
