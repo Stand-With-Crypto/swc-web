@@ -39,6 +39,10 @@ function useLiveSumDonations({ initialData }: SumDonationsCounterProps) {
     {
       refreshInterval: 5 * 1000,
       fallbackData: {
+        usersDonationsAmountUsd: roundDownNumberToAnimateIn(
+          initialData.usersDonationsAmountUsd,
+          10000,
+        ),
         amountUsd: roundDownNumberToAnimateIn(initialData.amountUsd, 10000),
         fairshakeAmountUsd: roundDownNumberToAnimateIn(initialData.fairshakeAmountUsd, 10000),
       },

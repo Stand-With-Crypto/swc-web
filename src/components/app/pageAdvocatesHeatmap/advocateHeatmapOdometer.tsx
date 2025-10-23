@@ -22,6 +22,7 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
     total: roundDownNumberByGranularityToAnimateIn(countUsers, 100000),
   },
   sumDonations: {
+    usersDonationsAmountUsd: 0,
     amountUsd: 0,
     fairshakeAmountUsd: 0,
   },
