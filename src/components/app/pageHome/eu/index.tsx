@@ -1,5 +1,5 @@
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
-import { TopLevelMetrics } from '@/components/app/pageHome/common/topLevelMetrics'
+import * as TopLevelMetrics from '@/components/app/pageHome/common/topLevelMetrics'
 import { HomePageProps } from '@/components/app/pageHome/common/types'
 import { RecentActivity } from '@/components/app/recentActivity'
 import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
@@ -24,10 +24,12 @@ export const i18nMessages = createI18nMessages({
     en: {
       communityTitle: 'Our community',
       getInvolvedTitle: 'Get involved',
-      getInvolvedSubtitle: 'The future of crypto is in your hands. Here’s how you can help.',
+      getInvolvedSubtitle: "The future of crypto is in your hands. Here's how you can help.",
       communitySubtitle:
-        'See how our community is taking a stand to safeguard the future of crypto in Australia.',
+        'See how our community is taking a stand to safeguard the future of crypto in Europe.',
       viewAll: 'View all',
+      globalCryptoAdvocates: 'Global crypto advocates',
+      globalPolicymakerContacts: 'Global policymaker contacts',
     },
     de: {
       communityTitle: 'Unsere Community',
@@ -36,6 +38,8 @@ export const i18nMessages = createI18nMessages({
       communitySubtitle:
         'Sehen Sie, wie unsere Community sich für die Zukunft von Krypto in der EU stark macht.',
       viewAll: 'Alle anzeigen',
+      globalCryptoAdvocates: 'Globale Krypto-Befürworter',
+      globalPolicymakerContacts: 'Globale politische Entscheidungsträger kontaktiert',
     },
     fr: {
       communityTitle: 'Notre communauté',
@@ -45,6 +49,8 @@ export const i18nMessages = createI18nMessages({
       communitySubtitle:
         'Voyez comment notre communauté se mobilise pour protéger le futur de la crypto en Europe.',
       viewAll: 'Voir tout',
+      globalCryptoAdvocates: 'Défenseurs mondiaux de la crypto',
+      globalPolicymakerContacts: 'Contacts avec les décideurs politiques mondiaux',
     },
   },
 })
@@ -61,7 +67,28 @@ export async function EuPageHome(props: EuPageHomeProps) {
       <EuHero language={language} />
 
       <section className="container">
-        <TopLevelMetrics {...topLevelMetrics} disableTooltips useGlobalLabels />
+        <TopLevelMetrics.Root countryCode={countryCode}>
+          <TopLevelMetrics.Split>
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/advocacyToolkit/shield.png"
+              imgAlt={t('globalCryptoAdvocates')}
+              label={t('globalCryptoAdvocates')}
+              value={topLevelMetrics.countUsers.total}
+            />
+            <TopLevelMetrics.Card
+              countryCode={countryCode}
+              img="/actionTypeIcons/email.png"
+              imgAlt={t('globalPolicymakerContacts')}
+              label={t('globalPolicymakerContacts')}
+              value={
+                topLevelMetrics.countPolicymakerContacts.countUserActionCalls +
+                topLevelMetrics.countPolicymakerContacts.countUserActionEmailRecipients +
+                topLevelMetrics.countPolicymakerContacts.hardcodedCountSum
+              }
+            />
+          </TopLevelMetrics.Split>
+        </TopLevelMetrics.Root>
       </section>
 
       {recentActivity && recentActivity.count > 0 && (
