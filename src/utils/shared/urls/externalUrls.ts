@@ -3,6 +3,7 @@ import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
+import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 import { fullUrl } from './fullUrl'
 
@@ -10,13 +11,20 @@ export const externalUrls = {
   swcReferralUrl: ({
     referralId,
     countryCode,
+    language,
   }: {
     referralId: string
     countryCode?: SupportedCountryCodes
+    language?: SupportedLanguages
   }) => {
     if (!countryCode || countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE) {
       return fullUrl(`/join/${referralId}`)
     }
+
+    if (countryCode === SupportedCountryCodes.EU) {
+      return fullUrl(`/${countryCode}/${language ?? SupportedLanguages.EN}/join/${referralId}`)
+    }
+
     return fullUrl(`/${countryCode}/join/${referralId}`)
   },
 }

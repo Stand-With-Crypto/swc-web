@@ -36,11 +36,11 @@ export const i18nMessages = createI18nMessages({
 })
 
 export function UserReferralUrl(props: UserReferralUrlProps) {
-  const { t } = useTranslation(i18nMessages, 'UserReferralUrl')
+  const { t, language } = useTranslation(i18nMessages, 'UserReferralUrl')
   const { referralId, className, countryCode } = props
 
   const [_, handleCopyToClipboard, hasCopied] = useCopyTextToClipboard()
-  const fullUrl = externalUrls.swcReferralUrl({ referralId, countryCode })
+  const fullUrl = externalUrls.swcReferralUrl({ referralId, countryCode, language })
   const presentationUrl = fullUrl
     .replace(/https?:\/\/(www\.)?/, '')
     .replace('/join/', '/join/\u200B')
