@@ -14,6 +14,8 @@ import {
 import { logger } from '@/utils/shared/logger'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
+const READ_ONLY_COOKIES_ERROR_MESSAGE = 'Cookies can only be modified'
+
 export async function appRouterGetThirdwebAuthUser(): Promise<{
   userId: string
   address: string
@@ -62,23 +64,35 @@ async function getValidatedAuthTokenPayload(cookieToken: string) {
       return null
     }
 
-    const newJwtToken = await refreshJWT({
-      account: thirdwebAdminAccount,
-      jwt: cookieToken,
-      expirationTime: THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS,
-    })
-    currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, newJwtToken)
-
-    const refreshedJwtToken = await thirdwebAuth.verifyJWT({ jwt: newJwtToken })
-    if (!refreshedJwtToken.valid) {
-      await handleJwtValidationError({
-        verificationResponse: refreshedJwtToken,
-        domain: 'getValidatedAuthTokenPayload/refreshedJwtToken',
+    try {
+      const newJwtToken = await refreshJWT({
+        account: thirdwebAdminAccount,
+        jwt: cookieToken,
+        expirationTime: THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS,
       })
-      return null
-    }
+      currentCookies.set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, newJwtToken)
 
-    return refreshedJwtToken.parsedJWT
+      const refreshedJwtToken = await thirdwebAuth.verifyJWT({ jwt: newJwtToken })
+
+      if (!refreshedJwtToken.valid) {
+        await handleJwtValidationError({
+          verificationResponse: refreshedJwtToken,
+          domain: 'getValidatedAuthTokenPayload/refreshedJwtToken',
+        })
+        return null
+      }
+
+      return refreshedJwtToken.parsedJWT
+    } catch (error) {
+      // If we get an error about modifying cookies in read-only context, just return null
+      // This happens when called from Server Components or generateMetadata
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      if (errorMessage.includes(READ_ONLY_COOKIES_ERROR_MESSAGE)) {
+        logger.info('JWT token expired but cannot refresh in read-only context (Server Component).')
+        return null
+      }
+      throw error
+    }
   } catch (error) {
     await handleJwtValidationError({
       error,
@@ -100,18 +114,34 @@ async function handleJwtValidationError({
     error: string
   }
 }) {
-  const currentCookies = await cookies()
-  currentCookies.delete(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
-  Sentry.captureException('Invalid JWT token', {
-    extra: {
-      verificationResponse,
-      // not capturing this because the message might include interpolated data and it would create a spam of errors
-      // that would need to be manually grouped
-      error,
-    },
-    tags: {
-      domain,
-    },
-  })
+  let isReadOnlyContext = false
+
+  try {
+    const currentCookies = await cookies()
+    currentCookies.delete(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+  } catch (cookieError) {
+    const errorMessage = cookieError instanceof Error ? cookieError.message : String(cookieError)
+    if (errorMessage.includes(READ_ONLY_COOKIES_ERROR_MESSAGE)) {
+      logger.info('Cannot delete invalid JWT cookie in read-only context.')
+      isReadOnlyContext = true
+    } else {
+      logger.error('Error deleting invalid JWT cookie.', { error: cookieError })
+    }
+  }
+
+  if (!isReadOnlyContext) {
+    Sentry.captureException('Invalid JWT token', {
+      extra: {
+        verificationResponse,
+        // not capturing this because the message might include interpolated data and it would create a spam of errors
+        // that would need to be manually grouped
+        error,
+      },
+      tags: {
+        domain,
+      },
+    })
+  }
+
   return null
 }

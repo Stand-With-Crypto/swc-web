@@ -22,7 +22,8 @@ export const dynamic = 'force-dynamic'
 type Props = PageProps
 
 const title = 'Your Stand With Crypto profile'
-const description = `See what actions you can take to help promote innovation.`
+const description = 'See what actions you can take to help promote innovation.'
+
 export async function generateMetadata(_props: Props): Promise<Metadata> {
   return generateMetadataDetails({
     title,
