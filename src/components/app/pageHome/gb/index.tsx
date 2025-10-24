@@ -65,10 +65,14 @@ export function GbPageHome({
           <TopLevelMetrics.Aside>
             <TopLevelMetrics.Card
               countryCode={countryCode}
-              img="/gb/3d-shield.png"
-              imgAlt="UK advocates"
-              label="UK advocates"
-              value={topLevelMetrics.countUsers[countryCode] ?? 0}
+              img="/actionTypeIcons/email.png"
+              imgAlt="Global policymaker contacts"
+              label="Global policymaker contacts"
+              value={
+                topLevelMetrics.countPolicymakerContacts.countUserActionCalls +
+                topLevelMetrics.countPolicymakerContacts.countUserActionEmailRecipients +
+                topLevelMetrics.countPolicymakerContacts.hardcodedCountSum
+              }
             />
             <TopLevelMetrics.Card
               countryCode={countryCode}
