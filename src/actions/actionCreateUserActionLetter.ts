@@ -14,6 +14,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
+import type PostGrid from 'postgrid-node'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -21,8 +22,7 @@ import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMeth
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { buildPostGridAddress } from '@/utils/server/postgrid/buildLetterAddress'
 import { POSTGRID_STATUS_TO_LETTER_STATUS } from '@/utils/server/postgrid/contants'
-import { createLetter } from '@/utils/server/postgrid/createLetter'
-import { PostGridLetterAddress } from '@/utils/server/postgrid/types'
+import { sendLetter } from '@/utils/server/postgrid/sendLetter'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -138,19 +138,16 @@ async function _actionCreateUserActionLetter(input: Input) {
 
   await triggerRateLimiterAtMostOnce()
 
-  // Get or create address
   const address = await prismaClient.address.upsert({
     where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
     create: validatedFields.data.address,
     update: validatedFields.data.address,
   })
 
-  // Call PostGrid for each recipient FIRST
   const recipientResults = await Promise.all(
     validatedFields.data.dtsiPeople.map(async dtsiPerson => {
       const idempotencyKey = `LETTER:${countryCode}:${campaignName}:${user.id}:${dtsiPerson.slug}`
 
-      // Build advocate's address
       const fromAddress = buildPostGridAddress(
         validatedFields.data.firstName,
         validatedFields.data.lastName,
@@ -164,7 +161,7 @@ async function _actionCreateUserActionLetter(input: Input) {
       )
         .split(',')
         .map(s => s.trim())
-      const toAddress: PostGridLetterAddress = {
+      const toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName = {
         firstName: dtsiPerson.firstName || 'Representative',
         lastName: dtsiPerson.lastName || 'Unknown',
         addressLine1: officeAddressParts[0] || 'Parliament House',
@@ -174,7 +171,7 @@ async function _actionCreateUserActionLetter(input: Input) {
         countryCode: 'AU',
       }
 
-      const letter = await createLetter({
+      const letter = await sendLetter({
         to: toAddress,
         from: fromAddress,
         templateId: 'template_iUD4isUdA8kz8BpCc3c6F3', // TODO: Add template ID
