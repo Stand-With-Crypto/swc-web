@@ -24,6 +24,8 @@ import { buildPostGridAddress } from '@/utils/server/postgrid/buildLetterAddress
 import { POSTGRID_STATUS_TO_LETTER_STATUS } from '@/utils/server/postgrid/contants'
 import { sendLetter } from '@/utils/server/postgrid/sendLetter'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getQuorumPoliticianAddress } from '@/utils/server/quorum/getQuorumPoliticianAddress'
+import { getQuorumPoliticianByDTSIPerson } from '@/utils/server/quorum/getQuorumPoliticianFromDTSIPerson'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
@@ -154,21 +156,47 @@ async function _actionCreateUserActionLetter(input: Input) {
         address,
       )
 
-      // Parse politician's office address from DTSI
-      // officeAddress format example: "Parliament House, Canberra, ACT 2600, Australia"
-      const officeAddressParts = (
-        dtsiPerson.officeAddress || 'Parliament House, Canberra, ACT 2600, Australia'
-      )
-        .split(',')
-        .map(s => s.trim())
-      const toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName = {
-        firstName: dtsiPerson.firstName || 'Representative',
-        lastName: dtsiPerson.lastName || 'Unknown',
-        addressLine1: officeAddressParts[0] || 'Parliament House',
-        city: officeAddressParts[1] || 'Canberra',
-        provinceOrState: officeAddressParts[2]?.split(' ')[0] || 'ACT',
-        postalOrZip: officeAddressParts[2]?.split(' ')[1] || '2600',
-        countryCode: 'AU',
+      // Get Quorum politician to retrieve office address
+      const quorumPolitician = await getQuorumPoliticianByDTSIPerson({
+        countryCode,
+        person: dtsiPerson,
+      })
+
+      let toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName
+      let fullOfficeAddress: string
+
+      if (quorumPolitician) {
+        // Fetch full address data from Quorum
+        const addressData = await getQuorumPoliticianAddress(quorumPolitician.id)
+
+        if (addressData?.officeAddress) {
+          // Use structured address components from Quorum
+          toAddress = {
+            firstName: dtsiPerson.firstName || 'Representative',
+            lastName: dtsiPerson.lastName || 'Unknown',
+            addressLine1: addressData.officeAddress.street1 || 'Parliament House',
+            ...(addressData.officeAddress.street2 && {
+              addressLine2: addressData.officeAddress.street2,
+            }),
+            city: addressData.officeAddress.city || 'Canberra',
+            provinceOrState: addressData.officeAddress.state || 'ACT',
+            postalOrZip: addressData.officeAddress.zipcode || '2600',
+            countryCode: 'AU',
+          }
+          fullOfficeAddress = addressData.address || 'Address unavailable'
+        } else {
+          // Fallback if Quorum doesn't have structured address
+          logger.warn(
+            `No structured address from Quorum for ${dtsiPerson.slug}, using fallback`,
+          )
+          toAddress = buildFallbackAddress(dtsiPerson)
+          fullOfficeAddress = 'Parliament House, Canberra, ACT 2600, Australia'
+        }
+      } else {
+        // Fallback if no Quorum match found
+        logger.warn(`No Quorum match for ${dtsiPerson.slug}, using fallback address`)
+        toAddress = buildFallbackAddress(dtsiPerson)
+        fullOfficeAddress = 'Parliament House, Canberra, ACT 2600, Australia'
       }
 
       const letter = await sendLetter({
@@ -187,6 +215,7 @@ async function _actionCreateUserActionLetter(input: Input) {
       return {
         letter,
         dtsiPerson,
+        officeAddress: fullOfficeAddress,
       }
     }),
   )
@@ -214,8 +243,8 @@ async function _actionCreateUserActionLetter(input: Input) {
           },
           userActionLetterRecipients: {
             create: recipientResults.map(result => ({
-              dtsiSlug: result?.dtsiPerson?.slug,
-              officeAddress: result?.dtsiPerson?.officeAddress,
+              dtsiSlug: result.dtsiPerson.slug,
+              officeAddress: result.officeAddress,
               postgridOrderId: result?.letter?.trackingNumber || null,
               userActionLetterStatusUpdates: {
                 create: {
@@ -369,4 +398,18 @@ async function maybeUpsertUser({
   })
   user.primaryUserEmailAddressId = primaryUserEmailAddressId
   return { user, userState: 'New' }
+}
+
+function buildFallbackAddress(
+  dtsiPerson: Input['dtsiPeople'][0],
+): PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName {
+  return {
+    firstName: dtsiPerson.firstName || 'Representative',
+    lastName: dtsiPerson.lastName || 'Unknown',
+    addressLine1: 'Parliament House',
+    city: 'Canberra',
+    provinceOrState: 'ACT',
+    postalOrZip: '2600',
+    countryCode: 'AU',
+  }
 }
