@@ -29,6 +29,16 @@ const QUORUM_MOST_RECENT_PERSON_TYPE_IN = '1,3,7'
 
 const logger = getLogger('fetchQuorum')
 
+export interface NormalizedQuorumAddress {
+  street1: string | null
+  street2: string | null
+  building: string | null
+  room: string | null
+  city: string | null
+  state: string | null
+  zipcode: string | null
+}
+
 export interface NormalizedQuorumPolitician {
   id: string
   firstName: string
@@ -40,6 +50,8 @@ export interface NormalizedQuorumPolitician {
   nameAndTitle: string
   regionRepresented?: string
   stateRepresented?: string
+  address?: string | null
+  officeAddress?: NormalizedQuorumAddress | null
 }
 
 interface QuorumPolitician {
@@ -53,6 +65,14 @@ interface QuorumPolitician {
   name: string
   region_represented?: string
   most_recent_role_state?: string
+  address?: string
+  most_recent_role_address?: string
+  most_recent_role_street1?: string
+  most_recent_role_street2?: string
+  most_recent_role_building?: string
+  most_recent_role_room?: string
+  most_recent_role_city?: string
+  most_recent_role_zipcode?: string
 }
 
 interface QuorumNewPersonResponse {
@@ -136,7 +156,7 @@ export async function fetchQuorumByPersonId(personId: string) {
     return
   }
 
-  return normalizeQuorumPolitician(data)
+  return normalizeQuorumPoliticianWithAddress(data)
 }
 
 function normalizeQuorumPolitician(politician: QuorumPolitician): NormalizedQuorumPolitician {
@@ -152,4 +172,38 @@ function normalizeQuorumPolitician(politician: QuorumPolitician): NormalizedQuor
     regionRepresented: politician.region_represented,
     stateRepresented: politician.most_recent_role_state,
   }
+}
+
+function normalizeQuorumPoliticianWithAddress(
+  politician: QuorumPolitician,
+): NormalizedQuorumPolitician {
+  return {
+    ...normalizeQuorumPolitician(politician),
+    address:
+      toNullableString(politician.most_recent_role_address) || toNullableString(politician.address),
+    officeAddress: buildOfficeAddress(politician),
+  }
+}
+
+function buildOfficeAddress(politician: QuorumPolitician): NormalizedQuorumAddress | null {
+  const officeAddress: NormalizedQuorumAddress = {
+    street1: toNullableString(politician.most_recent_role_street1),
+    street2: toNullableString(politician.most_recent_role_street2),
+    building: toNullableString(politician.most_recent_role_building),
+    room: toNullableString(politician.most_recent_role_room),
+    city: toNullableString(politician.most_recent_role_city),
+    state: toNullableString(politician.most_recent_role_state),
+    zipcode: toNullableString(politician.most_recent_role_zipcode),
+  }
+
+  const hasAny = Object.values(officeAddress).some(v => !!v)
+  return hasAny ? officeAddress : null
+}
+
+function toNullableString(value: unknown): string | null {
+  if (typeof value === 'string') {
+    const trimmed = value.trim()
+    return trimmed.length > 0 ? trimmed : null
+  }
+  return null
 }
