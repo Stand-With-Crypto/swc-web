@@ -1,6 +1,7 @@
 'use server'
 import 'server-only'
 
+import * as Sentry from '@sentry/nextjs'
 import {
   Address,
   Prisma,
@@ -162,42 +163,62 @@ async function _actionCreateUserActionLetter(input: Input) {
         person: dtsiPerson,
       })
 
-      let toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName
-      let fullOfficeAddress: string
-
-      if (quorumPolitician) {
-        // Fetch full address data from Quorum
-        const addressData = await getQuorumPoliticianAddress(quorumPolitician.id)
-
-        if (addressData?.officeAddress) {
-          // Use structured address components from Quorum
-          toAddress = {
-            firstName: dtsiPerson.firstName || 'Representative',
-            lastName: dtsiPerson.lastName || 'Unknown',
-            addressLine1: addressData.officeAddress.street1 || 'Parliament House',
-            ...(addressData.officeAddress.street2 && {
-              addressLine2: addressData.officeAddress.street2,
-            }),
-            city: addressData.officeAddress.city || 'Canberra',
-            provinceOrState: addressData.officeAddress.state || 'ACT',
-            postalOrZip: addressData.officeAddress.zipcode || '2600',
-            countryCode: 'AU',
-          }
-          fullOfficeAddress = addressData.address || 'Address unavailable'
-        } else {
-          // Fallback if Quorum doesn't have structured address
-          logger.warn(
-            `No structured address from Quorum for ${dtsiPerson.slug}, using fallback`,
-          )
-          toAddress = buildFallbackAddress(dtsiPerson)
-          fullOfficeAddress = 'Parliament House, Canberra, ACT 2600, Australia'
-        }
-      } else {
-        // Fallback if no Quorum match found
-        logger.warn(`No Quorum match for ${dtsiPerson.slug}, using fallback address`)
-        toAddress = buildFallbackAddress(dtsiPerson)
-        fullOfficeAddress = 'Parliament House, Canberra, ACT 2600, Australia'
+      if (!quorumPolitician) {
+        const error = new Error(`No Quorum politician match found for ${dtsiPerson.slug}`)
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'letter-action',
+            countryCode,
+            issue: 'missing-quorum-match',
+          },
+          extra: {
+            dtsiSlug: dtsiPerson.slug,
+            dtsiPerson,
+            campaignName,
+          },
+        })
+        throw error
       }
+
+      // Fetch full address data from Quorum
+      const addressData = await getQuorumPoliticianAddress(quorumPolitician.id)
+
+      if (!addressData?.officeAddress) {
+        const error = new Error(
+          `No office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`,
+        )
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'letter-action',
+            countryCode,
+            issue: 'missing-office-address',
+          },
+          extra: {
+            dtsiSlug: dtsiPerson.slug,
+            quorumId: quorumPolitician.id,
+            dtsiPerson,
+            campaignName,
+            addressData,
+          },
+        })
+        throw error
+      }
+
+      // Use structured address components from Quorum
+      const toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName = {
+        firstName: dtsiPerson.firstName || 'Representative',
+        lastName: dtsiPerson.lastName || 'Unknown',
+        addressLine1: addressData.officeAddress.street1 || '',
+        ...(addressData.officeAddress.street2 && {
+          addressLine2: addressData.officeAddress.street2,
+        }),
+        city: addressData.officeAddress.city || '',
+        provinceOrState: addressData.officeAddress.state || '',
+        postalOrZip: addressData.officeAddress.zipcode || '',
+        countryCode: 'AU',
+      }
+
+      const fullOfficeAddress = addressData.address || 'Address unavailable'
 
       const letter = await sendLetter({
         to: toAddress,
@@ -398,18 +419,4 @@ async function maybeUpsertUser({
   })
   user.primaryUserEmailAddressId = primaryUserEmailAddressId
   return { user, userState: 'New' }
-}
-
-function buildFallbackAddress(
-  dtsiPerson: Input['dtsiPeople'][0],
-): PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName {
-  return {
-    firstName: dtsiPerson.firstName || 'Representative',
-    lastName: dtsiPerson.lastName || 'Unknown',
-    addressLine1: 'Parliament House',
-    city: 'Canberra',
-    provinceOrState: 'ACT',
-    postalOrZip: '2600',
-    countryCode: 'AU',
-  }
 }
