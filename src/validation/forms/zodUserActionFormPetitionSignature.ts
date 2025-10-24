@@ -88,7 +88,7 @@ export const i18nMessages = createI18nMessages({
   },
 })
 
-export const userActionFormPetitionSignatureI18nMessages = mergeI18nMessages(
+export const zodUserActionFormPetitionSignatureI18nMessages = mergeI18nMessages(
   i18nMessages,
   zodGooglePlacesAutocompletePredictionI18nMessages,
 )

@@ -6,7 +6,6 @@ export const EU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.OPT_IN,
   UserActionType.TWEET,
   UserActionType.REFER,
-  // TODO(EU): Add more action types when EU campaigns are implemented
 ] as const
 
 export type EUActiveClientUserActionWithCampaignType =
@@ -28,8 +27,7 @@ export enum EUUserActionLinkedInCampaignName {
 export type EUUserActionEmailCampaignName = string
 
 export enum EUUserActionSignPetitionCampaignName {
-  // TODO(EU): Add EU-specific campaigns
-  DEFAULT = 'DEFAULT',
+  STRATEGY_FOR_STABLECOINS_2025 = 'eu-pro-innovation-strategy-for-stablecoins',
 }
 
 export interface EUUserActionCampaigns {
@@ -37,7 +35,6 @@ export interface EUUserActionCampaigns {
   [UserActionType.TWEET]: EUUserActionTweetCampaignName
   [UserActionType.REFER]: EUUserActionReferCampaignName
   [UserActionType.LINKEDIN]: EUUserActionLinkedInCampaignName
-  // TODO(EU): Add more action types when campaigns are implemented
   [UserActionType.SIGN_PETITION]: EUUserActionSignPetitionCampaignName
 }
 
@@ -46,6 +43,6 @@ export const EU_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP: EUUserActionCampaigns 
   [UserActionType.TWEET]: EUUserActionTweetCampaignName.DEFAULT,
   [UserActionType.REFER]: EUUserActionReferCampaignName.DEFAULT,
   [UserActionType.LINKEDIN]: EUUserActionLinkedInCampaignName.DEFAULT,
-  // TODO(EU): Add more mappings when campaigns are implemented
-  [UserActionType.SIGN_PETITION]: EUUserActionSignPetitionCampaignName.DEFAULT,
+  [UserActionType.SIGN_PETITION]:
+    EUUserActionSignPetitionCampaignName.STRATEGY_FOR_STABLECOINS_2025,
 }

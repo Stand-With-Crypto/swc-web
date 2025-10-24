@@ -5,6 +5,7 @@ import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recen
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { isValidStateCodeByCountryCode } from '@/utils/shared/stateUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 export function RecentActivityRowAnimatedContainer({
@@ -18,6 +19,11 @@ export function RecentActivityRowAnimatedContainer({
       <div>
         {actions
           .filter(action => {
+            // Bypasses the validation for EU since we use the countries as "states"
+            if (countryCode === SupportedCountryCodes.EU) {
+              return true
+            }
+
             if (action.user.userLocationDetails?.administrativeAreaLevel1) {
               const isValidStateCode = isValidStateCodeByCountryCode(
                 countryCode,

@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
@@ -9,10 +10,12 @@ import { getStaticTranslation } from '@/utils/server/i18n/getStaticTranslation'
 import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   EUUserActionLinkedInCampaignName,
   EUUserActionReferCampaignName,
+  EUUserActionSignPetitionCampaignName,
   EUUserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns/eu/euUserActionCampaigns'
 
@@ -34,6 +37,8 @@ export const i18nMessages = createI18nMessages({
       referCampaignsModalDescription:
         'Share your referral link with friends to help grow our movement.',
       referCampaignDescription: 'You have referred friends to join Stand With Crypto.',
+      signPetitionTitle: 'Sign the petition',
+      signPetitionDescription: 'Set out a pro-innovation strategy for stablecoins in Europe',
     },
     fr: {
       optInTitle: 'Rejoignez Stand With Crypto',
@@ -52,6 +57,9 @@ export const i18nMessages = createI18nMessages({
       referCampaignsModalDescription:
         'Partagez votre lien de parrainage avec vos amis pour aider à développer notre mouvement.',
       referCampaignDescription: 'Vous avez parrainé des amis pour rejoindre Stand With Crypto.',
+      signPetitionTitle: 'Signer la pétition',
+      signPetitionDescription:
+        'Proposez une stratégie pro-innovation pour les stablecoins en Europe',
     },
     de: {
       optInTitle: 'Tritt Stand With Crypto bei',
@@ -71,6 +79,9 @@ export const i18nMessages = createI18nMessages({
       referCampaignsModalDescription:
         'Teile deinen Empfehlungslink mit Freunden, um unsere Bewegung zu vergrößern.',
       referCampaignDescription: 'Du hast Freunde empfohlen, Stand With Crypto beizutreten.',
+      signPetitionTitle: 'Petition unterschreiben',
+      signPetitionDescription:
+        'Schlagen Sie eine pro-Innovation-Strategie für Stablecoins in Europa vor',
     },
   },
 })
@@ -81,6 +92,8 @@ export function getEuUserActionCtasForGridDisplay(
   language = SupportedLanguages.EN,
 ): UserActionGridCTA {
   const { t } = getStaticTranslation(i18nMessages, language, countryCode)
+
+  const urls = getIntlUrls(countryCode, { language })
 
   return {
     [UserActionType.OPT_IN]: {
@@ -172,6 +185,34 @@ export function getEuUserActionCtasForGridDisplay(
               {children}
             </UserActionFormFollowLinkedInDialog>
           ),
+        },
+      ],
+    },
+    [UserActionType.SIGN_PETITION]: {
+      title: t('signPetitionTitle'),
+      description: t('signPetitionDescription'),
+      mobileCTADescription: t('signPetitionDescription'),
+      campaignsModalDescription: t('signPetitionDescription'),
+      image: '/actionTypeIcons/petition.svg',
+      link: ({ children }) => (
+        <Link
+          className="w-full"
+          href={urls.petitionDetails(
+            EUUserActionSignPetitionCampaignName.STRATEGY_FOR_STABLECOINS_2025,
+          )}
+        >
+          {children}
+        </Link>
+      ),
+      campaigns: [
+        {
+          actionType: UserActionType.SIGN_PETITION,
+          campaignName: EUUserActionSignPetitionCampaignName.STRATEGY_FOR_STABLECOINS_2025,
+          isCampaignActive: true,
+          title: t('signPetitionTitle'),
+          description: t('signPetitionDescription'),
+          canBeTriggeredMultipleTimes: true,
+          WrapperComponent: null,
         },
       ],
     },

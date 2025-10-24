@@ -1,7 +1,7 @@
 import { SupportedLanguages } from '@/utils/shared/supportedLocales'
 
 // EU countries and their primary languages
-export const EU_COUNTRY_TO_PRIMARY_LANGUAGE: Record<string, SupportedLanguages> = {
+export const EU_COUNTRY_TO_PRIMARY_LANGUAGE = {
   // German-speaking countries
   at: SupportedLanguages.DE, // Austria
   de: SupportedLanguages.DE, // Germany
@@ -36,7 +36,9 @@ export const EU_COUNTRY_TO_PRIMARY_LANGUAGE: Record<string, SupportedLanguages> 
   si: SupportedLanguages.EN, // Slovenia
   es: SupportedLanguages.EN, // Spain
   se: SupportedLanguages.EN, // Sweden
-}
+} as const
+
+export type EUCountryCode = keyof typeof EU_COUNTRY_TO_PRIMARY_LANGUAGE
 
 export const EU_COUNTRY_CODES = Object.keys(EU_COUNTRY_TO_PRIMARY_LANGUAGE)
 
@@ -45,5 +47,8 @@ export function isEUCountry(countryCode: string): boolean {
 }
 
 export function getEUCountryPrimaryLanguage(countryCode: string): SupportedLanguages {
-  return EU_COUNTRY_TO_PRIMARY_LANGUAGE[countryCode.toLowerCase()] || SupportedLanguages.EN
+  return (
+    EU_COUNTRY_TO_PRIMARY_LANGUAGE[countryCode.toLowerCase() as EUCountryCode] ||
+    SupportedLanguages.EN
+  )
 }

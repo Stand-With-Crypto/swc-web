@@ -3,6 +3,7 @@ import 'server-only'
 import { cookies } from 'next/headers'
 
 import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
+import { isEUCountry } from '@/utils/shared/euCountryMapping'
 import { isValidCountryCode } from '@/utils/shared/isValidCountryCode'
 import {
   DEFAULT_SUPPORTED_COUNTRY_CODE,
@@ -25,8 +26,12 @@ export function createCountryCodeValidation(
       .get(USER_ACCESS_LOCATION_COOKIE_NAME)
       ?.value?.toLowerCase()
 
+    const normalizedUserAccessLocation = isEUCountry(userAccessLocation ?? '')
+      ? SupportedCountryCodes.EU
+      : userAccessLocation
+
     const isValidCountryCodeResults = allowedCountryCodesArray.map(countryCode =>
-      isValidCountryCode({ countryCode, userAccessLocation }),
+      isValidCountryCode({ countryCode, userAccessLocation: normalizedUserAccessLocation }),
     )
 
     if (isValidCountryCodeResults.every(result => !result)) {

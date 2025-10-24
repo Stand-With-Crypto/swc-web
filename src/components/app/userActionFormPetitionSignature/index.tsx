@@ -43,8 +43,8 @@ import {
 } from '@/utils/web/toastUtils'
 import {
   createUserActionFormPetitionSignature,
-  userActionFormPetitionSignatureI18nMessages,
   type UserActionPetitionSignatureValues,
+  zodUserActionFormPetitionSignatureI18nMessages,
 } from '@/validation/forms/zodUserActionFormPetitionSignature'
 
 import { FormContainer } from './container'
@@ -119,7 +119,7 @@ export function UserActionFormPetitionSignature({
   user,
 }: UserActionFormPetitionSignatureProps) {
   const { t } = useTranslation(
-    mergeI18nMessages(i18nMessages, userActionFormPetitionSignatureI18nMessages),
+    mergeI18nMessages(i18nMessages, zodUserActionFormPetitionSignatureI18nMessages),
     'UserActionFormPetitionSignature',
   )
 

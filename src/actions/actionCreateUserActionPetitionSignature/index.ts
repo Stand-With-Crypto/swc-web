@@ -5,6 +5,7 @@ import { Address, User, UserActionType, UserCryptoAddress, UserEmailAddress } fr
 import { waitUntil } from '@vercel/functions'
 import { z, ZodError } from 'zod'
 
+import { userActionFormPetitionSignatureI18nMessages } from '@/actions/actionCreateUserActionPetitionSignature/i18nMessages'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getPetitionCountryCodeValidator } from '@/components/app/userActionFormPetitionSignature/utils/getPetitionCountryCodeValidator'
 import { getPetitionBySlugFromAPI } from '@/data/petitions/getPetitionBySlugFromAPI'
@@ -19,7 +20,6 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
-import { createI18nMessages } from '@/utils/shared/i18n/createI18nMessages'
 import { mergeI18nMessages } from '@/utils/shared/i18n/mergeI18nMessages'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -33,8 +33,8 @@ import { userFullName } from '@/utils/shared/userFullName'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import {
   createUserActionFormPetitionSignatureAction,
-  userActionFormPetitionSignatureI18nMessages,
   type UserActionPetitionSignatureActionValues as Input,
+  zodUserActionFormPetitionSignatureI18nMessages,
 } from '@/validation/forms/zodUserActionFormPetitionSignature'
 
 const logger = getLogger('actionCreateUserActionPetitionSignature')
@@ -62,28 +62,6 @@ type UserWithRelations = User & {
 
 type UserMatch = NonNullable<Awaited<ReturnType<typeof getAuthenticatedUser>>>['userMatch']
 
-export const i18nMessages = createI18nMessages({
-  defaultMessages: {
-    en: {
-      petitionNotFound: 'Petition not found',
-      userNotAuthenticated: 'User must be authenticated to sign petition',
-      wrongCountryCode: 'Address country code does not match petition country code',
-    },
-    de: {
-      petitionNotFound: 'Petition nicht gefunden',
-      userNotAuthenticated:
-        'Der Benutzer muss authentifiziert sein, um eine Petition zu unterzeichnen',
-      wrongCountryCode: 'Die Adressen-Ländercode stimmt nicht mit dem Petition-Ländercode überein',
-    },
-    fr: {
-      petitionNotFound: 'Pétition non trouvée',
-      userNotAuthenticated: "L'utilisateur doit être authentifié pour signer la pétition",
-      wrongCountryCode:
-        "Le code du pays de l'adresse ne correspond pas au code du pays de la pétition",
-    },
-  },
-})
-
 async function _actionCreateUserActionPetitionSignature(
   input: Input,
   { countryCode }: { countryCode: SupportedCountryCodes },
@@ -93,7 +71,10 @@ async function _actionCreateUserActionPetitionSignature(
   const context = await setupActionContext()
 
   const { t } = await getServerTranslation(
-    mergeI18nMessages(i18nMessages, userActionFormPetitionSignatureI18nMessages),
+    mergeI18nMessages(
+      userActionFormPetitionSignatureI18nMessages,
+      zodUserActionFormPetitionSignatureI18nMessages,
+    ),
     'actionCreateUserActionPetitionSignature',
     countryCode,
     context.language,
