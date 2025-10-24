@@ -1,15 +1,6 @@
-import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import type PostGrid from 'postgrid-node'
 
-export interface PostGridLetterAddress {
-  firstName: string
-  lastName: string
-  addressLine1: string
-  addressLine2?: string
-  city: string
-  provinceOrState: string
-  postalOrZip: string
-  countryCode: string
-}
+import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface PostGridOrderMetadata {
   userId: string
@@ -18,9 +9,9 @@ export interface PostGridOrderMetadata {
   dtsiSlug: string
 }
 
-export interface CreateLetterParams {
-  to: PostGridLetterAddress
-  from: PostGridLetterAddress
+export interface SendLetterParams {
+  to: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName
+  from: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName
   templateId: string
   idempotencyKey: string
   metadata: PostGridOrderMetadata
