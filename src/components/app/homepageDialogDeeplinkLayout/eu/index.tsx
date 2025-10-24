@@ -37,7 +37,12 @@ export async function EUHomepageDialogDeeplinkLayout({
       {hidePseudoDialog ? (
         children
       ) : (
-        <PseudoDialog className={className} countryCode={countryCode} size={size}>
+        <PseudoDialog
+          className={className}
+          countryCode={countryCode}
+          language={language}
+          size={size}
+        >
           {children}
         </PseudoDialog>
       )}
