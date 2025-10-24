@@ -240,7 +240,7 @@ export const US_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: USUserActionEmailCampaignName.USDC_REWARDS_SEP_18_2025,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'Email Your Senator',
         description: 'Tell them to protect YOUR rewards',
         canBeTriggeredMultipleTimes: true,
