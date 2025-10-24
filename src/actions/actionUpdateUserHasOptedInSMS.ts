@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
@@ -40,7 +40,7 @@ async function _actionUpdateUserHasOptedInToSMS(
 ) {
   logger.info('triggered')
 
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')
   }

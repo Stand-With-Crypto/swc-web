@@ -3,7 +3,7 @@ import 'server-only'
 import * as Sentry from '@sentry/nextjs'
 import { NextResponse } from 'next/server'
 
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -15,7 +15,7 @@ async function apiResponse() {
     Sentry.captureMessage('Someone tried to access the wiped database detection API in production')
     return { state: 'ok' as const }
   }
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
   if (!authUser) {
     return { state: 'unauthenticated' as const }
   }

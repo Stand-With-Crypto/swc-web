@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { getPollsVotesFromUser } from '@/data/polls/getPollsData'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { zodSupportedCountryCode } from '@/validation/fields/zodSupportedCountryCode'
@@ -23,7 +23,7 @@ export const GET = withRouteMiddleware(async (_: Request, { params }: RequestCon
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
 
   if (!authUser) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 import { waitUntil } from 'node_modules/@vercel/functions/wait-until'
 import { z } from 'zod'
 
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics/serverAnalytics'
@@ -34,7 +34,7 @@ export async function actionUpdateUserCountryCodeWithoutMiddleware(
   countryCode: z.infer<typeof zodSupportedCountryCode>,
 ) {
   const sessionId = await getUserSessionId()
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
 
   if (!authUser) {
     const error = new Error("User's Country Code update failed - Not authenticated")

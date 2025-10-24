@@ -6,6 +6,7 @@ import { cookies } from 'next/headers'
 import { refreshJWT } from 'thirdweb/utils'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
+import { ServerAuthUser } from '@/utils/server/authentication/getAuthUser'
 import {
   THIRDWEB_TOKEN_EXPIRATION_TIME_SECONDS,
   thirdwebAdminAccount,
@@ -14,10 +15,9 @@ import {
 import { logger } from '@/utils/shared/logger'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
-export async function appRouterGetThirdwebAuthUser(): Promise<{
-  userId: string
-  address: string
-} | null> {
+export async function getThirdwebAuthUser(
+  { shouldRevalidateToken } = { shouldRevalidateToken: true },
+): Promise<ServerAuthUser | null> {
   const currentCookies = await cookies()
   const token = currentCookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 
@@ -25,7 +25,10 @@ export async function appRouterGetThirdwebAuthUser(): Promise<{
     return null
   }
 
-  const parsedTokenBody = await getValidatedAuthTokenPayload(token.value)
+  const parsedTokenBody = await getValidatedAuthTokenPayload({
+    cookieToken: token.value,
+    shouldRevalidateToken,
+  })
 
   if (!parsedTokenBody) {
     return null
@@ -39,13 +42,23 @@ export async function appRouterGetThirdwebAuthUser(): Promise<{
   }
 }
 
-async function getValidatedAuthTokenPayload(cookieToken: string) {
+async function getValidatedAuthTokenPayload({
+  cookieToken,
+  shouldRevalidateToken,
+}: {
+  cookieToken: string
+  shouldRevalidateToken: boolean
+}) {
   const currentCookies = await cookies()
   try {
     const jwtToken = await thirdwebAuth.verifyJWT({ jwt: cookieToken })
 
     if (jwtToken.valid) {
       return jwtToken.parsedJWT
+    }
+
+    if (!shouldRevalidateToken) {
+      return null
     }
 
     if (!/^this token expired at/i.test(jwtToken.error)) {

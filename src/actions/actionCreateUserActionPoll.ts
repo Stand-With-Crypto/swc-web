@@ -6,7 +6,7 @@ import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -48,7 +48,7 @@ async function actionCreateUserActionPollWithoutMiddleware(
   const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
 
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
   if (!authUser) {
     const error = new Error('Create User Action Poll - Not authenticated')
     Sentry.captureException(error, {

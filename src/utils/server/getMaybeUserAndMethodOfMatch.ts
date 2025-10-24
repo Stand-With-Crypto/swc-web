@@ -3,7 +3,7 @@ import { Prisma, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 import { GetResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   getUserSessionId,
@@ -44,7 +44,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
   prisma?: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>
 }): Promise<BaseUserAndMethodOfMatch<S, I>> {
   const { include, cursor, distinct, orderBy, skip, take } = prismaConfig || {}
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
   const sessionId =
     // if we got back an auth user, don't throw even if we should because we're gonna match to
     // the auth cookies. I don't know how often this will happen if the root cause is the user blocking cookies
