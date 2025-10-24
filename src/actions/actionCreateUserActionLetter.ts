@@ -27,6 +27,7 @@ import { sendLetter } from '@/utils/server/postgrid/sendLetter'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getQuorumPoliticianAddress } from '@/utils/server/quorum/getQuorumPoliticianAddress'
 import { getQuorumPoliticianByDTSIPerson } from '@/utils/server/quorum/getQuorumPoliticianFromDTSIPerson'
+import type { NormalizedQuorumAddress } from '@/utils/server/quorum/utils/fetchQuorum'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
@@ -149,7 +150,7 @@ async function _actionCreateUserActionLetter(input: Input) {
 
   const recipientResultsWithNulls = await Promise.all(
     validatedFields.data.dtsiPeople.map(async dtsiPerson => {
-      const idempotencyKey = `LETTER:${countryCode}:${campaignName}:${user.id}:${dtsiPerson.slug}`
+      const idempotencyKey = `${user.id}:${campaignName}:${countryCode}:${dtsiPerson.slug}`
 
       const fromAddress = buildPostGridAddress(
         validatedFields.data.firstName,
@@ -157,7 +158,6 @@ async function _actionCreateUserActionLetter(input: Input) {
         address,
       )
 
-      // Get Quorum politician to retrieve office address
       const quorumPolitician = await getQuorumPoliticianByDTSIPerson({
         countryCode,
         person: dtsiPerson,
@@ -167,20 +167,19 @@ async function _actionCreateUserActionLetter(input: Input) {
         ? await getQuorumPoliticianAddress(quorumPolitician.id)
         : undefined
 
-      if (!quorumPolitician || !addressData?.officeAddress) {
+      if (!quorumPolitician || !isValidAddress(addressData?.officeAddress, addressData?.address)) {
         const errorMessage = !quorumPolitician
           ? `No Quorum politician match found for ${dtsiPerson.slug}`
-          : `No office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`
+          : `No valid office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`
 
         Sentry.captureException(new Error(errorMessage), {
           tags: {
-            domain: 'letter-action',
+            domain: 'actionCreateUserActionLetter',
             countryCode,
-            issue: !quorumPolitician ? 'missing-quorum-match' : 'missing-office-address',
+            issue: !quorumPolitician ? 'missing-quorum-politician-match' : 'missing-office-address',
           },
           extra: {
             dtsiSlug: dtsiPerson.slug,
-            dtsiPerson,
             campaignName,
             ...(quorumPolitician && { quorumId: quorumPolitician.id }),
             ...(addressData && { addressData }),
@@ -190,21 +189,16 @@ async function _actionCreateUserActionLetter(input: Input) {
         return null
       }
 
-      // Use structured address components from Quorum
       const toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName = {
-        firstName: dtsiPerson.firstName || 'Representative',
-        lastName: dtsiPerson.lastName || 'Unknown',
-        addressLine1: addressData.officeAddress.street1 || '',
-        ...(addressData.officeAddress.street2 && {
-          addressLine2: addressData.officeAddress.street2,
-        }),
+        firstName: dtsiPerson.firstName,
+        lastName: dtsiPerson.lastName,
+        addressLine1: addressData.officeAddress.street1 || addressData.address || '',
+        countryCode,
+        addressLine2: addressData.officeAddress.street2 || '',
         city: addressData.officeAddress.city || '',
         provinceOrState: addressData.officeAddress.state || '',
         postalOrZip: addressData.officeAddress.zipcode || '',
-        countryCode: 'AU',
       }
-
-      const fullOfficeAddress = addressData.address || 'Address unavailable'
 
       const letter = await sendLetter({
         to: toAddress,
@@ -222,18 +216,15 @@ async function _actionCreateUserActionLetter(input: Input) {
       return {
         letter,
         dtsiPerson,
-        officeAddress: fullOfficeAddress,
+        recipientAddress: addressData.address!, // Safe: validated above
       }
     }),
   )
 
-  // Filter out politicians where address data was unavailable
   const recipientResults = recipientResultsWithNulls.filter(
     (result): result is NonNullable<typeof result> => result !== null,
   )
 
-  // If no recipients have valid addresses, return early
-  // (Individual failures already logged to Sentry)
   if (recipientResults.length === 0) {
     logger.warn('No valid politician addresses found for any recipients')
     waitUntil(beforeFinish())
@@ -264,7 +255,7 @@ async function _actionCreateUserActionLetter(input: Input) {
           userActionLetterRecipients: {
             create: recipientResults.map(result => ({
               dtsiSlug: result.dtsiPerson.slug,
-              officeAddress: result.officeAddress,
+              officeAddress: result.recipientAddress, // Guaranteed to be non-null by validation
               postgridOrderId: result?.letter?.trackingNumber || null,
               userActionLetterStatusUpdates: {
                 create: {
@@ -418,4 +409,20 @@ async function maybeUpsertUser({
   })
   user.primaryUserEmailAddressId = primaryUserEmailAddressId
   return { user, userState: 'New' }
+}
+
+const isValidAddress = (
+  officeAddress: NormalizedQuorumAddress | null | undefined,
+  fullAddress: string | null | undefined,
+): officeAddress is NonNullable<NormalizedQuorumAddress> => {
+  if (!officeAddress || !fullAddress) return false
+  
+  // Require essential fields for mailing
+  const hasEssentialFields =
+    !!officeAddress.street1 &&
+    !!officeAddress.city &&
+    !!officeAddress.state &&
+    !!officeAddress.zipcode
+
+  return hasEssentialFields
 }
