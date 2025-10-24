@@ -255,7 +255,7 @@ async function _actionCreateUserActionLetter(input: Input) {
           userActionLetterRecipients: {
             create: recipientResults.map(result => ({
               dtsiSlug: result.dtsiPerson.slug,
-              officeAddress: result.recipientAddress, // Guaranteed to be non-null by validation
+              officeAddress: result.recipientAddress,
               postgridOrderId: result?.letter?.trackingNumber || null,
               userActionLetterStatusUpdates: {
                 create: {
@@ -416,7 +416,7 @@ const isValidAddress = (
   fullAddress: string | null | undefined,
 ): officeAddress is NonNullable<NormalizedQuorumAddress> => {
   if (!officeAddress || !fullAddress) return false
-  
+
   // Require essential fields for mailing
   const hasEssentialFields =
     !!officeAddress.street1 &&
