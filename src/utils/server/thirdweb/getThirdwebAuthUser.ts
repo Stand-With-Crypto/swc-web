@@ -16,7 +16,7 @@ import { logger } from '@/utils/shared/logger'
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 export async function getThirdwebAuthUser(
-  { isSSR } = { isSSR: false },
+  { shouldRevalidateToken } = { shouldRevalidateToken: true },
 ): Promise<ServerAuthUser | null> {
   const currentCookies = await cookies()
   const token = currentCookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
@@ -27,9 +27,7 @@ export async function getThirdwebAuthUser(
 
   const parsedTokenBody = await getValidatedAuthTokenPayload({
     cookieToken: token.value,
-    // We cannot set and delete cookies in an SSR page, so we should not revalidate the token there.
-    // The token will instead be revalidated when the page loads on the client.
-    shouldRevalidateToken: !isSSR,
+    shouldRevalidateToken,
   })
 
   if (!parsedTokenBody) {

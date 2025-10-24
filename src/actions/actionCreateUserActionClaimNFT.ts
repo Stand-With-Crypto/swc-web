@@ -7,6 +7,7 @@ import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -15,7 +16,6 @@ import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/ser
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { getThirdwebAuthUser } from '@/utils/server/thirdweb/getThirdwebAuthUser'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { getLogger } from '@/utils/shared/logger'
@@ -59,7 +59,7 @@ async function _actionCreateUserActionClaimNFT(input: CreateActionClaimNFTInput)
   const localUser = await parseLocalUserFromCookies()
   const sessionId = await getUserSessionId()
 
-  const authUser = await getThirdwebAuthUser()
+  const authUser = await getAuthUser()
   if (!authUser) {
     const error = new Error('Create User Action Claim NFT - Not authenticated')
     Sentry.captureException(error, {

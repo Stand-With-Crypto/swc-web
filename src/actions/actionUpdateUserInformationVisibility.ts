@@ -5,7 +5,7 @@ import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -21,7 +21,7 @@ export const actionUpdateUserInformationVisibility = withServerActionMiddleware(
 async function _actionUpdateUserInformationVisibility(
   data: z.infer<typeof zodUpdateUserInformationVisibility>,
 ) {
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')
   }

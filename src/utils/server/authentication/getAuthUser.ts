@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getThirdwebAuthUser } from '@/utils/server/thirdweb/getThirdwebAuthUser'
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 export interface ServerAuthUser {
@@ -12,7 +13,20 @@ export interface ServerAuthUser {
   address: string | null
 }
 
-export async function getAuthUser(): Promise<ServerAuthUser | null> {
+/**
+ * Never call this function with shouldRevalidateToken set to true on an SSR page.
+ */
+export async function getAuthUser(
+  { shouldRevalidateToken } = {
+    shouldRevalidateToken: true,
+  },
+): Promise<ServerAuthUser | null> {
+  const thirdwebAuthData = await getThirdwebAuthUser({ shouldRevalidateToken })
+
+  if (thirdwebAuthData) {
+    return thirdwebAuthData
+  }
+
   const currentCookies = await cookies()
 
   const sessionId = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
