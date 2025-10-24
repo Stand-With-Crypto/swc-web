@@ -1,7 +1,6 @@
 'use server'
 import 'server-only'
 
-import * as Sentry from '@sentry/nextjs'
 import {
   Address,
   Prisma,
@@ -14,6 +13,7 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import type PostGrid from 'postgrid-node'
 import { z } from 'zod'
@@ -147,7 +147,7 @@ async function _actionCreateUserActionLetter(input: Input) {
     update: validatedFields.data.address,
   })
 
-  const recipientResults = await Promise.all(
+  const recipientResultsWithNulls = await Promise.all(
     validatedFields.data.dtsiPeople.map(async dtsiPerson => {
       const idempotencyKey = `LETTER:${countryCode}:${campaignName}:${user.id}:${dtsiPerson.slug}`
 
@@ -163,45 +163,31 @@ async function _actionCreateUserActionLetter(input: Input) {
         person: dtsiPerson,
       })
 
-      if (!quorumPolitician) {
-        const error = new Error(`No Quorum politician match found for ${dtsiPerson.slug}`)
-        Sentry.captureException(error, {
+      const addressData = quorumPolitician
+        ? await getQuorumPoliticianAddress(quorumPolitician.id)
+        : undefined
+
+      if (!quorumPolitician || !addressData?.officeAddress) {
+        const errorMessage = !quorumPolitician
+          ? `No Quorum politician match found for ${dtsiPerson.slug}`
+          : `No office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`
+
+        Sentry.captureException(new Error(errorMessage), {
           tags: {
             domain: 'letter-action',
             countryCode,
-            issue: 'missing-quorum-match',
+            issue: !quorumPolitician ? 'missing-quorum-match' : 'missing-office-address',
           },
           extra: {
             dtsiSlug: dtsiPerson.slug,
             dtsiPerson,
             campaignName,
+            ...(quorumPolitician && { quorumId: quorumPolitician.id }),
+            ...(addressData && { addressData }),
           },
         })
-        throw error
-      }
 
-      // Fetch full address data from Quorum
-      const addressData = await getQuorumPoliticianAddress(quorumPolitician.id)
-
-      if (!addressData?.officeAddress) {
-        const error = new Error(
-          `No office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`,
-        )
-        Sentry.captureException(error, {
-          tags: {
-            domain: 'letter-action',
-            countryCode,
-            issue: 'missing-office-address',
-          },
-          extra: {
-            dtsiSlug: dtsiPerson.slug,
-            quorumId: quorumPolitician.id,
-            dtsiPerson,
-            campaignName,
-            addressData,
-          },
-        })
-        throw error
+        return null
       }
 
       // Use structured address components from Quorum
@@ -240,6 +226,19 @@ async function _actionCreateUserActionLetter(input: Input) {
       }
     }),
   )
+
+  // Filter out politicians where address data was unavailable
+  const recipientResults = recipientResultsWithNulls.filter(
+    (result): result is NonNullable<typeof result> => result !== null,
+  )
+
+  // If no recipients have valid addresses, return early
+  // (Individual failures already logged to Sentry)
+  if (recipientResults.length === 0) {
+    logger.warn('No valid politician addresses found for any recipients')
+    waitUntil(beforeFinish())
+    return { user: getClientUser(user) }
+  }
 
   await prismaClient.userAction.create({
     data: {
