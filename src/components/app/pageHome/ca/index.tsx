@@ -57,8 +57,8 @@ export function CaPageHome({
             <TopLevelMetrics.Card
               countryCode={countryCode}
               img="/ca/3d-shield.png"
-              imgAlt="CA advocates"
-              label="CA advocates"
+              imgAlt="Canadian advocates"
+              label="Canadian advocates"
               value={topLevelMetrics.countUsers[countryCode] ?? 0}
             />
             <TopLevelMetrics.Card
