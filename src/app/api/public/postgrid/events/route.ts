@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       })
     },
     {
-      maxRetryTime: 120 * 1000, // 2 minutes
+      maxRetryTime: 60 * 1000, // 1 minute
     },
   )
 
@@ -69,8 +69,9 @@ export async function POST(request: NextRequest) {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
       logger.info('Status already recorded, skipping duplicate', {
         letterId: payload.data.id,
-        status,
         recipientId: recipient.id,
+        userId: payload.data.metadata.userId,
+        status,
       })
     } else {
       throw error
