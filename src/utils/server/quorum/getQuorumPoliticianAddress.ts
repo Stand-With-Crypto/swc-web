@@ -19,8 +19,12 @@ export async function getQuorumPoliticianAddress(
 
   const cachedPoliticianAddress = await redis.get<QuorumPoliticianAddress>(redisCacheKey)
   if (cachedPoliticianAddress) {
-    logger.info(`Found cached address for Quorum ID ${quorumPersonId}`)
-    return cachedPoliticianAddress
+    if (!cachedPoliticianAddress.address || !cachedPoliticianAddress.officeAddress) {
+      logger.info(`Invalid cached address for Quorum ID ${quorumPersonId}`)
+    } else {
+      logger.info(`Found cached address for Quorum ID ${quorumPersonId}`)
+      return cachedPoliticianAddress
+    }
   }
 
   logger.info(`Fetching full Quorum profile for ID ${quorumPersonId} to retrieve address fields`)
@@ -37,7 +41,7 @@ export async function getQuorumPoliticianAddress(
   }
 
   await redis.set(redisCacheKey, addressData, { ex: REDIS_CACHE_TTL_SECONDS })
-  logger.info(`Cached address data for Quorum ID ${quorumPersonId}`)
+  logger.info(`Cached address data for Quorum ID ${quorumPersonId}`, { addressData })
 
   return addressData
 }
