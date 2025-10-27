@@ -84,6 +84,10 @@ export function AUUserActionFormLetter({
       emailAddress: initialValues?.email || user?.primaryUserEmailAddress?.emailAddress || '',
       address: initialValues?.address || userAddress,
       dtsiSlugs: [],
+      senderAddress: {
+        ...campaignMetadata.senderAddress,
+        metadata: { userId: user?.id },
+      },
     },
   })
 
@@ -171,4 +175,3 @@ export function AUUserActionFormLetter({
       return null
   }
 }
-

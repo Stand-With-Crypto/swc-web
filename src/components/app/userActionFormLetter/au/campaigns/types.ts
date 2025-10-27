@@ -1,6 +1,7 @@
 import { GetTextProps } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
 import { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory/au'
+import type { PostGridSenderContact } from '@/validation/fields/zodPostgridAddress'
 
 export interface CampaignMetadata {
   campaignName: AUUserActionLetterCampaignName
@@ -8,5 +9,5 @@ export interface CampaignMetadata {
   dialogSubtitle: string
   politicianCategory: YourPoliticianCategory
   getLetterBodyText: (props?: GetTextProps & { address?: string }) => string
+  senderAddress: Omit<PostGridSenderContact, 'metadata'>
 }
-
