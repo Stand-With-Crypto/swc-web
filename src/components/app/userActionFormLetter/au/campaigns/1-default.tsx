@@ -10,6 +10,7 @@ import {
 } from '@/utils/shared/yourPoliticianCategory/au'
 
 import type { CampaignMetadata } from './types'
+import { AU_USER_ACTION_LETTER_SENDER_ADDRESS } from '@/components/app/userActionFormLetter/au/constants'
 
 const CAMPAIGN_NAME = AUUserActionLetterCampaignName.DEFAULT
 
@@ -48,5 +49,5 @@ export const campaignMetadata: CampaignMetadata = {
   dialogSubtitle: 'Send a physical letter about crypto policy',
   politicianCategory: LETTER_FLOW_POLITICIANS_CATEGORY,
   getLetterBodyText,
+  senderAddress: AU_USER_ACTION_LETTER_SENDER_ADDRESS,
 }
-

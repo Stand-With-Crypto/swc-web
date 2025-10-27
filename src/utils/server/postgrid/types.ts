@@ -1,21 +1,9 @@
-import type PostGrid from 'postgrid-node'
-
 import type { PostgridStatusName } from '@/utils/server/postgrid/contants'
 import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-
-interface PostGridAdvocateContact
-  extends PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName {
-  metadata: {
-    userId: string
-  }
-}
-
-interface PostGridDTSIPersonContact
-  extends PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName {
-  metadata: {
-    dtsiSlug: string
-  }
-}
+import type {
+  PostGridRecipientContact,
+  PostGridSenderContact,
+} from '@/validation/fields/zodPostgridAddress'
 
 export interface PostGridOrderMetadata {
   userId: string
@@ -25,8 +13,8 @@ export interface PostGridOrderMetadata {
 }
 
 export interface SendLetterParams {
-  to: PostGridDTSIPersonContact
-  from: PostGridAdvocateContact
+  to: PostGridRecipientContact
+  from: PostGridSenderContact
   templateId: string
   idempotencyKey: string
   metadata: PostGridOrderMetadata
@@ -44,8 +32,8 @@ export interface PostGridWebhookPayload {
     id: string
     live: boolean
     description: string | null
-    from: PostGridAdvocateContact
-    to: PostGridDTSIPersonContact
+    from: PostGridSenderContact
+    to: PostGridRecipientContact
     metadata: PostGridOrderMetadata
     sendDate: string
     status: PostgridStatusName
