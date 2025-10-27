@@ -15,13 +15,11 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
-import type PostGrid from 'postgrid-node'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
-import { buildPostGridAddress } from '@/utils/server/postgrid/buildLetterAddress'
 import { POSTGRID_STATUS_TO_LETTER_STATUS } from '@/utils/server/postgrid/contants'
 import { sendLetter } from '@/utils/server/postgrid/sendLetter'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -50,6 +48,12 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { withSafeParseWithMetadata } from '@/utils/shared/zod'
+import {
+  type PostGridRecipientContact,
+  type PostGridSenderContact,
+  zodPostGridRecipientAddress,
+  zodPostGridSenderAddress,
+} from '@/validation/fields/zodPostgridAddress'
 import { zodUserActionFormLetterAction } from '@/validation/forms/zodUserActionFormLetter'
 
 const actionType = UserActionType.LETTER
@@ -142,17 +146,7 @@ async function _actionCreateUserActionLetter(input: Input) {
 
   await triggerRateLimiterAtMostOnce()
 
-  const address = await prismaClient.address.upsert({
-    where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-    create: validatedFields.data.address,
-    update: validatedFields.data.address,
-  })
-
-  const fromAddress = buildPostGridAddress(
-    validatedFields.data.firstName,
-    validatedFields.data.lastName,
-    address,
-  )
+  const fromAddress: PostGridSenderContact = validatedFields.data.senderAddress
 
   const recipientResultsWithNulls = await Promise.all(
     validatedFields.data.dtsiPeople.map(dtsiPerson =>
@@ -345,7 +339,7 @@ async function buildLetterToRecipient({
   countryCode: SupportedCountryCodes
   campaignName: string
   userId: string
-  fromAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName
+  fromAddress: PostGridSenderContact
 }): Promise<{
   letter: Awaited<ReturnType<typeof sendLetter>>
   dtsiPerson: Input['dtsiPeople'][number]
@@ -358,11 +352,11 @@ async function buildLetterToRecipient({
     person: dtsiPerson,
   })
 
-  const addressData = quorumPolitician
+  const quorumAddress = quorumPolitician
     ? await getQuorumPoliticianAddress(quorumPolitician.id)
     : undefined
 
-  if (!quorumPolitician || !isValidAddress(addressData?.officeAddress, addressData?.address)) {
+  if (!quorumPolitician || !isValidAddress(quorumAddress?.officeAddress, quorumAddress?.address)) {
     const errorMessage = !quorumPolitician
       ? `No Quorum politician match found for ${dtsiPerson.slug}`
       : `No valid office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`
@@ -376,24 +370,27 @@ async function buildLetterToRecipient({
       extra: {
         dtsiSlug: dtsiPerson.slug,
         campaignName,
-        ...(quorumPolitician && { quorumId: quorumPolitician.id }),
-        ...(addressData && { addressData }),
+        ...(!!quorumPolitician && { quorumId: quorumPolitician.id }),
+        ...(!!quorumAddress && { quorumAddress: JSON.stringify(quorumAddress) }),
       },
     })
 
     return null
   }
 
-  const toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName = {
+  const toAddress: PostGridRecipientContact = zodPostGridRecipientAddress.parse({
     firstName: dtsiPerson.firstName,
     lastName: dtsiPerson.lastName,
-    addressLine1: addressData.officeAddress.street1 || addressData.address || '',
+    addressLine1: quorumAddress.address || quorumAddress.officeAddress.street1,
+    addressLine2: quorumAddress.officeAddress.street2,
+    city: quorumAddress.officeAddress.city,
+    provinceOrState: quorumAddress.officeAddress.state,
+    postalOrZip: quorumAddress.officeAddress.zipcode,
     countryCode,
-    addressLine2: addressData.officeAddress.street2 || '',
-    city: addressData.officeAddress.city || '',
-    provinceOrState: addressData.officeAddress.state || '',
-    postalOrZip: addressData.officeAddress.zipcode || '',
-  }
+    metadata: {
+      dtsiSlug: dtsiPerson.slug,
+    },
+  })
 
   const letter = await sendLetter({
     to: toAddress,
@@ -411,7 +408,7 @@ async function buildLetterToRecipient({
   return {
     letter,
     dtsiPerson,
-    recipientAddress: addressData.address!,
+    recipientAddress: quorumAddress.address!,
   }
 }
 
