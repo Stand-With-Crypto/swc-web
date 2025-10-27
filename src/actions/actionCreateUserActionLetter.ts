@@ -52,8 +52,7 @@ import {
   type PostGridRecipientContact,
   type PostGridSenderContact,
   zodPostGridRecipientAddress,
-  zodPostGridSenderAddress,
-} from '@/validation/fields/zodPostgridAddress'
+} from '@/validation/fields/zodPostGridAddress'
 import { zodUserActionFormLetterAction } from '@/validation/forms/zodUserActionFormLetter'
 
 const actionType = UserActionType.LETTER
@@ -356,6 +355,8 @@ async function buildLetterToRecipient({
     ? await getQuorumPoliticianAddress(quorumPolitician.id)
     : undefined
 
+  logger.info('Found quorum address: ', quorumAddress)
+
   if (!quorumPolitician || !isValidAddress(quorumAddress?.officeAddress, quorumAddress?.address)) {
     const errorMessage = !quorumPolitician
       ? `No Quorum politician match found for ${dtsiPerson.slug}`
@@ -456,7 +457,7 @@ async function createUserAction({
             create: recipients.map(result => ({
               dtsiSlug: result.dtsiPerson.slug,
               officeAddress: result.recipientAddress,
-              postgridOrderId: result?.letter?.trackingNumber || null,
+              postgridOrderId: result?.letter?.id || null,
               userActionLetterStatusUpdates: {
                 create: {
                   status: result?.letter?.status
