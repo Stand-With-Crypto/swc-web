@@ -3,19 +3,18 @@ import * as Sentry from '@sentry/nextjs'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { prismaClient } from '@/utils/server/prismaClient'
 import { mapPostgridStatus } from '@/utils/server/postgrid/mapPostgridStatus'
+import { prismaClient } from '@/utils/server/prismaClient'
 import { redis } from '@/utils/server/redis'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 import {
   PROCESS_POSTGRID_WEBHOOK_EVENTS_EVENT_NAME,
   PROCESS_POSTGRID_WEBHOOK_EVENTS_FUNCTION_ID,
 } from './types'
+import { POSTGRID_EVENTS_REDIS_KEY } from './utils'
 
 const CRON_SCHEDULE = '*/5 * * * *' // Every 5 minutes
-const COUNTRIES_TO_PROCESS = [SupportedCountryCodes.AU]
 
 interface PostGridWebhookEvent {
   id: string
@@ -44,28 +43,23 @@ export const processPostgridWebhookEvents = inngest.createFunction(
       : { event: PROCESS_POSTGRID_WEBHOOK_EVENTS_EVENT_NAME }),
   },
   async ({ step, logger }) => {
-    const results = {
-      totalEventsProcessed: 0,
-      totalStatusUpdates: 0,
+    // Fetch all events from Redis
+    const rawEvents = await step.run('fetch-events', async () => {
+      const events = await redis.lrange(POSTGRID_EVENTS_REDIS_KEY, 0, -1)
+      logger.info(`Fetched ${events.length} events from Redis`)
+      return events
+    })
+
+    if (rawEvents.length === 0) {
+      logger.info('No events to process')
+      return {
+        totalEventsProcessed: 0,
+        totalStatusUpdates: 0,
+      }
     }
 
-    for (const countryCode of COUNTRIES_TO_PROCESS) {
-      const redisKey = `postgrid:webhook:events:${countryCode}`
-
-      // Fetch all events from Redis
-      const rawEvents = await step.run(`fetch-events-${countryCode}`, async () => {
-        const events = await redis.lrange(redisKey, 0, -1)
-        logger.info(`Fetched ${events.length} events from Redis for ${countryCode}`)
-        return events
-      })
-
-      if (rawEvents.length === 0) {
-        logger.info(`No events to process for ${countryCode}`)
-        continue
-      }
-
-      // Parse and deduplicate events
-      const events = await step.run(`parse-events-${countryCode}`, () => {
+    // Parse and deduplicate events
+    const events = await step.run('parse-events', () => {
         const parsed: PostGridWebhookEvent[] = []
         const seenEventIds = new Set<string>()
 
@@ -83,21 +77,23 @@ export const processPostgridWebhookEvents = inngest.createFunction(
           }
         }
 
-        logger.info(`Parsed ${parsed.length} unique events (${rawEvents.length - parsed.length} duplicates removed)`)
-        return parsed
-      })
+      logger.info(
+        `Parsed ${parsed.length} unique events (${rawEvents.length - parsed.length} duplicates removed)`,
+      )
+      return parsed
+    })
 
-      // Group events by letter ID and keep latest status
-      const latestEventByLetterId = new Map<string, PostGridWebhookEvent>()
-      for (const event of events) {
-        const letterId = event.data.id
-        latestEventByLetterId.set(letterId, event)
-      }
+    // Group events by letter ID and keep latest status
+    const latestEventByLetterId = new Map<string, PostGridWebhookEvent>()
+    for (const event of events) {
+      const letterId = event.data.id
+      latestEventByLetterId.set(letterId, event)
+    }
 
-      logger.info(`Processing ${latestEventByLetterId.size} unique letters`)
+    logger.info(`Processing ${latestEventByLetterId.size} unique letters`)
 
-      // Process updates in batches
-      const updateCount = await step.run(`update-database-${countryCode}`, async () => {
+    // Process updates in batches
+    const updateCount = await step.run('update-database', async () => {
         let updates = 0
 
         for (const [letterId, event] of latestEventByLetterId.entries()) {
@@ -139,23 +135,23 @@ export const processPostgridWebhookEvents = inngest.createFunction(
               extra: { letterId, event },
             })
           }
-        }
+      }
 
-        return updates
-      })
+      return updates
+    })
 
-      // Clear processed events from Redis
-      await step.run(`clear-redis-${countryCode}`, async () => {
-        await redis.del(redisKey)
-        logger.info(`Cleared ${rawEvents.length} events from Redis key ${redisKey}`)
-      })
+    // Clear processed events from Redis
+    await step.run('clear-redis', async () => {
+      await redis.del(POSTGRID_EVENTS_REDIS_KEY)
+      logger.info(`Cleared ${rawEvents.length} events from Redis key ${POSTGRID_EVENTS_REDIS_KEY}`)
+    })
 
-      results.totalEventsProcessed += events.length
-      results.totalStatusUpdates += updateCount
+    const results = {
+      totalEventsProcessed: events.length,
+      totalStatusUpdates: updateCount,
     }
 
     logger.info('Webhook processing complete', results)
     return results
   },
 )
-
