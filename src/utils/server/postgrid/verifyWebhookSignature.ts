@@ -1,30 +1,18 @@
-import crypto from 'crypto'
+import { jwtDecode } from 'jwt-decode'
 
+import type { PostGridWebhookPayload } from '@/utils/server/postgrid/types'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
 const POSTGRID_WEBHOOK_SECRET = requiredOutsideLocalEnv(
   process.env.POSTGRID_WEBHOOK_SECRET,
   'POSTGRID_WEBHOOK_SECRET',
-  'PostGrid Webhook Verification',
+  'PostGrid Webhook Events',
 )
 
-export function verifyPostgridWebhookSignature(
-  signature: string | null,
-  payload: string,
-): boolean {
-  if (!POSTGRID_WEBHOOK_SECRET) {
+export function verifyPostgridWebhookSignature(payload: string | undefined) {
+  if (!POSTGRID_WEBHOOK_SECRET || !payload) {
     return false
   }
 
-  if (!signature) {
-    return false
-  }
-
-  const expectedSignature = crypto
-    .createHmac('sha256', POSTGRID_WEBHOOK_SECRET)
-    .update(payload)
-    .digest('hex')
-
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature))
+  return jwtDecode<PostGridWebhookPayload>(payload)
 }
-
