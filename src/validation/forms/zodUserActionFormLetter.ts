@@ -8,7 +8,7 @@ import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstAndLastNames } from '@/validation/fields/zodName'
-import { zodPostGridSenderAddress } from '@/validation/fields/zodPostgridAddress'
+import { zodPostGridSenderAddress } from '@/validation/fields/zodPostGridAddress'
 import { zodYourPoliticianCategory } from '@/validation/fields/zodYourPoliticianCategory'
 
 const GENERIC_ERROR_DESCRIPTION =

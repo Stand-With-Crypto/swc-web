@@ -1,4 +1,4 @@
-import type { PostGridSenderContact } from '@/validation/fields/zodPostgridAddress'
+import type { PostGridSenderContact } from '@/validation/fields/zodPostGridAddress'
 
 /**
  * SUITE 2, LEVEL 1
