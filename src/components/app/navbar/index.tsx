@@ -197,7 +197,7 @@ export function Navbar({
             </div>
           </div>
         </div>
-        <Drawer {...dialogProps} direction="top" shouldScaleBackground>
+        <Drawer {...dialogProps} direction="top" scrollLockTimeout={2000} shouldScaleBackground>
           <DrawerTrigger asChild data-testid="drawer-trigger">
             <button className="p-3 min-[1096px]:hidden">
               <span className="sr-only">Open navigation menu</span>
