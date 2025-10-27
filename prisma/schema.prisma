@@ -661,9 +661,7 @@ model UserActionLetterRecipient {
   postgridOrderId               String?                        @unique @map("postgrid_letter_id")
   userActionLetterStatusUpdates UserActionLetterStatusUpdate[]
 
-  @@unique([userActionLetterId, dtsiSlug])
   @@index([userActionLetterId])
-  @@index([dtsiSlug])
   @@index([postgridOrderId])
   @@map("user_action_letter_recipient")
 }
