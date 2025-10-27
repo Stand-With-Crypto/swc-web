@@ -664,16 +664,18 @@ model UserActionLetterRecipient {
   @@unique([userActionLetterId, dtsiSlug])
   @@index([userActionLetterId])
   @@index([dtsiSlug])
+  @@index([postgridOrderId])
   @@map("user_action_letter_recipient")
 }
 
 model UserActionLetterStatusUpdate {
   id                          String                    @id @default(uuid())
-  recipient                   UserActionLetterRecipient @relation(fields: [userActionLetterRecipientId], references: [id], onDelete: Cascade)
+  userActionLetterRecipient   UserActionLetterRecipient @relation(fields: [userActionLetterRecipientId], references: [id], onDelete: Cascade)
   userActionLetterRecipientId String                    @map("user_action_letter_recipient_id")
   status                      UserActionLetterStatus
   datetimeCreated             DateTime                  @default(now()) @map("datetime_created")
 
+  @@unique([userActionLetterRecipientId, status])
   @@index([userActionLetterRecipientId])
   @@map("user_action_letter_status_update")
 }

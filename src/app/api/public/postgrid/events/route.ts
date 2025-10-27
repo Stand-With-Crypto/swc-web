@@ -1,5 +1,7 @@
+import { Prisma } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
+import pRetry from 'p-retry'
 
 import { mapPostgridStatus } from '@/utils/server/postgrid/mapPostgridStatus'
 import { verifyPostgridWebhookSignature } from '@/utils/server/postgrid/verifyWebhookSignature'
@@ -24,14 +26,22 @@ export async function POST(request: NextRequest) {
   logger.info('Received PostGrid webhook event', {
     eventType: payload.type,
     letterId: payload.data.id,
+    status: payload.data.status,
     ...payload.data.metadata,
   })
 
   const status = mapPostgridStatus(payload.data.status)
 
-  const recipient = await prismaClient.userActionLetterRecipient.findFirst({
-    where: { postgridOrderId: payload.data.id },
-  })
+  const recipient = await pRetry(
+    async () => {
+      return await prismaClient.userActionLetterRecipient.findFirstOrThrow({
+        where: { postgridOrderId: payload.data.id },
+      })
+    },
+    {
+      maxRetryTime: 120 * 1000, // 2 minutes
+    },
+  )
 
   if (!recipient) {
     logger.error('Recipient not found for PostGrid order', { letterId: payload.data.id })
@@ -42,18 +52,30 @@ export async function POST(request: NextRequest) {
     return new NextResponse('Letter recipient not found', { status: 400 })
   }
 
-  await prismaClient.userActionLetterStatusUpdate.create({
-    data: {
-      userActionLetterRecipientId: recipient.id,
-      status,
-    },
-  })
+  try {
+    await prismaClient.userActionLetterStatusUpdate.create({
+      data: {
+        userActionLetterRecipientId: recipient.id,
+        status,
+      },
+    })
 
-  logger.info('Updated status for PostGrid letter', {
-    letterId: payload.data.id,
-    status,
-    recipientId: recipient.id,
-  })
+    logger.info('Updated status for PostGrid letter', {
+      letterId: payload.data.id,
+      recipientId: recipient.id,
+      status,
+    })
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      logger.info('Status already recorded, skipping duplicate', {
+        letterId: payload.data.id,
+        status,
+        recipientId: recipient.id,
+      })
+    } else {
+      throw error
+    }
+  }
 
   return new NextResponse('ok')
 }
