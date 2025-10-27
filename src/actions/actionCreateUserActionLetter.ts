@@ -148,77 +148,22 @@ async function _actionCreateUserActionLetter(input: Input) {
     update: validatedFields.data.address,
   })
 
+  const fromAddress = buildPostGridAddress(
+    validatedFields.data.firstName,
+    validatedFields.data.lastName,
+    address,
+  )
+
   const recipientResultsWithNulls = await Promise.all(
-    validatedFields.data.dtsiPeople.map(async dtsiPerson => {
-      const idempotencyKey = `${user.id}:${campaignName}:${countryCode}:${dtsiPerson.slug}`
-
-      const fromAddress = buildPostGridAddress(
-        validatedFields.data.firstName,
-        validatedFields.data.lastName,
-        address,
-      )
-
-      const quorumPolitician = await getQuorumPoliticianByDTSIPerson({
-        countryCode,
-        person: dtsiPerson,
-      })
-
-      const addressData = quorumPolitician
-        ? await getQuorumPoliticianAddress(quorumPolitician.id)
-        : undefined
-
-      if (!quorumPolitician || !isValidAddress(addressData?.officeAddress, addressData?.address)) {
-        const errorMessage = !quorumPolitician
-          ? `No Quorum politician match found for ${dtsiPerson.slug}`
-          : `No valid office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`
-
-        Sentry.captureException(new Error(errorMessage), {
-          tags: {
-            domain: 'actionCreateUserActionLetter',
-            countryCode,
-            issue: !quorumPolitician ? 'missing-quorum-politician-match' : 'missing-office-address',
-          },
-          extra: {
-            dtsiSlug: dtsiPerson.slug,
-            campaignName,
-            ...(quorumPolitician && { quorumId: quorumPolitician.id }),
-            ...(addressData && { addressData }),
-          },
-        })
-
-        return null
-      }
-
-      const toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName = {
-        firstName: dtsiPerson.firstName,
-        lastName: dtsiPerson.lastName,
-        addressLine1: addressData.officeAddress.street1 || addressData.address || '',
-        countryCode,
-        addressLine2: addressData.officeAddress.street2 || '',
-        city: addressData.officeAddress.city || '',
-        provinceOrState: addressData.officeAddress.state || '',
-        postalOrZip: addressData.officeAddress.zipcode || '',
-      }
-
-      const letter = await sendLetter({
-        to: toAddress,
-        from: fromAddress,
-        templateId: 'template_iUD4isUdA8kz8BpCc3c6F3', // TODO: Add template ID
-        idempotencyKey,
-        metadata: {
-          userId: user.id,
-          campaignName,
-          countryCode,
-          dtsiSlug: dtsiPerson.slug,
-        },
-      })
-
-      return {
-        letter,
+    validatedFields.data.dtsiPeople.map(dtsiPerson =>
+      buildLetterToRecipient({
         dtsiPerson,
-        recipientAddress: addressData.address!, // Safe: validated above
-      }
-    }),
+        countryCode,
+        campaignName,
+        userId: user.id,
+        fromAddress,
+      }),
+    ),
   )
 
   const recipientResults = recipientResultsWithNulls.filter(
@@ -231,51 +176,13 @@ async function _actionCreateUserActionLetter(input: Input) {
     return { user: getClientUser(user) }
   }
 
-  await prismaClient.userAction.create({
-    data: {
-      user: { connect: { id: user.id } },
-      actionType,
-      countryCode,
-      campaignName: validatedFields.data.campaignName,
-      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
-        ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-          }
-        : { userSession: { connect: { id: sessionId } } }),
-      userActionLetter: {
-        create: {
-          firstName: validatedFields.data.firstName,
-          lastName: validatedFields.data.lastName,
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-              create: validatedFields.data.address,
-            },
-          },
-          userActionLetterRecipients: {
-            create: recipientResults.map(result => ({
-              dtsiSlug: result.dtsiPerson.slug,
-              officeAddress: result.recipientAddress,
-              postgridOrderId: result?.letter?.trackingNumber || null,
-              userActionLetterStatusUpdates: {
-                create: {
-                  status: result?.letter?.status
-                    ? POSTGRID_STATUS_TO_LETTER_STATUS[result.letter.status]
-                    : UserActionLetterStatus.UNKNOWN,
-                },
-              },
-            })),
-          },
-        },
-      },
-    },
-    include: {
-      userActionLetter: {
-        include: {
-          userActionLetterRecipients: true,
-        },
-      },
-    },
+  await createUserAction({
+    user,
+    sessionId,
+    userMatch,
+    countryCode,
+    recipients: recipientResults,
+    formData: validatedFields.data,
   })
 
   analytics.trackUserActionCreated({
@@ -425,4 +332,152 @@ const isValidAddress = (
     !!officeAddress.zipcode
 
   return hasEssentialFields
+}
+
+async function buildLetterToRecipient({
+  dtsiPerson,
+  countryCode,
+  campaignName,
+  userId,
+  fromAddress,
+}: {
+  dtsiPerson: Input['dtsiPeople'][number]
+  countryCode: SupportedCountryCodes
+  campaignName: string
+  userId: string
+  fromAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName
+}): Promise<{
+  letter: Awaited<ReturnType<typeof sendLetter>>
+  dtsiPerson: Input['dtsiPeople'][number]
+  recipientAddress: string
+} | null> {
+  const idempotencyKey = `${userId}:${campaignName}:${countryCode}:${dtsiPerson.slug}`
+
+  const quorumPolitician = await getQuorumPoliticianByDTSIPerson({
+    countryCode,
+    person: dtsiPerson,
+  })
+
+  const addressData = quorumPolitician
+    ? await getQuorumPoliticianAddress(quorumPolitician.id)
+    : undefined
+
+  if (!quorumPolitician || !isValidAddress(addressData?.officeAddress, addressData?.address)) {
+    const errorMessage = !quorumPolitician
+      ? `No Quorum politician match found for ${dtsiPerson.slug}`
+      : `No valid office address available from Quorum for ${dtsiPerson.slug} (Quorum ID: ${quorumPolitician.id})`
+
+    Sentry.captureException(new Error(errorMessage), {
+      tags: {
+        domain: 'actionCreateUserActionLetter',
+        countryCode,
+        issue: !quorumPolitician ? 'missing-quorum-politician-match' : 'missing-office-address',
+      },
+      extra: {
+        dtsiSlug: dtsiPerson.slug,
+        campaignName,
+        ...(quorumPolitician && { quorumId: quorumPolitician.id }),
+        ...(addressData && { addressData }),
+      },
+    })
+
+    return null
+  }
+
+  const toAddress: PostGrid.Contacts.ContactCreateParams.ContactCreateWithFirstName = {
+    firstName: dtsiPerson.firstName,
+    lastName: dtsiPerson.lastName,
+    addressLine1: addressData.officeAddress.street1 || addressData.address || '',
+    countryCode,
+    addressLine2: addressData.officeAddress.street2 || '',
+    city: addressData.officeAddress.city || '',
+    provinceOrState: addressData.officeAddress.state || '',
+    postalOrZip: addressData.officeAddress.zipcode || '',
+  }
+
+  const letter = await sendLetter({
+    to: toAddress,
+    from: fromAddress,
+    templateId: 'template_iUD4isUdA8kz8BpCc3c6F3', // TODO: Add template ID
+    idempotencyKey,
+    metadata: {
+      userId,
+      campaignName,
+      countryCode,
+      dtsiSlug: dtsiPerson.slug,
+    },
+  })
+
+  return {
+    letter,
+    dtsiPerson,
+    recipientAddress: addressData.address!,
+  }
+}
+
+async function createUserAction({
+  user,
+  sessionId,
+  userMatch,
+  countryCode,
+  recipients,
+  formData,
+}: {
+  user: UserWithRelations
+  sessionId: string
+  userMatch: Awaited<ReturnType<typeof getMaybeUserAndMethodOfMatch>>
+  countryCode: SupportedCountryCodes
+  recipients: Array<{
+    letter: Awaited<ReturnType<typeof sendLetter>>
+    dtsiPerson: Input['dtsiPeople'][number]
+    recipientAddress: string
+  }>
+  formData: Input
+}) {
+  await prismaClient.userAction.create({
+    data: {
+      user: { connect: { id: user.id } },
+      actionType,
+      countryCode,
+      campaignName: formData.campaignName,
+      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
+        ? {
+            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+          }
+        : { userSession: { connect: { id: sessionId } } }),
+      userActionLetter: {
+        create: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: formData.address.googlePlaceId },
+              create: formData.address,
+            },
+          },
+          userActionLetterRecipients: {
+            create: recipients.map(result => ({
+              dtsiSlug: result.dtsiPerson.slug,
+              officeAddress: result.recipientAddress,
+              postgridOrderId: result?.letter?.trackingNumber || null,
+              userActionLetterStatusUpdates: {
+                create: {
+                  status: result?.letter?.status
+                    ? POSTGRID_STATUS_TO_LETTER_STATUS[result.letter.status]
+                    : UserActionLetterStatus.UNKNOWN,
+                },
+              },
+            })),
+          },
+        },
+      },
+    },
+    include: {
+      userActionLetter: {
+        include: {
+          userActionLetterRecipients: true,
+        },
+      },
+    },
+  })
 }
