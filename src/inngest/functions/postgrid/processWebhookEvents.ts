@@ -60,22 +60,22 @@ export const processPostgridWebhookEvents = inngest.createFunction(
 
     // Parse and deduplicate events
     const events = await step.run('parse-events', () => {
-        const parsed: PostGridWebhookEvent[] = []
-        const seenEventIds = new Set<string>()
+      const parsed: PostGridWebhookEvent[] = []
+      const seenEventIds = new Set<string>()
 
-        for (const rawEvent of rawEvents) {
-          try {
-            const event = JSON.parse(rawEvent) as PostGridWebhookEvent
-            if (!seenEventIds.has(event.id)) {
-              parsed.push(event)
-              seenEventIds.add(event.id)
-            }
-          } catch (error) {
-            logger.error('Failed to parse event', {
-              error: error instanceof Error ? error.message : String(error),
-            })
+      for (const rawEvent of rawEvents) {
+        try {
+          const event = JSON.parse(rawEvent) as PostGridWebhookEvent
+          if (!seenEventIds.has(event.id)) {
+            parsed.push(event)
+            seenEventIds.add(event.id)
           }
+        } catch (error) {
+          logger.error('Failed to parse event', {
+            error: error instanceof Error ? error.message : String(error),
+          })
         }
+      }
 
       logger.info(
         `Parsed ${parsed.length} unique events (${rawEvents.length - parsed.length} duplicates removed)`,
@@ -94,47 +94,47 @@ export const processPostgridWebhookEvents = inngest.createFunction(
 
     // Process updates in batches
     const updateCount = await step.run('update-database', async () => {
-        let updates = 0
+      let updates = 0
 
-        for (const [letterId, event] of latestEventByLetterId.entries()) {
-          try {
-            const status = mapPostgridStatus(event.data.status)
+      for (const [letterId, event] of latestEventByLetterId.entries()) {
+        try {
+          const status = mapPostgridStatus(event.data.status)
 
-            if (status === UserActionLetterStatus.UNKNOWN) {
-              logger.warn(`Unknown PostGrid status: ${event.data.status}`, { letterId })
-              continue
-            }
-
-            // Find the recipient by postgridOrderId
-            const recipient = await prismaClient.userActionLetterRecipient.findUnique({
-              where: { postgridOrderId: letterId },
-            })
-
-            if (!recipient) {
-              logger.warn(`Recipient not found for PostGrid order ${letterId}`)
-              continue
-            }
-
-            // Create status update record under recipient
-            await prismaClient.userActionLetterStatusUpdate.create({
-              data: {
-                userActionLetterRecipientId: recipient.id,
-                status,
-              },
-            })
-
-            updates++
-            logger.info(`Updated status for letter ${letterId} to ${status}`)
-          } catch (error) {
-            logger.error('Failed to process event', {
-              letterId,
-              error: error instanceof Error ? error.message : String(error),
-            })
-            Sentry.captureException(error, {
-              tags: { domain: 'postgrid.processWebhookEvents' },
-              extra: { letterId, event },
-            })
+          if (status === UserActionLetterStatus.UNKNOWN) {
+            logger.warn(`Unknown PostGrid status: ${event.data.status}`, { letterId })
+            continue
           }
+
+          // Find the recipient by postgridOrderId
+          const recipient = await prismaClient.userActionLetterRecipient.findUnique({
+            where: { postgridOrderId: letterId },
+          })
+
+          if (!recipient) {
+            logger.warn(`Recipient not found for PostGrid order ${letterId}`)
+            continue
+          }
+
+          // Create status update record under recipient
+          await prismaClient.userActionLetterStatusUpdate.create({
+            data: {
+              userActionLetterRecipientId: recipient.id,
+              status,
+            },
+          })
+
+          updates++
+          logger.info(`Updated status for letter ${letterId} to ${status}`)
+        } catch (error) {
+          logger.error('Failed to process event', {
+            letterId,
+            error: error instanceof Error ? error.message : String(error),
+          })
+          Sentry.captureException(error, {
+            tags: { domain: 'postgrid.processWebhookEvents' },
+            extra: { letterId, event },
+          })
+        }
       }
 
       return updates
