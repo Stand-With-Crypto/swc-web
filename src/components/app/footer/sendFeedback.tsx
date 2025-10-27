@@ -13,7 +13,13 @@ import {
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useDialog } from '@/hooks/useDialog'
 
-export function SendFeedbackButton({ href }: { href: string }) {
+export function SendFeedbackButton({
+  href,
+  showIntlDisclaimer,
+}: {
+  href: string
+  showIntlDisclaimer: boolean
+}) {
   const dialogProps = useDialog({ analytics: 'Send-Feedback-Dialog' })
   const [copiedValue, handleCopyToClipboard] = useCopyTextToClipboard()
 
@@ -40,6 +46,15 @@ export function SendFeedbackButton({ href }: { href: string }) {
           >
             {copiedValue ? 'Copied!' : 'Copy email to clipboard'}
           </Button>
+          {showIntlDisclaimer && (
+            <p className="mt-2 text-center text-sm text-muted-foreground">
+              <Balancer>
+                This email address is monitored by SWC International Ltd. and its service providers.
+                Any information submitted to this email is subject to SWC International Ltd.'s
+                Privacy Policy.
+              </Balancer>
+            </p>
+          )}
         </DialogBody>
       </DialogContent>
     </Dialog>

@@ -63,7 +63,12 @@ export function Footer({
                     {text}
                   </ExternalLink>
                 ))}
-                {sendFeedbackLink && <SendFeedbackButton href={sendFeedbackLink} />}
+                {sendFeedbackLink && (
+                  <SendFeedbackButton
+                    href={sendFeedbackLink}
+                    showIntlDisclaimer={countryCode !== SupportedCountryCodes.US}
+                  />
+                )}
               </div>
               <div className="space-y-3 sm:space-y-6">
                 {links.map(({ text, href }) => (
