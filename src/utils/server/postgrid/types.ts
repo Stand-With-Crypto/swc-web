@@ -3,7 +3,7 @@ import type { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import type {
   PostGridRecipientContact,
   PostGridSenderContact,
-} from '@/validation/fields/zodPostgridAddress'
+} from '@/validation/fields/zodPostGridAddress'
 
 export interface PostGridOrderMetadata {
   userId: string

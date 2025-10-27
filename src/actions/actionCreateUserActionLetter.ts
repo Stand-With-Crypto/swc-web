@@ -52,8 +52,7 @@ import {
   type PostGridRecipientContact,
   type PostGridSenderContact,
   zodPostGridRecipientAddress,
-  zodPostGridSenderAddress,
-} from '@/validation/fields/zodPostgridAddress'
+} from '@/validation/fields/zodPostGridAddress'
 import { zodUserActionFormLetterAction } from '@/validation/forms/zodUserActionFormLetter'
 
 const actionType = UserActionType.LETTER
