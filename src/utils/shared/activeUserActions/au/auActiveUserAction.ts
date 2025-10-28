@@ -5,5 +5,6 @@ const _AU_ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.TWEET,
   UserActionType.LINKEDIN,
   UserActionType.VIEW_KEY_PAGE,
+  UserActionType.LETTER,
 ] as const
 export type AUActiveClientUserActionType = (typeof _AU_ACTIVE_CLIENT_USER_ACTION_TYPES)[number]

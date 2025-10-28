@@ -24,7 +24,6 @@ export function UserActionFormLetter(props: UserActionFormLetterProps) {
       description: '',
       place_id: '',
     },
-    email: '',
     firstName: '',
     lastName: '',
   })
@@ -72,4 +71,3 @@ export function UserActionFormLetter(props: UserActionFormLetterProps) {
     </Suspense>
   )
 }
-

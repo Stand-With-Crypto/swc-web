@@ -9,7 +9,7 @@ import { zodUserActionFormLetterFields } from '@/validation/forms/zodUserActionF
 export interface UserActionFormLetterPropsBase {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
-  initialValues?: FormFields
+  initialValues?: Partial<FormFields>
 }
 
 export interface UserActionFormLetterProps extends UserActionFormLetterPropsBase {
@@ -24,7 +24,6 @@ export interface FormFields {
     latitude?: number | null
     longitude?: number | null
   }
-  email: string
   firstName: string
   lastName: string
 }
@@ -33,4 +32,3 @@ export type LetterActionFormValues = z.infer<typeof zodUserActionFormLetterField
   GenericErrorFormValues
 
 export type LetterActionCampaignNames = AUUserActionLetterCampaignName
-
