@@ -5,7 +5,6 @@ import { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaig
 import { withEnhancedDescription } from '@/utils/shared/zod'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
-import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstAndLastNames } from '@/validation/fields/zodName'
 import { zodPostGridSenderAddress } from '@/validation/fields/zodPostGridAddress'
@@ -15,7 +14,6 @@ const GENERIC_ERROR_DESCRIPTION =
   'We are unable to identify your representative. Please try again or contact support.'
 
 const base = object({
-  emailAddress: zodEmailAddress,
   letterPreview: string(),
   dtsiSlugs: withEnhancedDescription(array(zodDTSISlug).min(1), {
     triggerException: true,
