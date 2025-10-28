@@ -4,4 +4,3 @@ export const SectionNames = {
   LETTER: 'letter',
   SUCCESS: 'success',
 }
-

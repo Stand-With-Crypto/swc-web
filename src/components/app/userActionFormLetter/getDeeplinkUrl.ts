@@ -23,4 +23,3 @@ export function getDeeplinkUrlByCampaignName({ campaignName, countryCode }: Args
 
   return `${getIntlPrefix(countryCode)}/action/letter/${slugifiedCampaignName}`
 }
-

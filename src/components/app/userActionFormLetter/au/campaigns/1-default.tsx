@@ -3,6 +3,7 @@ import {
   getRepIntro,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { AU_USER_ACTION_LETTER_SENDER_ADDRESS } from '@/components/app/userActionFormLetter/au/constants'
 import { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
@@ -10,7 +11,6 @@ import {
 } from '@/utils/shared/yourPoliticianCategory/au'
 
 import type { CampaignMetadata } from './types'
-import { AU_USER_ACTION_LETTER_SENDER_ADDRESS } from '@/components/app/userActionFormLetter/au/constants'
 
 const CAMPAIGN_NAME = AUUserActionLetterCampaignName.DEFAULT
 

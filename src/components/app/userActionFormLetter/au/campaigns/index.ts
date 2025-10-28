@@ -15,4 +15,3 @@ const LETTER_ACTION_CAMPAIGN_NAME_TO_METADATA: Record<
 export function getAULetterActionCampaignMetadata(campaignName: AUUserActionLetterCampaignName) {
   return LETTER_ACTION_CAMPAIGN_NAME_TO_METADATA[campaignName]
 }
-

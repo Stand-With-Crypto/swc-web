@@ -18,34 +18,36 @@ import { getYourPoliticianCategoryDisplayName } from '@/utils/shared/yourPolitic
 import type { YourPoliticianCategory } from '@/validation/fields/zodYourPoliticianCategory'
 
 const orderedStatuses: Array<{
-  key: UserActionLetterStatus
+  status: UserActionLetterStatus
   title: string
   description: string
 }> = [
   {
-    key: UserActionLetterStatus.READY,
+    status: UserActionLetterStatus.READY,
     title: 'Order created',
     description:
       'Your letter order has been created and queued. Printing will begin in the next business day.',
   },
   {
-    key: UserActionLetterStatus.PRINTING,
+    status: UserActionLetterStatus.PRINTING,
     title: 'Printing ',
     description: 'Your letter is being printed.',
   },
   {
-    key: UserActionLetterStatus.PROCESSED_FOR_DELIVERY,
+    status: UserActionLetterStatus.PROCESSED_FOR_DELIVERY,
     title: 'In transit',
     description: 'Your letter has been handed off for delivery.',
   },
   {
-    key: UserActionLetterStatus.COMPLETED,
+    status: UserActionLetterStatus.COMPLETED,
     title: 'Delivered',
     description: 'Your letter has been delivered.',
   },
 ]
 
-function buildRecipientPlotPoints(recipient: LetterAction['userActionLetterRecipients'][number]) {
+function buildRecipientPlotPoints(
+  recipient: LetterAction['userActionLetterRecipients'][number],
+): TimelinePlotPoint[] {
   const updates = [...recipient.userActionLetterStatusUpdates]
     .map(update => ({
       ...update,
@@ -53,26 +55,25 @@ function buildRecipientPlotPoints(recipient: LetterAction['userActionLetterRecip
     }))
     .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())
 
-  const current = updates[updates.length - 1]?.status
-  const currentIdx = Math.max(
-    0,
-    orderedStatuses.findIndex(s => s.key === current),
-  )
+  const currentStatus = updates[updates.length - 1]?.status
 
   const timestamps: Record<UserActionLetterStatus, Date | null> = {} as any
-  orderedStatuses.forEach(status => {
-    const update = updates.find(u => u.status === status.key)
-    timestamps[status.key] = update ? new Date(update.timestamp) : null
+  orderedStatuses.forEach(step => {
+    const update = updates.find(u => u.status === step.status)
+    timestamps[step.status] = update ? new Date(update.timestamp) : null
   })
 
   const plotPoints: TimelinePlotPoint[] = orderedStatuses.map((step, index) => ({
     id: index,
     title: step.title,
     description: step.description,
-    isHighlighted: index === currentIdx,
+    isHighlighted: step.status === currentStatus,
     isMajorMilestone: true,
-    status: index <= currentIdx ? TimelinePlotPointStatus.PASSED : TimelinePlotPointStatus.PENDING,
-    date: timestamps[step.key],
+    status:
+      step.status === currentStatus
+        ? TimelinePlotPointStatus.INTRODUCED
+        : TimelinePlotPointStatus.PENDING,
+    date: timestamps[step.status],
   }))
 
   return plotPoints
