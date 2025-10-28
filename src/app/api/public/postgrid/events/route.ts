@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
       data: {
         userActionLetterRecipientId: recipient.id,
         status,
+        postgridUpdatedAt: new Date(payload.data.updatedAt),
       },
     })
 
@@ -64,6 +65,7 @@ export async function POST(request: NextRequest) {
       letterId: payload.data.id,
       recipientId: recipient.id,
       status,
+      postgridUpdatedAt: payload.data.updatedAt,
     })
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
