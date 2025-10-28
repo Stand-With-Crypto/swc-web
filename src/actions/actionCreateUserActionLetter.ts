@@ -10,7 +10,6 @@ import {
   UserActionType,
   UserCryptoAddress,
   UserEmailAddress,
-  UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
@@ -188,7 +187,6 @@ async function _actionCreateUserActionLetter(input: Input) {
   })
   peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
-    $email: validatedFields.data.emailAddress,
     $name: userFullName(validatedFields.data),
   })
 
@@ -211,23 +209,12 @@ async function maybeUpsertUser({
   onUpsertUser: () => Promise<void> | void
   countryCode: string
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
-  const { firstName, lastName, emailAddress, address } = input
+  const { firstName, lastName, address } = input
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
       ...(firstName && firstName !== existingUser.firstName && { firstName }),
       ...(lastName && lastName !== existingUser.lastName && { lastName }),
-      ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
-      ...(emailAddress &&
-        existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
-          userEmailAddresses: {
-            create: {
-              emailAddress,
-              isVerified: false,
-              source: UserEmailAddressSource.USER_ENTERED,
-            },
-          },
-        }),
       ...(address &&
         existingUser.address?.googlePlaceId !== address.googlePlaceId && {
           address: {
@@ -254,16 +241,6 @@ async function maybeUpsertUser({
         address: true,
       },
     })
-
-    if (!user.primaryUserEmailAddressId && emailAddress) {
-      const newEmail = user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)!
-      logger.info(`updating primary email`)
-      await prismaClient.user.update({
-        where: { id: user.id },
-        data: { primaryUserEmailAddressId: newEmail.id },
-      })
-      user.primaryUserEmailAddressId = newEmail.id
-    }
     return { user, userState: 'Existing With Updates' }
   }
 
@@ -279,18 +256,11 @@ async function maybeUpsertUser({
       referralId: generateReferralId(),
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       userSessions: { create: { id: sessionId } },
-      hasOptedInToEmails: true,
+      hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       smsStatus: SMSStatus.NOT_OPTED_IN,
       firstName,
       lastName,
-      userEmailAddresses: {
-        create: {
-          emailAddress,
-          isVerified: false,
-          source: UserEmailAddressSource.USER_ENTERED,
-        },
-      },
       address: {
         connectOrCreate: {
           where: { googlePlaceId: address.googlePlaceId },
@@ -300,14 +270,6 @@ async function maybeUpsertUser({
       countryCode,
     },
   })
-  const primaryUserEmailAddressId = user.userEmailAddresses[0].id
-  await prismaClient.user.update({
-    where: { id: user.id },
-    data: {
-      primaryUserEmailAddressId,
-    },
-  })
-  user.primaryUserEmailAddressId = primaryUserEmailAddressId
   return { user, userState: 'New' }
 }
 

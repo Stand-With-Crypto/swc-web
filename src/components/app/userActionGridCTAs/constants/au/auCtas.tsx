@@ -294,20 +294,19 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     ],
   },
   [UserActionType.LETTER]: {
-    title: 'Send a letter to your MP',
-    description: 'Send a physical letter to your member of Parliament about crypto policy.',
-    mobileCTADescription: 'Send a physical letter to your MP',
-    campaignsModalDescription:
-      'Send a physical letter to your member of Parliament about crypto policy.',
+    title: 'Send an official letter',
+    description: 'Send a real physical letter to your local policymaker',
+    mobileCTADescription: 'Send a real physical letter to your local policymaker',
+    campaignsModalDescription: 'Send a real physical letter to your local policymaker',
     image: '/au/actionTypeIcons/email.png',
     campaigns: [
       {
         actionType: UserActionType.LETTER,
         campaignName: AUUserActionLetterCampaignName.DEFAULT,
         isCampaignActive: true,
-        title: 'Send a letter to your MP',
-        description: 'Send a physical letter advocating for responsible crypto policy.',
-        canBeTriggeredMultipleTimes: false,
+        title: 'Send an official letter',
+        description: 'Send a real physical letter to your local policymaker',
+        canBeTriggeredMultipleTimes: true,
         WrapperComponent: getLetterActionWrapperComponentByCampaignName({
           countryCode,
           campaignName: AUUserActionLetterCampaignName.DEFAULT,

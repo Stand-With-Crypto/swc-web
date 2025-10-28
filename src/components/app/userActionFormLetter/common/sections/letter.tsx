@@ -4,8 +4,8 @@ import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { ANALYTICS_NAME_USER_ACTION_FORM_LETTER } from '@/components/app/userActionFormLetter/common/constants'
 import { GetTextProps } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
+import { ANALYTICS_NAME_USER_ACTION_FORM_LETTER } from '@/components/app/userActionFormLetter/common/constants'
 import { LetterActionFormValues } from '@/components/app/userActionFormLetter/common/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -42,9 +42,8 @@ export function Letter({ children }: { children: ReactNode }) {
 interface LetterFormProps {
   children: ReactNode
   form: UseFormReturn<LetterActionFormValues>
-  onSubmit: (data: LetterActionFormValues) => Promise<void>
 }
-Letter.Form = function LetterForm({ children, form, onSubmit }: LetterFormProps) {
+Letter.Form = function LetterForm({ children, form }: LetterFormProps) {
   const isDesktop = useIsDesktop()
   const { setFocus } = form
 
@@ -54,33 +53,35 @@ Letter.Form = function LetterForm({ children, form, onSubmit }: LetterFormProps)
     }
   }, [isDesktop, setFocus])
 
-  return (
-    <Form {...form}>
-      <form
-        className="flex h-full flex-col"
-        id={ANALYTICS_NAME_USER_ACTION_FORM_LETTER}
-        onSubmit={form.handleSubmit(
-          onSubmit,
-          trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_LETTER),
-        )}
-      >
-        <ScrollArea className="overflow-auto">
-          <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>{children}</div>
-        </ScrollArea>
-      </form>
+  return <Form {...form}>{children}</Form>
+}
 
-      <Letter.FormSubmitButton />
-    </Form>
+Letter.FormFields = function FormFields({
+  children,
+  onSubmit,
+}: {
+  children: ReactNode
+  onSubmit: (data: LetterActionFormValues) => Promise<void>
+}) {
+  const { handleSubmit } = useFormContext<LetterActionFormValues>()
+
+  return (
+    <form
+      className="flex h-full flex-col"
+      id={ANALYTICS_NAME_USER_ACTION_FORM_LETTER}
+      onSubmit={handleSubmit(
+        onSubmit,
+        trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_LETTER),
+      )}
+    >
+      <ScrollArea className="overflow-auto">
+        <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>{children}</div>
+      </ScrollArea>
+    </form>
   )
 }
 
-Letter.Heading = function Heading({
-  title,
-  subtitle,
-}: {
-  title: string
-  subtitle: string
-}) {
+Letter.Heading = function Heading({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <div className="space-y-4 md:space-y-8">
       <PageTitle size="sm">{title}</PageTitle>
@@ -122,22 +123,9 @@ Letter.PersonalInformationFields = function PersonalInformation() {
       />
       <FormField
         control={control}
-        name="emailAddress"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Email</FormLabel>
-            <FormControl>
-              <Input placeholder="Your email" {...field} />
-            </FormControl>
-            <FormErrorMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={control}
         name="address"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="col-span-2">
             <FormLabel>Address</FormLabel>
             <FormControl>
               <GooglePlacesSelect
@@ -297,21 +285,26 @@ Letter.Preview = function Preview({ getLetterBodyText }: PreviewProps) {
   )
 }
 
-Letter.Disclaimer = function Disclaimer({
-  countryCode,
-}: {
-  countryCode: SupportedCountryCodes
-}) {
+Letter.FormFooter = function FormFooter({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className="z-10 mt-auto flex w-full flex-col items-center justify-center gap-4 border border-t p-6 md:px-12"
+      style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
+    >
+      {children}
+    </div>
+  )
+}
+
+Letter.Disclaimer = function Disclaimer({ countryCode }: { countryCode: SupportedCountryCodes }) {
   const urls = getIntlUrls(countryCode)
 
   return (
-    <div>
-      <p className="text-xs text-fontcolor-muted">
-        By submitting, I understand that Stand With Crypto and its vendors may collect and use my
-        personal information subject to the{' '}
-        <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink>.
-      </p>
-    </div>
+    <p className="text-center text-xs text-fontcolor-muted sm:max-w-md">
+      By submitting, I understand that Stand With Crypto and its vendors may collect and use my
+      personal information subject to the{' '}
+      <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink>.
+    </p>
   )
 }
 
@@ -319,20 +312,14 @@ Letter.FormSubmitButton = function FormSubmitButton() {
   const { formState } = useFormContext<LetterActionFormValues>()
 
   return (
-    <div
-      className="z-10 mt-auto flex flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
-      style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
+    <Button
+      className="w-full sm:max-w-md"
+      disabled={formState.isSubmitting}
+      form={ANALYTICS_NAME_USER_ACTION_FORM_LETTER}
+      size="lg"
+      type="submit"
     >
-      <Button
-        className="w-full sm:max-w-md"
-        disabled={formState.isSubmitting}
-        form={ANALYTICS_NAME_USER_ACTION_FORM_LETTER}
-        size="lg"
-        type="submit"
-      >
-        Send letter
-      </Button>
-    </div>
+      Send letter
+    </Button>
   )
 }
-

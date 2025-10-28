@@ -81,7 +81,6 @@ export function AUUserActionFormLetter({
       politicianCategory: campaignMetadata.politicianCategory,
       firstName: initialValues?.firstName || user?.firstName || '',
       lastName: initialValues?.lastName || user?.lastName || '',
-      emailAddress: initialValues?.email || user?.primaryUserEmailAddress?.emailAddress || '',
       address: initialValues?.address || userAddress,
       dtsiSlugs: [],
       senderAddress: {
@@ -146,21 +145,27 @@ export function AUUserActionFormLetter({
     case SectionNames.LETTER:
       return (
         <Letter>
-          <Letter.Form form={form} onSubmit={onSubmit}>
-            <Letter.Heading
-              subtitle={campaignMetadata.dialogSubtitle}
-              title={campaignMetadata.dialogTitle}
-            />
-            <Letter.PersonalInformationFields />
-            <Letter.Representatives
-              categoryDisplayName={getAUPoliticianCategoryDisplayName(
-                campaignMetadata.politicianCategory,
-              )}
-              countryCode={countryCode}
-              dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
-            />
-            <Letter.Preview getLetterBodyText={campaignMetadata.getLetterBodyText} />
-            <Letter.Disclaimer countryCode={countryCode} />
+          <Letter.Form form={form}>
+            <Letter.FormFields onSubmit={onSubmit}>
+              <Letter.Heading
+                subtitle={campaignMetadata.dialogSubtitle}
+                title={campaignMetadata.dialogTitle}
+              />
+              <Letter.PersonalInformationFields />
+              <Letter.Representatives
+                categoryDisplayName={getAUPoliticianCategoryDisplayName(
+                  campaignMetadata.politicianCategory,
+                )}
+                countryCode={countryCode}
+                dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
+              />
+              <Letter.Preview getLetterBodyText={campaignMetadata.getLetterBodyText} />
+            </Letter.FormFields>
+
+            <Letter.FormFooter>
+              <Letter.Disclaimer countryCode={countryCode} />
+              <Letter.FormSubmitButton />
+            </Letter.FormFooter>
           </Letter.Form>
         </Letter>
       )
