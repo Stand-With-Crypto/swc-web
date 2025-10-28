@@ -2,9 +2,9 @@ import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
+import { getAULetterActionCampaignMetadata } from '@/components/app/userActionFormLetter/au/campaigns'
 import { Letter } from '@/components/app/userActionFormLetter/common/sections/letter'
 import { LetterActionCampaignNames } from '@/components/app/userActionFormLetter/common/types'
-import { getAULetterActionCampaignMetadata } from '@/components/app/userActionFormLetter/au/campaigns'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { FormItemSkeleton } from '@/components/ui/form'
@@ -98,21 +98,18 @@ export function UserActionFormLetterSkeleton(props: UserActionFormLetterSkeleton
                   </FormItemSkeleton>
                 </div>
               </div>
-
-              <div>
-                <p className="text-xs text-fontcolor-muted">
-                  By submitting, I understand that Stand With Crypto and its vendors may collect
-                  and use my personal information subject to the{' '}
-                  <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink>.
-                </p>
-              </div>
             </div>
           </ScrollArea>
 
           <div
-            className="z-10 flex flex-1 flex-col items-center justify-center gap-4 border border-t p-6 sm:flex-row md:px-12"
+            className="z-10 mt-auto flex w-full flex-col items-center justify-center gap-4 border border-t p-6 md:px-12"
             style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
           >
+            <p className="text-center text-xs text-fontcolor-muted sm:max-w-md">
+              By submitting, I understand that Stand With Crypto and its vendors may collect and use
+              my personal information subject to the{' '}
+              <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink>.
+            </p>
             <Button className="w-full sm:max-w-md" size="lg" type="submit">
               Send letter
             </Button>
@@ -122,4 +119,3 @@ export function UserActionFormLetterSkeleton(props: UserActionFormLetterSkeleton
     </UserActionFormLayout>
   )
 }
-
