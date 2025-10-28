@@ -74,7 +74,7 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Omit<
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
   [UserActionType.LETTER]: {
-    title: 'Your letter is on its way!',
+    title: 'You sent a letter!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
 }
