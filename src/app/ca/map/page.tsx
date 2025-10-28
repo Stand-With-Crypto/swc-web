@@ -10,11 +10,11 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
-const title = 'Crypto advocates in the UK'
+const title = 'Crypto advocates in Canada'
 const description =
-  'See how the community is taking a stand to safeguard the future of crypto in the UK.'
+  'See how the community is taking a stand to safeguard the future of crypto in Canada.'
 
-const countryCode = SupportedCountryCodes.GB
+const countryCode = SupportedCountryCodes.CA
 
 export const metadata: Metadata = {
   ...generateMetadataDetails({

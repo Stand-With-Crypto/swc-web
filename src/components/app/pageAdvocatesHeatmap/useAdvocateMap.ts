@@ -10,6 +10,7 @@ import {
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export interface MapMarker {
@@ -20,6 +21,17 @@ export interface MapMarker {
   datetimeCreated: string
   iconType: AdvocateHeatmapAction
   amountUsd?: number
+}
+
+export function getMapAdministrativeAreaName(
+  countryCode: SupportedCountryCodes,
+  administrativeAreaCode: string,
+) {
+  if (countryCode === SupportedCountryCodes.CA) {
+    return getCAProvinceOrTerritoryNameFromCode(administrativeAreaCode)
+  }
+
+  return administrativeAreaCode
 }
 
 const createMarkersFromActions = (
@@ -51,7 +63,9 @@ const createMarkersFromActions = (
       const administrativeArea = (swcCivicAdministrativeArea ??
         administrativeAreaLevel1) as keyof typeof stateCoords
 
-      if (!administrativeArea || !stateCoords[administrativeArea]) return
+      if (!administrativeArea || !stateCoords[administrativeArea]) {
+        return
+      }
 
       const coordinates = stateCoords[administrativeArea]
 
@@ -79,7 +93,7 @@ const createMarkersFromActions = (
 
         markers.push({
           id: item.id,
-          name: administrativeArea,
+          name: getMapAdministrativeAreaName(countryCode, administrativeArea),
           coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
           actionType: item.actionType,
           datetimeCreated: item.datetimeCreated,

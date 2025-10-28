@@ -36,7 +36,7 @@ export function AdvocatesHeatmapPage({
         'min-h-screen overflow-hidden': isEmbedded,
       })}
     >
-      <section className={'standard-spacing-from-navbar flex flex-col justify-center space-y-9'}>
+      <section className="standard-spacing-from-navbar flex flex-col justify-center space-y-9">
         {title && description ? (
           <div className="flex w-full flex-col items-center justify-center gap-24">
             <div className={`flex flex-col gap-4 ${isEmbedded ? 'text-white' : 'text-black'})`}>

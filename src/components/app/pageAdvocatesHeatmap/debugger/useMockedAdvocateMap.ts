@@ -10,7 +10,10 @@ import {
   AREAS_WITH_SINGLE_MARKER,
   MapProjectionConfig,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { MapMarker } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
+import {
+  getMapAdministrativeAreaName,
+  MapMarker,
+} from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { useCountryCode } from '@/hooks/useCountryCode'
 import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -26,13 +29,15 @@ function applyCoordinatesOffset(
 }
 
 function getMarkerMocker({
-  mapMarkerOffset,
   actions,
   coordinates,
+  countryCode,
+  mapMarkerOffset,
 }: {
-  mapMarkerOffset: number
   actions: Partial<Record<UserActionType, AdvocateHeatmapAction>>
   coordinates: AreaCoordinates
+  countryCode: SupportedCountryCodes
+  mapMarkerOffset: number
 }) {
   const getRandomAction = () => {
     const actionKeys = Object.keys(actions)
@@ -48,11 +53,13 @@ function getMarkerMocker({
       return []
     }
 
+    const administrativeAreaName = getMapAdministrativeAreaName(countryCode, administrativeArea)
+
     if (AREAS_WITH_SINGLE_MARKER.includes(administrativeArea)) {
       return [
         {
           id: '1',
-          name: administrativeArea,
+          name: administrativeAreaName,
           coordinates: applyCoordinatesOffset(administrativeAreaCoords, 0, 0),
           actionType: UserActionType.EMAIL,
           datetimeCreated: '2021-01-01',
@@ -64,7 +71,7 @@ function getMarkerMocker({
     return [
       {
         id: '1',
-        name: administrativeArea,
+        name: administrativeAreaName,
         coordinates: applyCoordinatesOffset(administrativeAreaCoords, 0, 0),
         actionType: UserActionType.EMAIL,
         datetimeCreated: '2021-01-01',
@@ -72,7 +79,7 @@ function getMarkerMocker({
       },
       {
         id: '2',
-        name: administrativeArea,
+        name: administrativeAreaName,
         coordinates: applyCoordinatesOffset(
           administrativeAreaCoords,
           -mapMarkerOffset,
@@ -84,7 +91,7 @@ function getMarkerMocker({
       },
       {
         id: '3',
-        name: administrativeArea,
+        name: administrativeAreaName,
         coordinates: applyCoordinatesOffset(
           administrativeAreaCoords,
           mapMarkerOffset,
@@ -125,9 +132,10 @@ const createMarkersFromActions = ({
   }
 
   const markerMocker = getMarkerMocker({
-    mapMarkerOffset,
     actions,
     coordinates: overrideCoordinates || coordinates,
+    countryCode,
+    mapMarkerOffset,
   })
 
   if (!selectedAreas) {

@@ -29,14 +29,14 @@ export function AdvocateHeatmapActionList({
           : 'w-full items-center rounded-[24px] bg-[#FBF8FF] px-10 py-8',
       )}
     >
-      {!isEmbedded && <strong>Key</strong>}
+      {!isEmbedded && <strong className="w-32">Key</strong>}
       {Object.entries(actions).map(([key, action]) => {
         const ActionIcon = action.icon
 
         return (
           <div
             className={cn(
-              'flex flex-col items-center gap-3 font-sans text-base md:flex-row',
+              'flex flex-1 flex-col items-center gap-3 font-sans text-base md:flex-row',
               isEmbedded ? 'text-white' : 'text-black',
             )}
             key={key}
