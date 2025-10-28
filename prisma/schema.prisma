@@ -672,6 +672,7 @@ model UserActionLetterStatusUpdate {
   userActionLetterRecipientId String                    @map("user_action_letter_recipient_id")
   status                      UserActionLetterStatus
   datetimeCreated             DateTime                  @default(now()) @map("datetime_created")
+  postgridUpdatedAt           DateTime?                 @map("postgrid_updated_at")
 
   @@unique([userActionLetterRecipientId, status])
   @@index([userActionLetterRecipientId])
