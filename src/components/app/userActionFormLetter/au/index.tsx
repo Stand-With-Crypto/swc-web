@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -54,9 +55,17 @@ export function AUUserActionFormLetter({
   const router = useRouter()
   const campaignMetadata = getAULetterActionCampaignMetadata(campaignName)
 
+  const hasCompletedUserActionLetter = useMemo(
+    () =>
+      user?.userActions?.some(
+        a => a.actionType === UserActionType.LETTER && a.campaignName === campaignName,
+      ),
+    [user, campaignName],
+  )
+
   const sectionProps = useSections({
     sections: Object.values(SectionNames),
-    initialSectionId: SectionNames.LETTER,
+    initialSectionId: hasCompletedUserActionLetter ? SectionNames.SUCCESS : SectionNames.LETTER,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_LETTER,
   })
 
@@ -172,7 +181,12 @@ export function AUUserActionFormLetter({
     case SectionNames.SUCCESS:
       return (
         <div className={cn(dialogContentPaddingStyles, 'h-full')}>
-          <UserActionFormLetterSuccess onClose={onCancel} />
+          <UserActionFormLetterSuccess
+            campaignName={campaignName}
+            countryCode={countryCode}
+            onClose={onCancel}
+            politicianCategory={campaignMetadata.politicianCategory}
+          />
         </div>
       )
     default:
