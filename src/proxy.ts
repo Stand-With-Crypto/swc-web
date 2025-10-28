@@ -12,7 +12,7 @@ import {
 } from '@/utils/shared/userAccessLocation'
 
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   if (isCypress) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }

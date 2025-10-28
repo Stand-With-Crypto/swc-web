@@ -1,4 +1,7 @@
+import tailwindcssAspectRatio from '@tailwindcss/aspect-ratio'
+import tailwindcssTypography from '@tailwindcss/typography'
 import type { Config } from 'tailwindcss'
+import tailwindcssAnimate from 'tailwindcss-animate'
 
 const config: Config = {
   content: ['./src/**/*.{ts,tsx}'],
@@ -95,11 +98,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  plugins: [tailwindcssAnimate, tailwindcssTypography, tailwindcssAspectRatio],
 }
 
 export default config
