@@ -54,10 +54,7 @@ import {
 
 import NFTMintStatus = $Enums.NFTMintStatus
 
-export const ACTION_NFT_SLUG: Partial<Record<
-  UserActionType,
-  Record<string, NFTSlug | null>
->> = {
+export const ACTION_NFT_SLUG: Partial<Record<UserActionType, Record<string, NFTSlug | null>>> = {
   [UserActionType.OPT_IN]: {
     [UserActionOptInCampaignName.DEFAULT]: NFTSlug.SWC_SHIELD,
   },
@@ -178,7 +175,9 @@ export async function claimNFT({
 
   const actionNftMapping = ACTION_NFT_SLUG[activeClientUserActionTypeWithCampaign]
   if (!actionNftMapping) {
-    throw Error(`Action type ${activeClientUserActionTypeWithCampaign} does not support NFT minting.`)
+    throw Error(
+      `Action type ${activeClientUserActionTypeWithCampaign} does not support NFT minting.`,
+    )
   }
 
   const nftSlug = actionNftMapping[campaignName]
