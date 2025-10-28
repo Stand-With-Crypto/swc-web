@@ -51,7 +51,12 @@ export async function getAuthenticatedData() {
       },
       userActionLetter: {
         include: {
-          userActionLetterRecipients: true,
+          address: true,
+          userActionLetterRecipients: {
+            include: {
+              userActionLetterStatusUpdates: true,
+            },
+          },
         },
       },
       userActionCall: true,

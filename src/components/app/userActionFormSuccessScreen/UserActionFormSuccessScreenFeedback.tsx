@@ -45,7 +45,7 @@ const UserActionFormSuccessScreenDefaultImage = () => (
 UserActionFormSuccessScreenFeedback.Image = function UserActionFormSuccessScreenFeedbackImage({
   children,
 }: {
-  children: ReactNode
+  children?: ReactNode
 }) {
   return <div className="mx-auto">{children || <UserActionFormSuccessScreenDefaultImage />}</div>
 }
