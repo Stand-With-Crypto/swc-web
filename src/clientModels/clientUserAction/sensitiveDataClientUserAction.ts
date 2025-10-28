@@ -8,6 +8,7 @@ import {
   UserActionEmailRecipient,
   UserActionLetter,
   UserActionLetterRecipient,
+  type UserActionLetterStatusUpdate,
   UserActionOptIn,
   UserActionPetition,
   UserActionPoll,
@@ -46,7 +47,10 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionDonation: UserActionDonation | null
   userActionLetter:
     | (UserActionLetter & {
-        userActionLetterRecipients: UserActionLetterRecipient[]
+        address: Address | null
+        userActionLetterRecipients: (UserActionLetterRecipient & {
+          userActionLetterStatusUpdates: UserActionLetterStatusUpdate[]
+        })[]
       })
     | null
   userActionOptIn: UserActionOptIn | null
@@ -85,12 +89,11 @@ type SensitiveDataClientUserActionEmail = Pick<
   userActionEmailRecipients: SensitiveDataClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
-type SensitiveDataClientUserActionLetterRecipient = Pick<
-  UserActionLetterRecipient,
-  'id' | 'dtsiSlug'
->
 interface SensitiveDataClientUserActionLetter {
-  userActionLetterRecipients: SensitiveDataClientUserActionLetterRecipient[]
+  address: ClientAddress | null
+  userActionLetterRecipients: (UserActionLetterRecipient & {
+    userActionLetterStatusUpdates: UserActionLetterStatusUpdate[]
+  })[]
   actionType: typeof UserActionType.LETTER
 }
 type SensitiveDataClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
@@ -304,13 +307,11 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, ...emailFields })
     },
     [UserActionType.LETTER]: () => {
-      const { userActionLetterRecipients } = getRelatedModel(record, 'userActionLetter')
+      const { userActionLetterRecipients, address } = getRelatedModel(record, 'userActionLetter')
       const letterFields: SensitiveDataClientUserActionLetter = {
         actionType: UserActionType.LETTER,
-        userActionLetterRecipients: userActionLetterRecipients.map(x => ({
-          id: x.id,
-          dtsiSlug: x.dtsiSlug,
-        })),
+        address: address ? getSensitiveClientAddress(address) : null,
+        userActionLetterRecipients,
       }
       return getClientModel({ ...sharedProps, ...letterFields })
     },
