@@ -30,9 +30,7 @@ export async function generateStaticParams() {
 
 const countryCode = SupportedCountryCodes.AU
 
-export default async function UserActionLetterDeepLink(
-  props: PageProps<{ campaignName: string }>,
-) {
+export default async function UserActionLetterDeepLink(props: PageProps<{ campaignName: string }>) {
   const params = await props.params
   const campaignName = deSlugifyCampaignName(params.campaignName, AUUserActionLetterCampaignName)
 
@@ -62,4 +60,3 @@ export default async function UserActionLetterDeepLink(
     </AUHomepageDialogDeeplinkLayout>
   )
 }
-
