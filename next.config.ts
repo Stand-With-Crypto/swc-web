@@ -410,6 +410,18 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: '/:countryCode/:language/join/:referralId',
+        destination:
+          '/:countryCode/:language/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
+        missing: [
+          {
+            type: 'query',
+            key: 'utm_medium',
+          },
+        ],
+      },
+      {
         source: '/politicians/person/:slug/questionnaire',
         destination: '/politicians/person/:slug#questionnaire',
         permanent: false,
