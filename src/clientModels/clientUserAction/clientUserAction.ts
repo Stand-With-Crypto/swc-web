@@ -8,6 +8,7 @@ import {
   UserActionEmailRecipient,
   UserActionLetter,
   UserActionLetterRecipient,
+  type UserActionLetterStatusUpdate,
   UserActionOptIn,
   UserActionPetition,
   UserActionPoll,
@@ -50,7 +51,9 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionDonation: UserActionDonation | null
   userActionLetter:
     | (UserActionLetter & {
-        userActionLetterRecipients: UserActionLetterRecipient[]
+        userActionLetterRecipients: (UserActionLetterRecipient & {
+          userActionLetterStatusUpdates: UserActionLetterStatusUpdate[]
+        })[]
       })
     | null
   userActionOptIn: UserActionOptIn | null
@@ -86,7 +89,7 @@ interface ClientUserActionEmail {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
-type ClientUserActionLetterRecipient = Pick<UserActionLetterRecipient, 'id' | 'dtsiSlug'> & {
+type ClientUserActionLetterRecipient = Pick<UserActionLetterRecipient, 'id'> & {
   person: DTSIPersonForUserActions | null
 }
 interface ClientUserActionLetter {
@@ -289,8 +292,8 @@ export const getClientUserAction = ({
         actionType: UserActionType.LETTER,
         userActionLetterRecipients: userActionLetterRecipients.map(x => ({
           id: x.id,
-          dtsiSlug: x.dtsiSlug,
           person: x.dtsiSlug ? peopleBySlug[x.dtsiSlug] : null,
+          userActionLetterStatusUpdates: x.userActionLetterStatusUpdates,
         })),
       }
       return getClientModel({ ...sharedProps, ...letterFields })
