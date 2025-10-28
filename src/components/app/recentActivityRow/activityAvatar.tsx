@@ -10,7 +10,7 @@ const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.NFT_MINT]: '/activityFeedIcons/donate.svg',
   [UserActionType.CALL]: '/activityFeedIcons/call.svg',
   [UserActionType.EMAIL]: '/activityFeedIcons/email.svg',
-  [UserActionType.LETTER]: '/activityFeedIcons/email.svg',
+  [UserActionType.LETTER]: '/activityFeedIcons/letter.svg',
   [UserActionType.OPT_IN]: '/activityFeedIcons/join.svg',
   [UserActionType.VOTER_REGISTRATION]: '/activityFeedIcons/vote.svg',
   [UserActionType.VOTER_ATTESTATION]: '/activityFeedIcons/pledge.svg',

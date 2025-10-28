@@ -298,7 +298,7 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     description: 'Send a real physical letter to your local policymaker',
     mobileCTADescription: 'Send a real physical letter to your local policymaker',
     campaignsModalDescription: 'Send a real physical letter to your local policymaker',
-    image: '/au/actionTypeIcons/email.png',
+    image: '/au/actionTypeIcons/letter.png',
     campaigns: [
       {
         actionType: UserActionType.LETTER,
