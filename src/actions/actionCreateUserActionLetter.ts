@@ -425,6 +425,11 @@ async function createUserAction({
                   status: result?.letter?.status
                     ? POSTGRID_STATUS_TO_LETTER_STATUS[result.letter.status]
                     : UserActionLetterStatus.UNKNOWN,
+                  postgridUpdatedAt: result?.letter?.updatedAt
+                    ? new Date(result.letter.updatedAt)
+                    : result?.letter?.createdAt
+                      ? new Date(result.letter.createdAt)
+                      : undefined,
                 },
               },
             })),
