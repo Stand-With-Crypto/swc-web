@@ -23,6 +23,8 @@ const AU_LETTER_TEMPLATE_IDS = {
 } as const
 
 export const AU_USER_ACTION_LETTER_TEMPLATE_ID =
-  NEXT_PUBLIC_ENVIRONMENT === 'production'
+  NEXT_PUBLIC_ENVIRONMENT === 'production' ||
+  NEXT_PUBLIC_ENVIRONMENT === 'testing' ||
+  NEXT_PUBLIC_ENVIRONMENT === 'preview'
     ? AU_LETTER_TEMPLATE_IDS.live
     : AU_LETTER_TEMPLATE_IDS.test
