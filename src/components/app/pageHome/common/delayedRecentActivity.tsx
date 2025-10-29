@@ -18,15 +18,15 @@ import { ErrorBoundary } from '@/utils/web/errorBoundary'
 
 export function DelayedRecentActivityWithMap({
   actions,
-  countUsers,
-  countryCode,
   advocatesMapPageData,
+  countryCode,
+  countUsers,
   showDonateButton = true,
 }: {
   actions: PublicRecentActivity
-  countUsers: number
-  countryCode: SupportedCountryCodes
   advocatesMapPageData?: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  countryCode: SupportedCountryCodes
+  countUsers: number
   showDonateButton?: boolean
 }) {
   const { data: recentActivity } = useApiRecentActivity(actions, {

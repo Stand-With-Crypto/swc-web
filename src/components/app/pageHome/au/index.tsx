@@ -1,6 +1,7 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { AuRecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/au/recentActivityAndLeaderboardTabs'
+import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/common/delayedRecentActivity'
 import { FoundersCarousel } from '@/components/app/pageHome/common/foundersCarousel'
 import { HomePageSection } from '@/components/app/pageHome/common/homePageSectionLayout'
 import { PartnerGrid } from '@/components/app/pageHome/common/partnerGrid'
@@ -30,12 +31,14 @@ const countryCode = SupportedCountryCodes.AU
 const urls = getIntlUrls(countryCode)
 
 export function AuPageHome({
-  topLevelMetrics,
-  recentActivity,
-  partners,
-  founders,
+  actions,
+  advocatePerStateDataProps,
+  countUsers,
   dtsiHomepagePoliticians,
+  founders,
   leaderboardData,
+  partners,
+  topLevelMetrics,
 }: HomePageProps) {
   return (
     <>
@@ -78,18 +81,25 @@ export function AuPageHome({
             data-testid="community-leaderboard-tabs"
             defaultValue={AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             options={[
-              recentActivity && {
+              {
                 value: AuRecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
                 label: 'Recent activity',
                 content: (
-                  <div className="space-y-4">
-                    <RecentActivity.List actions={recentActivity} />
-                    <RecentActivity.Footer>
-                      <Button asChild variant="secondary">
-                        <InternalLink href={urls.community()}>View all</InternalLink>
-                      </Button>
-                    </RecentActivity.Footer>
-                  </div>
+                  <>
+                    <HomePageSection.Subtitle className="hidden md:block">
+                      See how our community is taking a stand to safeguard the future of crypto in
+                      Australia.
+                    </HomePageSection.Subtitle>
+                    {countUsers && actions && (
+                      <DelayedRecentActivityWithMap
+                        actions={actions}
+                        advocatesMapPageData={advocatePerStateDataProps}
+                        countUsers={countUsers.total}
+                        countryCode={countryCode}
+                        showDonateButton={false}
+                      />
+                    )}
+                  </>
                 ),
               },
               {

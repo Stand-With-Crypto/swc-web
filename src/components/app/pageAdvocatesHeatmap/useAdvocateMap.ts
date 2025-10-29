@@ -10,6 +10,7 @@ import {
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useCountryCode } from '@/hooks/useCountryCode'
+import { getAUStateNameFromStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { getCAProvinceOrTerritoryNameFromCode } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -27,6 +28,9 @@ export function getMapAdministrativeAreaName(
   countryCode: SupportedCountryCodes,
   administrativeAreaCode: string,
 ) {
+  if (countryCode === SupportedCountryCodes.AU) {
+    return getAUStateNameFromStateCode(administrativeAreaCode)
+  }
   if (countryCode === SupportedCountryCodes.CA) {
     return getCAProvinceOrTerritoryNameFromCode(administrativeAreaCode)
   }
