@@ -1,4 +1,4 @@
-import { array, boolean, nativeEnum, number, object, string, z } from 'zod'
+import { array, boolean, nativeEnum, number, object, string, url, z } from 'zod'
 
 export enum EVENT_TYPE_OPTIONS {
   'official' = 'official',
@@ -8,8 +8,8 @@ export enum EVENT_TYPE_OPTIONS {
 export const zodEventSchemaValidation = object({
   data: object({
     promotedPositioning: number().optional(),
-    image: string().url(),
-    rsvpUrl: string().url(),
+    image: url(),
+    rsvpUrl: url(),
     formattedAddress: string(),
     countryCode: string().length(2),
     isOccuring: boolean(),

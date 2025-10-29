@@ -202,7 +202,7 @@ async function createUser(
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionTweetAtPersonInput>,
+  validatedInput: z.ZodSafeParseSuccess<CreateActionTweetAtPersonInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
@@ -217,7 +217,7 @@ function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionTweetAtPersonInput>
+  validatedInput: z.ZodSafeParseSuccess<CreateActionTweetAtPersonInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
@@ -251,8 +251,8 @@ async function createAction<U extends User>({
       campaignName: validatedInput.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-          }
+          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+        }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionTweetAtPerson: {
         create: {

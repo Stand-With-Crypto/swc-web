@@ -219,7 +219,7 @@ async function createUser(
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionCallCongresspersonInput>,
+  validatedInput: z.ZodSafeParseSuccess<CreateActionCallCongresspersonInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
@@ -234,7 +234,7 @@ function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionCallCongresspersonInput>
+  validatedInput: z.ZodSafeParseSuccess<CreateActionCallCongresspersonInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
@@ -268,8 +268,8 @@ async function createActionAndUpdateUser<U extends User>({
       campaignName: validatedInput.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-          }
+          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+        }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       countryCode,
       userActionCall: {
@@ -291,19 +291,19 @@ async function createActionAndUpdateUser<U extends User>({
   })
   const updatedUser = userAction.userActionCall!.addressId
     ? await prismaClient.user.update({
-        where: { id: user.id },
-        data: {
-          address: {
-            connect: {
-              id: userAction.userActionCall!.addressId,
-            },
+      where: { id: user.id },
+      data: {
+        address: {
+          connect: {
+            id: userAction.userActionCall!.addressId,
           },
         },
-        include: {
-          primaryUserCryptoAddress: true,
-          address: true,
-        },
-      })
+      },
+      include: {
+        primaryUserCryptoAddress: true,
+        address: true,
+      },
+    })
     : user
   logger.info('created user action and updated user')
 

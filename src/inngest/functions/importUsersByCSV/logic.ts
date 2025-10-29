@@ -139,6 +139,7 @@ async function createUserWithCountryCode(
 
     const data: ExternalUserActionOptInInput = {
       emailAddress: userData.email,
+      cryptoAddress: undefined,
       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       campaignName,
       isVerifiedEmailAddress: false,

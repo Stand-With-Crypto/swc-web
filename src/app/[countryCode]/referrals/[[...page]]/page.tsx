@@ -27,7 +27,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
   })
 }
 
-const pageValidator = z.string().pipe(z.coerce.number().int().gte(1).lte(50))
+const pageValidator = z.coerce.number().int().gte(1).lte(50)
 const validatePageNum = ([pageParam]: (string | undefined)[]) => {
   if (!pageParam) {
     return 1

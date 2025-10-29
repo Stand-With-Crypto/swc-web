@@ -1,4 +1,4 @@
-import { array, boolean, date, number, object, string, z } from 'zod'
+import { array, boolean, date, number, object, string, url, z } from 'zod'
 
 export const zodPetitionMilestoneSchema = object({
   title: string().min(1),
@@ -13,7 +13,7 @@ export const zodPetitionSchemaValidation = object({
     content: string().min(1),
     countSignaturesGoal: number().positive(),
     enableAutomaticMilestones: boolean().optional(),
-    image: string().url().nullish(),
+    image: url().nullish(),
     milestones: array(zodPetitionMilestoneSchema).optional(),
     datetimeFinished: string().nullish(),
   }),

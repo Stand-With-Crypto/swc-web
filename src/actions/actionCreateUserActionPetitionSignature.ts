@@ -141,8 +141,8 @@ function handleValidationError(error: ZodError): PetitionActionResult {
   const filteredErrors: Record<string, string[]> = {}
 
   for (const [key, value] of Object.entries(fieldErrors)) {
-    if (value) {
-      filteredErrors[key] = value
+    if (value && Array.isArray(value) && value.every(item => typeof item === 'string')) {
+      filteredErrors[key] = value as string[]
     }
   }
 
@@ -227,8 +227,8 @@ async function createPetitionUserAction({
       campaignName: input.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-          }
+          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+        }
         : { userSession: { connect: { id: sessionId } } }),
       userActionPetition: {
         create: {

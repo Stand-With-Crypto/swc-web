@@ -87,12 +87,12 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   }
   const { user, peopleAnalytics } = userMatch.user
     ? {
-        user: userMatch.user,
-        peopleAnalytics: getServerPeopleAnalytics({
-          localUser,
-          userId: userMatch.user.id,
-        }),
-      }
+      user: userMatch.user,
+      peopleAnalytics: getServerPeopleAnalytics({
+        localUser,
+        userId: userMatch.user.id,
+      }),
+    }
     : await createUser({ localUser, sessionId, countryCode })
 
   const analytics = getServerAnalytics({
@@ -171,7 +171,7 @@ async function createUser(
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>,
+  validatedInput: z.ZodSafeParseSuccess<CreateActionVoterRegistrationInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
@@ -186,7 +186,7 @@ function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>
+  validatedInput: z.ZodSafeParseSuccess<CreateActionVoterRegistrationInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
@@ -222,8 +222,8 @@ async function createAction<U extends User>({
       campaignName: validatedInput.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-          }
+          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+        }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionVoterRegistration: {
         create: {

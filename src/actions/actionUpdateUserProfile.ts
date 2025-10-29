@@ -118,12 +118,12 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
     validatedFields.data
   const address = validatedFields.data.address
     ? await prismaClient.address.upsert({
-        where: {
-          googlePlaceId: validatedFields.data.address.googlePlaceId,
-        },
-        create: validatedFields.data.address,
-        update: validatedFields.data.address,
-      })
+      where: {
+        googlePlaceId: validatedFields.data.address.googlePlaceId,
+      },
+      create: validatedFields.data.address,
+      update: validatedFields.data.address,
+    })
     : null
 
   const { success: isSupportedCountryCode, data: addressCountryCode } =
@@ -138,17 +138,17 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
   const primaryUserEmailAddress =
     emailAddress && !existingUserEmailAddress
       ? await prismaClient.userEmailAddress.create({
-          data: {
-            emailAddress,
-            source: UserEmailAddressSource.USER_ENTERED,
-            isVerified: false,
-            user: {
-              connect: {
-                id: user.id,
-              },
+        data: {
+          emailAddress,
+          source: UserEmailAddressSource.USER_ENTERED,
+          isVerified: false,
+          user: {
+            connect: {
+              id: user.id,
             },
           },
-        })
+        },
+      })
       : existingUserEmailAddress
 
   const localUser = await parseLocalUserFromCookies()
@@ -216,8 +216,8 @@ async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
         updatedUser,
         updatedUser.primaryUserCryptoAddress
           ? await getENSDataFromCryptoAddressAndFailGracefully(
-              updatedUser.primaryUserCryptoAddress.cryptoAddress,
-            )
+            updatedUser.primaryUserCryptoAddress.cryptoAddress,
+          )
           : null,
       ),
       address: updatedUser.address && getSensitiveClientAddress(updatedUser.address),
@@ -288,10 +288,10 @@ async function handleCapitolCanaryAdvocateUpsert(
         },
         ...(!oldUser.hasOptedInToMembership &&
           updatedUser.hasOptedInToMembership && {
-            metadata: {
-              tags: ['C4 Member'],
-            },
-          }),
+          metadata: {
+            tags: ['C4 Member'],
+          },
+        }),
       },
     })
   }
