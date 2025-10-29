@@ -31,13 +31,13 @@ const contentSecurityPolicy = {
     "'self'",
     !isProd
       ? // NextJS requires 'unsafe-eval' in dev (faster source maps)
-        "'unsafe-eval' 'unsafe-inline' blob:"
+      "'unsafe-eval' 'unsafe-inline' blob:"
       : /*
         Streaming react server components within next.js relies on adding inline scripts to the page as content
         is progressively streamed in. https://github.com/vercel/next.js/discussions/42170#discussioncomment-8137079
         a nonce strategy won't work as it requires all our pages to be dynamically generated https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy#adding-a-nonce-with-middleware
         */
-        "'unsafe-inline'",
+      "'unsafe-inline'",
     isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
     'https://snap.licdn.com/li.lms-analytics/insight.min.js',
     'https://*.googleapis.com',
@@ -235,9 +235,7 @@ const nextConfig: NextConfig = {
   experimental: {
     webpackBuildWorker: true,
   },
-  turbopack: {
-    // Enable Turbopack configuration to silence the error
-  },
+  turbopack: {},
   images: {
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
     unoptimized: false,
