@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react'
+import type { Meta } from '@storybook/nextjs'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { StanceDetailsProps } from '@/components/app/dtsiStanceDetails/types'
