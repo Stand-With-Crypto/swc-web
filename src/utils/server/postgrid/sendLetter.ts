@@ -10,15 +10,17 @@ export async function sendLetter(params: SendLetterParams) {
     return
   }
 
+  const { userId, campaignName, countryCode, dtsiSlug } = params.metadata
+  const idempotencyKey = `${userId}:${campaignName}:${countryCode}:${dtsiSlug}`
   const letter = await postgridClient.letters.create(
     {
       ...params,
       template: params.templateId,
       size: 'a4',
-      description: `SWC Letter - ${params.metadata.campaignName}`,
+      description: `SWC Letter - ${campaignName}`,
     },
     {
-      idempotencyKey: params.idempotencyKey,
+      idempotencyKey,
     },
   )
 
