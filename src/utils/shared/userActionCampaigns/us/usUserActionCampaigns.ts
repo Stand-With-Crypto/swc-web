@@ -7,6 +7,7 @@ export const US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VOTER_REGISTRATION,
   UserActionType.CALL,
   UserActionType.EMAIL,
+  UserActionType.LETTER,
   UserActionType.DONATION,
   UserActionType.TWEET,
   UserActionType.NFT_MINT,
@@ -48,6 +49,10 @@ export enum USUserActionEmailCampaignName {
   CLARITY_ACT_SENATE_JUL_17_2025 = 'CLARITY_ACT_SENATE_JUL_17_2025',
   DAY_OF_ACTION_AUG_14_2025 = 'DAY_OF_ACTION_AUG_14_2025',
   USDC_REWARDS_SEP_18_2025 = 'USDC_REWARDS_SEP_18_2025',
+}
+
+export enum USUserActionLetterCampaignName {
+  DEFAULT = 'DEFAULT',
 }
 
 // this seemingly random id is the id of the poll (in builder.io) that was used in the initial poll campaign
@@ -186,4 +191,5 @@ export const US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VIEW_KEY_PAGE]: USUserActionViewKeyPageCampaignName.DEFAULT,
   [UserActionType.LINKEDIN]: USUserActionLinkedinCampaignName.DEFAULT,
   [UserActionType.SIGN_PETITION]: USUserActionSignPetitionCampaignName.DEFAULT,
+  [UserActionType.LETTER]: USUserActionLetterCampaignName.DEFAULT,
 } satisfies Record<USActiveClientUserActionWithCampaignType, string>
