@@ -4,6 +4,11 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('sendLetter')
 
+function getLetterSizeForCountry(countryCode: string): 'us_letter' | 'a4' {
+  const US_LETTER_COUNTRIES = ['BR', 'CA', 'US']
+  return US_LETTER_COUNTRIES.includes(countryCode.toUpperCase()) ? 'us_letter' : 'a4'
+}
+
 export async function sendLetter(params: SendLetterParams) {
   if (!postgridClient) {
     logger.debug('PostGrid client not initialized. Skipping order creation.')
@@ -12,12 +17,15 @@ export async function sendLetter(params: SendLetterParams) {
 
   const { userId, campaignName, countryCode, dtsiSlug } = params.metadata
   const idempotencyKey = `${userId}:${campaignName}:${countryCode}:${dtsiSlug}`
+  const letterSize = getLetterSizeForCountry(params.to.countryCode)
+
   const letter = await postgridClient.letters.create(
     {
       ...params,
       template: params.templateId,
-      size: 'a4',
-      description: `SWC Letter - ${campaignName}`,
+      size: letterSize,
+      color: true,
+      description: `${campaignName} campaign`,
     },
     {
       idempotencyKey,
