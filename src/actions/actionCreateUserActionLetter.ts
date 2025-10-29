@@ -146,7 +146,7 @@ async function _actionCreateUserActionLetter(input: Input) {
 
   const fromAddress: PostGridSenderContact = validatedFields.data.senderAddress
 
-  const recipientResultsWithNulls = await Promise.all(
+  const recipientResults = await Promise.all(
     validatedFields.data.dtsiPeople.map(dtsiPerson =>
       buildLetterToRecipient({
         dtsiPerson,
@@ -157,16 +157,6 @@ async function _actionCreateUserActionLetter(input: Input) {
       }),
     ),
   )
-
-  const recipientResults = recipientResultsWithNulls.filter(
-    (result): result is NonNullable<typeof result> => result !== null,
-  )
-
-  if (recipientResults.length === 0) {
-    logger.warn('No valid politician addresses found for any recipients')
-    waitUntil(beforeFinish())
-    return { user: getClientUser(user) }
-  }
 
   await createUserAction({
     user,
@@ -302,10 +292,10 @@ async function buildLetterToRecipient({
   userId: string
   fromAddress: PostGridSenderContact
 }): Promise<{
-  letter: Awaited<ReturnType<typeof sendLetter>>
+  letter: Awaited<ReturnType<typeof sendLetter>> | null
   dtsiPerson: Input['dtsiPeople'][number]
-  recipientAddress: string
-} | null> {
+  recipientAddress: string | null
+}> {
   const idempotencyKey = `${userId}:${campaignName}:${countryCode}:${dtsiPerson.slug}`
 
   const quorumPolitician = await getQuorumPoliticianByDTSIPerson({
@@ -338,7 +328,11 @@ async function buildLetterToRecipient({
       },
     })
 
-    return null
+    return {
+      letter: null,
+      dtsiPerson,
+      recipientAddress: null,
+    }
   }
 
   const toAddress: PostGridRecipientContact = zodPostGridRecipientAddress.parse({
@@ -388,9 +382,9 @@ async function createUserAction({
   userMatch: Awaited<ReturnType<typeof getMaybeUserAndMethodOfMatch>>
   countryCode: SupportedCountryCodes
   recipients: Array<{
-    letter: Awaited<ReturnType<typeof sendLetter>>
+    letter: Awaited<ReturnType<typeof sendLetter>> | null
     dtsiPerson: Input['dtsiPeople'][number]
-    recipientAddress: string
+    recipientAddress: string | null
   }>
   formData: Input
 }) {
@@ -418,8 +412,8 @@ async function createUserAction({
           userActionLetterRecipients: {
             create: recipients.map(result => ({
               dtsiSlug: result.dtsiPerson.slug,
-              officeAddress: result.recipientAddress,
-              postgridOrderId: result?.letter?.id || null,
+              officeAddress: result?.recipientAddress || '',
+              postgridOrderId: result?.letter?.id,
               userActionLetterStatusUpdates: {
                 create: {
                   status: result?.letter?.status
