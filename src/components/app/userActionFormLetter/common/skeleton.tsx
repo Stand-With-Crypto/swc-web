@@ -51,18 +51,13 @@ export function UserActionFormLetterSkeleton(props: UserActionFormLetterSkeleton
                     <label>First name</label>
                     <Input placeholder="Your first name" />
                   </FormItemSkeleton>
-
                   <FormItemSkeleton>
                     <label>Last name</label>
                     <Input placeholder="Your last name" />
                   </FormItemSkeleton>
-                  <FormItemSkeleton>
-                    <label>Email</label>
-                    <Input placeholder="Your email" />
-                  </FormItemSkeleton>
-                  <FormItemSkeleton>
+                  <FormItemSkeleton className="col-span-2">
                     <label>Address</label>
-                    <Input placeholder="Your full address" />
+                    <Input className="col-span-2" placeholder="Your full address" />
                   </FormItemSkeleton>
                 </div>
                 <div className="w-full">
