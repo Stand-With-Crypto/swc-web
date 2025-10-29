@@ -10,24 +10,26 @@ import {
   IconProps,
   JoinIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 type USStateCoords = Partial<Record<USStateCode, [number, number]>>
 type GBStateCoords = Partial<Record<GBRegion, [number, number]>>
+type CAStateCoords = Partial<Record<CAProvinceOrTerritoryCode, [number, number]>>
 
 interface RegionCoords {
   [SupportedCountryCodes.US]: USStateCoords
   [SupportedCountryCodes.GB]: GBStateCoords
-  [SupportedCountryCodes.CA]: never
+  [SupportedCountryCodes.CA]: CAStateCoords
   [SupportedCountryCodes.AU]: never
 }
 
-export type AreaCoordinates = USStateCoords | GBStateCoords
-export type AreaCoordinatesKey = keyof USStateCoords | keyof GBStateCoords
+export type AreaCoordinates = USStateCoords | GBStateCoords | CAStateCoords
+export type AreaCoordinatesKey = keyof USStateCoords | keyof GBStateCoords | keyof CAStateCoords
 
-export const AREAS_WITH_SINGLE_MARKER: AreaCoordinatesKey[] = ['London']
+export const AREAS_WITH_SINGLE_MARKER: AreaCoordinatesKey[] = ['London', 'NB', 'NS', 'PE']
 
 // Coordinates format: [longitude, latitude]
 export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {
@@ -98,6 +100,21 @@ export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {
     London: [0.2, 51.9],
     Scotland: [-4.5, 56.8],
   },
+  [SupportedCountryCodes.CA]: {
+    AB: [-117.5, 56.0],
+    BC: [-127.5, 55.0],
+    MB: [-100.5, 56.0],
+    NB: [-66.5, 48.5],
+    NL: [-61.0, 57.5],
+    NS: [-64.0, 46.0],
+    NT: [-127.0, 65.5],
+    NU: [-95.0, 70.0],
+    ON: [-88.0, 53.0],
+    PE: [-62.0, 49.5],
+    QC: [-73.5, 54.5],
+    SK: [-108.5, 56.0],
+    YT: [-142.0, 64.5],
+  },
 }
 
 export interface MapProjectionConfig {
@@ -132,6 +149,21 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
     markerOffset: 0.5,
     markerSize: 30,
     geoPropertyStateNameKey: 'nuts118nm',
+  },
+  [SupportedCountryCodes.CA]: {
+    projectionUrl:
+      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-ca.topojson',
+    // Mercator projection causes distortion in Canada, so using Conic Conformal instead (this is the official projection for Canada maps)
+    projection: 'geoConicConformal',
+    projectionConfig: {
+      center: [8.0, 64.5],
+      parallels: [49, 77],
+      scale: 770,
+      rotate: [96, 0, 0],
+    },
+    markerOffset: 2,
+    markerSize: 34,
+    geoPropertyStateNameKey: 'name',
   },
 }
 
@@ -211,13 +243,38 @@ export const ADVOCATES_ACTIONS_BY_COUNTRY_CODE: Partial<
       labelMobile: 'joined',
       labelActionTooltip: () => 'joined SWC',
     },
-    // TODO: Uncomment this when we add email action to UK
-    // EMAIL: {
-    //   icon: EmailIcon,
-    //   label: 'Email sent to MP',
-    //   labelMobile: 'emailed',
-    //   labelActionTooltip: () => 'emailed their rep',
-    // },
+    EMAIL: {
+      icon: EmailIcon,
+      label: 'Email sent to MP',
+      labelMobile: 'emailed',
+      labelActionTooltip: () => 'emailed their rep',
+    },
+    TWEET: {
+      icon: FollowOnXIcon,
+      label: 'Followed SWC on X',
+      labelMobile: 'Followed SWC on X',
+      labelActionTooltip: () => 'followed SWC on X',
+    },
+    LINKEDIN: {
+      icon: FollowOnLinkedInIcon,
+      label: 'Followed SWC on LinkedIn',
+      labelMobile: 'Followed SWC on LinkedIn',
+      labelActionTooltip: () => 'followed SWC on LinkedIn',
+    },
+  },
+  [SupportedCountryCodes.CA]: {
+    OPT_IN: {
+      icon: JoinIcon,
+      label: 'New member joined',
+      labelMobile: 'joined',
+      labelActionTooltip: () => 'joined SWC',
+    },
+    EMAIL: {
+      icon: EmailIcon,
+      label: 'Email sent to MP',
+      labelMobile: 'emailed',
+      labelActionTooltip: () => 'emailed their rep',
+    },
     TWEET: {
       icon: FollowOnXIcon,
       label: 'Followed SWC on X',

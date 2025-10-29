@@ -30,6 +30,7 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { getCAProvinceOrTerritoryCodeFromName } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { getUSStateCodeFromStateName } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
@@ -89,6 +90,10 @@ export function AdvocatesHeatmap({
         return totalAdvocatesPerState.find(
           total => total.state.toUpperCase() === stateName.toUpperCase(),
         )?.totalAdvocates
+      }
+      if (countryCode === SupportedCountryCodes.CA) {
+        const provinceCode = getCAProvinceOrTerritoryCodeFromName(stateName)
+        return totalAdvocatesPerState.find(total => total.state === provinceCode)?.totalAdvocates
       }
     },
     [countryCode, totalAdvocatesPerState],

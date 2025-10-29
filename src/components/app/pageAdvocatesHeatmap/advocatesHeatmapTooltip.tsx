@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { pluralize } from '@/utils/shared/pluralize'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
@@ -39,9 +40,14 @@ export function TotalAdvocatesPerStateTooltip({
 
   const totalAdvocatesPerState = getTotalAdvocatesPerState(hoveredStateName) ?? 0
 
-  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale: COUNTRY_CODE_TO_LOCALE[countryCode] })} advocates in ${hoveredStateName}`
+  const formattedNumber = FormattedNumber({
+    amount: totalAdvocatesPerState,
+    locale: COUNTRY_CODE_TO_LOCALE[countryCode],
+  })
+  const pluralizedAdvocate = pluralize({ count: totalAdvocatesPerState, singular: 'advocate' })
+  const tooltipContent = `${formattedNumber} ${pluralizedAdvocate} in ${hoveredStateName}`
 
-  const tooltipWidth = formattedNumber.length * 10
+  const tooltipWidth = tooltipContent.length * 10
   const offsetX = tooltipWidth / 2
 
   // Calculate the adjusted position so it does not overflow the window
@@ -61,7 +67,7 @@ export function TotalAdvocatesPerStateTooltip({
         pointerEvents: 'none',
       }}
     >
-      {formattedNumber}
+      {tooltipContent}
     </div>
   )
 }

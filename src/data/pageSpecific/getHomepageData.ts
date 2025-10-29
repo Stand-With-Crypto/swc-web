@@ -44,6 +44,7 @@ export async function getHomepageData(props: GetHomePageDataProps) {
     queryDTSIHomepagePeople({ countryCode: props.countryCode }),
     getSumDonationsByUser({ limit: 10, pageNum: 1 }),
   ])
+
   return {
     sumDonations,
     countUsers,
