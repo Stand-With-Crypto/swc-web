@@ -144,7 +144,8 @@ async function _actionCreateUserActionLetter(input: Input) {
 
   await triggerRateLimiterAtMostOnce()
 
-  const fromAddress: PostGridSenderContact = validatedFields.data.senderAddress
+  // const fromAddress: PostGridSenderContact = validatedFields.data.senderAddress
+  const fromAddress: PostGridSenderContact = { ...MOCK_ADDRESS, metadata: { userId: user.id } }
 
   const recipientResults = await Promise.all(
     validatedFields.data.dtsiPeople.map(dtsiPerson =>
@@ -350,7 +351,8 @@ async function buildLetterToRecipient({
   })
 
   const letter = await sendLetter({
-    to: toAddress,
+    // to: toAddress,
+    to: { ...MOCK_ADDRESS, metadata: { dtsiSlug: dtsiPerson.slug } },
     from: fromAddress,
     templateId: 'template_iUD4isUdA8kz8BpCc3c6F3', // TODO: Add template ID
     idempotencyKey,
@@ -439,4 +441,15 @@ async function createUserAction({
       },
     },
   })
+}
+
+const MOCK_ADDRESS: Omit<PostGridRecipientContact, 'metadata'> = {
+  firstName: 'Eduardo',
+  lastName: 'Picolo',
+  addressLine1: 'QS 2 LT 2',
+  addressLine2: 'Riacho Fundo 1',
+  city: 'Brasília',
+  provinceOrState: 'DF',
+  postalOrZip: '718100-200',
+  countryCode: 'BR',
 }
