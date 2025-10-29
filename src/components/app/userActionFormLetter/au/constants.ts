@@ -15,3 +15,5 @@ export const AU_USER_ACTION_LETTER_SENDER_ADDRESS: Omit<PostGridSenderContact, '
   firstName: 'Stand With Crypto',
   lastName: '',
 }
+
+export const AU_USER_ACTION_LETTER_TEMPLATE_ID = 'template_iUD4isUdA8kz8BpCc3c6F3'

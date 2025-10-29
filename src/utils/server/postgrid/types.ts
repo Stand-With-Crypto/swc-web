@@ -16,7 +16,6 @@ export interface SendLetterParams {
   to: PostGridRecipientContact
   from: PostGridSenderContact
   templateId: string
-  idempotencyKey: string
   metadata: PostGridOrderMetadata
 }
 
