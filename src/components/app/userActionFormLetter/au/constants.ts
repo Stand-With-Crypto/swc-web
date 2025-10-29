@@ -1,3 +1,4 @@
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import type { PostGridSenderContact } from '@/validation/fields/zodPostGridAddress'
 
 /**
@@ -16,4 +17,12 @@ export const AU_USER_ACTION_LETTER_SENDER_ADDRESS: Omit<PostGridSenderContact, '
   lastName: '',
 }
 
-export const AU_USER_ACTION_LETTER_TEMPLATE_ID = 'template_iUD4isUdA8kz8BpCc3c6F3'
+const AU_LETTER_TEMPLATE_IDS = {
+  test: 'template_iUD4isUdA8kz8BpCc3c6F3',
+  live: 'template_9AKHp5vdWnzEsgy6eD9Nwo',
+} as const
+
+export const AU_USER_ACTION_LETTER_TEMPLATE_ID =
+  NEXT_PUBLIC_ENVIRONMENT === 'production'
+    ? AU_LETTER_TEMPLATE_IDS.live
+    : AU_LETTER_TEMPLATE_IDS.test

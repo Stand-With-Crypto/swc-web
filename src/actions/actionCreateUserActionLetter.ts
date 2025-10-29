@@ -440,3 +440,14 @@ async function createUserAction({
     },
   })
 }
+
+const MOCK_ADDRESS: Omit<PostGridRecipientContact, 'metadata'> = {
+  firstName: 'Eduardo',
+  lastName: 'Picolo',
+  addressLine1: 'QS 2 LT 2',
+  addressLine2: 'Residencial Via Araguaia, Apto 120A, Riacho Fundo 1',
+  city: 'Brasília',
+  provinceOrState: 'DF',
+  postalOrZip: '71810-200',
+  countryCode: 'BR',
+}
