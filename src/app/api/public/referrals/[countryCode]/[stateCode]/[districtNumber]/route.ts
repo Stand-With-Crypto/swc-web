@@ -1,9 +1,9 @@
 import 'server-only'
 
 import { NextRequest, NextResponse } from 'next/server'
-import { ZodTypeAny } from 'zod'
 
 import { getDistrictRank } from '@/utils/server/districtRankings/upsertRankings'
+import { AdministrativeArea } from '@/utils/server/districtRankings/types'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   zodAUStateDistrict,
@@ -15,12 +15,12 @@ import {
 export const revalidate = 60 // 1 minute
 export const dynamic = 'error'
 
-const ZOD_SCHEMA_BY_COUNTRY_CODE_MAP: Record<SupportedCountryCodes, ZodTypeAny> = {
+const ZOD_SCHEMA_BY_COUNTRY_CODE_MAP = {
   [SupportedCountryCodes.US]: zodUSStateDistrict,
   [SupportedCountryCodes.AU]: zodAUStateDistrict,
   [SupportedCountryCodes.CA]: zodCAProvinceDistrict,
   [SupportedCountryCodes.GB]: zodGbRegionConstituency,
-}
+} as const
 
 export async function GET(
   _: NextRequest,
@@ -35,8 +35,7 @@ export async function GET(
   const params = await props.params
   const { stateCode, districtNumber, countryCode } = params
 
-  const zodSchema =
-    ZOD_SCHEMA_BY_COUNTRY_CODE_MAP[countryCode as keyof typeof ZOD_SCHEMA_BY_COUNTRY_CODE_MAP]
+  const zodSchema = ZOD_SCHEMA_BY_COUNTRY_CODE_MAP[countryCode]
 
   if (!zodSchema) {
     return NextResponse.json({ error: 'Invalid country code' }, { status: 400 })
@@ -44,11 +43,11 @@ export async function GET(
 
   const parseResult = zodSchema.safeParse({ state: stateCode, district: districtNumber })
   if (!parseResult.success) {
-    return NextResponse.json({ error: parseResult.error.errors }, { status: 400 })
+    return NextResponse.json({ error: parseResult.error.issues }, { status: 400 })
   }
 
   const member = {
-    state: parseResult.data.state,
+    state: parseResult.data.state as AdministrativeArea,
     district: parseResult.data.district,
   }
 
