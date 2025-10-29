@@ -9,5 +9,6 @@ export interface CampaignMetadata {
   dialogSubtitle: string
   politicianCategory: YourPoliticianCategory
   getLetterBodyText: (props?: GetTextProps & { address?: string }) => string
+  templateId: string
   senderAddress: Omit<PostGridSenderContact, 'metadata'>
 }

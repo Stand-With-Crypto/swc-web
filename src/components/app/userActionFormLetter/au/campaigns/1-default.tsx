@@ -3,7 +3,10 @@ import {
   getRepIntro,
   GetTextProps,
 } from '@/components/app/userActionFormEmailCongressperson/common/emailBodyUtils'
-import { AU_USER_ACTION_LETTER_SENDER_ADDRESS } from '@/components/app/userActionFormLetter/au/constants'
+import {
+  AU_USER_ACTION_LETTER_SENDER_ADDRESS,
+  AU_USER_ACTION_LETTER_TEMPLATE_ID,
+} from '@/components/app/userActionFormLetter/au/constants'
 import { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
@@ -49,5 +52,6 @@ export const campaignMetadata: CampaignMetadata = {
   dialogSubtitle: 'Send a physical letter about crypto policy',
   politicianCategory: LETTER_FLOW_POLITICIANS_CATEGORY,
   getLetterBodyText,
+  templateId: AU_USER_ACTION_LETTER_TEMPLATE_ID,
   senderAddress: AU_USER_ACTION_LETTER_SENDER_ADDRESS,
 }

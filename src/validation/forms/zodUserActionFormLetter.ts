@@ -25,6 +25,7 @@ const base = object({
   }),
   campaignName: nativeEnum(AUUserActionLetterCampaignName),
   politicianCategory: zodYourPoliticianCategory,
+  templateId: string(),
   senderAddress: zodPostGridSenderAddress,
 }).merge(zodFirstAndLastNames)
 

@@ -88,6 +88,7 @@ export function AUUserActionFormLetter({
         address: user?.address?.formattedDescription,
       }),
       politicianCategory: campaignMetadata.politicianCategory,
+      templateId: campaignMetadata.templateId,
       firstName: initialValues?.firstName || user?.firstName || '',
       lastName: initialValues?.lastName || user?.lastName || '',
       address: initialValues?.address || userAddress,

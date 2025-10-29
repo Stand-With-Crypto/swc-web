@@ -154,6 +154,7 @@ async function _actionCreateUserActionLetter(input: Input) {
         campaignName,
         userId: user.id,
         fromAddress,
+        templateId: validatedFields.data.templateId,
       }),
     ),
   )
@@ -285,19 +286,19 @@ async function buildLetterToRecipient({
   campaignName,
   userId,
   fromAddress,
+  templateId,
 }: {
   dtsiPerson: Input['dtsiPeople'][number]
   countryCode: SupportedCountryCodes
   campaignName: string
   userId: string
   fromAddress: PostGridSenderContact
+  templateId: string
 }): Promise<{
   letter: Awaited<ReturnType<typeof sendLetter>> | null
   dtsiPerson: Input['dtsiPeople'][number]
   recipientAddress: string | null
 }> {
-  const idempotencyKey = `${userId}:${campaignName}:${countryCode}:${dtsiPerson.slug}`
-
   const quorumPolitician = await getQuorumPoliticianByDTSIPerson({
     countryCode,
     person: dtsiPerson,
@@ -352,8 +353,7 @@ async function buildLetterToRecipient({
   const letter = await sendLetter({
     to: toAddress,
     from: fromAddress,
-    templateId: 'template_iUD4isUdA8kz8BpCc3c6F3', // TODO: Add template ID
-    idempotencyKey,
+    templateId,
     metadata: {
       userId,
       campaignName,
