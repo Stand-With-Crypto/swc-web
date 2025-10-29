@@ -76,7 +76,7 @@ async function _actionCreateUserActionRsvpEvent(
   if (
     !isActionSupportedForCountry(countryCode, UserActionType.RSVP_EVENT) ||
     getActionDefaultCampaignName(UserActionType.RSVP_EVENT, countryCode) !==
-    validatedInput.data.campaignName
+      validatedInput.data.campaignName
   ) {
     return { errors: { campaignName: ['Invalid campaign name'] } }
   }
@@ -260,8 +260,8 @@ async function createAction<U extends User>({
       countryCode,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
-          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-        }
+            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+          }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionRsvpEvent: {
         create: {

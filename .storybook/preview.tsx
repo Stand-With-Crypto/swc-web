@@ -1,6 +1,8 @@
-import type { Preview } from '@storybook/nextjs'
-import React from 'react'
 import '../src/globals.css'
+
+import React from 'react'
+import type { Preview } from '@storybook/nextjs'
+
 import { openSansFont, satoshiFont } from '../src/utils/web/fonts'
 
 const preview: Preview = {

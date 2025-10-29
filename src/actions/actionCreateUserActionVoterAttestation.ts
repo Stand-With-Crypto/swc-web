@@ -203,8 +203,8 @@ async function createActionAndUpdateUser<U extends User>({
       campaignName: validatedInput.campaignName,
       ...(user.primaryUserCryptoAddressId
         ? {
-          userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId } },
-        }
+            userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId } },
+          }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionVoterAttestation: {
         create: {
@@ -269,13 +269,13 @@ async function createUser({
       smsStatus: SMSStatus.NOT_OPTED_IN,
       ...(address
         ? {
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: address.googlePlaceId },
-              create: address,
+            address: {
+              connectOrCreate: {
+                where: { googlePlaceId: address.googlePlaceId },
+                create: address,
+              },
             },
-          },
-        }
+          }
         : {}),
       ...mapLocalUserToUserDatabaseFields(localUser),
       countryCode,

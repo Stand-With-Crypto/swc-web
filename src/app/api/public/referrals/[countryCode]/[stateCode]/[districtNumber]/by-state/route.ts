@@ -2,8 +2,8 @@ import 'server-only'
 
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getDistrictRankByState } from '@/utils/server/districtRankings/upsertRankings'
 import { AdministrativeArea } from '@/utils/server/districtRankings/types'
+import { getDistrictRankByState } from '@/utils/server/districtRankings/upsertRankings'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import {
   zodAUStateDistrict,

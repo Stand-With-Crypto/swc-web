@@ -251,8 +251,8 @@ async function createAction<U extends User>({
       campaignName: validatedInput.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
-          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-        }
+            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+          }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionTweetAtPerson: {
         create: {

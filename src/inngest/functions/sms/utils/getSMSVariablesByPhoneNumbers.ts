@@ -1,12 +1,12 @@
 import { Address, User } from '@prisma/client'
 import { uniq } from 'lodash-es'
 
+import { AdministrativeArea } from '@/utils/server/districtRankings/types'
 import {
   getMemberKey,
   getMultipleDistrictRankings,
   MemberKey,
 } from '@/utils/server/districtRankings/upsertRankings'
-import { AdministrativeArea } from '@/utils/server/districtRankings/types'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { getUSStateNameFromStateCode } from '@/utils/shared/stateMappings/usStateUtils'
@@ -54,10 +54,14 @@ export async function getSMSVariablesByPhoneNumbers(phoneNumbers: string[]) {
           return undefined
         }
 
-        return districtRankMap[getMemberKey({
-          state: parseResult.data.state as AdministrativeArea,
-          district: parseResult.data.district,
-        })] || undefined
+        return (
+          districtRankMap[
+            getMemberKey({
+              state: parseResult.data.state as AdministrativeArea,
+              district: parseResult.data.district,
+            })
+          ] || undefined
+        )
       }
 
       return {

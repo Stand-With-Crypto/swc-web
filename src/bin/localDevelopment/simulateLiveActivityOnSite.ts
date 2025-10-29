@@ -26,7 +26,7 @@ async function simulateLiveActivityOnSite() {
   logger.info(
     'simulating live activity on the website.\n NOTE: this will run until you exit the process.',
   )
-  // eslint-disable-next-line no-constant-condition
+
   while (true) {
     logger.info('creating user and action')
     const user = await createUser()

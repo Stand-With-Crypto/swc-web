@@ -227,8 +227,8 @@ async function createPetitionUserAction({
       campaignName: input.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
-          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-        }
+            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+          }
         : { userSession: { connect: { id: sessionId } } }),
       userActionPetition: {
         create: {

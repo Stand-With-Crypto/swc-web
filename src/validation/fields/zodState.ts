@@ -56,10 +56,10 @@ const COUNTRY_CODE_TO_ZOD_STATE_MAP: Record<
 type ZodStateReturn<T extends SupportedCountryCodes> = T extends SupportedCountryCodes.US
   ? USStateCode
   : T extends SupportedCountryCodes.GB
-  ? GBCountryCode
-  : T extends SupportedCountryCodes.CA
-  ? CAProvinceOrTerritoryCode
-  : AUStateCode
+    ? GBCountryCode
+    : T extends SupportedCountryCodes.CA
+      ? CAProvinceOrTerritoryCode
+      : AUStateCode
 
 export const zodState = {
   parse: <T extends SupportedCountryCodes>(

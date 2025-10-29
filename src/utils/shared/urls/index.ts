@@ -65,7 +65,6 @@ type RecentActivityAndLeaderboardTabs =
   | GbRecentActivityAndLeaderboardTabs
 
 export const getIntlPrefix = (countryCode: SupportedCountryCodes) =>
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   countryCode === DEFAULT_SUPPORTED_COUNTRY_CODE ? '' : `/${countryCode}`
 
 export const getIntlUrls = (
