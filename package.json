@@ -135,11 +135,11 @@
     "twitter-api-v2": "^1.15.2",
     "undici": "^6.0.1",
     "use-places-autocomplete": "^4.0.1",
-    "uuid": "^9.0.1",
+    "uuid": "^13.0.0",
     "vaul": "^1.1.2",
     "viem": "^2.7.16",
     "xlsx": "^0.18.5",
-    "zod": "^3.22.4"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
@@ -171,7 +171,6 @@
     "@types/react-dom": "^19.0.3",
     "@types/react-simple-maps": "^3.0.4",
     "@types/sanitize-html": "^2.9.5",
-    "@types/uuid": "^10.0.0",
     "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
