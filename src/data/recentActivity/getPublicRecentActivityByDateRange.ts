@@ -46,7 +46,11 @@ const fetchFromPrisma = async (config: RecentActivityByDateRangeConfig) => {
           },
           userActionLetter: {
             include: {
-              userActionLetterRecipients: true,
+              userActionLetterRecipients: {
+                include: {
+                  userActionLetterStatusUpdates: true,
+                },
+              },
             },
           },
           nftMint: true,
