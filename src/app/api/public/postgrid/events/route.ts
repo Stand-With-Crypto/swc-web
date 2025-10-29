@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, type UserActionLetterRecipient } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 import pRetry from 'p-retry'
@@ -32,24 +32,31 @@ export async function POST(request: NextRequest) {
 
   const status = mapPostgridStatus(payload.data.status)
 
-  const recipient = await pRetry(
-    async () => {
-      return await prismaClient.userActionLetterRecipient.findFirstOrThrow({
-        where: { postgridOrderId: payload.data.id },
-      })
-    },
-    {
-      maxRetryTime: 60 * 1000, // 1 minute
-    },
-  )
-
-  if (!recipient) {
-    logger.error('Recipient not found for PostGrid order', { letterId: payload.data.id })
-    Sentry.captureMessage('Letter recipient not found for PostGrid order', {
-      extra: { payload },
-      tags: { domain: 'postgridWebhook' },
-    })
-    return new NextResponse('Letter recipient not found', { status: 400 })
+  let recipient: UserActionLetterRecipient
+  try {
+    recipient = await pRetry(
+      async () => {
+        return await prismaClient.userActionLetterRecipient.findFirstOrThrow({
+          where: { postgridOrderId: payload.data.id },
+        })
+      },
+      {
+        maxRetryTime: 60 * 1000, // 1 minute
+      },
+    )
+  } catch (error) {
+    logger.error(
+      `UserActionLetterRecipient not found for PostGrid order ${payload.data.id} after retries: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    )
+    Sentry.captureException(
+      `UserActionLetterRecipient not found for PostGrid order ${payload.data.id}: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      {
+        extra: { payload },
+        tags: { domain: 'postgridWebhook' },
+      },
+    )
+    // Return 200 so PostGrid Webhook doesn't retry every hour for this order
+    return new NextResponse('UserActionLetterRecipient not found after retries', { status: 200 })
   }
 
   try {
@@ -62,7 +69,7 @@ export async function POST(request: NextRequest) {
     })
 
     logger.info('Updated status for PostGrid letter', {
-      letterId: payload.data.id,
+      postgridOrderId: payload.data.id,
       recipientId: recipient.id,
       status,
       postgridUpdatedAt: payload.data.updatedAt,
@@ -70,7 +77,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
       logger.info('Status already recorded, skipping duplicate', {
-        letterId: payload.data.id,
+        postgridOrderId: payload.data.id,
         recipientId: recipient.id,
         userId: payload.data.metadata.userId,
         status,
@@ -80,5 +87,5 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  return new NextResponse('ok')
+  return new NextResponse('ok', { status: 200 })
 }
