@@ -5,6 +5,7 @@ import { Marker } from 'react-simple-maps'
 import { motion } from 'motion/react'
 
 import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+import { Coords } from '@/components/app/pageAdvocatesHeatmap/constants'
 
 export function AdvocateHeatmapMarker({
   coordinates,
@@ -14,7 +15,7 @@ export function AdvocateHeatmapMarker({
   currentActionInfo,
   size,
 }: {
-  coordinates: [number, number]
+  coordinates: Coords
   IconComponent: React.FC<IconProps>
   size?: number
   handleActionMouseLeave: (event: React.MouseEvent<SVGElement, MouseEvent>) => void

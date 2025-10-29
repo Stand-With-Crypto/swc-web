@@ -8,10 +8,12 @@ import {
   AreaCoordinates,
   AreaCoordinatesKey,
   AREAS_WITH_SINGLE_MARKER,
+  Coords,
   MapProjectionConfig,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import {
   getMapAdministrativeAreaName,
+  getRandomOffset,
   MapMarker,
 } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { useCountryCode } from '@/hooks/useCountryCode'
@@ -20,12 +22,44 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('useMockedAdvocateMap')
 
-function applyCoordinatesOffset(
-  coordinates: [number, number],
-  offsetX: number,
-  offsetY: number,
-): [number, number] {
+/**
+ * Distributes 3 markers around a central point with slight random jitter
+ * to simulate a natural heat map distribution while keeping markers within bounds.
+ * @param centerCoordinates [longitude, latitude] of the central point
+ * @param verticalSpacing Base spacing between markers on the vertical axis
+ * @returns Array of 3 jittered coordinate pairs
+ */
+function generateJitteredMarkerPositions(
+  centerCoordinates: Coords,
+  verticalSpacing: number,
+  horizontalRange = 1.2,
+  verticalRange = 0.8,
+): [Coords, Coords, Coords] {
+  return Array.from({ length: 3 }, (_, index) => {
+    const horizontalJitter = getRandomOffset(horizontalRange)
+    const verticalJitter = getRandomOffset(verticalRange) + verticalSpacing * (index - 1)
+    return applyCoordinatesOffset(centerCoordinates, horizontalJitter, verticalJitter)
+  }) as [Coords, Coords, Coords]
+}
+
+function applyCoordinatesOffset(coordinates: Coords, offsetX: number, offsetY: number): Coords {
   return [coordinates[0] + offsetX, coordinates[1] + offsetY]
+}
+
+function getMarkerPositions(
+  coordinates: Coords,
+  offset: number,
+  shouldRandomizeMarkerOffsets = false,
+) {
+  if (shouldRandomizeMarkerOffsets) {
+    return generateJitteredMarkerPositions(coordinates, offset)
+  }
+
+  return [
+    applyCoordinatesOffset(coordinates, 0, 0),
+    applyCoordinatesOffset(coordinates, -offset, offset),
+    applyCoordinatesOffset(coordinates, offset, -offset),
+  ]
 }
 
 function getMarkerMocker({
@@ -33,11 +67,13 @@ function getMarkerMocker({
   coordinates,
   countryCode,
   mapMarkerOffset,
+  shouldRandomizeMarkerOffsets,
 }: {
   actions: Partial<Record<UserActionType, AdvocateHeatmapAction>>
   coordinates: AreaCoordinates
   countryCode: SupportedCountryCodes
   mapMarkerOffset: number
+  shouldRandomizeMarkerOffsets?: boolean
 }) {
   const getRandomAction = () => {
     const actionKeys = Object.keys(actions)
@@ -68,11 +104,17 @@ function getMarkerMocker({
       ]
     }
 
+    const actionCoords = getMarkerPositions(
+      administrativeAreaCoords,
+      mapMarkerOffset,
+      shouldRandomizeMarkerOffsets,
+    )
+
     return [
       {
         id: '1',
         name: administrativeAreaName,
-        coordinates: applyCoordinatesOffset(administrativeAreaCoords, 0, 0),
+        coordinates: actionCoords[0],
         actionType: UserActionType.EMAIL,
         datetimeCreated: '2021-01-01',
         iconType: getRandomAction(),
@@ -80,11 +122,7 @@ function getMarkerMocker({
       {
         id: '2',
         name: administrativeAreaName,
-        coordinates: applyCoordinatesOffset(
-          administrativeAreaCoords,
-          -mapMarkerOffset,
-          mapMarkerOffset,
-        ),
+        coordinates: actionCoords[1],
         actionType: UserActionType.EMAIL,
         datetimeCreated: '2021-01-01',
         iconType: getRandomAction(),
@@ -92,11 +130,7 @@ function getMarkerMocker({
       {
         id: '3',
         name: administrativeAreaName,
-        coordinates: applyCoordinatesOffset(
-          administrativeAreaCoords,
-          mapMarkerOffset,
-          -mapMarkerOffset,
-        ),
+        coordinates: actionCoords[2],
         actionType: UserActionType.EMAIL,
         datetimeCreated: '2021-01-01',
         iconType: getRandomAction(),
@@ -106,17 +140,19 @@ function getMarkerMocker({
 }
 
 const createMarkersFromActions = ({
+  actionsLimit = 20,
   countryCode,
   mapMarkerOffset = 1,
   overrideCoordinates,
   selectedAreas,
-  actionsLimit = 20,
+  shouldRandomizeMarkerOffsets = false,
 }: {
+  actionsLimit?: number
   countryCode: SupportedCountryCodes
   mapMarkerOffset?: number
   overrideCoordinates?: AreaCoordinates
   selectedAreas?: AreaCoordinatesKey[]
-  actionsLimit?: number
+  shouldRandomizeMarkerOffsets?: boolean
 }) => {
   const actions = ADVOCATES_ACTIONS_BY_COUNTRY_CODE[countryCode]
   const coordinates = AREA_COORDS_BY_COUNTRY_CODE[countryCode]
@@ -136,6 +172,7 @@ const createMarkersFromActions = ({
     coordinates: overrideCoordinates || coordinates,
     countryCode,
     mapMarkerOffset,
+    shouldRandomizeMarkerOffsets,
   })
 
   if (!selectedAreas) {
@@ -166,11 +203,12 @@ export const useMockedAdvocateMap = ({
   useEffect(() => {
     setDisplayedMarkers(
       createMarkersFromActions({
+        actionsLimit,
         countryCode,
         mapMarkerOffset: mapConfig.markerOffset,
         overrideCoordinates: coordinates,
         selectedAreas,
-        actionsLimit,
+        shouldRandomizeMarkerOffsets: mapConfig.shouldRandomizeMarkerOffsets,
       }),
     )
   }, [countryCode, mapConfig, coordinates, selectedAreas, actionsLimit])

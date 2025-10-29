@@ -16,10 +16,12 @@ import { GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-type USStateCoords = Partial<Record<USStateCode, [number, number]>>
-type GBStateCoords = Partial<Record<GBRegion, [number, number]>>
-type CAStateCoords = Partial<Record<CAProvinceOrTerritoryCode, [number, number]>>
-type AUStateCoords = Partial<Record<AUStateCode, [number, number]>>
+export type Coords = [number, number]
+
+type USStateCoords = Partial<Record<USStateCode, Coords>>
+type GBStateCoords = Partial<Record<GBRegion, Coords>>
+type CAStateCoords = Partial<Record<CAProvinceOrTerritoryCode, Coords>>
+type AUStateCoords = Partial<Record<AUStateCode, Coords>>
 
 interface RegionCoords {
   [SupportedCountryCodes.US]: USStateCoords
@@ -123,23 +125,24 @@ export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {
   },
   [SupportedCountryCodes.AU]: {
     ACT: [149.1, -35.3],
-    NSW: [145.5, -31.5],
-    NT: [132.5, -19.0],
-    QLD: [143.5, -22.0],
-    SA: [134.0, -29.0],
-    TAS: [145.0, -40.5],
-    VIC: [143.5, -36.0],
-    WA: [121.0, -25.0],
+    NSW: [150.0, -33.0],
+    NT: [131.5, -12.0],
+    QLD: [151.5, -25.0],
+    SA: [136.5, -34.0],
+    TAS: [146.0, -41.5],
+    VIC: [144.0, -37.0],
+    WA: [115.0, -30.5],
   },
 }
 
 export interface MapProjectionConfig {
-  projectionUrl: string
-  projection?: ComposableMapProps['projection']
-  projectionConfig?: ComposableMapProps['projectionConfig']
+  geoPropertyStateNameKey: string
   markerOffset?: number
   markerSize?: number
-  geoPropertyStateNameKey: string
+  projection?: ComposableMapProps['projection']
+  projectionConfig?: ComposableMapProps['projectionConfig']
+  projectionUrl: string
+  shouldRandomizeMarkerOffsets?: boolean
 }
 
 export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapProjectionConfig>> = {
@@ -178,20 +181,22 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       rotate: [96, 0, 0],
     },
     markerOffset: 2,
-    markerSize: 34,
+    markerSize: 30,
     geoPropertyStateNameKey: 'name',
+    shouldRandomizeMarkerOffsets: true,
   },
   [SupportedCountryCodes.AU]: {
     projectionUrl:
       'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-au.topojson',
     projection: 'geoMercator',
     projectionConfig: {
-      center: [134.5, -26.0],
+      center: [134.5, -27.5],
       scale: 745,
     },
     markerOffset: 1.5,
-    markerSize: 30,
+    markerSize: 28,
     geoPropertyStateNameKey: 'name',
+    shouldRandomizeMarkerOffsets: true,
   },
 }
 

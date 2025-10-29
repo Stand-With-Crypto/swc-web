@@ -4,7 +4,7 @@ import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { AnimatePresence, motion } from 'motion/react'
 
-import { MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { Coords, MAP_PROJECTION_CONFIG } from '@/components/app/pageAdvocatesHeatmap/constants'
 import {
   StateEventsDialog,
   StateEventsDialogProps,
@@ -22,7 +22,7 @@ import { cn } from '@/utils/web/cn'
 interface MapMarker {
   id: string
   name: string
-  coordinates: [number, number]
+  coordinates: Coords
   eventsInStateMarker: number
   eventState: string
 }

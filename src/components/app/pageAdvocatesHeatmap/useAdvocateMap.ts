@@ -6,6 +6,7 @@ import {
   ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
   AREA_COORDS_BY_COUNTRY_CODE,
   AREAS_WITH_SINGLE_MARKER,
+  Coords,
   MapProjectionConfig,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
@@ -17,11 +18,25 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 export interface MapMarker {
   id: string
   name: string
-  coordinates: [number, number]
+  coordinates: Coords
   actionType: UserActionType
   datetimeCreated: string
   iconType: AdvocateHeatmapAction
   amountUsd?: number
+}
+
+const INITIAL_MARKERS = 5
+const MAX_MARKERS = 20
+const MAX_MARKERS_PER_ADMINISTRATIVE_AREA = 3
+const ADVOCATE_MAP_INTERVAL = 2_000
+
+/**
+ * Generates a random offset within a symmetric range.
+ * @param maxRange Maximum absolute deviation from center
+ * @returns Random value between -maxRange/2 and +maxRange/2
+ */
+export function getRandomOffset(maxRange: number): number {
+  return Math.random() * maxRange - maxRange / 2
 }
 
 export function getMapAdministrativeAreaName(
@@ -42,6 +57,7 @@ const createMarkersFromActions = (
   recentActivity: PublicRecentActivity['data'],
   countryCode: SupportedCountryCodes,
   mapMarkerOffset = 1,
+  shouldRandomizeMarkerOffsets = false,
 ): MapMarker[] => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
@@ -58,54 +74,72 @@ const createMarkersFromActions = (
     return markers
   }
 
-  recentActivity.forEach(item => {
-    const userLocation = item.user.userLocationDetails
+  const activityWithAdministrativeArea = recentActivity
+    .map(item => {
+      const userLocation = item.user.userLocationDetails
 
-    const { administrativeAreaLevel1, swcCivicAdministrativeArea } = userLocation ?? {}
+      const { administrativeAreaLevel1, swcCivicAdministrativeArea } = userLocation ?? {}
 
-    if (userLocation && (administrativeAreaLevel1 || swcCivicAdministrativeArea)) {
       const administrativeArea = (swcCivicAdministrativeArea ??
         administrativeAreaLevel1) as keyof typeof stateCoords
 
-      if (!administrativeArea || !stateCoords[administrativeArea]) {
-        return
+      return {
+        ...item,
+        administrativeArea,
+        coordinates: stateCoords[administrativeArea],
+      }
+    })
+    .filter((item, index, items) => {
+      const hasAdministrativeAreaAndCoords =
+        Boolean(item.administrativeArea) && Boolean(stateCoords[item.administrativeArea])
+
+      const hasActionConfig = actions[item.actionType]
+
+      const isWithinLimit =
+        items
+          .slice(0, index)
+          .filter(({ administrativeArea }) => administrativeArea === item.administrativeArea)
+          .length < MAX_MARKERS_PER_ADMINISTRATIVE_AREA
+
+      return hasAdministrativeAreaAndCoords && hasActionConfig && isWithinLimit
+    })
+
+  activityWithAdministrativeArea.forEach(item => {
+    let offsetX = 0
+    let offsetY = 0
+
+    if (
+      stateCount[item.administrativeArea] &&
+      !AREAS_WITH_SINGLE_MARKER.includes(item.administrativeArea)
+    ) {
+      const horizontalRange = 1.2
+      const verticalRange = 0.8
+
+      if (shouldRandomizeMarkerOffsets) {
+        offsetX = getRandomOffset(horizontalRange)
+        offsetY =
+          getRandomOffset(verticalRange) - mapMarkerOffset * stateCount[item.administrativeArea]
+      } else {
+        offsetX = stateCount[item.administrativeArea] % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
+        offsetY = stateCount[item.administrativeArea] % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
       }
 
-      const coordinates = stateCoords[administrativeArea]
-
-      if (coordinates) {
-        let offsetX = 0
-        let offsetY = 0
-
-        if (
-          stateCount[administrativeArea] &&
-          !AREAS_WITH_SINGLE_MARKER.includes(administrativeArea)
-        ) {
-          offsetX = stateCount[administrativeArea] % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
-          offsetY = stateCount[administrativeArea] % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
-
-          stateCount[administrativeArea] += 1
-        } else {
-          stateCount[administrativeArea] = 1
-        }
-
-        const currentIconActionType = actions[item.actionType]
-
-        if (!currentIconActionType) {
-          return
-        }
-
-        markers.push({
-          id: item.id,
-          name: getMapAdministrativeAreaName(countryCode, administrativeArea),
-          coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
-          actionType: item.actionType,
-          datetimeCreated: item.datetimeCreated,
-          iconType: currentIconActionType,
-          amountUsd: 'amountUsd' in item ? item.amountUsd : undefined,
-        })
-      }
+      stateCount[item.administrativeArea] += 1
+    } else {
+      stateCount[item.administrativeArea] = 1
     }
+
+    const currentIconActionType = actions[item.actionType]!
+
+    markers.push({
+      id: item.id,
+      name: getMapAdministrativeAreaName(countryCode, item.administrativeArea),
+      coordinates: [item.coordinates[0] + offsetX, item.coordinates[1] + offsetY],
+      actionType: item.actionType,
+      datetimeCreated: item.datetimeCreated,
+      iconType: currentIconActionType,
+      amountUsd: 'amountUsd' in item ? item.amountUsd : undefined,
+    })
   })
 
   // Using reverse to make the markers appear in the order they were created
@@ -119,10 +153,6 @@ const markersAreSame = (arr1: MapMarker[], arr2: MapMarker[]): boolean => {
   return ids1.every((id, index) => id === ids2[index])
 }
 
-const INITIAL_MARKERS = 5
-const MAX_MARKERS = 20
-const ADVOCATE_MAP_INTERVAL = 2000
-
 export function useAdvocateMap({
   actions,
   mapConfig,
@@ -135,7 +165,13 @@ export function useAdvocateMap({
   const countryCode = useCountryCode()
 
   const markers = useMemo(
-    () => createMarkersFromActions(actions.data, countryCode, mapConfig.markerOffset),
+    () =>
+      createMarkersFromActions(
+        actions.data,
+        countryCode,
+        mapConfig.markerOffset,
+        mapConfig.shouldRandomizeMarkerOffsets,
+      ),
     [actions, countryCode, mapConfig],
   )
 

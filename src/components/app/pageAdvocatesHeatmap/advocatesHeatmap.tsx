@@ -37,10 +37,10 @@ import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/su
 import { cn } from '@/utils/web/cn'
 
 interface RenderMapProps {
-  countryCode: SupportedCountryCodes
   actions: PublicRecentActivity
-  countUsers: number
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  countryCode: SupportedCountryCodes
+  countUsers: number
   isEmbedded?: boolean
   mapConfig: MapProjectionConfig
 }
