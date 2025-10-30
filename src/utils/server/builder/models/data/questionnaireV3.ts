@@ -1,0 +1,90 @@
+import * as Sentry from '@sentry/nextjs'
+import pRetry from 'p-retry'
+
+import { builderSDKClient, DEFAULT_CACHE_IN_SECONDS } from '@/utils/server/builder'
+import { BuilderDataModelIdentifiers } from '@/utils/server/builder/models/data/constants'
+import { getLogger } from '@/utils/shared/logger'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { DEFAULT_LOCALE } from '@/utils/shared/supportedLocales'
+import {
+  QUESTION_ANSWER_OPTIONS,
+  SWCQuestionnaireAnswers,
+  SWCQuestionnaireEntry,
+  zodQuestionnaireSchemaValidation,
+} from '@/utils/shared/zod/getSWCQuestionnaire'
+
+const logger = getLogger(`builderIOQuestionnaire`)
+
+export async function getQuestionnaireV3({
+  dtsiSlug,
+  countryCode,
+}: {
+  dtsiSlug: string
+  countryCode: SupportedCountryCodes
+}) {
+  try {
+    const entries = await pRetry(
+      () =>
+        builderSDKClient.getAll(BuilderDataModelIdentifiers.QUESTIONNAIRE_V3, {
+          query: {
+            data: {
+              dtsiSlug,
+            },
+          },
+          includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
+          locale: DEFAULT_LOCALE,
+          cacheSeconds: DEFAULT_CACHE_IN_SECONDS,
+          fields: 'data',
+        }),
+      { retries: 3, minTimeout: 5000 },
+    )
+
+    const isValidResponse = zodQuestionnaireSchemaValidation.safeParse(entries)
+
+    // Using safeParse to prevent logging errors when a politician hasn't answered the questionnaire yet.
+    if (!isValidResponse.success) return null
+
+    return normalizeQuestionnaire(isValidResponse.data, countryCode)
+  } catch (e) {
+    logger.error('error getting questionnaire entries:' + e)
+    Sentry.captureException(e, {
+      level: 'error',
+      tags: { domain: 'builder.io', model: 'questionnaire' },
+      extra: { dtsiSlug, countryCode },
+    })
+    return null
+  }
+}
+
+export interface NormalizedQuestionnaire {
+  dtsiSlug: string
+  questions: Array<{
+    question: string
+    answer: QUESTION_ANSWER_OPTIONS
+    otherAnswer?: string
+  }>
+}
+
+function normalizeQuestionnaire(
+  questionnaire: SWCQuestionnaireEntry,
+  countryCode: SupportedCountryCodes,
+): NormalizedQuestionnaire {
+  const countryCodeToQuestionnaireMap: Record<SupportedCountryCodes, SWCQuestionnaireAnswers[]> = {
+    [SupportedCountryCodes.US]: questionnaire.questionnaireUs,
+    [SupportedCountryCodes.AU]: questionnaire.questionnaireAu,
+    [SupportedCountryCodes.CA]: questionnaire.questionnaireCa,
+    [SupportedCountryCodes.GB]: questionnaire.questionnaireGb,
+  }
+
+  return {
+    dtsiSlug: questionnaire.dtsiSlug,
+    questions: countryCodeToQuestionnaireMap[countryCode].map(
+      ({ question, answer, otherAnswer }) => ({
+        question,
+        answer,
+        otherAnswer: answer === QUESTION_ANSWER_OPTIONS.OTHER ? otherAnswer : undefined,
+      }),
+    ),
+  }
+}

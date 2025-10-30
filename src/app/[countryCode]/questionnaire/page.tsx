@@ -1,12 +1,15 @@
 import { Clock } from 'lucide-react'
 import { Metadata } from 'next'
 
+import { QuestionnaireClient } from '@/app/[countryCode]/questionnaire/QuestionnaireClient'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { getBuilderForm } from '@/data/questionnaire/getBuilderForm'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { usExternalUrls } from '@/utils/shared/urls'
 
 export const dynamic = 'error'
@@ -17,7 +20,13 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function QuestionnairePage() {
+export default async function QuestionnairePage({
+  params,
+}: {
+  params: { countryCode: SupportedCountryCodes }
+}) {
+  const config = await getBuilderForm(params?.countryCode)
+
   return (
     <div className="standard-spacing-from-navbar container flex flex-col items-center space-y-20">
       <div className="relative h-[180px] w-full md:h-[300px]">
@@ -45,17 +54,21 @@ export default async function QuestionnairePage() {
         </PageSubTitle>
       </div>
 
-      <div className="space-y-6">
-        <Button asChild size="lg">
-          <ExternalLink href={usExternalUrls.swcQuestionnaire()}>
-            Proceed to questionnaire
-          </ExternalLink>
-        </Button>
-        <div className="flex items-center justify-center gap-[7px] text-muted-foreground">
-          <Clock size={16} />
-          <p>2-3 minutes</p>
+      {config ? (
+        <QuestionnaireClient config={config} />
+      ) : (
+        <div className="space-y-6">
+          <Button asChild size="lg">
+            <ExternalLink href={usExternalUrls.swcQuestionnaire()}>
+              Proceed to questionnaire
+            </ExternalLink>
+          </Button>
+          <div className="flex items-center justify-center gap-[7px] text-muted-foreground">
+            <Clock size={16} />
+            <p>2-3 minutes</p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

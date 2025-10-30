@@ -8,6 +8,7 @@ import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleS
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getQuestionnaire } from '@/utils/server/builder/models/data/questionnaire'
+import { getQuestionnaireV3 } from '@/utils/server/builder/models/data/questionnaireV3'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -42,13 +43,20 @@ export async function generateStaticParams() {
 export default async function PoliticianDetails(props: Props) {
   const params = await props.params
 
-  const [person, questionnaire] = await Promise.all([
+  const [person, questionnaire, questionnaireV3] = await Promise.all([
     getPoliticianDetailsData(params.dtsiSlug),
     getQuestionnaire({
       dtsiSlug: params.dtsiSlug,
       countryCode,
     }),
+    getQuestionnaireV3({
+      dtsiSlug: params.dtsiSlug,
+      countryCode,
+    }),
   ])
+
+  // TODO QUESTIONNAIRE: Start to use the new questionnaire model and remove the logs here
+  console.log('questionnaireV3:', JSON.stringify(questionnaireV3, null, 2))
 
   if (!person) {
     notFound()
