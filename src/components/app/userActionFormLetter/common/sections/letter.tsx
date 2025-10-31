@@ -270,8 +270,9 @@ Letter.Preview = function Preview({ getLetterBodyText }: PreviewProps) {
               <Textarea
                 autoComplete="off"
                 autoCorrect="off"
-                disabled
+                className="cursor-default"
                 placeholder=""
+                readOnly
                 rows={16}
                 spellCheck={false}
                 {...field}
