@@ -1,9 +1,9 @@
-import { Prisma, type UserActionLetterRecipient } from '@prisma/client'
+import { Prisma, type UserActionLetterRecipient, type UserActionLetterStatus } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 import pRetry from 'p-retry'
 
-import { mapPostgridStatus } from '@/utils/server/postgrid/mapPostgridStatus'
+import { POSTGRID_STATUS_TO_LETTER_STATUS } from '@/utils/server/postgrid/contants'
 import { verifyPostgridWebhookSignature } from '@/utils/server/postgrid/verifyWebhookSignature'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     ...payload.data.metadata,
   })
 
-  const status = mapPostgridStatus(payload.data.status)
+  const status: UserActionLetterStatus = POSTGRID_STATUS_TO_LETTER_STATUS[payload.data.status]
 
   let recipient: UserActionLetterRecipient
   try {
