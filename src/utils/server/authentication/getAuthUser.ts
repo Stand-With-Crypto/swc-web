@@ -1,4 +1,3 @@
-'use server'
 import 'server-only'
 
 import { UserActionType } from '@prisma/client'
@@ -6,16 +5,23 @@ import { cookies } from 'next/headers'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
+import { getThirdwebAuthUser } from '@/utils/server/thirdweb/getThirdwebAuthUser'
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
-interface ServerAuthUser {
+export interface ServerAuthUser {
   userId: string
   address: string | null
 }
 
-export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
-  const thirdwebAuthData = await appRouterGetThirdwebAuthUser()
+/**
+ * Never call this function with shouldRevalidateToken set to true on an SSR page.
+ */
+export async function getAuthUser(
+  { shouldRevalidateToken } = {
+    shouldRevalidateToken: true,
+  },
+): Promise<ServerAuthUser | null> {
+  const thirdwebAuthData = await getThirdwebAuthUser({ shouldRevalidateToken })
 
   if (thirdwebAuthData) {
     return thirdwebAuthData
@@ -24,7 +30,6 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
   const currentCookies = await cookies()
 
   const sessionId = currentCookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
-
   if (!sessionId) {
     return null
   }
@@ -55,7 +60,6 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
   }
 
   const cryptoAddress = user.primaryUserCryptoAddress
-
   return {
     userId: user.id,
     address: cryptoAddress ? parseThirdwebAddress(cryptoAddress.cryptoAddress) : null,

@@ -3,7 +3,7 @@ import 'server-only'
 
 import { z } from 'zod'
 
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
@@ -22,7 +22,7 @@ export const actionConfirmUserMergeAlert = withServerActionMiddleware(
 )
 
 async function _actionConfirmUserMergeAlert(data: z.infer<typeof schema>) {
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')
   }

@@ -20,7 +20,7 @@ import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getAuthUser } from '@/utils/server/authentication/getAuthUser'
 import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
@@ -56,7 +56,7 @@ const logger = getLogger(`actionUpdateUserProfile`)
 type Input = z.infer<ReturnType<typeof getZodUpdateUserProfileFormActionSchema>>
 
 async function actionUpdateUserProfileWithoutMiddleware(data: Input) {
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await getAuthUser()
 
   if (!authUser) {
     throw new Error('Unauthenticated')
