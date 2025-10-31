@@ -34,6 +34,7 @@ it('page - politicians interactions', () => {
     })
   cy.get('@stateFilterTrigger').click()
   cy.get('[role="option"]').contains('div', 'All').click()
+  cy.wait(3000)
   cy.get('tbody').find('tr').should('have.length', 100)
 
   // filter table by role
@@ -50,6 +51,7 @@ it('page - politicians interactions', () => {
     })
   cy.get('@roleFilterTrigger').click()
   cy.get('[role="option"]').contains('div', 'All').click()
+  cy.wait(1000)
   cy.get('@roleFilterTrigger').children().should('contain', 'All')
 
   // filter the table by name
@@ -65,6 +67,7 @@ it('page - politicians interactions', () => {
     searchText: '350 Fifth Avenue New York, NY 10118',
     typingRequired: true,
   })
+  cy.wait(4000)
   cy.get('[data-test-id="dtsi-people-associated-with-address"]', { timeout: 10000 })
   // clear your address
   cy.contains('350 Fifth Avenue, New York, NY 10118').click()

@@ -1,4 +1,4 @@
-import { array, boolean, nativeEnum, object, string, z } from 'zod'
+import { array, boolean, nativeEnum, object, string, url, z } from 'zod'
 
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
@@ -44,7 +44,7 @@ export const zodBillSchemaValidation = object({
     countryCode: string().length(2),
     ctaButton: object({
       label: string(),
-      url: string().url(),
+      url: url(),
     }).partial(),
     dateIntroduced: string(),
     dtsiSlug: string().optional(),
@@ -59,11 +59,11 @@ export const zodBillSchemaValidation = object({
         category: nativeEnum(BillKeyDateCategory),
       }),
     ).optional(),
-    officialBillUrl: string().url(),
+    officialBillUrl: url(),
     relatedUrls: array(
       object({
         title: string(),
-        url: string().url(),
+        url: url(),
       }),
     ).optional(),
     summary: string(),

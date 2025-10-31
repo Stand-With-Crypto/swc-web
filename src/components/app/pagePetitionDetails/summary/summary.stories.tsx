@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 import { SignatureProvider } from '@/components/app/pagePetitionDetails/signatureContext'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'

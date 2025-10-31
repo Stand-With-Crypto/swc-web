@@ -1,11 +1,11 @@
-import { object, string, z } from 'zod'
+import { object, string, url, z } from 'zod'
 
 export const zodFoundersSchemaValidation = object({
   data: object({
     name: string(),
     companyName: string(),
-    companyUrl: string().url(),
-    image: string().url(),
+    companyUrl: url(),
+    image: url(),
   }),
 })
 

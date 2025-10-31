@@ -1,6 +1,5 @@
-import { string } from 'zod'
+import { email } from 'zod'
 
-export const zodEmailAddress = string()
-  .trim()
-  .email('Please enter a valid email address')
-  .toLowerCase()
+export const zodEmailAddress = email({
+  error: 'Please enter a valid email address',
+}).toLowerCase()

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const validatePageNum = ([page]: (string | undefined)[]) => {
-  const pageValidator = z.string().pipe(z.coerce.number().int().gte(1).lte(50))
+  const pageValidator = z.coerce.number().int().gte(1).lte(50)
   if (!page) {
     return 1
   }

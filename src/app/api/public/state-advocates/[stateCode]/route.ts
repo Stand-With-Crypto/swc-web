@@ -25,7 +25,7 @@ export async function GET(_: NextRequest, context: RequestContext) {
   if (payload.success === false) {
     return NextResponse.json(
       {
-        errors: payload.error.errors,
+        errors: payload.error.issues,
       },
       { status: 400 },
     )

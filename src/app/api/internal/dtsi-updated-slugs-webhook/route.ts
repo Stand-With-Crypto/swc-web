@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
   pathsToUpdate.forEach(page => revalidatePath(page))
   logger.info('updated pages', pathsToUpdate)
 
-  revalidateTag(DTSI_AllPeopleQueryTag)
+  revalidateTag(DTSI_AllPeopleQueryTag, 'max')
   logger.info('updated fetch tags', DTSI_AllPeopleQueryTag)
 
   return NextResponse.json({ pathsToUpdate })

@@ -233,12 +233,9 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 
 const nextConfig: NextConfig = {
   experimental: {
-    turbo: {},
     webpackBuildWorker: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  turbopack: {},
   images: {
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
     unoptimized: false,
@@ -443,7 +440,7 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
-        source: '/&modal=call-your-representative&:rest*',
+        source: '/&modal=call-your-representative&:rest(.*)',
         destination: '/action/call?unexpectedUrl=true',
         permanent: false,
       },

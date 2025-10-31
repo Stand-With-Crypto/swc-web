@@ -53,6 +53,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
 ): Promise<VerifiedSWCPartnerApiResponse<ExternalUserActionOptInResult>> {
   return handleExternalUserActionOptIn({
     emailAddress: input.emailAddress,
+    cryptoAddress: undefined,
     optInType: input.optInType,
     campaignName: input.campaignName,
     isVerifiedEmailAddress: input.isVerifiedEmailAddress,

@@ -55,7 +55,7 @@ export async function getAllPetitionsFromBuilderIO({
       .map(entry => {
         const validEntry = zodPetitionSchemaValidation.safeParse(entry)
         if (!validEntry.success) {
-          logger.warn('Invalid petition entry:', validEntry.error.errors)
+          logger.warn('Invalid petition entry:', validEntry.error.issues)
           return null
         }
         return validEntry.data.data
@@ -105,7 +105,7 @@ export async function getPetitionFromBuilderIO(
     const validEntry = zodPetitionSchemaValidation.safeParse(entry)
 
     if (!validEntry.success) {
-      logger.warn('Invalid petition entry:', validEntry.error.errors)
+      logger.warn('Invalid petition entry:', validEntry.error.issues)
       return null
     }
 

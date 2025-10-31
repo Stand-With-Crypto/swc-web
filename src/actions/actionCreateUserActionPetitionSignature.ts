@@ -141,8 +141,8 @@ function handleValidationError(error: ZodError): PetitionActionResult {
   const filteredErrors: Record<string, string[]> = {}
 
   for (const [key, value] of Object.entries(fieldErrors)) {
-    if (value) {
-      filteredErrors[key] = value
+    if (value && Array.isArray(value) && value.every(item => typeof item === 'string')) {
+      filteredErrors[key] = value as string[]
     }
   }
 

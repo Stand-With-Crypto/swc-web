@@ -24,6 +24,6 @@ export default function DebugClientSentry() {
   // if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
   //   return <div className="container max-w-lg">not enabled in production</div>
   // }
-  // eslint-disable-next-line
+
   return <div>foobar{`${val && val.foo.bar.baz}`}</div>
 }

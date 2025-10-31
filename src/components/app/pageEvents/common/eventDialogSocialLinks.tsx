@@ -46,6 +46,7 @@ export function EventDialogSocialLinks({
         <Button asChild variant="link">
           <a
             href={`http://twitter.com/share?url=${eventDeeplink}&hashtags=StandWithCrypto&text=I’m interested in an event from @StandWithCrypto! It’s time to make our voices heard and protect the future of crypto in America. Learn more about the event here:`}
+            rel="noreferrer"
             target="_blank"
           >
             <NextImage alt="Share on X" height={20} src="/socialIcons/x.svg" width={20} />
@@ -53,7 +54,11 @@ export function EventDialogSocialLinks({
         </Button>
 
         <Button asChild variant="link">
-          <a href={`https://www.facebook.com/sharer.php?u=${eventDeeplink}`} target="_blank">
+          <a
+            href={`https://www.facebook.com/sharer.php?u=${eventDeeplink}`}
+            rel="noreferrer"
+            target="_blank"
+          >
             <Facebook size={20} />
           </a>
         </Button>
