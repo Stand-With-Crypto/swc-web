@@ -4,13 +4,17 @@ import { noop } from 'lodash-es'
 
 import type { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
+import {
+  UserActionFormSuccessScreenNextAction,
+  UserActionFormSuccessScreenNextActionSkeleton,
+} from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { TimelinePlotPointStatus } from '@/components/ui/timeline/constants'
 import { Timeline } from '@/components/ui/timeline/timeline'
 import type { TimelinePlotPoint } from '@/components/ui/timeline/types'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import type { UserActionCampaignNames } from '@/utils/shared/userActionCampaigns'
@@ -85,27 +89,29 @@ type PerformedUserActions = NonNullable<
 type LetterAction = Extract<PerformedUserActions, { actionType: typeof UserActionType.LETTER }>
 
 export const UserActionFormLetterSuccess = ({
-  onClose,
   countryCode,
   campaignName,
   politicianCategory,
 }: {
-  onClose: () => void
   countryCode: SupportedCountryCodes
   campaignName: UserActionCampaignNames
   politicianCategory: YourPoliticianCategory
 }) => {
-  const { data } = useApiResponseForUserFullProfileInfo({
+  const userProfileResponse = useApiResponseForUserFullProfileInfo({
+    revalidateOnMount: true,
+  })
+  const { user } = userProfileResponse.data || { user: null }
+  const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
     revalidateOnMount: true,
   })
 
   const userActionLetter = useMemo(
     () =>
-      data?.user?.userActions?.find(
+      user?.userActions?.find(
         (action): action is LetterAction =>
           action.actionType === UserActionType.LETTER && action.campaignName === campaignName,
       ) ?? null,
-    [data, campaignName],
+    [user, campaignName],
   )
 
   const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress({
@@ -114,7 +120,7 @@ export const UserActionFormLetterSuccess = ({
   })
 
   return (
-    <UserActionFormSuccessScreen onClose={onClose}>
+    <div className="flex h-full flex-col gap-8 md:pb-12">
       <div className="flex flex-col items-center justify-center gap-8">
         <UserActionFormSuccessScreenFeedback.Image />
         <div className="space-y-2">
@@ -156,6 +162,18 @@ export const UserActionFormLetterSuccess = ({
           )
         })}
       </div>
-    </UserActionFormSuccessScreen>
+
+      {performedActionsResponse.isLoading || userProfileResponse.isLoading ? (
+        <UserActionFormSuccessScreenNextActionSkeleton />
+      ) : (
+        <UserActionFormSuccessScreenNextAction
+          data={{
+            countryCode,
+            userHasEmbeddedWallet: user?.hasEmbeddedWallet || false,
+            performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes || [],
+          }}
+        />
+      )}
+    </div>
   )
 }
