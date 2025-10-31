@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import Script from 'next/script'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
@@ -21,18 +20,7 @@ type DynamicPageProps = PageProps<{ page: string[] }>
 export default async function Page(props: DynamicPageProps) {
   const { page, countryCode } = await props.params
 
-  console.log('Content Page - raw page:', page)
-  console.log('Content Page - page type:', typeof page)
-  console.log('Content Page - page is array:', Array.isArray(page))
-  console.log('Content Page - countryCode:', countryCode)
-  console.log('Content Page - countryCode type:', typeof countryCode)
-
-  if (!page) {
-    console.log('Content Page - page is falsy, calling notFound()')
-    return notFound()
-  }
-
-  const pathname = PAGE_PREFIX + page?.join('/')
+  const pathname = PAGE_PREFIX + page.join('/')
 
   const content = await getPageContent(PAGE_MODEL, pathname, countryCode)
 
@@ -49,14 +37,7 @@ export default async function Page(props: DynamicPageProps) {
 export async function generateMetadata(props: DynamicPageProps): Promise<Metadata> {
   const { page, countryCode } = await props.params
 
-  if (!page) {
-    return generateMetadataDetails({
-      title: 'Page not found',
-      description: 'The page you are looking for does not exist.',
-    })
-  }
-
-  const pathname = PAGE_PREFIX + page?.join('/')
+  const pathname = PAGE_PREFIX + page.join('/')
 
   const metadata = await getPageDetails(PAGE_MODEL, pathname, countryCode)
 

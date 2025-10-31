@@ -46,16 +46,6 @@ export async function BuilderPageLayout({
 
   const footerConfig = await getFooterConfig(countryCode)
 
-  // Debug logging
-  console.log('BuilderPageLayout - countryCode:', countryCode)
-  console.log('BuilderPageLayout - pathname:', pathname)
-  console.log('BuilderPageLayout - footerConfig:', footerConfig)
-  console.log('BuilderPageLayout - socialLinks:', footerConfig?.socialLinks)
-
-  if (!footerConfig) {
-    throw new Error(`Footer config not found for country code: ${countryCode}`)
-  }
-
   return (
     <>
       {pageMetadata.hasNavbar && <Navbar {...navbarConfig} />}
