@@ -16,6 +16,7 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { UserActionFormClaimNFTDialog } from '@/components/app/userActionFormClaimNFT/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
+import { UserActionFormLetterDialog } from '@/components/app/userActionFormLetter/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -35,6 +36,7 @@ import {
 } from '@/utils/shared/stateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
+import type { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { USUserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
@@ -372,6 +374,43 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             </Button>
           ),
           children: <MainText>Someone {inStateOrEmpty} signed a petition</MainText>,
+        }
+      }
+      case UserActionType.LETTER: {
+        const dtsiRecipients = action.userActionLetterRecipients.filter(x => x.person)
+        return {
+          onFocusContent: () => (
+            <LoginDialogWrapper
+              authenticatedContent={
+                <UserActionFormLetterDialog
+                  campaignName={action.campaignName as AUUserActionLetterCampaignName}
+                  countryCode={action.countryCode as SupportedCountryCodes}
+                >
+                  <Button>Send yours</Button>
+                </UserActionFormLetterDialog>
+              }
+            >
+              <Button>Send yours</Button>
+            </LoginDialogWrapper>
+          ),
+          children: (
+            <MainText>
+              Letter sent to{' '}
+              {dtsiRecipients.length
+                ? listOfThings(
+                    dtsiRecipients.map(actionLetterRecipient => (
+                      <React.Fragment key={actionLetterRecipient.id}>
+                        <DTSIPersonName
+                          countryCode={countryCode}
+                          href={urls.politicianDetails(actionLetterRecipient.person!.slug)}
+                          person={actionLetterRecipient.person!}
+                        />
+                      </React.Fragment>
+                    )),
+                  ).map((content, index) => <React.Fragment key={index}>{content}</React.Fragment>)
+                : 'Representative'}
+            </MainText>
+          ),
         }
       }
     }

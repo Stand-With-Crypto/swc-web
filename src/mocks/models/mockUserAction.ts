@@ -7,16 +7,17 @@ import {
   ORDERED_SUPPORTED_COUNTRIES,
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
-import {
-  US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-} from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
+import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
+import { AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
+import { US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const activeActionTypesByCountry: Record<SupportedCountryCodes, readonly UserActionType[]> = {
   [SupportedCountryCodes.US]: US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  [SupportedCountryCodes.CA]: [UserActionType.OPT_IN, UserActionType.TWEET],
-  [SupportedCountryCodes.GB]: [UserActionType.OPT_IN, UserActionType.TWEET],
-  [SupportedCountryCodes.AU]: [UserActionType.OPT_IN, UserActionType.TWEET],
+  [SupportedCountryCodes.CA]: CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.GB]: GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.AU]: AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
 }
 
 export function mockCreateUserActionInput({
@@ -40,7 +41,7 @@ export function mockCreateUserActionInput({
   return {
     actionType,
     countryCode,
-    campaignName: US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
+    campaignName: getActionDefaultCampaignName(actionType, countryCode),
   } satisfies Omit<
     Prisma.UserActionCreateInput,
     'userId' | 'nftMintId' | 'userCryptoAddressId' | 'userSessionId' | 'userEmailAddressId' | 'user'

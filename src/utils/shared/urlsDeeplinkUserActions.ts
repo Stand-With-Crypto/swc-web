@@ -1,10 +1,14 @@
 import { UserActionType } from '@prisma/client'
 
-import { getDeeplinkUrlByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getDeeplinkUrl'
+import { getDeeplinkUrlByCampaignName as getEmailDeeplinkUrlByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getDeeplinkUrl'
+import { getDeeplinkUrlByCampaignName as getLetterDeeplinkUrlByCampaignName } from '@/components/app/userActionFormLetter/getDeeplinkUrl'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
-import { AUUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import {
+  type AUUserActionLetterCampaignName,
+  AUUserActionViewKeyPageCampaignName,
+} from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { CAUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { GBUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import {
@@ -111,6 +115,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(countryCode)}/action/claim-nft`
     },
   },
+  [UserActionType.LETTER]: {
+    getDeeplinkUrl: ({ countryCode }) => {
+      return `${getIntlPrefix(countryCode)}/action/letter`
+    },
+  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
@@ -181,9 +190,16 @@ export const getUserActionDeeplink = <
     campaign === COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[config.countryCode][actionType]
 
   if (actionType === UserActionType.EMAIL) {
-    return getDeeplinkUrlByCampaignName({
+    return getEmailDeeplinkUrlByCampaignName({
       countryCode: config.countryCode,
       campaignName: campaign as USUserActionEmailCampaignName,
+    })
+  }
+
+  if (actionType === UserActionType.LETTER) {
+    return getLetterDeeplinkUrlByCampaignName({
+      countryCode: config.countryCode,
+      campaignName: campaign as AUUserActionLetterCampaignName,
     })
   }
 

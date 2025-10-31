@@ -33,7 +33,7 @@ export function UserActionFormSuccessScreenFeedback(
   )
 }
 
-const UserActionFormSuccessScreenDefaultImage = () => (
+export const UserActionFormSuccessScreenDefaultImage = () => (
   <NextImage
     alt="Shield with checkmark"
     height={120}
