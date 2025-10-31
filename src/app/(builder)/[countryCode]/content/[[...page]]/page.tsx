@@ -21,8 +21,6 @@ type DynamicPageProps = PageProps<{ page: string[] }>
 export default async function Page(props: DynamicPageProps) {
   const { page, countryCode } = await props.params
 
-  console.log('======= page', page)
-
   if (!page) {
     return notFound()
   }
