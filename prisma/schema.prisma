@@ -629,9 +629,9 @@ model UserDeletionLog {
 }
 
 
-// To provide the most customized and straight-forward experience to our users, we have this BI tables,
-// so we can reach the user with more precision and with a better communication strategy.
-// The data is survey information conducted by an independent research firm and voluntarely send by the users.
+// This table is used primarily for Business Intelligence (BI) purposes and analytics.
+// It is NOT used for internal application functions or user-facing features.
+// The data is survey information conducted by a third party and voluntarely send by the users.
 model VoterProfile {
   id String @id @default(uuid())
 
@@ -644,9 +644,9 @@ model VoterProfile {
   @@map("voter_profile")
 }
 
-// To provide the most customized and straight-forward experience to our users, we have this BI tables,
-// so we can reach the user with more precision and with a better communication strategy.
-// The data is survey information conducted by an independent research firm and voluntarely send by the users.
+// This table is used primarily for Business Intelligence (BI) purposes and analytics.
+// It is NOT used for internal application functions or user-facing features.
+// The data is survey information conducted by a third party and voluntarely send by the users.
 model VoterElectionResult {
   id String @id @default(uuid())
 
