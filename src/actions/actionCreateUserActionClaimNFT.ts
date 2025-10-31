@@ -123,7 +123,7 @@ async function _actionCreateUserActionClaimNFT(input: CreateActionClaimNFTInput)
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionClaimNFTInput>,
+  validatedInput: z.ZodSafeParseSuccess<CreateActionClaimNFTInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
@@ -138,7 +138,7 @@ function logSpamActionSubmissions({
   validatedInput,
   analytics,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionClaimNFTInput>
+  validatedInput: z.ZodSafeParseSuccess<CreateActionClaimNFTInput>
   analytics: ReturnType<typeof getServerAnalytics>
 }) {
   analytics.trackUserActionCreatedIgnored({

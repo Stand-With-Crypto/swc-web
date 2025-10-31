@@ -22,7 +22,7 @@ function isValidDistrict(state: string, district: string | null): boolean {
     logger.warn('[District Rankings] Invalid district', {
       state,
       district,
-      errors: zodResult.error.errors,
+      errors: zodResult.error.issues,
     })
     return false
   }

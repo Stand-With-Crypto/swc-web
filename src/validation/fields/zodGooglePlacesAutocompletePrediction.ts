@@ -6,7 +6,6 @@ export const zodGooglePlacesAutocompletePrediction = object(
     description: string(),
   },
   {
-    required_error: 'Please select a valid address',
-    invalid_type_error: 'Please select a valid address',
+    error: _issue => 'Please select a valid address',
   },
 )

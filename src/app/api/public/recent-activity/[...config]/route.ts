@@ -10,7 +10,10 @@ export const revalidate = 30 // 30 seconds
 export const dynamic = 'error'
 
 const zodParams = z.object({
-  limit: z.string().pipe(z.coerce.number().int().gte(0).lt(100)),
+  limit: z
+    .string()
+    .transform(val => parseInt(val, 10))
+    .pipe(z.number().int().gte(0).lt(100)),
   countryCode: zodSupportedCountryCode,
   stateCode: z.string().length(2).optional(),
 })

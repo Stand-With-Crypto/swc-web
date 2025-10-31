@@ -173,7 +173,7 @@ async function _actionCreateUserActionVotingInformationResearched(
 
 async function getExistingUserAction(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionVotingInformationResearchedInput>,
+  validatedInput: z.ZodSafeParseSuccess<CreateActionVotingInformationResearchedInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
@@ -250,7 +250,7 @@ async function createActionAndUpdateUser({
   countryCode,
 }: {
   user: User
-  validatedInput: z.SafeParseSuccess<CreateActionVotingInformationResearchedInput>
+  validatedInput: z.ZodSafeParseSuccess<CreateActionVotingInformationResearchedInput>
   sessionId: Awaited<ReturnType<typeof getUserSessionId>>
   countryCode: string
 }) {
@@ -309,7 +309,7 @@ async function updateAction({
   existingVotingInformationResearchAction: NonNullable<
     Awaited<ReturnType<typeof getExistingUserAction>>
   >
-  validatedInput: z.SafeParseSuccess<CreateActionVotingInformationResearchedInput>
+  validatedInput: z.ZodSafeParseSuccess<CreateActionVotingInformationResearchedInput>
 }) {
   const updatedAction = await prismaClient.userAction.update({
     where: { id: existingVotingInformationResearchAction.id },

@@ -15,7 +15,12 @@ const zodDateString = z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
 const zodParams = z.object({
   startDate: zodDateString,
   endDate: zodDateString,
-  offset: z.string().pipe(z.coerce.number().int().gte(0).lte(1000)).optional().default('0'),
+  offset: z
+    .string()
+    .transform(val => parseInt(val, 10))
+    .pipe(z.number().int().gte(0).lte(1000))
+    .optional()
+    .default(0),
 })
 
 export async function GET(

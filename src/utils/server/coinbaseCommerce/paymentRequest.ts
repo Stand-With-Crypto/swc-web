@@ -112,7 +112,7 @@ export const zodCoinbaseCommercePayment = z.object({
           }),
         })
         .optional(),
-      metadata: z.record(z.string().or(z.null()).optional()),
+      metadata: z.record(z.string(), z.union([z.string(), z.null()]).optional()),
     }),
   }),
 })

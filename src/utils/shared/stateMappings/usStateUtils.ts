@@ -72,8 +72,8 @@ export const US_MAIN_STATE_CODE_WITH_DC_TO_DISPLAY_NAME_MAP = {
 export type USStateCode = keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
 
 export const getUSStateNameFromStateCode = (stateCode: string) => {
-  // @ts-ignore
-  const name: string = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode.toUpperCase()]
+  const upperStateCode = stateCode.toUpperCase() as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+  const name: string = US_STATE_CODE_TO_DISPLAY_NAME_MAP[upperStateCode]
   if (name) {
     return name
   }

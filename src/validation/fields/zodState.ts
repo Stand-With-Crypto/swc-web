@@ -23,32 +23,32 @@ const COUNTRY_CODE_TO_ZOD_STATE_MAP: Record<
   {
     stateMap: Record<string, string>
     zodOptions: {
-      required_error: string
+      error: string
     }
   }
 > = {
   [SupportedCountryCodes.US]: {
     stateMap: US_STATE_CODE_TO_DISPLAY_NAME_MAP,
     zodOptions: {
-      required_error: 'Please enter a valid US state',
+      error: 'Please enter a valid US state',
     },
   },
   [SupportedCountryCodes.GB]: {
     stateMap: GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP,
     zodOptions: {
-      required_error: 'Please enter a valid GB country',
+      error: 'Please enter a valid GB country',
     },
   },
   [SupportedCountryCodes.CA]: {
     stateMap: CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP,
     zodOptions: {
-      required_error: 'Please enter a valid CA state',
+      error: 'Please enter a valid CA state',
     },
   },
   [SupportedCountryCodes.AU]: {
     stateMap: AU_STATE_CODE_TO_DISPLAY_NAME_MAP,
     zodOptions: {
-      required_error: 'Please enter a valid AU state',
+      error: 'Please enter a valid AU state',
     },
   },
 }

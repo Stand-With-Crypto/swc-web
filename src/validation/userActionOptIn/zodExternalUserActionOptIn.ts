@@ -25,7 +25,7 @@ export const getZodExternalUserActionOptInSchema = (countryCode: SupportedCountr
     emailAddress: zodEmailAddress,
     cryptoAddress: string()
       .optional()
-      .refine(str => !str || isAddress(str), { message: 'Invalid Ethereum address' })
+      .refine(str => !str || isAddress(str), { error: 'Invalid Ethereum address' })
       .transform(str => str && str.toLowerCase()),
     optInType: z.nativeEnum(UserActionOptInType),
     campaignName: z.string(),
@@ -43,6 +43,6 @@ export const getZodExternalUserActionOptInSchema = (countryCode: SupportedCountr
         medium: z.string(),
       })
       .optional(),
-    additionalAnalyticsProperties: z.record(z.string()).optional(),
+    additionalAnalyticsProperties: z.record(z.string(), z.unknown()).optional(),
     countryCode: zodSupportedCountryCode,
   })

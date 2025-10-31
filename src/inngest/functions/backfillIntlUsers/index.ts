@@ -136,11 +136,14 @@ export const backfillIntlUsersCoordinator = inngest.createFunction(
               acc.validUsers.push(result.data)
             } else {
               acc.invalidCount++
-              result.error.errors.forEach(err => {
+              result.error.issues.forEach(err => {
                 const errorKey = `${err.path.join('.')}: ${err.code}`
                 const current = errorsByType.get(errorKey) || { count: 0, examples: [] }
                 current.examples.push({
-                  rawUserData: err.path.length ? rawUser[err.path[0]] : rawUser,
+                  rawUserData:
+                    err.path.length && typeof err.path[0] === 'string'
+                      ? rawUser[err.path[0] as keyof typeof rawUser]
+                      : rawUser,
                   message: err.message,
                 })
                 errorsByType.set(errorKey, {

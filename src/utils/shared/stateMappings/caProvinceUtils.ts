@@ -26,8 +26,9 @@ export type CAProvinceOrTerritoryCode =
   keyof typeof CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP
 
 export const getCAProvinceOrTerritoryNameFromCode = (code: string) => {
-  // @ts-ignore
-  const name: string = CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP[code.toUpperCase()]
+  const upperCode =
+    code.toUpperCase() as keyof typeof CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP
+  const name: string = CA_PROVINCES_AND_TERRITORIES_CODE_TO_DISPLAY_NAME_MAP[upperCode]
   if (name) {
     return name
   }

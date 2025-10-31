@@ -30,7 +30,7 @@ export const getZodVerifiedSWCPartnersUserActionOptInSchema = (
 ) =>
   z.object({
     emailAddress: zodEmailAddress,
-    optInType: z.nativeEnum(UserActionOptInType),
+    optInType: z.enum(UserActionOptInType),
     campaignName: z.string(),
     isVerifiedEmailAddress: z.boolean(),
     firstName: zodFirstName.optional(),
@@ -46,6 +46,7 @@ export const getZodVerifiedSWCPartnersUserActionOptInSchema = (
 type Input = z.infer<ReturnType<typeof getZodVerifiedSWCPartnersUserActionOptInSchema>> & {
   partner: VerifiedSWCPartner
   hasValidPhoneNumber: boolean
+  cryptoAddress?: string
 }
 
 export async function verifiedSWCPartnersUserActionOptIn(
@@ -53,6 +54,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
 ): Promise<VerifiedSWCPartnerApiResponse<ExternalUserActionOptInResult>> {
   return handleExternalUserActionOptIn({
     emailAddress: input.emailAddress,
+    cryptoAddress: input.cryptoAddress,
     optInType: input.optInType,
     campaignName: input.campaignName,
     isVerifiedEmailAddress: input.isVerifiedEmailAddress,

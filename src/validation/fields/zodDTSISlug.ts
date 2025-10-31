@@ -1,3 +1,5 @@
 import { string } from 'zod'
 
-export const zodDTSISlug = string({ required_error: 'Person required to submit' })
+export const zodDTSISlug = string({
+  error: issue => (issue.input === undefined ? 'Person required to submit' : 'Invalid person slug'),
+})
