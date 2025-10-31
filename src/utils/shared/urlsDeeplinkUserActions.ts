@@ -5,7 +5,10 @@ import { getDeeplinkUrlByCampaignName as getLetterDeeplinkUrlByCampaignName } fr
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserActions'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlPrefix } from '@/utils/shared/urls'
-import { AUUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import {
+  type AUUserActionLetterCampaignName,
+  AUUserActionViewKeyPageCampaignName,
+} from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { CAUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
 import { GBUserActionViewKeyPageCampaignName } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import {
@@ -196,7 +199,7 @@ export const getUserActionDeeplink = <
   if (actionType === UserActionType.LETTER) {
     return getLetterDeeplinkUrlByCampaignName({
       countryCode: config.countryCode,
-      campaignName: campaign as any, // Type will be narrowed based on country
+      campaignName: campaign as AUUserActionLetterCampaignName,
     })
   }
 

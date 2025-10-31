@@ -5,7 +5,10 @@ import { noop } from 'lodash-es'
 import type { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
-import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
+import {
+  UserActionFormSuccessScreenDefaultImage,
+  UserActionFormSuccessScreenFeedback,
+} from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import {
   UserActionFormSuccessScreenNextAction,
   UserActionFormSuccessScreenNextActionSkeleton,
@@ -122,7 +125,9 @@ export const UserActionFormLetterSuccess = ({
   return (
     <div className="flex h-full flex-col gap-8 md:pb-12">
       <div className="flex flex-col items-center justify-center gap-8">
-        <UserActionFormSuccessScreenFeedback.Image />
+        <div className="mx-auto">
+          <UserActionFormSuccessScreenDefaultImage />
+        </div>
         <div className="space-y-2">
           <UserActionFormSuccessScreenFeedback.Title>
             {USER_ACTION_FORM_SUCCESS_SCREEN_INFO.LETTER.title}

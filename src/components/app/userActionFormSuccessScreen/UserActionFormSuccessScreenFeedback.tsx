@@ -33,7 +33,7 @@ export function UserActionFormSuccessScreenFeedback(
   )
 }
 
-const UserActionFormSuccessScreenDefaultImage = () => (
+export const UserActionFormSuccessScreenDefaultImage = () => (
   <NextImage
     alt="Shield with checkmark"
     height={120}
@@ -45,7 +45,7 @@ const UserActionFormSuccessScreenDefaultImage = () => (
 UserActionFormSuccessScreenFeedback.Image = function UserActionFormSuccessScreenFeedbackImage({
   children,
 }: {
-  children?: ReactNode
+  children: ReactNode
 }) {
   return <div className="mx-auto">{children || <UserActionFormSuccessScreenDefaultImage />}</div>
 }

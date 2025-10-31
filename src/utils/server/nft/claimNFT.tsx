@@ -28,13 +28,13 @@ import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns'
+import { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
   USUserActionCallCampaignName,
   USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
   USUserActionEmailCampaignName,
-  USUserActionLetterCampaignName,
   USUserActionLinkedinCampaignName,
   USUserActionLiveEventCampaignName,
   USUserActionNftMintCampaignName,
@@ -67,7 +67,7 @@ export const ACTION_NFT_SLUG: Record<UserActionType, Record<string, NFTSlug | nu
     [USUserActionEmailCampaignName.FIT21_2024_04]: null,
   },
   [UserActionType.LETTER]: {
-    [USUserActionLetterCampaignName.DEFAULT]: null,
+    [AUUserActionLetterCampaignName.DEFAULT]: null,
   },
   [UserActionType.DONATION]: {
     [USUserActionDonationCampaignName.DEFAULT]: null,

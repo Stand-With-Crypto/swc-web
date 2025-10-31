@@ -1,6 +1,6 @@
 'use client'
 
-import { lazy, Suspense, useCallback } from 'react'
+import { lazy, Suspense } from 'react'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { ANALYTICS_NAME_USER_ACTION_FORM_LETTER } from '@/components/app/userActionFormLetter/common/constants'
@@ -40,8 +40,6 @@ export function UserActionFormLetterDialog({
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const { user } = fetchUser.data || { user: null }
 
-  const onCancel = useCallback(() => dialogProps.onOpenChange(false), [dialogProps])
-
   if (fetchUser.isLoading) {
     return (
       <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
@@ -58,7 +56,7 @@ export function UserActionFormLetterDialog({
       trigger={children}
     >
       <Suspense fallback={<UserActionFormLetterSkeleton {...props} />}>
-        <LazyUserActionFormLetter {...props} onCancel={onCancel} user={user} />
+        <LazyUserActionFormLetter {...props} user={user} />
       </Suspense>
     </UserActionFormDialog>
   )

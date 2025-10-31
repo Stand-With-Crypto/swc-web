@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect } from 'react'
 import { UserActionType } from '@prisma/client'
-import { notFound, useRouter } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 import { GeoGate } from '@/components/app/geoGate'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
@@ -30,7 +30,6 @@ function UserActionFormLetterDeeplinkWrapperContent(
   usePreventOverscroll()
 
   const fetchUser = useApiResponseForUserFullProfileInfo()
-  const router = useRouter()
   const urls = getIntlUrls(countryCode)
   const { user } = fetchUser.data || { user: null }
   const cta = getUserActionCTAsByCountry(countryCode)[UserActionType.LETTER]
@@ -66,14 +65,7 @@ function UserActionFormLetterDeeplinkWrapperContent(
     )
   }
 
-  return (
-    <UserActionFormLetter
-      {...props}
-      initialValues={initialValues}
-      onCancel={() => router.replace(urls.home())}
-      user={user}
-    />
-  )
+  return <UserActionFormLetter {...props} initialValues={initialValues} user={user} />
 }
 
 export function UserActionFormLetterDeeplinkWrapper(

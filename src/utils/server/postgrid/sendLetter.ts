@@ -1,11 +1,12 @@
 import { postgridClient } from '@/utils/server/postgrid/postgridClient'
 import { SendLetterParams } from '@/utils/server/postgrid/types'
 import { getLogger } from '@/utils/shared/logger'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('sendLetter')
 
 function getLetterSizeForCountry(countryCode: string): 'us_letter' | 'a4' {
-  const US_LETTER_COUNTRIES = ['BR', 'CA', 'US']
+  const US_LETTER_COUNTRIES = [SupportedCountryCodes.US, SupportedCountryCodes.CA]
   return US_LETTER_COUNTRIES.includes(countryCode.toUpperCase()) ? 'us_letter' : 'a4'
 }
 
