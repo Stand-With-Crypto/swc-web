@@ -1,3 +1,5 @@
+import { UserActionType } from '@prisma/client'
+
 import {
   AdvocateHeatmapAction,
   AreaCoordinatesKey,
@@ -5,7 +7,6 @@ import {
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
-import { UserActionType } from '@prisma/client'
 
 type ActivityWithLocation = PublicRecentActivity['data'][number] & {
   administrativeArea: AreaCoordinatesKey
