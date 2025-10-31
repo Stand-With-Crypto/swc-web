@@ -18,6 +18,10 @@ export function generateBuilderPageStaticParams(
       countryCode,
     })
 
+    if (!paths || paths.length === 0) {
+      return []
+    }
+
     return paths.map(path => ({
       countryCode,
       page: path?.replace(pagePrefix, '').split('/'),

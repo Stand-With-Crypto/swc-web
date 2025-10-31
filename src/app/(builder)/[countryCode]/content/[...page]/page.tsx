@@ -20,7 +20,7 @@ type DynamicPageProps = PageProps<{ page: string[] }>
 export default async function Page(props: DynamicPageProps) {
   const { page, countryCode } = await props.params
 
-  const pathname = PAGE_PREFIX + page?.join('/')
+  const pathname = PAGE_PREFIX + page.join('/')
 
   const content = await getPageContent(PAGE_MODEL, pathname, countryCode)
 
@@ -37,7 +37,7 @@ export default async function Page(props: DynamicPageProps) {
 export async function generateMetadata(props: DynamicPageProps): Promise<Metadata> {
   const { page, countryCode } = await props.params
 
-  const pathname = PAGE_PREFIX + page?.join('/')
+  const pathname = PAGE_PREFIX + page.join('/')
 
   const metadata = await getPageDetails(PAGE_MODEL, pathname, countryCode)
 
