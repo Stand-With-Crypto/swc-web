@@ -58,7 +58,6 @@ const DTSI_DANIEL_MULINO = {
     },
   },
   twitterAccounts: [],
-  officeAddress: 'Parliament House, Canberra, ACT 2600, Australia',
 }
 
 /**

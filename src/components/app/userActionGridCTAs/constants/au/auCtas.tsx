@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { getEmailActionWrapperComponentByCampaignName } from '@/components/app/userActionFormEmailCongressperson/getWrapperComponentByCampaignName'
 import { UserActionFormFollowLinkedInDialog } from '@/components/app/userActionFormFollowOnLinkedIn/common/dialog'
-import { getLetterActionWrapperComponentByCampaignName } from '@/components/app/userActionFormLetter/getWrapperComponentByCampaignName'
 import { UserActionFormReferDialog } from '@/components/app/userActionFormRefer/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/common/dialog'
 import { UserActionViewKeyPageDialog } from '@/components/app/userActionFormViewKeyPage/dialog'
@@ -13,7 +12,6 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
   AUUserActionEmailCampaignName,
-  AUUserActionLetterCampaignName,
   AUUserActionLinkedInCampaignName,
   AUUserActionPollCampaignName,
   AUUserActionReferCampaignName,
@@ -290,27 +288,6 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
             {children}
           </UserActionFormFollowLinkedInDialog>
         ),
-      },
-    ],
-  },
-  [UserActionType.LETTER]: {
-    title: 'Send an official letter',
-    description: 'Send a real physical letter to your local policymaker',
-    mobileCTADescription: 'Send a real physical letter to your local policymaker',
-    campaignsModalDescription: 'Send a real physical letter to your local policymaker',
-    image: '/au/actionTypeIcons/email.png',
-    campaigns: [
-      {
-        actionType: UserActionType.LETTER,
-        campaignName: AUUserActionLetterCampaignName.DEFAULT,
-        isCampaignActive: true,
-        title: 'Send an official letter',
-        description: 'Send a real physical letter to your local policymaker',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getLetterActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: AUUserActionLetterCampaignName.DEFAULT,
-        }),
       },
     ],
   },

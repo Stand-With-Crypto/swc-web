@@ -28,9 +28,9 @@ import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { COUNTRY_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns'
+import { AUUserActionLetterCampaignName } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns/common'
 import {
-  USActiveClientUserActionWithCampaignType,
   USUserActionCallCampaignName,
   USUserActionClaimNftCampaignName,
   USUserActionDonationCampaignName,
@@ -54,7 +54,7 @@ import {
 
 import NFTMintStatus = $Enums.NFTMintStatus
 
-export const ACTION_NFT_SLUG: Partial<Record<UserActionType, Record<string, NFTSlug | null>>> = {
+export const ACTION_NFT_SLUG: Record<UserActionType, Record<string, NFTSlug | null>> = {
   [UserActionType.OPT_IN]: {
     [UserActionOptInCampaignName.DEFAULT]: NFTSlug.SWC_SHIELD,
   },
@@ -65,6 +65,9 @@ export const ACTION_NFT_SLUG: Partial<Record<UserActionType, Record<string, NFTS
   [UserActionType.EMAIL]: {
     [USUserActionEmailCampaignName.DEFAULT]: null,
     [USUserActionEmailCampaignName.FIT21_2024_04]: null,
+  },
+  [UserActionType.LETTER]: {
+    [AUUserActionLetterCampaignName.DEFAULT]: null,
   },
   [UserActionType.DONATION]: {
     [USUserActionDonationCampaignName.DEFAULT]: null,
