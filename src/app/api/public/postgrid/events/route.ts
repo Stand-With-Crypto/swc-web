@@ -1,0 +1,89 @@
+import { Prisma, type UserActionLetterRecipient, type UserActionLetterStatus } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { NextRequest, NextResponse } from 'next/server'
+import pRetry from 'p-retry'
+
+import { POSTGRID_STATUS_TO_LETTER_STATUS } from '@/utils/server/postgrid/contants'
+import { verifyPostgridWebhookSignature } from '@/utils/server/postgrid/verifyWebhookSignature'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getLogger } from '@/utils/shared/logger'
+
+const logger = getLogger('postgridWebhook')
+
+export async function POST(request: NextRequest) {
+  const jwtPayload = await request.text()
+
+  const payload = verifyPostgridWebhookSignature(jwtPayload)
+  if (!payload) {
+    logger.error('Unauthorized PostGrid webhook request - invalid signature')
+    Sentry.captureMessage('Unauthorized PostGrid webhook request - invalid signature', {
+      extra: { jwtPayload },
+      tags: { domain: 'postgridWebhook' },
+    })
+    return new NextResponse('Unauthorized', { status: 401 })
+  }
+
+  logger.info('Received PostGrid webhook event', {
+    eventType: payload.type,
+    letterId: payload.data.id,
+    status: payload.data.status,
+    ...payload.data.metadata,
+  })
+
+  const status: UserActionLetterStatus = POSTGRID_STATUS_TO_LETTER_STATUS[payload.data.status]
+
+  let recipient: UserActionLetterRecipient
+  try {
+    recipient = await pRetry(
+      async () => {
+        return await prismaClient.userActionLetterRecipient.findFirstOrThrow({
+          where: { postgridOrderId: payload.data.id },
+        })
+      },
+      {
+        maxRetryTime: 60 * 1000, // 1 minute
+      },
+    )
+  } catch (error) {
+    logger.error(
+      `UserActionLetterRecipient not found for PostGrid order ${payload.data.id} after retries: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    )
+    Sentry.captureException(
+      `UserActionLetterRecipient not found for PostGrid order ${payload.data.id}: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      {
+        extra: { payload },
+        tags: { domain: 'postgridWebhook' },
+      },
+    )
+    // Return 200 so PostGrid Webhook doesn't retry every hour for this order
+    return new NextResponse('UserActionLetterRecipient not found after retries', { status: 200 })
+  }
+
+  try {
+    await prismaClient.userActionLetterStatusUpdate.create({
+      data: {
+        userActionLetterRecipientId: recipient.id,
+        status,
+      },
+    })
+
+    logger.info('Updated status for PostGrid letter', {
+      postgridOrderId: payload.data.id,
+      recipientId: recipient.id,
+      status,
+    })
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      logger.info('Status already recorded, skipping duplicate', {
+        postgridOrderId: payload.data.id,
+        recipientId: recipient.id,
+        userId: payload.data.metadata.userId,
+        status,
+      })
+    } else {
+      throw error
+    }
+  }
+
+  return new NextResponse('ok', { status: 200 })
+}

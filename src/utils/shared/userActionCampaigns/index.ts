@@ -88,7 +88,9 @@ export const getActionDefaultCampaignName = (
     COUNTRY_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[countryCode as SupportedCountryCodes]
 
   if (!campaignNameEnum) {
-    return US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action]
+    return US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[
+      action as keyof typeof US_USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP
+    ]
   }
 
   return campaignNameEnum[action as keyof typeof campaignNameEnum]
