@@ -1,5 +1,28 @@
-import { AreaCoordinatesKey, Coords } from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  AdvocateHeatmapAction,
+  AreaCoordinatesKey,
+  Coords,
+} from '@/components/app/pageAdvocatesHeatmap/constants'
+import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { UserActionType } from '@prisma/client'
+
+type ActivityWithLocation = PublicRecentActivity['data'][number] & {
+  administrativeArea: AreaCoordinatesKey
+  coordinates?: Coords
+}
+
+const MAX_MARKERS_PER_ADMINISTRATIVE_AREA = 3
+
+/**
+ * Generates a unique ID for a marker based on country code and administrative area
+ */
+function generateMarkerUniqueId(
+  countryCode: SupportedCountryCodes,
+  administrativeArea: AreaCoordinatesKey,
+) {
+  return `${countryCode}:${administrativeArea}`
+}
 
 /**
  * Simple hash function to convert string to number
@@ -172,9 +195,34 @@ export function getJitteredMarkerPosition({
   return applyCoordinatesOffset(centerCoordinates, baseX + jitterX, baseY + jitterY)
 }
 
-function generateMarkerUniqueId(
-  countryCode: SupportedCountryCodes,
+export function getAdministrativeAreaFromActivity(
+  item: PublicRecentActivity['data'][number],
+): AreaCoordinatesKey {
+  const userLocation = item.user.userLocationDetails
+  const { administrativeAreaLevel1, swcCivicAdministrativeArea } = userLocation ?? {}
+  return (swcCivicAdministrativeArea ?? administrativeAreaLevel1) as AreaCoordinatesKey
+}
+
+export function getCoordinatesForArea(
   administrativeArea: AreaCoordinatesKey,
-) {
-  return `${countryCode}:${administrativeArea}`
+  stateCoords: Partial<Record<string, Coords>>,
+): Coords | undefined {
+  return stateCoords[administrativeArea as string]
+}
+
+export function isValidActivityItem(
+  item: ActivityWithLocation,
+  index: number,
+  items: ActivityWithLocation[],
+  actions: Partial<Record<UserActionType, AdvocateHeatmapAction>>,
+): item is ActivityWithLocation & { coordinates: Coords } {
+  const hasValidData = Boolean(item.administrativeArea) && Boolean(item.coordinates)
+  const hasActionConfig = Boolean(actions[item.actionType])
+
+  const markersInSameArea = items
+    .slice(0, index)
+    .filter(({ administrativeArea }) => administrativeArea === item.administrativeArea).length
+  const isWithinLimit = markersInSameArea < MAX_MARKERS_PER_ADMINISTRATIVE_AREA
+
+  return hasValidData && hasActionConfig && isWithinLimit
 }

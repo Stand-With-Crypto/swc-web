@@ -18,24 +18,24 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 export type Coords = [number, number]
 
-type USStateCoords = Partial<Record<USStateCode, Coords>>
-type GBStateCoords = Partial<Record<GBRegion, Coords>>
-type CAStateCoords = Partial<Record<CAProvinceOrTerritoryCode, Coords>>
 type AUStateCoords = Partial<Record<AUStateCode, Coords>>
+type CAStateCoords = Partial<Record<CAProvinceOrTerritoryCode, Coords>>
+type GBStateCoords = Partial<Record<GBRegion, Coords>>
+type USStateCoords = Partial<Record<USStateCode, Coords>>
 
 interface RegionCoords {
-  [SupportedCountryCodes.US]: USStateCoords
-  [SupportedCountryCodes.GB]: GBStateCoords
-  [SupportedCountryCodes.CA]: CAStateCoords
   [SupportedCountryCodes.AU]: AUStateCoords
+  [SupportedCountryCodes.CA]: CAStateCoords
+  [SupportedCountryCodes.GB]: GBStateCoords
+  [SupportedCountryCodes.US]: USStateCoords
 }
 
-export type AreaCoordinates = USStateCoords | GBStateCoords | CAStateCoords | AUStateCoords
+export type AreaCoordinates = AUStateCoords | CAStateCoords | GBStateCoords | USStateCoords
 export type AreaCoordinatesKey =
-  | keyof USStateCoords
-  | keyof GBStateCoords
-  | keyof CAStateCoords
   | keyof AUStateCoords
+  | keyof CAStateCoords
+  | keyof GBStateCoords
+  | keyof USStateCoords
 
 export const AREAS_WITH_SINGLE_MARKER: AreaCoordinatesKey[] = ['ACT', 'London', 'NB', 'NS', 'PE']
 

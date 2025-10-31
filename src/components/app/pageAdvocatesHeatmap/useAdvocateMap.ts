@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { getJitteredMarkerPosition } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.utils'
+import {
+  getAdministrativeAreaFromActivity,
+  getCoordinatesForArea,
+  getJitteredMarkerPosition,
+  isValidActivityItem,
+} from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.utils'
 import {
   AdvocateHeatmapAction,
   ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
@@ -28,7 +33,6 @@ export interface MapMarker {
 
 const INITIAL_MARKERS = 5
 const MAX_MARKERS = 20
-const MAX_MARKERS_PER_ADMINISTRATIVE_AREA = 3
 const ADVOCATE_MAP_INTERVAL = 2_000
 
 export function getMapAdministrativeAreaName(
@@ -66,40 +70,18 @@ const createMarkersFromActions = (
     return markers
   }
 
-  const activityWithAdministrativeArea = recentActivity
+  const validActivities = recentActivity
     .map(item => {
-      const userLocation = item.user.userLocationDetails
+      const administrativeArea = getAdministrativeAreaFromActivity(item)
+      const coordinates = getCoordinatesForArea(administrativeArea, stateCoords)
 
-      const { administrativeAreaLevel1, swcCivicAdministrativeArea } = userLocation ?? {}
-
-      const administrativeArea = (swcCivicAdministrativeArea ??
-        administrativeAreaLevel1) as keyof typeof stateCoords
-
-      return {
-        ...item,
-        administrativeArea,
-        coordinates: stateCoords[administrativeArea],
-      }
+      return { ...item, administrativeArea, coordinates }
     })
-    .filter((item, index, items) => {
-      const hasAdministrativeAreaAndCoords =
-        Boolean(item.administrativeArea) && Boolean(stateCoords[item.administrativeArea])
+    .filter((item, index, items) => isValidActivityItem(item, index, items, actions))
 
-      const hasActionConfig = actions[item.actionType]
-
-      const isWithinLimit =
-        items
-          .slice(0, index)
-          .filter(({ administrativeArea }) => administrativeArea === item.administrativeArea)
-          .length < MAX_MARKERS_PER_ADMINISTRATIVE_AREA
-
-      return hasAdministrativeAreaAndCoords && hasActionConfig && isWithinLimit
-    })
-
-  activityWithAdministrativeArea.forEach(item => {
+  validActivities.forEach(item => {
     let markerCoordinates: Coords = item.coordinates
 
-    // Initialize counter if not exists
     if (!stateCount[item.administrativeArea]) {
       stateCount[item.administrativeArea] = 0
     }
