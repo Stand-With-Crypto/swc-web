@@ -49,7 +49,6 @@ interface AUUserActionFormLetterProps extends UserActionFormLetterPropsBase {
 export function AUUserActionFormLetter({
   user,
   initialValues,
-  onCancel,
   campaignName,
 }: AUUserActionFormLetterProps) {
   const router = useRouter()
@@ -185,7 +184,6 @@ export function AUUserActionFormLetter({
           <UserActionFormLetterSuccess
             campaignName={campaignName}
             countryCode={countryCode}
-            onClose={onCancel}
             politicianCategory={campaignMetadata.politicianCategory}
           />
         </div>
