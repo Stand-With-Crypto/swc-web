@@ -150,6 +150,8 @@ model User {
   UserCommunicationJourney UserCommunicationJourney[]
   smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
   countryCode              String                     @map("country_code")
+  voterProfile             VoterProfile?
+  voterElectionResults     VoterElectionResult[]
 
   @@index([addressId])
   @@index([internalStatus])
@@ -624,4 +626,40 @@ model UserDeletionLog {
   date         DateTime @default(now())
 
   @@map("user_deletion_log")
+}
+
+
+// This table is used primarily for Business Intelligence (BI) purposes and analytics.
+// It is NOT used for internal application functions or user-facing features.
+// The data is survey information conducted by a third party and voluntarely send by the users.
+model VoterProfile {
+  id String @id @default(uuid())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  voterStatus      String
+  partyAffiliation String?
+
+  @@map("voter_profile")
+}
+
+// This table is used primarily for Business Intelligence (BI) purposes and analytics.
+// It is NOT used for internal application functions or user-facing features.
+// The data is survey information conducted by a third party and voluntarely send by the users.
+model VoterElectionResult {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  electionYear        Int     @map("election_year")
+  generalVotingMethod String? @map("general_voting_method")
+  // choiceIndex is a 0-100 score. 0-20 rep, 20-70 independent, 70+ dem.
+  choiceIndex         Int?    @map("choice_index")
+  // modeledPartisanship is the choiceIndex classified into REPUBLICAN, INDEPENDENT or DEMOCRAT.
+  modeledPartisanship String? @map("modeled_partisanship")
+
+  @@unique([userId, electionYear])
+  @@map("voter_election_result")
 }
