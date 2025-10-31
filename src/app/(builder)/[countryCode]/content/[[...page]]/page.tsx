@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import Script from 'next/script'
 
 import { BuilderPageLayout, RenderBuilderContent } from '@/components/app/builder'
@@ -19,6 +20,10 @@ type DynamicPageProps = PageProps<{ page: string[] }>
 
 export default async function Page(props: DynamicPageProps) {
   const { page, countryCode } = await props.params
+
+  if (!page) {
+    return notFound()
+  }
 
   const pathname = PAGE_PREFIX + page?.join('/')
 
