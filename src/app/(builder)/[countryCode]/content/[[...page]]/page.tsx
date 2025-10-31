@@ -21,7 +21,14 @@ type DynamicPageProps = PageProps<{ page: string[] }>
 export default async function Page(props: DynamicPageProps) {
   const { page, countryCode } = await props.params
 
+  console.log('Content Page - raw page:', page)
+  console.log('Content Page - page type:', typeof page)
+  console.log('Content Page - page is array:', Array.isArray(page))
+  console.log('Content Page - countryCode:', countryCode)
+  console.log('Content Page - countryCode type:', typeof countryCode)
+
   if (!page) {
+    console.log('Content Page - page is falsy, calling notFound()')
     return notFound()
   }
 
