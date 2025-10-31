@@ -43,7 +43,12 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
           },
           userActionLetter: {
             include: {
-              userActionLetterRecipients: true,
+              address: true,
+              userActionLetterRecipients: {
+                include: {
+                  userActionLetterStatusUpdates: true,
+                },
+              },
             },
           },
           nftMint: true,
@@ -101,9 +106,9 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
         }
       })
     } else if (userAction.userActionLetter) {
-      userAction.userActionLetter.userActionLetterRecipients.forEach(recipient => {
-        if (recipient.dtsiSlug) {
-          dtsiSlugs.add(recipient.dtsiSlug)
+      userAction.userActionLetter.userActionLetterRecipients.forEach(userActionLetterRecipient => {
+        if (userActionLetterRecipient.dtsiSlug) {
+          dtsiSlugs.add(userActionLetterRecipient.dtsiSlug)
         }
       })
     } else if (userAction.userActionTweetAtPerson?.recipientDtsiSlug) {

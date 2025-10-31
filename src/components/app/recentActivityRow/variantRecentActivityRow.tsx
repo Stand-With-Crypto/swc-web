@@ -374,30 +374,6 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: <MainText>Someone {inStateOrEmpty} signed a petition</MainText>,
         }
       }
-      case UserActionType.LETTER: {
-        const dtsiRecipients = action.userActionLetterRecipients.filter(x => x.person)
-        return {
-          onFocusContent: () => null,
-          children: (
-            <MainText>
-              Letter sent to{' '}
-              {dtsiRecipients.length
-                ? listOfThings(
-                    dtsiRecipients.map(actionLetterRecipient => (
-                      <React.Fragment key={actionLetterRecipient.id}>
-                        <DTSIPersonName
-                          countryCode={countryCode}
-                          href={urls.politicianDetails(actionLetterRecipient.person!.slug)}
-                          person={actionLetterRecipient.person!}
-                        />
-                      </React.Fragment>
-                    )),
-                  ).map((content, index) => <React.Fragment key={index}>{content}</React.Fragment>)
-                : 'Representative'}
-            </MainText>
-          ),
-        }
-      }
     }
     return gracefullyError({
       // @ts-ignore

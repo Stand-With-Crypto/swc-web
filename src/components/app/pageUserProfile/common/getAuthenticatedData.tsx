@@ -51,7 +51,12 @@ export async function getAuthenticatedData() {
       },
       userActionLetter: {
         include: {
-          userActionLetterRecipients: true,
+          address: true,
+          userActionLetterRecipients: {
+            include: {
+              userActionLetterStatusUpdates: true,
+            },
+          },
         },
       },
       userActionCall: true,
@@ -98,6 +103,12 @@ export async function getAuthenticatedData() {
       userAction.userActionEmail.userActionEmailRecipients.forEach(userActionEmailRecipient => {
         if (userActionEmailRecipient.dtsiSlug) {
           dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
+        }
+      })
+    } else if (userAction.userActionLetter) {
+      userAction.userActionLetter.userActionLetterRecipients.forEach(userActionLetterRecipient => {
+        if (userActionLetterRecipient.dtsiSlug) {
+          dtsiSlugs.add(userActionLetterRecipient.dtsiSlug)
         }
       })
     } else if (userAction.userActionTweetAtPerson?.recipientDtsiSlug) {

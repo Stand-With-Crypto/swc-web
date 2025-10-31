@@ -8,13 +8,16 @@ import {
   SupportedCountryCodes,
 } from '@/utils/shared/supportedCountries'
 import { getActionDefaultCampaignName } from '@/utils/shared/userActionCampaigns'
+import { AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/au/auUserActionCampaigns'
+import { CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/ca/caUserActionCampaigns'
+import { GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/gb/gbUserActionCampaigns'
 import { US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns/us/usUserActionCampaigns'
 
 const activeActionTypesByCountry: Record<SupportedCountryCodes, readonly UserActionType[]> = {
   [SupportedCountryCodes.US]: US_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
-  [SupportedCountryCodes.CA]: [UserActionType.OPT_IN, UserActionType.TWEET],
-  [SupportedCountryCodes.GB]: [UserActionType.OPT_IN, UserActionType.TWEET],
-  [SupportedCountryCodes.AU]: [UserActionType.OPT_IN, UserActionType.TWEET, UserActionType.LETTER],
+  [SupportedCountryCodes.CA]: CA_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.GB]: GB_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  [SupportedCountryCodes.AU]: AU_ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
 }
 
 export function mockCreateUserActionInput({
