@@ -21,6 +21,8 @@ type DynamicPageProps = PageProps<{ page: string[] }>
 export default async function Page(props: DynamicPageProps) {
   const { page, countryCode } = await props.params
 
+  console.log('======= page', page)
+
   if (!page) {
     return notFound()
   }
@@ -41,6 +43,13 @@ export default async function Page(props: DynamicPageProps) {
 
 export async function generateMetadata(props: DynamicPageProps): Promise<Metadata> {
   const { page, countryCode } = await props.params
+
+  if (!page) {
+    return generateMetadataDetails({
+      title: 'Page not found',
+      description: 'The page you are looking for does not exist.',
+    })
+  }
 
   const pathname = PAGE_PREFIX + page?.join('/')
 
