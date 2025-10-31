@@ -171,7 +171,7 @@ async function createUser(
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>,
+  validatedInput: z.ZodSafeParseSuccess<CreateActionVoterRegistrationInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
@@ -186,7 +186,7 @@ function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>
+  validatedInput: z.ZodSafeParseSuccess<CreateActionVoterRegistrationInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({

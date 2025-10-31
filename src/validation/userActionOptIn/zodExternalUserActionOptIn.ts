@@ -43,6 +43,6 @@ export const getZodExternalUserActionOptInSchema = (countryCode: SupportedCountr
         medium: z.string(),
       })
       .optional(),
-    additionalAnalyticsProperties: z.record(z.string()).optional(),
+    additionalAnalyticsProperties: z.record(z.string(), z.unknown()).optional(),
     countryCode: zodSupportedCountryCode,
   })

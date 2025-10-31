@@ -25,8 +25,8 @@ export type GBRegion = (typeof GB_NUTS_1_AREA_NAMES)[number]
 export type GBCountryCode = keyof typeof GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP
 
 export const getGBCountryNameFromCode = (code: string) => {
-  // @ts-ignore
-  const name: string = GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP[code.toUpperCase()]
+  const upperCode = code.toUpperCase() as keyof typeof GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP
+  const name: string = GB_MAIN_COUNTRY_CODE_TO_DISPLAY_NAME_MAP[upperCode]
   if (name) {
     return name
   }

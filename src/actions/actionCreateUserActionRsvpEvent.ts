@@ -207,7 +207,7 @@ async function changeReceiveNotificationStatus({
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionRsvpEventInput>,
+  validatedInput: z.ZodSafeParseSuccess<CreateActionRsvpEventInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {

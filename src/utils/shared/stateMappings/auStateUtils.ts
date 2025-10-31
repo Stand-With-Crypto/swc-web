@@ -20,8 +20,8 @@ export const AU_STATE_CODE_TO_DISPLAY_NAME_MAP = {
 export type AUStateCode = keyof typeof AU_STATE_CODE_TO_DISPLAY_NAME_MAP
 
 export const getAUStateNameFromStateCode = (stateCode: string) => {
-  // @ts-ignore
-  const name: string = AU_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode.toUpperCase()]
+  const upperStateCode = stateCode.toUpperCase() as keyof typeof AU_STATE_CODE_TO_DISPLAY_NAME_MAP
+  const name: string = AU_STATE_CODE_TO_DISPLAY_NAME_MAP[upperStateCode]
   if (name) {
     return name
   }
