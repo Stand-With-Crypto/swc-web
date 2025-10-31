@@ -8,7 +8,6 @@ import { zodUserActionFormLetterFields } from '@/validation/forms/zodUserActionF
 
 export interface UserActionFormLetterPropsBase {
   user: GetUserFullProfileInfoResponse['user']
-  onCancel: () => void
   initialValues?: Partial<FormFields>
 }
 
