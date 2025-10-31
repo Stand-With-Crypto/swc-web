@@ -4,6 +4,7 @@ import React, { Suspense, useEffect } from 'react'
 import { UserActionType } from '@prisma/client'
 import { notFound } from 'next/navigation'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { GeoGate } from '@/components/app/geoGate'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { UserActionFormLetter } from '@/components/app/userActionFormLetter'
@@ -65,7 +66,16 @@ function UserActionFormLetterDeeplinkWrapperContent(
     )
   }
 
-  return <UserActionFormLetter {...props} initialValues={initialValues} user={user} />
+  // return <UserActionFormLetter {...props} initialValues={initialValues} user={user} />
+  return (
+    <LoginDialogWrapper
+      authenticatedContent={
+        <UserActionFormLetter {...props} initialValues={initialValues} user={user} />
+      }
+    >
+      <UserActionFormLetter {...props} initialValues={initialValues} user={user} />
+    </LoginDialogWrapper>
+  )
 }
 
 export function UserActionFormLetterDeeplinkWrapper(

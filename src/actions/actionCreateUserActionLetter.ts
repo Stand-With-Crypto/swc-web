@@ -4,20 +4,18 @@ import 'server-only'
 import {
   Address,
   Prisma,
-  SMSStatus,
   User,
   UserActionLetterStatus,
   UserActionType,
   UserCryptoAddress,
   UserEmailAddress,
-  UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { getUserAccessLocationCookie } from '@/utils/server/getUserAccessLocationCookie'
 import { POSTGRID_STATUS_TO_LETTER_STATUS } from '@/utils/server/postgrid/contants'
 import { sendLetter } from '@/utils/server/postgrid/sendLetter'
@@ -26,23 +24,14 @@ import { getQuorumPoliticianAddress } from '@/utils/server/quorum/getQuorumPolit
 import { getQuorumPoliticianByDTSIPerson } from '@/utils/server/quorum/getQuorumPoliticianFromDTSIPerson'
 import type { NormalizedQuorumAddress } from '@/utils/server/quorum/utils/fetchQuorum'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
-import {
-  AnalyticsUserActionUserState,
-  getServerAnalytics,
-  getServerPeopleAnalytics,
-} from '@/utils/server/serverAnalytics'
-import {
-  mapLocalUserToUserDatabaseFields,
-  parseLocalUserFromCookies,
-  ServerLocalUser,
-} from '@/utils/server/serverLocalUser'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
-import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -76,18 +65,11 @@ export const actionCreateUserActionLetter = withServerActionMiddleware(
 async function _actionCreateUserActionLetter(input: Input) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
-    context: 'unauthenticated',
+    context: 'authenticated',
   })
 
-  const userMatch = await getMaybeUserAndMethodOfMatch({
-    prisma: {
-      include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
-    },
-  })
-  logger.info(userMatch.user ? 'found user' : 'no user found')
-  const sessionId = await getUserSessionId()
-  const validatedFields = withSafeParseWithMetadata(zodUserActionFormLetterAction, input)
   const countryCode = (await getUserAccessLocationCookie())!
+  const validatedFields = withSafeParseWithMetadata(zodUserActionFormLetterAction, input)
 
   if (!validatedFields.success) {
     return {
@@ -97,15 +79,62 @@ async function _actionCreateUserActionLetter(input: Input) {
   }
   logger.info('validated fields')
 
+  const sessionId = await getUserSessionId()
   const localUser = await parseLocalUserFromCookies()
-  const { user, userState } = await maybeUpsertUser({
-    existingUser: userMatch.user,
-    input: validatedFields.data,
-    sessionId,
-    localUser,
-    onUpsertUser: triggerRateLimiterAtMostOnce,
-    countryCode,
+
+  const authUser = await appRouterGetAuthUser()
+  if (!authUser) {
+    const error = new Error('Create User Action Letter - Not authenticated')
+    Sentry.captureException(error, {
+      tags: { domain: 'actionCreateUserActionLetter' },
+      extra: { sessionId },
+    })
+    throw error
+  }
+
+  const user = await prismaClient.user.findFirstOrThrow({
+    where: { id: authUser.userId },
+    include: {
+      primaryUserCryptoAddress: true,
+      userEmailAddresses: true,
+      address: true,
+    },
   })
+  logger.info('found authenticated user')
+
+  const updatePayload: Prisma.UserUpdateInput = {
+    ...(validatedFields.data.firstName &&
+      validatedFields.data.firstName !== user.firstName && {
+        firstName: validatedFields.data.firstName,
+      }),
+    ...(validatedFields.data.lastName &&
+      validatedFields.data.lastName !== user.lastName && {
+        lastName: validatedFields.data.lastName,
+      }),
+    ...(validatedFields.data.address &&
+      user.address?.googlePlaceId !== validatedFields.data.address.googlePlaceId && {
+        address: {
+          connectOrCreate: {
+            where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
+            create: validatedFields.data.address,
+          },
+        },
+      }),
+    countryCode,
+  }
+
+  const hasUpdates = Object.keys(updatePayload).length > 0
+  const updatedUser = hasUpdates
+    ? await prismaClient.user.update({
+        where: { id: user.id },
+        data: updatePayload,
+        include: {
+          primaryUserCryptoAddress: true,
+          userEmailAddresses: true,
+          address: true,
+        },
+      })
+    : user
 
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -114,7 +143,7 @@ async function _actionCreateUserActionLetter(input: Input) {
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
-  logger.info('fetched/created user')
+  logger.info('fetched user')
 
   const campaignName = validatedFields.data.campaignName
 
@@ -133,13 +162,13 @@ async function _actionCreateUserActionLetter(input: Input) {
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
-      reason: 'Too Many Recent',
+      reason: 'Already Exists',
       creationMethod: 'On Site',
-      userState,
+      userState: hasUpdates ? 'Existing With Updates' : 'Existing',
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     waitUntil(beforeFinish())
-    return { user: getClientUser(user) }
+    return { user: getClientUser(updatedUser) }
   }
 
   await triggerRateLimiterAtMostOnce()
@@ -160,9 +189,8 @@ async function _actionCreateUserActionLetter(input: Input) {
   )
 
   await createUserAction({
-    user,
+    user: updatedUser,
     sessionId,
-    userMatch,
     countryCode,
     recipients: recipientResults,
     formData: validatedFields.data,
@@ -173,7 +201,7 @@ async function _actionCreateUserActionLetter(input: Input) {
     campaignName,
     'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
     creationMethod: 'On Site',
-    userState,
+    userState: hasUpdates ? 'Existing With Updates' : 'Existing',
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
   peopleAnalytics.set({
@@ -182,86 +210,7 @@ async function _actionCreateUserActionLetter(input: Input) {
   })
 
   waitUntil(beforeFinish())
-  return { user: getClientUser(user) }
-}
-
-async function maybeUpsertUser({
-  existingUser,
-  input,
-  sessionId,
-  localUser,
-  onUpsertUser,
-  countryCode,
-}: {
-  existingUser: UserWithRelations | null
-  input: Input
-  sessionId: string
-  localUser: ServerLocalUser | null
-  onUpsertUser: () => Promise<void> | void
-  countryCode: string
-}): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
-  const { firstName, lastName, address } = input
-
-  if (existingUser) {
-    const updatePayload: Prisma.UserUpdateInput = {
-      ...(firstName && firstName !== existingUser.firstName && { firstName }),
-      ...(lastName && lastName !== existingUser.lastName && { lastName }),
-      ...(address &&
-        existingUser.address?.googlePlaceId !== address.googlePlaceId && {
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: address.googlePlaceId },
-              create: address,
-            },
-          },
-        }),
-      countryCode,
-    }
-    const keysToUpdate = Object.keys(updatePayload)
-    if (!keysToUpdate.length) {
-      return { user: existingUser, userState: 'Existing' }
-    }
-    logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
-    await onUpsertUser()
-    const user = await prismaClient.user.update({
-      where: { id: existingUser.id },
-      data: updatePayload,
-      include: {
-        primaryUserCryptoAddress: true,
-        userEmailAddresses: true,
-        address: true,
-      },
-    })
-    return { user, userState: 'Existing With Updates' }
-  }
-
-  await onUpsertUser()
-  const user = await prismaClient.user.create({
-    include: {
-      primaryUserCryptoAddress: true,
-      userEmailAddresses: true,
-      address: true,
-    },
-    data: {
-      ...mapLocalUserToUserDatabaseFields(localUser),
-      referralId: generateReferralId(),
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      userSessions: { create: { id: sessionId } },
-      hasOptedInToEmails: false,
-      hasOptedInToMembership: false,
-      smsStatus: SMSStatus.NOT_OPTED_IN,
-      firstName,
-      lastName,
-      address: {
-        connectOrCreate: {
-          where: { googlePlaceId: address.googlePlaceId },
-          create: address,
-        },
-      },
-      countryCode,
-    },
-  })
-  return { user, userState: 'New' }
+  return { user: getClientUser(updatedUser) }
 }
 
 const isValidAddress = (
@@ -372,14 +321,12 @@ async function buildLetterToRecipient({
 async function createUserAction({
   user,
   sessionId,
-  userMatch,
   countryCode,
   recipients,
   formData,
 }: {
   user: UserWithRelations
   sessionId: string
-  userMatch: Awaited<ReturnType<typeof getMaybeUserAndMethodOfMatch>>
   countryCode: SupportedCountryCodes
   recipients: Array<{
     letter: Awaited<ReturnType<typeof sendLetter>> | null
@@ -394,9 +341,9 @@ async function createUserAction({
       actionType,
       countryCode,
       campaignName: formData.campaignName,
-      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
+      ...(user.primaryUserCryptoAddress
         ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+            userCryptoAddress: { connect: { id: user.primaryUserCryptoAddress.id } },
           }
         : { userSession: { connect: { id: sessionId } } }),
       userActionLetter: {
