@@ -307,10 +307,16 @@ export const AU_USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Send an official letter',
         description: 'Send a real physical letter to your local policymaker',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: getLetterActionWrapperComponentByCampaignName({
-          countryCode,
-          campaignName: AUUserActionLetterCampaignName.DEFAULT,
-        }),
+        WrapperComponent: ({ children }) => (
+          <LoginDialogWrapper
+            authenticatedContent={getLetterActionWrapperComponentByCampaignName({
+              countryCode,
+              campaignName: AUUserActionLetterCampaignName.DEFAULT,
+            })({ children })}
+          >
+            {children}
+          </LoginDialogWrapper>
+        ),
       },
     ],
   },
