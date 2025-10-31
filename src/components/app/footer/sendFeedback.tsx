@@ -1,7 +1,6 @@
 'use client'
 
 import Balancer from 'react-wrap-balancer'
-import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -11,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { InternalLink } from '@/components/ui/link'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
@@ -53,8 +53,12 @@ export function SendFeedbackButton({
             <p className="mt-2 text-center text-sm text-muted-foreground">
               <Balancer>
                 This email address is monitored by SWC International Ltd. and its service providers.
-                Any information submitted to this email is subject to SWC International Ltd.'s
-                <Link href={getIntlUrls(countryCode).privacyPolicy()}>Privacy Policy</Link>.
+                Any information submitted to this email is subject to
+                <InternalLink href={getIntlUrls(countryCode).privacyPolicy()}>
+                  {' '}
+                  SWC International Ltd.'s Privacy Policy
+                </InternalLink>
+                .
               </Balancer>
             </p>
           )}
