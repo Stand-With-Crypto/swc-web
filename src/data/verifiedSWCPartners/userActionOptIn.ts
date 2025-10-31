@@ -30,7 +30,7 @@ export const getZodVerifiedSWCPartnersUserActionOptInSchema = (
 ) =>
   z.object({
     emailAddress: zodEmailAddress,
-    optInType: z.enum(UserActionOptInType),
+    optInType: z.nativeEnum(UserActionOptInType),
     campaignName: z.string(),
     isVerifiedEmailAddress: z.boolean(),
     firstName: zodFirstName.optional(),
