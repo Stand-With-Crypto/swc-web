@@ -52,6 +52,7 @@ model Address {
   users                                 User[]
   userActionVotingInformationResearched UserActionVotingInformationResearched[]
   userActionRefers                      UserActionRefer[]
+  userActionLetters                     UserActionLetter[]
 
   @@index([administrativeAreaLevel1, countryCode])
   @@map("address")
@@ -268,6 +269,7 @@ enum UserActionType {
   CALL
   DONATION
   EMAIL
+  LETTER
   LINKEDIN
   LIVE_EVENT
   NFT_MINT
@@ -313,6 +315,7 @@ model UserAction {
   userActionEmail                       UserActionEmail?
   userActionCall                        UserActionCall?
   userActionDonation                    UserActionDonation?
+  userActionLetter                      UserActionLetter?
   userActionOptIn                       UserActionOptIn?
   userActionPetition                    UserActionPetition?
   userActionVoterRegistration           UserActionVoterRegistration?
@@ -624,4 +627,54 @@ model UserDeletionLog {
   date         DateTime @default(now())
 
   @@map("user_deletion_log")
+}
+
+enum UserActionLetterStatus {
+  READY
+  PRINTING
+  PROCESSED_FOR_DELIVERY
+  COMPLETED
+  CANCELLED
+  UNKNOWN
+}
+
+model UserActionLetter {
+  id                         String                      @id @default(uuid())
+  userAction                 UserAction                  @relation(fields: [id], references: [id], onDelete: Cascade)
+  firstName                  String                      @map("first_name")
+  lastName                   String                      @map("last_name")
+  address                    Address                     @relation(fields: [addressId], references: [id])
+  addressId                  String                      @map("address_id")
+  userActionLetterRecipients UserActionLetterRecipient[]
+  datetimeCreated            DateTime                    @default(now()) @map("datetime_created")
+
+  @@index([addressId])
+  @@map("user_action_letter")
+}
+
+model UserActionLetterRecipient {
+  id                            String                         @id @default(uuid())
+  userActionLetterId            String                         @map("user_action_letter_id")
+  userActionLetter              UserActionLetter               @relation(fields: [userActionLetterId], references: [id], onDelete: Cascade)
+  dtsiSlug                      String                         @map("dtsi_slug")
+  officeAddress                 String                         @map("office_address")
+  postgridOrderId               String?                        @unique @map("postgrid_letter_id")
+  userActionLetterStatusUpdates UserActionLetterStatusUpdate[]
+
+  @@index([userActionLetterId])
+  @@index([postgridOrderId])
+  @@map("user_action_letter_recipient")
+}
+
+model UserActionLetterStatusUpdate {
+  id                          String                    @id @default(uuid())
+  userActionLetterRecipient   UserActionLetterRecipient @relation(fields: [userActionLetterRecipientId], references: [id], onDelete: Cascade)
+  userActionLetterRecipientId String                    @map("user_action_letter_recipient_id")
+  status                      UserActionLetterStatus
+  datetimeCreated             DateTime                  @default(now()) @map("datetime_created")
+  postgridUpdatedAt           DateTime?                 @map("postgrid_updated_at")
+
+  @@unique([userActionLetterRecipientId, status])
+  @@index([userActionLetterRecipientId])
+  @@map("user_action_letter_status_update")
 }
