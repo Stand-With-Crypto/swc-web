@@ -10,10 +10,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { InternalLink } from '@/components/ui/link'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useDialog } from '@/hooks/useDialog'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
-export function SendFeedbackButton({ href }: { href: string }) {
+export function SendFeedbackButton({
+  href,
+  countryCode,
+}: {
+  href: string
+  countryCode: SupportedCountryCodes
+}) {
   const dialogProps = useDialog({ analytics: 'Send-Feedback-Dialog' })
   const [copiedValue, handleCopyToClipboard] = useCopyTextToClipboard()
 
@@ -40,6 +49,19 @@ export function SendFeedbackButton({ href }: { href: string }) {
           >
             {copiedValue ? 'Copied!' : 'Copy email to clipboard'}
           </Button>
+          {countryCode !== SupportedCountryCodes.US && (
+            <p className="mt-2 text-center text-sm text-muted-foreground">
+              <Balancer>
+                This email address is monitored by SWC International Ltd. and its service providers.
+                Any information submitted to this email is subject to
+                <InternalLink href={getIntlUrls(countryCode).privacyPolicy()}>
+                  {' '}
+                  SWC International Ltd.'s Privacy Policy
+                </InternalLink>
+                .
+              </Balancer>
+            </p>
+          )}
         </DialogBody>
       </DialogContent>
     </Dialog>
