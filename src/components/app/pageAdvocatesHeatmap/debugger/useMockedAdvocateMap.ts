@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import {
+  applyCoordinatesOffset,
+  getMarkerPositions,
+} from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.utils'
+import {
   AdvocateHeatmapAction,
   ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
   AREA_COORDS_BY_COUNTRY_CODE,
@@ -20,24 +24,18 @@ import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('useMockedAdvocateMap')
 
-function applyCoordinatesOffset(
-  coordinates: [number, number],
-  offsetX: number,
-  offsetY: number,
-): [number, number] {
-  return [coordinates[0] + offsetX, coordinates[1] + offsetY]
-}
-
 function getMarkerMocker({
   actions,
   coordinates,
   countryCode,
   mapMarkerOffset,
+  shouldRandomizeMarkerOffsets,
 }: {
   actions: Partial<Record<UserActionType, AdvocateHeatmapAction>>
   coordinates: AreaCoordinates
   countryCode: SupportedCountryCodes
   mapMarkerOffset: number
+  shouldRandomizeMarkerOffsets?: boolean
 }) {
   const getRandomAction = () => {
     const actionKeys = Object.keys(actions)
@@ -68,11 +66,19 @@ function getMarkerMocker({
       ]
     }
 
+    const actionCoords = getMarkerPositions({
+      administrativeArea,
+      coordinates: administrativeAreaCoords,
+      countryCode,
+      offset: mapMarkerOffset,
+      shouldRandomizeMarkerOffsets,
+    })
+
     return [
       {
         id: '1',
         name: administrativeAreaName,
-        coordinates: applyCoordinatesOffset(administrativeAreaCoords, 0, 0),
+        coordinates: actionCoords[0],
         actionType: UserActionType.EMAIL,
         datetimeCreated: '2021-01-01',
         iconType: getRandomAction(),
@@ -80,11 +86,7 @@ function getMarkerMocker({
       {
         id: '2',
         name: administrativeAreaName,
-        coordinates: applyCoordinatesOffset(
-          administrativeAreaCoords,
-          -mapMarkerOffset,
-          mapMarkerOffset,
-        ),
+        coordinates: actionCoords[1],
         actionType: UserActionType.EMAIL,
         datetimeCreated: '2021-01-01',
         iconType: getRandomAction(),
@@ -92,11 +94,7 @@ function getMarkerMocker({
       {
         id: '3',
         name: administrativeAreaName,
-        coordinates: applyCoordinatesOffset(
-          administrativeAreaCoords,
-          mapMarkerOffset,
-          -mapMarkerOffset,
-        ),
+        coordinates: actionCoords[2],
         actionType: UserActionType.EMAIL,
         datetimeCreated: '2021-01-01',
         iconType: getRandomAction(),
@@ -106,17 +104,19 @@ function getMarkerMocker({
 }
 
 const createMarkersFromActions = ({
+  actionsLimit = 20,
   countryCode,
   mapMarkerOffset = 1,
   overrideCoordinates,
   selectedAreas,
-  actionsLimit = 20,
+  shouldRandomizeMarkerOffsets = false,
 }: {
+  actionsLimit?: number
   countryCode: SupportedCountryCodes
   mapMarkerOffset?: number
   overrideCoordinates?: AreaCoordinates
   selectedAreas?: AreaCoordinatesKey[]
-  actionsLimit?: number
+  shouldRandomizeMarkerOffsets?: boolean
 }) => {
   const actions = ADVOCATES_ACTIONS_BY_COUNTRY_CODE[countryCode]
   const coordinates = AREA_COORDS_BY_COUNTRY_CODE[countryCode]
@@ -136,6 +136,7 @@ const createMarkersFromActions = ({
     coordinates: overrideCoordinates || coordinates,
     countryCode,
     mapMarkerOffset,
+    shouldRandomizeMarkerOffsets,
   })
 
   if (!selectedAreas) {
@@ -166,11 +167,12 @@ export const useMockedAdvocateMap = ({
   useEffect(() => {
     setDisplayedMarkers(
       createMarkersFromActions({
+        actionsLimit,
         countryCode,
         mapMarkerOffset: mapConfig.markerOffset,
         overrideCoordinates: coordinates,
         selectedAreas,
-        actionsLimit,
+        shouldRandomizeMarkerOffsets: mapConfig.shouldRandomizeMarkerOffsets,
       }),
     )
   }, [countryCode, mapConfig, coordinates, selectedAreas, actionsLimit])

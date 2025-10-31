@@ -1,4 +1,6 @@
-export const EVENT_MAP_STATE_COORDS: Record<string, [number, number]> = {
+import { Coords } from '@/components/app/pageAdvocatesHeatmap/constants'
+
+export const EVENT_MAP_STATE_COORDS: Record<string, Coords> = {
   AL: [-87.3023, 33.3182],
   AK: [-154.4044, 66.3707],
   AZ: [-112.4312, 35.0489],

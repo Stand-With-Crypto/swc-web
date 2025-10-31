@@ -10,26 +10,34 @@ import {
   IconProps,
   JoinIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+import { AUStateCode } from '@/utils/shared/stateMappings/auStateUtils'
 import { CAProvinceOrTerritoryCode } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { GBRegion } from '@/utils/shared/stateMappings/gbCountryUtils'
 import { USStateCode } from '@/utils/shared/stateMappings/usStateUtils'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
-type USStateCoords = Partial<Record<USStateCode, [number, number]>>
-type GBStateCoords = Partial<Record<GBRegion, [number, number]>>
-type CAStateCoords = Partial<Record<CAProvinceOrTerritoryCode, [number, number]>>
+export type Coords = [number, number]
+
+type AUStateCoords = Partial<Record<AUStateCode, Coords>>
+type CAStateCoords = Partial<Record<CAProvinceOrTerritoryCode, Coords>>
+type GBStateCoords = Partial<Record<GBRegion, Coords>>
+type USStateCoords = Partial<Record<USStateCode, Coords>>
 
 interface RegionCoords {
-  [SupportedCountryCodes.US]: USStateCoords
-  [SupportedCountryCodes.GB]: GBStateCoords
+  [SupportedCountryCodes.AU]: AUStateCoords
   [SupportedCountryCodes.CA]: CAStateCoords
-  [SupportedCountryCodes.AU]: never
+  [SupportedCountryCodes.GB]: GBStateCoords
+  [SupportedCountryCodes.US]: USStateCoords
 }
 
-export type AreaCoordinates = USStateCoords | GBStateCoords | CAStateCoords
-export type AreaCoordinatesKey = keyof USStateCoords | keyof GBStateCoords | keyof CAStateCoords
+export type AreaCoordinates = AUStateCoords | CAStateCoords | GBStateCoords | USStateCoords
+export type AreaCoordinatesKey =
+  | keyof AUStateCoords
+  | keyof CAStateCoords
+  | keyof GBStateCoords
+  | keyof USStateCoords
 
-export const AREAS_WITH_SINGLE_MARKER: AreaCoordinatesKey[] = ['London', 'NB', 'NS', 'PE']
+export const AREAS_WITH_SINGLE_MARKER: AreaCoordinatesKey[] = ['ACT', 'London', 'NB', 'NS', 'PE']
 
 // Coordinates format: [longitude, latitude]
 export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {
@@ -115,15 +123,26 @@ export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {
     SK: [-108.5, 56.0],
     YT: [-142.0, 64.5],
   },
+  [SupportedCountryCodes.AU]: {
+    ACT: [149.1, -35.3],
+    NSW: [150.0, -31.5],
+    NT: [131.5, -12.0],
+    QLD: [151.5, -25.0],
+    SA: [136.5, -34.0],
+    TAS: [146.0, -41.5],
+    VIC: [144.0, -37.0],
+    WA: [115.5, -30.5],
+  },
 }
 
 export interface MapProjectionConfig {
-  projectionUrl: string
-  projection?: ComposableMapProps['projection']
-  projectionConfig?: ComposableMapProps['projectionConfig']
+  geoPropertyStateNameKey: string
   markerOffset?: number
   markerSize?: number
-  geoPropertyStateNameKey: string
+  projection?: ComposableMapProps['projection']
+  projectionConfig?: ComposableMapProps['projectionConfig']
+  projectionUrl: string
+  shouldRandomizeMarkerOffsets?: boolean
 }
 
 export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapProjectionConfig>> = {
@@ -162,8 +181,21 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       rotate: [96, 0, 0],
     },
     markerOffset: 2,
-    markerSize: 34,
+    markerSize: 30,
     geoPropertyStateNameKey: 'name',
+  },
+  [SupportedCountryCodes.AU]: {
+    projectionUrl:
+      'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-au.topojson',
+    projection: 'geoMercator',
+    projectionConfig: {
+      center: [134.5, -27.5],
+      scale: 745,
+    },
+    markerOffset: 2.6,
+    markerSize: 28,
+    geoPropertyStateNameKey: 'name',
+    shouldRandomizeMarkerOffsets: true,
   },
 }
 
@@ -263,6 +295,32 @@ export const ADVOCATES_ACTIONS_BY_COUNTRY_CODE: Partial<
     },
   },
   [SupportedCountryCodes.CA]: {
+    OPT_IN: {
+      icon: JoinIcon,
+      label: 'New member joined',
+      labelMobile: 'joined',
+      labelActionTooltip: () => 'joined SWC',
+    },
+    EMAIL: {
+      icon: EmailIcon,
+      label: 'Email sent to MP',
+      labelMobile: 'emailed',
+      labelActionTooltip: () => 'emailed their rep',
+    },
+    TWEET: {
+      icon: FollowOnXIcon,
+      label: 'Followed SWC on X',
+      labelMobile: 'Followed SWC on X',
+      labelActionTooltip: () => 'followed SWC on X',
+    },
+    LINKEDIN: {
+      icon: FollowOnLinkedInIcon,
+      label: 'Followed SWC on LinkedIn',
+      labelMobile: 'Followed SWC on LinkedIn',
+      labelActionTooltip: () => 'followed SWC on LinkedIn',
+    },
+  },
+  [SupportedCountryCodes.AU]: {
     OPT_IN: {
       icon: JoinIcon,
       label: 'New member joined',

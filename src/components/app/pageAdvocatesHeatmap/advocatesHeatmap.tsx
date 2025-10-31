@@ -30,16 +30,17 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { getAUStateCodeFromStateName } from '@/utils/shared/stateMappings/auStateUtils'
 import { getCAProvinceOrTerritoryCodeFromName } from '@/utils/shared/stateMappings/caProvinceUtils'
 import { getUSStateCodeFromStateName } from '@/utils/shared/stateMappings/usStateUtils'
 import { COUNTRY_CODE_TO_LOCALE, SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 interface RenderMapProps {
-  countryCode: SupportedCountryCodes
   actions: PublicRecentActivity
-  countUsers: number
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  countryCode: SupportedCountryCodes
+  countUsers: number
   isEmbedded?: boolean
   mapConfig: MapProjectionConfig
 }
@@ -47,10 +48,10 @@ interface RenderMapProps {
 const isProd = NEXT_PUBLIC_ENVIRONMENT === 'production'
 
 export function AdvocatesHeatmap({
-  countryCode,
   actions,
-  countUsers,
   advocatesMapPageData,
+  countryCode,
+  countUsers,
   isEmbedded,
   mapConfig,
 }: RenderMapProps) {
@@ -94,6 +95,10 @@ export function AdvocatesHeatmap({
       if (countryCode === SupportedCountryCodes.CA) {
         const provinceCode = getCAProvinceOrTerritoryCodeFromName(stateName)
         return totalAdvocatesPerState.find(total => total.state === provinceCode)?.totalAdvocates
+      }
+      if (countryCode === SupportedCountryCodes.AU) {
+        const stateCode = getAUStateCodeFromStateName(stateName)
+        return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
       }
     },
     [countryCode, totalAdvocatesPerState],
