@@ -64,10 +64,7 @@ export function Footer({
                   </ExternalLink>
                 ))}
                 {sendFeedbackLink && (
-                  <SendFeedbackButton
-                    href={sendFeedbackLink}
-                    showIntlDisclaimer={countryCode !== SupportedCountryCodes.US}
-                  />
+                  <SendFeedbackButton countryCode={countryCode} href={sendFeedbackLink} />
                 )}
               </div>
               <div className="space-y-3 sm:space-y-6">

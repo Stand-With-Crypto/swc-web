@@ -1,6 +1,7 @@
 'use client'
 
 import Balancer from 'react-wrap-balancer'
+import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -12,13 +13,15 @@ import {
 } from '@/components/ui/dialog'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 import { useDialog } from '@/hooks/useDialog'
+import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 export function SendFeedbackButton({
   href,
-  showIntlDisclaimer,
+  countryCode,
 }: {
   href: string
-  showIntlDisclaimer: boolean
+  countryCode: SupportedCountryCodes
 }) {
   const dialogProps = useDialog({ analytics: 'Send-Feedback-Dialog' })
   const [copiedValue, handleCopyToClipboard] = useCopyTextToClipboard()
@@ -46,12 +49,12 @@ export function SendFeedbackButton({
           >
             {copiedValue ? 'Copied!' : 'Copy email to clipboard'}
           </Button>
-          {showIntlDisclaimer && (
+          {countryCode !== SupportedCountryCodes.US && (
             <p className="mt-2 text-center text-sm text-muted-foreground">
               <Balancer>
                 This email address is monitored by SWC International Ltd. and its service providers.
                 Any information submitted to this email is subject to SWC International Ltd.'s
-                Privacy Policy.
+                <Link href={getIntlUrls(countryCode).privacyPolicy()}>Privacy Policy</Link>.
               </Balancer>
             </p>
           )}
