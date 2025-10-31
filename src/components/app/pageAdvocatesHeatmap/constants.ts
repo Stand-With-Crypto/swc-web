@@ -125,13 +125,13 @@ export const AREA_COORDS_BY_COUNTRY_CODE: Partial<RegionCoords> = {
   },
   [SupportedCountryCodes.AU]: {
     ACT: [149.1, -35.3],
-    NSW: [150.0, -33.0],
+    NSW: [150.0, -31.5],
     NT: [131.5, -12.0],
     QLD: [151.5, -25.0],
     SA: [136.5, -34.0],
     TAS: [146.0, -41.5],
     VIC: [144.0, -37.0],
-    WA: [115.0, -30.5],
+    WA: [115.5, -30.5],
   },
 }
 
@@ -183,7 +183,6 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
     markerOffset: 2,
     markerSize: 30,
     geoPropertyStateNameKey: 'name',
-    shouldRandomizeMarkerOffsets: true,
   },
   [SupportedCountryCodes.AU]: {
     projectionUrl:
@@ -193,7 +192,7 @@ export const MAP_PROJECTION_CONFIG: Partial<Record<SupportedCountryCodes, MapPro
       center: [134.5, -27.5],
       scale: 745,
     },
-    markerOffset: 1.5,
+    markerOffset: 2.6,
     markerSize: 28,
     geoPropertyStateNameKey: 'name',
     shouldRandomizeMarkerOffsets: true,

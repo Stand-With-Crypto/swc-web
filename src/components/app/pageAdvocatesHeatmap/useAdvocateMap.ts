@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
+import { getJitteredMarkerPosition } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.utils'
 import {
   AdvocateHeatmapAction,
   ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
@@ -29,15 +30,6 @@ const INITIAL_MARKERS = 5
 const MAX_MARKERS = 20
 const MAX_MARKERS_PER_ADMINISTRATIVE_AREA = 3
 const ADVOCATE_MAP_INTERVAL = 2_000
-
-/**
- * Generates a random offset within a symmetric range.
- * @param maxRange Maximum absolute deviation from center
- * @returns Random value between -maxRange/2 and +maxRange/2
- */
-export function getRandomOffset(maxRange: number): number {
-  return Math.random() * maxRange - maxRange / 2
-}
 
 export function getMapAdministrativeAreaName(
   countryCode: SupportedCountryCodes,
@@ -105,28 +97,31 @@ const createMarkersFromActions = (
     })
 
   activityWithAdministrativeArea.forEach(item => {
-    let offsetX = 0
-    let offsetY = 0
+    let markerCoordinates: Coords = item.coordinates
 
-    if (
-      stateCount[item.administrativeArea] &&
-      !AREAS_WITH_SINGLE_MARKER.includes(item.administrativeArea)
-    ) {
-      const horizontalRange = 1.2
-      const verticalRange = 0.8
+    // Initialize counter if not exists
+    if (!stateCount[item.administrativeArea]) {
+      stateCount[item.administrativeArea] = 0
+    }
+
+    if (!AREAS_WITH_SINGLE_MARKER.includes(item.administrativeArea)) {
+      const markerIndexInArea = stateCount[item.administrativeArea]
 
       if (shouldRandomizeMarkerOffsets) {
-        offsetX = getRandomOffset(horizontalRange)
-        offsetY =
-          getRandomOffset(verticalRange) - mapMarkerOffset * stateCount[item.administrativeArea]
+        markerCoordinates = getJitteredMarkerPosition({
+          administrativeArea: item.administrativeArea,
+          centerCoordinates: item.coordinates,
+          countryCode,
+          markerIndexInArea,
+          verticalSpacing: mapMarkerOffset,
+        })
       } else {
-        offsetX = stateCount[item.administrativeArea] % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
-        offsetY = stateCount[item.administrativeArea] % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
+        const offsetX = markerIndexInArea % 2 === 0 ? mapMarkerOffset : -mapMarkerOffset
+        const offsetY = markerIndexInArea % 2 === 0 ? -mapMarkerOffset : mapMarkerOffset
+        markerCoordinates = [item.coordinates[0] + offsetX, item.coordinates[1] + offsetY]
       }
 
       stateCount[item.administrativeArea] += 1
-    } else {
-      stateCount[item.administrativeArea] = 1
     }
 
     const currentIconActionType = actions[item.actionType]!
@@ -134,7 +129,7 @@ const createMarkersFromActions = (
     markers.push({
       id: item.id,
       name: getMapAdministrativeAreaName(countryCode, item.administrativeArea),
-      coordinates: [item.coordinates[0] + offsetX, item.coordinates[1] + offsetY],
+      coordinates: markerCoordinates,
       actionType: item.actionType,
       datetimeCreated: item.datetimeCreated,
       iconType: currentIconActionType,

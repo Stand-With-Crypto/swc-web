@@ -2,18 +2,20 @@ import { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import {
+  applyCoordinatesOffset,
+  getMarkerPositions,
+} from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.utils'
+import {
   AdvocateHeatmapAction,
   ADVOCATES_ACTIONS_BY_COUNTRY_CODE,
   AREA_COORDS_BY_COUNTRY_CODE,
   AreaCoordinates,
   AreaCoordinatesKey,
   AREAS_WITH_SINGLE_MARKER,
-  Coords,
   MapProjectionConfig,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
 import {
   getMapAdministrativeAreaName,
-  getRandomOffset,
   MapMarker,
 } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { useCountryCode } from '@/hooks/useCountryCode'
@@ -21,46 +23,6 @@ import { getLogger } from '@/utils/shared/logger'
 import { SupportedCountryCodes } from '@/utils/shared/supportedCountries'
 
 const logger = getLogger('useMockedAdvocateMap')
-
-/**
- * Distributes 3 markers around a central point with slight random jitter
- * to simulate a natural heat map distribution while keeping markers within bounds.
- * @param centerCoordinates [longitude, latitude] of the central point
- * @param verticalSpacing Base spacing between markers on the vertical axis
- * @returns Array of 3 jittered coordinate pairs
- */
-function generateJitteredMarkerPositions(
-  centerCoordinates: Coords,
-  verticalSpacing: number,
-  horizontalRange = 1.2,
-  verticalRange = 0.8,
-): [Coords, Coords, Coords] {
-  return Array.from({ length: 3 }, (_, index) => {
-    const horizontalJitter = getRandomOffset(horizontalRange)
-    const verticalJitter = getRandomOffset(verticalRange) + verticalSpacing * (index - 1)
-    return applyCoordinatesOffset(centerCoordinates, horizontalJitter, verticalJitter)
-  }) as [Coords, Coords, Coords]
-}
-
-function applyCoordinatesOffset(coordinates: Coords, offsetX: number, offsetY: number): Coords {
-  return [coordinates[0] + offsetX, coordinates[1] + offsetY]
-}
-
-function getMarkerPositions(
-  coordinates: Coords,
-  offset: number,
-  shouldRandomizeMarkerOffsets = false,
-) {
-  if (shouldRandomizeMarkerOffsets) {
-    return generateJitteredMarkerPositions(coordinates, offset)
-  }
-
-  return [
-    applyCoordinatesOffset(coordinates, 0, 0),
-    applyCoordinatesOffset(coordinates, -offset, offset),
-    applyCoordinatesOffset(coordinates, offset, -offset),
-  ]
-}
 
 function getMarkerMocker({
   actions,
@@ -104,11 +66,13 @@ function getMarkerMocker({
       ]
     }
 
-    const actionCoords = getMarkerPositions(
-      administrativeAreaCoords,
-      mapMarkerOffset,
+    const actionCoords = getMarkerPositions({
+      administrativeArea,
+      coordinates: administrativeAreaCoords,
+      countryCode,
+      offset: mapMarkerOffset,
       shouldRandomizeMarkerOffsets,
-    )
+    })
 
     return [
       {
